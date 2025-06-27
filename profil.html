@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Profil Sekolah - UPT SD NEGERI 160 GRESIK</title>
+  <title>Profil - UPT SD NEGERI 160 GRESIK</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: sans-serif;
       margin: 0;
@@ -12,6 +16,9 @@
     }
 
     header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
       background-color: #007bff;
       color: white;
       padding: 10px 20px;
@@ -38,7 +45,7 @@
 
     .judul p {
       margin: 5px 0 0;
-      font-size: 1em;
+      font-size: 1.2em;
     }
 
     nav {
@@ -46,7 +53,8 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 15px;
+      align-items: center;
+      gap: 10px;
       padding: 10px;
     }
 
@@ -55,10 +63,7 @@
       color: white;
       text-decoration: none;
       font-weight: bold;
-      padding: 10px 15px;
-      display: inline-block;
-      line-height: 1.5;
-      vertical-align: middle;
+      padding: 8px 12px;
     }
 
     nav a:hover,
@@ -70,11 +75,6 @@
       position: relative;
     }
 
-    /* Panah dihilangkan */
-    .dropdown > span::after {
-      content: "";
-    }
-
     .dropdown-content {
       display: none;
       position: absolute;
@@ -82,7 +82,11 @@
       min-width: 160px;
       top: 100%;
       left: 0;
-      z-index: 1000;
+      z-index: 999;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
     }
 
     .dropdown-content a {
@@ -96,10 +100,6 @@
       background-color: #004080;
     }
 
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
     .hero {
       text-align: center;
       padding: 40px 20px;
@@ -107,15 +107,14 @@
 
     .hero h2 {
       font-size: 1.6em;
-      margin-bottom: 10px;
     }
 
     .content {
       max-width: 800px;
-      margin: 0 auto;
+      margin: auto;
       padding: 20px;
-      line-height: 1.6;
       text-align: justify;
+      line-height: 1.6;
     }
 
     @media (max-width: 600px) {
@@ -128,7 +127,7 @@
       }
 
       .judul p {
-        font-size: 0.9em;
+        font-size: 1em;
       }
 
       nav {
@@ -136,13 +135,14 @@
         align-items: center;
       }
 
-      nav a,
-      nav .dropdown > span {
-        padding: 8px;
+      .dropdown-content {
+        position: static;
+        width: 100%;
+        text-align: center;
       }
 
-      .content {
-        padding: 15px;
+      .dropdown:hover .dropdown-content {
+        display: block;
       }
     }
   </style>
@@ -153,7 +153,7 @@
     <img src="tutwuri.png" alt="Logo Tutwuri" class="logo" />
     <div class="judul">
       <h1>UPT SD NEGERI 160 GRESIK</h1>
-      <p>Sekolah Favorit, Berkualitas, dan Islami</p>
+      <p>Profil Sekolah</p>
     </div>
     <img src="logo.png" alt="Logo SDN 160 Gresik" class="logo" />
   </header>
@@ -179,23 +179,30 @@
 
   <section class="hero">
     <h2>Profil Sekolah</h2>
-    <p>Informasi lengkap tentang identitas dan visi-misi sekolah.</p>
+    <p>Visi, misi, sejarah, dan identitas sekolah kami.</p>
   </section>
 
   <section class="content">
-    <h3>Identitas Sekolah</h3>
-    <p>UPT SD Negeri 160 Gresik adalah sekolah dasar negeri yang terletak di Kabupaten Gresik. Sekolah ini memiliki komitmen untuk memberikan pendidikan berkualitas dengan landasan nilai-nilai islami dan nasionalisme.</p>
-
     <h3>Visi</h3>
-    <p>Menjadi sekolah yang unggul dalam prestasi, berakhlak mulia, dan berwawasan lingkungan.</p>
+    <p>Menjadi sekolah unggulan yang berkarakter, cerdas, dan religius.</p>
 
     <h3>Misi</h3>
     <ul>
-      <li>Meningkatkan mutu pembelajaran yang aktif, kreatif, dan menyenangkan.</li>
-      <li>Membentuk karakter siswa yang religius dan berintegritas.</li>
-      <li>Menumbuhkan budaya cinta lingkungan dan kebersamaan.</li>
-      <li>Mendorong partisipasi aktif orang tua dan masyarakat dalam pendidikan.</li>
+      <li>Menanamkan akhlak mulia dan nilai-nilai keislaman sejak dini.</li>
+      <li>Mengembangkan potensi akademik dan non-akademik peserta didik.</li>
+      <li>Menjalin kerja sama yang harmonis dengan orang tua dan masyarakat.</li>
     </ul>
+
+    <h3>Sejarah Singkat</h3>
+    <p>UPT SD Negeri 160 Gresik telah berdiri sejak tahun XXXX dan terus berkembang menjadi salah satu sekolah favorit di wilayah Gresik.</p>
+
+    <h3>Identitas Sekolah</h3>
+    <p>
+      Nama: UPT SD Negeri 160 Gresik<br>
+      NPSN: 12345678<br>
+      Alamat: Jl. Contoh No. 1, Gresik<br>
+      Telepon: (031) 1234567
+    </p>
   </section>
 
 </body>

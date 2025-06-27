@@ -48,20 +48,26 @@
       justify-content: center;
       gap: 15px;
       padding: 10px;
+      position: relative;
     }
 
-    nav a, nav span {
+    nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      cursor: pointer;
+      padding: 10px 15px;
+      position: relative;
+    }
+
+    nav a:hover {
+      background-color: #003f80;
     }
 
     .dropdown {
       position: relative;
     }
 
-    .dropdown span::after {
+    .dropdown > a::after {
       content: ' ▾';
     }
 
@@ -107,6 +113,11 @@
       .judul p {
         font-size: 0.9em;
       }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
@@ -126,7 +137,7 @@
     <a href="profil.html">Profil</a>
     <a href="#">Guru & Staf</a>
     <div class="dropdown">
-      <span>Kelas</span>
+      <a href="#">Kelas</a>
       <div class="dropdown-content">
         <a href="kelas1.html">Kelas 1</a>
         <a href="kelas2.html">Kelas 2</a>

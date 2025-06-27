@@ -6,122 +6,152 @@
   <title>Profil - UPT SD NEGERI 160 GRESIK</title>
   <style>
     body {
+      font-family: sans-serif;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #e9f0f7;
+      background-color: #f2f7fb;
     }
-    .header {
+
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background-color: #005eb8;
-      padding: 10px 20px;
-      color: white;
+      flex-wrap: wrap;
     }
-    .logo-left, .logo-right {
-      width: 60px;
-      height: auto;
+
+    .logo {
+      height: 50px;
     }
-    .title {
-      flex-grow: 1;
+
+    .judul {
+      flex: 1;
       text-align: center;
     }
-    .title h1 {
-      font-size: 28px;
-      margin: 5px 0;
-    }
-    .title h2 {
-      font-size: 18px;
+
+    .judul h1 {
+      font-size: 1.8em;
       margin: 0;
-      font-weight: normal;
+      font-weight: bold;
+    }
+
+    .judul p {
+      margin: 5px 0 0;
+      font-size: 1em;
     }
 
     nav {
-      background-color: #003b80;
+      background-color: #0056b3;
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 10px;
     }
-    nav a {
+
+    nav a, nav .dropdown > span {
       color: white;
-      padding: 14px 20px;
       text-decoration: none;
       font-weight: bold;
+      padding: 10px 15px;
+      display: inline-block;
     }
-    nav a:hover {
-      background-color: #002a5c;
+
+    nav a:hover, nav .dropdown > span:hover {
+      background-color: #003f80;
     }
 
     .dropdown {
       position: relative;
     }
+
+    .dropdown > span::after {
+      content: " ▾";
+    }
+
     .dropdown-content {
       display: none;
       position: absolute;
-      background-color: #003b80;
+      background-color: #007bff;
       min-width: 160px;
-      z-index: 1;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
     }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
+
     .dropdown-content a {
       display: block;
       padding: 10px;
       color: white;
       text-decoration: none;
     }
+
     .dropdown-content a:hover {
-      background-color: #002a5c;
+      background-color: #004080;
     }
 
-    .content {
-      padding: 30px;
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .hero h2 {
+      font-size: 1.6em;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
       max-width: 800px;
       margin: auto;
-      text-align: justify;
-    }
-    .content h2 {
-      text-align: center;
-      color: #003b80;
+      line-height: 1.6;
     }
 
-    @media (max-width: 768px) {
-      .header {
+    @media (max-width: 600px) {
+      .logo {
+        height: 40px;
+      }
+
+      .judul h1 {
+        font-size: 1.4em;
+      }
+
+      .judul p {
+        font-size: 0.9em;
+      }
+
+      nav {
         flex-direction: column;
         align-items: center;
-        text-align: center;
       }
-      .logo-left, .logo-right {
-        width: 50px;
-        margin: 5px;
-      }
-      .title h1 {
-        font-size: 22px;
-      }
-      .title h2 {
-        font-size: 16px;
+
+      nav a, nav .dropdown > span {
+        padding: 8px;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <img src="tutwuri.png" alt="Logo Tutwuri" class="logo-left">
-    <div class="title">
+  <header>
+    <img src="tutwuri.png" alt="Logo Tutwuri" class="logo" />
+    <div class="judul">
       <h1>UPT SD NEGERI 160 GRESIK</h1>
-      <h2>Profil Sekolah</h2>
+      <p>Sekolah Favorit, Berkualitas, dan Islami</p>
     </div>
-    <img src="logo.png" alt="Logo SDN 160" class="logo-right">
-  </div>
+    <img src="logo.png" alt="Logo SDN 160 Gresik" class="logo" />
+  </header>
 
   <nav>
     <a href="index.html">Beranda</a>
     <a href="profil.html">Profil</a>
-    <a href="#">Guru & Staf</a>
+    <a href="guru.html">Guru & Staf</a>
     <div class="dropdown">
-      <a href="#">Kelas ▾</a>
+      <span>Kelas</span>
       <div class="dropdown-content">
         <a href="kelas1.html">Kelas 1</a>
         <a href="kelas2.html">Kelas 2</a>
@@ -131,22 +161,19 @@
         <a href="kelas6.html">Kelas 6</a>
       </div>
     </div>
-    <a href="#">Galeri</a>
-    <a href="#">Kontak</a>
+    <a href="galeri.html">Galeri</a>
+    <a href="kontak.html">Kontak</a>
   </nav>
 
-  <div class="content">
+  <section class="hero">
     <h2>Profil Sekolah</h2>
     <p>
-      UPT SD Negeri 160 Gresik adalah sekolah dasar unggulan di Kabupaten Gresik yang berkomitmen mencetak generasi penerus bangsa yang cerdas, terampil, dan berakhlak mulia. 
+      UPT SD Negeri 160 Gresik merupakan salah satu sekolah dasar unggulan yang terletak di wilayah Gresik. 
+      Sekolah ini berkomitmen untuk menyelenggarakan pendidikan yang berkualitas tinggi, mengedepankan nilai-nilai keislaman, 
+      dan menciptakan lingkungan belajar yang ramah anak. Dengan dukungan tenaga pendidik profesional dan fasilitas yang memadai, 
+      SDN 160 Gresik terus berinovasi demi mencetak generasi yang cerdas, berakhlak mulia, dan siap menghadapi tantangan masa depan.
     </p>
-    <p>
-      Dengan dukungan tenaga pendidik profesional, fasilitas pembelajaran yang memadai, serta lingkungan belajar yang kondusif, sekolah ini menjadi pilihan utama bagi para orang tua.
-    </p>
-    <p>
-      UPT SDN 160 Gresik mengintegrasikan nilai-nilai keislaman dalam pembelajaran dan kegiatan sehari-hari guna membentuk karakter siswa yang religius dan berintegritas.
-    </p>
-  </div>
+  </section>
 
 </body>
 </html>

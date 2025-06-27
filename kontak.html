@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kontak - UPT SD NEGERI 160 GRESIK</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background-color: #f2f7fb;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .judul {
+      flex: 1;
+      text-align: center;
+    }
+
+    .judul h1 {
+      font-size: 1.8em;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .judul p {
+      margin: 5px 0 0;
+      font-size: 1.2em;
+    }
+
+    nav {
+      background-color: #0056b3;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 12px;
+    }
+
+    nav a:hover {
+      background-color: #003f80;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #007bff;
+      min-width: 160px;
+      top: 100%;
+      left: 0;
+      z-index: 999;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #004080;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .hero h2 {
+      font-size: 1.6em;
+    }
+
+    .konten {
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .konten h3 {
+      margin-top: 0;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    form button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    form button:hover {
+      background-color: #0056b3;
+    }
+
+    .info-sekolah {
+      margin-top: 30px;
+    }
+
+    @media (max-width: 600px) {
+      .logo {
+        height: 40px;
+      }
+
+      .judul h1 {
+        font-size: 1.4em;
+      }
+
+      .judul p {
+        font-size: 1em;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .dropdown-content {
+        position: static;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="tutwuri.png" alt="Logo Tutwuri" class="logo" />
+    <div class="judul">
+      <h1>UPT SD NEGERI 160 GRESIK</h1>
+      <p>Hubungi Kami</p>
+    </div>
+    <img src="logo.png" alt="Logo SDN 160 Gresik" class="logo" />
+  </header>
+
+  <nav>
+    <a href="index.html">Beranda</a>
+    <a href="profil.html">Profil</a>
+    <a href="guru.html">Guru & Staf</a>
+    <div class="dropdown">
+      <a href="#">Kelas</a>
+      <div class="dropdown-content">
+        <a href="kelas1.html">Kelas 1</a>
+        <a href="kelas2.html">Kelas 2</a>
+        <a href="kelas3.html">Kelas 3</a>
+        <a href="kelas4.html">Kelas 4</a>
+        <a href="kelas5.html">Kelas 5</a>
+        <a href="kelas6.html">Kelas 6</a>
+      </div>
+    </div>
+    <a href="galeri.html">Galeri</a>
+    <a href="kontak.html">Kontak</a>
+  </nav>
+
+  <section class="hero">
+    <h2>Formulir Kontak</h2>
+    <p>Kirim pertanyaan atau pesan Anda kepada kami</p>
+  </section>
+
+  <section class="konten">
+    <form>
+      <label>Nama:</label>
+      <input type="text" placeholder="Nama Anda" required>
+
+      <label>Email:</label>
+      <input type="email" placeholder="Alamat Email" required>
+
+      <label>Pesan:</label>
+      <textarea rows="5" placeholder="Tulis pesan di sini..." required></textarea>
+
+      <button type="submit">Kirim</button>
+    </form>
+
+    <div class="info-sekolah">
+      <h3>Alamat Sekolah</h3>
+      <p>Jl. Pendidikan No. 160, Gresik</p>
+      <p>Email: sdn160gresik@email.com</p>
+      <p>Telp: (031) 12345678</p>
+    </div>
+  </section>
+
+</body>
+</html>

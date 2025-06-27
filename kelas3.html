@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kelas 3 - UPT SD NEGERI 160 GRESIK</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: sans-serif;
       margin: 0;
@@ -12,6 +16,9 @@
     }
 
     header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
       background-color: #007bff;
       color: white;
       padding: 10px 20px;
@@ -46,7 +53,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 15px;
+      gap: 10px;
       padding: 10px;
     }
 
@@ -55,10 +62,8 @@
       color: white;
       text-decoration: none;
       font-weight: bold;
-      padding: 10px 15px;
+      padding: 8px 12px;
       display: inline-block;
-      line-height: 1.5;
-      vertical-align: middle;
     }
 
     nav a:hover,
@@ -70,7 +75,6 @@
       position: relative;
     }
 
-    /* Panah dihilangkan */
     .dropdown > span::after {
       content: "";
     }
@@ -82,7 +86,11 @@
       min-width: 160px;
       top: 100%;
       left: 0;
-      z-index: 1000;
+      z-index: 999;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
     }
 
     .dropdown-content a {
@@ -96,10 +104,6 @@
       background-color: #004080;
     }
 
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
     .hero {
       text-align: center;
       padding: 40px 20px;
@@ -107,15 +111,14 @@
 
     .hero h2 {
       font-size: 1.6em;
-      margin-bottom: 10px;
     }
 
     .content {
       max-width: 800px;
-      margin: 0 auto;
+      margin: auto;
       padding: 20px;
-      line-height: 1.6;
       text-align: center;
+      line-height: 1.6;
     }
 
     @media (max-width: 600px) {
@@ -141,8 +144,14 @@
         padding: 8px;
       }
 
-      .content {
-        padding: 15px;
+      .dropdown-content {
+        position: static;
+        width: 100%;
+        text-align: center;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
       }
     }
   </style>

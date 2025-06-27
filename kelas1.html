@@ -15,6 +15,7 @@
       background-color: #f2f7fb;
     }
 
+    /* HEADER STICKY */
     header {
       position: sticky;
       top: 0;
@@ -48,12 +49,13 @@
       font-size: 1.2em;
     }
 
+    /* NAVIGASI NORMAL (TIDAK STICKY) */
     nav {
       background-color: #0056b3;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 15px;
+      gap: 10px;
       padding: 10px;
     }
 
@@ -62,7 +64,7 @@
       color: white;
       text-decoration: none;
       font-weight: bold;
-      padding: 10px 15px;
+      padding: 8px 12px;
       display: inline-block;
     }
 
@@ -76,7 +78,7 @@
     }
 
     .dropdown > span::after {
-      content: "";
+      content: ""; /* hilangkan panah ▼ */
     }
 
     .dropdown-content {
@@ -86,7 +88,11 @@
       min-width: 160px;
       top: 100%;
       left: 0;
-      z-index: 1000;
+      z-index: 999;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
     }
 
     .dropdown-content a {
@@ -100,10 +106,6 @@
       background-color: #004080;
     }
 
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
     .hero {
       text-align: center;
       padding: 40px 20px;
@@ -111,17 +113,17 @@
 
     .hero h2 {
       font-size: 1.6em;
-      margin-bottom: 10px;
     }
 
     .content {
       max-width: 800px;
-      margin: 0 auto;
+      margin: auto;
       padding: 20px;
-      line-height: 1.6;
       text-align: center;
+      line-height: 1.6;
     }
 
+    /* MOBILE RESPONSIVE */
     @media (max-width: 600px) {
       .logo {
         height: 40px;
@@ -145,14 +147,21 @@
         padding: 8px;
       }
 
-      .content {
-        padding: 15px;
+      .dropdown-content {
+        position: static;
+        width: 100%;
+        text-align: center;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- Header Sticky -->
   <header>
     <img src="tutwuri.png" alt="Logo Tutwuri" class="logo" />
     <div class="judul">
@@ -162,6 +171,7 @@
     <img src="logo.png" alt="Logo SDN 160 Gresik" class="logo" />
   </header>
 
+  <!-- Navigasi Normal -->
   <nav>
     <a href="index.html">Beranda</a>
     <a href="profil.html">Profil</a>
@@ -181,6 +191,7 @@
     <a href="kontak.html">Kontak</a>
   </nav>
 
+  <!-- Isi Konten -->
   <section class="hero">
     <h2>Halaman Kelas 1</h2>
     <p>Informasi, materi, dan kegiatan belajar Kelas 1.</p>

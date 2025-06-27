@@ -50,14 +50,15 @@
       padding: 10px;
     }
 
-    nav a {
+    nav a, nav .dropdown > span {
       color: white;
       text-decoration: none;
       font-weight: bold;
       padding: 10px 15px;
+      display: inline-block;
     }
 
-    nav a:hover {
+    nav a:hover, nav .dropdown > span:hover {
       background-color: #003f80;
     }
 
@@ -65,15 +66,7 @@
       position: relative;
     }
 
-    .dropdown span {
-      color: white;
-      font-weight: bold;
-      padding: 10px 15px;
-      cursor: pointer;
-      display: inline-block;
-    }
-
-    .dropdown span::after {
+    .dropdown > span::after {
       content: " ▾";
     }
 
@@ -128,6 +121,10 @@
       nav {
         flex-direction: column;
         align-items: center;
+      }
+
+      nav a, nav .dropdown > span {
+        padding: 8px;
       }
     }
   </style>

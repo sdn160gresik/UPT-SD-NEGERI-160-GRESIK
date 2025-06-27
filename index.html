@@ -48,18 +48,21 @@
       justify-content: center;
       gap: 15px;
       padding: 10px;
-      position: relative;
     }
 
-    nav a {
+    nav a,
+    nav .dropdown > span {
       color: white;
       text-decoration: none;
       font-weight: bold;
       padding: 10px 15px;
-      position: relative;
+      display: inline-block;
+      line-height: 1.5;
+      vertical-align: middle;
     }
 
-    nav a:hover {
+    nav a:hover,
+    nav .dropdown > span:hover {
       background-color: #003f80;
     }
 
@@ -67,8 +70,8 @@
       position: relative;
     }
 
-    .dropdown > a::after {
-      content: ' ▾';
+    .dropdown > span::after {
+      content: " ▾";
     }
 
     .dropdown-content {
@@ -98,7 +101,12 @@
 
     .hero {
       text-align: center;
-      padding: 30px 15px;
+      padding: 40px 20px;
+    }
+
+    .hero h2 {
+      font-size: 1.6em;
+      margin-bottom: 10px;
     }
 
     @media (max-width: 600px) {
@@ -117,6 +125,11 @@
       nav {
         flex-direction: column;
         align-items: center;
+      }
+
+      nav a,
+      nav .dropdown > span {
+        padding: 8px;
       }
     }
   </style>
@@ -137,7 +150,7 @@
     <a href="profil.html">Profil</a>
     <a href="guru.html">Guru & Staf</a>
     <div class="dropdown">
-      <a href="#">Kelas</a>
+      <span>Kelas</span>
       <div class="dropdown-content">
         <a href="kelas1.html">Kelas 1</a>
         <a href="kelas2.html">Kelas 2</a>

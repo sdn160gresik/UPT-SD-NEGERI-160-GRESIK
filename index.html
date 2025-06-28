@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Beranda - UPT SD NEGERI 160 GRESIK</title>
+  <title>UPT SD NEGERI 160 GRESIK</title>
   <style>
     * {
       box-sizing: border-box;
@@ -50,20 +50,25 @@
     nav {
       background-color: #0056b3;
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 15px;
       padding: 10px;
+      position: sticky;
+      top: 70px;
+      z-index: 999;
     }
 
-    nav a {
+    nav a, nav .dropbtn {
       color: white;
       text-decoration: none;
       font-weight: bold;
       padding: 8px 12px;
+      display: inline-block;
+      cursor: pointer;
     }
 
-    nav a:hover {
+    nav a:hover, nav .dropbtn:hover {
       background-color: #003f80;
     }
 
@@ -81,10 +86,6 @@
       z-index: 999;
     }
 
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
     .dropdown-content a {
       display: block;
       padding: 10px;
@@ -96,8 +97,12 @@
       background-color: #004080;
     }
 
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
     .hero {
-      background: url('hero-image.jpg') center/cover no-repeat;
+      background: linear-gradient(to right, #007bff, #3399ff);
       color: white;
       padding: 60px 20px;
       text-align: center;
@@ -193,7 +198,7 @@
     <a href="profil.html">Profil</a>
     <a href="guru.html">Guru & Staf</a>
     <div class="dropdown">
-      <a href="#">Kelas</a>
+      <span class="dropbtn">Kelas</span>
       <div class="dropdown-content">
         <a href="kelas1.html">Kelas 1</a>
         <a href="kelas2.html">Kelas 2</a>

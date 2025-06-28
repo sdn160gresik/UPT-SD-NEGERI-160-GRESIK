@@ -140,24 +140,66 @@
       flex: 1 1 300px;
     }
 
-    .galeri h3,
-    .layanan h3 {
+    .galeri h3 {
       text-align: center;
       color: #0056b3;
     }
 
-    .galeri .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      padding: 10px;
+    .galeri {
+      position: relative;
     }
 
-    .galeri .grid-container img {
+    .galeri-slider {
+      overflow: hidden;
+    }
+
+    .slider-wrapper {
+      display: flex;
+      transition: transform 0.4s ease-in-out;
+      width: max-content;
+    }
+
+    .grid-slide {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      min-width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .grid-slide img {
       width: 100%;
       height: auto;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-button {
+      position: absolute;
+      top: 45%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 91, 187, 0.7);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 50%;
+      z-index: 10;
+      display: none;
+    }
+
+    .nav-button.show {
+      display: block;
+    }
+
+    .prev-btn {
+      left: -10px;
+    }
+
+    .next-btn {
+      right: -10px;
     }
 
     .layanan {
@@ -195,6 +237,10 @@
     @media (max-width: 768px) {
       .content-dua-kolom {
         flex-direction: column;
+      }
+
+      .grid-slide {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -238,13 +284,23 @@
 <section class="content-dua-kolom">
   <div class="kolom galeri">
     <h3>Galeri Foto Sekolah</h3>
-    <div class="grid-container">
-      <img src="galeri/1.jpg" alt="Kegiatan 1">
-      <img src="galeri/2.jpg" alt="Kegiatan 2">
-      <img src="galeri/3.jpg" alt="Kegiatan 3">
-      <img src="galeri/4.jpg" alt="Kegiatan 4">
-      <img src="galeri/5.jpg" alt="Kegiatan 5">
-      <img src="galeri/6.jpg" alt="Kegiatan 6">
+    <button class="nav-button prev-btn" onclick="prevSlide()">❮</button>
+    <button class="nav-button next-btn" onclick="nextSlide()">❯</button>
+    <div class="galeri-slider">
+      <div class="slider-wrapper" id="slider">
+        <div class="grid-slide">
+          <img src="galeri/1.jpg" alt="Kegiatan 1">
+          <img src="galeri/2.jpg" alt="Kegiatan 2">
+          <img src="galeri/3.jpg" alt="Kegiatan 3">
+          <img src="galeri/4.jpg" alt="Kegiatan 4">
+        </div>
+        <div class="grid-slide">
+          <img src="galeri/5.jpg" alt="Kegiatan 5">
+          <img src="galeri/6.jpg" alt="Kegiatan 6">
+          <img src="galeri/7.jpg" alt="Kegiatan 7">
+          <img src="galeri/8.jpg" alt="Kegiatan 8">
+        </div>
+      </div>
     </div>
   </div>
   <div class="kolom layanan">
@@ -261,6 +317,47 @@
 <footer>
   <p>&copy; 2025 UPT SD NEGERI 160 GRESIK | Jalan Pendidikan No. 123, Gresik</p>
 </footer>
+
+<script>
+  let currentIndex = 0;
+  const slider = document.getElementById("slider");
+  const slides = document.querySelectorAll(".grid-slide");
+  const prevBtn = document.querySelector(".prev-btn");
+  const nextBtn = document.querySelector(".next-btn");
+
+  function updateSlider() {
+    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    if (currentIndex === 0) {
+      prevBtn.classList.remove("show");
+    } else {
+      prevBtn.classList.add("show");
+    }
+
+    if (currentIndex === slides.length - 1) {
+      nextBtn.classList.remove("show");
+    } else {
+      nextBtn.classList.add("show");
+    }
+  }
+
+  function nextSlide() {
+    if (currentIndex < slides.length - 1) {
+      currentIndex++;
+      updateSlider();
+    }
+  }
+
+  function prevSlide() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateSlider();
+    }
+  }
+
+  // Inisialisasi tombol
+  updateSlider();
+</script>
 
 </body>
 </html>

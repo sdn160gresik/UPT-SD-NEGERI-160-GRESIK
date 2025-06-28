@@ -2,30 +2,27 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kelas 5 - UPT SD NEGERI 160 GRESIK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kelas 4 - UPT SD NEGERI 160 GRESIK</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
-      margin: 0;
       font-family: sans-serif;
+      margin: 0;
       background-color: #f2f7fb;
     }
 
     header {
       background-color: #007bff;
       color: white;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 20px;
-      position: sticky;
+      flex-wrap: wrap;
+      position: fixed;
+      width: 100%;
       top: 0;
       z-index: 1000;
-      flex-wrap: wrap;
     }
 
     .logo {
@@ -38,8 +35,8 @@
     }
 
     .judul h1 {
+      font-size: 1.6em;
       margin: 0;
-      font-size: 1.8em;
     }
 
     .judul p {
@@ -54,22 +51,13 @@
       justify-content: center;
       gap: 15px;
       padding: 10px;
-      position: sticky;
-      top: 70px;
-      z-index: 999;
+      margin-top: 100px;
     }
 
-    nav a, nav .dropbtn {
+    nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      padding: 8px 12px;
-      display: inline-block;
-      cursor: pointer;
-    }
-
-    nav a:hover, nav .dropbtn:hover {
-      background-color: #003f80;
     }
 
     .dropdown {
@@ -83,7 +71,11 @@
       min-width: 160px;
       top: 100%;
       left: 0;
-      z-index: 999;
+      z-index: 1000;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
     }
 
     .dropdown-content a {
@@ -97,64 +89,37 @@
       background-color: #004080;
     }
 
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    .hero {
-      background-color: #e0f0ff;
-      text-align: center;
-      padding: 60px 20px;
-    }
-
-    .hero h2 {
-      font-size: 2em;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      font-size: 1.2em;
-      margin: 0;
-    }
-
-    .section {
-      max-width: 1000px;
-      margin: auto;
-      padding: 30px 15px;
-    }
-
-    .section h3 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .kelas-links {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 15px;
-      text-align: center;
-    }
-
-    .kelas-links a {
-      background-color: #ffffff;
-      text-decoration: none;
-      color: #333;
+    main {
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: background-color 0.3s;
     }
 
-    .kelas-links a:hover {
-      background-color: #d9ecff;
-    }
-
-    footer {
-      background-color: #003f80;
-      color: white;
+    h2 {
       text-align: center;
-      padding: 15px;
+      font-size: 2em;
+    }
+
+    h3 {
       margin-top: 40px;
+      color: #0056b3;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      margin: 10px 0;
+    }
+
+    a.link-download {
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    a.link-download:hover {
+      text-decoration: underline;
     }
 
     @media (max-width: 600px) {
@@ -163,15 +128,16 @@
       }
 
       .judul h1 {
-        font-size: 1.4em;
+        font-size: 1.3em;
       }
 
       .judul p {
         font-size: 0.9em;
       }
 
-      .kelas-links {
-        grid-template-columns: 1fr 1fr;
+      nav {
+        flex-direction: column;
+        align-items: center;
       }
     }
   </style>
@@ -182,9 +148,9 @@
     <img src="tutwuri.png" alt="Logo Tutwuri" class="logo" />
     <div class="judul">
       <h1>UPT SD NEGERI 160 GRESIK</h1>
-      <p>Sekolah Favorit, Berkualitas, dan Islami</p>
+      <p>Kelas 4</p>
     </div>
-    <img src="logo.png" alt="Logo Sekolah" class="logo" />
+    <img src="logo.png" alt="Logo SD" class="logo" />
   </header>
 
   <nav>
@@ -192,7 +158,7 @@
     <a href="profil.html">Profil</a>
     <a href="guru.html">Guru & Staf</a>
     <div class="dropdown">
-      <span class="dropbtn">Kelas</span>
+      <a href="#">Kelas</a>
       <div class="dropdown-content">
         <a href="kelas1.html">Kelas 1</a>
         <a href="kelas2.html">Kelas 2</a>
@@ -206,25 +172,17 @@
     <a href="kontak.html">Kontak</a>
   </nav>
 
-  <section class="hero">
-    <h2>Kelas 5</h2>
-    <p>Halaman untuk informasi dan perangkat pembelajaran Kelas 5</p>
-  </section>
-
-  <section class="section">
-    <h3>Pilih Kelas Lain</h3>
-    <div class="kelas-links">
-      <a href="kelas1.html">📘 Kelas 1</a>
-      <a href="kelas2.html">📗 Kelas 2</a>
-      <a href="kelas3.html">📙 Kelas 3</a>
-      <a href="kelas5.html">📕 Kelas 5</a>
-      <a href="kelas6.html">📓 Kelas 6</a>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 UPT SD NEGERI 160 GRESIK | Jalan Pendidikan No. 123, Gresik</p>
-  </footer>
+  <main>
+    <h2>Perangkat Pembelajaran Kelas 4</h2>
+    <section>
+      <h3>Unduh Perangkat:</h3>
+      <ul>
+        <li><a href="perangkat/kelas4/silabus.pdf" target="_blank" class="link-download">📄 Silabus Kelas 4</a></li>
+        <li><a href="perangkat/kelas4/rpp.pdf" target="_blank" class="link-download">📄 RPP Kelas 4</a></li>
+        <li><a href="perangkat/kelas4/modul.pdf" target="_blank" class="link-download">📄 Modul Ajar Kelas 4</a></li>
+      </ul>
+    </section>
+  </main>
 
 </body>
 </html>

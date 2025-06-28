@@ -1,3 +1,5 @@
+# Memuat ulang isi index.html yang sebelumnya, dengan tambahan menu Pengumuman
+updated_index_html = """
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -10,7 +12,6 @@
       font-family: sans-serif;
       background-color: #f2f7fb;
     }
-
     header {
       background-color: #007bff;
       color: white;
@@ -23,26 +24,21 @@
       z-index: 1000;
       flex-wrap: wrap;
     }
-
     .logo {
       height: 50px;
     }
-
     .judul {
       flex: 1;
       text-align: center;
     }
-
     .judul h1 {
       margin: 0;
       font-size: 1.8em;
     }
-
     .judul p {
       margin: 5px 0 0;
       font-size: 1em;
     }
-
     nav {
       background-color: #0056b3;
       display: flex;
@@ -54,7 +50,6 @@
       top: 70px;
       z-index: 999;
     }
-
     nav a, nav .dropbtn {
       color: white;
       text-decoration: none;
@@ -63,15 +58,12 @@
       display: inline-block;
       cursor: pointer;
     }
-
     nav a:hover, nav .dropbtn:hover {
       background-color: #003f80;
     }
-
     .dropdown {
       position: relative;
     }
-
     .dropdown-content {
       display: none;
       position: absolute;
@@ -81,39 +73,32 @@
       left: 0;
       z-index: 999;
     }
-
     .dropdown-content a {
       display: block;
       padding: 10px;
       color: white;
       text-decoration: none;
     }
-
     .dropdown-content a:hover {
       background-color: #004080;
     }
-
     .dropdown:hover .dropdown-content {
       display: block;
     }
-
     .hero {
       background: linear-gradient(to right, #007bff, #3399ff);
       color: white;
       padding: 30px 20px;
       text-align: center;
     }
-
     .hero h2 {
       font-size: 1.8em;
       margin: 0 0 10px;
     }
-
     .hero p {
       font-size: 1.3em;
       margin: 0 0 20px;
     }
-
     .hero a {
       background-color: #0056b3;
       color: white;
@@ -122,11 +107,9 @@
       border-radius: 5px;
       font-weight: bold;
     }
-
     .hero a:hover {
       background-color: #003f80;
     }
-
     .content-dua-kolom {
       display: flex;
       flex-wrap: wrap;
@@ -135,34 +118,28 @@
       max-width: 1200px;
       margin: auto;
     }
-
     .kolom {
       flex: 1 1 300px;
     }
-
     .galeri h3,
     .layanan h3 {
       text-align: center;
       color: #0056b3;
     }
-
     .slideshow-container {
       position: relative;
       height: 600px;
       overflow: hidden;
     }
-
     .slide {
       position: absolute;
       width: 100%;
       opacity: 0;
       transition: opacity 1s ease-in-out;
     }
-
     .slide.active {
       opacity: 1;
     }
-
     .slide img {
       width: 100%;
       height: auto;
@@ -170,14 +147,12 @@
       margin-bottom: 15px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
-
     .layanan {
       display: flex;
       flex-direction: column;
       gap: 15px;
       padding: 10px;
     }
-
     .layanan a {
       display: block;
       background-color: #ffffff;
@@ -190,11 +165,9 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       text-align: center;
     }
-
     .layanan a:hover {
       background-color: #e6f0ff;
     }
-
     footer {
       background-color: #003f80;
       color: white;
@@ -202,12 +175,10 @@
       padding: 15px;
       margin-top: 40px;
     }
-
     @media (max-width: 768px) {
       .content-dua-kolom {
         flex-direction: column;
       }
-
       .slide img {
         height: auto;
       }
@@ -241,6 +212,7 @@
     </div>
   </div>
   <a href="galeri.html">Galeri</a>
+  <a href="pengumuman.html">Pengumuman</a>
   <a href="kontak.html">Kontak</a>
 </nav>
 
@@ -252,7 +224,6 @@
 
 <section class="content-dua-kolom">
   <div class="kolom galeri">
-    <!-- <h3>Galeri Kegiatan Sekolah</h3> -->
     <div class="slideshow-container">
       <div class="slide active"><img src="galeri/1.jpg" alt="Gambar 1" /></div>
       <div class="slide"><img src="galeri/2.jpg" alt="Gambar 2" /></div>
@@ -278,18 +249,21 @@
 <script>
   let slideIndex = 0;
   const slides = document.querySelectorAll(".slide");
-
   function showSlides() {
-    slides.forEach((slide, i) => {
-      slide.classList.remove("active");
-    });
-
+    slides.forEach((slide) => slide.classList.remove("active"));
     slideIndex = (slideIndex + 1) % slides.length;
     slides[slideIndex].classList.add("active");
   }
-
-  setInterval(showSlides, 3000); // Ganti gambar setiap 3 detik
+  setInterval(showSlides, 3000);
 </script>
 
 </body>
 </html>
+"""
+
+# Simpan sebagai file HTML siap pakai
+output_file = "/mnt/data/index_pengumuman.html"
+with open(output_file, "w", encoding="utf-8") as f:
+    f.write(updated_index_html)
+
+output_file

@@ -170,7 +170,8 @@
 
     .grid-slide img {
       width: 100%;
-      height: auto;
+      max-height: 180px;
+      object-fit: cover;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     }
@@ -241,6 +242,10 @@
 
       .grid-slide {
         grid-template-columns: 1fr;
+      }
+
+      .grid-slide img {
+        max-height: 200px;
       }
     }
   </style>
@@ -328,17 +333,8 @@
   function updateSlider() {
     slider.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-    if (currentIndex === 0) {
-      prevBtn.classList.remove("show");
-    } else {
-      prevBtn.classList.add("show");
-    }
-
-    if (currentIndex === slides.length - 1) {
-      nextBtn.classList.remove("show");
-    } else {
-      nextBtn.classList.add("show");
-    }
+    prevBtn.classList.toggle("show", currentIndex > 0);
+    nextBtn.classList.toggle("show", currentIndex < slides.length - 1);
   }
 
   function nextSlide() {
@@ -355,7 +351,6 @@
     }
   }
 
-  // Inisialisasi tombol
   updateSlider();
 </script>
 

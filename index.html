@@ -127,41 +127,71 @@
       background-color: #003f80;
     }
 
-    .section {
-      max-width: 1000px;
-      margin: auto;
+    .content-dua-kolom {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
       padding: 30px 15px;
+      max-width: 1200px;
+      margin: auto;
     }
 
-    .section h3 {
+    .kolom {
+      flex: 1 1 300px;
+    }
+
+    .galeri h3,
+    .layanan h3 {
       text-align: center;
-      margin-bottom: 20px;
-      font-size: 1.6em;
       color: #0056b3;
     }
 
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 20px;
+    .slideshow-container {
+      position: relative;
+      height: 600px;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .layanan {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 10px;
+    }
+
+    .layanan a {
+      display: block;
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 1.1em;
+      color: #003366;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       text-align: center;
     }
 
-    .features a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .features div {
-      background-color: #ffffff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: background-color 0.3s;
-      font-size: 1.2em;
-    }
-
-    .features div:hover {
+    .layanan a:hover {
       background-color: #e6f0ff;
     }
 
@@ -173,69 +203,93 @@
       margin-top: 40px;
     }
 
-    @media (max-width: 600px) {
-      .logo { height: 40px; }
-      .judul h1 { font-size: 1.4em; }
-      .judul p { font-size: 0.9em; }
-      .hero h2 { font-size: 1.5em; }
-      .hero p { font-size: 1.1em; }
-      .features {
-        grid-template-columns: 1fr 1fr;
+    @media (max-width: 768px) {
+      .content-dua-kolom {
+        flex-direction: column;
+      }
+
+      .slide img {
+        height: auto;
       }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <img src="tutwuri.png" alt="Logo Tutwuri" class="logo" />
-    <div class="judul">
-      <h1>UPT SD NEGERI 160 GRESIK</h1>
-      <p>Sekolah Favorit, Berkualitas, dan Islami</p>
+<header>
+  <img src="tutwuri.png" alt="Logo Tutwuri" class="logo" />
+  <div class="judul">
+    <h1>UPT SD NEGERI 160 GRESIK</h1>
+    <p>Sekolah Favorit, Berkualitas, dan Islami</p>
+  </div>
+  <img src="logo.png" alt="Logo Sekolah" class="logo" />
+</header>
+
+<nav>
+  <a href="index.html">Beranda</a>
+  <a href="profil.html">Profil</a>
+  <a href="guru.html">Guru & Staf</a>
+  <div class="dropdown">
+    <span class="dropbtn">Kelas</span>
+    <div class="dropdown-content">
+      <a href="kelas1.html">Kelas 1</a>
+      <a href="kelas2.html">Kelas 2</a>
+      <a href="kelas3.html">Kelas 3</a>
+      <a href="kelas4.html">Kelas 4</a>
+      <a href="kelas5.html">Kelas 5</a>
+      <a href="kelas6.html">Kelas 6</a>
     </div>
-    <img src="logo.png" alt="Logo Sekolah" class="logo" />
-  </header>
+  </div>
+  <a href="galeri.html">Galeri</a>
+  <a href="kontak.html">Kontak</a>
+</nav>
 
-  <nav>
-    <a href="index.html">Beranda</a>
-    <a href="profil.html">Profil</a>
-    <a href="guru.html">Guru & Staf</a>
-    <div class="dropdown">
-      <span class="dropbtn">Kelas</span>
-      <div class="dropdown-content">
-        <a href="kelas1.html">Kelas 1</a>
-        <a href="kelas2.html">Kelas 2</a>
-        <a href="kelas3.html">Kelas 3</a>
-        <a href="kelas4.html">Kelas 4</a>
-        <a href="kelas5.html">Kelas 5</a>
-        <a href="kelas6.html">Kelas 6</a>
-      </div>
+<section class="hero">
+  <h2>Selamat Datang di Website Resmi</h2>
+  <p>UPT SD Negeri 160 Gresik</p>
+  <a href="profil.html">Lihat Profil Sekolah</a>
+</section>
+
+<section class="content-dua-kolom">
+  <div class="kolom galeri">
+    <h3>Galeri Kegiatan Sekolah</h3>
+    <div class="slideshow-container">
+      <div class="slide active"><img src="galeri/1.jpg" alt="Gambar 1" /></div>
+      <div class="slide"><img src="galeri/2.jpg" alt="Gambar 2" /></div>
+      <div class="slide"><img src="galeri/3.jpg" alt="Gambar 3" /></div>
+      <div class="slide"><img src="galeri/4.jpg" alt="Gambar 4" /></div>
     </div>
-    <a href="galeri.html">Galeri</a>
-    <a href="kontak.html">Kontak</a>
-  </nav>
-
-  <section class="hero">
-    <h2>Selamat Datang di Website Resmi</h2>
-    <p>UPT SD Negeri 160 Gresik</p>
-    <a href="profil.html">Lihat Profil Sekolah</a>
-  </section>
-
-  <section class="section">
+  </div>
+  <div class="kolom layanan">
     <h3>Layanan Kami</h3>
-    <div class="features">
-      <a href="profil.html"><div>📚 Kurikulum</div></a>
-      <a href="guru.html"><div>👩‍🏫 Guru & Staf</div></a>
-      <a href="kelas1.html"><div>🏫 Kelas</div></a>
-      <a href="galeri.html"><div>📷 Galeri</div></a>
-      <a href="profil.html#agenda"><div>📆 Agenda</div></a>
-      <a href="kontak.html"><div>📩 Kontak</div></a>
-    </div>
-  </section>
+    <a href="profil.html">📚 Kurikulum</a>
+    <a href="guru.html">👩‍🏫 Guru & Staf</a>
+    <a href="kelas1.html">🏫 Kelas</a>
+    <a href="galeri.html">📷 Galeri</a>
+    <a href="profil.html#agenda">📆 Agenda</a>
+    <a href="kontak.html">📩 Kontak</a>
+  </div>
+</section>
 
-  <footer>
-    <p>&copy; 2025 UPT SD NEGERI 160 GRESIK | Jalan Pendidikan No. 123, Gresik</p>
-  </footer>
+<footer>
+  <p>&copy; 2025 UPT SD NEGERI 160 GRESIK | Jalan Pendidikan No. 123, Gresik</p>
+</footer>
+
+<script>
+  let slideIndex = 0;
+  const slides = document.querySelectorAll(".slide");
+
+  function showSlides() {
+    slides.forEach((slide, i) => {
+      slide.classList.remove("active");
+    });
+
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add("active");
+  }
+
+  setInterval(showSlides, 3000); // Ganti gambar setiap 3 detik
+</script>
 
 </body>
 </html>

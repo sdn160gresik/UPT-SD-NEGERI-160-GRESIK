@@ -10,21 +10,21 @@
     }
 
     body {
-      font-family: sans-serif;
       margin: 0;
+      font-family: sans-serif;
       background-color: #f2f7fb;
     }
 
     header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
       background-color: #007bff;
       color: white;
-      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
       flex-wrap: wrap;
     }
 
@@ -38,14 +38,13 @@
     }
 
     .judul h1 {
-      font-size: 1.8em;
       margin: 0;
-      font-weight: bold;
+      font-size: 1.8em;
     }
 
     .judul p {
       margin: 5px 0 0;
-      font-size: 1.2em;
+      font-size: 1em;
     }
 
     nav {
@@ -53,30 +52,28 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
+      gap: 15px;
       padding: 10px;
+      position: sticky;
+      top: 70px;
+      z-index: 999;
     }
 
-    nav a,
-    nav .dropdown > span {
+    nav a, nav .dropbtn {
       color: white;
       text-decoration: none;
       font-weight: bold;
       padding: 8px 12px;
       display: inline-block;
+      cursor: pointer;
     }
 
-    nav a:hover,
-    nav .dropdown > span:hover {
+    nav a:hover, nav .dropbtn:hover {
       background-color: #003f80;
     }
 
     .dropdown {
       position: relative;
-    }
-
-    .dropdown > span::after {
-      content: "";
     }
 
     .dropdown-content {
@@ -87,10 +84,6 @@
       top: 100%;
       left: 0;
       z-index: 999;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
     }
 
     .dropdown-content a {
@@ -104,21 +97,64 @@
       background-color: #004080;
     }
 
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
     .hero {
+      background-color: #e0f0ff;
       text-align: center;
-      padding: 40px 20px;
+      padding: 60px 20px;
     }
 
     .hero h2 {
-      font-size: 1.6em;
+      font-size: 2em;
+      margin-bottom: 10px;
     }
 
-    .content {
-      max-width: 800px;
+    .hero p {
+      font-size: 1.2em;
+      margin: 0;
+    }
+
+    .section {
+      max-width: 1000px;
       margin: auto;
-      padding: 20px;
+      padding: 30px 15px;
+    }
+
+    .section h3 {
       text-align: center;
-      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .kelas-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      text-align: center;
+    }
+
+    .kelas-links a {
+      background-color: #ffffff;
+      text-decoration: none;
+      color: #333;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+    }
+
+    .kelas-links a:hover {
+      background-color: #d9ecff;
+    }
+
+    footer {
+      background-color: #003f80;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
     }
 
     @media (max-width: 600px) {
@@ -131,22 +167,11 @@
       }
 
       .judul p {
-        font-size: 1em;
+        font-size: 0.9em;
       }
 
-      nav {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .dropdown-content {
-        position: static;
-        width: 100%;
-        text-align: center;
-      }
-
-      .dropdown:hover .dropdown-content {
-        display: block;
+      .kelas-links {
+        grid-template-columns: 1fr 1fr;
       }
     }
   </style>
@@ -157,9 +182,9 @@
     <img src="tutwuri.png" alt="Logo Tutwuri" class="logo" />
     <div class="judul">
       <h1>UPT SD NEGERI 160 GRESIK</h1>
-      <p>Kelas 3</p>
+      <p>Sekolah Favorit, Berkualitas, dan Islami</p>
     </div>
-    <img src="logo.png" alt="Logo SDN 160 Gresik" class="logo" />
+    <img src="logo.png" alt="Logo Sekolah" class="logo" />
   </header>
 
   <nav>
@@ -167,7 +192,7 @@
     <a href="profil.html">Profil</a>
     <a href="guru.html">Guru & Staf</a>
     <div class="dropdown">
-      <span>Kelas</span>
+      <span class="dropbtn">Kelas</span>
       <div class="dropdown-content">
         <a href="kelas1.html">Kelas 1</a>
         <a href="kelas2.html">Kelas 2</a>
@@ -182,13 +207,24 @@
   </nav>
 
   <section class="hero">
-    <h2>Halaman Kelas 3</h2>
-    <p>Informasi, materi, dan kegiatan belajar Kelas 3.</p>
+    <h2>Kelas 3</h2>
+    <p>Halaman untuk informasi dan perangkat pembelajaran Kelas 3</p>
   </section>
 
-  <section class="content">
-    <p>Selamat datang di halaman khusus Kelas 3.<br>Silakan eksplorasi perangkat pembelajaran, kegiatan siswa, dan informasi kelas lainnya di sini.</p>
+  <section class="section">
+    <h3>Pilih Kelas Lain</h3>
+    <div class="kelas-links">
+      <a href="kelas1.html">📘 Kelas 1</a>
+      <a href="kelas2.html">📗 Kelas 2</a>
+      <a href="kelas4.html">📙 Kelas 4</a>
+      <a href="kelas5.html">📕 Kelas 5</a>
+      <a href="kelas6.html">📓 Kelas 6</a>
+    </div>
   </section>
+
+  <footer>
+    <p>&copy; 2025 UPT SD NEGERI 160 GRESIK | Jalan Pendidikan No. 123, Gresik</p>
+  </footer>
 
 </body>
 </html>

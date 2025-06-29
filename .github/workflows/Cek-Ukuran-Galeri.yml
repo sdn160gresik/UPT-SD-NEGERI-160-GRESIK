@@ -1,1 +1,24 @@
+name: Cek Ukuran Galeri
+
+on:
+  push:
+    paths:
+      - 'galeri/**'
+
+jobs:
+  ukur-galeri:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Hitung ukuran total folder galeri/
+        run: |
+          echo "=== 📦 PENGGUNAAN PENYIMPANAN GALERI ==="
+          total_size=$(du -sh galeri | cut -f1)
+          total_files=$(find galeri -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) | wc -l)
+
+          echo "🖼️ Jumlah gambar  : $total_files file"
+          echo "📂 Total ukuran   : $total_size"
+          echo "========================================"
 

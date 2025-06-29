@@ -1,1 +1,28 @@
+name: Generate Galeri JSON
+
+on:
+  push:
+    paths:
+      - 'galeri/**'
+
+jobs:
+  generate-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Buat file data-galeri.json otomatis
+        run: |
+          echo "[" > data-galeri.json
+          find galeri -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) | sed 's|^galeri/||' | awk '{ print "\"" $0 "\"," }' >> data-galeri.json
+          sed -i '$ s/,$//' data-galeri.json
+          echo "]" >> data-galeri.json
+
+      - name: Commit dan Push file JSON
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add data-galeri.json
+          git commit -m "Update data-galeri.json otomatis"
+          git push
 

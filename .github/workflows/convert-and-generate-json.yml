@@ -1,0 +1,48 @@
+name: Konversi ke WebP & Generate JSON
+
+on:
+  push:
+    paths:
+      - 'galeri/**'
+
+jobs:
+  convert-and-generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install webp tool
+        run: sudo apt-get install -y webp
+
+      - name: Konversi ke .webp dan hapus file asli
+        run: |
+          find galeri -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | while read file; do
+            base="${file%.*}"
+            if [ ! -f "$base.webp" ]; then
+              echo "Mengonversi $file → $base.webp"
+              cwebp -q 80 "$file" -o "$base.webp" && rm "$file"
+            fi
+          done
+
+      - name: Generate data-galeri.json
+        run: |
+          echo "{" > data-galeri.json
+          for folder in galeri/*/ ; do
+            keg=$(basename "$folder")
+            echo "  \"$keg\": [" >> data-galeri.json
+            find "$folder" -type f -iname "*.webp" | sed 's|.*/||' | awk '{ print "    \"" $0 "\"," }' >> data-galeri.json
+            sed -i '$ s/,$//' data-galeri.json
+            echo "  ]," >> data-galeri.json
+          done
+          sed -i '$ s/},/}/' data-galeri.json
+          echo "}" >> data-galeri.json
+
+      - name: Commit perubahan
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add galeri/ data-galeri.json
+          git commit -m "Konversi ke .webp & update data-galeri.json otomatis"
+          git push

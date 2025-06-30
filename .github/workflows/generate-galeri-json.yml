@@ -19,14 +19,17 @@ jobs:
       - name: Generate data-galeri.json dari .webp
         run: |
           echo "{" > data-galeri.json
+          first=1
           for folder in galeri/*/ ; do
             keg=$(basename "$folder")
+            if [ $first -eq 0 ]; then echo "," >> data-galeri.json; fi
             echo "  \"$keg\": [" >> data-galeri.json
             find "$folder" -type f -iname "*.webp" | sed 's|.*/||' | awk '{ print "    \"" $0 "\"," }' >> data-galeri.json
             sed -i '$ s/,$//' data-galeri.json
-            echo "  ]," >> data-galeri.json
+            echo -n "  ]" >> data-galeri.json
+            first=0
           done
-          sed -i '$ s/},/}/' data-galeri.json
+          echo "" >> data-galeri.json
           echo "}" >> data-galeri.json
 
       - name: Commit perubahan JSON

@@ -6,13 +6,11 @@
   <title>Galeri - UPT SD NEGERI 160 GRESIK</title>
   <style>
     * { box-sizing: border-box; }
-
     body {
       font-family: sans-serif;
       margin: 0;
       background-color: #f2f7fb;
     }
-
     header {
       background-color: #007bff;
       color: white;
@@ -21,25 +19,20 @@
       align-items: center;
       justify-content: space-between;
     }
-
     .logo { height: 50px; }
-
     .judul {
       text-align: center;
       flex: 1;
     }
-
     .judul h1 {
       margin: 0;
       font-size: 1.8em;
       font-weight: bold;
     }
-
     .judul p {
       margin: 5px 0 0;
       font-size: 1.2em;
     }
-
     nav {
       background-color: #0056b3;
       display: flex;
@@ -49,22 +42,18 @@
       gap: 10px;
       padding: 10px;
     }
-
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       padding: 8px 12px;
     }
-
     nav a:hover {
       background-color: #003f80;
     }
-
     .dropdown {
       position: relative;
     }
-
     .dropdown-content {
       display: none;
       position: absolute;
@@ -74,18 +63,15 @@
       left: 0;
       z-index: 999;
     }
-
     .dropdown:hover .dropdown-content {
       display: block;
     }
-
     .dropdown-content a {
       display: block;
       padding: 10px;
       color: white;
       text-decoration: none;
     }
-
     .dropdown-content a:hover {
       background-color: #004080;
     }
@@ -95,36 +81,46 @@
       padding: 20px;
     }
 
-    .galeri {
+    .controls {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .controls input, .controls select {
+      padding: 8px;
+      margin: 5px;
+      font-size: 1em;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .kegiatan-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
+      gap: 20px;
+      padding: 20px;
       max-width: 1000px;
       margin: auto;
-      padding: 20px;
     }
-
-    .galeri img {
+    .kegiatan-item {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      text-align: center;
+      text-decoration: none;
+      color: black;
+    }
+    .kegiatan-item img {
       width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      height: 150px;
+      object-fit: cover;
     }
-
-    .load-more {
-      display: block;
-      margin: 10px auto 40px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .load-more:hover {
-      background-color: #0056b3;
+    .kegiatan-item p {
+      margin: 10px;
+      font-weight: bold;
+      font-size: 1.1em;
+      text-transform: capitalize;
     }
 
     @media (max-width: 600px) {
@@ -170,39 +166,76 @@
     <p>Dokumentasi kegiatan dan momen spesial di SDN 160 Gresik</p>
   </section>
 
-  <section class="galeri" id="galeri"></section>
+  <section class="controls">
+    <input type="text" id="pencarian" placeholder="Cari kegiatan..." />
+    <select id="filterKategori">
+      <option value="">Semua Kategori</option>
+    </select>
+  </section>
 
-  <button id="loadMore" class="load-more">Lihat Lebih Banyak</button>
+  <section class="kegiatan-grid" id="kegiatanGrid"></section>
 
   <script>
-    let dataGambar = [];
-    let jumlahTampil = 12;
-    let ditampilkan = 0;
+    let semuaData = {};
 
     fetch('data-galeri.json')
-      .then(res => res.json())
+      .then(response => response.json())
       .then(data => {
-        dataGambar = data;
-        tampilkanGambar();
+        semuaData = data;
+        tampilkanSemuaKegiatan(data);
+        isiDropdown(data);
       });
 
-    function tampilkanGambar() {
-      const container = document.getElementById('galeri');
-      const sisa = dataGambar.length - ditampilkan;
-      const ambil = Math.min(jumlahTampil, sisa);
-      for (let i = 0; i < ambil; i++) {
+    function tampilkanSemuaKegiatan(data) {
+      const container = document.getElementById('kegiatanGrid');
+      container.innerHTML = '';
+
+      for (const folder in data) {
+        const gambarPertama = data[folder][0];
+        if (!gambarPertama) continue;
+
+        const link = document.createElement('a');
+        link.href = `kegiatan.html?kegiatan=${folder}`;
+        link.className = 'kegiatan-item';
+        link.setAttribute('data-nama', folder.toLowerCase());
+
         const img = document.createElement('img');
-        img.src = 'galeri/' + dataGambar[ditampilkan];
-        img.alt = 'Foto Kegiatan ' + (ditampilkan + 1);
-        container.appendChild(img);
-        ditampilkan++;
-      }
-      if (ditampilkan >= dataGambar.length) {
-        document.getElementById('loadMore').style.display = 'none';
+        img.src = `galeri/${folder}/${gambarPertama}`;
+        img.alt = folder;
+
+        const label = document.createElement('p');
+        label.textContent = folder.replace(/-/g, ' ');
+
+        link.appendChild(img);
+        link.appendChild(label);
+        container.appendChild(link);
       }
     }
 
-    document.getElementById('loadMore').addEventListener('click', tampilkanGambar);
+    function isiDropdown(data) {
+      const filter = document.getElementById('filterKategori');
+      Object.keys(data).forEach(k => {
+        const opt = document.createElement('option');
+        opt.value = k;
+        opt.textContent = k.replace(/-/g, ' ');
+        filter.appendChild(opt);
+      });
+    }
+
+    document.getElementById('pencarian').addEventListener('input', () => {
+      const keyword = document.getElementById('pencarian').value.toLowerCase();
+      document.querySelectorAll('.kegiatan-item').forEach(item => {
+        const nama = item.getAttribute('data-nama');
+        item.style.display = nama.includes(keyword) ? '' : 'none';
+      });
+    });
+
+    document.getElementById('filterKategori').addEventListener('change', () => {
+      const kategori = document.getElementById('filterKategori').value;
+      tampilkanSemuaKegiatan(
+        kategori ? { [kategori]: semuaData[kategori] } : semuaData
+      );
+    });
   </script>
 
 </body>

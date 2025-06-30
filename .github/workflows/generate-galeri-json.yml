@@ -1,4 +1,4 @@
-name: Generate Galeri JSON
+name: Generate Galeri JSON (WEBP Only)
 
 on:
   push:
@@ -6,23 +6,30 @@ on:
       - 'galeri/**'
 
 jobs:
-  generate-json:
+  generate-json-only:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Buat file data-galeri.json otomatis
+      - name: Generate data-galeri.json dari .webp
         run: |
-          echo "[" > data-galeri.json
-          find galeri -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) | sed 's|^galeri/||' | awk '{ print "\"" $0 "\"," }' >> data-galeri.json
-          sed -i '$ s/,$//' data-galeri.json
-          echo "]" >> data-galeri.json
+          echo "{" > data-galeri.json
+          for folder in galeri/*/ ; do
+            keg=$(basename "$folder")
+            echo "  \"$keg\": [" >> data-galeri.json
+            find "$folder" -type f -iname "*.webp" | sed 's|.*/||' | awk '{ print "    \"" $0 "\"," }' >> data-galeri.json
+            sed -i '$ s/,$//' data-galeri.json
+            echo "  ]," >> data-galeri.json
+          done
+          sed -i '$ s/},/}/' data-galeri.json
+          echo "}" >> data-galeri.json
 
-      - name: Commit dan Push file JSON
+      - name: Commit perubahan JSON
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add data-galeri.json
-          git commit -m "Update data-galeri.json otomatis"
+          git commit -m "Update otomatis data-galeri.json dari file .webp"
           git push
-

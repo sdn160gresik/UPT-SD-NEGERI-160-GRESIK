@@ -1,35 +1,41 @@
-name: Generate Galeri JSON (WEBP Only)
+name: Generate Galeri JSON
 
 on:
   push:
     paths:
       - 'galeri/**'
 
+permissions:
+  contents: write
+
 jobs:
-  generate-json-only:
+  generate-json:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Generate data-galeri.json dari .webp
+      - name: Generate valid data-galeri.json
         run: |
           echo "{" > data-galeri.json
+          first=1
           for folder in galeri/*/ ; do
             keg=$(basename "$folder")
+            if [ $first -eq 0 ]; then echo "," >> data-galeri.json; fi
             echo "  \"$keg\": [" >> data-galeri.json
             find "$folder" -type f -iname "*.webp" | sed 's|.*/||' | awk '{ print "    \"" $0 "\"," }' >> data-galeri.json
             sed -i '$ s/,$//' data-galeri.json
-            echo "  ]," >> data-galeri.json
+            echo -n "  ]" >> data-galeri.json
+            first=0
           done
-          sed -i '$ s/},/}/' data-galeri.json
+          echo "" >> data-galeri.json
           echo "}" >> data-galeri.json
 
-      - name: Commit perubahan JSON
+      - name: Commit perubahan
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add data-galeri.json
-          git commit -m "Update otomatis data-galeri.json dari file .webp"
+          git commit -m "Update otomatis data-galeri.json (valid JSON)" || echo "Tidak ada perubahan"
           git push

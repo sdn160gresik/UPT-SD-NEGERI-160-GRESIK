@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detail Kegiatan</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background-color: #f2f7fb;
+    }
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .judul {
+      font-size: 1.5em;
+    }
+    .galeri {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+    .galeri img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .back {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .back a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="judul" id="judulKegiatan">Kegiatan</div>
+  </header>
+
+  <div class="back">
+    <a href="galeri.html">← Kembali ke Galeri</a>
+  </div>
+
+  <section class="galeri" id="galeri"></section>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const kegiatan = params.get('kegiatan');
+    const judul = kegiatan ? kegiatan.replace(/-/g, ' ').toUpperCase() : 'Kegiatan';
+    document.getElementById('judulKegiatan').textContent = judul;
+
+    fetch('data-galeri.json')
+      .then(res => res.json())
+      .then(data => {
+        const folder = data[kegiatan];
+        const galeri = document.getElementById('galeri');
+
+        if (folder && folder.length > 0) {
+          folder.forEach((file, i) => {
+            const img = document.createElement('img');
+            img.src = `galeri/${kegiatan}/${file}`;
+            img.alt = `${kegiatan} ${i + 1}`;
+            galeri.appendChild(img);
+          });
+        } else {
+          galeri.innerHTML = '<p style="text-align:center;">Belum ada foto untuk kegiatan ini.</p>';
+        }
+      });
+  </script>
+
+</body>
+</html>

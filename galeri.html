@@ -3,71 +3,153 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Galeri Sekolah - UPT SD NEGERI 160 GRESIK</title>
+  <title>Galeri - UPT SD NEGERI 160 GRESIK</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: sans-serif;
       margin: 0;
-      background: #f2f2f2;
+      background-color: #f2f7fb;
     }
+
     header {
-      background: #0074d9;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #007bff;
       color: white;
-      padding: 1rem;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .judul {
+      flex: 1;
       text-align: center;
     }
-    nav {
-      background: #005bb5;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 0.5rem 0;
+
+    .judul h1 {
+      font-size: 1.8em;
+      margin: 0;
+      font-weight: bold;
     }
+
+    .judul p {
+      margin: 5px 0 0;
+      font-size: 1.2em;
+    }
+
+    nav {
+      background-color: #0056b3;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+    }
+
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
+      padding: 8px 12px;
     }
 
-    .judul {
+    nav a:hover {
+      background-color: #003f80;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #007bff;
+      min-width: 160px;
+      top: 100%;
+      left: 0;
+      z-index: 999;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #004080;
+    }
+
+    .hero {
       text-align: center;
-      margin: 2rem 1rem 0.5rem;
-      font-size: 1.2rem;
+      padding: 40px 20px 20px;
+    }
+
+    .hero h2 {
+      font-size: 1.6em;
+      margin: 0;
+      color: #007bff;
+    }
+
+    .hero p {
+      margin-top: 5px;
+      font-size: 1.1em;
       color: #333;
     }
 
-    .kegiatan-grid {
+    .galeri {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: auto;
     }
 
-    .kegiatan-item {
+    .galeri a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .galeri-item {
       background: white;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
       overflow: hidden;
       text-align: center;
-      text-decoration: none;
-      color: black;
       transition: transform 0.2s ease;
     }
 
-    .kegiatan-item:hover {
+    .galeri-item:hover {
       transform: scale(1.03);
     }
 
-    .kegiatan-item img {
+    .galeri-item img {
       width: 100%;
       height: 150px;
       object-fit: cover;
       display: block;
     }
 
-    .kegiatan-item p {
+    .galeri-item p {
       margin: 10px;
       font-weight: bold;
       font-size: 1em;
@@ -75,10 +157,30 @@
     }
 
     @media (max-width: 600px) {
-      .kegiatan-grid {
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      .logo {
+        height: 40px;
       }
-      .kegiatan-item img {
+
+      .judul h1 {
+        font-size: 1.4em;
+      }
+
+      .judul p {
+        font-size: 1em;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .dropdown-content {
+        position: static;
+        width: 100%;
+        text-align: center;
+      }
+
+      .galeri-item img {
         height: 120px;
       }
     }
@@ -87,38 +189,55 @@
 <body>
 
   <header>
-    <h1>UPT SD NEGERI 160 GRESIK</h1>
-    <p>Galeri Sekolah</p>
+    <img src="tutwuri.png" alt="Logo Tutwuri" class="logo" />
+    <div class="judul">
+      <h1>UPT SD NEGERI 160 GRESIK</h1>
+      <p>Galeri Sekolah</p>
+    </div>
+    <img src="logo.png" alt="Logo SDN 160 Gresik" class="logo" />
   </header>
 
   <nav>
     <a href="index.html">Beranda</a>
     <a href="profil.html">Profil</a>
     <a href="guru.html">Guru & Staf</a>
-    <a href="kelas1.html">Kelas</a>
+    <div class="dropdown">
+      <a href="#">Kelas</a>
+      <div class="dropdown-content">
+        <a href="kelas1.html">Kelas 1</a>
+        <a href="kelas2.html">Kelas 2</a>
+        <a href="kelas3.html">Kelas 3</a>
+        <a href="kelas4.html">Kelas 4</a>
+        <a href="kelas5.html">Kelas 5</a>
+        <a href="kelas6.html">Kelas 6</a>
+      </div>
+    </div>
     <a href="galeri.html">Galeri</a>
     <a href="kontak.html">Kontak</a>
   </nav>
 
-  <div class="judul">Dokumentasi kegiatan dan momen spesial di SDN 160 Gresik</div>
+  <section class="hero">
+    <h2>Galeri Kegiatan</h2>
+    <p>Dokumentasi kegiatan dan momen spesial di SDN 160 Gresik</p>
+  </section>
 
-  <div class="kegiatan-grid" id="galeriKegiatan"></div>
+  <section class="galeri" id="galeriKegiatan"></section>
 
   <script>
     fetch('data-galeri.json')
       .then(res => res.json())
       .then(data => {
-        const kontainer = document.getElementById("galeriKegiatan");
+        const galeri = document.getElementById("galeriKegiatan");
         for (const kegiatan in data) {
-          const gambarPertama = data[kegiatan][0];
+          const gambar = data[kegiatan][0];
           const item = document.createElement("a");
           item.href = `kegiatan.html?kegiatan=${encodeURIComponent(kegiatan)}`;
-          item.className = "kegiatan-item";
           item.innerHTML = `
-            <img src="galeri/${kegiatan}/${gambarPertama}" alt="${kegiatan}">
-            <p>${kegiatan}</p>
-          `;
-          kontainer.appendChild(item);
+            <div class="galeri-item">
+              <img src="galeri/${kegiatan}/${gambar}" alt="${kegiatan}">
+              <p>${kegiatan}</p>
+            </div>`;
+          galeri.appendChild(item);
         }
       })
       .catch(err => {

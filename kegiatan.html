@@ -121,6 +121,30 @@
       height: auto;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      cursor: zoom-in;
+    }
+
+    /* Modal zoom overlay */
+    .modal-zoom {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-zoom img {
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      margin: 5% auto;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #000;
+      cursor: zoom-out;
     }
 
     @media (max-width: 600px) {
@@ -145,6 +169,10 @@
         position: static;
         width: 100%;
         text-align: center;
+      }
+
+      .galeri img {
+        height: auto;
       }
     }
   </style>
@@ -186,6 +214,11 @@
 
   <section class="galeri" id="isiGaleri"></section>
 
+  <!-- Modal Zoom -->
+  <div class="modal-zoom" id="modalZoom">
+    <img src="" alt="Zoomed" id="zoomedImg">
+  </div>
+
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const kegiatan = urlParams.get('kegiatan');
@@ -200,6 +233,7 @@
             const img = document.createElement("img");
             img.src = `galeri/${kegiatan}/${gbr}`;
             img.alt = kegiatan;
+            img.onclick = () => zoomImage(img.src);
             isi.appendChild(img);
           });
         } else {
@@ -209,6 +243,19 @@
       .catch(() => {
         document.getElementById("isiGaleri").innerHTML = "<p style='text-align:center;'>Galeri tidak dapat dimuat.</p>";
       });
+
+    // Fungsi Zoom
+    function zoomImage(src) {
+      const modal = document.getElementById("modalZoom");
+      const img = document.getElementById("zoomedImg");
+      img.src = src;
+      modal.style.display = "block";
+    }
+
+    // Tutup modal saat diklik
+    document.getElementById("modalZoom").onclick = () => {
+      document.getElementById("modalZoom").style.display = "none";
+    };
   </script>
 
 </body>

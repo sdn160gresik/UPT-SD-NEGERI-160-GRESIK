@@ -1,4 +1,4 @@
-name: Konversi ke WebP & Generate JSON
+name: Generate Galeri JSON (WEBP Only)
 
 on:
   push:
@@ -6,27 +6,14 @@ on:
       - 'galeri/**'
 
 jobs:
-  convert-and-generate:
+  generate-json-only:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install webp tool
-        run: sudo apt-get install -y webp
-
-      - name: Konversi ke .webp dan hapus file asli
-        run: |
-          find galeri -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | while read file; do
-            base="${file%.*}"
-            if [ ! -f "$base.webp" ]; then
-              echo "Mengonversi $file → $base.webp"
-              cwebp -q 80 "$file" -o "$base.webp" && rm "$file"
-            fi
-          done
-
-      - name: Generate data-galeri.json
+      - name: Generate data-galeri.json dari .webp
         run: |
           echo "{" > data-galeri.json
           for folder in galeri/*/ ; do
@@ -39,10 +26,10 @@ jobs:
           sed -i '$ s/},/}/' data-galeri.json
           echo "}" >> data-galeri.json
 
-      - name: Commit perubahan
+      - name: Commit perubahan JSON
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add galeri/ data-galeri.json
-          git commit -m "Konversi ke .webp & update data-galeri.json otomatis"
+          git add data-galeri.json
+          git commit -m "Update otomatis data-galeri.json dari file .webp"
           git push

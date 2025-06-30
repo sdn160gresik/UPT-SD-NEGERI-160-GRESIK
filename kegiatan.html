@@ -3,80 +3,211 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Detail Kegiatan</title>
+  <title>Kegiatan - UPT SD NEGERI 160 GRESIK</title>
   <style>
+    * { box-sizing: border-box; }
+
     body {
       font-family: sans-serif;
       margin: 0;
       background-color: #f2f7fb;
     }
+
     header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
       background-color: #007bff;
       color: white;
-      padding: 15px;
-      text-align: center;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
     }
+
+    .logo {
+      height: 50px;
+    }
+
     .judul {
-      font-size: 1.5em;
-    }
-    .galeri {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      max-width: 1000px;
-      margin: auto;
-      padding: 20px;
-    }
-    .galeri img {
-      width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-    .back {
+      flex: 1;
       text-align: center;
-      margin-bottom: 20px;
     }
-    .back a {
-      color: #007bff;
+
+    .judul h1 {
+      font-size: 1.8em;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .judul p {
+      margin: 5px 0 0;
+      font-size: 1.2em;
+    }
+
+    nav {
+      background-color: #0056b3;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
       text-decoration: none;
       font-weight: bold;
+      padding: 8px 12px;
+    }
+
+    nav a:hover {
+      background-color: #003f80;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #007bff;
+      min-width: 160px;
+      top: 100%;
+      left: 0;
+      z-index: 999;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #004080;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 30px 20px 10px;
+    }
+
+    .hero h2 {
+      font-size: 1.6em;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+
+    .galeri {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .galeri img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 600px) {
+      .logo {
+        height: 40px;
+      }
+
+      .judul h1 {
+        font-size: 1.4em;
+      }
+
+      .judul p {
+        font-size: 1em;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .dropdown-content {
+        position: static;
+        width: 100%;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="judul" id="judulKegiatan">Kegiatan</div>
+    <img src="tutwuri.png" alt="Logo Tutwuri" class="logo" />
+    <div class="judul">
+      <h1>UPT SD NEGERI 160 GRESIK</h1>
+      <p>Dokumentasi Kegiatan</p>
+    </div>
+    <img src="logo.png" alt="Logo SDN 160 Gresik" class="logo" />
   </header>
 
-  <div class="back">
-    <a href="galeri.html">← Kembali ke Galeri</a>
-  </div>
+  <nav>
+    <a href="index.html">Beranda</a>
+    <a href="profil.html">Profil</a>
+    <a href="guru.html">Guru & Staf</a>
+    <div class="dropdown">
+      <a href="#">Kelas</a>
+      <div class="dropdown-content">
+        <a href="kelas1.html">Kelas 1</a>
+        <a href="kelas2.html">Kelas 2</a>
+        <a href="kelas3.html">Kelas 3</a>
+        <a href="kelas4.html">Kelas 4</a>
+        <a href="kelas5.html">Kelas 5</a>
+        <a href="kelas6.html">Kelas 6</a>
+      </div>
+    </div>
+    <a href="galeri.html">Galeri</a>
+    <a href="kontak.html">Kontak</a>
+  </nav>
 
-  <section class="galeri" id="galeri"></section>
+  <section class="hero">
+    <h2 id="judulKegiatan">Kegiatan</h2>
+    <p>Dokumentasi kegiatan lengkap</p>
+  </section>
+
+  <section class="galeri" id="isiGaleri"></section>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const kegiatan = params.get('kegiatan');
-    const judul = kegiatan ? kegiatan.replace(/-/g, ' ').toUpperCase() : 'Kegiatan';
-    document.getElementById('judulKegiatan').textContent = judul;
+    const urlParams = new URLSearchParams(window.location.search);
+    const kegiatan = urlParams.get('kegiatan');
+    document.getElementById("judulKegiatan").textContent = kegiatan ?? 'Kegiatan';
 
     fetch('data-galeri.json')
       .then(res => res.json())
       .then(data => {
-        const folder = data[kegiatan];
-        const galeri = document.getElementById('galeri');
-
-        if (folder && folder.length > 0) {
-          folder.forEach((file, i) => {
-            const img = document.createElement('img');
-            img.src = `galeri/${kegiatan}/${file}`;
-            img.alt = `${kegiatan} ${i + 1}`;
-            galeri.appendChild(img);
+        const isi = document.getElementById("isiGaleri");
+        if (kegiatan in data) {
+          data[kegiatan].forEach(gbr => {
+            const img = document.createElement("img");
+            img.src = `galeri/${kegiatan}/${gbr}`;
+            img.alt = kegiatan;
+            isi.appendChild(img);
           });
         } else {
-          galeri.innerHTML = '<p style="text-align:center;">Belum ada foto untuk kegiatan ini.</p>';
+          isi.innerHTML = "<p style='text-align:center;'>Kegiatan tidak ditemukan.</p>";
         }
+      })
+      .catch(() => {
+        document.getElementById("isiGaleri").innerHTML = "<p style='text-align:center;'>Galeri tidak dapat dimuat.</p>";
       });
   </script>
 

@@ -5,6 +5,9 @@ on:
     paths:
       - 'galeri/**'
 
+permissions:
+  contents: write
+
 jobs:
   generate-json-only:
     runs-on: ubuntu-latest
@@ -31,5 +34,5 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add data-galeri.json
-          git commit -m "Update otomatis data-galeri.json dari file .webp"
+          git commit -m "Update otomatis data-galeri.json dari file .webp" || echo "Tidak ada perubahan"
           git push

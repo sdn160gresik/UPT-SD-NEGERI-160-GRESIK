@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lembah-Matematika-Kelas5</title>
+  <title>Lembah Matematika Kelas 5</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     html, body {
@@ -11,33 +11,64 @@
       padding: 0;
       font-family: 'Poppins', sans-serif;
       min-height: 100vh;
-    }
-
-    body {
       background-image: url('https://i.imgur.com/EBZL7Do.png');
       background-repeat: no-repeat;
       background-position: center center;
       background-size: contain;
-      background-attachment: scroll;
       background-color: #e0f7fa;
       color: #0288d1;
     }
 
-    nav {
-      background: transparent;
-      padding: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
+    .menu-button {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1001;
     }
 
-    nav a {
+    .menu-icon {
+      width: 30px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .menu-icon div {
+      background-color: #0288d1;
+      height: 4px;
+      border-radius: 2px;
+    }
+
+    .dropdown-menu {
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    .dropdown-menu a {
+      padding: 10px 15px;
       text-decoration: none;
       color: #0288d1;
       font-weight: bold;
-      background: #d0f0ff;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
+      border-bottom: 1px solid #e0f0f0;
+    }
+
+    .dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #e0f7fa;
     }
 
     .title-section {
@@ -97,12 +128,6 @@
     }
 
     @media (max-width: 768px) {
-      body {
-        background-size: contain;
-        background-position: center top;
-        background-attachment: scroll;
-      }
-
       .title-section h1 {
         font-size: 1.5rem;
       }
@@ -119,25 +144,57 @@
 </head>
 <body>
 
-  <nav>
-    <a href="index.html">🏠 Beranda</a>
-    <a href="kelas.html">📚 Kembali ke Kelas</a>
-  </nav>
+  <!-- Hamburger Menu Button -->
+  <button class="menu-button" onclick="toggleMenu()" aria-label="Menu">
+    <div class="menu-icon">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </button>
 
+  <!-- Dropdown Menu -->
+  <div class="dropdown-menu" id="dropdownMenu">
+    <a href="index.html">🏠 Beranda</a>
+    <a href="kelas.html">🏫 Kembali ke Kelas</a>
+    <a href="latihan-soal-matematika5.html">🧠 Latihan Soal</a>
+    <a href="tugas.html">📄 Lihat Tugas</a>
+    <a href="petualangan.html">📖 Petualangan Belajar</a>
+  </div>
+
+  <!-- Title Section -->
   <div class="title-section">
     <h1>🧮 Lembah Matematika</h1>
     <div class="intro-title">Selamat datang di Lembah Matematika!</div><br>
     <div class="intro-subtitle">Siapkan semangatmu dan mari taklukkan rintangan satu per satu</div>
   </div>
 
+  <!-- Math Menu Grid -->
   <div class="math-menu">
-    <a href="#operasi" class="math-item">➕ Operasi Hitung</a>
-    <a href="#pecahan" class="math-item">🔢 Pecahan</a>
-    <a href="#pengukuran" class="math-item">📏 Pengukuran</a>
-    <a href="#geometri" class="math-item">📐 Geometri</a>
-    <a href="latihan-soal-matematika5.html" class="math-item">🧠 Latihan Soal</a>
-    <a href="tugas.html" class="math-item">📄 Tugas</a>
+    <a href="#operasi">➕ Operasi Hitung</a>
+    <a href="#pecahan">🔢 Pecahan</a>
+    <a href="#pengukuran">📏 Pengukuran</a>
+    <a href="#geometri">📐 Geometri</a>
+    <a href="latihan-soal-matematika5.html">🧠 Latihan Soal</a>
+    <a href="tugas.html">📄 Lihat Tugas</a>
   </div>
+
+  <!-- Script to toggle menu -->
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("dropdownMenu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+
+    // Optional: close menu when clicking outside
+    document.addEventListener("click", function(event) {
+      const button = document.querySelector(".menu-button");
+      const menu = document.getElementById("dropdownMenu");
+      if (!button.contains(event.target) && !menu.contains(event.target)) {
+        menu.style.display = "none";
+      }
+    });
+  </script>
 
 </body>
 </html>

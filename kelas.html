@@ -16,13 +16,24 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
+      justify-content: space-between;
       padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     nav img {
       height: 55px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 0.5rem;
     }
 
     nav a {
@@ -33,11 +44,13 @@
       text-decoration: none;
       color: #0288d1;
       font-weight: bold;
-      transition: background-color 0.3s;
+      border: 2px solid #0288d1;
+      transition: background-color 0.3s, transform 0.2s ease;
     }
 
     nav a:hover {
       background-color: #cce5ff;
+      transform: scale(1.05);
     }
 
     .container {
@@ -106,6 +119,16 @@
 
       nav {
         flex-direction: column;
+        align-items: center;
+      }
+
+      .nav-logo {
+        margin-bottom: 10px;
+      }
+
+      .nav-menu {
+        justify-content: center;
+        flex-wrap: wrap;
       }
 
       nav img {
@@ -119,34 +142,30 @@
 
   <!-- Navigasi + Logo -->
   <nav>
-    <div style="display: flex; align-items: center; gap: 1rem;">
+    <div class="nav-logo">
       <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
       <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 62px;">
       <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah">
     </div>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-left: auto; margin-right: auto;">
-      <a href="index.html">Beranda</a>
-      <a href="#">Tentang</a>
-      <a href="#">Program</a>
-      <a href="#">Galeri</a>
-      <a href="#">Kontak</a>
+    <div class="nav-menu">
+      <a href="index.html">🏠 Beranda</a>
+      <a href="#">📞 Kontak</a>
     </div>
   </nav>
 
   <!-- Konten Utama -->
   <div class="container">
-    <div class="subjudul">Siap Belajar Hari Ini? Pilih Kelasmu! 🌟</div>
+    <div class="subjudul">📚 Siap Belajar Hari Ini? Pilih Kelasmu! 🌟</div>
 
     <div class="kelas-baris">
       <a href="kelas1.html" class="button-kelas kelas1">1</a>
       <a href="kelas2.html" class="button-kelas kelas2">2</a>
       <a href="kelas3.html" class="button-kelas kelas3">3</a>
       <a href="kelas4.html" class="button-kelas kelas4">4</a>
-      <a href="Petualangan-Kelas-5.html" class="button-kelas kelas5">5</a> <!-- Link telah diganti -->
+      <a href="Petualangan-Kelas-5.html" class="button-kelas kelas5">5</a>
       <a href="kelas6.html" class="button-kelas kelas6">6</a>
     </div>
   </div>
 
 </body>
 </html>
-

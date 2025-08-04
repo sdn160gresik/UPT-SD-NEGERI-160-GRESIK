@@ -24,22 +24,24 @@
         font-size: 0.9rem;
         padding: 0.4rem 0.6rem !important;
       }
-      .hero {
-        padding: 1rem 1rem !important;
+      .dropdown-content {
+        position: static;
+        display: none;
+        box-shadow: none;
+        background: transparent;
       }
-      h1 {
-        font-size: 2rem !important;
-      }
-      p {
-        font-size: 1.2rem !important;
+      .dropdown.open .dropdown-content {
+        display: block !important;
       }
     }
+
     html, body {
       height: 100%;
       margin: 0;
       font-family: 'Poppins', sans-serif;
       color: #333;
     }
+
     .background-wrapper {
       min-height: 100%;
       background: url('https://i.imgur.com/elvDO0G.png') no-repeat center center;
@@ -48,27 +50,32 @@
       background-repeat: no-repeat;
       background-attachment: fixed;
     }
+
     nav a {
       margin: 0 1rem;
       color: white;
       text-decoration: none;
       font-weight: bold;
     }
+
     .hero {
       padding-top: 2rem;
       padding-bottom: 2rem;
       text-align: center;
       color: #fff;
     }
+
     section {
       padding: 3rem 2rem;
       margin: 2rem;
     }
+
     h2 {
       text-align: center;
       margin-bottom: 2rem;
       color: #0288d1;
     }
+
     .card {
       background: white;
       padding: 1.5rem;
@@ -77,13 +84,16 @@
       text-align: center;
       transition: transform 0.3s;
     }
+
     .card:hover {
       transform: scale(1.05);
     }
+
     .kelas-container {
       padding: 2rem;
       text-align: center;
     }
+
     .kelas-button {
       display: inline-block;
       margin: 0.5rem;
@@ -95,8 +105,40 @@
       font-weight: bold;
       transition: background 0.3s;
     }
+
     .kelas-button:hover {
       background-color: #0277bd;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 6px;
+    }
+
+    .dropdown-content a {
+      color: #0288d1;
+      padding: 10px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f0f0f0;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
     }
   </style>
 </head>
@@ -109,12 +151,25 @@
         <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah" style="height: 55px;">
       </div>
       <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-left: auto; margin-right: auto;">
-        <a href="#" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; color: #0288d1; font-weight: bold;">Beranda</a>
-        <a href="#tentang" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; color: #0288d1; font-weight: bold;">Tentang</a>
-        <a href="#program" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; color: #0288d1; font-weight: bold;">Program</a>
-        <a href="#galeri" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; color: #0288d1; font-weight: bold;">Galeri</a>
-        <a href="kelas.html" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; color: #0288d1; font-weight: bold;">Kelas</a>
-        <a href="#kontak" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; color: #0288d1; font-weight: bold;">Kontak</a>
+        <a href="#" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Beranda</a>
+        <a href="#tentang" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Tentang</a>
+        <a href="#program" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Program</a>
+        <a href="#galeri" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Galeri</a>
+        <a href="kelas.html" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Kelas</a>
+        <a href="#kontak" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Kontak</a>
+
+        <!-- Dropdown Latihan -->
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Latihan ▼</a>
+          <div class="dropdown-content">
+            <a href="latihan/kelas1.html">Kelas 1</a>
+            <a href="latihan/kelas2.html">Kelas 2</a>
+            <a href="latihan/kelas3.html">Kelas 3</a>
+            <a href="latihan/kelas4.html">Kelas 4</a>
+            <a href="latihan/kelas5.html">Kelas 5</a>
+            <a href="latihan/kelas6.html">Kelas 6</a>
+          </div>
+        </div>
       </div>
     </nav>
 
@@ -123,7 +178,27 @@
       <p style="font-size: 1.6rem;">Tempat Tumbuhnya Anak Hebat dan Bahagia!</p>
     </section>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const dropdown = document.querySelector(".dropdown");
+      const toggle = dropdown.querySelector(".dropdown-toggle");
+      const content = dropdown.querySelector(".dropdown-content");
+
+      if (window.innerWidth <= 768) {
+        toggle.addEventListener("click", function (e) {
+          e.preventDefault();
+          dropdown.classList.toggle("open");
+        });
+
+        // Klik di luar untuk menutup
+        document.addEventListener("click", function (e) {
+          if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove("open");
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
-
-

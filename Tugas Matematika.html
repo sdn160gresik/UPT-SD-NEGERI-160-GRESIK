@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tugas Matematika Kelas 5</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+    }
+
+    body {
+      background-image: url('https://i.imgur.com/EBZL7Do.png');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+      background-attachment: scroll;
+      background-color: #e0f7fa;
+      color: #0288d1;
+    }
+
+    .menu-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .menu {
+      display: none;
+      position: absolute;
+      top: 3.5rem;
+      right: 1rem;
+      background-color: #d0f0ff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      flex-direction: column;
+      min-width: 180px;
+    }
+
+    .menu a {
+      padding: 0.8rem 1rem;
+      text-decoration: none;
+      color: #0288d1;
+      font-weight: bold;
+      border-bottom: 1px solid #b2ebf2;
+    }
+
+    .menu a:last-child {
+      border-bottom: none;
+    }
+
+    .menu.show {
+      display: flex;
+    }
+
+    .title-section {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+    }
+
+    .title-section h1 {
+      font-size: 2rem;
+      color: #01579b;
+    }
+
+    .intro-title {
+      font-size: 1.3rem;
+      color: white;
+      background-color: #0288d1;
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      margin-top: 0.5rem;
+      font-weight: bold;
+    }
+
+    .intro-subtitle {
+      font-size: 1rem;
+      color: white;
+      background-color: #4fc3f7;
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+    }
+
+    .task-section {
+      text-align: center;
+      margin: 3rem auto;
+      padding: 1rem;
+    }
+
+    .download-btn {
+      background-color: #00acc1;
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background-color: #00838f;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        background-size: contain;
+        background-position: center top;
+        background-attachment: scroll;
+      }
+
+      .title-section h1 {
+        font-size: 1.5rem;
+      }
+
+      .intro-title {
+        font-size: 1rem;
+      }
+
+      .intro-subtitle {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hamburger Menu -->
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <div class="menu" id="navMenu">
+    <a href="index.html">🏠 Beranda</a>
+    <a href="Lembah-Matematika-Kelas5.html">🧮 Kembali ke Kelas</a>
+    <a href="Latihan-Soal-Kelas5.html">📘 Latihan Soal</a>
+    <a href="Petualangan-Kelas5.html">🎮 Petualangan Belajar</a>
+  </div>
+
+  <div class="title-section">
+    <h1>📄 Tugas Matematika Kelas 5</h1>
+    <div class="intro-title">Yuk, kerjakan tugas matematika minggu ini!</div><br>
+    <div class="intro-subtitle">Klik tombol di bawah untuk melihat tugasmu</div>
+  </div>
+
+  <div class="task-section">
+    <a href="tugas-matematika-kelas5.pdf" class="download-btn" target="_blank">📄 Tugas</a>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('navMenu');
+      menu.classList.toggle('show');
+    }
+
+    // Optional: Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('navMenu');
+      const toggle = document.querySelector('.menu-toggle');
+      if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+        menu.classList.remove('show');
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Identitas Istana</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+  html, body {
+    margin: 0; padding: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100%; width: 100%;
+    overflow-x: hidden;
+    background: url('https://i.imgur.com/Bc2M7hb.png') no-repeat center center fixed;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .nav-left img {
+    height: 45px;
+    margin-right: 0.5rem;
+  }
+
+  .nav-right a {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #0288d1;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .nav-right a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  main {
+    flex-grow: 1;
+    max-width: 650px;
+    width: 90%;
+    margin: 2rem auto 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .box-judul {
+    background: rgba(255,255,255,0.9);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+    color: #0288d1;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.8rem;
+  }
+
+  .subjudul {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 0.4rem;
+    color: #555;
+  }
+
+  form {
+    background: rgba(255,255,255,0.9);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+    color: #0288d1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  input {
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+
+  /* Tombol Lepas Landas */
+  .btn-lepas-landas {
+    background: linear-gradient(45deg, #0288d1, #00c6ff);
+    color: white;
+    border: none;
+    padding: 0.9rem 2rem;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 198, 255, 0.5);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-lepas-landas:hover {
+    transform: scale(1.08);
+    background: linear-gradient(45deg, #0273b9, #00aee0);
+    box-shadow: 0 6px 14px rgba(0, 198, 255, 0.7);
+  }
+
+  /* Animasi pesawat */
+  .btn-lepas-landas span {
+    display: inline-block;
+    transition: transform 0.5s ease;
+  }
+
+  .btn-lepas-landas:hover span {
+    transform: translateX(8px);
+  }
+
+  /* Kotak peringatan */
+  .alert-box {
+    display: none;
+    background: rgba(255, 230, 0, 0.95);
+    color: #000;
+    padding: 1rem;
+    border-radius: 10px;
+    font-weight: 600;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik" />
+    <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 50px;" />
+    <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah" />
+  </div>
+  <div class="nav-right">
+    <a href="index.html">🏠 Beranda</a>
+    <a href="#">📌 Program</a>
+    <a href="#">🖼️ Galeri</a>
+  </div>
+</nav>
+
+<main>
+  <div class="box-judul">
+    🚀 Ayo Terbang ke Dunia Soal!
+    <div class="subjudul">isi datamu dulu ya... 😊</div>
+  </div>
+
+  <form id="identitasForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfKZyW7Jk8nhhXbhBxIV1Q-JQ6rFRVF-x6ZDD3Cev62GU4Ajw/formResponse" method="POST" target="_self">
+    <input type="text" name="entry.412084629" placeholder="✏️ Nama Lengkap" />
+    <input type="text" name="entry.1516025769" placeholder="🏫 Kelas" />
+    <input type="text" name="entry.1387174656" placeholder="🔢 No Absen" />
+
+    <div class="alert-box" id="alertBox">⚠️ Wah, ada yang kosong nih!  
+    Yuk isi semua data biar pesawat kita bisa lepas landas! ✈️🔥</div>
+
+    <button type="submit" class="btn-lepas-landas"><span>✈️ Lepas Landas ke Soal!</span></button>
+  </form>
+</main>
+
+<script>
+  document.getElementById('identitasForm').addEventListener('submit', function(e) {
+    const nama = this.querySelector('[name="entry.412084629"]').value.trim();
+    const kelas = this.querySelector('[name="entry.1516025769"]').value.trim();
+    const noAbsen = this.querySelector('[name="entry.1387174656"]').value.trim();
+    const alertBox = document.getElementById('alertBox');
+
+    if (!nama || !kelas || !noAbsen) {
+      e.preventDefault();
+      alertBox.style.display = 'block';
+    } else {
+      alertBox.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>

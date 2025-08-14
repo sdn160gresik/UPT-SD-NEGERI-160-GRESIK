@@ -105,46 +105,38 @@
     .kelas5 { background-color: #000000; }
     .kelas6 { background-color: #9b0000; }
 
-    /* Popup Peringatan */
+    /* Popup peringatan */
     .popup {
-      display: none;
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      background: #ffffff;
-      padding: 20px 25px;
-      border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      transform: translate(-50%, -50%) scale(0.7);
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
       text-align: center;
       z-index: 999;
-      animation: pop 0.3s ease forwards;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
     }
 
-    .popup h3 {
-      margin: 0;
-      font-size: 18px;
-      color: #0288d1;
+    .popup.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
     }
 
     .popup button {
-      margin-top: 12px;
-      padding: 6px 12px;
+      margin-top: 15px;
+      padding: 8px 15px;
       border: none;
-      border-radius: 6px;
       background: #0288d1;
       color: white;
-      cursor: pointer;
+      border-radius: 6px;
       font-weight: bold;
-    }
-
-    .popup button:hover {
-      background: #026aa7;
-    }
-
-    @keyframes pop {
-      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      cursor: pointer;
     }
 
     @media (max-width: 600px) {
@@ -153,36 +145,11 @@
         height: 50px;
         font-size: 22px;
       }
-
-      .subjudul {
-        font-size: 18px;
-        padding: 10px 20px;
-      }
-
-      nav {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .nav-logo {
-        margin-bottom: 10px;
-      }
-
-      .nav-menu {
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      nav img {
-        height: 40px !important;
-        margin: 0.3rem;
-      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigasi + Logo -->
   <nav>
     <div class="nav-logo">
       <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
@@ -195,7 +162,6 @@
     </div>
   </nav>
 
-  <!-- Konten Utama -->
   <div class="container">
     <div class="subjudul">📚 Siap Belajar Hari Ini? Pilih Kelasmu! 🌟</div>
 
@@ -209,52 +175,47 @@
     </div>
   </div>
 
-  <!-- Popup Peringatan -->
-  <div class="popup" id="popupPeringatan">
-    <h3>🎯 Wah, kelas ini belum aktif! Sabar ya, ilmu serunya sedang disiapkan 📚✨</h3>
-    <button onclick="tutupPopup()">Tutup</button>
+  <!-- Popup -->
+  <div id="popup" class="popup">
+    <div id="popup-text">🚧 Kelas ini sedang disiapkan. Sabar ya, bintang kelas! 🌟</div>
+    <button onclick="closePopup()">OK</button>
   </div>
 
-  <!-- Script -->
   <script>
-    const hoverSound = new Audio('suara/button-click-switch-valve-water-drips-30548 (mp3cut.net).mp3');
-    let soundReady = false;
+    const clickSound = new Audio('suara/bubble-pop-04-323580 (mp3cut.net).mp3');
+    const popup = document.getElementById('popup');
+    const popupText = document.getElementById('popup-text');
 
-    const buttons = document.querySelectorAll('.button-kelas, .nav-menu a');
-    const popup = document.getElementById('popupPeringatan');
-
-    function playHoverSound() {
-      if (soundReady) {
-        hoverSound.currentTime = 0;
-        hoverSound.play();
-      }
+    function playClickSound() {
+      clickSound.currentTime = 0;
+      clickSound.play();
     }
 
-    function tutupPopup() {
-      popup.style.display = 'none';
+    function showPopup(text) {
+      popupText.textContent = text;
+      popup.classList.add('show');
     }
 
-    buttons.forEach(button => {
-      button.addEventListener('click', (e) => {
-        if (!soundReady) {
-          soundReady = true;
-          playHoverSound();
-        } else {
-          playHoverSound();
-        }
+    function closePopup() {
+      popup.classList.remove('show');
+    }
 
-        // Cek jika tombol kelas 1,2,3,4,6
-        if (button.classList.contains('kelas1') ||
-            button.classList.contains('kelas2') ||
-            button.classList.contains('kelas3') ||
-            button.classList.contains('kelas4') ||
-            button.classList.contains('kelas6')) {
-          e.preventDefault(); // cegah pindah halaman
-          popup.style.display = 'block';
+    // Event klik tombol kelas
+    document.querySelectorAll('.button-kelas').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        playClickSound();
+
+        const kelas = this.textContent.trim();
+        if (['1','2','3','4','6'].includes(kelas)) {
+          e.preventDefault();
+          showPopup(`🚧 Wah, Kelas ${kelas} masih dalam proses persiapan. Sabar ya, calon juara! 🏆`);
         }
       });
+    });
 
-      button.addEventListener('mouseenter', playHoverSound);
+    // Event klik menu nav
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', playClickSound);
     });
   </script>
 

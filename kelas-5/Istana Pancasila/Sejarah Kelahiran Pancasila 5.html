@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sejarah Kelahiran Pancasila - Latihan Soal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      font-family: 'Poppins', sans-serif;
+      height: 100%; width: 100%;
+      overflow-x: hidden;
+      background: url('https://i.imgur.com/Bc2M7hb.png') no-repeat center center fixed;
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-left img {
+      height: 45px;
+      margin-right: 0.5rem;
+    }
+
+    .nav-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      position: relative;
+    }
+
+    .nav-right a,
+    .dropdown-btn {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #0288d1;
+      font-weight: bold;
+      font-size: 0.9rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+      border: none;
+    }
+
+    .nav-right a:hover,
+    .dropdown-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .title-section {
+      text-align: center;
+      margin: 20px 15px 10px;
+      background: rgba(255,255,255,0.85);
+      color: #0288d1;
+      padding: 0.7rem 1.2rem;
+      border-radius: 12px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 1px 1px 6px rgba(0,0,0,0.2);
+    }
+
+    .title-section h1 {
+      margin: 0;
+      font-size: 2rem;
+      text-shadow: none;
+      background: none;
+      color: #0288d1;
+    }
+
+    .title-section p {
+      margin-top: 0.3rem;
+      font-size: 1rem;
+      color: #0288d1;
+    }
+
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 15px;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    /* Dropdown khusus untuk menu interaktif */
+    .dropdown-map {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      max-width: 260px;
+      margin: auto;
+    }
+
+    .map-item.dropdown-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      color: #0288d1;
+      font-weight: bold;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      padding: 15px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      user-select: none;
+    }
+
+    .map-item.dropdown-btn:hover {
+      background-color: #dff6ff;
+      transform: scale(1.05);
+    }
+
+    .dropdown-content-map {
+      display: none;
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.95);
+      min-width: 220px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 30;
+      top: 100%;
+      left: 0;
+      margin-top: 5px;
+    }
+
+    .dropdown-content-map a {
+      color: #0288d1;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    /* Warna hover beda-beda sesuai variabel */
+    .dropdown-content-map a:hover {
+      background-color: var(--hover-bg, #bde5ff);
+    }
+
+    /* Tampilkan dropdown ketika aktif */
+    .dropdown-map.open .dropdown-content-map {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      nav {
+        padding: 1rem;
+      }
+      .nav-right {
+        gap: 0.3rem;
+      }
+      .nav-right a,
+      .dropdown-btn {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+      }
+      .map-grid {
+        grid-template-columns: 1fr;
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigasi -->
+  <nav>
+    <div class="nav-left">
+      <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik" />
+      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 50px;" />
+      <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah" />
+    </div>
+    <div class="nav-right">
+      <a href="index.html">🏠 Beranda</a>
+      <a href="#">📌 Program</a>
+      <a href="#">🖼️ Galeri</a>
+    </div>
+  </nav>
+
+  <!-- Judul Halaman -->
+  <div class="title-section">
+    <h1>📜 Sejarah Kelahiran Pancasila</h1>
+    <p>Uji pengetahuanmu tentang sejarah Pancasila lewat latihan soal berikut!</p>
+  </div>
+
+  <!-- Menu Interaktif dengan dropdown latihan -->
+  <div class="map-grid">
+    <div class="dropdown-map">
+      <button class="map-item dropdown-btn">
+        <span class="emoji">📝</span> Yuk, Kerjakan Latihan Pancasila! ▼
+      </button>
+      <div class="dropdown-content-map">
+        <a href="latihan 1 - istana.html" style="--hover-bg:#b3d9ff;">🏁 Latihan 1</a>
+        <a href="#latihan2" style="--hover-bg:#b3ffcc;">🎯 Latihan 2</a>
+        <a href="#latihan3" style="--hover-bg:#ffb3b3;">🔥 Latihan 3</a>
+        <a href="#latihan4" style="--hover-bg:#fff0b3;">🚀 Latihan 4</a>
+        <a href="#latihan5" style="--hover-bg:#d9b3ff;">💡 Latihan 5</a>
+        <a href="#latihan6" style="--hover-bg:#ffcce6;">📚 Latihan 6</a>
+        <a href="#latihan7" style="--hover-bg:#b3fff0;">🎉 Latihan 7</a>
+        <a href="#latihan8" style="--hover-bg:#ffd9b3;">🧩 Latihan 8</a>
+        <a href="#latihan9" style="--hover-bg:#e6ccff;">⭐ Latihan 9</a>
+        <a href="#latihan10" style="--hover-bg:#ccffdd;">🏆 Latihan 10</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle dropdown
+    const dropdownBtn = document.querySelector('.map-item.dropdown-btn');
+    const dropdownMap = document.querySelector('.dropdown-map');
+
+    dropdownBtn.addEventListener('click', () => {
+      dropdownMap.classList.toggle('open');
+    });
+
+    window.addEventListener('click', (e) => {
+      if (!dropdownMap.contains(e.target)) {
+        dropdownMap.classList.remove('open');
+      }
+    });
+  </script>
+
+</body>
+</html>

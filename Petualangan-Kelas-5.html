@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -19,7 +19,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* bayangan lembut */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
     .nav-left {
@@ -188,6 +188,20 @@
       Tantangan Logika
     </a>
   </div>
+
+  <!-- Audio & Script -->
+  <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
+  <script>
+    const clickSound = document.getElementById("clickSound");
+    const allButtons = document.querySelectorAll("a, button, .map-item");
+
+    allButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        clickSound.currentTime = 0;
+        clickSound.play();
+      });
+    });
+  </script>
 
 </body>
 </html>

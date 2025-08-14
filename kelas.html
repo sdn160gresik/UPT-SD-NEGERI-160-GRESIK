@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -166,6 +166,17 @@
       <a href="kelas6.html" class="button-kelas kelas6">6</a>
     </div>
   </div>
+
+  <!-- Script Suara Hover -->
+  <script>
+    const hoverSound = new Audio('suara/button-click-switch-valve-water-drips-30548 (mp3cut.net).mp3');
+    document.querySelectorAll('.button-kelas').forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        hoverSound.currentTime = 0; // reset biar suara bisa diputar berulang
+        hoverSound.play();
+      });
+    });
+  </script>
 
 </body>
 </html>

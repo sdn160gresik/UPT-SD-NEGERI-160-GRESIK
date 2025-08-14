@@ -158,6 +158,9 @@
   </style>
 </head>
 <body>
+  <!-- Audio klik -->
+  <audio id="clickSound" src="suara/bubble-pop-04-323580 (mp3cut.net).mp3" preload="auto"></audio>
+
   <div class="background-wrapper">
     <nav style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem;">
       <div style="display: flex; align-items: center; gap: 1rem;">
@@ -173,7 +176,6 @@
         <a href="kelas.html" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Kelas</a>
         <a href="#kontak" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Kontak</a>
         
-        <!-- Dropdown disusun sejajar -->
         <div class="dropdown">
           <a href="#" class="dropdown-toggle">Latihan ▼</a>
           <div class="dropdown-content">
@@ -181,7 +183,7 @@
             <a href="latihan/kelas2.html">Kelas 2</a>
             <a href="latihan/kelas3.html">Kelas 3</a>
             <a href="latihan/kelas4.html">Kelas 4</a>
-            <a href="Petualangan-Kelas-5.html">Kelas 5</a> <!-- sudah diperbarui -->
+            <a href="Petualangan-Kelas-5.html">Kelas 5</a>
             <a href="latihan/kelas6.html">Kelas 6</a>
           </div>
         </div>
@@ -198,8 +200,19 @@
     document.addEventListener("DOMContentLoaded", function () {
       const dropdown = document.querySelector(".dropdown");
       const toggle = dropdown.querySelector(".dropdown-toggle");
-      const content = dropdown.querySelector(".dropdown-content");
+      const clickSound = document.getElementById("clickSound");
 
+      function playClickSound() {
+        clickSound.currentTime = 0;
+        clickSound.play();
+      }
+
+      // Tambahkan suara di semua tombol & link
+      document.querySelectorAll("a, button").forEach(el => {
+        el.addEventListener("click", playClickSound);
+      });
+
+      // Dropdown mobile
       if (window.innerWidth <= 768) {
         toggle.addEventListener("click", function (e) {
           e.preventDefault();

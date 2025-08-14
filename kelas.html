@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -105,6 +105,48 @@
     .kelas5 { background-color: #000000; }
     .kelas6 { background-color: #9b0000; }
 
+    /* Popup Peringatan */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #ffffff;
+      padding: 20px 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      text-align: center;
+      z-index: 999;
+      animation: pop 0.3s ease forwards;
+    }
+
+    .popup h3 {
+      margin: 0;
+      font-size: 18px;
+      color: #0288d1;
+    }
+
+    .popup button {
+      margin-top: 12px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      background: #0288d1;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .popup button:hover {
+      background: #026aa7;
+    }
+
+    @keyframes pop {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
     @media (max-width: 600px) {
       .button-kelas {
         width: 50px;
@@ -167,14 +209,52 @@
     </div>
   </div>
 
-  <!-- Script Suara Hover -->
+  <!-- Popup Peringatan -->
+  <div class="popup" id="popupPeringatan">
+    <h3>🎯 Wah, kelas ini belum aktif! Sabar ya, ilmu serunya sedang disiapkan 📚✨</h3>
+    <button onclick="tutupPopup()">Tutup</button>
+  </div>
+
+  <!-- Script -->
   <script>
     const hoverSound = new Audio('suara/button-click-switch-valve-water-drips-30548 (mp3cut.net).mp3');
-    document.querySelectorAll('.button-kelas').forEach(button => {
-      button.addEventListener('mouseenter', () => {
-        hoverSound.currentTime = 0; // reset biar suara bisa diputar berulang
+    let soundReady = false;
+
+    const buttons = document.querySelectorAll('.button-kelas, .nav-menu a');
+    const popup = document.getElementById('popupPeringatan');
+
+    function playHoverSound() {
+      if (soundReady) {
+        hoverSound.currentTime = 0;
         hoverSound.play();
+      }
+    }
+
+    function tutupPopup() {
+      popup.style.display = 'none';
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        if (!soundReady) {
+          soundReady = true;
+          playHoverSound();
+        } else {
+          playHoverSound();
+        }
+
+        // Cek jika tombol kelas 1,2,3,4,6
+        if (button.classList.contains('kelas1') ||
+            button.classList.contains('kelas2') ||
+            button.classList.contains('kelas3') ||
+            button.classList.contains('kelas4') ||
+            button.classList.contains('kelas6')) {
+          e.preventDefault(); // cegah pindah halaman
+          popup.style.display = 'block';
+        }
       });
+
+      button.addEventListener('mouseenter', playHoverSound);
     });
   </script>
 

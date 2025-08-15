@@ -182,7 +182,8 @@
   </div>
 
   <script>
-    const clickSound = new Audio('suara/bubble-pop.mp3');
+    // Ganti ke jalur ../ karena folder suara ada di luar kelas-5
+    const clickSound = new Audio('../suara/blub.mp3');
     const popup = document.getElementById('popup');
     const popupText = document.getElementById('popup-text');
 
@@ -200,25 +201,25 @@
       popup.classList.remove('show');
     }
 
-    // Event klik tombol kelas
-    document.querySelectorAll('.button-kelas').forEach(btn => {
-      btn.addEventListener('click', function(e) {
+    // Event klik untuk semua link (nav dan tombol kelas)
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function(e) {
         playClickSound();
 
-        const kelas = this.textContent.trim();
-        if (['1','2','3','4','6'].includes(kelas)) {
-          e.preventDefault();
-          showPopup(`🚧 Wah, Kelas ${kelas} masih dalam proses persiapan. Sabar ya, calon juara! 🏆`);
+        // Cek kalau tombol kelas yang belum tersedia
+        if (this.classList.contains('button-kelas')) {
+          const kelas = this.textContent.trim();
+          if (['1','2','3','4','6'].includes(kelas)) {
+            e.preventDefault();
+            showPopup(`🚧 Wah, Kelas ${kelas} masih dalam proses persiapan. Sabar ya, calon juara! 🏆`);
+          }
         }
       });
     });
 
-    // Event klik menu nav
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-      link.addEventListener('click', playClickSound);
-    });
+    // Event klik tombol popup
+    document.querySelector('#popup button').addEventListener('click', playClickSound);
   </script>
 
 </body>
 </html>
-

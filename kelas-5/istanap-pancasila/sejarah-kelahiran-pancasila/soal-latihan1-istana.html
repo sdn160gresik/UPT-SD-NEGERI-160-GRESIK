@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Kuis Seru PKn</title>
 <style>
+/* ========== STYLE ========== */
 .kotak-soal {
     background-color: white;
     border: 2px solid #add8e6;
@@ -149,7 +150,7 @@ button:hover {
 <body>
 <div class="container">
     <div class="nav">
-                <a href="../sejarah-kelahiran-pancasila-5.html">⬅️ kembali</a>
+        <a href="../sejarah-kelahiran-pancasila-5.html">⬅️ kembali</a>
         <a href="Soal_PKn_Kelas_5.pdf" download>📥 Download</a>
     </div>
     <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
@@ -158,8 +159,9 @@ button:hover {
     <div id="quiz"></div>
 </div>
 
-<audio id="suaraKlik" src="mouse-clicks-6849 (mp3cut.net).mp3"></audio>
-<audio id="suaraPeringatan" src="tada-234709.mp3"></audio>
+<!-- Suara -->
+<audio id="suaraKlik" src="suara/mouse-clicks.mp3" preload="auto"></audio>
+<audio id="suaraPeringatan" src="suara/tada-234709.mp3" preload="auto"></audio>
 
 <script>
 let soal = [
@@ -184,7 +186,6 @@ function acakArray(arr) {
         [arr[i], arr[j]] = [arr[j], arr[i]];
     }
 }
-
 function acakJawabanSoal(s) {
     let gabung = s.a.map((teks, i) => ({ teks, benar: i === s.k }));
     for (let i = gabung.length - 1; i > 0; i--) {
@@ -219,8 +220,6 @@ function tampilkanSoal() {
             warnaPeringkat = "peringkat-kuning";
         } else {
             peringkat = "💡 Jangan menyerah, ayo coba lagi!";
-            warnaNilai = "nilai-merah";
-            warnaPeringkat = "peringkat-merah";
         }
 
         tampilkanPopupHasil(`
@@ -283,14 +282,19 @@ function muatUlang() {
 
 function mainkanSuaraKlik() {
     const suara = document.getElementById("suaraKlik");
-    suara.currentTime = 0;
-    suara.play();
+    if (suara) {
+        suara.pause();
+        suara.currentTime = 0;
+        suara.play().catch(() => {});
+    }
 }
-
 function mainkanSuaraPeringatan() {
     const suara = document.getElementById("suaraPeringatan");
-    suara.currentTime = 0;
-    suara.play();
+    if (suara) {
+        suara.pause();
+        suara.currentTime = 0;
+        suara.play().catch(() => {});
+    }
 }
 
 acakArray(soal);

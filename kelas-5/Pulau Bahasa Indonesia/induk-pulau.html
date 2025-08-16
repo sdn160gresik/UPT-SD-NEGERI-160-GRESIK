@@ -10,12 +10,12 @@
       margin: 0;
       font-family: 'Poppins', sans-serif;
       background: url('https://i.imgur.com/ybBJNKU.png') no-repeat center center fixed;
-      background-size: cover;
+      background-size: cover;   /* tetap full layar */
       color: #333;
       text-align: center;
     }
 
-    /* --- Navigasi transparan tanpa border --- */
+    /* --- Navigasi --- */
     nav {
       display: flex;
       justify-content: space-between;
@@ -75,13 +75,20 @@
       text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
     }
 
+    /* Intro hanya selebar teks */
     .intro {
       margin: 20px auto;
-      padding: 15px;
-      max-width: 700px;
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .intro p {
+      display: inline-block;              /* background menempel sesuai panjang teks */
+      background: rgba(255, 255, 255, 0.85); 
+      padding: 12px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      font-size: 1.2rem;
+      font-weight: 500;
     }
 
     .menu {
@@ -147,7 +154,7 @@
     <div class="nav-right">
       <a href="../../index.html">🏠 Beranda</a>
       <a href="../Petualangan-Kelas-5.html">◀️ kembali</a>
-           <a href="#">🖼️ Galeri</a>
+      <a href="#">🖼️ Galeri</a>
       <a href="kelas.html">🏫 Kelas</a>
     </div>
   </nav>
@@ -157,38 +164,22 @@
     <h1>📚 Pulau Bahasa Indonesia</h1>
   </div>
 
-  <!-- Isi Halaman -->
+  <!-- Intro -->
   <section class="intro">
-    <p>Selamat datang di <strong>Pulau Bahasa Indonesia</strong>! 🌴  
-    Di sini kamu bisa membaca cerita seru, menulis kreatif, berbicara hebat, dan bermain kuis interaktif.  
-    Mari jelajahi petualangan bahasa bersama! 🚤</p>
+    <p>Selamat datang di Pulau Bahasa Indonesia 🌴 jelajahi petualangan bahasa bersama!</p>
   </section>
-
+ 
+  <!-- Menu -->
   <section class="menu">
-    <div class="card" onclick="alert('Menu Membaca Seru dibuka!')">
-      <h2>📝 Membaca Seru</h2>
-      <p>Cerita rakyat, dongeng, fabel, dan bacaan menarik lainnya.</p>
-    </div>
-
-    <div class="card" onclick="alert('Menu Menulis Kreatif dibuka!')">
-      <h2>✍️ Menulis Kreatif</h2>
-      <p>Latihan menulis paragraf, puisi, dan cerita sederhana.</p>
-    </div>
-
-    <div class="card" onclick="alert('Menu Berbicara Hebat dibuka!')">
-      <h2>💬 Berbicara Hebat</h2>
-      <p>Latihan pidato, bercerita, dan berdialog dengan teman.</p>
-    </div>
-
-    <div class="card" onclick="alert('Menu Kuis & Petualangan Bahasa dibuka!')">
-      <h2>🎯 Kuis & Petualangan</h2>
-      <p>Mainkan soal interaktif seru dan raih bintang prestasi! ⭐</p>
-    </div>
+    <div class="card"><h2>🕵️‍ Petualangan Seru di Negeri Kata dan Cerita</h2></div>
+    <div class="card"><h2>🚪 Pintu Rahasia ke Alam Cerita✨</h2></div>
+    <div class="card"><h2>🌟 Mengasah Minat & Bakat </h2></div>
+    <div class="card"><h2>🎯 Langkah Kecil Menuju Wirausaha Hebat</h2></div>
+    <div class="card"><h2>🌟 Hebatnya Jadi Bagian dari Dunia</h2></div>
+    <div class="card"><h2>🏝️ Dari Pulau ke Pulau, Kita Tetap Satu</h2></div>
+    <div class="card"><h2>🌳 Hutan Hijau, Udara Segar, Hidup Bahagia</h2></div>
+    <div class="card"><h2>🤝 Hebatnya Gotong Royong</h2></div>
   </section>
-
-  <footer>
-    🌊 <em>“Bahasa adalah jembatan menuju ilmu dan persahabatan.”</em> 🌊
-  </footer>
 
   <!-- Suara klik -->
   <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>

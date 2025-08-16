@@ -1,74 +1,56 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pulau Bahasa Indonesia</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     html, body {
-      height: 100%;
       margin: 0;
+      padding: 0;
       font-family: 'Poppins', sans-serif;
-      /* Fallback + background image */
-      background: #e0f7fa url('https://i.imgur.com/ybBJNKU.png') no-repeat center center;
+      height: 100%;
+      width: 100%;
+      overflow-x: hidden;
+      background: url('https://i.imgur.com/uXBnMk8.png') no-repeat center center fixed;
       background-size: cover;
-    }
-
-    body {
       color: #333;
-      text-align: center;
-      min-height: 100vh;
     }
 
-    /* --- Navigasi --- */
     nav {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      flex-wrap: wrap;
-      background: none;
-      border: none;
-      box-shadow: none;
     }
 
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
+    .nav-left img {
+      height: 45px;
+      margin-right: 0.5rem;
     }
 
     .nav-right {
       display: flex;
-      gap: 0.5rem;
       flex-wrap: wrap;
-      margin-top: 0.5rem;
+      gap: 0.5rem;
     }
 
-    nav img {
-      height: 50px;
-      max-width: 100%;
-    }
-
-    nav a {
+    .nav-right a {
       background: rgba(255, 255, 255, 0.9);
       padding: 0.4rem 0.8rem;
       border-radius: 6px;
       text-decoration: none;
       color: #0288d1;
       font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
       font-size: 0.9rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    nav a:hover {
+    .nav-right a:hover {
       transform: scale(1.05);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .title-section {
@@ -80,85 +62,53 @@
       font-size: 2rem;
       background: rgba(255,255,255,0.85);
       display: inline-block;
-      padding: 0.5rem 1.2rem;
+      padding: 0.5rem 1rem;
       border-radius: 12px;
       color: #0288d1;
       text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
     }
 
-    /* Intro hanya selebar teks */
-    .intro {
-      margin: 15px auto;
-      text-align: center;
-    }
-
-    .intro p {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.85); 
-      padding: 10px 15px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    .title-section p {
+      background: rgba(255,255,255,0.8);
+      color: #0288d1;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      max-width: 90%;
+      margin: 10px auto;
       font-size: 1rem;
-      font-weight: 500;
     }
 
-    .menu {
+    .map-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 15px;
-      max-width: 900px;
-      margin: 25px auto;
-      padding: 10px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
     }
 
-    .card {
-      background: rgba(255,255,255,0.9);
-      padding: 15px;
+    .map-item {
+      background: rgba(255, 255, 255, 0.9);
       border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
-
-    .card:hover {
-      transform: scale(1.03);
-      background: #e6f7ff;
-    }
-
-    .card h2 {
-      margin-top: 10px;
-      color: #2b7a78;
+      padding: 15px;
+      text-align: center;
+      color: #0288d1;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+      text-decoration: none;
+      font-weight: bold;
       font-size: 1rem;
     }
 
-    footer {
-      background: rgba(255, 255, 255, 0.8);
-      padding: 12px;
-      margin-top: 20px;
-      border-top: 4px solid #2b7a78;
-      font-size: 0.9rem;
+    .map-item:hover {
+      transform: scale(1.05);
+      background-color: #dff6ff;
     }
 
-    /* 📱 Responsif untuk HP */
-    @media (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        align-items: center;
-      }
-      .nav-right {
-        justify-content: center;
-      }
-      .title-section h1 {
-        font-size: 1.4rem;
-        padding: 0.4rem 1rem;
-      }
-      .intro p {
-        font-size: 0.9rem;
-        padding: 8px 12px;
-      }
-      .card h2 {
-        font-size: 0.9rem;
-      }
+    .map-item .emoji {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 8px;
     }
   </style>
 </head>
@@ -168,7 +118,7 @@
   <nav>
     <div class="nav-left">
       <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
-      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 55px;">
+      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 50px;">
       <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah">
     </div>
     <div class="nav-right">
@@ -182,30 +132,26 @@
   <!-- Judul Halaman -->
   <div class="title-section">
     <h1>📚 Pulau Bahasa Indonesia</h1>
+    <p>Selamat datang di Pulau Bahasa Indonesia 🌴 Jelajahi petualangan bahasa bersama!</p>
   </div>
 
-  <!-- Intro -->
-  <section class="intro">
-    <p>Selamat datang di Pulau Bahasa Indonesia 🌴 jelajahi petualangan bahasa bersama!</p>
-  </section>
- 
-  <!-- Menu -->
-  <section class="menu">
-    <div class="card"><h2>🕵️‍ Petualangan Seru di Negeri Kata dan Cerita</h2></div>
-    <div class="card"><h2>🚪 Pintu Rahasia ke Alam Cerita✨</h2></div>
-    <div class="card"><h2>🌟 Mengasah Minat & Bakat </h2></div>
-    <div class="card"><h2>🎯 Langkah Kecil Menuju Wirausaha Hebat</h2></div>
-    <div class="card"><h2>🌟 Hebatnya Jadi Bagian dari Dunia</h2></div>
-    <div class="card"><h2>🏝️ Dari Pulau ke Pulau, Kita Tetap Satu</h2></div>
-    <div class="card"><h2>🌳 Hutan Hijau, Udara Segar, Hidup Bahagia</h2></div>
-    <div class="card"><h2>🤝 Hebatnya Gotong Royong</h2></div>
-  </section>
+  <!-- Menu Interaktif -->
+  <div class="map-grid">
+    <a href="#petualangan-kata" class="map-item"><span class="emoji">🕵️‍♂️</span>Petualangan Seru di Negeri Kata & Cerita</a>
+    <a href="#pintu-cerita" class="map-item"><span class="emoji">🚪</span>Pintu Rahasia ke Alam Cerita</a>
+    <a href="#minat-bakat" class="map-item"><span class="emoji">🌟</span>Mengasah Minat & Bakat</a>
+    <a href="#wirausaha" class="map-item"><span class="emoji">🎯</span>Langkah Kecil Menuju Wirausaha Hebat</a>
+    <a href="#dunia-bersama" class="map-item"><span class="emoji">🌍</span>Hebatnya Jadi Bagian dari Dunia</a>
+    <a href="#pulau-ke-pulau" class="map-item"><span class="emoji">🏝️</span>Dari Pulau ke Pulau, Kita Tetap Satu</a>
+    <a href="#hutan-hijau" class="map-item"><span class="emoji">🌳</span>Hutan Hijau, Udara Segar, Hidup Bahagia</a>
+    <a href="#gotong-royong" class="map-item"><span class="emoji">🤝</span>Hebatnya Gotong Royong</a>
+  </div>
 
-  <!-- Suara klik -->
+  <!-- Suara klik interaktif -->
   <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
   <script>
     const clickSound = document.getElementById("clickSound");
-    const allButtons = document.querySelectorAll("a, button, .card");
+    const allButtons = document.querySelectorAll("a, .map-item");
     allButtons.forEach(btn => {
       btn.addEventListener("click", () => {
         clickSound.currentTime = 0;

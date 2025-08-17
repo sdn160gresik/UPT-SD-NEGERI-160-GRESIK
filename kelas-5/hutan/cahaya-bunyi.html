@@ -1,0 +1,233 @@
+<!DOCTYPE html>   
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🌞 Serunya Bermain dengan Cahaya & Bunyi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      height: 100%;
+      width: 100%;
+      overflow-x: hidden;
+      background: url('https://i.imgur.com/Xjy7Xeq.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .nav-left img {
+      height: 45px;
+      margin-right: 0.5rem;
+    }
+
+    .nav-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .nav-right a {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #0288d1;
+      font-weight: bold;
+      font-size: 0.9rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .nav-right a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .title-section {
+      text-align: center;
+      margin: 20px 15px 10px;
+    }
+
+    .title-section h1 {
+      font-size: 2rem;
+      background: rgba(255,255,255,0.85);
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      color: #0288d1;
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+    }
+
+    .title-section p {
+      background: rgba(255,255,255,0.8);
+      color: #0288d1;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      max-width: 90%;
+      margin: 10px auto;
+      font-size: 1rem;
+    }
+
+    /* Dropdown Menu */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .dropdown button {
+      background: #0288d1;
+      color: white;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .dropdown button:hover {
+      background: #0277bd;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: rgba(255,255,255,0.95);
+      min-width: 200px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 1;
+      margin-top: 5px;
+      overflow: hidden;
+    }
+
+    .dropdown-content.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .dropdown-content a {
+      color: #0288d1;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      transition: background 0.3s ease;
+      font-weight: bold;
+    }
+
+    .dropdown-content a:hover {
+      background: #dff6ff;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-5px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .map-item {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      color: #0288d1;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .map-item:hover {
+      transform: scale(1.05);
+      background-color: #dff6ff;
+    }
+
+    .map-item .emoji {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigasi -->
+  <nav>
+    <div class="nav-left">
+      <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
+      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 50px;">
+      <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah">
+    </div>
+    <div class="nav-right">
+      <a href="../../index.html">🏠 Beranda</a>
+      <a href="hutan.html">◀️ Kembali</a>
+      <a href="#">🖼️ Galeri</a>
+      <a href="kelas.html">🏫 Kelas</a>
+    </div>
+  </nav>
+
+  <!-- Judul Halaman -->
+  <div class="title-section">
+    <h1>🌞 Serunya Bermain dengan Cahaya & Bunyi</h1>
+    <p>Yuk, jelajahi dunia cahaya ✨ Temukan keajaiban pantulan, bayangan, dan warna-warni yang seru!</p>
+
+    <!-- Dropdown Menu -->
+    <div class="dropdown">
+      <button id="dropdownBtn">🎶 Lanjutkan 🔽</button>
+      <div class="dropdown-content" id="dropdownMenu">
+        <a href="cahaya.html">🔦 Bermain dengan Cahaya</a>
+        <a href="bunyi.html">🔔 Bermain dengan Bunyi</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Suara klik interaktif -->
+  <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
+  <script>
+    const clickSound = document.getElementById("clickSound");
+    const allButtons = document.querySelectorAll("a, .map-item, button");
+    allButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        clickSound.currentTime = 0;
+        clickSound.play();
+      });
+    });
+
+    // Dropdown toggle
+    const dropdownBtn = document.getElementById("dropdownBtn");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    dropdownBtn.addEventListener("click", (e) => {
+      e.stopPropagation(); // biar tidak langsung tertutup
+      dropdownMenu.classList.toggle("show");
+    });
+
+    // Klik di luar dropdown untuk menutup
+    window.addEventListener("click", () => {
+      dropdownMenu.classList.remove("show");
+    });
+  </script>
+
+</body>
+</html>

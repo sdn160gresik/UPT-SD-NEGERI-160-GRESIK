@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🌞 Rahasia Seru Cahaya</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-image: url('https://i.imgur.com/IFKQPGS.png');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+}
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.nav a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    background-color: white;
+    padding: 10px 15px;
+    border: 2px solid #add8e6;
+    border-radius: 8px;
+}
+.kotak-soal {
+    background-color: white;
+    border: 2px solid #add8e6;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    max-width: 600px;
+    width: 100%;
+}
+.answers label {
+    display: block;
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #2c3e50;
+    font-weight: bold;
+    transition: background 0.2s, transform 0.1s;
+}
+.answers input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #007bff;
+    transform: scale(1.2);
+}
+.answers label:nth-child(1) { background: #d6eaff; }
+.answers label:nth-child(2) { background: #d6ffd9; }
+.answers label:nth-child(3) { background: #fffbd6; }
+.answers label:nth-child(4) { background: #ffd6e7; }
+.answers label:hover {
+    filter: brightness(0.9);
+    transform: scale(1.02);
+}
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+button:hover {
+    background-color: #0056b3;
+}
+.gambar {
+    max-width: 100%; 
+    border-radius: 8px; 
+    margin: 10px 0;
+}
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 25px 35px;
+    border-radius: 12px;
+    text-align: center;
+    z-index: 2000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    font-size: 18px;
+    font-weight: bold;
+    animation: pop 0.3s ease-out;
+    max-width: 90%;
+}
+.popup-warning {
+    background: #fff3cd;
+    border: 2px solid #ffecb5;
+    color: #856404;
+}
+.popup-success {
+    background: #d4edda;
+    border: 2px solid #c3e6cb;
+    color: #155724;
+}
+.popup-gold {
+    background: #fff8e1;
+    border: 2px solid #ffeb3b;
+    color: #8d6e00;
+}
+.nilai-besar {
+    font-size: 48px;
+    font-weight: bold;
+    display: block;
+    margin: 10px 0;
+}
+.nilai-merah { color: #e74c3c; }
+.nilai-kuning { color: #f39c12; }
+.nilai-hijau { color: #27ae60; }
+.nilai-emas { color: #d4af37; }
+.peringkat-merah { color: #e74c3c; }
+.peringkat-kuning { color: #f39c12; }
+.peringkat-hijau { color: #27ae60; }
+.peringkat-emas { color: #d4af37; }
+@keyframes pop {
+    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="nav">
+        <a href="rahasia.html">◀️ Kembali</a>
+        <a href="diaryguru-com-Soal-IPAS-Kelas-5-Cahaya-dan-Sifatnya.pdf" download>📥 Download</a>
+    </div>
+    <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
+        🌞 Rahasia Seru Cahaya
+    </h1>
+    <div id="quiz"></div>
+</div>
+
+<audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
+<audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
+
+<script>
+// ====== Data Soal (20 soal) ======
+const bankSoal = [
+  {q:"Perhatikan pernyataan berikut!<br>1) Cahaya hanya dipantulkan oleh cermin<br>2) Air sangat diperlukan cahaya untuk bergerak<br>3) Matahari satu-satunya sumber cahaya<br>4) Cahaya tidak perlu media untuk bergerak<br><br>Pernyataan yang tepat ditunjukkan oleh nomor...", a:["1","2","3","4"], k:3},
+  {q:"Saat pagi hari, Dika melihat cahaya masuk melalui kaca jendela. Peristiwa ini membuktikan bahwa cahaya dapat ....", a:["dipantulkan","diuraikan","menembus benda bening","dibiaskan"], k:2},
+  {q:"<img src='https://i.imgur.com/Z0Dhnto.jpeg' class='gambar'><br>Percobaan Adit menunjukkan cahaya dapat ....", a:["merambat lurus","dipantulkan","menembus benda bening","membentuk bayangan"], k:0},
+  {q:"<i>Perhatikan tabel berikut!</i><br>1) Batu<br>2) Air<br>3) Plastik transparan<br>4) Kertas karton<br>5) Gelas bening<br><br>Benda-benda di atas yang dapat ditembus oleh cahaya yaitu ....", a:["1, 2, dan 5","1, 2, dan 3","2, 3, dan 5","2, 4, dan 5"], k:2},
+  {q:"Benda-benda yang tidak dapat ditembus oleh cahaya disebut ....", a:["benda bening","benda transparan","benda lebar","benda gelap"], k:3},
+  {q:"Dona bersama Tika melihat air kolam tampak dangkal, padahal cukup dalam. Peristiwa ini terjadi akibat ....", a:["pemantulan cahaya","pembiasan cahaya","penguraian cahaya","cahaya merambat lurus"], k:1},
+  {q:"<img src='https://i.imgur.com/hdxXMoy.jpeg' class='gambar'><br>Kegiatan yang dilakukan Dion menunjukkan sifat cahaya yang ....", a:["dapat dipantulkan","dapat dibiaskan","dapat diuraikan","menembus benda bening"], k:0},
+  {q:"<img src='https://i.imgur.com/jSLyDya.jpeg' class='gambar'><br>Peristiwa di atas membuktikan bahwa cahaya dapat ....", a:["dipantulkan","dibiaskan","diuraikan","merambat lurus"], k:1},
+  {q:"Dwita menyalakan senter ke benda buram. Peristiwa yang terjadi adalah ....", a:["semua cahaya bisa menembus","hanya sebagian cahaya menembus","tidak bisa ditembus cahaya","cahaya dipantulkan ke arah berlawanan"], k:2},
+  {q:"Cahaya matahari merupakan salah satu contoh cahaya yang berwarna ....", a:["hitam","merah","biru","putih"], k:3},
+  {q:"<img src='https://i.imgur.com/3jH4zkV.jpeg' class='gambar'><br>Fenomena pelangi menunjukkan bahwa cahaya ....", a:["membentuk bayangan","dipantulkan","diuraikan","menembus benda bening"], k:2},
+  {q:"Cahaya matahari dapat menghasilkan warna pelangi apabila terkena air. Salah satu warna pelangi yaitu ....", a:["putih","hitam","ungu","abu-abu"], k:2},
+  {q:"<img src='https://i.imgur.com/l030Fno.jpeg' class='gambar'><br>Percobaan Wiwin membuktikan bahwa cahaya ....", a:["dapat dibiaskan","dapat merambat lurus","dapat dipantulkan","menembus benda bening"], k:1},
+  {q:"<img src='https://i.imgur.com/J6oAgiP.jpeg' class='gambar'><br>Hasil pantulan cahaya mobil pada gambar di atas yaitu ....", a:["berkilat","satu arah","beraturan","tidak beraturan"], k:2},
+  {q:"Cahaya akan memantul beraturan apabila mengenai permukaan yang ....", a:["datar","tidak rata","bergelombang","tebal"], k:0},
+  {q:"Setiap pagi Vivi bercermin untuk mengecek kerapian. Cermin yang digunakan adalah cermin ....", a:["datar","cekung","cembung","bikonkaf"], k:0},
+  {q:"Sendok stainless steel merupakan contoh cermin ....", a:["datar","cekung","cembung","bikonkaf"], k:2},
+  {q:"<img src='https://i.imgur.com/AwTTLhK.jpeg' class='gambar'><br>Benda yang terlihat pada cermin tersebut ... dari benda aslinya.", a:["lebih besar","lebih kecil","sama besar","terbalik"], k:2},
+  {q:"<i>Perhatikan pernyataan berikut!</i><br>1) Menghilangkan tulang<br>2) Menghangatkan tubuh<br>3) Operasi mata<br>4) Mengobati penyakit kulit<br><br>Manfaat cahaya di bidang kesehatan ditunjukkan oleh nomor ....", a:["1 dan 2","2 dan 3","3 dan 4","1 dan 4"], k:2},
+  {q:"<img src='https://i.imgur.com/FOc172n.jpeg' class='gambar'><br>Ketika cahaya mengenai benda, cahaya yang terhalang membentuk bayangan. Arah bayangan dan sinar cahaya yang tepat ditunjukkan oleh nomor ....", a:["1","2","3","4"], k:1}
+];
+
+// ====== Variabel ======
+let soal = [];
+let indeks = 0;
+let benar = 0;
+
+// acak array
+function acakArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+}
+
+// ambil soal acak
+function ambilSoalAcak() {
+    let copy = [...bankSoal];
+    acakArray(copy);
+    return copy.slice(0,10); // ambil 10 soal acak
+}
+
+// acak jawaban
+function acakJawabanSoal(s) {
+    let gabung = s.a.map((teks, i) => ({ teks, benar: i === s.k }));
+    acakArray(gabung);
+    s.a = gabung.map(o => o.teks);
+    s.k = gabung.findIndex(o => o.benar);
+}
+
+// tampilkan soal
+function tampilkanSoal() {
+    const quiz = document.getElementById("quiz");
+    if (indeks >= soal.length) {
+        const nilai = Math.round((benar / soal.length) * 100);
+        let peringkat = "";
+        let kelasPopup = "popup-success";
+        let warnaNilai = "nilai-merah";
+        let warnaPeringkat = "peringkat-merah";
+
+        if (nilai === 100) {
+            peringkat = "🏆 Luar biasa! Kamu benar semua, Sang Juara!";
+            kelasPopup = "popup-gold";
+            warnaNilai = "nilai-emas";
+            warnaPeringkat = "peringkat-emas";
+        } else if (nilai >= 80) {
+            peringkat = "🥈 Hebat! Hanya sedikit lagi menuju sempurna!";
+            warnaNilai = "nilai-hijau";
+            warnaPeringkat = "peringkat-hijau";
+        } else if (nilai >= 60) {
+            peringkat = "🥉 Lumayan! Tingkatkan lagi biar makin mantap!";
+            warnaNilai = "nilai-kuning";
+            warnaPeringkat = "peringkat-kuning";
+        } else {
+            peringkat = "💡 Jangan menyerah, ayo coba lagi!";
+        }
+
+        tampilkanPopupHasil(`
+            🎉 Selesai!<br>
+            Benar: ${benar} / ${soal.length}<br>
+            Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}%</span>
+            <span class="${warnaPeringkat}">${peringkat}</span>
+        `, kelasPopup);
+        return;
+    }
+    const s = soal[indeks];
+    quiz.innerHTML = `
+    <div class="kotak-soal"><b>Soal ${indeks + 1} dari ${soal.length}</b><br><br>${s.q}</div>
+    <div class="answers">
+        ${s.a.map((j, i) => `
+            <label>
+                <input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" /> 
+                ${j}
+            </label>`).join('')}
+    </div>
+    <button onclick="periksaJawaban()">➡️ Lanjut</button>
+    `;
+}
+
+// periksa jawaban
+function periksaJawaban() {
+    const jawaban = document.querySelector('input[name="jawaban"]:checked');
+    if (!jawaban) {
+        mainkanSuaraPeringatan();
+        tampilkanPopup("🎯 Ayo tentukan jawabanmu, kamu pasti bisa!", "popup-warning");
+        return;
+    }
+    if (parseInt(jawaban.value) === soal[indeks].k) benar++;
+    indeks++;
+    tampilkanSoal();
+}
+
+// popup
+function tampilkanPopup(teks, kelas = "popup-warning") {
+    const popup = document.createElement("div");
+    popup.className = `popup ${kelas}`;
+    popup.innerHTML = teks;
+    document.body.appendChild(popup);
+    setTimeout(() => popup.remove(), 3000);
+}
+function tampilkanPopupHasil(teks, kelas) {
+    const popup = document.createElement("div");
+    popup.className = `popup ${kelas}`;
+    popup.innerHTML = `${teks}<br><br>
+    <button onclick="muatUlang()">🔄 Mulai Lagi</button>`;
+    document.body.appendChild(popup);
+}
+
+// reset kuis
+function muatUlang() {
+    document.querySelectorAll('.popup').forEach(p => p.remove());
+    indeks = 0;
+    benar = 0;
+    soal = ambilSoalAcak();
+    soal.forEach(s => acakJawabanSoal(s));
+    tampilkanSoal();
+}
+
+// suara
+function mainkanSuaraKlik() {
+    const suara = document.getElementById("suaraKlik");
+    suara.currentTime = 0;
+    suara.play();
+}
+function mainkanSuaraPeringatan() {
+    const suara = document.getElementById("suaraPeringatan");
+    suara.currentTime = 0;
+    suara.play();
+}
+
+muatUlang();
+</script>
+</body>
+</html>

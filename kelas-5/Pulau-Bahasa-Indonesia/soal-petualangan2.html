@@ -69,11 +69,11 @@ button:hover { background-color: #0056b3; }
     <!-- Form Identitas -->
     <div id="formIdentitas" class="form-identitas">
         <label>Nama:</label>
-        <input type="text" id="nama" required oninput="mainkanSuaraKetik()">
+        <input type="text" id="nama" oninput="mainkanSuaraKetik()" required>
         <label>Kelas:</label>
-        <input type="text" id="kelas" required oninput="mainkanSuaraKetik()">
+        <input type="text" id="kelas" oninput="mainkanSuaraKetik()" required>
         <label>No Absen:</label>
-        <input type="number" id="absen" required oninput="mainkanSuaraKetik()">
+        <input type="number" id="absen" oninput="mainkanSuaraKetik()" required>
         <button onclick="mulaiKuis()">Mulai Kuis</button>
     </div>
 
@@ -81,10 +81,11 @@ button:hover { background-color: #0056b3; }
     <div id="quiz" style="display:none;"></div>
 </div>
 
-<!-- Suara -->
+<!-- Audio -->
 <audio id="suaraKetik" src="../../suara/typing.mp3"></audio>
 <audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
-<audio id="suaraMulaiNext" src="../../suara/swoosh.mp3"></audio>
+<audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
+<audio id="suaraMulai" src="../../suara/swoosh.mp3"></audio>
 <audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
 
 <script>
@@ -98,12 +99,20 @@ let soal = [
    { q: "Setelah membaca teks, kamu dapat mengupas informasi dengan bantuan …", 
       a: ["Kamus", "Kata kerja", "Kata tanya adiksimba", "Kalimat ajakan"], k: 2 },
    { q: "Pernyataan yang benar tentang ide pokok adalah …", 
-      a: ["Ide pokok hanya terdapat di akhir paragraf", "Ide pokok tidak penting", "Ide pokok bisa digunakan untuk mengembangkan paragraf", "Ide pokok selalu berupa nama tokoh"], k: 2 }
+      a: ["Ide pokok hanya terdapat di akhir paragraf", "Ide pokok tidak penting", "Ide pokok bisa digunakan untuk mengembangkan paragraf", "Ide pokok selalu berupa nama tokoh"], k: 2 },
+   { q: "Kata tanya apa digunakan untuk menanyakan …", 
+      a: ["Waktu", "Tempat", "Alasan", "Hal atau peristiwa"], k: 3 },
+   { q: "Contoh kalimat dengan kata tanya kapan adalah …", 
+      a: ["Kapan Heri mulai sekolah?", "Kapan mana Heri bermain?", "Kapan guru Heri?", "Kapan mulai Heri sedih?"], k: 0 },
+   { q: "Contoh kalimat dengan kata mengapa adalah …", 
+      a: ["Mengapa wajah Heri sedih?", "Mengapa lalu Heri ulang tahun?", "Mengapa karena isi buku itu?", "Mengapa kemudian yang duduk di depan?"], k: 0 },
+   { q: "Ide pokok disebut juga sebagai …", 
+      a: ["Kalimat tambahan", "Cerita utama", "Gagasan pokok, pikiran pokok, atau gagasan utama", "Judul paragraf"], k: 2 },
+   { q: "Kata tanya di mana digunakan untuk menanyakan …", 
+      a: ["Jumlah", "Alasan", "Tempat", "Waktu"], k: 2 }
 ];
 
-let indeks = 0;
-let benar = 0;
-let dataSiswa = {};
+let indeks = 0, benar = 0, dataSiswa = {};
 
 function mulaiKuis() {
     const nama = document.getElementById("nama").value.trim();
@@ -111,11 +120,12 @@ function mulaiKuis() {
     const absen = document.getElementById("absen").value.trim();
 
     if (!nama || !kelas || !absen) {
-        tampilkanPopup("⚠️ Isi dulu identitasmu ya biar detektif cilik makin keren!", "popup-warning");
+        mainkanSuaraPeringatan();
+        tampilkanPopup("✨ Wah, jangan lupa isi identitas dulu ya! Semangat kamu pasti bisa! 🚀", "popup-warning");
         return;
     }
 
-    mainkanSuaraMulaiNext();
+    mainkanSuaraMulai();
     dataSiswa = { nama, kelas, absen };
     document.getElementById("formIdentitas").style.display = "none";
     document.getElementById("quiz").style.display = "block";
@@ -146,7 +156,6 @@ function tampilkanSoal() {
     if (indeks >= soal.length) {
         const nilai = Math.round((benar / soal.length) * 100);
 
-        // kirim ke Google Form
         const formURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfxHzqPxlfNK-1Ncz03OQiNNncxE9WQsan1KyTF9AgiXHfpyQ/formResponse";
         const params = new URLSearchParams();
         params.append("entry.1114641071", dataSiswa.nama);
@@ -156,7 +165,6 @@ function tampilkanSoal() {
 
         fetch(formURL, { method: "POST", body: params, mode: "no-cors" });
 
-        // popup hasil
         let peringkat = "";
         let kelasPopup = "popup-success";
         let warnaNilai = "nilai-merah";
@@ -164,17 +172,13 @@ function tampilkanSoal() {
 
         if (nilai === 100) {
             peringkat = "🏆 Luar biasa! Kamu benar semua, Sang Juara!";
-            kelasPopup = "popup-gold";
-            warnaNilai = "nilai-emas";
-            warnaPeringkat = "peringkat-emas";
+            kelasPopup = "popup-gold"; warnaNilai = "nilai-emas"; warnaPeringkat = "peringkat-emas";
         } else if (nilai >= 80) {
             peringkat = "🥈 Hebat! Hanya sedikit lagi menuju sempurna!";
-            warnaNilai = "nilai-hijau";
-            warnaPeringkat = "peringkat-hijau";
+            warnaNilai = "nilai-hijau"; warnaPeringkat = "peringkat-hijau";
         } else if (nilai >= 60) {
             peringkat = "🥉 Lumayan! Tingkatkan lagi biar makin mantap!";
-            warnaNilai = "nilai-kuning";
-            warnaPeringkat = "peringkat-kuning";
+            warnaNilai = "nilai-kuning"; warnaPeringkat = "peringkat-kuning";
         } else {
             peringkat = "💡 Jangan menyerah, ayo coba lagi!";
         }
@@ -204,12 +208,13 @@ function tampilkanSoal() {
 function periksaJawaban() {
     const jawaban = document.querySelector('input[name="jawaban"]:checked');
     if (!jawaban) {
-        tampilkanPopup("🎯 Ayo pilih dulu jawabannya, semangat!", "popup-warning");
+        mainkanSuaraPeringatan();
+        tampilkanPopup("🎯 Ayo tentukan jawabanmu, semangat! Kamu pasti bisa!", "popup-warning");
         return;
     }
     if (parseInt(jawaban.value) === soal[indeks].k) benar++;
     indeks++;
-    mainkanSuaraMulaiNext();
+    mainkanSuaraMulai();
     tampilkanSoal();
 }
 
@@ -233,11 +238,10 @@ function tampilkanPopupHasil(teks, kelas) {
 
 function muatUlang() {
     document.querySelectorAll('.popup').forEach(p => p.remove());
-    indeks = 0;
-    benar = 0;
-    mainkanSuaraUlangi();
+    indeks = 0; benar = 0;
     document.getElementById("formIdentitas").style.display = "block";
     document.getElementById("quiz").style.display = "none";
+    mainkanSuaraUlangi();
 }
 
 function keluarKuis() {
@@ -248,16 +252,20 @@ function mainkanSuaraKlik() {
     const suara = document.getElementById("suaraKlik");
     suara.currentTime = 0; suara.play();
 }
-function mainkanSuaraKetik() {
-    const suara = document.getElementById("suaraKetik");
+function mainkanSuaraPeringatan() {
+    const suara = document.getElementById("suaraPeringatan");
     suara.currentTime = 0; suara.play();
 }
-function mainkanSuaraMulaiNext() {
-    const suara = document.getElementById("suaraMulaiNext");
+function mainkanSuaraMulai() {
+    const suara = document.getElementById("suaraMulai");
     suara.currentTime = 0; suara.play();
 }
 function mainkanSuaraUlangi() {
     const suara = document.getElementById("suaraUlangi");
+    suara.currentTime = 0; suara.play();
+}
+function mainkanSuaraKetik() {
+    const suara = document.getElementById("suaraKetik");
     suara.currentTime = 0; suara.play();
 }
 </script>

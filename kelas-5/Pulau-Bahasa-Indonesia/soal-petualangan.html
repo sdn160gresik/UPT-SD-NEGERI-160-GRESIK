@@ -111,6 +111,50 @@ button:hover { background-color: #0056b3; }
 .nilai-merah { background: #f8d7da; color: #721c24; }
 .nilai-kuning { background: #fff3cd; color: #856404; }
 .nilai-hijau { background: #d4edda; color: #155724; }
+
+/* Kotak peringatan di tengah */
+.warning-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+.warning-box {
+    background: #fff3cd;
+    border: 3px solid #ffcc00;
+    border-radius: 12px;
+    padding: 25px 30px;
+    max-width: 400px;
+    text-align: center;
+    font-size: 18px;
+    color: #856404;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    animation: popIn 0.4s ease;
+}
+.warning-box h2 {
+    margin: 0 0 10px;
+    font-size: 22px;
+    color: #d35400;
+}
+.warning-box button {
+    background: #ffcc00;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    margin-top: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.warning-box button:hover {
+    background: #e6b800;
+}
+@keyframes popIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
 </style>
 </head>
 <body>
@@ -142,8 +186,12 @@ button:hover { background-color: #0056b3; }
     </div>
 </div>
 
+<!-- Wadah untuk peringatan -->
+<div id="peringatanArea"></div>
+
 <audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
 <audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
+<audio id="suaraSwoosh" src="../../suara/swoosh.mp3"></audio>
 
 <script>
 let soal = [
@@ -186,6 +234,8 @@ function mulaiKuis() {
         alert("Mohon isi semua data terlebih dahulu!");
         return;
     }
+
+    mainkanSuaraSwoosh();
 
     document.getElementById("infoSiswa").innerHTML = `
         👤 Nama: <b>${dataNama}</b> | 🏫 Kelas: <b>${dataKelas}</b> | 🔢 Absen: <b>${dataAbsen}</b>
@@ -254,13 +304,31 @@ function periksaJawaban() {
     const jawaban = document.querySelector('input[name="jawaban"]:checked');
     if (!jawaban) {
         mainkanSuaraPeringatan();
-        alert("🎯 Ayo tentukan jawabanmu!");
+        tampilkanPeringatan("⚡ Ups! Kamu belum memilih jawaban.<br>Ayo semangat, pilih dulu ya sebelum lanjut! 💡");
         return;
     }
     if (parseInt(jawaban.value) === soal[indeks].k) benar++;
     indeks++;
+
+    mainkanSuaraSwoosh();
     tampilkanSoal();
 }
+function tampilkanPeringatan(pesan) {
+    const area = document.getElementById("peringatanArea");
+    area.innerHTML = `
+        <div class="warning-overlay">
+            <div class="warning-box">
+                <h2>🚀 Yuk, Jangan Lupa!</h2>
+                <p>${pesan}</p>
+                <button onclick="tutupPeringatan()">Oke 👍</button>
+            </div>
+        </div>
+    `;
+}
+function tutupPeringatan() {
+    document.getElementById("peringatanArea").innerHTML = "";
+}
+
 // === kirim ke Google Form ===
 function kirimDataKeGoogleSheet(nama, kelas, absen, nilai) {
     const formURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLScrdR_ejx4jr5oHz-BQ9ZU-X6dfgnl7n3atNwxvJxeJluXKjQ/formResponse";
@@ -293,6 +361,20 @@ function mainkanSuaraPeringatan() {
     const suara = document.getElementById("suaraPeringatan");
     suara.currentTime = 0; suara.play();
 }
+function mainkanSuaraSwoosh() {
+    const suara = document.getElementById("suaraSwoosh");
+    suara.currentTime = 0; suara.play();
+}
+
+// === Tambahkan suara klik saat mengetik di form identitas ===
+document.addEventListener("DOMContentLoaded", () => {
+    ["nama", "kelas", "absen"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener("input", mainkanSuaraKlik);
+        }
+    });
+});
 </script>
 </body>
 </html>

@@ -97,41 +97,12 @@ button:hover {
     font-weight: bold;
     animation: pop 0.3s ease-out;
     max-width: 90%;
+    background: white;
 }
-.popup-warning {
-    background: #fff3cd;
-    border: 2px solid #ffecb5;
-    color: #856404;
-}
-.popup-success {
-    background: #d4edda;
-    border: 2px solid #c3e6cb;
-    color: #155724;
-}
-.popup-gold {
-    background: #fff8e1;
-    border: 2px solid #ffeb3b;
-    color: #8d6e00;
-}
-.popup button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 10px;
-}
-.popup button:hover {
-    background-color: #0056b3;
-}
-.nilai-besar {
-    font-size: 48px;
-    font-weight: bold;
-    display: block;
-    margin: 10px 0;
-}
+.popup-warning { background: #fff3cd; border: 2px solid #ffecb5; color: #856404; }
+.popup-success { background: #d4edda; border: 2px solid #c3e6cb; color: #155724; }
+.popup-gold { background: #fff8e1; border: 2px solid #ffeb3b; color: #8d6e00; }
+.nilai-besar { font-size: 48px; font-weight: bold; display: block; margin: 10px 0; }
 .nilai-merah { color: #e74c3c; }
 .nilai-kuning { color: #f39c12; }
 .nilai-hijau { color: #27ae60; }
@@ -149,174 +120,165 @@ button:hover {
 <body>
 <div class="container">
     <div class="nav">
-                <a href="../../sejarah-kelahiran-pancasila-5.html">◀️ kembali</a>
+        <a href="../../sejarah-kelahiran-pancasila-5.html">◀️ kembali</a>
         <a href="Soal_PKn_Kelas_5.pdf" download>📥 Download</a>
     </div>
     <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
         📜 Jakarta Charter Hunt – Petualangan Sejarah
     </h1>
-    <div id="quiz"></div>
+
+    <!-- Form Identitas -->
+    <div id="formIdentitas" style="background:white; padding:20px; border-radius:10px; border:2px solid #add8e6; max-width:500px;">
+        <h2>📝 Isi Identitas Dulu Yuk!</h2>
+        <label>Nama: <input type="text" id="nama" oninput="playTyping()" required></label><br><br>
+        <label>No Absen: <input type="number" id="absen" oninput="playTyping()" required></label><br><br>
+        <label>Kelas: <input type="text" id="kelas" oninput="playTyping()" required></label><br><br>
+        <button onclick="mulaiKuis()">🚀 Mulai Kuis</button>
+    </div>
+
+    <div id="quiz" style="display:none;"></div>
 </div>
 
-<audio id="suaraKlik" src="../../../../suara/mouse-clicks.mp3"></audio>
-<audio id="suaraPeringatan" src="../../../../suara/tada-234709.mp3"></audio>
+<!-- Suara -->
+<audio id="suaraTyping" src="../../suara/typing.mp3"></audio>
+<audio id="suaraNext" src="../../suara/next.mp3"></audio>
+<audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
+<audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
+<audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
 
 <script>
 let soal = [
     { q: "Apa nama rumusan dasar negara yang dihasilkan oleh Panitia Sembilan?", 
-      a: ["Pancasila", "UUD 1945", "Piagam Jakarta", "Deklarasi Kemerdekaan"], 
-      k: 2 },
+      a: ["Pancasila", "UUD 1945", "Piagam Jakarta", "Deklarasi Kemerdekaan"], k: 2 },
     { q: "Siapakah ketua Panitia Sembilan?", 
-      a: ["Moh. Hatta", "Soepomo", "Soekarno", "Moh. Yamin"], 
-      k: 2 },
+      a: ["Moh. Hatta", "Soepomo", "Soekarno", "Moh. Yamin"], k: 2 },
     { q: "Tugas utama Panitia Sembilan adalah...", 
-      a: ["Menyusun teks proklamasi", "Mengatur pemilu pertama", "Mengolah usul konsep dasar negara", "Menyusun kabinet pertama"], 
-      k: 2 },
+      a: ["Menyusun teks proklamasi", "Mengatur pemilu pertama", "Mengolah usul konsep dasar negara", "Menyusun kabinet pertama"], k: 2 },
     { q: "Berikut ini yang tidak termasuk dalam isi Piagam Jakarta adalah...", 
-      a: ["Persatuan Indonesia", "Keadilan sosial bagi seluruh rakyat Indonesia", "Kebebasan pers", "Kemanusiaan yang adil dan beradab"], 
-      k: 2 },
+      a: ["Persatuan Indonesia", "Keadilan sosial bagi seluruh rakyat Indonesia", "Kebebasan pers", "Kemanusiaan yang adil dan beradab"], k: 2 },
     { q: "Tokoh yang mengusulkan dasar negara dalam sidang BPUPKI, kecuali...", 
-      a: ["Ir. Soekarno", "Drs. Moh. Hatta", "Prof. Dr. Soepomo", "Prof. Mohammad Yamin"], 
-      k: 1 },
+      a: ["Ir. Soekarno", "Drs. Moh. Hatta", "Prof. Dr. Soepomo", "Prof. Mohammad Yamin"], k: 1 },
     { q: "Piagam Jakarta dikenal juga dengan sebutan...", 
-      a: ["Jakarta Agreement", "Jakarta Statement", "Jakarta Charter", "Jakarta Law"], 
-      k: 2 },
+      a: ["Jakarta Agreement", "Jakarta Statement", "Jakarta Charter", "Jakarta Law"], k: 2 },
     { q: "Kalimat pertama dalam Piagam Jakarta adalah...", 
-      a: ["Keadilan sosial bagi seluruh rakyat Indonesia", "Persatuan Indonesia", "Ketuhanan dengan kewajiban menjalankan syariat Islam", "Kerakyatan yang dipimpin oleh hikmat kebijaksanaan"], 
-      k: 2 },
+      a: ["Keadilan sosial bagi seluruh rakyat Indonesia", "Persatuan Indonesia", "Ketuhanan dengan kewajiban menjalankan syariat Islam", "Kerakyatan yang dipimpin oleh hikmat kebijaksanaan"], k: 2 },
     { q: "Siapakah yang bukan anggota Panitia Sembilan?", 
-      a: ["Ir. Soekarno", "Moh. Yamin", "Drs. Moh. Hatta", "Sutan Sjahrir"], 
-      k: 3 },
+      a: ["Ir. Soekarno", "Moh. Yamin", "Drs. Moh. Hatta", "Sutan Sjahrir"], k: 3 },
     { q: "Apa tujuan sidang BPUPKI yang pertama?", 
-      a: ["Membentuk kabinet sementara", "Membahas bentuk negara dan dasar negara", "Menyusun undang-undang pertahanan", "Menentukan presiden pertama"], 
-      k: 1 },
+      a: ["Membentuk kabinet sementara", "Membahas bentuk negara dan dasar negara", "Menyusun undang-undang pertahanan", "Menentukan presiden pertama"], k: 1 },
     { q: "Bentuk negara yang disepakati dalam sidang BPUPKI adalah...", 
-      a: ["Negara bagian", "Negara serikat", "Negara kesatuan", "Negara liberal"], 
-      k: 2 }
+      a: ["Negara bagian", "Negara serikat", "Negara kesatuan", "Negara liberal"], k: 2 }
 ];
-
 
 let indeks = 0;
 let benar = 0;
+let identitas = {};
 
-function acakArray(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
+function playTyping(){ let s=document.getElementById("suaraTyping"); s.currentTime=0; s.play(); }
+function playNext(){ let s=document.getElementById("suaraNext"); s.currentTime=0; s.play(); }
+function playUlangi(){ let s=document.getElementById("suaraUlangi"); s.currentTime=0; s.play(); }
+function playKlik(){ let s=document.getElementById("suaraKlik"); s.currentTime=0; s.play(); }
+function playPeringatan(){ let s=document.getElementById("suaraPeringatan"); s.currentTime=0; s.play(); }
+
+function mulaiKuis(){
+    let nama=document.getElementById("nama").value.trim();
+    let absen=document.getElementById("absen").value.trim();
+    let kelas=document.getElementById("kelas").value.trim();
+    if(!nama||!absen||!kelas){
+        playPeringatan();
+        tampilkanPopup("⚠️ Hey Sahabat! Jangan lupa isi identitas dulu ya 😊", "popup-warning");
+        return;
     }
+    identitas={nama,absen,kelas};
+    document.getElementById("formIdentitas").style.display="none";
+    document.getElementById("quiz").style.display="block";
+    acakArray(soal); soal.forEach(s=>acakJawabanSoal(s));
+    tampilkanSoal();
+    playNext();
 }
 
-function acakJawabanSoal(s) {
-    let gabung = s.a.map((teks, i) => ({ teks, benar: i === s.k }));
-    for (let i = gabung.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [gabung[i], gabung[j]] = [gabung[j], gabung[i]];
-    }
-    s.a = gabung.map(o => o.teks);
-    s.k = gabung.findIndex(o => o.benar);
+function acakArray(arr){for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}}
+function acakJawabanSoal(s){
+    let gabung=s.a.map((teks,i)=>({teks,benar:i===s.k}));
+    for(let i=gabung.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[gabung[i],gabung[j]]=[gabung[j],gabung[i]];}
+    s.a=gabung.map(o=>o.teks);
+    s.k=gabung.findIndex(o=>o.benar);
 }
 
-function tampilkanSoal() {
-    const quiz = document.getElementById("quiz");
-    if (indeks >= soal.length) {
-        const nilai = Math.round((benar / soal.length) * 100);
-        let peringkat = "";
-        let kelasPopup = "popup-success";
-        let warnaNilai = "nilai-merah";
-        let warnaPeringkat = "peringkat-merah";
-
-        if (nilai === 100) {
-            peringkat = "🏆 Luar biasa! Kamu benar semua, Sang Juara!";
-            kelasPopup = "popup-gold";
-            warnaNilai = "nilai-emas";
-            warnaPeringkat = "peringkat-emas";
-        } else if (nilai >= 80) {
-            peringkat = "🥈 Hebat! Hanya sedikit lagi menuju sempurna!";
-            warnaNilai = "nilai-hijau";
-            warnaPeringkat = "peringkat-hijau";
-        } else if (nilai >= 60) {
-            peringkat = "🥉 Lumayan! Tingkatkan lagi biar makin mantap!";
-            warnaNilai = "nilai-kuning";
-            warnaPeringkat = "peringkat-kuning";
-        } else {
-            peringkat = "💡 Jangan menyerah, ayo coba lagi!";
-            warnaNilai = "nilai-merah";
-            warnaPeringkat = "peringkat-merah";
-        }
-
+function tampilkanSoal(){
+    const quiz=document.getElementById("quiz");
+    if(indeks>=soal.length){
+        const nilai=Math.round((benar/soal.length)*100);
+        let peringkat="",kelasPopup="popup-success",warnaNilai="nilai-merah",warnaPeringkat="peringkat-merah";
+        if(nilai===100){peringkat="🏆 Luar biasa! Sang Juara!";kelasPopup="popup-gold";warnaNilai="nilai-emas";warnaPeringkat="peringkat-emas";}
+        else if(nilai>=80){peringkat="🥈 Hebat! Hampir sempurna!";warnaNilai="nilai-hijau";warnaPeringkat="peringkat-hijau";}
+        else if(nilai>=60){peringkat="🥉 Lumayan! Tingkatkan lagi!";warnaNilai="nilai-kuning";warnaPeringkat="peringkat-kuning";}
+        else {peringkat="💡 Jangan menyerah, coba lagi!";warnaNilai="nilai-merah";warnaPeringkat="peringkat-merah";}
+        kirimKeGoogleForm(nilai);
         tampilkanPopupHasil(`
             🎉 Selesai!<br>
-            Benar: ${benar} / ${soal.length}<br>
+            Benar: ${benar}/${soal.length}<br>
             Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}%</span>
             <span class="${warnaPeringkat}">${peringkat}</span>
         `, kelasPopup);
         return;
     }
-    const s = soal[indeks];
-    quiz.innerHTML = `
+    const s=soal[indeks];
+    quiz.innerHTML=`
     <div class="kotak-soal">${s.q}</div>
     <div class="answers">
-        ${s.a.map((j, i) => `
+        ${s.a.map((j,i)=>`
             <label>
-                <input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" /> 
-                ${j}
+                <input type="radio" name="jawaban" value="${i}" onclick="playKlik()" /> ${j}
             </label>`).join('')}
     </div>
-    <button onclick="periksaJawaban()">Next</button>
-    `;
+    <button onclick="periksaJawaban()">Next</button>`;
 }
 
-function periksaJawaban() {
-    const jawaban = document.querySelector('input[name="jawaban"]:checked');
-    if (!jawaban) {
-        mainkanSuaraPeringatan();
-        tampilkanPopup("🎯 Ayo tentukan jawabanmu, kamu pasti bisa!", "popup-warning");
-        return;
-    }
-    if (parseInt(jawaban.value) === soal[indeks].k) benar++;
-    indeks++;
-    tampilkanSoal();
+function periksaJawaban(){
+    const jawaban=document.querySelector('input[name="jawaban"]:checked');
+    if(!jawaban){playPeringatan();tampilkanPopup("🎯 Ayo pilih dulu jawabannya, semangat!","popup-warning");return;}
+    if(parseInt(jawaban.value)===soal[indeks].k) benar++;
+    indeks++; playNext(); tampilkanSoal();
 }
 
-function tampilkanPopup(teks, kelas = "popup-warning") {
-    const popup = document.createElement("div");
-    popup.className = `popup ${kelas}`;
-    popup.innerHTML = teks;
+function tampilkanPopup(teks,kelas="popup-warning"){
+    const popup=document.createElement("div");
+    popup.className=`popup ${kelas}`;
+    popup.innerHTML=teks;
     document.body.appendChild(popup);
-    setTimeout(() => popup.remove(), 3000);
+    setTimeout(()=>popup.remove(),3000);
 }
 
-function tampilkanPopupHasil(teks, kelas) {
-    const popup = document.createElement("div");
-    popup.className = `popup ${kelas}`;
-    popup.innerHTML = `${teks}<br><br><button onclick="muatUlang()">Mulai Lagi</button>`;
+function tampilkanPopupHasil(teks,kelas){
+    const popup=document.createElement("div");
+    popup.className=`popup ${kelas}`;
+    popup.innerHTML=`${teks}<br><br>
+        <button onclick="muatUlang()">🔄 Ulangi</button>
+        <button onclick="tutupHasil()">❌ Selesai</button>`;
     document.body.appendChild(popup);
 }
 
-function muatUlang() {
-    document.querySelectorAll('.popup').forEach(p => p.remove());
-    indeks = 0;
-    benar = 0;
-    acakArray(soal);
-    soal.forEach(s => acakJawabanSoal(s));
+function muatUlang(){
+    playUlangi();
+    document.querySelectorAll('.popup').forEach(p=>p.remove());
+    indeks=0; benar=0;
+    acakArray(soal); soal.forEach(s=>acakJawabanSoal(s));
     tampilkanSoal();
 }
+function tutupHasil(){document.querySelectorAll('.popup').forEach(p=>p.remove());}
 
-function mainkanSuaraKlik() {
-    const suara = document.getElementById("suaraKlik");
-    suara.currentTime = 0;
-    suara.play();
+function kirimKeGoogleForm(nilai){
+    fetch("https://docs.google.com/forms/u/0/d/e/1FAIpQLSfcFPaJNxq_gIBJGMskEf6uWnUszSaMnKMeXS58KQ5qDp2UjA/formResponse",{
+        method:"POST",
+        body:new URLSearchParams({
+            "entry.1114641071":identitas.nama,
+            "entry.1445858210":identitas.absen,
+            "entry.687539915":identitas.kelas,
+            "entry.175130881":nilai
+        })
+    });
 }
-
-function mainkanSuaraPeringatan() {
-    const suara = document.getElementById("suaraPeringatan");
-    suara.currentTime = 0;
-    suara.play();
-}
-
-acakArray(soal);
-soal.forEach(s => acakJawabanSoal(s));
-tampilkanSoal();
 </script>
 </body>
 </html>

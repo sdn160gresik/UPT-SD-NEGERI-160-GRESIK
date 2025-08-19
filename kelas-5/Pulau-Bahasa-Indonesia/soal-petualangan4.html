@@ -98,27 +98,10 @@ button:hover {
     animation: pop 0.3s ease-out;
     max-width: 90%;
 }
-.popup-warning {
-    background: #fff3cd;
-    border: 2px solid #ffecb5;
-    color: #856404;
-}
-.popup-success {
-    background: #d4edda;
-    border: 2px solid #c3e6cb;
-    color: #155724;
-}
-.popup-gold {
-    background: #fff8e1;
-    border: 2px solid #ffeb3b;
-    color: #8d6e00;
-}
-.nilai-besar {
-    font-size: 48px;
-    font-weight: bold;
-    display: block;
-    margin: 10px 0;
-}
+.popup-warning { background: #fff3cd; border: 2px solid #ffecb5; color: #856404; }
+.popup-success { background: #d4edda; border: 2px solid #c3e6cb; color: #155724; }
+.popup-gold { background: #fff8e1; border: 2px solid #ffeb3b; color: #8d6e00; }
+.nilai-besar { font-size: 48px; font-weight: bold; display: block; margin: 10px 0; }
 .nilai-merah { color: #e74c3c; }
 .nilai-kuning { color: #f39c12; }
 .nilai-hijau { color: #27ae60; }
@@ -131,6 +114,20 @@ button:hover {
     0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
     100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
+.form-identitas {
+    background: white;
+    border: 2px solid #add8e6;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+.form-identitas input {
+    width: 90%;
+    padding: 8px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
 </style>
 </head>
 <body>
@@ -142,240 +139,153 @@ button:hover {
     <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
         🕵️ Detektif Cilik Ayo Uji Kepintaranmu
     </h1>
-    <div id="quiz"></div>
+    <div id="formIdentitas" class="form-identitas">
+        <h3>📝 Isi Identitasmu Dulu Yuk!</h3>
+        <input type="text" id="nama" placeholder="Nama" oninput="mainkanSuaraTyping()"><br>
+        <input type="text" id="kelas" placeholder="Kelas" oninput="mainkanSuaraTyping()"><br>
+        <input type="number" id="absen" placeholder="No Absen" oninput="mainkanSuaraTyping()"><br>
+        <button onclick="mulaiKuis()">Mulai Kuis</button>
+    </div>
+    <div id="quiz" style="display:none"></div>
 </div>
 
+<!-- Suara -->
 <audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
 <audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
+<audio id="suaraTyping" src="../../suara/typing.mp3"></audio>
+<audio id="suaraNext" src="../../suara/next.mp3"></audio>
+<audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
 
 <script>
 let soal = [
-  { 
-    q: "Informasi tersirat adalah…", 
-    a: [
-      "Informasi yang langsung tertulis di teks",
-      "Informasi yang harus dihafalkan",
-      "Informasi yang tidak disampaikan secara langsung di teks",
-      "Informasi yang hanya ada di judul"
-    ], 
-    k: 2 
-  },
-  { 
-    q: "Ide pokok adalah…", 
-    a: [
-      "Kalimat terakhir dalam teks",
-      "Ide atau gagasan dasar untuk mengembangkan paragraph",
-      "Informasi tersirat",
-      "Judul teks"
-    ], 
-    k: 1 
-  },
-  { 
-    q: "“Rina berjalan kaki sambil menunduk dan membawa kertas ulangan merah”, informasi tersiratnya adalah…", 
-    a: [
-      "Rina sedang gembira",
-      "Rina sedang sakit",
-      "Rina sedang sedih atau kecewa",
-      "Rina sedang berbelanja"
-    ], 
-    k: 2 
-  },
-  { 
-    q: "Warna merah pada kertas ulangan biasanya berarti…", 
-    a: [
-      "Nilai bagus",
-      "Nilai jelek",
-      "Nilai sempurna",
-      "Ulangan belum dinilai"
-    ], 
-    k: 1 
-  },
-  { 
-    q: "Salah satu cara menemukan informasi tersirat adalah…", 
-    a: [
-      "Menghafalkan teks",
-      "Mengabaikan ekspresi tokoh",
-      "Memperhatikan petunjuk dalam teks",
-      "Membaca cepat tanpa memahami"
-    ], 
-    k: 2 
-  },
-  { 
-    q: "Ide pokok biasanya terletak pada…", 
-    a: [
-      "Kalimat utama",
-      "Kalimat penutup",
-      "Kalimat tambahan",
-      "Judul teks"
-    ], 
-    k: 0 
-  },
-  { 
-    q: "Kalimat “Ayah membawa payung saat keluar rumah” – informasi tersiratnya adalah…", 
-    a: [
-      "Ayah takut panas",
-      "Ayah takut hujan",
-      "Ayah akan pergi ke pasar",
-      "Ayah senang berjalan"
-    ], 
-    k: 1 
-  },
-  { 
-    q: "berikut adalah kalimat yang menunjukkan informasi tersirat…", 
-    a: [
-      "“Ibu membeli sayur di pasar.”",
-      "“Ani tersenyum sambil membawa piala.”",
-      "“Pasar buka setiap hari pukul 06.00.”",
-      "“Ayah membaca koran pagi ini.”"
-    ], 
-    k: 1 
-  },
-  { 
-    q: "Informasi tersurat dapat berupa…", 
-    a: [
-      "Fakta yang tertulis jelas di teks",
-      "Dugaan penulis",
-      "Perasaan tokoh",
-      "Tafsiran pembaca"
-    ], 
-    k: 0 
-  },
-  { 
-    q: "Kalimat “Ayah membawa payung saat keluar rumah” – cara menentukan informasi tersiratnya dengan…", 
-    a: [
-      "Pemahaman mendalam dan penafsiran logis",
-      "Penghafalan teks",
-      "Membaca sekilas",
-      "Menebak tanpa dasar"
-    ], 
-    k: 0 
-  }
-
+  { q: "Informasi tersirat adalah…", a: ["Informasi yang langsung tertulis di teks","Informasi yang harus dihafalkan","Informasi yang tidak disampaikan secara langsung di teks","Informasi yang hanya ada di judul"], k: 2 },
+  { q: "Ide pokok adalah…", a: ["Kalimat terakhir dalam teks","Ide atau gagasan dasar untuk mengembangkan paragraph","Informasi tersirat","Judul teks"], k: 1 },
+  { q: "“Rina berjalan kaki sambil menunduk dan membawa kertas ulangan merah”, informasi tersiratnya adalah…", a: ["Rina sedang gembira","Rina sedang sakit","Rina sedang sedih atau kecewa","Rina sedang berbelanja"], k: 2 },
+  { q: "Warna merah pada kertas ulangan biasanya berarti…", a: ["Nilai bagus","Nilai jelek","Nilai sempurna","Ulangan belum dinilai"], k: 1 },
+  { q: "Salah satu cara menemukan informasi tersirat adalah…", a: ["Menghafalkan teks","Mengabaikan ekspresi tokoh","Memperhatikan petunjuk dalam teks","Membaca cepat tanpa memahami"], k: 2 },
+  { q: "Ide pokok biasanya terletak pada…", a: ["Kalimat utama","Kalimat penutup","Kalimat tambahan","Judul teks"], k: 0 },
+  { q: "Kalimat “Ayah membawa payung saat keluar rumah” – informasi tersiratnya adalah…", a: ["Ayah takut panas","Ayah takut hujan","Ayah akan pergi ke pasar","Ayah senang berjalan"], k: 1 },
+  { q: "berikut adalah kalimat yang menunjukkan informasi tersirat…", a: ["“Ibu membeli sayur di pasar.”","“Ani tersenyum sambil membawa piala.”","“Pasar buka setiap hari pukul 06.00.”","“Ayah membaca koran pagi ini.”"], k: 1 },
+  { q: "Informasi tersurat dapat berupa…", a: ["Fakta yang tertulis jelas di teks","Dugaan penulis","Perasaan tokoh","Tafsiran pembaca"], k: 0 },
+  { q: "Kalimat “Ayah membawa payung saat keluar rumah” – cara menentukan informasi tersiratnya dengan…", a: ["Pemahaman mendalam dan penafsiran logis","Penghafalan teks","Membaca sekilas","Menebak tanpa dasar"], k: 0 }
 ];
 
 let indeks = 0;
 let benar = 0;
 
-function acakArray(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
+function acakArray(arr){for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}}
+function acakJawabanSoal(s){let gabung=s.a.map((teks,i)=>({teks,benar:i===s.k}));for(let i=gabung.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[gabung[i],gabung[j]]=[gabung[j],gabung[i]];}s.a=gabung.map(o=>o.teks);s.k=gabung.findIndex(o=>o.benar);}
+
+function mulaiKuis(){
+    const nama=document.getElementById("nama").value.trim();
+    const kelas=document.getElementById("kelas").value.trim();
+    const absen=document.getElementById("absen").value.trim();
+    if(!nama || !kelas || !absen){
+        mainkanSuaraPeringatan();
+        tampilkanPopup("⚠️ Wah, jangan lupa isi identitas dulu ya! Semangat, biar nilaimu tercatat rapi 👍", "popup-warning");
+        return;
     }
+    document.getElementById("formIdentitas").style.display="none";
+    document.getElementById("quiz").style.display="block";
+    mainkanSuaraNext();
+    acakArray(soal);
+    soal.forEach(s=>acakJawabanSoal(s));
+    tampilkanSoal();
 }
 
-function acakJawabanSoal(s) {
-    let gabung = s.a.map((teks, i) => ({ teks, benar: i === s.k }));
-    for (let i = gabung.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [gabung[i], gabung[j]] = [gabung[j], gabung[i]];
-    }
-    s.a = gabung.map(o => o.teks);
-    s.k = gabung.findIndex(o => o.benar);
-}
-
-function tampilkanSoal() {
-    const quiz = document.getElementById("quiz");
-    if (indeks >= soal.length) {
-        const nilai = Math.round((benar / soal.length) * 100);
-        let peringkat = "";
-        let kelasPopup = "popup-success";
-        let warnaNilai = "nilai-merah";
-        let warnaPeringkat = "peringkat-merah";
-
-        if (nilai === 100) {
-            peringkat = "🏆 Luar biasa! Kamu benar semua, Sang Juara!";
-            kelasPopup = "popup-gold";
-            warnaNilai = "nilai-emas";
-            warnaPeringkat = "peringkat-emas";
-        } else if (nilai >= 80) {
-            peringkat = "🥈 Hebat! Hanya sedikit lagi menuju sempurna!";
-            warnaNilai = "nilai-hijau";
-            warnaPeringkat = "peringkat-hijau";
-        } else if (nilai >= 60) {
-            peringkat = "🥉 Lumayan! Tingkatkan lagi biar makin mantap!";
-            warnaNilai = "nilai-kuning";
-            warnaPeringkat = "peringkat-kuning";
-        } else {
-            peringkat = "💡 Jangan menyerah, ayo coba lagi!";
-            warnaNilai = "nilai-merah";
-            warnaPeringkat = "peringkat-merah";
-        }
-
+function tampilkanSoal(){
+    const quiz=document.getElementById("quiz");
+    if(indeks>=soal.length){
+        const nilai=Math.round((benar/soal.length)*100);
+        kirimNilai(nilai);
+        let peringkat="",kelasPopup="popup-success",warnaNilai="nilai-merah",warnaPeringkat="peringkat-merah";
+        if(nilai===100){peringkat="🏆 Luar biasa! Kamu benar semua, Sang Juara!";kelasPopup="popup-gold";warnaNilai="nilai-emas";warnaPeringkat="peringkat-emas";}
+        else if(nilai>=80){peringkat="🥈 Hebat! Hanya sedikit lagi menuju sempurna!";warnaNilai="nilai-hijau";warnaPeringkat="peringkat-hijau";}
+        else if(nilai>=60){peringkat="🥉 Lumayan! Tingkatkan lagi biar makin mantap!";warnaNilai="nilai-kuning";warnaPeringkat="peringkat-kuning";}
+        else{peringkat="💡 Jangan menyerah, ayo coba lagi!";}
         tampilkanPopupHasil(`
             🎉 Selesai!<br>
             Benar: ${benar} / ${soal.length}<br>
-            Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}%</span>
+            Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}</span>
             <span class="${warnaPeringkat}">${peringkat}</span>
-        `, kelasPopup);
+        `,kelasPopup);
         return;
     }
-    const s = soal[indeks];
-    quiz.innerHTML = `
+    const s=soal[indeks];
+    quiz.innerHTML=`
     <div class="kotak-soal">${s.q}</div>
     <div class="answers">
-        ${s.a.map((j, i) => `
+        ${s.a.map((j,i)=>`
             <label>
-                <input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" /> 
-                ${j}
+                <input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" />${j}
             </label>`).join('')}
     </div>
-    <button onclick="periksaJawaban()">Next</button>
-    `;
+    <button onclick="periksaJawaban()">Next</button>`;
 }
 
-function periksaJawaban() {
-    const jawaban = document.querySelector('input[name="jawaban"]:checked');
-    if (!jawaban) {
+function periksaJawaban(){
+    const jawaban=document.querySelector('input[name="jawaban"]:checked');
+    if(!jawaban){
         mainkanSuaraPeringatan();
         tampilkanPopup("🎯 Ayo tentukan jawabanmu, kamu pasti bisa!", "popup-warning");
         return;
     }
-    if (parseInt(jawaban.value) === soal[indeks].k) benar++;
+    if(parseInt(jawaban.value)===soal[indeks].k)benar++;
     indeks++;
+    mainkanSuaraNext();
     tampilkanSoal();
 }
 
-function tampilkanPopup(teks, kelas = "popup-warning") {
-    const popup = document.createElement("div");
-    popup.className = `popup ${kelas}`;
-    popup.innerHTML = teks;
+function tampilkanPopup(teks,kelas="popup-warning"){
+    const popup=document.createElement("div");
+    popup.className=`popup ${kelas}`;
+    popup.innerHTML=teks;
     document.body.appendChild(popup);
-    setTimeout(() => popup.remove(), 3000);
+    setTimeout(()=>popup.remove(),3000);
 }
 
-function tampilkanPopupHasil(teks, kelas) {
-    const popup = document.createElement("div");
-    popup.className = `popup ${kelas}`;
-    popup.innerHTML = `${teks}<br><br><button onclick="muatUlang()">Mulai Lagi</button>`;
+function tampilkanPopupHasil(teks,kelas){
+    const popup=document.createElement("div");
+    popup.className=`popup ${kelas}`;
+    popup.innerHTML=`
+        ${teks}<br><br>
+        <button onclick="muatUlang()">🔄 Ulangi</button>
+        <button onclick="tutupKuis()">❌ Selesai</button>`;
     document.body.appendChild(popup);
 }
 
-function muatUlang() {
-    document.querySelectorAll('.popup').forEach(p => p.remove());
-    indeks = 0;
-    benar = 0;
-    acakArray(soal);
-    soal.forEach(s => acakJawabanSoal(s));
+function muatUlang(){
+    document.querySelectorAll('.popup').forEach(p=>p.remove());
+    indeks=0; benar=0;
+    acakArray(soal); soal.forEach(s=>acakJawabanSoal(s));
+    mainkanSuaraUlangi();
     tampilkanSoal();
 }
 
-function mainkanSuaraKlik() {
-    const suara = document.getElementById("suaraKlik");
-    suara.currentTime = 0;
-    suara.play();
+function tutupKuis(){
+    document.querySelectorAll('.popup').forEach(p=>p.remove());
+    document.getElementById("quiz").style.display="none";
+    document.getElementById("formIdentitas").style.display="block";
 }
 
-function mainkanSuaraPeringatan() {
-    const suara = document.getElementById("suaraPeringatan");
-    suara.currentTime = 0;
-    suara.play();
-}
+function mainkanSuaraKlik(){const s=document.getElementById("suaraKlik");s.currentTime=0;s.play();}
+function mainkanSuaraPeringatan(){const s=document.getElementById("suaraPeringatan");s.currentTime=0;s.play();}
+function mainkanSuaraTyping(){const s=document.getElementById("suaraTyping");s.currentTime=0;s.play();}
+function mainkanSuaraNext(){const s=document.getElementById("suaraNext");s.currentTime=0;s.play();}
+function mainkanSuaraUlangi(){const s=document.getElementById("suaraUlangi");s.currentTime=0;s.play();}
 
-acakArray(soal);
-soal.forEach(s => acakJawabanSoal(s));
-tampilkanSoal();
+function kirimNilai(nilai){
+    const nama=document.getElementById("nama").value;
+    const kelas=document.getElementById("kelas").value;
+    const absen=document.getElementById("absen").value;
+    const formURL="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdU8y21ARIr2lT4rs1ZpdNpXPZbq2YjGNK85zgF0RuPLVy8HQ/formResponse";
+    const params=new URLSearchParams();
+    params.append("entry.1114641071",nama);
+    params.append("entry.687539915",kelas);
+    params.append("entry.1445858210",absen);
+    params.append("entry.175130881",nilai);
+    fetch(formURL,{method:"POST",body:params,mode:"no-cors"});
+}
 </script>
 </body>
 </html>
-
-

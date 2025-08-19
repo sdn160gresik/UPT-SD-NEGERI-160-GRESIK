@@ -6,13 +6,17 @@
 <title>Kuis Seru Petualangan</title>
 <style>
 .kotak-soal {
-    background-color: white;
-    border: 2px solid #add8e6;
-    border-radius: 10px;
-    padding: 15px 20px;
-    margin-bottom: 15px;
+    background: linear-gradient(135deg, #f0f9ff, #cce5ff);
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
     max-width: 600px;
     width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 body {
     font-family: 'Arial', sans-serif;
@@ -47,28 +51,14 @@ body {
     border: 2px solid #add8e6;
     border-radius: 8px;
 }
-.answers label {
-    display: block;
-    margin-bottom: 12px;
-    padding: 10px 14px;
+.hidden { display: none; }
+label { font-weight: bold; }
+input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
     border-radius: 6px;
-    cursor: pointer;
-    color: #2c3e50;
-    font-weight: bold;
-    transition: background 0.2s, transform 0.1s;
-}
-.answers input[type="radio"] {
-    margin-right: 10px;
-    accent-color: #007bff;
-    transform: scale(1.2);
-}
-.answers label:nth-child(1) { background: #d6eaff; }
-.answers label:nth-child(2) { background: #d6ffd9; }
-.answers label:nth-child(3) { background: #fffbd6; }
-.answers label:nth-child(4) { background: #ffd6e7; }
-.answers label:hover {
-    filter: brightness(0.9);
-    transform: scale(1.02);
 }
 button {
     background-color: #007bff;
@@ -80,57 +70,47 @@ button {
     border-radius: 5px;
     margin-top: 10px;
 }
-button:hover {
-    background-color: #0056b3;
+button:hover { background-color: #0056b3; }
+.info-siswa {
+    background: white;
+    border: 2px solid #add8e6;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
 }
-.popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 25px 35px;
+/* Jawaban ke bawah */
+.answers label {
+    display: block;
+    margin-bottom: 8px;
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.answers label:hover { background: #eaf6ff; }
+/* Kotak hasil */
+.hasil-box {
+    background: white;
+    border: 3px solid #3399ff;
     border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
     text-align: center;
-    z-index: 2000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     font-size: 18px;
-    font-weight: bold;
-    animation: pop 0.3s ease-out;
-    max-width: 90%;
-}
-.popup-warning {
-    background: #fff3cd;
-    border: 2px solid #ffecb5;
-    color: #856404;
-}
-.popup-success {
-    background: #d4edda;
-    border: 2px solid #c3e6cb;
-    color: #155724;
-}
-.popup-gold {
-    background: #fff8e1;
-    border: 2px solid #ffeb3b;
-    color: #8d6e00;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 .nilai-besar {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: bold;
-    display: block;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
     margin: 10px 0;
 }
-.nilai-merah { color: #e74c3c; }
-.nilai-kuning { color: #f39c12; }
-.nilai-hijau { color: #27ae60; }
-.nilai-emas { color: #d4af37; }
-.peringkat-merah { color: #e74c3c; }
-.peringkat-kuning { color: #f39c12; }
-.peringkat-hijau { color: #27ae60; }
-.peringkat-emas { color: #d4af37; }
-@keyframes pop {
-    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-}
+.nilai-merah { background: #f8d7da; color: #721c24; }
+.nilai-kuning { background: #fff3cd; color: #856404; }
+.nilai-hijau { background: #d4edda; color: #155724; }
 </style>
 </head>
 <body>
@@ -142,7 +122,24 @@ button:hover {
     <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
         🕵️ Detektif Cilik Ayo Uji Kepintaranmu
     </h1>
-    <div id="quiz"></div>
+
+    <!-- Form Data Siswa -->
+    <div id="formData">
+        <h3>Silakan isi identitas sebelum mulai:</h3>
+        <label>Nama: </label><br>
+        <input type="text" id="nama"><br>
+        <label>Kelas: </label><br>
+        <input type="text" id="kelas"><br>
+        <label>No. Absen: </label><br>
+        <input type="text" id="absen"><br>
+        <button onclick="mulaiKuis()">Mulai Kuis</button>
+    </div>
+
+    <!-- Info siswa + quiz -->
+    <div id="areaKuis" class="hidden">
+        <div id="infoSiswa" class="info-siswa"></div>
+        <div id="quiz"></div>
+    </div>
 </div>
 
 <audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
@@ -159,29 +156,44 @@ let soal = [
     { q: "Kata tanya siapa digunakan untuk menanyakan …", 
       a: ["Waktu kejadian", "Tokoh yang terlibat", "Tempat peristiwa", "Penyebab peristiwa"], k: 1 },
     { q: "Contoh kalimat dengan kata tanya siapa adalah …", 
-      a: ["Siapa yang datang bersama Hani?", "Siapa Heri duduk?", "Siapa kegiatan mereka?", "Siapa mereka senang?"], k: 0 },
-    { q: "Kalimat yang berisi gagasan utama disebut …", 
-      a: ["Kalimat penjelas", "Kalimat ajakan", "Kalimat utama", "Kalimat tanya"], k: 2 },
-    { q: "Kata tanya kapan digunakan untuk menanyakan …", 
-      a: ["Sebab", "Tempat", "Waktu", "Cara"], k: 2 },
-    { q: "Untuk menemukan ide pokok, kamu harus …", 
-      a: ["Melihat gambar", "Membaca judul teks", "Membaca dan memahami isi teks", "Menghafal semua kalimat"], k: 2 },
-    { q: "Kata tanya \"adiksimba\" merupakan singkatan dari …", 
-      a: ["Apa, di mana, kapan, siapa, dan bagaimana", "Apa, di mana, kapan, siapa, mengapa, dan bagaimana", "Apa, siapa, kapan, jumlah", "Adik, Simbah, dan Bapak"], k: 1 },
-    { q: "Ide pokok terletak pada …", 
-      a: ["Kalimat penjelas", "Kalimat utama", "Judul", "Kata tanya"], k: 1 }
+      a: ["Siapa yang datang bersama Hani?", "Siapa Heri duduk?", "Siapa kegiatan mereka?", "Siapa mereka senang?"], k: 0 }
 ];
+
+// data siswa
+let dataNama = "";
+let dataKelas = "";
+let dataAbsen = "";
 
 let indeks = 0;
 let benar = 0;
 
+function mulaiKuis() {
+    dataNama = document.getElementById("nama").value.trim();
+    dataKelas = document.getElementById("kelas").value.trim();
+    dataAbsen = document.getElementById("absen").value.trim();
+
+    if (!dataNama || !dataKelas || !dataAbsen) {
+        alert("Mohon isi semua data terlebih dahulu!");
+        return;
+    }
+
+    document.getElementById("infoSiswa").innerHTML = `
+        👤 Nama: <b>${dataNama}</b> | 🏫 Kelas: <b>${dataKelas}</b> | 🔢 Absen: <b>${dataAbsen}</b>
+    `;
+
+    document.getElementById("formData").classList.add("hidden");
+    document.getElementById("areaKuis").classList.remove("hidden");
+
+    acakArray(soal);
+    soal.forEach(s => acakJawabanSoal(s));
+    tampilkanSoal();
+}
 function acakArray(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
         [arr[i], arr[j]] = [arr[j], arr[i]];
     }
 }
-
 function acakJawabanSoal(s) {
     let gabung = s.a.map((teks, i) => ({ teks, benar: i === s.k }));
     for (let i = gabung.length - 1; i > 0; i--) {
@@ -191,41 +203,28 @@ function acakJawabanSoal(s) {
     s.a = gabung.map(o => o.teks);
     s.k = gabung.findIndex(o => o.benar);
 }
-
 function tampilkanSoal() {
     const quiz = document.getElementById("quiz");
     if (indeks >= soal.length) {
         const nilai = Math.round((benar / soal.length) * 100);
-        let peringkat = "";
-        let kelasPopup = "popup-success";
-        let warnaNilai = "nilai-merah";
-        let warnaPeringkat = "peringkat-merah";
+        kirimDataKeGoogleSheet(dataNama, dataKelas, dataAbsen, nilai);
 
-        if (nilai === 100) {
-            peringkat = "🏆 Luar biasa! Kamu benar semua, Sang Juara!";
-            kelasPopup = "popup-gold";
-            warnaNilai = "nilai-emas";
-            warnaPeringkat = "peringkat-emas";
-        } else if (nilai >= 80) {
-            peringkat = "🥈 Hebat! Hanya sedikit lagi menuju sempurna!";
-            warnaNilai = "nilai-hijau";
-            warnaPeringkat = "peringkat-hijau";
-        } else if (nilai >= 60) {
-            peringkat = "🥉 Lumayan! Tingkatkan lagi biar makin mantap!";
-            warnaNilai = "nilai-kuning";
-            warnaPeringkat = "peringkat-kuning";
-        } else {
-            peringkat = "💡 Jangan menyerah, ayo coba lagi!";
-            warnaNilai = "nilai-merah";
-            warnaPeringkat = "peringkat-merah";
-        }
+        let kelasWarna = "nilai-merah";
+        if (nilai >= 80) kelasWarna = "nilai-hijau";
+        else if (nilai >= 60) kelasWarna = "nilai-kuning";
 
-        tampilkanPopupHasil(`
-            🎉 Selesai!<br>
-            Benar: ${benar} / ${soal.length}<br>
-            Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}%</span>
-            <span class="${warnaPeringkat}">${peringkat}</span>
-        `, kelasPopup);
+        quiz.innerHTML = `
+            <div class="hasil-box">
+                <h2>🎉 Selesai!</h2>
+                <p>Benar: <b>${benar}</b> dari <b>${soal.length}</b></p>
+                <div style="text-align:center;">
+                    <p><b>Nilai Kamu:</b></p>
+                    <div class="nilai-besar ${kelasWarna}">${nilai}</div>
+                </div>
+                <button onclick="ulangiKuis()">🔄 Ulangi Kuis</button>
+                <button onclick="keluarKuis()">❌ Selesai</button>
+            </div>
+        `;
         return;
     }
     const s = soal[indeks];
@@ -241,61 +240,49 @@ function tampilkanSoal() {
     <button onclick="periksaJawaban()">Next</button>
     `;
 }
-
 function periksaJawaban() {
     const jawaban = document.querySelector('input[name="jawaban"]:checked');
     if (!jawaban) {
         mainkanSuaraPeringatan();
-        tampilkanPopup("🎯 Ayo tentukan jawabanmu, kamu pasti bisa!", "popup-warning");
+        alert("🎯 Ayo tentukan jawabanmu!");
         return;
     }
     if (parseInt(jawaban.value) === soal[indeks].k) benar++;
     indeks++;
     tampilkanSoal();
 }
-
-function tampilkanPopup(teks, kelas = "popup-warning") {
-    const popup = document.createElement("div");
-    popup.className = `popup ${kelas}`;
-    popup.innerHTML = teks;
-    document.body.appendChild(popup);
-    setTimeout(() => popup.remove(), 3000);
+// === kirim ke Google Form ===
+function kirimDataKeGoogleSheet(nama, kelas, absen, nilai) {
+    const formURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLScrdR_ejx4jr5oHz-BQ9ZU-X6dfgnl7n3atNwxvJxeJluXKjQ/formResponse";
+    const formData = new FormData();
+    formData.append("entry.1114641071", nama);
+    formData.append("entry.687539915", kelas);
+    formData.append("entry.1445858210", absen);
+    formData.append("entry.175130881", nilai);
+    fetch(formURL, { method: "POST", body: formData, mode: "no-cors" });
 }
-
-function tampilkanPopupHasil(teks, kelas) {
-    const popup = document.createElement("div");
-    popup.className = `popup ${kelas}`;
-    popup.innerHTML = `${teks}<br><br><button onclick="muatUlang()">Mulai Lagi</button>`;
-    document.body.appendChild(popup);
-}
-
-function muatUlang() {
-    document.querySelectorAll('.popup').forEach(p => p.remove());
+// 🔄 ulangi kuis
+function ulangiKuis() {
     indeks = 0;
     benar = 0;
-    acakArray(soal);
-    soal.forEach(s => acakJawabanSoal(s));
-    tampilkanSoal();
+    document.getElementById("formData").classList.remove("hidden");
+    document.getElementById("areaKuis").classList.add("hidden");
+    document.getElementById("nama").value = "";
+    document.getElementById("kelas").value = "";
+    document.getElementById("absen").value = "";
 }
-
+// ❌ selesai kuis
+function keluarKuis() {
+    window.location.href = "🕵Petualangan-Seru.html";
+}
 function mainkanSuaraKlik() {
     const suara = document.getElementById("suaraKlik");
-    suara.currentTime = 0;
-    suara.play();
+    suara.currentTime = 0; suara.play();
 }
-
 function mainkanSuaraPeringatan() {
     const suara = document.getElementById("suaraPeringatan");
-    suara.currentTime = 0;
-    suara.play();
+    suara.currentTime = 0; suara.play();
 }
-
-acakArray(soal);
-soal.forEach(s => acakJawabanSoal(s));
-tampilkanSoal();
 </script>
 </body>
 </html>
-
-
-

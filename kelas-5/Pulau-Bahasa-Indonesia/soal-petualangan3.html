@@ -80,9 +80,7 @@ button {
     border-radius: 5px;
     margin-top: 10px;
 }
-button:hover {
-    background-color: #0056b3;
-}
+button:hover { background-color: #0056b3; }
 .popup {
     position: fixed;
     top: 50%;
@@ -123,10 +121,6 @@ button:hover {
 .nilai-kuning { color: #f39c12; }
 .nilai-hijau { color: #27ae60; }
 .nilai-emas { color: #d4af37; }
-.peringkat-merah { color: #e74c3c; }
-.peringkat-kuning { color: #f39c12; }
-.peringkat-hijau { color: #27ae60; }
-.peringkat-emas { color: #d4af37; }
 @keyframes pop {
     0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
     100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
@@ -142,159 +136,144 @@ button:hover {
     <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
         🕵️ Detektif Cilik Ayo Uji Kepintaranmu
     </h1>
-    <div id="quiz"></div>
+
+    <!-- FORM IDENTITAS -->
+    <div id="identitas">
+        <div class="kotak-soal">
+            <label>Nama: <input type="text" id="nama" oninput="mainkanSuaraKetik()"></label><br><br>
+            <label>Kelas: <input type="text" id="kelas" oninput="mainkanSuaraKetik()"></label><br><br>
+            <label>No Absen: <input type="number" id="absen" oninput="mainkanSuaraKetik()"></label><br><br>
+            <button onclick="mulaiKuis()">🚀 Mulai Kuis</button>
+        </div>
+    </div>
+
+    <div id="quiz" style="display:none;"></div>
 </div>
 
+<!-- AUDIO -->
+<audio id="suaraKetik" src="../../suara/typing.mp3"></audio>
 <audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
+<audio id="suaraMulai" src="../../suara/swoosh.mp3"></audio>
+<audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
 <audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
 
 <script>
 let soal = [
-      { q: "Informasi tersurat adalah…", 
-     a: ["Informasi yang disampaikan tidak langsung di teks", "Informasi yang disampaikan secara langsung di teks", "Informasi yang memerlukan penafsiran", "Informasi yang memerlukan pengetahuan tambahan"], k: 1 },
+   { q: "Informasi tersurat adalah…", 
+     a: ["Informasi tidak langsung", "Informasi langsung di teks", "Informasi yang memerlukan tafsiran", "Memerlukan pengetahuan tambahan"], k: 1 },
    { q: "Ide pokok disebut juga…", 
      a: ["Ide tambahan", "Pikiran tambahan", "Gagasan pokok atau pikiran utama", "Informasi tambahan"], k: 2 },
    { q: "Contoh informasi tersurat dari kalimat “Dina pergi ke pasar pada pukul 07.00 pagi untuk membeli sayur dan buah” adalah…", 
      a: ["Dina senang pergi ke pasar", "Dina pergi ke pasar", "Dina lapar", "Dina sedang memasak"], k: 1 },
    { q: "Informasi tersirat memerlukan…", 
-     a: ["Membaca sekilas", "Pengetahuan umum atau pengalaman pribadi", "Menghafal kalimat utama", "Membaca judul"], k: 1 },
+     a: ["Membaca sekilas", "Pengetahuan umum/pengalaman pribadi", "Menghafal kalimat utama", "Membaca judul"], k: 1 },
    { q: "Ide pendukung berfungsi untuk…", 
-     a: ["Mengganti ide pokok", "Menjelas atau menguatkan ide pokok", "Mengurangi isi teks", "Membuat teks lebih singkat"], k: 1 },
+     a: ["Mengganti ide pokok", "Menjelas atau menguatkan ide pokok", "Mengurangi isi teks", "Membuat teks singkat"], k: 1 },
    { q: "Untuk menemukan informasi dalam teks, kita harus…", 
-     a: ["Membaca sebagian teks", "Membaca atau menyimak teks secara menyeluruh dan saksama", "Menghafalkan ide pokok", "Melihat ilustrasi saja"], k: 1 },
-   { q: "Informasi tersurat dapat diperoleh dengan…", 
-     a: ["Menebak isi teks", "Membaca seluruh teks dan menafsirkannya", "Melihat informasi yang tertulis langsung di teks", "Menggunakan pengetahuan umum"], k: 2 },
+     a: ["Membaca sebagian teks", "Membaca/simak seluruh teks saksama", "Menghafalkan ide pokok", "Melihat ilustrasi saja"], k: 1 },
+   { q: "Informasi tersurat diperoleh dengan…", 
+     a: ["Menebak isi teks", "Membaca & menafsirkan", "Melihat informasi tertulis langsung", "Menggunakan pengetahuan umum"], k: 2 },
    { q: "Ciri ide pokok adalah…", 
-     a: ["Bersifat sangat detail", "Bersifat umum dan dapat dijabarkan", "Berupa opini", "Hanya ada di judul"], k: 1 },
+     a: ["Sangat detail", "Bersifat umum & dapat dijabarkan", "Berupa opini", "Hanya ada di judul"], k: 1 },
    { q: "Perbedaan informasi tersurat dan tersirat adalah…", 
-     a: ["Tersurat tidak perlu dibaca, tersirat perlu dibaca", "Tersurat tertulis langsung, tersirat tidak tertulis langsung", "Tersurat memerlukan pengetahuan umum, tersirat tidak", "Tersurat dan tersirat sama"], k: 1 },
+     a: ["Tersurat tidak perlu dibaca", "Tersurat tertulis langsung, tersirat tidak", "Tersurat butuh pengetahuan umum", "Tersurat & tersirat sama"], k: 1 },
    { q: "Kalimat “Ayah membawa payung saat keluar rumah” – informasi tersuratnya adalah…", 
-     a: ["Ayah takut hujan", "Ayah membawa payung", "Ayah ingin berpergian jauh", "Ayah sedang sakit"], k: 1 }
+     a: ["Ayah takut hujan", "Ayah membawa payung", "Ayah ingin bepergian jauh", "Ayah sakit"], k: 1 }
 ];
 
-let indeks = 0;
-let benar = 0;
+let indeks = 0, benar = 0;
 
-function acakArray(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-}
-
-function acakJawabanSoal(s) {
-    let gabung = s.a.map((teks, i) => ({ teks, benar: i === s.k }));
-    for (let i = gabung.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [gabung[i], gabung[j]] = [gabung[j], gabung[i]];
-    }
-    s.a = gabung.map(o => o.teks);
-    s.k = gabung.findIndex(o => o.benar);
-}
-
-function tampilkanSoal() {
-    const quiz = document.getElementById("quiz");
-    if (indeks >= soal.length) {
-        const nilai = Math.round((benar / soal.length) * 100);
-        let peringkat = "";
-        let kelasPopup = "popup-success";
-        let warnaNilai = "nilai-merah";
-        let warnaPeringkat = "peringkat-merah";
-
-        if (nilai === 100) {
-            peringkat = "🏆 Luar biasa! Kamu benar semua, Sang Juara!";
-            kelasPopup = "popup-gold";
-            warnaNilai = "nilai-emas";
-            warnaPeringkat = "peringkat-emas";
-        } else if (nilai >= 80) {
-            peringkat = "🥈 Hebat! Hanya sedikit lagi menuju sempurna!";
-            warnaNilai = "nilai-hijau";
-            warnaPeringkat = "peringkat-hijau";
-        } else if (nilai >= 60) {
-            peringkat = "🥉 Lumayan! Tingkatkan lagi biar makin mantap!";
-            warnaNilai = "nilai-kuning";
-            warnaPeringkat = "peringkat-kuning";
-        } else {
-            peringkat = "💡 Jangan menyerah, ayo coba lagi!";
-            warnaNilai = "nilai-merah";
-            warnaPeringkat = "peringkat-merah";
-        }
-
-        tampilkanPopupHasil(`
-            🎉 Selesai!<br>
-            Benar: ${benar} / ${soal.length}<br>
-            Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}%</span>
-            <span class="${warnaPeringkat}">${peringkat}</span>
-        `, kelasPopup);
+// === IDENTITAS ===
+function mulaiKuis(){
+    let nama = document.getElementById("nama").value.trim();
+    let kelas = document.getElementById("kelas").value.trim();
+    let absen = document.getElementById("absen").value.trim();
+    if(!nama || !kelas || !absen){
+        mainkanSuaraPeringatan();
+        tampilkanPopup("🌟 Isi dulu identitasmu ya! Nama, kelas, dan absen biar seru!", "popup-warning");
         return;
     }
-    const s = soal[indeks];
-    quiz.innerHTML = `
+    mainkanSuaraMulai();
+    document.getElementById("identitas").style.display="none";
+    document.getElementById("quiz").style.display="block";
+    acakArray(soal);
+    soal.forEach(s=>acakJawabanSoal(s));
+    tampilkanSoal();
+}
+
+// === RANDOM ===
+function acakArray(arr){ for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} }
+function acakJawabanSoal(s){
+    let gabung = s.a.map((teks,i)=>({teks, benar:i===s.k}));
+    for(let i=gabung.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[gabung[i],gabung[j]]=[gabung[j],gabung[i]];}
+    s.a=gabung.map(o=>o.teks); s.k=gabung.findIndex(o=>o.benar);
+}
+
+// === TAMPILKAN SOAL ===
+function tampilkanSoal(){
+    const quiz=document.getElementById("quiz");
+    if(indeks>=soal.length){
+        const nilai=Math.round((benar/soal.length)*100);
+        kirimNilai(nilai);
+        let pesan="",kelasPopup="popup-success",warna="nilai-merah";
+        if(nilai===100){pesan="🏆 Luar biasa! Kamu benar semua!";kelasPopup="popup-gold";warna="nilai-emas";}
+        else if(nilai>=80){pesan="🥈 Hebat! Tinggal sedikit lagi!";warna="nilai-hijau";}
+        else if(nilai>=60){pesan="🥉 Lumayan! Tingkatkan lagi!";warna="nilai-kuning";}
+        else{pesan="💡 Jangan menyerah, ayo coba lagi!";}
+        tampilkanPopupHasil(`🎉 Selesai!<br>Benar: ${benar}/${soal.length}<br>
+        Nilai: <span class="nilai-besar ${warna}">${nilai}</span><br>${pesan}`,kelasPopup);
+        return;
+    }
+    const s=soal[indeks];
+    quiz.innerHTML=`
     <div class="kotak-soal">${s.q}</div>
     <div class="answers">
-        ${s.a.map((j, i) => `
-            <label>
-                <input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" /> 
-                ${j}
-            </label>`).join('')}
+        ${s.a.map((j,i)=>`<label><input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()"> ${j}</label>`).join('')}
     </div>
-    <button onclick="periksaJawaban()">Next</button>
-    `;
+    <button onclick="periksaJawaban()">Next</button>`;
+}
+function periksaJawaban(){
+    const jawaban=document.querySelector('input[name="jawaban"]:checked');
+    if(!jawaban){mainkanSuaraPeringatan();tampilkanPopup("🎯 Pilih jawaban dulu ya, semangat!", "popup-warning");return;}
+    if(parseInt(jawaban.value)===soal[indeks].k) benar++;
+    indeks++; mainkanSuaraMulai(); tampilkanSoal();
 }
 
-function periksaJawaban() {
-    const jawaban = document.querySelector('input[name="jawaban"]:checked');
-    if (!jawaban) {
-        mainkanSuaraPeringatan();
-        tampilkanPopup("🎯 Ayo tentukan jawabanmu, kamu pasti bisa!", "popup-warning");
-        return;
-    }
-    if (parseInt(jawaban.value) === soal[indeks].k) benar++;
-    indeks++;
-    tampilkanSoal();
+// === POPUP ===
+function tampilkanPopup(teks,kelas="popup-warning"){
+    const p=document.createElement("div");p.className=`popup ${kelas}`;p.innerHTML=teks;
+    document.body.appendChild(p);setTimeout(()=>p.remove(),3000);
 }
-
-function tampilkanPopup(teks, kelas = "popup-warning") {
-    const popup = document.createElement("div");
-    popup.className = `popup ${kelas}`;
-    popup.innerHTML = teks;
-    document.body.appendChild(popup);
-    setTimeout(() => popup.remove(), 3000);
+function tampilkanPopupHasil(teks,kelas){
+    const p=document.createElement("div");p.className=`popup ${kelas}`;
+    p.innerHTML=`${teks}<br><br>
+    <button onclick="muatUlang()">🔄 Ulangi</button>
+    <button onclick="selesai()">❌ Selesai</button>`;
+    document.body.appendChild(p);
 }
+function muatUlang(){document.querySelectorAll('.popup').forEach(p=>p.remove());indeks=0;benar=0;acakArray(soal);soal.forEach(s=>acakJawabanSoal(s));mainkanSuaraUlangi();tampilkanSoal();}
+function selesai(){location.reload();}
 
-function tampilkanPopupHasil(teks, kelas) {
-    const popup = document.createElement("div");
-    popup.className = `popup ${kelas}`;
-    popup.innerHTML = `${teks}<br><br><button onclick="muatUlang()">Mulai Lagi</button>`;
-    document.body.appendChild(popup);
+// === SUARA ===
+function mainkanSuaraKlik(){let s=document.getElementById("suaraKlik");s.currentTime=0;s.play();}
+function mainkanSuaraMulai(){let s=document.getElementById("suaraMulai");s.currentTime=0;s.play();}
+function mainkanSuaraUlangi(){let s=document.getElementById("suaraUlangi");s.currentTime=0;s.play();}
+function mainkanSuaraPeringatan(){let s=document.getElementById("suaraPeringatan");s.currentTime=0;s.play();}
+function mainkanSuaraKetik(){let s=document.getElementById("suaraKetik");s.currentTime=0;s.play();}
+
+// === KIRIM NILAI ===
+function kirimNilai(nilai){
+    let nama=document.getElementById("nama").value;
+    let kelas=document.getElementById("kelas").value;
+    let absen=document.getElementById("absen").value;
+    let formURL="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfRI7tTbYodomVQeAt-nyjYsDk7sRkk1S1L7y0UvzsEoN0mGQ/formResponse";
+    let data=new FormData();
+    data.append("entry.1114641071",nama);
+    data.append("entry.687539915",kelas);
+    data.append("entry.1445858210",absen);
+    data.append("entry.175130881",nilai);
+    fetch(formURL,{method:"POST",body:data,mode:"no-cors"});
 }
-
-function muatUlang() {
-    document.querySelectorAll('.popup').forEach(p => p.remove());
-    indeks = 0;
-    benar = 0;
-    acakArray(soal);
-    soal.forEach(s => acakJawabanSoal(s));
-    tampilkanSoal();
-}
-
-function mainkanSuaraKlik() {
-    const suara = document.getElementById("suaraKlik");
-    suara.currentTime = 0;
-    suara.play();
-}
-
-function mainkanSuaraPeringatan() {
-    const suara = document.getElementById("suaraPeringatan");
-    suara.currentTime = 0;
-    suara.play();
-}
-
-acakArray(soal);
-soal.forEach(s => acakJawabanSoal(s));
-tampilkanSoal();
 </script>
 </body>
 </html>
-
-

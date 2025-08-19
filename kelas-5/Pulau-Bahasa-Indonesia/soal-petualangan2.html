@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Kuis Seru Petualangan</title>
 <style>
-/* --- style sama seperti sebelumnya --- */
 .kotak-soal {
     background-color: white;
     border: 2px solid #add8e6;
@@ -70,11 +69,11 @@ button:hover { background-color: #0056b3; }
     <!-- Form Identitas -->
     <div id="formIdentitas" class="form-identitas">
         <label>Nama:</label>
-        <input type="text" id="nama" oninput="mainkanSuaraTyping()">
+        <input type="text" id="nama" required oninput="mainkanSuaraKetik()">
         <label>Kelas:</label>
-        <input type="text" id="kelas" oninput="mainkanSuaraTyping()">
+        <input type="text" id="kelas" required oninput="mainkanSuaraKetik()">
         <label>No Absen:</label>
-        <input type="number" id="absen" oninput="mainkanSuaraTyping()">
+        <input type="number" id="absen" required oninput="mainkanSuaraKetik()">
         <button onclick="mulaiKuis()">Mulai Kuis</button>
     </div>
 
@@ -82,12 +81,11 @@ button:hover { background-color: #0056b3; }
     <div id="quiz" style="display:none;"></div>
 </div>
 
-<!-- Audio -->
-<audio id="suaraTyping" src="../../suara/typing.mp3"></audio>
-<audio id="suaraMulai" src="../../suara/swoosh.mp3"></audio>
-<audio id="suaraNext" src="../../suara/swoosh.mp3"></audio>
+<!-- Suara -->
+<audio id="suaraKetik" src="../../suara/typing.mp3"></audio>
+<audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
+<audio id="suaraMulaiNext" src="../../suara/swoosh.mp3"></audio>
 <audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
-<audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
 
 <script>
 let soal = [
@@ -100,17 +98,7 @@ let soal = [
    { q: "Setelah membaca teks, kamu dapat mengupas informasi dengan bantuan …", 
       a: ["Kamus", "Kata kerja", "Kata tanya adiksimba", "Kalimat ajakan"], k: 2 },
    { q: "Pernyataan yang benar tentang ide pokok adalah …", 
-      a: ["Ide pokok hanya terdapat di akhir paragraf", "Ide pokok tidak penting", "Ide pokok bisa digunakan untuk mengembangkan paragraf", "Ide pokok selalu berupa nama tokoh"], k: 2 },
-   { q: "Kata tanya apa digunakan untuk menanyakan …", 
-      a: ["Waktu", "Tempat", "Alasan", "Hal atau peristiwa"], k: 3 },
-   { q: "Contoh kalimat dengan kata tanya kapan adalah …", 
-      a: ["Kapan Heri mulai sekolah?", "Kapan mana Heri bermain?", "Kapan guru Heri?", "Kapan mulai Heri sedih?"], k: 0 },
-   { q: "Contoh kalimat dengan kata mengapa adalah …", 
-      a: ["Mengapa wajah Heri sedih?", "Mengapa lalu Heri ulang tahun?", "Mengapa karena isi buku itu?", "Mengapa kemudian yang duduk di depan?"], k: 0 },
-   { q: "Ide pokok disebut juga sebagai …", 
-      a: ["Kalimat tambahan", "Cerita utama", "Gagasan pokok, pikiran pokok, atau gagasan utama", "Judul paragraf"], k: 2 },
-   { q: "Kata tanya di mana digunakan untuk menanyakan …", 
-      a: ["Jumlah", "Alasan", "Tempat", "Waktu"], k: 2 }
+      a: ["Ide pokok hanya terdapat di akhir paragraf", "Ide pokok tidak penting", "Ide pokok bisa digunakan untuk mengembangkan paragraf", "Ide pokok selalu berupa nama tokoh"], k: 2 }
 ];
 
 let indeks = 0;
@@ -123,15 +111,14 @@ function mulaiKuis() {
     const absen = document.getElementById("absen").value.trim();
 
     if (!nama || !kelas || !absen) {
-        tampilkanPopup("🌟 Hei sahabat detektif! Lengkapi dulu identitasmu supaya bisa ikut petualangan seru ini!", "popup-warning");
-        mainkanSuaraPeringatan();
+        tampilkanPopup("⚠️ Isi dulu identitasmu ya biar detektif cilik makin keren!", "popup-warning");
         return;
     }
 
+    mainkanSuaraMulaiNext();
     dataSiswa = { nama, kelas, absen };
     document.getElementById("formIdentitas").style.display = "none";
     document.getElementById("quiz").style.display = "block";
-    mainkanSuaraMulai();
 
     acakArray(soal);
     soal.forEach(s => acakJawabanSoal(s));
@@ -169,7 +156,7 @@ function tampilkanSoal() {
 
         fetch(formURL, { method: "POST", body: params, mode: "no-cors" });
 
-        // tampilkan popup hasil
+        // popup hasil
         let peringkat = "";
         let kelasPopup = "popup-success";
         let warnaNilai = "nilai-merah";
@@ -190,14 +177,12 @@ function tampilkanSoal() {
             warnaPeringkat = "peringkat-kuning";
         } else {
             peringkat = "💡 Jangan menyerah, ayo coba lagi!";
-            warnaNilai = "nilai-merah";
-            warnaPeringkat = "peringkat-merah";
         }
 
         tampilkanPopupHasil(`
             🎉 Selesai!<br>
             Benar: ${benar} / ${soal.length}<br>
-            Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}</span>
+            Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}%</span>
             <span class="${warnaPeringkat}">${peringkat}</span>
         `, kelasPopup);
         return;
@@ -208,7 +193,7 @@ function tampilkanSoal() {
     <div class="answers">
         ${s.a.map((j, i) => `
             <label>
-                <input type="radio" name="jawaban" value="${i}" /> 
+                <input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" /> 
                 ${j}
             </label>`).join('')}
     </div>
@@ -219,13 +204,12 @@ function tampilkanSoal() {
 function periksaJawaban() {
     const jawaban = document.querySelector('input[name="jawaban"]:checked');
     if (!jawaban) {
-        mainkanSuaraPeringatan();
-        tampilkanPopup("🎯 Ayo tentukan jawabanmu, kamu pasti bisa!", "popup-warning");
+        tampilkanPopup("🎯 Ayo pilih dulu jawabannya, semangat!", "popup-warning");
         return;
     }
     if (parseInt(jawaban.value) === soal[indeks].k) benar++;
     indeks++;
-    mainkanSuaraNext();
+    mainkanSuaraMulaiNext();
     tampilkanSoal();
 }
 
@@ -251,40 +235,30 @@ function muatUlang() {
     document.querySelectorAll('.popup').forEach(p => p.remove());
     indeks = 0;
     benar = 0;
+    mainkanSuaraUlangi();
     document.getElementById("formIdentitas").style.display = "block";
     document.getElementById("quiz").style.display = "none";
-    mainkanSuaraUlangi();
 }
 
 function keluarKuis() {
     window.location.href = "🕵Petualangan-Seru.html";
 }
 
-/* --- suara --- */
-function mainkanSuaraTyping() {
-    const suara = document.getElementById("suaraTyping");
-    suara.currentTime = 0;
-    suara.play();
+function mainkanSuaraKlik() {
+    const suara = document.getElementById("suaraKlik");
+    suara.currentTime = 0; suara.play();
 }
-function mainkanSuaraMulai() {
-    const suara = document.getElementById("suaraMulai");
-    suara.currentTime = 0;
-    suara.play();
+function mainkanSuaraKetik() {
+    const suara = document.getElementById("suaraKetik");
+    suara.currentTime = 0; suara.play();
 }
-function mainkanSuaraNext() {
-    const suara = document.getElementById("suaraNext");
-    suara.currentTime = 0;
-    suara.play();
+function mainkanSuaraMulaiNext() {
+    const suara = document.getElementById("suaraMulaiNext");
+    suara.currentTime = 0; suara.play();
 }
 function mainkanSuaraUlangi() {
     const suara = document.getElementById("suaraUlangi");
-    suara.currentTime = 0;
-    suara.play();
-}
-function mainkanSuaraPeringatan() {
-    const suara = document.getElementById("suaraPeringatan");
-    suara.currentTime = 0;
-    suara.play();
+    suara.currentTime = 0; suara.play();
 }
 </script>
 </body>

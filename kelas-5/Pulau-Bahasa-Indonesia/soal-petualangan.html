@@ -189,9 +189,11 @@ button:hover { background-color: #0056b3; }
 <!-- Wadah untuk peringatan -->
 <div id="peringatanArea"></div>
 
+<!-- Suara -->
 <audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
 <audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
 <audio id="suaraSwoosh" src="../../suara/swoosh.mp3"></audio>
+<audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio> <!-- 🔊 suara ulangi -->
 
 <script>
 let soal = [
@@ -339,8 +341,10 @@ function kirimDataKeGoogleSheet(nama, kelas, absen, nilai) {
     formData.append("entry.175130881", nilai);
     fetch(formURL, { method: "POST", body: formData, mode: "no-cors" });
 }
+
 // 🔄 ulangi kuis
 function ulangiKuis() {
+    mainkanSuaraUlangi(); // 🔊 mainkan suara ulangi
     indeks = 0;
     benar = 0;
     document.getElementById("formData").classList.remove("hidden");
@@ -349,6 +353,7 @@ function ulangiKuis() {
     document.getElementById("kelas").value = "";
     document.getElementById("absen").value = "";
 }
+
 // ❌ selesai kuis
 function keluarKuis() {
     window.location.href = "🕵Petualangan-Seru.html";
@@ -363,6 +368,10 @@ function mainkanSuaraPeringatan() {
 }
 function mainkanSuaraSwoosh() {
     const suara = document.getElementById("suaraSwoosh");
+    suara.currentTime = 0; suara.play();
+}
+function mainkanSuaraUlangi() {
+    const suara = document.getElementById("suaraUlangi");
     suara.currentTime = 0; suara.play();
 }
 

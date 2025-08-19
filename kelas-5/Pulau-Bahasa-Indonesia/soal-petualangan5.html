@@ -5,15 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Kuis Seru Petualangan</title>
 <style>
-.kotak-soal {
-    background-color: white;
-    border: 2px solid #add8e6;
-    border-radius: 10px;
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    max-width: 600px;
-    width: 100%;
-}
 body {
     font-family: 'Arial', sans-serif;
     padding: 20px;
@@ -22,309 +13,209 @@ body {
     background-position: center;
 }
 .container {
-    max-width: 100%;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+    text-align: center;
 }
-.nav {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-bottom: 20px;
+.form-identitas, #quizArea { 
+    background: white; 
+    border: 2px solid #add8e6; 
+    border-radius: 10px; 
+    padding: 20px; 
+    margin-top: 20px;
 }
-.nav a {
-    text-decoration: none;
-    color: #2c3e50;
-    font-weight: bold;
-    background-color: white;
-    padding: 10px 15px;
-    border: 2px solid #add8e6;
-    border-radius: 8px;
-}
-.answers label {
-    display: block;
-    margin-bottom: 12px;
-    padding: 10px 14px;
+input, select {
+    padding: 10px;
+    margin: 8px 0;
+    width: 80%;
+    border: 1px solid #ccc;
     border-radius: 6px;
-    cursor: pointer;
-    color: #2c3e50;
-    font-weight: bold;
-    transition: background 0.2s, transform 0.1s;
-}
-.answers input[type="radio"] {
-    margin-right: 10px;
-    accent-color: #007bff;
-    transform: scale(1.2);
-}
-.answers label:nth-child(1) { background: #d6eaff; }
-.answers label:nth-child(2) { background: #d6ffd9; }
-.answers label:nth-child(3) { background: #fffbd6; }
-.answers label:nth-child(4) { background: #ffd6e7; }
-.answers label:hover {
-    filter: brightness(0.9);
-    transform: scale(1.02);
 }
 button {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 6px;
     margin-top: 10px;
 }
-button:hover {
-    background-color: #0056b3;
+button:hover { background-color: #0056b3; }
+.kotak-soal {
+    background-color: white;
+    border: 2px solid #add8e6;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+.answers label {
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #f8f9fa;
+}
+.answers input[type="radio"] {
+    margin-right: 8px;
+    accent-color: #007bff;
 }
 .popup {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%,-50%);
+    background: white;
     padding: 25px 35px;
     border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     text-align: center;
     z-index: 2000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     font-size: 18px;
     font-weight: bold;
-    animation: pop 0.3s ease-out;
-    max-width: 90%;
 }
-.popup-warning {
-    background: #fff3cd;
-    border: 2px solid #ffecb5;
-    color: #856404;
-}
-.popup-success {
-    background: #d4edda;
-    border: 2px solid #c3e6cb;
-    color: #155724;
-}
-.popup-gold {
-    background: #fff8e1;
-    border: 2px solid #ffeb3b;
-    color: #8d6e00;
-}
-.nilai-besar {
-    font-size: 48px;
-    font-weight: bold;
-    display: block;
-    margin: 10px 0;
-}
-.nilai-merah { color: #e74c3c; }
-.nilai-kuning { color: #f39c12; }
-.nilai-hijau { color: #27ae60; }
-.nilai-emas { color: #d4af37; }
-.peringkat-merah { color: #e74c3c; }
-.peringkat-kuning { color: #f39c12; }
-.peringkat-hijau { color: #27ae60; }
-.peringkat-emas { color: #d4af37; }
-@keyframes pop {
-    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-}
+.popup-warning { background: #fff3cd; border: 2px solid #ffecb5; color: #856404; }
+.popup-success { background: #d4edda; border: 2px solid #c3e6cb; color: #155724; }
+.popup-gold { background: #fff8e1; border: 2px solid #ffeb3b; color: #8d6e00; }
+.nilai-besar { font-size: 48px; margin: 10px 0; font-weight: bold; }
 </style>
 </head>
 <body>
 <div class="container">
-    <div class="nav">
-        <a href="🕵Petualangan-Seru.html">◀️ kembali</a>
-        <a href="Soal_Petualangan5.pdf" download>📥 Download</a>
-    </div>
-    <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
+    <h1 style="background:white; border:2px solid #add8e6; padding:10px; border-radius:10px;">
         🕵️ Detektif Cilik Ayo Uji Kepintaranmu
     </h1>
-    <div id="quiz"></div>
+
+    <!-- Form identitas -->
+    <div class="form-identitas" id="formIdentitas">
+        <h2>Isi Identitasmu Dulu 😊</h2>
+        <input type="text" id="nama" placeholder="Nama"><br>
+        <input type="text" id="kelas" placeholder="Kelas"><br>
+        <input type="number" id="absen" placeholder="No Absen"><br>
+        <button onclick="mulaiKuis()">Mulai Kuis 🚀</button>
+    </div>
+
+    <!-- Area Kuis -->
+    <div id="quizArea" style="display:none;">
+        <div id="quiz"></div>
+    </div>
 </div>
 
+<!-- Audio -->
+<audio id="suaraKetik" src="../../suara/typing.mp3"></audio>
 <audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
+<audio id="suaraNext" src="../../suara/next.mp3"></audio>
+<audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
 <audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
 
 <script>
 let soal = [
-       { 
-    q: "Ide pokok dari paragraf berikut adalah:\n\"Pasar tradisional menjual berbagai kebutuhan sehari-hari. Di pasar, kita bisa membeli sayur, buah, ikan, dan bumbu dapur.\"",
-    a: ["Kita bisa membeli sayur, buah, ikan, dan bumbu dapur", "Pasar tradisional menjual berbagai kebutuhan sehari-hari", "Pasar ramai setiap hari", "Pedagang menjual sayur"],
-    k: 1
-  },
-  { 
-    q: "Informasi tersurat dari paragraf berikut adalah:\n\"Raka tersenyum lebar sambil memegang piala di tangannya. Ia baru saja turun dari panggung penghargaan.\"",
-    a: ["Raka tersenyum", "Raka memegang piala", "Raka baru saja naik panggung", "Raka sedang bermain"],
-    k: 1
-  },
-  { 
-    q: "Ide pokok dari paragraf berikut adalah:\n\"Hutan adalah rumah bagi berbagai jenis hewan dan tumbuhan. Pohon-pohon besar menyediakan tempat tinggal bagi burung, monyet, dan serangga. Tanaman kecil di bawahnya menjadi makanan bagi hewan herbivora. Semua makhluk hidup di hutan saling bergantung satu sama lain.\"",
-    a: ["Pohon-pohon besar menyediakan tempat tinggal bagi burung", "Hutan adalah rumah bagi berbagai jenis hewan dan tumbuhan", "Tanaman kecil menjadi makanan bagi hewan herbivora", "Semua makhluk hidup saling bergantung"],
-    k: 1
-  },
-  { 
-    q: "Informasi tersurat dari paragraf berikut adalah:\n\"Pukul 06.00 pagi, Rani berlari kecil menuju halte bus. Di tangannya ia memegang tas sekolah.\"",
-    a: ["Rani membawa tas sekolah", "Rani menuju halte bus pada pukul 06.00 pagi", "Rani berlari ke rumah", "Rani terlambat sekolah"],
-    k: 1
-  },
-  { 
-    q: "Ide pokok dari paragraf berikut adalah:\n\"Gunung adalah tempat yang indah untuk berwisata. Udara di gunung sejuk dan segar. Pemandangan di sekitar gunung sangat memukau. Banyak orang datang untuk mendaki atau berkemah.\"",
-    a: ["Udara di gunung sejuk dan segar", "Pemandangan di sekitar gunung sangat memukau", "Gunung adalah tempat yang indah untuk berwisata", "Banyak orang mendaki"],
-    k: 2
-  },
-  { 
-    q: "Informasi tersirat dari paragraf berikut adalah:\n\"Di kelas, Bayu duduk diam sambil menunduk. Matanya terlihat sembab, dan di mejanya tergeletak buku yang sobek.\"",
-    a: ["Bayu sedang membaca buku", "Bayu mungkin sedang sedih atau kecewa karena bukunya rusak", "Bayu sedang tidur", "Bayu menunggu teman"],
-    k: 1
-  },
-  { 
-    q: "Informasi yang tidak disampaikan langsung di dalam teks disebut …",
-    a: ["Ide pokok", "Informasi tersurat", "Ide pendukung", "Informasi tersirat"],
-    k: 3
-  },
-  { 
-    q: "Informasi tersurat dari paragraf berikut adalah:\n\"Arif berangkat ke sekolah menggunakan sepeda. Ia berangkat pukul 06.30 pagi.\"",
-    a: ["Arif menggunakan motor", "Arif berangkat ke sekolah menggunakan sepeda pada pukul 06.30 pagi", "Arif terlambat", "Arif berjalan kaki"],
-    k: 1
-  },
-  { 
-    q: "Informasi tersirat dari paragraf berikut adalah:\n\"Sepulang sekolah, Sinta berjalan cepat menuju rumah. Di tangannya ada kantong plastik berisi sayuran segar.\"",
-    a: ["Sinta baru saja berbelanja sayuran", "Sinta akan memasak", "Sinta sedang pergi ke pasar", "Sinta membawa makanan ringan"],
-    k: 0
-  },
-  { 
-    q: "Ide pokok juga dapat disebut …",
-    a: ["Gagasan pokok, pikiran pokok, gagasan utama, pikiran utama", "Ide pendukung", "Informasi tersurat", "Informasi tersirat"],
-    k: 0
-  }
+  { q: "Ide pokok dari paragraf berikut adalah:\n\"Pasar tradisional menjual berbagai kebutuhan sehari-hari. Di pasar, kita bisa membeli sayur, buah, ikan, dan bumbu dapur.\"",
+    a: ["Kita bisa membeli sayur, buah, ikan, dan bumbu dapur", "Pasar tradisional menjual berbagai kebutuhan sehari-hari", "Pasar ramai setiap hari", "Pedagang menjual sayur"], k: 1 },
+  { q: "Informasi tersurat dari paragraf berikut adalah:\n\"Raka tersenyum lebar sambil memegang piala di tangannya. Ia baru saja turun dari panggung penghargaan.\"",
+    a: ["Raka tersenyum", "Raka memegang piala", "Raka baru saja naik panggung", "Raka sedang bermain"], k: 1 },
+  { q: "Ide pokok dari paragraf berikut adalah:\n\"Hutan adalah rumah bagi berbagai jenis hewan dan tumbuhan. Pohon-pohon besar menyediakan tempat tinggal bagi burung, monyet, dan serangga. Tanaman kecil di bawahnya menjadi makanan bagi hewan herbivora. Semua makhluk hidup di hutan saling bergantung satu sama lain.\"",
+    a: ["Pohon-pohon besar menyediakan tempat tinggal bagi burung", "Hutan adalah rumah bagi berbagai jenis hewan dan tumbuhan", "Tanaman kecil menjadi makanan bagi hewan herbivora", "Semua makhluk hidup saling bergantung"], k: 1 },
+  { q: "Informasi tersurat dari paragraf berikut adalah:\n\"Pukul 06.00 pagi, Rani berlari kecil menuju halte bus. Di tangannya ia memegang tas sekolah.\"",
+    a: ["Rani membawa tas sekolah", "Rani menuju halte bus pada pukul 06.00 pagi", "Rani berlari ke rumah", "Rani terlambat sekolah"], k: 1 },
+  { q: "Ide pokok dari paragraf berikut adalah:\n\"Gunung adalah tempat yang indah untuk berwisata. Udara di gunung sejuk dan segar. Pemandangan di sekitar gunung sangat memukau. Banyak orang datang untuk mendaki atau berkemah.\"",
+    a: ["Udara di gunung sejuk dan segar", "Pemandangan di sekitar gunung sangat memukau", "Gunung adalah tempat yang indah untuk berwisata", "Banyak orang mendaki"], k: 2 },
+  { q: "Informasi tersirat dari paragraf berikut adalah:\n\"Di kelas, Bayu duduk diam sambil menunduk. Matanya terlihat sembab, dan di mejanya tergeletak buku yang sobek.\"",
+    a: ["Bayu sedang membaca buku", "Bayu mungkin sedang sedih atau kecewa karena bukunya rusak", "Bayu sedang tidur", "Bayu menunggu teman"], k: 1 },
+  { q: "Informasi yang tidak disampaikan langsung di dalam teks disebut …",
+    a: ["Ide pokok", "Informasi tersurat", "Ide pendukung", "Informasi tersirat"], k: 3 },
+  { q: "Informasi tersurat dari paragraf berikut adalah:\n\"Arif berangkat ke sekolah menggunakan sepeda. Ia berangkat pukul 06.30 pagi.\"",
+    a: ["Arif menggunakan motor", "Arif berangkat ke sekolah menggunakan sepeda pada pukul 06.30 pagi", "Arif terlambat", "Arif berjalan kaki"], k: 1 },
+  { q: "Informasi tersirat dari paragraf berikut adalah:\n\"Sepulang sekolah, Sinta berjalan cepat menuju rumah. Di tangannya ada kantong plastik berisi sayuran segar.\"",
+    a: ["Sinta baru saja berbelanja sayuran", "Sinta akan memasak", "Sinta sedang pergi ke pasar", "Sinta membawa makanan ringan"], k: 0 },
+  { q: "Ide pokok juga dapat disebut …",
+    a: ["Gagasan pokok, pikiran pokok, gagasan utama, pikiran utama", "Ide pendukung", "Informasi tersurat", "Informasi tersirat"], k: 0 }
 ];
 
-let indeks = 0;
-let benar = 0;
+let indeks=0, benar=0, nama="", kelas="", absen="";
 
-function acakArray(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-}
-
-function acakJawabanSoal(s) {
-    let gabung = s.a.map((teks, i) => ({ teks, benar: i === s.k }));
-    for (let i = gabung.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [gabung[i], gabung[j]] = [gabung[j], gabung[i]];
-    }
-    s.a = gabung.map(o => o.teks);
-    s.k = gabung.findIndex(o => o.benar);
-}
-
-function tampilkanSoal() {
-    const quiz = document.getElementById("quiz");
-    if (indeks >= soal.length) {
-        const nilai = Math.round((benar / soal.length) * 100);
-        let peringkat = "";
-        let kelasPopup = "popup-success";
-        let warnaNilai = "nilai-merah";
-        let warnaPeringkat = "peringkat-merah";
-
-        if (nilai === 100) {
-            peringkat = "🏆 Luar biasa! Kamu benar semua, Sang Juara!";
-            kelasPopup = "popup-gold";
-            warnaNilai = "nilai-emas";
-            warnaPeringkat = "peringkat-emas";
-        } else if (nilai >= 80) {
-            peringkat = "🥈 Hebat! Hanya sedikit lagi menuju sempurna!";
-            warnaNilai = "nilai-hijau";
-            warnaPeringkat = "peringkat-hijau";
-        } else if (nilai >= 60) {
-            peringkat = "🥉 Lumayan! Tingkatkan lagi biar makin mantap!";
-            warnaNilai = "nilai-kuning";
-            warnaPeringkat = "peringkat-kuning";
-        } else {
-            peringkat = "💡 Jangan menyerah, ayo coba lagi!";
-            warnaNilai = "nilai-merah";
-            warnaPeringkat = "peringkat-merah";
-        }
-
-        tampilkanPopupHasil(`
-            🎉 Selesai!<br>
-            Benar: ${benar} / ${soal.length}<br>
-            Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}%</span>
-            <span class="${warnaPeringkat}">${peringkat}</span>
-        `, kelasPopup);
+function mulaiKuis(){
+    nama=document.getElementById("nama").value.trim();
+    kelas=document.getElementById("kelas").value.trim();
+    absen=document.getElementById("absen").value.trim();
+    if(!nama || !kelas || !absen){
+        mainkanSuaraPeringatan();
+        tampilkanPopup("🌟 Ayo lengkapi dulu identitasmu biar seru!","popup-warning");
         return;
     }
-    const s = soal[indeks];
-    quiz.innerHTML = `
-    <div class="kotak-soal">${s.q}</div>
-    <div class="answers">
-        ${s.a.map((j, i) => `
-            <label>
-                <input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" /> 
-                ${j}
-            </label>`).join('')}
-    </div>
-    <button onclick="periksaJawaban()">Next</button>
+    document.getElementById("formIdentitas").style.display="none";
+    document.getElementById("quizArea").style.display="block";
+    acakArray(soal);
+    soal.forEach(s=>acakJawabanSoal(s));
+    tampilkanSoal();
+    mainkanSuaraNext();
+}
+
+function tampilkanSoal(){
+    const quiz=document.getElementById("quiz");
+    if(indeks>=soal.length){
+        const nilai=Math.round((benar/soal.length)*100);
+        kirimNilai(nilai);
+        tampilkanPopupHasil(`
+          🎉 Selesai!<br>
+          Benar: ${benar}/${soal.length}<br>
+          Nilai: <span class="nilai-besar">${nilai}</span>
+        `);
+        return;
+    }
+    const s=soal[indeks];
+    quiz.innerHTML=`
+      <div class="kotak-soal">${s.q}</div>
+      <div class="answers">
+        ${s.a.map((j,i)=>`
+          <label><input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()"> ${j}</label>`).join("")}
+      </div>
+      <button onclick="periksaJawaban()">Next ▶️</button>
     `;
 }
 
-function periksaJawaban() {
-    const jawaban = document.querySelector('input[name="jawaban"]:checked');
-    if (!jawaban) {
-        mainkanSuaraPeringatan();
-        tampilkanPopup("🎯 Ayo tentukan jawabanmu, kamu pasti bisa!", "popup-warning");
-        return;
-    }
-    if (parseInt(jawaban.value) === soal[indeks].k) benar++;
-    indeks++;
-    tampilkanSoal();
+function periksaJawaban(){
+    const j=document.querySelector('input[name="jawaban"]:checked');
+    if(!j){mainkanSuaraPeringatan(); tampilkanPopup("🎯 Pilih jawaban dulu ya!","popup-warning"); return;}
+    if(parseInt(j.value)===soal[indeks].k) benar++;
+    indeks++; mainkanSuaraNext(); tampilkanSoal();
 }
 
-function tampilkanPopup(teks, kelas = "popup-warning") {
-    const popup = document.createElement("div");
-    popup.className = `popup ${kelas}`;
-    popup.innerHTML = teks;
-    document.body.appendChild(popup);
-    setTimeout(() => popup.remove(), 3000);
+function tampilkanPopup(teks,kelas){
+    const p=document.createElement("div");
+    p.className=`popup ${kelas}`; p.innerHTML=teks;
+    document.body.appendChild(p); setTimeout(()=>p.remove(),3000);
 }
 
-function tampilkanPopupHasil(teks, kelas) {
-    const popup = document.createElement("div");
-    popup.className = `popup ${kelas}`;
-    popup.innerHTML = `${teks}<br><br><button onclick="muatUlang()">Mulai Lagi</button>`;
-    document.body.appendChild(popup);
+function tampilkanPopupHasil(teks){
+    const p=document.createElement("div");
+    p.className="popup popup-success";
+    p.innerHTML=`${teks}<br><br>
+      <button onclick="muatUlang()">🔄 Ulangi</button>
+      <button onclick="selesaiKuis()">❌ Selesai</button>`;
+    document.body.appendChild(p);
 }
 
-function muatUlang() {
-    document.querySelectorAll('.popup').forEach(p => p.remove());
-    indeks = 0;
-    benar = 0;
-    acakArray(soal);
-    soal.forEach(s => acakJawabanSoal(s));
-    tampilkanSoal();
-}
+function muatUlang(){document.querySelectorAll(".popup").forEach(p=>p.remove()); indeks=0; benar=0; tampilkanSoal(); mainkanSuaraUlangi();}
+function selesaiKuis(){window.location.href="🕵Petualangan-Seru.html";}
 
-function mainkanSuaraKlik() {
-    const suara = document.getElementById("suaraKlik");
-    suara.currentTime = 0;
-    suara.play();
-}
+function acakArray(arr){for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}}
+function acakJawabanSoal(s){let g=s.a.map((teks,i)=>({teks,benar:i===s.k})); for(let i=g.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[g[i],g[j]]=[g[j],g[i]];} s.a=g.map(o=>o.teks); s.k=g.findIndex(o=>o.benar);}
 
-function mainkanSuaraPeringatan() {
-    const suara = document.getElementById("suaraPeringatan");
-    suara.currentTime = 0;
-    suara.play();
-}
+function mainkanSuaraKlik(){let s=document.getElementById("suaraKlik"); s.currentTime=0;s.play();}
+function mainkanSuaraNext(){let s=document.getElementById("suaraNext"); s.currentTime=0;s.play();}
+function mainkanSuaraUlangi(){let s=document.getElementById("suaraUlangi"); s.currentTime=0;s.play();}
+function mainkanSuaraPeringatan(){let s=document.getElementById("suaraPeringatan"); s.currentTime=0;s.play();}
 
-acakArray(soal);
-soal.forEach(s => acakJawabanSoal(s));
-tampilkanSoal();
+function kirimNilai(nilai){
+    let form=new FormData();
+    form.append("entry.1114641071",nama);
+    form.append("entry.687539915",kelas);
+    form.append("entry.1445858210",absen);
+    form.append("entry.175130881",nilai);
+    fetch("https://docs.google.com/forms/u/0/d/e/1FAIpQLSdsVUKJ1wpm8W9KJN1V7l_SRyXIANoktI6CBuwjpmXFeXfqQw/formResponse",{method:"POST",body:form,mode:"no-cors"});
+}
 </script>
 </body>
 </html>
-
-

@@ -85,7 +85,7 @@ button:hover { background-color: #0056b3; }
 <audio id="suaraKetik" src="../../suara/typing.mp3"></audio>
 <audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
 <audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
-<audio id="suaraMulai" src="../../suara/swoosh.mp3"></audio>
+<audio id="suaraMulai" src="../../suara/next.mp3"></audio>
 <audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
 
 <script>
@@ -121,7 +121,7 @@ function mulaiKuis() {
 
     if (!nama || !kelas || !absen) {
         mainkanSuaraPeringatan();
-        tampilkanPopup("✨ Wah, jangan lupa isi identitas dulu ya! Semangat kamu pasti bisa! 🚀", "popup-warning");
+        tampilkanPopup("✨ Wah, jangan lupa isi identitas dulu ya! Semangat, kamu pasti bisa! 🚀", "popup-warning");
         return;
     }
 
@@ -183,12 +183,10 @@ function tampilkanSoal() {
             peringkat = "💡 Jangan menyerah, ayo coba lagi!";
         }
 
-        tampilkanPopupHasil(`
-            🎉 Selesai!<br>
+        tampilkanPopupHasil(`🎉 Selesai!<br>
             Benar: ${benar} / ${soal.length}<br>
             Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}%</span>
-            <span class="${warnaPeringkat}">${peringkat}</span>
-        `, kelasPopup);
+            <span class="${warnaPeringkat}">${peringkat}</span>`, kelasPopup);
         return;
     }
     const s = soal[indeks];

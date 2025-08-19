@@ -6,15 +6,6 @@
 <title>Kuis Seru PKn</title>
 <style>
 /* ========== STYLE ========== */
-.kotak-soal {
-    background-color: white;
-    border: 2px solid #add8e6;
-    border-radius: 10px;
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    max-width: 600px;
-    width: 100%;
-}
 body {
     font-family: 'Arial', sans-serif;
     padding: 20px;
@@ -30,7 +21,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     min-height: 100vh;
 }
 .nav {
@@ -47,6 +37,32 @@ body {
     padding: 10px 15px;
     border: 2px solid #add8e6;
     border-radius: 8px;
+}
+#identitas {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #add8e6;
+    max-width: 400px;
+}
+#identitas input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+#identitas button {
+    width: 100%;
+}
+.kotak-soal {
+    background-color: white;
+    border: 2px solid #add8e6;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    max-width: 600px;
+    width: 100%;
 }
 .answers label {
     display: block;
@@ -99,34 +115,10 @@ button:hover {
     animation: pop 0.3s ease-out;
     max-width: 90%;
 }
-.popup-warning {
-    background: #fff3cd;
-    border: 2px solid #ffecb5;
-    color: #856404;
-}
-.popup-success {
-    background: #d4edda;
-    border: 2px solid #c3e6cb;
-    color: #155724;
-}
-.popup-gold {
-    background: #fff8e1;
-    border: 2px solid #ffeb3b;
-    color: #8d6e00;
-}
-.popup button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 10px;
-}
-.popup button:hover {
-    background-color: #0056b3;
-}
+.popup-warning { background: #fff3cd; border: 2px solid #ffecb5; color: #856404; }
+.popup-success { background: #d4edda; border: 2px solid #c3e6cb; color: #155724; }
+.popup-gold { background: #fff8e1; border: 2px solid #ffeb3b; color: #8d6e00; }
+.popup button { margin: 10px; }
 .nilai-besar {
     font-size: 48px;
     font-weight: bold;
@@ -137,10 +129,6 @@ button:hover {
 .nilai-kuning { color: #f39c12; }
 .nilai-hijau { color: #27ae60; }
 .nilai-emas { color: #d4af37; }
-.peringkat-merah { color: #e74c3c; }
-.peringkat-kuning { color: #f39c12; }
-.peringkat-hijau { color: #27ae60; }
-.peringkat-emas { color: #d4af37; }
 @keyframes pop {
     0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
     100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
@@ -153,17 +141,29 @@ button:hover {
         <a href="../sejarah-kelahiran-pancasila-5.html">◀️ kembali</a>
         <a href="Soal_PKn_Kelas_5.pdf" download>📥 Download</a>
     </div>
+
     <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
         🎯 Kuis Seru PKn – Sejarah BPUPKI
     </h1>
-    <div id="quiz"></div>
+
+    <!-- Form identitas -->
+    <div id="identitas">
+        <h3>📝 Isi Identitas Dulu ya!</h3>
+        <input type="text" id="nama" placeholder="Nama" oninput="mainkanSuaraTyping()">
+        <input type="text" id="absen" placeholder="No Absen" oninput="mainkanSuaraTyping()">
+        <input type="text" id="kelas" placeholder="Kelas" oninput="mainkanSuaraTyping()">
+        <button onclick="mulaiKuis()">🚀 Mulai Kuis</button>
+    </div>
+
+    <div id="quiz" style="display:none;"></div>
 </div>
 
 <!-- Suara -->
-<audio id="suaraKlik" src="../../../suara/mouse-clicks.mp3" preload="auto"></audio>
-<audio id="suaraPeringatan" src="../../../suara/tada-234709.mp3" preload="auto"></audio>
-
-
+<audio id="suaraTyping" src="../../suara/typing.mp3" preload="auto"></audio>
+<audio id="suaraNext" src="../../suara/next.mp3" preload="auto"></audio>
+<audio id="suaraUlangi" src="../../suara/ulangi.mp3" preload="auto"></audio>
+<audio id="suaraKlik" src="../../suara/mouse-clicks.mp3" preload="auto"></audio>
+<audio id="suaraPeringatan" src="../../suara/tada-234709.mp3" preload="auto"></audio>
 
 <script>
 let soal = [
@@ -178,130 +178,85 @@ let soal = [
     { q: "Tujuan sidang pertama BPUPKI adalah …", a: ["Membahas dasar negara", "Membentuk pemerintahan sementara", "Mengatur ekonomi", "Membentuk tentara nasional"], k: 0 },
     { q: "Dalam sidang BPUPKI, bentuk negara Indonesia yang disepakati adalah …", a: ["Kerajaan", "Republik", "Kesultanan", "Monarki konstitusional"], k: 1 }
 ];
+let indeks = 0, benar = 0;
 
-let indeks = 0;
-let benar = 0;
+function acakArray(arr){for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}}
+function acakJawabanSoal(s){let gabung=s.a.map((teks,i)=>({teks,benar:i===s.k}));for(let i=gabung.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[gabung[i],gabung[j]]=[gabung[j],gabung[i]]}s.a=gabung.map(o=>o.teks);s.k=gabung.findIndex(o=>o.benar)}
 
-function acakArray(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
+function mulaiKuis(){
+    let nama=document.getElementById("nama").value.trim();
+    let absen=document.getElementById("absen").value.trim();
+    let kelas=document.getElementById("kelas").value.trim();
+    if(!nama||!absen||!kelas){
+        mainkanSuaraPeringatan();
+        tampilkanPopup("😊 Isi identitas dulu ya, biar datanya lengkap!", "popup-warning");
+        return;
     }
-}
-function acakJawabanSoal(s) {
-    let gabung = s.a.map((teks, i) => ({ teks, benar: i === s.k }));
-    for (let i = gabung.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [gabung[i], gabung[j]] = [gabung[j], gabung[i]];
-    }
-    s.a = gabung.map(o => o.teks);
-    s.k = gabung.findIndex(o => o.benar);
+    mainkanSuaraNext();
+    document.getElementById("identitas").style.display="none";
+    document.getElementById("quiz").style.display="block";
+    acakArray(soal);
+    soal.forEach(s=>acakJawabanSoal(s));
+    tampilkanSoal();
 }
 
-function tampilkanSoal() {
-    const quiz = document.getElementById("quiz");
-    if (indeks >= soal.length) {
-        const nilai = Math.round((benar / soal.length) * 100);
-        let peringkat = "";
-        let kelasPopup = "popup-success";
-        let warnaNilai = "nilai-merah";
-        let warnaPeringkat = "peringkat-merah";
-
-        if (nilai === 100) {
-            peringkat = "🏆 Luar biasa! Kamu benar semua, Sang Juara!";
-            kelasPopup = "popup-gold";
-            warnaNilai = "nilai-emas";
-            warnaPeringkat = "peringkat-emas";
-        } else if (nilai >= 80) {
-            peringkat = "🥈 Hebat! Hanya sedikit lagi menuju sempurna!";
-            warnaNilai = "nilai-hijau";
-            warnaPeringkat = "peringkat-hijau";
-        } else if (nilai >= 60) {
-            peringkat = "🥉 Lumayan! Tingkatkan lagi biar makin mantap!";
-            warnaNilai = "nilai-kuning";
-            warnaPeringkat = "peringkat-kuning";
-        } else {
-            peringkat = "💡 Jangan menyerah, ayo coba lagi!";
-        }
-
+function tampilkanSoal(){
+    const quiz=document.getElementById("quiz");
+    if(indeks>=soal.length){
+        const nilai=Math.round((benar/soal.length)*100);
+        let peringkat="",kelasPopup="popup-success",warnaNilai="nilai-merah";
+        if(nilai===100){peringkat="🏆 Luar biasa! Kamu benar semua!";kelasPopup="popup-gold";warnaNilai="nilai-emas"}
+        else if(nilai>=80){peringkat="🥈 Hebat! Hanya sedikit lagi menuju sempurna!";warnaNilai="nilai-hijau"}
+        else if(nilai>=60){peringkat="🥉 Lumayan! Tingkatkan lagi biar makin mantap!";warnaNilai="nilai-kuning"}
+        else{peringkat="💡 Jangan menyerah, ayo coba lagi!"}
         tampilkanPopupHasil(`
             🎉 Selesai!<br>
-            Benar: ${benar} / ${soal.length}<br>
-            Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}%</span>
-            <span class="${warnaPeringkat}">${peringkat}</span>
-        `, kelasPopup);
+            Benar: ${benar}/${soal.length}<br>
+            Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}</span>
+            <div>${peringkat}</div>
+        `,kelasPopup);
         return;
     }
-    const s = soal[indeks];
-    quiz.innerHTML = `
-    <div class="kotak-soal">${s.q}</div>
-    <div class="answers">
-        ${s.a.map((j, i) => `
-            <label>
-                <input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" /> 
-                ${j}
-            </label>`).join('')}
-    </div>
-    <button onclick="periksaJawaban()">Next</button>
+    const s=soal[indeks];
+    quiz.innerHTML=`
+        <div class="kotak-soal">${s.q}</div>
+        <div class="answers">
+        ${s.a.map((j,i)=>`<label><input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()"/> ${j}</label>`).join('')}
+        </div>
+        <button onclick="periksaJawaban()">Next</button>
     `;
 }
-
-function periksaJawaban() {
-    const jawaban = document.querySelector('input[name="jawaban"]:checked');
-    if (!jawaban) {
-        mainkanSuaraPeringatan();
-        tampilkanPopup("🎯 Ayo tentukan jawabanmu, kamu pasti bisa!", "popup-warning");
-        return;
-    }
-    if (parseInt(jawaban.value) === soal[indeks].k) benar++;
+function periksaJawaban(){
+    const jawaban=document.querySelector('input[name="jawaban"]:checked');
+    if(!jawaban){mainkanSuaraPeringatan();tampilkanPopup("🎯 Ayo tentukan jawabanmu, semangat!", "popup-warning");return;}
+    if(parseInt(jawaban.value)===soal[indeks].k) benar++;
     indeks++;
+    mainkanSuaraNext();
     tampilkanSoal();
 }
-
-function tampilkanPopup(teks, kelas = "popup-warning") {
-    const popup = document.createElement("div");
-    popup.className = `popup ${kelas}`;
-    popup.innerHTML = teks;
+function tampilkanPopup(teks,kelas="popup-warning"){
+    const popup=document.createElement("div");
+    popup.className=`popup ${kelas}`;
+    popup.innerHTML=teks;
     document.body.appendChild(popup);
-    setTimeout(() => popup.remove(), 3000);
+    setTimeout(()=>popup.remove(),3000);
 }
-
-function tampilkanPopupHasil(teks, kelas) {
-    const popup = document.createElement("div");
-    popup.className = `popup ${kelas}`;
-    popup.innerHTML = `${teks}<br><br><button onclick="muatUlang()">Mulai Lagi</button>`;
+function tampilkanPopupHasil(teks,kelas){
+    const popup=document.createElement("div");
+    popup.className=`popup ${kelas}`;
+    popup.innerHTML=`${teks}<br><br>
+        <button onclick="muatUlang()">🔄 Ulangi</button>
+        <button onclick="tutupPopup()">❌ Selesai</button>`;
     document.body.appendChild(popup);
 }
+function muatUlang(){mainkanSuaraUlangi();document.querySelectorAll('.popup').forEach(p=>p.remove());indeks=0;benar=0;acakArray(soal);soal.forEach(s=>acakJawabanSoal(s));tampilkanSoal()}
+function tutupPopup(){document.querySelectorAll('.popup').forEach(p=>p.remove())}
 
-function muatUlang() {
-    document.querySelectorAll('.popup').forEach(p => p.remove());
-    indeks = 0;
-    benar = 0;
-    acakArray(soal);
-    soal.forEach(s => acakJawabanSoal(s));
-    tampilkanSoal();
-}
-
-function mainkanSuaraKlik() {
-    const suara = document.getElementById("suaraKlik");
-    if (suara) {
-        suara.pause();
-        suara.currentTime = 0;
-        suara.play().catch(() => {});
-    }
-}
-function mainkanSuaraPeringatan() {
-    const suara = document.getElementById("suaraPeringatan");
-    if (suara) {
-        suara.pause();
-        suara.currentTime = 0;
-        suara.play().catch(() => {});
-    }
-}
-
-acakArray(soal);
-soal.forEach(s => acakJawabanSoal(s));
-tampilkanSoal();
+function mainkanSuaraTyping(){let s=document.getElementById("suaraTyping");s.pause();s.currentTime=0;s.play().catch(()=>{})}
+function mainkanSuaraNext(){let s=document.getElementById("suaraNext");s.pause();s.currentTime=0;s.play().catch(()=>{})}
+function mainkanSuaraUlangi(){let s=document.getElementById("suaraUlangi");s.pause();s.currentTime=0;s.play().catch(()=>{})}
+function mainkanSuaraKlik(){let s=document.getElementById("suaraKlik");s.pause();s.currentTime=0;s.play().catch(()=>{})}
+function mainkanSuaraPeringatan(){let s=document.getElementById("suaraPeringatan");s.pause();s.currentTime=0;s.play().catch(()=>{})}
 </script>
 </body>
 </html>

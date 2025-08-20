@@ -1,219 +1,207 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>UPT SD Negeri 160 Gresik - Sekolah Ceria</title>
+  <title>Petualangan-Kelas-5</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
-    @media only screen and (max-width: 768px) {
-      nav img {
-        position: static !important;
-        height: 40px !important;
-        margin-right: 0.5rem;
-        display: block;
-      }
-      nav {
-        flex-direction: column;
-        align-items: center;
-        padding-top: 1rem;
-        flex-wrap: wrap;
-        gap: 0.5rem !important;
-      }
-      nav a {
-        font-size: 0.9rem;
-        padding: 0.4rem 0.6rem !important;
-      }
-      .dropdown-content {
-        position: static;
-        display: none;
-        box-shadow: none;
-        background: transparent;
-      }
-      .dropdown.open .dropdown-content {
-        display: block !important;
-      }
-    }
-
-    html, body {
-      height: 100%;
+    body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      color: #333;
+      background: url('https://i.imgur.com/clG3P3n.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
     }
 
-    .background-wrapper {
-      min-height: 100%;
-      background: url('https://i.imgur.com/elvDO0G.png') no-repeat center center;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    nav img {
+      height: 55px;
     }
 
     nav a {
-      margin: 0 1rem;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .hero {
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-      text-align: center;
-      color: #fff;
-    }
-
-    section {
-      padding: 3rem 2rem;
-      margin: 2rem;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #0288d1;
-    }
-
-    .card {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.3s;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-    }
-
-    .kelas-container {
-      padding: 2rem;
-      text-align: center;
-    }
-
-    .kelas-button {
-      display: inline-block;
-      margin: 0.5rem;
-      padding: 1rem 2rem;
-      background-color: #0288d1;
-      color: #fff;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    .kelas-button:hover {
-      background-color: #0277bd;
-    }
-
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .dropdown-toggle {
-      background: rgba(255,255,255,0.9);
+      background: rgba(255, 255, 255, 0.9);
       padding: 0.5rem 1rem;
       border-radius: 6px;
+      text-decoration: none;
       color: #0288d1;
       font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    nav a:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .title-section {
+      text-align: center;
+      margin: 30px 20px 10px;
+    }
+
+    .title-section h1 {
+      font-size: 2rem;
+      background: rgba(255,255,255,0.85);
       display: inline-block;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: white;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-      z-index: 1;
-      border-radius: 6px;
-    }
-
-    .dropdown-content a {
+      padding: 0.5rem 1.5rem;
+      border-radius: 12px;
       color: #0288d1;
-      padding: 10px 16px;
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+    }
+
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .map-item {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      color: #0288d1;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
       text-decoration: none;
-      display: block;
-      text-align: left;
+      font-weight: bold;
+      font-size: 1.1rem;
     }
 
-    .dropdown-content a:hover {
-      background-color: #f0f0f0;
+    .map-item:hover {
+      transform: scale(1.05);
+      background-color: #dff6ff;
     }
 
-    .dropdown:hover .dropdown-content {
+    .map-item .emoji {
+      font-size: 2.5rem;
       display: block;
+      margin-bottom: 10px;
     }
 
-    .dropdown.open .dropdown-content {
-      display: block;
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-right {
+        justify-content: flex-start;
+        margin-top: 1rem;
+      }
+
+      .title-section h1 {
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .map-item {
+        font-size: 1rem;
+        padding: 15px;
+      }
+
+      .map-item .emoji {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Audio klik -->
-  <audio id="clickSound" src="suara/blub.mp3" preload="auto"></audio>
 
-  <div class="background-wrapper">
-    <nav style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem;">
-      <div style="display: flex; align-items: center; gap: 1rem;">
-        <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik" style="height: 55px;">
-        <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 62px;">
-        <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah" style="height: 55px;">
-      </div>
-      <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.5rem; margin-left: auto; margin-right: auto;">
-        <a href="#program" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Program</a>
-        <a href="#galeri" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Galeri</a>
-        <a href="kelas-5/kelas.html" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Kelas</a>
-        <a href="#kontak" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Kontak</a>
-      </div>
-    </nav>
+  <!-- Navigasi -->
+  <nav>
+    <div class="nav-left">
+      <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
+      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 62px;">
+      <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah">
+    </div>
+    <div class="nav-right">
+      <a href="../index.html">🏠 Beranda</a>
+      <a href="#">📌 Program</a>
+      <a href="#">🖼️ Galeri</a>
+      <a href="kelas.html">🏫 Kelas</a>
+    </div>
+  </nav>
 
-    <section class="hero" style="margin-top: -40px;">
-      <h1 style="font-size: 3rem;">Selamat Datang di UPT SD Negeri 160 Gresik</h1>
-      <p style="font-size: 1.6rem;">Tempat Tumbuhnya Anak Hebat dan Bahagia!</p>
-    </section>
+  <!-- Judul Halaman -->
+  <div class="title-section">
+    <h1>📖 Petualangan Belajar Kelas 5</h1>
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const clickSound = document.getElementById("clickSound");
+  <!-- Peta Petualangan -->
+  <div class="map-grid">
+    <a href="istanap-pancasila/istana-pancasila.html" class="map-item">
+      <span class="emoji">⭐</span>
+      Istana Pancasila
+    </a>
+    <a href="Pulau-Bahasa-Indonesia/pulau.html" class="map-item">
+      <span class="emoji">📚</span>
+      Pulau Bahasa Indonesia
+    </a>
+    <a href="lembah/lembah.html" class="map-item">
+      <span class="emoji">⛰️</span>
+      Lembah Matematika
+    </a>
+    <a href="hutan/hutan.html" class="map-item">
+      <span class="emoji">🌿</span>
+      Hutan IPAS
+    </a>
+    <a href="#sbdp5.html" class="map-item">
+      <span class="emoji">🎨</span>
+      Gunung Seni Budaya
+    </a>
+    <a href="#bjawa5.html" class="map-item">
+      <span class="emoji">🏡</span>
+      Desa Bahasa Jawa
+    </a>
+    <a href="#plh5.html" class="map-item">
+      <span class="emoji">🌱</span>
+      Danau PLH
+    </a>
+    <a href="#latihan5.html" class="map-item">
+      <span class="emoji">🧠</span>
+      Tantangan Logika
+    </a>
+  </div>
 
-      function playClickSound() {
+  <!-- Audio & Script -->
+  <audio id="clickSound" src="suara/bubble-pop.mp3" preload="auto"></audio>
+  <script>
+    const clickSound = document.getElementById("clickSound");
+    const allButtons = document.querySelectorAll("a, button, .map-item");
+
+    allButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
         clickSound.currentTime = 0;
         clickSound.play();
-      }
-
-      // Tambahkan suara ke semua tombol & link
-      document.querySelectorAll("a, button").forEach(el => {
-        el.addEventListener("click", playClickSound);
       });
-
-      // Dropdown mobile
-      const dropdown = document.querySelector(".dropdown");
-      if (dropdown) {
-        const toggle = dropdown.querySelector(".dropdown-toggle");
-        if (window.innerWidth <= 768 && toggle) {
-          toggle.addEventListener("click", function (e) {
-            e.preventDefault();
-            dropdown.classList.toggle("open");
-          });
-
-          document.addEventListener("click", function (e) {
-            if (!dropdown.contains(e.target)) {
-              dropdown.classList.remove("open");
-            }
-          });
-        }
-      }
     });
   </script>
+
 </body>
 </html>

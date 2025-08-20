@@ -109,10 +109,13 @@ button:hover { opacity: 0.9; }
         <a href="soal-wisata1.pdf" download>📥 Download</a>
     </div>
     <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
-        🧙‍♂️ Quest Cerdas
+        🕹️ Quest Cerdas
     </h1>
     <div id="quiz"></div>
 </div>
+
+<!-- Suara klik tombol -->
+<audio id="suaraKlik" src="../../suara/button-press.mp3" preload="auto"></audio>
 
 <script>
 let soalAsli = [
@@ -160,6 +163,7 @@ let soalAsli = [
 
 let soal = [];
 let indeks = 0;
+const audioKlik = document.getElementById("suaraKlik");
 
 function acakArray(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -193,11 +197,17 @@ function tampilkanSoal() {
     <div class="answers">
         ${s.a.map((j, i) => `
             <label>
-                <input type="radio" name="jawaban" value="${i}" onclick="periksaJawaban(${i})" /> 
+                <input type="radio" name="jawaban" value="${i}" onclick="klikJawaban(${i})" /> 
                 ${j}
             </label>`).join('')}
     </div>
     `;
+}
+
+function klikJawaban(pilihan) {
+    audioKlik.currentTime = 0;
+    audioKlik.play();
+    periksaJawaban(pilihan);
 }
 
 function periksaJawaban(pilihan) {

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🧠 Arena Pintar</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-image: url('https://i.imgur.com/QWbucXj.jpeg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+}
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.nav a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    background-color: white;
+    padding: 10px 15px;
+    border: 2px solid #add8e6;
+    border-radius: 8px;
+}
+.kotak-soal {
+    background-color: white;
+    border: 2px solid #add8e6;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    max-width: 600px;
+    width: 100%;
+}
+.answers label {
+    display: block;
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #2c3e50;
+    font-weight: bold;
+    transition: background 0.2s, transform 0.1s;
+}
+.answers input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #007bff;
+    transform: scale(1.2);
+}
+.answers label:nth-child(1) { background: #d6eaff; }
+.answers label:nth-child(2) { background: #d6ffd9; }
+.answers label:nth-child(3) { background: #fffbd6; }
+.answers label:nth-child(4) { background: #ffd6e7; }
+.answers label:hover {
+    filter: brightness(0.9);
+    transform: scale(1.02);
+}
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+button:hover {
+    background-color: #0056b3;
+}
+.gambar {
+    max-width: 100%; 
+    border-radius: 8px; 
+    margin: 10px 0;
+}
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 25px 35px;
+    border-radius: 12px;
+    text-align: center;
+    z-index: 2000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    font-size: 18px;
+    font-weight: bold;
+    animation: pop 0.3s ease-out;
+    max-width: 90%;
+    background: white;
+}
+.popup-success {
+    background: #d4edda;
+    border: 2px solid #c3e6cb;
+    color: #155724;
+}
+.popup-warning {
+    background: #fff3cd;
+    border: 2px solid #ffecb5;
+    color: #856404;
+}
+@keyframes pop {
+    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="nav">
+        <a href="rahasia.html">◀️ Kembali</a>
+        <a href="soal bagian mata.pdf" download>📥 Download</a>
+    </div>
+    <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
+        🧠 Arena Pintar
+    </h1>
+    <div id="quiz"></div>
+</div>
+
+<audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
+<audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
+
+<script>
+// ====== Data Soal ======
+const bankSoal = [
+ { q: "<img src='https://i.imgur.com/yAIiX0B.jpeg' class='gambar'><br>Nomor 1 adalah …", a: ["Iris", "Pupil", "Kornea", "Otot mata"], k: 0 },
+  { q: "<img src='https://i.imgur.com/yAIiX0B.jpeg' class='gambar'><br>Nomor 2 adalah …", a: ["Iris", "Pupil", "Kornea", "Otot mata"], k: 1 },
+  { q: "<img src='https://i.imgur.com/yAIiX0B.jpeg' class='gambar'><br>Nomor 3 adalah …", a: ["Iris", "Pupil", "Kornea", "Otot mata"], k: 2 },
+  { q: "<img src='https://i.imgur.com/yAIiX0B.jpeg' class='gambar'><br>Nomor 4 adalah …", a: ["Pupil", "Kornea", "Bintik kuning", "Lensa"], k: 3 },
+  { q: "<img src='https://i.imgur.com/yAIiX0B.jpeg' class='gambar'><br>Nomor 5 adalah …", a: ["Bintik kuning", "Otot mata", "Syaraf mata", "Lensa"], k: 1 },
+  { q: "<img src='https://i.imgur.com/yAIiX0B.jpeg' class='gambar'><br>Nomor 6 adalah …", a: ["Koroid", "Syaraf mata", "Pupil", "Lensa mata"], k: 0 },
+  { q: "<img src='https://i.imgur.com/yAIiX0B.jpeg' class='gambar'><br>Nomor 7 adalah …", a: ["Iris", "Bintik kuning", "Lensa mata", "Kornea"], k: 1 },
+  { q: "<img src='https://i.imgur.com/yAIiX0B.jpeg' class='gambar'><br>Nomor 8 adalah …", a: ["Otot mata", "Syaraf mata", "Kornea", "Koroid"], k: 1 },
+  { q: "<img src='https://i.imgur.com/yAIiX0B.jpeg' class='gambar'><br>Mengatur besar kecilnya pupil serta memberi warna mata.", a: ["1", "2", "3", "4"], k: 0 },
+  { q: "<img src='https://i.imgur.com/yAIiX0B.jpeg' class='gambar'><br>Mengatur banyaknya cahaya yang masuk ke mata.", a: ["1", "2", "3", "4"], k: 1 },
+  { q: "<img src='https://i.imgur.com/yAIiX0B.jpeg' class='gambar'><br>Bagian sklera berwarna bening untuk menerima dan meneruskan cahaya yang masuk ke mata.", a: ["1", "2", "3", "4"], k: 2 },
+  { q: "<img src='https://i.imgur.com/yAIiX0B.jpeg' class='gambar'><br>Meneruskan dan memfokuskan cahaya agar jatuh tepat di retina.", a: ["1", "2", "3", "4"], k: 3 },
+  { q: "<img src='https://i.imgur.com/yAIiX0B.jpeg' class='gambar'><br>Menggerakkan bola mata.", a: ["1", "3", "5", "7"], k: 2 },
+  { q: "<img src='https://i.imgur.com/yAIiX0B.jpeg' class='gambar'><br>Bintik kuning: peka terhadap cahaya.", a: ["1", "3", "5", "7"], k: 3 },
+  { q: "<img src='https://i.imgur.com/yAIiX0B.jpeg' class='gambar'><br>Meneruskan rangsang cahaya ke saraf pusat di otak.", a: ["2", "4", "6", "8"], k: 3 },
+  { q: "Fungsi pupil adalah …", a: ["Mengatur banyaknya cahaya yang masuk ke mata", "Meneruskan cahaya yang masuk ke mata", "Mengatur besar kecilnya pupil", "Memberi warna mata"], k: 0 },
+  { q: "Bagian mata yang berfungsi meneruskan rangsang cahaya ke saraf pusat di otak.", a: ["Pupil", "Kornea", "Sklera", "Syaraf mata"], k: 3 },
+  { q: "Bagian mata yang berfungsi menggerakkan bola mata.", a: ["Syaraf mata", "Bintik kuning", "Otot mata", "Lensa mata"], k: 2 },
+  { q: "Meneruskan dan memfokuskan cahaya agar jatuh tepat di retina.", a: ["Pupil", "Lensa mata", "Otot mata", "Retina"], k: 1 },
+  { q: "Memberi warna mata.", a: ["Kornea", "Iris", "Pupil", "Lensa mata"], k: 1 }
+];
+
+// ====== Variabel ======
+let soal = [];
+let indeks = 0;
+
+// tampilkan soal
+function tampilkanSoal() {
+    const quiz = document.getElementById("quiz");
+    if (indeks >= soal.length) {
+        tampilkanPopup("🎉 Kuis selesai!<br><br><button onclick='muatUlang()'>🔄 Mulai Lagi</button>", "popup-success");
+        return;
+    }
+    const s = soal[indeks];
+    quiz.innerHTML = `
+    <div class="kotak-soal"><b>Soal ${indeks + 1} dari ${soal.length}</b><br><br>${s.q}</div>
+    <div class="answers">
+        ${s.a.map((j, i) => `
+            <label>
+                <input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" /> 
+                ${j}
+            </label>`).join('')}
+    </div>
+    `;
+}
+
+// periksa jawaban
+function periksaJawaban() {
+    const jawaban = document.querySelector('input[name="jawaban"]:checked');
+    if (!jawaban) {
+        mainkanSuaraPeringatan();
+        tampilkanPopup("⚠️ Pilih jawaban dulu ya!", "popup-warning", false);
+        return;
+    }
+    if (parseInt(jawaban.value) === soal[indeks].k) {
+        tampilkanPopup("🎉 Hebat! Jawabanmu benar!<br><br><button onclick='lanjut()'>➡️ Next</button>", "popup-success", true);
+    } else {
+        tampilkanPopup("😅 Belum tepat, tetap semangat ya!<br><br><button onclick='lanjut()'>➡️ Next</button>", "popup-warning", true);
+    }
+}
+
+// lanjut soal berikutnya
+function lanjut() {
+    document.querySelectorAll('.popup').forEach(p => p.remove());
+    indeks++;
+    tampilkanSoal();
+}
+
+// popup
+function tampilkanPopup(teks, kelas, tombol = true) {
+    const popup = document.createElement("div");
+    popup.className = `popup ${kelas}`;
+    popup.innerHTML = teks;
+    document.body.appendChild(popup);
+}
+
+// reset kuis
+function muatUlang() {
+    document.querySelectorAll('.popup').forEach(p => p.remove());
+    indeks = 0;
+    soal = [...bankSoal]; // soal tetap
+    tampilkanSoal();
+}
+
+// suara
+function mainkanSuaraKlik() {
+    const suara = document.getElementById("suaraKlik");
+    suara.currentTime = 0;
+    suara.play();
+}
+function mainkanSuaraPeringatan() {
+    const suara = document.getElementById("suaraPeringatan");
+    suara.currentTime = 0;
+    suara.play();
+}
+
+// mulai
+muatUlang();
+document.addEventListener("change", e=>{
+    if(e.target.name==="jawaban"){ periksaJawaban(); }
+});
+</script>
+</body>
+</html>

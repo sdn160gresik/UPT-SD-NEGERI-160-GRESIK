@@ -24,14 +24,11 @@
         font-size: 0.9rem;
         padding: 0.4rem 0.6rem !important;
       }
-      .dropdown-content {
-        position: static;
-        display: none;
-        box-shadow: none;
-        background: transparent;
+      .hero h1 {
+        font-size: 1.6rem !important;
       }
-      .dropdown.open .dropdown-content {
-        display: block !important;
+      .hero p {
+        font-size: 1.1rem !important;
       }
     }
 
@@ -109,110 +106,32 @@
     .kelas-button:hover {
       background-color: #0277bd;
     }
-
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .dropdown-toggle {
-      background: rgba(255,255,255,0.9);
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      color: #0288d1;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: white;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-      z-index: 1;
-      border-radius: 6px;
-    }
-
-    .dropdown-content a {
-      color: #0288d1;
-      padding: 10px 16px;
-      text-decoration: none;
-      display: block;
-      text-align: left;
-    }
-
-    .dropdown-content a:hover {
-      background-color: #f0f0f0;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    .dropdown.open .dropdown-content {
-      display: block;
-    }
   </style>
 </head>
 <body>
   <div class="background-wrapper">
-    <nav style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem;">
+    <nav style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 1rem;">
+      <!-- Logo di kiri -->
       <div style="display: flex; align-items: center; gap: 1rem;">
         <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik" style="height: 55px;">
         <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 62px;">
         <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah" style="height: 55px;">
       </div>
-      <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.5rem; margin-left: auto; margin-right: auto;">
+
+      <!-- Menu di kanan -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-left: auto;">
         <a href="#" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Beranda</a>
-        <a href="#tentang" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Tentang</a>
         <a href="#program" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Program</a>
         <a href="#galeri" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Galeri</a>
         <a href="kelas.html" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Kelas</a>
         <a href="#kontak" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Kontak</a>
-        
-        <!-- Dropdown disusun sejajar -->
-        <div class="dropdown">
-          <a href="#" class="dropdown-toggle">Latihan ▼</a>
-          <div class="dropdown-content">
-            <a href="latihan/kelas1.html">Kelas 1</a>
-            <a href="latihan/kelas2.html">Kelas 2</a>
-            <a href="latihan/kelas3.html">Kelas 3</a>
-            <a href="latihan/kelas4.html">Kelas 4</a>
-            <a href="Petualangan-Kelas-5.html">Kelas 5</a> <!-- sudah diperbarui -->
-            <a href="latihan/kelas6.html">Kelas 6</a>
-          </div>
-        </div>
       </div>
     </nav>
 
     <section class="hero" style="margin-top: -40px;">
-      <h1 style="font-size: 3rem;">Selamat Datang di UPT SD Negeri 160 Gresik</h1>
-      <p style="font-size: 1.6rem;">Tempat Tumbuhnya Anak Hebat dan Bahagia!</p>
+      <h1 style="font-size: 2rem;">Selamat Datang di UPT SD Negeri 160 Gresik</h1>
+      <p style="font-size: 1.4rem;">Tempat Tumbuhnya Anak Hebat dan Bahagia!</p>
     </section>
   </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const dropdown = document.querySelector(".dropdown");
-      const toggle = dropdown.querySelector(".dropdown-toggle");
-      const content = dropdown.querySelector(".dropdown-content");
-
-      if (window.innerWidth <= 768) {
-        toggle.addEventListener("click", function (e) {
-          e.preventDefault();
-          dropdown.classList.toggle("open");
-        });
-
-        document.addEventListener("click", function (e) {
-          if (!dropdown.contains(e.target)) {
-            dropdown.classList.remove("open");
-          }
-        });
-      }
-    });
-  </script>
 </body>
 </html>

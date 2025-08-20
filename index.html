@@ -123,7 +123,7 @@
         <a href="#" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Beranda</a>
         <a href="#program" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Program</a>
         <a href="#galeri" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Galeri</a>
-        <a href="kelas-5/kelas.html" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Kelas</a>
+        <a href="kelas.html" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Kelas</a>
         <a href="#kontak" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Kontak</a>
       </div>
     </nav>
@@ -133,6 +133,22 @@
       <p style="font-size: 1.4rem;">Tempat Tumbuhnya Anak Hebat dan Bahagia!</p>
     </section>
   </div>
+
+  <!-- Audio klik -->
+  <audio id="click-sound" src="suara/blub.mp3" preload="auto"></audio>
+
+  <script>
+    const clickSound = document.getElementById("click-sound");
+
+    function playClickSound() {
+      clickSound.currentTime = 0; // reset biar bisa diputar cepat berulang
+      clickSound.play();
+    }
+
+    // Tambahkan ke semua link dan tombol
+    document.querySelectorAll("a, button, .kelas-button").forEach(el => {
+      el.addEventListener("click", playClickSound);
+    });
+  </script>
 </body>
 </html>
-

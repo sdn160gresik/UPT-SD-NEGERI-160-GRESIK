@@ -144,18 +144,46 @@ button:hover {
     0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
     100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
+.hidden { display: none; }
+.info-siswa {
+    background: white;
+    border: 2px solid #add8e6;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
 </style>
 </head>
 <body>
 <div class="container">
     <div class="nav">
-                <a href="../../sejarah-kelahiran-pancasila-5.html">◀️ kembali</a>
+        <a href="../../sejarah-kelahiran-pancasila-5.html">◀️ kembali</a>
         <a href="Soal_PKn_Kelas_5.pdf" download>📥 Download</a>
     </div>
     <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
-        🗝️ Membuka Misteri Piagam Jakarta
+        🚀 "Petualangan Seru BPUPKI & Panitia Sembilan!
     </h1>
-    <div id="quiz"></div>
+
+    <!-- Form Identitas -->
+    <div id="formData">
+        <h3>🌟 Yuk, lengkapi dulu identitasmu sebelum mulai</h3>
+        <label>Nama: </label><br>
+        <input type="text" id="nama"><br>
+        <label>Kelas: </label><br>
+        <input type="text" id="kelas"><br>
+        <label>No. Absen: </label><br>
+        <input type="text" id="absen"><br>
+        <button onclick="mulaiKuis()">Mulai Kuis</button>
+    </div>
+
+    <!-- Peringatan -->
+    <div id="peringatanArea"></div>
+
+    <!-- Area kuis (disembunyikan dulu) -->
+    <div id="areaKuis" class="hidden">
+        <div id="infoSiswa" class="info-siswa"></div>
+        <div id="quiz"></div>
+    </div>
 </div>
 
 <audio id="suaraKlik" src="../../../../suara/mouse-clicks.mp3"></audio>
@@ -163,7 +191,7 @@ button:hover {
 
 <script>
 let soal = [
-    { q: "Tugas Panitia Sembilan adalah…", 
+      { q: "Tugas Panitia Sembilan adalah…", 
       a: ["Menyusun pembagian wilayah", "Menyusun rumusan dasar negara", "Memilih presiden dan wakil presiden", "Membentuk pasukan pertahanan"], 
       k: 1 },
     { q: "Hasil yang dihasilkan Panitia Sembilan adalah…", 
@@ -195,9 +223,59 @@ let soal = [
       k: 1 }
 ];
 
+let dataNama = "", dataKelas = "", dataAbsen = "";
+let indeks = 0, benar = 0;
 
-let indeks = 0;
-let benar = 0;
+// Fungsi Peringatan
+function tampilkanPeringatan(pesan){
+    document.getElementById("peringatanArea").innerHTML=`
+        <div class="popup popup-warning">
+            <h2>🤩Ups</h2>
+            <p>${pesan}</p>
+            <button onclick="tutupPeringatan()">Oke 👍</button>
+        </div>`;
+}
+function tutupPeringatan(){
+    document.getElementById("peringatanArea").innerHTML="";
+}
+
+ 
+
+// Fungsi Mulai Kuis
+function mulaiKuis() {
+    dataNama = document.getElementById("nama").value.trim();
+    dataKelas = document.getElementById("kelas").value.trim();
+    dataAbsen = document.getElementById("absen").value.trim();
+
+    if (!dataNama || !dataKelas || !dataAbsen) {
+        mainkanSuaraPeringatan();
+        tampilkanPeringatan("jangan lupa isi Nama, Kelas, dan Absen dulu ya!");
+        return;
+    }
+
+    mainkanSuaraKlik();
+    document.getElementById("infoSiswa").innerHTML = 
+        `👤 Nama: <b>${dataNama}</b> | 🏫 Kelas: <b>${dataKelas}</b> | 🔢 Absen: <b>${dataAbsen}</b>`;
+
+    document.getElementById("formData").classList.add("hidden");
+    document.getElementById("areaKuis").classList.remove("hidden");
+
+    acakArray(soal); 
+    soal.forEach(s => acakJawabanSoal(s)); 
+    tampilkanSoal();
+}
+
+// Fungsi Kirim Nilai
+function kirimDataKeGoogleSheet(nama, kelas, absen, nilai){
+    const formURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfne3Ob0TdlIhbJ_EF5dCwb8Lci3zDTs73My8X-MMkBYRoHoQ/formResponse";
+    const formData = new FormData();
+    formData.append("entry.1114641071", nama);
+    formData.append("entry.687539915", kelas);
+    formData.append("entry.1445858210", absen);
+    formData.append("entry.175130881", nilai);
+
+    fetch(formURL, { method: "POST", body: formData, mode: "no-cors" });
+}
 
 function acakArray(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -205,7 +283,6 @@ function acakArray(arr) {
         [arr[i], arr[j]] = [arr[j], arr[i]];
     }
 }
-
 function acakJawabanSoal(s) {
     let gabung = s.a.map((teks, i) => ({ teks, benar: i === s.k }));
     for (let i = gabung.length - 1; i > 0; i--) {
@@ -215,7 +292,6 @@ function acakJawabanSoal(s) {
     s.a = gabung.map(o => o.teks);
     s.k = gabung.findIndex(o => o.benar);
 }
-
 function tampilkanSoal() {
     const quiz = document.getElementById("quiz");
     if (indeks >= soal.length) {
@@ -244,10 +320,13 @@ function tampilkanSoal() {
             warnaPeringkat = "peringkat-merah";
         }
 
+        // kirim nilai ke Google Sheet
+        kirimDataKeGoogleSheet(dataNama, dataKelas, dataAbsen, nilai);
+
         tampilkanPopupHasil(`
             🎉 Selesai!<br>
             Benar: ${benar} / ${soal.length}<br>
-            Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}%</span>
+            Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}</span>
             <span class="${warnaPeringkat}">${peringkat}</span>
         `, kelasPopup);
         return;
@@ -265,34 +344,23 @@ function tampilkanSoal() {
     <button onclick="periksaJawaban()">Next</button>
     `;
 }
-
 function periksaJawaban() {
     const jawaban = document.querySelector('input[name="jawaban"]:checked');
     if (!jawaban) {
         mainkanSuaraPeringatan();
-        tampilkanPopup("🎯 Ayo tentukan jawabanmu, kamu pasti bisa!", "popup-warning");
+        tampilkanPeringatan("🎯 Ayo tentukan jawabanmu dulu!");
         return;
     }
     if (parseInt(jawaban.value) === soal[indeks].k) benar++;
     indeks++;
     tampilkanSoal();
 }
-
-function tampilkanPopup(teks, kelas = "popup-warning") {
-    const popup = document.createElement("div");
-    popup.className = `popup ${kelas}`;
-    popup.innerHTML = teks;
-    document.body.appendChild(popup);
-    setTimeout(() => popup.remove(), 3000);
-}
-
 function tampilkanPopupHasil(teks, kelas) {
     const popup = document.createElement("div");
     popup.className = `popup ${kelas}`;
     popup.innerHTML = `${teks}<br><br><button onclick="muatUlang()">Mulai Lagi</button>`;
     document.body.appendChild(popup);
 }
-
 function muatUlang() {
     document.querySelectorAll('.popup').forEach(p => p.remove());
     indeks = 0;
@@ -301,22 +369,16 @@ function muatUlang() {
     soal.forEach(s => acakJawabanSoal(s));
     tampilkanSoal();
 }
-
 function mainkanSuaraKlik() {
     const suara = document.getElementById("suaraKlik");
     suara.currentTime = 0;
     suara.play();
 }
-
 function mainkanSuaraPeringatan() {
     const suara = document.getElementById("suaraPeringatan");
     suara.currentTime = 0;
     suara.play();
 }
-
-acakArray(soal);
-soal.forEach(s => acakJawabanSoal(s));
-tampilkanSoal();
 </script>
 </body>
 </html>

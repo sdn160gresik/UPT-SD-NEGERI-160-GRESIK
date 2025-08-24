@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Petualangan Seru di Pagi Ceria — Episode 1</title>
+  <meta name="description" content="Kisah keluarga Hasan memulai hari dengan sholat Subuh berjamaah, doa, dan kebersamaan. Episode 1: Embun Pagi dan Suara Adzan." />
+  <style>
+    :root{
+      --bg: #fafafa;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted:#6b7280;
+      --accent:#0ea5e9;
+      --ring:rgba(14,165,233,.25);
+    }
+    .dark{
+      --bg:#0b1220;
+      --card:#0f172a;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --accent:#38bdf8;
+      --ring:rgba(56,189,248,.25);
+    }
+    html,body{height:100%}
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: var(--bg); color: var(--text); line-height:1.7;
+    }
+    .container{max-width:920px; margin:0 auto; padding:24px}
+    header{
+      position:sticky; top:0; z-index:20; backdrop-filter:saturate(150%) blur(6px);
+      background: color-mix(in oklab, var(--bg) 85%, transparent);
+      border-bottom:1px solid color-mix(in oklab, var(--muted) 20%, transparent);
+    }
+    .toolbar{display:flex; gap:12px; align-items:center; justify-content:space-between; padding:12px 24px}
+    .btn{
+      border:1px solid color-mix(in oklab, var(--accent) 35%, var(--muted));
+      background: color-mix(in oklab, var(--accent) 12%, var(--card));
+      color: var(--text); padding:10px 14px; border-radius:14px; cursor:pointer; font-weight:600;
+      box-shadow:0 0 0 0 var(--ring); transition: box-shadow .2s, transform .06s, background .2s;
+    }
+    .btn:focus{outline:none; box-shadow:0 0 0 6px var(--ring)}
+    .btn:active{transform:translateY(1px)}
+    main{padding: 24px}
+    .card{
+      background: var(--card); border:1px solid color-mix(in oklab, var(--muted) 18%, transparent);
+      border-radius: 20px; padding: 24px; box-shadow: 0 10px 30px color-mix(in oklab, black 8%, transparent);
+    }
+    .title{font-size: clamp(28px, 4vw, 42px); margin: 6px 0 0; letter-spacing:.2px}
+    .subtitle{color:var(--muted); margin:6px 0 0 0}
+    .hero{display:grid; gap:18px; grid-template-columns: 1fr}
+    .hero-illustration{display:none}
+    section{margin: 26px 0}
+    h2{font-size: clamp(20px, 3vw, 28px); margin: 2px 0 8px}
+    p{margin: 10px 0}
+    .divider{height:1px; background: color-mix(in oklab, var(--muted) 18%, transparent); margin: 22px 0}
+    .quote{border-left:4px solid var(--accent); padding:10px 14px; background: color-mix(in oklab, var(--accent) 10%, var(--card)); border-radius: 10px}
+    footer{color:var(--muted); font-size:14px; padding: 28px 0 40px}
+    .tag{display:inline-block; padding:.25rem .6rem; border-radius:999px; font-size:12px; border:1px solid color-mix(in oklab, var(--muted) 25%, transparent); background: color-mix(in oklab, var(--muted) 5%, transparent)}
+
+    @media (min-width: 860px){
+      .hero{grid-template-columns: 1.3fr .7fr; align-items:center}
+    }
+
+    /* Cetak */
+    @media print{
+      header{display:none}
+      body{background:#fff}
+      .card{box-shadow:none; border-color:#ddd}
+      a[href]:after{content:" (" attr(href) ")"; font-size:12px; color:#555}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="toolbar container">
+      <div style="display:flex; align-items:center; gap:10px">
+        <span class="tag">Episode 1</span>
+        <strong>Petualangan Seru di Pagi Ceria</strong>
+      </div>
+      <div style="display:flex; gap:10px">
+        <button class="btn" onclick="toggleDark()" aria-pressed="false" id="darkBtn">Mode Gelap</button>
+        <button class="btn" onclick="window.print()">Cetak</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <article class="card" itemscope itemtype="https://schema.org/Article">
+      <div class="hero">
+        <div>
+          <img src="https://i.imgur.com/9HbEA8z.jpeg" alt="Ilustrasi Embun Pagi" style="max-width:100%; border-radius:14px; margin-bottom:12px;">
+          <h1 class="title" itemprop="headline">Petualangan Seru di Pagi Ceria</h1>
+          <p class="subtitle">Keluarga Hasan memulai hari dengan sholat, doa, dan kebersamaan.</p>
+        </div>
+      </div>
+
+      <div class="divider" role="separator"></div>
+
+      <section aria-labelledby="pembuka">
+        <h2 id="pembuka">🌿 Pagi Sejuk & Kumandang Adzan</h2>
+        <p>Pagi itu, udara masih sejuk. Embun menempel di dedaunan, dan suara ayam jantan terdengar bersahutan dari kejauhan. Dari menara masjid, adzan Subuh berkumandang merdu, menggema hingga ke rumah keluarga Hasan.</p>
+      </section>
+
+      <section aria-labelledby="bangun" >
+        <h2 id="bangun">⏰ Bangun Pagi Bersama Keluarga Hasan</h2>
+        <p>Di dalam rumah, Ayah Hasan berjalan pelan menuju kamar anak-anak sambil mengetuk pintu. Dengan suara lembut ia memanggil,</p>
+        <p class="quote">“Fatih… Hana… Rafa… ayo bangun, Nak. Sudah waktunya sholat Subuh berjamaah.”</p>
+        <p>Fatih, anak sulung yang berusia dua belas tahun, menggeliat kecil di kasurnya. Ia memang agak malas bangun pagi, tapi selalu ingat pesan Ayah bahwa sholat Subuh adalah kunci keberkahan hari. “Baik, Yah… sebentar lagi Fatih wudhu,” jawabnya sambil bangkit.</p>
+        <p>Hana, si gadis ceria berusia sepuluh tahun, malah sudah duduk di tepi kasur sambil mengucek mata. “Aku duluan ya, Kak Fatih!” serunya riang.</p>
+        <p>Lain halnya dengan Rafa, si bungsu berusia tujuh tahun. Ia masih meringkuk dalam selimut, hanya menampakkan rambutnya yang acak-acakan. Dengan suara setengah mengantuk ia bergumam, “Hmm… sebentar lagi, Yah. Rafa masih ngantuk banget…”</p>
+      </section>
+
+      <section aria-labelledby="trik">
+        <h2 id="trik">🎯 Trik Membangunkan Rafa</h2>
+        <p>Ayah tersenyum. Ia tahu, membangunkan Rafa memang butuh trik khusus. Ayah duduk di tepi tempat tidur Rafa dan mengusap rambutnya. “Nak, kalau kita sholat Subuh berjamaah, Allah akan memberi kita hari yang penuh cahaya. Mau kan hari ini Rafa ceria?”</p>
+        <p>Rafa menggerakkan sedikit tubuhnya, tapi masih malas membuka mata. Ibu Aisyah pun datang membawa kabar yang membuat Rafa langsung bangun.</p>
+        <p class="quote">“Kalau Rafa segera wudhu, nanti Ibu buatkan roti bakar cokelat kesukaanmu,” kata Ibu dengan senyum hangat.</p>
+        <p>Mata Rafa langsung terbuka lebar. “Roti cokelat? Serius, Bu?” “Serius,” jawab Ibu sambil mengedipkan mata. Rafa pun melompat dari kasur. “Kalau begitu, aku wudhu dulu!”</p>
+      </section>
+
+      <section aria-labelledby="subuh">
+        <h2 id="subuh">🕌 Sholat Subuh Berjamaah</h2>
+        <p>Keluarga Hasan berangkat bersama menuju masjid. Udara Subuh terasa sejuk, cahaya lampu jalan yang temaram menemani langkah mereka. Ayah berjalan di depan, sementara Fatih, Hana, dan Rafa mengikutinya dengan semangat.</p>
+        <p>Sesampainya di masjid, Ayah menjadi imam sholat Subuh berjamaah, sementara anak-anak berdiri rapi di saf belakang bersama jamaah lainnya. Bacaan ayat-ayat Al-Qur’an yang dilantunkan Ayah terdengar indah, membuat hati anak-anak terasa damai. Setelah salam, mereka bersama-sama menengadahkan tangan, berdoa memohon keberkahan dan perlindungan Allah.</p>
+        <p>Usai berdoa, Keluarga Hasan berjalan pulang sambil menikmati udara pagi yang segar. Burung-burung berkicau, dan sinar matahari mulai muncul di ufuk timur.</p>
+        <p>Setibanya di rumah, Miko, kucing kesayangan mereka, sudah menunggu di depan pintu, mengeong seolah menyambut. Hana bertepuk tangan riang, “Yey! Sekarang waktunya permainan doa, kan Yah?” Ayah tersenyum hangat, “Betul, Nak. Setelah itu kita sarapan, lalu bersiap untuk aktivitas hari ini.”</p>
+      </section>
+
+      <section aria-labelledby="game">
+        <h2 id="game">🎲 Permainan Tebak Doa</h2>
+        <p>Ayah mengangguk. “Betul sekali. Kita main tebak doa! Ayah beri situasi, kalian jawab dengan doa yang sesuai. Siap?” “Siapppp!” jawab anak-anak serentak. “Kalau mau makan, doa apa?” tanya Ayah.</p>
+        <p>Hana cepat mengangkat tangan. “Aku tahu! <em>Bismillahirrahmanirrahim. Allahumma barik lana fima razaqtana wa qina ‘adzaban nar.</em>” “Bagus sekali!” kata Ayah sambil mengacungkan jempol. “Kalau mau tidur, bagaimana?” tanya Ayah lagi.</p>
+        <p>Fatih menjawab mantap, “<em>Bismika Allahumma ahya wa bismika amut.</em>” Ibu tersenyum bangga. “Anak-anak Ibu memang pintar.”</p>
+        <p>Sekarang giliran Rafa. Ayah bertanya, “Kalau habis bersin, doanya apa?” Rafa menggaruk kepala, wajahnya serius berpikir. Tiba-tiba ia bersuara lantang, “Alhamdulillahhh!”</p>
+        <p>Semua langsung tertawa, bahkan Miko sampai terloncat kaget. “Haha, benar, Raf! Tapi biasanya orang lain menjawab, <em>Yarhamukallah</em>,” jelas Ayah sambil tertawa kecil. Rafa ikut tertawa malu. “Ya sudah, yang penting aku ingat bagian paling gampang dulu, Yah!”</p>
+      </section>
+
+      <section aria-labelledby="rahasia">
+        <h2 id="rahasia">🌸 Rahasia Pagi Ceria</h2>
+        <p>Permainan doa itu membuat suasana pagi semakin hangat. Ibu menepuk tangan, “Kalian hebat semua. Doa membuat hati kita penuh semangat dan cahaya.”</p>
+        <p>Ayah menambahkan, “Ingat, Nak. Barangsiapa yang memulai hari dengan doa, Allah akan menjaga langkahnya sepanjang hari.”</p>
+        <p>Fatih berbisik ke Hana, “Nanti aku mau hafal doa baru lagi, biar lebih banyak jawabnya.” “Aku juga!” balas Hana penuh semangat. Rafa bersorak, “Aku juga ikut… tapi setelah makan roti cokelat dulu!”</p>
+        <p>Semua tertawa riang. Hari itu keluarga Hasan memulai petualangan dengan sholat, doa, dan kebersamaan. Dan sejak saat itu, mereka menamai rutinitas pagi mereka sebagai: <strong>Rahasia Pagi Ceria</strong>.</p>
+      </section>
+
+      <div class="divider"></div>
+
+      <footer>
+        <p>© <span id="year"></span> — Kisah Keluarga Hasan. Halaman HTML ini bersifat mandiri (tanpa framework) dan siap untuk dicetak atau diunggah ke situs sekolah/komunitas.</p>
+      </footer>
+    </article>
+  </main>
+
+  <script>
+    (function restoreTheme(){
+      const saved = localStorage.getItem('theme');
+      if(saved === 'dark') document.documentElement.classList.add('dark');
+    })();
+    function toggleDark(){
+      const el = document.documentElement;
+      el.classList.toggle('dark');
+      const isDark = el.classList.contains('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      const btn = document.getElementById('darkBtn');
+      btn.setAttribute('aria-pressed', isDark?'true':'false');
+      btn.textContent = isDark ? 'Mode Terang' : 'Mode Gelap';
+    }
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

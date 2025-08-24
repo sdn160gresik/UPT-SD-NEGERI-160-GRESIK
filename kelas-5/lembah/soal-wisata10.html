@@ -1,159 +1,82 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Kuis Bilangan</title>
-<style>
-.kotak-soal {
-    background-color: white;
-    border: 2px solid #add8e6;
-    border-radius: 10px;
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    max-width: 600px;
-    width: 100%;
-}
-body {
-    font-family: 'Arial', sans-serif;
-    padding: 20px;
-    background-image: url('https://i.imgur.com/IFKQPGS.png');
-    background-size: cover;
-    background-position: center;
-}
-.container {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-}
-.nav {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-.nav a {
-    text-decoration: none;
-    color: #2c3e50;
-    font-weight: bold;
-    background-color: white;
-    padding: 10px 15px;
-    border: 2px solid #add8e6;
-    border-radius: 8px;
-}
-.answers label {
-    display: block;
-    margin-bottom: 12px;
-    padding: 10px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    color: #2c3e50;
-    font-weight: bold;
-    transition: background 0.2s, transform 0.1s;
-}
-.answers input[type="radio"] {
-    margin-right: 10px;
-    accent-color: #007bff;
-    transform: scale(1.2);
-}
-.answers label:nth-child(1) { background: #d6eaff; }
-.answers label:nth-child(2) { background: #d6ffd9; }
-.answers label:nth-child(3) { background: #fffbd6; }
-.answers label:nth-child(4) { background: #ffd6e7; }
-.answers label:hover {
-    filter: brightness(0.9);
-    transform: scale(1.02);
-}
-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 10px;
-}
-button:hover {
-    background-color: #0056b3;
-}
-.popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 25px 35px;
-    border-radius: 12px;
-    text-align: center;
-    z-index: 2000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    font-size: 18px;
-    font-weight: bold;
-    animation: pop 0.3s ease-out;
-    max-width: 90%;
-}
-.popup-warning {
-    background: #fff3cd;
-    border: 2px solid #ffecb5;
-    color: #856404;
-}
-.popup-success {
-    background: #d4edda;
-    border: 2px solid #c3e6cb;
-    color: #155724;
-}
-.popup-gold {
-    background: #fff8e1;
-    border: 2px solid #ffeb3b;
-    color: #8d6e00;
-}
-.nilai-besar {
-    font-size: 48px;
-    font-weight: bold;
-    display: block;
-    margin: 10px 0;
-}
-.nilai-merah { color: #e74c3c; }
-.nilai-kuning { color: #f39c12; }
-.nilai-hijau { color: #27ae60; }
-.nilai-emas { color: #d4af37; }
-.peringkat-merah { color: #e74c3c; }
-.peringkat-kuning { color: #f39c12; }
-.peringkat-hijau { color: #27ae60; }
-.peringkat-emas { color: #d4af37; }
-@keyframes pop {
-    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuis Bilangan</title>
+  <style>
+    .kotak-soal { background-color: white; border: 2px solid #add8e6; border-radius: 10px; padding: 15px 20px; margin-bottom: 15px; max-width: 600px; width: 100%; }
+    body { font-family: 'Arial', sans-serif; padding: 20px; background-image: url('https://i.imgur.com/IFKQPGS.png'); background-size: cover; background-position: center; }
+    .container { max-width: 100%; margin: 0 auto; padding: 20px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
+    .nav { display: flex; gap: 20px; justify-content: center; margin-bottom: 20px; }
+    .nav a { text-decoration: none; color: #2c3e50; font-weight: bold; background-color: white; padding: 10px 15px; border: 2px solid #add8e6; border-radius: 8px; }
+    .answers label { display: block; margin-bottom: 12px; padding: 10px 14px; border-radius: 6px; cursor: pointer; color: #2c3e50; font-weight: bold; transition: background 0.2s, transform 0.1s; }
+    .answers input[type="radio"] { margin-right: 10px; accent-color: #007bff; transform: scale(1.2); }
+    .answers label:nth-child(1) { background: #d6eaff; }
+    .answers label:nth-child(2) { background: #d6ffd9; }
+    .answers label:nth-child(3) { background: #fffbd6; }
+    .answers label:nth-child(4) { background: #ffd6e7; }
+    .answers label:hover { filter: brightness(0.9); transform: scale(1.02); }
+    button { background-color: #007bff; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; margin-top: 10px; }
+    button:hover { background-color: #0056b3; }
+
+    .popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 25px 35px; border-radius: 12px; text-align: center; z-index: 2000; box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-size: 18px; font-weight: bold; animation: pop 0.3s ease-out; max-width: 90%; }
+    .popup-warning { background: #fff3cd; border: 2px solid #ffecb5; color: #856404; }
+    .popup-success { background: #d4edda; border: 2px solid #c3e6cb; color: #155724; }
+    .popup-gold { background: #fff8e1; border: 2px solid #ffeb3b; color: #8d6e00; }
+
+    .nilai-besar { font-size: 48px; font-weight: bold; display: block; margin: 10px 0; }
+    .nilai-merah { color: #e74c3c; }
+    .nilai-kuning { color: #f39c12; }
+    .nilai-hijau { color: #27ae60; }
+    .nilai-emas { color: #d4af37; }
+
+    .peringkat-merah { color: #e74c3c; }
+    .peringkat-kuning { color: #f39c12; }
+    .peringkat-hijau { color: #27ae60; }
+    .peringkat-emas { color: #d4af37; }
+
+    @keyframes pop { 0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+
+    .form-identitas { background: white; border: 2px solid #add8e6; border-radius: 10px; padding: 20px; max-width: 400px; width: 100%; margin-bottom: 20px; }
+    .form-identitas input { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 6px; }
+
+    .progress { background: white; border: 2px solid #add8e6; border-radius: 10px; padding: 8px 14px; margin-bottom: 10px; font-weight: bold; }
+  </style>
 </head>
 <body>
-<div class="container">
+  <div class="container">
     <div class="nav">
-        <a href="🏰Kerajaan-Angka-Ajaib.html">◀️ kembali</a>
-        <a href="soal-wisata10.pdf" download>📥 Download</a>
+      <a href="🏰Kerajaan-Angka-Ajaib.html">◀️ kembali</a>
+      <a href="soal-wisata10.pdf" download>📥 Download</a>
     </div>
-    <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
-        🧙‍♂️ Petualangan Angka Ajaib
-    </h1>
-    <p style="background:white; padding:8px 15px; border-radius:8px; border:1px solid #add8e6;">
-        Kuis ini menampilkan <b>5 soal acak</b> dari total 20 soal yang tersedia.
-    </p>
-    <div id="quiz"></div>
-</div>
 
-<audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
-<audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
+    <h1 style="color:#2c3e50;text-align:center;background:white;padding:10px 20px;border-radius:10px;border:2px solid #add8e6;"> 🧙‍♂️ Petualangan Angka Ajaib </h1>
 
-<script>
-let soalAsli = [
-  { q: "7.830 ÷ 9 = …", a: ["860", "870", "880", "890"], k: 1 },
+    <!-- Form identitas -->
+    <div id="formIdentitas" class="form-identitas">
+      <h3>✍️Yuk tulis identitasmu dulu, biar dunia petualangan ini semakin seru!✨</h3>
+      <input type="text" id="nama" placeholder="Nama Lengkap" oninput="mainkanSuaraKetik()">
+      <input type="text" id="kelas" placeholder="Kelas" oninput="mainkanSuaraKetik()">
+      <input type="number" id="absen" placeholder="No Absen" oninput="mainkanSuaraKetik()">
+      <button onclick="mulaiKuis()">🚀 Mulai Kuis</button>
+    </div>
+
+    <div id="progress" class="progress" style="display:none;">Soal 1/10</div>
+    <div id="quiz" style="display:none;"></div>
+  </div>
+
+  <!-- Suara -->
+  <audio id="suaraKetik" src="../../suara/typing.mp3"></audio>
+  <audio id="suaraNext" src="../../suara/blub.mp3"></audio>
+  <audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
+  <audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
+  <audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
+
+  <script>
+    // ===== Data Soal (20 soal) =====
+    const soalMaster = [
+{ q: "7.830 ÷ 9 = …", a: ["860", "870", "880", "890"], k: 1 },
   { q: "6.042 + 2.389 = …", a: ["8.321", "8.431", "8.421", "8.411"], k: 2 },
   { q: "15.240 – 7.815 = …", a: ["7.425", "7.435", "7.415", "7.445"], k: 0 },
   { q: "4.506 × 3 = …", a: ["13.518", "13.506", "13.416", "13.428"], k: 0 },
@@ -173,130 +96,172 @@ let soalAsli = [
   { q: "7.814 + 9.027 = …", a: ["16.041", "16.051", "16.031", "16.021"], k: 0 },
   { q: "13.507 – 4.829 = …", a: ["8.678", "8.688", "8.668", "8.658"], k: 0 },
   { q: "2.604 × 7 = …", a: ["18.218", "18.228", "18.238", "18.248"], k: 1 }
-];
-let soal = [];
-let indeks = 0;
-let benar = 0;
+    ];
 
-function acakArray(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
+    // ===== Variabel Kuis =====
+    const JUMLAH_SOAL = 10; // tampilkan hanya 10 dari 20
+    let daftarSoal = [];
+    let indeks = 0;
+    let benar = 0;
+
+    // ===== Utilitas Acak =====
+    function acakArray(arr){
+      for(let i = arr.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
         [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
     }
-}
 
-function ambilSoalAcak() {
-    let copy = [...soalAsli];
-    acakArray(copy);
-    return copy.slice(0, 5); // ambil 5 soal acak
-}
+    function ambilSoalAcak(master, n){
+      const salin = master.map(s => ({ q: s.q, a: [...s.a], k: s.k }));
+      acakArray(salin);
+      return salin.slice(0, n);
+    }
 
-function acakJawabanSoal(s) {
-    let gabung = s.a.map((teks, i) => ({ teks, benar: i === s.k }));
-    acakArray(gabung);
-    s.a = gabung.map(o => o.teks);
-    s.k = gabung.findIndex(o => o.benar);
-}
+    function acakJawabanSoal(s){
+      const gabung = s.a.map((teks, i) => ({ teks, benar: i === s.k }));
+      acakArray(gabung);
+      s.a = gabung.map(o => o.teks);
+      s.k = gabung.findIndex(o => o.benar);
+    }
 
-function tampilkanSoal() {
-    const quiz = document.getElementById("quiz");
-    if (indeks >= soal.length) {
-        const nilai = Math.round((benar / soal.length) * 100);
-        let peringkat = "";
-        let kelasPopup = "popup-success";
-        let warnaNilai = "nilai-merah";
-        let warnaPeringkat = "peringkat-merah";
+    // ===== Identitas & Mulai =====
+    function mulaiKuis(){
+      const nama = document.getElementById('nama').value.trim();
+      const kelas = document.getElementById('kelas').value.trim();
+      const absen = document.getElementById('absen').value.trim();
 
-        if (nilai === 100) {
-            peringkat = "🏆 Luar biasa! Kamu benar semua, Sang Juara!";
-            kelasPopup = "popup-gold";
-            warnaNilai = "nilai-emas";
-            warnaPeringkat = "peringkat-emas";
-        } else if (nilai >= 80) {
-            peringkat = "🥈 Hebat! Hanya sedikit lagi menuju sempurna!";
-            warnaNilai = "nilai-hijau";
-            warnaPeringkat = "peringkat-hijau";
-        } else if (nilai >= 60) {
-            peringkat = "🥉 Lumayan! Tingkatkan lagi biar makin mantap!";
-            warnaNilai = "nilai-kuning";
-            warnaPeringkat = "peringkat-kuning";
+      if(!nama || !kelas || !absen){
+        mainkanSuaraPeringatan();
+        tampilkanPopup("⚡ Isi identitas dulu ya! Petualang hebat selalu siap dengan data lengkap! 😉", "popup-warning");
+        return;
+      }
+
+      mainkanSuaraNext();
+      document.getElementById('formIdentitas').style.display = 'none';
+      document.getElementById('quiz').style.display = 'block';
+      document.getElementById('progress').style.display = 'inline-block';
+
+      daftarSoal = ambilSoalAcak(soalMaster, JUMLAH_SOAL);
+      daftarSoal.forEach(acakJawabanSoal);
+      indeks = 0; benar = 0;
+      tampilkanSoal();
+    }
+
+    // ===== Render Soal =====
+    function tampilkanSoal(){
+      const quiz = document.getElementById('quiz');
+      const progress = document.getElementById('progress');
+
+      if(indeks >= daftarSoal.length){
+        const nilai = Math.round((benar / JUMLAH_SOAL) * 100);
+        let peringkat = "", kelasPopup = "popup-success", warnaNilai = "nilai-merah", warnaPeringkat = "peringkat-merah";
+        if(nilai === 100){
+          peringkat = "🏆 Luar biasa! Kamu berhasil melewati misi dengan sempurna, Sang Petualang Hebat!";
+          kelasPopup = "popup-gold"; warnaNilai = "nilai-emas"; warnaPeringkat = "peringkat-emas";
+        } else if(nilai >= 80){
+          peringkat = "🥈 Mantap! Petualanganmu hampir mencapai garis akhir!";
+          warnaNilai = "nilai-hijau"; warnaPeringkat = "peringkat-hijau";
+        } else if(nilai >= 60){
+          peringkat = "🥉 Bagus! Energi petualanganmu makin menggelegar, teruskan langkahmu!";
+          warnaNilai = "nilai-kuning"; warnaPeringkat = "peringkat-kuning";
         } else {
-            peringkat = "💡 Jangan menyerah, ayo coba lagi!";
+          peringkat = "💡 Ayo! Sang penjelajah tangguh tidak pernah menyerah, terus melangkah!";
         }
 
-        tampilkanPopupHasil(`
-            🎉 Selesai!<br>
-            Benar: ${benar} / ${soal.length}<br>
-            Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}%</span>
-            <span class="${warnaPeringkat}">${peringkat}</span>
-        `, kelasPopup);
+        kirimNilai(nilai);
+        tampilkanPopupHasil(`🎉 Selesai!<br>Benar: ${benar}/${JUMLAH_SOAL}<br>Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}</span><span class="${warnaPeringkat}">${peringkat}</span>`, kelasPopup);
+        quiz.innerHTML = "";
+        progress.style.display = 'none';
         return;
-    }
-    const s = soal[indeks];
-    quiz.innerHTML = `
-    <div class="kotak-soal"><b>Soal ${indeks + 1} dari ${soal.length}</b><br><br>${s.q}</div>
-    <div class="answers">
-        ${s.a.map((j, i) => `
-            <label>
-                <input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" /> 
-                ${j}
-            </label>`).join('')}
-    </div>
-    <button onclick="periksaJawaban()">Next</button>
-    `;
-}
+      }
 
-function periksaJawaban() {
-    const jawaban = document.querySelector('input[name="jawaban"]:checked');
-    if (!jawaban) {
+      const s = daftarSoal[indeks];
+      progress.textContent = `Soal ${indeks+1}/${JUMLAH_SOAL}`;
+
+      quiz.innerHTML = `
+        <div class="kotak-soal">${s.q}</div>
+        <div class="answers">
+          ${s.a.map((j, i) => `
+            <label><input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()"/> ${j}</label>
+          `).join('')}
+        </div>
+        <button onclick="periksaJawaban()">Next</button>
+      `;
+    }
+
+    // ===== Cek Jawaban =====
+    function periksaJawaban(){
+      const jawaban = document.querySelector('input[name="jawaban"]:checked');
+      if(!jawaban){
         mainkanSuaraPeringatan();
-        tampilkanPopup("🎯 Ayo tentukan jawabanmu, kamu pasti bisa!", "popup-warning");
+        tampilkanPopup("🎯 Ayo tentukan jawabanmu, petualang hebat pasti bisa!", "popup-warning");
         return;
+      }
+      if(parseInt(jawaban.value, 10) === daftarSoal[indeks].k){
+        benar++;
+      }
+      indeks++;
+      mainkanSuaraNext();
+      tampilkanSoal();
     }
-    if (parseInt(jawaban.value) === soal[indeks].k) benar++;
-    indeks++;
-    tampilkanSoal();
-}
 
-function tampilkanPopup(teks, kelas = "popup-warning") {
-    const popup = document.createElement("div");
-    popup.className = `popup ${kelas}`;
-    popup.innerHTML = teks;
-    document.body.appendChild(popup);
-    setTimeout(() => popup.remove(), 3000);
-}
+    // ===== Popup =====
+    function tampilkanPopup(teks, kelas = 'popup-warning'){
+      const popup = document.createElement('div');
+      popup.className = `popup ${kelas}`;
+      popup.innerHTML = teks;
+      document.body.appendChild(popup);
+      setTimeout(() => popup.remove(), 3000);
+    }
 
-function tampilkanPopupHasil(teks, kelas) {
-    const popup = document.createElement("div");
-    popup.className = `popup ${kelas}`;
-    popup.innerHTML = `${teks}<br><br>
-    <button onclick="muatUlang()">Mulai Lagi</button>`;
-    document.body.appendChild(popup);
-}
+    function tampilkanPopupHasil(teks, kelas){
+      const popup = document.createElement('div');
+      popup.className = `popup ${kelas}`;
+      popup.innerHTML = `${teks}<br><br>
+        <button onclick="muatUlang()">🔄 Ulangi</button>
+        <button onclick="selesaiKuis()">❌ Selesai</button>`;
+      document.body.appendChild(popup);
+    }
 
-function muatUlang() {
-    document.querySelectorAll('.popup').forEach(p => p.remove());
-    indeks = 0;
-    benar = 0;
-    soal = ambilSoalAcak();
-    soal.forEach(s => acakJawabanSoal(s));
-    tampilkanSoal();
-}
+    // ===== Ulangi & Selesai =====
+    function muatUlang(){
+      document.querySelectorAll('.popup').forEach(p => p.remove());
+      daftarSoal = ambilSoalAcak(soalMaster, JUMLAH_SOAL);
+      daftarSoal.forEach(acakJawabanSoal);
+      indeks = 0; benar = 0;
+      mainkanSuaraUlangi();
+      document.getElementById('progress').style.display = 'inline-block';
+      tampilkanSoal();
+    }
 
-function mainkanSuaraKlik() {
-    const suara = document.getElementById("suaraKlik");
-    suara.currentTime = 0;
-    suara.play();
-}
+    function selesaiKuis(){
+      window.location.href = "🏰Kerajaan-Angka-Ajaib.html";
+    }
 
-function mainkanSuaraPeringatan() {
-    const suara = document.getElementById("suaraPeringatan");
-    suara.currentTime = 0;
-    suara.play();
-}
+    // ===== Kirim Nilai ke Google Form =====
+    function kirimNilai(nilai){
+      const nama = document.getElementById('nama').value.trim();
+      const kelas = document.getElementById('kelas').value.trim();
+      const absen = document.getElementById('absen').value.trim();
 
-// Pertama kali load
-muatUlang();
-</script>
+      const url = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfbkJMSbig8-ptcCFf311jc2TFDKZYlArtpsN039W19KCXpfw/formResponse";
+      const formData = new FormData();
+      formData.append("entry.1114641071", nama);
+      formData.append("entry.687539915", kelas);
+      formData.append("entry.1445858210", absen);
+      formData.append("entry.175130881", nilai);
+
+      fetch(url, { method: 'POST', body: formData, mode: 'no-cors' });
+    }
+
+    // ===== Suara =====
+    function mainkanSuaraKlik(){ const s = document.getElementById('suaraKlik'); s.currentTime = 0; s.play(); }
+    function mainkanSuaraPeringatan(){ const s = document.getElementById('suaraPeringatan'); s.currentTime = 0; s.play(); }
+    function mainkanSuaraKetik(){ const s = document.getElementById('suaraKetik'); s.currentTime = 0; s.play(); }
+    function mainkanSuaraNext(){ const s = document.getElementById('suaraNext'); s.currentTime = 0; s.play(); }
+    function mainkanSuaraUlangi(){ const s = document.getElementById('suaraUlangi'); s.currentTime = 0; s.play(); }
+  </script>
 </body>
 </html>

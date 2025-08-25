@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Pilih Kelipatan</title>
+<style>
+  body {
+    margin-top: 90px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  select, button, label {
+    padding: 5px 10px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(10, 60px);
+    grid-gap: 5px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .cell {
+    border: 1px solid #999;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background: #ffffff;
+    font-weight: bold;
+    position: relative;
+  }
+  .tanda {
+    position: absolute;
+    bottom: 2px;
+    right: 5px;
+    font-size: 18px;
+  }
+  #info {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #f0f0f0;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 2px solid #999;
+    z-index: 1000;
+  }
+  #popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff7cc;
+    border: 3px solid #ff9900;
+    border-radius: 15px;
+    padding: 20px;
+    z-index: 2000;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+    max-width: 300px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    animation: popin 0.4s ease-out;
+  }
+  #popup button {
+    margin-top: 15px;
+    padding: 8px 15px;
+    border: none;
+    background: #ff9900;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  @keyframes popin {
+    from { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div id="info"></div>
+
+<h2>Klik bilangan sesuai kelipatan yang dipilih!</h2>
+
+<label for="kelipatan">Pilih kelipatan: </label>
+<select id="kelipatan">
+  <option value="2">Kelipatan 2</option>
+  <option value="3">Kelipatan 3</option>
+  <option value="4">Kelipatan 4</option>
+  <option value="5">Kelipatan 5</option>
+  <option value="6">Kelipatan 6</option>
+  <option value="7">Kelipatan 7</option>
+  <option value="8">Kelipatan 8</option>
+  <option value="9">Kelipatan 9</option>
+  <option value="10">Kelipatan 10</option>
+</select>
+
+<label>
+  <input type="checkbox" id="acak"> Tampilkan angka acak
+</label>
+
+<button id="reset">Reset</button>
+<button onclick="window.location.href='KPK-FPB.html'">⬅️ Kembali</button>
+
+<div class="grid" id="grid"></div>
+
+<!-- Popup -->
+<div id="popup">
+  🎉 Hebat! Kamu berhasil menemukan semua bilangan kelipatan ini!  
+  <br>Terus semangat ya 🚀💡
+  <br>
+  <button id="closePopup">Lanjut</button>
+</div>
+
+<!-- Suara benar -->
+<audio id="benarSound">
+  <source src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg" type="audio/ogg">
+  <source src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Suara salah -->
+<audio id="salahSound">
+  <source src="tada-234709.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Suara menang -->
+<audio id="menangSound">
+  <source src="menang.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const grid = document.getElementById("grid");
+  const dropdown = document.getElementById("kelipatan");
+  const resetBtn = document.getElementById("reset");
+  const info = document.getElementById("info");
+  const popup = document.getElementById("popup");
+  const closePopup = document.getElementById("closePopup");
+  const acakCheckbox = document.getElementById("acak");
+
+  const benarSound = document.getElementById("benarSound");
+  const salahSound = document.getElementById("salahSound");
+  const menangSound = document.getElementById("menangSound");
+
+  let sisaBenar = 0;
+  let sudahKlik = new Set();
+
+  function buatGrid() {
+    grid.innerHTML = "";
+    let angka = [];
+    for (let i = 1; i <= 100; i++) angka.push(i);
+    if (acakCheckbox.checked) angka.sort(() => Math.random() - 0.5);
+
+    angka.forEach(i => {
+      let cell = document.createElement("div");
+      cell.className = "cell";
+      cell.textContent = i;
+
+      let tanda = document.createElement("span");
+      tanda.className = "tanda";
+      cell.appendChild(tanda);
+
+      cell.addEventListener("click", function () {
+        let k = parseInt(dropdown.value);
+        if (i % k === 0) {
+          if (!sudahKlik.has(i)) { 
+            tanda.textContent = "✔";
+            tanda.style.color = "green";
+            cell.style.background = "#e6ffe6";
+            sudahKlik.add(i);
+            sisaBenar--;
+            benarSound.currentTime = 0; 
+            benarSound.play();
+            updateInfo();
+          }
+        } else {
+          tanda.textContent = "✘";
+          tanda.style.color = "red";
+          cell.style.background = "#ffe6e6";
+          salahSound.currentTime = 0;
+          salahSound.play();
+        }
+      });
+
+      grid.appendChild(cell);
+    });
+  }
+
+  function updateInfo() {
+    info.textContent = `Sisa bilangan kelipatan ${dropdown.value} yang harus dipilih: ${sisaBenar}`;
+    if (sisaBenar === 0) {
+      showPopup();
+    }
+  }
+
+  function showPopup() {
+    menangSound.currentTime = 0;
+    menangSound.play();
+    popup.style.display = "block";
+  }
+
+  closePopup.addEventListener("click", () => {
+    popup.style.display = "none";
+  });
+
+  function hitungKelipatan() {
+    let k = parseInt(dropdown.value);
+    let jumlah = 0;
+    for (let i = 1; i <= 100; i++) {
+      if (i % k === 0) jumlah++;
+    }
+    sisaBenar = jumlah;
+    sudahKlik.clear();
+    updateInfo();
+  }
+
+  function resetSemua() {
+    buatGrid();
+    hitungKelipatan();
+    popup.style.display = "none";
+  }
+
+  resetBtn.addEventListener("click", resetSemua);
+  dropdown.addEventListener("change", resetSemua);
+  acakCheckbox.addEventListener("change", resetSemua);
+
+  resetSemua();
+</script>
+
+</body>
+</html>

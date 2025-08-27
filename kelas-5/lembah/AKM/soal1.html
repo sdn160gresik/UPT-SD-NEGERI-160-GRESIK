@@ -65,18 +65,60 @@
       border-radius: 6px;
       border: 1px solid #ccc;
     }
-    .pembahasan {
-      margin-top: 20px;
-      padding: 15px;
-      background: #e6f7e6;
-      border-left: 5px solid #28a745;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      display: none;
-    }
-    .video-container {
+    .feedback { margin-top: 15px; font-weight: bold; font-size: 1.1rem; }
+    .benar { color: green; }
+    .salah { color: red; }
+    .btn-pembahasan {
       margin-top: 15px;
+      display: none;
+      padding: 10px 16px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn-pembahasan:hover { background: #0056b3; }
+    .navigasi {
+      margin-top: 25px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .navigasi a {
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .btn-kembali { background-color: #d9534f; color: white; }
+    .btn-kembali:hover { background-color: #c9302c; }
+    .btn-lanjut { background-color: #5cb85c; color: white; }
+    .btn-lanjut:hover { background-color: #449d44; }
+
+    /* === Modal (kotak melayang) === */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 700px;
+      width: 90%;
       text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      animation: fadeIn 0.3s ease;
     }
     .video-controls {
       margin-top: 10px;
@@ -94,25 +136,11 @@
     .btn-stop:hover { background: #c9302c; }
     .btn-close { background: #5cb85c; color: white; }
     .btn-close:hover { background: #449d44; }
-    .feedback { margin-top: 15px; font-weight: bold; font-size: 1.1rem; }
-    .benar { color: green; }
-    .salah { color: red; }
-    .navigasi {
-      margin-top: 25px;
-      display: flex;
-      justify-content: space-between;
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
     }
-    .navigasi a {
-      text-decoration: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .btn-kembali { background-color: #d9534f; color: white; }
-    .btn-kembali:hover { background-color: #c9302c; }
-    .btn-lanjut { background-color: #5cb85c; color: white; }
-    .btn-lanjut:hover { background-color: #449d44; }
   </style>
 </head>
 <body>
@@ -147,20 +175,24 @@
 
     <div id="feedback" class="feedback"></div>
 
-    <div class="pembahasan" id="pembahasan">
-      <h3>Pembahasan:</h3>
-      <div class="video-container">
-        <div id="player"></div>
-        <div class="video-controls">
-          <button class="btn-stop" onclick="stopVideo()">⏹ Stop</button>
-          <button class="btn-close" onclick="closeVideo()">❌ Keluar</button>
-        </div>
-      </div>
-    </div>
+    <!-- Tombol pembahasan -->
+    <button id="btnPembahasan" class="btn-pembahasan" onclick="tampilkanPembahasan()">📘 Lihat Pembahasan</button>
 
     <div class="navigasi">
       <a href="AKM.html" class="btn-kembali">⬅ Kembali</a>
       <a href="AKM.html" class="btn-lanjut">Lanjut ➡</a>
+    </div>
+  </div>
+
+  <!-- Modal (kotak melayang) -->
+  <div id="modalPembahasan" class="modal">
+    <div class="modal-content">
+      <h3>Pembahasan:</h3>
+      <div id="player"></div>
+      <div class="video-controls">
+        <button class="btn-stop" onclick="stopVideo()">⏹ Stop</button>
+        <button class="btn-close" onclick="closeVideo()">❌ Keluar</button>
+      </div>
     </div>
   </div>
 
@@ -177,15 +209,8 @@
         height: '315',
         width: '560',
         videoId: 'wq-EkXMM83E',
-        playerVars: {
-          start: startTime,
-          end: endTime,
-          autoplay: 0,
-          controls: 1
-        },
-        events: {
-          'onStateChange': onPlayerStateChange
-        }
+        playerVars: { autoplay: 0, controls: 1 },
+        events: { 'onStateChange': onPlayerStateChange }
       });
     }
 
@@ -203,7 +228,7 @@
 
     function cekJawaban(pilihan) {
       let feedback = document.getElementById("feedback");
-      let pembahasan = document.getElementById("pembahasan");
+      let btnPembahasan = document.getElementById("btnPembahasan");
 
       if (pilihan === "A") {
         feedback.innerHTML = "🎉 Jawaban Benar!";
@@ -212,7 +237,12 @@
         feedback.innerHTML = "😅 Coba lagi!";
         feedback.className = "feedback salah";
       }
-      pembahasan.style.display = "block";
+      btnPembahasan.style.display = "inline-block"; // tampilkan tombol pembahasan
+    }
+
+    function tampilkanPembahasan() {
+      let modal = document.getElementById("modalPembahasan");
+      modal.style.display = "flex";
       player.seekTo(startTime);
       player.playVideo();
     }
@@ -223,7 +253,7 @@
 
     function closeVideo() {
       stopVideo();
-      document.getElementById("pembahasan").style.display = "none";
+      document.getElementById("modalPembahasan").style.display = "none";
     }
   </script>
 </body>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Susun Balok</title>
+  <style>
+    :root{--bg:#f5f9ff;--card:#ffffff;--accent:#2b7bb9;--muted:#6b7280}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg),#eef6ff);
+      color:#0b2440;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:20px;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+    }
+    .wrapper{
+      width:100%;
+      max-width:900px;
+      background:var(--card);
+      border-radius:12px;
+      box-shadow:0 8px 30px rgba(15,30,55,0.08);
+      padding:20px;
+      border:1px solid rgba(43,123,185,0.06);
+    }
+    p{line-height:1.6;margin:10px 0;font-size:16px}
+    .figure{margin:18px 0;text-align:center}
+    .figure img{max-width:30%;height:auto;border-radius:8px;border:1px solid rgba(11,36,64,0.05)}
+    .question{
+      margin-top:18px;padding:18px;border-radius:10px;background:linear-gradient(180deg,#ffffff,#fbfdff);
+      border:1px solid rgba(11,36,64,0.04);
+    }
+    .question strong{display:block;margin-bottom:8px;color:#0b2440}
+    .hint{color:var(--muted);font-size:14px}
+    textarea{
+      width:100%;min-height:80px;margin-top:10px;padding:10px;
+      font-size:15px;border-radius:8px;border:1px solid #ccc;
+      resize:vertical;
+    }
+    .buttons{
+      margin-top:20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    button{
+      padding:10px 18px;
+      border:none;
+      border-radius:8px;
+      font-size:15px;
+      font-weight:600;
+      cursor:pointer;
+      background:var(--accent);
+      color:white;
+      transition:background 0.2s;
+    }
+    button:hover{background:#1e5f8c}
+    button:disabled{
+      background:#9ca3af;
+      cursor:not-allowed;
+    }
+    /* Modal Youtube */
+    .modal{
+      display:none;
+      position:fixed;
+      z-index:1000;
+      left:0;top:0;
+      width:100%;height:100%;
+      background:rgba(0,0,0,0.6);
+      justify-content:center;
+      align-items:center;
+    }
+    .modal-content{
+      background:white;
+      border-radius:12px;
+      padding:10px;
+      max-width:90%;
+      width:500px;
+      text-align:center;
+      box-shadow:0 8px 25px rgba(0,0,0,0.3);
+    }
+    .video-controls{
+      display:flex;
+      justify-content:space-between;
+      margin-top:8px;
+      gap:6px;
+    }
+    .video-controls button{
+      flex:1;
+      margin:0;
+      background:#ef4444;
+    }
+    .video-controls button:first-child{background:#3b82f6}
+    iframe{width:100%;height:280px;border-radius:8px}
+    @media (max-width:520px){
+      body{padding:12px}
+      .wrapper{padding:14px}
+      .figure img{max-width:45%}
+      iframe{height:200px}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrapper" role="main">
+
+    <p>Dimas, Suta dan Beta bermain susun balok dengan cara menyusun balok sesuai pola.</p>
+    <p>Wasit akan meletakkan balok-balok yang masing-masing berisi satu bilangan pada lapisan paling bawah, kemudian pemain melanjutkan menyusun balok-balok pada lapisan di atasnya.</p>
+    <p>Pemain yang meletakkan balok paling banyak menjadi pemenangnya, sedangkan pemain yang salah dalam meletakkan balok, tidak boleh melanjutkan permainan.</p>
+
+    <figure class="figure">
+      <img src="https://i.imgur.com/HuFkmQi.png" alt="Ilustrasi susun balok - lapisan dasar" />
+    </figure>
+
+    <p>Wasit telah meletakkan lapisan pertama.</p>
+    <p><strong>Ayo susun lapisan berikutnya.</strong></p>
+
+    <figure class="figure">
+      <img src="https://i.imgur.com/vbiEmFf.png" alt="Tantangan susun balok - susun lapisan berikutnya" />
+    </figure>
+
+    <div class="question" role="region" aria-labelledby="q-title">
+      <strong id="q-title">Tunggu, sepertinya ada yang tidak benar.</strong>
+      <p>Dimas merasa ia tidak akan bisa menyusun balok sampai puncak. Apakah kamu setuju? Jelaskan alasanmu!</p>
+      <textarea id="answer" placeholder="Tulis jawabanmu di sini..."></textarea>
+      <button onclick="submitAnswer()">✅ Kirim Jawaban</button>
+      <p class="hint">(Tuliskan jawabanmu dengan jelas, misalnya berdasarkan pola, jumlah balok, atau strategi pemain.)</p>
+    </div>
+
+    <!-- Tombol Navigasi -->
+    <div class="buttons">
+      <button onclick="location.href='AKM.html'">⬅ Kembali</button>
+      <img src="https://i.imgur.com/LqQVDoS.png" alt="Icon" style="height:40px"/>
+      <button onclick="location.href='AKM.html'">Lanjut ➡</button>
+      <button id="btnPembahasan" onclick="openModal()" disabled>📺 Pembahasan</button>
+    </div>
+
+  </main>
+
+  <!-- Modal Youtube -->
+  <div class="modal" id="youtubeModal">
+    <div class="modal-content">
+      <iframe id="youtubeVideo"
+        src="https://www.youtube.com/embed/wq-EkXMM83E?start=513&end=605&enablejsapi=1"
+        title="Pembahasan"
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+      </iframe>
+      <div class="video-controls">
+        <button onclick="stopVideo()">⏹ Stop</button>
+        <button onclick="closeModal()">❌ Keluar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let modal = document.getElementById("youtubeModal");
+    let iframe = document.getElementById("youtubeVideo");
+    let btnPembahasan = document.getElementById("btnPembahasan");
+
+    function submitAnswer(){
+      let jawaban = document.getElementById("answer").value.trim();
+      if(jawaban.length === 0){
+        alert("Silakan tuliskan jawaban terlebih dahulu.");
+        return;
+      }
+      // langsung aktifkan tombol pembahasan tanpa pesan
+      btnPembahasan.disabled = false;
+    }
+
+    function openModal(){
+      modal.style.display = "flex";
+      iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    }
+
+    function closeModal(){
+      stopVideo();
+      modal.style.display = "none";
+    }
+
+    function stopVideo(){
+      iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+    }
+  </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -11,7 +11,6 @@
       margin: 10px;
       background-color: #f5f9ff;
     }
-    /* Kotak judul biru */
     .judul {
       background: #007BFF;
       color: white;
@@ -22,7 +21,6 @@
       font-weight: bold;
       margin-bottom: 15px;
     }
-    /* Kotak soal putih */
     .soal {
       background: #fff;
       padding: 20px;
@@ -60,14 +58,12 @@
       text-align: center;
       margin: 15px 0;
     }
-    /* Gambar soal lebih kecil */
     .gambar img {
       max-width: 250px;
       height: auto;
       border: 2px solid #ddd;
       border-radius: 8px;
     }
-    /* Gambar opsi jawaban lebih kecil */
     .pilihan img {
       max-width: 120px;
       height: auto;
@@ -79,12 +75,8 @@
       font-weight: bold;
       font-size: 1.1rem;
     }
-    .benar {
-      color: green;
-    }
-    .salah {
-      color: red;
-    }
+    .benar { color: green; }
+    .salah { color: red; }
     .btn-pembahasan {
       display: none;
       margin-top: 15px;
@@ -96,10 +88,7 @@
       cursor: pointer;
       font-weight: bold;
     }
-    .btn-pembahasan:hover {
-      background-color: #0056b3;
-    }
-    /* Modal */
+    .btn-pembahasan:hover { background-color: #0056b3; }
     .modal {
       display: none;
       position: fixed;
@@ -141,11 +130,12 @@
     .btn-stop:hover { background: #c9302c; }
     .btn-close { background: #5cb85c; }
     .btn-close:hover { background: #449d44; }
-    /* Tombol navigasi */
     .navigasi {
       margin-top: 25px;
       display: flex;
       justify-content: space-between;
+      align-items: center; /* sejajarkan vertikal */
+      gap: 15px;
     }
     .navigasi a {
       text-decoration: none;
@@ -158,42 +148,31 @@
       background-color: #d9534f;
       color: white;
     }
-    .btn-kembali:hover {
-      background-color: #c9302c;
-    }
+    .btn-kembali:hover { background-color: #c9302c; }
     .btn-lanjut {
       background-color: #5cb85c;
       color: white;
     }
-    .btn-lanjut:hover {
-      background-color: #449d44;
+    .btn-lanjut:hover { background-color: #449d44; }
+    .gambar-nav img {
+      max-width: 600px; /* diperbesar 4x */
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid #ccc;
     }
-    /* Responsif */
     @media (max-width: 600px) {
-      .soal {
-        padding: 12px;
-      }
-      .judul {
-        font-size: 1.3rem;
-        padding: 12px;
-      }
-      h2 {
-        font-size: 1rem;
-      }
+      .soal { padding: 12px; }
+      .judul { font-size: 1.3rem; padding: 12px; }
+      h2 { font-size: 1rem; }
       .pilihan div {
         font-size: 0.9rem;
         flex-direction: column;
         align-items: flex-start;
       }
-      .gambar img {
-        max-width: 180px;
-      }
-      .pilihan img {
-        max-width: 100px;
-      }
-      .modal iframe {
-        height: 220px;
-      }
+      .gambar img { max-width: 180px; }
+      .pilihan img { max-width: 100px; }
+      .modal iframe { height: 220px; }
+      .gambar-nav img { max-width: 250px; } /* agar pas di HP */
     }
   </style>
 </head>
@@ -229,6 +208,9 @@
 
     <div class="navigasi">
       <a href="AKM.html" class="btn-kembali">⬅ Kembali</a>
+      <div class="gambar-nav">
+        <img src="https://i.imgur.com/LqQVDoS.png" alt="Ikon Tengah">
+      </div>
       <a href="AKM.html" class="btn-lanjut">Lanjut ➡</a>
     </div>
   </div>
@@ -245,7 +227,6 @@
   </div>
 
   <script>
-    let player;
     function cekJawaban(pilihan) {
       let feedback = document.getElementById("feedback");
       let btnPembahasan = document.getElementById("btnPembahasan");
@@ -267,7 +248,7 @@
 
     function stopVideo() {
       let iframe = document.getElementById("youtubePlayer");
-      iframe.src = iframe.src; // reload untuk stop
+      iframe.src = iframe.src;
     }
 
     function tutupPembahasan() {

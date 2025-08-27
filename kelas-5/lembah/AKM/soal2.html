@@ -29,12 +29,16 @@
       max-width: 900px;
       margin: auto;
     }
-    h2 { text-align: center; color: #555; margin-top: 0; margin-bottom: 20px; font-size: 1.2rem; }
-
+    h2 {
+      text-align: center;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
     .pyramid-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; margin:18px 0 26px 0; }
     .row{ display:flex; gap:10px; align-items:center; justify-content:center; }
-    .block{ min-width:64px; height:44px; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; box-shadow:0 1px 0 rgba(0,0,0,0.08); font-size:18px; }
-
+    .block{ min-width:64px; height:44px; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:18px; }
     .c-yellow{ background:#f7c948; color:#111;}
     .c-blue{ background:#1f6feb; }
     .c-green{ background:#2ad1a3; color:#064; }
@@ -47,44 +51,62 @@
 
     table{ width:100%; border-collapse:collapse; margin-top:12px; }
     th, td{ padding:12px; border-bottom:1px solid #eef2f7; text-align:left; vertical-align:middle; font-size:15px; }
-    th { background:transparent; color:#6b7280; font-weight:600; }
-    .choices{ width:160px; text-align:center; }
+    th { color:#6b7280; font-weight:600; }
+    .choices{ width:180px; text-align:center; }
 
-    .btn-row { display:flex; justify-content:flex-end; gap:10px; margin-top:12px; }
-    button { padding:8px 14px; border-radius:8px; border:0; cursor:pointer; font-weight:600; }
-
-    /* pembahasan box */
-    .pembahasan {
-      margin-top:16px;
-      padding:12px;
-      background:#fff9e6;
-      border-left:4px solid #f59e0b;
-      border-radius:8px;
-      display:none;
-    }
-    .pembahasan-controls {
-      display:flex;
-      justify-content:space-between; /* STOP kiri, KELUAR kanan */
-      align-items:center;
-      gap:10px;
-      margin-bottom:10px;
-    }
-    .btn-stop { background: #f44336; color: white; padding:8px 12px; border-radius:6px; border:0; cursor:pointer; }
-    .btn-keluar { background: #555; color: white; padding:8px 12px; border-radius:6px; border:0; cursor:pointer; }
-    .pembahasan iframe { width:100%; height:360px; border-radius:6px; border:0; background:#000; }
-    .watchlink { display:inline-block; margin-top:8px; color:#0b63d6; text-decoration:underline; }
-
-    .navigasi { margin-top: 22px; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+    .navigasi { margin-top: 25px; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
     .navigasi a { text-decoration: none; padding: 10px 18px; border-radius: 8px; font-weight: bold; transition: 0.3s; }
     .btn-kembali { background-color: #d9534f; color: white; }
-    .btn-lanjut  { background-color: #5cb85c; color: white; }
+    .btn-kembali:hover { background-color: #c9302c; }
+    .btn-lanjut { background-color: #5cb85c; color: white; }
+    .btn-lanjut:hover { background-color: #449d44; }
     .navigasi img { max-height: 40px; }
+
+    /* Modal pembahasan */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 12px;
+      max-width: 800px;
+      width: 100%;
+      position: relative;
+      padding: 10px;
+    }
+    .modal iframe {
+      width: 100%;
+      height: 400px;
+      border-radius: 12px;
+    }
+    .modal-buttons {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .btn-stop, .btn-close {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .btn-stop { background: #d9534f; color: #fff; }
+    .btn-close { background: #5cb85c; color: #fff; }
 
     @media (max-width:600px){
       .block{ min-width:50px; height:36px; font-size:15px; }
-      .choices{ width:120px; }
+      .choices{ width:140px; }
       .navigasi img { max-height:30px; }
-      .pembahasan iframe { height:220px; }
+      .modal iframe { height: 220px; }
     }
   </style>
 </head>
@@ -92,7 +114,7 @@
   <div class="judul">SOAL LATIHAN ANBK</div>
 
   <div class="soal">
-    <h2>Soal Latihan 2</h2>
+    <h2>Soal Latihan 1</h2>
 
     <p>Permainan berlanjut. Permainan sudah sampai ke lapisan kedua!<br>
     Perhatikan susunan bilangan pada balok berikut:</p>
@@ -127,43 +149,24 @@
         <tbody>
           <tr>
             <td>Ada balok dengan bilangan 91 pada lapisan ketiga.</td>
-            <td class="choices"><label><input type="radio" name="q1" value="benar"></label></td>
-            <td class="choices"><label><input type="radio" name="q1" value="salah"></label></td>
+            <td><input type="radio" name="q1" value="benar"></td>
+            <td><input type="radio" name="q1" value="salah"></td>
           </tr>
           <tr>
             <td>Balok yang ada di puncak bertuliskan bilangan 102.</td>
-            <td class="choices"><label><input type="radio" name="q2" value="benar"></label></td>
-            <td class="choices"><label><input type="radio" name="q2" value="salah"></label></td>
+            <td><input type="radio" name="q2" value="benar"></td>
+            <td><input type="radio" name="q2" value="salah"></td>
           </tr>
           <tr>
             <td>Ada balok bertulis bilangan 96 di lapisan keempat.</td>
-            <td class="choices"><label><input type="radio" name="q3" value="benar"></label></td>
-            <td class="choices"><label><input type="radio" name="q3" value="salah"></label></td>
+            <td><input type="radio" name="q3" value="benar"></td>
+            <td><input type="radio" name="q3" value="salah"></td>
           </tr>
         </tbody>
       </table>
 
-      <div class="btn-row">
-        <button type="button" class="btn-reset" onclick="resetQuiz()">Reset</button>
-        <button type="button" class="btn-check" onclick="checkAnswers()">Periksa Jawaban</button>
-      </div>
-
-      <p id="result" style="margin-top:12px;font-weight:700;"></p>
-
-      <!-- Pembahasan: muncul jika jawaban benar atau saat link diklik -->
-      <div id="pembahasan" class="pembahasan" aria-hidden="true">
-        <div class="pembahasan-controls">
-          <button type="button" class="btn-stop" onclick="stopVideo()">Stop</button>
-          <button type="button" class="btn-keluar" onclick="closePembahasan()">Keluar</button>
-        </div>
-
-        <!-- iframe kosong awalnya; data-src berisi base embed URL -->
-        <iframe id="ytVideo" src="" data-src="https://www.youtube.com/embed/wq-EkXMM83E" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-        <p>
-          <a href="https://www.youtube.com/watch?v=wq-EkXMM83E" class="watchlink" id="inlinePlay" target="_blank" rel="noopener noreferrer">Video Pembahasan (klik untuk putar di kotak)</a>
-        </p>
-      </div>
+      <p id="result" style="margin-top:12px;font-weight:bold;"></p>
+      <button type="button" id="btnPembahasan" style="display:none;margin-top:10px;padding:10px 18px;border-radius:8px;background:#007BFF;color:#fff;font-weight:bold;">Pembahasan</button>
     </form>
 
     <div class="navigasi">
@@ -173,92 +176,86 @@
     </div>
   </div>
 
+  <!-- Modal video -->
+  <div id="videoModal" class="modal">
+    <div class="modal-content">
+      <div id="player"></div>
+      <div class="modal-buttons">
+        <button class="btn-stop" onclick="stopVideo()">⏹ Stop</button>
+        <button class="btn-close" onclick="closeModal()">✖ Keluar</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Jawaban benar sesuai permintaan:
-    // q1 => 'salah', q2 => 'benar', q3 => 'benar'
-    const correctAnswers = { q1: 'salah', q2: 'benar', q3: 'benar' };
-
     function checkAnswers(){
-      const resultEl = document.getElementById('result');
-      const pembahasan = document.getElementById('pembahasan');
-
-      const q1 = document.querySelector('input[name="q1"]:checked');
-      const q2 = document.querySelector('input[name="q2"]:checked');
-      const q3 = document.querySelector('input[name="q3"]:checked');
+      var r = document.getElementById('result');
+      var q1 = document.querySelector('input[name="q1"]:checked');
+      var q2 = document.querySelector('input[name="q2"]:checked');
+      var q3 = document.querySelector('input[name="q3"]:checked');
 
       if(!q1 || !q2 || !q3){
-        resultEl.style.color = '#b91c1c';
-        resultEl.textContent = 'Silakan pilih jawaban untuk semua pernyataan terlebih dahulu.';
-        hidePembahasan();
+        r.style.color = 'red';
+        r.textContent = 'Silakan pilih jawaban untuk semua pernyataan.';
         return;
       }
 
-      const selected = { q1: q1.value, q2: q2.value, q3: q3.value };
-      let score = 0;
-      ['q1','q2','q3'].forEach(k => { if(selected[k] === correctAnswers[k]) score++; });
+      var correct = { q1: 'salah', q2: 'salah', q3: 'salah' };
+      var score = 0;
+      ['q1','q2','q3'].forEach(function(k){
+        var sel = document.querySelector('input[name="'+k+'"]:checked').value;
+        if(sel === correct[k]) score++;
+      });
 
-      if(score === 3){
-        resultEl.style.color = '#047857';
-        resultEl.textContent = '🎉 Semua jawaban benar! Skor: 3 dari 3. Pembahasan tampil dan video otomatis diputar.';
-        // tampilkan pembahasan dan auto play
-        showPembahasanAndPlay();
-      } else {
-        resultEl.style.color = '#b45309';
-        resultEl.textContent = 'Beberapa jawaban masih salah. Skor: ' + score + ' dari 3. Coba lagi.';
-        hidePembahasan();
-      }
+      r.style.color = score === 3 ? 'green' : 'orange';
+      r.textContent = 'Skor: ' + score + ' dari 3.';
+
+      document.getElementById("btnPembahasan").style.display = "inline-block";
     }
 
-    function resetQuiz(){
-      document.getElementById('quizForm').reset();
-      document.getElementById('result').textContent = '';
-      hidePembahasan();
+    // Cek jawaban otomatis saat pilih opsi
+    document.querySelectorAll("input[type=radio]").forEach(el=>{
+      el.addEventListener("change", checkAnswers);
+    });
+
+    // YouTube API
+    var player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        videoId: 'wq-EkXMM83E',
+        playerVars: { start: 207, end: 382, controls: 1 },
+        events: {
+          'onStateChange': function(e){
+            if(e.data === YT.PlayerState.PLAYING){
+              var interval = setInterval(function(){
+                if(player.getCurrentTime() >= 382){
+                  player.pauseVideo();
+                  clearInterval(interval);
+                }
+              },500);
+            }
+          }
+        }
+      });
     }
 
-    function showPembahasanAndPlay(){
-      const pembahasan = document.getElementById('pembahasan');
-      const iframe = document.getElementById('ytVideo');
-      const base = iframe.dataset.src || '';
-      // tambahkan autoplay flag; gunakan user gesture (klik Periksa Jawaban) untuk memicu autoplay
-      iframe.src = base + '?autoplay=1&rel=0';
-      pembahasan.style.display = 'block';
-      pembahasan.setAttribute('aria-hidden','false');
+    document.getElementById("btnPembahasan").onclick = function(){
+      document.getElementById("videoModal").style.display = "flex";
+      player.seekTo(207);
+      player.playVideo();
     }
-
     function stopVideo(){
-      const iframe = document.getElementById('ytVideo');
-      // hentikan pemutaran dengan mengosongkan src
-      if(iframe && iframe.src){
-        iframe.src = '';
-      }
+      if(player) player.stopVideo();
     }
-
-    function closePembahasan(){
+    function closeModal(){
       stopVideo();
-      const pembahasan = document.getElementById('pembahasan');
-      pembahasan.style.display = 'none';
-      pembahasan.setAttribute('aria-hidden','true');
+      document.getElementById("videoModal").style.display = "none";
     }
 
-    function hidePembahasan(){
-      // helper untuk menyembunyikan dan hentikan video
-      closePembahasan();
-    }
-
-    // Jika user mengklik link di dalam kotak, putar di kotak (prevent open tab)
-    document.addEventListener('click', function(e){
-      const el = e.target;
-      if(el && el.id === 'inlinePlay'){
-        e.preventDefault();
-        // buka kotak pembahasan dan play
-        showPembahasanAndPlay();
-      }
-    });
-
-    // start with pembahasan hidden
-    document.addEventListener('DOMContentLoaded', function(){
-      hidePembahasan();
-    });
+    // Load YouTube API
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
   </script>
 </body>
 </html>

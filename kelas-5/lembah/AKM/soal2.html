@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Soal Latihan ANBK</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 10px;
+      background-color: #f5f9ff;
+    }
+    .judul {
+      background: #007BFF;
+      color: white;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .soal {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 { text-align: center; color: #555; margin-top: 0; margin-bottom: 20px; font-size: 1.2rem; }
+
+    .pyramid-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; margin:18px 0 26px 0; }
+    .row{ display:flex; gap:10px; align-items:center; justify-content:center; }
+    .block{ min-width:64px; height:44px; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; box-shadow:0 1px 0 rgba(0,0,0,0.08); font-size:18px; }
+
+    .c-yellow{ background:#f7c948; color:#111;}
+    .c-blue{ background:#1f6feb; }
+    .c-green{ background:#2ad1a3; color:#064; }
+    .c-orange{ background:#f59e0b; }
+    .c-darkblue{ background:#1e40af; }
+    .c-red{ background:#c53030; }
+    .c-lightblue{ background:#8ec6ff; color:#072; }
+    .c-lime{ background:#a3e635; color:#083; }
+    .c-pink{ background:#f3c6ef; color:#3b0b3b; }
+
+    table{ width:100%; border-collapse:collapse; margin-top:12px; }
+    th, td{ padding:12px; border-bottom:1px solid #eef2f7; text-align:left; vertical-align:middle; font-size:15px; }
+    th { background:transparent; color:#6b7280; font-weight:600; }
+    .choices{ width:160px; text-align:center; }
+
+    .btn-row { display:flex; justify-content:flex-end; gap:10px; margin-top:12px; }
+    button { padding:8px 14px; border-radius:8px; border:0; cursor:pointer; font-weight:600; }
+
+    /* pembahasan box */
+    .pembahasan {
+      margin-top:16px;
+      padding:12px;
+      background:#fff9e6;
+      border-left:4px solid #f59e0b;
+      border-radius:8px;
+      display:none;
+    }
+    .pembahasan-controls {
+      display:flex;
+      justify-content:space-between; /* STOP kiri, KELUAR kanan */
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .btn-stop { background: #f44336; color: white; padding:8px 12px; border-radius:6px; border:0; cursor:pointer; }
+    .btn-keluar { background: #555; color: white; padding:8px 12px; border-radius:6px; border:0; cursor:pointer; }
+    .pembahasan iframe { width:100%; height:360px; border-radius:6px; border:0; background:#000; }
+    .watchlink { display:inline-block; margin-top:8px; color:#0b63d6; text-decoration:underline; }
+
+    .navigasi { margin-top: 22px; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+    .navigasi a { text-decoration: none; padding: 10px 18px; border-radius: 8px; font-weight: bold; transition: 0.3s; }
+    .btn-kembali { background-color: #d9534f; color: white; }
+    .btn-lanjut  { background-color: #5cb85c; color: white; }
+    .navigasi img { max-height: 40px; }
+
+    @media (max-width:600px){
+      .block{ min-width:50px; height:36px; font-size:15px; }
+      .choices{ width:120px; }
+      .navigasi img { max-height:30px; }
+      .pembahasan iframe { height:220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="judul">SOAL LATIHAN ANBK</div>
+
+  <div class="soal">
+    <h2>Soal Latihan 2</h2>
+
+    <p>Permainan berlanjut. Permainan sudah sampai ke lapisan kedua!<br>
+    Perhatikan susunan bilangan pada balok berikut:</p>
+
+    <div class="pyramid-wrap">
+      <div class="row">
+        <div class="block c-red">84</div>
+        <div class="block c-lightblue">81</div>
+        <div class="block c-lime">78</div>
+        <div class="block c-pink">75</div>
+      </div>
+      <div class="row">
+        <div class="block c-yellow">60</div>
+        <div class="block c-blue">63</div>
+        <div class="block c-green">66</div>
+        <div class="block c-orange">69</div>
+        <div class="block c-darkblue">72</div>
+      </div>
+    </div>
+
+    <h3>Pernyataan berikut benar atau salah?</h3>
+
+    <form id="quizForm" autocomplete="off" onsubmit="return false;">
+      <table>
+        <thead>
+          <tr>
+            <th>Pernyataan</th>
+            <th class="choices">Benar</th>
+            <th class="choices">Salah</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ada balok dengan bilangan 91 pada lapisan ketiga.</td>
+            <td class="choices"><label><input type="radio" name="q1" value="benar"></label></td>
+            <td class="choices"><label><input type="radio" name="q1" value="salah"></label></td>
+          </tr>
+          <tr>
+            <td>Balok yang ada di puncak bertuliskan bilangan 102.</td>
+            <td class="choices"><label><input type="radio" name="q2" value="benar"></label></td>
+            <td class="choices"><label><input type="radio" name="q2" value="salah"></label></td>
+          </tr>
+          <tr>
+            <td>Ada balok bertulis bilangan 96 di lapisan keempat.</td>
+            <td class="choices"><label><input type="radio" name="q3" value="benar"></label></td>
+            <td class="choices"><label><input type="radio" name="q3" value="salah"></label></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="btn-row">
+        <button type="button" class="btn-reset" onclick="resetQuiz()">Reset</button>
+        <button type="button" class="btn-check" onclick="checkAnswers()">Periksa Jawaban</button>
+      </div>
+
+      <p id="result" style="margin-top:12px;font-weight:700;"></p>
+
+      <!-- Pembahasan: muncul jika jawaban benar atau saat link diklik -->
+      <div id="pembahasan" class="pembahasan" aria-hidden="true">
+        <div class="pembahasan-controls">
+          <button type="button" class="btn-stop" onclick="stopVideo()">Stop</button>
+          <button type="button" class="btn-keluar" onclick="closePembahasan()">Keluar</button>
+        </div>
+
+        <!-- iframe kosong awalnya; data-src berisi base embed URL -->
+        <iframe id="ytVideo" src="" data-src="https://www.youtube.com/embed/wq-EkXMM83E" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+        <p>
+          <a href="https://www.youtube.com/watch?v=wq-EkXMM83E" class="watchlink" id="inlinePlay" target="_blank" rel="noopener noreferrer">Video Pembahasan (klik untuk putar di kotak)</a>
+        </p>
+      </div>
+    </form>
+
+    <div class="navigasi">
+      <a href="index.html" class="btn-kembali">⬅ Kembali</a>
+      <img src="https://i.imgur.com/LqQVDoS.png" alt="Ikon Navigasi">
+      <a href="index.html" class="btn-lanjut">Lanjut ➡</a>
+    </div>
+  </div>
+
+  <script>
+    // Jawaban benar sesuai permintaan:
+    // q1 => 'salah', q2 => 'benar', q3 => 'benar'
+    const correctAnswers = { q1: 'salah', q2: 'benar', q3: 'benar' };
+
+    function checkAnswers(){
+      const resultEl = document.getElementById('result');
+      const pembahasan = document.getElementById('pembahasan');
+
+      const q1 = document.querySelector('input[name="q1"]:checked');
+      const q2 = document.querySelector('input[name="q2"]:checked');
+      const q3 = document.querySelector('input[name="q3"]:checked');
+
+      if(!q1 || !q2 || !q3){
+        resultEl.style.color = '#b91c1c';
+        resultEl.textContent = 'Silakan pilih jawaban untuk semua pernyataan terlebih dahulu.';
+        hidePembahasan();
+        return;
+      }
+
+      const selected = { q1: q1.value, q2: q2.value, q3: q3.value };
+      let score = 0;
+      ['q1','q2','q3'].forEach(k => { if(selected[k] === correctAnswers[k]) score++; });
+
+      if(score === 3){
+        resultEl.style.color = '#047857';
+        resultEl.textContent = '🎉 Semua jawaban benar! Skor: 3 dari 3. Pembahasan tampil dan video otomatis diputar.';
+        // tampilkan pembahasan dan auto play
+        showPembahasanAndPlay();
+      } else {
+        resultEl.style.color = '#b45309';
+        resultEl.textContent = 'Beberapa jawaban masih salah. Skor: ' + score + ' dari 3. Coba lagi.';
+        hidePembahasan();
+      }
+    }
+
+    function resetQuiz(){
+      document.getElementById('quizForm').reset();
+      document.getElementById('result').textContent = '';
+      hidePembahasan();
+    }
+
+    function showPembahasanAndPlay(){
+      const pembahasan = document.getElementById('pembahasan');
+      const iframe = document.getElementById('ytVideo');
+      const base = iframe.dataset.src || '';
+      // tambahkan autoplay flag; gunakan user gesture (klik Periksa Jawaban) untuk memicu autoplay
+      iframe.src = base + '?autoplay=1&rel=0';
+      pembahasan.style.display = 'block';
+      pembahasan.setAttribute('aria-hidden','false');
+    }
+
+    function stopVideo(){
+      const iframe = document.getElementById('ytVideo');
+      // hentikan pemutaran dengan mengosongkan src
+      if(iframe && iframe.src){
+        iframe.src = '';
+      }
+    }
+
+    function closePembahasan(){
+      stopVideo();
+      const pembahasan = document.getElementById('pembahasan');
+      pembahasan.style.display = 'none';
+      pembahasan.setAttribute('aria-hidden','true');
+    }
+
+    function hidePembahasan(){
+      // helper untuk menyembunyikan dan hentikan video
+      closePembahasan();
+    }
+
+    // Jika user mengklik link di dalam kotak, putar di kotak (prevent open tab)
+    document.addEventListener('click', function(e){
+      const el = e.target;
+      if(el && el.id === 'inlinePlay'){
+        e.preventDefault();
+        // buka kotak pembahasan dan play
+        showPembahasanAndPlay();
+      }
+    });
+
+    // start with pembahasan hidden
+    document.addEventListener('DOMContentLoaded', function(){
+      hidePembahasan();
+    });
+  </script>
+</body>
+</html>

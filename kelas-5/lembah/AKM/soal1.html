@@ -11,7 +11,6 @@
       margin: 10px;
       background-color: #f5f9ff;
     }
-    /* Kotak judul biru */
     .judul {
       background: #007BFF;
       color: white;
@@ -22,7 +21,6 @@
       font-weight: bold;
       margin-bottom: 15px;
     }
-    /* Kotak soal putih */
     .soal {
       background: #fff;
       padding: 20px;
@@ -53,21 +51,14 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-    .pilihan div:hover {
-      background: #e0e0e0;
-    }
-    .gambar {
-      text-align: center;
-      margin: 15px 0;
-    }
-    /* Gambar soal lebih kecil */
+    .pilihan div:hover { background: #e0e0e0; }
+    .gambar { text-align: center; margin: 15px 0; }
     .gambar img {
       max-width: 250px;
       height: auto;
       border: 2px solid #ddd;
       border-radius: 8px;
     }
-    /* Gambar opsi jawaban lebih kecil */
     .pilihan img {
       max-width: 120px;
       height: auto;
@@ -83,24 +74,33 @@
       font-size: 0.95rem;
       display: none;
     }
-    .feedback {
+    .video-container {
       margin-top: 15px;
+      text-align: center;
+    }
+    .video-controls {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .video-controls button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
       font-weight: bold;
-      font-size: 1.1rem;
     }
-    .benar {
-      color: green;
-    }
-    .salah {
-      color: red;
-    }
-    /* Tombol navigasi */
+    .btn-stop { background: #d9534f; color: white; }
+    .btn-stop:hover { background: #c9302c; }
+    .btn-close { background: #5cb85c; color: white; }
+    .btn-close:hover { background: #449d44; }
+    .feedback { margin-top: 15px; font-weight: bold; font-size: 1.1rem; }
+    .benar { color: green; }
+    .salah { color: red; }
     .navigasi {
       margin-top: 25px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 15px;
     }
     .navigasi a {
       text-decoration: none;
@@ -109,54 +109,10 @@
       font-weight: bold;
       transition: 0.3s;
     }
-    .btn-kembali {
-      background-color: #d9534f;
-      color: white;
-    }
-    .btn-kembali:hover {
-      background-color: #c9302c;
-    }
-    .btn-lanjut {
-      background-color: #5cb85c;
-      color: white;
-    }
-    .btn-lanjut:hover {
-      background-color: #449d44;
-    }
-    /* Gambar di navigasi */
-    .navigasi img {
-      max-height: 40px;
-    }
-    /* Responsif */
-    @media (max-width: 600px) {
-      body {
-        margin: 5px;
-      }
-      .soal {
-        padding: 12px;
-      }
-      .judul {
-        font-size: 1.3rem;
-        padding: 12px;
-      }
-      h2 {
-        font-size: 1rem;
-      }
-      .pilihan div {
-        font-size: 0.9rem;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .gambar img {
-        max-width: 180px;
-      }
-      .pilihan img {
-        max-width: 100px;
-      }
-      .navigasi img {
-        max-height: 30px;
-      }
-    }
+    .btn-kembali { background-color: #d9534f; color: white; }
+    .btn-kembali:hover { background-color: #c9302c; }
+    .btn-lanjut { background-color: #5cb85c; color: white; }
+    .btn-lanjut:hover { background-color: #449d44; }
   </style>
 </head>
 <body>
@@ -165,77 +121,109 @@
   <div class="soal">
     <h2>Soal Latihan 1</h2>
 
-    <p>
-      Dimas, Suta dan Beta bermain susun balok dengan cara menyusun balok sesuai pola. 
+    <p>Dimas, Suta dan Beta bermain susun balok dengan cara menyusun balok sesuai pola. 
       Wasit akan meletakkan balok-balok yang masing-masing berisi satu bilangan pada 
       lapisan paling bawah, kemudian pemain melanjutkan menyusun balok-balok pada 
       lapisan di atasnya. Pemain yang meletakkan balok paling banyak menjadi pemenangnya, 
-      sedangkan pemain yang salah dalam meletakkan balok, tidak boleh melanjutkan permainan.
-    </p>
+      sedangkan pemain yang salah dalam meletakkan balok, tidak boleh melanjutkan permainan.</p>
 
     <div class="gambar">
       <img src="https://i.imgur.com/eP8QBmi.png" alt="Contoh Susun Balok">
     </div>
 
-    <p>
-      Wasit meletakkan empat kotak pada lapisan pertama seperti gambar.
-    </p>
+    <p>Wasit meletakkan empat kotak pada lapisan pertama seperti gambar.</p>
 
     <div class="gambar">
       <img src="https://i.imgur.com/mMsd3yB.png" alt="Lapisan Pertama">
     </div>
 
-    <p>
-      Tiga kotak yang harus diletakkan di atasnya adalah ....
-    </p>
+    <p>Tiga kotak yang harus diletakkan di atasnya adalah ....</p>
     <div class="pilihan">
-      <div onclick="cekJawaban('A')">A. <img src="https://i.imgur.com/MIQ8OiX.png" alt="Opsi A"></div>
-      <div onclick="cekJawaban('B')">B. <img src="https://i.imgur.com/FGFcOI4.png" alt="Opsi B"></div>
-      <div onclick="cekJawaban('C')">C. <img src="https://i.imgur.com/ZoYJLOo.png" alt="Opsi C"></div>
-      <div onclick="cekJawaban('D')">D. <img src="https://i.imgur.com/G2yh6dj.png" alt="Opsi D"></div>
+      <div onclick="cekJawaban('A')">A. <img src="https://i.imgur.com/MIQ8OiX.png"></div>
+      <div onclick="cekJawaban('B')">B. <img src="https://i.imgur.com/FGFcOI4.png"></div>
+      <div onclick="cekJawaban('C')">C. <img src="https://i.imgur.com/ZoYJLOo.png"></div>
+      <div onclick="cekJawaban('D')">D. <img src="https://i.imgur.com/G2yh6dj.png"></div>
     </div>
 
     <div id="feedback" class="feedback"></div>
 
     <div class="pembahasan" id="pembahasan">
       <h3>Pembahasan:</h3>
-      <ol>
-        <li>
-          Perhatikan alur angkanya, dari susunan balok bagian bawah menunjukkan ke arah kanan setiap bilangan ditambah 2.  
-          Bilangan di atasnya dari kanan ke kiri berpola setiap bilangan bertambah 2.  
-          Bilangan di atasnya dari kiri ke kanan setiap bilangan ditambah 2.  
-          Sampai di puncak ditambah 2.
-        </li>
-        <li>
-          Diterapkan pada pola bilangan di empat kotak yang disusun wasit, yaitu <b>2 - 4 - 6 - 8</b>,  
-          ke arah kanan setiap bilangan bertambah 2.  
-          Maka susunan di atasnya dengan pola yang sama, ditambah 2 ke arah kiri menjadi <b>10 - 12 - 14</b>.  
-          Jadi jawabannya adalah <b>A (opsi pilihan 1)</b>.
-        </li>
-      </ol>
+      <div class="video-container">
+        <div id="player"></div>
+        <div class="video-controls">
+          <button class="btn-stop" onclick="stopVideo()">⏹ Stop</button>
+          <button class="btn-close" onclick="closeVideo()">❌ Keluar</button>
+        </div>
+      </div>
     </div>
 
     <div class="navigasi">
       <a href="AKM.html" class="btn-kembali">⬅ Kembali</a>
-      <img src="https://i.imgur.com/LqQVDoS.png" alt="Ikon Navigasi">
       <a href="AKM.html" class="btn-lanjut">Lanjut ➡</a>
     </div>
   </div>
 
+  <!-- Load YouTube API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script>
+    let player;
+    let startTime = 94;   // 1:34 dalam detik
+    let endTime = 192;    // 3:12 dalam detik
+    let checkInterval;
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '315',
+        width: '560',
+        videoId: 'wq-EkXMM83E',
+        playerVars: {
+          start: startTime,
+          end: endTime,
+          autoplay: 0,
+          controls: 1
+        },
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+
+    function onPlayerStateChange(event) {
+      if (event.data == YT.PlayerState.PLAYING) {
+        clearInterval(checkInterval);
+        checkInterval = setInterval(() => {
+          if (player.getCurrentTime() >= endTime) {
+            player.pauseVideo();
+            clearInterval(checkInterval);
+          }
+        }, 500);
+      }
+    }
+
     function cekJawaban(pilihan) {
       let feedback = document.getElementById("feedback");
       let pembahasan = document.getElementById("pembahasan");
-      
+
       if (pilihan === "A") {
         feedback.innerHTML = "🎉 Jawaban Benar!";
         feedback.className = "feedback benar";
-        pembahasan.style.display = "block";
       } else {
         feedback.innerHTML = "😅 Coba lagi!";
         feedback.className = "feedback salah";
-        pembahasan.style.display = "none";
       }
+      pembahasan.style.display = "block";
+      player.seekTo(startTime);
+      player.playVideo();
+    }
+
+    function stopVideo() {
+      if (player) player.pauseVideo();
+    }
+
+    function closeVideo() {
+      stopVideo();
+      document.getElementById("pembahasan").style.display = "none";
     }
   </script>
 </body>

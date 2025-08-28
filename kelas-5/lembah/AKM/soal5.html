@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soal Numerasi ANBK SD</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f5f9ff;
+        }
+
+        .judul {
+            background: #007BFF;
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .subjudul {
+            font-size: 1.2rem;
+            font-weight: normal;
+            margin-top: 5px;
+            color: #e0e0e0;
+        }
+
+        .soal {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .pattern {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .color-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .red { background-color: red; }
+        .green { background-color: green; }
+        .yellow { background-color: yellow; }
+
+        .options label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            gap: 10px;
+        }
+
+        .buttons button {
+            padding: 8px 12px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .buttons img {
+            flex: 1;
+            max-height: 80px;
+            object-fit: contain;
+        }
+
+        #videoBox {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            border: 2px solid #333;
+            z-index: 1000;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        #videoBox iframe {
+            width: 100%;
+            height: 200px;
+        }
+
+        #videoControls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+        }
+
+        #discussionBtn {
+            margin-top: 10px;
+            padding: 10px 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #discussionBtn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        #feedback {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="judul">
+        SOAL LATIHAN ANBK
+        <div class="subjudul">Soal Latihan 5</div>
+    </div>
+
+    <div class="soal">
+        <h2>Soal Numerasi ANBK SD</h2>
+
+        <p>1. Pernahkah kamu melihat bola-bola dari semen seperti gambar di bawah?</p>
+        <p>Bola-bola tersebut dinamakan <b>bollard</b>. Fungsinya menghalangi kendaraan bermotor masuk ke trotoar. Juga sebagai hiasan trotoar.</p>
+        <p><b>Bollard</b> akan dipasang di Jalan Antasari sebanyak 15 buah.</p>
+        <p>Pola warna <b>bollard</b> yang dipasang adalah:</p>
+
+        <div class="pattern">
+            <div class="color-circle red"></div>
+            <div class="color-circle green"></div>
+            <div class="color-circle yellow"></div>
+            <div class="color-circle red"></div>
+            <div class="color-circle green"></div>
+            <div class="color-circle yellow"></div>
+        </div>
+
+        <p>Warna <b>bollard</b> pada urutan ke-11 adalah ....</p>
+
+        <div class="options">
+            <label><input type="radio" name="answer" value="hijau"> hijau</label>
+            <label><input type="radio" name="answer" value="kuning"> kuning</label>
+            <label><input type="radio" name="answer" value="merah"> merah</label>
+        </div>
+
+        <div id="feedback"></div>
+
+        <div class="buttons">
+            <button id="backBtn" onclick="window.location='AKM.html'">Kembali</button>
+            <img src="https://i.imgur.com/RChzgsF.png" alt="Gambar tengah">
+            <button id="nextBtn" onclick="window.location='AKM.html'">Lanjut</button>
+        </div>
+
+        <button id="discussionBtn" disabled>Lihat Pembahasan</button>
+    </div>
+
+    <!-- Kotak Video -->
+    <div id="videoBox">
+        <div id="player"></div>
+        <div id="videoControls">
+            <button id="stopBtn">Stop</button>
+            <button id="closeBtn">Keluar</button>
+        </div>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        const options = document.querySelectorAll('input[name="answer"]');
+        const discussionBtn = document.getElementById('discussionBtn');
+        const feedback = document.getElementById('feedback');
+
+        options.forEach(option => {
+            option.addEventListener('change', () => {
+                // Aktifkan tombol pembahasan baik jawaban benar atau salah
+                discussionBtn.disabled = false;
+
+                // Feedback jawaban
+                if(option.value === 'hijau'){  // ganti sesuai jawaban benar
+                    feedback.textContent = '🎉 Jawaban Benar!';
+                    feedback.style.color = 'green';
+                } else {
+                    feedback.textContent = '😅 Jawaban Salah!';
+                    feedback.style.color = 'red';
+                }
+            });
+        });
+
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '200',
+                width: '100%',
+                videoId: 'h9UCywjtNk8',
+                playerVars: { start: 72, end: 213, autoplay: 0 },
+                events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange }
+            });
+        }
+
+        function onPlayerReady(event) {}
+        function onPlayerStateChange(event) {
+            if(event.data === YT.PlayerState.ENDED){
+                closeVideo();
+            }
+        }
+
+        discussionBtn.addEventListener('click', () => {
+            document.getElementById('videoBox').style.display = 'block';
+            player.playVideo();
+        });
+
+        document.getElementById('stopBtn').addEventListener('click', () => {
+            player.pauseVideo();
+        });
+
+        document.getElementById('closeBtn').addEventListener('click', () => {
+            closeVideo();
+        });
+
+        function closeVideo() {
+            document.getElementById('videoBox').style.display = 'none';
+            player.stopVideo();
+        }
+    </script>
+
+</body>
+</html>

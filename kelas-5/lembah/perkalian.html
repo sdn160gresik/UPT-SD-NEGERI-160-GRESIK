@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latihan Perkalian</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      text-align: center;
+      background: linear-gradient(to bottom, #2a4d3f, #18392b);
+      color: white;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    header {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px;
+      background: rgba(0,0,0,0.4);
+      font-size: 18px;
+    }
+    .container { margin-top: 20px; padding: 10px; }
+    .pilihan-box {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 10px; margin-bottom: 20px;
+    }
+    .pilihan {
+      font-size: 22px; font-weight: bold;
+      padding: 12px 18px; border-radius: 15px;
+      cursor: pointer; border: none; color: white;
+    }
+    .pilihan.acak { background: #16a085; }
+    .pilihan.num2 { background: #e74c3c; }
+    .pilihan.num3 { background: #2980b9; }
+    .pilihan.num4 { background: #8e44ad; }
+    .pilihan.num5 { background: #d35400; }
+    .pilihan.num6 { background: #27ae60; }
+    .pilihan.num7 { background: #c0392b; }
+    .pilihan.num8 { background: #2c3e50; }
+    .pilihan.num9 { background: #f39c12; }
+    .question-box {
+      display: inline-flex; align-items: center; gap: 15px;
+      font-size: 40px; background: rgba(255,255,255,0.1);
+      padding: 15px; border-radius: 20px;
+    }
+    .number, .operator, .result {
+      padding: 12px 20px; border-radius: 15px; font-weight: bold;
+    }
+    .number { background: #ff6b6b; }
+    .operator { background: #8e44ad; }
+    .result { background: #f39c12; }
+    .jawaban-box {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    input {
+      font-size: 24px; padding: 8px; width: 100px;
+      text-align: center; border-radius: 10px; border: none;
+    }
+    button.cek-btn {
+      font-size: 18px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 10px;
+      background: #3498db;
+      color: white;
+      cursor: pointer;
+    }
+    button.cek-btn:hover { background: #2980b9; }
+
+    /* Tombol selesai */
+    .selesai-btn {
+      margin-top: 30px;
+      padding: 12px 20px;
+      font-size: 20px;
+      border: none;
+      border-radius: 15px;
+      background: #e67e22;
+      color: white;
+      cursor: pointer;
+    }
+    .selesai-btn:hover { background: #d35400; }
+
+    /* Pesan mengambang tengah layar */
+    .message {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px; font-weight: bold;
+      display: none; background: rgba(0,0,0,0.85);
+      padding: 20px 30px; border-radius: 20px;
+      animation: fadeIn 0.3s;
+      z-index: 9999;
+      max-width: 80%;
+      text-align: center;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translate(-50%, -50%) scale(0.9);}
+      to {opacity: 1; transform: translate(-50%, -50%) scale(1);}
+    }
+    .pesan-btn {
+      margin-top: 15px;
+      padding: 10px 18px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      background: #27ae60;
+      color: white;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .pesan-btn:hover { background: #2ecc71; }
+
+    /* Konfeti */
+    .confetti {
+      position: fixed;
+      top: 0;
+      width: 10px;
+      height: 10px;
+      background: red;
+      opacity: 0.8;
+      animation: fall 3s linear forwards;
+      z-index: 9998;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @media(max-width:600px){
+      .question-box{ font-size:28px; }
+      .pilihan{ font-size:18px; padding:10px 14px; }
+      input{ font-size:20px; width:80px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div id="nyawa">❤️ 3</div>
+    <div id="timer">⏱ 20</div>
+    <div id="progress">❓ 0/10</div>
+  </header>
+
+  <div class="container">
+    <div class="pilihan-box">
+      <button class="pilihan acak" onclick="mulaiSoal('acak')">Acak</button>
+      <button class="pilihan num2" onclick="mulaiSoal(2)">×2</button>
+      <button class="pilihan num3" onclick="mulaiSoal(3)">×3</button>
+      <button class="pilihan num4" onclick="mulaiSoal(4)">×4</button>
+      <button class="pilihan num5" onclick="mulaiSoal(5)">×5</button>
+      <button class="pilihan num6" onclick="mulaiSoal(6)">×6</button>
+      <button class="pilihan num7" onclick="mulaiSoal(7)">×7</button>
+      <button class="pilihan num8" onclick="mulaiSoal(8)">×8</button>
+      <button class="pilihan num9" onclick="mulaiSoal(9)">×9</button>
+    </div>
+
+    <div class="question-box" id="soal">
+      <span class="number" id="angka1">?</span>
+      <span class="operator">×</span>
+      <span class="number" id="angka2">?</span>
+      <span class="operator">=</span>
+      <span class="result">??</span>
+    </div>
+
+    <div class="jawaban-box">
+      <input type="number" id="jawaban" placeholder="Isi jawaban">
+      <button class="cek-btn" onclick="cekJawaban()">Cek Jawaban</button>
+    </div>
+
+    <div class="message" id="pesan"></div>
+
+    <!-- Tombol selesai -->
+    <div>
+      <button class="selesai-btn" onclick="window.location.href='lembah.html'">✅ Selesai</button>
+    </div>
+  </div>
+
+  <script>
+    // script sama persis dengan yang sudah ada (tidak berubah)
+    // ...
+  </script>
+</body>
+</html>

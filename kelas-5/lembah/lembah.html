@@ -1,209 +1,165 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Latihan Perkalian</title>
-<style>
-  body { font-family: "Comic Sans MS", cursive, sans-serif; text-align:center;
-    background: linear-gradient(to bottom, #2a4d3f, #18392b); color:white; margin:0; padding:0; overflow-x:hidden; }
-  header { display:flex; justify-content:center; align-items:center; padding:10px; background: rgba(0,0,0,0.4); font-size:18px; gap:30px;}
-  .container{margin-top:20px;padding:10px;}
-  .pilihan-box{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:20px;}
-  .pilihan{font-size:22px;font-weight:bold;padding:12px 18px;border-radius:15px;cursor:pointer;border:none;color:white;}
-  .acak{background:#16a085;} .num2{background:#e74c3c;} .num3{background:#2980b9;} .num4{background:#8e44ad;}
-  .num5{background:#d35400;} .num6{background:#27ae60;} .num7{background:#c0392b;} .num8{background:#2c3e50;} .num9{background:#f39c12;}
-  .question-box{display:inline-flex;align-items:center;gap:15px;font-size:40px;background: rgba(255,255,255,0.1); padding:15px;border-radius:20px;}
-  .number, .operator, .result{padding:12px 20px;border-radius:15px;font-weight:bold;}
-  .number{background:#ff6b6b;} .operator{background:#8e44ad;} .result{background:#f39c12;}
-  .jawaban-box{margin-top:15px;display:flex;justify-content:center;align-items:center;gap:10px;}
-  input{font-size:24px;padding:8px;width:100px;text-align:center;border-radius:10px;border:none;}
-  button.cek-btn{font-size:18px;padding:10px 16px;border:none;border-radius:10px;background:#3498db;color:white;cursor:pointer;}
-  button.cek-btn:hover{background:#2980b9;}
-  .message{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
-    font-size:24px;font-weight:bold;display:none;background: rgba(0,0,0,0.85);padding:20px 30px;border-radius:20px;animation:fadeIn 0.3s;z-index:9999;max-width:80%;}
-  @keyframes fadeIn{from{opacity:0; transform:translate(-50%,-50%) scale(0.9);} to{opacity:1; transform:translate(-50%,-50%) scale(1);} }
-  .pesan-btn{margin-top:15px;padding:10px 18px;font-size:18px;border:none;border-radius:12px;background:#27ae60;color:white;cursor:pointer;display:inline-block;}
-  .pesan-btn:hover{background:#2ecc71;}
-  @media(max-width:600px){.question-box{font-size:28px;}.pilihan{font-size:18px;padding:10px 14px;} input{font-size:20px;width:80px;}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lembah Matematika</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      height: 100%;
+      width: 100%;
+      overflow-x: hidden;
+      /* Background baru dari Imgur */
+      background: url('https://i.imgur.com/fecWj4m.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .nav-left img {
+      height: 45px;
+      margin-right: 0.5rem;
+    }
+
+    .nav-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .nav-right a {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #0288d1;
+      font-weight: bold;
+      font-size: 0.9rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .nav-right a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .title-section {
+      text-align: center;
+      margin: 20px 15px 10px;
+    }
+
+    .title-section h1 {
+      font-size: 2rem;
+      background: rgba(255,255,255,0.85);
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      color: #0288d1;
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+    }
+
+    .title-section p {
+      background: rgba(255,255,255,0.8);
+      color: #0288d1;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      max-width: 90%;
+      margin: 10px auto;
+      font-size: 1rem;
+    }
+
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .map-item {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      color: #0288d1;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .map-item:hover {
+      transform: scale(1.05);
+      background-color: #dff6ff;
+    }
+
+    .map-item .emoji {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+  </style>
 </head>
 <body>
-<header>
-  <div id="timer">⏱ 20</div>
-  <div id="progress">❓ 0/10</div>
-</header>
 
-<div class="container">
-  <div class="pilihan-box">
-    <button class="pilihan acak" onclick="mulaiSoal('acak')">Acak</button>
-    <button class="pilihan num2" onclick="mulaiSoal(2)">×2</button>
-    <button class="pilihan num3" onclick="mulaiSoal(3)">×3</button>
-    <button class="pilihan num4" onclick="mulaiSoal(4)">×4</button>
-    <button class="pilihan num5" onclick="mulaiSoal(5)">×5</button>
-    <button class="pilihan num6" onclick="mulaiSoal(6)">×6</button>
-    <button class="pilihan num7" onclick="mulaiSoal(7)">×7</button>
-    <button class="pilihan num8" onclick="mulaiSoal(8)">×8</button>
-    <button class="pilihan num9" onclick="mulaiSoal(9)">×9</button>
+  <!-- Navigasi -->
+  <nav>
+    <div class="nav-left">
+      <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
+      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 50px;">
+      <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah">
+    </div>
+    <div class="nav-right">
+      <a href="../../index.html">🏠 Beranda</a>
+      <a href="../Petualangan-Kelas-5.html">◀️ Kembali</a>
+      <a href="#">🖼️ Galeri</a>
+      <a href="kelas.html">🏫 Kelas</a>
+    </div>
+  </nav>
+
+  <!-- Judul Halaman -->
+  <div class="title-section">
+    <h1>📐 Lembah Matematika</h1>
+    <p>Selamat datang di Lembah Matematika ⛰️ Jelajahi serunya dunia angka dan logika!</p>
   </div>
 
-  <div class="question-box" id="soal">
-    <span class="number" id="angka1">?</span>
-    <span class="operator">×</span>
-    <span class="number" id="angka2">?</span>
-    <span class="operator">=</span>
-    <span class="result">??</span>
+  <!-- Menu Interaktif -->
+  <div class="map-grid">
+    <a href="wisata.html" class="map-item"><span class="emoji">🎡</span>Wisata Angka Dari Nol sampai Seratus Ribu</a>
+    <a href="#pintu-geometri" class="map-item"><span class="emoji">🎲</span>Bangun Datar Ajaib</a>
+    <a href="#minat-aljabar" class="map-item"><span class="emoji">🎯</span>Petualangan Seru Bersama KPK dan FPB</a>
+    <a href="#logika-cerdas" class="map-item"><span class="emoji">🏰</span>Kerajaan Pecahan</a>
+    <a href="#dunia-matematika" class="map-item"><span class="emoji">🚀</span>Petualangan Pecahan</a>
+    <a href="#perjalanan-rumus" class="map-item"><span class="emoji">📊</span>Jelajah Warna-Warni Data</a>
+    <a href="#alam-bentuk" class="map-item"><span class="emoji">🌈</span>Dunia Sudut Ajaib</a>
+    <a href="#kerja-sama" class="map-item"><span class="emoji">🔍</span>Detektif Bangun Datar</a>
   </div>
+  
+  <!-- Suara klik interaktif -->
+  <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
+  <script>
+    const clickSound = document.getElementById("clickSound");
+    const allButtons = document.querySelectorAll("a, .map-item");
+    allButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        clickSound.currentTime = 0;
+        clickSound.play();
+      });
+    });
+  </script>
 
-  <div class="jawaban-box">
-    <input type="number" id="jawaban" placeholder="Isi jawaban">
-    <button class="cek-btn" onclick="cekJawaban()">Cek Jawaban</button>
-  </div>
-
-  <div class="message" id="pesan"></div>
-</div>
-
-<script>
-let benar, pilihanAktif = "acak", totalSoal = 10, terjawab = 0, benarCount = 0;
-let timer = 20, timerInterval;
-let soalTerpakaiPerKategori = {acak: [],2: [],3: [],4: [],5: [],6: [],7: [],8: [],9: []};
-let tombolKategori = {};
-
-window.onload = function(){
-  tombolKategori = {
-    acak: document.querySelector(".pilihan.acak"),
-    2: document.querySelector(".pilihan.num2"),
-    3: document.querySelector(".pilihan.num3"),
-    4: document.querySelector(".pilihan.num4"),
-    5: document.querySelector(".pilihan.num5"),
-    6: document.querySelector(".pilihan.num6"),
-    7: document.querySelector(".pilihan.num7"),
-    8: document.querySelector(".pilihan.num8"),
-    9: document.querySelector(".pilihan.num9")
-  };
-  mulaiSoal('acak');
-};
-
-function totalKombinasi(k){ return k==='acak'? 8*10 : 10; }
-
-function mulaiSoal(pilihan){
-  pilihanAktif = pilihan;
-  terjawab=0; benarCount=0;
-  soalTerpakaiPerKategori[pilihanAktif]=[];
-  document.getElementById("progress").textContent="❓ "+terjawab+"/"+totalSoal;
-  document.getElementById("pesan").style.display="none";
-  soalBaru();
-}
-
-function resetTimer(){
-  if(timerInterval) clearInterval(timerInterval);
-  timer=20; document.getElementById("timer").textContent="⏱ "+timer;
-  timerInterval=setInterval(()=>{
-    timer--; document.getElementById("timer").textContent="⏱ "+timer;
-    if(timer<=0){
-      clearInterval(timerInterval);
-      terjawab++; document.getElementById("progress").textContent="❓ "+terjawab+"/"+totalSoal;
-      tampilkanPesan("⏱ Waktu habis! Yuk lanjut ke soal berikutnya 💪","orange");
-      if(terjawab>=totalSoal){ gameOver(); return; }
-    }
-  },1000);
-}
-
-function soalBaru(){
-  if(terjawab>=totalSoal){ gameOver(); return; }
-  if(soalTerpakaiPerKategori[pilihanAktif].length >= totalKombinasi(pilihanAktif)){
-    tampilkanPesan("✅ Semua soal kategori ini sudah selesai! Pilih kategori lain.","yellow"); return;
-  }
-
-  let a,b,pair,maxTries=100;
-  do{
-    a = (pilihanAktif==='acak') ? Math.floor(Math.random()*8)+2 : parseInt(pilihanAktif);
-    b = Math.floor(Math.random()*10)+1;
-    pair=`${a}x${b}`;
-    maxTries--;
-  }while(soalTerpakaiPerKategori[pilihanAktif].includes(pair) && maxTries>0);
-
-  soalTerpakaiPerKategori[pilihanAktif].push(pair);
-
-  if(tombolKategori[pilihanAktif] && soalTerpakaiPerKategori[pilihanAktif].length >= totalKombinasi(pilihanAktif)){
-    tombolKategori[pilihanAktif].disabled=true;
-    tombolKategori[pilihanAktif].style.background="#7f8c8d";
-    tombolKategori[pilihanAktif].style.cursor="not-allowed";
-  }
-
-  benar = a*b;
-  document.getElementById("angka1").textContent=a;
-  document.getElementById("angka2").textContent=b;
-  document.getElementById("jawaban").value=""; document.getElementById("jawaban").focus();
-  document.getElementById("pesan").style.display="none";
-  resetTimer();
-}
-
-function cekJawaban(){
-  const input=parseInt(document.getElementById("jawaban").value);
-  if(!isNaN(input)){
-    terjawab++;
-    if(input===benar){
-      benarCount++;
-      const pesanC=["🎉 Hebat! Kamu jago banget! 💪","✨ Mantap sekali! Lanjut terus ya! 🚀","🌟 Jawaban benar! Kamu keren! 😎","👏 Bagus sekali! Semangat terus! 🔥"];
-      tampilkanPesan(pesanC[Math.floor(Math.random()*pesanC.length)],"lightgreen");
-    }else{
-      const pesanS=["❌ Salah, tapi semangat terus! 💡","😅 Belum tepat, tetap berjuang! 🌈","🙃 Jawaban salah, ayo coba lagi! 💪","💔 Salah, tapi jangan menyerah!"];
-      tampilkanPesan(pesanS[Math.floor(Math.random()*pesanS.length)],"red");
-    }
-    document.getElementById("progress").textContent="❓ "+terjawab+"/"+totalSoal;
-    clearInterval(timerInterval);
-    if(terjawab>=totalSoal) gameOver();
-  }
-}
-
-function tampilkanPesan(teks, warna){
-  const pesan=document.getElementById("pesan");
-  pesan.innerHTML=`${teks}<br><button class='pesan-btn' onclick='tutupPesan()'>Oke</button>`;
-  pesan.style.color=warna; pesan.style.display="block";
-}
-
-function tutupPesan(){
-  const pesan=document.getElementById('pesan');
-  pesan.style.display='none';
-  if(terjawab<totalSoal) soalBaru();
-}
-
-function gameOver(){
-  clearInterval(timerInterval);
-  let nilai=Math.round((benarCount/totalSoal)*100);
-  let teks=`📊 Nilai Akhir: ${nilai}%<br>🌈 Seru sekali belajarnya! 🎉<br>Semangat terus ya, kamu hebat! 💪✨`;
-  teks+=`<br><button class='pesan-btn' onclick='mainLagi()'>🔄 Main Lagi</button>`;
-  teks+=`<br><button class='pesan-btn' onclick='selesai()'>✅ Selesai</button>`;
-  const pesan=document.getElementById("pesan");
-  pesan.innerHTML=teks; pesan.style.color="yellow"; pesan.style.display="block";
-}
-
-function mainLagi(){
-  terjawab=0; benarCount=0;
-  for(let k in soalTerpakaiPerKategori){
-    soalTerpakaiPerKategori[k]=[];
-    if(tombolKategori[k]){
-      tombolKategori[k].disabled=false; tombolKategori[k].style.cursor="pointer";
-      if(k==="acak") tombolKategori[k].style.background="#16a085";
-      else if(k==="2") tombolKategori[k].style.background="#e74c3c";
-      else if(k==="3") tombolKategori[k].style.background="#2980b9";
-      else if(k==="4") tombolKategori[k].style.background="#8e44ad";
-      else if(k==="5") tombolKategori[k].style.background="#d35400";
-      else if(k==="6") tombolKategori[k].style.background="#27ae60";
-      else if(k==="7") tombolKategori[k].style.background="#c0392b";
-      else if(k==="8") tombolKategori[k].style.background="#2c3e50";
-      else if(k==="9") tombolKategori[k].style.background="#f39c12";
-    }
-  }
-  document.getElementById("progress").textContent="❓ "+terjawab+"/"+totalSoal;
-  document.getElementById("pesan").style.display="none";
-  mulaiSoal(pilihanAktif);
-}
-
-function selesai(){
-  window.location.href="lembah.html";
-}
-</script>
 </body>
 </html>

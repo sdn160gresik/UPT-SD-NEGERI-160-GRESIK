@@ -11,181 +11,120 @@
     --red:#e74c3c; --green:#6ab04c; --blue:#3b82f6; --purple:#7c3aed;
   }
   *{box-sizing:border-box}
-  body{
-    margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-    color:var(--ink); background:var(--bg);
-  }
+  body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    color:var(--ink); background:var(--bg);}
   .wrap{max-width:1000px; margin-inline:auto; padding:20px;}
-  .layout{
-    display:grid; grid-template-columns:1.1fr .9fr; gap:22px; align-items:start;
-  }
+  .layout{display:grid; grid-template-columns:1.1fr .9fr; gap:22px; align-items:start;}
   @media (max-width:880px){ .layout{grid-template-columns:1fr;} }
-  .card{
-    background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px;
-    box-shadow:0 6px 18px rgba(0,0,0,.04);
-  }
+  .card{background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px;
+    box-shadow:0 6px 18px rgba(0,0,0,.04);}
   h2{margin:.2rem 0 1rem; font-size:clamp(18px,2.4vw,22px)}
   p{color:var(--sub); margin:.4rem 0 1rem; line-height:1.55}
-  .pattern{
-    display:flex; align-items:center; gap:14px; padding:16px; background:var(--box);
-    border-radius:12px; overflow:auto; border:1px dashed #d1d5db;
-  }
+  .pattern{display:flex; align-items:center; gap:14px; padding:16px; background:var(--box);
+    border-radius:12px; overflow:auto; border:1px dashed #d1d5db;}
   .seq{display:flex; gap:18px; align-items:center}
   .shape{width:34px; height:34px; flex:0 0 34px}
-  table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:12px; border:1px solid var(--line)}
+  table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden;
+    border-radius:12px; border:1px solid var(--line)}
   th, td{padding:10px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:middle}
   th{background:#f9fafb; font-size:14px}
   tr:last-child td{border-bottom:none}
   .options{display:flex; gap:12px; flex-wrap:wrap}
-  label.opt{
-    display:flex; align-items:center; gap:8px; padding:8px 10px; border:1px solid #d1d5db;
-    border-radius:10px; cursor:pointer; user-select:none; background:#fff
-  }
+  label.opt{display:flex; align-items:center; gap:8px; padding:8px 10px; border:1px solid #d1d5db;
+    border-radius:10px; cursor:pointer; user-select:none; background:#fff}
   label.opt:hover{box-shadow:0 2px 10px rgba(0,0,0,.05)}
   input[type=radio]{accent-color:#111827; transform:scale(1.05)}
-  .btn{
-    display:inline-block; padding:10px 16px; border-radius:10px; border:2px solid #111827;
-    background:#111827; color:#fff; font-weight:700; cursor:pointer;
-  }
+  .btn{display:inline-block; padding:10px 16px; border-radius:10px; border:2px solid #111827;
+    background:#111827; color:#fff; font-weight:700; cursor:pointer;}
   .btn.secondary{background:#fff; color:#111827}
   .result{margin-top:12px; font-weight:700}
   .good{color:var(--ok)} .bad{color:var(--bad)}
   .footer-note{font-size:12px; color:var(--sub)}
   svg{width:100%; height:100%}
-
-  /* area nav kecil di dalam soal (Kembali - Lanjut) */
-  .inline-nav{
-    display:flex; align-items:center; gap:10px; margin-top:12px; justify-content:center;
-  }
+  .inline-nav{display:flex; align-items:center; gap:10px; margin-top:12px; justify-content:center;}
   .nav-btn { flex:0 0 auto; min-width:88px; text-align:center; }
+  @media(max-width:420px){.nav-btn{min-width:70px; padding:8px}}
 
-  @media(max-width:420px){
-    .nav-btn{min-width:70px; padding:8px}
-  }
+  .page-title-box{background:linear-gradient(90deg, rgba(59,130,246,0.12), rgba(59,130,246,0.08));
+    border:2px solid var(--blue); color:var(--blue); padding:12px 16px; border-radius:12px;
+    max-width:520px; margin:0 auto 18px; text-align:center; font-weight:800; letter-spacing:0.6px;
+    box-shadow:0 6px 20px rgba(59,130,246,0.06);}
+  .label-box{display:inline-block; background:var(--blue); color:#fff; padding:8px 12px;
+    border-radius:10px; font-weight:800; margin-bottom:12px; font-size:14px;}
 
-  /* === Penambahan styling untuk judul blue box & kotak 'Latihan Soal 6' === */
-  .page-title-box{
-    background:linear-gradient(90deg, rgba(59,130,246,0.12), rgba(59,130,246,0.08));
-    border:2px solid var(--blue);
-    color:var(--blue);
-    padding:12px 16px;
-    border-radius:12px;
-    max-width:520px;
-    margin:0 auto 18px;
-    text-align:center;
-    font-weight:800;
-    letter-spacing:0.6px;
-    box-shadow:0 6px 20px rgba(59,130,246,0.06);
-  }
-  .label-box{
-    display:inline-block;
-    background:var(--blue);
-    color:#ffffff;
-    padding:8px 12px;
-    border-radius:10px;
-    font-weight:800;
-    margin-bottom:12px;
-    font-size:14px;
-  }
+  /* Modal pembahasan */
+  .modal{position:fixed; inset:0; background:rgba(0,0,0,.65); display:none;
+    justify-content:center; align-items:center; z-index:1000;}
+  .modal-content{background:#fff; padding:12px; border-radius:12px; max-width:800px; width:90%;
+    position:relative; box-shadow:0 8px 30px rgba(0,0,0,0.25);}
+  .video-box{position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px;}
+  .video-box iframe{position:absolute; top:0; left:0; width:100%; height:100%;}
+  .modal-controls{display:flex; justify-content:space-between; margin-top:8px;}
+  .modal-controls button{flex:1; margin:0 4px;}
 </style>
 </head>
 <body>
 
 <main class="wrap">
 
-  <!-- Judul utama baru (kotak biru) -->
-  <div class="page-title-box" role="banner" aria-label="Judul Latihan">
-    LATIHAN SOAL ANBK
-  </div>
+  <div class="page-title-box">LATIHAN SOAL ANBK</div>
 
   <div class="layout">
-    <!-- KIRI: Teks Soal & Pola -->
+    <!-- KIRI -->
     <section class="card">
-      <!-- Kotak kecil 'Latihan Soal 6' -->
       <div class="label-box">Latihan Soal 6</div>
-
       <h2>Rangkaian Bangun Datar</h2>
-      <p>
-        Dinda siswa kelas 2. Hari ini ada pelajaran prakarya. Dinda membuat rangkaian dari 15 buah bangun datar.
-        Bangun datar tersebut disusun membentuk pola. Lihatlah pola yang disusun Dinda berikut.
-        Pada pola berikut, baru 8 bangun datar yang terpasang.
-      </p>
-
-      <!-- Pola 8 bentuk -->
-      <div class="pattern" aria-label="Pola 8 bangun datar">
-        <div class="seq">
-          <div class="shape"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="var(--red)"/></svg></div>
-          <div class="shape"><svg viewBox="0 0 100 100"><rect x="15" y="15" width="70" height="70" rx="4" fill="var(--green)"/></svg></div>
-          <div class="shape"><svg viewBox="0 0 100 100"><polygon points="50,12 88,88 12,88" fill="var(--blue)"/></svg></div>
-          <div class="shape"><svg viewBox="0 0 100 100"><polygon fill="var(--purple)" points="50,8 61,38 94,38 66,56 76,88 50,69 24,88 34,56 6,38 39,38"/></svg></div>
-          <div class="shape"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="var(--red)"/></svg></div>
-          <div class="shape"><svg viewBox="0 0 100 100"><rect x="15" y="15" width="70" height="70" rx="4" fill="var(--green)"/></svg></div>
-          <div class="shape"><svg viewBox="0 0 100 100"><polygon points="50,12 88,88 12,88" fill="var(--blue)"/></svg></div>
-          <div class="shape"><svg viewBox="0 0 100 100"><polygon fill="var(--purple)" points="50,8 61,38 94,38 66,56 76,88 50,69 24,88 34,56 6,38 39,38"/></svg></div>
-        </div>
-      </div>
-
-      <p>Dinda akan melanjutkan pola di atas sampai terbentuk rangkaian sesuai rencananya.</p>
-
-      <!-- Sumber soal + gambar -->
+      <p>Dinda siswa kelas 2 ...</p>
+      <div class="pattern"><div class="seq">
+        <div class="shape"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="var(--red)"/></svg></div>
+        <div class="shape"><svg viewBox="0 0 100 100"><rect x="15" y="15" width="70" height="70" rx="4" fill="var(--green)"/></svg></div>
+        <div class="shape"><svg viewBox="0 0 100 100"><polygon points="50,12 88,88 12,88" fill="var(--blue)"/></svg></div>
+        <div class="shape"><svg viewBox="0 0 100 100"><polygon fill="var(--purple)" points="50,8 61,38 94,38 66,56 76,88 50,69 24,88 34,56 6,38 39,38"/></svg></div>
+      </div></div>
+      <p>Dinda akan melanjutkan pola di atas ...</p>
       <div style="text-align:center; margin:16px 0;">
         <p class="footer-note"><strong>Sumber Soal: ANBK SD Numerasi</strong></p>
-        <img src="https://i.imgur.com/iRyhetW.png" alt="Gambar pola lanjutan" style="width:100%; max-width:1000px; height:auto; border-radius:10px;">
+        <img src="https://i.imgur.com/iRyhetW.png" style="width:100%; max-width:1000px; border-radius:10px;">
       </div>
     </section>
 
-    <!-- KANAN: Tabel Pemasangan -->
+    <!-- KANAN -->
     <section class="card">
       <h2>Pasangkan urutan dengan jenis bangun datar</h2>
       <form id="formSoal">
         <table>
-          <thead>
-            <tr><th style="width:110px">Urutan Ke-</th><th>Pilihan Bentuk</th></tr>
-          </thead>
+          <thead><tr><th>Urutan</th><th>Pilihan Bentuk</th></tr></thead>
           <tbody>
-            <tr>
-              <td><strong>9</strong></td>
-              <td class="options">
-                <label class="opt"><input type="radio" name="n9" value="square" />Persegi</label>
-                <label class="opt"><input type="radio" name="n9" value="triangle" />Segitiga</label>
-                <label class="opt"><input type="radio" name="n9" value="star" />Bintang</label>
-                <label class="opt"><input type="radio" name="n9" value="circle" />Lingkaran</label>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>11</strong></td>
-              <td class="options">
-                <label class="opt"><input type="radio" name="n11" value="square" />Persegi</label>
-                <label class="opt"><input type="radio" name="n11" value="triangle" />Segitiga</label>
-                <label class="opt"><input type="radio" name="n11" value="star" />Bintang</label>
-                <label class="opt"><input type="radio" name="n11" value="circle" />Lingkaran</label>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>14</strong></td>
-              <td class="options">
-                <label class="opt"><input type="radio" name="n14" value="square" />Persegi</label>
-                <label class="opt"><input type="radio" name="n14" value="triangle" />Segitiga</label>
-                <label class="opt"><input type="radio" name="n14" value="star" />Bintang</label>
-                <label class="opt"><input type="radio" name="n14" value="circle" />Lingkaran</label>
-              </td>
-            </tr>
+            <tr><td><strong>9</strong></td><td class="options">
+              <label class="opt"><input type="radio" name="n9" value="square">Persegi</label>
+              <label class="opt"><input type="radio" name="n9" value="triangle">Segitiga</label>
+              <label class="opt"><input type="radio" name="n9" value="star">Bintang</label>
+              <label class="opt"><input type="radio" name="n9" value="circle">Lingkaran</label>
+            </td></tr>
+            <tr><td><strong>11</strong></td><td class="options">
+              <label class="opt"><input type="radio" name="n11" value="square">Persegi</label>
+              <label class="opt"><input type="radio" name="n11" value="triangle">Segitiga</label>
+              <label class="opt"><input type="radio" name="n11" value="star">Bintang</label>
+              <label class="opt"><input type="radio" name="n11" value="circle">Lingkaran</label>
+            </td></tr>
+            <tr><td><strong>14</strong></td><td class="options">
+              <label class="opt"><input type="radio" name="n14" value="square">Persegi</label>
+              <label class="opt"><input type="radio" name="n14" value="triangle">Segitiga</label>
+              <label class="opt"><input type="radio" name="n14" value="star">Bintang</label>
+              <label class="opt"><input type="radio" name="n14" value="circle">Lingkaran</label>
+            </td></tr>
           </tbody>
         </table>
 
-        <div style="display:flex; gap:10px; margin-top:14px; align-items:center">
+        <div style="display:flex; gap:10px; margin-top:14px;">
           <button type="button" class="btn" id="cekBtn">Periksa Jawaban</button>
           <button type="reset" class="btn secondary" id="resetBtn">Reset</button>
+          <button type="button" class="btn secondary" id="pembahasanBtn" disabled>Pembahasan</button>
         </div>
 
-        <!-- Navigasi ke AKM.html -->
         <div class="inline-nav">
-          <div class="nav-btn">
-            <a href="AKM.html" class="btn secondary">Kembali</a>
-          </div>
-          <div class="nav-btn">
-            <a href="AKM.html" class="btn secondary">Lanjut</a>
-          </div>
+          <div class="nav-btn"><a href="AKM.html" class="btn secondary">Kembali</a></div>
+          <div class="nav-btn"><a href="AKM.html" class="btn secondary">Lanjut</a></div>
         </div>
 
         <div id="hasil" class="result"></div>
@@ -195,37 +134,55 @@
   </div>
 </main>
 
+<!-- Modal Youtube -->
+<div class="modal" id="pembahasanModal">
+  <div class="modal-content">
+    <div class="video-box">
+      <iframe id="ytFrame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="modal-controls">
+      <button class="btn secondary" id="stopVideo">Stop</button>
+      <button class="btn secondary" id="closeModal">Keluar</button>
+    </div>
+  </div>
+</div>
+
 <script>
-  const answerKey = { n9: "circle", n11: "triangle", n14: "square" };
+  const answerKey = { n9:"circle", n11:"triangle", n14:"square" };
   const cekBtn = document.getElementById("cekBtn");
   const hasil  = document.getElementById("hasil");
   const form   = document.getElementById("formSoal");
+  const pembahasanBtn = document.getElementById("pembahasanBtn");
+  const modal = document.getElementById("pembahasanModal");
+  const ytFrame = document.getElementById("ytFrame");
+  const stopBtn = document.getElementById("stopVideo");
+  const closeBtn = document.getElementById("closeModal");
 
   cekBtn.addEventListener("click", () => {
     const data = new FormData(form);
-    let correct = 0, answered = 0;
-    Object.keys(answerKey).forEach(name => {
-      const value = data.get(name);
-      if (value) answered++;
-      if (value === answerKey[name]) correct++;
+    let correct=0, answered=0;
+    Object.keys(answerKey).forEach(name=>{
+      const v=data.get(name); if(v) answered++;
+      if(v===answerKey[name]) correct++;
     });
-    if (answered < 3) {
-      hasil.textContent = "Lengkapi semua jawaban dulu ya 😊";
-      hasil.className = "result";
-      return;
-    }
-    if (correct === 3) {
-      hasil.textContent = "Hebat! Semua benar 🎉 (9=Lingkaran, 11=Segitiga, 14=Persegi)";
-      hasil.className = "result good";
-    } else {
-      hasil.textContent = `Masih ada yang keliru. Skor: ${correct}/3. Coba lagi ya!`;
-      hasil.className = "result bad";
-    }
+    if(answered<3){ hasil.textContent="Lengkapi semua jawaban dulu ya 😊"; hasil.className="result"; return;}
+    if(correct===3){ hasil.textContent="Hebat! Semua benar 🎉 (9=Lingkaran, 11=Segitiga, 14=Persegi)"; hasil.className="result good";}
+    else{ hasil.textContent=`Masih ada yang keliru. Skor: ${correct}/3. Coba lagi ya!`; hasil.className="result bad";}
+    pembahasanBtn.disabled=false; // aktifkan tombol pembahasan
   });
 
-  document.getElementById("resetBtn").addEventListener("click", () => {
-    hasil.textContent = "";
-    hasil.className = "result";
+  document.getElementById("resetBtn").addEventListener("click", ()=>{
+    hasil.textContent=""; hasil.className="result"; pembahasanBtn.disabled=true;
+  });
+
+  // Tampilkan modal youtube
+  pembahasanBtn.addEventListener("click", ()=>{
+    modal.style.display="flex";
+    ytFrame.src="https://www.youtube.com/embed/V8ora0zRxn4?start=72&end=213&autoplay=1";
+  });
+  stopBtn.addEventListener("click", ()=>{ ytFrame.src=""; });
+  closeBtn.addEventListener("click", ()=>{
+    ytFrame.src=""; modal.style.display="none";
   });
 </script>
 </body>

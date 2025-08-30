@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kuis Membaca</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       font-family: "Comic Sans MS", cursive, sans-serif;
       background: #f0f9f7;
@@ -17,16 +15,29 @@
       margin-left: auto;
       margin-right: auto;
     }
-    .judul-utama {
+    .judul-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       background: #3498db;
       color: white;
-      text-align: center;
       padding: 12px;
       font-size: 1.4em;
       font-weight: bold;
       border-radius: 10px;
       margin-bottom: 15px;
     }
+    .judul-container button {
+      background: white;
+      color: #3498db;
+      font-weight: bold;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.8em;
+    }
+    .judul-container button:hover { background: #ecf0f1; }
     .judul-sub {
       background: #dff0ff;
       color: #2c3e50;
@@ -62,11 +73,7 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
       font-size: 1em;
     }
-    h2 {
-      text-align: center;
-      color: #2c3e50;
-      font-size: 1.3em;
-    }
+    h2 { text-align: center; color: #2c3e50; font-size: 1.3em; }
     button {
       margin-top: 8px;
       padding: 8px 12px;
@@ -77,24 +84,55 @@
       cursor: pointer;
       font-size: 0.9em;
     }
-    button:hover {
-      background: #2980b9;
-    }
+    button:hover { background: #2980b9; }
     .benar { color: green; font-weight: bold; }
     .salah { color: red; font-weight: bold; }
 
-    /* Tambahan agar teks lebih nyaman dibaca di layar kecil */
+    .footer-img {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .footer-img img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    /* Tombol ke atas */
+    #toTopBtn {
+      display: none; /* sembunyi dulu */
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 99;
+      background: #3498db;
+      color: white;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    }
+    #toTopBtn:hover { background: #2980b9; }
+
     @media (max-width: 480px) {
       body { padding: 8px; font-size: 0.95em; }
-      .judul-utama { font-size: 1.2em; padding: 10px; }
+      .judul-container { font-size: 1.1em; padding: 10px; }
       .judul-sub { font-size: 1.05em; padding: 8px; }
       h2 { font-size: 1.1em; }
+      .judul-container button { font-size: 0.7em; padding: 5px 8px; }
     }
   </style>
 </head>
 <body>
 
-<div class="judul-utama">SOAL LATIHAN ANBK</div>
+<div class="judul-container">
+  <button onclick="window.location.href='literasi.html'">⟵ Kembali</button>
+  <div>SOAL LATIHAN ANBK</div>
+  <button onclick="window.location.href='literasi.html'">Lanjut ⟶</button>
+</div>
+
 <div class="judul-sub">Soal Literasi 1</div>
 
 <h2>Dokter Buku</h2>
@@ -126,7 +164,7 @@
   Tuti akhirnya mendapat gelar baru, "Dokter Buku".</p>
 </div>
 
-<!-- Soal tetap sama -->
+<!-- Soal -->
 <div class="soal">
   <p><b>1. Gelar apa yang akhirnya didapatkan oleh Tuti?</b></p>
   <input type="text" id="jawab1">
@@ -168,6 +206,13 @@
   <button onclick="cek4()">Periksa</button>
   <p id="hasil4"></p>
 </div>
+
+<div class="footer-img">
+  <img src="https://i.imgur.com/9LYqA8G.png" alt="Gambar tambahan">
+</div>
+
+<!-- Tombol ke atas -->
+<button id="toTopBtn" onclick="scrollToTop()">⬆️</button>
 
 <script>
 function cek1() {
@@ -214,6 +259,19 @@ function cek4() {
   } else {
     document.getElementById("hasil4").innerHTML = "<span class='salah'>Belum tepat, sifat Tuti adalah Jujur dan Peduli.</span>";
   }
+}
+
+/* Tombol ke atas */
+let toTopBtn = document.getElementById("toTopBtn");
+window.onscroll = function() {
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    toTopBtn.style.display = "block";
+  } else {
+    toTopBtn.style.display = "none";
+  }
+};
+function scrollToTop() {
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 </script>
 

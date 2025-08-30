@@ -1,0 +1,222 @@
+kunci jawaban no 1 mosnter buku
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuis Membaca</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      background: #f0f9f7;
+      margin: 0;
+      padding: 10px;
+      max-width: 800px; 
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .judul-utama {
+      background: #3498db;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 1.4em;
+      font-weight: bold;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .judul-sub {
+      background: #dff0ff;
+      color: #2c3e50;
+      text-align: center;
+      padding: 10px;
+      font-size: 1.2em;
+      font-weight: bold;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      border: 2px solid #3498db;
+    }
+    .teks-bacaan {
+      background: #fff8e1;
+      border-left: 5px solid #f39c12;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      font-size: 1em;
+      line-height: 1.4;
+    }
+    .teks-bacaan img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 10px auto;
+      border-radius: 8px;
+    }
+    .soal {
+      margin-bottom: 15px;
+      background: #fff;
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      font-size: 1em;
+    }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      font-size: 1.3em;
+    }
+    button {
+      margin-top: 8px;
+      padding: 8px 12px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9em;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    .benar { color: green; font-weight: bold; }
+    .salah { color: red; font-weight: bold; }
+
+    /* Tambahan agar teks lebih nyaman dibaca di layar kecil */
+    @media (max-width: 480px) {
+      body { padding: 8px; font-size: 0.95em; }
+      .judul-utama { font-size: 1.2em; padding: 10px; }
+      .judul-sub { font-size: 1.05em; padding: 8px; }
+      h2 { font-size: 1.1em; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="judul-utama">SOAL LATIHAN ANBK</div>
+<div class="judul-sub">Soal Literasi 1</div>
+
+<h2>Dokter Buku</h2>
+
+<div class="teks-bacaan">
+  <p>Sekolah mengadakan perlombaan.</p>
+  <img src="https://i.imgur.com/IJTDZBO.png" alt="Perlombaan">
+
+  <p>Anak yang paling banyak membaca buku akan menjadi pemenang.  
+  Dia akan mendapat gelar "Monster Buku".  
+  Aku dan Tuti ikut meminjam beberapa buku di perpustakaan.</p>
+
+  <img src="https://i.imgur.com/R8wM6J4.png" alt="Buku rusak">
+  <p>Buku yang dipinjam Tuti ternyata halamannya banyak yang lepas.  
+  Ia dibantu ibunya memperbaiki buku yang rusak di rumah.</p>
+
+  <img src="https://i.imgur.com/zCPnhh5.png" alt="Semangat membaca">
+  <p>Tuti jadi bersemangat untuk meminjam lebih banyak buku.
+  Buku yang dipinjam adalah buku yang rusak dan perlu diperbaiki.</p>
+
+  <img src="https://i.imgur.com/Ug6qxFw.png" alt="Monster Buku">
+  <p>Tibalah saatnya gelar "Monster Buku" diumumkan.  
+  Gelar itu diraih oleh Tuti.  
+  Tuti diminta tampil untuk menceritakan isi buku yang dipinjam.  
+  Tuti langsung maju.  
+  Dengan gugup Tuti bercerita.  
+  Ia meminjam banyak buku hanya untuk diperbaiki, bukan dibaca.  
+  Gelar "Monster Buku" tidak jadi diberikan.  
+  Tuti akhirnya mendapat gelar baru, "Dokter Buku".</p>
+</div>
+
+<!-- Soal tetap sama -->
+<div class="soal">
+  <p><b>1. Gelar apa yang akhirnya didapatkan oleh Tuti?</b></p>
+  <input type="text" id="jawab1">
+  <button onclick="cek1()">Periksa</button>
+  <p id="hasil1"></p>
+</div>
+
+<div class="soal">
+  <p><b>2. Bagaimana cara mendapatkan gelar "Monster Buku" dalam perlombaan tersebut?</b><br>
+  Klik pilihan <b>Benar</b> atau <b>Salah</b> untuk setiap pernyataan sesuai isi teks!</p>
+
+  <p>a. Gelar "Monster Buku" diberikan kepada anak yang dapat menceritakan dengan baik isi buku yang dipinjam.</p>
+  <input type="radio" name="q2a" value="benar"> Benar
+  <input type="radio" name="q2a" value="salah"> Salah
+
+  <p>b. Gelar "Monster Buku" diberikan kepada anak yang paling rajin meminjam serta membaca buku dari perpustakaan.</p>
+  <input type="radio" name="q2b" value="benar"> Benar
+  <input type="radio" name="q2b" value="salah"> Salah
+  <br><button onclick="cek2()">Periksa</button>
+  <p id="hasil2"></p>
+</div>
+
+<div class="soal">
+  <p><b>3. Apa yang membuat Tuti bersemangat untuk meminjam banyak buku?</b></p>
+  <input type="radio" name="q3" value="monster"> Meraih gelar "Monster Buku"<br>
+  <input type="radio" name="q3" value="perlombaan"> Mengikuti perlombaan di sekolah.<br>
+  <input type="radio" name="q3" value="dokter"> Meraih gelar "Dokter Buku".<br>
+  <input type="radio" name="q3" value="memperbaiki"> Memperbaiki buku-buku yang rusak.<br>
+  <button onclick="cek3()">Periksa</button>
+  <p id="hasil3"></p>
+</div>
+
+<div class="soal">
+  <p><b>4. Bagaimana sifat Tuti berdasarkan cerita tersebut?</b><br>
+  Pilih jawaban yang benar dengan memberi tanda (✓)! Jawaban benar lebih dari satu.</p>
+  <input type="checkbox" id="q4a" value="jujur"> Jujur<br>
+  <input type="checkbox" id="q4b" value="gugup"> Gugup<br>
+  <input type="checkbox" id="q4c" value="peduli"> Peduli<br>
+  <button onclick="cek4()">Periksa</button>
+  <p id="hasil4"></p>
+</div>
+
+<script>
+function cek1() {
+  let j = document.getElementById("jawab1").value.trim().toLowerCase();
+  if(j.includes("dokter")) {
+    document.getElementById("hasil1").innerHTML = "<span class='benar'>Benar! Gelar yang didapat Tuti adalah 'Dokter Buku'.</span>";
+  } else {
+    document.getElementById("hasil1").innerHTML = "<span class='salah'>Salah, seharusnya 'Dokter Buku'.</span>";
+  }
+}
+
+function cek2() {
+  let a = document.querySelector('input[name="q2a"]:checked');
+  let b = document.querySelector('input[name="q2b"]:checked');
+  if(a && b) {
+    let hasil = "";
+    hasil += (a.value === "salah") ? "<p class='benar'>Pernyataan a: Benar, seharusnya Salah.</p>" : "<p class='salah'>Pernyataan a: Salah, seharusnya Salah.</p>";
+    hasil += (b.value === "benar") ? "<p class='benar'>Pernyataan b: Benar.</p>" : "<p class='salah'>Pernyataan b: Salah, seharusnya Benar.</p>";
+    document.getElementById("hasil2").innerHTML = hasil;
+  } else {
+    document.getElementById("hasil2").innerHTML = "<span class='salah'>Jawab semua dulu!</span>";
+  }
+}
+
+function cek3() {
+  let q3 = document.querySelector('input[name="q3"]:checked');
+  if(!q3) {
+    document.getElementById("hasil3").innerHTML = "<span class='salah'>Pilih salah satu jawaban!</span>";
+    return;
+  }
+  if(q3.value === "memperbaiki") {
+    document.getElementById("hasil3").innerHTML = "<span class='benar'>Benar! Tuti bersemangat karena ingin memperbaiki buku-buku yang rusak.</span>";
+  } else {
+    document.getElementById("hasil3").innerHTML = "<span class='salah'>Salah, jawabannya adalah 'Memperbaiki buku-buku yang rusak'.</span>";
+  }
+}
+
+function cek4() {
+  let jujur = document.getElementById("q4a").checked;
+  let gugup = document.getElementById("q4b").checked;
+  let peduli = document.getElementById("q4c").checked;
+  if(jujur && peduli && !gugup) {
+    document.getElementById("hasil4").innerHTML = "<span class='benar'>Benar! Sifat Tuti adalah Jujur dan Peduli.</span>";
+  } else {
+    document.getElementById("hasil4").innerHTML = "<span class='salah'>Belum tepat, sifat Tuti adalah Jujur dan Peduli.</span>";
+  }
+}
+</script>
+
+</body>
+</html>

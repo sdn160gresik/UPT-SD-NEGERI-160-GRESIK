@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latihan Soal ANBK</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      padding: 10px;
+      margin: 0;
+    }
+    .judul {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      position: relative;
+    }
+    .judul button {
+      position: absolute;
+      top: 10px;
+      padding: 5px 10px;
+      background: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .judul .kembali {
+      left: 10px;
+    }
+    .judul .lanjut {
+      right: 10px;
+    }
+    .soal-box {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 20px;
+    }
+    .teks img {
+      max-width: 100%;
+      display: block;
+      margin: auto;
+    }
+    .teks h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+    .soal {
+      margin-bottom: 20px;
+    }
+    .btn-atas {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      padding: 10px 15px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .bawah {
+      margin-top: 40px;
+      text-align: center;
+    }
+    .hasil {
+      margin-top: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="judul">
+    <button class="kembali" onclick="window.location.href='AKM.html'">Kembali</button>
+    Latihan Soal ANBK
+    <button class="lanjut" onclick="window.location.href='AKM.html'">Lanjut</button>
+  </div>
+
+  <div class="soal-box">
+    Soal Literasi 2
+  </div>
+
+  <div class="teks">
+    <img src="https://i.imgur.com/PrhoGAE.png" alt="Gambar Kelelawar">
+    <h2>Kelelawar Sang Bintang Malam</h2>
+    <p>Kelelawar merupakan binatang yang aktif di malam hari. Karena itulah kelelawar disebut hewan nokturnal. Saat malam, kelelawar mencari mangsa mengandalkan telinga sebagai indra pendengaran.</p>
+    <p>Makanan utama kelelawar buah-buahan dan serangga kecil. Dengan kemampuan ekolokasi, kelelawar dapat mendeteksi adanya mangsa melalui pantulan suara. Indra pendengaran kelelawar sangat tajam sehingga mampu mengetahui posisi mangsa meskipun dalam keadaan gelap gulita.</p>
+  </div>
+
+  <!-- Soal 1 -->
+  <div class="soal">
+    <p>1. Apa makanan kelelawar?</p>
+    <label><input type="radio" name="soal1" value="a"> Buah-buahan.</label><br>
+    <label><input type="radio" name="soal1" value="b"> Semua jenis serangga.</label><br>
+    <label><input type="radio" name="soal1" value="c"> Serangga yang kecil.</label><br>
+    <label><input type="radio" name="soal1" value="d"> Dahan pohon.</label><br>
+    <button onclick="cekJawaban(1)">Cek Jawaban</button>
+    <div id="hasil1" class="hasil"></div>
+  </div>
+
+  <!-- Soal 2 -->
+  <div class="soal">
+    <p>2. Bagaimana cara kelelawar untuk mencari makanannya?</p>
+    <label>Klik pilihan <b>Benar</b> atau <b>Salah</b> untuk setiap pernyataan sesuai isi teks!</label><br><br>
+    <table border="1" cellpadding="5" cellspacing="0">
+      <tr>
+        <th>Pernyataan</th>
+        <th>Benar</th>
+        <th>Salah</th>
+      </tr>
+      <tr>
+        <td>Kelelawar mengandalkan getaran suara dan pendengarannya untuk menemukan arah sumber makanan.</td>
+        <td><input type="radio" name="soal2a" value="benar"></td>
+        <td><input type="radio" name="soal2a" value="salah"></td>
+      </tr>
+      <tr>
+        <td>Pantulan getaran suara kelelawar menunjukkan jenis makanan yang dicarinya.</td>
+        <td><input type="radio" name="soal2b" value="benar"></td>
+        <td><input type="radio" name="soal2b" value="salah"></td>
+      </tr>
+    </table>
+    <br>
+    <button onclick="cekJawaban(2)">Cek Jawaban</button>
+    <div id="hasil2" class="hasil"></div>
+  </div>
+
+  <!-- Soal 3 -->
+  <div class="soal">
+    <p>3. Kelelawar menunjukkan perbedaan perilaku di siang dan malam hari. Manakah pernyataan yang memuat perbedaan perilaku tersebut?</p>
+    <label><input type="checkbox" name="soal3" value="1"> Pada siang hari kelelawar aktif bersuara dibandingkan malam hari.</label><br>
+    <label><input type="checkbox" name="soal3" value="2"> Kelelawar aktif di malam hari dan pasif di siang hari.</label><br>
+    <label><input type="checkbox" name="soal3" value="3"> Kelelawar mencari makan di malam hari dan tidur di siang hari.</label><br>
+    <button onclick="cekJawaban(3)">Cek Jawaban</button>
+    <div id="hasil3" class="hasil"></div>
+  </div>
+
+  <button class="btn-atas" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Ke Atas</button>
+
+  <div class="bawah">
+    <img src="https://i.imgur.com/QPxZpSB.png" alt="Gambar Bawah">
+  </div>
+
+  <script>
+    function cekJawaban(no) {
+      let hasilDiv = document.getElementById("hasil" + no);
+
+      if (no === 1) {
+        let jawabanBenar = ["a","c"];
+        let pilihan = document.querySelector('input[name="soal1"]:checked');
+        if (!pilihan) {
+          hasilDiv.innerHTML = "<span style='color:red'>Silakan pilih jawaban dulu.</span>";
+          return;
+        }
+        hasilDiv.innerHTML = (jawabanBenar.includes(pilihan.value)) 
+          ? "<span style='color:green'>Jawaban benar ✔</span>" 
+          : "<span style='color:red'>Jawaban salah ✘</span>";
+      } 
+      else if (no === 2) {
+        let p1 = document.querySelector('input[name="soal2a"]:checked');
+        let p2 = document.querySelector('input[name="soal2b"]:checked');
+        if (!p1 || !p2) {
+          hasilDiv.innerHTML = "<span style='color:red'>Silakan jawab semua pernyataan.</span>";
+          return;
+        }
+        let benar1 = (p1.value === "benar");
+        let benar2 = (p2.value === "salah");
+        hasilDiv.innerHTML = (benar1 && benar2) 
+          ? "<span style='color:green'>Jawaban benar ✔</span>" 
+          : "<span style='color:red'>Jawaban salah ✘</span>";
+      } 
+      else if (no === 3) {
+        let pilihan = document.querySelectorAll('input[name="soal3"]:checked');
+        let jawabanBenar = ["2","3"];
+        let jawabanUser = Array.from(pilihan).map(p => p.value);
+        if (jawabanUser.length === 0) {
+          hasilDiv.innerHTML = "<span style='color:red'>Silakan pilih jawaban dulu.</span>";
+          return;
+        }
+        hasilDiv.innerHTML = (jawabanUser.sort().toString() === jawabanBenar.sort().toString()) 
+          ? "<span style='color:green'>Jawaban benar ✔</span>" 
+          : "<span style='color:red'>Jawaban salah ✘</span>";
+      }
+    }
+  </script>
+
+</body>
+</html>

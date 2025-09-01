@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Latihan Soal ANBK - Soal Numerasi 7</title>
+  <style>
+    :root{
+      --biru:#1e88e5;
+      --biru-tua:#1565c0;
+      --bg:#f7fbff;
+      --card:#ffffff;
+      --teks:#222;
+      --abu:#e8f1ff;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+      background:var(--bg);
+      color:var(--teks);
+      line-height:1.5;
+    }
+    .wrap{
+      max-width:720px;
+      margin:0 auto;
+      padding:12px 14px 20px;
+    }
+
+    /* Header Judul + Tombol */
+    .header{
+      position:relative;
+      margin:10px 0 14px;
+    }
+    .judul{
+      background:var(--biru);
+      color:#fff;
+      text-align:center;
+      padding:12px 48px;
+      border-radius:12px;
+      font-weight:700;
+      font-size:18px;
+      box-shadow:0 4px 10px rgba(21,101,192,.25);
+    }
+    .btn-head{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:#fff;
+      color:var(--biru-tua);
+      border:2px solid var(--biru);
+      padding:8px 10px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+      box-shadow:0 2px 6px rgba(0,0,0,.08);
+      transition:.2s;
+    }
+    .btn-head:hover{background:var(--abu)}
+    .btn-lanjut{left:8px}
+    .btn-kembali{right:8px}
+
+    /* Kotak subjudul */
+    .subjudul{
+      background:#fff;
+      border:2px solid var(--biru);
+      color:var(--biru-tua);
+      border-radius:12px;
+      padding:10px 14px;
+      font-weight:700;
+      text-align:center;
+      margin-bottom:14px;
+      box-shadow:0 2px 8px rgba(0,0,0,.06);
+    }
+
+    /* Konten soal */
+    .card{
+      background:var(--card);
+      border-radius:14px;
+      padding:14px;
+      box-shadow:0 4px 16px rgba(0,0,0,.08);
+    }
+    .teks-tengah{
+      text-align:center;
+      margin:0 0 12px;
+    }
+    .gambar-soal{
+      max-width:80%;
+      height:auto;
+      display:block;
+      margin:0 auto 12px;
+      border-radius:10px;
+    }
+    .gambar-opsi{
+      max-width:150px;
+      height:auto;
+      border-radius:8px;
+      display:block;
+    }
+
+    /* Pilihan jawaban */
+    .opsi{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+    .opsi label{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      border:2px solid #e5e9f2;
+      border-radius:12px;
+      padding:8px;
+      background:#fff;
+      cursor:pointer;
+      transition:.2s;
+    }
+    .opsi input{
+      width:18px;height:18px;
+      accent-color:var(--biru);
+      flex:0 0 auto;
+    }
+    .opsi label:hover{border-color:var(--biru)}
+
+    /* Tombol cek jawaban */
+    .cek-btn{
+      margin-top:14px;
+      background:var(--biru);
+      color:#fff;
+      border:none;
+      padding:10px 18px;
+      border-radius:10px;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 4px 12px rgba(30,136,229,.3);
+      transition:.2s;
+    }
+    .cek-btn:hover{background:var(--biru-tua)}
+
+    .hasil{
+      margin-top:10px;
+      font-weight:700;
+      text-align:center;
+      font-size:16px;
+    }
+
+    /* Tombol kembali ke atas */
+    .to-top{
+      position:fixed;
+      right:14px;
+      bottom:88px;
+      background:var(--biru);
+      color:#fff;
+      border:none;
+      border-radius:999px;
+      padding:12px 14px;
+      font-weight:700;
+      box-shadow:0 8px 18px rgba(21,101,192,.35);
+      cursor:pointer;
+      display:none;
+      z-index:50;
+    }
+    .to-top:active{transform:translateY(1px)}
+    .footer-img{
+      margin-top:16px;
+      margin-bottom:130px;
+    }
+    .footer-img img{
+      max-width:60%;
+      height:auto;
+      display:block;
+      margin:0 auto;
+    }
+  </style>
+</head>
+<body id="top">
+  <div class="wrap">
+
+    <!-- Header judul + tombol kiri/kanan -->
+    <div class="header">
+      <a class="btn-head btn-lanjut" href="numerasi.html">➜ Lanjut</a>
+      <div class="judul">Latihan Soal ANBK</div>
+      <a class="btn-head btn-kembali" href="numerasi.html">Kembali</a>
+    </div>
+
+    <!-- Subjudul -->
+    <div class="subjudul">Soal Numerasi 7</div>
+
+    <!-- Kartu Soal -->
+    <div class="card" role="group" aria-labelledby="pertanyaan">
+      <p id="pertanyaan" class="teks-tengah">
+        Indonesia kaya akan motif batiknya. Berikut merupakan salah satu motif batik geometris
+        dengan empat motif A, B, C, dan D yang membentuk suatu pola.
+      </p>
+
+      <img class="gambar-soal" src="https://i.imgur.com/sccmxOZ.png" alt="Motif batik geometris A, B, C, D"/>
+
+      <p class="teks-tengah" style="margin-top:6px;">
+        Urutan motif yang tepat untuk melanjutkan motif batik tersebut adalah ....
+      </p>
+
+      <!-- Pilihan jawaban -->
+      <div class="opsi">
+        <label>
+          <input type="radio" name="jawaban" value="1" />
+          <div>
+            <strong>Pilihan 1</strong><br/>
+            <img class="gambar-opsi" src="https://i.imgur.com/9d5pA6A.png" alt="Pilihan jawaban 1"/>
+          </div>
+        </label>
+
+        <label>
+          <input type="radio" name="jawaban" value="2" />
+          <div>
+            <strong>Pilihan 2</strong><br/>
+            <img class="gambar-opsi" src="https://i.imgur.com/wn4nTED.png" alt="Pilihan jawaban 2"/>
+          </div>
+        </label>
+
+        <label>
+          <input type="radio" name="jawaban" value="3" />
+          <div>
+            <strong>Pilihan 3</strong><br/>
+            <img class="gambar-opsi" src="https://i.imgur.com/XGMuvuL.png" alt="Pilihan jawaban 3"/>
+          </div>
+        </label>
+      </div>
+
+      <!-- Tombol cek jawaban -->
+      <button class="cek-btn" onclick="cekJawaban()">Cek Jawaban</button>
+      <div id="hasil" class="hasil"></div>
+    </div>
+
+    <!-- Gambar bagian bawah -->
+    <div class="footer-img">
+      <img src="https://i.imgur.com/q1y2xns.png" alt="Ilustrasi dekoratif bagian bawah halaman"/>
+    </div>
+  </div>
+
+  <!-- Tombol kembali ke atas -->
+  <button class="to-top" id="toTopBtn">↑ Atas</button>
+
+  <script>
+    // Tombol kembali ke atas
+    const toTopBtn = document.getElementById('toTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 240) {
+        toTopBtn.style.display = 'inline-flex';
+      } else {
+        toTopBtn.style.display = 'none';
+      }
+    });
+    toTopBtn.addEventListener('click', () => {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+
+    // Cek jawaban (jawaban benar = pilihan 1)
+    function cekJawaban(){
+      const jawaban = document.querySelector('input[name="jawaban"]:checked');
+      const hasil = document.getElementById('hasil');
+      if(!jawaban){
+        hasil.textContent = "❗ Silakan pilih jawaban dulu";
+        hasil.style.color = "orange";
+        return;
+      }
+      if(jawaban.value === "1"){
+        hasil.textContent = "✅ Jawaban benar!";
+        hasil.style.color = "green";
+      } else {
+        hasil.textContent = "❌ Jawaban salah!";
+        hasil.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>

@@ -79,6 +79,7 @@
     .progress { height: 10px; background: #2b6d5f; border-radius: 999px; overflow: hidden; border: 1px solid var(--outline); }
     .bar { height: 100%; width: 0%; background: #84f0b8; transition: width .3s ease; }
 
+    /* Container efek meriah */
     .celebration-container {
       pointer-events: none;
       position: fixed;
@@ -87,18 +88,44 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      z-index: 5;
+      z-index: 9999;
     }
+
+    /* Gaya dasar tiap gambar perayaan */
     .celebration-img {
       position: absolute;
-      width: 60px;
-      height: 60px;
-      animation: fall linear forwards;
+      height: auto;            /* jaga proporsionalitas */
+      will-change: transform, opacity, left;
+      user-select: none;
+      pointer-events: none;
+      display: block;
+      /* default animations applied inline for variety */
     }
+
+    /* Animasi jatuh dari atas ke bawah */
     @keyframes fall {
-      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      0% { transform: translateY(-20vh) rotate(0deg); opacity: 1; }
+      60% { opacity: 1; }
       100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
     }
+    /* Animasi goyangan/angin horizontal (alternate) */
+    @keyframes sway {
+      0% { transform: translateX(0px) rotate(0deg); }
+      50% { transform: translateX(20px) rotate(10deg); }
+      100% { transform: translateX(-18px) rotate(-8deg); }
+    }
+
+    /* adaptasi mobile: batasi ukuran maksimal sehingga tetap enak di HP */
+    @media (max-width: 480px) {
+      .celebration-img { max-width: 28vw; }
+    }
+    @media (min-width: 481px) and (max-width: 900px) {
+      .celebration-img { max-width: 14vw; }
+    }
+    @media (min-width: 900px) {
+      .celebration-img { max-width: 110px; }
+    }
+
   </style>
 </head>
 <body>
@@ -251,7 +278,7 @@
       choicesEl.innerHTML = '';
       btnNext.style.display = 'none';
 
-      opts.forEach((val)=>{
+      opts.forEach((val)=> {
         const div = document.createElement('div');
         div.className = 'choice';
         div.textContent = val;
@@ -345,38 +372,126 @@
       bar.style.width = '100%';
       pNo.textContent = totalSoalDipilih;
 
+      // Pilih gambar sesuai rentang nilai (sesuai permintaan)
+      // 90–99, 80–89, 70–79, 60–69, 45–59, 30–44, 0–29
+      // (nilai 100 tetap memicu efek khusus sebelumnya)
       if (pct === 100) {
-        startCelebration();
+        // efek khusus untuk 100 — contoh gambar uang / confetti (tetap dipertahankan)
+        startCelebration("https://i.imgur.com/VkKwPoq.png");
+      } else if (pct >= 90 && pct <= 99) {
+        startCelebration("https://i.imgur.com/YBAc4nA.png");
+      } else if (pct >= 80 && pct <= 89) {
+        startCelebration("https://i.imgur.com/LxJC8eD.png");
+      } else if (pct >= 70 && pct <= 79) {
+        startCelebration("https://i.imgur.com/LxAc7aT.png");
+      } else if (pct >= 60 && pct <= 69) {
+        startCelebration("https://i.imgur.com/mv57c1T.png");
+      } else if (pct >= 45 && pct <= 59) {
+        startCelebration("https://i.imgur.com/1fYaea5.png");
+      } else if (pct >= 30 && pct <= 44) {
+        startCelebration("https://i.imgur.com/PV8BnDp.png");
+      } else if (pct >= 0 && pct <= 29) {
+        startCelebration("https://i.imgur.com/4VhlJMq.png");
       }
     }
 
-    function createFallingImg(){
+    /**
+     * Membuat satu gambar jatuh (proporsional, acak posisi, animasi jatuh + goyangan)
+     * imgUrl: string
+     */
+    function createFallingImg(imgUrl) {
       const img = document.createElement('img');
-      img.src = "https://i.imgur.com/VkKwPoq.png";
+      img.src = imgUrl;
       img.className = "celebration-img";
-      img.style.left = Math.random()*100 + "vw";
-      img.style.animationDuration = (3 + Math.random()*2) + "s";
-      img.style.transform = `rotate(${Math.random()*360}deg) scale(${0.6 + Math.random()*0.8})`;
+
+      // letakkan acak horizontal; gunakan 'left' agar proporsional di layar hp
+      const left = Math.random() * 100; // vw
+      img.style.left = (left) + "vw";
+
+      // ukuran proporsional berdasarkan viewport width (vw) + fallback max-width via CSS
+      const vwSize = (6 + Math.random() * 18); // 6vw..24vw typical
+      img.style.width = vwSize + "vw";
+      img.style.height = "auto";
+
+      // durasi jatuh acak agar terlihat natural
+      const fallDur = 3 + Math.random() * 3.5; // 3s - 6.5s
+      // durasi goyangan (alternate), gunakan sedikit variasi
+      const swayDur = 1.5 + Math.random() * 2.5; // 1.5s - 4s
+
+      // gabungkan dua animasi: fall (sekali) dan sway (alternate looping)
+      img.style.animation = `fall ${fallDur}s linear forwards, sway ${swayDur}s ease-in-out infinite alternate`;
+
+      // supaya putaran acak dan skala acak sedikit
+      img.style.transformOrigin = "50% 50%";
+      img.style.opacity = "0.98";
+
+      // tambahkan delay acak agar tidak semua jatuh bersamaan
+      img.style.animationDelay = (Math.random() * 0.8) + "s";
+
+      // tambahkan ke kontainer
       celebration.appendChild(img);
 
-      img.addEventListener('animationend', ()=> img.remove());
+      // hapus ketika animasi fall selesai (agar tidak menumpuk)
+      // 'fallDur' menentukan kapan harus dihapus (ditambah sedikit buffer)
+      setTimeout(() => {
+        if (img && img.parentNode) img.remove();
+      }, (fallDur + 0.2) * 1000);
     }
 
-    function startCelebration(){
-      if (celebrationInterval) clearInterval(celebrationInterval);
-      celebrationInterval = setInterval(()=> createFallingImg(), 300);
+    /**
+     * Memulai interval pembuatan gambar jatuh sampai di-stop.
+     * imageUrl: gambar yang akan digunakan
+     */
+    function startCelebration(imageUrl) {
+      // hentikan dulu kalau sedang berjalan
+      if (celebrationInterval) {
+        clearInterval(celebrationInterval);
+        celebrationInterval = null;
+      }
+      // bersihkan elemen lama
+      celebration.innerHTML = "";
+
+      // Buat batch awal beragam ukuran/posisi
+      for (let i=0;i<8;i++){
+        // tambahkan sedikit jeda untuk batch awal supaya lebih organik
+        setTimeout(()=> createFallingImg(imageUrl), i * 120);
+      }
+
+      // interval berkelanjutan: terus muncul sampai user klik mulai ulang
+      celebrationInterval = setInterval(()=> {
+        // tiap interval, buat 1-3 gambar acak
+        const count = 1 + Math.floor(Math.random() * 3);
+        for (let i=0;i<count;i++){
+          // berikan jeda kecil antar gambar dalam satu interval
+          setTimeout(()=> createFallingImg(imageUrl), i * 120);
+        }
+      }, 350); // setiap 350ms akan menambahkan beberapa gambar baru
     }
 
     // 🔹 Event listeners
     btnStart.addEventListener('click', startGame);
     btnNext.addEventListener('click', nextQuestion);
     btnSkip.addEventListener('click', skipQuestion);
-    btnRestart.addEventListener('click', ()=>{
+    btnRestart.addEventListener('click', ()=> {
       endScreen.classList.remove('active');
       startScreen.classList.add('active');
-      clearInterval(celebrationInterval);
+      // hentikan perayaan dan bersihkan gambar
+      if (celebrationInterval) {
+        clearInterval(celebrationInterval);
+        celebrationInterval = null;
+      }
       celebration.innerHTML = "";
     });
+
+    // optional: pastikan saat berpindah tab/reload, interval tidak numpuk (safety)
+    window.addEventListener('visibilitychange', () => {
+      if (document.hidden && celebrationInterval) {
+        // nonaktifkan sementara
+        clearInterval(celebrationInterval);
+        celebrationInterval = null;
+      }
+    });
+
   </script>
 </body>
 </html>

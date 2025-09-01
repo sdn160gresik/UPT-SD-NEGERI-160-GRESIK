@@ -1,191 +1,422 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Latihan Perkalian</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Game Perkalian 2–9</title>
   <style>
+    :root {
+      --bg: #2e6e61;
+      --panel: #3c816f;
+      --panel-dark: #2a5c4f;
+      --text: #ffffff;
+      --right: #2ecc71;
+      --wrong: #e74c3c;
+      --neutral: #2f7a68;
+      --outline: rgba(255,255,255,.25);
+    }
+    * { box-sizing: border-box; }
     body {
-      font-family: "Comic Sans MS", cursive, sans-serif;
-      text-align: center;
-      background: linear-gradient(to bottom, #2a4d3f, #18392b);
-      color: white;
       margin: 0;
-      padding: 0;
-      overflow-x: hidden;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(160deg, var(--bg), #24594d 60%);
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+    }
+
+    .app {
+      width: min(880px, 96vw);
+      background: var(--panel);
+      border-radius: 22px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.25), inset 0 0 0 1px var(--outline);
+      padding: clamp(18px, 3.2vw, 28px);
     }
     header {
       display: flex;
-      justify-content: space-around;
       align-items: center;
-      padding: 10px;
-      background: rgba(0,0,0,0.4);
-      font-size: 18px;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
     }
-    .container { margin-top: 20px; padding: 10px; }
-    .pilihan-box {
-      display: flex; flex-wrap: wrap; justify-content: center;
-      gap: 10px; margin-bottom: 20px;
+    .brand {
+      font-weight: 800;
+      letter-spacing: .3px;
     }
-    .pilihan {
-      font-size: 22px; font-weight: bold;
-      padding: 12px 18px; border-radius: 15px;
-      cursor: pointer; border: none; color: white;
-    }
-    .pilihan.acak { background: #16a085; }
-    .pilihan.num2 { background: #e74c3c; }
-    .pilihan.num3 { background: #2980b9; }
-    .pilihan.num4 { background: #8e44ad; }
-    .pilihan.num5 { background: #d35400; }
-    .pilihan.num6 { background: #27ae60; }
-    .pilihan.num7 { background: #c0392b; }
-    .pilihan.num8 { background: #2c3e50; }
-    .pilihan.num9 { background: #f39c12; }
-    .question-box {
-      display: inline-flex; align-items: center; gap: 15px;
-      font-size: 40px; background: rgba(255,255,255,0.1);
-      padding: 15px; border-radius: 20px;
-    }
-    .number, .operator, .result {
-      padding: 12px 20px; border-radius: 15px; font-weight: bold;
-    }
-    .number { background: #ff6b6b; }
-    .operator { background: #8e44ad; }
-    .result { background: #f39c12; }
-    .jawaban-box {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
+    .pill {
+      background: var(--panel-dark);
+      border: 1px solid var(--outline);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      opacity: .95;
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
-    input {
-      font-size: 24px; padding: 8px; width: 100px;
-      text-align: center; border-radius: 10px; border: none;
-    }
-    button.cek-btn {
-      font-size: 18px;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 10px;
-      background: #3498db;
-      color: white;
-      cursor: pointer;
-    }
-    button.cek-btn:hover { background: #2980b9; }
+    .stats { display:flex; gap:8px; flex-wrap: wrap; }
 
-    /* Tombol selesai */
-    .selesai-btn {
-      margin-top: 30px;
-      padding: 12px 20px;
-      font-size: 20px;
-      border: none;
-      border-radius: 15px;
-      background: #e67e22;
-      color: white;
-      cursor: pointer;
-    }
-    .selesai-btn:hover { background: #d35400; }
+    .screen { display:none; }
+    .screen.active { display:block; }
 
-    /* Pesan mengambang tengah layar */
-    .message {
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 24px; font-weight: bold;
-      display: none; background: rgba(0,0,0,0.85);
-      padding: 20px 30px; border-radius: 20px;
-      animation: fadeIn 0.3s;
-      z-index: 9999;
-      max-width: 80%;
+    /* Start Screen */
+    .start {
+      text-align: center;
+      padding: 24px 8px 10px;
+    }
+    .start h1 {
+      margin: 6px 0 10px;
+      font-size: clamp(22px, 4.2vw, 34px);
+    }
+    .grid2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 12px 0 22px;
+    }
+    .card {
+      background: var(--panel-dark);
+      border: 1px solid var(--outline);
+      border-radius: 18px;
+      padding: 14px;
+      text-align: left;
+    }
+    .card label { display:block; font-size:14px; opacity:.9; margin-bottom:6px; }
+    .card select, .card input[type="number"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--outline);
+      background: #2d6356;
+      color: var(--text);
+      font-size: 16px;
+      outline: none;
+    }
+    .btn {
+      background: #58b68c;
+      border: none;
+      color: #0f2e27;
+      font-weight: 700;
+      padding: 12px 18px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: transform .05s ease, filter .2s ease;
+      box-shadow: 0 8px 18px rgba(0,0,0,.18);
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn.secondary { background: #6aa89a; color: #09322a; }
+
+    /* Game Screen */
+    .question {
+      display: grid;
+      place-items: center;
+      background: #2b6d5f;
+      border-radius: 18px;
+      border: 1px solid var(--outline);
+      margin: 12px 0 16px;
+      padding: 18px;
+      min-height: 120px;
       text-align: center;
     }
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translate(-50%, -50%) scale(0.9);}
-      to {opacity: 1; transform: translate(-50%, -50%) scale(1);}
+    .question .expr {
+      font-size: clamp(42px, 9vw, 86px);
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-shadow: 0 4px 0 rgba(0,0,0,.12);
     }
-    .pesan-btn {
-      margin-top: 15px;
-      padding: 10px 18px;
-      font-size: 18px;
-      border: none;
-      border-radius: 12px;
-      background: #27ae60;
-      color: white;
+
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .choice {
+      background: #2f7a68;
+      border: 2px solid rgba(255,255,255,.18);
+      border-radius: 16px;
+      min-height: 68px;
+      display: grid;
+      place-items: center;
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 800;
       cursor: pointer;
-      display: inline-block;
+      user-select: none;
+      transition: transform .04s ease, background .2s ease, border-color .2s ease, filter .2s ease;
     }
-    .pesan-btn:hover { background: #2ecc71; }
+    .choice:hover { filter: brightness(1.05); }
+    .choice:active { transform: translateY(1px); }
+    .choice.correct { background: var(--right); color: #0b4025; border-color: rgba(0,0,0,.08); }
+    .choice.wrong   { background: var(--wrong); color: #fff; border-color: rgba(0,0,0,.08); }
+    .choice.disabled { pointer-events: none; opacity: .9; }
 
-    /* Konfeti */
-    .confetti {
-      position: fixed;
-      top: 0;
-      width: 10px;
+    .controls { display:flex; gap:10px; justify-content: center; margin-top: 14px; }
+
+    /* End Screen */
+    .end {
+      text-align: center;
+      padding: 18px 8px 8px;
+    }
+    .big-score { font-size: clamp(36px, 8vw, 70px); font-weight: 900; margin: 0 0 6px; }
+    .msg { font-size: clamp(16px, 3.5vw, 22px); opacity: .95; margin-bottom: 14px; }
+
+    /* Progress bar */
+    .progress {
       height: 10px;
-      background: red;
-      opacity: 0.8;
-      animation: fall 3s linear forwards;
-      z-index: 9998;
+      background: #2b6d5f;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--outline);
     }
-    @keyframes fall {
-      to {
-        transform: translateY(100vh) rotate(720deg);
-        opacity: 0;
-      }
-    }
-
-    @media(max-width:600px){
-      .question-box{ font-size:28px; }
-      .pilihan{ font-size:18px; padding:10px 14px; }
-      input{ font-size:20px; width:80px; }
-    }
+    .bar { height: 100%; width: 0%; background: #84f0b8; transition: width .3s ease; }
   </style>
 </head>
 <body>
-  <header>
-    <div id="nyawa">❤️ 3</div>
-    <div id="timer">⏱ 20</div>
-    <div id="progress">❓ 0/10</div>
-  </header>
+  <div class="app" id="app">
+    <header>
+      <div class="brand">🔢 Perkalian 2–9</div>
+      <div class="stats">
+        <div class="pill" id="pillProgress">Soal: <strong id="pNo">0</strong>/<span id="pTotal">0</span></div>
+        <div class="pill">Skor: <strong id="pScore">0</strong></div>
+      </div>
+    </header>
+    <div class="progress"><div class="bar" id="bar"></div></div>
 
-  <div class="container">
-    <div class="pilihan-box">
-      <button class="pilihan acak" onclick="mulaiSoal('acak')">Acak</button>
-      <button class="pilihan num2" onclick="mulaiSoal(2)">×2</button>
-      <button class="pilihan num3" onclick="mulaiSoal(3)">×3</button>
-      <button class="pilihan num4" onclick="mulaiSoal(4)">×4</button>
-      <button class="pilihan num5" onclick="mulaiSoal(5)">×5</button>
-      <button class="pilihan num6" onclick="mulaiSoal(6)">×6</button>
-      <button class="pilihan num7" onclick="mulaiSoal(7)">×7</button>
-      <button class="pilihan num8" onclick="mulaiSoal(8)">×8</button>
-      <button class="pilihan num9" onclick="mulaiSoal(9)">×9</button>
-    </div>
+    <!-- Start Screen -->
+    <section class="screen start active" id="startScreen">
+      <h1>Siap latihan cepat? 🎯</h1>
+      <p>Semua soal dari <strong>perkalian 2 sampai 9</strong>. Tidak ada perkalian dengan 1 atau 10, sesuai permintaan.</p>
+      <div class="grid2">
+        <div class="card">
+          <label for="jumlah">Jumlah Soal</label>
+          <select id="jumlah">
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20" selected>20</option>
+            <option value="30">30</option>
+            <option value="64">Semua kombinasi (64)</option>
+          </select>
+        </div>
+        <div class="card">
+          <label>Mode Pilihan</label>
+          <select id="mode">
+            <option value="campur" selected>Campur (acak)</option>
+            <option value="terurut">Terurut (2×2 s/d 9×9)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn" id="btnStart">Mulai ▶</button>
+    </section>
 
-    <div class="question-box" id="soal">
-      <span class="number" id="angka1">?</span>
-      <span class="operator">×</span>
-      <span class="number" id="angka2">?</span>
-      <span class="operator">=</span>
-      <span class="result">??</span>
-    </div>
+    <!-- Game Screen -->
+    <section class="screen" id="gameScreen">
+      <div class="question">
+        <div class="expr" id="expr">2 × 8</div>
+      </div>
+      <div class="choices" id="choices"></div>
+      <div class="controls">
+        <button class="btn secondary" id="btnSkip" title="Lewati soal ini (tidak menambah skor)">Lewati ⏭</button>
+        <button class="btn" id="btnNext" style="display:none">Soal Berikutnya ➜</button>
+      </div>
+    </section>
 
-    <div class="jawaban-box">
-      <input type="number" id="jawaban" placeholder="Isi jawaban">
-      <button class="cek-btn" onclick="cekJawaban()">Cek Jawaban</button>
-    </div>
-
-    <div class="message" id="pesan"></div>
-
-    <!-- Tombol selesai -->
-    <div>
-      <button class="selesai-btn" onclick="window.location.href='lembah.html'">✅ Selesai</button>
-    </div>
+    <!-- End Screen -->
+    <section class="screen end" id="endScreen">
+      <div class="big-score" id="finalScore">0/0</div>
+      <div class="msg" id="finalMsg">Keren! 😄</div>
+      <div class="controls">
+        <button class="btn" id="btnRestart">Main Lagi 🔁</button>
+      </div>
+    </section>
   </div>
 
   <script>
-    // script sama persis dengan yang sudah ada (tidak berubah)
-    // ...
+    const startScreen = document.getElementById('startScreen');
+    const gameScreen  = document.getElementById('gameScreen');
+    const endScreen   = document.getElementById('endScreen');
+
+    const exprEl   = document.getElementById('expr');
+    const choicesEl= document.getElementById('choices');
+    const btnStart = document.getElementById('btnStart');
+    const btnNext  = document.getElementById('btnNext');
+    const btnSkip  = document.getElementById('btnSkip');
+    const btnRestart = document.getElementById('btnRestart');
+
+    const jumlahSel= document.getElementById('jumlah');
+    const modeSel  = document.getElementById('mode');
+
+    const pNo = document.getElementById('pNo');
+    const pTotal = document.getElementById('pTotal');
+    const pScore = document.getElementById('pScore');
+    const bar = document.getElementById('bar');
+
+    const finalScore = document.getElementById('finalScore');
+    const finalMsg = document.getElementById('finalMsg');
+
+    // State
+    let pairs = []; // [{a,b}] tanpa 1 dan 10
+    let idx = 0;
+    let score = 0;
+
+    function buildAllPairs() {
+      const nums = [2,3,4,5,6,7,8,9];
+      const list = [];
+      for (const a of nums) for (const b of nums) list.push({a,b});
+      return list; // 64
+    }
+
+    function shuffle(arr) { for (let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
+
+    function startGame(){
+      const total = parseInt(jumlahSel.value,10);
+      const mode = modeSel.value;
+
+      const all = buildAllPairs();
+      if (mode === 'campur') shuffle(all);
+      // Potong sesuai jumlah
+      pairs = all.slice(0, Math.min(total, all.length));
+
+      idx = 0; score = 0;
+      pTotal.textContent = pairs.length;
+      pScore.textContent = score;
+      pNo.textContent = 0;
+      bar.style.width = '0%';
+
+      startScreen.classList.remove('active');
+      endScreen.classList.remove('active');
+      gameScreen.classList.add('active');
+
+      renderQuestion();
+    }
+
+    function renderQuestion(){
+      const {a,b} = pairs[idx];
+      const correct = a*b;
+      exprEl.textContent = `${a} × ${b}`;
+
+      // generate options
+      const opts = generateOptions(correct, a, b);
+      // clear UI
+      choicesEl.innerHTML = '';
+      btnNext.style.display = 'none';
+
+      // create buttons
+      opts.forEach((val)=>{
+        const div = document.createElement('div');
+        div.className = 'choice';
+        div.textContent = val;
+        div.addEventListener('click', ()=> handleChoice(div, val, correct));
+        choicesEl.appendChild(div);
+      });
+
+      pNo.textContent = idx+1;
+      const pct = ((idx) / pairs.length) * 100;
+      bar.style.width = pct + '%';
+    }
+
+    function generateOptions(correct, a, b){
+      // kumpulkan kandidat salah yang masih masuk akal
+      const set = new Set([correct]);
+      const candidates = [];
+
+      // gunakan nilai sekitar hasil yang benar, dan hasil perkalian tetangga
+      const deltas = [ -8,-6,-4,-3,-2,2,3,4,6,8,10,12];
+      for (const d of deltas) {
+        const v = correct + d;
+        if (v > 0) candidates.push(v);
+      }
+      // hasil perkalian tetangga
+      const nearPairs = [
+        (a+1)*b, (a-1)*b, a*(b+1), a*(b-1)
+      ].filter(v=>v>0);
+      candidates.push(...nearPairs);
+
+      // acak kandidat dan ambil 3 unik yang tidak sama dengan benar
+      shuffle(candidates);
+      const options = [correct];
+      for (const v of candidates){
+        if (!options.includes(v)) options.push(v);
+        if (options.length===4) break;
+      }
+      // Jika belum cukup (kasus langka), isi dengan angka acak positif
+      while (options.length<4){
+        const r = correct + Math.floor(Math.random()*12)+2; // jaga jarak
+        if (!options.includes(r)) options.push(r);
+      }
+      return shuffle(options);
+    }
+
+    function handleChoice(el, value, correct){
+      const nodes = Array.from(document.querySelectorAll('.choice'));
+      nodes.forEach(n=> n.classList.add('disabled'));
+
+      if (value === correct){
+        el.classList.add('correct');
+        score++;
+        pScore.textContent = score;
+      } else {
+        el.classList.add('wrong');
+        // tandai yang benar
+        const right = nodes.find(n => Number(n.textContent) === correct);
+        if (right) right.classList.add('correct');
+      }
+      btnNext.style.display = 'inline-block';
+    }
+
+    function nextQuestion(){
+      idx++;
+      if (idx >= pairs.length){
+        endGame();
+      } else {
+        renderQuestion();
+      }
+    }
+
+    function skipQuestion(){
+      // Lewati tanpa skor; tetap lanjut
+      nextQuestion();
+    }
+
+    function endGame(){
+      gameScreen.classList.remove('active');
+      endScreen.classList.add('active');
+
+      finalScore.textContent = `${score}/${pairs.length}`;
+      const pct = Math.round((score/pairs.length)*100);
+      const msg = pct >= 90 ? 'Super sekali! 🌟'
+                : pct >= 75 ? 'Hebat! Pertahankan! 💪'
+                : pct >= 50 ? 'Bagus! Terus latihan ya! 🙂'
+                : 'Semangat! Coba lagi, pasti bisa! 🚀';
+      finalMsg.textContent = `${msg} (Nilai: ${pct})`;
+
+      bar.style.width = '100%';
+      pNo.textContent = pairs.length;
+    }
+
+    // Events
+    btnStart.addEventListener('click', startGame);
+    btnNext.addEventListener('click', nextQuestion);
+    btnSkip.addEventListener('click', skipQuestion);
+    btnRestart.addEventListener('click', ()=>{
+      startScreen.classList.add('active');
+      endScreen.classList.remove('active');
+      gameScreen.classList.remove('active');
+    });
+
+    // Keyboard support: 1..4 memilih opsi, Enter untuk next
+    document.addEventListener('keydown', (e)=>{
+      if (gameScreen.classList.contains('active')){
+        const keys = ['1','2','3','4'];
+        if (keys.includes(e.key)){
+          const idx = Number(e.key)-1;
+          const node = document.querySelectorAll('.choice')[idx];
+          if (node && !node.classList.contains('disabled')) node.click();
+        }
+        if (e.key === 'Enter'){
+          if (btnNext.style.display !== 'none') btnNext.click();
+        }
+      }
+    });
   </script>
 </body>
 </html>

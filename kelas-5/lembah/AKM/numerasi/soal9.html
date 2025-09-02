@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal Bermain Layang-Layang</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+      text-align: center;
+    }
+    .judul-box {
+      background: #2196F3;
+      color: white;
+      padding: 15px;
+      font-size: 22px;
+      font-weight: bold;
+      border-radius: 10px;
+      margin: auto;
+      max-width: 600px;
+    }
+    .subjudul-box {
+      background: #e0e0e0;
+      padding: 10px;
+      font-size: 18px;
+      margin: 15px auto;
+      border-radius: 8px;
+      max-width: 600px;
+    }
+    .soal-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: #fff;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background: #e6f2ff;
+    }
+    label {
+      cursor: pointer;
+    }
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn:hover {
+      background: #45a049;
+    }
+    #hasil {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+      color: darkblue;
+    }
+    .gambar-atas {
+      margin: 15px 0;
+      text-align: center;
+    }
+    .gambar-atas img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .gambar-bawah {
+      margin-top: 25px;
+    }
+    .gambar-bawah img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .navigasi {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .navigasi button {
+      margin: 10px 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #4CAF50;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .navigasi button:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="judul-box">Latihan Soal ANBK</div>
+  <div class="subjudul-box">Latihan Soal 9</div>
+
+  <div class="soal-box">
+    <h2>Bermain Layang-Layang</h2>
+    <div class="gambar-atas">
+      <img src="https://i.imgur.com/QynCHmG.png" alt="gambar layang-layang">
+    </div>
+    <p>
+      Dika ingin layang-layangnya ada pada posisi paling tinggi, sedangkan layang-layang Erwin ketinggiannya berada di antara layang-layang Bagas dan Dika.  
+      Pilihlah kolom Benar atau Salah untuk setiap pernyataan!
+    </p>
+
+    <form id="quizForm">
+      <table>
+        <tr>
+          <th>Pernyataan</th>
+          <th>Benar</th>
+          <th>Salah</th>
+        </tr>
+        <tr>
+          <td>Layang-layang Bagas diturunkan 18 meter</td>
+          <td><input type="radio" name="q1" value="Benar"></td>
+          <td><input type="radio" name="q1" value="Salah"></td>
+        </tr>
+        <tr>
+          <td>Layang-layang Dika dinaikkan 25 meter</td>
+          <td><input type="radio" name="q2" value="Benar"></td>
+          <td><input type="radio" name="q2" value="Salah"></td>
+        </tr>
+      </table>
+      <button type="button" class="btn" onclick="cekJawaban()">Periksa Jawaban</button>
+    </form>
+
+    <div id="hasil"></div>
+
+    <div class="navigasi">
+      <button onclick="window.location.href='numerasi.html'">⬅️ Kembali</button>
+      <button onclick="window.location.href='numerasi.html'">Lanjutkan ➡️</button>
+    </div>
+  </div>
+
+  <div class="gambar-bawah">
+    <img src="https://i.imgur.com/oTSi7hu.png" alt="gambar dekorasi">
+  </div>
+
+  <script>
+    function cekJawaban() {
+      let skor = 0;
+      let total = 2;
+
+      // Kunci jawaban: q1 = Salah, q2 = Benar
+      if (document.querySelector('input[name="q1"]:checked')?.value === "Salah") skor++;
+      if (document.querySelector('input[name="q2"]:checked')?.value === "Benar") skor++;
+
+      document.getElementById("hasil").innerHTML = 
+        "Skor Anda: " + skor + " dari " + total;
+    }
+  </script>
+</body>
+</html>

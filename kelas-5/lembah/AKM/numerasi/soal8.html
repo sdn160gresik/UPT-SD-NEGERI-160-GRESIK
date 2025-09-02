@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal Bermain Layang-Layang</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+      text-align: center;
+    }
+    .judul-box {
+      background: #2196F3;
+      color: white;
+      padding: 15px;
+      font-size: 22px;
+      font-weight: bold;
+      border-radius: 10px;
+      margin: auto;
+      max-width: 600px;
+    }
+    .subjudul-box {
+      background: #e0e0e0;
+      padding: 10px;
+      font-size: 18px;
+      margin: 15px auto;
+      border-radius: 8px;
+      max-width: 600px;
+    }
+    .soal-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    .opsi {
+      margin: 10px 0;
+    }
+    button {
+      margin: 10px 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #4CAF50;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .navigasi {
+      margin-top: 20px;
+      text-align: center;
+    }
+    #hasil {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+    }
+    .gambar-atas {
+      margin: 15px 0;
+      text-align: center;
+    }
+    .gambar-atas img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .gambar-bawah {
+      margin-top: 25px;
+    }
+    .gambar-bawah img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="judul-box">Latihan Soal ANBK</div>
+  <div class="subjudul-box">Latihan Soal 8</div>
+
+  <div class="soal-box">
+    <h2>Bermain Layang-Layang</h2>
+    <div class="gambar-atas">
+      <img src="https://i.imgur.com/QynCHmG.png" alt="gambar layang-layang">
+    </div>
+    <p><b>Pertanyaan:</b><br>
+      Apa yang harus dilakukan agar layang-layang Erwin berada pada posisi tertinggi?
+    </p>
+
+    <form id="quizForm">
+      <div class="opsi">
+        <input type="radio" name="jawaban" value="salah"> Bagas menurunkan layang-layangnya 25 meter.
+      </div>
+      <div class="opsi">
+        <input type="radio" name="jawaban" value="salah"> Dika dan Erwin sama-sama menaikkan 20 meter.
+      </div>
+      <div class="opsi">
+        <input type="radio" name="jawaban" value="benar"> Bagas dan Dika sama-sama menurunkan 20 meter.
+      </div>
+      <button type="button" onclick="cekJawaban()">Periksa Jawaban</button>
+    </form>
+
+    <div id="hasil"></div>
+
+    <div class="navigasi">
+      <button onclick="window.location.href='lembah.html'">⬅️ Kembali</button>
+      <button onclick="window.location.href='lembah.html'">Lanjutkan ➡️</button>
+    </div>
+  </div>
+
+  <div class="gambar-bawah">
+    <img src="https://i.imgur.com/oTSi7hu.png" alt="gambar dekorasi">
+  </div>
+
+  <script>
+    function cekJawaban() {
+      let jawaban = document.querySelector('input[name="jawaban"]:checked');
+      let hasil = document.getElementById("hasil");
+      if (!jawaban) {
+        hasil.innerHTML = "⚠️ Silakan pilih jawaban terlebih dahulu.";
+        hasil.style.color = "orange";
+      } else if (jawaban.value === "benar") {
+        hasil.innerHTML = "✅ Benar! Erwin akan berada di posisi tertinggi.";
+        hasil.style.color = "green";
+      } else {
+        hasil.innerHTML = "❌ Salah! Coba lagi.";
+        hasil.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>

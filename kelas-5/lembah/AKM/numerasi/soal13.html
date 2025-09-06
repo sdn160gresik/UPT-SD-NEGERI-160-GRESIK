@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Soal Latihan ANBK - Duta Bermain Kartu</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      margin: 0;
+      padding: 30px;
+      background: #f5f7f9;
+      color: #111;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 24px;
+      border-radius: 6px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+    .judul-biru {
+      background: #2f81d6;
+      color: #fff;
+      padding: 12px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 20px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .subjudul {
+      background: #e6eefb;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+    }
+    .bold { font-weight: 700; }
+
+    .cards {
+      margin: 12px 0;
+      text-align: center;
+    }
+    .card {
+      width: 60px;
+      height: 80px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 22px;
+      color: #fff;
+      border-radius: 6px;
+      margin: 0 6px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    .yellow { background: #f6c800; color:#111; }
+    .red { background: #e53935; }
+    .green { background: #2e7d32; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+    thead th {
+      background: #2f81d6;
+      color: #fff;
+      padding: 10px;
+    }
+    tbody td {
+      border: 1px solid #e6eefb;
+      padding: 10px;
+    }
+    tbody tr:nth-child(odd) td { background: #f6f9ff; }
+    .radio-cell { text-align: center; width: 80px; }
+
+    .btn-area {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .btn {
+      background: #2f81d6;
+      border: none;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn:hover { background: #1d5fa7; }
+
+    .hasil {
+      margin-top: 16px;
+      padding: 12px;
+      background: #e8f4ff;
+      border: 1px solid #bcdcff;
+      border-radius: 6px;
+      display: none;
+    }
+    .sumber {
+      margin-top: 24px;
+      font-size: 14px;
+      color: #555;
+      font-style: italic;
+    }
+    .sumber a { cursor: pointer; color:#2f81d6; text-decoration: underline; }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      max-width: 800px;
+      width: 90%;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      position: relative;
+    }
+    .modal-content iframe {
+      width: 100%;
+      height: 450px;
+      border: none;
+      border-radius: 6px;
+    }
+    .close {
+      position: absolute;
+      top: 6px;
+      right: 12px;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #333;
+    }
+    .close:hover { color: red; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="judul-biru">Soal Latihan ANBK</div>
+    <div class="subjudul">Latihan Soal 13</div>
+
+    <p>Duta bermain kartu dengan</p>
+    <p><span class="bold">tiga kartu angka berikut.</span></p>
+
+    <!-- kartu di bawah teks -->
+    <div class="cards">
+      <div class="card red">2</div>
+      <div class="card yellow">1</div>
+      <div class="card green">6</div>
+    </div>
+
+    <p>Kartu-kartu tersebut ia susun sehingga terbentuk bilangan tiga angka dengan nilai yang berbeda.</p>
+    <p><span class="bold">Duta menyusun sebuah bilangan yang dibaca 'seratus enam puluh dua'.</span> Berilah tanda centang (√) pada kolom Benar atau Salah untuk setiap pernyataan!</p>
+
+    <!-- tabel soal -->
+    <table>
+      <thead>
+        <tr>
+          <th>Pernyataan</th>
+          <th class="radio-cell">Benar</th>
+          <th class="radio-cell">Salah</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Kartu kuning di tempat ratusan, kartu hijau di tempat puluhan</td>
+          <td class="radio-cell"><input type="radio" name="q1" value="benar"></td>
+          <td class="radio-cell"><input type="radio" name="q1" value="salah"></td>
+        </tr>
+        <tr>
+          <td>Kartu merah di tempat ratusan, kartu hijau di tempat puluhan</td>
+          <td class="radio-cell"><input type="radio" name="q2" value="benar"></td>
+          <td class="radio-cell"><input type="radio" name="q2" value="salah"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="btn" style="margin-top:15px;" onclick="cekJawaban()">Periksa Jawaban</button>
+
+    <!-- hasil cek jawaban -->
+    <div id="hasil" class="hasil"></div>
+
+    <!-- tombol navigasi -->
+    <div class="btn-area">
+      <a href="numerasi.html" class="btn">&#8592;</a>
+      <a href="numerasi.html" class="btn">&#8594;</a>
+    </div>
+
+    <div class="sumber">
+      sumber : 
+      <a onclick="openModal()">https://www.youtube.com/watch?v=k79QAuccJMg</a>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <iframe id="videoFrame" src="" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+    function cekJawaban() {
+      let q1 = document.querySelector('input[name="q1"]:checked');
+      let q2 = document.querySelector('input[name="q2"]:checked');
+      let hasilDiv = document.getElementById("hasil");
+      hasilDiv.style.display = "block";
+
+      if (!q1 || !q2) {
+        hasilDiv.innerHTML = "<p style='color:red'>Harap pilih semua jawaban dulu.</p>";
+        return;
+      }
+
+      // kunci benar: q1 = benar, q2 = salah
+      if (q1.value === "benar" && q2.value === "salah") {
+        hasilDiv.innerHTML = "<p style='color:green'><b>Jawaban kamu benar semua 🎉</b></p>";
+      } else {
+        hasilDiv.innerHTML = "<p style='color:red'><b>Jawaban kamu salah ❌</b><br>Coba periksa kembali.</p>";
+      }
+    }
+
+    function openModal() {
+      let modal = document.getElementById("modal");
+      let iframe = document.getElementById("videoFrame");
+      iframe.src = "https://www.youtube.com/embed/k79QAuccJMg?start=0";
+      modal.style.display = "flex";
+    }
+
+    function closeModal() {
+      let modal = document.getElementById("modal");
+      let iframe = document.getElementById("videoFrame");
+      iframe.src = "";
+      modal.style.display = "none";
+    }
+
+    // Tutup modal bila klik luar konten
+    window.onclick = function(event) {
+      let modal = document.getElementById("modal");
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+  </script>
+</body>
+</html>

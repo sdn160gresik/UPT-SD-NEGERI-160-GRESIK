@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal Bilangan Cacah</title>
+  <style>
+    :root{
+      --biru:#0074d9;
+      --putih:#ffffff;
+      --abu:#f1f5f9;
+      --teks:#111827;
+      --bayang:0 2px 6px rgba(0,0,0,.12);
+    }
+    *{box-sizing:border-box}
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: var(--teks);
+      padding: 20px;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .wrap {max-width: 800px; margin: 0 auto;}
+    .judul-biru{
+      background: var(--biru);
+      color: var(--putih);
+      padding: 14px 16px;
+      font-size: 22px;
+      font-weight: 700;
+      text-align: center;
+      border-radius:10px;
+      margin-bottom:12px;
+      box-shadow: var(--bayang);
+    }
+    .subjudul{
+      background: #e6f0ff;
+      color:#0b3d91;
+      padding: 10px 14px;
+      border-radius:10px;
+      margin-bottom:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      box-shadow: var(--bayang);
+    }
+    .subjudul .teks{
+      font-weight:700;
+    }
+    .nav-panah{
+      display:flex;
+      gap:8px;
+    }
+    .nav-panah a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:42px;height:42px;
+      border-radius:999px;
+      border:2px solid #0b3d91;
+      text-decoration:none;
+      font-size:22px;
+      user-select:none;
+      box-shadow: var(--bayang);
+      background:#fff;
+    }
+    .nav-panah a:active{transform:scale(.98)}
+    .soal {
+      background: white;
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: var(--bayang);
+      margin-top: 12px;
+    }
+    .topik{
+      font-weight:700;
+      margin: 0 0 8px 0;
+      color:#0b3d91;
+    }
+    .opsi {
+      margin-top: 15px;
+    }
+    .opsi label {
+      display: block;
+      margin: 8px 0;
+      padding:10px 12px;
+      border:1px solid #e5e7eb;
+      border-radius:10px;
+      cursor:pointer;
+      background:#fafafa;
+      transition: border .15s ease;
+    }
+    .opsi input{margin-right:10px}
+    .opsi label:hover{border-color:#cbd5e1}
+    .hasil{
+      margin-top:14px;
+      font-weight:700;
+      display:none;
+      padding:10px 12px;
+      border-radius:10px;
+    }
+    .hasil.benar{background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0}
+    .hasil.salah{background:#fef2f2; color:#991b1b; border:1px solid #fecaca}
+    .kunci{
+      display:none;
+      margin-top:10px;
+      background:#fff7ed;
+      color:#7c2d12;
+      border:1px solid #fed7aa;
+      padding:10px 12px;
+      border-radius:10px;
+    }
+    .footer-sumber{
+      margin-top:20px;
+      font-size:14px;
+      color:#334155;
+      text-align:center;
+    }
+    .footer-sumber a{color:#0b3d91}
+    .gambar-kartu{
+      text-align:center;
+      margin:12px 0;
+    }
+    .gambar-kartu img{
+      max-width:100%;
+      height:auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- Judul biru -->
+    <div class="judul-biru">Soal Latihan ANBK</div>
+
+    <!-- Subjudul + tombol panah -->
+    <div class="subjudul">
+      <div class="teks">Latihanh Soal 11</div>
+      <div class="nav-panah">
+        <!-- Keduanya menuju numerasi.html sesuai permintaan -->
+        <a href="numerasi.html" title="Kembali">&#8592;</a>
+        <a href="numerasi.html" title="Lanjut">&#8594;</a>
+      </div>
+    </div>
+
+    <!-- Kartu soal -->
+    <div class="soal" id="kartu-soal">
+      <p class="topik">Memahami bilangan cacah (maks. tiga angka).</p>
+      <p>Duta bermain kartu dengan tiga kartu angka berikut.</p>
+
+      <!-- Tambahkan gambar di sini -->
+      <div class="gambar-kartu">
+        <img src="https://i.imgur.com/S4ckkoq.png" alt="Kartu angka">
+      </div>
+
+      <p>Kartu-kartu tersebut ia susun sehingga terbentuk bilangan tiga angka dengan nilai yang berbeda.</p>
+      <p><strong>Bilangan terkecil</strong> yang terbentuk dari ketiga kartu tersebut adalah ….</p>
+      
+      <div class="opsi" id="opsi">
+        <label><input type="radio" name="jawaban" value="216">216</label>
+        <label><input type="radio" name="jawaban" value="162">162</label>
+        <label><input type="radio" name="jawaban" value="126">126</label>
+      </div>
+
+      <div id="hasil" class="hasil"></div>
+      <div id="kunci" class="kunci">
+        <strong>Kunci jawaban:</strong> 126<br>
+        Susun digit dari yang terkecil ke terbesar untuk mendapatkan nilai paling kecil.
+      </div>
+    </div>
+
+    <!-- Sumber -->
+    <div class="footer-sumber">
+      sumber : 
+      <a href="https://www.youtube.com/watch?v=k79QAuccJMg&list=PLIMz4xsPihRYONU_BZsV5Jmci0o1zH9fz&ab_channel=BernalarOfficial" target="_blank" rel="noopener">
+        https://www.youtube.com/watch?v=k79QAuccJMg&list=PLIMz4xsPihRYONU_BZsV5Jmci0o1zH9fz&ab_channel=BernalarOfficial
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    (function(){
+      const benar = "126"; // kunci
+      const opsi = document.getElementById('opsi');
+      const hasil = document.getElementById('hasil');
+      const kunci = document.getElementById('kunci');
+
+      opsi.addEventListener('change', function(e){
+        const dipilih = document.querySelector('input[name="jawaban"]:checked');
+        if(!dipilih) return;
+
+        const value = dipilih.value;
+        const isBenar = value === benar;
+
+        hasil.style.display = 'block';
+        hasil.textContent = isBenar ? 'Benar! 👍' : 'Salah. Coba periksa lagi.';
+        hasil.className = 'hasil ' + (isBenar ? 'benar' : 'salah');
+
+        // Tampilkan kunci jawaban setelah menjawab
+        kunci.style.display = 'block';
+      });
+    })();
+  </script>
+</body>
+</html>

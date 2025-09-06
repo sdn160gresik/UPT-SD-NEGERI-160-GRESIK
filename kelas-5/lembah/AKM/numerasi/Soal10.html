@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal Numerasi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f1f1;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #2566a3;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+    .subjudul {
+      background: #e0e0e0;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    .container {
+      background: white;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 800px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 18px;
+      text-align: center;
+    }
+    .content {
+      text-align: justify;
+      margin-bottom: 20px;
+    }
+    .images {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    .images div {
+      text-align: center;
+    }
+    .images img {
+      max-width: 150px;
+      border-radius: 6px;
+    }
+    .question {
+      margin: 20px 0;
+    }
+    .options {
+      margin-top: 10px;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .feedback {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .correct {
+      color: green;
+    }
+    .wrong {
+      color: red;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn-red { background: #e74c3c; color: white; }
+    .btn-blue { background: #3498db; color: white; }
+    .btn-yellow { background: #f1c40f; color: black; }
+
+    /* Modal YouTube */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      position: relative;
+      width: 80%;
+      max-width: 800px;
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .modal iframe {
+      width: 100%;
+      height: 450px;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .sumber {
+      margin-top: 25px;
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Latihan Soal ANBK</h1>
+  </header>
+  <div class="subjudul">Latihan Soal 10</div>
+
+  <div class="container">
+    <h2>Bacalah teks cerita berikut!</h2>
+    <div class="content">
+      <p><b>Bakti Sosial SD Tunas Jaya</b><br>
+      Siswa Kelas 2 SD Tunas Jaya mengadakan bakti sosial. Siswa kelas 2A, 2B, dan 2C diminta mengumpulkan baju layak pakai. 
+      Kelas 2A mengumpulkan 95 baju. Kelas 2B mengumpulkan 68 baju. 
+      Sementara kelas 2C mengumpulkan 89 baju. 
+      Baju yang terkumpul nantinya akan disumbangkan ke Panti Asuhan Berkah Sentosa.</p>
+    </div>
+
+    <div class="images">
+      <div>
+        <img src="https://i.imgur.com/dUY0J1k.png" alt="Kelas 2A">
+        <p>Kelas 2A</p>
+      </div>
+      <div>
+        <img src="https://i.imgur.com/DukSeWY.png" alt="Kelas 2B">
+        <p>Kelas 2B</p>
+      </div>
+      <div>
+        <img src="https://i.imgur.com/LHSY0Zj.png" alt="Kelas 2C">
+        <p>Kelas 2C</p>
+      </div>
+    </div>
+
+    <!-- Soal -->
+    <div class="question">
+      <p><b>Perbandingan jumlah baju yang disumbangkan oleh setiap kelas adalah....</b></p>
+      <div class="options">
+        <label><input type="radio" name="q1" value="A"> A. Baju kelas 2A lebih sedikit dibandingkan baju dari kelas 2B.</label>
+        <label><input type="radio" name="q1" value="B"> B. Baju kelas 2A lebih sedikit dibandingkan baju dari kelas 2C.</label>
+        <label><input type="radio" name="q1" value="C"> C. Baju kelas 2B lebih sedikit dibandingkan baju dari kelas 2C.</label>
+      </div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+
+    <div class="buttons">
+      <a href="numerasi.html"><button class="btn btn-red">Soal sebelumnya</button></a>
+      <button class="btn btn-yellow" id="openModal">Pembahasan</button>
+      <a href="numerasi.html"><button class="btn btn-blue">Soal berikutnya</button></a>
+    </div>
+
+    <div class="sumber">
+      sumber : youtube.com/watch?time_continue=224&v=t0kvq3jc9n4&source_ve_path=Mjg2NjY
+    </div>
+  </div>
+
+  <!-- Modal YouTube -->
+  <div class="modal" id="youtubeModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <iframe id="youtubeFrame" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+    const options = document.querySelectorAll('input[name="q1"]');
+    const feedback = document.getElementById("feedback");
+    const modal = document.getElementById("youtubeModal");
+    const youtubeFrame = document.getElementById("youtubeFrame");
+    const openModal = document.getElementById("openModal");
+    const closeModal = document.getElementById("closeModal");
+
+    options.forEach(option => {
+      option.addEventListener("change", () => {
+        if (option.value === "C") {
+          feedback.textContent = "✅ Jawaban benar!";
+          feedback.className = "feedback correct";
+        } else {
+          feedback.textContent = "❌ Jawaban salah, coba lagi.";
+          feedback.className = "feedback wrong";
+        }
+      });
+    });
+
+    // Buka modal YouTube di menit 3:44
+    openModal.addEventListener("click", () => {
+      youtubeFrame.src = "https://www.youtube.com/embed/t0kvq3jc9n4?start=224&autoplay=1";
+      modal.style.display = "flex";
+    });
+
+    // Tutup modal
+    closeModal.addEventListener("click", () => {
+      youtubeFrame.src = "";
+      modal.style.display = "none";
+    });
+
+    // Tutup modal jika klik di luar kotak
+    window.addEventListener("click", (e) => {
+      if (e.target == modal) {
+        youtubeFrame.src = "";
+        modal.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

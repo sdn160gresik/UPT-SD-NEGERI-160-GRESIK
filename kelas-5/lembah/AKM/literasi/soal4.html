@@ -13,7 +13,6 @@
       --card-shadow: 0 6px 18px rgba(20,30,60,0.08);
     }
 
-    /* Reset & layout */
     *{box-sizing:border-box}
     html,body{height:100%}
     body {
@@ -21,8 +20,6 @@
       background: var(--bg);
       margin: 12px;
       color: #222;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
     }
 
     .judul-biru {
@@ -45,7 +42,6 @@
       text-align: center;
     }
 
-    /* Card */
     .container {
       max-width: 900px;
       width: 100%;
@@ -56,7 +52,6 @@
       overflow: hidden;
       display: grid;
       grid-template-columns: 1fr 360px;
-      gap: 0;
     }
 
     .left {
@@ -76,7 +71,6 @@
       padding: 14px;
       border-radius: 8px;
       margin-bottom: 14px;
-      min-height: 120px;
     }
 
     .illustration {
@@ -87,6 +81,7 @@
       background: #f7fbff;
       border-radius: 8px;
       margin-top: 12px;
+      flex-direction: column;
     }
     .illustration img {
       width: 100%;
@@ -95,6 +90,14 @@
       max-height: 260px;
       border-radius: 6px;
       object-fit: contain;
+      margin-bottom: 12px;
+    }
+
+    .illustration .teks-bawah {
+      font-size: clamp(14px, 3.2vw, 16px);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      text-align: justify;
     }
 
     .question-title {
@@ -114,17 +117,15 @@
       cursor: pointer;
       user-select: none;
       font-size: clamp(14px, 3.2vw, 16px);
-      transition: all .15s ease;
     }
 
     input[type="radio"]{display:none}
     input[type="radio"]:checked + .option-label{
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
       border-color: #9fcffb;
       background: #f3fbff;
     }
 
-    .btns { display:flex; gap:10px; margin-top:12px; align-items:center; }
+    .btns { display:flex; gap:10px; margin-top:12px; align-items:center; flex-wrap:wrap; }
     button{ padding:10px 14px; border-radius:8px; border:none; cursor:pointer; font-weight:700; }
     .check{ background: var(--biru); color:white; }
     .nav-btn{ background:#eef1f5; color:#333; }
@@ -133,32 +134,40 @@
     .correct{ background:#e6fbef !important; border-color:#7ee0a7 !important; color:#086a3e }
     .wrong{ background:#fff1f1 !important; border-color:#f1a1a1 !important; color:#9b2b2b }
 
-    .sumber{ margin-top:14px; font-size:14px; color:#444; text-align:center }
+    .sumber-box {
+      margin-top: 18px;
+      padding: 12px;
+      background: #f0f6ff;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #333;
+    }
 
-    /* Responsive adjustments */
+    /* Tombol kembali ke atas */
+    #toTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 99;
+      background: var(--biru);
+      color: white;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    #toTopBtn:hover {
+      background: #176fd1;
+    }
+
     @media (max-width: 900px){
       .container{ grid-template-columns: 1fr; }
       .left { padding: 18px; border-right: none; }
       .right { padding: 18px; border-top: 1px solid #eef2f6; }
-    }
-
-    @media (max-width: 480px){
-      body{ margin: 10px }
-      .container{ border-radius:8px }
-      .left, .right { padding: 14px }
-      .judul-biru{ font-size: 18px }
-      .subjudul{ font-size: 15px }
-      .illustration img{ max-height:200px }
-      .btns{ flex-direction: column; }
-      button{ width:100%; padding:12px; }
-      .option-label{ padding:14px }
-      .question-title{ font-size:16px }
-      .passage{ font-size:15px }
-    }
-
-    /* Larger screens small polish */
-    @media (min-width: 1200px){
-      .container{ max-width:1100px }
     }
   </style>
 </head>
@@ -175,13 +184,23 @@
 
       <div class="illustration">
         <img src="https://i.imgur.com/ckY9Ipj.png" alt="Ilustrasi teleskop">
+        <div class="teks-bawah">
+          Aku melihat teleskop dipajang di etalase toko. Itulah teleskop impianku. Aku mendekat dan kecewa. Harganya mahal sekali. Aku tidak punya uang. Tidak ada cara lain selain menabung. Semua uang saku kumasukkan ke celengan. Berbulan-bulan aku tidak jajan. Tidak ada es krim lagi. Sungguh berat rasanya. Semua demi teleskop.
+          <br><br>
+          Akhirnya tabunganku cukup. Aku buru-buru lari ke toko itu. Hatiku senang karena akan memiliki teleskop. Saat sampai di toko, aku terkejut. Harga teleskop sudah naik. Uangku tidak lagi cukup. Itu artinya aku harus menabung lagi sampai uangku cukup. Aku tidak akan putus asa.
+        </div>
+        <img src="https://i.imgur.com/xkVz6pX.png" alt="Ilustrasi anak menabung">
+      </div>
+
+      <div class="sumber-box">
+        <strong>Sumber bacaan:</strong> Disadur menjadi prosa dari film pendek Thailand “The Dream”<br>
+        <strong>Sumber soal:</strong> <a href="https://www.youtube.com/watch?v=wOgYh0FahV8&list=PLIMz4xsPihRYONU_BZsV5Jmci0o1zH9fz&index=3" target="_blank">YouTube</a>
       </div>
     </div>
 
     <div class="right">
       <div class="question">
         <div class="question-title">Tokoh dalam cerita ingin menjadi seorang astronaut. Mengapa dia membutuhkan teleskop?</div>
-
         <ul class="options" id="options">
           <li>
             <input type="radio" id="opt1" name="jawab" value="1">
@@ -201,23 +220,20 @@
           </li>
         </ul>
 
-        <div class="btns" aria-hidden="false">
+        <div class="btns">
           <button class="check" id="cekBtn">Periksa Jawaban</button>
           <button class="nav-btn" onclick="window.location.href='literasi.html'">Kembali</button>
           <button class="nav-btn" onclick="window.location.href='literasi.html'">Lanjut</button>
         </div>
-
-        <div class="result" id="resultArea" aria-live="polite"></div>
+        <div class="result" id="resultArea"></div>
       </div>
     </div>
   </div>
 
-  <div class="sumber">
-    Sumber: <a href="https://www.youtube.com/watch?v=wOgYh0FahV8&list=PLIMz4xsPihRYONU_BZsV5Jmci0o1zH9fz&index=3" target="_blank">https://www.youtube.com/watch?v=wOgYh0FahV8</a>
-  </div>
+  <!-- Tombol kembali ke atas -->
+  <button onclick="topFunction()" id="toTopBtn" title="Kembali ke atas">↑</button>
 
   <script>
-    // Kunci jawaban: opsi 2 benar
     const correctValue = "2";
     const cekBtn = document.getElementById('cekBtn');
     const resultArea = document.getElementById('resultArea');
@@ -260,6 +276,20 @@
         clearHighlights();
       });
     });
+
+    // Tombol kembali ke atas
+    let toTopBtn = document.getElementById("toTopBtn");
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        toTopBtn.style.display = "block";
+      } else {
+        toTopBtn.style.display = "none";
+      }
+    }
+    function topFunction() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   </script>
 </body>
 </html>

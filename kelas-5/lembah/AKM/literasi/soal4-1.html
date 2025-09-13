@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Soal Bacaan - Teleskop</title>
+  <style>
+    :root{
+      --bg:#f3f6fb;
+      --biru:#2b8cff;
+      --putih:#ffffff;
+      --muted:#eef6ff;
+      --card-shadow: 0 6px 18px rgba(20,30,60,0.08);
+    }
+
+    /* Reset & layout */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      margin: 12px;
+      color: #222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .judul-biru {
+      background: var(--biru);
+      color: white;
+      padding: 12px 14px;
+      font-size: clamp(18px, 4vw, 22px);
+      font-weight: 700;
+      text-align: center;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .subjudul {
+      background: var(--muted);
+      padding: 8px 10px;
+      font-size: clamp(14px, 3.2vw, 18px);
+      font-weight: 600;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    /* Card */
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      background: var(--putih);
+      box-shadow: var(--card-shadow);
+      border-radius: 10px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 0;
+    }
+
+    .left {
+      padding: 24px;
+      border-right: 1px solid #eef2f6;
+    }
+    .right {
+      padding: 24px;
+    }
+
+    h2{margin-top:0;margin-bottom:8px;font-size:clamp(18px,3.6vw,20px)}
+
+    .passage {
+      font-size: clamp(15px, 3.6vw, 18px);
+      line-height: 1.65;
+      background: #fcfeff;
+      padding: 14px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      min-height: 120px;
+    }
+
+    .illustration {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      background: #f7fbff;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+    .illustration img {
+      width: 100%;
+      height: auto;
+      max-width: 420px;
+      max-height: 260px;
+      border-radius: 6px;
+      object-fit: contain;
+    }
+
+    .question-title {
+      font-weight: 700;
+      margin-bottom: 12px;
+      font-size: clamp(16px, 3.6vw, 18px);
+    }
+
+    .options { list-style: none; padding: 0; margin: 0 0 12px 0; }
+    .options li { margin-bottom: 10px; }
+
+    .option-label {
+      display: block;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid #e6eef6;
+      cursor: pointer;
+      user-select: none;
+      font-size: clamp(14px, 3.2vw, 16px);
+      transition: all .15s ease;
+    }
+
+    input[type="radio"]{display:none}
+    input[type="radio"]:checked + .option-label{
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border-color: #9fcffb;
+      background: #f3fbff;
+    }
+
+    .btns { display:flex; gap:10px; margin-top:12px; align-items:center; }
+    button{ padding:10px 14px; border-radius:8px; border:none; cursor:pointer; font-weight:700; }
+    .check{ background: var(--biru); color:white; }
+    .nav-btn{ background:#eef1f5; color:#333; }
+
+    .result{ margin-top:12px; font-weight:700; min-height:1.2em }
+    .correct{ background:#e6fbef !important; border-color:#7ee0a7 !important; color:#086a3e }
+    .wrong{ background:#fff1f1 !important; border-color:#f1a1a1 !important; color:#9b2b2b }
+
+    .sumber{ margin-top:14px; font-size:14px; color:#444; text-align:center }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px){
+      .container{ grid-template-columns: 1fr; }
+      .left { padding: 18px; border-right: none; }
+      .right { padding: 18px; border-top: 1px solid #eef2f6; }
+    }
+
+    @media (max-width: 480px){
+      body{ margin: 10px }
+      .container{ border-radius:8px }
+      .left, .right { padding: 14px }
+      .judul-biru{ font-size: 18px }
+      .subjudul{ font-size: 15px }
+      .illustration img{ max-height:200px }
+      .btns{ flex-direction: column; }
+      button{ width:100%; padding:12px; }
+      .option-label{ padding:14px }
+      .question-title{ font-size:16px }
+      .passage{ font-size:15px }
+    }
+
+    /* Larger screens small polish */
+    @media (min-width: 1200px){
+      .container{ max-width:1100px }
+    }
+  </style>
+</head>
+<body>
+  <div class="judul-biru">Latihan Soal ANBK</div>
+  <div class="subjudul">Soal Literasi 4</div>
+
+  <div class="container" role="main">
+    <div class="left">
+      <h2>Bacaan</h2>
+      <div class="passage" id="bacaan">
+        Aku ingin jadi astronaut supaya bisa pergi ke bulan. Astronaut harus tahu semua tentang angkasa luar. Di antaranya melihat bulan dan bintang. Untuk itu aku perlu sebuah teleskop. Aku ingin mempelajari bulan dan bintang.
+      </div>
+
+      <div class="illustration">
+        <img src="https://i.imgur.com/ckY9Ipj.png" alt="Ilustrasi teleskop">
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="question">
+        <div class="question-title">Tokoh dalam cerita ingin menjadi seorang astronaut. Mengapa dia membutuhkan teleskop?</div>
+
+        <ul class="options" id="options">
+          <li>
+            <input type="radio" id="opt1" name="jawab" value="1">
+            <label for="opt1" class="option-label">Dia membutuhkan teleskop untuk pergi ke bulan.</label>
+          </li>
+          <li>
+            <input type="radio" id="opt2" name="jawab" value="2">
+            <label for="opt2" class="option-label">Dia ingin melihat dan mempelajari bulan dan bintang.</label>
+          </li>
+          <li>
+            <input type="radio" id="opt3" name="jawab" value="3">
+            <label for="opt3" class="option-label">Astronaut harus pernah mengunjungi bintang.</label>
+          </li>
+          <li>
+            <input type="radio" id="opt4" name="jawab" value="4">
+            <label for="opt4" class="option-label">Astronaut harus bisa pergi ke angkasa luar.</label>
+          </li>
+        </ul>
+
+        <div class="btns" aria-hidden="false">
+          <button class="check" id="cekBtn">Periksa Jawaban</button>
+          <button class="nav-btn" onclick="window.location.href='literasi.html'">Kembali</button>
+          <button class="nav-btn" onclick="window.location.href='literasi.html'">Lanjut</button>
+        </div>
+
+        <div class="result" id="resultArea" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sumber">
+    Sumber: <a href="https://www.youtube.com/watch?v=wOgYh0FahV8&list=PLIMz4xsPihRYONU_BZsV5Jmci0o1zH9fz&index=3" target="_blank">https://www.youtube.com/watch?v=wOgYh0FahV8</a>
+  </div>
+
+  <script>
+    // Kunci jawaban: opsi 2 benar
+    const correctValue = "2";
+    const cekBtn = document.getElementById('cekBtn');
+    const resultArea = document.getElementById('resultArea');
+    const optionsList = document.getElementById('options');
+
+    function clearHighlights() {
+      const labels = optionsList.querySelectorAll('.option-label');
+      labels.forEach(l => {
+        l.classList.remove('correct', 'wrong');
+      });
+    }
+
+    cekBtn.addEventListener('click', () => {
+      const chosen = document.querySelector('input[name="jawab"]:checked');
+      clearHighlights();
+      resultArea.textContent = '';
+      if (!chosen) {
+        resultArea.style.color = '#9b2b2b';
+        resultArea.textContent = 'Pilih satu jawaban terlebih dahulu.';
+        return;
+      }
+
+      const selectedLabel = chosen.nextElementSibling;
+      if (chosen.value === correctValue) {
+        selectedLabel.classList.add('correct');
+        resultArea.style.color = '#086a3e';
+        resultArea.textContent = 'Benar — dia membutuhkan teleskop untuk melihat dan mempelajari bulan dan bintang.';
+      } else {
+        selectedLabel.classList.add('wrong');
+        const correctRadio = document.querySelector('input[name="jawab"][value="' + correctValue + '"]');
+        if (correctRadio) correctRadio.nextElementSibling.classList.add('correct');
+        resultArea.style.color = '#9b2b2b';
+        resultArea.textContent = 'Salah. Perhatikan bacaan lalu coba lagi.';
+      }
+    });
+
+    document.querySelectorAll('.option-label').forEach(lbl => {
+      lbl.addEventListener('click', () => {
+        resultArea.textContent = '';
+        clearHighlights();
+      });
+    });
+  </script>
+</body>
+</html>

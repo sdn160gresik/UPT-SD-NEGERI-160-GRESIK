@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Latihan Soal ANBK - Literasi 5</title>
+  <style>
+    :root{ --bg:#f3f6fb; --biru:#2b8cff; --putih:#ffffff; --abu:#e6eefc; --text:#223; }
+    *{box-sizing:border-box}
+    body{font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--text); margin:0; padding:16px}
+    .container{max-width:900px; margin:0 auto;}
+
+    .title-box{background:var(--biru); color:var(--putih); padding:14px 16px; border-radius:10px; text-align:center; font-size:20px; font-weight:700}
+    .subtitle-box{background:var(--putih); margin-top:12px; padding:10px 12px; border-radius:8px; box-shadow:0 1px 0 rgba(0,0,0,0.05); font-weight:700}
+
+    .story{background:var(--putih); margin-top:12px; padding:14px; border-radius:10px; line-height:1.6; box-shadow:0 1px 4px rgba(34,34,34,0.06)}
+    .story h3{margin-top:0; margin-bottom:8px}
+    .media-row{display:flex; gap:12px; align-items:flex-start; margin-top:10px}
+    .text-area{flex:1}
+    .thumb{width:140px; height:140px; flex:0 0 140px; border-radius:8px; object-fit:cover}
+
+    .question{background:var(--putih); margin-top:12px; padding:14px; border-radius:10px; line-height:1.6; box-shadow:0 1px 4px rgba(34,34,34,0.06)}
+    .question button{margin-top:10px; padding:8px 12px; border:none; border-radius:6px; background:var(--biru); color:#fff; cursor:pointer; font-weight:600}
+    .feedback{margin-top:10px; font-weight:600}
+
+    .source{background:var(--abu); margin-top:12px; padding:10px; border-radius:8px; font-size:14px}
+
+    .btn-row{display:flex; gap:10px; margin-top:12px}
+    .btn{flex:1; padding:10px 12px; border-radius:8px; font-weight:600; border:0; cursor:pointer}
+    .btn-primary{background:var(--biru); color:white}
+    .btn-outline{background:white; border:1px solid #cfe2ff}
+
+    .to-top{position:fixed; right:14px; bottom:14px; padding:10px 12px; border-radius:999px; box-shadow:0 6px 18px rgba(0,0,0,0.12); background:var(--biru); color:white; border:0}
+
+    @media (max-width:600px){
+      .media-row{flex-direction:column-reverse}
+      .thumb{width:100%; height:auto; flex:0 0 auto}
+      .title-box{font-size:18px}
+      .btn-row{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title-box">Latihan Soal ANBK</div>
+
+    <div class="subtitle-box">Soal Literasi 5</div>
+
+    <article class="story" id="bacaan">
+      <h3>Kisah Kutu di Negeri Rambut</h3>
+      <div style="margin-bottom:10px; font-size:13px; color:#334155">Bacalah teks cerita berikut, kemudian kerjakan soal.</div>
+      <div class="media-row">
+        <div class="text-area">
+          <p>Di suatu negeri yang subur, kutu berkumpul. Ada ribuan telur kutu di sekitar rambut panjang Ajeng. Ajeng kurang menjaga kebersihan. Ia sering menggaruk kepalanya karena gatal. Para kutu sudah semakin banyak. Mereka ingin mencari negeri baru. Tak jarang rambut teman-teman Ajeng menjadi korban. Teman-teman Ajeng menjadi risih. Ketika Ajeng mulai menggaruk rambut, mereka menjauhinya. Ajeng merasa sedih. Akhirnya ia memutuskan berkeramas dan memotong rambutnya. Para kutu sangat marah. Mereka berloncatan mencari negeri yang baru.</p>
+          <p style="margin-top:14px; font-size:13px; color:#334155"><strong>Sumber tulisan:</strong> Kompasiana.com dengan perubahan<br>
+          <strong>Sumber gambar:</strong> Nindia Pratiwi</p>
+        </div>
+        <img src="https://i.imgur.com/4bMEY65.png" alt="Ilustrasi" class="thumb">
+      </div>
+    </article>
+
+    <div class="question">
+      <p><strong>Soal:</strong></p>
+      <p>Dimana ribuan telur kutu berkumpul?</p>
+      <label><input type="radio" name="q1" value="A"> A. Di suatu negeri.</label><br>
+      <label><input type="radio" name="q1" value="B"> B. Di rambut Ajeng.</label><br>
+      <label><input type="radio" name="q1" value="C"> C. Di rambut teman-teman.</label><br>
+      <button onclick="checkAnswer()">Periksa Jawaban</button>
+      <div id="feedback" class="feedback"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="history.back()">Kembali</button>
+      <a href="literasi.html" class="btn btn-primary" role="button" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">Lanjut</a>
+    </div>
+
+    <div class="source">
+      <strong>Sumber soal:</strong>
+      <div style="margin-top:6px; word-break:break-all">
+        https://www.youtube.com/watch?v=-_RIbPoSDxk&list=PLAGqBrRlo6Htl-7USwx4DewWuvJjjuSSI&index=2
+      </div>
+    </div>
+
+  </div>
+
+  <button class="to-top" onclick="scrollToTop()">↑</button>
+
+  <script>
+    function scrollToTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
+
+    function checkAnswer(){
+      const pilihan = document.querySelector('input[name="q1"]:checked');
+      const feedback = document.getElementById("feedback");
+      if(!pilihan){
+        feedback.textContent = "Silakan pilih jawaban dulu.";
+        feedback.style.color = "orange";
+        return;
+      }
+      if(pilihan.value === "B"){
+        feedback.textContent = "✔ Jawaban benar! Ribuan telur kutu ada di rambut Ajeng.";
+        feedback.style.color = "green";
+      }else{
+        feedback.textContent = "✘ Jawaban salah. Coba lagi.";
+        feedback.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>

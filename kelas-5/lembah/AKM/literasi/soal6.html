@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Soal Literasi 6</title>
+  <style>
+    body{
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:#f2f6fb;
+      padding:16px;
+      display:flex;
+      justify-content:center;
+    }
+    .card{
+      width:920px;
+      max-width:100%;
+      background:white;
+      border-radius:20px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.12);
+      padding:24px;
+    }
+    .judul-biru{
+      background:#2b8cff;
+      color:white;
+      text-align:center;
+      font-size:24px;
+      font-weight:bold;
+      padding:10px;
+      border-radius:10px;
+      margin-bottom:12px;
+    }
+    .subjudul{
+      background:#e8f0fe;
+      padding:8px;
+      border-radius:8px;
+      font-size:18px;
+      font-weight:600;
+      margin-bottom:18px;
+      text-align:center;
+    }
+    h1{
+      font-size:24px;
+      margin:6px 0 16px 0;
+      line-height:1.3;
+    }
+    p.instr{
+      font-size:16px;
+      margin:6px 0 16px 0;
+      color:#222;
+    }
+    .options{ margin-top:8px; }
+    .option{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:10px;
+      border-radius:8px;
+      margin-bottom:10px;
+      font-size:16px;
+      border:2px solid transparent;
+      transition:background .12s, border-color .12s;
+    }
+    .option input[type="checkbox"]{
+      width:20px;
+      height:20px;
+      margin-top:3px;
+      accent-color:#2b8cff;
+    }
+    .opt-label{ flex:1; line-height:1.3; }
+    .correct { background:#e9f7ee; border-color:#27a54b; }
+    .wrong { background:#fff3f3; border-color:#d9534f; }
+    .missed { background:#fff9e6; border-color:#f0ad4e; }
+    .controls{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+    button{
+      padding:10px 14px;
+      border-radius:999px;
+      border:none;
+      font-size:15px;
+      cursor:pointer;
+      box-shadow:0 4px 10px rgba(0,0,0,0.06);
+    }
+    .btn-check{ background:#2b8cff; color:white; }
+    .btn-reset{ background:#f0f0f0; color:#333; }
+    .btn-nav{ background:#27a54b; color:white; }
+    .feedback{
+      flex:1 1 100%;
+      font-size:15px;
+      font-weight:600;
+      margin-top:8px;
+    }
+    .nav-buttons{
+      display:flex;
+      justify-content:space-between;
+      width:100%;
+      margin-top:12px;
+    }
+    .sumber{
+      background:#f9f9f9;
+      border-left:4px solid #2b8cff;
+      margin-top:20px;
+      padding:10px;
+      font-size:14px;
+      border-radius:6px;
+      word-break:break-word;
+    }
+    @media(max-width:480px){
+      h1{ font-size:20px; }
+      .option{ font-size:15px; }
+      .judul-biru{ font-size:20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card" role="main" aria-labelledby="judul">
+    <div class="judul-biru">Latihan Soal ANBK</div>
+    <div class="subjudul">Soal Literasi 6</div>
+
+    <h1 id="judul">Mengapa teman-teman Ajeng merasa risih kepadanya?</h1>
+    <p class="instr">Klik pada setiap pilihan jawaban benar! <br><strong>Jawaban benar lebih dari satu.</strong></p>
+
+    <form id="quiz">
+      <div class="options">
+        <label class="option" id="optA">
+          <input type="checkbox" name="q" value="A" data-correct="false" />
+          <div class="opt-label"><strong>A.</strong> Rambut Ajeng panjang.</div>
+        </label>
+        <label class="option" id="optB">
+          <input type="checkbox" name="q" value="B" data-correct="true" />
+          <div class="opt-label"><strong>B.</strong> Ajeng sering menggaruk kepala.</div>
+        </label>
+        <label class="option" id="optC">
+          <input type="checkbox" name="q" value="C" data-correct="true" />
+          <div class="opt-label"><strong>C.</strong> Rambut Ajeng banyak kutu.</div>
+        </label>
+      </div>
+
+      <div class="controls">
+        <button type="button" class="btn-check" id="checkBtn">Periksa Jawaban ✓</button>
+        <button type="button" class="btn-reset" id="resetBtn">Ulangi</button>
+        <div class="feedback" id="feedback" aria-live="polite"></div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="literasi.html"><button type="button" class="btn-nav">⟵ Kembali</button></a>
+        <a href="literasi.html"><button type="button" class="btn-nav">Lanjut ⟶</button></a>
+      </div>
+    </form>
+
+    <div class="sumber">
+      Sumber soal: <a href="https://www.youtube.com/watch?v=-_RIbPoSDxk&list=PLAGqBrRlo6Htl-7USwx4DewWuvJjjuSSI&index=2" target="_blank">
+      https://www.youtube.com/watch?v=-_RIbPoSDxk&list=PLAGqBrRlo6Htl-7USwx4DewWuvJjjuSSI&index=2</a>
+    </div>
+  </div>
+
+  <script>
+    const checkBtn = document.getElementById('checkBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const feedback = document.getElementById('feedback');
+    const options = Array.from(document.querySelectorAll('.option'));
+
+    function clearStates(){
+      options.forEach(opt => opt.classList.remove('correct','wrong','missed'));
+      feedback.textContent = '';
+    }
+
+    checkBtn.addEventListener('click', () => {
+      clearStates();
+      const inputs = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+      let correctCount = 0, chosenCorrect = 0, chosenWrong = 0;
+      inputs.forEach(i => { if (i.dataset.correct === "true") correctCount++; });
+      inputs.forEach(i => {
+        const parent = i.closest('.option');
+        const isCorrect = i.dataset.correct === "true";
+        if (i.checked && isCorrect) { parent.classList.add('correct'); chosenCorrect++; }
+        else if (i.checked && !isCorrect) { parent.classList.add('wrong'); chosenWrong++; }
+        else if (!i.checked && isCorrect) { parent.classList.add('missed'); }
+      });
+      if (chosenCorrect === correctCount && chosenWrong === 0) {
+        feedback.textContent = "Bagus! Semua jawaban benar terpilih.";
+      } else {
+        let msgs = [];
+        if (chosenCorrect > 0) msgs.push(`Benar dipilih: ${chosenCorrect}`);
+        if (chosenWrong > 0) msgs.push(`Salah dipilih: ${chosenWrong}`);
+        const missed = correctCount - chosenCorrect;
+        if (missed > 0) msgs.push(`Jawaban benar yang belum dipilih: ${missed}`);
+        feedback.textContent = msgs.join(' • ');
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      document.querySelectorAll('input[type="checkbox"]').forEach(i => i.checked = false);
+      clearStates();
+    });
+
+    options.forEach(opt => {
+      opt.tabIndex = 0;
+      opt.addEventListener('keydown', (e) => {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          const cb = opt.querySelector('input[type="checkbox"]');
+          cb.checked = !cb.checked;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

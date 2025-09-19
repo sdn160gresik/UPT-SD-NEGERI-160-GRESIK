@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Latihan Soal ANBK</title>
+  <style>
+    :root{font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;}
+    body{background:#f3f6fb;margin:0;padding:24px;color:#111}
+    .container{max-width:900px;margin:0 auto}
+    .card{background:#fff;border-radius:12px;box-shadow:0 6px 18px rgba(18,38,63,0.06);padding:18px}
+    .title{background:#1e90ff;color:#fff;padding:14px;border-radius:10px;font-size:20px;font-weight:700;text-align:center}
+    .subtitle{border:2px solid #e6eefc;padding:10px;border-radius:8px;margin-top:12px;font-weight:600}
+    .instruction{margin-top:12px;font-size:15px}
+    
+    .images{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;align-items:flex-end;justify-content:center}
+    .images img{border-radius:8px;border:1px solid #ddd;}
+    @media (max-width:640px){
+      .images{flex-direction:column;align-items:center;}
+      .images img{width:100%!important;max-width:100%!important;height:auto!important;}
+    }
+
+    .info{background:#fff6e6;border-left:4px solid #ffb74d;padding:10px;margin-top:12px;border-radius:6px}
+    .question{margin-top:14px;font-weight:700}
+    .options{margin-top:10px;display:flex;flex-direction:column;gap:10px}
+    .option{background:#f7fbff;border:1px solid #dfefff;padding:10px;border-radius:8px;cursor:pointer;display:flex;align-items:center}
+    .option input{margin-right:8px}
+    .actions{margin-top:14px;display:flex;gap:10px}
+    .btn{padding:10px 14px;border-radius:8px;border:0;cursor:pointer;font-weight:600}
+    .btn-primary{background:#1e90ff;color:white}
+    .btn-secondary{background:#e6eefc;color:#123}
+    .result{margin-top:12px;padding:10px;border-radius:8px;display:none}
+    .result.correct{background:#e7fff0;border:1px solid #5bd58b;color:#0b6b3b}
+    .result.wrong{background:#fff1f2;border:1px solid #ff9aa2;color:#a10008}
+    .source{margin-top:12px;padding:10px;border-radius:8px;border:1px dashed #cdd9f7;background:#fbfdff}
+    .nav{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="title">Latihan Soal ANBK</div>
+      <div class="subtitle">Latihan Soal 5</div>
+
+      <div class="instruction">Perhatikan keterangan pada gambar lift di bawah ini!</div>
+
+      <div class="images" aria-hidden>
+        <img src="https://i.imgur.com/8JaIFMa.png" alt="Gambar 1" style="width:250px; height:auto;" />
+        <img src="https://i.imgur.com/9CIiXyQ.png" alt="Gambar 2" style="width:auto; height:200px;" />
+        <img src="https://i.imgur.com/I2TrOwi.png" alt="Gambar 3" style="width:auto; height:200px;" />
+        <img src="https://i.imgur.com/p37ABzk.png" alt="Gambar 4" style="width:auto; height:150px;" />
+      </div>
+
+      <div class="info">
+        Lift sudah berisi 5 orang dengan jumlah berat badan 380 kg.<br>
+        Di luar lift, Andi, Rosa, dan Joni akan masuk ke dalam lift yang sama.
+      </div>
+
+      <div class="question">
+        Dua orang akan masuk ke dalam lift. Mereka akan bergabung dengan kelima orang yang sudah ada di dalam lift. 
+        Dua orang yang dapat masuk secara bersamaan ke dalam lift tersebut adalah ….
+      </div>
+
+      <form id="quizForm">
+        <div class="options">
+          <label class="option"><input type="checkbox" name="answer" value="a">Andi dan Joni</label>
+          <label class="option"><input type="checkbox" name="answer" value="b">Andi dan Rosa</label>
+          <label class="option"><input type="checkbox" name="answer" value="c">Rosa dan Joni</label>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="submitBtn">Periksa Jawaban</button>
+          <button type="reset" class="btn btn-secondary" id="resetBtn">Ulang</button>
+        </div>
+      </form>
+
+      <div id="result" class="result" role="status"></div>
+
+      <div class="source">Sumber soal: <a href="https://www.youtube.com/watch?v=a4tjifkQS40&t=244" target="_blank" rel="noopener">YouTube (link)</a></div>
+
+      <div class="nav">
+        <a href="../Numerasi-paketB.html"><button class="btn btn-secondary">Kembali</button></a>
+        <a href="../Numerasi-paketB.html"><button class="btn btn-primary">Lanjutkan</button></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const correctAnswers = ["a","c"]; // jawaban benar
+    const resultEl = document.getElementById('result');
+    const submitBtn = document.getElementById('submitBtn');
+
+    submitBtn.addEventListener('click', ()=>{
+      const form = document.getElementById('quizForm');
+      const data = new FormData(form);
+      const selected = data.getAll('answer');
+
+      if(selected.length === 0){
+        resultEl.style.display = 'block';
+        resultEl.className = 'result wrong';
+        resultEl.textContent = 'Pilih minimal satu jawaban.';
+        return;
+      }
+
+      const isCorrect = 
+        selected.length === correctAnswers.length &&
+        selected.every(val => correctAnswers.includes(val));
+
+      resultEl.style.display = 'block';
+      if(isCorrect){
+        resultEl.className = 'result correct';
+        resultEl.textContent = '✅ Benar';
+      } else {
+        resultEl.className = 'result wrong';
+        resultEl.textContent = '❌ Salah';
+      }
+    });
+  </script>
+</body>
+</html>

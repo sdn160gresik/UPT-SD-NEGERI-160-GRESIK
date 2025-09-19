@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Latihan Soal Numerasi</title>
+<style>
+.kotak-soal {
+    background-color: white;
+    border: 2px solid #add8e6;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    max-width: 600px;
+    width: 100%;
+}
+body {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-image: url('https://i.imgur.com/lRhI0Xw.png');
+    background-size: cover;
+    background-position: center;
+}
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.nav a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    background-color: white;
+    padding: 10px 15px;
+    border: 2px solid #add8e6;
+    border-radius: 8px;
+}
+select {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 2px solid #add8e6;
+    font-weight: bold;
+    margin-top: 20px;
+    cursor: pointer;
+}
+h1 img {
+    vertical-align: middle;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="nav">
+        <a href="../AKM.html">◀️ kembali</a>
+        <a href="soal-wisata1.pdf" download>📥 Download</a>
+    </div>
+    <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
+        <img src="https://i.imgur.com/oDj5njL.png" alt="Ikon"> Latihan Soal Numerasi
+    </h1>
+
+    <!-- Dropdown Pilihan Paket -->
+    <select id="menuLatihan" onchange="pilihLatihan()">
+        <option value="">-- Pilih Paket Soal --</option>
+        <option value="paketA.html">Paket A</option>
+        <option value="paketB.html">Paket B</option>
+        <option value="paketC.html">Paket C</option>
+    </select>
+</div>
+
+<script>
+function pilihLatihan() {
+    let menu = document.getElementById("menuLatihan");
+    let nilai = menu.value;
+    if (nilai) {
+        window.location.href = nilai;
+    }
+}
+</script>
+</body>
+</html>

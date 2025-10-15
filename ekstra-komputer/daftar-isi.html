@@ -115,6 +115,29 @@
       color:#1a73e8;
       text-decoration:underline;
     }
+
+    /* 🔹 Tombol Home melayang 🔹 */
+    .home-floating {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+    .home-floating img {
+      width: 70px;
+      height: auto;
+      transition: transform 0.2s;
+    }
+    .home-floating img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Responsif untuk HP */
+    @media (max-width: 600px) {
+      .home-floating img {
+        width: 55px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -135,7 +158,6 @@
         </div>
       </div>
       <div style="margin-top:12px">
-        <!-- Bagian ini diubah agar mengarah ke perangkat-keras.html -->
         <details open>
           <summary>
             <div class="summary-left">
@@ -303,5 +325,10 @@
 
     <div class="corner">✦</div>
   </div>
+
+  <!-- 🔹 Tombol Home melayang -->
+  <a href="../index.html" class="home-floating" title="Kembali ke Halaman Utama">
+    <img src="https://i.imgur.com/pjkmRdR.png" alt="Home">
+  </a>
 </body>
 </html>

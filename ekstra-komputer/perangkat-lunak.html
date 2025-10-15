@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mengenal Perangkat Lunak Komputer</title>
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    background: url("https://i.imgur.com/1NgzbO1.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    color: #222;
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 153, 255, 0.95);
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 28px;
+    font-weight: bold;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    z-index: 1000;
+  }
+
+  main {
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 120px auto 100px;
+    padding: 25px;
+    border-radius: 20px;
+    max-width: 900px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  }
+
+  h2 {
+    color: #0077cc;
+    border-bottom: 2px solid #0077cc;
+    padding-bottom: 5px;
+  }
+
+  h3 {
+    color: #ff6600;
+    margin-top: 15px;
+  }
+
+  ul {
+    margin-left: 20px;
+  }
+
+  .card {
+    background-color: #f0f8ff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+
+  th, td {
+    border: 1px solid #0077cc;
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #e0f3ff;
+  }
+
+  .latihan {
+    background-color: #fff8e1;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 25px;
+    border-left: 6px solid #ffcc00;
+    text-align: center;
+  }
+
+  .btn-latihan {
+    display: inline-block;
+    background-color: #ffcc00;
+    color: #000;
+    font-weight: bold;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  }
+
+  .btn-latihan:hover {
+    background-color: #ff9900;
+    transform: scale(1.05);
+  }
+
+  footer {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid #0077cc;
+    padding: 10px 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+
+  .btn-home {
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    width: 90px;
+    cursor: pointer;
+    z-index: 999;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+
+  .btn-home img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .btn-home:hover {
+    transform: scale(1.1);
+  }
+
+  .klik-teks {
+    color: #0077cc;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+
+  .klik-teks:hover {
+    color: #ff6600;
+  }
+
+  .penjelasan {
+    display: none;
+    margin-top: 8px;
+    padding: 10px 15px;
+    border-left: 4px solid #0077cc;
+    background-color: #f0f8ff;
+    border-radius: 8px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<header>💻 Mengenal Perangkat Lunak Komputer</header>
+
+<main>
+  <h2>💡 Apa itu Perangkat Lunak?</h2>
+  <p>Perangkat <b>lunak komputer (software)</b> adalah <b>program atau aplikasi</b> yang berfungsi untuk <b>mengatur cara kerja komputer</b> dan <b>membantu pengguna</b> dalam melakukan berbagai kegiatan.</p>
+
+  <div class="card">
+    <p>Jika <b>perangkat keras</b> bisa kita sentuh, maka <b>perangkat lunak</b> tidak bisa disentuh karena berupa <b>kode dan instruksi</b> yang berjalan di dalam komputer.</p>
+    <p><strong>📌 Contoh:</strong></p>
+    <ul>
+      <li>Windows, Android, dan Linux (sebagai sistem operasi)</li>
+      <li>Microsoft Word, Excel, dan PowerPoint (sebagai aplikasi)</li>
+      <li>Google Chrome, Firefox (sebagai aplikasi penjelajah internet)</li>
+      <li>Game seperti Minecraft atau Among Us (sebagai hiburan)</li>
+    </ul>
+  </div>
+
+  <h2>🧠 Jenis-jenis Perangkat Lunak</h2>
+
+  <ol>
+    <li>
+      <span class="klik-teks" onclick="togglePenjelasan('jenis1')">Perangkat Lunak Sistem (System Software)</span>
+      <div id="jenis1" class="penjelasan">
+        <p>Berfungsi untuk <b>mengatur dan mengendalikan</b> kerja perangkat keras komputer.</p>
+        <p><b>📘 Contoh:</b> Windows, macOS, Linux, Android.</p>
+      </div>
+    </li>
+
+    <li>
+      <span class="klik-teks" onclick="togglePenjelasan('jenis2')">Perangkat Lunak Aplikasi (Application Software)</span>
+      <div id="jenis2" class="penjelasan">
+        <p>Digunakan untuk <b>melakukan pekerjaan tertentu</b> sesuai kebutuhan pengguna.</p>
+        <p><b>📗 Contoh:</b></p>
+        <ul>
+          <li>Microsoft Word (mengetik)</li>
+          <li>Paint (menggambar)</li>
+          <li>PowerPoint (presentasi)</li>
+          <li>Game edukasi (belajar sambil bermain)</li>
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <span class="klik-teks" onclick="togglePenjelasan('jenis3')">Perangkat Lunak Bahasa Pemrograman (Programming Software)</span>
+      <div id="jenis3" class="penjelasan">
+        <p>Digunakan untuk <b>membuat program atau aplikasi baru</b>.</p>
+        <p><b>📙 Contoh:</b> Scratch, Python, dan Java.</p>
+      </div>
+    </li>
+  </ol>
+
+  <h2>⚙️ Fungsi Perangkat Lunak Komputer</h2>
+  <div class="card">
+    <ul>
+      <li>Mengatur kerja seluruh perangkat keras.</li>
+      <li>Menyediakan sarana untuk mengetik, menggambar, dan bermain.</li>
+      <li>Membantu pengguna menyelesaikan pekerjaan dengan cepat dan mudah.</li>
+      <li>Menjaga sistem komputer agar tetap berjalan dengan baik.</li>
+    </ul>
+  </div>
+
+  <h2>📊 Perbedaan Perangkat Keras dan Perangkat Lunak</h2>
+  <table>
+    <tr>
+      <th>No</th>
+      <th>Perangkat Keras (Hardware)</th>
+      <th>Perangkat Lunak (Software)</th>
+    </tr>
+    <tr>
+      <td>1.</td>
+      <td>Dapat disentuh dan dilihat</td>
+      <td>Tidak dapat disentuh</td>
+    </tr>
+    <tr>
+      <td>2.</td>
+      <td>Berupa alat fisik seperti monitor, keyboard</td>
+      <td>Berupa program dan data</td>
+    </tr>
+    <tr>
+      <td>3.</td>
+      <td>Tidak dapat bekerja tanpa perangkat lunak</td>
+      <td>Mengatur dan memerintah perangkat keras</td>
+    </tr>
+    <tr>
+      <td>4.</td>
+      <td>Contoh: CPU, mouse, printer</td>
+      <td>Contoh: Windows, Word, Paint</td>
+    </tr>
+  </table>
+
+  <h2>✨ Kesimpulan</h2>
+  <p>Perangkat lunak komputer sangat penting karena <b>tanpa software, perangkat keras tidak bisa bekerja</b>. Software membantu manusia melakukan berbagai pekerjaan — dari <b>mengetik, menggambar, bermain game</b>, hingga <b>belajar dan berkomunikasi</b>.</p>
+
+  <div class="latihan">
+    <h3>💡 Latihan Soal</h3>
+    <a href="SOAL2.html" class="btn-latihan">Mulai Latihan</a>
+  </div>
+</main>
+
+<footer>
+  © 2025 – Materi Komputer Dasar untuk SD - UPT SD NEGERI 160 GRESIK
+</footer>
+
+<a href="daftar-isi.html" title="Kembali ke Daftar Isi" class="btn-home">
+  <img src="https://i.imgur.com/pjkmRdR.png" alt="Tombol Home">
+</a>
+
+<script>
+  function togglePenjelasan(id) {
+    const div = document.getElementById(id);
+    div.style.display = div.style.display === "block" ? "none" : "block";
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mengenal Perangkat Keras Komputer</title>
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    background: url("https://i.imgur.com/1NgzbO1.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    color: #222;
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 153, 255, 0.95);
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 28px;
+    font-weight: bold;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    z-index: 1000;
+  }
+
+  main {
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 120px auto 100px;
+    padding: 25px;
+    border-radius: 20px;
+    max-width: 900px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  }
+
+  h2 {
+    color: #0077cc;
+    border-bottom: 2px solid #0077cc;
+    padding-bottom: 5px;
+  }
+
+  h3 {
+    color: #ff6600;
+    margin-top: 15px;
+  }
+
+  ul {
+    margin-left: 20px;
+  }
+
+  .contoh {
+    background-color: #f0f8ff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  .gambar-kelompok {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 15px;
+  }
+
+  .item-gambar {
+    text-align: center;
+  }
+
+  .item-gambar img {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #0077cc;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    background-color: white;
+  }
+
+  .item-gambar p {
+    margin-top: 8px;
+    font-weight: bold;
+    color: #005599;
+  }
+
+  .latihan {
+    background-color: #fff8e1;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 25px;
+    border-left: 6px solid #ffcc00;
+    text-align: center;
+  }
+
+  .btn-latihan {
+    display: inline-block;
+    background-color: #ffcc00;
+    color: #000;
+    font-weight: bold;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  }
+
+  .btn-latihan:hover {
+    background-color: #ff9900;
+    transform: scale(1.05);
+  }
+
+  /* ✅ FOOTER tetap terlihat saat scroll */
+  footer {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid #0077cc;
+    padding: 10px 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+
+  .klik-teks {
+    color: #0077cc;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+
+  .klik-teks:hover {
+    color: #ff6600;
+  }
+
+  .penjelasan {
+    display: none;
+    margin-top: 8px;
+    padding: 10px 15px;
+    border-left: 4px solid #0077cc;
+    background-color: #f0f8ff;
+    border-radius: 8px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn-home {
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    width: 90px;
+    cursor: pointer;
+    z-index: 999;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+
+  .btn-home img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .btn-home:hover {
+    transform: scale(1.1);
+  }
+
+  .gambar-kecil {
+    display: block;
+    margin: 10px auto;
+    border: 2px solid #0077cc;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    width: 150px;
+    background-color: #fff;
+  }
+</style>
+</head>
+<body>
+
+<header>🖥️ Mengenal Perangkat Keras Komputer</header>
+
+<main>
+  <h2>A. Apa Itu Perangkat Keras?</h2>
+  <p>Perangkat keras komputer atau <b>hardware</b> adalah bagian komputer yang bisa kita <b>lihat dan sentuh secara langsung</b>.</p>
+
+  <div class="contoh">
+    Contoh: <b>monitor, keyboard, mouse, CPU, printer.</b>
+    <div class="gambar-kelompok">
+      <div class="item-gambar">
+        <img src="https://i.imgur.com/XTPp3Ms.png" alt="Monitor komputer">
+        <p>Monitor</p>
+      </div>
+      <div class="item-gambar">
+        <img src="https://i.imgur.com/cvEObHv.png" alt="Keyboard komputer">
+        <p>Keyboard</p>
+      </div>
+      <div class="item-gambar">
+        <img src="https://i.imgur.com/21gjfMC.jpeg" alt="Mouse komputer">
+        <p>Mouse</p>
+      </div>
+      <div class="item-gambar">
+        <img src="https://i.imgur.com/lbjDywI.png" alt="CPU komputer">
+        <p>CPU</p>
+      </div>
+      <div class="item-gambar">
+        <img src="https://i.imgur.com/kmcvlzU.png" alt="Printer komputer">
+        <p>Printer</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>B. Fungsi Perangkat Keras</h2>
+  <ul>
+    <li>
+      <span class="klik-teks" onclick="togglePenjelasan('p1')">Menerima data atau perintah dari pengguna.</span>
+      <div id="p1" class="penjelasan">
+        <p>Perangkat keras berfungsi untuk menerima input dari pengguna, seperti data, perintah, atau instruksi yang akan diproses oleh komputer.</p>
+        <p><strong>📌 Contoh:</strong></p>
+        <ul>
+          <li>Keyboard digunakan untuk mengetik huruf dan angka.</li>
+          <li>Mouse digunakan untuk mengarahkan kursor dan memilih perintah.</li>
+          <li>Scanner digunakan untuk memasukkan gambar atau dokumen ke dalam komputer.</li>
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <span class="klik-teks" onclick="togglePenjelasan('p2')">Mengolah data menjadi informasi.</span>
+      <div id="p2" class="penjelasan">
+        <p>Setelah menerima data dari pengguna, perangkat keras tertentu bertugas untuk memproses data tersebut agar menjadi informasi yang berguna. Proses ini dilakukan oleh komponen utama seperti CPU.</p>
+      </div>
+    </li>
+
+    <li>
+      <span class="klik-teks" onclick="togglePenjelasan('p3')">Menampilkan hasil dari proses komputer.</span>
+      <div id="p3" class="penjelasan">
+        <p>Setelah data diolah, hasilnya perlu ditampilkan atau dikeluarkan agar dapat dilihat atau digunakan oleh pengguna.</p>
+      </div>
+    </li>
+  </ul>
+
+  <h2>C. Jenis-Jenis Perangkat Keras</h2>
+  <h3>🧮 1. Perangkat Masukan (Input Device)</h3>
+  <p>Digunakan untuk <b>memasukkan data</b> ke komputer.</p>
+
+  <h3>⚙️ 2. Perangkat Pemroses (Processing Device)</h3>
+  <p>Bagian ini adalah <b>otak komputer</b> yang mengolah data menjadi informasi.</p>
+
+  <h3>🖨️ 3. Perangkat Keluaran (Output Device)</h3>
+  <p>Digunakan untuk <b>menampilkan hasil kerja komputer</b>.</p>
+
+  <h3>💾 4. Perangkat Penyimpanan (Storage Device)</h3>
+  <p>Digunakan untuk <b>menyimpan data dan program</b>.</p>
+
+  <h2>D. Cara Merawat Komputer</h2>
+  <ul>
+    <li>Jangan makan atau minum di dekat komputer.</li>
+    <li>Cuci tangan sebelum menggunakan komputer.</li>
+    <li>Bersihkan keyboard dan monitor dari debu.</li>
+    <li>Matikan komputer dengan benar setelah digunakan.</li>
+  </ul>
+
+  <h2>E. Kesimpulan</h2>
+  <p>Perangkat keras adalah bagian komputer yang bisa kita lihat dan sentuh. Tanpa perangkat keras, komputer tidak bisa bekerja. Ayo kita jaga dan rawat komputer agar tetap awet dan berguna untuk belajar!</p>
+
+  <div class="latihan">
+    <h3>💡 Latihan Soal</h3>
+    <a href="SOAL1.html" class="btn-latihan">Mulai Latihan</a>
+  </div>
+</main>
+
+<footer>
+  © 2025 – Materi Komputer Dasar untuk SD - UPT SD NEGERI 160 GRESIK
+</footer>
+
+<a href="daftar-isi.html" title="Kembali ke Daftar Isi" class="btn-home">
+  <img src="https://i.imgur.com/pjkmRdR.png" alt="Tombol Home">
+</a>
+
+<script>
+  function togglePenjelasan(id) {
+    const div = document.getElementById(id);
+    div.style.display = div.style.display === "block" ? "none" : "block";
+  }
+</script>
+
+</body>
+</html>

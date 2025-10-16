@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuis Perangkat Lunak Pengolah Kata</title>
+  <style>
+    .kotak-soal {
+      background-color: white;
+      border: 2px solid #add8e6;
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      max-width: 600px;
+      width: 100%;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      padding: 20px;
+      background-image: url('https://i.imgur.com/1NgzbO1.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .answers label {
+      display: block;
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #2c3e50;
+      font-weight: bold;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .answers input[type="radio"] {
+      margin-right: 10px;
+      accent-color: #007bff;
+      transform: scale(1.2);
+    }
+    .answers label:nth-child(1) { background: #d6eaff; }
+    .answers label:nth-child(2) { background: #d6ffd9; }
+    .answers label:nth-child(3) { background: #fffbd6; }
+    .answers label:nth-child(4) { background: #ffd6e7; }
+    .answers label:hover { filter: brightness(0.9); transform: scale(1.02); }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    button:hover { background-color: #0056b3; }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 25px 35px;
+      border-radius: 12px;
+      text-align: center;
+      z-index: 2000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      font-size: 18px;
+      font-weight: bold;
+      animation: pop 0.3s ease-out;
+      max-width: 90%;
+    }
+    .popup-warning { background: #fff3cd; border: 2px solid #ffecb5; color: #856404; }
+    .popup-success { background: #d4edda; border: 2px solid #c3e6cb; color: #155724; }
+    .popup-gold { background: #fff8e1; border: 2px solid #ffeb3b; color: #8d6e00; }
+
+    .nilai-besar { font-size: 48px; font-weight: bold; display: block; margin: 10px 0; }
+    .nilai-merah { color: #e74c3c; }
+    .nilai-kuning { color: #f39c12; }
+    .nilai-hijau { color: #27ae60; }
+    .nilai-emas { color: #d4af37; }
+
+    @keyframes pop {
+      0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
+    .form-identitas {
+      background: white;
+      border: 2px solid #add8e6;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 400px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .form-identitas input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .progress {
+      background: white;
+      border: 2px solid #add8e6;
+      border-radius: 10px;
+      padding: 8px 14px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .tombol-home {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      z-index: 3000;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.8);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+    .tombol-home:hover { transform: scale(1.1); }
+    .tombol-home img { width: 50px; height: 50px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 style="color:#2c3e50;text-align:center;background:white;padding:10px 20px;border-radius:10px;border:2px solid #add8e6;">💻 Kuis Perangkat Lunak Pengolah Kata</h1>
+
+    <!-- Form Identitas -->
+    <div id="formIdentitas" class="form-identitas">
+      <h3>Isi Identitasmu dulu ya ✨</h3>
+      <input type="text" id="nama" placeholder="Nama Lengkap" oninput="mainkanSuaraKetik()">
+      <input type="text" id="kelas" placeholder="Kelas" oninput="mainkanSuaraKetik()">
+      <input type="number" id="absen" placeholder="No Absen" oninput="mainkanSuaraKetik()">
+      <button onclick="mulaiKuis()">🚀 Mulai Kuis</button>
+    </div>
+
+    <div id="progress" class="progress" style="display:none;">Soal 1/10</div>
+    <div id="quiz" style="display:none;"></div>
+  </div>
+
+  <!-- Tombol Home -->
+  <a href="perangkat-lunak.html" class="tombol-home" title="Kembali ke Halaman Utama">
+    <img src="https://i.imgur.com/pjkmRdR.png" alt="Home">
+  </a>
+
+  <!-- Suara -->
+  <audio id="suaraKetik" src="../../suara/typing.mp3"></audio>
+  <audio id="suaraNext" src="../../suara/blub.mp3"></audio>
+  <audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
+  <audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
+  <audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
+
+  <script>
+    const soalMaster = [
+      { q: "1. Perangkat lunak pengolah kata digunakan untuk ....", a: ["Menggambar dan mewarnai","Membuat dan mengedit dokumen teks","Menghitung angka","Menonton video"], k: 1 },
+      { q: "2. Contoh dokumen yang bisa dibuat dengan pengolah kata adalah ....", a: ["Lagu dan video","Surat dan laporan","Gambar dan grafik","Musik dan film"], k: 1 },
+      { q: "3. Microsoft Word termasuk jenis perangkat lunak ....", a: ["Pengolah angka","Pengolah kata","Pengolah gambar","Pengolah data"], k: 1 },
+      { q: "4. Perangkat lunak pengolah kata yang bisa digunakan secara online adalah ....", a: ["Paint","Google Docs","Notepad","CorelDraw"], k: 1 },
+      { q: "5. Fungsi utama perangkat lunak pengolah kata adalah ....", a: ["Membuat animasi dan efek suara","Mengetik dan mengedit teks","Menggambar dan melukis","Menghitung data keuangan"], k: 1 },
+      { q: "6. Salah satu tips mengetik rapi di Microsoft Word adalah ....", a: ["Gunakan spasi berkali-kali untuk pindah baris","Gunakan Enter setiap akhir kalimat","Gunakan Tab di awal paragraf","Gunakan huruf besar untuk semua teks"], k: 2 },
+      { q: "7. Perangkat lunak Notepad digunakan untuk ....", a: ["Mengedit gambar","Mengetik teks sederhana tanpa pemformatan","Membuat tabel dan grafik","Mengolah data angka"], k: 1 },
+      { q: "8. Keuntungan menggunakan pengolah kata adalah ....", a: ["Dokumen sulit diubah","Tulisan menjadi rapi dan cepat dibuat","Tidak bisa dicetak","Harus selalu terkoneksi internet"], k: 1 },
+      { q: "9. Contoh perangkat lunak pengolah kata gratis adalah ....", a: ["CorelDraw","LibreOffice Writer","Photoshop","Excel"], k: 1 },
+      { q: "10. Tombol Align dalam Microsoft Word berfungsi untuk ....", a: ["Menghapus teks","Menyimpan dokumen","Mengatur perataan tulisan","Mengubah ukuran kertas"], k: 2 }
+    ];
+
+    const JUMLAH_SOAL = 10;
+    let daftarSoal = [], indeks = 0, benar = 0;
+
+    function mulaiKuis(){
+      const nama = document.getElementById('nama').value.trim();
+      const kelas = document.getElementById('kelas').value.trim();
+      const absen = document.getElementById('absen').value.trim();
+      if(!nama || !kelas || !absen){
+        mainkanSuaraPeringatan();
+        tampilkanPopup("⚡ Isi identitas dulu ya!", "popup-warning");
+        return;
+      }
+      mainkanSuaraNext();
+      document.getElementById('formIdentitas').style.display = 'none';
+      document.getElementById('quiz').style.display = 'block';
+      document.getElementById('progress').style.display = 'inline-block';
+      daftarSoal = soalMaster;
+      indeks = 0; benar = 0;
+      tampilkanSoal();
+    }
+
+    function tampilkanSoal(){
+      const quiz = document.getElementById('quiz');
+      const progress = document.getElementById('progress');
+      if(indeks >= daftarSoal.length){
+        const nilai = Math.round((benar / JUMLAH_SOAL) * 100);
+        let peringkat = "", kelasPopup = "popup-success", warnaNilai = "nilai-merah";
+        if(nilai === 100){ peringkat = "🏆 Luar biasa!"; kelasPopup = "popup-gold"; warnaNilai = "nilai-emas"; }
+        else if(nilai >= 80){ peringkat = "🥈 Hebat!"; warnaNilai = "nilai-hijau"; }
+        else if(nilai >= 60){ peringkat = "🥉 Lumayan!"; warnaNilai = "nilai-kuning"; }
+        else { peringkat = "💡 Ayo coba lagi!"; }
+
+        kirimNilai(nilai);
+        tampilkanPopupHasil(`🎉 Selesai!<br>Benar: ${benar}/${JUMLAH_SOAL}<br>Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}</span><br>${peringkat}<br><br>📤 Nilai berhasil dikirim ke guru!`, kelasPopup);
+        quiz.innerHTML = ""; progress.style.display = 'none'; return;
+      }
+
+      const s = daftarSoal[indeks];
+      progress.textContent = `Soal ${indeks+1}/${JUMLAH_SOAL}`;
+      quiz.innerHTML = `
+        <div class="kotak-soal">${s.q}</div>
+        <div class="answers">
+          ${s.a.map((j, i) => `<label><input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()"/> ${j}</label>`).join('')}
+        </div>
+        <button onclick="periksaJawaban()">Next</button>
+      `;
+    }
+
+    function periksaJawaban(){
+      const jawaban = document.querySelector('input[name="jawaban"]:checked');
+      if(!jawaban){ mainkanSuaraPeringatan(); tampilkanPopup("🎯 Pilih jawabannya dulu!", "popup-warning"); return; }
+      if(parseInt(jawaban.value, 10) === daftarSoal[indeks].k){ benar++; }
+      indeks++; mainkanSuaraNext(); tampilkanSoal();
+    }
+
+    function tampilkanPopup(teks, kelas = 'popup-warning'){
+      const popup = document.createElement('div');
+      popup.className = `popup ${kelas}`;
+      popup.innerHTML = teks;
+      document.body.appendChild(popup);
+      setTimeout(() => popup.remove(), 3000);
+    }
+
+    function tampilkanPopupHasil(teks, kelas){
+      const popup = document.createElement('div');
+      popup.className = `popup ${kelas}`;
+      popup.innerHTML = `${teks}<br><br>
+        <button onclick="muatUlang()">🔄 Ulangi</button>`;
+      document.body.appendChild(popup);
+    }
+
+    function muatUlang(){
+      document.querySelectorAll('.popup').forEach(p => p.remove());
+      indeks = 0; benar = 0;
+      mainkanSuaraUlangi();
+      document.getElementById('progress').style.display = 'inline-block';
+      tampilkanSoal();
+    }
+
+    function kirimNilai(nilai){
+      const nama = document.getElementById('nama').value.trim();
+      const kelas = document.getElementById('kelas').value.trim();
+      const absen = document.getElementById('absen').value.trim();
+
+      const url = "https://docs.google.com/forms/u/0/d/e/1FAIpQLScFuhIExOVS4qrgsC3RO7uJQbQEyGbYcZ3NC-H4bJt8nV-OFg/formResponse";
+      const formData = new FormData();
+      formData.append("entry.2102215189", nama);
+      formData.append("entry.1051447194", absen);
+      formData.append("entry.1983906772", kelas);
+      formData.append("entry.477010156", nilai);
+      fetch(url, { method: 'POST', body: formData, mode: 'no-cors' });
+    }
+
+    function mainkanSuaraKlik(){ const s = document.getElementById('suaraKlik'); s.currentTime = 0; s.play(); }
+    function mainkanSuaraPeringatan(){ const s = document.getElementById('suaraPeringatan'); s.currentTime = 0; s.play(); }
+    function mainkanSuaraKetik(){ const s = document.getElementById('suaraKetik'); s.currentTime = 0; s.play(); }
+    function mainkanSuaraNext(){ const s = document.getElementById('suaraNext'); s.currentTime = 0; s.play(); }
+    function mainkanSuaraUlangi(){ const s = document.getElementById('suaraUlangi'); s.currentTime = 0; s.play(); }
+  </script>
+</body>
+</html>

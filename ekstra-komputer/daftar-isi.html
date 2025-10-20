@@ -3,320 +3,97 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Materi Pembelajaran Komputer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Nunito:wght@300;600&display=swap" rel="stylesheet">
+  <title>Halaman dengan Background</title>
+
+  <!-- Font Bebas Neue -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --card:#ffffff;
-      --accent:#4aa3ff;
-      --muted:#5b6b7a;
-      --radius:16px;
-    }
-    *{box-sizing:border-box}
-    body {
-      margin:0;
-      font-family:'Nunito',system-ui,Segoe UI,Helvetica,Arial;
-      background-image:url('https://i.imgur.com/1NgzbO1.jpeg');
-      background-size:cover;
-      background-attachment:fixed;
-      background-position:center;
-      color:#0f1724;
-      padding:24px;
-    }
-    header {
-      display:flex;
-      gap:16px;
-      align-items:center;
-      margin-bottom:18px;
-      background:rgba(255,255,255,0.7);
-      border-radius:12px;
-      padding:12px 16px;
-    }
-    .logo {
-      font-size:50px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      width:84px;
-      height:84px;
-    }
-    h1{font-family:'Baloo 2',cursive;margin:0;font-size:22px}
-    p.lead{margin:0;color:var(--muted)}
-
-    .container{max-width:980px;margin:0 auto}
-    .card{
-      background:rgba(255,255,255,0.9);
-      border-radius:var(--radius);
-      padding:18px;
-      margin:12px 0;
-      box-shadow:0 6px 20px rgba(16,24,40,0.08);
+      --bg-url: url("https://i.imgur.com/VR4RRIf.png");
     }
 
-    .section-title{display:flex;align-items:center;gap:12px}
-    .badge{
-      font-size:32px;
-      line-height:1;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: "Bebas Neue", sans-serif;
+      background-image: var(--bg-url);
+      background-size: 100% auto; /* 🔹 memenuhi lebar layar laptop */
+      background-position: top center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-color: #0f172a;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      text-align: left;
+      padding-left: 0;
     }
 
-    details{
-      margin:10px 0;
-      border-radius:12px;
-      padding:10px;
-      border:1px solid #eef6ff;
-      background:linear-gradient(180deg,rgba(255,255,255,0.7),transparent);
-      transition:0.3s;
-    }
-    summary{
-      cursor:pointer;
-      list-style:none;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:6px 8px;
-      color:var(--accent);
-      font-weight:600;
-    }
-    summary:hover{
-      color:#1a73e8;
-      text-decoration:underline;
-    }
-    .summary-left{display:flex;gap:12px;align-items:center}
-    .summary-left h3{margin:0;font-size:16px}
-    .summary-left p{margin:0;color:var(--muted);font-size:13px}
-    details[open]{box-shadow:0 14px 30px rgba(13,63,128,0.06)}
-
-    .content p{margin:8px 0;color:#172033}
-    .list{padding-left:16px;margin:6px 0}
-    .small{font-size:13px;color:var(--muted)}
-
-    footer{
-      margin-top:18px;
-      text-align:center;
-      color:#0f1724;
-      font-size:14px;
-      font-weight:700;
-      background:rgba(255,255,255,0.85);
-      border-radius:12px;
-      padding:10px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.05);
+    h1 {
+      font-size: clamp(3rem, 6vw, 6rem);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 8px rgba(255,255,255,0.3);
+      margin-top: 50vh;   /* posisi teks turun ke bawah */
+      margin-left: 2vw;   /* jarak dari kiri */
     }
 
-    .corner{position:absolute;right:20px;top:20px;opacity:0.08;font-size:86px}
+    .biru {
+      color: #0a2a6b; /* biru tua */
+    }
 
-    /* 🔹 Link tampil seperti teks biasa */
-    .link-summary {
+    .hitam {
+      color: #000000; /* hitam */
+    }
+
+    /* Tambahkan gaya untuk tautan */
+    a {
       text-decoration: none;
-      color: var(--accent);
-    }
-    .link-summary:hover {
-      color:#1a73e8;
-      text-decoration:underline;
+      color: #0a2a6b;
+      transition: color 0.3s, text-shadow 0.3s;
     }
 
-    /* 🔹 Tombol Home melayang 🔹 */
-    .home-floating {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 999;
-    }
-    .home-floating img {
-      width: 70px;
-      height: auto;
-      transition: transform 0.2s;
-    }
-    .home-floating img:hover {
-      transform: scale(1.1);
+    a:hover {
+      color: #1d4ed8; /* lebih terang saat disentuh */
+      text-shadow: 0 0 10px rgba(29, 78, 216, 0.6);
     }
 
-    /* 🔹 Responsif untuk HP */
+    /* 💻 Laptop dan layar besar */
+    @media (min-width: 1200px) {
+      body {
+        background-size: 100% auto;
+      }
+    }
+
+    /* 📱 Tablet */
+    @media (max-width: 1024px) {
+      body {
+        background-size: 110% auto;
+      }
+    }
+
+    /* 📱 HP */
     @media (max-width: 600px) {
-      .home-floating img {width: 55px;}
+      body {
+        background-size: 130% auto;
+        background-attachment: scroll;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+        letter-spacing: 3px;
+        margin-top: 45vh;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="logo">🖥️</div>
-      <div>
-        <h1>Materi Pembelajaran Komputer</h1>
-      </div>
-    </header>
-
-    <!-- 🔹 Bagian I -->
-    <div class="card">
-      <div class="section-title">
-        <div class="badge">🖥️</div>
-        <div>
-          <strong>I. Mengenal Perangkat Komputer</strong>
-          <div class="small">Pelajari apa itu perangkat keras dan perangkat lunak</div>
-        </div>
-      </div>
-      <div style="margin-top:12px">
-        <details open>
-          <summary>
-            <div class="summary-left">
-              <div>
-                <h3><a href="perangkat-keras.html" class="link-summary">a. Mengenal Perangkat Keras Komputer</a></h3>
-                <p class="small">Bagian-bagian komputer yang bisa dilihat dan disentuh</p>
-              </div>
-            </div>
-          </summary>
-        </details>
-
-        <details>
-          <summary>
-            <div class="summary-left">
-              <div>
-                <h3><a href="perangkat-lunak.html" class="link-summary">b. Mengenal Perangkat Lunak Komputer</a></h3>
-                <p class="small">Program yang membuat komputer bisa bekerja</p>
-              </div>
-            </div>
-          </summary>
-        </details>
-      </div>
-    </div>
-
-    <!-- 🔹 Bagian II -->
-    <div class="card">
-      <div class="section-title">
-        <div class="badge">💾</div>
-        <div>
-          <strong>II. Mengenal Perangkat Lunak Pengolah Kata</strong>
-          <div class="small">Belajar program untuk menulis tugas dan cerita</div>
-        </div>
-      </div>
-      <div style="margin-top:12px">
-        <h3><a href="Mengenal-Perangkat-Lunak-Pengolah-Kata.html" class="link-summary">Mengenal Perangkat Lunak Pengolah Kata</a></h3>
-      </div>
-    </div>
-
-    <!-- 🔹 Bagian III -->
-    <div class="card">
-      <div class="section-title">
-        <div class="badge">✏️</div>
-        <div>
-          <strong>III. Menggunakan Perangkat Lunak Pengolah Kata</strong>
-          <div class="small">Langkah demi langkah menggunakan Microsoft Word</div>
-        </div>
-      </div>
-      <div style="margin-top:12px">
-
-        <details open>
-          <summary>
-            <div class="summary-left">
-              <div>
-                <h3><a href="Langkah-langkah-Masuk-ke-Microsoft-Word.html" class="link-summary">A. Langkah-langkah Masuk ke Microsoft Word</a></h3>
-                <p class="small">Cara membuka dan mulai menulis</p>
-              </div>
-            </div>
-          </summary>
-        </details>
-
-        <details>
-          <summary>
-            <div class="summary-left">
-              <div>
-                <h3><a href="Menggunakan-Aplikasi-Microsoft-Word-2007.html" class="link-summary">B. Menggunakan Aplikasi Microsoft Word 2007</a></h3>
-                <p class="small">Mengenal menu dan latihan praktis</p>
-              </div>
-            </div>
-          </summary>
-          <div class="content">
-            <p>Menggunakan Aplikasi Microsoft Word 2007</p>
-            <div class="list">
-              <strong>Menggunakan Menu Home</strong>
-              <div class="list">a. Sub Menu Font</div>
-              <div class="list">Latihan 1–2</div>
-              <div class="list">b. Sub Menu Paragraf</div>
-              <div class="list">Latihan 3–6</div>
-              <div class="list">Proyek 1</div>
-
-              <div style="height:8px"></div>
-              <strong>Menggunakan Menu Insert</strong>
-              <div class="list">a. Sub Menu Pages (Latihan 7–8)</div>
-              <div class="list">b. Sub Menu Table (Latihan 9–11)</div>
-
-              <div style="height:8px"></div>
-              <strong>c. Menu Illustrations (Latihan 12–19)</strong>
-
-              <div style="height:8px"></div>
-              <strong>Menggunakan Page Layout</strong>
-              <div class="list">a. Page Setup</div>
-              <div class="list">b. Page Background</div>
-              <div class="list">Latihan 20</div>
-              <div class="list">Proyek 2</div>
-            </div>
-          </div>
-        </details>
-      </div>
-    </div>
-
-    <!-- 🔹 Bagian IV -->
-    <div class="card">
-      <div class="section-title">
-        <div class="badge">📄</div>
-        <div>
-          <strong>IV. Mengolah Dokumen</strong>
-          <div class="small">Menyimpan, membuka, dan latihan</div>
-        </div>
-      </div>
-      <div style="margin-top:12px">
-        <p>Menyimpan File</p>
-        <p>Membuka File</p>
-        <p>Latihan 21</p>
-      </div>
-    </div>
-
-    <!-- 🔹 Bagian V -->
-    <div class="card">
-      <div class="section-title">
-        <div class="badge">🖨️</div>
-        <div>
-          <strong>V. Mencetak Dokumen</strong>
-          <div class="small">Langkah-langkah untuk mencetak tugas</div>
-        </div>
-      </div>
-      <div style="margin-top:12px">
-        <p>Langkah-langkah untuk Mencetak Dokumen</p>
-      </div>
-    </div>
-
-    <!-- 🔹 Bagian VI -->
-    <div class="card">
-      <div class="section-title">
-        <div class="badge">🌐</div>
-        <div>
-          <strong>VI. Pengenalan Internet</strong>
-          <div class="small">Dasar-dasar internet dan browser</div>
-        </div>
-      </div>
-      <div style="margin-top:12px">
-        <div class="list">A. Pengenalan Internet</div>
-        <div class="list">B. Sejarah Internet</div>
-        <div class="list">C. Manfaat Internet</div>
-        <div class="list">D. Hal-hal Buruk Internet</div>
-        <div class="list">E. Mengenal Web Browser</div>
-        <div class="list">F. Mengenal Mesin Pencari (Search Engine)</div>
-        <div class="list">G. Menggunakan Internet</div>
-        <div class="list">H. Mengenal Situs Pembelajaran</div>
-      </div>
-    </div>
-
-    <footer>
-      © 2025 – Materi Komputer Dasar untuk SD - UPT SD NEGERI 160 GRESIK
-    </footer>
-
-    <div class="corner">✦</div>
-  </div>
-
-  <!-- 🔹 Tombol Home melayang -->
-  <a href="../index.html" class="home-floating" title="Kembali ke Halaman Utama">
-    <img src="https://i.imgur.com/pjkmRdR.png" alt="Home">
-  </a>
+  <h1>
+    <a href="materi.html" class="biru">PEMBELAJARAN</a><br>
+    <span class="hitam">KOMPUTER</span>
+  </h1>
 </body>
 </html>

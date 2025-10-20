@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mengenal Perangkat Komputer</title>
+
+  <!-- Font Bebas Neue -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-url: url("https://i.imgur.com/ql2NCZ6.png");
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: "Bebas Neue", sans-serif;
+      background-image: var(--bg-url);
+      background-size: 100% auto;
+      background-position: top center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-color: #0f172a;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    .judul-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 9vw;
+      margin-top: 73vh;
+      margin-left: 4vw;
+    }
+
+    .kanan {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 5vw;
+    }
+
+    .subkanan {
+      display: flex;
+      flex-direction: column;
+      gap: 1vh;
+      margin-left: 3vw;
+      margin-top: -4vh;
+    }
+
+    h1, h2, h3 {
+      font-size: clamp(1rem, 1.8vw, 2rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #0a2a6b;
+      text-shadow: 2px 2px 8px rgba(255,255,255,0.3);
+      margin: 0;
+    }
+
+    /* 🔹 Gaya untuk gambar menuju judul.html di tengah bawah (lebih ke bawah) */
+    .link-gambar {
+      position: fixed;
+      bottom: 1vh; /* 🔹 digeser ke bawah sedikit */
+      left: 50%;
+      transform: translateX(-50%);
+      transition: transform 0.3s ease;
+      z-index: 10;
+    }
+
+    .link-gambar img {
+      width: 90px;
+      height: auto;
+    }
+
+    .link-gambar:hover {
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    @media (max-width: 600px) {
+      .judul-container {
+        flex-direction: column;
+        margin-top: 65vh;
+        margin-left: 8vw;
+        gap: 1vh;
+      }
+
+      .kanan {
+        flex-direction: column;
+        gap: 1vh;
+      }
+
+      h1, h2, h3 {
+        font-size: 1rem;
+      }
+
+      .subkanan {
+        margin-top: -3vh;
+      }
+
+      .link-gambar img {
+        width: 70px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 🔹 Gambar menuju ke judul.html (diletakkan di tengah bawah sedikit lebih ke bawah) -->
+  <a href="judul.html" class="link-gambar">
+    <img src="https://i.imgur.com/Nc3RsIH.png" alt="Kembali ke Judul">
+  </a>
+
+  <div class="judul-container">
+    <h1>Mengenal Perangkat Komputer</h1>
+    <div class="kanan">
+      <h2>Perangkat Lunak Pengolah Kata</h2>
+      <div class="subkanan">
+        <h3>Menggunakan Perangkat Lunak</h3>
+        <h3>Pengolah Kata</h3>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

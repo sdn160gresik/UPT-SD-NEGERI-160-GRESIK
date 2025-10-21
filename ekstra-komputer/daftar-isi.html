@@ -17,65 +17,92 @@
       overflow: hidden;
     }
 
-    /* ====== HP PORTRAIT ====== */
     body {
       position: relative;
-      display: flex;
-      align-items: flex-start;   /* Supaya elemen bisa menempel di atas */
-      justify-content: flex-start;
       color: #003366;
       background-color: black;
-      padding-left: 0.2cm;       /* 📱 Jarak dari kiri */
       transition: all 0.5s ease;
     }
 
+    /* ====== GAMBAR BACKGROUND UTAMA ====== */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background-image: url("https://i.imgur.com/NBUM66k.png");
+      background-image: url("https://i.imgur.com/bjq0rWY.png"); /* 📱 HP Portrait */
       background-size: cover;
       background-position: center;
-      z-index: -1;
-    }
-
-    /* TEKS */
-    h1 {
-      font-size: 3rem;         /* 🔤 Ukuran teks diperkecil di HP portrait */
-      margin-top: 4.3cm;         /* 🔼 Geser teks dari atas di HP portrait */
-      transition: all 0.5s ease;
+      z-index: -2;
+      transition: background-image 0.5s ease;
     }
 
     /* ====== HP LANDSCAPE ====== */
     @media (orientation: landscape) and (max-width: 1023px) {
       body::before {
-        background-image: url("https://i.imgur.com/pi0jGn7.png");
-      }
-      body {
-        padding-left: 0.4cm;
-      }
-      h1 {
-        font-size: 1.4rem;       /* 🔤 Ukuran teks lebih kecil di landscape */
-        margin-top: 2.5cm;         /* 🔼 Geser teks dari atas di HP landscape */
+        background-image: url("https://i.imgur.com/8ADQ9A3.png"); /* 📱 HP Landscape */
       }
     }
 
     /* ====== LAPTOP ====== */
     @media (min-width: 1024px) {
       body::before {
-        background-image: url("https://i.imgur.com/0otqM2r.png");
+        background-image: url("https://i.imgur.com/GLb86oA.png"); /* 💻 Laptop */
       }
-      body {
-        padding-left: 0.3cm;
+    }
+
+    /* ====== TOMBOL GAMBAR KIRI ====== */
+    .tombol-gambar {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      z-index: 10; /* di atas background */
+      width: 180px;
+      height: auto;
+      opacity: 0.9;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    /* Efek hover */
+    .tombol-gambar:hover {
+      transform: translateY(-50%) scale(1.05);
+      opacity: 1;
+    }
+
+    /* 📱 HP POTRAIT: PERBESAR DAN GESER KE ATAS */
+    @media (orientation: portrait) and (max-width: 768px) {
+      .tombol-gambar {
+        width: 200px;  /* 🔹 diperbesar */
+        top: 35%;      /* 🔹 geser ke atas */
+        opacity: 1;
       }
-      h1 {
-        font-size: 3rem;         /* 💻 Ukuran teks besar di laptop */
-        margin-top: 6.5cm;
+    }
+
+    /* 📱 HP LANDSCAPE */
+    @media (orientation: landscape) and (max-width: 1023px) {
+      .tombol-gambar {
+        width: 150px;
+        top: 50%;
+      }
+    }
+
+    /* 💻 LAPTOP */
+    @media (min-width: 1024px) {
+      .tombol-gambar {
+        width: 300px;
+        opacity: 1;
+        top: 50%;
       }
     }
   </style>
 </head>
 <body>
-  <h1>Pembelajaran</h1>
+
+  <!-- Tombol gambar menuju materi.html -->
+  <a href="materi.html">
+    <img src="https://i.imgur.com/XYTajyI.png" alt="Tombol Menuju Materi" class="tombol-gambar">
+  </a>
+
 </body>
 </html>

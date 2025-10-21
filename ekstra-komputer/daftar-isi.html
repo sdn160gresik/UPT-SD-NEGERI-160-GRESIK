@@ -2,98 +2,80 @@
 <html lang="id">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Halaman dengan Background</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Background Responsive Halus</title>
 
-  <!-- Font Bebas Neue -->
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <!-- Font Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --bg-url: url("https://i.imgur.com/VR4RRIf.png");
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
       height: 100%;
-      margin: 0;
-      font-family: "Bebas Neue", sans-serif;
-      background-image: var(--bg-url);
-      background-size: 100% auto; /* 🔹 memenuhi lebar layar laptop */
-      background-position: top center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-color: #0f172a;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    /* ====== HP PORTRAIT ====== */
+    body {
+      position: relative;
       display: flex;
-      align-items: flex-start;
+      align-items: flex-start;   /* Supaya elemen bisa menempel di atas */
       justify-content: flex-start;
-      text-align: left;
-      padding-left: 0;
+      color: #003366;
+      background-color: black;
+      padding-left: 0.2cm;       /* 📱 Jarak dari kiri */
+      transition: all 0.5s ease;
     }
 
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("https://i.imgur.com/NBUM66k.png");
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+    }
+
+    /* TEKS */
     h1 {
-      font-size: clamp(3rem, 6vw, 6rem);
-      font-weight: 400;
-      line-height: 1;
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      text-shadow: 2px 2px 8px rgba(255,255,255,0.3);
-      margin-top: 50vh;   /* posisi teks turun ke bawah */
-      margin-left: 2vw;   /* jarak dari kiri */
+      font-size: 3rem;         /* 🔤 Ukuran teks diperkecil di HP portrait */
+      margin-top: 4.3cm;         /* 🔼 Geser teks dari atas di HP portrait */
+      transition: all 0.5s ease;
     }
 
-    .biru {
-      color: #0a2a6b; /* biru tua */
-    }
-
-    .hitam {
-      color: #000000; /* hitam */
-    }
-
-    /* Tambahkan gaya untuk tautan */
-    a {
-      text-decoration: none;
-      color: #0a2a6b;
-      transition: color 0.3s, text-shadow 0.3s;
-    }
-
-    a:hover {
-      color: #1d4ed8; /* lebih terang saat disentuh */
-      text-shadow: 0 0 10px rgba(29, 78, 216, 0.6);
-    }
-
-    /* 💻 Laptop dan layar besar */
-    @media (min-width: 1200px) {
-      body {
-        background-size: 100% auto;
+    /* ====== HP LANDSCAPE ====== */
+    @media (orientation: landscape) and (max-width: 1023px) {
+      body::before {
+        background-image: url("https://i.imgur.com/pi0jGn7.png");
       }
-    }
-
-    /* 📱 Tablet */
-    @media (max-width: 1024px) {
       body {
-        background-size: 110% auto;
+        padding-left: 0.4cm;
       }
-    }
-
-    /* 📱 HP */
-    @media (max-width: 600px) {
-      body {
-        background-size: 130% auto;
-        background-attachment: scroll;
-      }
-
       h1 {
-        font-size: 2.2rem;
-        letter-spacing: 3px;
-        margin-top: 45vh;
+        font-size: 1.4rem;       /* 🔤 Ukuran teks lebih kecil di landscape */
+        margin-top: 2.5cm;         /* 🔼 Geser teks dari atas di HP landscape */
+      }
+    }
+
+    /* ====== LAPTOP ====== */
+    @media (min-width: 1024px) {
+      body::before {
+        background-image: url("https://i.imgur.com/0otqM2r.png");
+      }
+      body {
+        padding-left: 0.3cm;
+      }
+      h1 {
+        font-size: 3rem;         /* 💻 Ukuran teks besar di laptop */
+        margin-top: 6.5cm;
       }
     }
   </style>
 </head>
 <body>
-  <h1>
-    <a href="materi.html" class="biru">PEMBELAJARAN</a><br>
-    <span class="hitam">KOMPUTER</span>
-  </h1>
+  <h1>Pembelajaran</h1>
 </body>
 </html>

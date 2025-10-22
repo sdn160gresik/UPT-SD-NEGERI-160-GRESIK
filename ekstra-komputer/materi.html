@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Materi Komputer</title>
 
-  <!-- Font Poppins -->
+  <!-- 🎨 Font Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 
   <style>
@@ -20,11 +20,12 @@
     body {
       position: relative;
       background-color: black;
-      color: #003366;
+      color: white;
+      text-align: center;
       transition: all 0.5s ease;
     }
 
-    /* ====== GAMBAR BACKGROUND RESPONSIF ====== */
+    /* 🖼️ Gambar background menyesuaikan perangkat */
     body::before {
       content: "";
       position: fixed;
@@ -36,19 +37,21 @@
       transition: background-image 0.5s ease;
     }
 
+    /* 📱 HP Landscape */
     @media (orientation: landscape) and (max-width: 1023px) {
       body::before {
-        background-image: url("https://i.imgur.com/EHLPGZZ.png"); /* 📱 HP Landscape */
+        background-image: url("https://i.imgur.com/EHLPGZZ.png");
       }
     }
 
+    /* 💻 Laptop */
     @media (min-width: 1024px) {
       body::before {
-        background-image: url("https://i.imgur.com/XN5i5jT.png"); /* 💻 Laptop */
+        background-image: url("https://i.imgur.com/XN5i5jT.png");
       }
     }
 
-    /* ====== KONTAINER TOMBOL UTAMA ====== */
+    /* 🔘 Kontainer tombol utama */
     .tombol-container {
       position: fixed;
       display: flex;
@@ -58,8 +61,10 @@
       z-index: 10;
       width: 100%;
       height: 100%;
+      flex-wrap: wrap;
     }
 
+    /* 🎯 Setelan tombol */
     .tombol {
       width: 180px;
       height: auto;
@@ -73,23 +78,17 @@
       opacity: 1;
     }
 
-    /* 💻 ====== PENGATURAN UNTUK LAPTOP ====== */
+    /* 💻 Laptop */
     @media (min-width: 1024px) {
       .tombol-container {
-        justify-content: flex-start;
-        align-items: flex-end;
-        left: 80px;
-        bottom: 200px;
-        gap: 80px;
+        gap: 100px;
       }
-      .tombol {
-        width: 320px;
-      }
+      .tombol { width: 280px; }
 
-      /* 💻 Tombol home di tengah bawah, digeser lebih ke bawah */
+      /* 🏠 Tombol Home di tengah bawah */
       .tombol-tengah-bawah {
         position: fixed;
-        bottom: 30px; /* ⬇️ digeser lebih ke bawah dari sebelumnya (60px → 30px) */
+        bottom: 30px;
         left: 50%;
         transform: translateX(-50%);
         width: 150px;
@@ -98,64 +97,42 @@
         transition: all 0.4s ease;
         z-index: 20;
       }
-
       .tombol-tengah-bawah:hover {
         transform: translateX(-50%) scale(1.1);
         opacity: 1;
       }
     }
 
-    /* 📱 ====== HP LANDSCAPE ====== */
+    /* 📱 HP Landscape */
     @media (orientation: landscape) and (max-width: 1023px) {
-      .tombol-container {
-        justify-content: flex-start;
-        left: 25px;
-      }
+      .tombol-container { gap: 30px; }
+      .tombol { width: 200px; }
 
-      .tombol {
-        width: 200px; /* diperbesar di mode landscape */
-      }
-
-      .tombol:nth-child(2) {
-        transform: translateX(25px);
-      }
-
-      .tombol:nth-child(3) {
-        transform: translateX(45px);
-      }
-
-      /* 📱 Tombol home di tengah bawah — diperkecil dan digeser ke bawah */
       .tombol-tengah-bawah {
         position: fixed;
-        bottom: 10px; /* ⬇️ digeser lebih ke bawah dari sebelumnya (35px → 20px) */
+        bottom: 10px;
         left: 50%;
         transform: translateX(-50%);
-        width: 80px; /* 📏 diperkecil dari 100px → 80px */
+        width: 80px;
         opacity: 0.9;
-        z-index: 20;
-        transition: all 0.4s ease;
         cursor: pointer;
+        transition: all 0.4s ease;
+        z-index: 20;
       }
-
       .tombol-tengah-bawah:hover {
         transform: translateX(-50%) scale(1.1);
         opacity: 1;
       }
     }
 
-    /* 📱 ====== HP PORTRAIT ====== */
+    /* 📱 HP Portrait */
     @media (orientation: portrait) and (max-width: 768px) {
       .tombol-container {
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
         gap: 25px;
       }
-      .tombol {
-        width: 180px;
-      }
+      .tombol { width: 180px; }
 
-      /* 📱 Tombol home di tengah bawah — tetap ukuran sedang */
       .tombol-tengah-bawah {
         position: fixed;
         bottom: 40px;
@@ -163,11 +140,10 @@
         transform: translateX(-50%);
         width: 90px;
         opacity: 0.9;
-        z-index: 20;
-        transition: all 0.4s ease;
         cursor: pointer;
+        transition: all 0.4s ease;
+        z-index: 20;
       }
-
       .tombol-tengah-bawah:hover {
         transform: translateX(-50%) scale(1.1);
         opacity: 1;
@@ -177,14 +153,25 @@
 </head>
 <body>
 
-  <!-- 🔹 TIGA TOMBOL UTAMA 🔹 -->
+  <!-- 🔹 TIGA TOMBOL UTAMA TANPA NAMA 🔹 -->
   <div class="tombol-container">
-    <img src="https://i.imgur.com/3HmvYZA.png" alt="Tombol 1" class="tombol">
-    <img src="https://i.imgur.com/W9dsGDG.png" alt="Tombol 2" class="tombol">
-    <img src="https://i.imgur.com/ipVy8cM.png" alt="Tombol 3" class="tombol">
+    <!-- 🖱️ Tombol 1: Mengenal Perangkat Komputer (menuju perangkat.html) -->
+    <a href="perangkat.html">
+      <img src="https://i.imgur.com/3HmvYZA.png" alt="Mengenal Perangkat Komputer" class="tombol">
+    </a>
+
+    <!-- 🖱️ Tombol 2: Perangkat Lunak Pengolah Kata -->
+    <a href="perangkat-lunak-pengolah-kata.html">
+      <img src="https://i.imgur.com/W9dsGDG.png" alt="Perangkat Lunak Pengolah Kata" class="tombol">
+    </a>
+
+    <!-- 🖱️ Tombol 3: Menggunakan Perangkat Lunak -->
+    <a href="menggunakan-perangkat-lunak.html">
+      <img src="https://i.imgur.com/ipVy8cM.png" alt="Menggunakan Perangkat Lunak" class="tombol">
+    </a>
   </div>
 
-  <!-- 🔹 TOMBOL HOME (TENGAH BAWAH) MENUJU DAFTAR ISI 🔹 -->
+  <!-- 🏠 Tombol Home di tengah bawah -->
   <a href="daftar-isi.html">
     <img src="https://i.imgur.com/Nc3RsIH.png" alt="Tombol Home" class="tombol-tengah-bawah">
   </a>

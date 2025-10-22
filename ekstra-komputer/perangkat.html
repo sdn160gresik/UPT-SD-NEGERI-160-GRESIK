@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Materi Perangkat Komputer</title>
+
+  <!-- Font Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    body {
+      position: relative;
+      background-color: black;
+      color: #003366;
+      transition: all 0.5s ease;
+    }
+
+    /* 🎨 ====== GAMBAR BACKGROUND RESPONSIF ====== */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("https://i.imgur.com/LAgmIsm.png"); /* 📱 HP Portrait */
+      background-size: cover;
+      background-position: center;
+      z-index: -2;
+      transition: background-image 0.5s ease;
+    }
+
+    /* 📱 HP LANDSCAPE */
+    @media (orientation: landscape) and (max-width: 1023px) {
+      body::before {
+        background-image: url("https://i.imgur.com/txA0rI8.png");
+      }
+    }
+
+    /* 💻 LAPTOP */
+    @media (min-width: 1024px) {
+      body::before {
+        background-image: url("https://i.imgur.com/MjiFXeU.png");
+      }
+    }
+
+    /* 🔘 ====== KONTAINER TOMBOL ====== */
+    .tombol-container {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+    }
+
+    /* 🌟 ====== GAYA UMUM SEMUA TOMBOL ====== */
+    .tombol {
+      width: 4cm;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      opacity: 0.9;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.3));
+      position: absolute;
+    }
+
+    .tombol:hover {
+      transform: scale(1.08);
+      opacity: 1;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.8));
+    }
+
+    /* 💻 ====== LAPTOP ====== */
+    @media (min-width: 1024px) {
+      .tombol { width: 3cm; }
+      .tombol[alt="Fungsi"] { left: 8.8cm; top: 10cm; }
+      .tombol[alt="Pengertian"] { left: 9cm; top: 5cm; }
+      .tombol[alt="Jenis"] { left: 20cm; top: 5cm; }
+      .tombol[alt="Merawat"] { left: 20cm; top: 10cm; }
+
+      /* 🏠 Tombol Home di kanan bawah laptop */
+      .tombol-tengah-bawah {
+        position: fixed;
+        bottom: 2cm;
+        right: 2cm;
+        width: 2cm;
+        transition: all 0.4s ease;
+      }
+      .tombol-tengah-bawah:hover { transform: scale(1.1); }
+    }
+
+    /* 📱 ====== HP LANDSCAPE ====== */
+    @media (orientation: landscape) and (max-width: 1023px) {
+      .tombol { width: 2cm; }
+
+      /* 📍 Posisi tombol lainnya (TETAP SAMA seperti semula) */
+      .tombol[alt="Pengertian"] { top: 2cm; left: 5cm; }
+      .tombol[alt="Fungsi"] { top: 5cm; left: 5cm; }
+      .tombol[alt="Jenis"] { top: 2cm; left: 11.5cm; }
+      .tombol[alt="Merawat"] { top: 5cm; left: 11.5cm; }
+
+      /* 🏠 Tombol Home digeser ke kanan dan ke atas */
+      .tombol-tengah-bawah {
+        position: fixed;
+        bottom: 1cm;   /* ⬆️ sebelumnya 0.8cm → sekarang lebih ke atas */
+        right: 1.8cm;    /* ⬅️ sebelumnya di tengah → sekarang di kanan */
+        width: 1.5cm;  /* ukuran tombol */
+        transition: all 0.4s ease;
+      }
+
+      /* Efek hover agar tetap halus */
+      .tombol-tengah-bawah:hover { transform: scale(1.1); }
+    }
+
+    /* 📱 ====== HP PORTRAIT ====== */
+    @media (orientation: portrait) and (max-width: 768px) {
+      .tombol { width: 2cm; }
+
+      .tombol[alt="Pengertian"] { top: 6cm; left: 0.2cm; }
+      .tombol[alt="Fungsi"] { top: 6cm; left: 7cm; }
+      .tombol[alt="Jenis"] { top: 12cm; left: 0.2cm; }
+      .tombol[alt="Merawat"] { top: 12cm; left: 7cm; }
+
+      /* 🏠 Tombol Home di tengah bawah (untuk portrait) */
+      .tombol-tengah-bawah {
+        position: fixed;
+        bottom: 1cm;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1.5cm;
+      }
+      .tombol-tengah-bawah:hover { transform: translateX(-50%) scale(1.1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔹 EMPAT TOMBOL UTAMA 🔹 -->
+  <div class="tombol-container">
+    <img src="https://i.imgur.com/WULB9VO.png" alt="Pengertian" class="tombol" title="Pengertian">
+    <img src="https://i.imgur.com/div0LMG.png" alt="Fungsi" class="tombol" title="Fungsi">
+    <img src="https://i.imgur.com/19GHP8u.png" alt="Jenis" class="tombol" title="Jenis">
+    <img src="https://i.imgur.com/J1VFcHX.png" alt="Merawat" class="tombol" title="Merawat">
+  </div>
+
+  <!-- 🏠 Tombol Home -->
+  <a href="daftar-isi.html">
+    <img src="https://i.imgur.com/Nc3RsIH.png" alt="Tombol Home" class="tombol-tengah-bawah" title="Kembali ke Daftar Isi">
+  </a>
+
+</body>
+</html>

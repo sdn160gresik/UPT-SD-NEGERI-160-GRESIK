@@ -2,178 +2,320 @@
 <html lang="id">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Materi Perangkat Komputer</title>
-
-  <!-- 🎨 Font Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perangkat Komputer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html, body {
-      height: 100%;
-      font-family: 'Poppins', sans-serif;
-      overflow: hidden;
+    :root {
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --accent:#0b76ef;
+      --orange:#ff9500;
+      --muted:#6b7280;
     }
+
+    * {box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
     body {
-      position: relative;
-      background-color: black;
-      color: #003366;
-      transition: all 0.5s ease;
+      margin:0;
+      color:#0f172a;
+      background:url('https://i.imgur.com/1NgzbO1.jpeg') no-repeat center center fixed;
+      background-size:cover;
+      line-height:1.45;
     }
 
-    /* 🎨 ====== GAMBAR BACKGROUND RESPONSIF ====== */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("https://i.imgur.com/LAgmIsm.png"); /* 📱 HP Portrait */
-      background-size: cover;
-      background-position: center;
-      z-index: -1; /* 🔧 supaya tombol di atas */
-      transition: background-image 0.5s ease;
+    .title-box {
+      background:#0B76EF;
+      color:white;
+      font-weight:700;
+      font-size:26px;
+      padding:16px 40px;
+      border-radius:16px;
+      box-shadow:0 6px 18px rgba(11,118,239,0.3);
+      margin:20px auto;
+      display:table;
     }
 
-    /* 📱 HP LANDSCAPE */
-    @media (orientation: landscape) and (max-width: 1023px) {
-      body::before { background-image: url("https://i.imgur.com/txA0rI8.png"); }
+    .wrap {
+      padding:20px 18px;
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+      max-width:760px;
+      margin:auto;
     }
 
-    /* 💻 LAPTOP */
-    @media (min-width: 1024px) {
-      body::before { background-image: url("https://i.imgur.com/MjiFXeU.png"); }
+    /* 🌟 Kotak judul menyesuaikan panjang teks */
+    .section-title {
+      background:var(--orange);
+      color:#fff;
+      font-weight:700;
+      font-size:20px;
+      padding:12px 20px;
+      border-radius:12px;
+      box-shadow:0 6px 14px rgba(255,149,0,0.3);
+      display:inline-block; /* penting agar lebar sesuai isi teks */
+      width:auto; /* memastikan lebar mengikuti teks */
+      max-width:100%; /* mencegah melampaui layar kecil */
+      white-space:nowrap; /* mencegah teks turun baris */
     }
 
-    /* 🔘 ====== KONTAINER TOMBOL ====== */
-    .tombol-container {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: 5;
+    .section-content {
+      background:var(--card);
+      border-radius:12px;
+      padding:16px 20px;
+      box-shadow:0 4px 14px rgba(11,118,239,0.1);
+      backdrop-filter:blur(4px);
     }
 
-    /* 🌟 ====== GAYA UMUM UNTUK SEMUA TOMBOL ====== */
-    .tombol {
-      width: 4cm;
-      cursor: pointer;
-      transition: all 0.4s ease;
-      opacity: 0.9;
-      filter: drop-shadow(0 0 6px rgba(255,255,255,0.3));
-      position: absolute;
-      z-index: 6; /* 🔧 tombol utama bisa diklik */
+    p {color:var(--muted);margin:8px 0;}
+    ul {color:var(--muted);margin-top:8px;margin-left:20px;}
+    li {margin-bottom:6px;}
+
+    /* 🌟 Efek klik hanya untuk daftar yang bisa diklik */
+    .clickable li {
+      cursor:pointer;
+    }
+    .clickable li:hover {
+      color:var(--accent);
+      text-decoration:underline;
     }
 
-    .tombol:hover {
-      transform: scale(1.08);
-      opacity: 1;
-      filter: drop-shadow(0 0 15px rgba(255,255,255,0.8));
+    .grid {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+    }
+    @media(min-width:600px){
+      .grid{grid-template-columns:repeat(3,1fr);}
+    }
+    .item {
+      background:#fbfdff;
+      border:1px solid #eef6ff;
+      border-radius:10px;
+      padding:10px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .icon {font-size:26px;}
+    .name {font-weight:600;}
+    .desc {font-size:13px;color:var(--muted);}
+
+    .actions {display:flex;margin-top:12px;}
+    .btn {
+      flex:1;
+      padding:10px;
+      border-radius:10px;
+      border:0;
+      font-weight:700;
+      cursor:pointer;
+      transition:all .2s ease;
+    }
+    .btn.primary {
+      background:var(--accent);
+      color:#fff;
+    }
+    .btn.primary:hover {background:#0a5fd2;}
+
+    .floating-left {
+      position:fixed;
+      bottom:30px;
+      left:-60px;
+      z-index:900;
+      animation:floatY 3.5s ease-in-out infinite;
+    }
+    .floating-left img {
+      width:480px;
+      height:auto;
+      filter:drop-shadow(0 8px 24px rgba(11,76,150,0.3));
+      opacity:0.95;
+    }
+    @keyframes floatY {
+      0%,100% {transform:translateY(0);}
+      50% {transform:translateY(-8px);}
     }
 
-    /* 💻 ====== TATA LETAK UNTUK LAPTOP ====== */
-    @media (min-width: 1024px) {
-      .tombol { width: 3cm; }
-      .tombol[alt="Fungsi"] { left: 8.8cm; top: 10cm; }
-      .tombol[alt="Pengertian"] { left: 9cm; top: 5cm; }
-      .tombol[alt="Jenis"] { left: 20cm; top: 5cm; }
-      .tombol[alt="Merawat"] { left: 20cm; top: 10cm; }
+    .floating-buttons {
+      position:fixed;
+      bottom:24px;
+      right:24px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      z-index:1000;
+    }
+    .float-btn {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:transparent;
+      border:0;
+      cursor:pointer;
+      padding:14px;
+      width:90px;
+      height:90px;
+      transition:transform .16s ease, opacity .16s ease;
+    }
+    .float-btn img {
+      width:60px;
+      height:60px;
+      object-fit:contain;
+      filter:drop-shadow(0 8px 20px rgba(11,76,150,0.18));
+    }
+    .float-btn:hover{transform:translateY(-4px) scale(1.05);}
 
-      .tombol-tengah-bawah,
-      .tombol-back {
-        position: fixed;
-        bottom: 2cm;
-        width: 2cm;
-        transition: all 0.4s ease;
-        z-index: 10; /* 🔧 tombol link di atas segalanya */
-        cursor: pointer;
-      }
-
-      .tombol-tengah-bawah { right: 2cm; }
-      .tombol-back { left: 2cm; }
-
-      .tombol-tengah-bawah:hover,
-      .tombol-back:hover {
-        transform: scale(1.1);
-      }
+    /* 🌟 Modal gambar melayang */
+    .popup {
+      display:none;
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:rgba(0,0,0,0.6);
+      justify-content:center;
+      align-items:center;
+      z-index:2000;
+    }
+    .popup img {
+      max-width:80%;
+      max-height:80%;
+      border-radius:12px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.3);
+      animation:zoomIn .3s ease;
+    }
+    @keyframes zoomIn {
+      from {transform:scale(0.8);opacity:0;}
+      to {transform:scale(1);opacity:1;}
     }
 
-    /* 📱 ====== HP LANDSCAPE ====== */
-    @media (orientation: landscape) and (max-width: 1023px) {
-      .tombol { width: 2cm; }
-
-      .tombol[alt="Pengertian"] { top: 2cm; left: 5cm; }
-      .tombol[alt="Fungsi"] { top: 5cm; left: 5cm; }
-      .tombol[alt="Jenis"] { top: 2cm; left: 11.5cm; }
-      .tombol[alt="Merawat"] { top: 5cm; left: 11.5cm; }
-
-      .tombol-tengah-bawah,
-      .tombol-back {
-        position: fixed;
-        bottom: 1cm;
-        width: 1.5cm;
-        transition: all 0.4s ease;
-        z-index: 10;
-        cursor: pointer;
-      }
-
-      .tombol-tengah-bawah { right: 1.8cm; }
-      .tombol-back { left: 1.8cm; }
-
-      .tombol-tengah-bawah:hover,
-      .tombol-back:hover { transform: scale(1.1); }
-    }
-
-    /* 📱 ====== HP PORTRAIT ====== */
-    @media (orientation: portrait) and (max-width: 768px) {
-      .tombol { width: 2cm; }
-
-      .tombol[alt="Pengertian"] { top: 6cm; left: 0.2cm; }
-      .tombol[alt="Fungsi"] { top: 6cm; left: 7cm; }
-      .tombol[alt="Jenis"] { top: 12cm; left: 0.2cm; }
-      .tombol[alt="Merawat"] { top: 12cm; left: 7cm; }
-
-      .tombol-tengah-bawah,
-      .tombol-back {
-        position: fixed;
-        bottom: 1cm;
-        width: 1.5cm;
-        transition: all 0.4s ease;
-        z-index: 10;
-        cursor: pointer;
-      }
-
-      .tombol-tengah-bawah {
-        left: 50%;
-        transform: translateX(-50%);
-      }
-
-      .tombol-back { left: 1cm; }
-
-      .tombol-tengah-bawah:hover { transform: translateX(-50%) scale(1.1); }
-      .tombol-back:hover { transform: scale(1.1); }
+    @media(max-width:480px){
+      .floating-left img {width:180px;}
+      .title-box {font-size:22px;padding:12px 30px;}
+      .float-btn {width:80px;height:80px;padding:12px;}
+      .float-btn img {width:52px;height:52px;}
+      .section-title {white-space:normal;} /* agar tetap rapi di layar kecil */
     }
   </style>
 </head>
+
 <body>
 
-  <!-- 🔹 EMPAT TOMBOL UTAMA 🔹 -->
-  <div class="tombol-container">
-    <img src="https://i.imgur.com/WULB9VO.png" alt="Pengertian" class="tombol" title="Pengertian">
-    <img src="https://i.imgur.com/div0LMG.png" alt="Fungsi" class="tombol" title="Fungsi">
-    <img src="https://i.imgur.com/19GHP8u.png" alt="Jenis" class="tombol" title="Jenis">
-    <img src="https://i.imgur.com/J1VFcHX.png" alt="Merawat" class="tombol" title="Merawat">
+  <div class="title-box">Perangkat Komputer</div>
+
+  <main class="wrap">
+    
+    <div class="section-title">🧠 Apa itu Komputer?</div>
+    <div class="section-content">
+      <p>Komputer adalah alat elektronik yang membantu kita mengolah data menjadi informasi. Komputer bisa digunakan untuk menulis, menggambar, menghitung, dan mencari informasi.</p>
+    </div>
+
+    <div class="section-title">⚙️ Bagian Utama Perangkat Komputer</div>
+    <div class="section-content">
+      <div class="grid">
+        <div class="item">
+          <div class="icon">🧩</div>
+          <div>
+            <div class="name">Perangkat Keras</div>
+            <div class="desc">Bagian yang bisa dilihat dan disentuh (misalnya monitor, keyboard).</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="icon">💿</div>
+          <div>
+            <div class="name">Perangkat Lunak</div>
+            <div class="desc">Program atau aplikasi yang menjalankan komputer (misalnya Windows, Word).</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="icon">🧍‍♀️</div>
+          <div>
+            <div class="name">Pengguna (Brainware)</div>
+            <div class="desc">Orang yang mengoperasikan komputer (misalnya guru, siswa).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">💻 Perangkat Keras (Hardware)</div>
+    <div class="section-content">
+      <p>Klik pada nama perangkat untuk melihat gambarnya:</p>
+      <ul class="clickable">
+        <li onclick="showImage('https://i.imgur.com/XTPp3Ms.png')"><strong>Monitor</strong> — Menampilkan gambar dan tulisan di layar.</li>
+        <li onclick="showImage('https://i.imgur.com/cvEObHv.png')"><strong>Keyboard</strong> — Untuk mengetik huruf dan angka.</li>
+        <li onclick="showImage('https://i.imgur.com/21gjfMC.jpeg')"><strong>Mouse</strong> — Untuk mengarahkan kursor dan memilih menu.</li>
+        <li onclick="showImage('https://i.imgur.com/lbjDywI.png')"><strong>CPU</strong> — Otak komputer yang memproses data.</li>
+        <li onclick="showImage('https://i.imgur.com/kmcvlzU.png')"><strong>Printer</strong> — Untuk mencetak hasil kerja ke kertas.</li>
+      </ul>
+    </div>
+
+    <div class="section-title">🧠 Perangkat Lunak (Software)</div>
+    <div class="section-content">
+      <p>Perangkat lunak adalah program yang berjalan di komputer. Tanpanya, komputer tidak bisa bekerja. Contohnya:</p>
+      <ul>
+        <li><strong>Sistem Operasi</strong> (misalnya Windows) — Mengatur semua bagian komputer.</li>
+        <li><strong>Aplikasi</strong> (misalnya Word, Paint, Browser) — Membantu melakukan tugas tertentu.</li>
+      </ul>
+    </div>
+
+    <div class="section-title">👩‍🏫 Pengguna / Brainware</div>
+    <div class="section-content">
+      <p>Brainware adalah orang yang menggunakan komputer. Mereka harus tahu cara memakai komputer dengan aman dan sopan.</p>
+      <ul>
+        <li>Guru membuat materi, siswa mengerjakan tugas, petugas sekolah memelihara komputer.</li>
+        <li>Aturan singkat: jangan membuka aplikasi tanpa izin, berhati-hati dengan data pribadi, dan matikan komputer dengan benar.</li>
+      </ul>
+    </div>
+
+    <div class="section-title">📝 Kesimpulan</div>
+    <div class="section-content">
+      <p>Perangkat komputer terbagi menjadi <strong>Hardware</strong>, <strong>Software</strong>, dan <strong>Brainware</strong>. Ketiganya bekerja sama agar komputer dapat digunakan dengan baik.</p>
+      <div class="actions">
+        <button class="btn primary" onclick="openQuiz()">Latihan Singkat</button>
+      </div>
+    </div>
+
+  </main>
+
+  <div class="floating-left">
+    <img src="https://i.imgur.com/xi8XIsE.png" alt="Gambar remaja komputer">
   </div>
 
-  <!-- 🏠 Tombol Home -->
-  <a href="daftar-isi.html">
-    <img src="https://i.imgur.com/Nc3RsIH.png" alt="Tombol Home" class="tombol-tengah-bawah" title="Kembali ke Daftar Isi">
-  </a>
+  <div class="floating-buttons">
+    <button class="float-btn" title="Beranda" onclick="goHome()">
+      <img src="https://i.imgur.com/Nc3RsIH.png" alt="ikon beranda">
+    </button>
+    <button class="float-btn" title="Kembali" onclick="goBack()">
+      <img src="https://i.imgur.com/QEJbOve.png" alt="ikon kembali">
+    </button>
+  </div>
 
-  <!-- ⬅️ Tombol Back -->
-  <a href="materi.html">
-    <img src="https://i.imgur.com/QEJbOve.png" alt="Tombol Back" class="tombol-back" title="Kembali ke Halaman Materi">
-  </a>
+  <!-- Popup gambar -->
+  <div id="popup" class="popup" onclick="hideImage()">
+    <img id="popup-img" src="" alt="Perangkat komputer">
+  </div>
 
+  <script>
+    function openQuiz(){
+      alert('Ingin latihan singkat? Saya bisa buat 3 soal pilihan ganda interaktif untuk siswa kelas 5.\nKetik: buat soal latihan.');
+    }
+    function goHome(){
+      window.location.href = 'daftar-isi.html';
+    }
+    function goBack(){
+      window.location.href = 'materi.html';
+    }
+
+    // fungsi tampilkan gambar
+    function showImage(src){
+      const popup = document.getElementById('popup');
+      const img = document.getElementById('popup-img');
+      img.src = src;
+      popup.style.display = 'flex';
+    }
+    function hideImage(){
+      document.getElementById('popup').style.display = 'none';
+    }
+  </script>
 </body>
 </html>

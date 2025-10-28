@@ -46,7 +46,6 @@
       margin:auto;
     }
 
-    /* 🌟 Kotak judul menyesuaikan panjang teks */
     .section-title {
       background:var(--orange);
       color:#fff;
@@ -55,10 +54,10 @@
       padding:12px 20px;
       border-radius:12px;
       box-shadow:0 6px 14px rgba(255,149,0,0.3);
-      display:inline-block; /* penting agar lebar sesuai isi teks */
-      width:auto; /* memastikan lebar mengikuti teks */
-      max-width:100%; /* mencegah melampaui layar kecil */
-      white-space:nowrap; /* mencegah teks turun baris */
+      display:inline-block;
+      width:auto;
+      max-width:100%;
+      white-space:nowrap;
     }
 
     .section-content {
@@ -73,7 +72,6 @@
     ul {color:var(--muted);margin-top:8px;margin-left:20px;}
     li {margin-bottom:6px;}
 
-    /* 🌟 Efek klik hanya untuk daftar yang bisa diklik */
     .clickable li {
       cursor:pointer;
     }
@@ -166,7 +164,6 @@
     }
     .float-btn:hover{transform:translateY(-4px) scale(1.05);}
 
-    /* 🌟 Modal gambar melayang */
     .popup {
       display:none;
       position:fixed;
@@ -194,7 +191,7 @@
       .title-box {font-size:22px;padding:12px 30px;}
       .float-btn {width:80px;height:80px;padding:12px;}
       .float-btn img {width:52px;height:52px;}
-      .section-title {white-space:normal;} /* agar tetap rapi di layar kecil */
+      .section-title {white-space:normal;}
     }
   </style>
 </head>
@@ -290,29 +287,31 @@
     </button>
   </div>
 
-  <!-- Popup gambar -->
   <div id="popup" class="popup" onclick="hideImage()">
     <img id="popup-img" src="" alt="Perangkat komputer">
   </div>
 
   <script>
+    // Tombol menuju ke latihan
     function openQuiz(){
-      alert('Ingin latihan singkat? Saya bisa buat 3 soal pilihan ganda interaktif untuk siswa kelas 5.\nKetik: buat soal latihan.');
+      window.location.href = 'soal-pengertian.html';
     }
+
     function goHome(){
       window.location.href = 'daftar-isi.html';
     }
+
     function goBack(){
       window.location.href = 'materi.html';
     }
 
-    // fungsi tampilkan gambar
     function showImage(src){
       const popup = document.getElementById('popup');
       const img = document.getElementById('popup-img');
       img.src = src;
       popup.style.display = 'flex';
     }
+
     function hideImage(){
       document.getElementById('popup').style.display = 'none';
     }

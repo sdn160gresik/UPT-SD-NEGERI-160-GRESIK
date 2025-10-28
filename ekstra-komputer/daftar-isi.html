@@ -50,13 +50,13 @@
       }
     }
 
-    /* ====== TOMBOL GAMBAR KIRI ====== */
+    /* ====== TOMBOL GAMBAR MENUJU MATERI ====== */
     .tombol-gambar {
       position: fixed;
       top: 50%;
       left: 0;
       transform: translateY(-50%);
-      z-index: 10; /* di atas background */
+      z-index: 10;
       width: 180px;
       height: auto;
       opacity: 0.9;
@@ -64,18 +64,40 @@
       cursor: pointer;
     }
 
-    /* Efek hover */
     .tombol-gambar:hover {
       transform: translateY(-50%) scale(1.05);
       opacity: 1;
     }
 
-    /* 📱 HP POTRAIT: PERBESAR DAN GESER KE ATAS */
+    /* ====== TOMBOL HOME (KANAN BAWAH) ====== */
+    .tombol-home {
+      position: fixed;
+      bottom: 20px;
+     left: 20px;
+      width: 80px;
+      height: auto;
+      z-index: 20;
+      cursor: pointer;
+      opacity: 0.9;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .tombol-home:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    /* 📱 HP POTRAIT */
     @media (orientation: portrait) and (max-width: 768px) {
       .tombol-gambar {
-        width: 200px;  /* 🔹 diperbesar */
-        top: 35%;      /* 🔹 geser ke atas */
+        width: 200px;
+        top: 35%;
         opacity: 1;
+      }
+      .tombol-home {
+        width: 70px;
+        bottom: 15px;
+        right: 15px;
       }
     }
 
@@ -85,23 +107,33 @@
         width: 150px;
         top: 50%;
       }
+      .tombol-home {
+        width: 70px;
+      }
     }
 
     /* 💻 LAPTOP */
     @media (min-width: 1024px) {
       .tombol-gambar {
         width: 300px;
-        opacity: 1;
         top: 50%;
+      }
+      .tombol-home {
+        width: 90px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Tombol gambar menuju materi.html -->
+  <!-- Tombol menuju materi.html -->
   <a href="materi.html">
     <img src="https://i.imgur.com/XYTajyI.png" alt="Tombol Menuju Materi" class="tombol-gambar">
+  </a>
+
+  <!-- 🔹 Tombol Home menuju index.html -->
+  <a href="index.html">
+    <img src="https://i.imgur.com/Nc3RsIH.png" alt="Tombol Home" class="tombol-home">
   </a>
 
 </body>

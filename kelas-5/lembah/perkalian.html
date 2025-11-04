@@ -1,9 +1,9 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Game Perkalian 2–9</title>
+  <title>Game Perkalian 2–9 (Input Angka)</title>
   <style>
     :root {
       --bg: #2e6e61;
@@ -12,151 +12,158 @@
       --text: #ffffff;
       --right: #2ecc71;
       --wrong: #e74c3c;
-      --neutral: #2f7a68;
       --outline: rgba(255,255,255,.25);
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(160deg, var(--bg), #24594d 60%);
-      font-family: "Poppins", system-ui, sans-serif;
-      color: var(--text);
-      overflow-x: hidden;
+    *{box-sizing:border-box}
+    body{
+      margin:0;min-height:100vh;display:grid;place-items:center;
+      background:linear-gradient(160deg,var(--bg),#24594d 60%);
+      font-family:"Poppins",system-ui,sans-serif;color:var(--text);
     }
-    .app { width: min(880px, 96vw); background: var(--panel); border-radius: 22px;
-      box-shadow: 0 20px 50px rgba(0,0,0,.25), inset 0 0 0 1px var(--outline);
-      padding: clamp(18px, 3.2vw, 28px);
-      position: relative;
-      z-index: 2;
+    .app{
+      width:min(880px,96vw);background:var(--panel);border-radius:22px;
+      box-shadow:0 20px 50px rgba(0,0,0,.25),inset 0 0 0 1px var(--outline);
+      padding:clamp(18px,3.2vw,28px);position:relative;z-index:2;
     }
-    header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
-    .brand { font-weight: 800; letter-spacing: .3px; }
-    .pill { background: var(--panel-dark); border: 1px solid var(--outline); padding: 8px 12px;
-      border-radius: 999px; font-size: 14px; opacity: .95; display: inline-flex; align-items: center; gap: 8px;
-    }
-    .stats { display:flex; gap:8px; flex-wrap: wrap; }
-    .screen { display:none; }
-    .screen.active { display:block; }
-    .start { text-align: center; padding: 24px 8px 10px; }
-    .start h1 { margin: 6px 0 10px; font-size: clamp(22px, 4.2vw, 34px); }
-    .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 12px 0 22px; }
-    .card { background: var(--panel-dark); border: 1px solid var(--outline); border-radius: 18px; padding: 14px; text-align: left; }
-    .card label { display:block; font-size:14px; opacity:.9; margin-bottom:6px; }
-    .card select { width: 100%; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--outline); background: #2d6356; color: var(--text); font-size: 16px; outline: none; }
-    .btn { background: #58b68c; border: none; color: #0f2e27; font-weight: 700;
-      padding: 12px 18px; border-radius: 14px; cursor: pointer; transition: transform .05s ease, filter .2s ease;
-      box-shadow: 0 8px 18px rgba(0,0,0,.18);
-    }
-    .btn:active { transform: translateY(1px); }
-    .btn.secondary { background: #6aa89a; color: #09322a; }
-    .question { display: grid; place-items: center; background: #2b6d5f;
-      border-radius: 18px; border: 1px solid var(--outline); margin: 12px 0 16px; padding: 18px; min-height: 120px; text-align: center;
-    }
-    .question .expr { font-size: clamp(42px, 9vw, 86px); font-weight: 900; letter-spacing: 1px; text-shadow: 0 4px 0 rgba(0,0,0,.12); }
-    .choices { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .choice { background: #2f7a68; border: 2px solid rgba(255,255,255,.18); border-radius: 16px;
-      min-height: 68px; display: grid; place-items: center; font-size: clamp(22px, 4vw, 32px); font-weight: 800;
-      cursor: pointer; user-select: none; transition: transform .04s ease, background .2s ease, border-color .2s ease, filter .2s ease;
-    }
-    .choice:hover { filter: brightness(1.05); }
-    .choice:active { transform: translateY(1px); }
-    .choice.correct { background: var(--right); color: #0b4025; border-color: rgba(0,0,0,.08); }
-    .choice.wrong   { background: var(--wrong); color: #fff; border-color: rgba(0,0,0,.08); }
-    .choice.disabled { pointer-events: none; opacity: .9; }
-    .controls { display:flex; gap:10px; justify-content: center; margin-top: 14px; }
-    .end { text-align: center; padding: 18px 8px 8px; position: relative; z-index: 3; }
-    .big-score { font-size: clamp(36px, 8vw, 70px); font-weight: 900; margin: 0 0 6px; }
 
-    .nilai-hijau { color: #2ecc71; }
-    .nilai-hijau-muda { color: #00ff99; }
-    .nilai-kuning { color: #f1c40f; }
-    .nilai-merah { color: #e74c3c; }
+    /* === Timer melayang di depan === */
+    .floating-timer{
+      position:fixed;top:20px;left:50%;transform:translateX(-50%);
+      background:rgba(255,255,255,0.15);
+      border:3px solid rgba(255,255,255,0.3);
+      padding:10px 30px;border-radius:999px;
+      font-size:clamp(28px,5vw,46px);font-weight:800;
+      color:#fffb91;text-shadow:0 0 10px rgba(0,0,0,0.5);
+      backdrop-filter:blur(8px);
+      transition:transform .2s ease,color .3s ease;
+      z-index:9999;
+    }
+    .floating-timer.low{
+      color:#ff5757;
+      transform:translateX(-50%) scale(1.1);
+      animation:pulse 0.6s infinite alternate;
+    }
+    @keyframes pulse{
+      from{text-shadow:0 0 10px rgba(255,0,0,0.4);}
+      to{text-shadow:0 0 20px rgba(255,0,0,0.8);}
+    }
 
-    .msg { font-size: clamp(16px, 3.5vw, 22px); opacity: .95; margin-bottom: 14px; }
-    .progress { height: 10px; background: #2b6d5f; border-radius: 999px; overflow: hidden; border: 1px solid var(--outline); }
-    .bar { height: 100%; width: 0%; background: #84f0b8; transition: width .3s ease; }
-
-    /* Container efek meriah */
-    .celebration-container {
-      pointer-events: none;
+    /* === Kotak mengambang untuk pesan akhir === */
+    .floating-box {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 9999;
-    }
-
-    /* Gaya dasar tiap gambar perayaan */
-    .celebration-img {
-      position: absolute;
-      height: auto;            /* jaga proporsionalitas */
-      will-change: transform, opacity, left;
-      user-select: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      background: rgba(255,255,255,0.95);
+      color: #2a5c4f;
+      padding: 30px 50px;
+      border-radius: 20px;
+      font-size: 28px;
+      font-weight: 700;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      text-align: center;
+      opacity: 0;
       pointer-events: none;
+      transition: all 0.5s ease;
+      z-index: 99999;
+    }
+    .floating-box.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .floating-box.good {color:#2ecc71;}
+    .floating-box.medium {color:#f1c40f;}
+    .floating-box.bad {color:#e74c3c;}
+
+    header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:14px;}
+    .brand{font-weight:800;}
+    .pill{
+      background:var(--panel-dark);border:1px solid var(--outline);
+      padding:8px 12px;border-radius:999px;font-size:14px;
+    }
+    .screen{display:none}.screen.active{display:block}
+    .btn{background:#58b68c;border:none;color:#0f2e27;font-weight:700;
+      padding:12px 18px;border-radius:14px;cursor:pointer;
+      box-shadow:0 8px 18px rgba(0,0,0,.18);}
+    .btn.secondary{background:#6aa89a;color:#09322a}
+
+    .question{
+      display:grid;place-items:center;background:#2b6d5f;border-radius:18px;
+      border:1px solid var(--outline);margin:12px 0 16px;padding:18px;
+      min-height:120px;text-align:center;
+    }
+    .expr{font-size:clamp(42px,9vw,86px);font-weight:900;letter-spacing:1px;}
+    .input-area{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:10px;}
+    input[type=number]{font-size:28px;padding:8px 12px;width:140px;text-align:center;border-radius:12px;border:none;}
+    .feedback{font-size:22px;margin-top:10px;height:28px;}
+    .feedback.correct{color:var(--right)}.feedback.wrong{color:var(--wrong)}
+    .progress{height:10px;background:#2b6d5f;border-radius:999px;overflow:hidden;margin-bottom:8px;}
+    .bar{height:100%;width:0%;background:#84f0b8;transition:width .3s ease;}
+    .end{text-align:center;}
+    .big-score{font-size:clamp(36px,8vw,70px);font-weight:900;}
+    .nilai-hijau{color:#2ecc71}.nilai-kuning{color:#f1c40f}.nilai-merah{color:#e74c3c}
+
+    .option-grid {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    .option-box {
+      background: #2b6d5f;
+      border: 2px solid var(--outline);
+      border-radius: 18px;
+      padding: 18px;
+      flex: 1;
+      min-width: 220px;
+      text-align: center;
+      font-size: 18px;
+    }
+    .option-box label {
       display: block;
-      /* default animations applied inline for variety */
+      font-weight: 600;
+      margin-bottom: 8px;
     }
-
-    /* Animasi jatuh dari atas ke bawah */
-    @keyframes fall {
-      0% { transform: translateY(-20vh) rotate(0deg); opacity: 1; }
-      60% { opacity: 1; }
-      100% { transform: translateY(120dvh) rotate(720deg); opacity: 0; }
+    .option-box select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      text-align: center;
     }
-    /* Animasi goyangan/angin horizontal (alternate) */
-    @keyframes sway {
-      0% { transform: translateX(0px) rotate(0deg); }
-      50% { transform: translateX(20px) rotate(10deg); }
-      100% { transform: translateX(-18px) rotate(-8deg); }
-    }
-
-    /* adaptasi mobile: batasi ukuran maksimal sehingga tetap enak di HP */
-    @media (max-width: 480px) {
-      .celebration-img { max-width: 28vw; }
-    }
-    @media (min-width: 481px) and (max-width: 900px) {
-      .celebration-img { max-width: 14vw; }
-    }
-    @media (min-width: 900px) {
-      .celebration-img { max-width: 110px; }
-    }
-
   </style>
 </head>
 <body>
-  <div class="app" id="app">
+  <div class="floating-timer" id="floatingTimer">⏱️ 10</div>
+  <div class="floating-box" id="floatingBox"></div>
+
+  <div class="app">
     <header>
       <div class="brand">🔢 Perkalian 2–9</div>
       <div class="stats">
-        <div class="pill" id="pillProgress">Soal: <strong id="pNo">0</strong>/<span id="pTotal">0</span></div>
+        <div class="pill">Soal: <strong id="pNo">0</strong>/<span id="pTotal">0</span></div>
         <div class="pill">Skor: <strong id="pScore">0</strong></div>
       </div>
     </header>
     <div class="progress"><div class="bar" id="bar"></div></div>
 
-    <!-- Start Screen -->
     <section class="screen start active" id="startScreen">
       <h1>Siap latihan cepat? 🎯</h1>
-      <div class="grid2">
-        <div class="card">
+      <div class="option-grid">
+        <div class="option-box">
           <label for="jumlah">Jumlah Soal</label>
           <select id="jumlah">
-            <option value="3">3</option>
             <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20" selected>20</option>
+            <option value="10" selected>10</option>
+            <option value="20">20</option>
             <option value="30">30</option>
-            <option value="64">Semua kombinasi (64)</option>
           </select>
         </div>
-        <div class="card">
-          <label>Mode Pilihan</label>
+        <div class="option-box">
+          <label for="mode">Mode</label>
           <select id="mode">
             <option value="campur" selected>Campur (acak)</option>
             <option value="2">Perkalian 2</option>
@@ -173,325 +180,144 @@
       <button class="btn" id="btnStart">Mulai ▶</button>
     </section>
 
-    <!-- Game Screen -->
     <section class="screen" id="gameScreen">
-      <div class="question"><div class="expr" id="expr">2 × 8</div></div>
-      <div class="choices" id="choices"></div>
-      <div class="controls">
+      <div class="question"><div class="expr" id="expr"></div></div>
+      <div class="input-area">
+        <input type="number" id="answerInput" placeholder="Jawab..." />
+        <button class="btn" id="btnCheck">Periksa ✅</button>
+      </div>
+      <div class="feedback" id="feedback"></div>
+      <div class="controls" style="text-align:center;margin-top:10px;">
         <button class="btn secondary" id="btnSkip">Lewati ⏭</button>
-        <button class="btn" id="btnNext" style="display:none">Soal Berikutnya ➜</button>
       </div>
     </section>
 
-    <!-- End Screen -->
     <section class="screen end" id="endScreen">
-      <div class="big-score" id="finalScore">0/0</div>
-      <div class="msg" id="finalMsg">Keren! 😄</div>
-      <div class="controls"><button class="btn" id="btnRestart">Main Lagi 🔁</button></div>
+      <div class="big-score" id="finalScore"></div>
+      <div class="msg" id="finalMsg"></div>
+      <button class="btn" id="btnRestart">Main Lagi 🔁</button>
     </section>
   </div>
 
-  <!-- Container efek meriah -->
-  <div class="celebration-container" id="celebration"></div>
-
   <script>
-    const startScreen = document.getElementById('startScreen');
-    const gameScreen  = document.getElementById('gameScreen');
-    const endScreen   = document.getElementById('endScreen');
+    const TIME_LIMIT = 10;
+    const floatingTimer = document.getElementById('floatingTimer');
+    const floatingBox = document.getElementById('floatingBox');
+    let timeLeft, timerInterval;
+    let pairs=[], idx=0, score=0, skipped=[], total=0;
 
-    const exprEl   = document.getElementById('expr');
-    const choicesEl= document.getElementById('choices');
-    const btnStart = document.getElementById('btnStart');
-    const btnNext  = document.getElementById('btnNext');
-    const btnSkip  = document.getElementById('btnSkip');
-    const btnRestart = document.getElementById('btnRestart');
+    const startScreen=document.getElementById('startScreen'),
+          gameScreen=document.getElementById('gameScreen'),
+          endScreen=document.getElementById('endScreen'),
+          expr=document.getElementById('expr'),
+          answer=document.getElementById('answerInput'),
+          feedback=document.getElementById('feedback'),
+          pNo=document.getElementById('pNo'),
+          pTotal=document.getElementById('pTotal'),
+          pScore=document.getElementById('pScore'),
+          bar=document.getElementById('bar'),
+          finalScore=document.getElementById('finalScore'),
+          finalMsg=document.getElementById('finalMsg');
 
-    const jumlahSel= document.getElementById('jumlah');
-    const modeSel  = document.getElementById('mode');
-
-    const pNo = document.getElementById('pNo');
-    const pTotal = document.getElementById('pTotal');
-    const pScore = document.getElementById('pScore');
-    const bar = document.getElementById('bar');
-
-    const finalScore = document.getElementById('finalScore');
-    const finalMsg = document.getElementById('finalMsg');
-    const celebration = document.getElementById('celebration');
-
-    let pairs = [];
-    let idx = 0;
-    let score = 0;
-    let skippedQuestions = [];
-    let totalSoalDipilih = 0;
-    let celebrationInterval = null;
-
-    function shuffle(arr) {
-      for (let i=arr.length-1;i>0;i--){
-        const j=Math.floor(Math.random()*(i+1));
-        [arr[i],arr[j]]=[arr[j],arr[i]];
-      }
-      return arr;
-    }
+    function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
     function startGame(){
-      const total = parseInt(jumlahSel.value,10);
-      const mode = modeSel.value;
-
-      let all = [];
-      if (mode === 'campur') {
-        for (let a=2; a<=9; a++) {
-          for (let b=2; b<=9; b++) {
-            all.push({a,b});
-          }
-        }
-      } else {
-        const num = parseInt(mode,10);
-        for (let b=2; b<=9; b++) {
-          all.push({a:num, b:b});
-        }
-      }
-
+      const n=parseInt(document.getElementById('jumlah').value);
+      const mode=document.getElementById('mode').value;
+      let all=[];
+      if(mode==='campur'){for(let a=2;a<=9;a++){for(let b=2;b<=9;b++){all.push({a,b});}}}
+      else{const m=parseInt(mode);for(let b=2;b<=9;b++){all.push({a:m,b});}}
       shuffle(all);
-      pairs = all.slice(0, Math.min(total, all.length));
-      totalSoalDipilih = pairs.length;
-
-      idx = 0;
-      score = 0;
-      skippedQuestions = [];
-      pTotal.textContent = totalSoalDipilih;
-      pScore.textContent = score;
-      pNo.textContent = 0;
-      bar.style.width = '0%';
-
-      startScreen.classList.remove('active');
-      endScreen.classList.remove('active');
+      pairs=all.slice(0,n);
+      idx=0;score=0;skipped=[];total=pairs.length;
+      pNo.textContent=0;pTotal.textContent=total;pScore.textContent=0;
+      startScreen.classList.remove('active');endScreen.classList.remove('active');
       gameScreen.classList.add('active');
       renderQuestion();
     }
 
     function renderQuestion(){
-      const {a,b} = pairs[idx];
-      const correct = a*b;
-      exprEl.textContent = `${a} × ${b}`;
-
-      const opts = generateOptions(correct, a, b);
-      choicesEl.innerHTML = '';
-      btnNext.style.display = 'none';
-
-      opts.forEach((val)=> {
-        const div = document.createElement('div');
-        div.className = 'choice';
-        div.textContent = val;
-        div.addEventListener('click', ()=> handleChoice(div, val, correct));
-        choicesEl.appendChild(div);
-      });
-
-      pNo.textContent = idx+1;
-      const pct = ((idx) / totalSoalDipilih) * 100;
-      bar.style.width = pct + '%';
+      const {a,b}=pairs[idx];
+      expr.textContent=`${a} × ${b}`;
+      answer.value='';feedback.textContent='';
+      pNo.textContent=idx+1;
+      bar.style.width=(idx/total*100)+'%';
+      startTimer();
+      answer.focus();
     }
 
-    function generateOptions(correct, a, b){
-      const candidates = [];
-      const deltas = [ -8,-6,-4,-3,-2,2,3,4,6,8,10,12];
-      for (const d of deltas) {
-        const v = correct + d;
-        if (v > 0) candidates.push(v);
-      }
-      const nearPairs = [(a+1)*b, (a-1)*b, a*(b+1), a*(b-1)].filter(v=>v>0);
-      candidates.push(...nearPairs);
-
-      shuffle(candidates);
-      const options = [correct];
-      for (const v of candidates){
-        if (!options.includes(v)) options.push(v);
-        if (options.length===4) break;
-      }
-      while (options.length<4){
-        const r = correct + Math.floor(Math.random()*12)+2;
-        if (!options.includes(r)) options.push(r);
-      }
-      return shuffle(options);
+    function startTimer(){
+      clearInterval(timerInterval);
+      timeLeft=TIME_LIMIT;
+      updateTimer();
+      timerInterval=setInterval(()=>{
+        timeLeft--;
+        updateTimer();
+        if(timeLeft<=0){clearInterval(timerInterval);skip();}
+      },1000);
+    }
+    function updateTimer(){
+      floatingTimer.textContent=`⏱️ ${timeLeft}`;
+      floatingTimer.classList.toggle("low", timeLeft<=3);
     }
 
-    function handleChoice(el, value, correct){
-      const nodes = Array.from(document.querySelectorAll('.choice'));
-      nodes.forEach(n=> n.classList.add('disabled'));
-
-      if (value === correct){
-        el.classList.add('correct');
-        score++;
-        pScore.textContent = score;
-      } else {
-        el.classList.add('wrong');
-        const right = nodes.find(n => Number(n.textContent) === correct);
-        if (right) right.classList.add('correct');
+    function check(){
+      clearInterval(timerInterval);
+      const {a,b}=pairs[idx];
+      const correct=a*b;
+      const val=parseInt(answer.value);
+      if(val===correct){
+        score++;feedback.textContent="✅ Benar!";
+        feedback.className="feedback correct";
+      }else{
+        feedback.textContent=`❌ Salah! Jawaban: ${correct}`;
+        feedback.className="feedback wrong";
       }
-      btnNext.style.display = 'inline-block';
+      pScore.textContent=score;
+      setTimeout(next,700);
     }
 
-    function nextQuestion(){
+    function skip(){
+      skipped.push(pairs[idx]);
+      next();
+    }
+
+    function next(){
       idx++;
-      if (idx >= pairs.length){
-        if (skippedQuestions.length > 0) {
-          pairs = skippedQuestions;
-          skippedQuestions = [];
-          idx = 0;
-          renderQuestion();
-        } else {
-          endGame();
-        }
-      } else {
-        renderQuestion();
-      }
-    }
-
-    function skipQuestion(){
-      skippedQuestions.push(pairs[idx]);
-      nextQuestion();
+      if(idx>=pairs.length){
+        if(skipped.length>0){pairs=skipped;skipped=[];idx=0;renderQuestion();}
+        else endGame();
+      }else renderQuestion();
     }
 
     function endGame(){
       gameScreen.classList.remove('active');
       endScreen.classList.add('active');
-
-      finalScore.textContent = `${score}/${totalSoalDipilih}`;
-      const pct = Math.round((score/totalSoalDipilih)*100);
-
-      finalScore.className = "big-score";
-      if (pct >= 90) finalScore.classList.add("nilai-hijau-muda");
-      else if (pct >= 75) finalScore.classList.add("nilai-hijau");
-      else if (pct >= 50) finalScore.classList.add("nilai-kuning");
-      else finalScore.classList.add("nilai-merah");
-
-      const msg = pct >= 90 ? 'Super sekali! 🌟'
-                : pct >= 75 ? 'Hebat! Pertahankan! 💪'
-                : pct >= 50 ? 'Bagus! Terus latihan ya! 🙂'
-                : 'Semangat! Coba lagi, pasti bisa! 🚀';
-      finalMsg.textContent = `${msg} (Nilai: ${pct})`;
-      bar.style.width = '100%';
-      pNo.textContent = totalSoalDipilih;
-
-      // Pilih gambar sesuai rentang nilai (sesuai permintaan)
-      // 90–99, 80–89, 70–79, 60–69, 45–59, 30–44, 0–29
-      // (nilai 100 tetap memicu efek khusus sebelumnya)
-      if (pct === 100) {
-        // efek khusus untuk 100 — contoh gambar uang / confetti (tetap dipertahankan)
-        startCelebration("https://i.imgur.com/VkKwPoq.png");
-      } else if (pct >= 90 && pct <= 99) {
-        startCelebration("https://i.imgur.com/YBAc4nA.png");
-      } else if (pct >= 80 && pct <= 89) {
-        startCelebration("https://i.imgur.com/LxJC8eD.png");
-      } else if (pct >= 70 && pct <= 79) {
-        startCelebration("https://i.imgur.com/LxAc7aT.png");
-      } else if (pct >= 60 && pct <= 69) {
-        startCelebration("https://i.imgur.com/mv57c1T.png");
-      } else if (pct >= 45 && pct <= 59) {
-        startCelebration("https://i.imgur.com/1fYaea5.png");
-      } else if (pct >= 30 && pct <= 44) {
-        startCelebration("https://i.imgur.com/PV8BnDp.png");
-      } else if (pct >= 0 && pct <= 29) {
-        startCelebration("https://i.imgur.com/4VhlJMq.png");
-      }
+      const pct=Math.round(score/total*100); // nilai bulat
+      finalScore.textContent=`${pct}`;
+      finalScore.className="big-score";
+      let msgClass="";
+      if(pct>=75){finalScore.classList.add("nilai-hijau");msgClass="good";}
+      else if(pct>=50){finalScore.classList.add("nilai-kuning");msgClass="medium";}
+      else{finalScore.classList.add("nilai-merah");msgClass="bad";}
+      const msg=pct>=90?"Super sekali! 🌟":pct>=75?"Hebat! 💪":pct>=50?"Bagus! 🙂":"Semangat! 🚀";
+      finalMsg.textContent=msg;
+      showFloatingBox(`${pct} - ${msg}`, msgClass);
     }
 
-    /**
-     * Membuat satu gambar jatuh (proporsional, acak posisi, animasi jatuh + goyangan)
-     * imgUrl: string
-     */
-    function createFallingImg(imgUrl) {
-      const img = document.createElement('img');
-      img.src = imgUrl;
-      img.className = "celebration-img";
-
-      // letakkan acak horizontal; gunakan 'left' agar proporsional di layar hp
-      const left = Math.random() * 100; // vw
-      img.style.left = (left) + "vw";
-
-      // ukuran proporsional berdasarkan viewport width (vw) + fallback max-width via CSS
-      const vwSize = (6 + Math.random() * 18); // 6vw..24vw typical
-      img.style.width = vwSize + "vw";
-      img.style.height = "auto";
-
-      // durasi jatuh acak agar terlihat natural
-      const fallDur = 3 + Math.random() * 3.5; // 3s - 6.5s
-      // durasi goyangan (alternate), gunakan sedikit variasi
-      const swayDur = 1.5 + Math.random() * 2.5; // 1.5s - 4s
-
-      // gabungkan dua animasi: fall (sekali) dan sway (alternate looping)
-      img.style.animation = `fall ${fallDur}s linear forwards, sway ${swayDur}s ease-in-out infinite alternate`;
-
-      // supaya putaran acak dan skala acak sedikit
-      img.style.transformOrigin = "50% 50%";
-      img.style.opacity = "0.98";
-
-      // tambahkan delay acak agar tidak semua jatuh bersamaan
-      img.style.animationDelay = (Math.random() * 0.8) + "s";
-
-      // tambahkan ke kontainer
-      celebration.appendChild(img);
-
-      // hapus ketika animasi fall selesai (agar tidak menumpuk)
-      // 'fallDur' menentukan kapan harus dihapus (ditambah sedikit buffer)
-      setTimeout(() => {
-        if (img && img.parentNode) img.remove();
-      }, (fallDur + 0.2) * 1000);
+    function showFloatingBox(text, cls){
+      floatingBox.textContent=text;
+      floatingBox.className=`floating-box show ${cls}`;
+      setTimeout(()=>floatingBox.classList.remove('show'),3000);
     }
 
-    /**
-     * Memulai interval pembuatan gambar jatuh sampai di-stop.
-     * imageUrl: gambar yang akan digunakan
-     */
-    function startCelebration(imageUrl) {
-      // hentikan dulu kalau sedang berjalan
-      if (celebrationInterval) {
-        clearInterval(celebrationInterval);
-        celebrationInterval = null;
-      }
-      // bersihkan elemen lama
-      celebration.innerHTML = "";
-
-      // Buat batch awal beragam ukuran/posisi
-      for (let i=0;i<8;i++){
-        // tambahkan sedikit jeda untuk batch awal supaya lebih organik
-        setTimeout(()=> createFallingImg(imageUrl), i * 120);
-      }
-
-      // interval berkelanjutan: terus muncul sampai user klik mulai ulang
-      celebrationInterval = setInterval(()=> {
-        // tiap interval, buat 1-3 gambar acak
-        const count = 1 + Math.floor(Math.random() * 3);
-        for (let i=0;i<count;i++){
-          // berikan jeda kecil antar gambar dalam satu interval
-          setTimeout(()=> createFallingImg(imageUrl), i * 120);
-        }
-      }, 350); // setiap 350ms akan menambahkan beberapa gambar baru
-    }
-
-    // 🔹 Event listeners
-    btnStart.addEventListener('click', startGame);
-    btnNext.addEventListener('click', nextQuestion);
-    btnSkip.addEventListener('click', skipQuestion);
-    btnRestart.addEventListener('click', ()=> {
+    document.getElementById('btnStart').onclick=startGame;
+    document.getElementById('btnCheck').onclick=check;
+    document.getElementById('btnSkip').onclick=skip;
+    document.getElementById('btnRestart').onclick=()=>{
       endScreen.classList.remove('active');
       startScreen.classList.add('active');
-      // hentikan perayaan dan bersihkan gambar
-      if (celebrationInterval) {
-        clearInterval(celebrationInterval);
-        celebrationInterval = null;
-      }
-      celebration.innerHTML = "";
-    });
-
-    // optional: pastikan saat berpindah tab/reload, interval tidak numpuk (safety)
-    window.addEventListener('visibilitychange', () => {
-      if (document.hidden && celebrationInterval) {
-        // nonaktifkan sementara
-        clearInterval(celebrationInterval);
-        celebrationInterval = null;
-      }
-    });
-
+    };
   </script>
 </body>
 </html>

@@ -1,0 +1,310 @@
+evaluasi menuju ke soal-folder.html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Membuat Folder di File Explorer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: url("https://i.imgur.com/1NgzbO1.jpeg") no-repeat center center fixed;
+      background-size: cover;
+      color: #0f172a;
+      margin: 0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .title-box {
+      background: #0b76ef;
+      color: white;
+      font-weight: 700;
+      font-size: 26px;
+      padding: 16px 40px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(11, 118, 239, 0.3);
+      margin: 20px auto;
+      display: table;
+      text-align: center;
+      max-width: 95%;
+    }
+
+    .wrap {
+      padding: 20px;
+      max-width: 760px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-title {
+      background: #ff9500;
+      color: #fff;
+      font-weight: 700;
+      font-size: 20px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      box-shadow: 0 6px 14px rgba(255, 149, 0, 0.3);
+      display: inline-block;
+      margin-top: 24px;
+    }
+
+    .section-content {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 10px;
+      box-shadow: 0 4px 14px rgba(11, 118, 239, 0.1);
+    }
+
+    ul, ol { margin-left: 20px; }
+    li { margin-bottom: 6px; }
+    p { color: #374151; }
+
+    /* Tombol Evaluasi */
+    .evaluasi-btn {
+      display: block;
+      background: linear-gradient(135deg, #0b76ef, #1e90ff);
+      color: white;
+      text-align: center;
+      font-weight: 600;
+      font-size: 18px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(11, 118, 239, 0.3);
+      text-decoration: none;
+      width: fit-content;
+      margin: 30px auto 10px auto;
+      transition: all 0.3s ease;
+    }
+
+    .evaluasi-btn:hover {
+      background: linear-gradient(135deg, #1e90ff, #0b76ef);
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(11, 118, 239, 0.4);
+    }
+
+    .floating-left {
+      position: fixed;
+      bottom: 2vh;
+      left: 1vw;
+      z-index: 900;
+      cursor: grab;
+      touch-action: none;
+      animation: floatY 3.5s ease-in-out infinite;
+    }
+
+    .floating-left img {
+      width: 35vw;
+      max-width: 420px;
+      height: auto;
+      filter: drop-shadow(0 8px 24px rgba(11, 76, 150, 0.3));
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .floating-buttons {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+      cursor: grab;
+    }
+
+    .float-btn {
+      background: transparent;
+      border: none;
+      cursor: grab;
+      padding: 10px;
+      transition: transform 0.2s ease;
+      touch-action: none;
+    }
+
+    .float-btn img {
+      width: 15vw;
+      max-width: 80px;
+      min-width: 48px;
+      height: auto;
+      filter: drop-shadow(0 6px 14px rgba(11, 76, 150, 0.3));
+    }
+
+    .float-btn:hover {
+      transform: translateY(-4px) scale(1.05);
+    }
+
+    @media (max-width: 480px) and (orientation: portrait) {
+      .floating-left img { width: 55vw; max-width: 240px; }
+      .title-box { font-size: 20px; padding: 10px 18px; }
+      .wrap { padding: 14px; }
+      .section-title { font-size: 18px; }
+    }
+
+    @media (max-height: 480px) and (orientation: landscape) {
+      .floating-left img { width: 28vw; max-width: 200px; }
+      .float-btn img { width: 12vw; max-width: 64px; }
+      .title-box { font-size: 18px; padding: 8px 16px; }
+      .wrap { padding: 10px; }
+      .section-title { font-size: 17px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="title-box">📁 Membuat Folder di File Explorer</div>
+
+  <main class="wrap">
+    <div class="section-title">🎯 Tujuan Pembelajaran</div>
+    <div class="section-content">
+      <p>Setelah mempelajari materi ini, siswa diharapkan dapat:</p>
+      <ul>
+        <li>Menjelaskan pengertian folder.</li>
+        <li>Menyebutkan fungsi folder dalam komputer.</li>
+        <li>Menunjukkan langkah-langkah membuat folder di File Explorer.</li>
+        <li>Membuat folder baru dengan nama yang sesuai perintah guru.</li>
+      </ul>
+    </div>
+
+    <div class="section-title">📘 A. Pengertian Folder</div>
+    <div class="section-content">
+      <p>Folder adalah tempat untuk menyimpan dan mengelompokkan file atau dokumen di dalam komputer. Folder berfungsi agar file tersusun rapi dan mudah dicari.</p>
+      <p><b>📁 Contoh:</b></p>
+      <ul>
+        <li>Folder “Tugas Sekolah” berisi file tugas-tugas pelajaran.</li>
+        <li>Folder “Gambar” berisi foto dan gambar.</li>
+      </ul>
+    </div>
+
+    <div class="section-title">🧭 B. Fungsi Folder</div>
+    <div class="section-content">
+      <ol>
+        <li>Menyimpan file agar tidak tercecer.</li>
+        <li>Mengelompokkan data berdasarkan jenis (misal: dokumen, gambar, musik).</li>
+        <li>Memudahkan pencarian file.</li>
+        <li>Menjaga kerapian dan keteraturan data.</li>
+      </ol>
+    </div>
+
+    <div class="section-title">⚙️ C. Langkah-Langkah Membuat Folder di File Explorer</div>
+    <div class="section-content">
+      <p><b>🔹 Langkah 1: Buka File Explorer</b></p>
+      <ul>
+        <li>Klik ikon 📁 File Explorer di taskbar (biasanya berbentuk gambar folder kuning).</li>
+        <li>Atau tekan tombol Windows + E di keyboard.</li>
+      </ul>
+
+      <p><b>🔹 Langkah 2: Pilih Lokasi Folder</b></p>
+      <p>Tentukan tempat untuk membuat folder baru, misalnya di Documents, Desktop, atau Local Disk (C:) / (D:).</p>
+
+      <p><b>🔹 Langkah 3: Buat Folder Baru</b></p>
+      <ol>
+        <li>Klik kanan pada area kosong → pilih <b>New → Folder</b>.</li>
+        <li>Atau tekan <b>Ctrl + Shift + N</b> di keyboard.</li>
+      </ol>
+
+      <p><b>🔹 Langkah 4: Beri Nama Folder</b></p>
+      <ul>
+        <li>Ketik nama folder sesuai keinginan, misalnya <b>Tugas Komputer</b> atau <b>Dokumen Sekolah</b>.</li>
+        <li>Tekan Enter setelah memberi nama.</li>
+      </ul>
+    </div>
+
+    <div class="section-title">🧩 D. Contoh Praktik</div>
+    <div class="section-content">
+      <ol>
+        <li>Buka File Explorer.</li>
+        <li>Pilih Documents.</li>
+        <li>Klik kanan → New → Folder.</li>
+        <li>Ketik nama folder "<b>Latihan Komputer</b>".</li>
+        <li>Tekan Enter.</li>
+      </ol>
+      <p>✅ Folder baru berhasil dibuat!</p>
+    </div>
+
+    <div class="section-title">🧠 E. Tips Tambahan</div>
+    <div class="section-content">
+      <ul>
+        <li>Gunakan nama folder yang jelas, misalnya “Tugas Kelas 5” atau “Gambar Hewan”.</li>
+        <li>Jangan gunakan karakter khusus seperti ?, /, :, *, karena tidak diperbolehkan dalam nama folder.</li>
+        <li>Folder juga bisa dipindahkan, digandakan, atau dihapus sesuai kebutuhan.</li>
+      </ul>
+    </div>
+
+    <div class="section-title">💬 Kesimpulan</div>
+    <div class="section-content">
+      <p>Membuat folder di File Explorer sangat penting agar file di komputer tersusun rapi, mudah dicari, dan aman.</p>
+    </div>
+
+    <a href="soal-membuat_folder.html" class="evaluasi-btn">🧩Evaluasi</a>
+  </main>
+
+  <div class="floating-left" id="draggable">
+    <img src="https://i.imgur.com/xi8XIsE.png" alt="Gambar anak belajar komputer" />
+  </div>
+
+  <div class="floating-buttons" id="draggableButtons">
+    <button class="float-btn" title="Beranda" onclick="goHome()">
+      <img src="https://i.imgur.com/Nc3RsIH.png" alt="ikon beranda" />
+    </button>
+    <button class="float-btn" title="Kembali" onclick="goBack()">
+      <img src="https://i.imgur.com/QEJbOve.png" alt="ikon kembali" />
+    </button>
+  </div>
+
+  <script>
+    function goHome() { window.location.href = "../daftar-isi.html"; }
+    function goBack() { window.location.href = "materi.html"; }
+
+    function makeDraggable(el) {
+      let pos = { top: 0, left: 0, x: 0, y: 0 };
+      const downHandler = function (e) {
+        e.preventDefault();
+        el.style.cursor = 'grabbing';
+        pos = {
+          left: el.offsetLeft,
+          top: el.offsetTop,
+          x: e.clientX || e.touches?.[0].clientX,
+          y: e.clientY || e.touches?.[0].clientY,
+        };
+        document.addEventListener('mousemove', moveHandler);
+        document.addEventListener('touchmove', moveHandler);
+        document.addEventListener('mouseup', upHandler);
+        document.addEventListener('touchend', upHandler);
+      };
+
+      const moveHandler = function (e) {
+        const dx = (e.clientX || e.touches?.[0].clientX) - pos.x;
+        const dy = (e.clientY || e.touches?.[0].clientY) - pos.y;
+        el.style.left = `${pos.left + dx}px`;
+        el.style.top = `${pos.top + dy}px`;
+        el.style.bottom = "auto";
+        el.style.right = "auto";
+      };
+
+      const upHandler = function () {
+        el.style.cursor = 'grab';
+        document.removeEventListener('mousemove', moveHandler);
+        document.removeEventListener('touchmove', moveHandler);
+        document.removeEventListener('mouseup', upHandler);
+        document.removeEventListener('touchend', upHandler);
+      };
+
+      el.addEventListener('mousedown', downHandler);
+      el.addEventListener('touchstart', downHandler);
+    }
+
+    makeDraggable(document.getElementById("draggable"));
+    makeDraggable(document.getElementById("draggableButtons"));
+  </script>
+</body>
+</html>

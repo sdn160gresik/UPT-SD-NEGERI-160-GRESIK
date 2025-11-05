@@ -76,6 +76,56 @@
       margin-top: 40px;
       font-weight: bold;
     }
+
+    /* Tombol melayang */
+    .floating-btn {
+      position: fixed;
+      z-index: 999;
+      border-radius: 50%;
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .home-btn {
+      bottom: 100px;
+      left: 15px;
+      width: 70px;
+      height: 70px;
+    }
+
+    .back-btn {
+      bottom: 15px;
+      left: 15px;
+      width: 70px;
+      height: 70px;
+    }
+
+    /* ✅ Pelajar diperbesar dan agak ke bawah */
+    .pelajar-btn {
+      lefth: 30px;
+      bottom: 120px; /* posisinya agak ke bawah dari atas */
+      width: 300px;  /* diperbesar dari 70px ke 120px */
+      height: 300px;
+    }
+
+    img.btn-icon {
+      width: 100%;
+      height: auto;
+      border-radius: 50%;
+    }
+
+    @media (max-width: 600px) {
+      .home-btn, .back-btn {
+        width: 55px;
+        height: 55px;
+      }
+      .pelajar-btn {
+        width: 190px;
+        height: 190px;
+        lefth: 20px;
+        bottom: 80px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -87,7 +137,7 @@
   </header>
 
   <div class="container">
-    <a href="Menghidupkan_dan_Mematikan_Komputer_dengan_Benar.html" class="card">
+    <a href="menghidupkan_dan_mematikan_komputer_dengan_benar.html" class="card">
       <div class="icon">💡</div>
       <h2>Menghidupkan Komputer</h2>
       <p>Pelajari langkah-langkah menghidupkan dan mematikan komputer dengan benar.</p>
@@ -116,6 +166,77 @@
     Disusun oleh Guru TIK UPT SD NEGERI 160 GRESIK 💻
   </footer>
 
+  <!-- Tombol Home -->
+  <a href="daftar-isi.html" class="floating-btn home-btn" id="homeBtn">
+    <img src="https://i.imgur.com/Nc3RsIH.png" alt="Home" class="btn-icon">
+  </a>
+
+  <!-- Tombol Back -->
+  <a href="materi.html" class="floating-btn back-btn" id="backBtn">
+    <img src="https://i.imgur.com/QEJbOve.png" alt="Back" class="btn-icon">
+  </a>
+
+  <!-- Tombol Pelajar -->
+  <div class="floating-btn pelajar-btn" id="pelajarBtn">
+    <img src="https://i.imgur.com/xi8XIsE.png" alt="Pelajar" class="btn-icon">
+  </div>
+
+  <script>
+    // Fungsi agar tombol bisa digeser (drag)
+    function makeDraggable(element) {
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      element.onmousedown = dragMouseDown;
+      element.ontouchstart = dragTouchStart;
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+      }
+
+      function dragTouchStart(e) {
+        const touch = e.touches[0];
+        pos3 = touch.clientX;
+        pos4 = touch.clientY;
+        document.ontouchend = closeDragElement;
+        document.ontouchmove = elementTouchDrag;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        element.style.top = (element.offsetTop - pos2) + "px";
+        element.style.left = (element.offsetLeft - pos1) + "px";
+      }
+
+      function elementTouchDrag(e) {
+        const touch = e.touches[0];
+        pos1 = pos3 - touch.clientX;
+        pos2 = pos4 - touch.clientY;
+        pos3 = touch.clientX;
+        pos4 = touch.clientY;
+        element.style.top = (element.offsetTop - pos2) + "px";
+        element.style.left = (element.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+        document.ontouchend = null;
+        document.ontouchmove = null;
+      }
+    }
+
+    // Aktifkan drag untuk semua tombol
+    makeDraggable(document.getElementById("homeBtn"));
+    makeDraggable(document.getElementById("backBtn"));
+    makeDraggable(document.getElementById("pelajarBtn"));
+  </script>
+
 </body>
 </html>
-

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kuis Komputer — SD Kelas 5</title>
+  <title>Kuis Komputer Dasar SD</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -23,6 +23,14 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
+    }
+    h1 {
+      color:#2c3e50;
+      text-align:center;
+      background:white;
+      padding:10px 20px;
+      border-radius:10px;
+      border:2px solid #add8e6;
     }
     .kotak-soal {
       background-color: white;
@@ -53,6 +61,7 @@
     .answers label:nth-child(3) { background: #fffbd6; }
     .answers label:nth-child(4) { background: #ffd6e7; }
     .answers label:hover { filter: brightness(0.9); transform: scale(1.02); }
+
     button {
       background-color: #007bff;
       color: white;
@@ -64,6 +73,7 @@
       margin-top: 10px;
     }
     button:hover { background-color: #0056b3; }
+
     .popup-success {
       background: #d4edda;
       border: 2px solid #c3e6cb;
@@ -73,13 +83,16 @@
       text-align: center;
       font-size: 18px;
       font-weight: bold;
-      animation: pop 0.3s ease-out;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      max-width: 90%;
     }
+
     .nilai-besar { font-size: 48px; font-weight: bold; display: block; margin: 10px 0; }
-    @keyframes pop {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
+    .nilai-merah { color: #e74c3c; }
+    .nilai-kuning { color: #f39c12; }
+    .nilai-hijau { color: #27ae60; }
+    .nilai-emas { color: #d4af37; }
+
     .form-identitas {
       background: white;
       border: 2px solid #add8e6;
@@ -96,6 +109,7 @@
       border: 1px solid #ccc;
       border-radius: 6px;
     }
+
     .progress {
       background: white;
       border: 2px solid #add8e6;
@@ -104,10 +118,11 @@
       margin-bottom: 10px;
       font-weight: bold;
     }
+
     .tombol-home {
       position: fixed;
       bottom: 20px;
-      right: 20px;
+      left: 20px;
       width: 60px;
       height: 60px;
       z-index: 3000;
@@ -121,43 +136,11 @@
     }
     .tombol-home:hover { transform: scale(1.1); }
     .tombol-home img { width: 50px; height: 50px; }
-
-    /* 🔹 Popup peringatan */
-    .popup-warning {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(255, 255, 255, 0.95);
-      border: 3px solid #ffb347;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      border-radius: 15px;
-      padding: 25px 30px;
-      text-align: center;
-      z-index: 5000;
-      animation: pop 0.3s ease-out;
-      color: #d35400;
-      font-size: 18px;
-      font-weight: bold;
-      max-width: 350px;
-    }
-    .popup-warning button {
-      background-color: #f39c12;
-      color: white;
-      border: none;
-      margin-top: 15px;
-      padding: 8px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .popup-warning button:hover {
-      background-color: #e67e22;
-    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1 style="color:#2c3e50;text-align:center;background:white;padding:10px 20px;border-radius:10px;border:2px solid #add8e6;">💻 Kuis Komputer SD Kelas 5</h1>
+    <h1>💻 Kuis Komputer Dasar SD</h1>
 
     <div id="formIdentitas" class="form-identitas">
       <h3>Isi Identitasmu dulu ya ✨</h3>
@@ -171,16 +154,13 @@
     <div id="quiz" style="display:none;"></div>
   </div>
 
-  <a href="halaman-materi.html" class="tombol-home" title="Kembali">
-    <img src="https://i.imgur.com/pjkmRdR.png" alt="Home">
+  <a href="materi.html" class="tombol-home" title="Kembali">
+    <img src="https://i.imgur.com/QEJbOve.png" alt="Home">
   </a>
 
-  <div id="popupContainer"></div>
-
   <script>
-    // ---------------- Soal ----------------
     const soalMaster = [
-      // 🔹 Menghidupkan dan mematikan komputer
+      // 🔹 Menghidupkan dan Mematikan Komputer
       { q:"Langkah pertama sebelum menyalakan komputer adalah ....", a:["Menekan tombol power pada CPU","Memeriksa kabel listrik apakah sudah terpasang","Menyalakan monitor","Menunggu proses booting"], k:1 },
       { q:"Tombol power pada CPU biasanya bergambar ....", a:["Gambar bintang ⭐","Huruf P besar","Lingkaran dengan garis di atasnya ⏻","Gambar segitiga"], k:2 },
       { q:"Setelah komputer dinyalakan, proses yang terjadi sebelum muncul desktop disebut ....", a:["Printing","Booting","Scanning","Loading file"], k:1 },
@@ -192,7 +172,7 @@
       { q:"Berikut ini bukan termasuk hal yang perlu diperhatikan saat menggunakan komputer adalah ....", a:["Menggunakan tangan yang kering","Duduk dengan posisi tegak","Makan dan minum di dekat komputer","Menyimpan hasil pekerjaan sebelum dimatikan"], k:2 },
       { q:"Menghidupkan dan mematikan komputer dengan urutan yang benar bermanfaat untuk ....", a:["Membuat komputer tampil lebih indah","Menjaga keawetan komputer dan keamanan data","Mempercepat internet","Menghemat listrik"], k:1 },
 
-      // 🔹 Folder
+      // 🔹 Membuat Folder
       { q:"Folder digunakan untuk ....", a:["Menghapus file di komputer","Menyimpan dan mengelompokkan file","Mengedit dokumen","Memutar musik"], k:1 },
       { q:"Fungsi utama folder dalam komputer adalah ....", a:["Membuat program baru","Menjalankan aplikasi","Menyimpan dan mengatur file agar rapi","Menghapus virus komputer"], k:2 },
       { q:"Contoh nama folder yang baik adalah ....", a:["Tugas Kelas 5","???Gambar***","/Dokumen*/",":Musik:"], k:0 },
@@ -205,262 +185,6 @@
       { q:"Berikut ini bukan langkah membuat folder baru adalah ....", a:["Klik kanan → New → Folder","Tekan Ctrl + Shift + N","Tekan tombol Enter setelah memberi nama","Menghapus folder lama"], k:3 },
 
       // 🔹 Microsoft Word
-      {q:"Microsoft Word digunakan untuk...", a:["Menggambar dan mewarnai gambar","Mengolah kata dan membuat dokumen","Memutar musik dan video","Membuat presentasi"], k:1},
-      {q:"Program Microsoft Word termasuk dalam kategori...", a:["Pengolah angka","Pengolah gambar","Pengolah kata","Pengolah data"], k:2},
-      {q:"Untuk membuka Microsoft Word melalui tombol Start, langkah pertama yang dilakukan adalah...", a:["Klik ikon Search di taskbar","Klik ikon Start di pojok kiri bawah","Klik dua kali ikon Word di desktop","Ketik Word di kolom pencarian"], k:1},
-      {q:"Shortcut yang digunakan untuk menyimpan dokumen dengan cepat adalah...", a:["Ctrl + N","Ctrl + O","Ctrl + S","Ctrl + P"], k:2},
-      {q:"Melalui cara apa kita bisa membuka Microsoft Word selain dari menu Start?", a:["Melalui Control Panel","Melalui Shortcut di Desktop","Melalui Microsoft Excel","Melalui Paint"], k:1},
-      {q:"Apa fungsi dari Ribbon pada Microsoft Word?", a:["Menampilkan jam dan tanggal","Tempat menulis teks","Menampilkan ikon-ikon perintah","Menyimpan dokumen"], k:2},
-      {q:"Menu bar pada Microsoft Word berisi...", a:["Gambar dan foto","Ikon volume dan jaringan","Tab seperti File, Home, Insert, Design","Tombol Start dan Search"], k:2},
-      {q:"Area pengetikan pada Microsoft Word berfungsi untuk...", a:["Membuka file","Mengetik dan mengedit teks","Mengatur tampilan layar","Menyimpan file"], k:1},
-      {q:"Fungsi Status Bar di Microsoft Word adalah...", a:["Menampilkan jam komputer","Menampilkan jumlah halaman dan kata","Menyimpan dokumen secara otomatis","Menampilkan hasil print"], k:1},
-      {q:"Untuk membuat dokumen baru digunakan kombinasi tombol...", a:["Ctrl + O","Ctrl + S","Ctrl + N","Ctrl + P"], k:2},
-      {q:"Ikon kaca pembesar di taskbar berfungsi untuk...", a:["Menampilkan semua program","Melakukan pencarian aplikasi","Menyalakan komputer","Membuka file baru"], k:1},
-      {q:"Langkah terakhir membuka Microsoft Word melalui Start adalah...", a:["Mengetik Word di kolom pencarian","Mengklik folder Microsoft Office","Mengklik Microsoft Word dan menunggu terbuka","Mengklik ikon File"], k:2},
-      {q:"Ketika pertama kali membuka Microsoft Word, tampilan awal yang muncul adalah...", a:["Lembar kerja kosong","Halaman pengaturan printer","Daftar folder di komputer","File musik dan video"], k:0},
-      {q:"Untuk menyimpan dokumen dengan nama dan lokasi tertentu, gunakan menu...", a:["File → Open","File → Save As","File → Close","File → New"], k:1},
-      {q:"Tujuan utama mempelajari langkah-langkah menjalankan Microsoft Word adalah agar siswa...", a:["Dapat memutar lagu di Word","Dapat membuka, mengetik, dan menyimpan dokumen","Dapat menonton video di Word","Dapat menggambar di Paint"], k:1}
-    ];
-
-    const JUMLAH_SOAL = 10;
-    let daftarSoal = [], indeks = 0, benar = 0;
-    let namaSiswa = "", kelasSiswa = "", absenSiswa = "";
-
-    function shuffleArray(arr){
-      for(let i = arr.length - 1; i > 0; i--){
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
-    }
-
-    function tampilkanPopup(pesan){
-      const popupContainer = document.getElementById('popupContainer');
-      popupContainer.innerHTML = `
-        <div class="popup-warning">
-          ⚠️ ${pesan}<br><br>
-          <button onclick="tutupPopup()">Oke, Siap!</button>
-        </div>
-      `;
-    }
-
-    function tutupPopup(){
-      document.getElementById('popupContainer').innerHTML = '';
-    }
-
-    function mulaiKuis(){
-      namaSiswa = document.getElementById('nama').value.trim();
-      kelasSiswa = document.getElementById('kelas').value.trim();
-      absenSiswa = document.getElementById('absen').value.trim();
-      if(!namaSiswa || !kelasSiswa || !absenSiswa){
-        tampilkanPopup("Ups! 😅 Lengkapi dulu identitasmu, ya!<br>Nama, kelas, dan nomor absen wajib diisi biar semangat belajarnya makin mantap 💪");
-        return;
-      }
-      document.getElementById('formIdentitas').style.display = 'none';
-      document.getElementById('quiz').style.display = 'block';
-      document.getElementById('progress').style.display = 'inline-block';
-      daftarSoal = shuffleArray([...soalMaster]).slice(0, JUMLAH_SOAL);
-      indeks = 0; benar = 0;
-      tampilkanSoal();
-    }
-
-    function tampilkanSoal(){
-      const quiz = document.getElementById('quiz');
-      const progress = document.getElementById('progress');
-      if(indeks >= daftarSoal.length){
-        const nilai = Math.round((benar / JUMLAH_SOAL) * 100);
-        let pesan = nilai >= 80 ? "Hebat banget! 🌟" : nilai >= 60 ? "Bagus! Tetap semangat ya 💪" : "Jangan menyerah, kamu pasti bisa! 🚀";
-        quiz.innerHTML = `<div class="popup-success">🎉 Selesai!<br>Benar: ${benar}/${JUMLAH_SOAL}<br>Nilai: <span class='nilai-besar'>${nilai}</span><br>${pesan}<br><button onclick='location.reload()'>🔄 Ulangi</button></div>`;
-        progress.style.display = 'none';
-        return;
-      }
-      const s = daftarSoal[indeks];
-      let opsi = s.a.map((teks, idx) => ({ teks, benar: idx === s.k }));
-      opsi = shuffleArray(opsi);
-      progress.textContent = `Soal ${indeks+1}/${JUMLAH_SOAL}`;
-      quiz.innerHTML = `
-        <div class="kotak-soal">${s.q}</div>
-        <div class="answers">
-          ${opsi.map(o => `<label><input type="radio" name="jawaban" value="${o.benar}"/> ${o.teks}</label>`).join('')}
-        </div>
-        <button onclick="periksaJawaban()">Next ➡️</button>
-      `;
-    }
-
-    function periksaJawaban(){
-      const jawaban = document.querySelector('input[name="jawaban"]:checked');
-      if(!jawaban){
-        tampilkanPopup("Yuk pilih jawaban dulu! 🧐<br>Jangan buru-buru klik Next ya, baca soalnya pelan-pelan 😄");
-        return;
-      }
-      if(jawaban.value === "true"){ benar++; }
-      indeks++; tampilkanSoal();
-    }
-  </script>
-</body>
-</html>
-
-
-entry.2102215189 nama
-entry.1051447194 no absen
-entry.1983906772 kelas
-entry.477010156 nilai
-https://docs.google.com/forms/u/0/d/e/1FAIpQLSf7hqvwQ2WCRvrG5YEqk-bAjshBpjGC7-_tBzcSnVzWg_zIyw/formResponse
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kuis Microsoft Word</title>
-  <style>
-    .kotak-soal {
-      background-color: white;
-      border: 2px solid #add8e6;
-      border-radius: 10px;
-      padding: 15px 20px;
-      margin-bottom: 15px;
-      max-width: 600px;
-      width: 100%;
-    }
-    body {
-      font-family: 'Arial', sans-serif;
-      padding: 20px;
-      background-image: url('https://i.imgur.com/1NgzbO1.jpeg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
-    .container {
-      max-width: 100%;
-      margin: 0 auto;
-      padding: 20px;
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
-    .answers label {
-      display: block;
-      margin-bottom: 12px;
-      padding: 10px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      color: #2c3e50;
-      font-weight: bold;
-      transition: background 0.2s, transform 0.1s;
-    }
-    .answers input[type="radio"] {
-      margin-right: 10px;
-      accent-color: #007bff;
-      transform: scale(1.2);
-    }
-    .answers label:nth-child(1) { background: #d6eaff; }
-    .answers label:nth-child(2) { background: #d6ffd9; }
-    .answers label:nth-child(3) { background: #fffbd6; }
-    .answers label:nth-child(4) { background: #ffd6e7; }
-    .answers label:hover { filter: brightness(0.9); transform: scale(1.02); }
-
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-top: 10px;
-    }
-    button:hover { background-color: #0056b3; }
-
-    .popup-success {
-      background: #d4edda;
-      border: 2px solid #c3e6cb;
-      color: #155724;
-      padding: 25px 35px;
-      border-radius: 12px;
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-      animation: pop 0.3s ease-out;
-    }
-
-    .nilai-besar { font-size: 48px; font-weight: bold; display: block; margin: 10px 0; }
-
-    @keyframes pop {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    .form-identitas {
-      background: white;
-      border: 2px solid #add8e6;
-      border-radius: 10px;
-      padding: 20px;
-      max-width: 400px;
-      width: 100%;
-      margin-bottom: 20px;
-    }
-    .form-identitas input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    .progress {
-      background: white;
-      border: 2px solid #add8e6;
-      border-radius: 10px;
-      padding: 8px 14px;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    .tombol-home {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      z-index: 3000;
-      border-radius: 50%;
-      background-color: rgba(255,255,255,0.8);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s ease;
-    }
-    .tombol-home:hover { transform: scale(1.1); }
-    .tombol-home img { width: 50px; height: 50px; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1 style="color:#2c3e50;text-align:center;background:white;padding:10px 20px;border-radius:10px;border:2px solid #add8e6;">🧾 Kuis Microsoft Word</h1>
-
-    <div id="formIdentitas" class="form-identitas">
-      <h3>Isi Identitasmu dulu ya ✨</h3>
-      <input type="text" id="nama" placeholder="Nama Lengkap">
-      <input type="text" id="kelas" placeholder="Kelas">
-      <input type="number" id="absen" placeholder="No Absen">
-      <button onclick="mulaiKuis()">🚀 Mulai Kuis</button>
-    </div>
-
-    <div id="progress" class="progress" style="display:none;">Soal 1/10</div>
-    <div id="quiz" style="display:none;"></div>
-  </div>
-
-  <a href="halaman-materi.html" class="tombol-home" title="Kembali">
-    <img src="https://i.imgur.com/pjkmRdR.png" alt="Home">
-  </a>
-
-  <script>
-    const soalMaster = [
       {q:"Microsoft Word digunakan untuk...", a:["Menggambar dan mewarnai gambar","Mengolah kata dan membuat dokumen","Memutar musik dan video","Membuat presentasi"], k:1},
       {q:"Program Microsoft Word termasuk dalam kategori...", a:["Pengolah angka","Pengolah gambar","Pengolah kata","Pengolah data"], k:2},
       {q:"Untuk membuka Microsoft Word melalui tombol Start, langkah pertama yang dilakukan adalah...", a:["Klik ikon Search di taskbar","Klik ikon Start di pojok kiri bawah","Klik dua kali ikon Word di desktop","Ketik Word di kolom pencarian"], k:1},
@@ -511,8 +235,19 @@ https://docs.google.com/forms/u/0/d/e/1FAIpQLSf7hqvwQ2WCRvrG5YEqk-bAjshBpjGC7-_t
       if(indeks >= daftarSoal.length){
         const nilai = Math.round((benar / JUMLAH_SOAL) * 100);
         kirimNilai(nilai);
-        let pesan = nilai >= 80 ? "Hebat!" : nilai >= 60 ? "Lumayan!" : "Ayo coba lagi!";
-        quiz.innerHTML = `<div class="popup-success">🎉 Selesai!<br>Benar: ${benar}/${JUMLAH_SOAL}<br>Nilai: <span class='nilai-besar'>${nilai}</span><br>${pesan}<br><button onclick='location.reload()'>🔄 Ulangi</button></div>`;
+        let warna = nilai >= 85 ? 'nilai-emas' : nilai >= 70 ? 'nilai-hijau' : nilai >= 50 ? 'nilai-kuning' : 'nilai-merah';
+        let pesan = nilai >= 90 ? "🌟 Luar biasa! Kamu calon ahli komputer!" :
+                    nilai >= 75 ? "💪 Bagus! Terus pertahankan semangatmu!" :
+                    nilai >= 60 ? "😊 Cukup baik, yuk belajar lebih giat lagi!" :
+                    "🔥 Jangan menyerah, coba lagi ya!";
+        quiz.innerHTML = `
+          <div class="popup-success">
+            🎉 Kuis Selesai!<br><br>
+            <span class='nilai-besar ${warna}'>${nilai}</span>
+            <div>${pesan}</div><br>
+            <button onclick='location.reload()'>🔄 Ulangi</button>
+            <button onclick="window.location.href='materi.html'">🏠 Selesai</button>
+          </div>`;
         progress.style.display = 'none';
         return;
       }
@@ -538,12 +273,13 @@ https://docs.google.com/forms/u/0/d/e/1FAIpQLSf7hqvwQ2WCRvrG5YEqk-bAjshBpjGC7-_t
       indeks++; tampilkanSoal();
     }
 
+    // ✅ Kirim hasil ke Google Form
     function kirimNilai(nilai){
       const nama=document.getElementById('nama').value.trim();
       const kelas=document.getElementById('kelas').value.trim();
       const absen=document.getElementById('absen').value.trim();
 
-      const url="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfOGWDW2Dc1j-jllc1okl3fEIJzZ8FK57PF05lLgvr-jcdqZw/formResponse";
+      const url="https://docs.google.com/forms/u/0/d/e/1FAIpQLSf7hqvwQ2WCRvrG5YEqk-bAjshBpjGC7-_tBzcSnVzWg_zIyw/formResponse";
       const formData=new FormData();
       formData.append("entry.2102215189",nama);
       formData.append("entry.1051447194",absen);

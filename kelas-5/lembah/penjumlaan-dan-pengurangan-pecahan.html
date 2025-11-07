@@ -20,7 +20,7 @@
       justify-content: center;
     }
 
-    /* 🔹 Kotak judul bisa digeser manual */
+    /* 🔹 Judul geser horizontal */
     .title-container {
       position: fixed;
       top: 10px;
@@ -28,11 +28,10 @@
       overflow-x: auto;
       white-space: nowrap;
       z-index: 10;
-      scrollbar-width: none; /* Hilangkan scrollbar Firefox */
+      scrollbar-width: none;
     }
-
     .title-container::-webkit-scrollbar {
-      display: none; /* Hilangkan scrollbar Chrome/Safari */
+      display: none;
     }
 
     .title-box {
@@ -57,15 +56,16 @@
       font-size: 1.8em;
       font-weight: bold;
       color: white;
-      cursor: pointer;
+      cursor: grab;
       position: absolute;
-      transition: all 0.3s ease;
+      transition: transform 0.2s ease;
       box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      user-select: none;
     }
 
-    .circle:hover {
-      transform: scale(1.2);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+    .circle:active {
+      cursor: grabbing;
+      transform: scale(1.1);
     }
 
     .image-page {
@@ -137,7 +137,7 @@
 
     function createCircles() {
       const container = document.getElementById("landing-page");
-      container.innerHTML = ""; // kosongkan dulu
+      container.innerHTML = "";
 
       for (let i = 1; i <= 10; i++) {
         const circle = document.createElement("div");
@@ -145,15 +145,61 @@
         circle.textContent = i;
         circle.style.background = getRandomGradient();
 
-        // Posisi acak
         const x = Math.random() * (window.innerWidth - 100);
         const y = Math.random() * (window.innerHeight - 150) + 100;
         circle.style.left = `${x}px`;
         circle.style.top = `${y}px`;
 
         circle.onclick = () => showRandomImage(i);
+
+        makeDraggable(circle); // ➕ Tambahkan kemampuan geser
         container.appendChild(circle);
       }
+    }
+
+    function makeDraggable(element) {
+      let isDragging = false, offsetX, offsetY;
+
+      element.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        offsetX = e.clientX - element.offsetLeft;
+        offsetY = e.clientY - element.offsetTop;
+        element.style.zIndex = 1000;
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+          element.style.left = `${e.clientX - offsetX}px`;
+          element.style.top = `${e.clientY - offsetY}px`;
+        }
+      });
+
+      window.addEventListener("mouseup", () => {
+        isDragging = false;
+        element.style.zIndex = 1;
+      });
+
+      // 📱 Tambahkan dukungan sentuhan (untuk HP)
+      element.addEventListener("touchstart", (e) => {
+        isDragging = true;
+        const touch = e.touches[0];
+        offsetX = touch.clientX - element.offsetLeft;
+        offsetY = touch.clientY - element.offsetTop;
+        element.style.zIndex = 1000;
+      });
+
+      window.addEventListener("touchmove", (e) => {
+        if (isDragging) {
+          const touch = e.touches[0];
+          element.style.left = `${touch.clientX - offsetX}px`;
+          element.style.top = `${touch.clientY - offsetY}px`;
+        }
+      });
+
+      window.addEventListener("touchend", () => {
+        isDragging = false;
+        element.style.zIndex = 1;
+      });
     }
 
     function getRandomGradient() {
@@ -183,10 +229,9 @@
     function goBack() {
       document.getElementById("image-page").style.display = "none";
       document.getElementById("landing-page").style.display = "block";
-      createCircles(); // 🔹 Buat ulang posisi acak setiap kembali
+      createCircles();
     }
 
-    // Jalankan pertama kali
     createCircles();
   </script>
 

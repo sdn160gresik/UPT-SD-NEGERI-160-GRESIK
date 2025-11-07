@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galeri Acak Angka 1–10</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: url('https://i.imgur.com/WlSU2f0.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      text-align: center;
+      min-height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 🔹 Kotak judul bisa digeser manual */
+    .title-container {
+      position: fixed;
+      top: 10px;
+      width: 100%;
+      overflow-x: auto;
+      white-space: nowrap;
+      z-index: 10;
+      scrollbar-width: none; /* Hilangkan scrollbar Firefox */
+    }
+
+    .title-container::-webkit-scrollbar {
+      display: none; /* Hilangkan scrollbar Chrome/Safari */
+    }
+
+    .title-box {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff7eb3, #ff758c);
+      padding: 10px 30px;
+      border-radius: 25px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      font-weight: 700;
+      font-size: 1.2em;
+      margin-left: 100%;
+    }
+
+    .circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8em;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      position: absolute;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    .circle:hover {
+      transform: scale(1.2);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+    }
+
+    .image-page {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+    }
+
+    .image-page img {
+      max-width: 90%;
+      max-height: 70vh;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: #ff8a00;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 1em;
+    }
+
+    button:hover {
+      background: #ffb347;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔹 Judul geser manual -->
+  <div class="title-container" id="scroll-title">
+    <div class="title-box">
+      😄 Klik Angka Favoritmu! Temukan kejutan menarik! 🎁
+    </div>
+  </div>
+
+  <div id="landing-page"></div>
+
+  <div class="image-page" id="image-page">
+    <h1>Gambar Pilihanmu 🎁</h1>
+    <img id="random-image" src="" alt="Gambar acak">
+    <button onclick="goBack()">Kembali</button>
+  </div>
+
+  <script>
+    const imageLinks = [
+      "https://i.imgur.com/zOZ2Cen.png",
+      "https://i.imgur.com/PBvcn0x.png",
+      "https://i.imgur.com/XWWYgji.png",
+      "https://i.imgur.com/KKxJp2V.png",
+      "https://i.imgur.com/qZ4nTtZ.png",
+      "https://i.imgur.com/vlFnrLU.png",
+      "https://i.imgur.com/6bdpVNx.png",
+      "https://i.imgur.com/e58SCBW.png",
+      "https://i.imgur.com/TZdBdZ7.png",
+      "https://i.imgur.com/WlSU2f0.png"
+    ];
+
+    function createCircles() {
+      const container = document.getElementById("landing-page");
+      container.innerHTML = ""; // kosongkan dulu
+
+      for (let i = 1; i <= 10; i++) {
+        const circle = document.createElement("div");
+        circle.classList.add("circle");
+        circle.textContent = i;
+        circle.style.background = getRandomGradient();
+
+        // Posisi acak
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 150) + 100;
+        circle.style.left = `${x}px`;
+        circle.style.top = `${y}px`;
+
+        circle.onclick = () => showRandomImage(i);
+        container.appendChild(circle);
+      }
+    }
+
+    function getRandomGradient() {
+      const colors = [
+        ["#ff512f", "#dd2476"],
+        ["#36d1dc", "#5b86e5"],
+        ["#ff9966", "#ff5e62"],
+        ["#11998e", "#38ef7d"],
+        ["#f7971e", "#ffd200"],
+        ["#8e2de2", "#4a00e0"],
+        ["#f953c6", "#b91d73"],
+        ["#30cfd0", "#330867"],
+        ["#00b09b", "#96c93d"],
+        ["#ff758c", "#ff7eb3"]
+      ];
+      const random = colors[Math.floor(Math.random() * colors.length)];
+      return `linear-gradient(135deg, ${random[0]}, ${random[1]})`;
+    }
+
+    function showRandomImage(number) {
+      const randomIndex = Math.floor(Math.random() * imageLinks.length);
+      document.getElementById("random-image").src = imageLinks[randomIndex];
+      document.getElementById("landing-page").style.display = "none";
+      document.getElementById("image-page").style.display = "flex";
+    }
+
+    function goBack() {
+      document.getElementById("image-page").style.display = "none";
+      document.getElementById("landing-page").style.display = "block";
+      createCircles(); // 🔹 Buat ulang posisi acak setiap kembali
+    }
+
+    // Jalankan pertama kali
+    createCircles();
+  </script>
+
+</body>
+</html>

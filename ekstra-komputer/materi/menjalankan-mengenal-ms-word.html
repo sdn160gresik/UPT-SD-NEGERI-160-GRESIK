@@ -12,6 +12,7 @@
       margin: 0;
       padding: 0;
       text-align: center;
+      overflow: hidden;
     }
 
     header {
@@ -32,6 +33,29 @@
       flex: 1;
       text-align: center;
       font-size: 1.8em;
+    }
+
+    /* Tombol navigasi bisa dipindah */
+    .draggable {
+      position: absolute;
+      cursor: move;
+      transition: transform 0.2s;
+      z-index: 10;
+    }
+
+    .draggable:hover {
+      transform: scale(1.1);
+    }
+
+    /* Ukuran tombol home & back bisa diatur terpisah */
+    #home-btn img {
+      width: 70px; /* ubah ukuran tombol Home di sini */
+      height: 70px;
+    }
+
+    #back-btn img {
+      width: 40px; /* ubah ukuran tombol Back di sini */
+      height: 40px;
     }
 
     .container {
@@ -60,12 +84,6 @@
       background-color: #f0f8ff;
     }
 
-    .icon {
-      font-size: 50px;
-      margin-bottom: 10px;
-    }
-
-    /* Gaya untuk gambar ikon Word */
     .icon img {
       width: 60px;
       height: 60px;
@@ -84,6 +102,19 @@
       margin-top: 40px;
       font-weight: bold;
     }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    footer {
+      margin-top: auto;
+    }
   </style>
 </head>
 <body>
@@ -94,9 +125,17 @@
     <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Kanan">
   </header>
 
+  <!-- Tombol Home dan Back dapat dipindahkan -->
+  <a href="../daftar-isi.html" id="home-btn" class="draggable" title="Kembali ke Beranda" style="top: 100px; left: 50px;">
+    <img src="https://i.imgur.com/Nc3RsIH.png" alt="Tombol Home">
+  </a>
+
+  <a href="halaman-materi.html" id="back-btn" class="draggable" title="Kembali ke Halaman Materi" style="top: 100px; right: 50px;">
+    <img src="https://i.imgur.com/QEJbOve.png" alt="Tombol Back">
+  </a>
+
   <div class="container">
-     <!-- Kartu baru 1: Menjalankan Ms Word -->
-      <a href="Nama-dan-Fungsi-Toolbar-Microsoft-Word.html" class="card">
+    <a href="Nama-dan-Fungsi-Toolbar-Microsoft-Word.html" class="card">
       <div class="icon">
         <img src="https://i.imgur.com/4a3adyG.png" alt="Logo Microsoft Word">
       </div>
@@ -104,23 +143,56 @@
       <p>Kenali bagian-bagian tampilan dan fungsi utama Microsoft Word.</p>
     </a>
 
-    <!-- Kartu baru 2: Mengenal Ms Word -->
-  
-<a href="Langkah-Langkah_Menjalankan_Microsoft_Word.html" class="card">
+    <a href="Langkah-Langkah_Menjalankan_Microsoft_Word.html" class="card">
       <div class="icon">
         <img src="https://i.imgur.com/4a3adyG.png" alt="Logo Microsoft Word">
       </div>
       <h2>Menjalankan Ms Word</h2>
       <p>Pelajari cara membuka dan menjalankan aplikasi Microsoft Word di komputer.</p>
     </a>
-
   </div>
 
   <footer>
     Disusun oleh Guru TIK UPT SD NEGERI 160 GRESIK 💻
   </footer>
 
+  <script>
+    // Fungsi agar tombol bisa di-drag
+    function makeDraggable(element) {
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+      element.onmousedown = dragMouseDown;
+
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+      }
+
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        element.style.top = (element.offsetTop - pos2) + "px";
+        element.style.left = (element.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+
+    // Terapkan fungsi ke tombol Home & Back
+    makeDraggable(document.getElementById("home-btn"));
+    makeDraggable(document.getElementById("back-btn"));
+  </script>
+
 </body>
 </html>
-
-

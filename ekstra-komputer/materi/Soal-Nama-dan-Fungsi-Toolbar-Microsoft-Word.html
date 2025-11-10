@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuis Toolbar Microsoft Word</title>
+  <style>
+    .kotak-soal {
+      background-color: white;
+      border: 2px solid #add8e6;
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      max-width: 600px;
+      width: 100%;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      padding: 20px;
+      background-image: url('https://i.imgur.com/1NgzbO1.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .answers label {
+      display: block;
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #2c3e50;
+      font-weight: bold;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .answers input[type="radio"] {
+      margin-right: 10px;
+      accent-color: #007bff;
+      transform: scale(1.2);
+    }
+    .answers label:nth-child(1) { background: #d6eaff; }
+    .answers label:nth-child(2) { background: #d6ffd9; }
+    .answers label:nth-child(3) { background: #fffbd6; }
+    .answers label:nth-child(4) { background: #ffd6e7; }
+    .answers label:hover { filter: brightness(0.9); transform: scale(1.02); }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    button:hover { background-color: #0056b3; }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 25px 35px;
+      border-radius: 12px;
+      text-align: center;
+      z-index: 2000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      font-size: 18px;
+      font-weight: bold;
+      animation: pop 0.3s ease-out;
+      max-width: 90%;
+    }
+    .popup-warning { background: #fff3cd; border: 2px solid #ffecb5; color: #856404; }
+    .popup-success { background: #d4edda; border: 2px solid #c3e6cb; color: #155724; }
+    .popup-gold { background: #fff8e1; border: 2px solid #ffeb3b; color: #8d6e00; }
+
+    .nilai-besar { font-size: 48px; font-weight: bold; display: block; margin: 10px 0; }
+    .nilai-merah { color: #e74c3c; }
+    .nilai-kuning { color: #f39c12; }
+    .nilai-hijau { color: #27ae60; }
+    .nilai-emas { color: #d4af37; }
+
+    @keyframes pop {
+      0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
+    .form-identitas {
+      background: white;
+      border: 2px solid #add8e6;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 400px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .form-identitas input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .progress {
+      background: white;
+      border: 2px solid #add8e6;
+      border-radius: 10px;
+      padding: 8px 14px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .tombol-home {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      z-index: 3000;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.8);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+    .tombol-home:hover { transform: scale(1.1); }
+    .tombol-home img { width: 50px; height: 50px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 style="color:#2c3e50;text-align:center;background:white;padding:10px 20px;border-radius:10px;border:2px solid #add8e6;">💻 Kuis Toolbar Microsoft Word</h1>
+
+    <div id="formIdentitas" class="form-identitas">
+      <h3>Isi Identitasmu dulu ya ✨</h3>
+      <input type="text" id="nama" placeholder="Nama Lengkap" oninput="mainkanSuaraKetik()">
+      <input type="text" id="kelas" placeholder="Kelas" oninput="mainkanSuaraKetik()">
+      <input type="number" id="absen" placeholder="No Absen" oninput="mainkanSuaraKetik()">
+      <button onclick="mulaiKuis()">🚀 Mulai Kuis</button>
+    </div>
+
+    <div id="progress" class="progress" style="display:none;">Soal 1/10</div>
+    <div id="quiz" style="display:none;"></div>
+  </div>
+
+  <a href="Menghidupkan_dan_Mematikan_Komputer_dengan_Benar.html" class="tombol-home" title="Kembali">
+    <img src="https://i.imgur.com/pjkmRdR.png" alt="Home">
+  </a>
+
+  <audio id="suaraKetik" src="../../suara/typing.mp3"></audio>
+  <audio id="suaraNext" src="../../suara/blub.mp3"></audio>
+  <audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
+  <audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
+  <audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
+
+  <script>
+    const soalMaster = [
+      { q:"Toolbar terdapat di bagian mana dari jendela Microsoft Word?", a:["Di bawah dokumen","Di sisi kiri layar","Di bagian atas jendela","Di tengah layar"], k:2 },
+      { q:"Fungsi utama toolbar adalah ….", a:["Memudahkan kita mengerjakan dokumen","Menyimpan video","Menghapus teks","Menampilkan warna"], k:0 },
+      { q:"Nama lain dari toolbar di Microsoft Word adalah ….", a:["Tab Menu","Ribbon","Taskbar","Panel"], k:1 },
+      { q:"Tab yang berisi perintah untuk mengatur teks adalah ….", a:["Insert","Home","Layout","File"], k:1 },
+      { q:"Tombol Bold (B) digunakan untuk ….", a:["Membuat huruf tebal","Membuat huruf miring","Mengatur jarak teks","Menghapus huruf"], k:0 },
+      { q:"Tombol Italic (I) berfungsi untuk ….", a:["Membuat huruf besar","Membuat huruf miring","Menghapus teks","Menebalkan huruf"], k:1 },
+      { q:"Tombol Underline (U) digunakan untuk ….", a:["Mengatur ukuran teks","Memberi garis bawah","Mengatur warna huruf","Membuat tulisan miring"], k:1 },
+      { q:"Perintah Font Size digunakan untuk ….", a:["Mengatur posisi teks","Mengatur ukuran huruf","Mengubah gaya teks","Membuat garis bawah"], k:1 },
+      { q:"Perintah Align berfungsi untuk ….", a:["Menyimpan dokumen","Mengatur posisi teks","Membuat daftar","Mengatur ukuran huruf"], k:1 },
+      { q:"Perintah Bullets/Numbering digunakan untuk ….", a:["Membuat daftar","Menambah gambar","Menghapus halaman","Mengubah warna"], k:0 },
+      { q:"Tab Insert digunakan untuk ….", a:["Mengatur teks","Menambahkan sesuatu ke dokumen","Menghapus halaman","Mengatur jarak tepi"], k:1 },
+      { q:"Perintah Picture digunakan untuk ….", a:["Menyisipkan gambar","Menambahkan bentuk","Menulis ulang teks","Menghapus tabel"], k:0 },
+      { q:"Perintah Shapes digunakan untuk ….", a:["Menghapus gambar","Menambahkan bentuk","Menyimpan dokumen","Menambah halaman"], k:1 },
+      { q:"Perintah WordArt digunakan untuk ….", a:["Membuat tulisan bergaya","Menghapus teks","Mengatur ukuran huruf","Menyisipkan tabel"], k:0 },
+      { q:"Tab Layout digunakan untuk ….", a:["Mengatur tampilan kertas","Menyisipkan gambar","Menulis ulang teks","Membuat tabel"], k:0 },
+      { q:"Fungsi perintah Margins adalah ….", a:["Mengatur jarak tepi halaman","Mengubah warna teks","Menambah gambar","Membuat daftar"], k:0 },
+      { q:"Perintah Orientation digunakan untuk ….", a:["Menambah halaman","Menghapus teks","Mengatur posisi kertas (potrait/landscape)","Mengatur warna teks"], k:2 },
+      { q:"Tab Review berisi perintah seperti ….", a:["Spelling & Grammar","Save dan Print","Margins dan Orientation","Picture dan Shapes"], k:0 },
+      { q:"Fungsi Spelling & Grammar adalah ….", a:["Membuka dokumen","Mengecek ejaan dan tata bahasa","Menambahkan tabel","Mengatur ukuran kertas"], k:1 },
+      { q:"Tab File digunakan untuk ….", a:["Mengatur jarak huruf","Membuat bentuk","Membuka, menyimpan, dan mencetak dokumen","Menghapus tabel"], k:2 }
+    ];
+
+    const JUMLAH_SOAL = 10;
+    let daftarSoal = [], indeks = 0, benar = 0;
+
+    function shuffleArray(arr){
+      for(let i = arr.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function mulaiKuis(){
+      const nama = document.getElementById('nama').value.trim();
+      const kelas = document.getElementById('kelas').value.trim();
+      const absen = document.getElementById('absen').value.trim();
+      if(!nama || !kelas || !absen){
+        mainkanSuaraPeringatan();
+        tampilkanPopup("⚡ Isi identitas dulu ya!", "popup-warning");
+        return;
+      }
+      mainkanSuaraNext();
+      document.getElementById('formIdentitas').style.display = 'none';
+      document.getElementById('quiz').style.display = 'block';
+      document.getElementById('progress').style.display = 'inline-block';
+      daftarSoal = shuffleArray([...soalMaster]).slice(0, JUMLAH_SOAL);
+      indeks = 0; benar = 0;
+      tampilkanSoal();
+    }
+
+    function tampilkanSoal(){
+      const quiz = document.getElementById('quiz');
+      const progress = document.getElementById('progress');
+      if(indeks >= daftarSoal.length){
+        const nilai = Math.round((benar / JUMLAH_SOAL) * 100);
+        kirimNilai(nilai);
+        let peringkat = "", kelasPopup = "popup-success", warnaNilai = "nilai-merah";
+        if(nilai === 100){ peringkat = "🏆 Luar biasa!"; kelasPopup = "popup-gold"; warnaNilai = "nilai-emas"; }
+        else if(nilai >= 80){ peringkat = "🥈 Hebat!"; warnaNilai = "nilai-hijau"; }
+        else if(nilai >= 60){ peringkat = "🥉 Lumayan!"; warnaNilai = "nilai-kuning"; }
+        else { peringkat = "💡 Ayo coba lagi!"; }
+
+        tampilkanPopupHasil(`🎉 Selesai!<br>Benar: ${benar}/${JUMLAH_SOAL}<br>Nilai: <span class="nilai-besar ${warnaNilai}">${nilai}</span>${peringkat}`, kelasPopup);
+        quiz.innerHTML = ""; progress.style.display = 'none'; return;
+      }
+
+      const s = daftarSoal[indeks];
+      let opsi = s.a.map((teks, idx) => ({ teks, benar: idx === s.k }));
+      opsi = shuffleArray(opsi);
+
+      progress.textContent = `Soal ${indeks+1}/${JUMLAH_SOAL}`;
+      quiz.innerHTML = `
+        <div class="kotak-soal">${s.q}</div>
+        <div class="answers">
+          ${opsi.map(o => `<label><input type="radio" name="jawaban" value="${o.benar}" onclick="mainkanSuaraKlik()"/> ${o.teks}</label>`).join('')}
+        </div>
+        <button onclick="periksaJawaban()">Next</button>
+      `;
+    }
+
+    function periksaJawaban(){
+      const jawaban = document.querySelector('input[name="jawaban"]:checked');
+      if(!jawaban){ mainkanSuaraPeringatan(); tampilkanPopup("🎯 Pilih jawabannya dulu!", "popup-warning"); return; }
+      if(jawaban.value === "true"){ benar++; }
+      indeks++; mainkanSuaraNext(); tampilkanSoal();
+    }
+
+    function tampilkanPopup(teks, kelas='popup-warning'){
+      const popup=document.createElement('div');
+      popup.className=`popup ${kelas}`;
+      popup.innerHTML=teks;
+      document.body.appendChild(popup);
+      setTimeout(()=>popup.remove(),3000);
+    }
+
+    function tampilkanPopupHasil(teks,kelas){
+      const popup=document.createElement('div');
+      popup.className=`popup ${kelas}`;
+      popup.innerHTML=`${teks}<br><br><button onclick="muatUlang()">🔄 Ulangi</button><br><button onclick="selesaiKuis()">✅ Selesai</button>`;
+      document.body.appendChild(popup);
+    }
+
+    function muatUlang(){
+      document.querySelectorAll('.popup').forEach(p=>p.remove());
+      indeks=0; benar=0;
+      mainkanSuaraUlangi();
+      daftarSoal=shuffleArray([...soalMaster]).slice(0, JUMLAH_SOAL);
+      document.getElementById('progress').style.display='inline-block';
+      tampilkanSoal();
+    }
+
+    function selesaiKuis(){
+      window.location.href="halaman-materi.html";
+    }
+
+    function kirimNilai(nilai){
+      const nama=document.getElementById('nama').value.trim();
+      const kelas=document.getElementById('kelas').value.trim();
+      const absen=document.getElementById('absen').value.trim();
+
+      const url="https://docs.google.com/forms/u/0/d/e/1FAIpQLSc0w1ZLXA9qErK1Ocou4h7FEk8XdFOQFhj6l9_aEHIEY-5HqA/formResponse";
+      const formData=new FormData();
+      formData.append("entry.2102215189",nama);
+      formData.append("entry.1051447194",absen);
+      formData.append("entry.1983906772",kelas);
+      formData.append("entry.477010156",nilai);
+      fetch(url,{method:"POST",body:formData,mode:"no-cors"});
+    }
+
+    function mainkanSuaraKlik(){const s=document.getElementById('suaraKlik');s.currentTime=0;s.play();}
+    function mainkanSuaraPeringatan(){const s=document.getElementById('suaraPeringatan');s.currentTime=0;s.play();}
+    function mainkanSuaraKetik(){const s=document.getElementById('suaraKetik');s.currentTime=0;s.play();}
+    function mainkanSuaraNext(){const s=document.getElementById('suaraNext');s.currentTime=0;s.play();}
+    function mainkanSuaraUlangi(){const s=document.getElementById('suaraUlangi');s.currentTime=0;s.play();}
+  </script>
+</body>
+</html>

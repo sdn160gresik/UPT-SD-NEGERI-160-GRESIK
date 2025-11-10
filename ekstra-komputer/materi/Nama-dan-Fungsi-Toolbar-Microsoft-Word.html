@@ -87,9 +87,7 @@
       transition: transform 0.3s ease;
     }
 
-    .section:hover {
-      transform: translateY(-4px);
-    }
+    .section:hover { transform: translateY(-4px); }
 
     .sub-section {
       background: rgba(255,255,255,0.95);
@@ -100,9 +98,7 @@
       transition: transform 0.3s ease;
     }
 
-    .sub-section:hover {
-      transform: translateY(-3px);
-    }
+    .sub-section:hover { transform: translateY(-3px); }
 
     h2 {
       background: var(--grad1);
@@ -134,6 +130,30 @@
       font-style: italic;
     }
 
+    /* 🔹 Tombol Evaluasi */
+    .eval-box {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .eval-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      color: white;
+      padding: 14px 30px;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .eval-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+    }
+
     .footer-box {
       background: var(--footer-grad);
       color: #004d40;
@@ -151,6 +171,7 @@
       .footer-box { font-size: 14px; }
       h2 { font-size: 18px; }
       h3 { font-size: 16px; }
+      .eval-btn { font-size: 16px; padding: 12px 24px; }
     }
 
     .img-ribbon {
@@ -162,9 +183,6 @@
       box-shadow: 0 3px 12px rgba(0,0,0,0.1);
       border: 3px solid #1f6feb;
     }
-
-    @media (max-width: 768px) { .img-ribbon { max-width: 95%; } }
-    @media (max-width: 480px) { .img-ribbon { max-width: 100%; } }
 
     /* 🔹 Tombol draggable (Home & Back) */
     .draggable {
@@ -181,34 +199,16 @@
     .home-btn { bottom: 100px; right: 20px; }
     .back-btn { bottom: 30px; right: 20px; }
 
-/* Responsif untuk HP potrait dan landscape */
-@media screen and (max-width: 480px) and (orientation: portrait) {
-  .container {
-    margin: 10px;
-    padding: 15px;
-  }
-  .title-box { font-size: 18px; padding: 14px; }
-  .footer-box { font-size: 12px; padding: 10px; }
-  .draggable {
-    width: 50px;
-    height: 50px;
-  }
-}
+    /* Responsif potrait dan landscape */
+    @media screen and (max-width: 480px) and (orientation: portrait) {
+      .container { margin: 10px; padding: 15px; }
+      .draggable { width: 50px; height: 50px; }
+    }
 
-@media screen and (max-width: 820px) and (orientation: landscape) {
-  .container {
-    margin: 15px auto;
-    padding: 20px;
-    max-width: 95%;
-  }
-  .title-box { font-size: 20px; }
-  .footer-box { font-size: 13px; }
-  .draggable {
-    width: 50px;
-    height: 50px;
-  }
-}
-
+    @media screen and (max-width: 820px) and (orientation: landscape) {
+      .container { margin: 15px auto; padding: 20px; max-width: 95%; }
+      .draggable { width: 50px; height: 50px; }
+    }
   </style>
 </head>
 <body>
@@ -302,6 +302,11 @@
       <div class="kotak-putih">
         <p>Toolbar Microsoft Word sangat membantu kita dalam mengetik dan mengedit dokumen. Dengan mengenal fungsi setiap toolbar, kita bisa bekerja lebih cepat dan rapi.</p>
       </div>
+
+      <!-- 🔹 Tambahan tombol Evaluasi -->
+      <div class="eval-box">
+        <a href="Soal-Nama-dan-Fungsi-Toolbar-Microsoft-Word.html" class="eval-btn">📖 Evaluasi</a>
+      </div>
     </div>
 
     <div class="footer-box">🏫 UPT SD NEGERI 160 GRESIK 🏫</div>
@@ -311,26 +316,22 @@
     // 🔹 Fungsi drag tombol
     function makeDraggable(el) {
       let isDragging = false, x, y;
-
       el.addEventListener('mousedown', (e) => {
         isDragging = true;
         x = e.clientX - el.offsetLeft;
         y = e.clientY - el.offsetTop;
         el.style.transition = 'none';
       });
-
       document.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
         el.style.left = e.clientX - x + 'px';
         el.style.top = e.clientY - y + 'px';
       });
-
       document.addEventListener('mouseup', () => {
         isDragging = false;
         el.style.transition = 'transform 0.2s';
       });
     }
-
     makeDraggable(document.getElementById('homeBtn'));
     makeDraggable(document.getElementById('backBtn'));
   </script>

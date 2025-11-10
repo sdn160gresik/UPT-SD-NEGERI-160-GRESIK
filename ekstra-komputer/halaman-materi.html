@@ -21,6 +21,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 10px 20px;
+      position: relative;
     }
 
     header img {
@@ -32,6 +33,63 @@
       flex: 1;
       text-align: center;
       font-size: 1.8em;
+    }
+
+    /* Tombol navigasi (Home & Back) */
+    .nav-buttons {
+      position: fixed;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 100;
+    }
+
+    .nav-buttons a {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+
+    .nav-buttons a:hover {
+      transform: scale(1.1);
+    }
+
+    .nav-buttons img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+
+    /* Responsif */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.3em;
+      }
+
+      header img {
+        width: 45px;
+        height: 45px;
+      }
+
+      .nav-buttons img {
+        width: 45px;
+        height: 45px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-buttons img {
+        width: 40px;
+        height: 40px;
+      }
     }
 
     .container {
@@ -62,6 +120,13 @@
 
     .icon {
       font-size: 50px;
+      margin-bottom: 10px;
+    }
+
+    .icon img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
     }
 
     .card h2 {
@@ -100,14 +165,16 @@
     </a>
 
     <a href="menjalankan_microsoft_word.html" class="card">
-      <div class="icon">📄</div>
-      <h2>Menjalankan Microsoft Word</h2>
+      <div class="icon">
+        <img src="https://i.imgur.com/4a3adyG.png" alt="Logo Microsoft Word">
+      </div>
+      <h2>Microsoft Word</h2>
       <p>Kenali langkah-langkah membuka dan menggunakan Microsoft Word.</p>
     </a>
 
     <a href="evaluasi.html" class="card">
       <div class="icon">🧩</div>
-      <h2>Kartu Evaluasi</h2>
+      <h2>Evaluasi</h2>
       <p>Uji pemahamanmu dengan latihan dan kuis dari setiap materi.</p>
     </a>
   </div>
@@ -115,6 +182,16 @@
   <footer>
     Disusun oleh Guru TIK UPT SD NEGERI 160 GRESIK 💻
   </footer>
+
+  <!-- Tombol Navigasi -->
+  <div class="nav-buttons">
+    <a href="materi.html">
+      <img src="https://i.imgur.com/QEJbOve.png" alt="Tombol Back">
+    </a>
+    <a href="daftar-isi.html">
+      <img src="https://i.imgur.com/Nc3RsIH.png" alt="Tombol Home">
+    </a>
+  </div>
 
 </body>
 </html>

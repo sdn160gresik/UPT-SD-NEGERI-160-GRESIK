@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kuis Seru Petualangan</title>
+<style>
+.kotak-soal {
+    background: linear-gradient(135deg, #f0f9ff, #cce5ff);
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+body {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-image: url('https://i.imgur.com/IFKQPGS.png');
+    background-size: cover;
+    background-position: center;
+}
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.nav a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    background-color: white;
+    padding: 10px 15px;
+    border: 2px solid #add8e6;
+    border-radius: 8px;
+}
+.hidden { display: none; }
+label { font-weight: bold; }
+input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+button:hover { background-color: #0056b3; }
+.info-siswa {
+    background: white;
+    border: 2px solid #add8e6;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+.answers label {
+    display: block;
+    margin-bottom: 8px;
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.answers label:hover { background: #eaf6ff; }
+.hasil-box {
+    background: white;
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.nilai-besar {
+    font-size: 40px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.nilai-merah { background: #f8d7da; color: #721c24; }
+.nilai-kuning { background: #fff3cd; color: #856404; }
+.nilai-hijau { background: #d4edda; color: #155724; }
+.warning-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+.warning-box {
+    background: #fff3cd;
+    border: 3px solid #ffcc00;
+    border-radius: 12px;
+    padding: 25px 30px;
+    max-width: 400px;
+    text-align: center;
+    font-size: 18px;
+    color: #856404;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    animation: popIn 0.4s ease;
+}
+.warning-box h2 {
+    margin: 0 0 10px;
+    font-size: 22px;
+    color: #d35400;
+}
+.warning-box button {
+    background: #ffcc00;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    margin-top: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.warning-box button:hover { background: #e6b800; }
+@keyframes popIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="nav">
+        <a href="🕵Petualangan-Seru.html">◀️ kembali</a>
+        <a href="Soal_Petualangan.pdf" download>📥 Download</a>
+    </div>
+    <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
+        🕵️ Detektif Cilik Ayo Uji Kepintaranmu
+    </h1>
+
+    <!-- Form Data Siswa -->
+    <div id="formData">
+        <h3>Silakan isi identitas sebelum mulai:</h3>
+        <label>Nama: </label><br>
+        <input type="text" id="nama"><br>
+        <label>Kelas: </label><br>
+        <input type="text" id="kelas"><br>
+        <label>No. Absen: </label><br>
+        <input type="text" id="absen"><br>
+        <button onclick="mulaiKuis()">Mulai Kuis</button>
+    </div>
+
+    <div id="areaKuis" class="hidden">
+        <div id="infoSiswa" class="info-siswa"></div>
+        <div id="quiz"></div>
+    </div>
+</div>
+<div id="peringatanArea"></div>
+
+<!-- Suara -->
+<audio id="suaraKetik" src="../../suara/typing.mp3"></audio>
+<audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
+<audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
+<audio id="suaraNext" src="../../suara/next.mp3"></audio>
+<audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
+
+<script>
+let soal = [
+{q:"Kata berimbuhan me- yang tepat untuk melengkapi kalimat: Rani sedang ___ baju untuk dikenakan ke pesta.",a:["pakai","memakai","dipakai","terpakai"],k:1},
+{q:"Kalimat yang menggunakan imbuhan me- dengan benar adalah …",a:["Ibu menyapu lantai setiap pagi.","Ibu disapu lantai setiap pagi.","Ibu nyapu lantai setiap pagi.","Ibu penyapu lantai setiap pagi."],k:0},
+{q:"Kata yang berimbuhan -kan terdapat pada kalimat …",a:["Ayah membeli koran pagi ini.","Ibu menuliskan surat untuk nenek.","Adik makan roti cokelat.","Kakak mencuci sepatu."],k:1},
+{q:"Fungsi imbuhan -kan pada kata “menuliskan” adalah …",a:["Menyatakan pekerjaan untuk orang lain.","Menyatakan benda yang digunakan.","Menyatakan waktu.","Menyatakan tempat."],k:0},
+{q:"Kalimat berikut yang menggunakan imbuhan -lah adalah …",a:["Tolong bersihkan meja itu!","Jagalah kebersihan kelas kita!","Jangan lupa membawa buku!","Andi sudah belajar dengan rajin."],k:1},
+{q:"Arti imbuhan me- adalah untuk membentuk kata kerja yang …",a:["Menunjukkan benda","Menunjukkan tindakan","Menunjukkan sifat","Menunjukkan tempat"],k:1},
+{q:"Pilih kata berimbuhan me- yang benar!",a:["menyapu – menulis – mengikat","nyapu – nulis – ngikat","sapu – tulis – ikat","penyapu – penulis – pengikat"],k:0},
+{q:"Kata berikut yang tidak menggunakan imbuhan me- adalah …",a:["membaca","menulis","mendengar","duduk"],k:3},
+{q:"Kata berimbuhan me- yang berubah menjadi meny- digunakan pada kata …",a:["sapu","potong","jahit","buat"],k:0},
+{q:"Perhatikan kalimat berikut! “Ayah mengajarkan cara membuat roti.” Kata yang berimbuhan -kan adalah …",a:["cara","membuat","mengajarkan","roti"],k:2},
+{q:"Teks prosedur bertujuan untuk …",a:["Menceritakan pengalaman seseorang","Menjelaskan langkah-langkah melakukan sesuatu","Menyampaikan pendapat pribadi","Menjelaskan hasil penelitian"],k:1},
+{q:"Ciri utama teks prosedur adalah …",a:["Mengandung alur cerita","Berisi langkah-langkah atau petunjuk","Mengandung majas","Berisi dialog antar tokoh"],k:1},
+{q:"Struktur teks prosedur terdiri atas …",a:["Pembuka, isi, penutup","Tujuan, alat dan bahan, langkah-langkah","Orientasi, komplikasi, resolusi","Judul, isi, kesimpulan"],k:1},
+{q:"Kalimat berikut yang merupakan kalimat perintah adalah …",a:["Ibu sedang membuat kue ulang tahun.","Tolong aduk adonan hingga rata!","Saya membeli bahan kue di pasar.","Rina suka makan kue cokelat."],k:1},
+{q:"Bacalah teks berikut: 1. Tuangkan air ke dalam panci. 2. Masukkan mie instan dan bumbu. 3. Tunggu hingga matang. Tujuan teks tersebut adalah …",a:["Menjelaskan cara membuat mie instan","Menjelaskan cara menulis resep","Menceritakan pengalaman memasak","Mengajak makan mie bersama"],k:0},
+{q:"Bagian “Tujuan” dalam teks prosedur berisi …",a:["Nama penulis teks","Hasil kegiatan","Maksud dari kegiatan yang dilakukan","Bahan dan alat"],k:2},
+{q:"Kalimat berikut termasuk dalam bagian alat dan bahan teks prosedur …",a:["Panaskan air hingga mendidih.","Tujuan membuat teh manis agar menyegarkan.","Siapkan gelas, gula, dan teh celup.","Tuangkan teh ke dalam gelas."],k:2},
+{q:"Ciri bahasa teks prosedur adalah …",a:["Menggunakan banyak kata sifat","Menggunakan kata kerja dan kalimat perintah","Mengandung kalimat tanya","Mengandung kalimat pengandaian"],k:1},
+{q:"Kalimat berikut tidak termasuk teks prosedur adalah …",a:["Kupas kulit mangga.","Potong buah menjadi dua bagian.","Campurkan dengan gula.","Mangga adalah buah yang rasanya manis."],k:3},
+{q:"Teks prosedur yang baik harus disusun berdasarkan …",a:["Urutan langkah yang logis dan mudah diikuti","Gaya bahasa yang indah dan puitis","Pengalaman pribadi penulis","Cerita yang menghibur pembaca"],k:0}
+];
+
+let dataNama = "", dataKelas = "", dataAbsen = "";
+let indeks = 0, benar = 0;
+
+function mulaiKuis() {
+    dataNama = document.getElementById("nama").value.trim();
+    dataKelas = document.getElementById("kelas").value.trim();
+    dataAbsen = document.getElementById("absen").value.trim();
+    if (!dataNama || !dataKelas || !dataAbsen) {
+        mainkanSuaraPeringatan();
+        tampilkanPeringatan("⚠️ Ups! Data belum lengkap.<br>Isi dulu Nama, Kelas, dan Absen ya biar semangat belajarnya makin mantap! 🚀");
+        return;
+    }
+    mainkanSuaraNext();
+    document.getElementById("infoSiswa").innerHTML = `👤 Nama: <b>${dataNama}</b> | 🏫 Kelas: <b>${dataKelas}</b> | 🔢 Absen: <b>${dataAbsen}</b>`;
+    document.getElementById("formData").classList.add("hidden");
+    document.getElementById("areaKuis").classList.remove("hidden");
+    acakArray(soal); soal.forEach(s => acakJawabanSoal(s)); tampilkanSoal();
+}
+function acakArray(arr){ for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} }
+function acakJawabanSoal(s){ let gabung=s.a.map((teks,i)=>({teks,benar:i===s.k})); for(let i=gabung.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[gabung[i],gabung[j]]=[gabung[j],gabung[i]];} s.a=gabung.map(o=>o.teks); s.k=gabung.findIndex(o=>o.benar);}
+function tampilkanSoal(){
+    const quiz=document.getElementById("quiz");
+    if(indeks>=soal.length){
+        const nilai=Math.round((benar/soal.length)*100);
+        kirimDataKeGoogleSheet(dataNama,dataKelas,dataAbsen,nilai);
+        let kelasWarna="nilai-merah"; if(nilai>=80)kelasWarna="nilai-hijau"; else if(nilai>=60)kelasWarna="nilai-kuning";
+        quiz.innerHTML=`
+            <div class="hasil-box">
+                <h2>🎉 Selesai!</h2>
+                <p>Benar: <b>${benar}</b> dari <b>${soal.length}</b></p>
+                <div><p><b>Nilai Kamu:</b></p><div class="nilai-besar ${kelasWarna}">${nilai}</div></div>
+                <button onclick="ulangiKuis()">🔄 Ulangi Kuis</button>
+                <button onclick="keluarKuis()">❌ Selesai</button>
+            </div>`; return;
+    }
+    const s=soal[indeks];
+    quiz.innerHTML=`
+        <div class="kotak-soal">${s.q}</div>
+        <div class="answers">
+            ${s.a.map((j,i)=>`<label><input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" /> ${j}</label>`).join('')}
+        </div>
+        <button onclick="periksaJawaban()">Next</button>`;
+}
+function periksaJawaban(){
+    const jawaban=document.querySelector('input[name="jawaban"]:checked');
+    if(!jawaban){ mainkanSuaraPeringatan(); tampilkanPeringatan("⚡ Ups! Kamu belum memilih jawaban.<br>Ayo semangat, pilih dulu ya sebelum lanjut! 💡"); return; }
+    if(parseInt(jawaban.value)===soal[indeks].k) benar++;
+    indeks++; mainkanSuaraNext(); tampilkanSoal();
+}
+function tampilkanPeringatan(pesan){
+    document.getElementById("peringatanArea").innerHTML=`
+        <div class="warning-overlay"><div class="warning-box"><h2>🚀 Yuk, Jangan Lupa!</h2><p>${pesan}</p><button onclick="tutupPeringatan()">Oke 👍</button></div></div>`;
+}
+function tutupPeringatan(){ document.getElementById("peringatanArea").innerHTML=""; }
+function kirimDataKeGoogleSheet(nama,kelas,absen,nilai){
+    const formURL="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfodDmXxZVUNOGEYHc4JRXax7Skan7QcdueV998Gg9Tyo-qjA/formResponse";
+    const formData=new FormData();
+    formData.append("entry.1114641071",nama);
+    formData.append("entry.687539915",kelas);
+    formData.append("entry.1445858210",absen);
+    formData.append("entry.175130881",nilai);
+    fetch(formURL,{method:"POST",body:formData,mode:"no-cors"});
+}
+function ulangiKuis(){ mainkanSuaraUlangi(); indeks=0; benar=0; document.getElementById("formData").classList.remove("hidden"); document.getElementById("areaKuis").classList.add("hidden"); document.getElementById("nama").value=""; document.getElementById("kelas").value=""; document.getElementById("absen").value=""; }
+function keluarKuis(){ window.location.href="🕵Petualangan-Seru.html"; }
+function mainkanSuaraKlik(){ const s=document.getElementById("suaraKlik"); s.currentTime=0; s.play(); }
+function mainkanSuaraPeringatan(){ const s=document.getElementById("suaraPeringatan"); s.currentTime=0; s.play(); }
+function mainkanSuaraNext(){ const s=document.getElementById("suaraNext"); s.currentTime=0; s.play(); }
+function mainkanSuaraUlangi(){ const s=document.getElementById("suaraUlangi"); s.currentTime=0; s.play(); }
+function mainkanSuaraKetik(){ const s=document.getElementById("suaraKetik"); s.currentTime=0; s.play(); }
+document.addEventListener("DOMContentLoaded",()=>{["nama","kelas","absen"].forEach(id=>{const el=document.getElementById(id); if(el){el.addEventListener("input",mainkanSuaraKetik);}});});
+</script>
+</body>
+</html>

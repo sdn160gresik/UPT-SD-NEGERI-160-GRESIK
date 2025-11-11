@@ -185,7 +185,235 @@ button:hover { background-color: #0056b3; }
 <script>
 // =================== DATA SOAL ===================
 // (semua data soal tetap sama seperti sebelumnya)
-let soal = [...]; // <-- tetap isi soalmu di sini (disingkat agar ringkas)
+let soal = [{q:"Perhatikan pernyataan berikut!<br>1. Dapat menarik benda plastik<br>2. Dapat menarik benda logam<br>3. Dapat menolak benda plastik<br>4. Dapat menolak benda logam<br>Pernyataan yang tepat terkait magnet ditunjukkan oleh nomor ....",a:["1","2","3","4"],k:1},
+{q:"Adit meletakkan magnet batangan di atas meja. Dia lalu menjatuhkan peniti di dekat magnet. Peniti tersebut menempel pada magnet. Peristiwa ini terjadi akibat adanya ....",a:["usaha magnet","kecepatan magnet","medan magnet","perubahan magnet"],k:2},
+{q:"Perhatikan tabel berikut!<br>No&nbsp;&nbsp;Nama Benda<br>1 paku<br>2 jarum<br>3 beras<br>4 ranting<br>5 peniti<br>Benda-benda di atas yang dapat ditarik kuat oleh magnet yaitu ....",a:["1, 2, dan 5","1, 2, dan 3","2, 3, dan 5","2, 4, dan 5"],k:0},
+{q:"Danisha membawa benda yang tidak memiliki sifat kemagnetan sama sekali. Benda yang dimaksud yaitu ....",a:["besi","baja","kobalt","kerikil"],k:3},
+{q:"Magnet memberikan banyak manfaat dalam kehidupan sehari-hari. Berikut ini salah satu contoh manfaatnya yaitu ....",a:["sepatu sepak bola","termometer","balon udara","pintu kulkas"],k:3},
+{q:"Kompas dapat menunjukkan arah utara dan selatan karena jarumnya bekerja berdasarkan ....",a:["gaya gesek","gaya gravitasi","gaya magnet","gaya listrik"],k:2},
+{q:"Jarum kompas selalu menunjuk ke arah utara-selatan karena pada jarum terdapat ....",a:["logam biasa","magnet batang","paku baja","besi lunak"],k:1},
+{q:"Bagian jarum kompas yang menunjuk ke utara bumi sebenarnya adalah kutub ....",a:["utara magnet","selatan magnet","barat magnet","tengah magnet"],k:1},
+{q:"Ketika sebuah magnet didekatkan ke kompas, jarum kompas akan bergerak karena adanya ....",a:["tarikan gravitasi bumi","gaya magnet dari magnet","dorongan udara","tekanan udara"],k:1},
+{q:"Fungsi utama kompas bagi pelaut dan pendaki gunung adalah untuk ....",a:["mengukur kecepatan angin","menentukan arah mata angin","mengukur kedalaman laut","menentukan ketinggian tempat"],k:1},
+{q:"Benda berikut yang bukan termasuk benda bermagnet adalah ....",a:["besi","baja","plastik","nikel"],k:2},
+{q:"Bagian magnet yang memiliki gaya tarik paling kuat adalah ....",a:["tengah magnet","kutub magnet","sisi samping magnet","permukaan magnet"],k:1},
+{q:"Ketika dua magnet didekatkan, magnet akan saling tolak-menolak atau tarik-menarik. Hal ini menunjukkan adanya ....",a:["gaya magnet","gaya gravitasi","gaya listrik","gaya gesek"],k:0},
+
+{q:"Magnet memiliki dua kutub, yaitu ....",a:["kutub utara dan timur","kutub barat dan selatan","kutub utara dan selatan","kutub barat dan timur"],k:2},
+{q:"Jika dua kutub magnet yang sama didekatkan, maka akan ....",a:["saling tarik menarik","saling menempel","saling tolak-menolak","saling menempel kuat"],k:2},
+{q:"Apabila kutub utara magnet didekatkan dengan kutub selatan magnet lain, maka kedua magnet akan ....",a:["tolak-menolak","tarik-menarik","diam saja","lepas"],k:1},
+{q:"Magnet dapat dibuat dengan cara ....",a:["menggosok besi dengan magnet tetap","memukul besi dengan palu","memanaskan logam","menaruh besi di air"],k:0},
+{q:"Salah satu benda yang bisa menjadi magnet sementara adalah ....",a:["besi","kayu","plastik","kertas"],k:0},
+{q:"Berikut ini contoh benda yang menggunakan magnet dalam kehidupan sehari-hari, kecuali ....",a:["pengeras suara","pintu kulkas","televisi","piring kaca"],k:3},
+{q:"Magnet memiliki sifat dapat menembus benda tertentu. Salah satu benda yang dapat ditembus gaya magnet adalah ....",a:["kertas","logam","kayu tebal","batu besar"],k:0},
+{q:"Benda yang tidak dapat ditarik magnet disebut ....",a:["benda logam","benda nonmagnetik","benda magnetik","benda bermuatan"],k:1},
+{q:"Ketika paku digosok dengan magnet, lama-kelamaan paku dapat menarik benda kecil dari logam. Peristiwa ini menunjukkan bahwa ....",a:["paku berubah menjadi magnet","paku menjadi berat","paku berubah bentuk","paku menjadi panas"],k:0},
+{q:"Magnet banyak dimanfaatkan dalam alat-alat listrik. Contoh alat listrik yang menggunakan magnet adalah ....",a:["kipas angin","lampu minyak","kompor gas","senter tanpa baterai"],k:0},
+
+{q:"Perhatikan benda berikut!<br>1. lemari<br>2. bolpoin<br>3. parfum<br>4. blender<br>Benda yang hanya dapat berfungsi apabila mendapat energi listrik yaitu ....",a:["1","2","3","4"],k:3},
+{q:"Sepeda motor Pak Anton dapat menyala dan memancarkan cahaya karena mendapatkan energi listrik dari ....",a:["spion","aki","gardu","roda"],k:1},
+
+{q:"Bagian dari rangkaian listrik yang berfungsi memutuskan dan menyambungkan arus listrik adalah ....",a:["baterai","lampu","sakelar","kabel"],k:2},
+
+{q:"Jika sakelar dalam keadaan terbuka, maka arus listrik ....",a:["akan mengalir terus","tidak dapat mengalir","menjadi lebih kuat","berubah arah"],k:1},
+
+{q:"Ketika sakelar ditutup, lampu pada rangkaian listrik akan ....",a:["padam","menyala","redup","tetap mati"],k:1},
+
+{q:"Agar lampu dapat menyala, sakelar harus dalam posisi ....",a:["terbuka","terlepas","tertutup","tergantung"],k:2},
+
+{q:"Sakelar sangat berguna pada rangkaian listrik karena dapat ....",a:["menyimpan energi listrik","mengatur nyala lampu","menghubungkan atau memutuskan arus listrik","mengalirkan air"],k:2},
+
+{q:"Zaki ditugaskan oleh Ibu guru untuk menuliskan sumber energi listrik. Berikut ini adalah daftar yang Zaki miliki:<br>1. Matahari<br>2. Baterai<br>3. Dinamo<br>4. Kipas angin<br>5. Aki<br>Agar tugas Zaki benar, maka dia harus menulis nomor ....",a:["1, 2, dan 5","1, 2, dan 3","2, 3, dan 5","2, 4, dan 5"],k:2},
+
+{q:"Perhatikan daftar berikut!<br>1. Aki<br>2. Kipas angin<br>3. Generator<br>4. Televisi<br>5. Baterai<br>Yang termasuk sumber energi listrik ditunjukkan oleh nomor ....",a:["1, 3, dan 5","2, 3, dan 4","1, 2, dan 5","3, 4, dan 5"],k:0},
+
+{q:"Berikut ini beberapa benda di sekitar kita:<br>1. Panel surya<br>2. Lampu<br>3. Dinamo sepeda<br>4. Komputer<br>5. Baterai<br>Benda yang dapat menghasilkan energi listrik adalah ....",a:["1, 3, dan 5","2, 3, dan 4","1, 2, dan 5","2, 4, dan 5"],k:0},
+
+{q:"Amir menuliskan beberapa alat:<br>1. Kipas angin<br>2. Setrika<br>3. Generator<br>4. Aki<br>5. Radio<br>Yang merupakan sumber energi listrik adalah ....",a:["1, 2, dan 5","3, 4, dan 5","3 dan 4","2 dan 5"],k:2},
+
+{q:"Perhatikan pernyataan berikut!<br>1. Aki digunakan untuk menyalakan lampu mobil.<br>2. Panel surya menghasilkan listrik dari cahaya matahari.<br>3. Kipas angin menghasilkan listrik untuk rumah.<br>4. Generator menghasilkan arus listrik.<br>Pernyataan yang benar tentang sumber energi listrik adalah ....",a:["1, 2, dan 3","1, 2, dan 4","2, 3, dan 4","1, 3, dan 4"],k:1},
+
+
+
+
+{q:"Energi listrik merupakan energi yang berasal dari pergerakan benda yang sangat kecil yang disebut ....",a:["elektron","neutron","proton","ozon"],k:0},
+{q:"Diana membeli kabel listrik di toko. Kemudian dia mengelupas bagian luar kabel yang berwarna hitam sehingga terlihat bagian dalam kabel yang terbuat dari ....",a:["emas","besi","tembaga","plastik"],k:2},
+
+{q:"Kipas angin berfungsi agar udara di dalam ruangan terasa sejuk. Kipas angin dapat mengubah energi listrik menjadi energi ....",a:["gerak","panas","bunyi","cahaya"],k:0},
+
+{q:"Setrika digunakan untuk merapikan pakaian yang kusut. Setrika mengubah energi listrik menjadi energi ....",a:["gerak","panas","bunyi","cahaya"],k:1},
+
+{q:"Lampu digunakan untuk menerangi ruangan yang gelap. Lampu mengubah energi listrik menjadi energi ....",a:["panas","cahaya","bunyi","gerak"],k:1},
+
+{q:"Televisi menghasilkan suara dan gambar saat dinyalakan. Televisi mengubah energi listrik menjadi energi ....",a:["gerak dan panas","bunyi dan cahaya","cahaya dan gerak","panas dan bunyi"],k:1},
+
+{q:"Bel listrik dapat berbunyi ketika dialiri arus listrik. Bel listrik mengubah energi listrik menjadi energi ....",a:["bunyi","panas","gerak","cahaya"],k:0},
+
+{q:"Dwita membuat rangkaian listrik sederhana dengan 2 lampu, kabel, dan 1 baterai. Lampu dapat menyala. Kemudian Dwita menambahkan 1 baterai lagi, maka lampu akan ....",a:["mati (padam)","menyala lebih redup","menyala lebih terang","menyala seperti dengan 1 baterai"],k:2},
+{q:"Adit memasang baterai pada senter sehingga senter dapat menyala. Tiba-tiba Adit melepas baterai lalu memasangnya secara terbalik, maka senter tersebut akan ....",a:["menyala seperti semula","menyala lebih terang","menyala lebih redup","mati (padam)"],k:3},
+
+{q:"Benda di atas yang dapat berfungsi dengan menggunakan sumber listrik arus searah (DC) ditunjukkan oleh nomor ....",a:["(1)","(2)","(3)","(4)"],k:2},
+{q:"Salah satu perangkat elektronik yang dapat digunakan untuk mengubah sumber arus listrik dua arah menjadi sumber arus listrik searah yaitu ....",a:["pompa air","kompor listrik","laptop","kulkas"],k:2},
+
+{q:"Benda yang terhubung dengan kabel milik PLN dan berfungsi menyalurkan energi listrik kepada masyarakat disebut ....",a:["gardu","sakelar","stop kontak","sekering"],k:0},
+
+{q:"Fungsi gardu listrik dalam sistem penyaluran listrik adalah untuk ....",a:["menyalurkan listrik dari sakelar","menyalurkan listrik dari pembangkit listrik","menyimpan listrik dari sakelar","menyimpan listrik dari pembangkit listrik"],k:1},
+
+{q:"Alat yang digunakan untuk menghubungkan dan memutuskan arus listrik di rumah disebut ....",a:["baterai","sakelar","kabel","stop kontak"],k:1},
+
+{q:"Stop kontak di rumah berfungsi untuk ....",a:["menghubungkan steker alat listrik dengan sumber listrik","memutuskan arus listrik dari gardu","menyimpan arus listrik sementara","mengubah listrik menjadi panas"],k:0},
+
+{q:"Sekering digunakan dalam rangkaian listrik rumah untuk ....",a:["mengalirkan listrik lebih cepat","menghentikan arus listrik ketika terjadi kelebihan beban","menyimpan energi listrik","mengubah arus listrik menjadi panas"],k:1},
+
+{q:"Pembangkit listrik yang memanfaatkan air waduk yaitu ....",a:["PLTU","PLTA","PLTS","PLTG"],k:1},
+{q:"Made melihat banyak panel surya di kebun kakeknya. Alat tersebut digunakan untuk ....",a:["PLTG","PLTU","PLTS","PLTA"],k:2},
+{q:"PLTU memanfaatkan hasil pemanasan ketel uap yang dapat memutar turbin. Bahan bakar yang digunakan yaitu ....",a:["air","besi","solar","batu bara"],k:3},
+
+{q:"Pembangkit listrik tenaga bayu (PLTB) merupakan pembangkit listrik yang memanfaatkan ....",a:["air","angin","cahaya matahari","panas bumi"],k:1},
+
+{q:"Pembangkit listrik tenaga air (PLTA) menghasilkan energi listrik dengan memanfaatkan ....",a:["aliran air sungai atau bendungan","hembusan angin","panas bumi","sinar matahari"],k:0},
+
+{q:"Pembangkit listrik tenaga surya (PLTS) dapat menghasilkan energi listrik dengan memanfaatkan ....",a:["minyak bumi","sinar matahari","uap panas","angin"],k:1},
+
+{q:"Pembangkit listrik tenaga panas bumi (PLTP) memanfaatkan ....",a:["panas dari perut bumi","panas dari matahari","uap air laut","energi dari angin"],k:0},
+
+{q:"Pembangkit listrik tenaga diesel (PLTD) menggunakan .... sebagai sumber energi untuk menghasilkan listrik.",a:["bensin","air","angin","bahan bakar minyak"],k:3},
+
+
+
+{q:"Perhatikan pernyataan berikut!<br>1. oven<br>2. radio<br>3. blender<br>4. rice cooker<br>Benda-benda yang mengubah energi listrik menjadi energi panas ditunjukkan oleh nomor ....",a:["1 dan 2","2 dan 3","3 dan 4","1 dan 4"],k:3},
+
+{q:"Pembangkit listrik tenaga uap (PLTU) merupakan pembangkit listrik yang memanfaatkan bahan bakar ....",a:["solar","udara","minyak bumi","batu bara"],k:3},
+
+{q:"Pembangkit listrik tenaga air (PLTA) menghasilkan listrik dengan memanfaatkan ....",a:["aliran air sungai atau bendungan","hembusan angin","panas bumi","sinar matahari"],k:0},
+
+{q:"Pembangkit listrik tenaga surya (PLTS) menghasilkan listrik dengan memanfaatkan ....",a:["panas bumi","bahan bakar minyak","sinar matahari","batu bara"],k:2},
+
+{q:"Pembangkit listrik tenaga bayu (PLTB) menghasilkan energi listrik dari ....",a:["angin","air","panas bumi","bensin"],k:0},
+
+{q:"Pembangkit listrik tenaga diesel (PLTD) menggunakan .... sebagai bahan bakar utamanya.",a:["batu bara","air","solar","gas bumi"],k:2},
+
+
+
+{q:"Perhatikan pernyataan berikut!<br>1. harus menggunakan listrik<br>2. tidak menggunakan ilmu pengetahuan<br>3. memperumit pekerjaan manusia<br>4. menyelesaikan permasalahan<br>Salah satu ciri penggunaan teknologi dalam kehidupan sehari-hari ditunjukkan oleh nomor …",a:["1","2","3","4"],k:3},
+{q:"Berikut ini salah satu contoh penggunaan teknologi dalam keseharian yaitu …",a:["berjalan ketika sedang hujan","melihat benda dengan mata","memotong daging dengan pisau","tidur pada saat malam hari"],k:2},
+
+{q:"Telepon genggam merupakan salah satu teknologi modern yang digunakan sebagai alat ....",a:["penerangan","komunikasi","transportasi","penglihatan"],k:1},
+
+{q:"Pesawat terbang merupakan teknologi yang digunakan manusia untuk ....",a:["penerangan","komunikasi","transportasi","penglihatan"],k:2},
+
+{q:"Lampu listrik digunakan sebagai alat ....",a:["penerangan","komunikasi","transportasi","penglihatan"],k:0},
+
+{q:"Kacamata merupakan teknologi sederhana yang berfungsi sebagai alat ....",a:["penerangan","komunikasi","transportasi","penglihatan"],k:3},
+
+{q:"Radio dan televisi termasuk teknologi yang berfungsi sebagai alat ....",a:["penerangan","komunikasi","transportasi","penglihatan"],k:1},
+
+
+
+{q:"Adit bersama ayahnya akan bercocok tanam di kebun. Peralatan teknologi yang dapat mereka gunakan ditunjukkan oleh nomor …",a:["1, 2, dan 5","1, 2, dan 3","2, 3, dan 5","2, 4, dan 5"],k:1},
+{q:"Perkembangan penggunaan teknologi begitu panjang. Teknologi yang digunakan manusia pertama kali berupa …",a:["mesin uap","mesin telegraf","emas batangan","batu yang tajam"],k:3},
+{q:"Salah satu contoh teknologi yang digunakan manusia untuk berlayar dan menjelajah lautan yaitu …",a:["jam tangan","mesin cetak","kompas","USG"],k:2},
+{q:"Manfaat teknologi yang ditunjukkan oleh gambar di atas yaitu …",a:["memberikan hiburan","media komunikasi","alat penerangan","transportasi darat"],k:1},
+{q:"Setiap hari Minggu Bu Diana menggunakan alat di atas. Alat tersebut termasuk teknologi yang dapat digunakan untuk …",a:["memanaskan air","memasak daging mentah","menambah cita rasa","menghaluskan buah"],k:1},
+{q:"Pada tahun 1765, seorang ilmuwan bernama James Watt berhasil menciptakan suatu teknologi, yaitu …",a:["mesin uap","telepon","komputer","radio"],k:0},
+{q:"Ilmuwan yang pertama kali mencetuskan penggunaan energi listrik sekaligus membangun pembangkit listrik yaitu …",a:["Albert Einstein","Thomas Edison","Guglielmo Marconi","Alexander Graham Bell"],k:1},
+
+{q:"Perhatikan daftar berikut!<br>1. Pisau<br>2. Televisi<br>3. Komputer<br>4. Mobil<br>Benda yang termasuk teknologi sederhana ditunjukkan oleh nomor ....",a:["(1)","(2)","(3)","(4)"],k:0},
+
+{q:"Perhatikan daftar berikut!<br>1. Gergaji<br>2. Blender<br>3. Laptop<br>4. Radio<br>Benda yang termasuk teknologi sederhana ditunjukkan oleh nomor ....",a:["(1)","(2)","(3)","(4)"],k:0},
+
+{q:"Perhatikan daftar berikut!<br>1. Sapu<br>2. Mesin cuci<br>3. Komputer<br>4. Handphone<br>Benda yang termasuk teknologi sederhana ditunjukkan oleh nomor ....",a:["(1)","(2)","(3)","(4)"],k:0},
+
+{q:"Perhatikan daftar berikut!<br>1. Televisi<br>2. Setrika listrik<br>3. Lesung dan alu<br>4. Mesin jahit listrik<br>Benda yang termasuk teknologi sederhana ditunjukkan oleh nomor ....",a:["(1)","(2)","(3)","(4)"],k:2},
+
+{q:"Perhatikan daftar berikut!<br>1. Mobil<br>2. Sepeda<br>3. Blender<br>4. Komputer<br>Benda yang termasuk teknologi sederhana ditunjukkan oleh nomor ....",a:["(1)","(2)","(3)","(4)"],k:1},
+
+
+
+
+{q:"Pak Dedin merupakan seorang petani di desa. Teknologi masa kini yang dapat membantu pekerjaan Pak Dedin yaitu …",a:["menggunakan sapi untuk membajak sawah","memanen padi dengan ani-ani","menggemburkan tanah dengan traktor","menggunakan pukat harimau"],k:2},
+
+{q:"Termometer digunakan sebagai alat teknologi di bidang ....",a:["kesehatan","pertanian","pembangunan","olahraga"],k:0},
+
+{q:"Traktor merupakan alat teknologi yang banyak digunakan di bidang ....",a:["kesehatan","pertanian","pembangunan","olahraga"],k:1},
+
+{q:"Beton mixer (molen) merupakan contoh alat teknologi yang digunakan di bidang ....",a:["kesehatan","pertanian","pembangunan","olahraga"],k:2},
+
+{q:"Treadmill merupakan contoh alat teknologi yang digunakan di bidang ....",a:["kesehatan","pertanian","pembangunan","olahraga"],k:3},
+
+{q:"Alat USG (ultrasonografi) digunakan oleh dokter untuk memeriksa keadaan janin. Alat tersebut termasuk teknologi di bidang ....",a:["kesehatan","pertanian","pembangunan","olahraga"],k:0},
+
+{q:"Peralatan rumah tangga seperti kipas angin bekerja dengan mengubah energi listrik menjadi energi ....",a:["gerak","panas","bunyi","cahaya"],k:0},
+
+{q:"Sumber energi listrik yang berasal dari sinar matahari disebut ....",a:["PLTA","PLTU","PLTB","PLTS"],k:3},
+
+{q:"Benda yang digunakan untuk menghubungkan atau memutuskan aliran listrik disebut ....",a:["stop kontak","saklar","sekering","kabel"],k:1},
+
+{q:"Pembangkit listrik yang menggunakan aliran air sebagai sumber energi disebut ....",a:["PLTA","PLTU","PLTB","PLTS"],k:0},
+
+{q:"Televisi dan radio termasuk alat teknologi di bidang ....",a:["komunikasi","transportasi","pertanian","kesehatan"],k:0},
+
+{q:"Alat yang digunakan untuk mengukur kuat arus listrik adalah ....",a:["termometer","amperemeter","barometer","voltmeter"],k:1},
+
+{q:"Setrika listrik mengubah energi listrik menjadi energi ....",a:["gerak","panas","bunyi","cahaya"],k:1},
+
+{q:"Teknologi modern digunakan untuk mempermudah manusia dalam ....",a:["bermain","bekerja","tidur","berpakaian"],k:1},
+
+{q:"Salah satu contoh teknologi transportasi modern adalah ....",a:["sepeda kayu","kereta listrik","pedati","perahu layar"],k:1},
+
+{q:"Pembangkit listrik tenaga bayu memanfaatkan energi dari ....",a:["air","udara","api","matahari"],k:1},
+{q:"Salah satu karakteristik teknologi lemari es adalah …",a:["tidak memerlukan listrik","banyak ditemukan di kantor","menyimpan makanan agar awet","menghasilkan energi panas"],k:2},
+
+
+
+{q:"Berikut ini salah satu tujuan penggunaan teknologi dalam pertanian yaitu …",a:["dapat panen dalam satu minggu","menghasilkan tanaman yang kerdil","memusnahkan sebagian tanaman hama","menciptakan bibit tanaman unggul"],k:3},
+{q:"Salah satu contoh penggunaan teknologi di bidang industri manufaktur yaitu …",a:["mempergunakan pestisida agar hama hilang","mempergunakan mesin untuk membuat tas","menggunakan lampu sebagai penerangan","mempergunakan kompor listrik untuk masak"],k:1},
+{q:"Santi menggunakan salah satu teknologi yang rumit untuk mendapatkan informasi secara cepat. Teknologi yang dimaksud yaitu …",a:["internet","koran","mesin telegraf","rice cooker"],k:0},
+
+{q:"Masalah jarak antar kota yang jauh dapat diatasi dengan adanya teknologi ....",a:["transportasi","penerangan","konstruksi","komunikasi"],k:0},
+
+{q:"Masalah sulit berkomunikasi dengan orang yang berada jauh dapat diatasi dengan teknologi ....",a:["komunikasi","transportasi","penerangan","pertanian"],k:0},
+
+{q:"Teknologi kipas angin membantu manusia untuk mengatasi masalah ....",a:["udara panas","ruangan gelap","jarak jauh","suara bising"],k:0},
+
+{q:"Teknologi lemari es dibuat untuk memecahkan masalah ....",a:["makanan cepat basi","pakaian kotor","ruangan gelap","air kotor"],k:0},
+
+{q:"Masalah sulit melihat di malam hari dapat diatasi dengan teknologi ....",a:["lampu","kompor","kulkas","telepon"],k:0},
+
+{q:"Mesin cuci membantu manusia untuk mengatasi masalah ....",a:["mencuci pakaian secara manual","memasak makanan","menyimpan makanan","menerangi rumah"],k:0},
+
+{q:"Masalah sulit memperoleh informasi dengan cepat dapat diatasi menggunakan teknologi ....",a:["internet","radio","kendaraan","televisi"],k:0},
+
+{q:"Teknologi kompor listrik membantu manusia mengubah energi listrik menjadi energi ....",a:["panas","gerak","cahaya","bunyi"],k:0},
+
+{q:"Teknologi transportasi diciptakan untuk mempermudah manusia dalam ....",a:["berpindah tempat","menyimpan makanan","mengatur pencahayaan","mengirim pesan"],k:0},
+
+{q:"Masalah udara panas di dalam ruangan dapat diatasi dengan penggunaan teknologi ....",a:["kipas angin","lampu","televisi","kompor"],k:0},
+
+
+{q:"Orang yang pertama kali menemukan televisi ditunjukkan oleh nomor …<br>1. Philo T. Farnsworth<br>2. Guglielmo Marconi<br>3. Thomas Edison<br>4. Alexander Graham Bell",a:["1","2","3","4"],k:0},
+
+
+{q:"Peralatan lama seperti papan tulis kapur kini sudah tergantikan dengan teknologi modern berupa ....",a:["proyektor","speaker","laptop","drone"],k:0},
+
+{q:"Surat pos kini banyak digantikan dengan teknologi modern berupa ....",a:["email","televisi","radio","kamera"],k:0},
+
+{q:"Mesin ketik sudah jarang digunakan karena digantikan oleh ....",a:["komputer","proyektor","radio","telepon"],k:0},
+
+{q:"Peta kertas sekarang lebih jarang digunakan karena sudah tergantikan oleh ....",a:["Google Maps","kompas","kalkulator","televisi"],k:0},
+
+{q:"Kaset dan pemutar CD kini tergantikan dengan teknologi ....",a:["streaming musik","radio analog","mesin ketik","kamera digital"],k:0},
+
+{q:"Lampu minyak sudah tergantikan oleh teknologi ....",a:["lampu listrik","lilin","kompor gas","senter manual"],k:0},
+
+{q:"Kamera analog yang menggunakan film kini digantikan oleh ....",a:["kamera digital","kamera lubang jarum","scanner","fotokopi"],k:0},
+
+{q:"Telepon rumah dengan kabel kini sudah banyak tergantikan oleh ....",a:["telepon genggam","radio","faksimile","modem"],k:0},
+
+{q:"Pesan yang dahulu dikirim melalui surat kini lebih cepat dikirim lewat ....",a:["pesan instan","telegraf","pager","mesin tik"],k:0},
+
+{q:"Kegiatan belajar yang dulu hanya di kelas kini dapat dilakukan dengan bantuan teknologi ....",a:["pembelajaran daring","mesin tik","radio","televisi analog"],k:0},
+]; // <-- tetap isi soalmu di sini (disingkat agar ringkas)
 
 // ========== SCRIPT LOGIKA ==============
 let dataNama="",dataKelas="",dataAbsen="";
@@ -252,3 +480,4 @@ function kirimDataKeGoogleSheet(nama,kelas,absen,nilai){
 </script>
 </body>
 </html>
+

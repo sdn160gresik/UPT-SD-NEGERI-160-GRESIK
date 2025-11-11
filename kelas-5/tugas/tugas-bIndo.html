@@ -76,6 +76,7 @@
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
+      gap: 30px;
       margin: 30px auto;
     }
 
@@ -135,6 +136,34 @@
     .dropdown.show .dropdown-content {
       display: block;
     }
+
+    /* Kotak pesan melayang */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.95);
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      font-weight: bold;
+      color: #0288d1;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .popup.show {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
   </style>
 </head>
 <body>
@@ -160,56 +189,50 @@
 
   <!-- Kotak Dropdown Tugas -->
   <div class="task-container">
-    <div class="dropdown" id="dropdownMenu">
-      <button class="dropbtn">⬇️ Download Tugas</button>
+    <!-- Dropdown Download -->
+   
+    <!-- Dropdown Tanggal Tugas -->
+    <div class="dropdown" id="dropdownTanggal">
+      <button class="dropbtn">📅 Pilih Tugas</button>
       <div class="dropdown-content">
-        <a href="#" onclick="downloadFile('Latihan Soal Bahasa Indonesia kelas 5 Semester 1.docx')">Tugas 1</a>
-        <a href="#" onclick="downloadFile('Latihan Soal Bahasa Indonesia 2 Kelas 5 Semester 1.docx')">Tugas 2</a>
-        <a href="#">Tugas 3</a>
-        <a href="#">Tugas 4</a>
-        <a href="#">Tugas 5</a>
-        <a href="#">Tugas 6</a>
-        <a href="#">Tugas 7</a>
-        <a href="#">Tugas 8</a>
-        <a href="#">Tugas 9</a>
-        <a href="#">Tugas 10</a>
+        <a href="Soal_Bahasa_Indonesia_Kelas5_Imbuhan_TeksProsedur.html">11 November 2025</a>
+        <a href="#" id="tugasLain">Tugas Lain</a>
       </div>
     </div>
   </div>
 
+  <!-- Kotak Pesan Melayang -->
+  <div id="popupMessage" class="popup">⚙️ Mohon maaf, masih dalam proses.</div>
+
   <!-- Suara klik interaktif -->
   <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
+
   <script>
-    function downloadFile(fileUrl) {
-      const clickSound = document.getElementById("clickSound");
-      clickSound.currentTime = 0;
-      clickSound.play();
-
-      const link = document.createElement("a");
-      link.href = fileUrl;
-      link.download = fileUrl.split("/").pop();
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-
-    // Toggle dropdown dengan klik
-    const dropdown = document.getElementById("dropdownMenu");
-    const button = dropdown.querySelector(".dropbtn");
-
-    button.addEventListener("click", function (e) {
-      e.stopPropagation();
-      dropdown.classList.toggle("show");
+ 
+    // Dropdown umum
+    const dropdowns = document.querySelectorAll(".dropdown");
+    dropdowns.forEach(drop => {
+      const button = drop.querySelector(".dropbtn");
+      button.addEventListener("click", function(e) {
+        e.stopPropagation();
+        dropdowns.forEach(d => { if (d !== drop) d.classList.remove("show"); });
+        drop.classList.toggle("show");
+      });
     });
 
-    // Tutup dropdown kalau klik di luar
-    window.addEventListener("click", function () {
-      if (dropdown.classList.contains("show")) {
-        dropdown.classList.remove("show");
-      }
+    // Tutup semua dropdown jika klik di luar
+    window.addEventListener("click", function() {
+      dropdowns.forEach(drop => drop.classList.remove("show"));
+    });
+
+    // Pesan melayang untuk tugas lain
+    document.getElementById("tugasLain").addEventListener("click", function(e) {
+      e.preventDefault();
+      const popup = document.getElementById("popupMessage");
+      popup.classList.add("show");
+      setTimeout(() => popup.classList.remove("show"), 2000);
     });
   </script>
 
 </body>
 </html>
-

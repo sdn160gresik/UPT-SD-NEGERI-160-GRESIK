@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="jv">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Desa Bahasa Jawa</title>
+<style>
+  :root {
+    --radius: 16px;
+  }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    background: url('https://i.imgur.com/eIN6oyM.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* === MENU DI KANAN ATAS === */
+  .top-menu {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    background: rgba(255, 251, 232, 0.9);
+    border: 2px solid #d6b56f;
+    border-radius: 50px;
+    padding: 8px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 1000;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .top-menu a {
+    text-decoration: none;
+    color: #4E342E;
+    font-weight: bold;
+    font-size: 0.95em;
+    transition: color 0.3s;
+  }
+
+  .top-menu a:hover {
+    color: #FF7043;
+  }
+
+  /* === LOGO DI KIRI ATAS === */
+  .logo-container {
+    position: fixed;
+    top: 10px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 251, 232, 0.9);
+    border: 2px solid #d6b56f;
+    border-radius: 50px;
+    padding: 6px 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 1000;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .logo-container img {
+    height: 40px;
+    width: auto;
+    transition: transform 0.3s;
+  }
+
+  .logo-container img:hover {
+    transform: scale(1.1);
+  }
+
+  .container {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: rgba(255, 255, 255, 0.0);
+    backdrop-filter: none;
+    border-radius: var(--radius);
+    margin: 40px auto;
+    width: 90%;
+    max-width: 900px;
+  }
+
+  /* Kotak ceria semangat */
+  .welcome-box {
+    background: linear-gradient(135deg, #FFD54F, #FFB300, #FF7043);
+    color: #4E342E;
+    border-radius: var(--radius);
+    padding: 25px 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    margin-bottom: 30px;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .welcome-box h1 {
+    font-size: 2.2em;
+    margin-bottom: 10px;
+  }
+
+  .welcome-box h2 {
+    font-size: 1.3em;
+    margin: 0;
+    color: #4E342E;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: rgba(255, 251, 232, 0.9);
+    border: 3px solid #d6b56f;
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  }
+
+  .icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .footer {
+    margin-top: 30px;
+  }
+
+  button {
+    background: #b6823b;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+
+  button:hover {
+    background: #8f5f28;
+  }
+
+  /* Responsif untuk HP */
+  @media (max-width: 768px) {
+    .welcome-box h1 {
+      font-size: 1.6em;
+    }
+    .welcome-box h2 {
+      font-size: 1em;
+    }
+    .container {
+      padding: 20px 15px;
+      margin: 20px auto;
+    }
+    .card {
+      padding: 15px;
+    }
+    .top-menu {
+      right: 10px;
+      gap: 8px;
+      font-size: 0.85em;
+      padding: 6px 10px;
+    }
+    .logo-container img {
+      height: 32px;
+    }
+  }
+
+  @media (orientation: landscape) and (max-width: 900px) {
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Logo kiri atas -->
+<div class="logo-container">
+  <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik" />
+  <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" />
+  <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo SD" />
+</div>
+
+<!-- Menu kanan atas -->
+<div class="top-menu">
+  <a href="index.html">🏠 Beranda</a>
+  <a href="Petualangan-Kelas-5.html">◀️ Kembali</a>
+  <a href="galeri.html">🖼️ Galeri</a>
+</div>
+
+<div class="container">
+  <div class="welcome-box">
+    <h1>🏡 Sugeng Rawuh ing Desa Basa Jawa!</h1>
+    <h2>Ayo sinau lan dolanan nganggo basa Jawa kanthi cara sing nyenengake!</h2>
+  </div>
+
+  <div class="grid">
+    <a href="materi-bahsa-jawa.html">
+      <div class="card">
+        <div class="icon">🗣️</div>
+        <h3>Jinise Teks Wacan</h3>
+        <p>Sinau teks Jinise Teks Wacan.</p>
+      </div>
+    </a>
+
+    <a href="#">
+      <div class="card">
+        <div class="icon">📖</div>
+        <h3>Pawarta</h3>
+        <p>Jelasake Bab Pawarta.</p>
+      </div>
+    </a>
+
+    <a href="#">
+      <div class="card">
+        <div class="icon">🎭</div>
+        <h3>Basa Rinengga</h3>
+        <p>Pangerten Basa Rinengga.</p>
+      </div>
+    </a>
+
+    <a href="#">
+      <div class="card">
+        <div class="icon">🧩</div>
+        <h3>Tembang Macapat</h3>
+        <p>Jlentreake Tembang Macapat.</p>
+      </div>
+    </a>
+
+    <a href="#">
+      <div class="card">
+        <div class="icon">🎬</div>
+        <h3>Tembang Dolanan</h3>
+        <p>Jlentreake Pangerten Teks Diskripsi.</p>
+      </div>
+    </a>
+
+    <a href="#">
+      <div class="card">
+        <div class="icon">📝</div>
+        <h3>Wayang</h3>
+        <p>Kawruh Bab Wayang.</p>
+      </div>
+    </a>
+
+    <a href="#">
+      <div class="card">
+        <div class="icon">🔡</div>
+        <h3>Aksara Jawa</h3>
+        <p>Nulis Aksara Jawa.</p>
+      </div>
+    </a>
+  </div>
+
+  <div class="footer">
+    <button onclick="window.location.href='Petualangan-Kelas-5.html'">🔙 Bali menyang Peta Petualangan</button>
+  </div>
+</div>
+
+</body>
+</html>

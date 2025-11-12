@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kuis Basa Jawa Kelas 5</title>
+<style>
+.kotak-soal {
+  background: linear-gradient(135deg, #f0f9ff, #cce5ff);
+  border: 3px solid #3399ff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  max-width: 600px;
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  color: #003366;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+body {
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+  background-image: url('https://i.imgur.com/IFKQPGS.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.nav {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.nav a {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: bold;
+  background-color: white;
+  padding: 10px 15px;
+  border: 2px solid #add8e6;
+  border-radius: 8px;
+}
+.hidden { display: none; }
+label { font-weight: bold; }
+input[type="text"] {
+  padding: 8px;
+  width: 200px;
+  margin-bottom: 10px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+}
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+button:hover { background-color: #0056b3; }
+.info-siswa {
+  background: white;
+  border: 2px solid #add8e6;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+.answers label {
+  display: block;
+  margin-bottom: 8px;
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+.answers label:hover { background: #eaf6ff; }
+.hasil-box {
+  background: white;
+  border: 3px solid #3399ff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.nilai-besar {
+  font-size: 40px;
+  font-weight: bold;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+.nilai-merah { background: #f8d7da; color: #721c24; }
+.nilai-kuning { background: #fff3cd; color: #856404; }
+.nilai-hijau { background: #d4edda; color: #155724; }
+
+/* 🌈 Kotak peringatan melayang */
+.warning-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.warning-box {
+  background: linear-gradient(135deg, #fff8e1, #ffe082);
+  border: 3px solid #ffca28;
+  border-radius: 16px;
+  padding: 25px 30px;
+  max-width: 420px;
+  text-align: center;
+  font-size: 18px;
+  color: #5d4037;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  animation: popIn 0.4s ease;
+}
+.warning-box h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  color: #e65100;
+}
+.warning-box button {
+  background: #ffca28;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  margin-top: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #4e342e;
+}
+.warning-box button:hover { background: #ffd54f; }
+@keyframes popIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="nav">
+    <a href="materi-bahsa-jawa.html">◀️ Kembali</a>
+    <a href="#" onclick="window.location.reload()">🔄 Ulangi</a>
+  </div>
+
+  <h1 style="color:#2c3e50;text-align:center;background-color:white;padding:10px 20px;border-radius:10px;border:2px solid #add8e6;">
+    ⚡ Kuis Basa Jawa Kelas 5
+  </h1>
+
+  <div id="formData">
+    <h3>Isi identitas dhisik:</h3>
+    <label>Nama:</label><br><input type="text" id="nama"><br>
+    <label>Kelas:</label><br><input type="text" id="kelas"><br>
+    <label>No. Absen:</label><br><input type="text" id="absen"><br>
+    <button onclick="mulaiKuis()">Mulai Kuis</button>
+  </div>
+
+  <div id="areaKuis" class="hidden">
+    <div id="infoSiswa" class="info-siswa"></div>
+    <div id="quiz"></div>
+  </div>
+</div>
+
+<div id="peringatanArea"></div>
+
+<script>
+// =================== DATA SOAL ===================
+let semuaSoal = [
+{q:"Sumber informasi bisa dijupuk saka endi wae, kajaba …",a:["Koran","Majalah","Mimpi","Internet"],k:2},
+{q:"Wong sing sregep maca bakal …",a:["Kalah karo wong sing ora maca","Duwe kaluwihan","Kesulitan golek ilmu","Ora ana bedane"],k:1},
+{q:"Teks wacan utawa karangan dipérang dadi … jinisé teks.",a:["Telu","Loro","Lima","Pitu"],k:1},
+{q:"Teks sing isiné nerangaké sawijining perkara kanthi fakta lan informasi diarani teks …",a:["Narasi","Eksposisi","Deskripsi","Argumentasi"],k:1},
+{q:"Teks narasi nyritakaké …",a:["Kahanan kanthi rinci","Kedadéan kanthi runtut","Pendapat pribadi","Pesen moral"],k:1},
+{q:"Ciri teks narasi yaiku ana …",a:["Unsur tumindhak lan alur crita","Tegese tembung","Kata kerja berimbuhan","Paragraf sing cekak"],k:0},
+{q:"Teks narasi nggunakake basa …",a:["Kawi","Padian","Resmi","Baku"],k:1},
+{q:"Salah siji struktur teks narasi yaiku …",a:["Idhenthifikasi","Klarifikasi","Téma","Ringkesan"],k:2},
+{q:"Teks dhèskripsi nggambaraké sawijining …",a:["Pesen moral","Obyek kanthi rinci","Tegese tembung","Tumindak tokoh"],k:1},
+{q:"Ciri-ciri teks dhèskripsi yaiku …",a:["Njlèntrèhaké kanthi rinci lan gamblang","Ngandharaké alur crita","Ngajak wong tumindak","Nyritakaké peristiwa"],k:0},
+{q:"Struktur teks dhèskripsi sing pisanan yaiku …",a:["Klarifikasi","Identhifikasi","Bagian dhèskripsi","Kesimpulan"],k:1},
+{q:"Ing struktur teks dhèskripsi, klarifikasi tegesé …",a:["Nemtokaké punjeré crita","Ngandharaké bagéan saka obyek","Njlèntrèhaké kanthi rinci","Nggawé kesimpulan"],k:1},
+{q:"Pawarta ing basa Indonesia tegesé …",a:["Dongeng","Berita","Cerita rakyat","Pidato"],k:1},
+{q:"Pawarta iku kabar bab …",a:["Kedadéan kang wigati","Pendapat tokoh","Kahanan fiksi","Kawruh umum"],k:0},
+{q:"Pawarta lisan tegesé …",a:["Pawarta saka buku","Pawarta saka kandhane wong liya","Pawarta saka internet","Pawarta saka media cetak"],k:1},
+{q:"Ciri-ciri pawarta yaiku kudu …",a:["Fiktif lan nyenengaké","Aktual lan faktual","Lucu lan menarik","Rinci lan rumit"],k:1},
+{q:"Unsur pawarta sing nyritakaké sapa sing melu kedadéan yaiku unsur …",a:["Apa","Sapa","Geneya","Kepriye"],k:1},
+{q:"Unsur pawarta 5W + 1H tegesé yaiku …",a:["Apa, Sapa, Kapan, Ing ngendi, Geneya, Kepriye","Apa, Sapa, Kapan, Saka endi, Napa, Piye","Apa, Kapan, Endi, Napa, Sapa, Kepiye","Apa, Endi, Napa, Sapa, Kapan, Kepiye"],k:0},
+{q:"Teks narasi lan teks dhèskripsi padha-padha …",a:["Nyritakaké kedadéan kanthi rinci","Njlèntrèhaké sawijining obyek","Kalebu jinisé teks wacan","Ngandharaké pendapat"],k:2},
+{q:"Teks dhèskripsi nduwé tujuan kanggo …",a:["Ngajak pamaos supaya tumindak","Ngandharaké alesan logis","Nggambaraké kanthi rinci supaya pamaos kaya ngalami dhéwé","Nyritakaké alur peristiwa"],k:2},
+{q:"Pawarta ditulis adhedhasar …",a:["Imajinasi","Pendapat pribadi","Kasunyatan utawa fakta","Crita rakyat"],k:2},
+{q:"Wong sing nulis pawarta diarani …",a:["Panyerat","Wartawan","Panulis dongeng","Sutradara"],k:1},
+{q:"Teks narasi biasane nduwé unsur …",a:["Tokoh, latar, lan alur","Gagasan pokok","Grafik data","Tabel informasi"],k:0},
+{q:"Teks dhèskripsi bisa ditemokaké ing …",a:["Buku pelajaran","Laporan observasi","Cerita fiksi","Kabeh jawaban bener"],k:3},
+{q:"Ing teks pawarta, informasi kudu disusun kanthi …",a:["Urut lan cetha","Kacau","Sembarang","Lucu"],k:0},
+{q:"Salah siji tujuan maca pawarta yaiku …",a:["Supaya ngerti kabar paling anyar","Supaya iso ngarang crita","Supaya bisa nyanyi","Supaya ora bosen"],k:0},
+{q:"Teks narasi bisa awujud …",a:["Crita rakyat utawa dongeng","Laporan ilmiah","Pidato resmi","Artikel ilmiah"],k:0},
+{q:"Basa ing teks dhèskripsi kudu …",a:["Ngandhut makna ganda","Gampang dimangertèni lan njlèntrèhaké","Aneh lan rumit","Kaku lan resmi banget"],k:1},
+{q:"Wacan iku …",a:["Ukara sing ora ana maknane","Kumpulan tembung tanpa maksud","Karangan sing nduwé gagasan pokok","Gambar tanpa tulisan"],k:2},
+{q:"Nalika maca teks narasi, pamaos bisa …",a:["Ngrasakaké kedadéan kaya tokohé","Lali karo isi crita","Ngganti pungkasane","Ngira-ira tanpa ngerti makna"],k:0},
+];
+
+// =================== LOGIKA KUIS ===================
+let index = 0;
+let score = 0;
+let nama="", kelas="", absen="";
+const formURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfMpmorUZJfmjFTQGtwcblxcpOukY4u3gYtb0Q8GCrn8DBsjw/formResponse";
+
+// fungsi acak array
+function acakArray(arr){
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// 🌟 fungsi tampilkan peringatan cantik
+function tampilPeringatan(judul, pesan){
+  const area = document.getElementById("peringatanArea");
+  area.innerHTML = `
+    <div class="warning-overlay">
+      <div class="warning-box">
+        <h2>${judul}</h2>
+        <p>${pesan}</p>
+        <button onclick="tutupPeringatan()">🎯 Siap, ayo lanjut!</button>
+      </div>
+    </div>`;
+}
+function tutupPeringatan(){
+  document.getElementById("peringatanArea").innerHTML = "";
+}
+
+function mulaiKuis(){
+  nama = document.getElementById("nama").value.trim();
+  kelas = document.getElementById("kelas").value.trim();
+  absen = document.getElementById("absen").value.trim();
+  if(!nama || !kelas || !absen){
+    tampilPeringatan("✨ Wah, sabar dulu!", 
+      "Lengkapi identitasmu dhisik, ya! Biar guru ngerti sapa pahlawan cilik sing semangat sinau dina iki! 💪📚");
+    return;
+  }
+
+  soal = acakArray([...semuaSoal]).slice(0,10);
+  soal.forEach(s=>{
+    const benar = s.a[s.k];
+    s.a = acakArray([...s.a]);
+    s.k = s.a.indexOf(benar);
+  });
+
+  document.getElementById("formData").classList.add("hidden");
+  document.getElementById("areaKuis").classList.remove("hidden");
+  document.getElementById("infoSiswa").innerHTML =
+    `<b>Nama:</b> ${nama}<br><b>Kelas:</b> ${kelas}<br><b>Absen:</b> ${absen}`;
+  tampilSoal();
+}
+
+function tampilSoal(){
+  if(index >= soal.length){
+    selesaiKuis();
+    return;
+  }
+  const s = soal[index];
+  let html = `<div class='kotak-soal'>${index+1}. ${s.q}</div><div class='answers'>`;
+  s.a.forEach((j, i)=>{
+    html += `<label><input type='radio' name='jawab' value='${i}'> ${j}</label>`;
+  });
+  html += `</div><button onclick='cekJawaban()'>Kirim Jawaban</button>`;
+  document.getElementById("quiz").innerHTML = html;
+}
+
+function cekJawaban(){
+  const jawaban = document.querySelector("input[name='jawab']:checked");
+  if(!jawaban){
+    tampilPeringatan("📣 Eits, ojo lali!", 
+      "Pilih salah siji jawaban dhisik, ya! Semangatmu luar biasa, terus maju! 🚀🔥");
+    return;
+  }
+  if(parseInt(jawaban.value) === soal[index].k) score++;
+  index++;
+  tampilSoal();
+}
+
+function selesaiKuis(){
+  const nilai = Math.round((score/soal.length)*100);
+  let warna = "nilai-hijau";
+  if(nilai < 60) warna="nilai-merah";
+  else if(nilai < 80) warna="nilai-kuning";
+  document.getElementById("quiz").innerHTML =
+    `<div class='hasil-box'>
+      <h2>🎉 Hasil Kuis</h2>
+      <div class='nilai-besar ${warna}'>${nilai}</div><br>
+      Skor bener: ${score} saka ${soal.length}<br><br>
+      Hebat banget! Tetep semangat sinau, ya! 🌟
+    </div>`;
+
+  fetch(formURL, {
+    method: "POST",
+    mode: "no-cors",
+    body: new URLSearchParams({
+      "entry.1114641071": nama,
+      "entry.687539915": kelas,
+      "entry.1445858210": absen,
+      "entry.175130881": nilai
+    })
+  });
+}
+</script>
+</body>
+</html>

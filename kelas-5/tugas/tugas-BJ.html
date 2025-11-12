@@ -131,9 +131,23 @@
       background: #f1f1f1;
     }
 
-    /* kelas aktif untuk buka menu */
     .dropdown.show .dropdown-content {
       display: block;
+    }
+
+    /* Pesan notifikasi */
+    .notif {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #0288d1;
+      background: rgba(255,255,255,0.85);
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: none;
     }
   </style>
 </head>
@@ -158,58 +172,47 @@
     <h1>📚 Tugas Bahasa Jawa</h1>
   </div>
 
-  <!-- Kotak Dropdown Tugas -->
+  <!-- Kotak Dropdown Pilih Tugas -->
   <div class="task-container">
     <div class="dropdown" id="dropdownMenu">
-      <button class="dropbtn">⬇️ Download Tugas</button>
+      <button class="dropbtn">📅 Pilih Tugas</button>
       <div class="dropdown-content">
-        <a href="#" onclick="downloadFile('Latihan Soal Bahasa Jawa Kelas 5 Semester 1.docx')">Tugas 1</a>
-        <a href="#">Tugas 2</a>
-        <a href="#">Tugas 3</a>
-        <a href="#">Tugas 4</a>
-        <a href="#">Tugas 5</a>
-        <a href="#">Tugas 6</a>
-        <a href="#">Tugas 7</a>
-        <a href="#">Tugas 8</a>
-        <a href="#">Tugas 9</a>
-        <a href="#">Tugas 10</a>
+        <a href="bahasa_jawa/soal-bahasa-jawa-11-November-2025.html">12 November 2025</a>
+        <a href="#" onclick="showMessage()">Tugas Lain</a>
       </div>
     </div>
   </div>
 
+  <!-- Pesan notifikasi -->
+  <div id="notif" class="notif">⚙️ Tugas masih dalam proses. Tetap semangat belajar ya!</div>
+
   <!-- Suara klik interaktif -->
   <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
+
   <script>
-    function downloadFile(fileUrl) {
-      const clickSound = document.getElementById("clickSound");
-      clickSound.currentTime = 0;
-      clickSound.play();
-
-      const link = document.createElement("a");
-      link.href = fileUrl;
-      link.download = fileUrl.split("/").pop();
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-
-    // Toggle dropdown dengan klik
     const dropdown = document.getElementById("dropdownMenu");
     const button = dropdown.querySelector(".dropbtn");
+    const notif = document.getElementById("notif");
+    const clickSound = document.getElementById("clickSound");
 
     button.addEventListener("click", function (e) {
       e.stopPropagation();
       dropdown.classList.toggle("show");
     });
 
-    // Tutup dropdown kalau klik di luar
     window.addEventListener("click", function () {
       if (dropdown.classList.contains("show")) {
         dropdown.classList.remove("show");
       }
     });
+
+    function showMessage() {
+      clickSound.currentTime = 0;
+      clickSound.play();
+      notif.style.display = "inline-block";
+      setTimeout(() => notif.style.display = "none", 3000);
+    }
   </script>
 
 </body>
 </html>
-

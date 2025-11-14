@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kuis Seru Petualangan</title>
+<style>
+/* === (SEMUA STYLE TETAP, TIDAK DIUBAH) === */
+.kotak-soal {
+    background: linear-gradient(135deg, #f0f9ff, #cce5ff);
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+body {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-image: url('https://i.imgur.com/IFKQPGS.png');
+    background-size: cover;
+    background-position: center;
+}
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.nav a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    background-color: white;
+    padding: 10px 15px;
+    border: 2px solid #add8e6;
+    border-radius: 8px;
+}
+.hidden { display: none; }
+label { font-weight: bold; }
+input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+button:hover { background-color: #0056b3; }
+.info-siswa {
+    background: white;
+    border: 2px solid #add8e6;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+.answers label {
+    display: block;
+    margin-bottom: 8px;
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.answers label:hover { background: #eaf6ff; }
+.hasil-box {
+    background: white;
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.nilai-besar {
+    font-size: 40px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.nilai-merah { background: #f8d7da; color: #721c24; }
+.nilai-kuning { background: #fff3cd; color: #856404; }
+.nilai-hijau { background: #d4edda; color: #155724; }
+.warning-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+.warning-box {
+    background: #fff3cd;
+    border: 3px solid #ffcc00;
+    border-radius: 12px;
+    padding: 25px 30px;
+    max-width: 400px;
+    text-align: center;
+    font-size: 18px;
+    color: #856404;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    animation: popIn 0.4s ease;
+}
+.warning-box h2 {
+    margin: 0 0 10px;
+    font-size: 22px;
+    color: #d35400;
+}
+.warning-box button {
+    background: #ffcc00;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    margin-top: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.warning-box button:hover { background: #e6b800; }
+@keyframes popIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="nav">
+        <a href="landing-page-tugas-norma.html">◀️ kembali</a>
+        <a href="Soal-tugas-norma-1.docx" download>📥 Download</a>
+    </div>
+    <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
+        🕵️ Detektif Cilik Ayo Uji Kepintaranmu
+    </h1>
+
+    <!-- Form Data Siswa -->
+    <div id="formData">
+        <h3>Silakan isi identitas sebelum mulai:</h3>
+        <label>Nama: </label><br>
+        <input type="text" id="nama"><br>
+        <label>Kelas: </label><br>
+        <input type="text" id="kelas"><br>
+        <label>No. Absen: </label><br>
+        <input type="text" id="absen"><br>
+        <button onclick="mulaiKuis()">Mulai Kuis</button>
+    </div>
+
+    <div id="areaKuis" class="hidden">
+        <div id="infoSiswa" class="info-siswa"></div>
+        <div id="quiz"></div>
+    </div>
+</div>
+<div id="peringatanArea"></div>
+
+<!-- Suara -->
+<audio id="suaraKetik" src="../../suara/typing.mp3"></audio>
+<audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
+<audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
+<audio id="suaraNext" src="../../suara/next.mp3"></audio>
+<audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
+
+<script>
+/* ============================================================
+   🟦 SOAL NORMA (20 SOAL) — SUDAH DIGANTI & FORMAT DISESUAIKAN
+   ============================================================ */
+let soal = [
+{q:"Menurut KBBI, norma adalah...", a:["Kebiasaan yang dilakukan setiap hari","Aturan atau ketentuan yang mengikat","Peraturan pemerintah","Keputusan kepala sekolah"], k:1},
+{q:"Norma digunakan sebagai panduan untuk...", a:["Mengatur permainan","Mengatur jadwal belajar","Tatanan dan pengendalian tingkah laku","Membuat tugas sekolah"], k:2},
+{q:"Jika ingin hidup harmonis, kita harus...", a:["Memilih aturan yang disukai","Membuat aturan sendiri","Memahami norma yang ada di masyarakat","Mengabaikan aturan"], k:2},
+{q:"Norma agama sumber peraturannya dari...", a:["Wahyu Tuhan Yang Maha Esa","Pemerintah","Orang tua","Guru"], k:0},
+{q:"Contoh norma agama adalah...", a:["Tidak membuang sampah sembarangan","Menjaga kerukunan antar umat beragama","Mengerjakan ujian dengan jujur","Menggunakan pakaian sopan"], k:1},
+{q:"Sanksi norma agama biasanya terjadi...", a:["Di sekolah","Di akhirat","Di kantor polisi","Di rumah"], k:1},
+{q:"Norma kesusilaan berkaitan dengan...", a:["Hukum negara","Tata krama","Suara hati nurani","Peraturan lalu lintas"], k:2},
+{q:"Contoh norma kesusilaan adalah...", a:["Bertamu dengan sopan","Mengerjakan ujian dengan jujur","Membayar pajak","Melanggar lampu merah"], k:1},
+{q:"Sanksi bagi yang melanggar norma kesusilaan biasanya...", a:["Dendas","Dipenjara","Dikucilkan dari masyarakat","Diberi piagam"], k:2},
+{q:"Norma kesopanan mengatur tentang...", a:["Peraturan negara","Tata krama dan sopan santun","Aturan agama","Suara hati nurani"], k:1},
+{q:"Contoh norma kesopanan adalah...", a:["Mentaati peraturan lalu lintas","Selalu berkata jujur","Bertamu dengan sopan","Melakukan korupsi"], k:2},
+{q:"Norma kesopanan muncul karena...", a:["Undang-undang","Kebiasaan di masyarakat","Perintah guru","Wahyu"], k:1},
+{q:"Jika melanggar norma kesopanan, seseorang bisa...", a:["Didenda","Dimasukkan penjara","Dikucilkan sesuai adat","Dipromosikan"], k:2},
+{q:"Norma hukum dibuat oleh...", a:["Orang tua","Badan resmi negara","Tokoh masyarakat","Guru"], k:1},
+{q:"Norma hukum bersifat memaksa artinya...", a:["Boleh ditaati atau tidak","Wajib ditaati semua orang","Hanya berlaku di sekolah","Hanya untuk anak-anak"], k:1},
+{q:"Contoh norma hukum adalah...", a:["Menggunakan pakaian sopan","Mentaati peraturan lalu lintas","Mengembalikan dompet yang ditemukan","Berbicara sopan"], k:1},
+{q:"Orang yang melanggar norma hukum akan mendapat...", a:["Teguran orang tua","Sanksi moral","Hukuman penjara atau denda","Dikucilkan"], k:2},
+{q:"Norma yang mengatur hubungan manusia sehari-hari adalah...", a:["Norma hukum","Norma agama","Norma kesusilaan","Norma kesopanan"], k:3},
+{q:"Norma yang menentukan baik-buruk berdasarkan hati nurani adalah...", a:["Norma hukum","Norma kesopanan","Norma kesusilaan","Norma agama"], k:2},
+{q:"Contoh norma agama dalam teks adalah...", a:["Tidak meludah sembarangan","Menolong orang kesulitan","Menjalankan ibadah sesuai agamanya","Tidak menyerobot antrean"], k:2}
+];
+
+/* ==== SCRIPT LAIN TIDAK DIUBAH ==== */
+
+let dataNama = "", dataKelas = "", dataAbsen = "";
+let indeks = 0, benar = 0;
+
+function mulaiKuis() {
+    dataNama = document.getElementById("nama").value.trim();
+    dataKelas = document.getElementById("kelas").value.trim();
+    dataAbsen = document.getElementById("absen").value.trim();
+    if (!dataNama || !dataKelas || !dataAbsen) {
+        mainkanSuaraPeringatan();
+        tampilkanPeringatan("⚠️ Ups! Data belum lengkap.<br>Isi dulu Nama, Kelas, dan Absen ya biar semangat belajarnya makin mantap! 🚀");
+        return;
+    }
+    mainkanSuaraNext();
+    document.getElementById("infoSiswa").innerHTML = `👤 Nama: <b>${dataNama}</b> | 🏫 Kelas: <b>${dataKelas}</b> | 🔢 Absen: <b>${dataAbsen}</b>`;
+    document.getElementById("formData").classList.add("hidden");
+    document.getElementById("areaKuis").classList.remove("hidden");
+
+    acakArray(soal);
+    soal.forEach(s => acakJawabanSoal(s));
+
+    tampilkanSoal();
+}
+
+function acakArray(arr){ for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} }
+
+function acakJawabanSoal(s){
+    let gabung=s.a.map((teks,i)=>({teks,benar:i===s.k}));
+    for(let i=gabung.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[gabung[i],gabung[j]]=[gabung[j],gabung[i]];}
+    s.a=gabung.map(o=>o.teks);
+    s.k=gabung.findIndex(o=>o.benar);
+}
+
+function tampilkanSoal(){
+    const quiz=document.getElementById("quiz");
+    if(indeks>=soal.length){
+        const nilai=Math.round((benar/soal.length)*100);
+        kirimDataKeGoogleSheet(dataNama,dataKelas,dataAbsen,nilai);
+        let kelasWarna="nilai-merah"; 
+        if(nilai>=80)kelasWarna="nilai-hijau"; 
+        else if(nilai>=60)kelasWarna="nilai-kuning";
+
+        quiz.innerHTML=`
+            <div class="hasil-box">
+                <h2>🎉 Selesai!</h2>
+                <p>Benar: <b>${benar}</b> dari <b>${soal.length}</b></p>
+                <div><p><b>Nilai Kamu:</b></p><div class="nilai-besar ${kelasWarna}">${nilai}</div></div>
+                <button onclick="ulangiKuis()">🔄 Ulangi Kuis</button>
+                <button onclick="keluarKuis()">❌ Selesai</button>
+            </div>`;
+        return;
+    }
+
+    const s=soal[indeks];
+    quiz.innerHTML=`
+        <div class="kotak-soal">${s.q}</div>
+        <div class="answers">
+            ${s.a.map((j,i)=>`<label><input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" /> ${j}</label>`).join('')}
+        </div>
+        <button onclick="periksaJawaban()">Next</button>`;
+}
+
+function periksaJawaban(){
+    const jawaban=document.querySelector('input[name="jawaban"]:checked');
+    if(!jawaban){
+        mainkanSuaraPeringatan();
+        tampilkanPeringatan("⚡ Ups! Kamu belum memilih jawaban.<br>Ayo semangat, pilih dulu ya sebelum lanjut! 💡");
+        return;
+    }
+    if(parseInt(jawaban.value)===soal[indeks].k) benar++;
+    indeks++; 
+    mainkanSuaraNext();
+    tampilkanSoal();
+}
+
+function tampilkanPeringatan(pesan){
+    document.getElementById("peringatanArea").innerHTML=`
+        <div class="warning-overlay">
+            <div class="warning-box">
+                <h2>🚀 Yuk, Jangan Lupa!</h2>
+                <p>${pesan}</p>
+                <button onclick="tutupPeringatan()">Oke 👍</button>
+            </div>
+        </div>`;
+}
+function tutupPeringatan(){ document.getElementById("peringatanArea").innerHTML=""; }
+
+function kirimDataKeGoogleSheet(nama,kelas,absen,nilai){
+    const formURL="https://docs.google.com/forms/u/0/d/e/1FAIpQLSejQJQyRi5jlxTYD5Rk4A0TusPKYJg554W_YWlT5x6wnHJ_9A/formResponse";
+    const formData=new FormData();
+    formData.append("entry.1114641071",nama);
+    formData.append("entry.687539915",kelas);
+    formData.append("entry.1445858210",absen);
+    formData.append("entry.175130881",nilai);
+    fetch(formURL,{method:"POST",body:formData,mode:"no-cors"});
+}
+
+function ulangiKuis(){
+    mainkanSuaraUlangi();
+    indeks=0; 
+    benar=0;
+    document.getElementById("formData").classList.remove("hidden");
+    document.getElementById("areaKuis").classList.add("hidden");
+    document.getElementById("nama").value="";
+    document.getElementById("kelas").value="";
+    document.getElementById("absen").value="";
+}
+
+function keluarKuis(){ window.location.href="🕵Petualangan-Seru.html"; }
+
+function mainkanSuaraKlik(){ const s=document.getElementById("suaraKlik"); s.currentTime=0; s.play(); }
+function mainkanSuaraPeringatan(){ const s=document.getElementById("suaraPeringatan"); s.currentTime=0; s.play(); }
+function mainkanSuaraNext(){ const s=document.getElementById("suaraNext"); s.currentTime=0; s.play(); }
+function mainkanSuaraUlangi(){ const s=document.getElementById("suaraUlangi"); s.currentTime=0; s.play(); }
+function mainkanSuaraKetik(){ const s=document.getElementById("suaraKetik"); s.currentTime=0; s.play(); }
+
+document.addEventListener("DOMContentLoaded",()=>{
+    ["nama","kelas","absen"].forEach(id=>{
+        const el=document.getElementById(id);
+        if(el){el.addEventListener("input",mainkanSuaraKetik);}
+    });
+});
+</script>
+</body>
+</html>

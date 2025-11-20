@@ -1,0 +1,779 @@
+soal di acak
+jawaban di acak
+ambil 10 soal
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kuis Seru Petualangan</title>
+
+<style>
+/* === STYLE TIDAK DIUBAH === */
+.kotak-soal {
+    background: linear-gradient(135deg, #f0f9ff, #cce5ff);
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+body {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-image: url('https://i.imgur.com/IFKQPGS.png');
+    background-size: cover;
+    background-position: center;
+}
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.nav a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    background-color: white;
+    padding: 10px 15px;
+    border: 2px solid #add8e6;
+    border-radius: 8px;
+}
+.hidden { display: none; }
+label { font-weight: bold; }
+input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+button:hover { background-color: #0056b3; }
+.info-siswa {
+    background: white;
+    border: 2px solid #add8e6;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+.answers label {
+    display: block;
+    margin-bottom: 8px;
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.answers label:hover { background: #eaf6ff; }
+.hasil-box {
+    background: white;
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.nilai-besar {
+    font-size: 40px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.nilai-merah { background: #f8d7da; color: #721c24; }
+.nilai-kuning { background: #fff3cd; color: #856404; }
+.nilai-hijau { background: #d4edda; color: #155724; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="nav">
+        <a href="🕵Petualangan-Seru.html">◀️ kembali</a>
+    </div>
+
+    <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
+        🕵️ Detektif Cilik Ayo Uji Kepintaranmu
+    </h1>
+
+    <!-- Form Data -->
+    <div id="formData">
+        <h3>Silakan isi identitas sebelum mulai:</h3>
+        <label>Nama: </label><br>
+        <input type="text" id="nama"><br>
+
+        <label>Kelas: </label><br>
+        <input type="text" id="kelas"><br>
+
+        <label>No. Absen: </label><br>
+        <input type="text" id="absen"><br>
+
+        <button onclick="mulaiKuis()">Mulai Kuis</button>
+    </div>
+
+    <div id="areaKuis" class="hidden">
+        <div id="infoSiswa" class="info-siswa"></div>
+        <div id="quiz"></div>
+    </div>
+</div>
+
+<!-- ============================= SCRIPT =============================== -->
+<script>
+/* ====================== SOAL ========================= */
+let soal = [
+    { q:"Apa yang dimaksud dengan prinsip 3R dalam pengelolaan sampah?", 
+  a:["Membuang sampah sebanyak mungkin","Reduce, Reuse, Recycle","Mengumpulkan sampah di TPS","Mengolah sampah menjadi pupuk"], 
+  k:1 },
+
+{ q:"Pengelolaan sampah dengan prinsip 3R membutuhkan…", 
+  a:["Waktu dan kepedulian","Biaya sangat besar","Alat berat","Tenaga profesional"], 
+  k:0 },
+
+{ q:"Reduce adalah…", 
+  a:["Menggunakan kembali barang","Pengurangan segala kegiatan yang dapat membuahkan sampah","Mendaur ulang barang","Memilah sampah rumah tangga"], 
+  k:1 },
+
+{ q:"Contoh kegiatan reduce adalah…", 
+  a:["Menggunakan botol plastik sekali pakai","Menyediakan air minum isi ulang dan membawa tempat minum guna ulang","Membuang makanan yang tidak habis","Menggunakan sedotan plastik"], 
+  k:1 },
+
+{ q:"Acara sekolah yang mendukung reduce adalah…", 
+  a:["Acara dengan banyak hiasan plastik","Acara sekolah bebas sampah plastik dan stereofoam","Penjualan minuman kemasan plastik","Membagikan sedotan dan sendok plastik"], 
+  k:1 },
+
+{ q:"Minuman tanpa sedotan termasuk contoh…", 
+  a:["Reuse","Recycle","Reduce","Pembakaran sampah"], 
+  k:2 },
+
+{ q:"Memilih produk dengan kemasan yang bisa didaur ulang termasuk contoh…", 
+  a:["Reduce","Reuse","Recycle","Membuang sampah"], 
+  k:0 },
+
+{ q:"Menghindari penggunaan barang yang tidak perlu merupakan bagian dari…", 
+  a:["Reduce","Reuse","Recycle","Sampah organik"], 
+  k:0 },
+
+{ q:"Kegiatan berikut yang BUKAN contoh reduce adalah…", 
+  a:["Menghabiskan makanan dan minuman","Menggunakan produk isi ulang","Makanan tanpa sendok plastik","Menggunakan sedotan plastik"], 
+  k:3 },
+
+{ q:"Menggunakan produk yang bisa diisi ulang kembali adalah contoh dari…", 
+  a:["Reduce","Reuse","Recycle","Pembuangan"], 
+  k:0 },
+{ q:"Apa yang dimaksud dengan reuse?", 
+  a:["Membuang sampah ke tempatnya","Menggunakan kembali sampah secara langsung dengan fungsi sama atau berbeda","Mengurangi kegiatan yang menghasilkan sampah","Mengolah sampah menjadi barang baru"], 
+  k:1 },
+
+{ q:"Menggunakan kembali wadah yang sudah kosong untuk fungsi lain adalah contoh…", 
+  a:["Reduce","Reuse","Recycle","Membuang sampah"], 
+  k:1 },
+
+{ q:"Menggunakan botol plastik bekas untuk media tanam merupakan contoh…", 
+  a:["Reduce","Reuse","Recycle","Membakar sampah"], 
+  k:1 },
+
+{ q:"Menggunakan cup kopi plastik untuk tempat pensil adalah kegiatan…", 
+  a:["Reduce","Reuse","Recycle","Pembuangan"], 
+  k:1 },
+
+{ q:"Menggunakan kertas bolak-balik untuk buku catatan termasuk kegiatan…", 
+  a:["Reduce","Reuse","Recycle","Memilah sampah"], 
+  k:1 },
+
+{ q:"Kegiatan berikut merupakan contoh reuse, kecuali…", 
+  a:["Menggunakan amplop berulang","Menggunakan kertas bekas untuk amplop","Menggunakan kertas masih kosong untuk menulis","Menggunakan sendok plastik sekali pakai"], 
+  k:3 },
+
+{ q:"Menggunakan kertas bekas sebagai pembungkus adalah contoh dari…", 
+  a:["Recycle","Reuse","Reduce","Pencemaran"], 
+  k:1 },
+
+{ q:"Amplop yang digunakan beberapa kali termasuk tindakan…", 
+  a:["Recycle","Reuse","Reduce","Pembuangan"], 
+  k:1 },
+
+{ q:"Kegiatan berikut yang menunjukkan reuse adalah…", 
+  a:["Membuang botol plastik ke TPS","Menggunakan botol plastik untuk pot tanaman","Mengurangi pembelian snack plastik","Mengolah plastik menjadi biji plastik"], 
+  k:1 },
+
+{ q:"Memakai kertas yang masih kosong untuk keperluan menulis adalah contoh…", 
+  a:["Reduce","Reuse","Recycle","Tidak peduli lingkungan"], 
+  k:1 },
+{ q:"Apa yang dimaksud dengan recycle?", 
+  a:["Mengurangi sampah","Menggunakan kembali barang tanpa proses","Pemanfaatan kembali sampah dengan beberapa tahapan pengolahan","Membuang sampah ke TPA"], 
+  k:2 },
+
+{ q:"Tahapan pertama dalam daur ulang adalah…", 
+  a:["Pembakaran","Pemilahan sampah","Penimbunan","Pencampuran"], 
+  k:1 },
+
+{ q:"Daur ulang dilakukan dengan tujuan agar sampah…", 
+  a:["Cepat menumpuk","Memiliki nilai guna kembali","Lebih banyak dihasilkan","Bisa dibakar"], 
+  k:1 },
+
+{ q:"Mengirim sampah plastik ke pemulung atau bank sampah merupakan contoh…", 
+  a:["Reduce","Reuse","Recycle","Pembakaran"], 
+  k:2 },
+
+{ q:"Sampah kertas yang dikirim ke bank sampah termasuk kegiatan…", 
+  a:["Reuse","Recycle","Reduce","Pencemaran"], 
+  k:1 },
+
+{ q:"Mengolah sampah plastik menjadi kerajinan tangan termasuk…", 
+  a:["Reduce","Reuse","Recycle","Membuang sampah"], 
+  k:2 },
+
+{ q:"Kompos cair dan padat dibuat dari…", 
+  a:["Sampah anorganik","Sampah organik","Sampah logam","Sampah elektronik"], 
+  k:1 },
+
+{ q:"Daur ulang sampah kertas termasuk jenis kegiatan…", 
+  a:["Recycle","Reduce","Reuse","Pembakaran"], 
+  k:0 },
+
+{ q:"Daur ulang dilakukan melalui proses pemilahan, pengumpulan, pemrosesan, dan…", 
+  a:["Pembakaran","Pembuatan kembali produk bernilai guna","Pencampuran bahan","Penimbunan"], 
+  k:1 },
+
+{ q:"Manfaat daur ulang berikut ini BENAR, kecuali…", 
+  a:["Menghemati sumber daya alam","Penghematan energi","Penghematan lahan TPA","Meningkatkan sampah plastik"], 
+  k:3 },
+
+{ q:"Penghematan energi merupakan salah satu…", 
+  a:["Dampak buruk daur ulang","Manfaat daur ulang","Kerugian daur ulang","Proses daur ulang"], 
+  k:1 },
+
+{ q:"Penghematan lahan TPA berarti…", 
+  a:["Sampah makin banyak","TPA semakin luas","Sampah yang masuk TPA berkurang","TPA ditutup"], 
+  k:2 },
+
+{ q:"Lingkungan menjadi lebih asri adalah…", 
+  a:["Dampak negatif daur ulang","Manfaat daur ulang","Proses daur ulang","Tantangan daur ulang"], 
+  k:1 },
+
+{ q:"Daur ulang dapat mengurangi biaya belanja karena…", 
+  a:["Semua barang dibakar","Barang lama diolah kembali menjadi barang berguna","Sampah bertambah banyak","TPA diperluas"], 
+  k:1 },
+
+{ q:"Tidak semua sampah dapat didaur ulang. Yang mudah didaur ulang adalah…", 
+  a:["Sampah organik dan anorganik","Sampah radioaktif","Sampah elektronik","Sampah B3"], 
+  k:0 },
+
+{ q:"Mengolah sampah organik menjadi kompos termasuk kegiatan…", 
+  a:["Reduce","Reuse","Recycle","Pembuangan"], 
+  k:2 },
+
+{ q:"Mengapa tidak semua orang mau melakukan daur ulang?", 
+  a:["Butuh waktu dan usaha","Terlalu mudah dilakukan","Tidak menghasilkan barang","Tidak butuh pemilahan"], 
+  k:0 },
+
+{ q:"Mengapa sampah yang didaur ulang memiliki nilai guna?", 
+  a:["Karena jumlahnya sedikit","Karena melalui proses pengolahan","Karena langsung dibuang","Karena tidak dipilih"], 
+  k:1 },
+
+{ q:"Mengirim sampah kertas ke pemulung bertujuan agar…", 
+  a:["Menambah sampah","Menjadikan sampah bernilai lagi","Membuang sampah ke TPA","Mencampur sampah"], 
+  k:1 },
+
+{ q:"Recycling membantu mengurangi…", 
+  a:["Jumlah sampah di lingkungan","Pemilahan sampah","Pengolahan barang bekas","Pemanfaatan kompos"], 
+  k:0 },
+{
+    q: "Apa yang dimaksud dengan sampah anorganik?",
+    a: ["Sampah yang mudah membusuk", "Sampah yang sulit terurai dan tidak mudah membusuk", "Sampah yang berasal dari tumbuhan", "Sampah yang cepat hancur di tanah"],
+    k: 1
+  },
+  {
+    q: "Sampah anorganik yang tertimbun di tanah dapat menyebabkan…",
+    a: ["Kesuburan tanah meningkat", "Tanah menjadi lebih subur", "Pencemaran tanah", "Tanah lebih gembur"],
+    k: 2
+  },
+  {
+    q: "Berikut ini yang termasuk sampah anorganik adalah…",
+    a: ["Sisa sayur", "Daun kering", "Plastik", "Sisa makanan"],
+    k: 2
+  },
+  {
+    q: "Salah satu ciri sampah anorganik adalah…",
+    a: ["Mudah membusuk", "Sulit diuraikan", "Menghasilkan pupuk", "Cepat hancur di tanah"],
+    k: 1
+  },
+  {
+    q: "Contoh sampah anorganik selain plastik adalah…",
+    a: ["Logam", "Daun", "Rumput", "Sisa makanan"],
+    k: 0
+  },
+  {
+    q: "Sampah kertas seperti koran dan majalah termasuk…",
+    a: ["Sampah organik", "Sampah anorganik", "Sampah B3", "Sampah berbahaya"],
+    k: 1
+  },
+  {
+    q: "Kertas bekas dapat dimanfaatkan untuk membuat…",
+    a: ["Kompos", "Kerajinan seperti bunga dan mozaik", "Pupuk kandang", "Pakan ternak"],
+    k: 1
+  },
+  {
+    q: "Bubur kertas dapat dibuat menjadi…",
+    a: ["Makanan hewan", "Pot bunga", "Bingkai foto dan kotak pensil", "Sabun cair"],
+    k: 2
+  },
+  {
+    q: "Mengapa sampah kertas lebih baik didaur ulang?",
+    a: ["Agar warnanya berubah", "Agar menjadi pupuk", "Agar tidak menambah pencemaran dan bisa digunakan kembali", "Agar cepat membusuk"],
+    k: 2
+  },
+  {
+    q: "Salah satu manfaat memanfaatkan sampah kertas adalah…",
+    a: ["Membuat rumah menjadi kotor", "Mengurangi penumpukan sampah", "Mencemari tanah", "Menambah biaya belanja"],
+    k: 1
+  },
+{
+    q: "Mengapa sampah plastik sering digunakan sebagai pembungkus makanan?",
+    a: ["Karena mudah membusuk", "Karena sudah menjadi kebiasaan dan praktis digunakan", "Karena lebih ramah lingkungan", "Karena cepat terurai"],
+    k: 1
+  },
+  {
+    q: "Plastik banyak digunakan di berbagai tempat berikut, kecuali…",
+    a: ["Toko dan pasar swalayan", "Perkantoran", "Sekolah", "Danau dan sungai"],
+    k: 3
+  },
+  {
+    q: "Di rumah tangga, sampah plastik biasanya…",
+    a: ["Jarang ditemukan", "Banyak jumlahnya setiap hari", "Tidak bisa didaur ulang", "Langsung habis terurai"],
+    k: 1
+  },
+  {
+    q: "Apa yang sebaiknya dilakukan terhadap sampah plastik?",
+    a: ["Dibuang sembarangan", "Dibiarkan menumpuk", "Didaur ulang atau dimanfaatkan kembali", "Dibakar di halaman rumah"],
+    k: 2
+  },
+  {
+    q: "Mengapa kita tidak boleh membuang sampah plastik sembarangan?",
+    a: ["Karena baunya wangi", "Karena dapat mengotori lingkungan", "Karena bisa dimakan hewan", "Karena mudah larut dalam tanah"],
+    k: 1
+  },
+  {
+    q: "Pengusaha penampungan sampah plastik dapat mengolah plastik menjadi…",
+    a: ["Kompos", "Pupuk kandang", "Peralatan dapur seperti tampah atau tempat sampah", "Tanaman hias"],
+    k: 2
+  },
+  {
+    q: "Siapa saja yang dapat mengolah sampah plastik di rumah?",
+    a: ["Hanya pegawai pabrik", "Hanya guru di sekolah", "Ibu rumah tangga dan remaja", "Hanya pekerja kebersihan"],
+    k: 2
+  },
+  {
+    q: "Anak-anak dapat memanfaatkan sampah plastik menjadi…",
+    a: ["Makanan ringan", "Hiasan kelas atau tempat pensil", "Minuman kemasan", "Pupuk kompos"],
+    k: 1
+  },
+  {
+    q: "Plastik bekas seperti sampul buku atau sandal dapat dibuat menjadi…",
+    a: ["Kue kering", "Kerung, hiasan, atau tempat pensil", "Sabun mandi", "Cat dinding"],
+    k: 1
+  },
+  {
+    q: "Tujuan utama mengolah sampah plastik adalah…",
+    a: ["Menambah jumlah sampah", "Membuat lingkungan semakin kotor", "Mengubah plastik menjadi barang yang lebih bermanfaat", "Menghilangkan semua jenis plastik"],
+    k: 2
+  },
+{
+    q: "Bahan perca biasanya dimanfaatkan oleh ibu rumah tangga untuk membuat…",
+    a: ["Makanan ringan", "Kerajinan seperti tas dan tempat sapu", "Sabun mandi", "Mainan plastik"],
+    k: 1
+  },
+  {
+    q: "Selain tas, bahan perca dapat digunakan untuk membuat…",
+    a: ["Batu bata", "Sprei dan bantal kursi", "Peralatan logam", "Botol minuman"],
+    k: 1
+  },
+  {
+    q: "Mengapa kain perca mulai dilirik sebagai pengganti kapuk?",
+    a: ["Karena kapuk sulit dibersihkan", "Karena kapuk harganya meningkat", "Karena perca tidak bisa rusak", "Karena kapuk tidak dapat digunakan lagi"],
+    k: 1
+  },
+  {
+    q: "Sepeda kecil yang sudah tidak digunakan lagi termasuk jenis sampah…",
+    a: ["Organik", "Plastik", "Logam", "Kertas"],
+    k: 2
+  },
+  {
+    q: "Barang-barang logam bekas seperti panci atau besi bekas biasanya…",
+    a: ["Tidak memiliki nilai jual", "Paling mahal harganya jika dijual ke pemulung", "Tidak dapat didaur ulang", "Berbahaya untuk disentuh"],
+    k: 1
+  },
+  {
+    q: "Tempat khusus untuk menjual barang logam bekas di kota besar disebut…",
+    a: ["Pasar sayur", "Pasar loak", "Pasar induk", "Pasar tradisional"],
+    k: 1
+  },
+  {
+    q: "Mengapa sampah logam banyak dicari oleh pemulung?",
+    a: ["Karena sulit ditemukan", "Karena tidak dapat dilebur", "Karena tidak dapat digunakan kembali", "Karena harganya tinggi dan dapat diolah kembali"],
+    k: 3
+  },
+  {
+    q: "Sampah logam dapat dilebur kembali dan hasilnya dapat dicetak menjadi…",
+    a: ["Tanaman hias", "Alat rumah tangga dan pertanian", "Bahan bakar", "Makanan hewan"],
+    k: 1
+  },
+  {
+    q: "Contoh barang dari logam yang dapat didaur ulang adalah…",
+    a: ["Sandal jepit", "Panci bekas", "Sampah daun", "Kertas koran"],
+    k: 1
+  },
+  {
+    q: "Dalam proses daur ulang logam, hasil peleburan kemudian…",
+    a: ["Ditanam di tanah", "Dibuang ke sungai", "Dicetak menjadi barang yang bermanfaat", "Dibakar hingga habis"],
+    k: 2
+  },
+{
+    q: "Apa yang dimaksud dengan sampah organik?",
+    a: ["Sampah yang tidak dapat diuraikan", "Sampah yang berasal dari makhluk hidup dan dapat terurai alami", "Sampah yang berasal dari logam", "Sampah yang sulit dibakar"],
+    k: 1
+  },
+  {
+    q: "Sampah organik yang terurai akan menghasilkan…",
+    a: ["Gas beracun", "Zat hara yang bermanfaat", "Debu", "Air kotor"],
+    k: 1
+  },
+  {
+    q: "Jika tidak dikelola dengan baik, sampah organik dapat menimbulkan…",
+    a: ["Warna yang indah", "Bau sedap", "Penyakit dan bau tidak sedap", "Udara menjadi segar"],
+    k: 2
+  },
+  {
+    q: "Sampah organik dibagi menjadi dua jenis, yaitu…",
+    a: ["Basah dan anorganik", "Basah dan plastik", "Basah dan kering", "Kering dan logam"],
+    k: 2
+  },
+  {
+    q: "Sampah organik basah memiliki ciri…",
+    a: ["Sedikit mengandung air", "Mengandung banyak air", "Terbuat dari logam", "Tidak dapat membusuk"],
+    k: 1
+  },
+  {
+    q: "Berikut ini yang termasuk sampah organik basah adalah…",
+    a: ["Kayu dan ranting pohon", "Serbuk gergaji", "Kulit pisang dan sisa sayur", "Daun kering"],
+    k: 2
+  },
+  {
+    q: "Sampah organik kering memiliki ciri…",
+    a: ["Banyak air", "Sedikit air", "Berbau sangat menyengat", "Berbahaya disentuh"],
+    k: 1
+  },
+  {
+    q: "Contoh sampah organik kering adalah…",
+    a: ["Kulit bawang", "Buah busuk", "Daun dan ranting kering", "Sisa makanan basah"],
+    k: 2
+  },
+  {
+    q: "Mengapa sampah organik kering sering dibakar?",
+    a: ["Karena sulit diolah kembali", "Karena rasanya enak", "Karena mahal dijual", "Karena mudah dimakan hewan"],
+    k: 0
+  },
+  {
+    q: "Sisa potongan kayu dapat dimanfaatkan menjadi…",
+    a: ["Cermin dan kaca", "Sangkar burung atau kerajinan", "Makanan ringan", "Bahan bakar minyak"],
+    k: 1
+  },
+  {
+    q: "Serbuk gergaji biasanya digunakan sebagai…",
+    a: ["Pupuk kimia", "Bahan bakar", "Bahan makanan", "Batu bata"],
+    k: 1
+  },
+  {
+    q: "Triplek dan lantai dari tatal kayu merupakan hasil dari…",
+    a: ["Sampah anorganik", "Serbuk plastik", "Sisa potongan kayu kecil", "Kertas bekas"],
+    k: 2
+  },
+  {
+    q: "Sampah organik dapat dimanfaatkan sebagai tambahan pakan untuk…",
+    a: ["Kucing dan anjing", "Kambing, sapi, dan kerbau", "Ikan hias", "Burung kecil"],
+    k: 1
+  },
+  {
+    q: "Saat ini sampah organik juga dapat diolah menjadi pelet untuk makanan…",
+    a: ["Ayam dan ikan", "Kuda dan unta", "Kelinci", "Burung hias"],
+    k: 0
+  },
+  {
+    q: "Biogas dapat dihasilkan dari…",
+    a: ["Kertas bekas", "Kotoran hewan atau limbah tempe", "Botol plastik", "Batu dan pasir"],
+    k: 1
+  },
+  {
+    q: "Salah satu manfaat biogas adalah…",
+    a: ["Menjadi bahan bakar dan sumber listrik", "Menjadi makanan hewan", "Menjadi hiasan rumah", "Menjadi cat dinding"],
+    k: 0
+  },
+  {
+    q: "Kompos dibuat dari…",
+    a: ["Sampah anorganik", "Buah busuk dan sayuran", "Kaca dan logam", "Plastik dan kertas"],
+    k: 1
+  },
+  {
+    q: "Kompos bermanfaat untuk…",
+    a: ["Membuat logam lebih kuat", "Menyuburkan tanah", "Menghancurkan plastik", "Meningkatkan polusi"],
+    k: 1
+  },
+  {
+    q: "Pengolahan kompos dari sampah organik bersifat…",
+    a: ["Sangat sulit", "Tidak mungkin dilakukan di rumah", "Cukup mudah dilakukan", "Berbahaya bagi manusia"],
+    k: 2
+  },
+  {
+    q: "Sampah organik menjadi bermanfaat karena…",
+    a: ["Tidak bisa diuraikan", "Menjadi zat hara setelah terurai", "Menghasilkan logam baru", "Dapat berubah menjadi plastik"],
+    k: 1
+  },
+ {
+    q: "Apa yang dimaksud dengan kompos?",
+    a: ["Sampah plastik yang dibakar", "Bahan organik yang telah mengalami pelapukan oleh mikroorganisme", "Tanah yang bercampur air", "Bahan kimia untuk tanaman"],
+    k: 1
+  },
+  {
+    q: "Contoh bahan untuk membuat kompos adalah…",
+    a: ["Botol plastik dan kaca", "Besi dan logam", "Dedaunan, rumput, jerami, dan sisa dapur", "Kertas dan kardus"],
+    k: 2
+  },
+  {
+    q: "Kompos dimanfaatkan untuk…",
+    a: ["Memperindah ruangan", "Makanan sehat bagi tanah", "Mencuci peralatan dapur", "Pengganti air"],
+    k: 1
+  },
+  {
+    q: "Ciri kompos yang baik adalah…",
+    a: ["Berbau menyengat", "Berwarna sama seperti bahan asalnya", "Kadar air rendah dan tidak berbau", "Masih terlihat bentuk bahan pembuatnya"],
+    k: 2
+  },
+  {
+    q: "Kompos dapat terbentuk sendiri di alam melalui proses…",
+    a: ["Peleburan logam", "Pembusukan alami seperti humus", "Pembakaran daun", "Penguapan air"],
+    k: 1
+  },
+  {
+    q: "Dengan bantuan manusia, proses pembuatan kompos…",
+    a: ["Tidak bisa dilakukan", "Berlangsung lebih cepat", "Lebih berbahaya", "Menjadi lebih mahal"],
+    k: 1
+  },
+  {
+    q: "Salah satu manfaat kompos bagi tanah adalah…",
+    a: ["Meningkatkan polusi", "Mengurangi jumlah tumbuhan", "Memperbaiki lapisan tanah dan kelenturannya", "Mengubah tanah menjadi batu"],
+    k: 2
+  },
+  {
+    q: "Kompos dapat meningkatkan daya ikat tanah terhadap…",
+    a: ["Angin", "Air", "Cahaya matahari", "Debu"],
+    k: 1
+  },
+  {
+    q: "Kompos dapat menjadi makanan bagi…",
+    a: ["Plankton di tambak", "Hewan buas", "Burung di hutan", "Ikan paus"],
+    k: 0
+  },
+  {
+    q: "Kompos digunakan sebagai pengganti pupuk kimia karena…",
+    a: ["Lebih mahal dan sulit ditemukan", "Tidak mengandung unsur hara", "Lebih murah dan ramah lingkungan", "Tidak bisa digunakan untuk tanaman"],
+    k: 2
+  },
+{
+    q: "Apa alat utama yang digunakan untuk membuat pupuk kompos?",
+    a: [
+      "Wadah berukuran besar dengan penutup",
+      "Ember kecil tanpa penutup",
+      "Botol plastik bekas",
+      "Kaleng minuman"
+    ],
+    k: 0
+  },
+  {
+    q: "Apa yang harus dilakukan sebelum menggunakan sampah rumah tangga sebagai kompos?",
+    a: [
+      "Mencuci semua sampah",
+      "Memisahkan sampah organik dan plastik",
+      "Mengeringkan semua sampah",
+      "Memasukkan semua jenis sampah ke dalam wadah"
+    ],
+    k: 1
+  },
+  {
+    q: "Apa fungsi tanah pada proses pembuatan pupuk kompos?",
+    a: [
+      "Sebagai penghias wadah",
+      "Sebagai penutup sampah dan membantu proses pelapukan",
+      "Agar pupuk terlihat lebih berat",
+      "Untuk menjaga suhu tetap dingin"
+    ],
+    k: 1
+  },
+  {
+    q: "Mengapa wadah pembuatan kompos harus dilengkapi penutup?",
+    a: [
+      "Agar kompos tidak cepat kering",
+      "Agar tidak terkontaminasi air hujan dan hewan",
+      "Agar mudah dibawa ke mana-mana",
+      "Agar warnanya lebih menarik"
+    ],
+    k: 1
+  },
+  {
+    q: "Apa manfaat pupuk organik yang sudah jadi?",
+    a: [
+      "Sebagai hiasan pot bunga",
+      "Untuk memupuk semua jenis tanaman di pekarangan rumah",
+      "Untuk bahan bangunan",
+      "Untuk mengusir serangga"
+    ],
+    k: 1
+  }
+];
+
+// --- ACak Soal dan Ambil 10 Soal ---
+function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+}
+
+shuffle(soal);         // acak soal
+soal = soal.slice(0,10);  // ambil 10 soal pertama
+
+// Acak jawaban setiap soal
+soal.forEach(item => {
+    let benar = item.a[item.k];
+    shuffle(item.a);
+    item.k = item.a.indexOf(benar);
+});
+
+
+/* ===================== MULAI KUIS ===================== */
+function mulaiKuis() {
+    let nama = document.getElementById("nama").value;
+    let kelas = document.getElementById("kelas").value;
+    let absen = document.getElementById("absen").value;
+
+    if (!nama || !kelas || !absen) {
+        alert("Lengkapi identitas terlebih dahulu!");
+        return;
+    }
+
+    document.getElementById("formData").classList.add("hidden");
+    document.getElementById("areaKuis").classList.remove("hidden");
+
+    document.getElementById("infoSiswa").innerHTML =
+        `<b>Nama:</b> ${nama} | <b>Kelas:</b> ${kelas} | <b>Absen:</b> ${absen}`;
+
+    tampilkanSoal(0);
+}
+
+let nomor = 0;
+let benar = 0;
+
+/* ===================== TAMPILKAN SOAL ===================== */
+function tampilkanSoal(i) {
+    let q = soal[i];
+    let html = `
+        <div class="kotak-soal">
+            <p>${i + 1}. ${q.q}</p>
+            <div class="answers">
+    `;
+    q.a.forEach((j, idx) => {
+        html += `<label onclick="jawab(${idx})">${j}</label>`;
+    });
+
+    html += `</div></div>`;
+    document.getElementById("quiz").innerHTML = html;
+}
+
+/* ===================== CEK JAWABAN ===================== */
+function jawab(pilihan) {
+    if (pilihan === soal[nomor].k) benar++;
+
+    nomor++;
+    if (nomor < soal.length) {
+        tampilkanSoal(nomor);
+    } else {
+        selesai();
+    }
+}
+
+/* ===================== SELESAI & TAMPIL NILAI ===================== */
+function selesai() {
+    let nilai = Math.round((benar / soal.length) * 100);
+
+    let warna = "nilai-hijau";
+    if (nilai < 70) warna = "nilai-merah";
+    else if (nilai < 85) warna = "nilai-kuning";
+
+    document.getElementById("quiz").innerHTML = `
+        <div class="hasil-box">
+            <h2>Hasil Kuis</h2>
+            <div class="nilai-besar ${warna}">${nilai}</div>
+            <p>Jawaban benar: <b>${benar}</b> dari <b>${soal.length}</b></p>
+        </div>
+    `;
+
+    kirimNilai(nilai);
+}
+
+/* ===================== KIRIM NILAI KE GOOGLE FORM ===================== */
+function kirimNilai(nilai) {
+
+    let nama = document.getElementById("nama").value;
+    let kelas = document.getElementById("kelas").value;
+    let absen = document.getElementById("absen").value;
+
+    let url = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSeVA3kH5qIWUwlQb_80hQYSoj0Q2sMnYp8SAB9RlFgjm0fWUw/formResponse";
+
+    let form = new FormData();
+    form.append("entry.1114641071", nama);
+    form.append("entry.687539915", kelas);
+    form.append("entry.1445858210", absen);
+    form.append("entry.175130881", nilai);
+
+    fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        body: form
+    });
+
+    console.log("Nilai terkirim:", nilai);
+}
+</script>
+
+</body>
+</html>

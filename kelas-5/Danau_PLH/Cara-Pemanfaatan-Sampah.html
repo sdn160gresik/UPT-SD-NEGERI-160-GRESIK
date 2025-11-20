@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pengolaan Sampah</title>
+  <style>
+    :root{
+      --pad:16px;
+      --gap:12px;
+      --radius:12px;
+      --bab-color:#FFD580; 
+      --sub-color:#FFF700; 
+      --materi-color:#D6EAF8;
+      --text:#1b1b1b;
+      --muted:#4b5563;
+      --accent:#1f6feb;
+      --maxw:900px;
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', Arial;
+      background:url('https://i.imgur.com/5JqOAw5.jpeg');
+      background-size:cover;
+      background-attachment:fixed;
+      color:var(--text);
+      padding:32px 16px;
+      display:flex;
+      justify-content:center;
+    }
+    .container{
+      width:100%;
+      max-width:var(--maxw);
+    }
+    .box{
+      padding:var(--pad);
+      border-radius:var(--radius);
+      margin-bottom:var(--gap);
+      box-shadow: 0 6px 18px rgba(25,25,50,0.06);
+      border:1px solid rgba(0,0,0,0.03);
+      background:white;
+    }
+    .box-bab{
+      background:var(--bab-color);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:80px; /* diberi jarak dari navigasi */
+    }
+    .box-bab h1{
+      margin:0;
+      font-size:1.5rem;
+      letter-spacing:0.2px;
+    }
+
+    /* Navigasi kanan atas */
+    .nav-right{
+      position:fixed;
+      top:10px;
+      right:10px;
+      display:flex;
+      gap:10px;
+      font-weight:bold;
+      background:white;
+      padding:8px 12px;
+      border-radius:12px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Logo kiri atas */
+    .nav-left{
+      position:fixed;
+      top:10px;
+      left:10px;
+      display:flex;
+      gap:10px;
+      background:white;
+      padding:8px 12px;
+      border-radius:12px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.2);
+    }
+    .nav-left img{
+      height:50px;
+    }
+
+    .box-sub{
+      background:var(--sub-color);
+      padding:14px;
+    }
+    .box-sub h2{
+      margin:0 0 8px 0;
+      font-size:1.15rem;
+    }
+
+    .box-materi{
+      background:var(--materi-color);
+      padding:18px;
+      line-height:1.6;
+    }
+
+    /* kotak warna cerah */
+    .kotak-warna {
+      background:#FFEE88;
+      padding:16px;
+      border-radius:12px;
+      margin-top:12px;
+      margin-bottom:12px;
+      border:2px solid #E5C100;
+      font-weight:600;
+    }
+
+    .kotak-materi {
+      background:#FFD6E0;
+      padding:16px;
+      border-radius:12px;
+      margin-top:12px;
+      border:1px solid #E38AA6;
+      line-height:1.6;
+    }
+
+.btn-evaluasi {
+  display:block;
+  width:100%;
+  text-align:center;
+  padding:14px;
+  margin-top:20px;
+  border-radius:12px;
+  background:#FF6B6B;
+  color:white;
+  font-weight:700;
+  font-size:1.1rem;
+  text-decoration:none;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  transition:0.2s;
+}
+.btn-evaluasi:hover {
+  background:#FF3B3B;
+}
+  </style>
+</head>
+<body>
+
+  <!-- Logo kiri atas -->
+  <div class="nav-left">
+    <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
+    <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri">
+    <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah">
+  </div>
+
+  <!-- Navigasi kanan atas -->
+  <div class="nav-right">
+    <a href="#">🏠 Beranda</a>
+    <a href="#">◀️ Kembali</a>
+    <a href="#">🏫 Kelas</a>
+  </div>
+
+  <div class="container">
+
+    <!-- BAB -->
+    <section class="box box-bab" aria-labelledby="bab2">
+      <h1 id="bab2">B. Cara Pemanfaatan Sampah</h1>
+    </section>
+
+    <!-- Subjudul utama -->
+    <section class="box box-sub">
+      <h2><strong>Cara Pemanfaatan Sampah</strong></h2>
+    </section>
+
+    <!-- Materi pengantar -->
+    <article class="box box-materi">
+      <p>Sampah yang kita hasilkan setiap hari akan mendatangkan manfaat jika kita tidak enggan untuk memilah-milah jenis sampah untuk diolah kembali. Saat ini masyarakat pedesaan maupun perkotaan mulai mengetahui cara memanfaatkan sampah, tetapi belum optimal. Melakukan pemilahan sampah kering (anorganik) memang bukan hal yang mudah. Diperlukan ketekunan dan kreativitas tinggi agar sampah menjadi barang berguna dan memiliki nilai jual yang lebih tinggi.</p>
+    </article>
+
+    <!-- 1. Pengelolaan 3R -->
+    <div class="kotak-warna"><strong>1. Pengelolaan Sampah secara 3R</strong></div>
+    <article class="kotak-materi">
+      <p>Kita bisa mengelola sampah dengan prinsip 3R (reduce, reuse, recycle) setiap hari. Pengelolaan sampah dengan sistem 3R bisa dicoba oleh setiap orang dan kapan saja. Menangani sampah dengan prinsip 3R butuh meluangkan waktu dan kepedulian akan timbulnya penyakit dari sampah.</p>
+
+      <div class="kotak-warna"><strong>a. Reduce (Pengurangan)</strong></div>
+      <div class="kotak-materi">
+        <p><strong>Reduce</strong> adalah pengurangan segala kegiatan yang dapat membuahkan sampah. Contoh kegiatan reduce (pengurangan) sehari-hari:</p>
+        <ol>
+          <li>Menyediakan air minum isi ulang, membawa tempat minum dan makan guna ulang.</li>
+          <li>Acara sekolah bebas sampah plastik dan stereofoam.</li>
+          <li>Makanan dan minuman di kantin tanpa kemasan plastik.</li>
+          <li>Kampanye tidak menggunakan plastik.</li>
+          <li>Minum tanpa sedotan.</li>
+          <li>Makanan tanpa sendok plastik.</li>
+          <li>Menghabiskan makanan dan minum.</li>
+          <li>Memilih produk dengan kemasan yang bisa di daur ulang.</li>
+          <li>Hindari penggunaan dan pemakaian produk yang menimbulkan banyaknya sampah.</li>
+          <li>Menggunakan produk yang bisa diisi ulang kembali.</li>
+          <li>Menghindari penggunaan barang yang tidak perlu.</li>
+        </ol>
+      </div>
+
+      <div class="kotak-warna"><strong>b. Reuse (Penggunaan Kembali)</strong></div>
+      <div class="kotak-materi">
+        <p><strong>Reuse </strong>adalah menggunakan kembali sampah secara langsung, dengan fungsi yang masih sama ataupun fungsi yang beda.</p>
+        <ol>
+          <li>Menggunakan kembali wadah yang sudah kosong untuk fungsi yang lain.</li>
+          <li>Menggunakan botol plastik bekas untuk media tanam.</li>
+          <li>Menggunakan cup kopi plastik untuk tempat pensil.</li>
+          <li>Menggunakan kertas bolak-balik untuk buku catatan.</li>
+          <li>Menggunakan kertas bekas untuk amplop/pembungkus.</li>
+          <li>Menggunakan amplop berulang.</li>
+          <li>Memakai kertas yang masih kosong untuk keperluan menulis.</li>
+        </ol>
+      </div>
+
+      <div class="kotak-warna"><strong>c. Recycle (Daur Ulang)</strong></div>
+      <div class="kotak-materi">
+        <p><strong>Recycle </strong>adalah pemanfaatan kembali sampah dengan beberapa tahapan pengolahan.</p>
+        <ol>
+          <li>Pemilahan sampah.</li>
+          <li>Kirim sampah plastik ke pemulung/bank sampah.</li>
+          <li>Kirim sampah kertas ke pemulung/bank sampah.</li>
+          <li>Membuat kompos cair dan padat.</li>
+          <li>Membuat daur ulang sampah kertas.</li>
+          <li>Mengolah sampah plastik menjadi kerajinan tangan.</li>
+          <li>Mengolah sampah organik menjadi kompos.</li>
+        </ol>
+        <p>Dalam mengelola sampah bisa dengan di daur ulang supaya memiliki nilai yang bermanfaat lagi.</p> <p><strong>Daur ulang </strong>adalah suatu cara untuk mengelola sampah dengan pemilahan, pengumpulan, pemrosesan dan pembuatan produk sampai bernilai guna lagi.</p>
+<p>Manfaat dari daur ulang adalah sebagai berikut:</p>
+<ol>
+<li>Penghematan SDA (sumber daya alam).</li>
+<li>Penghematan energi.</li>
+<li>Penghematan lahan TPA.</li>
+<li>Lingkungan menjadi lebih asri.</li>
+<li>Pengurangan biaya belanja.</li>
+</ol>
+Mengelola sampah agar memiliki nilai guna memang tidak semua orang mau melakukannya. Supaya memiliki nilai guna memang tidak semua sampah dapat didaur ulang. Jenis sampah yang mudah kamu daur ulang di sekitar rumahmu yaitu sampah organik dan anorganik.
+
+      </div>
+    </article>
+
+    <!-- 2. Pemanfaatan Sampah Anorganik -->
+    <div class="kotak-warna"><strong>2. Pemanfaatan Sampah Anorganik</strong></div>
+    <article class="kotak-materi">
+      <p><strong>Sampah anorganik </strong>adalah sampah yang sudah tidak dipakai lagi sampah yang sudah tidak dipakai lagi tetapi tidak mudah membusuk. Sampah anorganik yang tertimbun di tanah dapat menyebabkan pencemaran tanah karena sampah anorganik tergolong zat yang sulit terurai dan menyebabkan rusaknya lapisan tanah.</p>
+<p>Adapun yang tergolong sampah anorganik contohnya kertas, plastik, logam, dan kaca.</p>
+
+
+      <div class="kotak-warna"><strong>a. Memanfaatkan Sampah Kertas</strong></div>
+      <div class="kotak-materi">
+        <p>Sampah Kertas koran, majalah, buku-buku bekas dan kertas pembungkus makanan, setelah tidak terpakai lagi termasuk sampah. Banyak sekali yang diproduksi oleh para penjual karena banyaknya minat masyarakat terhadap kertas, namun kertas dapat didaur ulang dan diproses kembali menjadi barang-barang yang berguna lagi secara langsung.</p>
+<p>Sampah kertas dapat dipakai untuk:</p>
+        <ul>
+          <li>Membuat dekorasi rumah. Daripada membuang kertas pembungkus kado atau kertas kado bekas, gunakanlah dengan sedikit kreativitas kamu dapat membuat bunga, mewarnainya, membuat mozaik dan hiasan lainnya.</li>
+          <li>Lampu hias.</li>
+          <li>Saucir angin, boneka dan lainnya.</li>
+<li>Selain itu, potongan-potongan sampah kertas bisa dilebur kembali dan menjadi bubur kertas. Bubur kertas dapat dibuat menjadi berbagai kerajinan, seperti hias, bingkai foto, kotak pensil.</li>
+        </ul>
+      </div>
+
+      <div class="kotak-warna"><strong>b. Memanfaatkan Sampah Plastik</strong></div>
+      <div class="kotak-materi">
+        <p>Penggunaan sampah plastik sebagai pengganti pembungkus makanan dan kertas di rumah sudah biasa.</p> <p>Plastik digunakan oleh para pedagang, industri kecil, dan juga di rumah tangga, toko, pasar swalayan, perkantoran, sekolah dan lainnya.</p>
+<p>Di rumah tangga, sampah plastik jumlahnya setiap hari. Plastik-plastik itu dapat didaur ulang dan dibuang begitu saja ke bak sampah.</p>
+<p>Jangan kotori lingkunganmu dengan sampah plastik. Lakukan sesuatu untuk mengolah sampah plastik menjadi barang kerajinan dan hiasan.
+Pengusaha penampungan sampah plastik mengolah kembali sampah plastik menjadi peralatan dapur seperti tampah, tempat sampah, meja dan pernak-pernik untuk di rumah tangga dan lainnya.
+Selain pengusaha, mengolah sampah plastik juga dapat dilakukan di rumah tangga. Ibu rumah tangga dan anak-anak remaja dapat mengolah sampah plastik. Anak-anak yang tidak lagi memakai buku tulis, buku gambar, atau sandal dapat memanfaatkan sampah plastik menjadi hiasan kelas atau tempat pensil, kerung, dan lainnya.</p>
+
+      </div>
+
+      <div class="kotak-warna"><strong>c. Memanfaatkan Sampah Kain</strong></div>
+      <div class="kotak-materi">
+        <p>Penggunaan bahan perca, biasanya ibu rumah tangga menggunakan perca untuk membuat kerajinan. Bahan perca yang dirancang digunakan sebagai tempat sapu, tas cantik dan kosmetik, sprei sampai bantal kursi. Dulu orang menggunakan bahan dari kapuk untuk isi kasur dan kursi. Karena harga kapuk terus naik dan mulai melirik kain perca sebagai pengganti kapuk.</p>
+      </div>
+
+      <div class="kotak-warna"><strong>d. Memanfaatkan Sampah Logam</strong></div>
+      <div class="kotak-materi">
+        <p>Kalian masih ingat waktu pertama kali belajar bersepeda dahulu? Di manakah sepeda kecil yang kalian gunakan semasa duduk di TK dulu. Coba kalian tanyakan ibu dan ayah? Jika masih ada di gudang rumah, sepeda itu menjadi sampah logam. Begitu juga panci bekas, besi atau baja bekas dan peralatan rumah tangga lainnya.</p> <p>Barang-barang tersebut jika dijual ke pemulung justru paling mahal harganya di banding sampah lainnya. Barang ini paling banyak dicari oleh pemulung.</p>
+
+<p>Di kota besar seperti Surabaya bahkan ada tempat khusus untuk menjual barang bekas dari logam atau besi namanya pasar loak. Pasar ini menjual berbagai macam barang dari besi atau logam. Sampah dari barang logam masih dapat dilebur atau diolah kembali. Dalam proses daur ulang, curahan besi hasil dari peleburan dicetak menjadi barang bermanfaat. Hasilnya dapat berupa alat rumah tangga, alat pertanian, dan alat pertukangan.
+</p>
+      </div>
+    </article>
+
+    <!-- 3. Pemanfaatan Sampah Organik -->
+    <div class="kotak-warna"><strong>3. Pemanfaatan Sampah Organik</strong></div>
+    <article class="kotak-materi">
+      <p><p>Sampah organik adalah sampah yang berasal dari sisa makhluk hidup yang dapat diuraikan secara alami proses pelapukannya. Sampah organik dapat terurai secara alami menjadi zat hara. Zat hara tersebut bisa bermanfaat untuk kehidupan makhluk hidup. Oleh karena itu sampah organik kembali menjadi suatu yang dapat dimanfaatkan bagi kehidupan di sekitar kita.</p>
+<p>Akan tetapi, jika tidak dikelola dengan baik, sampah organik dapat menimbulkan penyakit dan bau yang kurang sedap sebagai hasil dari pembusukan sampah organik.</p>
+<p>Berdasarkan jenisnya sampah organik dapat digolongkan menjadi dua, antara lain sampah organik basah dan sampah organik kering.</p>
+
+
+      <div class="kotak-warna"><strong>a. Sampah Organik Basah</strong></div>
+      <div class="kotak-materi">
+        <p>Sampah organik basah adalah sampah organik yang banyak mengandung air sehingga menimbulkan bau tidak sedap jika membusuk.</p> <p>Contohnya sisa sayur, kulit pisang, buah yang busuk, kulit bawang dan sejenisnya, serta kotoran hewan/kotoran manusia.</p>
+
+      </div>
+
+      <div class="kotak-warna"><strong>b. Sampah Organik Kering</strong></div>
+      <div class="kotak-materi">
+        <p>Sampah organik kering adalah sampah organik yang sedikit mengandung air.</p> <p>Contoh sampah organik adalah kayu, ranting pohon, kayu dan daun-daun kering. Kebanyakan sampah organik sulit diolah kembali jadi lebih sering dibakar untuk memusnahkannya.</p>
+
+<p>Berikut adalah contoh pemanfaatan sampah organik.</p>
+      </div>
+
+      <div class="kotak-warna"><strong>Contoh Pemanfaatan Sampah Organik kering</strong></div>
+      <div class="kotak-materi">
+        <ol>
+          <strong><li>Kayu untuk Penyubur Tanah dan Bahan Kerajinan</li></strong>
+<p>Pada perusahaan pengolahan kayu dan perabot rumah tangga banyak menyisakan sampah kayu.</p> <p>Sisa tersebut bisa dimanfaatkan menjadi sangkar burung, kandang ayam, hiasan dinding, atau aneka kerajinan tangan.</p> <p>Sementara serbuk gergaji dipakai sebagai bahan bakar.</p> <p>Dewasa ini telah banyak diproduksi daun pintu, lantai dan triplek dari sisa potongan kayu kecil (tatal).</p>
+          <strong><li>Sampah Organik Dapat Dimanfaatkan sebagai Tambahan Pakan Ternak.</li></strong>
+<p>Mungkin yang kalian tahu sampah organik hanya dibuat untuk tambahan pakan kambing, sapi dan kerbau.</p> 
+<p>Akan tetapi, sekarang ini sampah organik dapat diolah menjadi pelet untuk makanan ayam dan ikan.</p>
+          <strong><li>Sampah Organik Dapat Diubah Menjadi Biogas dan Sumber Listrik.</li></strong>
+<p>Sampah organik yang berasal dari kotoran hewan maupun manusia, limbah tempe, dan tahu digunakan sebagai bahan utama pembuatan biogas dan sumber listrik.</p>
+          <strong><li>Sampah Organik untuk Kompos/Pupuk Organik.</li></strong>
+<p>Sampah organik seperti buah-buah busuk dan sayuran dapat dibuat menjadi suatu berguna antara lain kompos. Pengolahan sampah organik untuk kompos tidaklah terlalu sulit.</p>
+        </ol>
+      </div>
+    </article>
+
+    <!-- 4. Kompos -->
+    <div class="kotak-warna"><strong>4. Kompos</strong></div>
+    <article class="kotak-materi">
+      <p><strong>Kompos adalah </strong>bahan-bahan organik (sampah basah) yang telah mengalami proses pelapukan karena adanya mikroorganisme (bakteri pembusuk) di dalamnya.</p> 
+<p>Bahan-bahan organik tersebut, misalnya dedaunan, rumput, jerami, sisa sampah dapur dan sampah pasar, serta kotoran hewan.</p> 
+<p>Kompos dapat dimanfaatkan sebagai makanan sehat bagi tanah, sedangkan tanah yang sehat atau subur akan memberikan kebaikan bagi tumbuhan yang tumbuh di atasnya.</p> 
+<p>Kompos yang sudah siap digunakan sebagai pupuk mengandung unsur hara yang dibutuhkan tanaman.</p>
+<p><strong>Ciri-ciri kompos </strong>yang baik salah satunya adalah warnanya berbeda dengan warna bahan pembentuknya, tidak berbau, kadar airnya rendah. Di alam bebas atau terbuka, kompos dapat terbentuk sendiri melalui proses alami seperti proses terjadinya humus di hutan liar. Namun, proses tersebut bisa berlangsung cukup lama. Dengan bantuan manusia proses pengomposan bisa berlangsung cepat.</p>
+
+<p><strong>Manfaat dan keunggulan pupuk kompos dari sampah organik adalah sebagai berikut.</strong></p>
+
+      <ul>
+        <li>Menyediakan unsur hara bagi tanaman.</li>
+        <li>Memperbaiki lapisan tanahdan kelenturan tanah.</li>
+        <li>Meningkatkan daya ikat tanah terhadap air.</li>
+        <li>Memudahkan pertumbuhan akar tanaman.</li>
+        <li>Menyimpan air dalam tanah lebih lama.</li>
+        <li>Pencegah lapisan kering pada tanah.</li>
+        <li>Menjadi makanan bagi planktonyang menjadi makanan udang dan ikan dalam tambak.</li>
+        <li>Pengganti pupuk kimia (buatan) karena harga lebih murah, dan ramah lingkungan.</li>
+        <li>Bersifat multiguna, karena dapat digunakan di lahan pertanian, perkebunan, dan lahan yang kritis.</li>
+<li>Lebih tahan terhadap penyakit.</li>
+<li>Penurun aktivitas mikroorganisme tanah yang merugikan.</li>
+      </ul>
+
+      <div class="kotak-warna"><strong>a. Cara Membuat Pupuk Kompos dari Sampah Organik Rumah Tangga</strong></div>
+      <div class="kotak-materi">
+        <p>Ayo, lakukan kegiatan berikut...</p>
+        <p><strong>Tugas Kelompok – Membuat Pupuk Kompos</strong></p>
+
+        <p><strong>1) Alat:</strong></p>
+        <ul>
+          <li>Wadah berukuran besar dengan penutup (tong atau ember)</li>
+          <li>Sarung tangan</li>
+        </ul>
+
+        <p><strong>2) Bahan:</strong></p>
+        <ul>
+          <li>Sampah rumah tangga</li>
+          <li>Tanah</li>
+          <li>Air secukupnya</li>
+          <li>Arang sekam</li>
+          <li>Kapur</li>
+          <li>Cairan pupuk EM4</li>
+        </ul>
+
+        <p><strong>3) Langkah-Langkah:</strong></p>
+        <ol>
+          <li>• Siapkan sampah rumah tangga yang akan diolah menjadi pupuk kompos.</li>
+<li>• Pisahkan sampah organik (sisa makanan/dedaunan) dengan sampah plastik. Sampah organiklah yang nantinya akan digunakan sebagai pupuk kompos.</li>
+<li>• Siapkan wadah berukuran besar untuk membuat pupuk kompos. Jangan lupa bahwa wadah harus dilengkapi dengan penutup agar pupuk yang dibuat tidak akan terkontaminasi.</li>
+<li>• Masukkan tanah secukupnya ke dalam wadah yang telah diisi dengan sampah organik. Ketebalannya bisa kamu sesuaikan dengan wadah dan banyaknya sampah organik.</li>
+<li>• Siram permukaan tanah tersebut menggunakan air secukupnya.</li>
+<li>• Masukkan sampah organik yang telah dicampur arang sekam (opsional) dan kapur pertanian ke dalam wadah.</li>
+<li>• Pastikan sampah disimpan secara merata. Sebisa mungkin ketebalan sampah setara dengan ketebalan tanah.</li>
+<li>• Siram dengan air yang telah bercampur EM4.</li>
+<li>• Masukkan lagi tanah ke dalam wadah. Kali ini tanah berperan sebagai penutup sampah.</li>
+<li>• Tutup wadah dengan rapat dan biarkan sekitar tiga minggu.</li>
+</li>
+        </ol>
+
+        <p>Perhatikan hal ini saat membuat pupuk kompos sendiri di rumah, yaitu pastikan wadah pembuat pupuk kompos tidak terkontaminasi oleh air hujan dan hewan juga wadah tak terkena paparan sinar matahari. Kalau semuanya sudah dilakukan, kini kalian bisa langsung menggunakan pupuk organik ini untuk memupuk semua jenis tanaman yang ada di pekarangan rumah. Alangkah indahnya pekarangan rumah kita yang rindang oleh pepohonan, banyak bunga bermekaran.</p>
+      </div>
+    </article>
+
+    <!-- Tombol Evaluasi -->
+    <a class="btn-evaluasi" href="Soal-Cara-Pemanfaatan-Sampah.html">
+      ➤ Mulai Evaluasi
+    </a>
+
+  </div>
+</body>
+</html>

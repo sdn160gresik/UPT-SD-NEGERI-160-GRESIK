@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="id">
 <head>
@@ -6,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pengolaan Sampah</title>
   <style>
+
+.nav-left {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 999;
+}
+
+.nav-left img {
+  height: 50px;
+}
+
+
+
     :root{
       --pad:16px;
       --gap:12px;
@@ -21,15 +37,19 @@
     *{box-sizing:border-box}
     body{
       font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', Arial;
-      background:linear-gradient(180deg,#fbfbfd,#f3f7ff);
-      color:var(--text);
-      padding:32px 16px;
-      display:flex;
-      justify-content:center;
+      background: url('https://i.imgur.com/5JqOAw5.jpeg');
+      background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color:var(--text);
+  padding:32px 16px;
+  display:flex;
+  justify-content:center;
     }
     .container{
       width:100%;
       max-width:var(--maxw);
+margin-top:70px;   /* ✨ Tambahkan ini */
     }
     .box{
       padding:var(--pad);
@@ -118,10 +138,47 @@
   background:#FF3B3B;
 }
 
+.top-menu {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+  z-index: 999;
+}
+
+.top-menu a {
+  background: #ffe066;
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: #000;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.top-menu a:hover {
+  background: #ffcc33;
+}
+
 
   </style>
 </head>
 <body>
+<nav>
+<div class="nav-left">
+  <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
+  <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 50px;">
+  <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah">
+</div>  
+
+  
+<div class="top-menu">
+  <a href="index.html">🏠 Beranda</a>
+  <a href="javascript:history.back()">◀️ Kembali</a>
+  <a href="kelas.html">🏫 Kelas</a>
+</div>
+
   <div class="container">
 
     <!-- BAB 2 -->

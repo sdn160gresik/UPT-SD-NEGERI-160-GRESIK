@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kuis Seru Petualangan</title>
+
+<style>
+/* === STYLE TIDAK DIUBAH === */
+.kotak-soal {
+    background: linear-gradient(135deg, #f0f9ff, #cce5ff);
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+body {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-image: url('https://i.imgur.com/IFKQPGS.png');
+    background-size: cover;
+    background-position: center;
+}
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.nav a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    background-color: white;
+    padding: 10px 15px;
+    border: 2px solid #add8e6;
+    border-radius: 8px;
+}
+.hidden { display: none; }
+label { font-weight: bold; }
+input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+button:hover { background-color: #0056b3; }
+.info-siswa {
+    background: white;
+    border: 2px solid #add8e6;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+.answers label {
+    display: block;
+    margin-bottom: 8px;
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.answers label:hover { background: #eaf6ff; }
+.hasil-box {
+    background: white;
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.nilai-besar {
+    font-size: 40px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.nilai-merah { background: #f8d7da; color: #721c24; }
+.nilai-kuning { background: #fff3cd; color: #856404; }
+.nilai-hijau { background: #d4edda; color: #155724; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="nav">
+        <a href="bab2.html">◀️ kembali</a>
+    </div>
+
+    <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
+        🕵️ Detektif Cilik Ayo Uji Kepintaranmu
+    </h1>
+
+    <!-- Form Data -->
+    <div id="formData">
+        <h3>Silakan isi identitas sebelum mulai:</h3>
+        <label>Nama: </label><br>
+        <input type="text" id="nama"><br>
+
+        <label>Kelas: </label><br>
+        <input type="text" id="kelas"><br>
+
+        <label>No. Absen: </label><br>
+        <input type="text" id="absen"><br>
+
+        <button onclick="mulaiKuis()">Mulai Kuis</button>
+    </div>
+
+    <div id="areaKuis" class="hidden">
+        <div id="infoSiswa" class="info-siswa"></div>
+        <div id="quiz"></div>
+    </div>
+</div>
+
+<!-- ============================= SCRIPT =============================== -->
+<script>
+/* ====================== SOAL ========================= */
+let soal = [
+ /* (SEMUA SOAL TETAP SAMA — TIDAK DIUBAH) */
+  {
+    q: "Apa masalah yang dihadapi hampir seluruh negara di dunia terkait sampah?",
+    a: [
+      "Kekurangan tempat wisata",
+      "Sampah yang menumpuk dan sulit dikelola",
+      "Kurangnya petugas kebersihan",
+      "Kesulitan menanam pohon"
+    ],
+    k: 1
+  },
+  {
+    q: "Apa dampak membuang sampah sembarangan terhadap lingkungan?",
+    a: [
+      "Membuat udara menjadi lebih segar",
+      "Merusak pemandangan dan menimbulkan bau tidak sedap",
+      "Membuat sungai menjadi jernih",
+      "Meningkatkan keindahan kota"
+    ],
+    k: 1
+  },
+  {
+    q: "Apa salah satu bahaya sampah yang menumpuk di saluran air atau sungai?",
+    a: [
+      "Menjadikan air sungai harum",
+      "Mengotori laut dan mengancam biota laut",
+      "Membuat sungai lebih lebar",
+      "Mempercepat aliran air sungai"
+    ],
+    k: 1
+  },
+  {
+    q: "Mengapa sampah di pinggir jalan lebih banyak daripada di tong sampah?",
+    a: [
+      "Karena tidak ada tong sampah sama sekali",
+      "Karena banyak orang membuang sampah sembarangan",
+      "Karena tong sampah selalu tertutup rapat",
+      "Karena tong sampah hanya boleh digunakan petugas"
+    ],
+    k: 1
+  },
+  {
+    q: "Apa ajakan yang disampaikan pada akhir teks?",
+    a: [
+      "Membakar sampah di halaman rumah",
+      "Membiasakan diri membuang sampah sembarangan",
+      "Membiasakan diri membuang sampah pada tempatnya",
+      "Mengumpulkan sampah di sungai"
+    ],
+    k: 2
+  },
+  {
+    q: "Apa akibat utama jika sampah dibuang sembarangan?",
+    a: [
+      "Menjadi pupuk alami dengan cepat",
+      "Menjadi tempat berkembangnya bakteri dan parasit",
+      "Membuat lingkungan tampak lebih rapi",
+      "Menghasilkan udara yang segar"
+    ],
+    k: 1
+  },
+  {
+    q: "Apa yang dimaksud penularan penyakit secara langsung dari sampah?",
+    a: [
+      "Penyakit menyebar melalui udara",
+      "Bakteri berpindah ke tubuh saat kita bersentuhan dengan sampah",
+      "Penyakit ditularkan oleh hewan",
+      "Penyakit muncul akibat makanan basi"
+    ],
+    k: 1
+  },
+  {
+    q: "Hewan berikut ini merupakan vektor penyakit yang sering muncul karena sampah, kecuali...",
+    a: [
+      "Kecoak",
+      "Nyamuk",
+      "Tikus",
+      "Kucing"
+    ],
+    k: 3
+  },
+  {
+    q: "Mengapa sampah tajam seperti kaleng dan kaca berbahaya?",
+    a: [
+      "Dapat menyebabkan luka yang mempermudah bakteri masuk ke tubuh",
+      "Mampu memotong sampah lain",
+      "Dapat menyebabkan banjir",
+      "Tidak dapat didaur ulang"
+    ],
+    k: 0
+  },
+  {
+    q: "Contoh penularan penyakit tidak langsung melalui sampah adalah...",
+    a: [
+      "Seseorang terluka saat memegang sampah",
+      "Lalat membawa bakteri ke makanan yang kita makan",
+      "Kaki terkena kaleng yang tajam",
+      "Sampah menimbulkan bau tidak sedap"
+    ],
+    k: 1
+  },
+  {
+    q: "Penyakit berikut yang disebabkan oleh bakteri dari sampah adalah...",
+    a: ["Hepatitis A", "Tetanus", "Trakoma", "Demam berdarah"],
+    k: 1
+  },
+  {
+    q: "Contoh penyakit yang disebabkan virus akibat lingkungan kotor adalah...",
+    a: ["Cacing kremi", "Gastroenteritis", "Cacing gelang", "Tetanus"],
+    k: 1
+  },
+  {
+    q: "Penyakit akibat parasit dari sampah ditunjukkan oleh pilihan berikut, kecuali...",
+    a: ["Cacing tambang", "Cacing kremi", "Cacing gelang", "Hepatitis A"],
+    k: 3
+  },
+  {
+    q: "Wabah hepatitis A pernah terjadi di Depok dan Pacitan karena...",
+    a: ["Satu orang tidak menjaga kebersihan", "Kurangnya ventilasi rumah", "Masalah gizi buruk", "Hujan deras berhari-hari"],
+    k: 0
+  },
+  {
+    q: "Demam berdarah termasuk penyakit yang ditularkan oleh...",
+    a: ["Bakteri", "Virus yang dibawa nyamuk", "Jamur", "Parasit gelang"],
+    k: 1
+  },
+  {
+    q: "Salah satu penyakit yang dapat timbul akibat bakteri dari sampah adalah...",
+    a: ["Salmonellosis", "Cacing kremi", "Trakoma", "Hepatitis A"],
+    k: 0
+  },
+  {
+    q: "Sampah dapat menjadi tempat berkembangnya bakteri dan parasit sehingga dapat menyebabkan...",
+    a: ["Kerusakan tanaman", "Penyakit pada manusia", "Peningkatan kesuburan tanah", "Munculnya udara bersih"],
+    k: 1
+  },
+  {
+    q: "Penyakit yang mudah menular adalah...",
+    a: ["Tetanus dan cacing gelang", "Gastroenteritis dan salmonellosis", "Hepatitis A dan demam berdarah", "Trakoma dan infeksi kulit"],
+    k: 2
+  },
+  {
+    q: "Agar terhindar dari penyakit akibat sampah, tindakan yang tepat adalah...",
+    a: ["Membakar sampah plastik", "Membuang sampah sembarangan", "Membuang sampah secara benar", "Menumpuk sampah di halaman rumah"],
+    k: 2
+  },
+  {
+    q: "Apa yang harus dilakukan jika mengalami keluhan kesehatan akibat lingkungan tidak bersih?",
+    a: ["Diam di rumah", "Menghubungi dokter", "Menunggu sembuh sendiri", "Membersihkan rumah tanpa perawatan"],
+    k: 1
+  }
+]; 
+
+/* ================== ACAK SOAL & AMBIL 10 ================== */
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// Acak soal
+soal = shuffle(soal);
+
+// ⬅️ AMBIL HANYA 10 SOAL
+soal = soal.slice(0, 10);
+
+// Acak jawaban pada setiap soal
+soal.forEach(s => {
+    let jawabanAsli = s.a.map((teks, idx) => ({ teks, idx }));
+    shuffle(jawabanAsli);
+
+    s.a = jawabanAsli.map(j => j.teks);
+    s.k = jawabanAsli.findIndex(j => j.idx === s.k);
+});
+
+/* ==================== TAMPILKAN ==================== */
+let index = 0;
+let benar = 0;
+
+function mulaiKuis() {
+    let nama = document.getElementById("nama").value.trim();
+    let kelas = document.getElementById("kelas").value.trim();
+    let absen = document.getElementById("absen").value.trim();
+
+    if (!nama || !kelas || !absen) {
+        alert("Isi semua data terlebih dahulu!");
+        return;
+    }
+
+    document.getElementById("formData").classList.add("hidden");
+    document.getElementById("areaKuis").classList.remove("hidden");
+
+    document.getElementById("infoSiswa").innerHTML =
+        `Nama: <b>${nama}</b> | Kelas: <b>${kelas}</b> | Absen: <b>${absen}</b>`;
+
+    tampilkanSoal();
+}
+
+function tampilkanSoal() {
+    let q = soal[index];
+    let html = `
+        <div class="kotak-soal">${index + 1}. ${q.q}</div>
+        <div class="answers">
+    `;
+
+    q.a.forEach((opt, i) => {
+        html += `<label onclick="jawab(${i})">${opt}</label>`;
+    });
+
+    html += `</div>`;
+    document.getElementById("quiz").innerHTML = html;
+}
+
+function jawab(pilihan) {
+    if (pilihan === soal[index].k) benar++;
+    index++;
+    if (index < soal.length) tampilkanSoal();
+    else selesai();
+}
+
+/* ==================== GOOGLE FORM ==================== */
+function kirimKeGoogleForm(nama, absen, kelas, nilai) {
+    const url = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfIXifijlCji7yidZRiHCQgB8C-uq2xMwTo00IwuyjqVc_c4A/formResponse";
+
+    const formData = new FormData();
+    formData.append("entry.1114641071", nama);
+    formData.append("entry.1445858210", absen);
+    formData.append("entry.687539915", kelas);
+    formData.append("entry.175130881", nilai);
+
+    fetch(url, { method: "POST", body: formData, mode: "no-cors" });
+}
+
+/* ==================== SELESAI ========================== */
+function selesai() {
+    let nama = document.getElementById("nama").value;
+    let kelas = document.getElementById("kelas").value;
+    let absen = document.getElementById("absen").value;
+
+    let nilai = Math.round((benar / soal.length) * 100);
+
+    kirimKeGoogleForm(nama, absen, kelas, nilai);
+
+    document.getElementById("quiz").innerHTML = `
+        <div class="hasil-box">
+            <h2>Hasil Kuis</h2>
+            <div class="nilai-besar ${
+                nilai < 60 ? "nilai-merah" :
+                nilai < 80 ? "nilai-kuning" :
+                "nilai-hijau"
+            }">${nilai}</div>
+            <p>Benar: ${benar} dari ${soal.length}</p>
+        </div>
+    `;
+}
+</script>
+</body>
+</html>

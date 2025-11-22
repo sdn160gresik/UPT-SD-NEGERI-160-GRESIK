@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kuis Seru Petualangan</title>
+
+<style>
+/* === STYLE TIDAK DIUBAH === */
+.kotak-soal {
+    background: linear-gradient(135deg, #f0f9ff, #cce5ff);
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+body {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-image: url('https://i.imgur.com/IFKQPGS.png');
+    background-size: cover;
+    background-position: center;
+}
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.nav a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    background-color: white;
+    padding: 10px 15px;
+    border: 2px solid #add8e6;
+    border-radius: 8px;
+}
+.hidden { display: none; }
+label { font-weight: bold; }
+input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+button:hover { background-color: #0056b3; }
+.info-siswa {
+    background: white;
+    border: 2px solid #add8e6;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+.answers label {
+    display: block;
+    margin-bottom: 8px;
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.answers label:hover { background: #eaf6ff; }
+.hasil-box {
+    background: white;
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.nilai-besar {
+    font-size: 40px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.nilai-merah { background: #f8d7da; color: #721c24; }
+.nilai-kuning { background: #fff3cd; color: #856404; }
+.nilai-hijau { background: #d4edda; color: #155724; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="nav">
+        <a href="Cara-Pemanfaatan-Sampah.html">◀️ kembali</a>
+    </div>
+
+    <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
+        🕵️ Detektif Cilik Ayo Uji Kepintaranmu
+    </h1>
+
+    <!-- Form Data -->
+    <div id="formData">
+        <h3>Silakan isi identitas sebelum mulai:</h3>
+        <label>Nama: </label><br>
+        <input type="text" id="nama"><br>
+
+        <label>Kelas: </label><br>
+        <input type="text" id="kelas"><br>
+
+        <label>No. Absen: </label><br>
+        <input type="text" id="absen"><br>
+
+        <button onclick="mulaiKuis()">Mulai Kuis</button>
+    </div>
+
+    <div id="areaKuis" class="hidden">
+        <div id="infoSiswa" class="info-siswa"></div>
+        <div id="quiz"></div>
+    </div>
+</div>
+
+<!-- ============================= SCRIPT =============================== -->
+<script>
+/* ====================== SOAL ========================= */
+let soal = [
+    { q:"Mengapa sampah perlu dikelola dengan baik?", a:["Agar tempat pembuangan sampah semakin penuh","Agar tidak menimbulkan permasalahan terhadap lingkungan","Agar jumlah sampah semakin banyak","Agar masyarakat menjadi sibuk"], k:1 },
+
+  { q:"Apa saja tahap pengelolaan sampah secara garis besar?", a:["Pemilahan, pembakaran, dan pembuangan","Pengumpulan, pengangkutan, dan pengolahan/pemusnahan","Pencegahan, pengumpulan, dan penimbunan","Pencucian, penyortiran, dan pembakaran"], k:1 },
+
+  { q:"Pengumpulan dan pengangkutan sampah dimulai dari siapa?", a:["Pemerintah pusat","Petugas kebersihan kota saja","Tiap rumah tangga atau badan/lembaga penghasil sampah","Para pedagang pasar"], k:2 },
+
+  { q:"Setelah diangkut dari rumah tangga, sampah pertama kali dibawa ke mana?", a:["Tempat pembuangan akhir (TPA)","Laut","Tempat penampungan sementara (TPS)","Tempat pembakaran"], k:2 },
+
+  { q:"Setelah dari TPS, sampah akan dibawa ke mana?", a:["Rumah warga","Gudang penyimpanan","Tempat pembuangan akhir (TPA)","Pabrik kertas"], k:2 },
+
+  { q:"Apa yang dimaksud dengan pewadahan?", a:["Mengangkut sampah ke TPA","Menampung sampah sementara di tempat sumbernya","Mengolah sampah menjadi pupuk","Membakar sampah di halaman"], k:1 },
+
+  { q:"Contoh alat yang digunakan untuk tahap pengumpulan sampah adalah…", a:["Gerobak sampah","Mobil pemadam","Sepeda motor","Alat ukur"], k:0 },
+
+  { q:"Yang termasuk tempat penampungan sampah di rumah adalah…", a:["Ember bekas, karung plastik, dan kotak kayu","Tas sekolah dan lemari","Botol minum dan kertas","Piring dan sendok"], k:0 },
+
+  { q:"Mengapa sebaiknya dilakukan pemilahan sampah sejak awal?", a:["Agar sampah cepat habis","Agar lebih mudah dalam pengolahan atau pemanfaatan berikutnya","Agar tempat sampah penuh","Agar sampah menjadi lebih berat"], k:1 },
+
+  { q:"Tahap pengumpulan sampah adalah…", a:["Penanganan sampah dari sumbernya untuk diangkut ke TPA","Pemilahan sampah organik dan anorganik saja","Menimbun sampah di halaman","Membuang sampah ke sungai"], k:0 },
+{ q:"Mengapa tempat penampungan sampah harus mudah dibersihkan?", a:["Agar terlihat lebih berwarna","Agar mudah mengeruk dan memindahkan sampah","Agar tidak perlu sering dibersihkan","Agar tempat sampah cepat rusak"], k:1 },
+
+  { q:"Tempat sampah yang kuat dan tidak mudah rusak bermanfaat untuk…", a:["Menghemat waktu bermain","Dapat dipakai dalam jangka waktu lama","Membuat sampah menjadi banyak","Mencegah orang membuang sampah"], k:1 },
+
+  { q:"Mengapa tempat sampah perlu diberi penutup yang rapat?", a:["Agar tidak bisa dibuka","Agar terlihat lebih indah","Agar tidak mudah dihinggapi lalat, kecoa, atau binatang lain","Agar sampah cepat kering"], k:2 },
+
+  { q:"Penutup tempat sampah harus bersifat…", a:["Longgar","Rapat dan aman","Berat dan sulit dibuka","Ringan dan mudah terbang"], k:1 },
+
+  { q:"Tempat sampah sebaiknya dihindarkan dari…", a:["Tanaman hias","Sinar matahari langsung, air hujan, dan angin","Ruangan tertutup","Peralatan dapur"], k:1 },
+
+  { q:"Mengapa tempat sampah perlu dijauhkan dari sinar matahari langsung?", a:["Agar warnanya tidak pudar","Agar sampah cepat kering","Agar bau tidak semakin menyengat dan tempat tidak cepat rusak","Agar lebih mudah dilihat"], k:2 },
+
+  { q:"Tempat sampah sebaiknya diletakkan di mana?", a:["Di dalam kamar tidur","Di garasi","Di luar rumah","Di atas lemari"], k:2 },
+
+  { q:"Mengapa tempat sampah ditempatkan di luar rumah?", a:["Agar tidak terlihat oleh tamu","Agar mudah dijangkau saat pemindahan dan bau tidak masuk ke rumah","Agar terkena sinar matahari","Agar lebih cepat penuh"], k:1 },
+
+  { q:"Berapa jumlah tempat sampah minimum yang dianjurkan?", a:["Satu","Dua","Tiga","Empat"], k:1 },
+
+  { q:"Dua tempat sampah diperlukan untuk memisahkan…", a:["Sampah basah dan sampah cair","Sampah makanan dan sampah pakaian","Sampah organik dan anorganik","Sampah logam dan plastik"], k:2 },
+
+  { q:"Pembakaran sampah tidak dianjurkan karena…", a:["Menghasilkan api yang indah","Menghemat tempat","Mencemari lingkungan","Membuat udara menjadi wangi"], k:2 },
+
+  { q:"Sampah lebih baik diolah atau didaur ulang karena…", a:["Dapat membuat lingkungan semakin kotor","Memperkecil manfaat sampah","Mengurangi pencemaran dan menghasilkan barang berguna","Membuat rumah kotor"], k:2 },
+
+  { q:"Manakah yang termasuk prinsip pembuatan tempat penampungan sampah?", a:["Tempat sampah harus ditempatkan di dalam ruangan tertutup","Tempat sampah harus selalu terkena sinar matahari","Tempat sampah harus kuat dan tidak mudah rusak","Tempat sampah harus digunakan untuk membakar sampah"], k:2 },
+
+  { q:"Jika tempat sampah tidak memiliki penutup, maka kemungkinan yang terjadi adalah…", a:["Sampah menjadi harum","Lalat dan kecoa mudah menghinggapi","Sampah cepat hilang","Tempat sampah menjadi lebih kuat"], k:1 },
+
+  { q:"Salah satu cara menjaga lingkungan dari pencemaran sampah adalah…", a:["Membakar semua sampah","Membiarkan sampah menumpuk","Membuang sampah ke sungai","Mengolah atau mendaur ulang sampah"], k:3 }
+
+];
+
+/* ======= ACAK URUTAN SOAL & AMBIL 10 ======= */
+function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+}
+
+shuffle(soal);
+soal = soal.slice(0, 10);
+
+// Acak jawaban tiap soal
+soal.forEach(item => {
+    let benar = item.a[item.k];
+    shuffle(item.a);
+    item.k = item.a.indexOf(benar);
+});
+
+
+/* ===================== MULAI ===================== */
+function mulaiKuis() {
+    let nama = document.getElementById("nama").value;
+    let kelas = document.getElementById("kelas").value;
+    let absen = document.getElementById("absen").value;
+
+    if (!nama || !kelas || !absen) {
+        alert("Lengkapi identitas terlebih dahulu!");
+        return;
+    }
+
+    document.getElementById("formData").classList.add("hidden");
+    document.getElementById("areaKuis").classList.remove("hidden");
+
+    document.getElementById("infoSiswa").innerHTML =
+        `<b>Nama:</b> ${nama} | <b>Kelas:</b> ${kelas} | <b>Absen:</b> ${absen}`;
+
+    tampilkanSoal(0);
+}
+
+let nomor = 0;
+let benar = 0;
+
+/* ===================== TAMPILKAN SOAL ===================== */
+function tampilkanSoal(i) {
+    let q = soal[i];
+    let html = `
+        <div class="kotak-soal">
+            <p>${i + 1}. ${q.q}</p>
+            <div class="answers">
+    `;
+    q.a.forEach((j, idx) => {
+        html += `<label onclick="jawab(${idx})">${j}</label>`;
+    });
+
+    html += `</div></div>`;
+    document.getElementById("quiz").innerHTML = html;
+}
+
+/* ===================== CEK ===================== */
+function jawab(pilihan) {
+    if (pilihan === soal[nomor].k) benar++;
+
+    nomor++;
+    if (nomor < soal.length) {
+        tampilkanSoal(nomor);
+    } else {
+        selesai();
+    }
+}
+
+/* ===================== SELESAI ===================== */
+function selesai() {
+    let nilai = Math.round((benar / soal.length) * 100);
+
+    let warna = "nilai-hijau";
+    if (nilai < 70) warna = "nilai-merah";
+    else if (nilai < 85) warna = "nilai-kuning";
+
+    document.getElementById("quiz").innerHTML = `
+        <div class="hasil-box">
+            <h2>Hasil Kuis</h2>
+            <div class="nilai-besar ${warna}">${nilai}</div>
+            <p>Jawaban benar: <b>${benar}</b> dari <b>${soal.length}</b></p>
+        </div>
+    `;
+
+    kirimNilai(nilai);
+}
+
+/* ===================== KIRIM NILAI (IDENTITAS BARU) ===================== */
+function kirimNilai(nilai) {
+
+    let nama = document.getElementById("nama").value;
+    let kelas = document.getElementById("kelas").value;
+    let absen = document.getElementById("absen").value;
+
+    let url = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSc0ZZLpqViflz-SrwaogMbECADEeHQVioD_J9Hnv9BDbiCsKg/formResponse";
+
+    let form = new FormData();
+    form.append("entry.1114641071", nama);
+    form.append("entry.687539915", kelas);
+    form.append("entry.1445858210", absen);
+    form.append("entry.175130881", nilai);
+
+    fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        body: form
+    });
+
+    console.log("Nilai terkirim:", nilai);
+}
+</script>
+
+</body>
+</html>

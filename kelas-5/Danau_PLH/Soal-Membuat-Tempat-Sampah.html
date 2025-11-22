@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kuis Seru Petualangan</title>
+
+<style>
+/* === STYLE TIDAK DIUBAH === */
+.kotak-soal {
+    background: linear-gradient(135deg, #f0f9ff, #cce5ff);
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+body {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-image: url('https://i.imgur.com/IFKQPGS.png');
+    background-size: cover;
+    background-position: center;
+}
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.nav a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    background-color: white;
+    padding: 10px 15px;
+    border: 2px solid #add8e6;
+    border-radius: 8px;
+}
+.hidden { display: none; }
+label { font-weight: bold; }
+input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+button:hover { background-color: #0056b3; }
+.info-siswa {
+    background: white;
+    border: 2px solid #add8e6;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+.answers label {
+    display: block;
+    margin-bottom: 8px;
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.answers label:hover { background: #eaf6ff; }
+.hasil-box {
+    background: white;
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.nilai-besar {
+    font-size: 40px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.nilai-merah { background: #f8d7da; color: #721c24; }
+.nilai-kuning { background: #fff3cd; color: #856404; }
+.nilai-hijau { background: #d4edda; color: #155724; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="nav">
+        <a href="bab2.html">◀️ kembali</a>
+    </div>
+
+    <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
+        🕵️ Detektif Cilik Ayo Uji Kepintaranmu
+    </h1>
+
+    <!-- Form Data -->
+    <div id="formData">
+        <h3>Silakan isi identitas sebelum mulai:</h3>
+        <label>Nama: </label><br>
+        <input type="text" id="nama"><br>
+
+        <label>Kelas: </label><br>
+        <input type="text" id="kelas"><br>
+
+        <label>No. Absen: </label><br>
+        <input type="text" id="absen"><br>
+
+        <button onclick="mulaiKuis()">Mulai Kuis</button>
+    </div>
+
+    <div id="areaKuis" class="hidden">
+        <div id="infoSiswa" class="info-siswa"></div>
+        <div id="quiz"></div>
+    </div>
+</div>
+
+<!-- ============================= SCRIPT =============================== -->
+<script>
+/* ====================== SOAL ========================= */
+let soal = [
+ /* (SEMUA SOAL TETAP SAMA — TIDAK DIUBAH) */
+ {
+    q: "Apa tujuan menyediakan tiga drum atau ember bekas dalam pembuatan tempat penampungan sampah?",
+    a: [
+      "Agar tempat sampah terlihat rapi",
+      "Untuk memisahkan jenis-jenis sampah",
+      "Agar sampah lebih cepat membusuk",
+      "Supaya drum tidak mudah penuh"
+    ],
+    k: 1
+  },
+  {
+    q: "Ukuran minimal drum atau ember yang digunakan untuk tempat sampah adalah mampu menampung…",
+    a: [
+      "1 kg sampah",
+      "3 kg sampah",
+      "5 kg sampah",
+      "10 kg sampah"
+    ],
+    k: 2
+  },
+  {
+    q: "Mengapa bagian luar drum diberi tulisan organik, anorganik, dan kertas?",
+    a: [
+      "Agar drum terlihat lebih bagus",
+      "Supaya memudahkan proses pembuangan sesuai jenis sampah",
+      "Agar drum tidak tertukar saat dipindahkan",
+      "Untuk mencegah drum menjadi kotor"
+    ],
+    k: 1
+  },
+  {
+    q: "Mengwhy tempat penampungan sampah harus memiliki penutup yang rapat?",
+    a: [
+      "Untuk menjaga warnanya tetap bersih",
+      "Agar tidak mudah dipindah-pindah",
+      "Agar tidak dihinggapi lalat atau hewan lain",
+      "Supaya dapat menampung lebih banyak sampah"
+    ],
+    k: 2
+  },
+  {
+    q: "Bahan apa saja yang dapat digunakan untuk membuat tempat penampungan sampah?",
+    a: [
+      "Hanya drum baru",
+      "Drum atau ember bekas dari bahan apa pun",
+      "Hanya ember plastik",
+      "Hanya bahan dari besi"
+    ],
+    k: 1
+  },
+  {
+    q: "Apa manfaat memisahkan sampah organik, anorganik, dan kertas?",
+    a: [
+      "Memudahkan pengelolaan dan daur ulang sampah",
+      "Membuat tempat sampah menjadi lebih berat",
+      "Mengurangi ukuran drum",
+      "Menghilangkan bau sampah"
+    ],
+    k: 0
+  },
+  {
+    q: "Apa yang terjadi jika tempat sampah tidak diberi penutup rapat?",
+    a: [
+      "Sampah akan tetap bersih",
+      "Lalat dan kecoa mudah masuk",
+      "Drum menjadi lebih kuat",
+      "Sampah cepat kering"
+    ],
+    k: 1
+  },
+  {
+    q: "Mengapa ukuran minimal drum adalah mampu menampung 5 kg sampah?",
+    a: [
+      "Agar tidak perlu sering dibersihkan",
+      "Agar cukup menampung sampah harian",
+      "Supaya terlihat besar",
+      "Karena itu ukuran standar drum"
+    ],
+    k: 1
+  },
+  {
+    q: "Apa fungsi tulisan penanda pada drum tempat sampah?",
+    a: [
+      "Sebagai dekorasi drum",
+      "Agar sampah bisa dicuci",
+      "Sebagai penanda jenis sampah yang boleh dimasukkan",
+      "Agar drum lebih kuat"
+    ],
+    k: 2
+  },
+  {
+    q: "Mengapa bahan dari karet ban bekas bisa digunakan untuk membuat tempat penampungan sampah?",
+    a: [
+      "Karena bahannya kuat dan tahan lama",
+      "Karena warnanya menarik",
+      "Karena mudah rusak",
+      "Karena tidak bisa dibersihkan"
+    ],
+    k: 0
+  },
+
+  /* ———————— jumlah soal panjang, tetap sama ————————— */
+  
+  {
+    q: "Apa manfaat berbagi makanan kepada orang yang membutuhkan?",
+    a: [
+      "Mengurangi sampah dan membantu mengurangi angka kelaparan",
+      "Membuat orang lain bergantung pada kita",
+      "Membuat makanan menjadi lebih mahal",
+      "Mengurangi waktu makan kita sendiri"
+    ],
+    k: 0
+  }
+
+]; 
+
+/* ================== ACAK SOAL & AMBIL 10 ================== */
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// Acak soal
+soal = shuffle(soal);
+
+// AMBIL HANYA 10 SOAL
+soal = soal.slice(0, 10);
+
+// Acak jawaban pada setiap soal
+soal.forEach(s => {
+    let jawabanAsli = s.a.map((teks, idx) => ({ teks, idx }));
+    shuffle(jawabanAsli);
+
+    s.a = jawabanAsli.map(j => j.teks);
+    s.k = jawabanAsli.findIndex(j => j.idx === s.k);
+});
+
+/* ==================== TAMPILKAN ==================== */
+let index = 0;
+let benar = 0;
+
+function mulaiKuis() {
+    let nama = document.getElementById("nama").value.trim();
+    let kelas = document.getElementById("kelas").value.trim();
+    let absen = document.getElementById("absen").value.trim();
+
+    if (!nama || !kelas || !absen) {
+        alert("Isi semua data terlebih dahulu!");
+        return;
+    }
+
+    document.getElementById("formData").classList.add("hidden");
+    document.getElementById("areaKuis").classList.remove("hidden");
+
+    document.getElementById("infoSiswa").innerHTML =
+        `Nama: <b>${nama}</b> | Kelas: <b>${kelas}</b> | Absen: <b>${absen}</b>`;
+
+    tampilkanSoal();
+}
+
+function tampilkanSoal() {
+    let q = soal[index];
+    let html = `
+        <div class="kotak-soal">${index + 1}. ${q.q}</div>
+        <div class="answers">
+    `;
+
+    q.a.forEach((opt, i) => {
+        html += `<label onclick="jawab(${i})">${opt}</label>`;
+    });
+
+    html += `</div>`;
+    document.getElementById("quiz").innerHTML = html;
+}
+
+function jawab(pilihan) {
+    if (pilihan === soal[index].k) benar++;
+    index++;
+    if (index < soal.length) tampilkanSoal();
+    else selesai();
+}
+
+/* ==================== GOOGLE FORM BARU ==================== */
+function kirimKeGoogleForm(nama, absen, kelas, nilai) {
+    const url = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSf4WG81iIif5_46LVT98DIkAIyHsRT0osAZ8fdnEtHxaxKs4g/formResponse";
+
+    const formData = new FormData();
+    formData.append("entry.1114641071", nama);
+    formData.append("entry.1445858210", absen);
+    formData.append("entry.687539915", kelas);
+    formData.append("entry.175130881", nilai);
+
+    fetch(url, { method: "POST", body: formData, mode: "no-cors" });
+}
+
+/* ==================== SELESAI ========================== */
+function selesai() {
+    let nama = document.getElementById("nama").value;
+    let kelas = document.getElementById("kelas").value;
+    let absen = document.getElementById("absen").value;
+
+    let nilai = Math.round((benar / soal.length) * 100);
+
+    kirimKeGoogleForm(nama, absen, kelas, nilai);
+
+    document.getElementById("quiz").innerHTML = `
+        <div class="hasil-box">
+            <h2>Hasil Kuis</h2>
+            <div class="nilai-besar ${
+                nilai < 60 ? "nilai-merah" :
+                nilai < 80 ? "nilai-kuning" :
+                "nilai-hijau"
+            }">${nilai}</div>
+            <p>Benar: ${benar} dari ${soal.length}</p>
+        </div>
+    `;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <title>Tugas Bahasa Indonesia</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      padding: 20px;
+      background-image: url('https://i.imgur.com/lvA1NVC.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .nav {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .nav a {
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: bold;
+      background-color: white;
+      padding: 10px 15px;
+      border: 2px solid #add8e6;
+      border-radius: 8px;
+    }
+
+    .bacaan-box {
+      background: #ffffffd8;
+      padding: 15px;
+      border-left: 6px solid #4da3ff;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      white-space: pre-line;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .soal-box {
+      background: #e8f4ff;
+      padding: 15px;
+      border-radius: 10px;
+      border: 2px solid #b6dcff;
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .answers label {
+      display: block;
+      background: #ffffff;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #b6dcff;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    input[type="radio"] {
+      accent-color: #007bff;
+      transform: scale(1.2);
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="nav">
+      <a href="index.html">📘 Tugas Kelas 5</a>
+      <a href="Latihan Soal Matematika Kelas 5.html">🔢 Matematika</a>
+      <a href="#">🧪 IPAS</a>
+      <a href="Latihan Soal Seni Kelas 5.html">🎨 Seni</a>
+    </div>
+
+    <h1 style="color: #2c3e50; text-align: center; margin-bottom: 30px; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">Tugas Bahasa Indonesia</h1>
+
+    <div id="quiz"></div>
+    <div id="result"></div>
+    <div id="restart" style="display:none; margin-top: 20px;">
+      <button onclick="muatUlang()">Mulai Lagi</button>
+    </div>
+
+  </div>
+
+  <script>
+    const soal = [
+      {
+    q: "Teks fiksi adalah teks yang…",
+    a: [
+      "berisi imajinasi atau cerita rekaan",
+      "berisi laporan hasil penelitian",
+      "memuat fakta yang dapat dibuktikan",
+      "berisi informasi ensiklopedis"
+    ],
+    k: 0
+  },
+  {
+    q: "Teks nonfiksi ditulis berdasarkan….",
+    a: [
+      "khayalan penulis",
+      "hasil imajinasi",
+      "perasaan tokoh",
+      "fakta yang benar-benar terjadi"
+    ],
+    k: 3
+  },
+  {
+    q: "Ciri yang membedakan teks fiksi dari nonfiksi adalah….",
+    a: [
+      "Teks fiksi menggunakan bahasa ilmiah",
+      "Teks nonfiksi memakai tokoh imajinasi",
+      "Teks fiksi mengandung alur dan amanat",
+      "Teks nonfiksi tidak memiliki struktur informasi"
+    ],
+    k: 2
+  },
+  {
+    q: "Jika pada gambar sampul terlihat judul “Petualangan di Hutan Misterius”, maka kemungkinan besar buku tersebut adalah….",
+    a: [
+      "Nonfiksi karena menjelaskan hutan",
+      "Fiksi karena mengandung unsur petualangan",
+      "Nonfiksi karena berisi informasi ilmiah",
+      "Artikel tentang tumbuhan hutan"
+    ],
+    k: 1
+  },
+  {
+    q: "Informasi dalam teks nonfiksi bersifat….",
+    a: [
+      "imajinatif",
+      "emosional",
+      "faktual",
+      "karangan bebas"
+    ],
+    k: 2
+  },
+  {
+    q: "Teks fiksi biasanya digunakan untuk….",
+    a: [
+      "membuktikan kebenaran data",
+      "menghibur pembaca dengan cerita",
+      "menyampaikan informasi ilmiah",
+      "memberikan laporan kegiatan"
+    ],
+    k: 1
+  },
+  {
+    q: "Berikut yang termasuk contoh teks nonfiksi adalah….",
+    a: [
+      "dongeng",
+      "cerpen",
+      "laporan ilmiah tentang hewan",
+      "novel fantasi"
+    ],
+    k: 2
+  },
+  {
+    q: "Pernyataan berikut yang benar adalah….",
+    a: [
+      "Semua teks fiksi benar-benar terjadi",
+      "Teks nonfiksi selalu berisi percakapan",
+      "Teks fiksi tidak memuat tokoh",
+      "Teks nonfiksi berisi informasi berdasarkan fakta"
+    ],
+    k: 3
+  },
+{
+  q: "“Aduh, sakit!” Suara Kelinci Kecil menggelegar di sudut kebun Pak Rusa.\nWajahnya tampak seputih kapas kapas dan titik-titik air mulai membanjiri matanya.\nIa terduduk di tanah sambil memegangi kakinya. Burung Pipit, yang sedang\nbertengger di dahan pohon dekat kebun itu, segera terbang menghampirinya.\n“Ada apa Kelinci Kecil?”\n“Kakiku terantuk batu lalu aku jatuh,” jawab Kelinci Kecil sambil meringis\nkesakitan.\n“Apa yang kamu lakukan di sini?” tanya Burung Pipit.\n“Aku… aku… mmm… aku mau mengambil wortel itu,” Kelinci Kecil menunjuk ke\narah tanaman wortel di kebun Pak Rusa.\n“Wah, kamu mau mengambil wortel Pak Rusa tanpa izin?” tanya Burung Pipit.\n“I… iya… Aku melihat daun-daun tanaman wortel itu melambai-lambai\nmemanggilku,” jawab Kelinci Kecil dengan kepala tertunduk.\n“Sebaiknya kamu minta izin dulu ke Pak Rusa. Aku sering melihat Pak Rusa\nmembagikan wortel-wortelnya ke binatang lain yang membantunya berkebun,”\nBurung Pipit menjelaskan.\n\nApa penyebab Kelinci Kecil jatuh di kebun Pak Rusa?",
+  a: ["Ia tersandung akar pohon", "Ia terantuk batu", "Ia didorong Burung Pipit", "Ia tertiup angin kencang"],
+  k: 1
+},
+{
+  q: "“Aduh, sakit!” Suara Kelinci Kecil menggelegar di sudut kebun Pak Rusa.\nWajahnya tampak seputih kapas kapas dan titik-titik air mulai membanjiri matanya.\nIa terduduk di tanah sambil memegangi kakinya. Burung Pipit, yang sedang\nbertengger di dahan pohon dekat kebun itu, segera terbang menghampirinya.\n“Ada apa Kelinci Kecil?”\n“Kakiku terantuk batu lalu aku jatuh,” jawab Kelinci Kecil sambil meringis\nkesakitan.\n“Apa yang kamu lakukan di sini?” tanya Burung Pipit.\n“Aku… aku… mmm… aku mau mengambil wortel itu,” Kelinci Kecil menunjuk ke\narah tanaman wortel di kebun Pak Rusa.\n“Wah, kamu mau mengambil wortel Pak Rusa tanpa izin?” tanya Burung Pipit.\n“I… iya… Aku melihat daun-daun tanaman wortel itu melambai-lambai\nmemanggilku,” jawab Kelinci Kecil dengan kepala tertunduk.\n“Sebaiknya kamu minta izin dulu ke Pak Rusa. Aku sering melihat Pak Rusa\nmembagikan wortel-wortelnya ke binatang lain yang membantunya berkebun,”\nBurung Pipit menjelaskan.\n\n\n\nAmanat yang terkandung dalam cerita tersebut adalah….",
+  a: [
+    "Jangan membantu teman yang kesakitan",
+    "Mintalah izin sebelum mengambil milik orang lain",
+    "Berlarilah lebih cepat agar tidak terjatuh",
+    "Jangan berbicara dengan burung"
+  ],
+  k: 1
+},
+
+{
+  q: "“Aduh, sakit!” Suara Kelinci Kecil menggelegar di sudut kebun Pak Rusa.\nWajahnya tampak seputih kapas kapas dan titik-titik air mulai membanjiri matanya.\nIa terduduk di tanah sambil memegangi kakinya. Burung Pipit, yang sedang\nbertengger di dahan pohon dekat kebun itu, segera terbang menghampirinya.\n“Ada apa Kelinci Kecil?”\n“Kakiku terantuk batu lalu aku jatuh,” jawab Kelinci Kecil sambil meringis\nkesakitan.\n“Apa yang kamu lakukan di sini?” tanya Burung Pipit.\n“Aku… aku… mmm… aku mau mengambil wortel itu,” Kelinci Kecil menunjuk ke\narah tanaman wortel di kebun Pak Rusa.\n“Wah, kamu mau mengambil wortel Pak Rusa tanpa izin?” tanya Burung Pipit.\n“I… iya… Aku melihat daun-daun tanaman wortel itu melambai-lambai\nmemanggilku,” jawab Kelinci Kecil dengan kepala tertunduk.\n“Sebaiknya kamu minta izin dulu ke Pak Rusa. Aku sering melihat Pak Rusa\nmembagikan wortel-wortelnya ke binatang lain yang membantunya berkebun,”\nBurung Pipit menjelaskan.\n\nSikap yang ditunjukkan Burung Pipit adalah….",
+  a: ["Acuh tak acuh", "Suka mengganggu", "Peduli dan suka menolong", "Pemarah"],
+  k: 2
+},
+{
+  q:"“Aduh, sakit!” Suara Kelinci Kecil menggelegar di sudut kebun Pak Rusa.\nWajahnya tampak seputih kapas kapas dan titik-titik air mulai membanjiri matanya.\nIa terduduk di tanah sambil memegangi kakinya. Burung Pipit, yang sedang\nbertengger di dahan pohon dekat kebun itu, segera terbang menghampirinya.\n“Ada apa Kelinci Kecil?”\n“Kakiku terantuk batu lalu aku jatuh,” jawab Kelinci Kecil sambil meringis\nkesakitan.\n“Apa yang kamu lakukan di sini?” tanya Burung Pipit.\n“Aku… aku… mmm… aku mau mengambil wortel itu,” Kelinci Kecil menunjuk ke\narah tanaman wortel di kebun Pak Rusa.\n“Wah, kamu mau mengambil wortel Pak Rusa tanpa izin?” tanya Burung Pipit.\n“I… iya… Aku melihat daun-daun tanaman wortel itu melambai-lambai\nmemanggilku,” jawab Kelinci Kecil dengan kepala tertunduk.\n“Sebaiknya kamu minta izin dulu ke Pak Rusa. Aku sering melihat Pak Rusa\nmembagikan wortel-wortelnya ke binatang lain yang membantunya berkebun,”\nBurung Pipit menjelaskan.\n\nTokoh utama dalam cerita tersebut adalah….",
+  a: ["Pak Rusa", "Kelinci Kecil", "Burung Hantu", "Burung Pipit"],
+  k: 1
+},
+
+{
+  q:"“Aduh, sakit!” Suara Kelinci Kecil menggelegar di sudut kebun Pak Rusa.\nWajahnya tampak seputih kapas kapas dan titik-titik air mulai membanjiri matanya.\nIa terduduk di tanah sambil memegangi kakinya. Burung Pipit, yang sedang\nbertengger di dahan pohon dekat kebun itu, segera terbang menghampirinya.\n“Ada apa Kelinci Kecil?”\n“Kakiku terantuk batu lalu aku jatuh,” jawab Kelinci Kecil sambil meringis\nkesakitan.\n“Apa yang kamu lakukan di sini?” tanya Burung Pipit.\n“Aku… aku… mmm… aku mau mengambil wortel itu,” Kelinci Kecil menunjuk ke\narah tanaman wortel di kebun Pak Rusa.\n“Wah, kamu mau mengambil wortel Pak Rusa tanpa izin?” tanya Burung Pipit.\n“I… iya… Aku melihat daun-daun tanaman wortel itu melambai-lambai\nmemanggilku,” jawab Kelinci Kecil dengan kepala tertunduk.\n“Sebaiknya kamu minta izin dulu ke Pak Rusa. Aku sering melihat Pak Rusa\nmembagikan wortel-wortelnya ke binatang lain yang membantunya berkebun,”\nBurung Pipit menjelaskan.\n\nTokoh yang memberikan nasihat kepada Kelinci Kecil adalah….",
+  a: ["Pak Rusa", "Burung Pipit", "Ayam Hutan", "Ibu Kelinci"],
+  k: 1
+},
+{
+  q:"“Aduh, sakit!” Suara Kelinci Kecil menggelegar di sudut kebun Pak Rusa.\nWajahnya tampak seputih kapas kapas dan titik-titik air mulai membanjiri matanya.\nIa terduduk di tanah sambil memegangi kakinya. Burung Pipit, yang sedang\nbertengger di dahan pohon dekat kebun itu, segera terbang menghampirinya.\n“Ada apa Kelinci Kecil?”\n“Kakiku terantuk batu lalu aku jatuh,” jawab Kelinci Kecil sambil meringis\nkesakitan.\n“Apa yang kamu lakukan di sini?” tanya Burung Pipit.\n“Aku… aku… mmm… aku mau mengambil wortel itu,” Kelinci Kecil menunjuk ke\narah tanaman wortel di kebun Pak Rusa.\n“Wah, kamu mau mengambil wortel Pak Rusa tanpa izin?” tanya Burung Pipit.\n“I… iya… Aku melihat daun-daun tanaman wortel itu melambai-lambai\nmemanggilku,” jawab Kelinci Kecil dengan kepala tertunduk.\n“Sebaiknya kamu minta izin dulu ke Pak Rusa. Aku sering melihat Pak Rusa\nmembagikan wortel-wortelnya ke binatang lain yang membantunya berkebun,”\nBurung Pipit menjelaskan.\n\nLatar tempat pada cerita tersebut adalah….",
+  a: ["Rumah Kelinci", "Hutan gelap", "Kebun Pak Rusa", "Danau kecil"],
+  k: 2
+},
+
+{
+  q:"“Aduh, sakit!” Suara Kelinci Kecil menggelegar di sudut kebun Pak Rusa.\nWajahnya tampak seputih kapas kapas dan titik-titik air mulai membanjiri matanya.\nIa terduduk di tanah sambil memegangi kakinya. Burung Pipit, yang sedang\nbertengger di dahan pohon dekat kebun itu, segera terbang menghampirinya.\n“Ada apa Kelinci Kecil?”\n“Kakiku terantuk batu lalu aku jatuh,” jawab Kelinci Kecil sambil meringis\nkesakitan.\n“Apa yang kamu lakukan di sini?” tanya Burung Pipit.\n“Aku… aku… mmm… aku mau mengambil wortel itu,” Kelinci Kecil menunjuk ke\narah tanaman wortel di kebun Pak Rusa.\n“Wah, kamu mau mengambil wortel Pak Rusa tanpa izin?” tanya Burung Pipit.\n“I… iya… Aku melihat daun-daun tanaman wortel itu melambai-lambai\nmemanggilku,” jawab Kelinci Kecil dengan kepala tertunduk.\n“Sebaiknya kamu minta izin dulu ke Pak Rusa. Aku sering melihat Pak Rusa\nmembagikan wortel-wortelnya ke binatang lain yang membantunya berkebun,”\nBurung Pipit menjelaskan.\n\nPeristiwa yang menyebabkan cerita dimulai adalah….",
+  a: [
+    "Burung Pipit memanen buah",
+    "Kelinci Kecil bermain di hutan",
+    "Kelinci Kecil terantuk batu dan jatuh",
+    "Pak Rusa memanggil hewan-hewan"
+  ],
+  k: 2
+},
+ {
+    q: "Kalimat “Angin malam bernyanyi pelan” menggunakan majas….",
+    a: ["Hiperbola", "Personifikasi", "Metafora", "Simile"],
+    k: 1
+  },
+  {
+    q: "“Wajahnya secerah mentari pagi” merupakan majas….",
+    a: ["Metafora", "Hiperbola", "Simile", "Personifikasi"],
+    k: 2
+  },
+  {
+    q: "“Rumah itu menelan korban” berarti….",
+    a: [
+      "Rumah berbicara",
+      "Rumah bergerak sendiri",
+      "Rumah menyebabkan kecelakaan",
+      "Rumah sedang kelaparan"
+    ],
+    k: 2
+  },
+  {
+    q: "Kalimat yang mengandung majas metafora adalah….",
+    a: [
+      "Ayah adalah tulang punggung keluarga.",
+      "Pelangi tersenyum di langit.",
+      "Suaranya keras sekali.",
+      "Anak itu kuat seperti harimau."
+    ],
+    k: 0
+  },
+  {
+    q: "“Hatinya selembut kapas” merupakan majas….",
+    a: ["Simile", "Metafora", "Hiperbola", "Personifikasi"],
+    k: 0
+  },
+
+  // ----- IMBUHAN -----
+  {
+    q: "Kata berimbuhan me- pada kalimat “Ibu _____ makanan untuk keluarga” adalah….",
+    a: ["memasak", "masak", "memasakan", "dimasak"],
+    k: 0
+  },
+  {
+    q: "Imbuhan –kan digunakan pada kalimat….",
+    a: [
+      "Tolong baca surat ini!",
+      "Ayah memperbaiki atap rumah.",
+      "Ibu membacakan cerita untuk adik.",
+      "Kakak bermain bola di lapangan."
+    ],
+    k: 2
+  },
+  {
+    q: "Kata berakhiran –lah terdapat pada kalimat….",
+    a: [
+      "Bacalah buku itu sampai selesai!",
+      "Baca buku itu di perpustakaan!",
+      "Membaca buku itu menyenangkan.",
+      "Aku sudah membaca buku itu."
+    ],
+    k: 0
+  },
+  {
+    q: "Kata berimbuhan me- yang tepat untuk gambar orang menulis adalah….",
+    a: ["tulis", "menulis", "ditulis", "tulisan"],
+    k: 1
+  },
+  {
+    q: "Kata “menggambar” terbentuk dari….",
+    a: [
+      "me- + gambar",
+      "meng- + gambar",
+      "me- + gambar + -kan",
+      "meng- + gambar + -kan"
+    ],
+    k: 1
+  },
+
+  // ----- SURAT PRIBADI -----
+  {
+    q: "Bagian surat pribadi yang berisi tempat dan tanggal ditulis adalah….",
+    a: ["Salam pembuka", "Kepala surat", "Isi surat", "Salam penutup"],
+    k: 1
+  },
+  {
+    q: "Surat pribadi digunakan untuk….",
+    a: [
+      "Komunikasi resmi",
+      "Mengirim laporan",
+      "Berkomunikasi dengan teman atau keluarga",
+      "Mengirim undangan rapat"
+    ],
+    k: 2
+  },
+  {
+    q: "“Sahabatku Dina” merupakan bagian….",
+    a: ["Isi", "Salam pembuka", "Salam penutup", "Lampiran"],
+    k: 1
+  },
+  {
+    q: "Yang TIDAK termasuk unsur surat pribadi adalah….",
+    a: ["Tempat dan tanggal", "Salam penutup", "Tanda tangan pejabat", "Isi surat"],
+    k: 2
+  },
+  {
+    q: "Informasi dalam surat pribadi bersifat….",
+    a: ["Resmi", "Santai dan personal", "Serius dan ilmiah", "Rahasia pemerintah"],
+    k: 1
+  },
+
+  // ----- IDIOM -----
+  {
+    q: "Idiom “buah tangan” berarti….",
+    a: ["Tangan yang memegang buah", "Hadiah atau oleh-oleh", "Tangan yang besar", "Tangan yang licin"],
+    k: 1
+  },
+  {
+    q: "“Angkat kaki” memiliki arti….",
+    a: ["Berdiri", "Pergi meninggalkan tempat", "Melompat", "Berjalan cepat"],
+    k: 1
+  },
+  {
+    q: "Idiom “kepala dingin” berarti….",
+    a: ["Kepala terasa sejuk", "Berpikir tenang", "Sakit kepala", "Tidak kuat panas"],
+    k: 1
+  },
+  {
+    q: "“Naik darah” berarti….",
+    a: ["Sedang makan banyak", "Menjadi marah", "Melompat tinggi", "Mengangkat benda"],
+    k: 1
+  },
+  {
+    q: "Idiom “ringan tangan” berarti….",
+    a: ["Tangannya kecil", "Suka membantu", "Tidak kuat memegang", "Tangan licin"],
+    k: 1
+  },
+
+  // ----- WAWANCARA -----
+  {
+    q: "Tujuan wawancara adalah….",
+    a: ["Berdebat dengan narasumber", "Mengumpulkan informasi", "Menguji kemampuan narasumber", "Menulis cerita fiksi"],
+    k: 1
+  },
+  {
+    q: "Pertanyaan yang termasuk 5W+1H adalah….",
+    a: [
+      "Apakah kamu mau ikut?",
+      "Di mana usaha keripik ini dimulai?",
+      "Kamu senang tidak?",
+      "Bagaimana perasaanmu?"
+    ],
+    k: 1
+  },
+  {
+    q: "Draf pertanyaan penting dibuat karena….",
+    a: ["Agar pewawancara tidak gugup", "Agar pertanyaan tidak lupa", "Agar narasumber marah", "Agar wawancara lebih lama"],
+    k: 1
+  },
+  {
+    q: "Narasumber adalah….",
+    a: [
+      "Orang yang mewawancarai",
+      "Orang yang memberikan jawaban",
+      "Orang yang mencatat hasil wawancara",
+      "Orang yang membuat laporan"
+    ],
+    k: 1
+  },
+  {
+  q: "P : Selamat pagi, Kak Nadya. Saya ingin mewawancarai Kakak tentang usaha susu kemasan.\nN : Silakan.\n\nP : Kapan Kakak memulai usaha?\nN : Tahun 2016.\n\nP : Apa alasan Kakak menjalankan usaha ini?\nN : Karena saya penggemar susu dan ingin masyarakat mengonsumsi susu sehat.\n\nP : Apa tantangan yang Kakak hadapi?\nN : Awalnya saya angkat barang sendiri, berjualan di acara Car Free Day, dan keluarga sempat tidak tega melihat perjuangan saya.\n\nP : Bagaimana cara Kakak menghadapi tantangan?\nN : Tetap optimistis dan bermental baja.\n\nP : Apa tantangan setelah usaha maju?\nN : Menjaga kualitas susu dan tidak sombong.\n\nP : Apa yang harus dan tidak boleh dilakukan dalam berusaha?\nN : Harus semangat, jujur, kerja sama, dan bekerja keras. Jangan malas atau tidak komitmen.\n\nP : Kami ingin sukses seperti Kakak. Ada pesan?\nN : Teruslah berkreasi, jujur, dan rendah hati.\n\nTeks wawancara di atas membahas tentang….",
+  a: [
+    "Bermain bola",
+    "Usaha keripik",
+    "Liburan sekolah",
+    "Usaha susu kemasan"
+  ],
+  k: 3
+},
+
+  // ----- IDE POKOK -----
+  {
+    q: "Ide pokok adalah….",
+    a: ["Contoh pada paragraf", "Pikiran utama dalam paragraf", "Kata yang diulang-ulang", "Gambar dalam cerita"],
+    k: 1
+  },
+  {
+    q: "Kalimat penjelas berfungsi untuk….",
+    a: ["Mengawali cerita", "Menjelaskan ide pokok", "Menutup cerita", "Menarik perhatian"],
+    k: 1
+  },
+  {
+    q: "Paragraf yang baik memiliki….",
+    a: ["Ide pokok & ide pendukung", "Dua judul", "Banyak kata sulit", "Banyak tokoh"],
+    k: 0
+  },
+  {
+    q: "Yang BUKAN ide pendukung adalah….",
+    a: [
+      "Contoh yang melengkapi",
+      "Penjelasan tambahan",
+      "Ilustrasi yang memperjelas",
+      "Kalimat yang tidak terkait ide pokok"
+    ],
+    k: 3
+  },
+  {
+    q: "Informasi dalam bacaan dapat ditemukan melalui….",
+    a: ["Judul & gambar", "Kalimat utama", "Kalimat penjelas", "Semua benar"],
+    k: 3
+  },
+ { 
+    q: "Cara Membuat Celengan dari Kardus\nBahan: kardus bekas, lem, cat air\nLangkah:\n- Gunting kardus sesuai bentuk.\n- Satukan potongan dengan lem.\n- Warnai sesuai selera.\n\nTujuan teks prosedur di atas adalah….",
+    a: [
+      "Menjelaskan cara membuat celengan dari kardus",
+      "Menceritakan pengalaman membuat celengan",
+      "Mengajak membeli celengan",
+      "Menggambarkan bentuk celengan"
+    ],
+    k: 0
+  },
+
+  { 
+    q: "Cara Membuat Celengan dari Kardus\nBahan: kardus bekas, lem, cat air\nLangkah:\n- Gunting kardus sesuai bentuk.\n- Satukan potongan dengan lem.\n- Warnai sesuai selera.\n\nInformasi yang terdapat pada teks adalah….",
+    a: [
+      "Cara bermain celengan",
+      "Cara membuat celengan",
+      "Cara memilih kardus terbaik",
+      "Riwayat celengan"
+    ],
+    k: 1
+  },
+
+  { 
+    q: "Cara Membuat Celengan dari Kardus\nBahan: kardus bekas, lem, cat air\nLangkah:\n- Gunting kardus sesuai bentuk.\n- Satukan potongan dengan lem.\n- Warnai sesuai selera.\n\nBagian “Gunting kardus sesuai bentuk” termasuk struktur….",
+    a: [
+      "Bahan",
+      "Tujuan",
+      "Langkah-langkah",
+      "Penutup"
+    ],
+    k: 2
+  },
+
+  { 
+    q: "Cara Membuat Celengan dari Kardus\nBahan: kardus bekas, lem, cat air\nLangkah:\n- Gunting kardus sesuai bentuk.\n- Satukan potongan dengan lem.\n- Warnai sesuai selera.\n\nKata “satukan” pada langkah kedua berarti….",
+    a: [
+      "Pisahkan",
+      "Gabungkan",
+      "Balikkan",
+      "Angkatlah"
+    ],
+    k: 1
+  }
+
+];
+
+
+    // Acak soal
+    soal.sort(() => Math.random() - 0.5);
+
+    // Batasi maksimal 10 soal
+    const jumlahSoal = 10;
+    const soalDipakai = soal.length > jumlahSoal ? soal.slice(0, jumlahSoal) : soal;
+
+    // Acak jawaban
+    soalDipakai.forEach(s => {
+      let jawabanBenar = s.a[s.k];
+      s.a = s.a.sort(() => Math.random() - 0.5);
+      s.k = s.a.indexOf(jawabanBenar);
+    });
+
+    let indeks = 0;
+    let benar = 0;
+
+    function tampilkanSoal() {
+      const quiz = document.getElementById("quiz");
+
+      if (indeks >= soalDipakai.length) {
+        quiz.innerHTML = "";
+        const nilai = Math.round((benar / soalDipakai.length) * 100);
+        document.getElementById("result").innerText =
+          `Skor Anda: ${benar} dari ${soalDipakai.length}\nNilai: ${nilai}%`;
+        document.getElementById("restart").style.display = "block";
+        return;
+      }
+
+      const s = soalDipakai[indeks];
+      const bagian = s.q.split("\n\n");
+
+      let bacaan = "";
+      let pertanyaan = "";
+
+      if (bagian.length > 1) {
+        bacaan = bagian[0];
+        pertanyaan = bagian[1];
+      } else {
+        pertanyaan = bagian[0];
+      }
+
+      quiz.innerHTML = `
+        ${bacaan ? `<div class="bacaan-box">${bacaan}</div>` : ""}
+        <div class="soal-box">${pertanyaan}</div>
+        <div class="answers">
+          ${s.a
+            .map((j, i) => `<label><input type="radio" name="jawaban" value="${i}"> ${j}</label>`)
+            .join("")}
+        </div>
+
+        <button onclick="periksaJawaban()">Next</button>
+      `;
+    }
+
+    function periksaJawaban() {
+      const jawaban = document.querySelector('input[name="jawaban"]:checked');
+      if (!jawaban) return alert("Pilih jawaban dulu!");
+
+      if (parseInt(jawaban.value) === soalDipakai[indeks].k) benar++;
+      indeks++;
+      tampilkanSoal();
+    }
+
+    function muatUlang() {
+      location.reload();
+    }
+
+    tampilkanSoal();
+  </script>
+
+</body>
+</html>

@@ -1,582 +1,387 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta charset="UTF-8" />
-  <title>Tugas Bahasa Indonesia</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      padding: 20px;
-      background-image: url('https://i.imgur.com/lvA1NVC.jpeg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      max-width: 100vw;
-      overflow-x: hidden;
-    }
-    .container {
-      max-width: 100%;
-      margin: 0 auto;
-      padding: 20px;
-      border-radius: 10px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
-    .nav {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    .nav a {
-      text-decoration: none;
-      color: #2c3e50;
-      font-weight: bold;
-      background-color: white;
-      padding: 10px 15px;
-      border: 2px solid #add8e6;
-      border-radius: 8px;
-    }
-
-    .bacaan-box {
-      background: #ffffffd8;
-      padding: 15px;
-      border-left: 6px solid #4da3ff;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      white-space: pre-line;
-      font-size: 15px;
-      line-height: 1.5;
-    }
-
-    .soal-box {
-      background: #e8f4ff;
-      padding: 15px;
-      border-radius: 10px;
-      border: 2px solid #b6dcff;
-      margin-bottom: 20px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .answers label {
-      display: block;
-      background: #ffffff;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #b6dcff;
-      margin-bottom: 10px;
-      cursor: pointer;
-    }
-
-    #result {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
-      text-align: center;
-    }
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-top: 10px;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    input[type="radio"] {
-      accent-color: #007bff;
-      transform: scale(1.2);
-      margin-right: 10px;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kuis Seru Petualangan</title>
+<style>
+/* ——— CSS Anda tetap, tidak diubah sedikit pun ——— */
+.kotak-soal {
+    background: linear-gradient(135deg, #f0f9ff, #cce5ff);
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+body {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-image: url('https://i.imgur.com/gVxQsB9.png');
+    background-size: cover;
+    background-position: center;
+}
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.nav a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    background-color: white;
+    padding: 10px 15px;
+    border: 2px solid #add8e6;
+    border-radius: 8px;
+}
+.hidden { display: none; }
+label { font-weight: bold; }
+input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+button:hover { background-color: #0056b3; }
+.info-siswa {
+    background: white;
+    border: 2px solid #add8e6;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+.answers label {
+    display: block;
+    margin-bottom: 8px;
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.answers label:hover { background: #eaf6ff; }
+.hasil-box {
+    background: white;
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.nilai-besar {
+    font-size: 40px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.nilai-merah { background: #f8d7da; color: #721c24; }
+.nilai-kuning { background: #fff3cd; color: #856404; }
+.nilai-hijau { background: #d4edda; color: #155724; }
+.warning-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+.warning-box {
+    background: #fff3cd;
+    border: 3px solid #ffcc00;
+    border-radius: 12px;
+    padding: 25px 30px;
+    max-width: 400px;
+    text-align: center;
+    font-size: 18px;
+    color: #856404;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+@keyframes popIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+/* Kotak identitas */
+.kotak-identitas {
+    background: white;
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 500px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+</style>
 </head>
 <body>
-  <div class="container">
-
+<div class="container">
     <div class="nav">
-      <a href="index.html">📘 Tugas Kelas 5</a>
-      <a href="Latihan Soal Matematika Kelas 5.html">🔢 Matematika</a>
-      <a href="#">🧪 IPAS</a>
-      <a href="Latihan Soal Seni Kelas 5.html">🎨 Seni</a>
+        <a href="tugas.html">◀️ kembali</a>
+        <a href="Soal_Tugas_Selasa_25_November_2025.docx" download>📥 Download</a>
     </div>
 
-    <h1 style="color: #2c3e50; text-align: center; margin-bottom: 30px; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">Tugas Bahasa Indonesia</h1>
+    <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
+        🕵️ Detektif Cilik Ayo Uji Kepintaranmu
+    </h1>
 
-    <div id="quiz"></div>
-    <div id="result"></div>
-    <div id="restart" style="display:none; margin-top: 20px;">
-      <button onclick="muatUlang()">Mulai Lagi</button>
+    <!-- Form Data Siswa -->
+    <div id="formData" class="kotak-identitas">
+        <h3>Silakan isi identitas sebelum mulai:</h3>
+
+        <label>Nama:</label><br>
+        <input type="text" id="nama"><br>
+
+        <label>Kelas:</label><br>
+        <input type="text" id="kelas"><br>
+
+        <label>No. Absen:</label><br>
+        <input type="text" id="absen"><br>
+
+        <button onclick="mulaiKuis()">Mulai Kuis</button>
     </div>
 
-  </div>
+    <div id="areaKuis" class="hidden">
+        <div id="infoSiswa" class="info-siswa"></div>
+        <div id="quiz"></div>
+    </div>
+</div>
 
-  <script>
-    const soal = [
-      {
-    q: "Teks fiksi adalah teks yang…",
-    a: [
-      "berisi imajinasi atau cerita rekaan",
-      "berisi laporan hasil penelitian",
-      "memuat fakta yang dapat dibuktikan",
-      "berisi informasi ensiklopedis"
-    ],
-    k: 0
-  },
-  {
-    q: "Teks nonfiksi ditulis berdasarkan….",
-    a: [
-      "khayalan penulis",
-      "hasil imajinasi",
-      "perasaan tokoh",
-      "fakta yang benar-benar terjadi"
-    ],
-    k: 3
-  },
-  {
-    q: "Ciri yang membedakan teks fiksi dari nonfiksi adalah….",
-    a: [
-      "Teks fiksi menggunakan bahasa ilmiah",
-      "Teks nonfiksi memakai tokoh imajinasi",
-      "Teks fiksi mengandung alur dan amanat",
-      "Teks nonfiksi tidak memiliki struktur informasi"
-    ],
-    k: 2
-  },
-  {
-    q: "Jika pada gambar sampul terlihat judul “Petualangan di Hutan Misterius”, maka kemungkinan besar buku tersebut adalah….",
-    a: [
-      "Nonfiksi karena menjelaskan hutan",
-      "Fiksi karena mengandung unsur petualangan",
-      "Nonfiksi karena berisi informasi ilmiah",
-      "Artikel tentang tumbuhan hutan"
-    ],
-    k: 1
-  },
-  {
-    q: "Informasi dalam teks nonfiksi bersifat….",
-    a: [
-      "imajinatif",
-      "emosional",
-      "faktual",
-      "karangan bebas"
-    ],
-    k: 2
-  },
-  {
-    q: "Teks fiksi biasanya digunakan untuk….",
-    a: [
-      "membuktikan kebenaran data",
-      "menghibur pembaca dengan cerita",
-      "menyampaikan informasi ilmiah",
-      "memberikan laporan kegiatan"
-    ],
-    k: 1
-  },
-  {
-    q: "Berikut yang termasuk contoh teks nonfiksi adalah….",
-    a: [
-      "dongeng",
-      "cerpen",
-      "laporan ilmiah tentang hewan",
-      "novel fantasi"
-    ],
-    k: 2
-  },
-  {
-    q: "Pernyataan berikut yang benar adalah….",
-    a: [
-      "Semua teks fiksi benar-benar terjadi",
-      "Teks nonfiksi selalu berisi percakapan",
-      "Teks fiksi tidak memuat tokoh",
-      "Teks nonfiksi berisi informasi berdasarkan fakta"
-    ],
-    k: 3
-  },
-{
-  q: "“Aduh, sakit!” Suara Kelinci Kecil menggelegar di sudut kebun Pak Rusa.\nWajahnya tampak seputih kapas kapas dan titik-titik air mulai membanjiri matanya.\nIa terduduk di tanah sambil memegangi kakinya. Burung Pipit, yang sedang\nbertengger di dahan pohon dekat kebun itu, segera terbang menghampirinya.\n“Ada apa Kelinci Kecil?”\n“Kakiku terantuk batu lalu aku jatuh,” jawab Kelinci Kecil sambil meringis\nkesakitan.\n“Apa yang kamu lakukan di sini?” tanya Burung Pipit.\n“Aku… aku… mmm… aku mau mengambil wortel itu,” Kelinci Kecil menunjuk ke\narah tanaman wortel di kebun Pak Rusa.\n“Wah, kamu mau mengambil wortel Pak Rusa tanpa izin?” tanya Burung Pipit.\n“I… iya… Aku melihat daun-daun tanaman wortel itu melambai-lambai\nmemanggilku,” jawab Kelinci Kecil dengan kepala tertunduk.\n“Sebaiknya kamu minta izin dulu ke Pak Rusa. Aku sering melihat Pak Rusa\nmembagikan wortel-wortelnya ke binatang lain yang membantunya berkebun,”\nBurung Pipit menjelaskan.\n\nApa penyebab Kelinci Kecil jatuh di kebun Pak Rusa?",
-  a: ["Ia tersandung akar pohon", "Ia terantuk batu", "Ia didorong Burung Pipit", "Ia tertiup angin kencang"],
-  k: 1
-},
-{
-  q: "“Aduh, sakit!” Suara Kelinci Kecil menggelegar di sudut kebun Pak Rusa.\nWajahnya tampak seputih kapas kapas dan titik-titik air mulai membanjiri matanya.\nIa terduduk di tanah sambil memegangi kakinya. Burung Pipit, yang sedang\nbertengger di dahan pohon dekat kebun itu, segera terbang menghampirinya.\n“Ada apa Kelinci Kecil?”\n“Kakiku terantuk batu lalu aku jatuh,” jawab Kelinci Kecil sambil meringis\nkesakitan.\n“Apa yang kamu lakukan di sini?” tanya Burung Pipit.\n“Aku… aku… mmm… aku mau mengambil wortel itu,” Kelinci Kecil menunjuk ke\narah tanaman wortel di kebun Pak Rusa.\n“Wah, kamu mau mengambil wortel Pak Rusa tanpa izin?” tanya Burung Pipit.\n“I… iya… Aku melihat daun-daun tanaman wortel itu melambai-lambai\nmemanggilku,” jawab Kelinci Kecil dengan kepala tertunduk.\n“Sebaiknya kamu minta izin dulu ke Pak Rusa. Aku sering melihat Pak Rusa\nmembagikan wortel-wortelnya ke binatang lain yang membantunya berkebun,”\nBurung Pipit menjelaskan.\n\n\n\nAmanat yang terkandung dalam cerita tersebut adalah….",
-  a: [
-    "Jangan membantu teman yang kesakitan",
-    "Mintalah izin sebelum mengambil milik orang lain",
-    "Berlarilah lebih cepat agar tidak terjatuh",
-    "Jangan berbicara dengan burung"
-  ],
-  k: 1
-},
+<div id="peringatanArea"></div>
 
-{
-  q: "“Aduh, sakit!” Suara Kelinci Kecil menggelegar di sudut kebun Pak Rusa.\nWajahnya tampak seputih kapas kapas dan titik-titik air mulai membanjiri matanya.\nIa terduduk di tanah sambil memegangi kakinya. Burung Pipit, yang sedang\nbertengger di dahan pohon dekat kebun itu, segera terbang menghampirinya.\n“Ada apa Kelinci Kecil?”\n“Kakiku terantuk batu lalu aku jatuh,” jawab Kelinci Kecil sambil meringis\nkesakitan.\n“Apa yang kamu lakukan di sini?” tanya Burung Pipit.\n“Aku… aku… mmm… aku mau mengambil wortel itu,” Kelinci Kecil menunjuk ke\narah tanaman wortel di kebun Pak Rusa.\n“Wah, kamu mau mengambil wortel Pak Rusa tanpa izin?” tanya Burung Pipit.\n“I… iya… Aku melihat daun-daun tanaman wortel itu melambai-lambai\nmemanggilku,” jawab Kelinci Kecil dengan kepala tertunduk.\n“Sebaiknya kamu minta izin dulu ke Pak Rusa. Aku sering melihat Pak Rusa\nmembagikan wortel-wortelnya ke binatang lain yang membantunya berkebun,”\nBurung Pipit menjelaskan.\n\nSikap yang ditunjukkan Burung Pipit adalah….",
-  a: ["Acuh tak acuh", "Suka mengganggu", "Peduli dan suka menolong", "Pemarah"],
-  k: 2
-},
-{
-  q:"“Aduh, sakit!” Suara Kelinci Kecil menggelegar di sudut kebun Pak Rusa.\nWajahnya tampak seputih kapas kapas dan titik-titik air mulai membanjiri matanya.\nIa terduduk di tanah sambil memegangi kakinya. Burung Pipit, yang sedang\nbertengger di dahan pohon dekat kebun itu, segera terbang menghampirinya.\n“Ada apa Kelinci Kecil?”\n“Kakiku terantuk batu lalu aku jatuh,” jawab Kelinci Kecil sambil meringis\nkesakitan.\n“Apa yang kamu lakukan di sini?” tanya Burung Pipit.\n“Aku… aku… mmm… aku mau mengambil wortel itu,” Kelinci Kecil menunjuk ke\narah tanaman wortel di kebun Pak Rusa.\n“Wah, kamu mau mengambil wortel Pak Rusa tanpa izin?” tanya Burung Pipit.\n“I… iya… Aku melihat daun-daun tanaman wortel itu melambai-lambai\nmemanggilku,” jawab Kelinci Kecil dengan kepala tertunduk.\n“Sebaiknya kamu minta izin dulu ke Pak Rusa. Aku sering melihat Pak Rusa\nmembagikan wortel-wortelnya ke binatang lain yang membantunya berkebun,”\nBurung Pipit menjelaskan.\n\nTokoh utama dalam cerita tersebut adalah….",
-  a: ["Pak Rusa", "Kelinci Kecil", "Burung Hantu", "Burung Pipit"],
-  k: 1
-},
+<!-- Suara -->
+<audio id="suaraKetik" src="../../suara/typing.mp3"></audio>
+<audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
+<audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
+<audio id="suaraNext" src="../../suara/next.mp3"></audio>
+<audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
 
-{
-  q:"“Aduh, sakit!” Suara Kelinci Kecil menggelegar di sudut kebun Pak Rusa.\nWajahnya tampak seputih kapas kapas dan titik-titik air mulai membanjiri matanya.\nIa terduduk di tanah sambil memegangi kakinya. Burung Pipit, yang sedang\nbertengger di dahan pohon dekat kebun itu, segera terbang menghampirinya.\n“Ada apa Kelinci Kecil?”\n“Kakiku terantuk batu lalu aku jatuh,” jawab Kelinci Kecil sambil meringis\nkesakitan.\n“Apa yang kamu lakukan di sini?” tanya Burung Pipit.\n“Aku… aku… mmm… aku mau mengambil wortel itu,” Kelinci Kecil menunjuk ke\narah tanaman wortel di kebun Pak Rusa.\n“Wah, kamu mau mengambil wortel Pak Rusa tanpa izin?” tanya Burung Pipit.\n“I… iya… Aku melihat daun-daun tanaman wortel itu melambai-lambai\nmemanggilku,” jawab Kelinci Kecil dengan kepala tertunduk.\n“Sebaiknya kamu minta izin dulu ke Pak Rusa. Aku sering melihat Pak Rusa\nmembagikan wortel-wortelnya ke binatang lain yang membantunya berkebun,”\nBurung Pipit menjelaskan.\n\nTokoh yang memberikan nasihat kepada Kelinci Kecil adalah….",
-  a: ["Pak Rusa", "Burung Pipit", "Ayam Hutan", "Ibu Kelinci"],
-  k: 1
-},
-{
-  q:"“Aduh, sakit!” Suara Kelinci Kecil menggelegar di sudut kebun Pak Rusa.\nWajahnya tampak seputih kapas kapas dan titik-titik air mulai membanjiri matanya.\nIa terduduk di tanah sambil memegangi kakinya. Burung Pipit, yang sedang\nbertengger di dahan pohon dekat kebun itu, segera terbang menghampirinya.\n“Ada apa Kelinci Kecil?”\n“Kakiku terantuk batu lalu aku jatuh,” jawab Kelinci Kecil sambil meringis\nkesakitan.\n“Apa yang kamu lakukan di sini?” tanya Burung Pipit.\n“Aku… aku… mmm… aku mau mengambil wortel itu,” Kelinci Kecil menunjuk ke\narah tanaman wortel di kebun Pak Rusa.\n“Wah, kamu mau mengambil wortel Pak Rusa tanpa izin?” tanya Burung Pipit.\n“I… iya… Aku melihat daun-daun tanaman wortel itu melambai-lambai\nmemanggilku,” jawab Kelinci Kecil dengan kepala tertunduk.\n“Sebaiknya kamu minta izin dulu ke Pak Rusa. Aku sering melihat Pak Rusa\nmembagikan wortel-wortelnya ke binatang lain yang membantunya berkebun,”\nBurung Pipit menjelaskan.\n\nLatar tempat pada cerita tersebut adalah….",
-  a: ["Rumah Kelinci", "Hutan gelap", "Kebun Pak Rusa", "Danau kecil"],
-  k: 2
-},
 
-{
-  q:"“Aduh, sakit!” Suara Kelinci Kecil menggelegar di sudut kebun Pak Rusa.\nWajahnya tampak seputih kapas kapas dan titik-titik air mulai membanjiri matanya.\nIa terduduk di tanah sambil memegangi kakinya. Burung Pipit, yang sedang\nbertengger di dahan pohon dekat kebun itu, segera terbang menghampirinya.\n“Ada apa Kelinci Kecil?”\n“Kakiku terantuk batu lalu aku jatuh,” jawab Kelinci Kecil sambil meringis\nkesakitan.\n“Apa yang kamu lakukan di sini?” tanya Burung Pipit.\n“Aku… aku… mmm… aku mau mengambil wortel itu,” Kelinci Kecil menunjuk ke\narah tanaman wortel di kebun Pak Rusa.\n“Wah, kamu mau mengambil wortel Pak Rusa tanpa izin?” tanya Burung Pipit.\n“I… iya… Aku melihat daun-daun tanaman wortel itu melambai-lambai\nmemanggilku,” jawab Kelinci Kecil dengan kepala tertunduk.\n“Sebaiknya kamu minta izin dulu ke Pak Rusa. Aku sering melihat Pak Rusa\nmembagikan wortel-wortelnya ke binatang lain yang membantunya berkebun,”\nBurung Pipit menjelaskan.\n\nPeristiwa yang menyebabkan cerita dimulai adalah….",
-  a: [
-    "Burung Pipit memanen buah",
-    "Kelinci Kecil bermain di hutan",
-    "Kelinci Kecil terantuk batu dan jatuh",
-    "Pak Rusa memanggil hewan-hewan"
-  ],
-  k: 2
-},
- {
-    q: "Kalimat “Angin malam bernyanyi pelan” menggunakan majas….",
-    a: ["Hiperbola", "Personifikasi", "Metafora", "Simile"],
-    k: 1
-  },
-  {
-    q: "“Wajahnya secerah mentari pagi” merupakan majas….",
-    a: ["Metafora", "Hiperbola", "Simile", "Personifikasi"],
-    k: 2
-  },
-  {
-    q: "“Rumah itu menelan korban” berarti….",
-    a: [
-      "Rumah berbicara",
-      "Rumah bergerak sendiri",
-      "Rumah menyebabkan kecelakaan",
-      "Rumah sedang kelaparan"
-    ],
-    k: 2
-  },
-  {
-    q: "Kalimat yang mengandung majas metafora adalah….",
-    a: [
-      "Ayah adalah tulang punggung keluarga.",
-      "Pelangi tersenyum di langit.",
-      "Suaranya keras sekali.",
-      "Anak itu kuat seperti harimau."
-    ],
-    k: 0
-  },
-  {
-    q: "“Hatinya selembut kapas” merupakan majas….",
-    a: ["Simile", "Metafora", "Hiperbola", "Personifikasi"],
-    k: 0
-  },
+<script>
+// —————————————————————————————————————————
+// Semuanya sama seperti punya Anda sebelumnya
+// —————————————————————————————————————————
 
-  // ----- IMBUHAN -----
-  {
-    q: "Kata berimbuhan me- pada kalimat “Ibu _____ makanan untuk keluarga” adalah….",
-    a: ["memasak", "masak", "memasakan", "dimasak"],
-    k: 0
-  },
-  {
-    q: "Imbuhan –kan digunakan pada kalimat….",
-    a: [
-      "Tolong baca surat ini!",
-      "Ayah memperbaiki atap rumah.",
-      "Ibu membacakan cerita untuk adik.",
-      "Kakak bermain bola di lapangan."
-    ],
-    k: 2
-  },
-  {
-    q: "Kata berakhiran –lah terdapat pada kalimat….",
-    a: [
-      "Bacalah buku itu sampai selesai!",
-      "Baca buku itu di perpustakaan!",
-      "Membaca buku itu menyenangkan.",
-      "Aku sudah membaca buku itu."
-    ],
-    k: 0
-  },
-  {
-    q: "Kata berimbuhan me- yang tepat untuk gambar orang menulis adalah….",
-    a: ["tulis", "menulis", "ditulis", "tulisan"],
-    k: 1
-  },
-  {
-    q: "Kata “menggambar” terbentuk dari….",
-    a: [
-      "me- + gambar",
-      "meng- + gambar",
-      "me- + gambar + -kan",
-      "meng- + gambar + -kan"
-    ],
-    k: 1
-  },
+let soal = [
 
-  // ----- SURAT PRIBADI -----
-  {
-    q: "Bagian surat pribadi yang berisi tempat dan tanggal ditulis adalah….",
-    a: ["Salam pembuka", "Kepala surat", "Isi surat", "Salam penutup"],
-    k: 1
-  },
-  {
-    q: "Surat pribadi digunakan untuk….",
-    a: [
-      "Komunikasi resmi",
-      "Mengirim laporan",
-      "Berkomunikasi dengan teman atau keluarga",
-      "Mengirim undangan rapat"
-    ],
-    k: 2
-  },
-  {
-    q: "“Sahabatku Dina” merupakan bagian….",
-    a: ["Isi", "Salam pembuka", "Salam penutup", "Lampiran"],
-    k: 1
-  },
-  {
-    q: "Yang TIDAK termasuk unsur surat pribadi adalah….",
-    a: ["Tempat dan tanggal", "Salam penutup", "Tanda tangan pejabat", "Isi surat"],
-    k: 2
-  },
-  {
-    q: "Informasi dalam surat pribadi bersifat….",
-    a: ["Resmi", "Santai dan personal", "Serius dan ilmiah", "Rahasia pemerintah"],
-    k: 1
-  },
-
-  // ----- IDIOM -----
-  {
-    q: "Idiom “buah tangan” berarti….",
-    a: ["Tangan yang memegang buah", "Hadiah atau oleh-oleh", "Tangan yang besar", "Tangan yang licin"],
-    k: 1
-  },
-  {
-    q: "“Angkat kaki” memiliki arti….",
-    a: ["Berdiri", "Pergi meninggalkan tempat", "Melompat", "Berjalan cepat"],
-    k: 1
-  },
-  {
-    q: "Idiom “kepala dingin” berarti….",
-    a: ["Kepala terasa sejuk", "Berpikir tenang", "Sakit kepala", "Tidak kuat panas"],
-    k: 1
-  },
-  {
-    q: "“Naik darah” berarti….",
-    a: ["Sedang makan banyak", "Menjadi marah", "Melompat tinggi", "Mengangkat benda"],
-    k: 1
-  },
-  {
-    q: "Idiom “ringan tangan” berarti….",
-    a: ["Tangannya kecil", "Suka membantu", "Tidak kuat memegang", "Tangan licin"],
-    k: 1
-  },
-
-  // ----- WAWANCARA -----
-  {
-    q: "Tujuan wawancara adalah….",
-    a: ["Berdebat dengan narasumber", "Mengumpulkan informasi", "Menguji kemampuan narasumber", "Menulis cerita fiksi"],
-    k: 1
-  },
-  {
-    q: "Pertanyaan yang termasuk 5W+1H adalah….",
-    a: [
-      "Apakah kamu mau ikut?",
-      "Di mana usaha keripik ini dimulai?",
-      "Kamu senang tidak?",
-      "Bagaimana perasaanmu?"
-    ],
-    k: 1
-  },
-  {
-    q: "Draf pertanyaan penting dibuat karena….",
-    a: ["Agar pewawancara tidak gugup", "Agar pertanyaan tidak lupa", "Agar narasumber marah", "Agar wawancara lebih lama"],
-    k: 1
-  },
-  {
-    q: "Narasumber adalah….",
-    a: [
-      "Orang yang mewawancarai",
-      "Orang yang memberikan jawaban",
-      "Orang yang mencatat hasil wawancara",
-      "Orang yang membuat laporan"
-    ],
-    k: 1
-  },
-  {
-  q: "P : Selamat pagi, Kak Nadya. Saya ingin mewawancarai Kakak tentang usaha susu kemasan.\nN : Silakan.\n\nP : Kapan Kakak memulai usaha?\nN : Tahun 2016.\n\nP : Apa alasan Kakak menjalankan usaha ini?\nN : Karena saya penggemar susu dan ingin masyarakat mengonsumsi susu sehat.\n\nP : Apa tantangan yang Kakak hadapi?\nN : Awalnya saya angkat barang sendiri, berjualan di acara Car Free Day, dan keluarga sempat tidak tega melihat perjuangan saya.\n\nP : Bagaimana cara Kakak menghadapi tantangan?\nN : Tetap optimistis dan bermental baja.\n\nP : Apa tantangan setelah usaha maju?\nN : Menjaga kualitas susu dan tidak sombong.\n\nP : Apa yang harus dan tidak boleh dilakukan dalam berusaha?\nN : Harus semangat, jujur, kerja sama, dan bekerja keras. Jangan malas atau tidak komitmen.\n\nP : Kami ingin sukses seperti Kakak. Ada pesan?\nN : Teruslah berkreasi, jujur, dan rendah hati.\n\nTeks wawancara di atas membahas tentang….",
-  a: [
-    "Bermain bola",
-    "Usaha keripik",
-    "Liburan sekolah",
-    "Usaha susu kemasan"
-  ],
-  k: 3
-},
-
-  // ----- IDE POKOK -----
-  {
-    q: "Ide pokok adalah….",
-    a: ["Contoh pada paragraf", "Pikiran utama dalam paragraf", "Kata yang diulang-ulang", "Gambar dalam cerita"],
-    k: 1
-  },
-  {
-    q: "Kalimat penjelas berfungsi untuk….",
-    a: ["Mengawali cerita", "Menjelaskan ide pokok", "Menutup cerita", "Menarik perhatian"],
-    k: 1
-  },
-  {
-    q: "Paragraf yang baik memiliki….",
-    a: ["Ide pokok & ide pendukung", "Dua judul", "Banyak kata sulit", "Banyak tokoh"],
-    k: 0
-  },
-  {
-    q: "Yang BUKAN ide pendukung adalah….",
-    a: [
-      "Contoh yang melengkapi",
-      "Penjelasan tambahan",
-      "Ilustrasi yang memperjelas",
-      "Kalimat yang tidak terkait ide pokok"
-    ],
-    k: 3
-  },
-  {
-    q: "Informasi dalam bacaan dapat ditemukan melalui….",
-    a: ["Judul & gambar", "Kalimat utama", "Kalimat penjelas", "Semua benar"],
-    k: 3
-  },
- { 
-    q: "Cara Membuat Celengan dari Kardus\nBahan: kardus bekas, lem, cat air\nLangkah:\n- Gunting kardus sesuai bentuk.\n- Satukan potongan dengan lem.\n- Warnai sesuai selera.\n\nTujuan teks prosedur di atas adalah….",
-    a: [
-      "Menjelaskan cara membuat celengan dari kardus",
-      "Menceritakan pengalaman membuat celengan",
-      "Mengajak membeli celengan",
-      "Menggambarkan bentuk celengan"
-    ],
-    k: 0
-  },
-
-  { 
-    q: "Cara Membuat Celengan dari Kardus\nBahan: kardus bekas, lem, cat air\nLangkah:\n- Gunting kardus sesuai bentuk.\n- Satukan potongan dengan lem.\n- Warnai sesuai selera.\n\nInformasi yang terdapat pada teks adalah….",
-    a: [
-      "Cara bermain celengan",
-      "Cara membuat celengan",
-      "Cara memilih kardus terbaik",
-      "Riwayat celengan"
-    ],
-    k: 1
-  },
-
-  { 
-    q: "Cara Membuat Celengan dari Kardus\nBahan: kardus bekas, lem, cat air\nLangkah:\n- Gunting kardus sesuai bentuk.\n- Satukan potongan dengan lem.\n- Warnai sesuai selera.\n\nBagian “Gunting kardus sesuai bentuk” termasuk struktur….",
-    a: [
-      "Bahan",
-      "Tujuan",
-      "Langkah-langkah",
-      "Penutup"
-    ],
-    k: 2
-  },
-
-  { 
-    q: "Cara Membuat Celengan dari Kardus\nBahan: kardus bekas, lem, cat air\nLangkah:\n- Gunting kardus sesuai bentuk.\n- Satukan potongan dengan lem.\n- Warnai sesuai selera.\n\nKata “satukan” pada langkah kedua berarti….",
-    a: [
-      "Pisahkan",
-      "Gabungkan",
-      "Balikkan",
-      "Angkatlah"
-    ],
-    k: 1
-  }
+{q:"Ide pokok dalam sebuah paragraf adalah …",a:["Gambar pendukung paragraf","Kalimat yang berisi inti paragraf","Judul dari teks","Kalimat terakhir paragraf"],k:1},
+{q:"Kalimat yang termasuk ide pendukung adalah …",a:["Kalimat penjelas yang memperkuat ide pokok","Kalimat berisi inti bacaan","Kalimat berisi kesimpulan","Kalimat ajakan"],k:0},
+{q:"Teks fiksi biasanya berisi …",a:["Data dan fakta","Imajinasi dan cerita rekaan","Tabel dan grafik","Instruksi kerja"],k:1},
+{q:"Unsur intrinsik yang terdapat dalam cerita fiksi adalah …",a:["Daftar isi","Biografi","Tokoh dan alur","Grafik penjualan"],k:2},
+{q:"Jika kata 'melimpah' berarti 'banyak tersedia', maka kalimat yang tepat adalah …",a:["Air sungai itu melimpah setiap sore","Buku itu melimpah tinggi","Pohon itu melimpah ke barat","Jalan itu melimpah sendiri"],k:0},
+{q:"Majas personifikasi memberikan sifat … kepada benda mati.",a:["Hewan","Tumbuhan","Manusia","Benda lain"],k:2},
+{q:"Kalimat berikut yang termasuk majas metafora adalah …",a:["Ombak berlari mengejar pasir","Ia adalah bintang kelas","Angin berbisik lembut","Rumah itu menyapa pagi"],k:1},
+{q:"Manakah kata yang berakhiran -kan?",a:["Makan","Bagikan","Membeli","Rumahkan"],k:1},
+{q:"Fungsi imbuhan me- adalah …",a:["Membentuk kata sifat","Membentuk kata kerja","Membentuk kata benda","Membentuk kata bilangan"],k:1},
+{q:"Teks prosedur dibuat untuk …",a:["Menghibur pembaca","Memberi langkah-langkah melakukan sesuatu","Menjelaskan perasaan","Menceritakan pengalaman"],k:1},
+{q:"Ciri teks prosedur adalah …",a:["Menggunakan dialog","Memiliki tokoh dan alur","Menggunakan langkah-langkah kerja","Berisi pendapat pribadi"],k:2},
+{q:"Salam pembuka dalam surat pribadi adalah …",a:["Hormat saya","Halo Sahabatku","Kepada Yth.","Salam hormat"],k:1},
+{q:"Bagian penutup surat pribadi berisi …",a:["Ajakan","Tanda tangan dan nama pengirim","Alamat lengkap penerima","Daftar pustaka"],k:1},
+{q:"Idiom 'buah tangan' berarti …",a:["Hadiah","Buah yang dipegang","Tangan kanan","Tangan untuk memetik buah"],k:0},
+{q:"'Kambing hitam' berarti …",a:["Hewan ternak","Orang yang disalahkan","Orang berkulit hitam","Peliharaan baru"],k:1},
+{q:"Pentingnya membuat draf pertanyaan sebelum wawancara adalah …",a:["Agar wawancara lebih cepat selesai","Agar pertanyaan sesuai tujuan wawancara","Agar narasumber tidak bertanya balik","Agar pewawancara terlihat marah"],k:1},
+{q:"Tujuan wawancara adalah …",a:["Menilai seseorang","Mendapatkan informasi","Memberi tugas","Menulis cerpen"],k:1},
+{q:"Contoh pertanyaan 5W+1H adalah …",a:["Apakah kamu mau?","Di mana kegiatan itu berlangsung?","Bisakah kamu cepat?","Jangan pergi dulu!"],k:1},
+{q:"Ide pokok dapat ditemukan melalui …",a:["Judul bacaan","Kata terakhir paragraf","Informasi utama dalam paragraf","Banyaknya kata"],k:2},
+{q:"Yang bukan termasuk ide pendukung adalah …",a:["Penjelasan tambahan","Contoh pendukung","Alasan pendukung","Kalimat yang tidak berkaitan dengan ide pokok"],k:3},
+{q:"Agar ide pokok mudah ditemukan, kita harus …",a:["Menghafal seluruh paragraf","Mencari kalimat penjelas","Menentukan informasi paling penting","Membaca bagian akhir saja"],k:2},
+{q:"Ide pokok biasanya terdapat pada …",a:["Kalimat utama","Dialog tokoh","Kata berimbuhan","Sampul buku"],k:0},
+{q:"Hubungan ide pokok dan ide pendukung adalah …",a:["Saling bertentangan","Tidak saling berkaitan","Ide pendukung memperjelas ide pokok","Ide pokok menjelaskan hal kecil"],k:2},
+{q:"Cerita fiksi selalu memiliki …",a:["Grafik statistik","Tokoh dan konflik","Tabel penjelasan","Catatan kaki"],k:1},
+{q:"Yang termasuk teks nonfiksi adalah …",a:["Cerpen","Dongeng","Laporan hasil pengamatan","Legenda rakyat"],k:2},
+{q:"Unsur intrinsik yang berhubungan dengan siapa yang terlibat dalam cerita adalah …",a:["Latar","Tema","Tokoh","Sudut pandang"],k:2},
+{q:"Kata 'harmonis' paling tepat digunakan dalam kalimat …",a:["Rumah itu harmonis di pagi hari","Keluarga Sinta hidup rukun dan harmonis","Mobil itu melaju harmonis","Teman-teman harmonis berjalan"],k:1},
+{q:"Kata 'menyeluruh' memiliki arti …",a:["Secara sebagian","Tidak lengkap","Secara keseluruhan","Tanpa arah"],k:2},
+{q:"Majas hiperbola adalah majas yang …",a:["Menggunakan perbandingan","Memberi sifat manusia pada benda","Menggunakan sindiran","Mengandung ungkapan berlebihan"],k:3},
+{q:"'Senyumnya selebar bulan purnama.' termasuk majas …",a:["Personifikasi","Hiperbola","Metafora","Simile"],k:1},
+{q:"Kata berikut yang menggunakan imbuhan me- adalah …",a:["Mencari","Jalanan","Hadiahkan","Rindulah"],k:0},
+{q:"Manakah kata berimbuhan -lah?",a:["Letakkan","Bukalah","Makanan","Permainan"],k:1},
+{q:"Kata 'membuang' termasuk kata kerja berimbuhan …",a:["me-","ber-","di-","ke-"],k:0},
+{q:"Teks prosedur sering menggunakan kata kerja …",a:["Lampau","Perintah","Tanya","Larangan"],k:1},
+{q:"Struktur teks prosedur terdiri atas …",a:["Judul – Tokoh – Alur","Tujuan – Bahan – Langkah-langkah","Orientasi – Komplikasi – Resolusi","Pendahuluan – Isi – Penutup"],k:1},
+{q:"Bagian alamat dalam surat pribadi biasanya ditulis pada …",a:["Bagian penutup","Bagian isi","Bagian kepala surat","Bagian catatan kaki"],k:2},
+{q:"Salam penutup yang sesuai untuk surat pribadi adalah …",a:["Salam hormat","Salam manis","Dengan hormat","Kepada Yth."],k:1},
+{q:"Ungkapan 'meja hijau' berarti …",a:["Meja berwarna hijau","Tempat bermain kartu","Pengadilan","Tempat makan"],k:2},
+{q:"'Tangan dingin' berarti …",a:["Orang yang berbakat sukses","Orang yang malas","Orang yang selalu kedinginan","Orang yang sombong"],k:0}
 
 ];
 
+let dataNama = "", dataKelas = "", dataAbsen = "";
+let indeks = 0, benar = 0;
 
-    // Acak soal
-    soal.sort(() => Math.random() - 0.5);
+function mulaiKuis() {
+    dataNama = document.getElementById("nama").value.trim();
+    dataKelas = document.getElementById("kelas").value.trim();
+    dataAbsen = document.getElementById("absen").value.trim();
 
-    // Batasi maksimal 10 soal
-    const jumlahSoal = 10;
-    const soalDipakai = soal.length > jumlahSoal ? soal.slice(0, jumlahSoal) : soal;
-
-    // Acak jawaban
-    soalDipakai.forEach(s => {
-      let jawabanBenar = s.a[s.k];
-      s.a = s.a.sort(() => Math.random() - 0.5);
-      s.k = s.a.indexOf(jawabanBenar);
-    });
-
-    let indeks = 0;
-    let benar = 0;
-
-    function tampilkanSoal() {
-      const quiz = document.getElementById("quiz");
-
-      if (indeks >= soalDipakai.length) {
-        quiz.innerHTML = "";
-        const nilai = Math.round((benar / soalDipakai.length) * 100);
-        document.getElementById("result").innerText =
-          `Skor Anda: ${benar} dari ${soalDipakai.length}\nNilai: ${nilai}%`;
-        document.getElementById("restart").style.display = "block";
+    if (!dataNama || !dataKelas || !dataAbsen) {
+        mainkanSuaraPeringatan();
+        tampilkanPeringatan("⚠️ Ups! Data belum lengkap.<br>Isi dulu Nama, Kelas, dan Absen ya.");
         return;
-      }
-
-      const s = soalDipakai[indeks];
-      const bagian = s.q.split("\n\n");
-
-      let bacaan = "";
-      let pertanyaan = "";
-
-      if (bagian.length > 1) {
-        bacaan = bagian[0];
-        pertanyaan = bagian[1];
-      } else {
-        pertanyaan = bagian[0];
-      }
-
-      quiz.innerHTML = `
-        ${bacaan ? `<div class="bacaan-box">${bacaan}</div>` : ""}
-        <div class="soal-box">${pertanyaan}</div>
-        <div class="answers">
-          ${s.a
-            .map((j, i) => `<label><input type="radio" name="jawaban" value="${i}"> ${j}</label>`)
-            .join("")}
-        </div>
-
-        <button onclick="periksaJawaban()">Next</button>
-      `;
     }
 
-    function periksaJawaban() {
-      const jawaban = document.querySelector('input[name="jawaban"]:checked');
-      if (!jawaban) return alert("Pilih jawaban dulu!");
+    mainkanSuaraNext();
+    document.getElementById("infoSiswa").innerHTML =
+    `👤 <b>${dataNama}</b> | 🏫 <b>${dataKelas}</b> | 🔢 <b>${dataAbsen}</b>`;
 
-      if (parseInt(jawaban.value) === soalDipakai[indeks].k) benar++;
-      indeks++;
-      tampilkanSoal();
-    }
+    document.getElementById("formData").classList.add("hidden");
+    document.getElementById("areaKuis").classList.remove("hidden");
 
-    function muatUlang() {
-      location.reload();
-    }
-
+    acakArray(soal);
+    soal = soal.slice(0, 10);
+    soal.forEach(s => acakJawabanSoal(s));
     tampilkanSoal();
-  </script>
+}
+
+function acakArray(arr){
+    for(let i=arr.length-1;i>0;i--){
+        let j=Math.floor(Math.random()*(i+1));
+        [arr[i],arr[j]]=[arr[j],arr[i]];
+    }
+}
+
+function acakJawabanSoal(s){
+    let gabung=s.a.map((teks,i)=>({teks,benar:i===s.k}));
+    for(let i=gabung.length-1;i>0;i--){
+        let j=Math.floor(Math.random()*(i+1));
+        [gabung[i],gabung[j]]=[gabung[j],gabung[i]];
+    }
+    s.a=gabung.map(o=>o.teks);
+    s.k=gabung.findIndex(o=>o.benar);
+}
+
+function tampilkanSoal() {
+    const quiz = document.getElementById("quiz");
+
+    if (indeks >= soal.length) {
+        const nilai = Math.round((benar / soal.length) * 100);
+
+        // ————————————————————————————————
+        // KIRIM NILAI OTOMATIS KE GOOGLE FORM
+        // ————————————————————————————————
+        fetch(
+            "https://docs.google.com/forms/u/0/d/e/1FAIpQLScqPWj835p_yS7NFEBBwdm2D82PLcmyfbbW2yMxiffsNyWdGw/formResponse",
+            {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body:
+                    "entry.1114641071=" + encodeURIComponent(dataNama) +
+                    "&entry.687539915=" + encodeURIComponent(dataKelas) +
+                    "&entry.1445858210=" + encodeURIComponent(dataAbsen) +
+                    "&entry.175130881=" + encodeURIComponent(nilai)
+            }
+        );
+        // ————————————————————————————————
+
+        let warna = "nilai-merah";
+        if (nilai >= 80) warna = "nilai-hijau";
+        else if (nilai >= 60) warna = "nilai-kuning";
+
+        quiz.innerHTML = `
+            <div class="hasil-box">
+                <h2>🎉 Selesai!</h2>
+                <p>Benar: <b>${benar}</b> dari <b>${soal.length}</b></p>
+                <div><p><b>Nilai Kamu:</b></p>
+                <div class="nilai-besar ${warna}">${nilai}</div></div>
+                <button onclick="ulangiKuis()">🔄 Ulangi Kuis</button>
+                <button onclick="keluarKuis()">❌ Selesai</button>
+            </div>
+        `;
+        return;
+    }
+
+    const s = soal[indeks];
+    quiz.innerHTML = `
+        <div class="kotak-soal">${s.q}</div>
+        <div class="answers">
+            ${s.a.map((j,i)=>
+                `<label><input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" /> ${j}</label>`
+            ).join('')}
+        </div>
+        <button onclick="periksaJawaban()">Next</button>
+    `;
+}
+
+function periksaJawaban() {
+    const jawaban = document.querySelector('input[name="jawaban"]:checked');
+    if (!jawaban) {
+        mainkanSuaraPeringatan();
+        tampilkanPeringatan("⚡ Kamu belum memilih jawaban.");
+        return;
+    }
+    if (parseInt(jawaban.value) === soal[indeks].k) benar++;
+    indeks++;
+    mainkanSuaraNext();
+    tampilkanSoal();
+}
+
+function tampilkanPeringatan(pesan){
+    document.getElementById("peringatanArea").innerHTML = `
+    <div class="warning-overlay">
+        <div class="warning-box">
+            <h2>🚀 Yuk, Jangan Lupa!</h2>
+            <p>${pesan}</p>
+            <button onclick="tutupPeringatan()">Oke 👍</button>
+        </div>
+    </div>`;
+}
+function tutupPeringatan(){ document.getElementById("peringatanArea").innerHTML=""; }
+function ulangiKuis(){
+    indeks=0; benar=0;
+    document.getElementById("formData").classList.remove("hidden");
+    document.getElementById("areaKuis").classList.add("hidden");
+    document.getElementById("nama").value="";
+    document.getElementById("kelas").value="";
+    document.getElementById("absen").value="";
+    mainkanSuaraUlangi();
+}
+function keluarKuis(){ window.location.href="🕵Petualangan-Seru.html"; }
+
+function mainkanSuaraKlik(){ const s=document.getElementById("suaraKlik"); s.currentTime=0; s.play(); }
+function mainkanSuaraPeringatan(){ const s=document.getElementById("suaraPeringatan"); s.currentTime=0; s.play(); }
+function mainkanSuaraNext(){ const s=document.getElementById("suaraNext"); s.currentTime=0; s.play(); }
+function mainkanSuaraUlangi(){ const s=document.getElementById("suaraUlangi"); s.currentTime=0; s.play(); }
+function mainkanSuaraKetik(){ const s=document.getElementById("suaraKetik"); s.currentTime=0; s.play(); }
+
+document.addEventListener("DOMContentLoaded",()=>{
+    ["nama","kelas","absen"].forEach(id=>{
+        const el=document.getElementById(id);
+        if(el){ el.addEventListener("input", mainkanSuaraKetik); }
+    });
+});
+</script>
 
 </body>
 </html>

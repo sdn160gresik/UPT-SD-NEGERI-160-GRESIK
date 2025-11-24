@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Latihan Soal Bahasa Indonesia</title>
+<style>
+/* ——— CSS Anda tetap, tidak diubah sedikit pun ——— */
+.kotak-soal {
+    background: linear-gradient(135deg, #f0f9ff, #cce5ff);
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+body {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-image: url('https://i.imgur.com/BlWoTZd.png');
+    background-size: cover;
+    background-position: center;
+}
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.nav a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    background-color: white;
+    padding: 10px 15px;
+    border: 2px solid #add8e6;
+    border-radius: 8px;
+}
+.hidden { display: none; }
+label { font-weight: bold; }
+input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+button:hover { background-color: #0056b3; }
+.info-siswa {
+    background: white;
+    border: 2px solid #add8e6;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+.answers label {
+    display: block;
+    margin-bottom: 8px;
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.answers label:hover { background: #eaf6ff; }
+.hasil-box {
+    background: white;
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.nilai-besar {
+    font-size: 40px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.nilai-merah { background: #f8d7da; color: #721c24; }
+.nilai-kuning { background: #fff3cd; color: #856404; }
+.nilai-hijau { background: #d4edda; color: #155724; }
+.warning-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+.warning-box {
+    background: #fff3cd;
+    border: 3px solid #ffcc00;
+    border-radius: 12px;
+    padding: 25px 30px;
+    max-width: 400px;
+    text-align: center;
+    font-size: 18px;
+    color: #856404;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+@keyframes popIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+.kotak-identitas {
+    background: white;
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 500px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="nav">
+        <a href="../../tugas-bIndo.html">◀️ kembali</a>
+        <a href="Soal_Tugas_Selasa_25_November_2025.docx" download>📥 Download</a>
+    </div>
+
+    <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
+        🕵️ Detektif Cilik Ayo Uji Kepintaranmu
+    </h1>
+
+    <!-- Form Data Siswa -->
+    <div id="formData" class="kotak-identitas">
+        <h3>Silakan isi identitas sebelum mulai:</h3>
+
+        <label>Nama:</label><br>
+        <input type="text" id="nama"><br>
+
+        <label>Kelas:</label><br>
+        <input type="text" id="kelas"><br>
+
+        <label>No. Absen:</label><br>
+        <input type="text" id="absen"><br>
+
+        <button onclick="mulaiKuis()">Mulai Kuis</button>
+    </div>
+
+    <div id="areaKuis" class="hidden">
+        <div id="infoSiswa" class="info-siswa"></div>
+        <div id="quiz"></div>
+    </div>
+</div>
+
+<div id="peringatanArea"></div>
+
+<!-- Suara -->
+<audio id="suaraKetik" src="../../suara/typing.mp3"></audio>
+<audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
+<audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
+<audio id="suaraNext" src="../../suara/next.mp3"></audio>
+<audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
+
+<script>
+// —————————————————————————————————————————
+// Soal & Fungsi (tetap sama seperti punya Anda)
+// —————————————————————————————————————————
+
+let soal = [
+/* SOAL TETAP — (saya tidak ubah satu huruf pun) */
+{"q":"Pecahan yang senilai dengan 3/6 adalah …","a":["1/6","1/3","2/6","6/3"],"k":1},
+  {"q":"Manakah pecahan terbesar?","a":["1/4","2/8","3/12","1/2"],"k":3},
+  {"q":"Urutan pecahan dari yang terkecil adalah 1/2, 3/4, 2/3","a":["3/4 – 2/3 – 1/2","1/2 – 2/3 – 3/4","2/3 – 1/2 – 3/4","1/2 – 3/4 – 2/3"],"k":1},
+  {"q":"Gambar satu lingkaran dibagi 4 bagian, 3 bagian diarsir. Pecahan model tersebut adalah …","a":["1/3","3/4","1/4","4/3"],"k":1},
+  {"q":"Pada garis bilangan, pecahan yang terletak paling dekat dengan 1 adalah …","a":["3/4","1/4","2/8","1/3"],"k":0},
+  {"q":"Pecahan berpenyebut berbeda yang setara untuk penjumlahan 1/2 + 1/3 adalah …","a":["3/6 + 2/6","2/4 + 1/3","1/2 + 2/3","1/3 + 1/2"],"k":0},
+  {"q":"Hasil dari 2/5 + 1/10 adalah …","a":["3/15","5/10","1/2","2/10"],"k":2},
+  {"q":"Sinta mempunyai 1/4 kue, lalu membeli lagi 2/4 kue. Banyak kue Sinta sekarang adalah …","a":["1/2","3/4","1","2/4"],"k":2},
+  {"q":"Model visual yang tepat untuk menunjukkan 1/3 + 1/6 adalah …","a":["Dua persegi dibagi 3 bagian","Satu persegi dibagi 6 bagian, 3 diarsir","Dua persegi: satu dibagi 3 bagian, satu dibagi 6","Satu persegi dibagi 9 bagian"],"k":2},
+  {"q":"Langkah awal dalam mengurangi pecahan berbeda penyebut adalah …","a":["Mengurangi pembilang","Menjumlahkan penyebut","Menyamakan penyebut","Mengalikan pembilang"],"k":2},
+  {"q":"Hasil dari 5/6 – 1/3 adalah …","a":["1/2","3/6","2/6","1/6"],"k":0},
+  {"q":"Ibu memiliki 3/4 liter minyak, digunakan 1/2 liter. Sisa minyak adalah …","a":["1/4","1/2","1/3","2/4"],"k":0},
+  {"q":"Kesalahan pada perhitungan berikut: 2/3 – 1/6 = 1/3","a":["Pembilang dikurang langsung","Penyebut tidak disamakan","Hasil pecahan dibalik","Pecahan harus dikali"],"k":1},
+  {"q":"Tali sepanjang 18 m dipasang mengelilingi taman berbentuk persegi. Keliling taman adalah …","a":["16 m","18 m","20 m","72 m"],"k":3},
+  {"q":"Sebuah meja berbentuk persegi panjang panjang 6 m dan lebar 4 m. Kelilingnya adalah …","a":["10 m","20 m","24 m","30 m"],"k":2},
+  {"q":"Gambar menunjukkan bangun datar dengan empat sisi sama panjang. Bangun tersebut adalah …","a":["Persegi panjang","Segitiga","Persegi","Trapesium"],"k":2},
+  {"q":"Keliling segitiga sembarang dengan sisi 6 cm, 7 cm, dan 5 cm adalah …","a":["16 cm","17 cm","18 cm","19 cm"],"k":2},
+  {"q":"Keliling segitiga sama sisi dengan panjang sisi 8 cm adalah …","a":["16 cm","20 cm","24 cm","32 cm"],"k":2},
+  {"q":"Sebuah segitiga sama kaki memiliki dua sisi sama panjang 10 cm dan sisi alas 6 cm. Kelilingnya adalah …","a":["20 cm","26 cm","16 cm","30 cm"],"k":1},
+  {"q":"Ani ingin membuat pita mengelilingi taman berbentuk segitiga dengan sisi 4 cm, 5 cm, dan 6 cm. Pita yang dibutuhkan adalah …","a":["9 cm","10 cm","11 cm","15 cm"],"k":3},
+
+  {"q":"Pecahan yang senilai dengan 4/8 adalah …","a":["1/4","1/2","3/4","2/8"],"k":1},
+  {"q":"Manakah yang lebih besar?","a":["3/5","4/10","2/5","1/2"],"k":0},
+  {"q":"Urutan pecahan dari terbesar adalah 5/6, 3/6, 4/6","a":["5/6 – 4/6 – 3/6","4/6 – 5/6 – 3/6","3/6 – 4/6 – 5/6","4/6 – 3/6 – 5/6"],"k":0},
+  {"q":"Model menunjukkan 2 dari 10 bagian diarsir. Pecahan tersebut adalah …","a":["2/5","1/5","2/10","5/2"],"k":2},
+  {"q":"Pada garis bilangan, titik 2/3 berada …","a":["Tepat di tengah","Lebih dekat ke 0","Lebih dekat ke 1","Sama dengan 1/2"],"k":2},
+  {"q":"Pecahan senilai untuk menyamakan penyebut 3/4 dan 1/2 adalah …","a":["3/8 dan 4/8","6/8 dan 2/4","3/4 dan 1/2","6/8 dan 4/8"],"k":3},
+  {"q":"Hasil dari 1/3 + 1/6 adalah …","a":["1/2","2/6","3/6","4/6"],"k":0},
+  {"q":"Siti memiliki 2/5 liter jus dan membeli lagi 3/10 liter. Total jusnya adalah …","a":["1/2 liter","7/10 liter","1 liter","5/10 liter"],"k":1},
+  {"q":"Model visual penjumlahan pecahan digunakan untuk …","a":["Memperbesar pecahan","Menunjukkan proses penjumlahan","Mengubah pecahan menjadi persen","Menghapus penyebut"],"k":1},
+  {"q":"Langkah pertama mengurangkan 4/5 – 1/10 adalah …","a":["Mengurangkan pembilang","Menyederhanakan pecahan","Menyamakan penyebut","Mengalikan penyebut"],"k":2},
+  {"q":"Hasil dari 7/10 – 1/5 adalah …","a":["5/10","3/10","1/2","7/5"],"k":1},
+  {"q":"Dika memakan 1/4 pizza dari sisa 3/4. Sisa pizza sekarang adalah …","a":["2/4","1/2","3/4","1/4"],"k":1},
+  {"q":"Kesalahan perhitungan 1/2 – 1/4 = 1/4 adalah …","a":["Penyebut tidak disamakan","Pembilang salah dijumlahkan","Menyamakan penyebut tidak perlu","Penyebut dijumlahkan"],"k":0},
+  {"q":"Taman dengan panjang 12 m dan lebar 8 m memiliki keliling …","a":["24 m","32 m","40 m","48 m"],"k":2},
+  {"q":"Keliling persegi dengan sisi 9 m adalah …","a":["18 m","27 m","36 m","45 m"],"k":2},
+  {"q":"Segitiga dengan 3 sisi berbeda adalah …","a":["Segitiga sama sisi","Segitiga sama kaki","Segitiga sembarang","Segitiga siku-siku"],"k":2},
+  {"q":"Keliling segitiga dengan sisi 8 cm, 4 cm, 9 cm adalah …","a":["19 cm","20 cm","21 cm","22 cm"],"k":2},
+  {"q":"Segitiga sama sisi dengan sisi 12 cm memiliki keliling …","a":["24 cm","30 cm","36 cm","48 cm"],"k":2},
+  {"q":"Segitiga sama kaki dengan dua sisi 7 cm dan satu sisi 5 cm memiliki keliling …","a":["14 cm","19 cm","21 cm","12 cm"],"k":1},
+  {"q":"Segitiga dengan sisi 5 cm, 7 cm, dan 8 cm memiliki keliling …","a":["15 cm","18 cm","20 cm","25 cm"],"k":2}
+];
+
+let dataNama = "", dataKelas = "", dataAbsen = "";
+let indeks = 0, benar = 0;
+
+function mulaiKuis() {
+    dataNama = document.getElementById("nama").value.trim();
+    dataKelas = document.getElementById("kelas").value.trim();
+    dataAbsen = document.getElementById("absen").value.trim();
+
+    if (!dataNama || !dataKelas || !dataAbsen) {
+        mainkanSuaraPeringatan();
+        tampilkanPeringatan("⚠️ Ups! Data belum lengkap.<br>Isi dulu Nama, Kelas, dan Absen ya.");
+        return;
+    }
+
+    mainkanSuaraNext();
+    document.getElementById("infoSiswa").innerHTML =
+    `👤 <b>${dataNama}</b> | 🏫 <b>${dataKelas}</b> | 🔢 <b>${dataAbsen}</b>`;
+
+    document.getElementById("formData").classList.add("hidden");
+    document.getElementById("areaKuis").classList.remove("hidden");
+
+    acakArray(soal);
+    soal = soal.slice(0, 10);
+    soal.forEach(s => acakJawabanSoal(s));
+    tampilkanSoal();
+}
+
+function acakArray(arr){
+    for(let i=arr.length-1;i>0;i--){
+        let j=Math.floor(Math.random()*(i+1));
+        [arr[i],arr[j]]=[arr[j],arr[i]];
+    }
+}
+
+function acakJawabanSoal(s){
+    let gabung=s.a.map((teks,i)=>({teks,benar:i===s.k}));
+    for(let i=gabung.length-1;i>0;i--){
+        let j=Math.floor(Math.random()*(i+1));
+        [gabung[i],gabung[j]]=[gabung[j],gabung[i]];
+    }
+    s.a=gabung.map(o=>o.teks);
+    s.k=gabung.findIndex(o=>o.benar);
+}
+
+function tampilkanSoal() {
+    const quiz = document.getElementById("quiz");
+
+    if (indeks >= soal.length) {
+        const nilai = Math.round((benar / soal.length) * 100);
+
+        // ————————————————————————————————
+        // 🔥 MENGIRIM NILAI OTOMATIS KE GOOGLE FORM
+        // (sudah saya ganti ke form Anda)
+        // ————————————————————————————————
+        fetch(
+            "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdYpBjilNI8U86oRUb4zC4028ocRso6OEtZYfxjT4OGnoCTXQ/formResponse",
+            {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body:
+                    "entry.1114641071=" + encodeURIComponent(dataNama) +
+                    "&entry.687539915=" + encodeURIComponent(dataKelas) +
+                    "&entry.1445858210=" + encodeURIComponent(dataAbsen) +
+                    "&entry.175130881=" + encodeURIComponent(nilai)
+            }
+        );
+        // ————————————————————————————————
+
+        let warna = "nilai-merah";
+        if (nilai >= 80) warna = "nilai-hijau";
+        else if (nilai >= 60) warna = "nilai-kuning";
+
+        quiz.innerHTML = `
+            <div class="hasil-box">
+                <h2>🎉 Selesai!</h2>
+                <p>Benar: <b>${benar}</b> dari <b>${soal.length}</b></p>
+                <div><p><b>Nilai Kamu:</b></p>
+                <div class="nilai-besar ${warna}">${nilai}</div></div>
+                <button onclick="ulangiKuis()">🔄 Ulangi Kuis</button>
+                <button onclick="keluarKuis()">❌ Selesai</button>
+            </div>
+        `;
+        return;
+    }
+
+    const s = soal[indeks];
+    quiz.innerHTML = `
+        <div class="kotak-soal">${s.q}</div>
+        <div class="answers">
+            ${s.a.map((j,i)=>
+                `<label><input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" /> ${j}</label>`
+            ).join('')}
+        </div>
+        <button onclick="periksaJawaban()">Next</button>
+    `;
+}
+
+function periksaJawaban() {
+    const jawaban = document.querySelector('input[name="jawaban"]:checked');
+    if (!jawaban) {
+        mainkanSuaraPeringatan();
+        tampilkanPeringatan("⚡ Kamu belum memilih jawaban.");
+        return;
+    }
+    if (parseInt(jawaban.value) === soal[indeks].k) benar++;
+    indeks++;
+    mainkanSuaraNext();
+    tampilkanSoal();
+}
+
+function tampilkanPeringatan(pesan){
+    document.getElementById("peringatanArea").innerHTML = `
+    <div class="warning-overlay">
+        <div class="warning-box">
+            <h2>🚀 Yuk, Jangan Lupa!</h2>
+            <p>${pesan}</p>
+            <button onclick="tutupPeringatan()">Oke 👍</button>
+        </div>
+    </div>`;
+}
+function tutupPeringatan(){ document.getElementById("peringatanArea").innerHTML=""; }
+function ulangiKuis(){
+    indeks=0; benar=0;
+    document.getElementById("formData").classList.remove("hidden");
+    document.getElementById("areaKuis").classList.add("hidden");
+    document.getElementById("nama").value="";
+    document.getElementById("kelas").value="";
+    document.getElementById("absen").value="";
+    mainkanSuaraUlangi();
+}
+function keluarKuis(){ window.location.href="🕵Petualangan-Seru.html"; }
+
+function mainkanSuaraKlik(){ const s=document.getElementById("suaraKlik"); s.currentTime=0; s.play(); }
+function mainkanSuaraPeringatan(){ const s=document.getElementById("suaraPeringatan"); s.currentTime=0; s.play(); }
+function mainkanSuaraNext(){ const s=document.getElementById("suaraNext"); s.currentTime=0; s.play(); }
+function mainkanSuaraUlangi(){ const s=document.getElementById("suaraUlangi"); s.currentTime=0; s.play(); }
+function mainkanSuaraKetik(){ const s=document.getElementById("suaraKetik"); s.currentTime=0; s.play(); }
+
+document.addEventListener("DOMContentLoaded",()=>{
+    ["nama","kelas","absen"].forEach(id=>{
+        const el=document.getElementById(id);
+        if(el){ el.addEventListener("input", mainkanSuaraKetik); }
+    });
+});
+</script>
+
+</body>
+</html>

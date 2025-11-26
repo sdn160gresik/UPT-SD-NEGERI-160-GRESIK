@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ayo nyoba kecerdasanmu!</title>
+
+<style>
+/* === STYLE TIDAK DIUBAH === */
+.kotak-soal {
+    background: linear-gradient(135deg, #f0f9ff, #cce5ff);
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+body {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-image: url('https://i.imgur.com/IFKQPGS.png');
+    background-size: cover;
+    background-position: center;
+}
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.nav a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    background-color: white;
+    padding: 10px 15px;
+    border: 2px solid #add8e6;
+    border-radius: 8px;
+}
+.hidden { display: none; }
+label { font-weight: bold; }
+input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+button:hover { background-color: #0056b3; }
+.info-siswa {
+    background: white;
+    border: 2px solid #add8e6;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+.answers label {
+    display: block;
+    margin-bottom: 8px;
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.answers label:hover { background: #eaf6ff; }
+.hasil-box {
+    background: white;
+    border: 3px solid #3399ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.nilai-besar {
+    font-size: 40px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.nilai-merah { background: #f8d7da; color: #721c24; }
+.nilai-kuning { background: #fff3cd; color: #856404; }
+.nilai-hijau { background: #d4edda; color: #155724; }
+.warning-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+.warning-box {
+    background: #fff3cd;
+    border: 3px solid #ffcc00;
+    border-radius: 12px;
+    padding: 25px 30px;
+    max-width: 400px;
+    text-align: center;
+    font-size: 18px;
+    color: #856404;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+.warning-box button {
+    background: #ffcc00;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    margin-top: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="nav">
+        <a href="Sampah_di_Lingkungan_dan_Jenisnya.html">◀️ kembali</a>
+    </div>
+
+    <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
+        🕵️ Detektif Cilik: Ayo nyoba kecerdasanmu!
+    </h1>
+
+    <!-- Form Data -->
+    <div id="formData">
+        <h3>Mangga isenana identitas dhisik sadurunge miwiti.</h3>
+        <label>Nama:</label><br>
+        <input type="text" id="nama"><br>
+        <label>Kelas:</label><br>
+        <input type="text" id="kelas"><br>
+        <label>No. Absen:</label><br>
+        <input type="text" id="absen"><br>
+        <button onclick="mulaiKuis()">Mulai Kuis</button>
+    </div>
+
+    <div id="areaKuis" class="hidden">
+        <div id="infoSiswa" class="info-siswa"></div>
+        <div id="quiz"></div>
+    </div>
+</div>
+
+<div id="peringatanArea"></div>
+
+<!-- Suara -->
+<audio id="suaraKetik" src="../../suara/typing.mp3"></audio>
+<audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
+<audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
+<audio id="suaraNext" src="../../suara/next.mp3"></audio>
+<audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
+
+<script>
+/* ====================== SOAL ========================= */
+let soal = [
+  { q:"Pawarta kalebu teks sing isine …", 
+  a:["Piandel","Kabar kedadean","Crita rekaan","Tembang"], 
+  k:1 },
+
+{ q:"Pawarta kudu adhedhasar kasunyatan utawa fakta, tegesé …", 
+  a:["Bisa digawe dhewe","Ora perlu bukti","Ana nyatane","Pancen ngapusi"], 
+  k:2 },
+
+{ q:"Sing kalebu media kang bisa nampa pawarta lisan yaiku …", 
+  a:["Poster","Radio","Majalah","Brosur"], 
+  k:1 },
+
+{ q:"Ing ngisor iki kang dudu media pawarta tulis yaiku …", 
+  a:["Surat kabar","Internet","Majalah","Siaran TV"], 
+  k:3 },
+
+{ q:"Pawarta sing asalé saka media online klebu pawarta …", 
+  a:["Lisan","Tulis","Visual","Ringkes"], 
+  k:1 },
+
+{ q:"Ciri pawarta sing kudu 'padhet lan jelas' yaiku …", 
+  a:["Aktual","Cekak Aos","Jangkep","Hoax"], 
+  k:1 },
+
+{ q:"Yen pawarta ora adhedhasar kedadean nyata, mula pawarta mau disebut …", 
+  a:["Fakta","Aktual","Hoax","Jangkep"], 
+  k:2 },
+
+{ q:"Unsur pawarta 'Sapa sing melu?' padha karo unsur …", 
+  a:["When","Who","Why","How"], 
+  k:1 },
+
+{ q:"'Apa sebab kedadeyan iki kelakon?' kalebu unsur …", 
+  a:["How","Why","Which","When"], 
+  k:1 },
+
+{ q:"Yen pawarta diarani aktual, tegese pawarta kasebut …", 
+  a:["Lawas","Gampang dingerteni","Isih anyar","Angel dibuktekake"], 
+  k:2 },
+
+{ q:"Pawarta sing wujude gambar utawa foto bisa dadi bageyan saka …", 
+  a:["Pawarta Lisan","Pawarta Visual","Pawarta Wicara","Pawarta Dongeng"], 
+  k:1 },
+
+{ q:"Unsur pawarta 'Kepriye?' nggoleki informasi babagan …", 
+  a:["Carane kedadean","Wektu kedadean","Wong sing melu","Sebab kedadean"], 
+  k:0 },
+
+{ q:"Salah siji unsur pawarta yaiku 'Ing ngendi?' sing padha karo …", 
+  a:["Where","What","When","How"], 
+  k:0 },
+
+{ q:"Ing pawarta, perangan sing nerangake lengkap kedadean diarani …", 
+  a:["Jangkep","Hoax","Ringkes","Maca"], 
+  k:0 },
+
+{ q:"Brosur lan pamflet kalebu …", 
+  a:["Pawarta Lisan","Pawarta Tulis","Pawarta Dongeng","Pawarta Lare"], 
+  k:1 },
+
+{ q:"Berita sing ditampa saka wong sing padha crita diarani …", 
+  a:["Pawarta Tulis","Pawarta Gambar","Pawarta Lisan","Pawarta Film"], 
+  k:2 },
+
+{ q:"Teks pawarta sing ora jangkep bakal …", 
+  a:["Gampang dipahami","Ora jelas","Dadi luwih resmi","Mesthi padha karo fakta"], 
+  k:1 },
+
+{ q:"Ing pawarta, unsur 'When' njawab pitakon …", 
+  a:["Kapan","Apa","Ing ngendi","Kepriye"], 
+  k:0 },
+
+{ q:"Yen pawarta isine ringkes nanging padhet lan jelas, tegese pawarta mau …", 
+  a:["Fakta","Cekak Aos","Hoax","Jangkep"], 
+  k:1 },
+
+{ q:"Teks pawarta ngemu unsur sing jumlahé …", 
+  a:["4","5W + 1H","3W + 2H","6W"], 
+  k:1 },
+{ q:"Pawarta ing basa Indonesia diarani …", 
+  a:["Warta","Berita","Kabar","Pesen"], 
+  k:1 },
+
+{ q:"Pawarta yaiku wujud kabar bab …", 
+  a:["Crita dongeng","Kedadean wigati ing wektu tartamtu","Paragraf deskripsi","Tatanan acara"], 
+  k:1 },
+
+{ q:"Pawarta bisa ditampa kanthi cara maca, ngrungokake, lan …", 
+  a:["Ngitung","Nulis","Deleng gambar","Ngakoni"], 
+  k:2 },
+
+{ q:"Pawarta sing ditampa saka kandhane wong liya diarani …", 
+  a:["Pawarta Tulis","Pawarta Audio","Pawarta Lisan","Pawarta Visual"], 
+  k:2 },
+
+{ q:"Pawarta sing ditampa saka media cetak klebu …", 
+  a:["Pawarta Lisan","Pawarta Tulis","Pawarta Wicara","Pawarta Obrolan"], 
+  k:1 },
+
+{ q:"Tuladhane pawarta tulis yaiku …", 
+  a:["Siaran radio","Pacelathon karo tangga","Brosur lan famlet","Wara-wara adzan"], 
+  k:2 },
+
+{ q:"Ciri pawarta sing “isih anyar” diarani …", 
+  a:["Jangkep","Faktual","Aktual","Hoax"], 
+  k:2 },
+
+{ q:"Ciri pawarta sing nyritakake kedadean temenan yaiku …", 
+  a:["Aktual","Faktual","Cekak Aos","Hoax"], 
+  k:1 },
+
+{ q:"Pawarta kang ngandharake kanthi lengkap duwé ciri …", 
+  a:["Jangkep","Cekak Aos","Hoax","Rame"], 
+  k:0 },
+
+{ q:"Pawarta sing singkat, padhet, lan jelas yaiku …", 
+  a:["Jangkep","Hoax","Cekak Aos","Faktual"], 
+  k:2 },
+
+{ q:"Kabar apus-apusan sing ora ana bukti nyatane diarani …", 
+  a:["Fakta","Hoax","Aktual","Ringkes"], 
+  k:1 },
+
+{ q:"Unsur pawarta sing takon 'Apa sing kedadeyan?' yaiku unsur …", 
+  a:["Sapa","Kapan","Apa","Geneya"], 
+  k:2 },
+
+{ q:"Unsur pawarta sing padha karo 'Who' yaiku …", 
+  a:["Sapa","Apa","Geneya","Ing ngendi"], 
+  k:0 },
+
+{ q:"'Nalika kedadeyan mau kelakon?' kalebu unsur …", 
+  a:["Kapan","Ing ngendi","Kepriye","Apa"], 
+  k:0 },
+
+{ q:"Unsur pawarta sing padha karo 'Where' yaiku …", 
+  a:["Kapan","Ing ngendi","Kepriye","Apa"], 
+  k:1 },
+
+{ q:"Unsur pawarta sing nerangake sebab kedadean yaiku …", 
+  a:["Apa","Kepriye","Kapan","Geneya"], 
+  k:3 },
+
+{ q:"Unsur pawarta 'How' ing basa Jawa diarani …", 
+  a:["Geneya","Kepriye","Apa","Sapa"], 
+  k:1 },
+
+{ q:"Unsur pawarta 5W + 1H ora kalebu …", 
+  a:["What","When","How","Which"], 
+  k:3 },
+
+{ q:"Siaran berita saka televisi kalebu pawarta …", 
+  a:["Tulis","Lisan","Wacanen","Cetak"], 
+  k:1 },
+
+{ q:"Pawarta sing diarani jangkep yaiku pawarta sing …", 
+  a:["Ringkes nanging ora jelas","Digawe saka gambar","Nduweni unsur 5W + 1H","Mung ana sumbere siji"], 
+  k:2 }
+];
+
+let dataNama="", dataKelas="", dataAbsen="";
+let indeks=0, benar=0;
+let jawabanTerkunci = false;
+
+/* ====================== MULAI KUIS ========================= */
+function mulaiKuis(){
+    dataNama = nama.value.trim();
+    dataKelas = kelas.value.trim();
+    dataAbsen = absen.value.trim();
+
+    if(!dataNama || !dataKelas || !dataAbsen){
+        mainkanSuaraPeringatan();
+        tampilkanPeringatan("⚠️ Monggo ngisi identitas rumiyin!");
+        return;
+    }
+
+    mainkanSuaraNext();
+    infoSiswa.innerHTML = `👤 Nama: <b>${dataNama}</b> | 🏫 Kelas: <b>${dataKelas}</b> | 🔢 Absen: <b>${dataAbsen}</b>`;
+
+    formData.classList.add("hidden");
+    areaKuis.classList.remove("hidden");
+
+    acakArray(soal);
+    soal = soal.slice(0,10);
+
+    soal.forEach(s=>acakJawabanSoal(s));
+
+    tampilkanSoal();
+}
+
+function acakArray(arr){
+    for(let i=arr.length-1;i>0;i--){
+        let j=Math.floor(Math.random()*(i+1));
+        [arr[i],arr[j]]=[arr[j],arr[i]];
+    }
+}
+
+function acakJawabanSoal(s){
+    let gabung = s.a.map((teks,i)=>({teks,benar:i===s.k}));
+    acakArray(gabung);
+    s.a = gabung.map(o=>o.teks);
+    s.k = gabung.findIndex(o=>o.benar);
+}
+
+/* ====================== TAMPILKAN SOAL ====================== */
+function tampilkanSoal(){
+    if(indeks >= soal.length){
+        const nilai = Math.round((benar/soal.length)*100);
+        let kelasWarna = nilai>=80 ? "nilai-hijau" : nilai>=60 ? "nilai-kuning" : "nilai-merah";
+
+        /* === KIRIM NILAI KE GOOGLE FORM === */
+        kirimDataGoogleForm(dataNama, dataKelas, dataAbsen, nilai);
+
+        quiz.innerHTML = `
+        <div class="hasil-box">
+            <h2>🎉 Rampung!</h2>
+            <p>Benar: <b>${benar}</b> dari <b>${soal.length}</b></p>
+            <div class="nilai-besar ${kelasWarna}">${nilai}</div>
+            <button onclick="ulangiKuis()">🔄 Baleni Kuis</button>
+            <button onclick="keluarKuis()">❌ Rampung</button>
+        </div>`;
+        return;
+    }
+
+    jawabanTerkunci = false;
+
+    const s = soal[indeks];
+    quiz.innerHTML = `
+        <div class="kotak-soal">${s.q}</div>
+        <div class="answers">
+            ${s.a.map((j,i)=>`
+                <label><input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" /> ${j}</label>
+            `).join('')}
+        </div>
+
+        <button onclick="periksaJawaban()" id="btnPeriksa">Mriksa Jawaban</button>
+
+        <span id="statusJawaban" style="margin-left:15px; font-weight:bold;"></span>
+
+        <button id="btnLanjut" class="hidden" onclick="lanjut()"> Terusaké ▶️</button>
+    `;
+}
+
+/* ====================== PERIKSA JAWABAN ====================== */
+function periksaJawaban(){
+    if(jawabanTerkunci) return;
+
+    const jawaban = document.querySelector('input[name="jawaban"]:checked');
+    if(!jawaban){
+        tampilkanPeringatan("⚡ Pilih rumiyin wangsulanipun!");
+        mainkanSuaraPeringatan();
+        return;
+    }
+
+    jawabanTerkunci = true;
+
+    let benarSalah = (parseInt(jawaban.value) === soal[indeks].k);
+    if(benarSalah) benar++;
+
+    document.querySelectorAll('input[name="jawaban"]').forEach(i=>i.disabled = true);
+
+    document.getElementById("statusJawaban").innerHTML =
+        benarSalah ? "✅ Leres" : "❌ Kliru";
+
+    document.getElementById("btnLanjut").classList.remove("hidden");
+
+    mainkanSuaraNext();
+}
+
+function lanjut(){
+    indeks++;
+    tampilkanSoal();
+}
+
+/* ====================== PERINGATAN ====================== */
+function tampilkanPeringatan(pesan){
+    peringatanArea.innerHTML = `
+        <div class="warning-overlay">
+            <div class="warning-box">
+                <h2>🚀 Ayo, Ojo Lali!</h2>
+                <p>${pesan}</p>
+                <button onclick="tutupPeringatan()">Inggih 👍</button>
+            </div>
+        </div>`;
+}
+
+function tutupPeringatan(){
+    peringatanArea.innerHTML = "";
+}
+
+/* ====================== ULANGI & KELUAR ====================== */
+function ulangiKuis(){
+    mainkanSuaraUlangi();
+    indeks=0; benar=0;
+
+    formData.classList.remove("hidden");
+    areaKuis.classList.add("hidden");
+
+    nama.value = kelas.value = absen.value = "";
+}
+
+function keluarKuis(){
+    window.location.href="Sampah_di_Lingkungan_dan_Jenisnya.html";
+}
+
+/* ====================== SUARA ====================== */
+function mainkanSuaraKlik(){ suaraKlik.currentTime=0; suaraKlik.play(); }
+function mainkanSuaraPeringatan(){ suaraPeringatan.currentTime=0; suaraPeringatan.play(); }
+function mainkanSuaraNext(){ suaraNext.currentTime=0; suaraNext.play(); }
+function mainkanSuaraUlangi(){ suaraUlangi.currentTime=0; suaraUlangi.play(); }
+
+/* ============================
+   === KIRIM DATA GOOGLE FORM ===
+   ============================ */
+function kirimDataGoogleForm(nama, kelas, absen, nilai){
+    const url = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdGQFWK5NuSY2X8ZWayg-WNBwu2TZeVeEG8U9aznjoKAKRpBw/formResponse";
+
+    const formData = new FormData();
+    formData.append("entry.1114641071", nama);
+    formData.append("entry.687539915", kelas);
+    formData.append("entry.1445858210", absen);
+    formData.append("entry.175130881", nilai);
+
+    fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+    });
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+    ["nama","kelas","absen"].forEach(id=>{
+        document.getElementById(id).addEventListener("input",mainkanSuaraKetik);
+    });
+});
+</script>
+
+</body>
+</html>

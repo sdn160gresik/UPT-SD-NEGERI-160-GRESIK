@@ -91,6 +91,7 @@ button:hover { background-color: #0056b3; }
   cursor: pointer;
 }
 .answers label:hover { background: #eaf6ff; }
+
 .hasil-box {
   background: white;
   border: 3px solid #3399ff;
@@ -113,7 +114,7 @@ button:hover { background-color: #0056b3; }
 .nilai-kuning { background: #fff3cd; color: #856404; }
 .nilai-hijau { background: #d4edda; color: #155724; }
 
-/* 🌈 Kotak peringatan melayang */
+/* warning */
 .warning-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -132,7 +133,6 @@ button:hover { background-color: #0056b3; }
   text-align: center;
   font-size: 18px;
   color: #5d4037;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
   animation: popIn 0.4s ease;
 }
 .warning-box h2 {
@@ -155,13 +155,22 @@ button:hover { background-color: #0056b3; }
   from { transform: scale(0.7); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+
+#feedback {
+  display: inline-block;
+  font-weight: bold;
+  margin-left: 15px;
+}
+.benar { color: green; }
+.salah { color: red; }
 </style>
 </head>
 <body>
+
 <div class="container">
   <div class="nav">
-    <a href="materi-bahsa-jawa.html">◀️ Kembali</a>
-    <a href="javascript:void(0)" onclick="window.location.reload()">🔄 Ulangi</a>
+    <a href="materi-bahsa-jawa.html">◀️ Mundur</a>
+    <a href="javascript:void(0)" onclick="window.location.reload()">🔄 Baleni</a>
   </div>
 
   <h1 style="color:#2c3e50;text-align:center;background-color:white;padding:10px 20px;border-radius:10px;border:2px solid #add8e6;">
@@ -173,7 +182,7 @@ button:hover { background-color: #0056b3; }
     <label>Nama:</label><br><input type="text" id="nama"><br>
     <label>Kelas:</label><br><input type="text" id="kelas"><br>
     <label>No. Absen:</label><br><input type="text" id="absen"><br>
-    <button onclick="mulaiKuis()">Mulai Kuis</button>
+    <button onclick="mulaiKuis()">Miwiti Kuis</button>
   </div>
 
   <div id="areaKuis" class="hidden">
@@ -185,7 +194,6 @@ button:hover { background-color: #0056b3; }
 <div id="peringatanArea"></div>
 
 <script>
-// =================== DATA SOAL ===================
 let semuaSoal = [
 {q:"Sumber informasi bisa dijupuk saka endi wae, kajaba …",a:["Koran","Majalah","Mimpi","Internet"],k:2},
 {q:"Wong sing sregep maca bakal …",a:["Kalah karo wong sing ora maca","Duwe kaluwihan","Kesulitan golek ilmu","Ora ana bedane"],k:1},
@@ -219,52 +227,49 @@ let semuaSoal = [
 {q:"Nalika maca teks narasi, pamaos bisa …",a:["Ngrasakaké kedadéan kaya tokohé","Lali karo isi crita","Ngganti pungkasane","Ngira-ira tanpa ngerti makna"],k:0},
 ];
 
-// =================== LOGIKA KUIS ===================
 let index = 0;
 let score = 0;
 let nama="", kelas="", absen="";
+let soal = [];
 const formURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfMpmorUZJfmjFTQGtwcblxcpOukY4u3gYtb0Q8GCrn8DBsjw/formResponse";
 
-// fungsi acak array
 function acakArray(arr){
-  for(let i = arr.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+  for(let i=arr.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
   }
   return arr;
 }
 
-// 🌟 fungsi tampilkan peringatan cantik
-function tampilPeringatan(judul, pesan){
-  const area = document.getElementById("peringatanArea");
-  area.innerHTML = `
-    <div class="warning-overlay">
-      <div class="warning-box">
-        <h2>${judul}</h2>
-        <p>${pesan}</p>
-        <button onclick="tutupPeringatan()">🎯 Siap, ayo lanjut!</button>
-      </div>
-    </div>`;
+function tampilPeringatan(judul,pesan){
+  const area=document.getElementById("peringatanArea");
+  area.innerHTML=`
+  <div class="warning-overlay">
+    <div class="warning-box">
+      <h2>${judul}</h2>
+      <p>${pesan}</p>
+      <button onclick="tutupPeringatan()">🎯 Siyap, ayo diterusaké!</button>
+    </div>
+  </div>`;
 }
 function tutupPeringatan(){
-  document.getElementById("peringatanArea").innerHTML = "";
+  document.getElementById("peringatanArea").innerHTML="";
 }
 
 function mulaiKuis(){
-  nama = document.getElementById("nama").value.trim();
-  kelas = document.getElementById("kelas").value.trim();
-  absen = document.getElementById("absen").value.trim();
-  if(!nama || !kelas || !absen){
-    tampilPeringatan("✨ Wah, sabar dulu!", 
-      "Lengkapi identitasmu dhisik, ya! Biar guru ngerti sapa pahlawan cilik sing semangat sinau dina iki! 💪📚");
+  nama=document.getElementById("nama").value.trim();
+  kelas=document.getElementById("kelas").value.trim();
+  absen=document.getElementById("absen").value.trim();
+  if(!nama||!kelas||!absen){
+    tampilPeringatan("✨ Wah, sabar rumiyin dhisik!","Sumangga dipun lengkapaké identitasipun rumiyin, nggih?");
     return;
   }
 
   soal = acakArray([...semuaSoal]).slice(0,10);
   soal.forEach(s=>{
-    const benar = s.a[s.k];
-    s.a = acakArray([...s.a]);
-    s.k = s.a.indexOf(benar);
+    const benar=s.a[s.k];
+    s.a=acakArray([...s.a]);
+    s.k=s.a.indexOf(benar);
   });
 
   document.getElementById("formData").classList.add("hidden");
@@ -275,55 +280,93 @@ function mulaiKuis(){
 }
 
 function tampilSoal(){
-  if(index >= soal.length){
-    selesaiKuis();
-    return;
-  }
+  if(index>=soal.length){ selesaiKuis(); return; }
+
   const s = soal[index];
-  let html = `<div class='kotak-soal'>${index+1}. ${s.q}</div><div class='answers'>`;
-  s.a.forEach((j, i)=>{
-    html += `<label><input type='radio' name='jawab' value='${i}'> ${j}</label>`;
+  let html = `
+    <div class="kotak-soal">${index+1}. ${s.q}</div>
+    <div class="answers">
+  `;
+  s.a.forEach((j,i)=>{
+    html += `<label><input type="radio" name="jawab" value="${i}"> ${j}</label>`;
   });
-  html += `</div><button onclick='cekJawaban()'>Kirim Jawaban</button>`;
+  html += `
+    </div>
+    <button id="btnPeriksa" onclick="periksa()">Periksa Jawaban</button>
+    <span id="feedback"></span>
+    <button id="btnNext" class="hidden" onclick="lanjut()">Terusaké ➡️</button>
+  `;
   document.getElementById("quiz").innerHTML = html;
 }
 
-function cekJawaban(){
-  const jawaban = document.querySelector("input[name='jawab']:checked");
-  if(!jawaban){
-    tampilPeringatan("📣 Eits, ojo lali!", 
-      "Pilih salah siji jawaban dhisik, ya! Semangatmu luar biasa, terus maju! 🚀🔥");
+function periksa(){
+  const pilih = document.querySelector("input[name='jawab']:checked");
+  if(!pilih){
+    tampilPeringatan("📣 Eits, ojo lali!","Pilih jawaban dhisik ya!");
     return;
   }
-  if(parseInt(jawaban.value) === soal[index].k) score++;
+
+  document.querySelectorAll("input[name='jawab']").forEach(i=>i.disabled = true);
+  document.getElementById("btnPeriksa").disabled = true;
+
+  const benar = soal[index].k;
+  const feedback = document.getElementById("feedback");
+
+  if(parseInt(pilih.value) === benar){
+    score++;
+    feedback.innerHTML = "<span class='benar'>✔️ Bener!</span>";
+  } else {
+    feedback.innerHTML = "<span class='salah'>❌ Salah!</span>";
+  }
+
+  document.getElementById("btnNext").classList.remove("hidden");
+}
+
+function lanjut(){
   index++;
   tampilSoal();
 }
 
 function selesaiKuis(){
   const nilai = Math.round((score/soal.length)*100);
-  let warna = "nilai-hijau";
-  if(nilai < 60) warna="nilai-merah";
-  else if(nilai < 80) warna="nilai-kuning";
-  document.getElementById("quiz").innerHTML =
-    `<div class='hasil-box'>
-      <h2>🎉 Hasil Kuis</h2>
-      <div class='nilai-besar ${warna}'>${nilai}</div><br>
-      Skor bener: ${score} saka ${soal.length}<br><br>
-      Hebat banget! Tetep semangat sinau, ya! 🌟
-    </div>`;
 
-  fetch(formURL, {
-    method: "POST",
-    mode: "no-cors",
-    body: new URLSearchParams({
-      "entry.1114641071": nama,
-      "entry.687539915": kelas,
-      "entry.1445858210": absen,
-      "entry.175130881": nilai
+  let warna="nilai-hijau";
+  let pesan="Pinter tenan! Ayo tetep semangat sinau, nggih! 🌟";
+
+  if(nilai < 60){
+    warna="nilai-merah";
+    pesan="Tetep nyemangat nggih! Belajar maneh ben luwih paham. Kowe mesthi bisa!! 💪";
+  }
+  else if(nilai < 80){
+    warna="nilai-kuning";
+    pesan="Wis cukup apik! Tinggal ditingkatké sethithik maneh. Semangat terus! 👍";
+  }
+  else {
+    warna="nilai-hijau";
+    pesan="Super sekali! Prestasimu apik banget. Tetep dijaga terus ya! 🏆";
+  }
+
+  document.getElementById("quiz").innerHTML = `
+    <div class='hasil-box'>
+      <h2>🎉 Hasilé Kuis</h2>
+      <div class='nilai-besar ${warna}'>${nilai}</div>
+      Skor bener: ${score} saka ${soal.length}<br><br>
+      <b>${pesan}</b>
+    </div>
+  `;
+
+  fetch(formURL,{
+    method:"POST",
+    mode:"no-cors",
+    body:new URLSearchParams({
+      "entry.1114641071":nama,
+      "entry.687539915":kelas,
+      "entry.1445858210":absen,
+      "entry.175130881":nilai
     })
   });
 }
 </script>
+
 </body>
 </html>

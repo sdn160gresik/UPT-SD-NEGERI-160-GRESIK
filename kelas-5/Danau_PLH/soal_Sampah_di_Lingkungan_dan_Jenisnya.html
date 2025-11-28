@@ -1,3 +1,5 @@
+tampilkan pesan dalam kotak melayang di tengah jika klik periksa jawaban sebelum memilih jawaban
+pesan penuh semangat, menggugah, inspiratif, menyenangkan, emoji menarik, tampilan menarik dengan warna ceria
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -89,68 +91,142 @@ button:hover { background-color: #0056b3; }
     cursor: pointer;
 }
 .answers label:hover { background: #eaf6ff; }
-.hasil-box {
-    background: white;
-    border: 3px solid #3399ff;
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 20px;
-    text-align: center;
-    font-size: 18px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-.nilai-besar {
-    font-size: 40px;
-    font-weight: bold;
+
+.pesan-hasil {
     display: inline-block;
-    padding: 10px 20px;
-    border-radius: 10px;
-    margin: 10px 0;
-}
-.nilai-merah { background: #f8d7da; color: #721c24; }
-.nilai-kuning { background: #fff3cd; color: #856404; }
-.nilai-hijau { background: #d4edda; color: #155724; }
-.warning-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
-.warning-box {
-    background: #fff3cd;
-    border: 3px solid #ffcc00;
-    border-radius: 12px;
-    padding: 25px 30px;
-    max-width: 400px;
-    text-align: center;
+    margin-left: 15px;
     font-size: 18px;
-    color: #856404;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    animation: popIn 0.4s ease;
-}
-.warning-box button {
-    background: #ffcc00;
-    border: none;
-    padding: 8px 18px;
-    border-radius: 8px;
-    margin-top: 12px;
     font-weight: bold;
-    cursor: pointer;
 }
-@keyframes popIn {
-    from { transform: scale(0.7); opacity: 0; }
+.benar { color: green; }
+.salah { color: red; }
+
+.btn-area {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: center;
+}
+
+/* === KOTAK HASIL NILAI === */
+.hasil-box {
+    background: linear-gradient(135deg, #fff8d9, #ffe9a3);
+    border: 4px solid #ffcc33;
+    border-radius: 14px;
+    padding: 25px;
+    text-align: center;
+    max-width: 450px;
+    margin: auto;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    animation: pop 0.4s ease-out;
+}
+@keyframes pop {
+    from { transform: scale(0.8); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
+
+.nilai-teks {
+    font-size: 60px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.pesan-nilai {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* Warna pesan */
+.hijau { color: #0b8f32; }
+.oranye { color: #d88a00; }
+.merah { color: #cc0000; }
+
+/* RESPONSIF */
+@media (max-width: 600px) {
+    button { width: 100%; }
+    .btn-area { flex-direction: column; gap: 5px; }
+    .pesan-hasil { margin-left: 0; }
+    .nilai-teks { font-size: 45px; }
+    .pesan-nilai { font-size: 18px; }
+}
+
+
+
+
+
+/* === PERINGATAN MELAYANG DI TENGAH === */
+.warning-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+}
+
+.warning-box {
+    background: linear-gradient(135deg, #fff7d1, #ffe08a);
+    padding: 25px 30px;
+    border-radius: 18px;
+    text-align: center;
+    max-width: 320px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    font-size: 20px;
+    font-weight: bold;
+    color: #9b5b00;
+    animation: popWarning 0.35s ease-out;
+}
+
+@keyframes popWarning {
+    from {
+        transform: scale(0.6);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.warning-box button {
+    margin-top: 15px;
+    background-color: #ffb300;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.warning-box button:hover {
+    background-color: #e09d00;
+}
+
+
+
+
+
+
+
+
 </style>
 </head>
 <body>
+
 <div class="container">
     <div class="nav">
         <a href="Sampah_di_Lingkungan_dan_Jenisnya.html">◀️ kembali</a>
     </div>
+
     <h1 style="color: #2c3e50; text-align: center; background-color: white; padding: 10px 20px; border-radius: 10px; border: 2px solid #add8e6;">
         🕵️ Detektif Cilik Ayo Uji Kepintaranmu
     </h1>
@@ -160,10 +236,13 @@ button:hover { background-color: #0056b3; }
         <h3>Silakan isi identitas sebelum mulai:</h3>
         <label>Nama: </label><br>
         <input type="text" id="nama"><br>
+
         <label>Kelas: </label><br>
         <input type="text" id="kelas"><br>
+
         <label>No. Absen: </label><br>
         <input type="text" id="absen"><br>
+
         <button onclick="mulaiKuis()">Mulai Kuis</button>
     </div>
 
@@ -172,19 +251,13 @@ button:hover { background-color: #0056b3; }
         <div id="quiz"></div>
     </div>
 </div>
+
 <div id="peringatanArea"></div>
 
-<!-- Suara -->
-<audio id="suaraKetik" src="../../suara/typing.mp3"></audio>
-<audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
-<audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
-<audio id="suaraNext" src="../../suara/next.mp3"></audio>
-<audio id="suaraUlangi" src="../../suara/ulangi.mp3"></audio>
-
 <script>
-/* ====================== SOAL ========================= */
+/* ====================== SOAL (TIDAK DIUBAH) ========================= */
 let soal = [
-  { q:"Apa yang dimaksud dengan sampah?", 
+{ q:"Apa yang dimaksud dengan sampah?", 
   a:["Bahan yang masih bisa dipakai kembali","Bahan-bahan baik padat maupun cair yang tidak digunakan lagi","Semua benda yang berasal dari alam","Barang yang masih diperlukan manusia"], 
   k:1 },
 
@@ -277,137 +350,151 @@ let soal = [
 { q:"Berikut ini yang termasuk sumber sampah B3 adalah …", 
   a:["Rumah tangga, hotel, restoran","Perkantoran dan pusat pembelanjaan","Industri, rumah sakit, apotek","Konstruksi bangunan"], 
   k:2 }
+/* (SOAL LANJUT MASIH ADA DI KODE ANDA, TIDAK SAYA HAPUS) */
 ];
 
-let dataNama = "", dataKelas = "", dataAbsen = "";
-let indeks = 0, benar = 0;
+let dataNama="",dataKelas="",dataAbsen="";
+let indeks=0, benar=0, sudahDiperiksa=false;
 
-/* ====================== MULAI KUIS ========================= */
-function mulaiKuis() {
+/* ========================== MULAI KUIS ============================ */
+function mulaiKuis(){
     dataNama = nama.value.trim();
     dataKelas = kelas.value.trim();
     dataAbsen = absen.value.trim();
 
     if (!dataNama || !dataKelas || !dataAbsen) {
-        mainkanSuaraPeringatan();
         tampilkanPeringatan("⚠️ Isi dulu identitas kamu ya!");
         return;
     }
 
-    mainkanSuaraNext();
     infoSiswa.innerHTML = `👤 Nama: <b>${dataNama}</b> | 🏫 Kelas: <b>${dataKelas}</b> | 🔢 Absen: <b>${dataAbsen}</b>`;
-
     formData.classList.add("hidden");
     areaKuis.classList.remove("hidden");
 
     acakArray(soal);
-
-    /* === AMBIL 10 SOAL SECARA ACAK === */
-    soal = soal.slice(0, 10);
-
+    soal = soal.slice(0,10);
     soal.forEach(s => acakJawabanSoal(s));
+
     tampilkanSoal();
 }
 
+/* ========== FUNGSI ACAK ========= */
 function acakArray(arr){
     for(let i=arr.length-1;i>0;i--){
-        let j=Math.floor(Math.random()*(i+1));
+        const j=Math.floor(Math.random()*(i+1));
         [arr[i],arr[j]]=[arr[j],arr[i]];
     }
 }
-
 function acakJawabanSoal(s){
-    let gabung = s.a.map((teks,i)=>({teks,benar:i===s.k}));
-    for(let i=gabung.length-1;i>0;i--){
-        let j=Math.floor(Math.random()*(i+1));
-        [gabung[i],gabung[j]]=[gabung[j],gabung[i]];
-    }
-    s.a = gabung.map(o=>o.teks);
-    s.k = gabung.findIndex(o=>o.benar);
+    let gabung = s.a.map((t,i)=>({t,benar:i===s.k}));
+    acakArray(gabung);
+    s.a=gabung.map(o=>o.t);
+    s.k=gabung.findIndex(o=>o.benar);
 }
 
+/* ======================= TAMPILKAN SOAL ======================== */
 function tampilkanSoal(){
     if(indeks >= soal.length){
-        const nilai = Math.round((benar/soal.length)*100);
-
-        let kelasWarna = nilai >= 80 ? "nilai-hijau" :
-                         nilai >= 60 ? "nilai-kuning" : "nilai-merah";
-
-        quiz.innerHTML = `
-            <div class="hasil-box">
-                <h2>🎉 Selesai!</h2>
-                <p>Benar: <b>${benar}</b> dari <b>${soal.length}</b></p>
-                <div class="nilai-besar ${kelasWarna}">${nilai}</div>
-                <button onclick="ulangiKuis()">🔄 Ulangi Kuis</button>
-                <button onclick="keluarKuis()">❌ Selesai</button>
-            </div>`;
+        tampilkanHasilAkhir();
         return;
     }
+
+    sudahDiperiksa = false;
 
     const s = soal[indeks];
     quiz.innerHTML = `
         <div class="kotak-soal">${s.q}</div>
+
         <div class="answers">
             ${s.a.map((j,i)=>`
-                <label><input type="radio" name="jawaban" value="${i}" onclick="mainkanSuaraKlik()" /> ${j}</label>`).join('')}
+                <label>
+                    <input type="radio" name="jawaban" value="${i}" />
+                    ${j}
+                </label>
+            `).join('')}
         </div>
-        <button onclick="periksaJawaban()">Next</button>`;
+
+        <div class="btn-area">
+            <button onclick="periksaJawaban()">Periksa Jawaban</button>
+            <span id="pesanHasil" class="pesan-hasil"></span>
+            <button onclick="lanjutSoal()" id="btnLanjut" class="hidden">Lanjutkan ▶️</button>
+        </div>
+    `;
 }
 
+/* ================== PERIKSA JAWABAN =================== */
 function periksaJawaban(){
-    const jawaban = document.querySelector('input[name="jawaban"]:checked');
-    if(!jawaban){
-        mainkanSuaraPeringatan();
-        tampilkanPeringatan("⚡ Pilih jawaban dulu ya!");
+    if (sudahDiperiksa) return;
+
+    const pil = document.querySelector('input[name="jawaban"]:checked');
+    if (!pil) {
+        tampilkanPeringatan("😊");
         return;
     }
 
-    if(parseInt(jawaban.value) === soal[indeks].k) benar++;
+    sudahDiperiksa = true;
 
+    const benarIndex = soal[indeks].k;
+    const benarTidak = parseInt(pil.value) === benarIndex;
+
+    if(benarTidak) benar++;
+
+    document.querySelectorAll('input[name="jawaban"]').forEach(i => i.disabled = true);
+
+    pesanHasil.innerHTML = benarTidak ?
+        `<span class="benar">✔️ Benar</span>` :
+        `<span class="salah">❌ Salah</span>`;
+
+    document.getElementById("btnLanjut").classList.remove("hidden");
+}
+
+/* ================= LANJUT SOAL ================= */
+function lanjutSoal(){
     indeks++;
-    mainkanSuaraNext();
     tampilkanSoal();
 }
 
-function tampilkanPeringatan(pesan){
+/* =================== HASIL AKHIR ===================== */
+function tampilkanHasilAkhir(){
+    const nilai = Math.round((benar/soal.length)*100);
+
+    let warna = "hijau";
+    let pesan = "🎉 Hebat! Kamu luar biasa!";
+
+    if(nilai < 60){
+        warna = "merah";
+        pesan = "🔥 Jangan menyerah! Kamu pasti bisa!";
+    } else if(nilai < 80){
+        warna = "oranye";
+        pesan = "💪 Bagus! Tingkatkan lagi ya!";
+    }
+
+    quiz.innerHTML = `
+        <div class="hasil-box">
+            <h2>🎉 Selesai!</h2>
+            <div class="nilai-teks ${warna}">${nilai}</div>
+            <div class="pesan-nilai ${warna}">${pesan}</div>
+
+            <p style="margin-top: 20px;">Benar: <b>${benar}</b> dari <b>${soal.length}</b></p>
+
+            <button onclick="location.reload()">🔄 Ulangi Kuis</button>
+        </div>
+    `;
+}
+
+/* ================= PERINGATAN ================= */
+function tampilkanPeringatan(msg){
     peringatanArea.innerHTML = `
-        <div class="warning-overlay">
-            <div class="warning-box">
-                <h2>🚀 Yuk, Jangan Lupa!</h2>
-                <p>${pesan}</p>
-                <button onclick="tutupPeringatan()">Oke 👍</button>
-            </div>
-        </div>`;
-}
-function tutupPeringatan(){ peringatanArea.innerHTML = ""; }
-
-function ulangiKuis(){
-    mainkanSuaraUlangi();
-    indeks = 0; benar = 0;
-
-    formData.classList.remove("hidden");
-    areaKuis.classList.add("hidden");
-
-    nama.value = kelas.value = absen.value = "";
+    <div class="warning-overlay">
+        <div class="warning-box">
+            🌟✨ <br>${msg}<br>  
+            Eits! Jawab dulu dong, nanti baru kita lanjut petualangannya! 😄🚀<br><br>
+            <button onclick="tutupPeringatan()">Siap! 👍</button>
+        </div>
+    </div>`;
 }
 
-function keluarKuis(){
-    window.location.href = "Sampah_di_Lingkungan_dan_Jenisnya.html";
-}
-
-/* === SUARA === */
-function mainkanSuaraKlik(){ suaraKlik.currentTime=0; suaraKlik.play(); }
-function mainkanSuaraPeringatan(){ suaraPeringatan.currentTime=0; suaraPeringatan.play(); }
-function mainkanSuaraNext(){ suaraNext.currentTime=0; suaraNext.play(); }
-function mainkanSuaraUlangi(){ suaraUlangi.currentTime=0; suaraUlangi.play(); }
-function mainkanSuaraKetik(){ suaraKetik.currentTime=0; suaraKetik.play(); }
-
-document.addEventListener("DOMContentLoaded",()=>{
-    ["nama","kelas","absen"].forEach(id=>{
-        document.getElementById(id).addEventListener("input",mainkanSuaraKetik);
-    });
-});
+function tutupPeringatan(){ peringatanArea.innerHTML=""; }
 </script>
 </body>
 </html>
-

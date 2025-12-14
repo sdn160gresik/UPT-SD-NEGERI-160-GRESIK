@@ -1,323 +1,292 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Game Perkalian 2–9 (Input Angka)</title>
-  <style>
-    :root {
-      --bg: #2e6e61;
-      --panel: #3c816f;
-      --panel-dark: #2a5c4f;
-      --text: #ffffff;
-      --right: #2ecc71;
-      --wrong: #e74c3c;
-      --outline: rgba(255,255,255,.25);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;min-height:100vh;display:grid;place-items:center;
-      background:linear-gradient(160deg,var(--bg),#24594d 60%);
-      font-family:"Poppins",system-ui,sans-serif;color:var(--text);
-    }
-    .app{
-      width:min(880px,96vw);background:var(--panel);border-radius:22px;
-      box-shadow:0 20px 50px rgba(0,0,0,.25),inset 0 0 0 1px var(--outline);
-      padding:clamp(18px,3.2vw,28px);position:relative;z-index:2;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game Perkalian 2–9</title>
 
-    /* === Timer melayang di depan === */
-    .floating-timer{
-      position:fixed;top:20px;left:50%;transform:translateX(-50%);
-      background:rgba(255,255,255,0.15);
-      border:3px solid rgba(255,255,255,0.3);
-      padding:10px 30px;border-radius:999px;
-      font-size:clamp(28px,5vw,46px);font-weight:800;
-      color:#fffb91;text-shadow:0 0 10px rgba(0,0,0,0.5);
-      backdrop-filter:blur(8px);
-      transition:transform .2s ease,color .3s ease;
-      z-index:9999;
-    }
-    .floating-timer.low{
-      color:#ff5757;
-      transform:translateX(-50%) scale(1.1);
-      animation:pulse 0.6s infinite alternate;
-    }
-    @keyframes pulse{
-      from{text-shadow:0 0 10px rgba(255,0,0,0.4);}
-      to{text-shadow:0 0 20px rgba(255,0,0,0.8);}
-    }
+<style>
+:root{
+  --bg:#2e6e61;--panel:#3c816f;--panel-dark:#2a5c4f;
+  --text:#fff;--right:#2ecc71;--wrong:#e74c3c;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;display:grid;place-items:center;
+  background:linear-gradient(160deg,var(--bg),#24594d);
+  font-family:Poppins,system-ui,sans-serif;color:var(--text);
+}
+.app{
+  width:min(900px,96vw);
+  background:var(--panel);
+  border-radius:22px;
+  padding:24px;
+}
+header{display:flex;justify-content:space-between;flex-wrap:wrap}
+.pill{background:var(--panel-dark);padding:8px 14px;border-radius:999px}
 
-    /* === Kotak mengambang untuk pesan akhir === */
-    .floating-box {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      background: rgba(255,255,255,0.95);
-      color: #2a5c4f;
-      padding: 30px 50px;
-      border-radius: 20px;
-      font-size: 28px;
-      font-weight: 700;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-      text-align: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.5s ease;
-      z-index: 99999;
-    }
-    .floating-box.show {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    .floating-box.good {color:#2ecc71;}
-    .floating-box.medium {color:#f1c40f;}
-    .floating-box.bad {color:#e74c3c;}
+.screen{display:none}
+.screen.active{display:block}
 
-    header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:14px;}
-    .brand{font-weight:800;}
-    .pill{
-      background:var(--panel-dark);border:1px solid var(--outline);
-      padding:8px 12px;border-radius:999px;font-size:14px;
-    }
-    .screen{display:none}.screen.active{display:block}
-    .btn{background:#58b68c;border:none;color:#0f2e27;font-weight:700;
-      padding:12px 18px;border-radius:14px;cursor:pointer;
-      box-shadow:0 8px 18px rgba(0,0,0,.18);}
-    .btn.secondary{background:#6aa89a;color:#09322a}
+.btn{
+  background:#58b68c;border:none;
+  color:#09322a;font-weight:700;
+  padding:12px 22px;border-radius:14px;
+  cursor:pointer;
+}
 
-    .question{
-      display:grid;place-items:center;background:#2b6d5f;border-radius:18px;
-      border:1px solid var(--outline);margin:12px 0 16px;padding:18px;
-      min-height:120px;text-align:center;
-    }
-    .expr{font-size:clamp(42px,9vw,86px);font-weight:900;letter-spacing:1px;}
-    .input-area{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:10px;}
-    input[type=number]{font-size:28px;padding:8px 12px;width:140px;text-align:center;border-radius:12px;border:none;}
-    .feedback{font-size:22px;margin-top:10px;height:28px;}
-    .feedback.correct{color:var(--right)}.feedback.wrong{color:var(--wrong)}
-    .progress{height:10px;background:#2b6d5f;border-radius:999px;overflow:hidden;margin-bottom:8px;}
-    .bar{height:100%;width:0%;background:#84f0b8;transition:width .3s ease;}
-    .end{text-align:center;}
-    .big-score{font-size:clamp(36px,8vw,70px);font-weight:900;}
-    .nilai-hijau{color:#2ecc71}.nilai-kuning{color:#f1c40f}.nilai-merah{color:#e74c3c}
+.option-grid{display:flex;gap:16px;flex-wrap:wrap;margin:20px 0}
+.option-box{
+  flex:1;min-width:220px;
+  background:#2b6d5f;
+  padding:16px;border-radius:16px;
+  text-align:center;
+}
+select,input{
+  width:100%;padding:10px;
+  border-radius:10px;border:none;
+  font-size:16px;text-align:center;
+}
 
-    .option-grid {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin: 20px 0;
-    }
-    .option-box {
-      background: #2b6d5f;
-      border: 2px solid var(--outline);
-      border-radius: 18px;
-      padding: 18px;
-      flex: 1;
-      min-width: 220px;
-      text-align: center;
-      font-size: 18px;
-    }
-    .option-box label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .option-box select {
-      width: 100%;
-      padding: 12px;
-      border-radius: 10px;
-      border: none;
-      font-size: 16px;
-      text-align: center;
-    }
-  </style>
+.question{
+  background:#2b6d5f;
+  border-radius:18px;
+  padding:30px;
+  display:grid;place-items:center;
+  margin:20px 0;
+}
+.expr{font-size:72px;font-weight:900}
+
+.feedback{height:32px;font-size:22px}
+.correct{color:#2ecc71}
+.wrong{color:#e74c3c}
+
+.end{text-align:center}
+.big-score{font-size:72px;font-weight:900}
+.nilai-hijau{color:#2ecc71}
+.nilai-kuning{color:#f1c40f}
+.nilai-merah{color:#e74c3c}
+
+/* TIMER */
+.floating-timer{
+  position:fixed;top:20px;left:50%;
+  transform:translateX(-50%);
+  background:rgba(255,255,255,.15);
+  border:3px solid rgba(255,255,255,.3);
+  padding:10px 30px;border-radius:999px;
+  font-size:42px;font-weight:800;
+  color:#fffb91;z-index:9999;
+}
+.floating-timer.low{
+  color:#ff5757;
+  animation:pulse .6s infinite alternate;
+}
+@keyframes pulse{
+  from{transform:translateX(-50%) scale(1)}
+  to{transform:translateX(-50%) scale(1.1)}
+}
+</style>
 </head>
+
 <body>
-  <div class="floating-timer" id="floatingTimer">⏱️ 10</div>
-  <div class="floating-box" id="floatingBox"></div>
 
-  <div class="app">
-    <header>
-      <div class="brand">🔢 Perkalian 2–9</div>
-      <div class="stats">
-        <div class="pill">Soal: <strong id="pNo">0</strong>/<span id="pTotal">0</span></div>
-        <div class="pill">Skor: <strong id="pScore">0</strong></div>
-      </div>
-    </header>
-    <div class="progress"><div class="bar" id="bar"></div></div>
+<div class="floating-timer" id="floatingTimer">⏱️ 10</div>
 
-    <section class="screen start active" id="startScreen">
-      <h1>Siap latihan cepat? 🎯</h1>
-      <div class="option-grid">
-        <div class="option-box">
-          <label for="jumlah">Jumlah Soal</label>
-          <select id="jumlah">
-            <option value="5">5</option>
-            <option value="10" selected>10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-          </select>
-        </div>
-        <div class="option-box">
-          <label for="mode">Mode</label>
-          <select id="mode">
-            <option value="campur" selected>Campur (acak)</option>
-            <option value="2">Perkalian 2</option>
-            <option value="3">Perkalian 3</option>
-            <option value="4">Perkalian 4</option>
-            <option value="5">Perkalian 5</option>
-            <option value="6">Perkalian 6</option>
-            <option value="7">Perkalian 7</option>
-            <option value="8">Perkalian 8</option>
-            <option value="9">Perkalian 9</option>
-          </select>
-        </div>
-      </div>
-      <button class="btn" id="btnStart">Mulai ▶</button>
-    </section>
-
-    <section class="screen" id="gameScreen">
-      <div class="question"><div class="expr" id="expr"></div></div>
-      <div class="input-area">
-        <input type="number" id="answerInput" placeholder="Jawab..." />
-        <button class="btn" id="btnCheck">Periksa ✅</button>
-      </div>
-      <div class="feedback" id="feedback"></div>
-      <div class="controls" style="text-align:center;margin-top:10px;">
-        <button class="btn secondary" id="btnSkip">Lewati ⏭</button>
-      </div>
-    </section>
-
-    <section class="screen end" id="endScreen">
-      <div class="big-score" id="finalScore"></div>
-      <div class="msg" id="finalMsg"></div>
-      <button class="btn" id="btnRestart">Main Lagi 🔁</button>
-    </section>
+<div class="app">
+<header>
+  <strong>🔢 Perkalian 2–9</strong>
+  <div>
+    <span class="pill">Soal <b id="pNo">0</b>/<span id="pTotal">0</span></span>
+    <span class="pill">Skor <b id="pScore">0</b></span>
+    <span class="pill">Gagal <b id="pFail">0</b></span>
   </div>
+</header>
 
-  <script>
-    const TIME_LIMIT = 10;
-    const floatingTimer = document.getElementById('floatingTimer');
-    const floatingBox = document.getElementById('floatingBox');
-    let timeLeft, timerInterval;
-    let pairs=[], idx=0, score=0, skipped=[], total=0;
+<!-- START -->
+<section class="screen active" id="startScreen">
+  <h2>Siap bermain? 🎯</h2>
+  <div class="option-grid">
 
-    const startScreen=document.getElementById('startScreen'),
-          gameScreen=document.getElementById('gameScreen'),
-          endScreen=document.getElementById('endScreen'),
-          expr=document.getElementById('expr'),
-          answer=document.getElementById('answerInput'),
-          feedback=document.getElementById('feedback'),
-          pNo=document.getElementById('pNo'),
-          pTotal=document.getElementById('pTotal'),
-          pScore=document.getElementById('pScore'),
-          bar=document.getElementById('bar'),
-          finalScore=document.getElementById('finalScore'),
-          finalMsg=document.getElementById('finalMsg');
+    <div class="option-box">
+      <label>Jumlah Soal</label>
+      <select id="jumlah">
+        <option>5</option>
+        <option selected>10</option>
+        <option>20</option>
+        <option>50</option>
+        <option>100</option>
+      </select>
+    </div>
 
-    function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+    <div class="option-box">
+      <label>Mode Perkalian</label>
+      <select id="mode">
+        <option value="campur">Campur</option>
+        <option value="2">Perkalian 2</option>
+        <option value="3">Perkalian 3</option>
+        <option value="4">Perkalian 4</option>
+        <option value="5">Perkalian 5</option>
+        <option value="6">Perkalian 6</option>
+        <option value="7">Perkalian 7</option>
+        <option value="8">Perkalian 8</option>
+        <option value="9">Perkalian 9</option>
+      </select>
+    </div>
 
-    function startGame(){
-      const n=parseInt(document.getElementById('jumlah').value);
-      const mode=document.getElementById('mode').value;
-      let all=[];
-      if(mode==='campur'){for(let a=2;a<=9;a++){for(let b=2;b<=9;b++){all.push({a,b});}}}
-      else{const m=parseInt(mode);for(let b=2;b<=9;b++){all.push({a:m,b});}}
-      shuffle(all);
-      pairs=all.slice(0,n);
-      idx=0;score=0;skipped=[];total=pairs.length;
-      pNo.textContent=0;pTotal.textContent=total;pScore.textContent=0;
-      startScreen.classList.remove('active');endScreen.classList.remove('active');
-      gameScreen.classList.add('active');
-      renderQuestion();
+    <div class="option-box">
+      <label>Waktu per Soal</label>
+      <select id="waktu">
+        <option>1</option><option>2</option><option>3</option>
+        <option>4</option><option>5</option>
+        <option>6</option><option>7</option>
+        <option>8</option><option>9</option>
+        <option selected>10</option>
+      </select>
+    </div>
+
+    <div class="option-box">
+      <label>Batas Kegagalan</label>
+      <select id="batasGagal">
+        <option value="0">Tidak ada batas 🚀</option>
+      </select>
+    </div>
+
+  </div>
+  <button class="btn" id="btnStart">Mulai ▶</button>
+</section>
+
+<!-- GAME -->
+<section class="screen" id="gameScreen">
+  <div class="question"><div class="expr" id="expr"></div></div>
+  <input type="number" id="answer" placeholder="Jawaban">
+  <br><br>
+  <button class="btn" id="btnCheck">Periksa</button>
+  <div class="feedback" id="feedback"></div>
+</section>
+
+<!-- END -->
+<section class="screen end" id="endScreen">
+  <div id="finalScore" class="big-score"></div>
+  <p id="finalMsg"></p>
+  <button class="btn" onclick="location.reload()">Main Lagi 🔁</button>
+</section>
+</div>
+
+<script>
+let TIME_LIMIT=10,timeLeft,timer;
+let pairs=[],idx=0,score=0,total=0;
+let fail=0,failLimit=0;
+
+const floatingTimer=document.getElementById("floatingTimer");
+
+/* 🔔 BEEP */
+function beep(){
+  const ctx=new (window.AudioContext||window.webkitAudioContext)();
+  const osc=ctx.createOscillator();
+  const gain=ctx.createGain();
+  osc.frequency.value=800;
+  gain.gain.value=0.15;
+  osc.connect(gain);gain.connect(ctx.destination);
+  osc.start();
+  osc.stop(ctx.currentTime+0.15);
+}
+
+/* pilihan gagal 1–100 */
+const batasSelect=document.getElementById("batasGagal");
+for(let i=1;i<=100;i++){
+  const opt=document.createElement("option");
+  opt.value=i;
+  opt.textContent=i+" kali";
+  if(i===3) opt.selected=true;
+  batasSelect.appendChild(opt);
+}
+
+function startGame(){
+  TIME_LIMIT=parseInt(waktu.value);
+  failLimit=parseInt(batasGagal.value);
+
+  const n=parseInt(jumlah.value);
+  const mode=document.getElementById("mode").value;
+
+  let all=[];
+  if(mode==="campur"){
+    for(let a=2;a<=9;a++)for(let b=2;b<=9;b++)all.push({a,b});
+  }else{
+    const m=parseInt(mode);
+    for(let b=2;b<=9;b++)all.push({a:m,b});
+  }
+
+  pairs=all.sort(()=>Math.random()-0.5).slice(0,n);
+  idx=0;score=0;fail=0;total=pairs.length;
+
+  startScreen.classList.remove("active");
+  gameScreen.classList.add("active");
+  next();
+}
+
+function next(){
+  if(idx>=pairs.length){endGame();return;}
+  const q=pairs[idx];
+  expr.textContent=`${q.a} × ${q.b}`;
+  answer.value="";feedback.textContent="";
+  pNo.textContent=idx+1;pTotal.textContent=total;pScore.textContent=score;
+  startTimer();
+}
+
+function startTimer(){
+  clearInterval(timer);
+  timeLeft=TIME_LIMIT;
+  updateTimer();
+  timer=setInterval(()=>{
+    timeLeft--;updateTimer();
+    if(timeLeft<=3 && timeLeft>0) beep();
+    if(timeLeft<=0){
+      fail++;checkFail();
+      idx++;next();
     }
+  },1000);
+}
 
-    function renderQuestion(){
-      const {a,b}=pairs[idx];
-      expr.textContent=`${a} × ${b}`;
-      answer.value='';feedback.textContent='';
-      pNo.textContent=idx+1;
-      bar.style.width=(idx/total*100)+'%';
-      startTimer();
-      answer.focus();
-    }
+function updateTimer(){
+  floatingTimer.textContent="⏱️ "+timeLeft;
+  floatingTimer.classList.toggle("low",timeLeft<=3);
+}
 
-    function startTimer(){
-      clearInterval(timerInterval);
-      timeLeft=TIME_LIMIT;
-      updateTimer();
-      timerInterval=setInterval(()=>{
-        timeLeft--;
-        updateTimer();
-        if(timeLeft<=0){clearInterval(timerInterval);skip();}
-      },1000);
-    }
-    function updateTimer(){
-      floatingTimer.textContent=`⏱️ ${timeLeft}`;
-      floatingTimer.classList.toggle("low", timeLeft<=3);
-    }
+btnCheck.onclick=()=>{
+  clearInterval(timer);
+  const {a,b}=pairs[idx];
+  const val=parseInt(answer.value);
+  if(val===a*b){
+    score++;feedback.textContent="✅ Benar!";
+    feedback.className="feedback correct";
+  }else{
+    fail++;feedback.textContent="❌ Salah";
+    feedback.className="feedback wrong";
+    checkFail();
+  }
+  idx++;setTimeout(next,600);
+};
 
-    function check(){
-      clearInterval(timerInterval);
-      const {a,b}=pairs[idx];
-      const correct=a*b;
-      const val=parseInt(answer.value);
-      if(val===correct){
-        score++;feedback.textContent="✅ Benar!";
-        feedback.className="feedback correct";
-      }else{
-        feedback.textContent=`❌ Salah! Jawaban: ${correct}`;
-        feedback.className="feedback wrong";
-      }
-      pScore.textContent=score;
-      setTimeout(next,700);
-    }
+function checkFail(){
+  pFail.textContent=fail;
+  if(failLimit!==0 && fail>=failLimit){
+    alert("❌ Batas kegagalan tercapai!\nGame diulang dari awal 💪");
+    location.reload();
+  }
+}
 
-    function skip(){
-      skipped.push(pairs[idx]);
-      next();
-    }
+function endGame(){
+  gameScreen.classList.remove("active");
+  endScreen.classList.add("active");
+  const pct=Math.round(score/total*100);
+  finalScore.textContent=pct;
+  finalScore.className=
+    "big-score "+(pct>=75?"nilai-hijau":pct>=50?"nilai-kuning":"nilai-merah");
+  finalMsg.textContent=pct>=75?"Hebat sekali! 🌟":"Ayo latihan lagi! 🚀";
+}
 
-    function next(){
-      idx++;
-      if(idx>=pairs.length){
-        if(skipped.length>0){pairs=skipped;skipped=[];idx=0;renderQuestion();}
-        else endGame();
-      }else renderQuestion();
-    }
+btnStart.onclick=startGame;
+</script>
 
-    function endGame(){
-      gameScreen.classList.remove('active');
-      endScreen.classList.add('active');
-      const pct=Math.round(score/total*100); // nilai bulat
-      finalScore.textContent=`${pct}`;
-      finalScore.className="big-score";
-      let msgClass="";
-      if(pct>=75){finalScore.classList.add("nilai-hijau");msgClass="good";}
-      else if(pct>=50){finalScore.classList.add("nilai-kuning");msgClass="medium";}
-      else{finalScore.classList.add("nilai-merah");msgClass="bad";}
-      const msg=pct>=90?"Super sekali! 🌟":pct>=75?"Hebat! 💪":pct>=50?"Bagus! 🙂":"Semangat! 🚀";
-      finalMsg.textContent=msg;
-      showFloatingBox(`${pct} - ${msg}`, msgClass);
-    }
-
-    function showFloatingBox(text, cls){
-      floatingBox.textContent=text;
-      floatingBox.className=`floating-box show ${cls}`;
-      setTimeout(()=>floatingBox.classList.remove('show'),3000);
-    }
-
-    document.getElementById('btnStart').onclick=startGame;
-    document.getElementById('btnCheck').onclick=check;
-    document.getElementById('btnSkip').onclick=skip;
-    document.getElementById('btnRestart').onclick=()=>{
-      endScreen.classList.remove('active');
-      startScreen.classList.add('active');
-    };
-  </script>
 </body>
 </html>

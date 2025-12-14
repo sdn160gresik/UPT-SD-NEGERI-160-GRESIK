@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menu Game Perkalian</title>
+
+<style>
+:root{
+  --bg:#2e6e61;
+  --panel:#3c816f;
+  --panel-dark:#2a5c4f;
+  --btn1:#58b68c;
+  --btn2:#f1c40f;
+  --text:#ffffff;
+}
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(160deg,var(--bg),#24594d);
+  font-family:Poppins,system-ui,sans-serif;
+  color:var(--text);
+}
+
+.app{
+  width:min(900px,95vw);
+  background:var(--panel);
+  border-radius:24px;
+  padding:32px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+h1{
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.subtitle{
+  opacity:.9;
+  margin-bottom:30px;
+  font-size:18px;
+}
+
+.menu{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
+}
+
+.card{
+  background:var(--panel-dark);
+  padding:24px;
+  border-radius:20px;
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+}
+
+.card h2{
+  font-size:26px;
+  margin-bottom:10px;
+}
+
+.card p{
+  font-size:16px;
+  opacity:.9;
+  margin-bottom:20px;
+}
+
+.btn{
+  display:inline-block;
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  font-size:18px;
+  font-weight:700;
+  text-decoration:none;
+  color:#09322a;
+}
+
+.btn.mode1{background:var(--btn1)}
+.btn.mode2{background:var(--btn2)}
+
+.footer{
+  margin-top:30px;
+  font-size:14px;
+  opacity:.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+  <h1>🔢 Game Perkalian</h1>
+  <div class="subtitle">
+    Pilih mode permainan dan mulai belajar dengan menyenangkan 🎯
+  </div>
+
+  <div class="menu">
+
+    <!-- MODE 1 -->
+    <div class="card">
+      <h2>Mode Perkalian 1</h2>
+      <p>
+        Latihan perkalian 2–9 dengan soal acak, timer,
+        skor, dan batas kegagalan.
+      </p>
+      <a href="perkalian.html" class="btn mode1">
+        ▶ Mulai Mode 1
+      </a>
+    </div>
+
+    <!-- MODE 2 -->
+    <div class="card">
+      <h2>Mode Perkalian 2</h2>
+      <p>
+        Belajar perkalian dengan tampilan
+        lingkar hitung yang interaktif dan visual.
+      </p>
+      <a href="lingkarhitung.html" class="btn mode2">
+        ▶ Mulai Mode 2
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    © Game Edukasi Matematika • Belajar jadi lebih seru 🚀
+  </div>
+</div>
+
+</body>
+</html>

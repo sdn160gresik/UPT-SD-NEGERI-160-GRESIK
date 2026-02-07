@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tugas Bahasa Indonesia</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+
   <style>
     html, body {
       margin: 0;
@@ -20,7 +21,6 @@
 
     nav {
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
@@ -31,29 +31,14 @@
       margin-right: 0.5rem;
     }
 
-    .nav-right {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-    }
-
     .nav-right a {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255,255,255,0.9);
       padding: 0.4rem 0.8rem;
       border-radius: 6px;
       text-decoration: none;
       color: #0288d1;
       font-weight: bold;
       font-size: 0.9rem;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .nav-right a:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
     .title-section {
@@ -64,44 +49,32 @@
     .title-section h1 {
       font-size: 2rem;
       background: rgba(255,255,255,0.85);
-      display: inline-block;
       padding: 0.5rem 1rem;
       border-radius: 12px;
       color: #0288d1;
-      text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+      display: inline-block;
     }
 
-    /* Dropdown Menu */
     .task-container {
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
       margin: 30px auto;
     }
 
     .dropdown {
       position: relative;
-      display: inline-block;
     }
 
     .dropbtn {
       background: rgba(255,255,255,0.9);
       border-radius: 12px;
       padding: 20px;
-      text-align: center;
       font-weight: bold;
       font-size: 1.1rem;
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
       color: #0288d1;
       border: none;
       width: 250px;
-    }
-
-    .dropbtn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
     }
 
     .dropdown-content {
@@ -109,8 +82,7 @@
       position: absolute;
       background: rgba(255,255,255,0.95);
       border-radius: 8px;
-      min-width: 200px;
-      z-index: 1;
+      min-width: 230px;
       margin-top: 5px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.25);
     }
@@ -124,20 +96,10 @@
       border-bottom: 1px solid #ddd;
     }
 
-    .dropdown-content a:last-child {
-      border-bottom: none;
-    }
-
-    .dropdown-content a:hover {
-      background: #f1f1f1;
-    }
-
-    /* kelas aktif untuk buka menu */
     .dropdown.show .dropdown-content {
       display: block;
     }
 
-    /* Kotak pesan melayang */
     .popup {
       display: none;
       position: fixed;
@@ -146,7 +108,7 @@
       transform: translate(-50%, -50%);
       background: rgba(255,255,255,0.95);
       padding: 20px 30px;
-      border-radius: 12px;
+      border-radius: 14px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       font-weight: bold;
       color: #0288d1;
@@ -164,82 +126,145 @@
       to {opacity: 1;}
     }
 
+    .calendar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 999;
+    }
+
+    .calendar-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #e1f5fe, #ffffff);
+      padding: 25px 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+      z-index: 1000;
+      animation: pop 0.4s ease;
+    }
+
+    .calendar-popup h2 {
+      margin: 0 0 10px;
+      color: #0288d1;
+    }
+
+    .calendar-popup p {
+      margin: 0 0 15px;
+      font-size: 0.95rem;
+    }
+
+    .calendar-popup input {
+      padding: 10px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      border: 2px solid #0288d1;
+      cursor: pointer;
+    }
+
+    @keyframes pop {
+      from {transform: translate(-50%, -50%) scale(0.6); opacity: 0;}
+      to {transform: translate(-50%, -50%) scale(1); opacity: 1;}
+    }
   </style>
 </head>
+
 <body>
 
-  <!-- Navigasi -->
-  <nav>
-    <div class="nav-left">
-      <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
-      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 50px;">
-      <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah">
-    </div>
-    <div class="nav-right">
-      <a href="../../index.html">🏠 Beranda</a>
-      <a href="tugas.html">◀️ Kembali</a>
-      <a href="#">🖼️ Galeri</a>
-    </div>
-  </nav>
-
-  <!-- Judul Halaman -->
-  <div class="title-section">
-    <h1>📚 Tugas Bahasa Indonesia</h1>
+<nav>
+  <div class="nav-left">
+    <img src="https://i.imgur.com/sxm7RR1.png">
+    <img src="https://i.imgur.com/tGA5UBc.png" style="height:50px;">
+    <img src="https://i.imgur.com/oWB8vKW.png">
   </div>
+  <div class="nav-right">
+    <a href="../../index.html">🏠 Beranda</a>
+    <a href="tugas.html">◀️ Kembali</a>
+    <a href="#">🖼️ Galeri</a>
+  </div>
+</nav>
 
-  <!-- Kotak Dropdown Tugas -->
-  <div class="task-container">
-    <!-- Dropdown Download -->
-   
-    <!-- Dropdown Tanggal Tugas -->
-    <div class="dropdown" id="dropdownTanggal">
-      <button class="dropbtn">📅 Pilih Tugas</button>
-      <div class="dropdown-content">
-        <a href="Soal_Bahasa_Indonesia_Kelas5_Imbuhan_TeksProsedur.html">Rabu, 12 November 2025</a>
-        <a href="bhs_indo/Selasa_25_Nov_25/Latihan_Soal_tugas_bahasa_indnesia.html">Selasa, 25 November 2025</a>
-        <a href="#" id="tugasLain">Tugas Lain</a>
-      </div>
+<div class="title-section">
+  <h1>📚 Tugas Bahasa Indonesia</h1>
+</div>
+
+<div class="task-container">
+  <div class="dropdown">
+    <button class="dropbtn">📅 Pilih Tugas</button>
+    <div class="dropdown-content">
+      <a href="Soal_Bahasa_Indonesia_Kelas5_Imbuhan_TeksProsedur.html">Rabu, 12 November 2025</a>
+      <a href="bhs_indo/Selasa_25_Nov_25/Latihan_Soal_tugas_bahasa_indnesia.html">Selasa, 25 November 2025</a>
+      <a href="#" id="tugasLain">📆 Pilih Tanggal Lain</a>
     </div>
   </div>
+</div>
 
-  <!-- Kotak Pesan Melayang -->
-  <div id="popupMessage" class="popup">⚙️ Mohon maaf, masih dalam proses.</div>
+<div id="popupMessage" class="popup">
+  😄📚 Wah! Soalnya masih disiapkan yaa!<br>Semangat belajarnya! 🌟
+</div>
 
-  <!-- Suara klik interaktif -->
-  <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
+<div class="calendar-overlay" id="calendarOverlay"></div>
 
-  <script>
- 
-    // Dropdown umum
-    const dropdowns = document.querySelectorAll(".dropdown");
-    dropdowns.forEach(drop => {
-      const button = drop.querySelector(".dropbtn");
-      button.addEventListener("click", function(e) {
-        e.stopPropagation();
-        dropdowns.forEach(d => { if (d !== drop) d.classList.remove("show"); });
-        drop.classList.toggle("show");
-      });
-    });
+<div class="calendar-popup" id="calendarPopup">
+  <h2>📅 Pilih Tanggal</h2>
+  <p>Ayo tentukan tanggal tugasmu! 💪✨</p>
+  <input type="date" id="calendarInput">
+</div>
 
-    // Tutup semua dropdown jika klik di luar
-    window.addEventListener("click", function() {
-      dropdowns.forEach(drop => drop.classList.remove("show"));
-    });
+<script>
+  const dropdown = document.querySelector(".dropdown");
+  const dropbtn = document.querySelector(".dropbtn");
+  const popup = document.getElementById("popupMessage");
+  const tugasLain = document.getElementById("tugasLain");
 
-    // Pesan melayang untuk tugas lain
-    document.getElementById("tugasLain").addEventListener("click", function(e) {
-      e.preventDefault();
-      const popup = document.getElementById("popupMessage");
+  const overlay = document.getElementById("calendarOverlay");
+  const calendarPopup = document.getElementById("calendarPopup");
+  const calendarInput = document.getElementById("calendarInput");
+
+  dropbtn.onclick = e => {
+    e.stopPropagation();
+    dropdown.classList.toggle("show");
+  };
+
+  window.onclick = () => dropdown.classList.remove("show");
+
+  tugasLain.onclick = e => {
+    e.preventDefault();
+    overlay.style.display = "block";
+    calendarPopup.style.display = "block";
+  };
+
+  overlay.onclick = () => {
+    overlay.style.display = "none";
+    calendarPopup.style.display = "none";
+  };
+
+  const soalByTanggal = {
+    "2025-11-12": "Soal_Bahasa_Indonesia_Kelas5_Imbuhan_TeksProsedur.html",
+    "2025-11-25": "bhs_indo/Selasa_25_Nov_25/Latihan_Soal_tugas_bahasa_indnesia.html",
+
+    "2026-02-10": "https://nurchintapembatik.my.canva.site/bahasa-indoensia-teks-eksplanasi",
+    "2026-02-12": "/kelas-5/tugas/bhs_indo/tugas_bhs_indo_120226.html"
+  };
+
+  calendarInput.onchange = function () {
+    const tgl = this.value;
+    overlay.style.display = "none";
+    calendarPopup.style.display = "none";
+
+    if (soalByTanggal[tgl]) {
+      window.location.href = soalByTanggal[tgl];
+    } else {
       popup.classList.add("show");
-      setTimeout(() => popup.classList.remove("show"), 2000);
-    });
-  </script>
+      setTimeout(() => popup.classList.remove("show"), 2300);
+    }
+  };
+</script>
 
 </body>
 </html>
-
-
-
-
-
-

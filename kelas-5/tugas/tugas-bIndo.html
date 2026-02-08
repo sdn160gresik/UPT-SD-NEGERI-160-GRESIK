@@ -215,7 +215,10 @@
     dropdown.classList.toggle("show");
   };
 
-  window.onclick = () => dropdown.classList.remove("show");
+  window.onclick = () => {
+    dropdown.classList.remove("show");
+    pesan.style.display = "none"; // 🔥 pesan hilang jika klik area mana saja
+  };
 
   tugasLain.onclick = e => {
     e.preventDefault();
@@ -228,8 +231,6 @@
     calendarPopup.style.display = "none";
     pesan.style.display = "none";
   };
-
-  pesan.onclick = () => pesan.style.display = "none";
 
   const soalByTanggal = {
     "2025-11-12": "Soal_Bahasa_Indonesia_Kelas5_Imbuhan_TeksProsedur.html",
@@ -253,39 +254,34 @@
       soalWaktuKhusus.tanggal + "T" + soalWaktuKhusus.waktu + ":00"
     );
 
-    // ✅ Tanggal tugas khusus tapi belum waktunya
     if (tglDipilih === soalWaktuKhusus.tanggal && sekarang < waktuAktif) {
       pesan.innerHTML = `
-        ⏰✨ <br>
-        <b>Tugas ini belum dibuka ya!</b><br><br>
-        📅 Tanggal: <b>10 Februari 2026</b><br>
-        🕖 Jam mulai: <b>07.00 WIB</b><br><br>
-        💪 Yuk bersiap dan semangat belajar!<br>
-        Kamu pasti bisa 🌟📚
+        ⏰✨<br>
+        <b>Tugas ini belum dibuka</b><br><br>
+        📅 10 Februari 2026<br>
+        🕖 Pukul 07.00 WIB<br><br>
+        💪 Tetap semangat belajar!<br>
+        Kamu luar biasa 🌟📚
       `;
       pesan.style.display = "block";
       return;
     }
 
-    // ✅ Tanggal & waktu sudah aktif
     if (tglDipilih === soalWaktuKhusus.tanggal && sekarang >= waktuAktif) {
       window.location.href = soalWaktuKhusus.link;
       return;
     }
 
-    // ✅ Tanggal tugas biasa
     if (soalByTanggal[tglDipilih]) {
       window.location.href = soalByTanggal[tglDipilih];
       return;
     }
 
-    // ❌ Tidak ada tugas
     pesan.innerHTML = `
-      😄🌈 <br>
+      😄🌈<br>
       <b>Belum ada tugas di tanggal ini</b><br><br>
-      ✨ Jangan menyerah ya!<br>
-      📅 Coba pilih tanggal lainnya<br>
-      🚀 Semangat belajarnya luar biasa!
+      📅 Yuk pilih tanggal lain<br>
+      🚀 Semangat belajarmu keren banget!
     `;
     pesan.style.display = "block";
   };

@@ -142,12 +142,13 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: linear-gradient(135deg, #fff176, #ffd54f);
-      padding: 25px 30px;
-      border-radius: 18px;
+      background: linear-gradient(135deg, #ffecb3, #ffe082, #ffd54f);
+      padding: 28px 32px;
+      border-radius: 20px;
       text-align: center;
       font-weight: bold;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+      color: #5d4037;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.35);
       z-index: 2000;
       animation: pop 0.4s ease;
     }
@@ -197,10 +198,7 @@
   <input type="date" id="calendarInput">
 </div>
 
-<div class="pesan-melayang" id="pesanMelayang">
-  😄 Belum ada tugas di tanggal ini ya!  
-  <br>Yuk cek tanggal lainnya ✨📅
-</div>
+<div class="pesan-melayang" id="pesanMelayang"></div>
 
 <script>
   const dropdown = document.querySelector(".dropdown");
@@ -255,16 +253,40 @@
       soalWaktuKhusus.tanggal + "T" + soalWaktuKhusus.waktu + ":00"
     );
 
+    // ✅ Tanggal tugas khusus tapi belum waktunya
+    if (tglDipilih === soalWaktuKhusus.tanggal && sekarang < waktuAktif) {
+      pesan.innerHTML = `
+        ⏰✨ <br>
+        <b>Tugas ini belum dibuka ya!</b><br><br>
+        📅 Tanggal: <b>10 Februari 2026</b><br>
+        🕖 Jam mulai: <b>07.00 WIB</b><br><br>
+        💪 Yuk bersiap dan semangat belajar!<br>
+        Kamu pasti bisa 🌟📚
+      `;
+      pesan.style.display = "block";
+      return;
+    }
+
+    // ✅ Tanggal & waktu sudah aktif
     if (tglDipilih === soalWaktuKhusus.tanggal && sekarang >= waktuAktif) {
       window.location.href = soalWaktuKhusus.link;
       return;
     }
 
+    // ✅ Tanggal tugas biasa
     if (soalByTanggal[tglDipilih]) {
       window.location.href = soalByTanggal[tglDipilih];
       return;
     }
 
+    // ❌ Tidak ada tugas
+    pesan.innerHTML = `
+      😄🌈 <br>
+      <b>Belum ada tugas di tanggal ini</b><br><br>
+      ✨ Jangan menyerah ya!<br>
+      📅 Coba pilih tanggal lainnya<br>
+      🚀 Semangat belajarnya luar biasa!
+    `;
     pesan.style.display = "block";
   };
 </script>

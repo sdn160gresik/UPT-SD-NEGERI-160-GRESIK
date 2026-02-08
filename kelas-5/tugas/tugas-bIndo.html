@@ -100,33 +100,6 @@
       display: block;
     }
 
-    .popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(255,255,255,0.95);
-      padding: 22px 30px;
-      border-radius: 16px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.35);
-      font-weight: bold;
-      color: #0288d1;
-      text-align: center;
-      z-index: 1000;
-      font-size: 1.05rem;
-    }
-
-    .popup.show {
-      display: block;
-      animation: fadeIn 0.4s ease;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
     .calendar-overlay {
       display: none;
       position: fixed;
@@ -147,7 +120,6 @@
       text-align: center;
       box-shadow: 0 10px 25px rgba(0,0,0,0.35);
       z-index: 1000;
-      animation: pop 0.4s ease;
     }
 
     .calendar-popup h2 {
@@ -166,11 +138,6 @@
       border-radius: 10px;
       border: 2px solid #0288d1;
       cursor: pointer;
-    }
-
-    @keyframes pop {
-      from {transform: translate(-50%, -50%) scale(0.6); opacity: 0;}
-      to {transform: translate(-50%, -50%) scale(1); opacity: 1;}
     }
   </style>
 </head>
@@ -205,8 +172,6 @@
   </div>
 </div>
 
-<div id="popupMessage" class="popup"></div>
-
 <div class="calendar-overlay" id="calendarOverlay"></div>
 
 <div class="calendar-popup" id="calendarPopup">
@@ -218,7 +183,6 @@
 <script>
   const dropdown = document.querySelector(".dropdown");
   const dropbtn = document.querySelector(".dropbtn");
-  const popup = document.getElementById("popupMessage");
   const tugasLain = document.getElementById("tugasLain");
 
   const overlay = document.getElementById("calendarOverlay");
@@ -245,54 +209,25 @@
 
   const soalByTanggal = {
     "2025-11-12": "Soal_Bahasa_Indonesia_Kelas5_Imbuhan_TeksProsedur.html",
-    "2025-11-25": "bhs_indo/Selasa_25_Nov_25/Latihan_Soal_tugas_bahasa_indnesia.html",
-    "2026-02-08": "https://nurchintapembatik.my.canva.site/bahasa-indonsia-teks-eksplanasi"
+    "2025-11-25": "bhs_indo/Selasa_25_Nov_25/Latihan_Soal_tugas_bahasa_indnesia.html"
   };
 
-  function tutupPopup(e){
-    if(!popup.contains(e.target)){
-      popup.classList.remove("show");
-      document.removeEventListener("click", tutupPopup);
-    }
-  }
-
   calendarInput.onchange = function () {
-    const tgl = this.value;
+    const tglDipilih = new Date(this.value);
     overlay.style.display = "none";
     calendarPopup.style.display = "none";
 
-    if (tgl === "2026-02-08") {
-      const now = new Date();
-      const tahun = now.getFullYear();
-      const bulan = now.getMonth() + 1;
-      const tanggal = now.getDate();
-      const jam = now.getHours();
-      const menit = now.getMinutes();
+    const batasWaktu = new Date("2026-02-08T15:35:00");
+    const sekarang = new Date();
 
-      if (tahun === 2026 && bulan === 2 && tanggal === 8 && jam === 15 && menit === 35) {
-        window.location.href = soalByTanggal[tgl];
-      } else {
-        popup.innerHTML =
-          "🌈😄 Semangat ya!<br><br>" +
-          "📅 Tugas ini baru bisa dibuka<br>" +
-          "<b>8 Februari 2026 pukul 15:35</b> ⏰<br><br>" +
-          "Ayo persiapkan diri, kamu hebat! 💪✨";
-        popup.classList.add("show");
-        setTimeout(() => {
-          document.addEventListener("click", tutupPopup);
-        }, 50);
-      }
+    if (sekarang >= batasWaktu && tglDipilih >= new Date("2026-02-08")) {
+      window.location.href = "https://nurchintapembatik.my.canva.site/bahasa-indonsia-teks-eksplanasi";
       return;
     }
 
-    if (soalByTanggal[tgl]) {
-      window.location.href = soalByTanggal[tgl];
-    } else {
-      popup.innerHTML = "😄📚 Wah! Soalnya masih disiapkan yaa!<br>Semangat belajarnya! 🌟";
-      popup.classList.add("show");
-      setTimeout(() => {
-        document.addEventListener("click", tutupPopup);
-      }, 50);
+    const tglStr = this.value;
+    if (soalByTanggal[tglStr]) {
+      window.location.href = soalByTanggal[tglStr];
     }
   };
 </script>

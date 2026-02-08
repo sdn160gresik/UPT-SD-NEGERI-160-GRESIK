@@ -125,6 +125,53 @@
       border: 2px solid #0288d1;
       cursor: pointer;
     }
+
+    .pesan-melayang {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #fff176, #ffd54f);
+      padding: 20px;
+      border-radius: 18px;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+      z-index: 2000;
+      max-width: 320px;
+    }
+
+    .daftar-tugas {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      margin-top: 10px;
+      padding-bottom: 5px;
+    }
+
+    .item-tugas {
+      min-width: 180px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* === TOOLTIP === */
+    .tooltip {
+      position: fixed;
+      background: rgba(0,0,0,0.85);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      pointer-events: none;
+      display: none;
+      z-index: 3000;
+    }
   </style>
 </head>
 
@@ -162,35 +209,75 @@
 
 <div class="calendar-popup" id="calendarPopup">
   <h2>📅 Pilih Tanggal</h2>
-  <input type="date" id="calendarInput" title="Arahkan kursor ke tanggal">
+  <input type="date" id="calendarInput">
 </div>
+
+<div class="pesan-melayang" id="pesanMelayang">
+  <div id="infoTugas"></div>
+  <div class="daftar-tugas" id="daftarTugas"></div>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
 
 <script>
   const kalenderTugas = [
-    { tanggal: "2026-02-06", waktu: "08:00" },
-    { tanggal: "2026-02-08", waktu: "16:15" },
-    { tanggal: "2026-02-10", waktu: "09:00" },
-    { tanggal: "2026-02-12", waktu: "10:00" }
+    { tanggal: "2026-02-06", waktu: "08:00", link: "#" },
+    { tanggal: "2026-02-08", waktu: "16:15", link: "https://nurchintapembatik.my.canva.site/bahasa-indonsia-teks-eksplanasi" },
+    { tanggal: "2026-02-10", waktu: "09:00", link: "#" },
+    { tanggal: "2026-02-12", waktu: "10:00", link: "#" }
   ];
 
+  const tooltip = document.getElementById("tooltip");
   const calendarInput = document.getElementById("calendarInput");
 
-  function updateTooltip(tanggal) {
-    const tugas = kalenderTugas.find(t => t.tanggal === tanggal);
+  calendarInput.addEventListener("mousemove", e => {
+    const tgl = calendarInput.value;
+    let teks = "Tidak ada tugas";
+
+    const tugas = kalenderTugas.find(t => t.tanggal === tgl);
     if (tugas) {
-      calendarInput.title = "Ada tugas pada jam " + tugas.waktu;
-    } else {
-      calendarInput.title = "Tidak ada tugas";
+      teks = `Ada tugas pada jam ${tugas.waktu}`;
     }
-  }
 
-  calendarInput.addEventListener("input", function () {
-    updateTooltip(this.value);
+    tooltip.textContent = teks;
+    tooltip.style.display = "block";
+    tooltip.style.left = e.pageX + 12 + "px";
+    tooltip.style.top = e.pageY + 12 + "px";
   });
 
-  calendarInput.addEventListener("mouseenter", function () {
-    if (this.value) updateTooltip(this.value);
+  calendarInput.addEventListener("mouseleave", () => {
+    tooltip.style.display = "none";
   });
+
+  calendarInput.onchange = function () {
+    const tgl = new Date(this.value);
+    const bulan = tgl.getMonth();
+    const tahun = tgl.getFullYear();
+
+    const daftar = kalenderTugas.filter(t => {
+      const d = new Date(t.tanggal);
+      return d.getMonth() === bulan && d.getFullYear() === tahun;
+    });
+
+    const info = document.getElementById("infoTugas");
+    const list = document.getElementById("daftarTugas");
+    list.innerHTML = "";
+
+    if (daftar.length === 0) {
+      info.innerHTML = "😄 Belum ada tugas di bulan ini";
+    } else {
+      info.innerHTML = "📌 Tugas di bulan ini:";
+      daftar.forEach(t => {
+        const div = document.createElement("div");
+        div.className = "item-tugas";
+        div.innerHTML = `📅 ${t.tanggal}<br>⏰ ${t.waktu}`;
+        div.onclick = () => window.location.href = t.link;
+        list.appendChild(div);
+      });
+    }
+
+    document.getElementById("pesanMelayang").style.display = "block";
+  };
 </script>
 
 </body>

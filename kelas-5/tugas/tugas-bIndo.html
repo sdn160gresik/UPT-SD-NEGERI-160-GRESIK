@@ -217,7 +217,7 @@
 
   window.onclick = () => {
     dropdown.classList.remove("show");
-    pesan.style.display = "none"; // 🔥 pesan hilang jika klik area mana saja
+    pesan.style.display = "none";
   };
 
   tugasLain.onclick = e => {
@@ -237,11 +237,18 @@
     "2025-11-25": "bhs_indo/Selasa_25_Nov_25/Latihan_Soal_tugas_bahasa_indnesia.html"
   };
 
-  const soalWaktuKhusus = {
-    tanggal: "2026-02-10",
-    waktu: "07:00",
-    link: "https://nurchintapembatik.my.canva.site/bahasa-indonsia-teks-eksplanasi"
-  };
+  const tugasKhusus = [
+    {
+      tanggal: "2026-02-08",
+      waktu: "07:00",
+      link: "https://nurchintapembatik.my.canva.site/bahasa-indonsia-teks-eksplanasi"
+    },
+    {
+      tanggal: "2026-02-10",
+      waktu: "07:00",
+      link: "https://nurchintapembatik.my.canva.site/bahasa-indonsia-teks-eksplanasi"
+    }
+  ];
 
   calendarInput.onchange = function () {
     overlay.style.display = "none";
@@ -250,26 +257,26 @@
     const sekarang = new Date();
     const tglDipilih = this.value;
 
-    const waktuAktif = new Date(
-      soalWaktuKhusus.tanggal + "T" + soalWaktuKhusus.waktu + ":00"
-    );
+    for (const tugas of tugasKhusus) {
+      const waktuAktif = new Date(tugas.tanggal + "T" + tugas.waktu + ":00");
 
-    if (tglDipilih === soalWaktuKhusus.tanggal && sekarang < waktuAktif) {
-      pesan.innerHTML = `
-        ⏰✨<br>
-        <b>Tugas ini belum dibuka</b><br><br>
-        📅 10 Februari 2026<br>
-        🕖 Pukul 07.00 WIB<br><br>
-        💪 Tetap semangat belajar!<br>
-        Kamu luar biasa 🌟📚
-      `;
-      pesan.style.display = "block";
-      return;
-    }
+      if (tglDipilih === tugas.tanggal && sekarang < waktuAktif) {
+        pesan.innerHTML = `
+          ⏰✨<br>
+          <b>Tugas ini belum dibuka</b><br><br>
+          📅 ${tugas.tanggal.split("-").reverse().join("-")}<br>
+          🕖 Pukul ${tugas.waktu} WIB<br><br>
+          💪 Tetap semangat belajar!<br>
+          Kamu luar biasa 🌟📚
+        `;
+        pesan.style.display = "block";
+        return;
+      }
 
-    if (tglDipilih === soalWaktuKhusus.tanggal && sekarang >= waktuAktif) {
-      window.location.href = soalWaktuKhusus.link;
-      return;
+      if (tglDipilih === tugas.tanggal && sekarang >= waktuAktif) {
+        window.location.href = tugas.link;
+        return;
+      }
     }
 
     if (soalByTanggal[tglDipilih]) {

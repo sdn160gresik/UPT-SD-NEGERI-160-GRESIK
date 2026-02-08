@@ -96,6 +96,46 @@
 
     .dropdown.show .dropdown-content { display: block; }
 
+    .calendar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 999;
+    }
+
+    .calendar-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #e1f5fe, #ffffff);
+      padding: 25px 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+      z-index: 1000;
+    }
+
+    .calendar-popup h2 {
+      margin: 0 0 10px;
+      color: #0288d1;
+    }
+
+    .calendar-popup p {
+      margin: 0 0 15px;
+      font-size: 0.95rem;
+    }
+
+    .calendar-popup input {
+      padding: 10px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      border: 2px solid #0288d1;
+      cursor: pointer;
+    }
+
     .pesan-melayang {
       display: none;
       position: fixed;
@@ -143,15 +183,19 @@
   <div class="dropdown">
     <button class="dropbtn">📅 Pilih Tugas</button>
     <div class="dropdown-content">
-      <a href="#" class="no-task">Rabu, 12 November 2025</a>
-      <a href="#" class="no-task">Selasa, 25 November 2025</a>
-
-      <!-- TUGAS AKTIF WAKTU -->
-      <a href="#" id="tugasFeb10">Selasa, 10 Februari 2026 ⏰ 07.00</a>
-
-      <a href="#" class="no-task">📆 Pilih Tanggal Lain</a>
+      <a href="#">Rabu, 12 November 2025</a>
+      <a href="#">Selasa, 25 November 2025</a>
+      <a href="#" id="tugasLain">📆 Pilih Tanggal Lain</a>
     </div>
   </div>
+</div>
+
+<div class="calendar-overlay" id="calendarOverlay"></div>
+
+<div class="calendar-popup" id="calendarPopup">
+  <h2>📅 Pilih Tanggal</h2>
+  <p>Ayo tentukan tanggal tugasmu! 💪✨</p>
+  <input type="date" id="calendarInput">
 </div>
 
 <div class="pesan-melayang" id="pesanMelayang"></div>
@@ -159,57 +203,47 @@
 <script>
   const dropdown = document.querySelector(".dropdown");
   const dropbtn = document.querySelector(".dropbtn");
-  const pesan = document.getElementById("pesanMelayang");
-  const tugasFeb10 = document.getElementById("tugasFeb10");
-  const noTaskLinks = document.querySelectorAll(".no-task");
+  const tugasLain = document.getElementById("tugasLain");
 
-  const waktuTugas = new Date("2026-02-10T07:00:00");
+  const overlay = document.getElementById("calendarOverlay");
+  const calendarPopup = document.getElementById("calendarPopup");
+  const calendarInput = document.getElementById("calendarInput");
+  const pesan = document.getElementById("pesanMelayang");
 
   dropbtn.onclick = e => {
     e.stopPropagation();
     dropdown.classList.toggle("show");
   };
 
-  // klik di mana saja → pesan hilang
   window.onclick = () => {
     dropdown.classList.remove("show");
     pesan.style.display = "none";
   };
 
-  // tugas 10 Februari
-  tugasFeb10.onclick = e => {
+  tugasLain.onclick = e => {
     e.preventDefault();
-    const sekarang = new Date();
-
-    if (sekarang >= waktuTugas) {
-      window.location.href = "https://nurchintapembatik.my.canva.site/matematika-ciri-ciri-segitiga";
-    } else {
-      pesan.innerHTML = `
-        ⏰📐✨<br>
-        <b>Tugas ini belum bisa dibuka</b><br><br>
-        🗓️ Tanggal: 10 Februari 2026<br>
-        ⏱️ Jam: <b>07.00 WIB</b><br><br>
-        🌟 Siapkan dirimu,<br>
-        belajar hebat dimulai tepat waktu!
-      `;
-      pesan.style.display = "block";
-    }
+    overlay.style.display = "block";
+    calendarPopup.style.display = "block";
   };
 
-  // tanggal tanpa tugas
-  noTaskLinks.forEach(link => {
-    link.onclick = e => {
-      e.preventDefault();
-      pesan.innerHTML = `
-        🌈🎉😊<br>
-        <b>Belum ada tugas di tanggal ini</b><br><br>
-        📘 Gunakan waktumu untuk membaca,<br>
-        ✏️ berlatih, dan bertanya<br>
-        💪 Kamu anak hebat, terus semangat!
-      `;
-      pesan.style.display = "block";
-    };
-  });
+  overlay.onclick = () => {
+    overlay.style.display = "none";
+    calendarPopup.style.display = "none";
+    pesan.style.display = "none";
+  };
+
+  calendarInput.onchange = function () {
+    overlay.style.display = "none";
+    calendarPopup.style.display = "none";
+
+    pesan.innerHTML = `
+      📐✨<br>
+      <b>Tugas Matematika belum tersedia</b><br><br>
+      📅 Silakan cek kembali nanti<br>
+      💪 Semangat belajarmu luar biasa!
+    `;
+    pesan.style.display = "block";
+  };
 </script>
 
 </body>

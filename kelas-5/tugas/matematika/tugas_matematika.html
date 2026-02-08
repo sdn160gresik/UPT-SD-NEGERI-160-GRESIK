@@ -118,24 +118,6 @@
       z-index: 1000;
     }
 
-    .calendar-popup h2 {
-      margin: 0 0 10px;
-      color: #0288d1;
-    }
-
-    .calendar-popup p {
-      margin: 0 0 15px;
-      font-size: 0.95rem;
-    }
-
-    .calendar-popup input {
-      padding: 10px;
-      font-size: 1.1rem;
-      border-radius: 10px;
-      border: 2px solid #0288d1;
-      cursor: pointer;
-    }
-
     .pesan-melayang {
       display: none;
       position: fixed;
@@ -150,12 +132,6 @@
       color: #5d4037;
       box-shadow: 0 12px 28px rgba(0,0,0,0.35);
       z-index: 2000;
-      animation: pop 0.4s ease;
-    }
-
-    @keyframes pop {
-      from { transform: translate(-50%, -60%) scale(0.8); opacity: 0; }
-      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
     }
   </style>
 </head>
@@ -201,28 +177,17 @@
 <div class="pesan-melayang" id="pesanMelayang"></div>
 
 <script>
-  const dropdown = document.querySelector(".dropdown");
-  const dropbtn = document.querySelector(".dropbtn");
   const tugasLain = document.getElementById("tugasLain");
-
   const overlay = document.getElementById("calendarOverlay");
   const calendarPopup = document.getElementById("calendarPopup");
   const calendarInput = document.getElementById("calendarInput");
   const pesan = document.getElementById("pesanMelayang");
 
-  const tugasTanggal = "02-10"; // 10 Februari
-  const jamTugas = 7;
+  // ⏰ WAKTU TUGAS RESMI
+  const waktuTugas = new Date(2026, 1, 10, 7, 1, 0); 
+  // 10 Februari 2026 pukul 07:01
+
   const linkTugas = "https://nurchintapembatik.my.canva.site/matematika-ciri-ciri-segitiga";
-
-  dropbtn.onclick = e => {
-    e.stopPropagation();
-    dropdown.classList.toggle("show");
-  };
-
-  window.onclick = () => {
-    dropdown.classList.remove("show");
-    pesan.style.display = "none";
-  };
 
   tugasLain.onclick = e => {
     e.preventDefault();
@@ -242,15 +207,18 @@
 
     const pilih = new Date(this.value);
     const sekarang = new Date();
-    const tanggalDipilih = String(pilih.getMonth() + 1).padStart(2,"0") + "-" + String(pilih.getDate()).padStart(2,"0");
 
-    if (tanggalDipilih === tugasTanggal) {
-      if (sekarang.getHours() < jamTugas) {
+    if (
+      pilih.getDate() === 10 &&
+      pilih.getMonth() === 1 &&
+      pilih.getFullYear() === 2026
+    ) {
+      if (sekarang < waktuTugas) {
         pesan.innerHTML = `
-          ⏰📘✨<br>
-          <b>Tugas tersedia pukul 07.00</b><br><br>
-          🗓️ 10 Februari<br>
-          🌟 Siapkan diri & tetap semangat belajar!
+          ⏰📘<br>
+          <b>Tugas belum bisa dibuka</b><br><br>
+          🕖 Tersedia mulai pukul 07.01<br>
+          💡 Mohon tunggu sesuai jadwal
         `;
         pesan.style.display = "block";
       } else {
@@ -258,10 +226,10 @@
       }
     } else {
       pesan.innerHTML = `
-        🌈🎉🚀<br>
+        🌈✨🎉<br>
         <b>Tidak ada tugas di tanggal ini</b><br><br>
-        💖 Teruslah belajar dengan ceria<br>
-        📚 Kamu hebat & luar biasa!
+        🚀 Terus semangat belajar<br>
+        📚 Kamu luar biasa!
       `;
       pesan.style.display = "block";
     }

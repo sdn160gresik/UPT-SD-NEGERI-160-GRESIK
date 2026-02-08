@@ -61,7 +61,9 @@
       margin: 30px auto;
     }
 
-    .dropdown { position: relative; }
+    .dropdown {
+      position: relative;
+    }
 
     .dropbtn {
       background: rgba(255,255,255,0.9);
@@ -94,7 +96,9 @@
       border-bottom: 1px solid #ddd;
     }
 
-    .dropdown.show .dropdown-content { display: block; }
+    .dropdown.show .dropdown-content {
+      display: block;
+    }
 
     .calendar-overlay {
       display: none;
@@ -116,6 +120,19 @@
       text-align: center;
       box-shadow: 0 10px 25px rgba(0,0,0,0.35);
       z-index: 1000;
+    }
+
+    .calendar-popup h2 {
+      margin-bottom: 10px;
+      color: #0288d1;
+    }
+
+    .calendar-popup input {
+      padding: 10px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      border: 2px solid #0288d1;
+      cursor: pointer;
     }
 
     .pesan-melayang {
@@ -183,19 +200,17 @@
   const calendarInput = document.getElementById("calendarInput");
   const pesan = document.getElementById("pesanMelayang");
 
-  // ⏰ WAKTU TUGAS RESMI
-  const waktuTugas = new Date(2026, 1, 10, 7, 1, 0); 
-  // 10 Februari 2026 pukul 07:01
-
+  // ⏰ WAKTU RESMI TUGAS (BARU BOLEH 07.01)
+  const waktuTugas = new Date(2026, 1, 10, 7, 1, 0);
   const linkTugas = "https://nurchintapembatik.my.canva.site/matematika-ciri-ciri-segitiga";
 
-  tugasLain.onclick = e => {
+  tugasLain.onclick = function (e) {
     e.preventDefault();
     overlay.style.display = "block";
     calendarPopup.style.display = "block";
   };
 
-  overlay.onclick = () => {
+  overlay.onclick = function () {
     overlay.style.display = "none";
     calendarPopup.style.display = "none";
     pesan.style.display = "none";
@@ -209,9 +224,9 @@
     const sekarang = new Date();
 
     if (
-      pilih.getDate() === 10 &&
+      pilih.getFullYear() === 2026 &&
       pilih.getMonth() === 1 &&
-      pilih.getFullYear() === 2026
+      pilih.getDate() === 10
     ) {
       if (sekarang < waktuTugas) {
         pesan.innerHTML = `

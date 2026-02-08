@@ -16,20 +16,15 @@
       overflow-x: hidden;
       background: url('https://i.imgur.com/ZhICw8Q.jpeg') no-repeat center center fixed;
       background-size: cover;
-      color: #333;
     }
 
     nav {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       padding: 1rem 2rem;
     }
 
-    .nav-left img {
-      height: 45px;
-      margin-right: 0.5rem;
-    }
+    .nav-left img { height: 45px; margin-right: 0.5rem; }
 
     .nav-right a {
       background: rgba(255,255,255,0.9);
@@ -38,66 +33,29 @@
       text-decoration: none;
       color: #0288d1;
       font-weight: bold;
-      font-size: 0.9rem;
     }
 
-    .title-section {
-      text-align: center;
-      margin: 20px 15px 10px;
-    }
+    .title-section { text-align: center; margin: 20px; }
 
     .title-section h1 {
-      font-size: 2rem;
       background: rgba(255,255,255,0.85);
-      padding: 0.5rem 1rem;
+      padding: 10px 20px;
       border-radius: 12px;
       color: #0288d1;
       display: inline-block;
     }
 
-    .task-container {
-      display: flex;
-      justify-content: center;
-      margin: 30px auto;
-    }
-
-    .dropdown {
-      position: relative;
-    }
+    .task-container { display: flex; justify-content: center; }
 
     .dropbtn {
       background: rgba(255,255,255,0.9);
       border-radius: 12px;
       padding: 20px;
       font-weight: bold;
-      font-size: 1.1rem;
       cursor: pointer;
       color: #0288d1;
       border: none;
       width: 250px;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background: rgba(255,255,255,0.95);
-      border-radius: 8px;
-      min-width: 230px;
-      margin-top: 5px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-    }
-
-    .dropdown-content a {
-      display: block;
-      padding: 10px;
-      text-decoration: none;
-      color: #0288d1;
-      font-weight: bold;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .dropdown.show .dropdown-content {
-      display: block;
     }
 
     .calendar-overlay {
@@ -114,22 +72,11 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: linear-gradient(135deg, #e1f5fe, #ffffff);
-      padding: 25px 30px;
+      background: #fff;
+      padding: 25px;
       border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
       z-index: 1000;
-    }
-
-    .calendar-popup h2 {
-      margin: 0 0 10px;
-      color: #0288d1;
-    }
-
-    .calendar-popup p {
-      margin: 0 0 15px;
-      font-size: 0.95rem;
+      text-align: center;
     }
 
     .calendar-popup input {
@@ -137,28 +84,20 @@
       font-size: 1.1rem;
       border-radius: 10px;
       border: 2px solid #0288d1;
-      cursor: pointer;
     }
 
     .pesan-melayang {
       display: none;
       position: fixed;
-      top: 50%;
+      top: 70%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      background: linear-gradient(135deg, #fff176, #ffd54f);
-      padding: 25px 30px;
-      border-radius: 18px;
-      text-align: center;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg,#fff176,#ffd54f);
+      padding: 15px 20px;
+      border-radius: 15px;
       font-weight: bold;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
       z-index: 2000;
-      animation: pop 0.4s ease;
-    }
-
-    @keyframes pop {
-      from { transform: translate(-50%, -60%) scale(0.8); opacity: 0; }
-      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
     }
   </style>
 </head>
@@ -168,13 +107,11 @@
 <nav>
   <div class="nav-left">
     <img src="https://i.imgur.com/sxm7RR1.png">
-    <img src="https://i.imgur.com/tGA5UBc.png" style="height:50px;">
+    <img src="https://i.imgur.com/tGA5UBc.png">
     <img src="https://i.imgur.com/oWB8vKW.png">
   </div>
   <div class="nav-right">
     <a href="../../index.html">🏠 Beranda</a>
-    <a href="tugas.html">◀️ Kembali</a>
-    <a href="#">🖼️ Galeri</a>
   </div>
 </nav>
 
@@ -183,94 +120,58 @@
 </div>
 
 <div class="task-container">
-  <div class="dropdown">
-    <button class="dropbtn">📅 Pilih Tugas</button>
-    <div class="dropdown-content">
-      <a href="Soal_Bahasa_Indonesia_Kelas5_Imbuhan_TeksProsedur.html">Rabu, 12 November 2025</a>
-      <a href="bhs_indo/Selasa_25_Nov_25/Latihan_Soal_tugas_bahasa_indnesia.html">Selasa, 25 November 2025</a>
-      <a href="#" id="tugasLain">📆 Pilih Tanggal Lain</a>
-    </div>
-  </div>
+  <button class="dropbtn" id="tugasLain">📅 Pilih Tanggal</button>
 </div>
 
 <div class="calendar-overlay" id="calendarOverlay"></div>
 
 <div class="calendar-popup" id="calendarPopup">
-  <h2>📅 Pilih Tanggal</h2>
-  <p>Ayo tentukan tanggal tugasmu! 💪✨</p>
+  <h3>📅 Pilih Tanggal</h3>
   <input type="date" id="calendarInput">
 </div>
 
-<div class="pesan-melayang" id="pesanMelayang">
-  😄 Belum ada tugas di tanggal ini ya!  
-  <br>Yuk cek tanggal lainnya ✨📅
-</div>
+<div class="pesan-melayang" id="pesanMelayang"></div>
 
 <script>
-  const dropdown = document.querySelector(".dropdown");
-  const dropbtn = document.querySelector(".dropbtn");
-  const tugasLain = document.getElementById("tugasLain");
+  const tugas = [
+    { tanggal: "2026-02-08", waktu: "16:15" },
+    { tanggal: "2026-02-10", waktu: "09:00" },
+    { tanggal: "2026-02-12", waktu: "10:00" }
+  ];
 
   const overlay = document.getElementById("calendarOverlay");
-  const calendarPopup = document.getElementById("calendarPopup");
-  const calendarInput = document.getElementById("calendarInput");
+  const popup = document.getElementById("calendarPopup");
+  const input = document.getElementById("calendarInput");
   const pesan = document.getElementById("pesanMelayang");
 
-  dropbtn.onclick = e => {
-    e.stopPropagation();
-    dropdown.classList.toggle("show");
-  };
-
-  window.onclick = () => dropdown.classList.remove("show");
-
-  tugasLain.onclick = e => {
-    e.preventDefault();
+  document.getElementById("tugasLain").onclick = () => {
     overlay.style.display = "block";
-    calendarPopup.style.display = "block";
+    popup.style.display = "block";
   };
 
   overlay.onclick = () => {
     overlay.style.display = "none";
-    calendarPopup.style.display = "none";
+    popup.style.display = "none";
     pesan.style.display = "none";
   };
 
-  pesan.onclick = () => pesan.style.display = "none";
+  input.addEventListener("mousemove", () => {
+    if (!input.value) return;
 
-  const soalByTanggal = {
-    "2025-11-12": "Soal_Bahasa_Indonesia_Kelas5_Imbuhan_TeksProsedur.html",
-    "2025-11-25": "bhs_indo/Selasa_25_Nov_25/Latihan_Soal_tugas_bahasa_indnesia.html"
-  };
+    const data = tugas.find(t => t.tanggal === input.value);
 
-  const soalWaktuKhusus = {
-    tanggal: "2026-02-08",
-    waktu: "16:15",
-    link: "https://nurchintapembatik.my.canva.site/bahasa-indonsia-teks-eksplanasi"
-  };
-
-  calendarInput.onchange = function () {
-    overlay.style.display = "none";
-    calendarPopup.style.display = "none";
-
-    const sekarang = new Date();
-    const tglDipilih = this.value;
-
-    const waktuAktif = new Date(
-      soalWaktuKhusus.tanggal + "T" + soalWaktuKhusus.waktu + ":00"
-    );
-
-    if (tglDipilih === soalWaktuKhusus.tanggal && sekarang >= waktuAktif) {
-      window.location.href = soalWaktuKhusus.link;
-      return;
-    }
-
-    if (soalByTanggal[tglDipilih]) {
-      window.location.href = soalByTanggal[tglDipilih];
-      return;
+    if (data) {
+      pesan.innerHTML = `✅ Ada tugas pada jam <br>⏰ ${data.waktu}`;
+    } else {
+      pesan.innerHTML = "❌ Tidak ada tugas";
     }
 
     pesan.style.display = "block";
-  };
+  });
+
+  input.addEventListener("mouseleave", () => {
+    pesan.style.display = "none";
+  });
 </script>
 
 </body>

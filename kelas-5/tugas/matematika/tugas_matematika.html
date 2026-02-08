@@ -210,6 +210,10 @@
   const calendarInput = document.getElementById("calendarInput");
   const pesan = document.getElementById("pesanMelayang");
 
+  const tugasTanggal = "02-10";
+  const jamTugas = 7;
+  const linkTugas = "https://nurchintapembatik.my.canva.site/matematika-ciri-ciri-segitiga";
+
   dropbtn.onclick = e => {
     e.stopPropagation();
     dropdown.classList.toggle("show");
@@ -236,13 +240,31 @@
     overlay.style.display = "none";
     calendarPopup.style.display = "none";
 
-    pesan.innerHTML = `
-      📐✨<br>
-      <b>Tugas Matematika belum tersedia</b><br><br>
-      📅 Silakan cek kembali nanti<br>
-      💪 Semangat belajarmu luar biasa!
-    `;
-    pesan.style.display = "block";
+    const pilih = new Date(this.value);
+    const sekarang = new Date();
+    const bulanHari = String(pilih.getMonth() + 1).padStart(2, "0") + "-" + String(pilih.getDate()).padStart(2, "0");
+
+    if (bulanHari === tugasTanggal) {
+      if (sekarang.getHours() < jamTugas) {
+        pesan.innerHTML = `
+          ⏰📘<br>
+          <b>Tugas tersedia pukul 07.00</b><br><br>
+          🗓️ 10 Februari<br>
+          💡 Siapkan diri dan semangat belajar!
+        `;
+        pesan.style.display = "block";
+      } else {
+        window.location.href = linkTugas;
+      }
+    } else {
+      pesan.innerHTML = `
+        🌈✨🎉<br>
+        <b>Tidak ada tugas di tanggal ini</b><br><br>
+        🚀 Terus semangat belajar<br>
+        📚 Kamu luar biasa!
+      `;
+      pesan.style.display = "block";
+    }
   };
 </script>
 

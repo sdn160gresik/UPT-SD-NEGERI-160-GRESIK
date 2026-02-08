@@ -74,21 +74,17 @@
       cursor: pointer;
       color: #0288d1;
       border: none;
-      width: 260px;
+      width: 250px;
     }
 
-    /* ===== DROPDOWN DENGAN BATAS 3 TUGAS ===== */
     .dropdown-content {
       display: none;
       position: absolute;
       background: rgba(255,255,255,0.95);
-      border-radius: 10px;
-      min-width: 260px;
-      margin-top: 6px;
+      border-radius: 8px;
+      min-width: 230px;
+      margin-top: 5px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-
-      max-height: 195px;          /* ± 3 tugas */
-      overflow-y: auto;           /* geser jika lebih */
     }
 
     .dropdown-content a {
@@ -98,15 +94,6 @@
       color: #0288d1;
       font-weight: bold;
       border-bottom: 1px solid #ddd;
-      font-size: 0.95rem;
-    }
-
-    .dropdown-content a span {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: normal;
-      color: #555;
-      margin-top: 3px;
     }
 
     .dropdown.show .dropdown-content {
@@ -199,24 +186,9 @@
   <div class="dropdown">
     <button class="dropbtn">📅 Pilih Tugas</button>
     <div class="dropdown-content">
-
-      <a href="Soal_Bahasa_Indonesia_Kelas5_Imbuhan_TeksProsedur.html">
-        Rabu, 12 November 2025
-        <span>⏰ 08.00 WIB</span>
-      </a>
-
-      <a href="bhs_indo/Selasa_25_Nov_25/Latihan_Soal_tugas_bahasa_indnesia.html">
-        Selasa, 25 November 2025
-        <span>⏰ 08.00 WIB</span>
-      </a>
-
-      <a href="#" id="tugasKhusus">
-        Minggu, 8 Februari 2026
-        <span>⏰ 16.15 WIB</span>
-      </a>
-
+      <a href="Soal_Bahasa_Indonesia_Kelas5_Imbuhan_TeksProsedur.html">Rabu, 12 November 2025</a>
+      <a href="bhs_indo/Selasa_25_Nov_25/Latihan_Soal_tugas_bahasa_indnesia.html">Selasa, 25 November 2025</a>
       <a href="#" id="tugasLain">📆 Pilih Tanggal Lain</a>
-
     </div>
   </div>
 </div>
@@ -238,7 +210,6 @@
   const dropdown = document.querySelector(".dropdown");
   const dropbtn = document.querySelector(".dropbtn");
   const tugasLain = document.getElementById("tugasLain");
-  const tugasKhusus = document.getElementById("tugasKhusus");
 
   const overlay = document.getElementById("calendarOverlay");
   const calendarPopup = document.getElementById("calendarPopup");
@@ -258,24 +229,6 @@
     calendarPopup.style.display = "block";
   };
 
-  const soalWaktuKhusus = {
-    tanggal: "2026-02-08",
-    waktu: "16:15",
-    link: "https://nurchintapembatik.my.canva.site/bahasa-indonsia-teks-eksplanasi"
-  };
-
-  tugasKhusus.onclick = e => {
-    e.preventDefault();
-    const sekarang = new Date();
-    const waktuAktif = new Date(soalWaktuKhusus.tanggal + "T" + soalWaktuKhusus.waktu + ":00");
-
-    if (sekarang >= waktuAktif) {
-      window.location.href = soalWaktuKhusus.link;
-    } else {
-      pesan.style.display = "block";
-    }
-  };
-
   overlay.onclick = () => {
     overlay.style.display = "none";
     calendarPopup.style.display = "none";
@@ -283,6 +236,41 @@
   };
 
   pesan.onclick = () => pesan.style.display = "none";
+
+  const soalByTanggal = {
+    "2025-11-12": "Soal_Bahasa_Indonesia_Kelas5_Imbuhan_TeksProsedur.html",
+    "2025-11-25": "bhs_indo/Selasa_25_Nov_25/Latihan_Soal_tugas_bahasa_indnesia.html"
+  };
+
+  const soalWaktuKhusus = {
+    tanggal: "2026-02-08",
+    waktu: "16:15",
+    link: "https://nurchintapembatik.my.canva.site/bahasa-indonsia-teks-eksplanasi"
+  };
+
+  calendarInput.onchange = function () {
+    overlay.style.display = "none";
+    calendarPopup.style.display = "none";
+
+    const sekarang = new Date();
+    const tglDipilih = this.value;
+
+    const waktuAktif = new Date(
+      soalWaktuKhusus.tanggal + "T" + soalWaktuKhusus.waktu + ":00"
+    );
+
+    if (tglDipilih === soalWaktuKhusus.tanggal && sekarang >= waktuAktif) {
+      window.location.href = soalWaktuKhusus.link;
+      return;
+    }
+
+    if (soalByTanggal[tglDipilih]) {
+      window.location.href = soalByTanggal[tglDipilih];
+      return;
+    }
+
+    pesan.style.display = "block";
+  };
 </script>
 
 </body>

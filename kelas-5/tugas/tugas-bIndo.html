@@ -139,6 +139,28 @@
       border: 2px solid #0288d1;
       cursor: pointer;
     }
+
+    /* ===== PESAN MELAYANG ===== */
+    .pesan-melayang {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #fff176, #ffd54f);
+      padding: 25px 30px;
+      border-radius: 18px;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+      z-index: 2000;
+      animation: pop 0.4s ease;
+    }
+
+    @keyframes pop {
+      from { transform: translate(-50%, -60%) scale(0.8); opacity: 0; }
+      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
   </style>
 </head>
 
@@ -180,6 +202,11 @@
   <input type="date" id="calendarInput">
 </div>
 
+<div class="pesan-melayang" id="pesanMelayang">
+  😄 Belum ada tugas di tanggal ini ya!  
+  <br>Yuk cek tanggal lainnya ✨📅
+</div>
+
 <script>
   const dropdown = document.querySelector(".dropdown");
   const dropbtn = document.querySelector(".dropbtn");
@@ -188,6 +215,7 @@
   const overlay = document.getElementById("calendarOverlay");
   const calendarPopup = document.getElementById("calendarPopup");
   const calendarInput = document.getElementById("calendarInput");
+  const pesan = document.getElementById("pesanMelayang");
 
   dropbtn.onclick = e => {
     e.stopPropagation();
@@ -205,30 +233,44 @@
   overlay.onclick = () => {
     overlay.style.display = "none";
     calendarPopup.style.display = "none";
+    pesan.style.display = "none";
   };
+
+  pesan.onclick = () => pesan.style.display = "none";
 
   const soalByTanggal = {
     "2025-11-12": "Soal_Bahasa_Indonesia_Kelas5_Imbuhan_TeksProsedur.html",
     "2025-11-25": "bhs_indo/Selasa_25_Nov_25/Latihan_Soal_tugas_bahasa_indnesia.html"
   };
 
+  const soalWaktuKhusus = {
+    tanggal: "2026-02-08",
+    waktu: "16:15",
+    link: "https://nurchintapembatik.my.canva.site/bahasa-indonsia-teks-eksplanasi"
+  };
+
   calendarInput.onchange = function () {
-    const tglDipilih = new Date(this.value);
     overlay.style.display = "none";
     calendarPopup.style.display = "none";
 
-    const batasWaktu = new Date("2026-02-10T07:00:00");
     const sekarang = new Date();
+    const tglDipilih = this.value;
 
-    if (sekarang >= batasWaktu && tglDipilih >= new Date("2026-02-10")) {
-      window.location.href = "https://nurchintapembatik.my.canva.site/bahasa-indonsia-teks-eksplanasi";
+    const waktuAktif = new Date(
+      soalWaktuKhusus.tanggal + "T" + soalWaktuKhusus.waktu + ":00"
+    );
+
+    if (tglDipilih === soalWaktuKhusus.tanggal && sekarang >= waktuAktif) {
+      window.location.href = soalWaktuKhusus.link;
       return;
     }
 
-    const tglStr = this.value;
-    if (soalByTanggal[tglStr]) {
-      window.location.href = soalByTanggal[tglStr];
+    if (soalByTanggal[tglDipilih]) {
+      window.location.href = soalByTanggal[tglDipilih];
+      return;
     }
+
+    pesan.style.display = "block";
   };
 </script>
 

@@ -107,13 +107,14 @@
       left: 50%;
       transform: translate(-50%, -50%);
       background: rgba(255,255,255,0.95);
-      padding: 20px 30px;
-      border-radius: 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      padding: 22px 30px;
+      border-radius: 16px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.35);
       font-weight: bold;
       color: #0288d1;
       text-align: center;
       z-index: 1000;
+      font-size: 1.05rem;
     }
 
     .popup.show {
@@ -204,9 +205,7 @@
   </div>
 </div>
 
-<div id="popupMessage" class="popup">
-  😄📚 Wah! Soalnya masih disiapkan yaa!<br>Semangat belajarnya! 🌟
-</div>
+<div id="popupMessage" class="popup"></div>
 
 <div class="calendar-overlay" id="calendarOverlay"></div>
 
@@ -247,19 +246,53 @@
   const soalByTanggal = {
     "2025-11-12": "Soal_Bahasa_Indonesia_Kelas5_Imbuhan_TeksProsedur.html",
     "2025-11-25": "bhs_indo/Selasa_25_Nov_25/Latihan_Soal_tugas_bahasa_indnesia.html",
-    "2026-02-10": "https://nurchintapembatik.my.canva.site/bahasa-indonsia-teks-eksplanasi"
+    "2026-02-08": "https://nurchintapembatik.my.canva.site/bahasa-indonsia-teks-eksplanasi"
   };
+
+  function tutupPopup(e){
+    if(!popup.contains(e.target)){
+      popup.classList.remove("show");
+      document.removeEventListener("click", tutupPopup);
+    }
+  }
 
   calendarInput.onchange = function () {
     const tgl = this.value;
     overlay.style.display = "none";
     calendarPopup.style.display = "none";
 
+    if (tgl === "2026-02-08") {
+      const now = new Date();
+      const tahun = now.getFullYear();
+      const bulan = now.getMonth() + 1;
+      const tanggal = now.getDate();
+      const jam = now.getHours();
+      const menit = now.getMinutes();
+
+      if (tahun === 2026 && bulan === 2 && tanggal === 8 && jam === 15 && menit === 35) {
+        window.location.href = soalByTanggal[tgl];
+      } else {
+        popup.innerHTML =
+          "🌈😄 Semangat ya!<br><br>" +
+          "📅 Tugas ini baru bisa dibuka<br>" +
+          "<b>8 Februari 2026 pukul 15:35</b> ⏰<br><br>" +
+          "Ayo persiapkan diri, kamu hebat! 💪✨";
+        popup.classList.add("show");
+        setTimeout(() => {
+          document.addEventListener("click", tutupPopup);
+        }, 50);
+      }
+      return;
+    }
+
     if (soalByTanggal[tgl]) {
       window.location.href = soalByTanggal[tgl];
     } else {
+      popup.innerHTML = "😄📚 Wah! Soalnya masih disiapkan yaa!<br>Semangat belajarnya! 🌟";
       popup.classList.add("show");
-      setTimeout(() => popup.classList.remove("show"), 2300);
+      setTimeout(() => {
+        document.addEventListener("click", tutupPopup);
+      }, 50);
     }
   };
 </script>

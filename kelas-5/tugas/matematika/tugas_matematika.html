@@ -85,6 +85,7 @@
       min-width: 230px;
       margin-top: 5px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+      z-index: 10;
     }
 
     .dropdown-content a {
@@ -173,8 +174,8 @@
 </div>
 
 <div class="task-container">
-  <div class="dropdown">
-    <button class="dropbtn">📅 Pilih Tugas</button>
+  <div class="dropdown" id="dropdownTugas">
+    <button class="dropbtn" id="btnDropdown">📅 Pilih Tugas</button>
     <div class="dropdown-content">
       <a href="#">Rabu, 12 November 2025</a>
       <a href="#">Selasa, 25 November 2025</a>
@@ -194,18 +195,31 @@
 <div class="pesan-melayang" id="pesanMelayang"></div>
 
 <script>
+  const dropdown = document.getElementById("dropdownTugas");
+  const btnDropdown = document.getElementById("btnDropdown");
   const tugasLain = document.getElementById("tugasLain");
   const overlay = document.getElementById("calendarOverlay");
   const calendarPopup = document.getElementById("calendarPopup");
   const calendarInput = document.getElementById("calendarInput");
   const pesan = document.getElementById("pesanMelayang");
 
-  // ⏰ WAKTU RESMI TUGAS (BARU BOLEH 07.01)
+  // === DROPDOWN PILIH TUGAS ===
+  btnDropdown.onclick = function (e) {
+    e.stopPropagation();
+    dropdown.classList.toggle("show");
+  };
+
+  window.onclick = function () {
+    dropdown.classList.remove("show");
+  };
+
+  // ⏰ WAKTU RESMI TUGAS
   const waktuTugas = new Date(2026, 1, 10, 7, 1, 0);
   const linkTugas = "https://nurchintapembatik.my.canva.site/matematika-ciri-ciri-segitiga";
 
   tugasLain.onclick = function (e) {
     e.preventDefault();
+    dropdown.classList.remove("show");
     overlay.style.display = "block";
     calendarPopup.style.display = "block";
   };

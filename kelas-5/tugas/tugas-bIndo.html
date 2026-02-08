@@ -159,19 +159,6 @@
       cursor: pointer;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
-
-    /* === TOOLTIP === */
-    .tooltip {
-      position: fixed;
-      background: rgba(0,0,0,0.85);
-      color: #fff;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      pointer-events: none;
-      display: none;
-      z-index: 3000;
-    }
   </style>
 </head>
 
@@ -217,8 +204,6 @@
   <div class="daftar-tugas" id="daftarTugas"></div>
 </div>
 
-<div class="tooltip" id="tooltip"></div>
-
 <script>
   const kalenderTugas = [
     { tanggal: "2026-02-06", waktu: "08:00", link: "#" },
@@ -226,28 +211,6 @@
     { tanggal: "2026-02-10", waktu: "09:00", link: "#" },
     { tanggal: "2026-02-12", waktu: "10:00", link: "#" }
   ];
-
-  const tooltip = document.getElementById("tooltip");
-  const calendarInput = document.getElementById("calendarInput");
-
-  calendarInput.addEventListener("mousemove", e => {
-    const tgl = calendarInput.value;
-    let teks = "Tidak ada tugas";
-
-    const tugas = kalenderTugas.find(t => t.tanggal === tgl);
-    if (tugas) {
-      teks = `Ada tugas pada jam ${tugas.waktu}`;
-    }
-
-    tooltip.textContent = teks;
-    tooltip.style.display = "block";
-    tooltip.style.left = e.pageX + 12 + "px";
-    tooltip.style.top = e.pageY + 12 + "px";
-  });
-
-  calendarInput.addEventListener("mouseleave", () => {
-    tooltip.style.display = "none";
-  });
 
   calendarInput.onchange = function () {
     const tgl = new Date(this.value);

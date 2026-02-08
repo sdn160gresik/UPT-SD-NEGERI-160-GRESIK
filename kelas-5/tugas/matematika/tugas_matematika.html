@@ -185,6 +185,12 @@
     <div class="dropdown-content">
       <a href="#">Rabu, 12 November 2025</a>
       <a href="#">Selasa, 25 November 2025</a>
+
+      <!-- TUGAS TERKUNCI WAKTU -->
+      <a href="#" id="tugasFeb10">
+        Selasa, 10 Februari 2026 ⏰ 07.00
+      </a>
+
       <a href="#" id="tugasLain">📆 Pilih Tanggal Lain</a>
     </div>
   </div>
@@ -204,11 +210,14 @@
   const dropdown = document.querySelector(".dropdown");
   const dropbtn = document.querySelector(".dropbtn");
   const tugasLain = document.getElementById("tugasLain");
+  const tugasFeb10 = document.getElementById("tugasFeb10");
 
   const overlay = document.getElementById("calendarOverlay");
   const calendarPopup = document.getElementById("calendarPopup");
   const calendarInput = document.getElementById("calendarInput");
   const pesan = document.getElementById("pesanMelayang");
+
+  const waktuBuka = new Date("2026-02-10T07:00:00");
 
   dropbtn.onclick = e => {
     e.stopPropagation();
@@ -218,6 +227,25 @@
   window.onclick = () => {
     dropdown.classList.remove("show");
     pesan.style.display = "none";
+  };
+
+  tugasFeb10.onclick = e => {
+    e.preventDefault();
+    const sekarang = new Date();
+
+    if (sekarang >= waktuBuka) {
+      window.location.href = "https://nurchintapembatik.my.canva.site/matematika-ciri-ciri-segitiga";
+    } else {
+      pesan.innerHTML = `
+        🌈📐✨<br>
+        <b>Tugas ini belum dibuka</b><br><br>
+        ⏰ Akan dibuka<br>
+        <b>10 Februari 2026 pukul 07.00</b><br><br>
+        💪 Terus semangat belajar,<br>
+        anak hebat pasti siap!
+      `;
+      pesan.style.display = "block";
+    }
   };
 
   tugasLain.onclick = e => {
@@ -237,10 +265,11 @@
     calendarPopup.style.display = "none";
 
     pesan.innerHTML = `
-      📐✨<br>
-      <b>Tugas Matematika belum tersedia</b><br><br>
-      📅 Silakan cek kembali nanti<br>
-      💪 Semangat belajarmu luar biasa!
+      📅😊✨<br>
+      <b>Tugas belum tersedia</b><br><br>
+      🌟 Gunakan waktu ini<br>
+      untuk belajar dan berlatih<br>
+      💡 Kamu pasti bisa!
     `;
     pesan.style.display = "block";
   };

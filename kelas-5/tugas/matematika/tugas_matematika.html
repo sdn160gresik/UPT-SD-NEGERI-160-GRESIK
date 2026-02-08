@@ -1,1 +1,251 @@
+<!DOCTYPE html> 
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tugas Matematika</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      height: 100%;
+      width: 100%;
+      overflow-x: hidden;
+      background: url('https://i.imgur.com/ZhICw8Q.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .nav-left img {
+      height: 45px;
+      margin-right: 0.5rem;
+    }
+
+    .nav-right a {
+      background: rgba(255,255,255,0.9);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #0288d1;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .title-section {
+      text-align: center;
+      margin: 20px 15px 10px;
+    }
+
+    .title-section h1 {
+      font-size: 2rem;
+      background: rgba(255,255,255,0.85);
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      color: #0288d1;
+      display: inline-block;
+    }
+
+    .task-container {
+      display: flex;
+      justify-content: center;
+      margin: 30px auto;
+    }
+
+    .dropdown { position: relative; }
+
+    .dropbtn {
+      background: rgba(255,255,255,0.9);
+      border-radius: 12px;
+      padding: 20px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: #0288d1;
+      border: none;
+      width: 250px;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: rgba(255,255,255,0.95);
+      border-radius: 8px;
+      min-width: 230px;
+      margin-top: 5px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: #0288d1;
+      font-weight: bold;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .dropdown.show .dropdown-content { display: block; }
+
+    .calendar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 999;
+    }
+
+    .calendar-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #e1f5fe, #ffffff);
+      padding: 25px 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+      z-index: 1000;
+    }
+
+    .calendar-popup h2 {
+      margin: 0 0 10px;
+      color: #0288d1;
+    }
+
+    .calendar-popup p {
+      margin: 0 0 15px;
+      font-size: 0.95rem;
+    }
+
+    .calendar-popup input {
+      padding: 10px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      border: 2px solid #0288d1;
+      cursor: pointer;
+    }
+
+    .pesan-melayang {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #ffecb3, #ffe082, #ffd54f);
+      padding: 28px 32px;
+      border-radius: 20px;
+      text-align: center;
+      font-weight: bold;
+      color: #5d4037;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+      z-index: 2000;
+      animation: pop 0.4s ease;
+    }
+
+    @keyframes pop {
+      from { transform: translate(-50%, -60%) scale(0.8); opacity: 0; }
+      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <div class="nav-left">
+    <img src="https://i.imgur.com/sxm7RR1.png">
+    <img src="https://i.imgur.com/tGA5UBc.png" style="height:50px;">
+    <img src="https://i.imgur.com/oWB8vKW.png">
+  </div>
+  <div class="nav-right">
+    <a href="../../index.html">🏠 Beranda</a>
+    <a href="tugas.html">◀️ Kembali</a>
+    <a href="#">🖼️ Galeri</a>
+  </div>
+</nav>
+
+<div class="title-section">
+  <h1>📐 Tugas Matematika</h1>
+</div>
+
+<div class="task-container">
+  <div class="dropdown">
+    <button class="dropbtn">📅 Pilih Tugas</button>
+    <div class="dropdown-content">
+      <a href="#">Rabu, 12 November 2025</a>
+      <a href="#">Selasa, 25 November 2025</a>
+      <a href="#" id="tugasLain">📆 Pilih Tanggal Lain</a>
+    </div>
+  </div>
+</div>
+
+<div class="calendar-overlay" id="calendarOverlay"></div>
+
+<div class="calendar-popup" id="calendarPopup">
+  <h2>📅 Pilih Tanggal</h2>
+  <p>Ayo tentukan tanggal tugasmu! 💪✨</p>
+  <input type="date" id="calendarInput">
+</div>
+
+<div class="pesan-melayang" id="pesanMelayang"></div>
+
+<script>
+  const dropdown = document.querySelector(".dropdown");
+  const dropbtn = document.querySelector(".dropbtn");
+  const tugasLain = document.getElementById("tugasLain");
+
+  const overlay = document.getElementById("calendarOverlay");
+  const calendarPopup = document.getElementById("calendarPopup");
+  const calendarInput = document.getElementById("calendarInput");
+  const pesan = document.getElementById("pesanMelayang");
+
+  dropbtn.onclick = e => {
+    e.stopPropagation();
+    dropdown.classList.toggle("show");
+  };
+
+  window.onclick = () => {
+    dropdown.classList.remove("show");
+    pesan.style.display = "none";
+  };
+
+  tugasLain.onclick = e => {
+    e.preventDefault();
+    overlay.style.display = "block";
+    calendarPopup.style.display = "block";
+  };
+
+  overlay.onclick = () => {
+    overlay.style.display = "none";
+    calendarPopup.style.display = "none";
+    pesan.style.display = "none";
+  };
+
+  calendarInput.onchange = function () {
+    overlay.style.display = "none";
+    calendarPopup.style.display = "none";
+
+    pesan.innerHTML = `
+      📐✨<br>
+      <b>Tugas Matematika belum tersedia</b><br><br>
+      📅 Silakan cek kembali nanti<br>
+      💪 Semangat belajarmu luar biasa!
+    `;
+    pesan.style.display = "block";
+  };
+</script>
+
+</body>
+</html>
 

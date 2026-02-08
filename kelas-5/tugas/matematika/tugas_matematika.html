@@ -210,7 +210,7 @@
   const calendarInput = document.getElementById("calendarInput");
   const pesan = document.getElementById("pesanMelayang");
 
-  const tugasTanggal = "02-10";
+  const tugasTanggal = "02-10"; // 10 Februari
   const jamTugas = 7;
   const linkTugas = "https://nurchintapembatik.my.canva.site/matematika-ciri-ciri-segitiga";
 
@@ -242,15 +242,15 @@
 
     const pilih = new Date(this.value);
     const sekarang = new Date();
-    const bulanHari = String(pilih.getMonth() + 1).padStart(2, "0") + "-" + String(pilih.getDate()).padStart(2, "0");
+    const tanggalDipilih = String(pilih.getMonth() + 1).padStart(2,"0") + "-" + String(pilih.getDate()).padStart(2,"0");
 
-    if (bulanHari === tugasTanggal) {
+    if (tanggalDipilih === tugasTanggal) {
       if (sekarang.getHours() < jamTugas) {
         pesan.innerHTML = `
-          ⏰📘<br>
+          ⏰📘✨<br>
           <b>Tugas tersedia pukul 07.00</b><br><br>
           🗓️ 10 Februari<br>
-          💡 Siapkan diri dan semangat belajar!
+          🌟 Siapkan diri & tetap semangat belajar!
         `;
         pesan.style.display = "block";
       } else {
@@ -258,10 +258,10 @@
       }
     } else {
       pesan.innerHTML = `
-        🌈✨🎉<br>
+        🌈🎉🚀<br>
         <b>Tidak ada tugas di tanggal ini</b><br><br>
-        🚀 Terus semangat belajar<br>
-        📚 Kamu luar biasa!
+        💖 Teruslah belajar dengan ceria<br>
+        📚 Kamu hebat & luar biasa!
       `;
       pesan.style.display = "block";
     }

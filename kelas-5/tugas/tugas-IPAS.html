@@ -178,52 +178,45 @@
   const calendar = document.getElementById("calendar");
   const popup = document.getElementById("popupMessage");
 
-  // Buka dropdown
   dropdown.querySelector(".dropbtn").onclick = (e) => {
     e.stopPropagation();
     dropdown.classList.toggle("show");
   };
 
-  // Klik Pilih Tanggal Lain → tampil kalender melayang
   document.getElementById("tugasLain").onclick = (e) => {
     e.preventDefault();
     calendarBox.style.display = "block";
   };
 
-  // Pilih tanggal → cek soal & hilangkan kalender
   calendar.onchange = () => {
     const tanggal = calendar.value;
     calendarBox.style.display = "none";
+    const now = new Date();
+    const targetDate = new Date("2026-02-12T07:00:00");
 
     if (tanggal === "2025-11-12") {
-      // Tugas lama bisa langsung dibuka
       window.location.href = "tugas_IPAS_11_Nov_25.html";
 
     } else if (tanggal === "2026-02-12") {
-      // Pastikan link 12 Februari 2026 hanya bisa diakses mulai pukul 07:00
-      const now = new Date();
-      const targetDate = new Date("2026-02-12T07:00:00");
       if (now >= targetDate) {
         window.location.href = "https://nurchintapembatik.my.canva.site/ipas-organ-pernafan-letak-wilayah";
       } else {
-        popup.innerHTML = `⏳ Tugas ini belum bisa dibuka 😄<br>📚 Tetap semangat belajar! 💪✨<br>🕒 Tunggu tanggal 12 Februari 2026 pukul 07:00`;
+        popup.innerHTML = `⏳ Woohoo! Tugas ini belum bisa dibuka 😄<br>📚 Tetap semangat belajar dan senyum ya! 😎✨<br>🕒 Tunggu tanggal 12 Februari 2026 pukul 07:00 🌞`;
         popup.classList.add("show");
       }
 
     } else {
-      // Tanggal lain
-      popup.innerHTML = `🌟 Tugas ini belum tersedia 😄<br>📚 Terus semangat belajar ya! 💪✨<br>🕒 Nantikan tanggal 12 Februari 2026 pukul 07:00 ⏰`;
+      // Pesan menyenangkan untuk tanggal lain
+      popup.innerHTML = `🎉 Yaaay! Tidak ada tugas di tanggal ini 😄<br>📚 Gunakan waktu ini untuk eksplor dan belajar hal baru! 🌟💡<br>💪 Terus semangat, kamu hebat! 🏆✨`;
       popup.classList.add("show");
     }
   };
 
-  // Klik di area manapun → tutup dropdown & popup
   window.onclick = () => {
     dropdown.classList.remove("show");
     popup.classList.remove("show");
   };
 
-  // Supaya klik di kalender tidak menutup sendiri dropdown & popup
   calendarBox.onclick = (e) => e.stopPropagation();
 </script>
 

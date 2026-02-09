@@ -232,7 +232,13 @@
 
     if (pilih.getFullYear() === 2026 && pilih.getMonth() === 1 && pilih.getDate() === 10) {
       if (sekarang < waktuTugas1) {
-        pesan.innerHTML = "⏰<br>Tugas tersedia pukul 07.01";
+        pesan.innerHTML = `
+          ⏰✨<br>
+          <b>Ups! Belum waktunya ya 😊</b><br><br>
+          📅 Tugas bisa dibuka<br>
+          🕖 Mulai pukul <b>07.01</b><br><br>
+          💪 Tetap semangat belajar! Kamu hebat 🌟
+        `;
         pesan.style.display = "block";
       } else {
         window.location.href = linkTugas1;
@@ -240,14 +246,26 @@
 
     } else if (pilih.getFullYear() === 2026 && pilih.getMonth() === 1 && pilih.getDate() === 12) {
       if (sekarang < waktuTugas2) {
-        pesan.innerHTML = "⏰<br>Tugas tersedia pukul 07.00";
+        pesan.innerHTML = `
+          ⏰🌈<br>
+          <b>Sedikit lagi ya! 😄</b><br><br>
+          📐 Tugas tersedia<br>
+          🕖 Mulai pukul <b>07.00</b><br><br>
+          🚀 Siapkan semangatmu! Kamu pasti bisa 💖
+        `;
         pesan.style.display = "block";
       } else {
         window.location.href = linkTugas2;
       }
 
     } else {
-      pesan.innerHTML = "🌈<br>Tidak ada tugas di tanggal ini";
+      pesan.innerHTML = `
+        🌸😊✨<br>
+        <b>Belum ada tugas di tanggal ini</b><br><br>
+        📚 Yuk pilih tanggal lain<br>
+        💡 Terus belajar dan berusaha<br><br>
+        🌟 Kamu luar biasa! 🌟
+      `;
       pesan.style.display = "block";
     }
   };

@@ -198,8 +198,11 @@
   const calendarInput = document.getElementById("calendarInput");
   const pesan = document.getElementById("pesanMelayang");
 
-  const waktuTugas = new Date(2026, 1, 10, 7, 1, 0);
-  const linkTugas = "https://nurchintapembatik.my.canva.site/matematika-ciri-ciri-segitiga";
+  const waktuTugas1 = new Date(2026, 1, 10, 7, 1, 0);
+  const linkTugas1 = "https://nurchintapembatik.my.canva.site/matematika-ciri-ciri-segitiga";
+
+  const waktuTugas2 = new Date(2026, 1, 12, 7, 0, 0);
+  const linkTugas2 = "https://nurchintapembatik.my.canva.site/matematika-bangun-datar";
 
   dropbtn.onclick = e => {
     e.stopPropagation();
@@ -227,29 +230,24 @@
     const pilih = new Date(this.value);
     const sekarang = new Date();
 
-    if (
-      pilih.getFullYear() === 2026 &&
-      pilih.getMonth() === 1 &&
-      pilih.getDate() === 10
-    ) {
-      if (sekarang < waktuTugas) {
-        pesan.innerHTML = `
-          ⏰📘<br>
-          <b>Tugas belum bisa dibuka</b><br><br>
-          🕖 Tersedia mulai pukul 07.01<br>
-          💡 Mohon tunggu sesuai jadwal
-        `;
+    if (pilih.getFullYear() === 2026 && pilih.getMonth() === 1 && pilih.getDate() === 10) {
+      if (sekarang < waktuTugas1) {
+        pesan.innerHTML = "⏰<br>Tugas tersedia pukul 07.01";
         pesan.style.display = "block";
       } else {
-        window.location.href = linkTugas;
+        window.location.href = linkTugas1;
       }
+
+    } else if (pilih.getFullYear() === 2026 && pilih.getMonth() === 1 && pilih.getDate() === 12) {
+      if (sekarang < waktuTugas2) {
+        pesan.innerHTML = "⏰<br>Tugas tersedia pukul 07.00";
+        pesan.style.display = "block";
+      } else {
+        window.location.href = linkTugas2;
+      }
+
     } else {
-      pesan.innerHTML = `
-        🌈✨🎉<br>
-        <b>Tidak ada tugas di tanggal ini</b><br><br>
-        🚀 Terus semangat belajar<br>
-        📚 Kamu luar biasa!
-      `;
+      pesan.innerHTML = "🌈<br>Tidak ada tugas di tanggal ini";
       pesan.style.display = "block";
     }
   };

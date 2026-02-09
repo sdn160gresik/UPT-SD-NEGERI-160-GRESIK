@@ -26,20 +26,10 @@
       padding: 1rem 2rem;
     }
 
-    .nav-left img {
-      height: 45px;
-      margin-right: 0.5rem;
-    }
-
-    .nav-right {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-    }
-
+    .nav-left img { height: 45px; margin-right: 0.5rem; }
+    .nav-right { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
     .nav-right a {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255,255,255,0.9);
       padding: 0.4rem 0.8rem;
       border-radius: 6px;
       text-decoration: none;
@@ -50,17 +40,9 @@
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+    .nav-right a:hover { transform: scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
 
-    .nav-right a:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    .title-section {
-      text-align: center;
-      margin: 20px 15px 10px;
-    }
-
+    .title-section { text-align: center; margin: 20px 15px 10px; }
     .title-section h1 {
       font-size: 2rem;
       background: rgba(255,255,255,0.85);
@@ -70,19 +52,8 @@
       color: #0288d1;
     }
 
-    .task-container {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin: 30px auto;
-    }
-
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
+    .task-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin: 30px auto; }
+    .dropdown { position: relative; display: inline-block; }
     .dropbtn {
       background: rgba(255,255,255,0.9);
       border-radius: 12px;
@@ -95,7 +66,6 @@
       border: none;
       width: 250px;
     }
-
     .dropdown-content {
       display: none;
       position: absolute;
@@ -105,7 +75,6 @@
       z-index: 1;
       margin-top: 5px;
     }
-
     .dropdown-content a {
       display: block;
       padding: 10px;
@@ -114,10 +83,7 @@
       font-weight: bold;
       border-bottom: 1px solid #ddd;
     }
-
-    .dropdown.show .dropdown-content {
-      display: block;
-    }
+    .dropdown.show .dropdown-content { display: block; }
 
     /* Kalender melayang */
     #calendarBox {
@@ -133,7 +99,6 @@
       text-align: center;
       z-index: 1001;
     }
-
     #calendarBox input {
       padding: 10px;
       font-size: 1.1rem;
@@ -158,11 +123,7 @@
       z-index: 1002;
       animation: bounce 0.6s;
     }
-
-    .popup.show {
-      display: block;
-    }
-
+    .popup.show { display: block; }
     @keyframes bounce {
       0% {transform: translate(-50%, -60%);}
       50% {transform: translate(-50%, -45%);}
@@ -204,6 +165,7 @@
   <input type="date" id="calendar">
 </div>
 
+<!-- Pesan melayang -->
 <div id="popupMessage" class="popup">
   🎉 Yeay! Tugasnya belum tersedia 😄  
   <br>📚 Jangan khawatir, tetap semangat belajar ya! 💪✨
@@ -215,32 +177,36 @@
   const calendar = document.getElementById("calendar");
   const popup = document.getElementById("popupMessage");
 
-  // buka dropdown
+  // Buka dropdown
   dropdown.querySelector(".dropbtn").onclick = (e) => {
     e.stopPropagation();
     dropdown.classList.toggle("show");
   };
 
-  // klik Pilih Tanggal Lain → tampil kalender melayang
+  // Klik Pilih Tanggal Lain → tampil kalender melayang
   document.getElementById("tugasLain").onclick = (e) => {
     e.preventDefault();
     calendarBox.style.display = "block";
   };
 
-  // pilih tanggal
+  // Pilih tanggal → cek soal
   calendar.onchange = () => {
     const tanggal = calendar.value;
-
     if (tanggal === "2025-11-12") {
       window.location.href = "tugas_IPAS_11_Nov_25.html";
     } else {
       popup.classList.add("show");
-      setTimeout(() => popup.classList.remove("show"), 2500);
     }
   };
 
-  // klik di luar dropdown → tutup
-  window.onclick = () => dropdown.classList.remove("show");
+  // Klik di area manapun → tutup dropdown & hilangkan popup
+  window.onclick = () => {
+    dropdown.classList.remove("show");
+    popup.classList.remove("show");
+  };
+
+  // Supaya klik di kalender tidak menutup sendiri popup & dropdown
+  calendarBox.onclick = (e) => e.stopPropagation();
 </script>
 
 </body>

@@ -68,10 +68,8 @@
       padding: 0.5rem 1rem;
       border-radius: 12px;
       color: #0288d1;
-      text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
     }
 
-    /* Dropdown Menu */
     .task-container {
       display: flex;
       justify-content: center;
@@ -93,15 +91,9 @@
       font-weight: bold;
       font-size: 1.1rem;
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
       color: #0288d1;
       border: none;
       width: 250px;
-    }
-
-    .dropbtn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
     }
 
     .dropdown-content {
@@ -112,7 +104,6 @@
       min-width: 200px;
       z-index: 1;
       margin-top: 5px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
     }
 
     .dropdown-content a {
@@ -124,20 +115,28 @@
       border-bottom: 1px solid #ddd;
     }
 
-    .dropdown-content a:last-child {
-      border-bottom: none;
-    }
-
-    .dropdown-content a:hover {
-      background: #f1f1f1;
-    }
-
-    /* kelas aktif untuk buka menu */
     .dropdown.show .dropdown-content {
       display: block;
     }
 
-    /* Kotak pesan melayang */
+    /* Kalender */
+    #calendarBox {
+      display: none;
+      margin-top: 10px;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    #calendarBox input {
+      padding: 8px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 2px solid #0288d1;
+    }
+
+    /* Popup pesan */
     .popup {
       display: none;
       position: fixed;
@@ -145,94 +144,94 @@
       left: 50%;
       transform: translate(-50%, -50%);
       background: rgba(255,255,255,0.95);
-      padding: 20px 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      padding: 25px 35px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
       font-weight: bold;
       color: #0288d1;
       text-align: center;
       z-index: 1000;
+      animation: bounce 0.6s;
     }
 
     .popup.show {
       display: block;
-      animation: fadeIn 0.4s ease;
     }
 
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
+    @keyframes bounce {
+      0% {transform: translate(-50%, -60%);}
+      50% {transform: translate(-50%, -45%);}
+      100% {transform: translate(-50%, -50%);}
     }
-
   </style>
 </head>
 <body>
 
-  <!-- Navigasi -->
-  <nav>
-    <div class="nav-left">
-      <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
-      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 50px;">
-      <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah">
-    </div>
-    <div class="nav-right">
-      <a href="../../index.html">🏠 Beranda</a>
-      <a href="tugas.html">◀️ Kembali</a>
-      <a href="#">🖼️ Galeri</a>
-    </div>
-  </nav>
-
-  <!-- Judul Halaman -->
-  <div class="title-section">
-    <h1>📚 Tugas IPAS</h1>
+<nav>
+  <div class="nav-left">
+    <img src="https://i.imgur.com/sxm7RR1.png">
+    <img src="https://i.imgur.com/tGA5UBc.png" style="height:50px">
+    <img src="https://i.imgur.com/oWB8vKW.png">
   </div>
+  <div class="nav-right">
+    <a href="../../index.html">🏠 Beranda</a>
+    <a href="tugas.html">◀️ Kembali</a>
+    <a href="#">🖼️ Galeri</a>
+  </div>
+</nav>
 
-  <!-- Kotak Dropdown Tugas -->
-  <div class="task-container">
-    <!-- Dropdown Download -->
-   
-    <!-- Dropdown Tanggal Tugas -->
-    <div class="dropdown" id="dropdownTanggal">
-      <button class="dropbtn">📅 Pilih Tugas</button>
-      <div class="dropdown-content">
-        <a href="tugas_IPAS_11_Nov_25.html">12 November 2025</a>
-        <a href="#" id="tugasLain">Tugas Lain</a>
+<div class="title-section">
+  <h1>📚 Tugas IPAS</h1>
+</div>
+
+<div class="task-container">
+  <div class="dropdown" id="dropdownTanggal">
+    <button class="dropbtn">📅 Pilih Tugas</button>
+    <div class="dropdown-content">
+      <a href="tugas_IPAS_11_Nov_25.html">12 November 2025</a>
+      <a href="#" id="tugasLain">📆 Pilih Tanggal Lain</a>
+      <div id="calendarBox">
+        <input type="date" id="calendar">
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Kotak Pesan Melayang -->
-  <div id="popupMessage" class="popup">⚙️ Mohon maaf, masih dalam proses.</div>
+<div id="popupMessage" class="popup">
+  🎉 Yeay! Tugasnya belum tersedia 😄  
+  <br>📚 Jangan khawatir, tetap semangat belajar ya! 💪✨
+</div>
 
-  <!-- Suara klik interaktif -->
-  <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
+<script>
+  const dropdown = document.getElementById("dropdownTanggal");
+  const calendarBox = document.getElementById("calendarBox");
+  const calendar = document.getElementById("calendar");
+  const popup = document.getElementById("popupMessage");
 
-  <script>
- 
-    // Dropdown umum
-    const dropdowns = document.querySelectorAll(".dropdown");
-    dropdowns.forEach(drop => {
-      const button = drop.querySelector(".dropbtn");
-      button.addEventListener("click", function(e) {
-        e.stopPropagation();
-        dropdowns.forEach(d => { if (d !== drop) d.classList.remove("show"); });
-        drop.classList.toggle("show");
-      });
-    });
+  dropdown.querySelector(".dropbtn").onclick = (e) => {
+    e.stopPropagation();
+    dropdown.classList.toggle("show");
+  };
 
-    // Tutup semua dropdown jika klik di luar
-    window.addEventListener("click", function() {
-      dropdowns.forEach(drop => drop.classList.remove("show"));
-    });
+  document.getElementById("tugasLain").onclick = (e) => {
+    e.preventDefault();
+    calendarBox.style.display = "block";
+  };
 
-    // Pesan melayang untuk tugas lain
-    document.getElementById("tugasLain").addEventListener("click", function(e) {
-      e.preventDefault();
-      const popup = document.getElementById("popupMessage");
+  calendar.onchange = () => {
+    const tanggal = calendar.value;
+
+    // tanggal yang sudah ada soalnya
+    if (tanggal === "2025-11-12") {
+      window.location.href = "tugas_IPAS_11_Nov_25.html";
+    } else {
       popup.classList.add("show");
-      setTimeout(() => popup.classList.remove("show"), 2000);
-    });
-  </script>
+      setTimeout(() => popup.classList.remove("show"), 2500);
+    }
+  };
+
+  window.onclick = () => dropdown.classList.remove("show");
+</script>
 
 </body>
 </html>

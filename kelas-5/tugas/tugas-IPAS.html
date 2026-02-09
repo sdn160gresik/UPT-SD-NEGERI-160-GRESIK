@@ -104,6 +104,7 @@
       font-size: 1.1rem;
       border-radius: 8px;
       border: 2px solid #0288d1;
+      cursor: pointer;
     }
 
     /* Popup pesan */
@@ -189,9 +190,10 @@
     calendarBox.style.display = "block";
   };
 
-  // Pilih tanggal → cek soal
+  // Pilih tanggal → cek soal & hilangkan kalender
   calendar.onchange = () => {
     const tanggal = calendar.value;
+    calendarBox.style.display = "none"; // hilangkan kalender setelah pilih tanggal
     if (tanggal === "2025-11-12") {
       window.location.href = "tugas_IPAS_11_Nov_25.html";
     } else {
@@ -199,14 +201,13 @@
     }
   };
 
-  // Klik di area manapun → tutup dropdown, popup, & kalender
+  // Klik di area manapun → tutup dropdown & popup
   window.onclick = () => {
     dropdown.classList.remove("show");
     popup.classList.remove("show");
-    calendarBox.style.display = "none";
   };
 
-  // Supaya klik di kalender tidak menutup sendiri popup & dropdown
+  // Supaya klik di kalender tidak menutup sendiri dropdown & popup
   calendarBox.onclick = (e) => e.stopPropagation();
 </script>
 

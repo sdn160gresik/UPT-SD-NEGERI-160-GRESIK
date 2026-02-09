@@ -1,1 +1,210 @@
+<!DOCTYPE html> 
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tugas Seni</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      height: 100%;
+      width: 100%;
+      overflow-x: hidden;
+      background: url('https://i.imgur.com/ZhICw8Q.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .nav-left img { height: 45px; margin-right: 0.5rem; }
+    .nav-right { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    .nav-right a {
+      background: rgba(255,255,255,0.9);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #0288d1;
+      font-weight: bold;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .nav-right a:hover { transform: scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+
+    .title-section { text-align: center; margin: 20px 15px 10px; }
+    .title-section h1 {
+      font-size: 2rem;
+      background: rgba(255,255,255,0.85);
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      color: #0288d1;
+    }
+
+    .task-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin: 30px auto; }
+    .dropdown { position: relative; display: inline-block; }
+    .dropbtn {
+      background: rgba(255,255,255,0.9);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: #0288d1;
+      border: none;
+      width: 250px;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: rgba(255,255,255,0.95);
+      border-radius: 8px;
+      min-width: 200px;
+      z-index: 1;
+      margin-top: 5px;
+    }
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: #0288d1;
+      font-weight: bold;
+      border-bottom: 1px solid #ddd;
+    }
+    .dropdown.show .dropdown-content { display: block; }
+
+    /* Kalender melayang */
+    #calendarBox {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.95);
+      padding: 20px 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      text-align: center;
+      z-index: 1001;
+    }
+    #calendarBox input {
+      padding: 10px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      border: 2px solid #0288d1;
+      cursor: pointer;
+    }
+
+    /* Popup pesan */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.95);
+      padding: 25px 35px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      font-weight: bold;
+      color: #0288d1;
+      text-align: center;
+      z-index: 1002;
+      animation: bounce 0.6s;
+    }
+    .popup.show { display: block; }
+    @keyframes bounce {
+      0% {transform: translate(-50%, -60%);}
+      50% {transform: translate(-50%, -45%);}
+      100% {transform: translate(-50%, -50%);}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <img src="https://i.imgur.com/sxm7RR1.png">
+    <img src="https://i.imgur.com/tGA5UBc.png" style="height:50px">
+    <img src="https://i.imgur.com/oWB8vKW.png">
+  </div>
+  <div class="nav-right">
+    <a href="../../index.html">🏠 Beranda</a>
+    <a href="tugas.html">◀️ Kembali</a>
+    <a href="#">🖼️ Galeri</a>
+  </div>
+</nav>
+
+<div class="title-section">
+  <h1>📚 Tugas Seni</h1>
+</div>
+
+<div class="task-container">
+  <div class="dropdown" id="dropdownTanggal">
+    <button class="dropbtn">📅 Pilih Tugas</button>
+    <div class="dropdown-content">
+      <a href="#" id="tugasLain">📆 Pilih Tanggal Lain</a>
+    </div>
+  </div>
+</div>
+
+<!-- Kalender melayang -->
+<div id="calendarBox">
+  <input type="date" id="calendar">
+</div>
+
+<!-- Pesan melayang -->
+<div id="popupMessage" class="popup">
+  🎉 Yeay! Tugasnya belum tersedia 😄  
+  <br>📚 Jangan khawatir, tetap semangat belajar ya! 💪✨
+</div>
+
+<script>
+  const dropdown = document.getElementById("dropdownTanggal");
+  const calendarBox = document.getElementById("calendarBox");
+  const calendar = document.getElementById("calendar");
+  const popup = document.getElementById("popupMessage");
+
+  // Buka dropdown
+  dropdown.querySelector(".dropbtn").onclick = (e) => {
+    e.stopPropagation();
+    dropdown.classList.toggle("show");
+  };
+
+  // Klik Pilih Tanggal Lain → tampil kalender melayang
+  document.getElementById("tugasLain").onclick = (e) => {
+    e.preventDefault();
+    calendarBox.style.display = "block";
+  };
+
+  // Pilih tanggal → cek soal & hilangkan kalender
+  calendar.onchange = () => {
+    calendarBox.style.display = "none"; // hilangkan kalender setelah pilih tanggal
+    popup.classList.add("show");
+  };
+
+  // Klik di area manapun → tutup dropdown & popup
+  window.onclick = () => {
+    dropdown.classList.remove("show");
+    popup.classList.remove("show");
+  };
+
+  // Supaya klik di kalender tidak menutup sendiri dropdown & popup
+  calendarBox.onclick = (e) => e.stopPropagation();
+</script>
+
+</body>
+</html>
 

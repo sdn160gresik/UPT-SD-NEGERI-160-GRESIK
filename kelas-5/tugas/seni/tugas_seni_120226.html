@@ -191,8 +191,22 @@
 
   // Pilih tanggal → cek soal & hilangkan kalender
   calendar.onchange = () => {
+    const tanggal = calendar.value;
     calendarBox.style.display = "none"; // hilangkan kalender setelah pilih tanggal
-    popup.classList.add("show");
+
+    if (tanggal === "2026-02-12") {
+      const now = new Date();
+      const targetDate = new Date("2026-02-12T07:00:00");
+      if (now >= targetDate) {
+        window.location.href = "https://nurchintapembatik.my.canva.site/seni-musik-notasi";
+      } else {
+        popup.innerHTML = `⏳ Woohoo! Tugas ini belum bisa dibuka 😄<br>📚 Tunggu tanggal 12 Februari 2026 pukul 07:00 🌞<br>💪 Tetap semangat belajar! ✨`;
+        popup.classList.add("show");
+      }
+    } else {
+      popup.innerHTML = `🎉 Yaaay! Tidak ada tugas di tanggal ini 😄<br>📚 Gunakan waktu ini untuk eksplor dan belajar hal baru! 🌟💡<br>💪 Terus semangat, kamu hebat! 🏆✨`;
+      popup.classList.add("show");
+    }
   };
 
   // Klik di area manapun → tutup dropdown & popup
@@ -207,4 +221,3 @@
 
 </body>
 </html>
-

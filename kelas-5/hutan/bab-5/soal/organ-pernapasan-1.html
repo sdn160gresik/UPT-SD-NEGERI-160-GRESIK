@@ -220,7 +220,8 @@
     <div class="glass-card rounded-xl p-3 mb-2 shadow-xl flex-grow flex flex-col">
      <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg p-2 mb-3">
       <h2 class="text-sm md:text-base font-bold text-gray-800 text-center" id="question-text">Pertanyaan akan muncul di sini...</h2>
-      <div class="flex justify-center"><img id="question-image" src="https://i.imgur.com/bhhL8Zp.jpeg" alt="Diagram sistem pernapasan" loading="lazy" style="max-width: 100%; max-height: 200px; margin-top: 8px; border-radius: 8px; display: none;" onerror="this.style.background='#e5e7eb'; this.style.display='block';">
+      <div class="flex justify-center">
+       <img id="question-image" src="https://i.imgur.com/bhhL8Zp.jpeg" alt="Diagram sistem pernapasan" loading="lazy" style="max-width: 100%; max-height: 200px; margin-top: 8px; border-radius: 8px; display: none;" onerror="this.style.background='#e5e7eb'; this.style.display='block';">
       </div>
      </div>
      <div class="mb-3">
@@ -235,7 +236,7 @@
      <div class="mt-2 text-center"><button onclick="clearAnswer()" class="px-4 py-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-lg transition-all duration-200 text-xs">🔄 Hapus Jawaban</button>
      </div>
     </div><!-- BACK BUTTON AT BOTTOM -->
-    <div class="flex justify-center mt-3"><a href="https://sdn160gresik.github.io/UPT-SD-NEGERI-160-GRESIK/kelas-5/hutan/bab-5/soal/sistem-pernapasan.html" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300"> Kembali </a>
+    <div class="flex justify-center mt-3"><a href="https://sdn160gresik.github.io/UPT-SD-NEGERI-160-GRESIK/kelas-5/hutan/bab-5/soal/sistem-pernapasan.html" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300"> Kembali </a>
     </div><!-- RETRY MESSAGE OVERLAY -->
     <div id="retry-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
      <div class="glass-card rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl animate-retry-bounce">
@@ -299,27 +300,27 @@
     let allGameScores = [];
     
     const questionBank = [
-      { question: "Apa yang dimaksud dengan inspirasi?", answer: "PROSES MENARIK NAPAS" },
-      { question: "Bronkiolus adalah …", answer: "CABANG DARI BRONKUS" },
-      { question: "Fungsi alveolus adalah …", answer: "TEMPAT PERTUKARAN" },
-      { question: "Kapan diafragma mengalami relaksasi?", answer: "SAAT MENGEMBUSKAN" },
-      { question: "Fungsi trakea adalah …", answer: "MENYALURKAN UDARA" },
-      { question: "Paru-paru terletak di …", answer: "RONGGA DADA" },
+      { question: "Apa yang dimaksud dengan inspirasi?", answer: "PROSESMENARIKNAPAS" },
+      { question: "Bronkiolus adalah …", answer: "CABANGDARIBRONUS" },
+      { question: "Fungsi alveolus adalah …", answer: "TEMPATPERTUKARAN" },
+      { question: "Kapan diafragma mengalami relaksasi?", answer: "SAATMENGEMBUSKAN" },
+      { question: "Fungsi trakea adalah …", answer: "MENYALURKANUDARA" },
+      { question: "Paru-paru terletak di …", answer: "RONGGARONGGA" },
       { question: "Bagaimanakah diafragma saat inspirasi?", answer: "BERKONTRAKSI" },
       { question: "Cabang trakea yang menuju paru-paru disebut …", answer: "BRONKUS" },
       { question: "Yang berfungsi mengontrol jumlah udara yang masuk dan keluar adalah …", answer: "BRONKIOLUS" },
       { question: "Dinding yang memisahkan rongga dada dan rongga perut adalah …", answer: "DIAFRAGMA" },
       { question: "Rongga hidung, rongga mulut, dan paru-paru dihubungkan oleh …", answer: "BRONKUS" },
-      { question: "Apa yang dimaksud dengan ekspirasi?", answer: "PROSES MENGEMBUSKAN" },
-      { question: "Yang berfungsi menyaring debu dan kotoran dalam trakea adalah …", answer: "RAMBUT GETAR" },
+      { question: "Apa yang dimaksud dengan ekspirasi?", answer: "PROSESMENGEMBUSKAN" },
+      { question: "Yang berfungsi menyaring debu dan kotoran dalam trakea adalah …", answer: "RAMBUTGETAR" },
       { question: "Fungsi bronkiolus adalah …", answer: "MENYALURKAN" },
       { question: "Bronkus merupakan percabangan dari …", answer: "TRAKEA" },
       { question: "Paru-paru berfungsi menampung udara yang banyak mengandung …", answer: "OKSIGEN" },
       { question: "Bagaimanakah diafragma saat ekspirasi?", answer: "RELAKSASI" },
       { question: "Organ pernapasan yang menghubungkan laring ke bronkus adalah …", answer: "TRAKEA" },
-      { question: "Kapan diafragma mengalami kontraksi?", answer: "SAAT MENARIK NAPAS" },
+      { question: "Kapan diafragma mengalami kontraksi?", answer: "SAATMENARIKNAPAS" },
       { question: "Alveolus terletak di ujung …", answer: "BRONKIOLUS" },
-      { question: "Fungsi bronkus adalah …", answer: "MENYALURKAN UDARA" },
+      { question: "Fungsi bronkus adalah …", answer: "MENYALURKANUDARA" },
       { question: "Organ ini sebagian terletak di leher dan sebagian lagi terletak di rongga dada adalah …", answer: "TRAKEA" },
       { question: "Diafragma kontraksi artinya dalam posisi …", answer: "MENDATAR" },
       { question: "Yang menghubungkan paru-paru kanan dan kiri adalah …", answer: "BRONKUS" },
@@ -909,5 +910,5 @@
     initializeDataSDK();
   </script>
   <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d0b2beae33fb5e4',t:'MTc3MTU2MDgwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d0ba494e2b36d00',t:'MTc3MTU2NTc1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d0c2a576795e778',t:'MTc3MTU3MTIyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

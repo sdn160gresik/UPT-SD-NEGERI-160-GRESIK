@@ -99,6 +99,7 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       color: white;
+      cursor: pointer;
     }
 
     .map-item:hover {
@@ -115,7 +116,7 @@
       margin-bottom: 10px;
     }
 
-    /* ===== POPUP PESAN ===== */
+    /* ===== POPUP ===== */
 
     .overlay {
       position: fixed;
@@ -135,18 +136,19 @@
       padding: 30px;
       border-radius: 20px;
       text-align: center;
-      max-width: 400px;
-      animation: fadeIn 0.4s ease;
+      max-width: 420px;
+      animation: fadeIn 0.3s ease;
     }
 
     .popup h2 {
       color: #0288d1;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     .popup p {
       font-size: 1rem;
       margin-bottom: 20px;
+      line-height: 1.6;
     }
 
     .popup button {
@@ -210,11 +212,11 @@
   <!-- POPUP -->
   <div class="overlay" id="overlay">
     <div class="popup">
-      <h2>🚧 Sedang Dalam Proses 🚀</h2>
+      <h2>🚧 Materi Sedang Diproses! 🚀</h2>
       <p>
-        Wah hebat! Kamu semangat belajar! 🌟<br><br>
-        Materi ini sedang kami siapkan agar lebih seru dan menyenangkan 💙<br>
-        Tetap semangat ya! Ilmu sedang diproses khusus untukmu! ✨📚
+        Hebat sekali semangat belajarmu! 🌟<br><br>
+        Materi ini sedang kami siapkan agar lebih seru, interaktif, dan menyenangkan! 🎉📚<br>
+        Tetap semangat ya! Ilmu terbaik sedang dalam perjalanan menuju kamu! ✨💙
       </p>
       <button onclick="tutupPopup()">Siap! 💪</button>
     </div>
@@ -229,10 +231,26 @@
 
     mapItems.forEach(item => {
       item.addEventListener("click", function(e) {
-        e.preventDefault(); // cegah pindah halaman
         clickSound.currentTime = 0;
         clickSound.play();
-        overlay.style.display = "flex";
+
+        const url = this.getAttribute("href");
+
+        fetch(url, { method: 'HEAD' })
+          .then(response => {
+            if (response.ok) {
+              window.location.href = url; // jika file ada
+            } else {
+              e.preventDefault();
+              overlay.style.display = "flex";
+            }
+          })
+          .catch(() => {
+            e.preventDefault();
+            overlay.style.display = "flex";
+          });
+
+        e.preventDefault();
       });
     });
 

@@ -17,7 +17,6 @@
       color: #333;
     }
 
-    /* NAVIGASI */
     nav {
       display: flex;
       justify-content: space-between;
@@ -47,7 +46,6 @@
       font-size: 0.9rem;
     }
 
-    /* JUDUL */
     .title-section {
       text-align: center;
       margin: 20px;
@@ -70,7 +68,6 @@
       color: #0288d1;
     }
 
-    /* MENU */
     .map-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -91,7 +88,6 @@
       transition: transform 0.3s ease;
     }
 
-    /* WARNA CERIA SELARAS DENGAN GRADASI */
     .map-item:nth-child(1) {
       background: linear-gradient(135deg, #4facfe, #00f2fe);
       color: #ffffff;
@@ -132,7 +128,6 @@
       margin-bottom: 6px;
     }
 
-    /* POPUP */
     .overlay {
       position: fixed;
       inset: 0;
@@ -194,7 +189,6 @@
 
 <body>
 
-  <!-- NAV -->
   <nav>
     <div class="nav-left">
       <img src="https://i.imgur.com/sxm7RR1.png">
@@ -209,13 +203,11 @@
     </div>
   </nav>
 
-  <!-- JUDUL -->
   <div class="title-section">
     <h1>🕵️‍♂️ Detektif Bangun Datar</h1>
     <p>Selamat datang, Detektif Hebat! Ayo jelajahi bangun datar dengan cara yang seru dan penuh semangat!</p>
   </div>
 
-  <!-- MENU -->
   <div class="map-grid">
     <a href="misi-persegi.html" class="map-item"><span class="emoji">⬜</span>Misi Persegi</a>
     <a href="misi-persegi-panjang.html" class="map-item"><span class="emoji">▭</span>Misi Persegi Panjang</a>
@@ -224,7 +216,6 @@
     <a href="soal-1.html" class="map-item"><span class="emoji">🧠</span>Arena Tantangan Detektif</a>
   </div>
 
-  <!-- POPUP -->
   <div class="overlay" id="overlay">
     <div class="popup">
       <div class="popup-emoji">🚧✨</div>
@@ -237,10 +228,8 @@
     </div>
   </div>
 
-  <!-- AUDIO -->
   <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
 
-  <!-- SCRIPT -->
   <script>
     const clickSound = document.getElementById("clickSound");
     const overlay = document.getElementById("overlay");
@@ -248,9 +237,22 @@
     document.querySelectorAll(".map-item").forEach(item => {
       item.addEventListener("click", function(e) {
         e.preventDefault();
+        const targetLink = this.getAttribute("href");
+
         clickSound.currentTime = 0;
         clickSound.play();
-        overlay.style.display = "flex";
+
+        fetch(targetLink, { method: 'HEAD' })
+          .then(response => {
+            if (response.ok) {
+              window.location.href = targetLink;
+            } else {
+              overlay.style.display = "flex";
+            }
+          })
+          .catch(() => {
+            overlay.style.display = "flex";
+          });
       });
     });
 

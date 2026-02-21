@@ -1,0 +1,265 @@
+<!DOCTYPE html>   
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💙 Sistem Pencernaan Manusia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      height: 100%;
+      width: 100%;
+      overflow-x: hidden;
+      background: url('https://i.imgur.com/fFfoAai.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .nav-left img {
+      height: 45px;
+      margin-right: 0.5rem;
+    }
+
+    .nav-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .nav-right a {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #0288d1;
+      font-weight: bold;
+      font-size: 0.9rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .nav-right a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .title-section {
+      display: flex;
+      flex-direction: column;     
+      align-items: center;        
+      justify-content: flex-start;    
+      text-align: center;         
+      min-height: 80vh;           
+      padding: 40px 20px 20px 20px;  
+    }
+
+    .title-section h1 {
+      font-size: 2rem;
+      background: rgba(255,255,255,0.85);
+      display: inline-block;
+      padding: 0.7rem 1.2rem;
+      border-radius: 12px;
+      color: #0288d1;
+      margin-bottom: 15px;
+    }
+
+    .title-section p {
+      background: rgba(255,255,255,0.85);
+      padding: 0.8rem 1.2rem;
+      border-radius: 10px;
+      max-width: 700px;
+      margin: 0 auto 20px auto;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #0288d1;
+      line-height: 1.6;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .dropbtn {
+      background: linear-gradient(135deg, #4fc3f7, #0288d1);
+      color: white;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .dropbtn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: rgba(255,255,255,0.95);
+      min-width: 200px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      border-radius: 10px;
+      z-index: 1;
+      flex-direction: column;
+    }
+
+    .dropdown-content a {
+      color: #0288d1;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .dropdown-content a:hover {
+      background-color: rgba(4, 125, 173, 0.1);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: flex;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 30px 20px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      animation: pop 0.3s ease;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      color: #0288d1;
+    }
+
+    .close-btn {
+      background: linear-gradient(135deg, #f44336, #d32f2f);
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.2s ease;
+    }
+
+    .close-btn:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
+      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 50px;">
+      <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah">
+    </div>
+    <div class="nav-right">
+      <a href="../../../../index.html">🏠 Beranda</a>
+      <a href="../pernapasan-pencernaan-pertumbuhan.html">◀️ Kembali</a>
+      <a href="#">🖼️ Galeri</a>
+      <a href="../../../kelas.html">🏫 Kelas</a>
+    </div>
+  </nav>
+
+  <div class="title-section">
+    <h1>💙 Sistem Pencernaan Manusia</h1>
+    <p>
+      Yuk kita mulai petualangan seru menjelajahi cara tubuh kita bernapas!<br>
+      🌬️🫁 Siap belajar dengan semangat? 💪✨
+    </p>
+
+    <div class="dropdown">
+      <button class="dropbtn">🚀 Mulai Petualangan</button>
+      <div class="dropdown-content">
+        <a href="organ-pernapasan-1.html">🌟 Petualangan 1</a>
+        <a href="organ-pernapasan-2.html">🚀 Petualangan 2</a>
+        <a href="organ-pernapasan-3.html">🌈 Petualangan 3</a>
+        <a href="gangguan-pernapasan.html">🔥 Petualangan 4</a>
+        <a href="#" onclick="belumAda()">🌿 Petualangan 5</a>
+        <a href="#" onclick="belumAda()">⭐ Petualangan 6</a>
+        <a href="#" onclick="belumAda()">💨 Petualangan 7</a>
+        <a href="#" onclick="belumAda()">🌍 Petualangan 8</a>
+        <a href="#" onclick="belumAda()">✨ Petualangan 9</a>
+        <a href="#" onclick="belumAda()">🏆 Petualangan 10</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="modalPesan" class="modal">
+    <div class="modal-content">
+      <h2>🎉 Hai Penjelajah Hebat! 🌈</h2>
+      <p>Petualangan seru ini sedang kami persiapkan khusus untukmu! 🚀💪<br>
+      Tetap semangat dan siapkan dirimu untuk menjelajahi dunia pernapasan manusia! 🫁✨<br>
+      Ayo, terus tersenyum dan nikmati belajar dengan penuh kegembiraan! 😄🌟</p>
+      <button class="close-btn" onclick="tutupModal()">Tutup</button>
+    </div>
+  </div>
+
+  <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
+
+  <script>
+    const clickSound = document.getElementById("clickSound");
+    const allButtons = document.querySelectorAll("a");
+    allButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        clickSound.currentTime = 0;
+        clickSound.play();
+      });
+    });
+
+    function belumAda() {
+      document.getElementById("modalPesan").style.display = "flex";
+    }
+
+    function tutupModal() {
+      document.getElementById("modalPesan").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>

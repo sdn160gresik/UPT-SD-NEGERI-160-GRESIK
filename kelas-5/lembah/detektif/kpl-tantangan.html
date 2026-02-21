@@ -1,0 +1,267 @@
+<!DOCTYPE html>  
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arena Tantangan Detektif</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      height: 100%;
+      background: url('https://i.imgur.com/u55gnLD.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-left img {
+      height: 45px;
+      margin-right: 6px;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-right a {
+      background: rgba(255,255,255,0.9);
+      padding: 6px 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #0288d1;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .title-section {
+      text-align: center;
+      margin: 20px;
+    }
+
+    .title-section h1 {
+      background: rgba(255,255,255,0.85);
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 14px;
+      color: #0288d1;
+    }
+
+    .title-section p {
+      background: rgba(255,255,255,0.8);
+      padding: 10px 16px;
+      border-radius: 10px;
+      max-width: 90%;
+      margin: 10px auto;
+      color: #0288d1;
+    }
+
+    .map-grid {
+      display: flex;
+      justify-content: center;
+      padding: 30px;
+    }
+
+    .dropdown-container {
+      position: relative;
+      width: 260px;
+    }
+
+    .dropdown-button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      width: 100%;
+      background: white;
+      border-radius: 14px;
+      margin-top: 10px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+      overflow: hidden;
+      z-index: 1000;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 12px;
+      text-decoration: none;
+      color: #0288d1;
+      font-weight: bold;
+      border-bottom: 1px solid #eee;
+    }
+
+    .dropdown-menu a:hover {
+      background: #f0f9ff;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .popup {
+      background: #ffffff;
+      padding: 26px;
+      border-radius: 22px;
+      text-align: center;
+      max-width: 340px;
+      animation: floatIn 0.5s ease;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+    }
+
+    .popup-emoji {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .popup h2 {
+      color: #0288d1;
+      margin-bottom: 10px;
+    }
+
+    .popup p {
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .popup button {
+      margin-top: 15px;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #4fc3f7;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <img src="https://i.imgur.com/sxm7RR1.png">
+      <img src="https://i.imgur.com/tGA5UBc.png">
+      <img src="https://i.imgur.com/oWB8vKW.png">
+    </div>
+    <div class="nav-right">
+      <a href="../../index.html">🏠 Beranda</a>
+      <a href="../lembah.html">◀️ Kembali</a>
+      <a href="#">🖼️ Galeri</a>
+      <a href="kelas.html">🏫 Kelas</a>
+    </div>
+  </nav>
+
+  <div class="title-section">
+    <h1>🧠 Arena Tantangan Detektif</h1>
+    <p>Selamat datang di Arena Tantangan, Detektif Hebat! Pilih level tantanganmu dan buktikan bahwa kamu siap menjadi Detektif Juara!</p>
+  </div>
+
+  </div>
+
+  <div class="map-grid">
+    <div class="dropdown-container">
+      <button class="dropdown-button" onclick="toggleDropdown()">🎯 Pilih Tantangan</button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="tantangan-1.html">Tantangan 1</a>
+        <a href="tantangan-2.html">Tantangan 2</a>
+        <a href="tantangan-3.html">Tantangan 3</a>
+        <a href="tantangan-4.html">Tantangan 4</a>
+        <a href="tantangan-5.html">Tantangan 5</a>
+        <a href="tantangan-6.html">Tantangan 6</a>
+        <a href="tantangan-7.html">Tantangan 7</a>
+        <a href="tantangan-8.html">Tantangan 8</a>
+        <a href="tantangan-9.html">Tantangan 9</a>
+        <a href="tantangan-10.html">Tantangan 10</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="popup">
+      <div class="popup-emoji">🚧✨</div>
+      <h2>Maaf ya, Detektif Hebat!</h2>
+      <p>
+        Tantangan ini sedang dalam persiapkan💡🔥<br><br>
+        Kami sedang menyiapkan misi yang seru, menantang, dan pastinya menyenangkan untukmu!<br><br>
+        Tetap semangat belajar dan jangan berhenti berpetualang! 🚀
+      </p>
+      <button onclick="tutupPopup()">Siap! 💪</button>
+    </div>
+  </div>
+
+  <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
+
+  <script>
+    const clickSound = document.getElementById("clickSound");
+    const overlay = document.getElementById("overlay");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    function toggleDropdown() {
+      dropdownMenu.style.display = 
+        dropdownMenu.style.display === "block" ? "none" : "block";
+    }
+
+    document.querySelectorAll(".dropdown-menu a").forEach(item => {
+      item.addEventListener("click", function(e) {
+        e.preventDefault();
+        const targetLink = this.getAttribute("href");
+
+        clickSound.currentTime = 0;
+        clickSound.play();
+
+        fetch(targetLink, { method: 'HEAD' })
+          .then(response => {
+            if (response.ok) {
+              window.location.href = targetLink;
+            } else {
+              overlay.style.display = "flex";
+            }
+          })
+          .catch(() => {
+            overlay.style.display = "flex";
+          });
+      });
+    });
+
+    function tutupPopup() {
+      overlay.style.display = "none";
+    }
+  </script>
+
+</body>
+</html>

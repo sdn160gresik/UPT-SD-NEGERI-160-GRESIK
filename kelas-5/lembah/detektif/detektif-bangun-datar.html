@@ -1,83 +1,76 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Detektif Bangun Datar</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+
   <style>
     html, body {
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
       height: 100%;
-      width: 100%;
-      overflow-x: hidden;
       background: url('https://i.imgur.com/SJsdg3q.png') no-repeat center center fixed;
       background-size: cover;
       color: #333;
     }
 
+    /* NAVIGASI */
     nav {
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
+      flex-wrap: wrap;
     }
 
     .nav-left img {
       height: 45px;
-      margin-right: 0.5rem;
+      margin-right: 6px;
     }
 
     .nav-right {
       display: flex;
+      gap: 8px;
       flex-wrap: wrap;
-      gap: 0.5rem;
     }
 
     .nav-right a {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 0.4rem 0.8rem;
+      background: rgba(255,255,255,0.9);
+      padding: 6px 10px;
       border-radius: 6px;
       text-decoration: none;
       color: #0288d1;
       font-weight: bold;
       font-size: 0.9rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .nav-right a:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
+    /* JUDUL */
     .title-section {
       text-align: center;
-      margin: 20px 15px 10px;
+      margin: 20px;
     }
 
     .title-section h1 {
-      font-size: 2rem;
       background: rgba(255,255,255,0.85);
       display: inline-block;
-      padding: 0.5rem 1rem;
-      border-radius: 12px;
+      padding: 10px 20px;
+      border-radius: 14px;
       color: #0288d1;
-      text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
     }
 
     .title-section p {
       background: rgba(255,255,255,0.8);
-      color: #0288d1;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
+      padding: 10px 16px;
+      border-radius: 10px;
       max-width: 90%;
       margin: 10px auto;
-      font-size: 1rem;
+      color: #0288d1;
     }
 
+    /* MENU */
     .map-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -88,16 +81,15 @@
     }
 
     .map-item {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      padding: 15px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 14px;
+      padding: 16px;
       text-align: center;
+      text-decoration: none;
       color: #0288d1;
+      font-weight: bold;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       transition: transform 0.3s ease;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
     }
 
     .map-item:hover {
@@ -105,21 +97,80 @@
       background-color: #dff6ff;
     }
 
-    .map-item .emoji {
-      font-size: 2rem;
+    .emoji {
+      font-size: 2.2rem;
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+    }
+
+    /* POPUP */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .popup {
+      background: #ffffff;
+      padding: 26px;
+      border-radius: 22px;
+      text-align: center;
+      max-width: 320px;
+      animation: floatIn 0.5s ease;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+    }
+
+    .popup-emoji {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .popup h2 {
+      color: #0288d1;
+      margin-bottom: 10px;
+    }
+
+    .popup p {
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .popup button {
+      margin-top: 15px;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #4fc3f7;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
+
 <body>
 
-  <!-- Navigasi -->
+  <!-- NAV -->
   <nav>
     <div class="nav-left">
-      <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
-      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 50px;">
-      <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah">
+      <img src="https://i.imgur.com/sxm7RR1.png">
+      <img src="https://i.imgur.com/tGA5UBc.png">
+      <img src="https://i.imgur.com/oWB8vKW.png">
     </div>
     <div class="nav-right">
       <a href="../../index.html">🏠 Beranda</a>
@@ -129,13 +180,13 @@
     </div>
   </nav>
 
-  <!-- Judul Halaman -->
+  <!-- JUDUL -->
   <div class="title-section">
     <h1>🕵️‍♂️ Detektif Bangun Datar</h1>
-    <p>Selamat datang, Detektif Hebat! 🔍 Mari selidiki rahasia persegi, persegi panjang, segitiga, dan lingkaran dengan cara yang seru dan menantang!</p>
+    <p>Selamat datang, Detektif Hebat! Ayo jelajahi bangun datar dengan cara yang seru dan penuh semangat!</p>
   </div>
 
-  <!-- Menu Interaktif -->
+  <!-- MENU -->
   <div class="map-grid">
     <a href="misi-persegi.html" class="map-item"><span class="emoji">⬜</span>Misi Persegi</a>
     <a href="misi-persegi-panjang.html" class="map-item"><span class="emoji">▭</span>Misi Persegi Panjang</a>
@@ -144,17 +195,39 @@
     <a href="arena-detektif.html" class="map-item"><span class="emoji">🧠</span>Arena Tantangan Detektif</a>
   </div>
 
-  <!-- Suara klik interaktif -->
+  <!-- POPUP -->
+  <div class="overlay" id="overlay">
+    <div class="popup">
+      <div class="popup-emoji">🚧✨</div>
+      <h2>Upss… Belum Siap!</h2>
+      <p>
+        Misi ini masih dalam proses ya, Detektif Hebat 🌱<br>
+        Tetap semangat belajar! Petualangan seru akan segera hadir 🚀
+      </p>
+      <button onclick="tutupPopup()">Siap! 💪</button>
+    </div>
+  </div>
+
+  <!-- AUDIO -->
   <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
+
+  <!-- SCRIPT -->
   <script>
     const clickSound = document.getElementById("clickSound");
-    const allButtons = document.querySelectorAll("a, .map-item");
-    allButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
+    const overlay = document.getElementById("overlay");
+
+    document.querySelectorAll(".map-item").forEach(item => {
+      item.addEventListener("click", function(e) {
+        e.preventDefault();
         clickSound.currentTime = 0;
         clickSound.play();
+        overlay.style.display = "flex";
       });
     });
+
+    function tutupPopup() {
+      overlay.style.display = "none";
+    }
   </script>
 
 </body>

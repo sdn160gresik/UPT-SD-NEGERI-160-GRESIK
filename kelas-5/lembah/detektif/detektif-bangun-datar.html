@@ -12,7 +12,7 @@
       padding: 0;
       font-family: 'Poppins', sans-serif;
       height: 100%;
-      background: url('https://i.imgur.com/u55gnLD.jpeg') no-repeat center center fixed;
+      background: url('https://i.imgur.com/SJsdg3q.png') no-repeat center center fixed;
       background-size: cover;
       color: #333;
     }
@@ -54,15 +54,16 @@
     }
 
     .title-section h1 {
-      background: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.9);
       display: inline-block;
-      padding: 10px 20px;
-      border-radius: 14px;
+      padding: 12px 24px;
+      border-radius: 16px;
       color: #0288d1;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 
     .title-section p {
-      background: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.85);
       padding: 10px 16px;
       border-radius: 10px;
       max-width: 90%;
@@ -74,33 +75,53 @@
     .map-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
+      gap: 18px;
       padding: 20px;
       max-width: 1000px;
       margin: auto;
     }
 
     .map-item {
-      background: rgba(255,255,255,0.9);
-      border-radius: 14px;
-      padding: 16px;
+      border-radius: 16px;
+      padding: 18px;
       text-align: center;
       text-decoration: none;
-      color: #0288d1;
+      color: white;
       font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      transition: all 0.3s ease;
     }
 
     .map-item:hover {
-      transform: scale(1.05);
-      background-color: #dff6ff;
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.3);
+    }
+
+    /* WARNA BERBEDA SETIAP MISI */
+    .map-item:nth-child(1) {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+    }
+
+    .map-item:nth-child(2) {
+      background: linear-gradient(135deg, #43e97b, #38f9d7);
+    }
+
+    .map-item:nth-child(3) {
+      background: linear-gradient(135deg, #fa709a, #fee140);
+    }
+
+    .map-item:nth-child(4) {
+      background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+    }
+
+    .map-item:nth-child(5) {
+      background: linear-gradient(135deg, #f7971e, #ffd200);
     }
 
     .emoji {
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     /* POPUP */
@@ -134,11 +155,6 @@
       margin-bottom: 10px;
     }
 
-    .popup p {
-      font-size: 0.95rem;
-      color: #444;
-    }
-
     .popup button {
       margin-top: 15px;
       padding: 8px 20px;
@@ -165,70 +181,24 @@
 
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-left">
-      <img src="https://i.imgur.com/sxm7RR1.png">
-      <img src="https://i.imgur.com/tGA5UBc.png">
-      <img src="https://i.imgur.com/oWB8vKW.png">
-    </div>
-    <div class="nav-right">
-      <a href="../../index.html">🏠 Beranda</a>
-      <a href="../lembah.html">◀️ Kembali</a>
-      <a href="#">🖼️ Galeri</a>
-      <a href="kelas.html">🏫 Kelas</a>
-    </div>
-  </nav>
-
-  <!-- JUDUL -->
-  <div class="title-section">
-    <h1>🕵️‍♂️ Detektif Bangun Datar</h1>
-    <p>Selamat datang, Detektif Hebat! Ayo jelajahi bangun datar dengan cara yang seru dan penuh semangat!</p>
-  </div>
-
   <!-- MENU -->
   <div class="map-grid">
-    <a href="misi-persegi.html" class="map-item"><span class="emoji">⬜</span>Misi Persegi</a>
-    <a href="misi-persegi-panjang.html" class="map-item"><span class="emoji">▭</span>Misi Persegi Panjang</a>
-    <a href="misi-segitiga.html" class="map-item"><span class="emoji">🔺</span>Misi Segitiga</a>
-    <a href="misi-lingkaran.html" class="map-item"><span class="emoji">⚪</span>Misi Lingkaran</a>
-    <a href="arena-detektif.html" class="map-item"><span class="emoji">🧠</span>Arena Tantangan Detektif</a>
+    <a href="misi-persegi.html" class="map-item">
+      <span class="emoji">⬜</span>Misi Persegi
+    </a>
+    <a href="misi-persegi-panjang.html" class="map-item">
+      <span class="emoji">▭</span>Misi Persegi Panjang
+    </a>
+    <a href="misi-segitiga.html" class="map-item">
+      <span class="emoji">🔺</span>Misi Segitiga
+    </a>
+    <a href="misi-lingkaran.html" class="map-item">
+      <span class="emoji">⚪</span>Misi Lingkaran
+    </a>
+    <a href="arena-detektif.html" class="map-item">
+      <span class="emoji">🧠</span>Arena Tantangan Detektif
+    </a>
   </div>
-
-  <!-- POPUP -->
-  <div class="overlay" id="overlay">
-    <div class="popup">
-      <div class="popup-emoji">🚧✨</div>
-      <h2>Upss… Belum Siap!</h2>
-      <p>
-        Misi ini masih dalam proses ya, Detektif Hebat 🌱<br>
-        Tetap semangat belajar! Petualangan seru akan segera hadir 🚀
-      </p>
-      <button onclick="tutupPopup()">Siap! 💪</button>
-    </div>
-  </div>
-
-  <!-- AUDIO -->
-  <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
-
-  <!-- SCRIPT -->
-  <script>
-    const clickSound = document.getElementById("clickSound");
-    const overlay = document.getElementById("overlay");
-
-    document.querySelectorAll(".map-item").forEach(item => {
-      item.addEventListener("click", function(e) {
-        e.preventDefault();
-        clickSound.currentTime = 0;
-        clickSound.play();
-        overlay.style.display = "flex";
-      });
-    });
-
-    function tutupPopup() {
-      overlay.style.display = "none";
-    }
-  </script>
 
 </body>
 </html>

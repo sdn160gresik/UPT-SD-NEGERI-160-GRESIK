@@ -184,7 +184,7 @@
      <div class="bg-gradient-to-r from-blue-100 to-cyan-100 rounded-xl p-3 mb-5 text-left">
       <h3 class="font-bold text-blue-700 mb-1 text-sm">Cara Bermain:</h3>
       <ul class="text-xs text-gray-600 space-y-0.5">
-       <li>👆 Klik huruf untuk menyusun jawaban</li>
+       <li>👆 Klik huruf atau angka untuk menyusun jawaban</li>
        <li>✅ Jawaban benar = +10 poin</li>
        <li>❌ Huruf salah = -1 poin</li>
        <li>❌ 3 kesalahan = 1 hati berkurang</li>
@@ -200,7 +200,7 @@
    <div id="game-screen" class="min-h-full w-full flex flex-col p-2 hidden relative">
     <div class="glass-card rounded-xl p-2 mb-2 shadow-xl">
      <div class="flex justify-between items-center flex-wrap gap-1 text-xs md:text-sm">
-      <div class="flex items-center gap-2"><span class="text-gray-700 font-semibold">Pilih Soal:</span> <button onclick="toggleQuestionSelector()" class="bg-blue-100 hover:bg-blue-200 px-2 py-1 rounded-lg text-blue-700 font-bold text-xs transition-all"> <span id="question-number">Soal 1/1</span> 📋 </button>
+      <div class="text-gray-700 font-semibold"><span id="question-number">Soal 1/10</span>
       </div>
       <div class="bg-gradient-to-r from-yellow-400 to-orange-500 px-2 py-1 rounded-lg text-white font-bold flex items-center gap-1 text-xs"><span>Skor:</span> <span id="score">0</span>
       </div>
@@ -208,13 +208,6 @@
      <div class="mt-1 flex justify-center gap-1">
       <div id="mistake-hearts" class="flex gap-0.5"><span class="text-lg">❤️</span> <span class="text-lg">❤️</span> <span class="text-lg">❤️</span>
       </div>
-     </div>
-    </div><!-- QUESTION SELECTOR MODAL -->
-    <div id="question-selector-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 flex items-center justify-center p-2">
-     <div class="glass-card rounded-2xl p-4 max-w-sm w-full max-h-96 shadow-2xl overflow-auto">
-      <h2 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-4 sticky top-0">Pilih Soal</h2>
-      <div id="question-selector-list" class="grid grid-cols-4 gap-2"><!-- Soal buttons akan diisi di sini -->
-      </div><button onclick="toggleQuestionSelector()" class="w-full mt-4 py-2 px-4 bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold rounded-lg transition-all">Tutup</button>
      </div>
     </div>
     <div class="glass-card rounded-xl p-3 mb-2 shadow-xl flex-grow flex flex-col">
@@ -229,14 +222,11 @@
      </div>
      <div id="feedback" class="text-center mb-2 h-8 flex items-center justify-center"></div>
      <div class="mt-auto">
-      <p class="text-center text-gray-500 text-xs mb-2 font-semibold">Pilih Huruf (A-Z):</p>
+      <p class="text-center text-gray-500 text-xs mb-2 font-semibold">Pilih Huruf atau Angka (A-Z, 0-9):</p>
       <div id="letter-buttons" class="flex flex-wrap justify-center gap-1"></div>
      </div>
-     <div class="mt-2 text-center"><button onclick="clearAnswer()" class="px-4 py-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-lg transition-all duration-200 text-xs">🔄 Hapus Jawaban</button>
-     </div>
-    </div><!-- BACK BUTTON AT BOTTOM -->
-<div class="flex justify-center mt-3"><a href="sistem-pernapasan.html" 
- class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300"> Kembali </a>
+    </div><!-- BACK BUTTON -->
+    <div class="flex justify-center mt-3"><a href="sistem-pernapasan.html" class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">⬅️ Kembali</a>
     </div><!-- RETRY MESSAGE OVERLAY -->
     <div id="retry-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
      <div class="glass-card rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl animate-retry-bounce">
@@ -343,7 +333,6 @@
     let hearts = 3;
     let usedQuestions = [];
     let currentQuestionIndex = 0;
-    let questionsFailedCount = {};
     let completedQuestions = new Set();
     
     const dataHandler = {
@@ -395,78 +384,41 @@
       document.getElementById(screenId).classList.remove('hidden');
     }
     
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+    
     function startGame() {
       score = 0;
       mistakes = 0;
       hearts = 3;
-      usedQuestions = [];
       currentQuestionIndex = 0;
       completedQuestions = new Set();
       updateScore();
       updateMistakes();
       
-      usedQuestions = [...questionBank];
+      usedQuestions = shuffleArray(questionBank).slice(0, 10);
       currentQuestion = usedQuestions[0];
       
       showScreen('game-screen');
       setupQuestion();
-      updateQuestionSelector();
     }
     
     function restartGame() {
       startGame();
     }
     
-    function toggleQuestionSelector() {
-      const modal = document.getElementById('question-selector-modal');
-      modal.classList.toggle('hidden');
-    }
-    
-    function updateQuestionSelector() {
-      const list = document.getElementById('question-selector-list');
-      list.innerHTML = '';
-      
-      usedQuestions.forEach((q, index) => {
-        const btn = document.createElement('button');
-        btn.className = 'w-12 h-12 rounded-lg font-bold text-sm transition-all transform hover:scale-110';
-        
-        if (completedQuestions.has(index)) {
-          btn.className += ' bg-gradient-to-br from-green-400 to-green-600 text-white shadow-lg';
-          btn.textContent = '✓';
-        } else if (index === currentQuestionIndex) {
-          btn.className += ' bg-gradient-to-br from-blue-600 to-cyan-600 text-white shadow-lg ring-2 ring-white';
-          btn.textContent = index + 1;
-        } else {
-          btn.className += ' bg-gray-200 hover:bg-gray-300 text-gray-700 shadow';
-          btn.textContent = index + 1;
-        }
-        
-        btn.onclick = () => selectQuestion(index);
-        list.appendChild(btn);
-      });
-    }
-    
-    function selectQuestion(index) {
-      currentQuestionIndex = index;
-      currentQuestion = usedQuestions[index];
-      setupQuestion();
-      updateQuestionSelector();
-      toggleQuestionSelector();
-    }
-    
     function setupQuestion() {
       document.getElementById('question-text').textContent = currentQuestion.question;
-      document.getElementById('question-number').textContent = `Soal ${currentQuestionIndex + 1}/${usedQuestions.length}`;
+      document.getElementById('question-number').textContent = `Soal ${currentQuestionIndex + 1}/10`;
       
       const imgElement = document.getElementById('question-image');
-      const diagramQuestions = [];
-      
-      if (diagramQuestions.includes(currentQuestionIndex)) {
-        imgElement.src = 'https://i.imgur.com/bhhL8Zp.jpeg';
-        imgElement.style.display = 'block';
-      } else {
-        imgElement.style.display = 'none';
-      }
+      imgElement.style.display = 'none';
       
       const answer = currentQuestion.answer;
       const words = answer.split(' ');
@@ -515,7 +467,7 @@
       const symbols = [' ', '.', ',', '-', '(', ')'];
       const allCharacters = [...alphabet, ...numbers, ...symbols];
       
-      allCharacters.forEach((char, index) => {
+      allCharacters.forEach((char) => {
         const btn = document.createElement('button');
         btn.className = 'letter-btn w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-blue-500 to-cyan-500 text-white text-sm md:text-base font-bold rounded-lg shadow-lg hover:shadow-xl relative';
         
@@ -666,25 +618,6 @@
       updateAllButtonAppearances();
     }
     
-    function clearAnswer() {
-      usedLetters.forEach(({ btn }) => {
-        btn.dataset.usedCount = '0';
-      });
-      usedLetters = [];
-      
-      answerSlots.forEach((slot) => {
-        if (slot.letter) {
-          slot.letter = null;
-          slot.element.textContent = '';
-          slot.element.classList.remove('slot-filled');
-        }
-      });
-      
-      lastClickedLetter = null;
-      updateAllButtonAppearances();
-      document.getElementById('feedback').innerHTML = '';
-    }
-    
     function checkAnswer() {
       const userAnswer = answerSlots.map(s => s.letter).join('');
       const correctAnswer = currentQuestion.answer.replace(/\s/g, '');
@@ -767,12 +700,11 @@
     function nextQuestion() {
       currentQuestionIndex++;
       
-      if (currentQuestionIndex < usedQuestions.length) {
+      if (currentQuestionIndex < 10) {
         currentQuestion = usedQuestions[currentQuestionIndex];
         document.getElementById('correct-answer-display').classList.add('hidden');
         showScreen('game-screen');
         setupQuestion();
-        updateQuestionSelector();
       } else {
         endGame('complete');
       }
@@ -916,6 +848,5 @@
     applyConfig(config);
     initializeDataSDK();
   </script>
-  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d0b2beae33fb5e4',t:'MTc3MTU2MDgwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d0dbee8b1eb0557',t:'MTc3MTU4NzgwMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d12498325c2f87a',t:'MTc3MTYzNTQyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

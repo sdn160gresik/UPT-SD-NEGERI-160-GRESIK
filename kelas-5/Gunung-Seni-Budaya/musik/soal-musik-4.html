@@ -504,8 +504,14 @@
       document.getElementById('question-text').textContent = currentQuestion.question;
       document.getElementById('question-number').textContent = `Soal ${currentQuestionIndex + 1}/10`;
       
-      const imgElement = document.getElementById('question-image');
-      imgElement.style.display = 'none';
+     const imgElement = document.getElementById('question-image');
+
+if (currentQuestion.image) {
+  imgElement.src = currentQuestion.image;
+  imgElement.style.display = 'block';
+} else {
+  imgElement.style.display = 'none';
+}
       
       const answer = currentQuestion.answer;
       const words = answer.split(' ');

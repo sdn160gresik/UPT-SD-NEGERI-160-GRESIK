@@ -7,123 +7,93 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
 
 <style>
-html, body{
-  margin:0;
-  padding:0;
-  font-family:'Poppins',sans-serif;
-  overflow-x:hidden;
-  background:url('https://i.imgur.com/uXBnMk8.png') no-repeat center center fixed;
-  background-size:cover;
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  background: url('https://i.imgur.com/uXBnMk8.png') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
 }
 
 /* Dropdown */
-.challenge-container{
-  text-align:center;
-  margin-top:40px;
-}
-select{
-  padding:12px 18px;
-  border-radius:12px;
-  border:none;
-  font-weight:bold;
-  cursor:pointer;
+.challenge-container {
+  text-align: center;
+  margin-top: 40px;
 }
 
-/* Overlay Coming Soon */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.6);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  z-index:999;
-  display:none;
+.challenge-container select {
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: none;
+  font-weight: bold;
+  color: #0288d1;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  cursor: pointer;
 }
 
-.message-box{
-  background:white;
-  padding:30px;
-  border-radius:20px;
-  text-align:center;
-  position:relative;
-  animation:floatUp 1s ease forwards, sparkle 2s infinite;
+/* Pesan Melayang */
+.floating-message {
+  position: fixed;
+  bottom: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(45deg, #ffecd2, #fcb69f);
+  padding: 20px 35px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0;
+  z-index: 9999;
+  animation: sparkle 1.5s infinite alternate;
 }
 
-@keyframes floatUp{
-  from{transform:translateY(80px);opacity:0;}
-  to{transform:translateY(0);opacity:1;}
+.floating-message.show {
+  bottom: 50px;
+  opacity: 1;
+  animation: sparkle 1.5s infinite alternate, shake 0.5s ease-in-out;
 }
 
-@keyframes sparkle{
-  0%{box-shadow:0 0 10px #fff;}
-  50%{box-shadow:0 0 25px gold;}
-  100%{box-shadow:0 0 10px #fff;}
+/* Efek berkilau */
+@keyframes sparkle {
+  0% { box-shadow: 0 0 10px #fff, 0 0 20px gold; }
+  100% { box-shadow: 0 0 25px #fff, 0 0 40px hotpink; }
 }
 
-@keyframes shake{
-  0%{transform:translateX(0);}
-  25%{transform:translateX(-3px);}
-  50%{transform:translateX(3px);}
-  75%{transform:translateX(-3px);}
-  100%{transform:translateX(0);}
-}
-
-.shake{
-  animation:shake 0.4s;
-}
-
-/* Maskot */
-.mascot{
-  font-size:60px;
-  margin-bottom:10px;
-  animation:bounce 1s infinite;
-}
-@keyframes bounce{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-10px);}
+/* Efek getar */
+@keyframes shake {
+  0% { transform: translateX(-50%) translateY(0); }
+  25% { transform: translateX(-48%) translateY(0); }
+  50% { transform: translateX(-52%) translateY(0); }
+  75% { transform: translateX(-49%) translateY(0); }
+  100% { transform: translateX(-50%) translateY(0); }
 }
 
 /* Balon */
-.balloon{
-  position:fixed;
-  bottom:-100px;
-  width:40px;
-  height:50px;
-  border-radius:50%;
-  animation:rise 6s linear forwards;
+.balloon {
+  position: fixed;
+  bottom: -100px;
+  font-size: 35px;
+  animation: rise linear forwards;
 }
-@keyframes rise{
-  from{transform:translateY(0);}
-  to{transform:translateY(-110vh);}
+
+@keyframes rise {
+  to { transform: translateY(-900px); opacity: 0; }
 }
 
 /* Konfeti */
-.confetti{
-  position:fixed;
-  width:8px;
-  height:8px;
-  background:red;
-  top:-10px;
-  animation:fall 4s linear forwards;
-}
-@keyframes fall{
-  to{transform:translateY(110vh);}
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: fall linear forwards;
 }
 
-/* Firework */
-.firework{
-  position:fixed;
-  width:10px;
-  height:10px;
-  background:yellow;
-  border-radius:50%;
-  animation:explode 1s ease-out forwards;
-}
-@keyframes explode{
-  from{transform:scale(1);opacity:1;}
-  to{transform:scale(8);opacity:0;}
+@keyframes fall {
+  to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
 }
 </style>
 </head>
@@ -134,100 +104,83 @@ select{
 <select id="challengeSelect">
   <option value="">🚀 Pilih Tantangan Seru...</option>
   <option value="tantangan1.html">🌟 Tantangan 1</option>
-  <option value="">📖 Tantangan 2 (Coming Soon)</option>
+  <option value="tantangan2.html">📖 Tantangan 2</option>
   <option value="tantangan3.html">✏️ Tantangan 3</option>
-  <option value="">🧠 Tantangan 4 (Coming Soon)</option>
+  <option value="tantangan4.html">🧠 Tantangan 4</option>
   <option value="tantangan5.html">🎯 Tantangan 5</option>
-  <option value="">🌏 Tantangan 6 (Coming Soon)</option>
+  <option value="tantangan6.html">🌏 Tantangan 6</option>
   <option value="tantangan7.html">🤝 Tantangan 7</option>
-  <option value="">🌱 Tantangan 8 (Coming Soon)</option>
+  <option value="tantangan8.html">🌱 Tantangan 8</option>
   <option value="tantangan9.html">🏆 Tantangan 9</option>
-  <option value="">👑 Tantangan 10 (Coming Soon)</option>
+  <option value="tantangan10.html">👑 Tantangan 10</option>
 </select>
 </div>
 
-<!-- Overlay -->
-<div class="overlay" id="overlay">
-  <div class="message-box shake" id="messageBox">
-    <div class="mascot">🎮</div>
-    <h2 id="animatedText"></h2>
-  </div>
-</div>
+<div id="floatingMessage" class="floating-message"></div>
 
-<!-- Musik -->
-<audio id="bgMusic" src="suara/comingsoon.mp3"></audio>
+<audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
+<audio id="funMusic" src="suara/ceria.mp3" preload="auto"></audio>
 
 <script>
 const select = document.getElementById("challengeSelect");
-const overlay = document.getElementById("overlay");
-const textEl = document.getElementById("animatedText");
-const music = document.getElementById("bgMusic");
+const messageBox = document.getElementById("floatingMessage");
+const clickSound = document.getElementById("clickSound");
+const funMusic = document.getElementById("funMusic");
 
-select.addEventListener("change", function(){
-  if(this.value){
-    window.location.href = this.value;
-  } else {
-    showComingSoon();
+function showEffects() {
+
+  messageBox.textContent = "🎊 Maaf yaaa... Tantangan ini masih dipersiapkan 💛 Tunggu kejutan serunya segera hadir! 🚀✨";
+  messageBox.classList.add("show");
+
+  funMusic.currentTime = 0;
+  funMusic.play();
+
+  // Balon warna-warni
+  const balloons = ["🎈","🎈","🎈","🎈","🎈"];
+  for (let i=0;i<8;i++){
+    let b = document.createElement("div");
+    b.className="balloon";
+    b.innerHTML = balloons[Math.floor(Math.random()*balloons.length)];
+    b.style.left = Math.random()*100+"vw";
+    b.style.animationDuration = (3+Math.random()*2)+"s";
+    b.style.color = `hsl(${Math.random()*360}, 80%, 60%)`;
+    document.body.appendChild(b);
+    setTimeout(()=>b.remove(),5000);
   }
-});
 
-function showComingSoon(){
-  overlay.style.display="flex";
-  music.play();
-  typeText("🎉 Maaf yaa... Tantangan ini masih dipersiapkan! Tunggu kejutan serunya segera hadir! 🎊");
-
-  createBalloons();
-  createConfetti();
-  createFirework();
+  // Konfeti
+  for (let i=0;i<40;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=`hsl(${Math.random()*360}, 80%, 60%)`;
+    c.style.animationDuration=(2+Math.random()*3)+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),5000);
+  }
 
   setTimeout(()=>{
-    overlay.style.display="none";
-    music.pause();
-    music.currentTime=0;
+    messageBox.classList.remove("show");
+    funMusic.pause();
   },5000);
 }
 
-function typeText(text){
-  textEl.innerHTML="";
-  let i=0;
-  const interval=setInterval(()=>{
-    textEl.innerHTML+=text.charAt(i);
-    i++;
-    if(i>=text.length) clearInterval(interval);
-  },40);
-}
+select.addEventListener("change", function(){
+  if(!this.value) return;
 
-function createBalloons(){
-  const colors=["red","blue","green","orange","purple","pink"];
-  for(let i=0;i<10;i++){
-    const b=document.createElement("div");
-    b.className="balloon";
-    b.style.left=Math.random()*100+"%";
-    b.style.background=colors[Math.floor(Math.random()*colors.length)];
-    document.body.appendChild(b);
-    setTimeout(()=>b.remove(),6000);
-  }
-}
+  clickSound.currentTime=0;
+  clickSound.play();
 
-function createConfetti(){
-  for(let i=0;i<30;i++){
-    const c=document.createElement("div");
-    c.className="confetti";
-    c.style.left=Math.random()*100+"%";
-    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),4000);
-  }
-}
-
-function createFirework(){
-  const f=document.createElement("div");
-  f.className="firework";
-  f.style.top="40%";
-  f.style.left="50%";
-  document.body.appendChild(f);
-  setTimeout(()=>f.remove(),1000);
-}
+  fetch(this.value,{method:'HEAD'})
+  .then(res=>{
+    if(res.ok){
+      window.location.href=this.value;
+    } else {
+      showEffects();
+    }
+  })
+  .catch(()=>showEffects());
+});
 </script>
 
 </body>

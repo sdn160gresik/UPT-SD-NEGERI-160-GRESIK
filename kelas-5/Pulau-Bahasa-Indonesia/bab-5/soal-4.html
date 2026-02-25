@@ -503,8 +503,15 @@
       const imgElement = document.getElementById('question-image');
       imgElement.style.display = 'none';
       
-      const answer = currentQuestion.answer;
-      const words = answer.split(' ');
+      let answer = currentQuestion.answer;
+
+// Jika jawaban berupa array, gabungkan menjadi satu string
+if (Array.isArray(answer)) {
+  answer = answer.join(' ');
+}
+// bersihkan newline
+answer = answer.replace(/\n/g, ' ');
+const words = answer.split(' ');
       
       answerSlots = [];
       usedLetters = [];

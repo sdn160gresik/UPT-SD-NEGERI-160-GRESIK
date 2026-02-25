@@ -487,7 +487,10 @@
     }
     
     function setupQuestion() {
-      document.getElementById('question-text').textContent = currentQuestion.question;
+      function setupQuestion() {
+  document.getElementById('question-text').innerHTML = 
+    currentQuestion.question.replace(/\n/g, "<br>");
+
       document.getElementById('question-number').textContent = `Soal ${currentQuestionIndex + 1}/10`;
       
       const imgElement = document.getElementById('question-image');

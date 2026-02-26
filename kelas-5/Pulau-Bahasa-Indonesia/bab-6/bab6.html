@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cinta Indonesia</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+
+<style>
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  flex-wrap: wrap;
+}
+
+.nav-left img {
+  height: 45px;
+  margin-right: 6px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.nav-right a {
+  background: rgba(255,255,255,0.9);
+  padding: 6px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #0288d1;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* ===== CSS yang sudah ada ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+}
+  html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  background: url('https://i.imgur.com/uXBnMk8.png') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+/* Dropdown */
+.challenge-container {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.challenge-container select {
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: none;
+  font-weight: bold;
+  color: #0288d1;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+/* Pesan Melayang */
+.floating-message {
+  position: fixed;
+  bottom: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(45deg, #ffecd2, #fcb69f);
+  padding: 20px 35px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0;
+  z-index: 9999;
+  animation: sparkle 1.5s infinite alternate;
+}
+
+.floating-message.show {
+  bottom: 50px;
+  opacity: 1;
+  animation: sparkle 1.5s infinite alternate, shake 0.5s ease-in-out;
+}
+
+/* Efek berkilau */
+@keyframes sparkle {
+  0% { box-shadow: 0 0 10px #fff, 0 0 20px gold; }
+  100% { box-shadow: 0 0 25px #fff, 0 0 40px hotpink; }
+}
+
+/* Efek getar */
+@keyframes shake {
+  0% { transform: translateX(-50%) translateY(0); }
+  25% { transform: translateX(-48%) translateY(0); }
+  50% { transform: translateX(-52%) translateY(0); }
+  75% { transform: translateX(-49%) translateY(0); }
+  100% { transform: translateX(-50%) translateY(0); }
+}
+
+/* Balon */
+.balloon {
+  position: fixed;
+  bottom: -100px;
+  font-size: 35px;
+  animation: rise linear forwards;
+}
+
+@keyframes rise {
+  to { transform: translateY(-900px); opacity: 0; }
+}
+
+/* Konfeti */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+<nav>
+  <div class="nav-left">
+    <img src="https://i.imgur.com/sxm7RR1.png">
+    <img src="https://i.imgur.com/tGA5UBc.png">
+    <img src="https://i.imgur.com/oWB8vKW.png">
+  </div>
+  <div class="nav-right">
+    <a href="../../../index.html">🏠 Beranda</a>
+    <a href="../pulau.html">◀️ Kembali</a>
+    <a href="#">🖼️ Galeri</a>
+    <a href="../../kelas.html">🏫 Kelas</a>
+  </div>
+</nav>
+<div class="challenge-container">
+<select id="challengeSelect">
+  <option value="">🚀 Pilih Tantangan Seru...</option>
+  <option value="tantangan1.html">🌟 Tantangan 1</option>
+  <option value="tantangan2.html">📖 Tantangan 2</option>
+  <option value="tantangan3.html">✏️ Tantangan 3</option>
+  <option value="tantangan4.html">🧠 Tantangan 4</option>
+  <option value="tantangan5.html">🎯 Tantangan 5</option>
+  <option value="tantangan6.html">🌏 Tantangan 6</option>
+  <option value="tantangan7.html">🤝 Tantangan 7</option>
+  <option value="tantangan8.html">🌱 Tantangan 8</option>
+  <option value="tantangan9.html">🏆 Tantangan 9</option>
+  <option value="tantangan10.html">👑 Tantangan 10</option>
+</select>
+</div>
+
+<div id="floatingMessage" class="floating-message"></div>
+
+<audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
+<audio id="funMusic" src="suara/ceria.mp3" preload="auto"></audio>
+
+<script>
+const select = document.getElementById("challengeSelect");
+const messageBox = document.getElementById("floatingMessage");
+const clickSound = document.getElementById("clickSound");
+const funMusic = document.getElementById("funMusic");
+
+function showEffects() {
+
+  messageBox.textContent = "🎊 Maaf yaaa... Tantangan ini masih dipersiapkan 💛 Tunggu kejutan serunya segera hadir! 🚀✨";
+  messageBox.classList.add("show");
+
+  funMusic.currentTime = 0;
+  funMusic.play();
+
+  // Balon warna-warni
+  const balloons = ["🎈","🎈","🎈","🎈","🎈"];
+  for (let i=0;i<8;i++){
+    let b = document.createElement("div");
+    b.className="balloon";
+    b.innerHTML = balloons[Math.floor(Math.random()*balloons.length)];
+    b.style.left = Math.random()*100+"vw";
+    b.style.animationDuration = (3+Math.random()*2)+"s";
+    b.style.color = `hsl(${Math.random()*360}, 80%, 60%)`;
+    document.body.appendChild(b);
+    setTimeout(()=>b.remove(),5000);
+  }
+
+  // Konfeti
+  for (let i=0;i<40;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=`hsl(${Math.random()*360}, 80%, 60%)`;
+    c.style.animationDuration=(2+Math.random()*3)+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),5000);
+  }
+
+  setTimeout(()=>{
+    messageBox.classList.remove("show");
+    funMusic.pause();
+  },5000);
+}
+
+select.addEventListener("change", function(){
+  if(!this.value) return;
+
+  clickSound.currentTime=0;
+  clickSound.play();
+
+  fetch(this.value,{method:'HEAD'})
+  .then(res=>{
+    if(res.ok){
+      window.location.href=this.value;
+    } else {
+      showEffects();
+    }
+  })
+  .catch(()=>showEffects());
+});
+</script>
+
+</body>
+</html>

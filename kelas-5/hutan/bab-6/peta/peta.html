@@ -1,4 +1,4 @@
-<!DOCTYPE html>    
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -55,12 +55,12 @@
 
     .title-section {
       display: flex;
-      flex-direction: column;     
-      align-items: center;        
-      justify-content: flex-start;    
-      text-align: center;         
-      min-height: 80vh;           
-      padding: 40px 20px 20px 20px;  
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      min-height: 80vh;
+      padding: 40px 20px 20px 20px;
     }
 
     .title-section h1 {
@@ -89,6 +89,9 @@
       position: relative;
       display: inline-block;
       margin-top: 20px;
+      border: 3px solid white; /* GARIS PUTIH DITAMBAHKAN */
+      border-radius: 15px;      /* Agar garis mengikuti bentuk tombol */
+      padding: 10px;
     }
 
     .dropbtn {
@@ -188,6 +191,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <nav>
@@ -227,12 +231,12 @@
   <!-- Modal pesan -->
   <div id="modalPesan" class="modal">
     <div class="modal-content">
-     <h2>🎉 Hai Penjelajah Hebat! 🌈</h2>
-<p>
-  Petualangan seru menjelajahi Peta Indonesia sedang kami siapkan khusus untukmu! 🚀<br>
-  Bersiaplah mengenal pulau-pulau, 🌊 laut, ⛰️ gunung, dan provinsi dengan cara yang menyenangkan! 🗺️<br>
-  Ayo tetap semangat, terus tersenyum, dan nikmati belajar sambil berpetualang! 😄✨
-</p>
+      <h2>🎉 Hai Penjelajah Hebat! 🌈</h2>
+      <p>
+        Petualangan seru menjelajahi Peta Indonesia sedang kami siapkan khusus untukmu! 🚀<br>
+        Bersiaplah mengenal pulau-pulau, 🌊 laut, ⛰️ gunung, dan provinsi dengan cara yang menyenangkan! 🗺️<br>
+        Ayo tetap semangat, terus tersenyum, dan nikmati belajar sambil berpetualang! 😄✨
+      </p>
       <button class="close-btn" onclick="tutupModal()">Tutup</button>
     </div>
   </div>
@@ -242,6 +246,7 @@
   <script>
     const clickSound = document.getElementById("clickSound");
     const allButtons = document.querySelectorAll("a");
+
     allButtons.forEach(btn => {
       btn.addEventListener("click", () => {
         clickSound.currentTime = 0;

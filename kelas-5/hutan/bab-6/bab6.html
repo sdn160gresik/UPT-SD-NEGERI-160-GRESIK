@@ -1,271 +1,186 @@
-<!DOCTYPE html>      
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🌾 Bab 6 Kekayaan Indonesia</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      height: 100%;
-      width: 100%;
-      overflow-x: hidden;
-      background: url('https://i.imgur.com/O7bTFPD.jpeg') no-repeat center center fixed;
-      background-size: cover;
-      color: #333;
-    }
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    background: url('https://i.imgur.com/O7bTFPD.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+  }
 
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-    }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
 
-    .nav-left img {
-      height: 45px;
-      margin-right: 0.5rem;
-    }
+  .nav-left img {
+    height: 45px;
+    margin-right: 0.5rem;
+  }
 
-    .nav-right {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
+  .nav-right {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 
-    .nav-right a {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      text-decoration: none;
-      color: #0288d1;
-      font-weight: bold;
-      font-size: 0.9rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+  .nav-right a {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #0288d1;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-    .nav-right a:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
+  .nav-right a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
 
-    .title-section {
-      text-align: center;
-      margin: 20px 15px 10px;
-    }
+  .title-section {
+    text-align: center;
+    margin: 20px 15px 10px;
+  }
 
-    .title-section h1 {
-      font-size: 2rem;
-      background: rgba(255,255,255,0.85);
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      border-radius: 12px;
-      color: #0288d1;
-    }
+  .title-section h1 {
+    font-size: 2rem;
+    background: rgba(255,255,255,0.85);
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    color: #0288d1;
+  }
 
-    .title-section p {
-      background: rgba(255,255,255,0.8);
-      color: #0288d1;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      max-width: 90%;
-      margin: 10px auto;
-      font-size: 1rem;
-    }
+  .title-section p {
+    background: rgba(255,255,255,0.8);
+    color: #0288d1;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    max-width: 90%;
+    margin: 10px auto;
+    font-size: 1rem;
+  }
 
-    .map-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-      margin: 20px auto;
-      max-width: 900px;
-      padding: 0 15px;
-    }
+  .map-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin: 20px auto;
+    max-width: 900px;
+    padding: 0 15px;
+  }
 
-    .map-item {
-      padding: 20px;
-      border-radius: 16px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      color: white;
-      cursor: pointer;
-    }
+  .map-item {
+    padding: 20px;
+    border-radius: 16px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    color: white;
+    cursor: pointer;
+  }
 
-    .map-item:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-    }
+  .map-item:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  }
 
-    .pernapasan { background: linear-gradient(135deg, #4fc3f7, #0288d1); }
-    .pencernaan { background: linear-gradient(135deg, #ffb74d, #f57c00); }
-    .pertumbuhan { background: linear-gradient(135deg, #81c784, #388e3c); }
+  /* ===== WARNA KHUSUS SETIAP MENU ===== */
 
-    .emoji {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
+  .peta {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+  }
 
-    /* ===== POPUP ===== */
+  .letak {
+    background: linear-gradient(135deg, #ab47bc, #8e24aa);
+  }
 
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
+  .maritim {
+    background: linear-gradient(135deg, #26c6da, #00838f);
+  }
 
-    .popup {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      text-align: center;
-      max-width: 420px;
-      animation: fadeIn 0.3s ease;
-    }
+  .sda {
+    background: linear-gradient(135deg, #66bb6a, #2e7d32);
+  }
 
-    .popup h2 {
-      color: #0288d1;
-      margin-bottom: 15px;
-    }
+  .dampak {
+    background: linear-gradient(135deg, #ef5350, #c62828);
+  }
 
-    .popup p {
-      font-size: 1rem;
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
+  .emoji {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
 
-    .popup button {
-      background: #0288d1;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+  /* ===== POPUP ===== */
 
-    .popup button:hover {
-      background: #0277bd;
-      transform: scale(1.05);
-    }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
 
-    @keyframes fadeIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
+  .popup {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 420px;
+    animation: fadeIn 0.3s ease;
+  }
 
-  </style>
-</head>
-<body>
+  .popup h2 {
+    color: #0288d1;
+    margin-bottom: 15px;
+  }
 
-  <nav>
-    <div class="nav-left">
-      <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo">
-      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo">
-      <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo">
-    </div>
-    <div class="nav-right">
-      <a href="../../../index.html">🏠 Beranda</a>
-      <a href="../hutan.html">◀️ Kembali</a>
-      <a href="#">🖼️ Galeri</a>
-      <a href="../../kelas.html">🏫 Kelas</a>
-    </div>
-  </nav>
+  .popup p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
 
-  <div class="title-section">
-    <h1>🌾 Bab 6 Kekayaan Indonesia</h1>
-    <p>Yuk, kita jelajahi kekayaan alam dan budaya Indonesia serta memahami berbagai potensi yang dimiliki Indonesia untuk kehidupan sehari-hari! ⛏️</p>
+  .popup button {
+    background: #0288d1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
 
-    <div class="map-grid">
-      <a href="soal/peta.html" class="map-item peta">
-    <span class="emoji">🗺️</span> Peta
-</a>
+  .popup button:hover {
+    background: #0277bd;
+    transform: scale(1.05);
+  }
 
-<a href="soal/letak-wilayah-indonesia.html" class="map-item letak">
-    <span class="emoji">📍</span> Letak Wilayah Indonesia
-</a>
+  @keyframes fadeIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
 
-<a href="soal/indonesia-negara-maritim-dan-agraris.html" class="map-item maritim">
-    <span class="emoji">🌊</span> Indonesia Negara Maritim dan Agraris
-</a>
-
-<a href="soal/sumber-daya-alam-indonesia.html" class="map-item sda">
-    <span class="emoji">⛏️</span> Sumber Daya Alam Indonesia
-</a>
-
-<a href="soal/dampak-pengambilan-sda.html" class="map-item dampak">
-    <span class="emoji">⚠️</span> Dampak Pengambilan Sumber Daya Alam
-</a>
-    </div>
-  </div>
-
-  <!-- POPUP -->
-  <div class="overlay" id="overlay">
-    <div class="popup">
-      <h2>🚧 Materi Sedang Diproses! 🚀</h2>
-      <p>
-        Hebat sekali semangat belajarmu! 🌟<br><br>
-        Materi ini sedang kami siapkan agar lebih seru, interaktif, dan menyenangkan! 🎉📚<br>
-        Tetap semangat ya! Ilmu terbaik sedang dalam perjalanan menuju kamu! ✨💙
-      </p>
-      <button onclick="tutupPopup()">Siap! 💪</button>
-    </div>
-  </div>
-
-  <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
-
-  <script>
-    const clickSound = document.getElementById("clickSound");
-    const overlay = document.getElementById("overlay");
-    const mapItems = document.querySelectorAll(".map-item");
-
-    mapItems.forEach(item => {
-      item.addEventListener("click", function(e) {
-        clickSound.currentTime = 0;
-        clickSound.play();
-
-        const url = this.getAttribute("href");
-
-        fetch(url, { method: 'HEAD' })
-          .then(response => {
-            if (response.ok) {
-              window.location.href = url; // jika file ada
-            } else {
-              e.preventDefault();
-              overlay.style.display = "flex";
-            }
-          })
-          .catch(() => {
-            e.preventDefault();
-            overlay.style.display = "flex";
-          });
-
-        e.preventDefault();
-      });
-    });
-
-    function tutupPopup() {
-      overlay.style.display = "none";
-    }
-  </script>
-
-</body>
-</html>
+</style>

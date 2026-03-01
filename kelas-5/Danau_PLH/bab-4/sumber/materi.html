@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -106,13 +106,33 @@ p{
 .highlight11{color:#D84315;font-weight:bold;}
 
 ul{font-size:18px;}
+
+/* TOMBOL KEMBALI */
+.btn-kembali{
+    display:inline-block;
+    margin-bottom:20px;
+    padding:10px 20px;
+    background:linear-gradient(135deg,#42a5f5,#1565c0);
+    color:white;
+    font-weight:bold;
+    text-decoration:none;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-kembali:hover{
+    transform:scale(1.05);
+    box-shadow:0 6px 14px rgba(0,0,0,0.3);
+}
 </style>
 </head>
 
 <body>
 <div class="container">
-<!-- TOMBOL KEMBALI -->
+
 <a href="sumber.html" class="btn-kembali">Kembali</a>
+
 <h1>🌍 Sumber dan Ketersediaan Air Tanah 💧</h1>
 
 <button class="accordion">A. Sumber dan Ketersediaan Air Tanah</button>
@@ -138,40 +158,20 @@ ul{font-size:18px;}
 
 <button class="accordion">2. Jenis Air Tanah</button>
 <div class="panel">
-<p><span class="highlight6">Air tanah permukaan</span> sebagai air yang berada di atas lapisan tanah atau batuan. Air tanah, dapat memancar jika mendapatkan tekanan pada daerah sekitar <span class="highlight7">Siklinal</span> yang cukup kuat, dan jika tekanan yang ada tidak cukup kuat maka air dapat mengalir naik. <span class="highlight7">Siklinal adalah</span> bagian dari hasil lipatan permukaan bumi yang ada di bagian bawah dan berbentuk cekung contohnya lembah dan danau.</p>
+<p><span class="highlight6">Air tanah permukaan</span> sebagai air yang berada di atas lapisan tanah atau batuan. Air tanah, dapat memancar jika mendapatkan tekanan pada daerah sekitar <span class="highlight7">Siklinal</span> yang cukup kuat.</p>
 
-<p><span class="highlight2">Air tanah permukaan sendiri mengandung banyak manfaat</span> dan sering dimanfaatkan oleh manusia dalam berbagai hal, seperti pertanian dan pengairan. <span class="highlight8">Air tanah kemudian dapat digolongkan menjadi 2 jenis</span>, yaitu air tanah yang berdasarkan kepada letaknya di permukaan tanah dan berdasarkan kepada dari mana air berasal.</p>
+<p><span class="highlight2">Air tanah permukaan sendiri mengandung banyak manfaat</span> dan sering dimanfaatkan oleh manusia.</p>
 
-<p><span class="highlight8">Air tanah berdasarkan letaknya dapat dibagi menjadi dua jenis.</span></p>
-<p><span class="highlight3">a. Air Tanah Freatik dan Air Tanah Dalam (Artesis)</span></p>
-Jenis air ini:
 <ul>
-<li>dapat ditemukan pada kedalaman 30–80 m dari permukaan tanah;</li>
-<li>dapat diminum atau dikonsumsi secara langsung karena sudah mengalami penyaringan secara sempurna dan terbebas dari kuman ataupun bakteri;</li>
-<li>digunakan untuk mengatasi kekeringan meskipun pada musim kemarau panjang.</li>
+<li>dapat ditemukan pada kedalaman 30–80 m;</li>
+<li>dapat diminum atau dikonsumsi secara langsung;</li>
+<li>digunakan untuk mengatasi kekeringan.</li>
 </ul>
-
-<p>Hal ini dikarenakan air tanah <span class="highlight9">artesis</span> sebagai kandungan dari beragam air tanah dengan debit air yang stabil.</p>
-
-<p><span class="highlight3">b. Air Tanah Freatik sebagai Air Tanah pada Permukaan yang Dangkal</span></p>
-<p>Air tanah ini letaknya tidak jauh dari permukaan tanah dan berada di atas lapisan kedap air contohnya ada pada air sumur.</p>
-
-<p>1. <span class="highlight6">Air tanah meteorit (vados)</span>, yaitu air tanah yang berasal dari proses presipitasi (hujan) yang tercampur dengan debu dan kotoran.</p>
-<p>2. <span class="highlight10">Air tanah baru (juvenil)</span>, yaitu air tanah yang berasal dari dalam bumi karena tekanan magma, contohnya adalah sumber air panas.</p>
-<p>3. <span class="highlight11">Air konat</span>, yaitu air tanah yang terkurung pada lapisan batuan purba.</p>
 </div>
 
 <button class="accordion">3. Daur Hidrologi dan Proses Terjadinya Air Tanah</button>
 <div class="panel">
-<p><span class="highlight2">Air tanah merupakan sumber persediaan air yang sangat penting</span>, terlebih di kawasan yang musim kemaraunya berlangsung hingga menghentikan aliran sungai.</p>
-
-<p><span class="highlight1">Aliran air permukaan seperti</span> sungai, danau meresap melalui tanah ke dalam tanah.</p>
-
 <p class="siklus">Siklus Air: presipitasi, kondensasi, transpirasi, evaporasi</p>
-
-<p class="penting"><span class="highlight3">Bagaimanakah proses terjadinya air tanah?</span> Air hujan sebagian besar akan mengalir di permukaan sebagai air sungai atau danau. Namun, sebagian kecil juga akan meresap ke dalam tanah.</p>
-
-<p>Lapisan batuan bersifat <span class="istilah">permeabel</span> atau lolos air. Air hujan meresap (<span class="istilah">infiltrasi</span>) ke zona tak jenuh dan meresap makin dalam (<span class="istilah">perkolasi</span>) hingga menjadi air tanah.</p>
 </div>
 
 </div>
@@ -180,31 +180,9 @@ Jenis air ini:
 var acc = document.getElementsByClassName("accordion");
 for (var i = 0; i < acc.length; i++) {
   acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
     var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
+    panel.style.display = panel.style.display === "block" ? "none" : "block";
   });
-}
-    .btn-kembali{
-    display:inline-block;
-    margin-bottom:20px;
-    padding:10px 20px;
-    background:linear-gradient(135deg,#42a5f5,#1565c0);
-    color:white;
-    font-weight:bold;
-    text-decoration:none;
-    border-radius:12px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.2);
-    transition:transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.btn-kembali:hover{
-    transform:scale(1.05);
-    box-shadow:0 6px 14px rgba(0,0,0,0.3);
 }
 </script>
 

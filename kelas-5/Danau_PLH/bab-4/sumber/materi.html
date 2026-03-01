@@ -1,190 +1,224 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sumber dan Ketersediaan Air Tanah</title>
+    <meta charset="UTF-8">
+    <title>Sumber dan Ketersediaan Air Tanah</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #c2f0ff, #d4f8e8);
+            display: flex;
+            justify-content: center;
+        }
 
-<style>
-body{
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(to bottom, #e3f2fd, #ffffff);
-    margin:0;
-    padding:20px;
-}
+        .container {
+            max-width: 900px;
+            width: 95%;
+            margin: 30px 0;
+        }
 
-.container{
-    max-width:1000px;
-    margin:auto;
-}
+        h1 {
+            text-align: center;
+            color: #0077b6;
+        }
 
-h1{
-    text-align:center;
-    background:linear-gradient(to right,#2196F3,#4CAF50);
-    color:white;
-    padding:20px;
-    border-radius:20px;
-    box-shadow:0 6px 15px rgba(0,0,0,0.2);
-}
+        .card {
+            background: #ffffff;
+            border-radius: 25px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.6s ease-in-out;
+        }
 
-.accordion{
-    background:#ffffff;
-    cursor:pointer;
-    padding:18px;
-    width:100%;
-    border:none;
-    text-align:left;
-    font-size:20px;
-    font-weight:bold;
-    border-radius:15px;
-    margin-top:15px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    transition:0.3s;
-}
+        details {
+            margin-bottom: 15px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
 
-.accordion:hover{
-    background:#e3f2fd;
-}
+        summary {
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 12px;
+            background: #e0f7fa;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
 
-.panel{
-    padding:0 18px;
-    display:none;
-    overflow:hidden;
-    background:white;
-    border-radius:15px;
-    margin-top:5px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.08);
-    padding-bottom:15px;
-}
+        summary:hover {
+            background: #b2ebf2;
+        }
 
-p{
-    font-size:18px;
-    line-height:1.7;
-}
+        details[open] summary {
+            background: #80deea;
+        }
 
-.definisi{
-    background:#FFF9C4;
-    padding:8px;
-    border-radius:8px;
-    font-weight:bold;
-}
+        details div {
+            padding: 15px;
+            animation: slideDown 0.4s ease;
+        }
 
-.contoh{
-    background:#C8E6C9;
-    padding:8px;
-    border-radius:8px;
-}
+        .btn-kembali {
+            display: inline-block;
+            background: #009688;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            margin-bottom: 20px;
+        }
 
-.penting{
-    background:#FFE0B2;
-    padding:10px;
-    border-radius:10px;
-}
+        .btn-kembali:hover {
+            background: #00796b;
+        }
 
-.istilah{
-    color:#1565C0;
-    font-weight:bold;
-}
+        .btn-wrapper {
+            text-align: center;
+        }
 
-.siklus{
-    background:#B3E5FC;
-    padding:12px;
-    border-radius:12px;
-    font-weight:bold;
-}
+        .highlight1 { color: #d81b60; font-weight: 600; }
+        .highlight2 { color: #1e88e5; font-weight: 600; }
+        .highlight3 { color: #8e24aa; font-weight: 600; }
+        .highlight4 { color: #43a047; font-weight: 600; }
+        .highlight5 { color: #fb8c00; font-weight: 600; }
 
-.highlight1{color:#1565C0;font-weight:bold;}
-.highlight2{color:#2E7D32;font-weight:bold;}
-.highlight3{color:#EF6C00;font-weight:bold;}
-.highlight4{color:#6A1B9A;font-weight:bold;}
-.highlight5{color:#C62828;font-weight:bold;}
-.highlight6{color:#00838F;font-weight:bold;}
-.highlight7{color:#AD1457;font-weight:bold;}
-.highlight8{color:#283593;font-weight:bold;}
-.highlight9{color:#00695C;font-weight:bold;}
-.highlight10{color:#8E24AA;font-weight:bold;}
-.highlight11{color:#D84315;font-weight:bold;}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-ul{font-size:18px;}
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-/* TOMBOL KEMBALI */
-.btn-kembali{
-    display:inline-block;
-    margin-bottom:20px;
-    padding:10px 20px;
-    background:linear-gradient(135deg,#42a5f5,#1565c0);
-    color:white;
-    font-weight:bold;
-    text-decoration:none;
-    border-radius:12px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.2);
-    transition:transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.btn-kembali:hover{
-    transform:scale(1.05);
-    box-shadow:0 6px 14px rgba(0,0,0,0.3);
-}
-</style>
+        @media (max-width: 600px) {
+            summary {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 <div class="container">
 
-<a href="sumber.html" class="btn-kembali">Kembali</a>
+    <div class="btn-wrapper">
+        <a href="sumber.html" class="btn-kembali">Kembali</a>
+    </div>
 
-<h1>🌍 Sumber dan Ketersediaan Air Tanah 💧</h1>
+    <h1>Sumber dan Ketersediaan Air Tanah</h1>
 
-<button class="accordion">A. Sumber dan Ketersediaan Air Tanah</button>
-<div class="panel">
-<p><span class="highlight1">Langkah yang dapat kita lakukan terkait dengan ketersediaan air adalah</span> melestarikan sumber air yang ada dengan cara menjaga sumber air agar tetap menghasilkan air untuk kebutuhan kita. Penghematan pemakaian air mutlak harus kita lakukan dengan mengembangkan perilaku hemat air dalam kehidupan sehari-hari.</p>
+    <div class="card">
+        <details>
+            <summary>▶ A. Sumber dan Ketersediaan Air Tanah</summary>
+            <div>
+                <p><span class="highlight1">Langkah yang dapat kita lakukan terkait dengan ketersediaan air adalah</span> melestarikan sumber air yang ada dengan cara menjaga sumber air agar tetap menghasilkan air untuk kebutuhan kita. Penghematan pemakaian air mutlak harus kita lakukan dengan mengembangkan perilaku hemat air dalam kehidupan sehari-hari.</p>
 
-<p><span class="highlight2">Air tanah sebagai sumber kehidupan bagi setiap makhluk hidup di bumi</span>. Tanpa air, bumi tidak akan pernah memiliki kehidupan. Kita wajib menjaga sumber air dengan baik dengan menjaga lingkungan sekitar kita. Sumber air yang digunakan masyarakat sangat banyak sekali. Mereka memanfaatkan air tanah, tadah hujan, embung penampung air, dan PAM.</p>
+                <p><span class="highlight2">Air tanah sebagai sumber kehidupan bagi setiap makhluk hidup di bumi</span>. Tanpa air, bumi tidak akan pernah memiliki kehidupan. Kita wajib menjaga sumber air dengan baik dengan menjaga lingkungan sekitar kita. Sumber air yang digunakan masyarakat sangat banyak sekali. Mereka memanfaatkan air tanah, tadah hujan, embung penampung air, dan PAM.</p>
 
-<p><span class="highlight3">Beberapa daerah sering kekurangan air karena berbagai alasan</span>, di antaranya musim kemarau yang panjang sehingga sumber air habis. Dampaknya mereka harus mengambil air sumber di tempat lain yang sangat jauh. Jenis air di bumi di antaranya air sungai, air laut, air hujan, dan air tanah. <span class="highlight4">Air tanah sangat penting untuk memenuhi kebutuhan kehidupan</span>. Mulai dari kebutuhan industri, keseimbangan alam, hingga kebutuhan rumah tangga.</p>
+                <p><span class="highlight3">Beberapa daerah sering kekurangan air karena berbagai alasan</span>, di antaranya musim kemarau yang panjang sehingga sumber air habis. Dampaknya mereka harus mengambil air sumber di tempat lain yang sangat jauh. Jenis air di bumi di antaranya air sungai, air laut, air hujan, dan air tanah. <span class="highlight4">Air tanah sangat penting untuk memenuhi kebutuhan kehidupan</span>. Mulai dari kebutuhan industri, keseimbangan alam, hingga kebutuhan rumah tangga.</p>
+            </div>
+        </details>
+    </div>
+
+    <div class="card">
+        <details>
+            <summary>▶ 1. Pengertian Air Tanah</summary>
+            <div>
+                <p>Beberapa pengertian dari air tanah adalah sebagai berikut.</p>
+
+                <details>
+                    <summary>a. Menurut Undang-Undang Nomor 7 Tahun 2004 tentang Sumber Daya Air</summary>
+                    <div>
+                        <p><span class="highlight5">Air tanah adalah</span> air yang terdapat di lapisan batuan di bawah permukaan tanah.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>b. Menurut Bouwer (1978)</summary>
+                    <div>
+                        <p>Air tanah adalah sejumlah air di bawah permukaan bumi yang kemudian dapat dikumpulkan dengan sumur-sumur, terowongan, atau sistem drainase dengan pemompaan.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>c. Menurut Fetter (1994)</summary>
+                    <div>
+                        <p>Air tanah adalah air yang tersimpan pada lajur jenuh hingga kemudian bergerak ke berbagai lapisan dan batuan tanah di bumi sampai air tersebut keluar sebagai mata air, atau terkumpul dalam satu danau, kolam, sungai, dan laut.</p>
+                    </div>
+                </details>
+            </div>
+        </details>
+    </div>
+
+    <div class="card">
+        <details>
+            <summary>▶ 2. Jenis Air Tanah</summary>
+            <div>
+                <p><span class="highlight5">Air tanah permukaan</span> sebagai air yang berada di atas lapisan tanah atau batuan. Air tanah, dapat memancar jika mendapatkan tekanan pada daerah sekitar yang cukup kuat, dan jika tekanan yang ada tidak cukup kuat maka air dapat mengalir naik. <span class="highlight3">Siknal adalah</span> bagian dari hasil lipatan permukaan bumi yang ada di bagian bawah dan berbentuk cekung contohnya lembah dan danau.</p>
+
+                <p><span class="highlight2">Air tanah permukaan sendiri mengandung banyak manfaat</span> dan sering dimanfaatkan oleh manusia dalam berbagai hal, seperti pertanian dan pengairan. <span class="highlight4">Air tanah kemudian dapat digolongkan menjadi 2 jenis</span>, yaitu air tanah yang berdasarkan kepada letaknya di permukaan tanah dan berdasarkan kepada dari mana air berasal.</p>
+
+                <p><span class="highlight1">Air tanah berdasarkan letaknya dapat dibagi menjadi dua jenis.</span></p>
+
+                <details>
+                    <summary>a. Air Tanah Freatik dan Air Tanah Dalam (Artesis)</summary>
+                    <div>
+                        <p><span class="highlight5">Jenis air ini:</span></p>
+                        <ol>
+                            <li>dapat ditemukan pada kedalaman 30–80 m dari permukaan tanah;</li>
+                            <li>dapat diminum atau dikonsumsi secara langsung karena sudah mengalami penyaringan secara sempurna dan terbebas dari kuman ataupun bakteri;</li>
+                            <li>digunakan untuk mengatasi kekeringan meskipun pada musim kemarau panjang.</li>
+                        </ol>
+                        <p>Hal ini dikarenakan air tanah <span class="highlight3">artesis</span> sebagai kandungan dari beragam air tanah dengan debit air yang stabil. Dalam membangun sumur artesis membutuhkan biaya yang tidak sedikit sebab diperlukan pompa air khusus berkapasitas besar. Bahkan, air tanah ini juga memiliki kemampuan keluar sendiri jika tekanan airnya cukup besar dan membentuk sumur artesis.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>b. Air Tanah Freatik sebagai Air Tanah pada Permukaan yang Dangkal</summary>
+                    <div>
+                        <p>Air tanah ini letaknya tidak jauh dari permukaan tanah dan berada di atas lapisan kedap air contohnya ada pada air sumur. Sementara air tanah berdasarkan asalnya dibagi menjadi tiga jenis.</p>
+                        <ol>
+                            <li><span class="highlight2">Air tanah meteorit (vados)</span>, yaitu air tanah yang berasal dari proses presipitasi (hujan) yang tercampur dengan debu dan kotoran.</li>
+                            <li><span class="highlight4">Air tanah baru (juvenil)</span>, yaitu air tanah yang berasal dari dalam bumi karena tekanan magma, contohnya adalah sumber air panas.</li>
+                            <li><span class="highlight5">Air konat</span>, yaitu air tanah yang terkurung pada lapisan batuan purba.</li>
+                        </ol>
+                    </div>
+                </details>
+            </div>
+        </details>
+    </div>
+
+    <div class="card">
+        <details>
+            <summary>▶ 3. Daur Hidrologi dan Proses Terjadinya Air Tanah</summary>
+            <div>
+                <p><span class="highlight1">Air tanah merupakan sumber persediaan air yang sangat penting</span>, terlebih di kawasan yang musim kemaraunya berlangsung hingga menghentikan aliran sungai. Bahkan, banyak sungai di permukaan tanah yang sebagian besar alirannya berasal dari air tanah. Namun, sebaliknya juga, aliran air sungai merupakan sumber utama untuk aliran air tanah.</p>
+
+                <p><span class="highlight3">Aliran air permukaan seperti</span> sungai, danau meresap melalui tanah ke dalam tanah. Selain itu, sumber air tanah juga berasal dari air hujan yang meresap ke dalam tanah melalui pori-pori atau retakan dalam formasi batuan dan akhirnya mencapai muka air tanah.</p>
+
+                <p>(Siklus Air: presipitasi, kondensasi, transpirasi, evaporasi)</p>
+
+                <p><span class="highlight2">Bagaimanakah proses terjadinya air tanah?</span> Air hujan sebagian besar akan mengalir di permukaan sebagai air sungai atau danau. Namun, sebagian kecil juga akan meresap ke dalam tanah. Jika mencapai kedalaman tertentu, air akan menjadi air tanah. Sebaliknya, jika tidak mencapai kedalaman tertentu, akan diuapkan kembali lewat tanaman dengan proses evaporasi.</p>
+
+                <p>Letak air tanah dapat mencapai beberapa puluh bahkan beberapa ratus meter di bawah permukaan bumi. Sebagian lapisan batuan bersifat permeabel atau lolos air, dan sebagian lain tidak tembus air sehingga air tidak dapat melaluinya. Lapisan lolos air tersebut misalnya terdiri dari kerikil, pasir, batu apung, dan batuan yang retak-retak. Air hujan dan air permukaan akan meresap (infiltrasi) mula-mula ke zona tak jenuh (zone of aeration) dan kemudian meresap makin dalam (perkolasi) hingga mencapai zona jenuh air dan menjadi air tanah.</p>
+            </div>
+        </details>
+    </div>
+
+    <div class="btn-wrapper">
+        <a href="sumber.html" class="btn-kembali">Kembali</a>
+    </div>
+
 </div>
-
-<button class="accordion">1. Pengertian Air Tanah</button>
-<div class="panel">
-<p>a. Menurut Undang-Undang Nomor 7 Tahun 2004 tentang Sumber Daya Air</p>
-<p class="definisi"><span class="highlight5">Air tanah adalah</span> air yang terdapat di lapisan batuan di bawah permukaan tanah.</p>
-
-<p>b. Menurut Bouwer (1978)</p>
-<p class="definisi"><span class="highlight5">Air tanah adalah</span> sejumlah air di bawah permukaan bumi yang kemudian dapat dikumpulkan dengan sumur-sumur, terowongan, atau sistem drainase dengan pemompaan.</p>
-
-<p>c. Menurut Fetter (1994)</p>
-<p class="definisi"><span class="highlight5">Air tanah adalah</span> air yang tersimpan pada lajur jenuh hingga kemudian bergerak ke berbagai lapisan dan batuan tanah di bumi sampai air tersebut keluar sebagai mata air, atau terkumpul dalam satu danau, kolam, sungai, dan laut.</p>
-</div>
-
-<button class="accordion">2. Jenis Air Tanah</button>
-<div class="panel">
-<p><span class="highlight6">Air tanah permukaan</span> sebagai air yang berada di atas lapisan tanah atau batuan. Air tanah, dapat memancar jika mendapatkan tekanan pada daerah sekitar <span class="highlight7">Siklinal</span> yang cukup kuat.</p>
-
-<p><span class="highlight2">Air tanah permukaan sendiri mengandung banyak manfaat</span> dan sering dimanfaatkan oleh manusia.</p>
-
-<ul>
-<li>dapat ditemukan pada kedalaman 30–80 m;</li>
-<li>dapat diminum atau dikonsumsi secara langsung;</li>
-<li>digunakan untuk mengatasi kekeringan.</li>
-</ul>
-</div>
-
-<button class="accordion">3. Daur Hidrologi dan Proses Terjadinya Air Tanah</button>
-<div class="panel">
-<p class="siklus">Siklus Air: presipitasi, kondensasi, transpirasi, evaporasi</p>
-</div>
-
-</div>
-
-<script>
-var acc = document.getElementsByClassName("accordion");
-for (var i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    var panel = this.nextElementSibling;
-    panel.style.display = panel.style.display === "block" ? "none" : "block";
-  });
-}
-</script>
-
 </body>
 </html>

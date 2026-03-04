@@ -236,7 +236,19 @@
       <div id="letter-buttons" class="flex flex-wrap justify-center gap-1"></div>
      </div>
     </div>
-    <div class="flex justify-center mt-3"><a href="kpl-tantangan.html" class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">Kembali</a>
+    <div class="mt-6 flex gap-4">
+
+  <button onclick="prevQuestion()" 
+  class="flex-1 py-3 bg-gray-500 text-white font-bold rounded-xl">
+  Kembali
+  </button>
+
+  <button onclick="goToPembahasan()" 
+  class="flex-1 py-3 bg-purple-600 text-white font-bold rounded-xl">
+  Pembahasan
+  </button>
+
+</div>
     </div>
     <div id="retry-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
      <div class="glass-card rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl animate-retry-bounce">
@@ -537,10 +549,7 @@
       const buttonsContainer = document.getElementById('letter-buttons');
       buttonsContainer.innerHTML = '';
       
-      const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-      const numbers = '0123456789'.split('');
-      const symbols = [' ', '.', ',', '-', '(', ')'];
-      const allCharacters = [...alphabet, ...numbers, ...symbols];
+      const allCharacters = ['A', 'B', 'C', 'D'];
       
       allCharacters.forEach((char, index) => {
         const btn = document.createElement('button');
@@ -931,9 +940,11 @@ initializeDataSDK();
 // =============================
 // FUNCTION MENUJU PEMBAHASAN
 // =============================
-function goToPembahasan() {
+   function goToPembahasan() {
   if (currentQuestion && currentQuestion.pembahasan) {
     window.location.href = currentQuestion.pembahasan;
+  } else {
+    alert("Pembahasan belum tersedia.");
   }
 }
   </script>

@@ -13,9 +13,7 @@
       height: 100%;
       width: 100%;
     }
-
-
-   
+    
     body {
       box-sizing: border-box;
       font-family: 'Nunito', sans-serif;
@@ -172,31 +170,6 @@
       #end-message { font-size: 0.875rem !important; }
       #final-score { font-size: 2rem !important; }
     }
-      /* ============================= */
-/* RESULT SCREEN CENTER FIX      */
-/* ============================= */
-#result-screen {
-  display: flex;                /* Membuat isi di tengah */
-  justify-content: center;      /* Center horizontal */
-  align-items: center;          /* Center vertical */
-  position: fixed;              /* Tetap di layar */
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 1000;                /* Supaya di atas semua elemen */
-  background: rgba(0,0,0,0.2); /* Overlay tipis di belakang */
-}
-
-#result-screen .glass-card {
-  max-width: 90vw;    /* Tidak terlalu lebar */
-  max-height: 90vh;   /* Tidak terlalu tinggi */
-  width: auto;
-  height: auto;
-  margin: 0;
-  padding: 1.5rem;
-  box-sizing: border-box;
-}
   </style>
  </head>
  <body class="h-full w-full overflow-auto bg-gradient-to-br from-blue-600 via-cyan-500 to-teal-400">
@@ -224,41 +197,6 @@
      </div><button id="start-btn" onclick="startGame()" class="w-full py-3 px-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-pulse-glow">🚀 Mulai Bermain!</button>
     </div>
    </div>
-
-<!-- MODAL PEMBAHASAN -->
-<div id="pembahasan-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
-  <div class="glass-card rounded-2xl p-6 max-w-xl w-full shadow-2xl border-4 border-purple-400 animate-slide-up">
-    
-    <h2 class="text-2xl font-bold text-center text-purple-700 mb-4">
-      📘 Pembahasan Soal
-    </h2>
-
-    <div class="grid grid-cols-5 gap-3 justify-items-center mb-5">
-      <button class="w-14 h-14 rounded-full bg-red-500 text-white font-bold" onclick="tampilPembahasan(1)">1</button>
-      <button class="w-14 h-14 rounded-full bg-blue-500 text-white font-bold" onclick="tampilPembahasan(2)">2</button>
-      <button class="w-14 h-14 rounded-full bg-green-500 text-white font-bold" onclick="tampilPembahasan(3)">3</button>
-      <button class="w-14 h-14 rounded-full bg-yellow-500 text-white font-bold" onclick="tampilPembahasan(4)">4</button>
-      <button class="w-14 h-14 rounded-full bg-pink-500 text-white font-bold" onclick="tampilPembahasan(5)">5</button>
-      <button class="w-14 h-14 rounded-full bg-indigo-500 text-white font-bold" onclick="tampilPembahasan(6)">6</button>
-      <button class="w-14 h-14 rounded-full bg-teal-500 text-white font-bold" onclick="tampilPembahasan(7)">7</button>
-      <button class="w-14 h-14 rounded-full bg-orange-500 text-white font-bold" onclick="tampilPembahasan(8)">8</button>
-      <button class="w-14 h-14 rounded-full bg-cyan-500 text-white font-bold" onclick="tampilPembahasan(9)">9</button>
-      <button class="w-14 h-14 rounded-full bg-purple-600 text-white font-bold" onclick="tampilPembahasan(10)">10</button>
-    </div>
-
-    <div id="isi-pembahasan" class="bg-gray-100 rounded-xl p-4 min-h-[140px] text-sm whitespace-pre-line mb-4"></div>
-
-    <div class="text-center">
-      <button onclick="closePembahasanModal()" 
-      class="px-6 py-2 bg-gray-400 hover:bg-gray-500 text-white font-bold rounded-lg">
-        OK
-      </button>
-    </div>
-
-  </div>
-</div>
-   
-   
    <div id="game-screen" class="min-h-full w-full flex flex-col p-2 hidden relative">
     <div class="glass-card rounded-xl p-2 mb-2 shadow-xl">
      <div class="flex justify-between items-center flex-wrap gap-1 text-xs md:text-sm">
@@ -298,16 +236,20 @@
       <div id="letter-buttons" class="flex flex-wrap justify-center gap-1"></div>
      </div>
     </div>
-    <div class="flex justify-center mt-3 gap-3">
-<a href="kpl-tantangan.html" class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-Kembali
-</a>
+   <div class="flex flex-col items-center gap-3 mt-3">
 
-<button onclick="openPembahasanModal()" 
-class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-📘 Pembahasan
-</button>
+  <button onclick="showFloatingMessage()"
+    class="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl shadow-lg hover:scale-105 transition-all">
+    📚 Lihat Pembahasan Soal
+  </button>
+
+  <a href="kpl-tantangan.html"
+     class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+    Kembali
+  </a>
+
 </div>
+     
     </div>
     <div id="retry-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
      <div class="glass-card rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl animate-retry-bounce">
@@ -322,45 +264,27 @@ class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-
      </div>
     </div>
    </div>
-<div id="result-screen" class="hidden">
-  <div id="result-confetti-container"></div>
-  
-  <div class="glass-card rounded-2xl p-6 md:p-10 text-center shadow-2xl animate-slide-up relative">
-    
-    <!-- Emoji -->
-    <div id="result-emoji" class="text-6xl md:text-7xl mb-2 animate-spin-celebrate">
+   <div id="result-screen" class="min-h-full w-full flex items-center justify-center p-2 hidden relative overflow-hidden">
+    <div id="result-confetti-container"></div>
+    <div class="glass-card rounded-2xl p-6 md:p-10 max-w-xs w-full text-center shadow-2xl animate-slide-up relative">
+     <div id="result-emoji" class="text-6xl md:text-7xl mb-2 animate-spin-celebrate">
       ✅
-    </div>
-
-    <!-- Skor dan jawaban benar -->
-    <div class="space-y-3 mb-6">
-      
-      <!-- Skor tambahan -->
+     </div>
+     <div class="space-y-3 mb-6">
       <div class="bg-gradient-to-r from-green-100 to-emerald-100 rounded-xl p-3">
-        <p id="result-score" class="text-5xl md:text-6xl font-black text-green-600">+10</p>
+       <p id="result-score" class="text-5xl md:text-6xl font-black text-green-600">+10</p>
       </div>
-
-      <!-- Total skor -->
       <div class="bg-gradient-to-r from-yellow-100 to-amber-100 rounded-xl p-3">
-        <p class="text-xs text-gray-600 mb-1">Total Skor</p>
-        <p id="result-total-score" class="text-4xl font-black text-amber-600">10</p>
+       <p class="text-xs text-gray-600 mb-1">Total Skor</p>
+       <p id="result-total-score" class="text-4xl font-black text-amber-600">10</p>
       </div>
-
-      <!-- Jawaban benar (opsional tampil) -->
       <div id="correct-answer-display" class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-3 hidden">
-        <p class="text-xs text-purple-700 mb-1 font-semibold">Jawaban Benar:</p>
-        <p id="correct-answer-text" class="text-lg font-black text-purple-700">JAWABAN</p>
+       <p class="text-xs text-purple-700 mb-1 font-semibold">Jawaban Benar:</p>
+       <p id="correct-answer-text" class="text-lg font-black text-purple-700">JAWABAN</p>
       </div>
-      
+     </div><button id="result-next-btn" onclick="nextQuestion()" class="w-full py-3 px-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-pulse-celebrate">🚀 Soal Berikutnya</button>
     </div>
-
-    <!-- Tombol Soal Berikutnya -->
-    <button id="result-next-btn" onclick="nextQuestion()" class="w-full py-3 px-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-pulse-celebrate">
-      🚀 Soal Berikutnya
-    </button>
-
-  </div>
-</div>
+   </div>
    <div id="end-screen" class="min-h-full w-full flex items-center justify-center p-2 hidden">
     <div class="glass-card rounded-2xl p-6 md:p-8 max-w-sm w-full text-center shadow-2xl animate-slide-up relative overflow-hidden">
      <div id="confetti-container"></div>
@@ -390,56 +314,16 @@ class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-
     let allGameScores = [];
     
     const questionBank = [
-      {
-    question: "Sebuah bangun datar berbentuk persegi memiliki panjang sisi 6 cm. Keliling bangun tersebut adalah __________ cm.",
-    answer: "24",
-    
-  },
-  {
-    question: "Keliling suatu bangun datar diperoleh dengan __________ semua panjang sisi bangun tersebut.",
-    answer: "MENJUMLAHKAN",
-    
-  },
-  {
-    question: "Sebuah segitiga memiliki panjang sisi 4 cm, 5 cm, dan 6 cm. Keliling segitiga tersebut adalah __________ cm.",
-    answer: "15",
-    
-  },
-  {
-    question: "Sebuah taman berbentuk persegi panjang memiliki panjang 12 m dan lebar 8 m. Panjang pagar yang dibutuhkan adalah __________ m.",
-    answer: "40",
-    
-  },
-  {
-    question: "Sebuah bingkai foto berbentuk persegi memiliki keliling 36 cm. Panjang salah satu sisi adalah __________ cm.",
-    answer: "9",
-    
-  },
-  {
-    question: "Bangun datar memiliki sisi 5 cm, 7 cm, 5 cm, dan 7 cm. Kelilingnya adalah __________ cm.",
-    answer: "24",
-   
-  },
-  {
-    question: "Lapangan berbentuk persegi panjang memiliki keliling 64 m. Jika panjang 18 m, maka lebar adalah __________ m.",
-    answer: "14",
-   
-  },
-  {
-    question: "Panjang pita untuk mengelilingi buku persegi adalah 48 cm. Panjang satu sisi buku adalah __________ cm.",
-    answer: "12",
-  
-  },
-  {
-    question: "Bangun datar memiliki keliling 30 cm. Tiga sisinya 6 cm, 8 cm, dan 7 cm. Sisi yang belum diketahui adalah __________ cm.",
-    answer: "9",
-   
-  },
-  {
-    question: "Segitiga sama sisi memiliki panjang satu sisi 7 cm. Kelilingnya adalah __________ cm.",
-    answer: "21",
-  
-  }
+      { question: "Segitiga yang memiliki tiga sisi sama panjang disebut segitiga __________.", answer: "SAMA SISI" },
+  { question: "Segitiga sembarang memiliki sisi 4 cm, 6 cm, dan 8 cm. Kelilingnya adalah __________ cm.", answer: "18" },
+  { question: "Segitiga sama kaki memiliki dua sisi 9 cm dan alas 12 cm. Kelilingnya adalah __________ cm.", answer: "30" },
+  { question: "Keliling segitiga sama sisi dapat dicari dengan rumus __________ × panjang sisi.", answer: "3" },
+  { question: "Segitiga memiliki keliling 24 cm. Dua sisi sama panjang 8 cm. Sisi lainnya adalah __________ cm.", answer: "8" },
+  { question: "Keliling segitiga sama sisi adalah 36 cm. Panjang satu sisi adalah __________ cm.", answer: "12" },
+  { question: "Segitiga sama kaki memiliki keliling 28 cm. Alas 10 cm. Panjang masing-masing sisi yang sama adalah __________ cm.", answer: "9" },
+  { question: "Segitiga sembarang memiliki keliling 40 cm. Dua sisinya 13 cm dan 15 cm. Sisi ketiga adalah __________ cm.", answer: "12" },
+  { question: "Persegi memiliki panjang sisi 6 cm. Kelilingnya adalah __________ cm.", answer: "24" },
+  { question: "Persegi panjang memiliki panjang 10 cm dan lebar 4 cm. Kelilingnya adalah __________ cm.", answer: "28" }
  
     ];
     
@@ -1002,92 +886,185 @@ class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-
     
     applyConfig(config);
     initializeDataSDK();
-
-   // =======================
-// FITUR PEMBAHASAN
-// =======================
-
-const dataPembahasan = {
-
-1: `Soal: Sebuah bangun datar berbentuk persegi memiliki panjang sisi 6 cm. Keliling bangun tersebut adalah __________ cm.
-
-Keliling persegi = 4 × sisi
-= 4 × 6
-= 24 cm.`,
-
-2: `Soal: Keliling suatu bangun datar diperoleh dengan __________ semua panjang sisi bangun tersebut.
-
-Keliling adalah hasil dari menjumlahkan semua panjang sisi pada suatu bangun datar.`,
-
-3: `Soal: Sebuah segitiga memiliki panjang sisi 4 cm, 5 cm, dan 6 cm. Keliling segitiga tersebut adalah __________ cm.
-
-Keliling segitiga = jumlah semua sisi
-= 4 + 5 + 6
-= 15 cm.`,
-
-4: `Soal: Sebuah taman berbentuk persegi panjang memiliki panjang 12 m dan lebar 8 m. Panjang pagar yang dibutuhkan adalah __________ m.
-
-Keliling persegi panjang = 2 × (panjang + lebar)
-= 2 × (12 + 8)
-= 2 × 20
-= 40 m.`,
-
-5: `Soal: Sebuah bingkai foto berbentuk persegi memiliki keliling 36 cm. Panjang salah satu sisi adalah __________ cm.
-
-Keliling persegi = 4 × sisi
-36 = 4 × sisi
-sisi = 36 ÷ 4
-= 9 cm.`,
-
-6: `Soal: Bangun datar memiliki sisi 5 cm, 7 cm, 5 cm, dan 7 cm. Kelilingnya adalah __________ cm.
-
-Keliling = jumlah semua sisi
-= 5 + 7 + 5 + 7
-= 24 cm.`,
-
-7: `Soal: Lapangan berbentuk persegi panjang memiliki keliling 64 m. Jika panjang 18 m, maka lebar adalah __________ m.
-
-K = 2 × (p + l)
-64 = 2 × (18 + l)
-64 = 36 + 2l
-64 − 36 = 28
-l = 28 ÷ 2
-= 14 m.`,
-
-8: `Soal: Panjang pita untuk mengelilingi buku persegi adalah 48 cm. Panjang satu sisi buku adalah __________ cm.
-
-Keliling persegi = 4 × sisi
-48 = 4 × sisi
-sisi = 48 ÷ 4
-= 12 cm.`,
-
-9: `Soal: Bangun datar memiliki keliling 30 cm. Tiga sisinya 6 cm, 8 cm, dan 7 cm. Sisi yang belum diketahui adalah __________ cm.
-
-Jumlah tiga sisi = 6 + 8 + 7
-= 21 cm
-Sisi yang belum diketahui = 30 − 21
-= 9 cm.`,
-
-10: `Soal: Segitiga sama sisi memiliki panjang satu sisi 7 cm. Kelilingnya adalah __________ cm.
-
-Keliling segitiga sama sisi = 3 × sisi
-= 3 × 7
-= 21 cm.`,
-};
-
-function openPembahasanModal(){
-  document.getElementById("pembahasan-modal").classList.remove("hidden");
-}
-
-function closePembahasanModal(){
-  document.getElementById("pembahasan-modal").classList.add("hidden");
-  document.getElementById("isi-pembahasan").innerHTML = "";
-}
-
-function tampilPembahasan(nomor){
-  document.getElementById("isi-pembahasan").innerText = dataPembahasan[nomor];
-}
-
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d1226e6f194f8d6',t:'MTc3MTYzNDAwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d1226e6f194f8d6',t:'MTc3MTYzNDAwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
+ /* ================= FLOATING MODAL FEATURE ================= */
+
+/* ================= DATA SOAL ================= */
+/* GANTI isi array di bawah ini dengan 10 soal & pembahasan Anda
+   PERSIS seperti yang Anda miliki (tanpa mengubah isi) */
+
+const floatingQuestionBank = [
+  {
+    soal: "Segitiga yang memiliki tiga sisi sama panjang disebut segitiga __________.",
+    jawaban: "SAMA SISI",
+    pembahasan: "Segitiga dengan tiga sisi sama panjang disebut segitiga sama sisi."
+  },
+  {
+    soal: "Segitiga sembarang memiliki sisi 4 cm, 6 cm, dan 8 cm. Kelilingnya adalah __________ cm.",
+    jawaban: "18",
+    pembahasan: "Keliling = 4 + 6 + 8 = 18 cm."
+  },
+  {
+    soal: "Segitiga sama kaki memiliki dua sisi 9 cm dan alas 12 cm. Kelilingnya adalah __________ cm.",
+    jawaban: "30",
+    pembahasan: "Keliling = 9 + 9 + 12 = 30 cm."
+  },
+  {
+    soal: "Keliling segitiga sama sisi dapat dicari dengan rumus __________ × panjang sisi.",
+    jawaban: "3",
+    pembahasan: "Rumus keliling segitiga sama sisi adalah 3 × sisi."
+  },
+  {
+    soal: "Segitiga memiliki keliling 24 cm. Dua sisi sama panjang 8 cm. Sisi lainnya adalah __________ cm.",
+    jawaban: "8",
+    pembahasan: "8 + 8 + 8 = 24 cm."
+  },
+  {
+    soal: "Keliling segitiga sama sisi adalah 36 cm. Panjang satu sisi adalah __________ cm.",
+    jawaban: "12",
+    pembahasan: "36 ÷ 3 = 12 cm."
+  },
+  {
+    soal: "Segitiga sama kaki memiliki keliling 28 cm. Alas 10 cm. Panjang masing-masing sisi yang sama adalah __________ cm.",
+    jawaban: "9",
+    pembahasan: "28 - 10 = 18, lalu 18 ÷ 2 = 9 cm."
+  },
+  {
+    soal: "Segitiga sembarang memiliki keliling 40 cm. Dua sisinya 13 cm dan 15 cm. Sisi ketiga adalah __________ cm.",
+    jawaban: "12",
+    pembahasan: "40 - (13 + 15) = 12 cm."
+  },
+  {
+    soal: "Persegi memiliki panjang sisi 6 cm. Kelilingnya adalah __________ cm.",
+    jawaban: "24",
+    pembahasan: "Keliling persegi = 4 × 6 = 24 cm."
+  },
+  {
+    soal: "Persegi panjang memiliki panjang 10 cm dan lebar 4 cm. Kelilingnya adalah __________ cm.",
+    jawaban: "28",
+    pembahasan: "Keliling = 2 × (10 + 4) = 28 cm."
+  }
+];
+
+
+/* ================= SHOW MODAL ================= */
+function showFloatingMessage() {
+  const modal = document.getElementById("floatingModal");
+  const content = document.getElementById("modalContent");
+
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+
+  setTimeout(() => {
+    content.classList.remove("scale-95", "opacity-0");
+    content.classList.add("scale-100", "opacity-100");
+  }, 50);
+
+  generateCircles();
+}
+
+
+/* ================= CLOSE MODAL ================= */
+function closeFloatingMessage() {
+  const modal = document.getElementById("floatingModal");
+  const content = document.getElementById("modalContent");
+
+  content.classList.remove("scale-100", "opacity-100");
+  content.classList.add("scale-95", "opacity-0");
+
+  setTimeout(() => {
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+    document.getElementById("questionDetail").classList.add("hidden");
+    document.getElementById("circleContainer").classList.remove("hidden");
+  }, 200);
+}
+
+
+/* ================= GENERATE CIRCLES ================= */
+function generateCircles() {
+  const container = document.getElementById("circleContainer");
+  container.innerHTML = "";
+
+  const gradients = [
+    "from-red-400 to-pink-500",
+    "from-blue-400 to-indigo-500",
+    "from-green-400 to-emerald-500",
+    "from-yellow-400 to-orange-500",
+    "from-purple-400 to-fuchsia-500",
+    "from-cyan-400 to-sky-500",
+    "from-lime-400 to-green-600",
+    "from-rose-400 to-red-600",
+    "from-teal-400 to-cyan-600",
+    "from-amber-400 to-yellow-600"
+  ];
+
+  floatingQuestionBank.forEach((_, index) => {
+    const btn = document.createElement("button");
+    btn.className = `
+      w-14 h-14 rounded-full 
+      bg-gradient-to-br ${gradients[index]}
+      text-white font-bold shadow-lg
+      hover:scale-110 transition transform
+    `;
+    btn.textContent = index + 1;
+    btn.onclick = () => showQuestionDetail(index);
+
+    container.appendChild(btn);
+  });
+}
+
+
+/* ================= SHOW DETAIL ================= */
+function showQuestionDetail(index) {
+  const data = floatingQuestionBank[index];
+
+  document.getElementById("circleContainer").classList.add("hidden");
+  document.getElementById("questionDetail").classList.remove("hidden");
+
+  document.getElementById("questionTitle").innerText = `Soal ${index + 1}`;
+  document.getElementById("questionText").innerText = data.soal;
+  document.getElementById("questionAnswer").innerText = "Jawaban: " + data.jawaban;
+  document.getElementById("questionExplanation").innerText = "Pembahasan: " + data.pembahasan;
+}
+ </script>
+ <!-- ================= FLOATING MODAL MESSAGE ================= -->
+<div id="floatingModal"
+     class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50 transition-opacity duration-300">
+
+  <div id="modalContent"
+       class="bg-white w-11/12 max-w-2xl rounded-2xl shadow-2xl p-6 transform scale-95 opacity-0 transition-all duration-300">
+
+    <!-- HEADER -->
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-bold text-gray-800">Pilih Soal</h2>
+      <button onclick="closeFloatingMessage()"
+              class="text-gray-500 hover:text-red-500 text-xl font-bold">&times;</button>
+    </div>
+
+    <!-- GRID LINGKARAN -->
+    <div id="circleContainer"
+         class="grid grid-cols-5 gap-4 justify-items-center">
+    </div>
+
+    <!-- DETAIL SOAL -->
+    <div id="questionDetail" class="hidden mt-6">
+      <h3 id="questionTitle" class="text-lg font-bold mb-2"></h3>
+      <p id="questionText" class="mb-2"></p>
+      <p id="questionAnswer" class="font-semibold text-green-600"></p>
+      <p id="questionExplanation" class="mt-2 text-gray-700"></p>
+
+      <div class="text-center mt-4">
+        <button onclick="closeFloatingMessage()"
+                class="px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">
+          OK
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ================= END FLOATING MODAL ================= -->
+ </body>
 </html>

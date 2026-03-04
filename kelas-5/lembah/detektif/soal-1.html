@@ -236,8 +236,26 @@
       <div id="letter-buttons" class="flex flex-wrap justify-center gap-1"></div>
      </div>
     </div>
-    <div class="flex justify-center mt-3"><a href="kpl-tantangan.html" class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">Kembali</a>
-    </div>
+    
+   <div class="flex justify-center gap-3 mt-3">
+
+<button onclick="showExplanation()" 
+class="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 
+hover:from-purple-600 hover:to-pink-600 text-white font-bold 
+rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 
+transition-all duration-300">
+📖 Pembahasan
+</button>
+
+<a href="kpl-tantangan.html" 
+class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 
+hover:from-orange-600 hover:to-orange-700 text-white font-bold 
+rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 
+transition-all duration-300">
+Kembali
+</a>
+
+</div>
     <div id="retry-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
      <div class="glass-card rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl animate-retry-bounce">
       <div class="text-6xl mb-4 animate-retry-shake">
@@ -251,6 +269,36 @@
      </div>
     </div>
    </div>
+
+   <!-- ✅ TARUH DI SINI -->
+<div id="explanation-modal" 
+  class="fixed inset-0 bg-black bg-opacity-50 hidden 
+  flex items-center justify-center z-50 p-4">
+
+  <div class="glass-card rounded-2xl p-6 max-w-md w-full 
+    text-center shadow-2xl animate-pop">
+
+    <h2 class="text-2xl font-bold text-purple-600 mb-4">
+      📖 Pembahasan
+    </h2>
+
+    <p id="explanation-text" 
+      class="text-gray-700 mb-6 text-sm leading-relaxed">
+      Isi pembahasan akan muncul di sini
+    </p>
+
+    <button onclick="closeExplanation()" 
+      class="px-6 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 
+      text-white font-bold rounded-xl shadow-lg hover:scale-105 transition">
+      OK
+    </button>
+
+  </div>
+</div>
+
+</div>  <!-- penutup game-screen -->
+   
+   
    <div id="result-screen" class="min-h-full w-full flex items-center justify-center p-2 hidden relative overflow-hidden">
     <div id="result-confetti-container"></div>
     <div class="glass-card rounded-2xl p-6 md:p-10 max-w-xs w-full text-center shadow-2xl animate-slide-up relative">
@@ -301,17 +349,57 @@
     let allGameScores = [];
     
     const questionBank = [
-     { question: "Sebuah bangun datar berbentuk persegi memiliki panjang sisi 6 cm. Keliling bangun tersebut adalah __________ cm.", answer: "24" },
-  { question: "Keliling suatu bangun datar diperoleh dengan __________ semua panjang sisi bangun tersebut.", answer: "MENJUMLAHKAN" },
-  { question: "Sebuah segitiga memiliki panjang sisi 4 cm, 5 cm, dan 6 cm. Keliling segitiga tersebut adalah __________ cm.", answer: "15" },
-  { question: "Sebuah taman berbentuk persegi panjang memiliki panjang 12 m dan lebar 8 m. Panjang pagar yang dibutuhkan adalah __________ m.", answer: "40" },
-  { question: "Sebuah bingkai foto berbentuk persegi memiliki keliling 36 cm. Panjang salah satu sisi adalah __________ cm.", answer: "9" },
-  { question: "Bangun datar memiliki sisi 5 cm, 7 cm, 5 cm, dan 7 cm. Kelilingnya adalah __________ cm.", answer: "24" },
-  { question: "Lapangan berbentuk persegi panjang memiliki keliling 64 m. Jika panjang 18 m, maka lebar adalah __________ m.", answer: "14" },
-  { question: "Panjang pita untuk mengelilingi buku persegi adalah 48 cm. Panjang satu sisi buku adalah __________ cm.", answer: "12" },
-  { question: "Bangun datar memiliki keliling 30 cm. Tiga sisinya 6 cm, 8 cm, dan 7 cm. Sisi yang belum diketahui adalah __________ cm.", answer: "9" },
-  { question: "Segitiga sama sisi memiliki panjang satu sisi 7 cm. Kelilingnya adalah __________ cm.", answer: "21" },
- 
+
+  {
+    question: "Sebuah bangun datar berbentuk persegi memiliki panjang sisi 6 cm. Keliling bangun tersebut adalah __________ cm.",
+    answer: "24",
+    explanation: "Keliling persegi = 4 × sisi. 4 × 6 = 24 cm."
+  },
+  {
+    question: "Keliling suatu bangun datar diperoleh dengan __________ semua panjang sisi bangun tersebut.",
+    answer: "MENJUMLAHKAN",
+    explanation: "Keliling adalah hasil menjumlahkan semua panjang sisi suatu bangun datar."
+  },
+  {
+    question: "Sebuah segitiga memiliki panjang sisi 4 cm, 5 cm, dan 6 cm. Keliling segitiga tersebut adalah __________ cm.",
+    answer: "15",
+    explanation: "Keliling segitiga = jumlah semua sisi. 4 + 5 + 6 = 15 cm."
+  },
+  {
+    question: "Sebuah taman berbentuk persegi panjang memiliki panjang 12 m dan lebar 8 m. Panjang pagar yang dibutuhkan adalah __________ m.",
+    answer: "40",
+    explanation: "Keliling persegi panjang = 2 × (panjang + lebar). 2 × (12 + 8) = 2 × 20 = 40 m."
+  },
+  {
+    question: "Sebuah bingkai foto berbentuk persegi memiliki keliling 36 cm. Panjang salah satu sisi adalah __________ cm.",
+    answer: "9",
+    explanation: "Sisi persegi = keliling ÷ 4. 36 ÷ 4 = 9 cm."
+  },
+  {
+    question: "Bangun datar memiliki sisi 5 cm, 7 cm, 5 cm, dan 7 cm. Kelilingnya adalah __________ cm.",
+    answer: "24",
+    explanation: "Keliling = jumlah semua sisi. 5 + 7 + 5 + 7 = 24 cm."
+  },
+  {
+    question: "Lapangan berbentuk persegi panjang memiliki keliling 64 m. Jika panjang 18 m, maka lebar adalah __________ m.",
+    answer: "14",
+    explanation: "Keliling persegi panjang = 2 × (p + l). 64 = 2 × (18 + l). 64 ÷ 2 = 32, maka 18 + l = 32, sehingga l = 14 m."
+  },
+  {
+    question: "Panjang pita untuk mengelilingi buku persegi adalah 48 cm. Panjang satu sisi buku adalah __________ cm.",
+    answer: "12",
+    explanation: "Sisi persegi = keliling ÷ 4. 48 ÷ 4 = 12 cm."
+  },
+  {
+    question: "Bangun datar memiliki keliling 30 cm. Tiga sisinya 6 cm, 8 cm, dan 7 cm. Sisi yang belum diketahui adalah __________ cm.",
+    answer: "9",
+    explanation: "Sisi yang belum diketahui = keliling − jumlah tiga sisi. 30 − (6 + 8 + 7) = 30 − 21 = 9 cm."
+  },
+  {
+    question: "Segitiga sama sisi memiliki panjang satu sisi 7 cm. Kelilingnya adalah __________ cm.",
+    answer: "21",
+    explanation: "Keliling segitiga sama sisi = 3 × sisi. 3 × 7 = 21 cm."
+  }
     ];
     
     let currentQuestion = null;
@@ -873,6 +961,49 @@
     
     applyConfig(config);
     initializeDataSDK();
+
+   // ====== FITUR PEMBAHASAN ======
+
+function showExplanation() {
+  const modal = document.getElementById('explanation-modal');
+  const text = document.getElementById('explanation-text');
+
+  text.innerHTML = getExplanationText();
+  modal.classList.remove('hidden');
+}
+
+function closeExplanation() {
+  document.getElementById('explanation-modal')
+    .classList.add('hidden');
+}
+
+function getExplanationText() {
+  switch(currentQuestionIndex) {
+    case 0:
+      return "Keliling persegi = 4 × sisi.<br>4 × 6 = <b>24 cm</b>.";
+    case 1:
+      return "Keliling bangun datar diperoleh dengan <b>menjumlahkan</b> semua panjang sisinya.";
+    case 2:
+      return "Keliling segitiga = 4 + 5 + 6 = <b>15 cm</b>.";
+    case 3:
+      return "Keliling persegi panjang = 2 × (12 + 8) = <b>40 m</b>.";
+    case 4:
+      return "Keliling 36 ÷ 4 = <b>9 cm</b>.";
+    case 5:
+      return "5 + 7 + 5 + 7 = <b>24 cm</b>.";
+    case 6:
+      return "Keliling 64 ÷ 2 = 32.<br>Lebar = 32 - 18 = <b>14 m</b>.";
+    case 7:
+      return "48 ÷ 4 = <b>12 cm</b>.";
+    case 8:
+      return "30 - (6 + 8 + 7) = <b>9 cm</b>.";
+    case 9:
+      return "Segitiga sama sisi = 3 × 7 = <b>21 cm</b>.";
+    default:
+      return "Pembahasan belum tersedia.";
+  }
+}
+  
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d1226e6f194f8d6',t:'MTc3MTYzNDAwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

@@ -172,6 +172,31 @@
       #end-message { font-size: 0.875rem !important; }
       #final-score { font-size: 2rem !important; }
     }
+      /* ============================= */
+/* RESULT SCREEN CENTER FIX      */
+/* ============================= */
+#result-screen {
+  display: flex;                /* Membuat isi di tengah */
+  justify-content: center;      /* Center horizontal */
+  align-items: center;          /* Center vertical */
+  position: fixed;              /* Tetap di layar */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;                /* Supaya di atas semua elemen */
+  background: rgba(0,0,0,0.2); /* Overlay tipis di belakang */
+}
+
+#result-screen .glass-card {
+  max-width: 90vw;    /* Tidak terlalu lebar */
+  max-height: 90vh;   /* Tidak terlalu tinggi */
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
   </style>
  </head>
  <body class="h-full w-full overflow-auto bg-gradient-to-br from-blue-600 via-cyan-500 to-teal-400">
@@ -1062,31 +1087,7 @@ function closePembahasanModal(){
 function tampilPembahasan(nomor){
   document.getElementById("isi-pembahasan").innerText = dataPembahasan[nomor];
 }
-   /* ============================= */
-/* RESULT SCREEN CENTER FIX      */
-/* ============================= */
-#result-screen {
-  display: flex;                /* Membuat isi di tengah */
-  justify-content: center;      /* Center horizontal */
-  align-items: center;          /* Center vertical */
-  position: fixed;              /* Tetap di layar */
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 1000;                /* Supaya di atas semua elemen */
-  background: rgba(0,0,0,0.2); /* Overlay tipis di belakang */
-}
 
-#result-screen .glass-card {
-  max-width: 90vw;    /* Tidak terlalu lebar */
-  max-height: 90vh;   /* Tidak terlalu tinggi */
-  width: auto;
-  height: auto;
-  margin: 0;
-  padding: 1.5rem;
-  box-sizing: border-box;
-}
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d1226e6f194f8d6',t:'MTc3MTYzNDAwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

@@ -978,30 +978,7 @@ function closeExplanation() {
 }
 
 function getExplanationText() {
-  switch(currentQuestionIndex) {
-    case 0:
-      return "Keliling persegi = 4 × sisi.<br>4 × 6 = <b>24 cm</b>.";
-    case 1:
-      return "Keliling bangun datar diperoleh dengan <b>menjumlahkan</b> semua panjang sisinya.";
-    case 2:
-      return "Keliling segitiga = 4 + 5 + 6 = <b>15 cm</b>.";
-    case 3:
-      return "Keliling persegi panjang = 2 × (12 + 8) = <b>40 m</b>.";
-    case 4:
-      return "Keliling 36 ÷ 4 = <b>9 cm</b>.";
-    case 5:
-      return "5 + 7 + 5 + 7 = <b>24 cm</b>.";
-    case 6:
-      return "Keliling 64 ÷ 2 = 32.<br>Lebar = 32 - 18 = <b>14 m</b>.";
-    case 7:
-      return "48 ÷ 4 = <b>12 cm</b>.";
-    case 8:
-      return "30 - (6 + 8 + 7) = <b>9 cm</b>.";
-    case 9:
-      return "Segitiga sama sisi = 3 × 7 = <b>21 cm</b>.";
-    default:
-      return "Pembahasan belum tersedia.";
-  }
+  return currentQuestion.explanation || "Pembahasan belum tersedia.";
 }
   
   </script>

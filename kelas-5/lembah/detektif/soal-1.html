@@ -13,7 +13,9 @@
       height: 100%;
       width: 100%;
     }
-    
+
+
+   
     body {
       box-sizing: border-box;
       font-family: 'Nunito', sans-serif;
@@ -179,7 +181,7 @@
      <div class="text-5xl md:text-6xl mb-4 animate-float">
       📐
      </div>
-     <h1 id="game-title" class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-3">Kuis Sistem Pernapasan</h1>
+     <h1 id="game-title" class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-3">Kuis Bangun Datar</h1>
      <p class="text-gray-600 text-sm mb-5 leading-relaxed">Susun huruf-huruf yang tersedia untuk membentuk jawaban yang benar tentang bangun datar! <span class="block mt-1 text-xs text-cyan-500 font-semibold">📏 Uji pengetahuanmu tentang persegi, segitiga, dan persegi panjang!</span></p>
      <div class="bg-gradient-to-r from-blue-100 to-cyan-100 rounded-xl p-3 mb-5 text-left">
       <h3 class="font-bold text-blue-700 mb-1 text-sm">Cara Bermain:</h3>
@@ -197,6 +199,41 @@
      </div><button id="start-btn" onclick="startGame()" class="w-full py-3 px-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-pulse-glow">🚀 Mulai Bermain!</button>
     </div>
    </div>
+
+<!-- MODAL PEMBAHASAN -->
+<div id="pembahasan-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+  <div class="glass-card rounded-2xl p-6 max-w-xl w-full shadow-2xl border-4 border-purple-400 animate-slide-up">
+    
+    <h2 class="text-2xl font-bold text-center text-purple-700 mb-4">
+      📘 Pembahasan Soal
+    </h2>
+
+    <div class="grid grid-cols-5 gap-3 justify-items-center mb-5">
+      <button class="w-14 h-14 rounded-full bg-red-500 text-white font-bold" onclick="tampilPembahasan(1)">1</button>
+      <button class="w-14 h-14 rounded-full bg-blue-500 text-white font-bold" onclick="tampilPembahasan(2)">2</button>
+      <button class="w-14 h-14 rounded-full bg-green-500 text-white font-bold" onclick="tampilPembahasan(3)">3</button>
+      <button class="w-14 h-14 rounded-full bg-yellow-500 text-white font-bold" onclick="tampilPembahasan(4)">4</button>
+      <button class="w-14 h-14 rounded-full bg-pink-500 text-white font-bold" onclick="tampilPembahasan(5)">5</button>
+      <button class="w-14 h-14 rounded-full bg-indigo-500 text-white font-bold" onclick="tampilPembahasan(6)">6</button>
+      <button class="w-14 h-14 rounded-full bg-teal-500 text-white font-bold" onclick="tampilPembahasan(7)">7</button>
+      <button class="w-14 h-14 rounded-full bg-orange-500 text-white font-bold" onclick="tampilPembahasan(8)">8</button>
+      <button class="w-14 h-14 rounded-full bg-cyan-500 text-white font-bold" onclick="tampilPembahasan(9)">9</button>
+      <button class="w-14 h-14 rounded-full bg-purple-600 text-white font-bold" onclick="tampilPembahasan(10)">10</button>
+    </div>
+
+    <div id="isi-pembahasan" class="bg-gray-100 rounded-xl p-4 min-h-[140px] text-sm whitespace-pre-line mb-4"></div>
+
+    <div class="text-center">
+      <button onclick="closePembahasanModal()" 
+      class="px-6 py-2 bg-gray-400 hover:bg-gray-500 text-white font-bold rounded-lg">
+        OK
+      </button>
+    </div>
+
+  </div>
+</div>
+   
+   
    <div id="game-screen" class="min-h-full w-full flex flex-col p-2 hidden relative">
     <div class="glass-card rounded-xl p-2 mb-2 shadow-xl">
      <div class="flex justify-between items-center flex-wrap gap-1 text-xs md:text-sm">
@@ -236,7 +273,16 @@
       <div id="letter-buttons" class="flex flex-wrap justify-center gap-1"></div>
      </div>
     </div>
-    <div class="flex justify-center mt-3"><a href="kpl-tantangan.html" class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">Kembali</a>
+    <div class="flex justify-center mt-3 gap-3">
+<a href="kpl-tantangan.html" class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+Kembali
+</a>
+
+<button onclick="openPembahasanModal()" 
+class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+📘 Pembahasan
+</button>
+</div>
     </div>
     <div id="retry-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
      <div class="glass-card rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl animate-retry-bounce">
@@ -913,6 +959,71 @@
     
     applyConfig(config);
     initializeDataSDK();
+
+   // =======================
+// FITUR PEMBAHASAN
+// =======================
+
+const dataPembahasan = {
+
+1: `Keliling persegi = 4 × sisi
+= 4 × 6
+= 24 cm`,
+
+2: `Keliling adalah hasil dari menjumlahkan semua panjang sisi pada suatu bangun datar.`,
+
+3: `Keliling segitiga = jumlah semua sisi
+= 4 + 5 + 6
+= 15 cm`,
+
+4: `Keliling persegi panjang = 2 × (panjang + lebar)
+= 2 × (12 + 8)
+= 2 × 20
+= 40 m`,
+
+5: `Keliling persegi = 4 × sisi
+36 = 4 × sisi
+Sisi = 36 ÷ 4
+= 9 cm`,
+
+6: `Keliling = jumlah semua sisi
+= 5 + 7 + 5 + 7
+= 24 cm`,
+
+7: `Keliling persegi panjang = 2 × (p + l)
+64 = 2 × (18 + l)
+64 ÷ 2 = 18 + l
+32 = 18 + l
+l = 32 − 18
+= 14 m`,
+
+8: `Keliling persegi = 4 × sisi
+48 = 4 × sisi
+Sisi = 48 ÷ 4
+= 12 cm`,
+
+9: `Jumlah tiga sisi = 6 + 8 + 7
+= 21
+Sisi yang belum diketahui = 30 − 21
+= 9 cm`,
+
+10: `Keliling segitiga sama sisi = 3 × sisi
+= 3 × 7
+= 21 cm`
+};
+
+function openPembahasanModal(){
+  document.getElementById("pembahasan-modal").classList.remove("hidden");
+}
+
+function closePembahasanModal(){
+  document.getElementById("pembahasan-modal").classList.add("hidden");
+  document.getElementById("isi-pembahasan").innerHTML = "";
+}
+
+function tampilPembahasan(nomor){
+  document.getElementById("isi-pembahasan").innerText = dataPembahasan[nomor];
+}
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d1226e6f194f8d6',t:'MTc3MTYzNDAwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

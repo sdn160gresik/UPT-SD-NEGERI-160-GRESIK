@@ -733,30 +733,25 @@ Kembali
     }
     
     function checkAnswer() {
-      const userAnswer = answerSlots.map(s => s.letter).join('');
-      const correctAnswer = currentQuestion.answer.replace(/\s/g, '');
-      
-      if (userAnswer === correctAnswer) {
-        score += 10;
-        completedQuestions.add(currentQuestionIndex);
-        updateScore();
-        
-        showFeedback('🎉 Benar! +10 poin', 'success');
-        
-        answerSlots.forEach((slot, i) => {
-          setTimeout(() => {
-            slot.element.classList.add('animate-celebrate');
-          }, i * 50);
-        });
-        
-        setTimeout(() => {
-          saveScore(score);
-          showResultScreen();
-        }, 1500);
-      } else {
-        showRetryOverlay();
-      }
-    }
+  const userAnswer = answerSlots.map(s => s.letter).join('');
+  const correctAnswer = currentQuestion.answer.replace(/\s/g, '');
+
+  if (userAnswer.toUpperCase() === correctAnswer.toUpperCase()) {
+
+    score += 10;
+    completedQuestions.add(currentQuestionIndex);
+    updateScore();
+
+    showFeedback('🎉 Benar! +10 poin', 'success');
+
+    setTimeout(() => {
+      showResultScreen();   // ⬅ INI YANG MEMBUAT TOMBOL MUNCUL
+    }, 1000);
+
+  } else {
+    showRetryOverlay();
+  }
+}
     
     function showRetryOverlay() {
       const overlay = document.getElementById('retry-overlay');

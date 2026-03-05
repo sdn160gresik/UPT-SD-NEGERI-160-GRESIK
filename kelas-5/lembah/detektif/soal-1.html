@@ -177,10 +177,10 @@
    <div id="start-screen" class="min-h-full w-full flex flex-col items-center justify-center p-2">
     <div class="glass-card rounded-2xl p-5 md:p-8 max-w-sm w-full text-center shadow-2xl animate-slide-up">
      <div class="text-5xl md:text-6xl mb-4 animate-float">
-      📐
+      🎭
      </div>
      <h1 id="game-title" class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-3">Kuis Bangun Datar</h1>
-     <p class="text-gray-600 text-sm mb-5 leading-relaxed">Susun huruf-huruf yang tersedia untuk membentuk jawaban yang benar tentang bangun datar! <span class="block mt-1 text-xs text-cyan-500 font-semibold">📏 Uji pengetahuanmu tentang persegi, segitiga, dan persegi panjang!</span></p>
+     <p class="text-gray-600 text-sm mb-5 leading-relaxed">Susun huruf-huruf yang tersedia untuk membentuk jawaban yang benar tentang Bangun Datar! <span class="block mt-1 text-xs text-cyan-500 font-semibold">🫁 Uji pengetahuanmu tentang Bangun Datar!</span></p>
      <div class="bg-gradient-to-r from-blue-100 to-cyan-100 rounded-xl p-3 mb-5 text-left">
       <h3 class="font-bold text-blue-700 mb-1 text-sm">Cara Bermain:</h3>
       <ul class="text-xs text-gray-600 space-y-0.5">
@@ -236,20 +236,8 @@
       <div id="letter-buttons" class="flex flex-wrap justify-center gap-1"></div>
      </div>
     </div>
-   <div class="flex flex-col items-center gap-3 mt-3">
-
-  <button onclick="showFloatingMessage()"
-    class="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl shadow-lg hover:scale-105 transition-all">
-    📚 Lihat Pembahasan Soal
-  </button>
-
-  <a href="kpl-tantangan.html"
-     class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-    Kembali
-  </a>
-
-</div>
-     
+    <div class="flex justify-center mt-3"><a href="kpl-tantangan.html
+" class="text-white font-semibold hover:underline">Kembali</a>
     </div>
     <div id="retry-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
      <div class="glass-card rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl animate-retry-bounce">
@@ -488,8 +476,10 @@
       toggleQuestionSelector();
     }
     
-    function setupQuestion() {
-      document.getElementById('question-text').textContent = currentQuestion.question;
+          function setupQuestion() {
+  document.getElementById('question-text').innerHTML = 
+    currentQuestion.question.replace(/\n/g, "<br>");
+
       document.getElementById('question-number').textContent = `Soal ${currentQuestionIndex + 1}/10`;
       
       const imgElement = document.getElementById('question-image');
@@ -924,179 +914,5 @@
     applyConfig(config);
     initializeDataSDK();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d1226e6f194f8d6',t:'MTc3MTYzNDAwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
- /* ================= FLOATING MODAL FEATURE ================= */
-
-/* ================= DATA SOAL ================= */
-/* GANTI isi array di bawah ini dengan 10 soal & pembahasan Anda
-   PERSIS seperti yang Anda miliki (tanpa mengubah isi) */
-
-const floatingQuestionBank = [
-  {
-  soal: "Sebuah bangun datar berbentuk persegi memiliki panjang sisi 6 cm. Keliling bangun tersebut adalah __________ cm.",
-  jawaban: "24",
-  pembahasan: "Keliling persegi = 4 × sisi. Jadi 4 × 6 = 24 cm."
-},
-{
-  soal: "Keliling suatu bangun datar diperoleh dengan __________ semua panjang sisi bangun tersebut.",
-  jawaban: "MENJUMLAHKAN",
-  pembahasan: "Keliling bangun datar diperoleh dengan menjumlahkan semua panjang sisi bangun tersebut."
-},
-{
-  soal: "Sebuah segitiga memiliki panjang sisi 4 cm, 5 cm, dan 6 cm. Keliling segitiga tersebut adalah __________ cm.",
-  jawaban: "15",
-  pembahasan: "Keliling segitiga = jumlah semua sisi, yaitu 4 + 5 + 6 = 15 cm."
-},
-{
-  soal: "Sebuah taman berbentuk persegi panjang memiliki panjang 12 m dan lebar 8 m. Panjang pagar yang dibutuhkan adalah __________ m.",
-  jawaban: "40",
-  pembahasan: "Keliling persegi panjang = 2 × (panjang + lebar) = 2 × (12 + 8) = 2 × 20 = 40 m."
-},
-{
-  soal: "Sebuah bingkai foto berbentuk persegi memiliki keliling 36 cm. Panjang salah satu sisi adalah __________ cm.",
-  jawaban: "9",
-  pembahasan: "Keliling persegi = 4 × sisi. Jadi sisi = 36 ÷ 4 = 9 cm."
-},
-{
-  soal: "Bangun datar memiliki sisi 5 cm, 7 cm, 5 cm, dan 7 cm. Kelilingnya adalah __________ cm.",
-  jawaban: "24",
-  pembahasan: "Keliling = jumlah semua sisi, yaitu 5 + 7 + 5 + 7 = 24 cm."
-},
-{
-  soal: "Lapangan berbentuk persegi panjang memiliki keliling 64 m. Jika panjang 18 m, maka lebar adalah __________ m.",
-  jawaban: "14",
-  pembahasan: "Keliling = 2 × (panjang + lebar). 64 = 2 × (18 + lebar). Maka lebar = 14 m."
-},
-{
-  soal: "Panjang pita untuk mengelilingi buku persegi adalah 48 cm. Panjang satu sisi buku adalah __________ cm.",
-  jawaban: "12",
-  pembahasan: "Keliling persegi = 4 × sisi. Jadi sisi = 48 ÷ 4 = 12 cm."
-},
-{
-  soal: "Bangun datar memiliki keliling 30 cm. Tiga sisinya 6 cm, 8 cm, dan 7 cm. Sisi yang belum diketahui adalah __________ cm.",
-  jawaban: "9",
-  pembahasan: "Jumlah tiga sisi = 6 + 8 + 7 = 21. Sisi yang belum diketahui = 30 − 21 = 9 cm."
-}
-];
-
-
-/* ================= SHOW MODAL ================= */
-function showFloatingMessage() {
-  const modal = document.getElementById("floatingModal");
-  const content = document.getElementById("modalContent");
-
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
-
-  setTimeout(() => {
-    content.classList.remove("scale-95", "opacity-0");
-    content.classList.add("scale-100", "opacity-100");
-  }, 50);
-
-  generateCircles();
-}
-
-
-/* ================= CLOSE MODAL ================= */
-function closeFloatingMessage() {
-  const modal = document.getElementById("floatingModal");
-  const content = document.getElementById("modalContent");
-
-  content.classList.remove("scale-100", "opacity-100");
-  content.classList.add("scale-95", "opacity-0");
-
-  setTimeout(() => {
-    modal.classList.add("hidden");
-    modal.classList.remove("flex");
-    document.getElementById("questionDetail").classList.add("hidden");
-    document.getElementById("circleContainer").classList.remove("hidden");
-  }, 200);
-}
-
-
-/* ================= GENERATE CIRCLES ================= */
-function generateCircles() {
-  const container = document.getElementById("circleContainer");
-  container.innerHTML = "";
-
-  const gradients = [
-    "from-red-400 to-pink-500",
-    "from-blue-400 to-indigo-500",
-    "from-green-400 to-emerald-500",
-    "from-yellow-400 to-orange-500",
-    "from-purple-400 to-fuchsia-500",
-    "from-cyan-400 to-sky-500",
-    "from-lime-400 to-green-600",
-    "from-rose-400 to-red-600",
-    "from-teal-400 to-cyan-600",
-    "from-amber-400 to-yellow-600"
-  ];
-
-  floatingQuestionBank.forEach((_, index) => {
-    const btn = document.createElement("button");
-    btn.className = `
-      w-14 h-14 rounded-full 
-      bg-gradient-to-br ${gradients[index]}
-      text-white font-bold shadow-lg
-      hover:scale-110 transition transform
-    `;
-    btn.textContent = index + 1;
-    btn.onclick = () => showQuestionDetail(index);
-
-    container.appendChild(btn);
-  });
-}
-
-
-/* ================= SHOW DETAIL ================= */
-function showQuestionDetail(index) {
-  const data = floatingQuestionBank[index];
-
-  document.getElementById("circleContainer").classList.add("hidden");
-  document.getElementById("questionDetail").classList.remove("hidden");
-
-  document.getElementById("questionTitle").innerText = `Soal ${index + 1}`;
-  document.getElementById("questionText").innerText = data.soal;
-  document.getElementById("questionAnswer").innerText = "Jawaban: " + data.jawaban;
-  document.getElementById("questionExplanation").innerText = "Pembahasan: " + data.pembahasan;
-}
- </script>
- <!-- ================= FLOATING MODAL MESSAGE ================= -->
-<div id="floatingModal"
-     class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50 transition-opacity duration-300">
-
-  <div id="modalContent"
-       class="bg-white w-11/12 max-w-2xl rounded-2xl shadow-2xl p-6 transform scale-95 opacity-0 transition-all duration-300">
-
-    <!-- HEADER -->
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-xl font-bold text-gray-800">Pilih Soal</h2>
-      <button onclick="closeFloatingMessage()"
-              class="text-gray-500 hover:text-red-500 text-xl font-bold">&times;</button>
-    </div>
-
-    <!-- GRID LINGKARAN -->
-    <div id="circleContainer"
-         class="grid grid-cols-5 gap-4 justify-items-center">
-    </div>
-
-    <!-- DETAIL SOAL -->
-    <div id="questionDetail" class="hidden mt-6">
-      <h3 id="questionTitle" class="text-lg font-bold mb-2"></h3>
-      <p id="questionText" class="mb-2"></p>
-      <p id="questionAnswer" class="font-semibold text-green-600"></p>
-      <p id="questionExplanation" class="mt-2 text-gray-700"></p>
-
-      <div class="text-center mt-4">
-        <button onclick="closeFloatingMessage()"
-                class="px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">
-          OK
-        </button>
-      </div>
-    </div>
-
-  </div>
-</div>
-<!-- ================= END FLOATING MODAL ================= -->
- </body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d1226e6f194f8d6',t:'MTc3MTYzNDAwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

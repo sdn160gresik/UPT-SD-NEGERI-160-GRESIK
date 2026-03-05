@@ -179,8 +179,8 @@
      <div class="text-5xl md:text-6xl mb-4 animate-float">
       📐
      </div>
-     <h1 id="game-title" class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-3">Kuis Sistem Pernapasan</h1>
-     <p class="text-gray-600 text-sm mb-5 leading-relaxed">Susun huruf-huruf yang tersedia untuk membentuk jawaban yang benar tentang bangun datar! <span class="block mt-1 text-xs text-cyan-500 font-semibold">📏 Uji pengetahuanmu tentang persegi, segitiga, dan persegi panjang!</span></p>
+     <h1 id="game-title" class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-3">Kuis Bangun Datar</h1>
+     <p class="text-gray-600 text-sm mb-5 leading-relaxed">Susun huruf-huruf yang tersedia untuk membentuk jawaban yang benar tentang Bangun Datar! <span class="block mt-1 text-xs text-cyan-500 font-semibold">🫁 Uji pengetahuanmu tentang Bangun Datar!</span></p>
      <div class="bg-gradient-to-r from-blue-100 to-cyan-100 rounded-xl p-3 mb-5 text-left">
       <h3 class="font-bold text-blue-700 mb-1 text-sm">Cara Bermain:</h3>
       <ul class="text-xs text-gray-600 space-y-0.5">
@@ -236,19 +236,8 @@
       <div id="letter-buttons" class="flex flex-wrap justify-center gap-1"></div>
      </div>
     </div>
-    <div class="mt-6 flex gap-4">
-
-<button onclick="window.location.href='kpl-tantangan.html'" 
-  class="flex-1 py-3 bg-gray-500 text-white font-bold rounded-xl">
-  Kembali
-</button>
-
-  <button onclick="goToPembahasan()" 
-  class="flex-1 py-3 bg-purple-600 text-white font-bold rounded-xl">
-  Pembahasan
-  </button>
-
-</div>
+    <div class="flex justify-center mt-3"><a href="kpl-tantangan.html
+" class="text-white font-semibold hover:underline">Kembali</a>
     </div>
     <div id="retry-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
      <div class="glass-card rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl animate-retry-bounce">
@@ -281,17 +270,7 @@
        <p class="text-xs text-purple-700 mb-1 font-semibold">Jawaban Benar:</p>
        <p id="correct-answer-text" class="text-lg font-black text-purple-700">JAWABAN</p>
       </div>
-     <div class="flex flex-col gap-2">
-  <button onclick="goToPembahasan()" 
-    class="w-full py-3 px-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg font-bold rounded-xl shadow-lg hover:scale-105 transition-all duration-300">
-    📘 Lihat Pembahasan
-  </button>
-
-  <button id="result-next-btn" onclick="nextQuestion()" 
-    class="w-full py-3 px-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-xl shadow-lg hover:scale-105 transition-all duration-300">
-    🚀 Soal Berikutnya
-  </button>
-</div>
+     </div><button id="result-next-btn" onclick="nextQuestion()" class="w-full py-3 px-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-pulse-celebrate">🚀 Soal Berikutnya</button>
     </div>
    </div>
    <div id="end-screen" class="min-h-full w-full flex items-center justify-center p-2 hidden">
@@ -323,7 +302,7 @@
     let allGameScores = [];
     
     const questionBank = [
-    {
+     {
   question: "Sebuah taman berbentuk persegi dengan panjang sisi 18 m. Keliling taman tersebut adalah ....\nA. 54 m\nB. 64 m\nC. 72 m\nD. 80 m",
   answer: "C"
 },
@@ -362,8 +341,7 @@
 {
   question: "Belah ketupat memiliki panjang sisi 11 cm. Kelilingnya adalah ....\nA. 33 cm\nB. 40 cm\nC. 44 cm\nD. 48 cm",
   answer: "C"
-}
- 
+},
     ];
     
     let currentQuestion = null;
@@ -490,9 +468,10 @@
       toggleQuestionSelector();
     }
     
-    function setupQuestion() {
-      document.getElementById('question-text').innerHTML =
-  currentQuestion.question.replace(/\n/g, "<br>");
+          function setupQuestion() {
+  document.getElementById('question-text').innerHTML = 
+    currentQuestion.question.replace(/\n/g, "<br>");
+
       document.getElementById('question-number').textContent = `Soal ${currentQuestionIndex + 1}/10`;
       
       const imgElement = document.getElementById('question-image');
@@ -540,7 +519,7 @@
       const buttonsContainer = document.getElementById('letter-buttons');
       buttonsContainer.innerHTML = '';
       
-      const allCharacters = ['A', 'B', 'C', 'D'];
+      const options = ['A', 'B', 'C', 'D'];
       
       allCharacters.forEach((char, index) => {
         const btn = document.createElement('button');
@@ -923,21 +902,6 @@
     
     applyConfig(config);
     initializeDataSDK();
-
-    applyConfig(config);
-initializeDataSDK();
-
-
-// =============================
-// FUNCTION MENUJU PEMBAHASAN
-// =============================
-   function goToPembahasan() {
-  if (currentQuestion && currentQuestion.pembahasan) {
-    window.location.href = currentQuestion.pembahasan;
-  } else {
-    alert("Pembahasan belum tersedia.");
-  }
-}
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d1226e6f194f8d6',t:'MTc3MTYzNDAwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

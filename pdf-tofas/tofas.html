@@ -173,7 +173,22 @@
      <div class="bg-gradient-to-br from-purple-400 via-pink-400 to-red-400 rounded-3xl p-6 shadow-2xl border-4 border-white">
       <div class="bg-white rounded-2xl p-6 text-center"><span class="text-6xl wiggle-animation inline-block">📋</span>
        <h3 class="title-font text-2xl text-purple-600 mt-4 mb-2">Hasil TOFAS Kamu</h3>
-       <p class="text-gray-600 mb-6">Klik tombol di bawah untuk mengunduh hasil TOFAS</p><button onclick="downloadTOFAS()" class="btn-fun bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-2xl text-xl font-bold shadow-lg transition-all duration-300 inline-flex items-center gap-3"> <span>📥</span> <span>UNDUH HASIL TOFAS</span> </button>
+       <p class="text-gray-600 mb-6">Klik tombol di bawah untuk mengunduh hasil TOFAS</p><button onclick="downloadTOFAS()" class="btn-fun bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-2xl text-xl font-bold shadow-lg transition-all duration-300 inline-flex items-center gap-3"> 
+        <span>📥</span> <span>UNDUH HASIL TOFAS</span> </button>
+
+       <!-- TOMBOL BARU SERTIFIKAT -->
+
+<div class="mt-4">
+
+<button onclick="downloadSertifikat()" 
+class="btn-fun bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-8 py-4 rounded-2xl text-xl font-bold shadow-lg transition-all duration-300 inline-flex items-center gap-3 border-4 border-white">
+
+<span>🏅</span>
+<span>UNDUH SERTIFIKAT</span>
+
+</button>
+
+</div>
        <div id="downloadSuccess" class="hidden mt-4 bg-green-100 border-2 border-green-400 text-green-700 px-4 py-3 rounded-2xl font-semibold">
         <p class="font-bold text-lg">✅ File berhasil diunduh!</p>
         <p class="text-sm mt-2">📁 Cek folder <strong>Downloads</strong> atau <strong>Unduhan</strong> di komputermu</p>
@@ -192,6 +207,17 @@
    </div>
   </div>
   <script>
+   function downloadSertifikat(){
+
+document.getElementById("popupSertifikat").classList.remove("hidden");
+
+}
+
+function tutupPopup(){
+
+document.getElementById("popupSertifikat").classList.add("hidden");
+
+}
     // Student Data
     const students = [
       { name: "ADDINIYAH ZAHRA AKBAR", username: "ADD001", password: "ADD001" },
@@ -347,7 +373,45 @@ function downloadTOFAS() {
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d978e91c6a5585b',t:'MTc3MzAzMjg1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d978e91c6a5585b',t:'MTc3MzAzMjg1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+
+  <div id="popupSertifikat" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+
+<div class="bg-white rounded-3xl p-8 max-w-md text-center shadow-2xl border-4 border-yellow-400">
+
+<div class="text-6xl mb-4">🌟</div>
+
+<h2 class="text-2xl font-bold text-orange-600 mb-2">
+Ups... Sertifikat Belum Tersedia
+</h2>
+
+<p class="text-gray-600 font-semibold">
+
+Wah hebat sudah sampai di sini! 👏  
+<br><br>
+
+Maaf ya, <b>nilai TOFAS kamu belum mencukupi untuk mendapatkan sertifikat.</b>
+
+<br><br>
+
+Tapi jangan sedih! 💪  
+Terus belajar dan berlatih supaya nanti bisa meraih  
+<b>sertifikat kerenmu!</b> 🚀📚
+
+</p>
+
+<button onclick="tutupPopup()" 
+class="mt-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-full font-bold">
+
+Semangat Belajar! 💪
+
+</button>
+
+</div>
+
+</div>
+ </body>
 
 </html>
+
 

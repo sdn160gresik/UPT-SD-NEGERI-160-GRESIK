@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Siswa Kelas 5</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&amp;family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Nunito', sans-serif; }
+    .title-font { font-family: 'Fredoka One', cursive; }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes bounce-slow {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: rotate(3deg); }
+    }
+    
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .float-animation { animation: float 3s ease-in-out infinite; }
+    .bounce-animation { animation: bounce-slow 2s ease-in-out infinite; }
+    .wiggle-animation { animation: wiggle 1s ease-in-out infinite; }
+    
+    .rainbow-bg {
+      background: linear-gradient(135deg, #FF6B6B, #FFE66D, #4ECDC4, #45B7D1, #96CEB4, #FF6B6B);
+      background-size: 400% 400%;
+      animation: rainbow 8s ease infinite;
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-8px) rotate(1deg);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    
+    .btn-fun:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      opacity: 0.7;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full overflow-auto">
+  <div id="app" class="min-h-full rainbow-bg relative"><!-- Decorative Elements -->
+   <div class="absolute top-10 left-10 text-6xl float-animation">
+    🌟
+   </div>
+   <div class="absolute top-20 right-20 text-5xl float-animation" style="animation-delay: 0.5s;">
+    🎈
+   </div>
+   <div class="absolute bottom-20 left-20 text-5xl float-animation" style="animation-delay: 1s;">
+    🎨
+   </div>
+   <div class="absolute bottom-10 right-10 text-6xl float-animation" style="animation-delay: 1.5s;">
+    🚀
+   </div><!-- Main Page -->
+   <div id="mainPage" class="relative z-10 p-4 md:p-8"><!-- Header -->
+    <header class="text-center mb-8">
+     <div class="inline-block bg-white rounded-3xl px-8 py-4 shadow-2xl bounce-animation">
+      <h1 id="portalTitle" class="title-font text-4xl md:text-5xl bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 bg-clip-text text-transparent">🎓 🎓</h1>
+      <p class="text-lg text-gray-600 mt-2 font-semibold">Selamat Datang, Pejuang Hebat! 💪</p>
+     </div>
+    </header><!-- Menu Cards -->
+    <div class="max-w-4xl mx-auto grid md:grid-cols-1 gap-6 md:gap-8"><!-- Card Hasil TOFAS -->
+     <div class="card-hover transition-all duration-300 cursor-pointer" onclick="showLoginPage()">
+      <div class="bg-gradient-to-br from-cyan-300 via-blue-400 to-purple-500 rounded-3xl p-6 shadow-xl border-4 border-white">
+       <div class="bg-white rounded-2xl p-6 text-center">
+        <div class="text-7xl mb-4 bounce-animation">
+         📊
+        </div>
+        <h2 class="title-font text-2xl md:text-3xl text-blue-600 mb-2">HASIL TOFAS</h2>
+        <p class="text-gray-600 font-semibold">Unduh hasil TOFAS kamu!</p>
+        <div class="mt-4 inline-block bg-blue-500 text-white px-6 py-2 rounded-full font-bold hover:bg-blue-600 transition-colors">
+         Masuk Sekarang! 🔑
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- Exit Button -->
+    <div class="text-center mt-10"><a href="Petualangan-Kelas-5.html" class="btn-fun inline-flex items-center gap-3 bg-gradient-to-r from-green-400 to-emerald-500 text-white px-8 py-4 rounded-full text-xl font-bold shadow-xl transition-all duration-300 border-4 border-white"> <span>🏠</span> <span>Kembali ke Petualangan</span> <span>🎮</span> </a>
+    </div>
+   </div><!-- Announcements Page -->
+   <div id="announcementsPage" class="hidden relative z-10 p-4 md:p-8">
+    <div class="max-w-3xl mx-auto"><!-- Back Button --> <button onclick="showMainPage()" class="btn-fun mb-6 bg-white text-purple-600 px-6 py-3 rounded-full font-bold shadow-lg transition-all duration-300 flex items-center gap-2"> <span>⬅️</span> <span>Kembali</span> </button> <!-- Announcements Card -->
+     <div class="bg-white rounded-3xl p-6 md:p-8 shadow-2xl border-4 border-yellow-400">
+      <div class="text-center mb-6"><span class="text-6xl">📢</span>
+       <h2 id="announcementTitle" class="title-font text-3xl md:text-4xl text-orange-600 mt-4">Pengumuman</h2>
+      </div><!-- Announcement Items -->
+      <div class="space-y-4">
+       <div class="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-2xl p-5 border-l-4 border-orange-500">
+        <div class="flex items-start gap-3"><span class="text-3xl">🎉</span>
+         <div>
+          <h3 class="font-bold text-lg text-orange-700">Hasil TOFAS Sudah Tersedia!</h3>
+          <p class="text-gray-600 mt-1">Hai Sobat Kelas 5! Hasil TOFAS kalian sudah bisa diunduh. Yuk login dan lihat hasilnya!</p>
+          <p class="text-sm text-gray-400 mt-2">📅 Desember 2024</p>
+         </div>
+        </div>
+       </div>
+       <div class="bg-gradient-to-r from-blue-100 to-cyan-100 rounded-2xl p-5 border-l-4 border-blue-500">
+        <div class="flex items-start gap-3"><span class="text-3xl">📚</span>
+         <div>
+          <h3 class="font-bold text-lg text-blue-700">Persiapan Ujian Semester</h3>
+          <p class="text-gray-600 mt-1">Jangan lupa belajar dengan giat ya! Ujian semester akan segera tiba. Semangat! 💪</p>
+          <p class="text-sm text-gray-400 mt-2">📅 Desember 2024</p>
+         </div>
+        </div>
+       </div>
+       <div class="bg-gradient-to-r from-green-100 to-emerald-100 rounded-2xl p-5 border-l-4 border-green-500">
+        <div class="flex items-start gap-3"><span class="text-3xl">🌟</span>
+         <div>
+          <h3 class="font-bold text-lg text-green-700">Selamat untuk Semua Siswa!</h3>
+          <p class="text-gray-600 mt-1">Kalian semua adalah bintang! Terus semangat belajar dan raih mimpimu! ⭐</p>
+          <p class="text-sm text-gray-400 mt-2">📅 Desember 2024</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Login Page -->
+   <div id="loginPage" class="hidden relative z-10 p-4 md:p-8">
+    <div class="max-w-md mx-auto"><!-- Back Button --> <button onclick="showMainPage()" class="btn-fun mb-6 bg-white text-purple-600 px-6 py-3 rounded-full font-bold shadow-lg transition-all duration-300 flex items-center gap-2"> <span>⬅️</span> <span>Kembali</span> </button> <!-- Login Card -->
+     <div class="bg-white rounded-3xl p-6 md:p-8 shadow-2xl border-4 border-blue-400">
+      <div class="text-center mb-6"><span class="text-6xl bounce-animation inline-block">🔐</span>
+       <h2 class="title-font text-3xl text-blue-600 mt-4">LOGIN SISWA</h2>
+       <p class="text-gray-500 mt-2">Masukkan username &amp; password kamu</p>
+      </div>
+      <form id="loginForm" class="space-y-5">
+       <div><label for="username" class="block text-gray-700 font-bold mb-2">👤 Username</label> <input type="text" id="username" placeholder="Masukkan username" class="w-full px-5 py-4 rounded-2xl border-3 border-blue-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-200 outline-none text-lg font-semibold transition-all">
+       </div>
+       <div><label for="password" class="block text-gray-700 font-bold mb-2">🔑 Password</label> <input type="password" id="password" placeholder="Masukkan password" class="w-full px-5 py-4 rounded-2xl border-3 border-blue-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-200 outline-none text-lg font-semibold transition-all">
+       </div>
+       <div id="loginError" class="hidden bg-red-100 border-2 border-red-400 text-red-700 px-4 py-3 rounded-2xl text-center font-semibold"><span>❌ Username atau Password salah!</span>
+       </div><button type="submit" class="btn-fun w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 rounded-2xl text-xl font-bold shadow-lg transition-all duration-300"> 🚀 MASUK </button>
+      </form>
+      <div class="mt-6 p-4 bg-yellow-50 rounded-2xl border-2 border-yellow-300">
+       <p class="text-center text-sm text-yellow-700">💡 <strong>Petunjuk:</strong> Username dan Password sama dengan kode kamu</p>
+      </div>
+     </div>
+    </div>
+   </div><!-- Dashboard Page (After Login) -->
+   <div id="dashboardPage" class="hidden relative z-10 p-4 md:p-8">
+    <div class="max-w-2xl mx-auto"><!-- Welcome Card -->
+     <div class="bg-white rounded-3xl p-6 md:p-8 shadow-2xl border-4 border-green-400 mb-6">
+      <div class="text-center"><span class="text-7xl">🎊</span>
+       <h2 class="title-font text-3xl text-green-600 mt-4">SELAMAT DATANG!</h2>
+       <p id="welcomeName" class="text-xl text-gray-600 mt-2 font-bold"></p>
+      </div>
+     </div><!-- Download Card -->
+     <div class="bg-gradient-to-br from-purple-400 via-pink-400 to-red-400 rounded-3xl p-6 shadow-2xl border-4 border-white">
+      <div class="bg-white rounded-2xl p-6 text-center"><span class="text-6xl wiggle-animation inline-block">📋</span>
+       <h3 class="title-font text-2xl text-purple-600 mt-4 mb-2">Hasil TOFAS Kamu</h3>
+       <p class="text-gray-600 mb-6">Klik tombol di bawah untuk mengunduh hasil TOFAS</p><button onclick="downloadTOFAS()" class="btn-fun bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-2xl text-xl font-bold shadow-lg transition-all duration-300 inline-flex items-center gap-3"> <span>📥</span> <span>UNDUH HASIL TOFAS</span> </button>
+       <div id="downloadSuccess" class="hidden mt-4 bg-green-100 border-2 border-green-400 text-green-700 px-4 py-3 rounded-2xl font-semibold">
+        <p class="font-bold text-lg">✅ File berhasil diunduh!</p>
+        <p class="text-sm mt-2">📁 Cek folder <strong>Downloads</strong> atau <strong>Unduhan</strong> di komputermu</p>
+       </div>
+       <div id="downloadInfo" class="mt-4 bg-blue-50 border-2 border-blue-300 text-blue-700 px-4 py-3 rounded-2xl text-sm">
+        <p class="font-semibold">💡 Petunjuk:</p>
+        <p>File akan otomatis tersimpan di folder <strong>Downloads</strong> komputer kamu</p>
+       </div>
+      </div>
+     </div><!-- Logout Button -->
+     <div class="text-center mt-8"><button onclick="logout()" class="btn-fun bg-gradient-to-r from-red-400 to-orange-500 text-white px-8 py-4 rounded-full text-xl font-bold shadow-lg transition-all duration-300 inline-flex items-center gap-3 border-4 border-white"> <span>🚪</span> <span>Keluar</span> </button>
+     </div><!-- Back to Adventure -->
+     <div class="text-center mt-4"><a href="Petualangan-Kelas-5.html" class="btn-fun inline-flex items-center gap-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-white px-8 py-4 rounded-full text-lg font-bold shadow-xl transition-all duration-300 border-4 border-white"> <span>🏠</span> <span>Kembali ke Petualangan</span> <span>🎮</span> </a>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    // Student Data
+    const students = [
+      { name: "ADDINIYAH ZAHRA AKBAR", username: "ADD001", password: "ADD001" },
+      { name: "AKBAR ALVINO KURNIAWAN", username: "AKB002", password: "AKB002" },
+      { name: "ALFAN NUR ROSYID", username: "ALF003", password: "ALF003" },
+      { name: "ALFIAN DAFFA ZAHIRUL UBAID", username: "ALF004", password: "ALF004" },
+      { name: "ANANDA ARESYAHIRA RAMADHANI", username: "ANA005", password: "ANA005" },
+      { name: "ANINDYA SALSABILA EVANIA", username: "ANI006", password: "ANI006" },
+      { name: "ASHALINA BILQIS HUMAIRA", username: "ASH007", password: "ASH007" },
+      { name: "ASYIFA BILQIS PUSPITA", username: "ASY008", password: "ASY008" },
+      { name: "AZZAHIRA SALSABILA AURA BILQIS", username: "AZZ009", password: "AZZ009" },
+      { name: "BELLVANIA ASSYIFATU HAIFA", username: "BEL010", password: "BEL010" },
+      { name: "BILQIS UFAIRA NUR AFIFA", username: "BIL011", password: "BIL011" },
+      { name: "DAMARA MARTA CAHYA PARWATI", username: "DAM012", password: "DAM012" },
+      { name: "DELVIN FAKHRUDDIN MAJID ALMER", username: "DEL013", password: "DEL013" },
+      { name: "FAHIRA KEYSHA AZZAHRA", username: "FAH014", password: "FAH014" },
+      { name: "KEYLA AIRA ADELIA", username: "KEY015", password: "KEY015" },
+      { name: "MUHAMMAD DINDA AFIF MUZZAKY", username: "MUH016", password: "MUH016" },
+      { name: "MUHAMMAD DIPTA PRASETYA", username: "MUH017", password: "MUH017" },
+      { name: "MUHAMMAD ILHAM PUTRA P.", username: "MUH018", password: "MUH018" },
+      { name: "MUHAMMAD IRSYAD RAMADHAN", username: "MUH019", password: "MUH019" },
+      { name: "MUHAMMAD KENZHO REZA P. W.", username: "MUH020", password: "MUH020" },
+      { name: "MUHAMMAD ZHAFRAN ILHAMSYAH", username: "MUH021", password: "MUH021" },
+      { name: "NAYLA SYIFA FAWWAZAH", username: "NAY022", password: "NAY022" },
+      { name: "NINDA RANIA FAJRIA", username: "NIN023", password: "NIN023" },
+      { name: "SYIFA ASSYABIYA ZALFA", username: "SYI024", password: "SYI024" },
+      { name: "TRISTAN PUTRA PASHA", username: "TRI025", password: "TRI025" },
+      { name: "VANESSA OCVIANI PRASETYA", username: "VAN026", password: "VAN026" }
+    ];
+
+    let currentUser = null;
+
+    // Default configuration
+    const defaultConfig = {
+      portal_title: "🎓 PENGUMUMAN 🎓",
+      announcement_title: "PENGUMUMAN",
+      primary_color: "#8B5CF6",
+      secondary_color: "#F59E0B",
+      accent_color: "#10B981"
+    };
+
+    // Page Navigation
+    function showMainPage() {
+      document.getElementById('mainPage').classList.remove('hidden');
+      document.getElementById('announcementsPage').classList.add('hidden');
+      document.getElementById('loginPage').classList.add('hidden');
+      document.getElementById('dashboardPage').classList.add('hidden');
+    }
+
+    function showAnnouncements() {
+      document.getElementById('mainPage').classList.add('hidden');
+      document.getElementById('announcementsPage').classList.remove('hidden');
+      document.getElementById('loginPage').classList.add('hidden');
+      document.getElementById('dashboardPage').classList.add('hidden');
+    }
+
+    function showLoginPage() {
+      document.getElementById('mainPage').classList.add('hidden');
+      document.getElementById('announcementsPage').classList.add('hidden');
+      document.getElementById('loginPage').classList.remove('hidden');
+      document.getElementById('dashboardPage').classList.add('hidden');
+      document.getElementById('loginError').classList.add('hidden');
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
+    }
+
+    function showDashboard() {
+      document.getElementById('mainPage').classList.add('hidden');
+      document.getElementById('announcementsPage').classList.add('hidden');
+      document.getElementById('loginPage').classList.add('hidden');
+      document.getElementById('dashboardPage').classList.remove('hidden');
+    }
+
+    // Login Handler
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value.toUpperCase().trim();
+      const password = document.getElementById('password').value.toUpperCase().trim();
+      
+      const student = students.find(s => s.username === username && s.password === password);
+      
+      if (student) {
+        currentUser = student;
+        document.getElementById('welcomeName').textContent = `Halo, ${student.name}! 👋`;
+        document.getElementById('downloadSuccess').classList.add('hidden');
+        showDashboard();
+      } else {
+        document.getElementById('loginError').classList.remove('hidden');
+      }
+    });
+
+    // Download TOFAS Result
+function downloadTOFAS() {
+  if (!currentUser) return;
+
+  const username = currentUser.username;
+
+  const fileURL =
+  "https://raw.githubusercontent.com/sdn160gresik/UPT-SD-NEGERI-160-GRESIK/main/pdf-tofas/" 
+  + username + ".pdf";
+
+  const link = document.createElement("a");
+  link.href = fileURL;
+  link.download = "Hasil_TOFAS_" + username + ".pdf";
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  document.getElementById('downloadSuccess').classList.remove('hidden');
+}
+
+    // Logout
+    function logout() {
+      currentUser = null;
+      showMainPage();
+    }
+
+    // Element SDK Integration
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig: defaultConfig,
+        onConfigChange: async (config) => {
+          const portalTitle = document.getElementById('portalTitle');
+          const announcementTitle = document.getElementById('announcementTitle');
+          
+          if (portalTitle) {
+            portalTitle.textContent = config.portal_title || defaultConfig.portal_title;
+          }
+          if (announcementTitle) {
+            announcementTitle.textContent = config.announcement_title || defaultConfig.announcement_title;
+          }
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                config.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["portal_title", config.portal_title || defaultConfig.portal_title],
+          ["announcement_title", config.announcement_title || defaultConfig.announcement_title]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d978e91c6a5585b',t:'MTc3MzAzMjg1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

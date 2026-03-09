@@ -100,7 +100,7 @@
       </div>
      </div>
     </div><!-- Exit Button -->
-    <div class="text-center mt-10"><a href="../kelas-5/Petualangan-Kelas-5.html"" class="btn-fun inline-flex items-center gap-3 bg-gradient-to-r from-green-400 to-emerald-500 text-white px-8 py-4 rounded-full text-xl font-bold shadow-xl transition-all duration-300 border-4 border-white"> <span>🏠</span> <span>Kembali ke Petualangan</span> <span>🎮</span> </a>
+    <div class="text-center mt-10"><a href="../kelas-5/Petualangan-Kelas-5.html" class="btn-fun inline-flex items-center gap-3 bg-gradient-to-r from-green-400 to-emerald-500 text-white px-8 py-4 rounded-full text-xl font-bold shadow-xl transition-all duration-300 border-4 border-white"> <span>🏠</span> <span>Kembali ke Petualangan</span> <span>🎮</span> </a>
     </div>
    </div><!-- Announcements Page -->
    <div id="announcementsPage" class="hidden relative z-10 p-4 md:p-8">
@@ -207,10 +207,36 @@ class="btn-fun bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-8 py
    </div>
   </div>
   <script>
-   function downloadSertifikat(){
+   let currentUser = null;
+const sertifikatFiles = {
+  "TRI025": "Tristan.pdf",
+  "MUH019": "IRSYAD.pdf",
+  "KEY015": "Adel.pdf"
+};
+   function downloadSertifikat() {
 
-document.getElementById("popupSertifikat").classList.remove("hidden");
+  if (!currentUser) return;
 
+  const username = currentUser.username;
+  const fileName = sertifikatFiles[username];
+
+  // jika tidak ada sertifikat
+  if (!fileName) {
+    document.getElementById("popupSertifikat").classList.remove("hidden");
+    return;
+  }
+
+  const fileURL =
+  "https://raw.githubusercontent.com/sdn160gresik/UPT-SD-NEGERI-160-GRESIK/main/pdf-tofas/" 
+  + fileName;
+
+  const link = document.createElement("a");
+  link.href = fileURL;
+  link.download = fileName;
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 function tutupPopup(){
@@ -248,7 +274,7 @@ document.getElementById("popupSertifikat").classList.add("hidden");
       { name: "VANESSA OCVIANI PRASETYA", username: "VAN026", password: "VAN026" }
     ];
 
-    let currentUser = null;
+  
 
     // Default configuration
     const defaultConfig = {
@@ -413,5 +439,6 @@ Semangat Belajar! 💪
  </body>
 
 </html>
+
 
 

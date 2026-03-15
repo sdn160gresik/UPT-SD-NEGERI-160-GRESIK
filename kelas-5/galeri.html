@@ -90,6 +90,11 @@ nav a:hover{
   max-width:1100px;
   margin:auto;
 }
+.gallery-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
 .gallery img,
 .gallery video{
   width:100%;
@@ -101,6 +106,14 @@ nav a:hover{
 .gallery img:hover,
 .gallery video:hover{
   transform:scale(1.05);
+}
+.item-name{
+  margin-top:5px;
+  text-align:center;
+  font-weight:bold;
+  color:white;
+  text-shadow: 1px 1px 3px black;
+  font-size:0.9rem;
 }
 
 /* MODAL */
@@ -125,6 +138,16 @@ nav a:hover{
 }
 .modal video{
   background:black;
+}
+
+/* Nama media di modal */
+.modal .modal-name{
+  margin-top:10px;
+  font-size:1.2rem;
+  color:white;
+  font-weight:bold;
+  text-align:center;
+  text-shadow: 1px 1px 3px black;
 }
 
 /* Tombol modal sejajar di bawah media */
@@ -158,7 +181,7 @@ nav a:hover{
   <div class="nav-right">
     <a href="../index.html">🏠 Beranda</a>
     <a href="kelas.html">🏫 Kelas</a>
-    <a href="Petualangan-Kelas-5.html">🖼️ Kembali</a>
+    <a href="Petualangan-Kelas-5.html">◀ Kembali</a>
   </div>
 </nav>
 
@@ -183,6 +206,7 @@ nav a:hover{
 <div id="modal" class="modal">
   <img id="modal-img">
   <video id="modal-video" controls></video>
+  <div class="modal-name" id="modal-name"></div>
   <div class="modal-buttons">
     <button onclick="prevItem()">⏮️ Back</button>
     <button onclick="downloadFile()">Download</button>
@@ -235,8 +259,19 @@ function fetchAlbum(albumID,category){
         element.src=item.link;
       }
       element.dataset.category=category;
+      element.dataset.name = item.title || "Tidak ada nama"; // tambahkan nama
       element.onclick=()=>openModal(item);
-      gallery.appendChild(element);
+      
+      // bungkus media + nama
+      const wrapper = document.createElement("div");
+      wrapper.className="gallery-item";
+      wrapper.appendChild(element);
+      const nameLabel = document.createElement("div");
+      nameLabel.className="item-name";
+      nameLabel.textContent = element.dataset.name;
+      wrapper.appendChild(nameLabel);
+      
+      gallery.appendChild(wrapper);
       galleryItems.push(item); // simpan semua item untuk navigasi
     });
   });
@@ -251,6 +286,7 @@ function openModal(item){
   const modal=document.getElementById("modal");
   const img=document.getElementById("modal-img");
   const vid=document.getElementById("modal-video");
+  const nameDiv = document.getElementById("modal-name");
   currentItem = item;
   currentIndex = galleryItems.indexOf(item);
   if(item.type.includes("video")){
@@ -262,6 +298,7 @@ function openModal(item){
     img.style.display="block";
     vid.style.display="none";
   }
+  nameDiv.textContent = item.title || "Tidak ada nama"; // tampilkan nama di modal
   modal.style.display="flex";
 }
 

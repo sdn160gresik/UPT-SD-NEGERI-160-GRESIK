@@ -1,155 +1,310 @@
 <!DOCTYPE html>
-
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Galeri Kegiatan Sekolah</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-
+/* BODY DAN BACKGROUND */
 body{
-margin:0;
-font-family:'Poppins',sans-serif;
-background:url('https://i.imgur.com/T7DDd3c.jpeg') no-repeat center center fixed;
-background-size:cover;
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background: url('https://i.imgur.com/clG3P3n.png') no-repeat center center fixed;
+  background-size: cover;
 }
 
-/* NAVBAR */
-
+/* NAVBAR TRANSPARAN TOTAL, IKUT SCROLL */
 nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:1rem 2rem;
-box-shadow:0 4px 8px rgba(0,0,0,0.2);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1rem 2rem;
+  background: transparent;
+  box-shadow: none;
 }
-
 .nav-left{
-display:flex;
-align-items:center;
-gap:1rem;
+  display:flex;
+  align-items:center;
+  gap:1rem;
 }
-
 .nav-right{
-display:flex;
-gap:0.5rem;
+  display:flex;
+  gap:0.5rem;
 }
-
 nav img{
-height:55px;
+  height:55px;
 }
-
 nav a{
-background:white;
-padding:0.5rem 1rem;
-border-radius:6px;
-text-decoration:none;
-color:#0288d1;
-font-weight:bold;
+  background: rgba(255,255,255,0.6);
+  padding:0.5rem 1rem;
+  border:2px solid #0288d1;
+  border-radius:8px;
+  text-decoration:none;
+  color:#0288d1;
+  font-weight:bold;
+  transition:0.3s;
+}
+nav a:hover{
+  background:#0288d1;
+  color:white;
 }
 
 /* JUDUL */
-
 .title{
-text-align:center;
-margin-top:40px;
+  text-align:center;
+  margin-top:20px;
+  padding:20px;
 }
-
 .title h1{
-background:white;
-display:inline-block;
-padding:.5rem 1.5rem;
-border-radius:12px;
-color:#0288d1;
+  background:white;
+  display:inline-block;
+  padding:.5rem 1.5rem;
+  border-radius:12px;
+  color:#0288d1;
 }
 
-/* GRID GALERI */
-
-.gallery-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-padding:30px;
-max-width:900px;
-margin:auto;
+/* FILTER */
+.filter{
+  text-align:center;
+  margin-bottom:20px;
+}
+.filter button{
+  border:none;
+  background:#0288d1;
+  color:white;
+  padding:10px 15px;
+  margin:5px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
 }
 
-.gallery-item{
-background:white;
-border-radius:15px;
-padding:25px;
-text-align:center;
-color:#0288d1;
-box-shadow:0 4px 10px rgba(0,0,0,0.2);
-text-decoration:none;
-font-weight:bold;
-font-size:1.1rem;
+/* GALLERY */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  padding:20px;
+  max-width:1100px;
+  margin:auto;
+}
+.gallery img,
+.gallery video{
+  width:100%;
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.3s;
+  border: 4px solid white;
+}
+.gallery img:hover,
+.gallery video:hover{
+  transform:scale(1.05);
 }
 
-.gallery-item span{
-font-size:2.5rem;
-display:block;
-margin-bottom:10px;
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  z-index:999;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+.modal img,
+.modal video{
+  max-width:90%;
+  max-height:80%;
+  border-radius:10px;
+}
+.modal video{
+  background:black;
 }
 
+/* Tombol modal sejajar di bawah media */
+.modal .modal-buttons{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:15px;
+}
+.modal button{
+  padding:10px 20px;
+  border:none;
+  border-radius:8px;
+  background:#0288d1;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+}
 </style>
-
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <nav>
-
-<div class="nav-left">
-<img src="https://i.imgur.com/sxm7RR1.png">
-<img src="https://i.imgur.com/tGA5UBc.png" style="height:62px;">
-<img src="https://i.imgur.com/oWB8vKW.png">
-</div>
-
-<div class="nav-right">
-<a href="../index.html">🏠 Beranda</a>
-<a href="#">📌 Program</a>
-<a href="galeri.html">🖼️ Galeri</a>
-<a href="kelas.html">🏫 Kelas</a>
-</div>
-
+  <div class="nav-left">
+    <img src="https://i.imgur.com/sxm7RR1.png">
+    <img src="https://i.imgur.com/tGA5UBc.png" style="height:62px;">
+    <img src="https://i.imgur.com/oWB8vKW.png">
+  </div>
+  <div class="nav-right">
+    <a href="../index.html">🏠 Beranda</a>
+    <a href="kelas.html">🏫 Kelas</a>
+    <a href="Petualangan-Kelas-5.html">🖼️ Kembali</a>
+  </div>
 </nav>
 
+<!-- JUDUL -->
 <div class="title">
-<h1>🖼️ Galeri Kegiatan Sekolah</h1>
+  <h1>🖼️ Galeri Kegiatan Sekolah</h1>
 </div>
 
-<div class="gallery-grid">
-
-<a href="galeri-keagamaan.html" class="gallery-item">
-<span>🕌</span>
-Kegiatan Keagamaan
-</a>
-
-<a href="#galeri-seni.html" class="gallery-item">
-<span>🎨</span>
-Kegiatan Seni
-</a>
-
-<a href="#galeri-olahraga.html" class="gallery-item">
-<span>⚽</span>
-Olahraga
-</a>
-
-<a href="#galeri-belajar.html" class="gallery-item">
-<span>📚</span>
-Kegiatan Belajar
-</a>
-
-<a href="#galeri-prestasi.html" class="gallery-item">
-<span>🏆</span>
-Prestasi Siswa
-</a>
-
+<!-- FILTER -->
+<div class="filter">
+  <button onclick="filter('all')">Semua</button>
+  <button onclick="filter('keagamaan')">Keagamaan</button>
+  <button onclick="filter('olahraga')">Olahraga</button>
+  <button onclick="filter('belajar')">Belajar</button>
+  <button onclick="filter('prestasi')">Prestasi</button>
 </div>
+
+<!-- GALERI -->
+<div class="gallery" id="gallery"></div>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <img id="modal-img">
+  <video id="modal-video" controls></video>
+  <div class="modal-buttons">
+    <button onclick="prevItem()">⏮️ Back</button>
+    <button onclick="downloadFile()">Download</button>
+    <button onclick="closeModal()">Tutup</button>
+    <button onclick="nextItem()">⏭️ Next</button>
+  </div>
+</div>
+
+<script>
+const albumIDs = {
+  keagamaan: "JTUCNbl",
+  olahraga: "XXXXXX",
+  belajar: "YYYYYY",
+  prestasi: "ZZZZZZ"
+};
+
+let currentCategory = "all";
+let currentItem = null;
+let galleryItems = []; // semua item
+let currentIndex = 0;
+
+function loadGallery(category){
+  const gallery=document.getElementById("gallery");
+  gallery.innerHTML="";
+  galleryItems = []; // reset galleryItems saat filter berubah
+  if(category==="all"){
+    for(let cat in albumIDs){
+      fetchAlbum(albumIDs[cat],cat);
+    }
+  }else{
+    fetchAlbum(albumIDs[category],category);
+  }
+}
+
+function fetchAlbum(albumID,category){
+  fetch(`https://api.imgur.com/3/album/${albumID}/images`,{
+    headers:{Authorization:"Client-ID 546c25a59c58ad7"}
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    const gallery=document.getElementById("gallery");
+    data.data.forEach(item=>{
+      let element;
+      if(item.type.includes("video")){
+        element=document.createElement("video");
+        element.src=item.link;
+        element.controls=false;
+      }else{
+        element=document.createElement("img");
+        element.src=item.link;
+      }
+      element.dataset.category=category;
+      element.onclick=()=>openModal(item);
+      gallery.appendChild(element);
+      galleryItems.push(item); // simpan semua item untuk navigasi
+    });
+  });
+}
+
+function filter(cat){
+  currentCategory=cat;
+  loadGallery(cat);
+}
+
+function openModal(item){
+  const modal=document.getElementById("modal");
+  const img=document.getElementById("modal-img");
+  const vid=document.getElementById("modal-video");
+  currentItem = item;
+  currentIndex = galleryItems.indexOf(item);
+  if(item.type.includes("video")){
+    vid.src=item.link;
+    vid.style.display="block";
+    img.style.display="none";
+  }else{
+    img.src=item.link;
+    img.style.display="block";
+    vid.style.display="none";
+  }
+  modal.style.display="flex";
+}
+
+function closeModal(){
+  const modal=document.getElementById("modal");
+  const vid=document.getElementById("modal-video");
+  vid.pause();
+  modal.style.display="none";
+}
+
+function nextItem(){
+  if(galleryItems.length === 0) return;
+  currentIndex = (currentIndex + 1) % galleryItems.length;
+  openModal(galleryItems[currentIndex]);
+}
+
+function prevItem(){
+  if(galleryItems.length === 0) return;
+  currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+  openModal(galleryItems[currentIndex]);
+}
+
+// Fungsi download langsung ke perangkat
+function downloadFile(){
+  if(!currentItem) return;
+  fetch(currentItem.link)
+    .then(resp => resp.blob())
+    .then(blob => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      const ext = currentItem.type.includes('video') ? '.mp4' : '.jpg';
+      a.download = `galeri${ext}`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+}
+
+// load semua kategori awal
+loadGallery("all");
+</script>
 
 </body>
 </html>

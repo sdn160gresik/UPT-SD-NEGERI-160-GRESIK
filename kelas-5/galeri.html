@@ -1,4 +1,5 @@
 <!DOCTYPE html>   
+<!DOCTYPE html>   
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -107,18 +108,24 @@ nav a:hover{
   flex-direction:column;
   align-items:center;
 }
+
+/* THUMBNAIL PROPORSIONAL */
 .gallery img,
 .gallery video{
   width:100%;
+  height:180px;
+  object-fit:cover;
   border-radius:12px;
   cursor:pointer;
   transition:0.3s;
   border: 4px solid white;
 }
+
 .gallery img:hover,
 .gallery video:hover{
   transform:scale(1.05);
 }
+
 .item-name{
   margin-top:5px;
   text-align:center;
@@ -197,12 +204,10 @@ nav a:hover{
   </div>
 </nav>
 
-<!-- JUDUL -->
 <div class="title">
   <h1>🖼️ Galeri Kegiatan Sekolah</h1>
 </div>
 
-<!-- FILTER DROPDOWN -->
 <div class="filter">
   <select onchange="filter(this.value)">
     <option value="all">Semua</option>
@@ -213,10 +218,8 @@ nav a:hover{
   </select>
 </div>
 
-<!-- GALERI -->
 <div class="gallery" id="gallery"></div>
 
-<!-- MODAL -->
 <div id="modal" class="modal">
   <img id="modal-img">
   <video id="modal-video" controls></video>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>   
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -65,21 +65,33 @@ nav a:hover{
   color:#0288d1;
 }
 
-/* FILTER */
+/* FILTER DROPDOWN MENARIK DENGAN WARNA TEKS */
 .filter{
   text-align:center;
   margin-bottom:20px;
 }
-.filter button{
+.filter select{
+  padding:12px 18px;
+  border-radius:12px;
   border:none;
-  background:#0288d1;
-  color:white;
-  padding:10px 15px;
-  margin:5px;
-  border-radius:8px;
-  cursor:pointer;
   font-weight:bold;
+  font-size:1rem;
+  cursor:pointer;
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
+  color:white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
+.filter select:hover{
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+/* Warna teks untuk setiap opsi */
+.filter option[value="all"] { color: #ff5722; font-weight:bold; }
+.filter option[value="keagamaan"] { color: #4caf50; font-weight:bold; }
+.filter option[value="olahraga"] { color: #2196f3; font-weight:bold; }
+.filter option[value="belajar"] { color: #ff9800; font-weight:bold; }
+.filter option[value="prestasi"] { color: #9c27b0; font-weight:bold; }
 
 /* GALLERY */
 .gallery{
@@ -190,13 +202,15 @@ nav a:hover{
   <h1>🖼️ Galeri Kegiatan Sekolah</h1>
 </div>
 
-<!-- FILTER -->
+<!-- FILTER DROPDOWN -->
 <div class="filter">
-  <button onclick="filter('all')">Semua</button>
-  <button onclick="filter('keagamaan')">Keagamaan</button>
-  <button onclick="filter('olahraga')">Olahraga</button>
-  <button onclick="filter('belajar')">Belajar</button>
-  <button onclick="filter('prestasi')">Prestasi</button>
+  <select onchange="filter(this.value)">
+    <option value="all">Semua</option>
+    <option value="keagamaan">Keagamaan</option>
+    <option value="olahraga">Olahraga</option>
+    <option value="belajar">Belajar</option>
+    <option value="prestasi">Prestasi</option>
+  </select>
 </div>
 
 <!-- GALERI -->
@@ -219,19 +233,19 @@ nav a:hover{
 const albumIDs = {
   keagamaan: "JTUCNbl",
   olahraga: "XXXXXX",
-  belajar: "YYYYYY",
+  belajar: "WYuEk5z",
   prestasi: "ZZZZZZ"
 };
 
 let currentCategory = "all";
 let currentItem = null;
-let galleryItems = []; // semua item
+let galleryItems = [];
 let currentIndex = 0;
 
 function loadGallery(category){
   const gallery=document.getElementById("gallery");
   gallery.innerHTML="";
-  galleryItems = []; // reset galleryItems saat filter berubah
+  galleryItems = [];
   if(category==="all"){
     for(let cat in albumIDs){
       fetchAlbum(albumIDs[cat],cat);
@@ -259,10 +273,9 @@ function fetchAlbum(albumID,category){
         element.src=item.link;
       }
       element.dataset.category=category;
-      element.dataset.name = item.title || "Tidak ada nama"; // tambahkan nama
+      element.dataset.name = item.title || "Tidak ada nama";
       element.onclick=()=>openModal(item);
       
-      // bungkus media + nama
       const wrapper = document.createElement("div");
       wrapper.className="gallery-item";
       wrapper.appendChild(element);
@@ -272,7 +285,7 @@ function fetchAlbum(albumID,category){
       wrapper.appendChild(nameLabel);
       
       gallery.appendChild(wrapper);
-      galleryItems.push(item); // simpan semua item untuk navigasi
+      galleryItems.push(item);
     });
   });
 }
@@ -298,7 +311,7 @@ function openModal(item){
     img.style.display="block";
     vid.style.display="none";
   }
-  nameDiv.textContent = item.title || "Tidak ada nama"; // tampilkan nama di modal
+  nameDiv.textContent = item.title || "Tidak ada nama";
   modal.style.display="flex";
 }
 
@@ -321,7 +334,6 @@ function prevItem(){
   openModal(galleryItems[currentIndex]);
 }
 
-// Fungsi download langsung ke perangkat
 function downloadFile(){
   if(!currentItem) return;
   fetch(currentItem.link)
@@ -339,7 +351,6 @@ function downloadFile(){
     });
 }
 
-// load semua kategori awal
 loadGallery("all");
 </script>
 

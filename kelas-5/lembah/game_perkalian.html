@@ -233,7 +233,7 @@
     .result-text {
       font-size: 1.1rem;
       margin-bottom: 28px;
-      line-height: 1.5;
+      line-height: 1.8;
       opacity: 0.95;
     }
 
@@ -352,14 +352,13 @@
  </head>
  <body>
   <div id="app" class="h-full w-full flex flex-col items-center justify-center overflow-auto">
-   <!-- Start Screen -->
    <div id="start-screen" class="text-center px-4 fade-in w-full h-full flex items-center justify-center">
     <div class="welcome-container">
      <h1 id="start-title" class="text-5xl font-black mb-6" style="color: white; text-shadow: 0 3px 10px rgba(0,0,0,0.3);">🎮 Temukan Pasangan Perkalian!</h1>
      <div class="h-1 bg-white opacity-80 mb-6 rounded-full" style="box-shadow: 0 0 10px rgba(255,255,255,0.5);"></div>
      <p id="start-instruction" class="text-2xl font-black mb-8" style="color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.2);">Pilih 2 angka yang hasil perkaliannya sama dengan angka ketiga</p><button id="start-btn" class="start-btn"> 🚀 Mulai Permainan <i data-lucide="play" style="width: 26px; height: 26px;"></i> </button>
     </div>
-   </div><!-- Game Screen -->
+   </div>
    <div id="game-screen" class="text-center mb-2 px-4 w-full flex flex-col items-center" style="display: none;">
     <h1 id="title" class="text-3xl md:text-4xl font-black mb-1" style="color: #f0e6ff;">Temukan Pasangan Perkalian!</h1>
     <p id="instruction" class="text-base md:text-lg mb-1" style="color: #b8a5d4;">Pilih 2 angka yang hasil perkaliannya sama dengan angka ketiga</p>
@@ -374,7 +373,7 @@
    </div>
    <div id="circles" class="flex flex-wrap justify-center gap-5 md:gap-7 mb-6 px-4 max-w-lg"></div>
    <div id="emoji-display" class="text-9xl mb-2 h-24 flex items-center justify-center"></div>
-   <div id="message" class="text-xl font-black mb-5 h-8" style="color: #f0e6ff;"></div><button id="next-btn" class="next-btn" style="display: none;"> Next Round <i data-lucide="arrow-right" style="width: 20px; height: 20px;"></i> </button> <!-- Modal -->
+   <div id="message" class="text-xl font-black mb-5 h-8" style="color: #f0e6ff;"></div>
    <div id="modal-backdrop" class="modal-backdrop" style="display: none;"></div>
    <div id="result-modal" class="result-modal" style="display: none;">
     <div class="result-emoji" id="modal-emoji"></div>
@@ -413,9 +412,12 @@
     let a, b, product;
     let locked = false;
     let streak = 0;
+    let totalScore = 0;
     let timeLeft = 30;
     let timerInterval = null;
     let gameActive = false;
+    let currentTeam = 1;
+    let totalTeams = 2;
 
     function generate() {
       let valid = false;
@@ -476,7 +478,6 @@
       locked = false;
       document.getElementById('message').textContent = '';
       document.getElementById('emoji-display').textContent = '';
-      document.getElementById('next-btn').style.display = 'none';
 
       numbers.forEach((num, i) => {
         const c = COLORS[i];
@@ -496,13 +497,11 @@
     }
 
     function handleClick(idx, el) {
-      if (!gameActive || locked || el.classList.contains('selected')) {
-        if (el.classList.contains('selected')) {
-          el.classList.remove('selected');
-          selected = selected.filter(s => s.idx !== idx);
-        }
-        return;
-      }
+      if (!gameActive || locked || el.classList.contains('disabled')) return;
+      
+      const alreadySelected = selected.find(s => s.idx === idx);
+      if (alreadySelected) return;
+      
       if (selected.length >= 3) return;
 
       el.classList.add('selected');
@@ -556,11 +555,11 @@
       if (isCorrect) {
         emoji.textContent = '🎉';
         title.textContent = 'Benar!';
-        text.textContent = `${n1} × ${n2} = ${n3}`;
+        text.innerHTML = `${n1} × ${n2} = ${n3}<br><br><span style="font-size: 1.6rem; margin-top: 16px; display: block; color: #6bcb77; font-weight: 900;">+10 Poin! 🌟</span>`;
       } else {
         emoji.textContent = '😢';
         title.textContent = 'Salah!';
-        text.textContent = `${n1} × ${n2} = ${actualProd}, bukan ${n3}`;
+        text.innerHTML = `${n1} × ${n2} = ${actualProd}, bukan ${n3}<br><br><span style="font-size: 1.4rem; margin-top: 16px; display: block; color: #ff6b6b; font-weight: 900;">0 Poin 😞</span>`;
       }
 
       modal.style.display = 'block';
@@ -613,16 +612,20 @@
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     
     function beep(freq, dur, type = 'sine') {
-      const o = audioCtx.createOscillator();
-      const g = audioCtx.createGain();
-      o.type = type;
-      o.frequency.value = freq;
-      g.gain.setValueAtTime(0.08, audioCtx.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
-      o.connect(g);
-      g.connect(audioCtx.destination);
-      o.start();
-      o.stop(audioCtx.currentTime + dur);
+      try {
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.type = type;
+        o.frequency.value = freq;
+        g.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+        o.connect(g);
+        g.connect(audioCtx.destination);
+        o.start();
+        o.stop(audioCtx.currentTime + dur);
+      } catch (e) {
+        // Audio not available
+      }
     }
 
     function playTick() {
@@ -687,7 +690,7 @@
       modal.className = `result-modal result-wrong`;
       emoji.textContent = '⏰';
       title.textContent = 'Waktu Habis!';
-      text.textContent = `Streak Akhir: ${streak} 🔥`;
+      text.innerHTML = `Skor Akhir: ${streak} 🔥<br><br><strong>Jawaban Benar:</strong><br>${a} × ${b} = ${product}`;
       
       modal.style.display = 'block';
       backdrop.style.display = 'block';
@@ -700,15 +703,12 @@
       render();
     });
 
-    document.getElementById('next-btn').addEventListener('click', () => {
-      generate();
-      render();
-    });
-
     document.getElementById('continue-btn').addEventListener('click', () => {
       document.getElementById('result-modal').style.display = 'none';
       document.getElementById('modal-backdrop').style.display = 'none';
       clearInterval(timerInterval);
+      
+      currentTeam = currentTeam === 1 ? 2 : 1;
       streak = 0;
       document.getElementById('streak').textContent = '0';
       generate();
@@ -736,7 +736,6 @@
         document.getElementById('instruction').style.color = c.secondary_text_color;
         document.getElementById('instruction').style.fontFamily = `${c.font_family}, Nunito, sans-serif`;
         document.getElementById('instruction').style.fontSize = `${c.font_size}px`;
-        document.getElementById('next-btn').style.background = c.accent_color;
         document.getElementById('score-display').style.color = c.highlight_color;
       },
       mapToCapabilities: (config) => ({
@@ -801,5 +800,5 @@
 
     lucide.createIcons();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e5c15ab75e3fdee',t:'MTc3NTA5MzU5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e5c86d3d29cf8e2',t:'MTc3NTA5ODIzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

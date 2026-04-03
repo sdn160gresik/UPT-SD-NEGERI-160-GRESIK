@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circle Click Counter</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Nunito', sans-serif; }
+    .btn-circle {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem; font-weight: 900; color: #fff;
+      transition: transform 0.15s, box-shadow 0.15s;
+      user-select: none;
+      text-shadow: 0 3px 6px rgba(0,0,0,0.4);
+      box-shadow: 
+        inset -3px -3px 8px rgba(0,0,0,0.3),
+        inset 2px 2px 5px rgba(255,255,255,0.2),
+        0 15px 35px rgba(0,0,0,0.5),
+        0 5px 15px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-circle::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent 60%);
+      pointer-events: none;
+    }
+    .btn-circle:hover { transform: scale(1.12) translateY(-3px); box-shadow: 
+        inset -3px -3px 8px rgba(0,0,0,0.3),
+        inset 2px 2px 5px rgba(255,255,255,0.2),
+        0 20px 45px rgba(0,0,0,0.6),
+        0 8px 20px rgba(0,0,0,0.4); }
+    .btn-circle:active { transform: scale(0.95) translateY(2px); }
+    @keyframes pop {
+      0% { transform: scale(0.7); opacity: 0; }
+      60% { transform: scale(1.15); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .pop { animation: pop 0.3s ease-out; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full w-full">
+  <div id="app" class="h-full w-full flex flex-col items-center justify-center gap-8 p-6 overflow-auto" style="background: #1a1a2e;">
+   <h1 id="title" class="text-3xl font-black text-center mb-2" style="color: #eee;">Tekan Tombol! 🎯</h1>
+   <div class="flex gap-3 flex-wrap justify-center"><select id="circleCount" class="px-4 py-2 rounded-lg text-sm font-bold" style="background:#333;color:#aaa;border:2px solid #555;"> <option value="1">1 Lingkaran</option> <option value="2">2 Lingkaran</option> <option value="3">3 Lingkaran</option> <option value="4">4 Lingkaran</option> <option value="5">5 Lingkaran</option> <option value="6">6 Lingkaran</option> <option value="7">7 Lingkaran</option> <option value="8">8 Lingkaran</option> <option value="9">9 Lingkaran</option> <option value="10">10 Lingkaran</option> <option value="11">11 Lingkaran</option> <option value="12" selected>12 Lingkaran</option> <option value="13">13 Lingkaran</option> <option value="14">14 Lingkaran</option> <option value="15">15 Lingkaran</option> <option value="16">16 Lingkaran</option> <option value="17">17 Lingkaran</option> <option value="18">18 Lingkaran</option> <option value="19">19 Lingkaran</option> <option value="20">20 Lingkaran</option> </select> <button onclick="resetAll()" class="px-6 py-2 rounded-full text-sm font-bold" style="background:#333;color:#aaa;">Reset Semua</button>
+   </div>
+   <div class="flex flex-wrap justify-center gap-6" id="grid"></div>
+  </div>
+  <script>
+    const colorPalette = [
+      '#FF1744','#00BCD4','#7C4DFF','#FFD700',
+      '#00E676','#FF6F00','#2196F3','#E91E63',
+      '#00ACC1','#FF5722','#9C27B0','#FFC107',
+      '#1DE9B6','#00695C','#0097A7','#6200EA',
+      '#D32F2F','#00E5FF','#651FFF','#FFAB00'
+    ];
+    let counts = [];
+    const grid = document.getElementById('grid');
+    const circleCountSelect = document.getElementById('circleCount');
+
+    function createButtons(count) {
+      counts = new Array(count).fill(0);
+      grid.innerHTML = '';
+      
+      for (let i = 0; i < count; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'btn-circle';
+        const color = colorPalette[i % colorPalette.length];
+        btn.style.background = color;
+        btn.style.boxShadow = `
+          inset -3px -3px 8px rgba(0,0,0,0.3),
+          inset 2px 2px 5px rgba(255,255,255,0.2),
+          0 15px 35px ${color}99,
+          0 5px 15px rgba(0,0,0,0.3)`;
+        btn.id = 'btn-' + i;
+        btn.addEventListener('click', () => {
+          counts[i]++;
+          btn.textContent = counts[i];
+          btn.classList.remove('pop');
+          void btn.offsetWidth;
+          btn.classList.add('pop');
+        });
+        grid.appendChild(btn);
+      }
+    }
+
+    circleCountSelect.addEventListener('change', (e) => {
+      createButtons(parseInt(e.target.value));
+    });
+
+    function resetAll() {
+      counts.fill(0);
+      document.querySelectorAll('.btn-circle').forEach(btn => {
+        btn.textContent = '';
+        btn.classList.remove('pop');
+      });
+    }
+
+    // Initialize with 12 circles
+    createButtons(12);
+
+    const defaultConfig = {
+      page_title: 'Tekan Tombol! 🎯',
+      background_color: '#1a1a2e',
+      text_color: '#eeeeee',
+      font_family: 'Nunito',
+      font_size: 16
+    };
+
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => {
+        document.getElementById('title').textContent = config.page_title || defaultConfig.page_title;
+        document.getElementById('title').style.color = config.text_color || defaultConfig.text_color;
+        document.getElementById('app').style.background = config.background_color || defaultConfig.background_color;
+        const font = config.font_family || defaultConfig.font_family;
+        document.getElementById('title').style.fontFamily = `${font}, Nunito, sans-serif`;
+        const sz = config.font_size || defaultConfig.font_size;
+        document.getElementById('title').style.fontSize = `${sz * 2}px`;
+      },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          { get: () => config.background_color || defaultConfig.background_color, set: v => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); }},
+          { get: () => config.text_color || defaultConfig.text_color, set: v => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); }}
+        ],
+        borderables: [],
+        fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: v => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }},
+        fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: v => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }}
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['page_title', config.page_title || defaultConfig.page_title]
+      ])
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e68113a72e6b573',t:'MTc3NTIxOTI0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

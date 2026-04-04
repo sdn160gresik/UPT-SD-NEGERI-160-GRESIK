@@ -8,6 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <script src="/_sdk/element_sdk.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&amp;display=swap" rel="stylesheet">
+
   <style>
     html, body {
       height: 100%;
@@ -22,6 +23,63 @@
     body {
       background: #1a1035;
     }
+
+    /* ===== TAMBAHAN RESPONSIVE TABLET ===== */
+    @media (max-width: 1024px) {
+      .welcome-container {
+        padding: 36px 28px;
+        max-width: 90%;
+      }
+
+      #start-title {
+        font-size: 2.5rem !important;
+      }
+
+      #start-instruction {
+        font-size: 1.3rem !important;
+      }
+
+      .circle {
+        width: 85px;
+        height: 85px;
+        font-size: 24px;
+      }
+
+      .timer-container {
+        font-size: 1.1rem;
+        padding: 10px 18px;
+      }
+
+      .timer-bar {
+        width: 150px;
+      }
+
+      #emoji-display {
+        font-size: 5rem;
+      }
+
+      .result-modal {
+        width: 90%;
+        padding: 36px 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .circle {
+        width: 70px;
+        height: 70px;
+        font-size: 20px;
+      }
+
+      #title {
+        font-size: 1.8rem !important;
+      }
+
+      #instruction {
+        font-size: 0.95rem !important;
+      }
+    }
+    /* ===== END RESPONSIVE ===== */
 
     @keyframes gradientShift {
       0%, 100% { background-position: 0% 50%; }
@@ -347,9 +405,13 @@
       transform: scale(0.95);
     }
   </style>
+
   <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
+
+<body>
+<!-- (SELURUH HTML & JS TETAP SAMA, TIDAK DIUBAH SAMA SEKALI) -->
  <body>
   <div id="app" class="h-full w-full flex flex-col items-center justify-center overflow-auto">
    <div id="start-screen" class="text-center px-4 fade-in w-full h-full flex items-center justify-center">

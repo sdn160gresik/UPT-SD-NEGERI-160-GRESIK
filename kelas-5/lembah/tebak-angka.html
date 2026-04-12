@@ -1,450 +1,284 @@
 <!doctype html>
 <html lang="id">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perkalian Lingkaran</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&amp;display=swap" rel="stylesheet">
-  <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tebak Angka</title>
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            font-family: 'Fredoka', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
 
-        body {
-            background: linear-gradient(135deg, #0f2744 0%, #1a3a52 100%);
-            overflow-x: hidden;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        #app {
-            width: 100%;
-            min-height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 15px;
-            padding-top: 20px;
-        }
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Fredoka', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
 
-        h1 {
-            color: white;
-            font-size: clamp(1.8rem, 5vw, 2.8rem);
-            margin-bottom: clamp(20px, 5vw, 40px);
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-            letter-spacing: 1px;
-            text-align: center;
-        }
+body {
+    background: linear-gradient(135deg, #0f2744 0%, #1a3a52 100%);
+    overflow-x: hidden;
+}
 
-        .circles-container {
-            display: flex;
-            align-items: center;
-            gap: clamp(10px, 3vw, 20px);
-            margin-bottom: clamp(20px, 5vw, 40px);
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+#app {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: clamp(10px, 3vw, 15px);
+    padding-top: clamp(15px, 4vw, 20px);
+}
 
-        .circle-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: clamp(5px, 2vw, 10px);
-        }
+h1 {
+    color: white;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    margin-bottom: clamp(20px, 5vw, 40px);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+    text-align: center;
+}
 
-        .circle {
-            width: clamp(80px, 20vw, 130px);
-            height: clamp(80px, 20vw, 130px);
-            border-radius: 50%;
-            border: 4px solid #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: clamp(28px, 6vw, 48px);
-            font-weight: 700;
-            color: #fff;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset -3px -3px 8px rgba(0, 0, 0, 0.2);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
+.circles-container {
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 3vw, 20px);
+    margin-bottom: clamp(20px, 5vw, 40px);
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
-        .circle::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 50%);
-            pointer-events: none;
-        }
+.circle-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(5px, 2vw, 10px);
+}
 
-        .circle:hover {
-            transform: scale(1.05);
-        }
+.circle {
+    width: clamp(45px, 13vw, 70px);
+    height: clamp(45px, 13vw, 70px);
+    border-radius: 50%;
+    border: 4px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(24px, 6vw, 40px);
+    font-weight: 700;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset -3px -3px 8px rgba(0, 0, 0, 0.2);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
 
-        .circle-label {
-            color: #a0aec0;
-            font-size: clamp(0.7rem, 2vw, 0.9rem);
-            opacity: 0.8;
-            font-weight: 600;
-        }
+.circle::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%);
+    pointer-events: none;
+}
 
-        .operator {
-            color: white;
-            font-size: clamp(1.8rem, 5vw, 3rem);
-            font-weight: bold;
-            margin: 0 clamp(5px, 1vw, 10px);
-        }
+.circle:hover {
+    transform: scale(1.05);
+}
 
-        .instruction {
-            color: white;
-            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-            margin-bottom: clamp(20px, 5vw, 30px);
-            opacity: 0.85;
-            text-align: center;
-            max-width: 500px;
-        }
+.operator {
+    color: white;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: bold;
+}
 
-        .timer-container {
-            width: 100%;
-            max-width: 400px;
-            margin-bottom: clamp(20px, 5vw, 30px);
-            padding: 0 15px;
-        }
+.timer-container {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: clamp(20px, 5vw, 30px);
+    padding: 0 10px;
+}
 
-        .timer-label {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            color: white;
-            font-size: clamp(0.85rem, 2vw, 0.95rem);
-            opacity: 0.75;
-            font-weight: 600;
-        }
+.timer-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: white;
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+}
 
-        .timer-text {
-            color: #FACC15;
-            font-weight: bold;
-            font-size: clamp(1rem, 2.5vw, 1.1rem);
-        }
+.timer-text {
+    color: #FACC15;
+    font-weight: bold;
+}
 
-        .timer-bar-bg {
-            width: 100%;
-            height: 12px;
-            background: #1e3a5f;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 2px solid white;
-        }
+.timer-bar-bg {
+    width: 100%;
+    height: 12px;
+    background: #1e3a5f;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid white;
+}
 
-        .timer-bar {
-            height: 100%;
-            width: 100%;
-            background: linear-gradient(90deg, #10b981 0%, #FACC15 50%, #ef4444 100%);
-            transition: width 0.1s linear;
-        }
+.timer-bar {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #10b981, #FACC15, #ef4444);
+    transition: width 0.1s linear;
+}
 
-        .numpad {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: clamp(10px, 3vw, 15px);
-            margin-bottom: clamp(20px, 5vw, 30px);
-            max-width: 350px;
-            width: 100%;
-        }
+.numpad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(10px, 3vw, 15px);
+    margin-bottom: clamp(20px, 5vw, 30px);
+    width: 100%;
+    max-width: 320px;
+}
 
-        .num-btn {
-            aspect-ratio: 1;
-            border-radius: 50%;
-            font-size: clamp(18px, 5vw, 24px);
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), inset -2px -2px 5px rgba(0, 0, 0, 0.3);
-            color: white;
-            touch-action: manipulation;
-        }
+.num-btn {
+    width: clamp(45px, 13vw, 70px);
+    height: clamp(45px, 13vw, 70px);
+    border-radius: 50%;
+    border: 4px solid #fff;
+    font-size: clamp(24px, 6vw, 40px);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3), inset -3px -3px 8px rgba(0,0,0,0.2);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
 
-        .num-btn::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, transparent 50%);
-            pointer-events: none;
-        }
+.num-btn::before {
+    content:'';
+    position:absolute;
+    top:-50%;
+    left:-50%;
+    width:200%;
+    height:200%;
+    background:linear-gradient(135deg, rgba(255,255,255,0.3), transparent);
+}
 
-        .num-btn:active:not(.disabled) {
-            transform: scale(1.15);
-        }
+.num-btn:active:not(.disabled) { transform: scale(1.15); }
+.num-btn:hover:not(.disabled) { transform: scale(1.1); }
 
-        .num-btn:hover:not(.disabled) {
-            transform: scale(1.1);
-        }
+.num-btn.selected {
+    transform: scale(1.2);
+}
 
-        .num-btn.selected {
-            transform: scale(1.2);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset -3px -3px 8px rgba(0, 0, 0, 0.4);
-        }
+.num-btn.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+}
 
-        .num-btn.disabled {
-            opacity: 0.3;
-            pointer-events: none;
-        }
+/* warna tetap */
+.btn-1 { background: linear-gradient(135deg,#FF6B6B,#FF8E72);}
+.btn-2 { background: linear-gradient(135deg,#FF9F5A,#FF7A59);}
+.btn-3 { background: linear-gradient(135deg,#FFD93D,#FFC93A); color:#1e3a5f;}
+.btn-4 { background: linear-gradient(135deg,#6BCB77,#4A9D6F);}
+.btn-5 { background: linear-gradient(135deg,#4D96FF,#357ABD);}
+.btn-6 { background: linear-gradient(135deg,#A78BFA,#8B5CF6);}
+.btn-7 { background: linear-gradient(135deg,#F472B6,#EC4899);}
+.btn-8 { background: linear-gradient(135deg,#22D3EE,#0891B2);}
+.btn-9 { background: linear-gradient(135deg,#FB923C,#EA580C);}
 
-        .btn-1 { background: linear-gradient(135deg, #FF6B6B 0%, #FF8E72 100%); }
-        .btn-2 { background: linear-gradient(135deg, #FF9F5A 0%, #FF7A59 100%); }
-        .btn-3 { background: linear-gradient(135deg, #FFD93D 0%, #FFC93A 100%); color: #1e3a5f; }
-        .btn-4 { background: linear-gradient(135deg, #6BCB77 0%, #4A9D6F 100%); }
-        .btn-5 { background: linear-gradient(135deg, #4D96FF 0%, #357ABD 100%); }
-        .btn-6 { background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%); }
-        .btn-7 { background: linear-gradient(135deg, #F472B6 0%, #EC4899 100%); }
-        .btn-8 { background: linear-gradient(135deg, #22D3EE 0%, #0891B2 100%); }
-        .btn-9 { background: linear-gradient(135deg, #FB923C 0%, #EA580C 100%); }
+.action-buttons {
+    display: flex;
+    gap: clamp(10px,2vw,15px);
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
-        .action-buttons {
-            display: flex;
-            gap: clamp(10px, 2vw, 15px);
-            margin-bottom: clamp(20px, 5vw, 30px);
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 100%;
-        }
+.action-btn {
+    padding: clamp(10px,2vw,12px) clamp(16px,3vw,24px);
+    border-radius: 50px;
+    font-weight: bold;
+    border: none;
+    color: white;
+}
 
-        .action-btn {
-            padding: clamp(10px, 2vw, 12px) clamp(16px, 3vw, 24px);
-            border-radius: 50px;
-            font-size: clamp(0.85rem, 2vw, 1rem);
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            color: white;
-            touch-action: manipulation;
-            white-space: nowrap;
-        }
+.reset-btn { background:#ef4444; }
+.check-btn { background:#3b82f6; }
+.new-btn { background:#FACC15; color:#1e3a5f; }
 
-        .action-btn:active {
-            transform: scale(0.95);
-        }
+.score-display {
+    color: white;
+    margin-top: 15px;
+}
 
-        .action-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-        }
+.result-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 30px;
+    border-radius: 20px;
+    font-size: 30px;
+    display: none;
+    color: white;
+}
+</style>
+</head>
 
-        .reset-btn {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-        }
+<body>
 
-        .check-btn {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        }
+<div id="app">
+<h1>Tebak Angka</h1>
 
-        .new-btn {
-            background: linear-gradient(135deg, #FACC15 0%, #EAB308 100%);
-            color: #1e3a5f;
-        }
+<div class="circles-container">
+<div class="circle-group"><div id="c1" class="circle"></div></div>
+<span class="operator">=</span>
+<div class="circle-group"><div id="c2" class="circle"></div></div>
+<span class="operator">×</span>
+<div class="circle-group"><div id="c3" class="circle"></div></div>
+</div>
 
-        .score-display {
-            color: white;
-            font-size: clamp(1rem, 2.5vw, 1.3rem);
-            font-weight: 600;
-            margin-top: clamp(15px, 3vw, 20px);
-            text-align: center;
-        }
+<div class="timer-container">
+<div class="timer-label">
+<span>⏱️ Waktu Tersisa</span>
+<span id="timerText">30s</span>
+</div>
+<div class="timer-bar-bg">
+<div id="timerBar" class="timer-bar"></div>
+</div>
+</div>
 
-        .score-value {
-            color: #FACC15;
-            font-weight: bold;
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-        }
+<div id="numpad" class="numpad"></div>
 
-        .result-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: clamp(30px, 5vw, 40px) clamp(40px, 8vw, 60px);
-            border-radius: 25px;
-            font-size: clamp(28px, 7vw, 36px);
-            font-weight: 700;
-            text-align: center;
-            z-index: 1000;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
-            letter-spacing: 1px;
-            display: none;
-            color: white;
-            max-width: 90%;
-        }
+<div class="action-buttons">
+<button class="action-btn reset-btn" onclick="resetSelection()">Ganti ↺</button>
+<button class="action-btn check-btn" onclick="checkAnswer()">Cek ✓</button>
+<button class="action-btn new-btn" onclick="resetGame()">Baru 🔄</button>
+</div>
 
-        @keyframes popupShow {
-            0% {
-                transform: translate(-50%, -50%) scale(0.3) rotate(-15deg);
-                opacity: 0;
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.15) rotate(8deg);
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1) rotate(0deg);
-                opacity: 1;
-            }
-        }
+<p class="score-display">Skor: <span id="scoreVal">0</span></p>
+</div>
 
-        @keyframes popupHide {
-            0% {
-                transform: translate(-50%, -50%) scale(1) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(0.3) rotate(15deg);
-                opacity: 0;
-            }
-        }
+<div id="resultPopup" class="result-popup"></div>
 
-        .result-popup.show {
-            animation: popupShow 0.5s ease;
-        }
+<script>
+let target=0;
+let picks=[];
+let score=0;
+let timerInterval=null;
+let timeLeft=30;
 
-        .result-popup.hide {
-            animation: popupHide 0.5s ease;
-        }
-
-        @keyframes floatUp {
-            0% {
-                opacity: 1;
-                transform: translateY(0) scale(1) rotate(0deg);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-150px) scale(1.6) rotate(45deg);
-            }
-        }
-
-        .emoji-float {
-            position: fixed;
-            font-size: clamp(32px, 8vw, 48px);
-            pointer-events: none;
-            animation: floatUp 2s ease-out forwards;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.15);
-            }
-        }
-
-        .pulse {
-            animation: pulse 0.6s ease;
-        }
-
-        @keyframes shake {
-            0%, 100% {
-                transform: translateX(0);
-            }
-            25% {
-                transform: translateX(-10px);
-            }
-            75% {
-                transform: translateX(10px);
-            }
-        }
-
-        .shake {
-            animation: shake 0.5s ease;
-        }
-
-        @media (max-width: 480px) {
-            #app {
-                padding: 10px;
-                padding-top: 15px;
-            }
-
-            .circles-container {
-                margin-bottom: 15px;
-            }
-
-            .numpad {
-                max-width: 280px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .num-btn:hover:not(.disabled) {
-                transform: scale(1.15) translateY(-4px);
-            }
-
-            .num-btn.selected {
-                transform: scale(1.3) translateY(-6px);
-            }
-        }
-    </style>
-  <style>body { box-sizing: border-box; }</style>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
-  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
- </head>
- <body>
-  <div id="app">
-   <h1>🔢 Perkalian Lingkaran</h1>
-   <div class="circles-container">
-    <div class="circle-group">
-     <div id="c1" class="circle"></div><span class="circle-label">Hasil</span>
-    </div><span class="operator">=</span>
-    <div class="circle-group">
-     <div id="c2" class="circle"></div><span class="circle-label">Angka 1</span>
-    </div><span class="operator">×</span>
-    <div class="circle-group">
-     <div id="c3" class="circle"></div><span class="circle-label">Angka 2</span>
-    </div>
-   </div>
-   <p class="instruction">Pilih dua angka (2-9) yang menghasilkan bilangan di lingkaran!</p>
-   <div class="timer-container">
-    <div class="timer-label"><span>⏱️ Waktu Tersisa</span> <span class="timer-text" id="timerText">30s</span>
-    </div>
-    <div class="timer-bar-bg">
-     <div id="timerBar" class="timer-bar"></div>
-    </div>
-   </div>
-   <div id="numpad" class="numpad"></div>
-   <div class="action-buttons"><button class="action-btn reset-btn" onclick="resetSelection()">Ganti ↺</button> <button class="action-btn check-btn" onclick="checkAnswer()">Cek ✓</button> <button class="action-btn new-btn" onclick="resetGame()">Baru 🔄</button>
-   </div>
-   <p class="score-display">Skor: <span class="score-value" id="scoreVal">0</span></p>
-  </div>
-  <div id="resultPopup" class="result-popup"></div>
-  <script>
-        let target = 0;
-        let picks = [];
-        let score = 0;
-        let timerInterval = null;
-        let timeLeft = 30;
-
-        function generateProblem() {
+function generateProblem() {
             clearInterval(timerInterval);
             timeLeft = 30;
             document.getElementById('timerBar').style.width = '100%';
@@ -639,3 +473,7 @@
     </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e8de223f028fdf8',t:'MTc3NTYxNTc3NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+    </style>
+ </head>
+
+/* SEMUA JS ASLI TETAP (TIDAK DIUBAH) */

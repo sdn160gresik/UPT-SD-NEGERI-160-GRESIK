@@ -8,58 +8,115 @@
   <script src="/_sdk/element_sdk.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=Fredoka+One&amp;display=swap" rel="stylesheet">
   <style>
+    html, body { height: 100%; }
     body { font-family: 'Nunito', sans-serif; }
     .title-font { font-family: 'Fredoka One', cursive; }
-    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease, padding 0.3s ease; opacity: 0; padding-top: 0; padding-bottom: 0; }
-    .accordion-content.open { max-height: 3000px; opacity: 1; padding-top: 1rem; padding-bottom: 1rem; }
-    .accordion-header { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-    .accordion-header:hover { transform: translateY(-2px); }
-    .indicator { transition: transform 0.3s ease; display: inline-block; }
-    .indicator.rotated { transform: rotate(45deg); }
-    .card-enter { animation: cardSlideIn 0.4s ease forwards; }
-    @keyframes cardSlideIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
-    .section-block { animation: fadeUp 0.5s ease forwards; opacity: 0; }
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-    .section-block:nth-child(1) { animation-delay: 0.1s; transform: translateY(20px); }
-    .section-block:nth-child(2) { animation-delay: 0.2s; transform: translateY(20px); }
-    .badge { display: inline-block; padding: 2px 10px; border-radius: 99px; font-size: 0.75rem; font-weight: 700; }
-    .text-list { margin-left: 1rem; }
+    
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.3s ease;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    
+    .accordion-content.open {
+      max-height: 3000px;
+      opacity: 1;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    
+    .accordion-header {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .accordion-header:hover {
+      transform: translateY(-2px);
+    }
+    
+    .indicator {
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+    
+    .indicator.rotated {
+      transform: rotate(45deg);
+    }
+    
+    .card-enter {
+      animation: cardSlideIn 0.4s ease forwards;
+    }
+    
+    @keyframes cardSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .section-block {
+      animation: fadeUp 0.5s ease forwards;
+      opacity: 0;
+    }
+    
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .section-block:nth-child(1) {
+      animation-delay: 0.1s;
+      transform: translateY(20px);
+    }
+    
+    .section-block:nth-child(2) {
+      animation-delay: 0.2s;
+      transform: translateY(20px);
+    }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <style>body { box-sizing: border-box; }</style>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
  <body class="h-full bg-amber-50 overflow-auto">
-  <div id="app" class="w-full min-h-full" style="background: linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #e0e7ff 100%);">
-   <div class="max-w-4xl mx-auto px-4 py-8"><!-- Header -->
-    <header class="text-center mb-10">
-     <div class="mb-4 flex justify-center">
-      <img src="https://i.imgur.com/fxAoaeN.png" alt="Pewarna Alami dan Buatan" loading="lazy" class="w-full max-w-sm h-auto" onerror="console.error('Image failed to load:', this.src); this.style.background='#e5e7eb'; this.alt='Image unavailable';">
+  <div id="app" class="w-full h-full" style="background: linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #e0e7ff 100%);">
+   <div class="max-w-4xl mx-auto px-4 py-8"><!-- HEADER -->
+    <header class="text-center mb-12">
+     <div class="mb-4 flex justify-center"><img src="https://i.imgur.com/fxAoaeN.png" alt="Pewarna Alami dan Buatan" loading="lazy" class="w-full max-w-sm h-auto" onerror="console.error('Image failed to load:', this.src); this.style.background='#e5e7eb'; this.alt='Image unavailable';">
      </div>
      <div class="inline-block mb-3 text-5xl">
       🎨
      </div>
-     <h1 id="page-title" class="title-font text-3xl md:text-4xl mb-2" style="color: #7c3aed;">Pewarna Alami &amp; Buatan</h1>
-     <p class="text-gray-600 text-sm md:text-base">Materi Pembelajaran Interaktif — Klik setiap sub bab untuk membuka isi!</p>
-    </header><!-- SECTION 1: Pewarna Alami -->
-    <section class="section-block mb-8">
-     <div class="flex items-center gap-3 mb-4"><span class="text-2xl">🌿</span>
-      <h2 class="title-font text-xl md:text-2xl" style="color: #16a34a;">1. Pewarna Alami</h2>
-     </div><!-- 1a -->
-     <div class="mb-3 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl" style="background: linear-gradient(135deg, #22c55e, #16a34a);"> <span>🧪 a. Pengertian Pewarna Alami</span> <span class="indicator text-xl">+</span> </button>
-      <div class="accordion-content bg-green-50 px-5 mx-1 rounded-b-xl">
-       <div class="card-enter bg-white rounded-xl p-4 shadow-sm border-l-4 border-green-400">
-        <p class="text-gray-700 leading-relaxed">Bahan pewarna atau zat pewarna pada makanan adalah bahan tambahan pada makanan yang dapat memperbaiki atau memberi warna pada makanan. Penambahan zat pewarna pada umumnya bertujuan untuk memperoleh warna makanan yang lebih menarik.</p>
+     <h1 id="page-title" class="title-font text-3xl md:text-4xl font-bold mb-3" style="color: #7c3aed;">Pewarna Alami &amp; Buatan</h1>
+     <p id="page-subtitle" class="text-gray-600 text-sm md:text-base font-medium">Materi Pembelajaran Interaktif — Klik setiap sub bab untuk membuka isi!</p>
+    </header><!-- SECTION 1: PEWARNA ALAMI -->
+    <section class="section-block mb-10">
+     <div class="flex items-center gap-3 mb-6"><span class="text-3xl">🌿</span>
+      <h2 id="section-1-title" class="title-font text-2xl md:text-3xl font-bold" style="color: #16a34a;">1. Pewarna Alami</h2>
+     </div><!-- 1a: Pengertian Pewarna Alami -->
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #22c55e, #16a34a);"> <span>🧪 a. Pengertian Pewarna Alami</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-green-50 px-5 rounded-b-2xl">
+       <div class="card-enter bg-white rounded-xl p-5 shadow-sm border-l-4 border-green-400">
+        <p class="text-gray-700 leading-relaxed text-sm md:text-base">Bahan pewarna atau zat pewarna pada makanan adalah bahan tambahan pada makanan yang dapat memperbaiki atau memberi warna pada makanan. Penambahan zat pewarna pada umumnya bertujuan untuk memperoleh warna makanan yang lebih menarik.</p>
        </div>
       </div>
-     </div><!-- 1b -->
-     <div class="mb-3 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl" style="background: linear-gradient(135deg, #4ade80, #22c55e);"> <span>🍽️ b. Pemakaian Pewarna Alami untuk Makanan</span> <span class="indicator text-xl">+</span> </button>
-      <div class="accordion-content bg-green-50 px-5 mx-1 rounded-b-xl">
-       <div class="card-enter space-y-3"><!-- Sub-bab 1: Jenis-Jenis Pewarna pada Makanan -->
+     </div><!-- 1b: Pemakaian Pewarna Alami untuk Makanan -->
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #4ade80, #22c55e);"> <span>🍽️ b. Pemakaian Pewarna Alami untuk Makanan</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-green-50 px-5 rounded-b-2xl">
+       <div class="card-enter space-y-4"><!-- Sub-bab 1: Jenis-Jenis Pewarna -->
         <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #10b981, #059669);"> <span class="text-sm">📋 1. Jenis-Jenis Pewarna pada Makanan</span> <span class="indicator text-lg">+</span> </button>
-         <div class="accordion-content bg-emerald-50">
+         <div class="accordion-content bg-emerald-50 rounded-b-xl">
           <div class="bg-white rounded-b-xl p-4 border-l-4 border-emerald-400">
-           <p class="text-gray-700 mb-3">Pewarna alami merupakan bahan pewarna yang diambil dari tumbuh-tumbuhan atau batu-batuan secara langsung. Misalnya:</p>
+           <p class="text-gray-700 mb-3 text-sm md:text-base">Pewarna alami merupakan bahan pewarna yang diambil dari tumbuh-tumbuhan atau batu-batuan secara langsung. Misalnya:</p>
            <div class="space-y-2 text-gray-700 text-sm">
             <p><strong>a) 🟢</strong> zat warna <strong>klorofil</strong> dari daun suji dan daun pandan yang menghasilkan warna hijau untuk mewarnai kue, seperti kue lapis dan kue pisang;</p>
             <p><strong>b) 🟡</strong> zat warna <strong>kurkumin</strong> berasal dari kunyit yang menghasilkan warna kuning untuk memberi warna pada tahu, minuman ringan, dan nasi kuning;</p>
@@ -71,11 +128,11 @@
            </div>
           </div>
          </div>
-        </div><!-- Sub-bab 2: Fungsi Zat Pewarna Makanan -->
+        </div><!-- Sub-bab 2: Fungsi Zat Pewarna -->
         <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #14b8a6, #0d9488);"> <span class="text-sm">⚙️ 2. Fungsi Zat Pewarna Makanan</span> <span class="indicator text-lg">+</span> </button>
-         <div class="accordion-content bg-teal-50">
+         <div class="accordion-content bg-teal-50 rounded-b-xl">
           <div class="bg-white rounded-b-xl p-4 border-l-4 border-teal-400">
-           <p class="text-gray-700 mb-3">Fungsi zat pewarna pada makanan, yaitu:</p>
+           <p class="text-gray-700 mb-3 text-sm md:text-base">Fungsi zat pewarna pada makanan, yaitu:</p>
            <div class="space-y-2 text-gray-700 text-sm">
             <p><strong>a)</strong> mendapatkan warna yang sama atau seragam pada makanan yang warna asalnya tidak sama;</p>
             <p><strong>b)</strong> memperbaiki penampilan makanan yang warnanya pudar akibat proses pemanasan;</p>
@@ -87,35 +144,35 @@
           </div>
          </div>
         </div>
-       </div><!-- 1c -->
-       <div class="mb-3 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl" style="background: linear-gradient(135deg, #a3e635, #65a30d);"> <span>👗 c. Pemakaian Pewarna Alami untuk Kain</span> <span class="indicator text-xl">+</span> </button>
-        <div class="accordion-content bg-lime-50 px-5 mx-1 rounded-b-xl">
-         <div class="card-enter bg-white rounded-xl p-4 shadow-sm border-l-4 border-lime-400">
-          <p class="text-gray-700 leading-relaxed mb-3">Jenis pewarna ini diambil dari serat alam tanaman atau hewan. Serat alam tanaman disebut serat selulosa (cellulose), sedangkan serat alam hewan disebut serat protein (proteine). Bahan pewarna alam yang digunakan untuk mewarnai tekstil berasal dari daun, kayu, kulit kayu, buah, atau bunga. Contoh tanaman yang sering dimanfaatkan sebagai pewarna alami tekstil, yaitu secang, kunyit, tarum atau indigofera, dan kesumba.</p>
-         </div>
-        </div>
+       </div>
+      </div>
+     </div><!-- 1c: Pemakaian Pewarna Alami untuk Kain -->
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #a3e635, #65a30d);"> <span>👗 c. Pemakaian Pewarna Alami untuk Kain</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-lime-50 px-5 rounded-b-2xl">
+       <div class="card-enter bg-white rounded-xl p-5 shadow-sm border-l-4 border-lime-400">
+        <p class="text-gray-700 leading-relaxed text-sm md:text-base">Jenis pewarna ini diambil dari serat alam tanaman atau hewan. Serat alam tanaman disebut serat selulosa (cellulose), sedangkan serat alam hewan disebut serat protein (proteine). Bahan pewarna alam yang digunakan untuk mewarnai tekstil berasal dari daun, kayu, kulit kayu, buah, atau bunga. Contoh tanaman yang sering dimanfaatkan sebagai pewarna alami tekstil, yaitu secang, kunyit, tarum atau indigofera, dan kesumba.</p>
        </div>
       </div>
      </div>
-    </section><!-- SECTION 2: Pewarna Buatan -->
-    <section class="section-block mb-8">
-     <div class="flex items-center gap-3 mb-4"><span class="text-2xl">⚗️</span>
-      <h2 class="title-font text-xl md:text-2xl" style="color: #dc2626;">2. Pewarna Buatan</h2>
-     </div><!-- 2a -->
-     <div class="mb-3 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl" style="background: linear-gradient(135deg, #f87171, #dc2626);"> <span>🔬 a. Pengertian Pewarna Buatan</span> <span class="indicator text-xl">+</span> </button>
-      <div class="accordion-content bg-red-50 px-5 mx-1 rounded-b-xl">
-       <div class="card-enter bg-white rounded-xl p-4 shadow-sm border-l-4 border-red-400">
-        <p class="text-gray-700 leading-relaxed mb-3">Menurut Peraturan Menteri Kesehatan RI No. 772/Menkes/PER/X/1999 secara umum pewarna sintetis (synthetic color) adalah pewarna yang diperoleh secara sintesis kimiawi. Penyalahgunaan zat pewarna dikarenakan ketidaktahuan masyarakat mengenai zat pewarna untuk pangan dan harga zat pewarna untuk industri jauh lebih murah dibandingkan dengan zat pewarna untuk pangan. Zat pewarna sintetis harus melalui berbagai prosedur pengujian sebelum dapat digunakan sebagai pewarna makanan. Zat pewarna yang diizinkan penggunaannya dalam makanan dikenal dengan certified color atau permitted color. Untuk penggunaannya, zat warna tersebut harus menjalani tes prosedur penggunaan yang disebut proses sertifikasi.</p>
+    </section><!-- SECTION 2: PEWARNA BUATAN -->
+    <section class="section-block mb-10">
+     <div class="flex items-center gap-3 mb-6"><span class="text-3xl">⚗️</span>
+      <h2 id="section-2-title" class="title-font text-2xl md:text-3xl font-bold" style="color: #dc2626;">2. Pewarna Buatan</h2>
+     </div><!-- 2a: Pengertian Pewarna Buatan -->
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #f87171, #dc2626);"> <span>🔬 a. Pengertian Pewarna Buatan</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-red-50 px-5 rounded-b-2xl">
+       <div class="card-enter bg-white rounded-xl p-5 shadow-sm border-l-4 border-red-400">
+        <p class="text-gray-700 leading-relaxed text-sm md:text-base">Menurut Peraturan Menteri Kesehatan RI No. 772/Menkes/PER/X/1999 secara umum pewarna sintetis (synthetic color) adalah pewarna yang diperoleh secara sintesis kimiawi. Penyalahgunaan zat pewarna dikarenakan ketidaktahuan masyarakat mengenai zat pewarna untuk pangan dan harga zat pewarna untuk industri jauh lebih murah dibandingkan dengan zat pewarna untuk pangan. Zat pewarna sintetis harus melalui berbagai prosedur pengujian sebelum dapat digunakan sebagai pewarna makanan. Zat pewarna yang diizinkan penggunaannya dalam makanan dikenal dengan certified color atau permitted color. Untuk penggunaannya, zat warna tersebut harus menjalani tes prosedur penggunaan yang disebut proses sertifikasi.</p>
        </div>
       </div>
-     </div><!-- 2b -->
-     <div class="mb-3 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl" style="background: linear-gradient(135deg, #fb923c, #ea580c);"> <span>🍬 b. Pemakaian Pewarna Buatan untuk Makanan</span> <span class="indicator text-xl">+</span> </button>
-      <div class="accordion-content bg-orange-50 px-5 mx-1 rounded-b-xl">
-       <div class="card-enter bg-white rounded-xl p-4 shadow-sm border-l-4 border-orange-400">
-        <p class="text-gray-700 mb-3">Ada banyak pewarna makanan yang sebenarnya dijual di pasaran. Pewarna ini digunakan sebagai pewarna makanan dan minuman agar terlihat lebih menarik untuk dinikmati. Pewarna makanan ini berasal dari zat kimia atau buatan.</p>
-        <p class="text-gray-700 mb-3">Berikut adalah beberapa pewarna makanan buatan yang boleh digunakan untuk mewarnai makanan serta minuman dan bisa dikonsumsi dengan kadar tertentu:</p>
-        <p class="text-gray-700 font-semibold mb-2">Pewarna Makanan Buatan yang Aman:</p>
-        <ul class="space-y-1 text-gray-700 text-sm mb-3">
+     </div><!-- 2b: Pemakaian Pewarna Buatan untuk Makanan -->
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #fb923c, #ea580c);"> <span>🍬 b. Pemakaian Pewarna Buatan untuk Makanan</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-orange-50 px-5 rounded-b-2xl">
+       <div class="card-enter bg-white rounded-xl p-5 shadow-sm border-l-4 border-orange-400">
+        <p class="text-gray-700 mb-3 text-sm md:text-base">Ada banyak pewarna makanan yang sebenarnya dijual di pasaran. Pewarna ini digunakan sebagai pewarna makanan dan minuman agar terlihat lebih menarik untuk dinikmati. Pewarna makanan ini berasal dari zat kimia atau buatan.</p>
+        <p class="text-gray-700 mb-3 text-sm md:text-base">Berikut adalah beberapa pewarna makanan buatan yang boleh digunakan untuk mewarnai makanan serta minuman dan bisa dikonsumsi dengan kadar tertentu:</p>
+        <p class="text-gray-700 font-semibold mb-2 text-sm md:text-base">Pewarna Makanan Buatan yang Aman:</p>
+        <ul class="space-y-1 text-gray-700 text-sm mb-4 ml-4">
          <li>• Tartrazin</li>
          <li>• Kuning kuinolin</li>
          <li>• Sunset Yellow</li>
@@ -129,114 +186,121 @@
          <li>• Hijau FCF</li>
          <li>• Cokelat HT</li>
         </ul>
-        <p class="text-gray-700 mb-3">Pewarna yang sudah disebutkan di atas merupakan jenis pewarna makanan yang bisa dikonsumsi dan ditambahkan pada minuman atau pun makanan. Akan tetapi, penggunaannya juga disarankan untuk tak terlalu berlebihan karena telah dibuat dengan bahan kimia yang dicampur dengan bahan kimia lainnya sehingga menghasilkan warna berbeda.</p>
+        <p class="text-gray-700 mb-3 text-sm md:text-base">Pewarna yang sudah disebutkan di atas merupakan jenis pewarna makanan yang bisa dikonsumsi dan ditambahkan pada minuman atau pun makanan. Akan tetapi, penggunaannya juga disarankan untuk tak terlalu berlebihan karena telah dibuat dengan bahan kimia yang dicampur dengan bahan kimia lainnya sehingga menghasilkan warna berbeda.</p>
        </div>
       </div>
-     </div><!-- 2c -->
-     <div class="mb-3 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl" style="background: linear-gradient(135deg, #ef4444, #b91c1c);"> <span>⚠️ c. Pewarna Makanan Buatan yang Berbahaya</span> <span class="indicator text-xl">+</span> </button>
-      <div class="accordion-content bg-red-50 px-5 mx-1 rounded-b-xl">
-       <div class="card-enter space-y-3">
-        <!-- Sub-bab 1: Rhodamin B -->
+     </div><!-- 2c: Pewarna Makanan Buatan yang Berbahaya -->
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #ef4444, #b91c1c);"> <span>⚠️ c. Pewarna Makanan Buatan yang Berbahaya</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-red-50 px-5 rounded-b-2xl">
+       <div class="card-enter space-y-4"><!-- Sub-bab 1: Rhodamin B -->
         <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #dc2626, #b91c1c);"> <span class="text-sm">🔴 1. Rhodamin B</span> <span class="indicator text-lg">+</span> </button>
-         <div class="accordion-content bg-red-50">
+         <div class="accordion-content bg-red-50 rounded-b-xl">
           <div class="bg-white rounded-b-xl p-4 border-l-4 border-red-400">
-           <p class="text-gray-700">Rhodamin merupakan pewarna makanan buatan atau sintetik berbentuk kristal dan memiliki warna hijau atau ungu kemerahan. Pewarna ini biasanya digunakan untuk mewarnai tekstil, kertas, atau produk kosmetik sehingga apabila dikonsumsi atau dituangkan ke dalam makanan dan minuman akan sangat berbahaya jika tertelan oleh tubuh manusia.</p>
+           <p class="text-gray-700 text-sm md:text-base">Rhodamin merupakan pewarna makanan buatan atau sintetik berbentuk kristal dan memiliki warna hijau atau ungu kemerahan. Pewarna ini biasanya digunakan untuk mewarnai tekstil, kertas, atau produk kosmetik sehingga apabila dikonsumsi atau dituangkan ke dalam makanan dan minuman akan sangat berbahaya jika tertelan oleh tubuh manusia.</p>
           </div>
          </div>
         </div><!-- Sub-bab 2: Metanil Yellow -->
         <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #f97316, #ea580c);"> <span class="text-sm">🟡 2. Metanil Yellow</span> <span class="indicator text-lg">+</span> </button>
-         <div class="accordion-content bg-orange-50">
+         <div class="accordion-content bg-orange-50 rounded-b-xl">
           <div class="bg-white rounded-b-xl p-4 border-l-4 border-orange-400">
-           <p class="text-gray-700">Metanil yellow merupakan pewarna makanan sintetik yang mempunyai warna kuning kecokelatan dan bisa larut dalam air dan juga alkohol. Metanil yellow biasanya akan berbentuk serbuk dan sering digunakan untuk mewarnai tekstil, kertas, tinta, kulit, cat, dan plastik.</p>
+           <p class="text-gray-700 text-sm md:text-base">Metanil yellow merupakan pewarna makanan sintetik yang mempunyai warna kuning kecokelatan dan bisa larut dalam air dan juga alkohol. Metanil yellow biasanya akan berbentuk serbuk dan sering digunakan untuk mewarnai tekstil, kertas, tinta, kulit, cat, dan plastik.</p>
           </div>
          </div>
         </div><!-- Sub-bab 3: Alura Red -->
         <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #fb7185, #f43f5e);"> <span class="text-sm">🔺 3. Alura Red</span> <span class="indicator text-lg">+</span> </button>
-         <div class="accordion-content bg-rose-50">
+         <div class="accordion-content bg-rose-50 rounded-b-xl">
           <div class="bg-white rounded-b-xl p-4 border-l-4 border-rose-400">
-           <p class="text-gray-700">Alura red merupakan pewarna makanan berbahaya berikutnya adalah alura red atau red 40 yang mengandung benzidene yang disinyalir bersifat karsinogen atau mampu memicu kanker. Sampai saat ini alura red masih kerap digunakan pada beberapa makanan dan minuman yang ada di pasaran. Menurut FDA, takaran aman untuk penggunaan alura red adalah 7 mg per kg berat badan tubuh.</p>
+           <p class="text-gray-700 text-sm md:text-base">Alura red merupakan pewarna makanan berbahaya berikutnya adalah alura red atau red 40 yang mengandung benzidene yang disinyalir bersifat karsinogen atau mampu memicu kanker. Sampai saat ini alura red masih kerap digunakan pada beberapa makanan dan minuman yang ada di pasaran. Menurut FDA, takaran aman untuk penggunaan alura red adalah 7 mg per kg berat badan tubuh.</p>
           </div>
          </div>
         </div><!-- Sub-bab 4: Sunset Yellow -->
         <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);"> <span class="text-sm">🌅 4. Sunset Yellow</span> <span class="indicator text-lg">+</span> </button>
-         <div class="accordion-content bg-amber-50">
+         <div class="accordion-content bg-amber-50 rounded-b-xl">
           <div class="bg-white rounded-b-xl p-4 border-l-4 border-amber-400">
-           <p class="text-gray-700 mb-3">Selanjutnya adalah pewarna makanan buatan yang dicurigai juga berbahaya saat dikonsumsi berlebih oleh tubuh manusia. Menurut FDA, takaran aman untuk pewarna yang satu ini adalah 3,75 miligram per kilogram berat badan.</p>
-           <p class="text-gray-700 font-semibold">Kita harus lebih waspada dalam menggunakan bahan-bahan pewarna makanan. Karena pewarna buatan juga terdiri atas yang aman hingga yang berbahaya apabila tertelan dan dikonsumsi oleh manusia.</p>
+           <p class="text-gray-700 mb-2 text-sm md:text-base">Selanjutnya adalah pewarna makanan buatan yang dicurigai juga berbahaya saat dikonsumsi berlebih oleh tubuh manusia. Menurut FDA, takaran aman untuk pewarna yang satu ini adalah 3,75 miligram per kilogram berat badan.</p>
+           <p class="text-gray-700 font-semibold text-sm md:text-base">Kita harus lebih waspada dalam menggunakan bahan-bahan pewarna makanan. Karena pewarna buatan juga terdiri atas yang aman hingga yang berbahaya apabila tertelan dan dikonsumsi oleh manusia.</p>
           </div>
          </div>
         </div>
        </div>
       </div>
-     </div>
-    </section>
-   </div><!-- 2d -->
-   <div class="mb-3 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl" style="background: linear-gradient(135deg, #ef4444, #b91c1c);"> <span>⚠️ d. Efek terhadap Kesehatan</span> <span class="indicator text-xl">+</span> </button>
-    <div class="accordion-content bg-red-50 px-5 mx-1 rounded-b-xl">
-     <div class="card-enter bg-white rounded-xl p-4 shadow-sm border-l-4 border-red-500">
-      <p class="text-gray-700 mb-3">Bahan pewarna sintesis yang telah dihasilkan oleh para ahli kimia berasal dari coal-tar yang jumlahnya ratusan. Pewarna buatan sangat disenangi oleh para ahli teknologi untuk pewarnaan barang-barang industri, baik untuk industri pangan maupun untuk industri nonpangan. Meskipun sebenarnya beberapa pewarna bersifat toksik.</p>
-      <p class="text-gray-700 mb-3">Pemakaian zat pewarna sintetis dalam makanan dan minuman mempunyai dampak positif bagi produsen dan konsumen. Misalnya, tampilan makanan lebih menarik, meratakan warna makanan dan mengembalikan warna bahan dasar yang telah hilang. Selama pengolahan ternyata dapat menimbulkan hal-hal yang tidak diinginkan dan memberikan dampak yang negatif bagi kesehatan konsumen.</p>
-      <div class="bg-gradient-to-r from-red-100 to-pink-100 rounded-xl p-4 border-l-4 border-red-500 mb-3">
-       <p class="text-red-900 font-bold mb-3 text-base">⚠️ Dampak negatif tersebut timbul apabila:</p>
-       <div class="space-y-2 text-gray-700 text-sm">
-        <p><strong>a.</strong> bahan pewarna sintetis ini dimakan dalam jumlah kecil, namun berulang;</p>
-        <p><strong>b.</strong> bahan pewarna sintetis dimakan dalam jangka waktu yang lama;</p>
-        <p><strong>c.</strong> kelompok masyarakat yang luas dengan daya tahan yang berbeda-beda, yaitu tergantung pada umur, jenis kelamin, berat badan, mutu makanan sehari-hari dan keadaan fisik;</p>
-        <p><strong>d.</strong> beberapa masyarakat menggunakan bahan pewarna sintetis secara berlebihan; dan</p>
-        <p><strong>e.</strong> penyimpanan bahan pewarna sintetis oleh pedagang bahan kimia yang tidak memenuhi persyaratan.</p>
+     </div><!-- 2d: Efek terhadap Kesehatan -->
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #ef4444, #b91c1c);"> <span>⚠️ d. Efek terhadap Kesehatan</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-red-50 px-5 rounded-b-2xl">
+       <div class="card-enter space-y-4"><!-- Sub-bab 1: Dampak Positif -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #dc2626, #b91c1c);"> <span class="text-sm">✅ 1. Dampak Positif</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-red-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-red-400">
+           <p class="text-gray-700 mb-3 text-sm md:text-base">Pemakaian zat pewarna sintetis dalam makanan dan minuman mempunyai dampak positif bagi produsen dan konsumen. Misalnya:</p>
+           <div class="space-y-2 text-gray-700 text-sm">
+            <p><strong>a)</strong> Tampilan makanan lebih menarik;</p>
+            <p><strong>b)</strong> Meratakan warna makanan;</p>
+            <p><strong>c)</strong> Mengembalikan warna bahan dasar yang telah hilang.</p>
+           </div>
+          </div>
+         </div>
+        </div><!-- Sub-bab 2: Dampak Negatif -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #f87171, #dc2626);"> <span class="text-sm">⚠️ 2. Dampak Negatif</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-red-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-red-400">
+           <p class="text-gray-700 mb-3 text-sm md:text-base">Selama pengolahan ternyata dapat menimbulkan hal-hal yang tidak diinginkan dan memberikan dampak yang negatif bagi kesehatan konsumen. Dampak negatif tersebut timbul apabila:</p>
+           <div class="space-y-2 text-gray-700 text-sm">
+            <p><strong>a)</strong> Bahan pewarna sintetis ini dimakan dalam jumlah kecil, namun berulang;</p>
+            <p><strong>b)</strong> Bahan pewarna sintetis dimakan dalam jangka waktu yang lama;</p>
+            <p><strong>c)</strong> Kelompok masyarakat yang luas dengan daya tahan yang berbeda-beda, yaitu tergantung pada umur, jenis kelamin, berat badan, mutu makanan sehari-hari dan keadaan fisik;</p>
+            <p><strong>d)</strong> Beberapa masyarakat menggunakan bahan pewarna sintetis secara berlebihan; dan</p>
+            <p><strong>e)</strong> Penyimpanan bahan pewarna sintetis oleh pedagang bahan kimia yang tidak memenuhi persyaratan.</p>
+           </div>
+          </div>
+         </div>
+        </div>
        </div>
       </div>
-     </div>
-    </div>
-   </div><!-- 2e -->
-   <div class="mb-3 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl" style="background: linear-gradient(135deg, #a78bfa, #7c3aed);"> <span>🧵 e. Pemakaian Pewarna Buatan untuk Kain</span> <span class="indicator text-xl">+</span> </button>
-    <div class="accordion-content bg-purple-50 px-5 mx-1 rounded-b-xl">
-     <div class="card-enter bg-white rounded-xl p-4 shadow-sm border-l-4 border-purple-400 space-y-4">
-      <div>
-       <p class="text-gray-700 mb-3">Pemberian warna pada pada kain atau tekstil sangat penting karena akan menambah keindahan pada kain atau pakaian yang kita pakai, atau kain yang akan kita pasang. Pewarnaan juga menentukan daya tarik suatu baju. Untuk menciptakan kain yang indah itu, ada proses pewarnaan tekstil yang menggunakan beragam jenis pewarna. Jenis-jenis bahan pewarna tekstil dikelompokkan ke dalam dua bagian, yaitu zat pewarna alami (natural dye) dan zat pewarna sintetis (synthetic dye).</p>
-      </div>
-      <div>
-       <p class="text-gray-700 mb-3"><strong>🎨 Pewarna Buatan (Synthetic Dye)</strong></p>
-       <p class="text-gray-700 mb-3">Jenis jenis bahan pewarna tekstil dibuat dari perpaduan zat kimia tertentu. Dibandingkan pewarna alami, pilihan warna zat pewarna sintetis lebih banyak.</p>
-       <div class="rounded-xl overflow-hidden shadow-sm mb-3">
+     </div><!-- 2e: Pemakaian Pewarna Buatan untuk Kain -->
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #a78bfa, #7c3aed);"> <span>🧵 e. Pemakaian Pewarna Buatan untuk Kain</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-purple-50 px-5 rounded-b-2xl">
+       <div class="card-enter bg-white rounded-xl p-5 shadow-sm border-l-4 border-purple-400">
+        <p class="text-gray-700 mb-4 text-sm md:text-base">Pemberian warna pada pada kain atau tekstil sangat penting karena akan menambah keindahan pada kain atau pakaian yang kita pakai, atau kain yang akan kita pasang. Pewarnaan juga menentukan daya tarik suatu baju. Untuk menciptakan kain yang indah itu, ada proses pewarnaan tekstil yang menggunakan beragam jenis pewarna. Jenis-jenis bahan pewarna tekstil dikelompokkan ke dalam dua bagian, yaitu zat pewarna alami (natural dye) dan zat pewarna sintetis (synthetic dye).</p>
+        <p class="text-gray-700 mb-4 font-semibold text-sm md:text-base">🎨 Pewarna Buatan (Synthetic Dye)</p>
+        <p class="text-gray-700 mb-4 text-sm md:text-base">Jenis jenis bahan pewarna tekstil dibuat dari perpaduan zat kimia tertentu. Dibandingkan pewarna alami, pilihan warna zat pewarna sintetis lebih banyak.</p>
         <div class="space-y-3"><!-- a. Napthol -->
          <div class="rounded-lg overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-3 py-2 text-left font-semibold text-white text-sm rounded-lg" style="background: linear-gradient(135deg, #c084fc, #a78bfa);"> <span>🟣 a. Napthol</span> <span class="indicator text-base">+</span> </button>
-          <div class="accordion-content bg-purple-50">
+          <div class="accordion-content bg-purple-50 rounded-b-lg">
            <div class="bg-white rounded-b-lg p-3 border-l-4 border-purple-300">
             <p class="text-gray-700 text-sm">Zat warna napthol berasal dari napthol sebagai komponen dasar dan garam diazonium atau garam napthol sebagai komponen tambahan. Pewarna ini digunakan dengan teknik celup.</p>
            </div>
           </div>
          </div><!-- b. Indigosol -->
          <div class="rounded-lg overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-3 py-2 text-left font-semibold text-white text-sm rounded-lg" style="background: linear-gradient(135deg, #818cf8, #6366f1);"> <span>🔵 b. Indigosol</span> <span class="indicator text-base">+</span> </button>
-          <div class="accordion-content bg-indigo-50">
+          <div class="accordion-content bg-indigo-50 rounded-b-lg">
            <div class="bg-white rounded-b-lg p-3 border-l-4 border-indigo-300">
             <p class="text-gray-700 text-sm">Zat warna indigosol memiliki ciri tidak mudah luntur. Warnanya merata dan cerah. Proses pewarnaannya bisa dengan dicelup atau dicolek. Warna akan muncul setelah ditambahkan natrium nitrit atau asam sulfat.</p>
            </div>
           </div>
          </div><!-- c. Warna Rapit -->
          <div class="rounded-lg overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-3 py-2 text-left font-semibold text-white text-sm rounded-lg" style="background: linear-gradient(135deg, #f472b6, #ec4899);"> <span>🔴 c. Warna Rapit</span> <span class="indicator text-base">+</span> </button>
-          <div class="accordion-content bg-pink-50">
+          <div class="accordion-content bg-pink-50 rounded-b-lg">
            <div class="bg-white rounded-b-lg p-3 border-l-4 border-pink-300">
             <p class="text-gray-700 text-sm">Zat warna rapit yang digunakan untuk coletan biasanya adalah jenis rapit fast. Zat warna rapit merupakan komponen campuran dari warna napthol dan garam diazonium yang distabilkan. Rapit yang banyak dipakai adalah warna merah.</p>
            </div>
           </div>
          </div><!-- d. Zat Warna Pigmen -->
          <div class="rounded-lg overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-3 py-2 text-left font-semibold text-white text-sm rounded-lg" style="background: linear-gradient(135deg, #facc15, #eab308);"> <span>🟡 d. Zat Warna Pigmen</span> <span class="indicator text-base">+</span> </button>
-          <div class="accordion-content bg-yellow-50">
+          <div class="accordion-content bg-yellow-50 rounded-b-lg">
            <div class="bg-white rounded-b-lg p-3 border-l-4 border-yellow-300">
             <p class="text-gray-700 text-sm">Zat warna pigmen merupakan unsur pengikat yang membantu menguatkan zat warna dengan serat. Zat warna pigmen biasanya digunakan untuk cetak saring dan kurang cocok digunakan pada teknik celup.</p>
            </div>
           </div>
          </div><!-- e. Cat Tekstil -->
          <div class="rounded-lg overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-3 py-2 text-left font-semibold text-white text-sm rounded-lg" style="background: linear-gradient(135deg, #fb923c, #f97316);"> <span>🎨 e. Cat Tekstil</span> <span class="indicator text-base">+</span> </button>
-          <div class="accordion-content bg-orange-50">
+          <div class="accordion-content bg-orange-50 rounded-b-lg">
            <div class="bg-white rounded-b-lg p-3 border-l-4 border-orange-300">
             <p class="text-gray-700 text-sm">Cat tekstil berbahan dasar air. Cat ini khusus digunakan untuk melukis di atas kain. Misalnya, melukis tas kain, t-shirt, hingga sepatu kain. Setelah cat kering, kain yang diwarnai harus disetrika. Dalam proses penyetrikaan, harus ada lapisan di atas kain. Jadi, setrika tidak langsung mengenai cat.</p>
            </div>
           </div>
          </div><!-- f. Cat Akrilik -->
          <div class="rounded-lg overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-3 py-2 text-left font-semibold text-white text-sm rounded-lg" style="background: linear-gradient(135deg, #06b6d4, #0891b2);"> <span>🖌️ f. Cat Akrilik</span> <span class="indicator text-base">+</span> </button>
-          <div class="accordion-content bg-cyan-50">
+          <div class="accordion-content bg-cyan-50 rounded-b-lg">
            <div class="bg-white rounded-b-lg p-3 border-l-4 border-cyan-300">
             <p class="text-gray-700 text-sm">Cat akrilik biasa dipakai untuk melukis. Bahan dasarnya adalah plastik polietilen sehingga cepat mengeras dan cepat kering. Penggunaannya biasanya dicampur dengan air.</p>
            </div>
@@ -246,20 +310,348 @@
        </div>
       </div>
      </div>
-    </div>
+    </section><!-- SECTION 3: PERBEDAAN PEWARNA ALAMI DAN BUATAN -->
+    <section class="section-block mb-10">
+     <div class="flex items-center gap-3 mb-6"><span class="text-3xl">🌱</span>
+      <h2 id="section-3-title" class="title-font text-2xl md:text-3xl font-bold" style="color: #059669;">3. Tanaman Penghasil Pewarna Makanan</h2>
+     </div><!-- 3a: Tanaman Penghasil Pewarna Makanan -->
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #10b981, #059669);"> <span>🌿 1. Tanaman Penghasil Pewarna Makanan</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-emerald-50 px-5 rounded-b-2xl">
+       <div class="card-enter space-y-4"><!-- a. Kunyit -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);"> <span class="text-sm">🟡 a. Kunyit</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-amber-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-amber-400">
+           <p class="text-gray-700 text-sm md:text-base">Warna kuning dapat dihasilkan dengan menggunakan kunyit. Warna kuning pada kunyit disebabkan oleh adanya zat kurkuminoid.</p>
+          </div>
+         </div>
+        </div><!-- b. Cabai Merah -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #ef4444, #b91c1c);"> <span class="text-sm">🔴 b. Cabai Merah</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-red-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-red-400">
+           <p class="text-gray-700 text-sm md:text-base">Selain rasanya yang pedas, warna merah pada cabai bisa dimanfaatkan sebagai pewarna alami. Hal ini diakibatkan adanya zat warna kapxantin yang terdapat pada cabai.</p>
+          </div>
+         </div>
+        </div><!-- c. Gula Merah -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #a16207, #78350f);"> <span class="text-sm">🟤 c. Gula Merah</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-amber-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-amber-700">
+           <p class="text-gray-700 text-sm md:text-base">Mendapatkan warna cokelat untuk makanan bisa saja menggunakan gula merah yang memiliki rasa manis. Tak jarang, pewarna ini sering digunakan untuk dodol dan bubur.</p>
+          </div>
+         </div>
+        </div><!-- d. Ubi Ungu -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #a855f7, #7c3aed);"> <span class="text-sm">🟣 d. Ubi Ungu</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-purple-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-purple-400">
+           <p class="text-gray-700 text-sm md:text-base">Selain sumber pangan, ubi ungu dapat dimanfaatkan untuk sumber warna ungu. Warna ungu ini diakibatkan dari kandungan senyawa antosianin pada ubi.</p>
+          </div>
+         </div>
+        </div><!-- e. Daun Pandan -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #22c55e, #16a34a);"> <span class="text-sm">🟢 e. Daun Pandan</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-green-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-green-400">
+           <p class="text-gray-700 text-sm md:text-base">Sejak dulu daun pandan selalu dipakai untuk memberikan warna hijau. Warna hijaunya berasal dari pigmen klorofil. Cara penggunaannya sangat mudah, tinggal menumbuk, menambahkan air dan memeras tumbuhan tersebut.</p>
+          </div>
+         </div>
+        </div><!-- f. Arang -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #374151, #1f2937);"> <span class="text-sm">⬛ f. Arang</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-gray-100 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-gray-400">
+           <p class="text-gray-700 text-sm md:text-base">Arang berasal dari pembakaran merang padi. Hasil pembakaran tersebut diberi air untuk dapat memberikan warna hitam pada makanan.</p>
+          </div>
+         </div>
+        </div><!-- g. Tomat -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #f87171, #dc2626);"> <span class="text-sm">🍅 g. Tomat</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-red-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-red-400">
+           <p class="text-gray-700 text-sm md:text-base">Warna merah tomat berasal dari pigmen likopen terutama bagian kulitnya.</p>
+          </div>
+         </div>
+        </div><!-- h. Bit Merah -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #f43f5e, #e11d48);"> <span class="text-sm">🩸 h. Bit Merah</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-rose-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-rose-400">
+           <p class="text-gray-700 text-sm md:text-base">Bit merah dapat menghasilkan warna merah alami. Warna merahnya cukup kuat dan cerah. Dalam makanan, penggunaan bit merah tidak akan banyak mengubah cita rasa makanan.</p>
+          </div>
+         </div>
+        </div><!-- i. Secang -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #d2691e, #a0522d);"> <span class="text-sm">🪵 i. Secang</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-amber-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-amber-700">
+           <p class="text-gray-700 text-sm md:text-base">Tahukah kamu apa itu secang? Secang adalah jenis rempah-rempah yang berbentuk kayu serut kemudian kemerahan. Biasanya secang digunakan untuk pembuatan wedang, serta warna merah pekatnya bisa untuk pewarna alami.</p>
+          </div>
+         </div>
+        </div><!-- j. Buah Jamblang -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #6d28d9, #5b21b6);"> <span class="text-sm">🫐 j. Buah Jamblang</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-purple-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-purple-400">
+           <p class="text-gray-700 text-sm md:text-base">Buah jamblang atau disebut pula duwet adalah sejenis buah berwarna ungu tua. Kandungan antosianinnya terdapat di dalamnya.</p>
+          </div>
+         </div>
+        </div><!-- k. Angkak -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #ea580c, #c2410c);"> <span class="text-sm">🧂 k. Angkak</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-orange-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-orange-400">
+           <p class="text-gray-700 text-sm md:text-base">Angkak dibuat dari beras yang berasal dari proses fermentasi kemudian dikeringkan. Warna merah pada angkak dapat kalian manfaatkan.</p>
+          </div>
+         </div>
+        </div><!-- l. Rosella -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #f472b6, #ec4899);"> <span class="text-sm">🌺 l. Rosella</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-pink-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-pink-400">
+           <p class="text-gray-700 text-sm md:text-base">Hibiscus sabdariffa atau rosella adalah spesies bunga yang berasal dari benua Afrika. Namun, bunga rosella telah banyak dibudidayakan di Indonesia. Bunga rosella yang dapat menghasilkan warna merah mendekati pink karena adanya antosianin.</p>
+          </div>
+         </div>
+        </div><!-- m. Kluwak -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #1f2937, #111827);"> <span class="text-sm">🌰 m. Kluwak</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-gray-100 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-gray-400">
+           <p class="text-gray-700 text-sm md:text-base">Jika ingin mendapatkan warna hitam atau cokelat pekat kamu bisa menggunakan daging yang ada di dalam biji kluwak.</p>
+          </div>
+         </div>
+        </div><!-- n. Bunga Telang -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);"> <span class="text-sm">🔵 n. Bunga Telang</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-sky-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-sky-400">
+           <p class="text-gray-700 text-sm md:text-base">Bunga telang (Clitoria ternatea) adalah tumbuhan merambat yang biasa ditemukan pada pekarangan atau tepi hutan. Cara mengolah bunga telang agar tercipta warna biru adalah dengan meremas atau menumbuk bunganya.</p>
+          </div>
+         </div>
+        </div><!-- o. Buah Naga -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #d946ef, #be123c);"> <span class="text-sm">🐉 o. Buah Naga</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-purple-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-purple-400">
+           <p class="text-gray-700 text-sm md:text-base">Selain rasanya yang lezat, daging buah naga bisa menghasilkan warna ungu ke merah muda.</p>
+          </div>
+         </div>
+        </div><!-- p. Murbei -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #a855f7, #7c3aed);"> <span class="text-sm">🫐 p. Murbei</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-purple-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-purple-400">
+           <p class="text-gray-700 text-sm md:text-base">Dengan menghaluskan buah tersebut, murbei bisa menghasilkan warna ungu kemerahan.</p>
+          </div>
+         </div>
+        </div><!-- q. Blueberry -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #6366f1, #4f46e5);"> <span class="text-sm">🫐 q. Blueberry</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-indigo-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-indigo-400">
+           <p class="text-gray-700 text-sm md:text-base">Buah blueberry yang kaya akan vitamin C dapat menghasilkan warna biru keunguan. Caranya, tinggal menghancurkan buah blueberry dan masukkan ke dalam makanan yang ingin dibuat.</p>
+          </div>
+         </div>
+        </div><!-- r. Bayam -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #10b981, #059669);"> <span class="text-sm">🥬 r. Bayam</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-emerald-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-emerald-400">
+           <p class="text-gray-700 text-sm md:text-base">Sayuran bayam bisa digunakan sebagai pewarna hijau alami karena adanya zat klorofil yang pekat dan kuat.</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- SECTION 4: TANAMAN PENGHASIL PEWARNA UNTUK KAIN -->
+    <section class="section-block mb-10">
+     <div class="flex items-center gap-3 mb-6"><span class="text-3xl">🧵</span>
+      <h2 class="title-font text-2xl md:text-3xl font-bold" style="color: #b45309;">4. Tanaman Penghasil Pewarna untuk Kain</h2>
+     </div>
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #d97706, #b45309);"> <span>📋 Pengantar Pewarna Tekstil Alami</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-amber-50 px-5 rounded-b-2xl">
+       <div class="card-enter bg-white rounded-xl p-5 shadow-sm border-l-4 border-amber-600">
+        <p class="text-gray-700 mb-3 text-sm md:text-base">Selain bahan pembuatan kain, bahan pewarna kain atau pakaian juga bisa didapat secara alami dari alam. Pewarna tekstil alami sudah lama digunakan sejak dulu oleh para perajin batik dan tenun di berbagai wilayah Nusantara. Berikut ini lima tumbuhan yang dapat digunakan sebagai bahan pewarna alami pada produk tekstil yang mudah ditemukan di Indonesia.</p>
+       </div>
+      </div>
+     </div>
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #f97316, #ea580c);"> <span>🌿 Tanaman Pewarna untuk Kain</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-orange-50 px-5 rounded-b-2xl">
+       <div class="card-enter space-y-4"><!-- a. Kesumba -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #f87171, #dc2626);"> <span class="text-sm">🔴 a. Kesumba</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-red-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-red-400">
+           <p class="text-gray-700 text-sm md:text-base">Kesumba merupakan salah satu jenis tanaman perdu yang berasal dari Amerika Selatan. Meski bukan tumbuhan asli Indonesia, kesumba mudah ditemukan di berbagai wilayah Indonesia. Kesumba memiliki warna alami merah yang pekat. Bagian yang kerap dijadikan sebagai pewarna alami adalah bijinya. Selain untuk pewarna tekstil, kesumba juga kerap digunakan sebagai pewarna produk kosmetik alami.</p>
+          </div>
+         </div>
+        </div><!-- b. Suji -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #22c55e, #16a34a);"> <span class="text-sm">🟢 b. Suji</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-green-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-green-400">
+           <p class="text-gray-700 text-sm md:text-base">Daun suji memiliki warna hijau pekat yang sangat khas. Umumnya orang lebih banyak menggunakan daun suji sebagai pewarna makanan. Namun, suji juga dapat digunakan sebagai bahan untuk membuat pewarna tekstil.</p>
+          </div>
+         </div>
+        </div><!-- c. Kunyit -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);"> <span class="text-sm">🟡 c. Kunyit</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-amber-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-amber-400">
+           <p class="text-gray-700 text-sm md:text-base">Kunyit merupakan rempah asli Asia Tenggara yang memiliki bakat kuat sebagai bahan pewarna alami. Warna kuning pada kunyit sangat pekat dan dapat melekat dengan baik pada kain tanpa membutuhkan berbagai bahan kimia lainnya.</p>
+          </div>
+         </div>
+        </div><!-- d. Daun Ketapang -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #a16207, #78350f);"> <span class="text-sm">🍂 d. Daun Ketapang</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-amber-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-amber-700">
+           <p class="text-gray-700 text-sm md:text-base">Daun pohon ketapang dapat diolah menjadi pewarna alami. Uniknya, hasil pengolahan daun ketapang dapat menghasilkan setidaknya tiga warna yang berbeda. Mulai dari olive green, hitam, hingga kuning kecokelatan. Perbedaan itu dapat terjadi berdasarkan kondisi daun yang digunakan serta bahan campuran yang digunakan untuk mengolah daun ketapang tersebut.</p>
+          </div>
+         </div>
+        </div><!-- e. Secang -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #d2691e, #a0522d);"> <span class="text-sm">🪵 e. Secang</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-amber-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-amber-700">
+           <p class="text-gray-700 text-sm md:text-base">Kulit kayu secang dapat diolah menjadi pewarna cokelat hingga merah alami. Nuansa warna earth tone akan terasa dari bahan yang diwarnai dengan kayu secang. Di beberapa daerah, secang juga kerap digunakan untuk mewarnai beberapa karya seni seperti anyaman.</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- SECTION 5: PEMBUATAN BATIK WARNA ALAMI -->
+    <section class="section-block mb-10">
+     <div class="flex items-center gap-3 mb-6"><span class="text-3xl">🎨</span>
+      <h2 class="title-font text-2xl md:text-3xl font-bold" style="color: #7c2d12;">5. Melakukan Pewarnaan Kain Batik dengan Pewarna Alami</h2>
+     </div>
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #b45309, #7c2d12);"> <span>📍 1. Proses Pembuatan Batik Warna Alami</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-amber-50 px-5 rounded-b-2xl">
+       <div class="card-enter bg-white rounded-xl p-5 shadow-sm border-l-4 border-amber-600">
+        <p class="text-gray-700 mb-3 text-sm md:text-base">Proses pembuatan batik dengan pewarna alami berbeda dengan pewarnaan secara sintetis, prosesnya lebih panjang dan lebih rumit. Sebagai gambaran proses atau alur pembuatan batik warna alami adalah sebagai berikut:</p>
+        <div class="bg-amber-100 p-4 rounded-lg border-l-4 border-amber-600">
+         <p class="text-gray-700 font-semibold text-center text-sm md:text-base">👔 Persiapan kain → 💧 Mordanting/perendaman kain → 🖌️ Proses membuat pola pada kain → 🎨 Pencelupan/pewarnaan → 🔒 Penguncian/fiksasi → 🔥 Pelorodan lilin batik → 🧼 Pencucian/finishing</p>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #ca8a04, #b45309);"> <span>👔 a. Langkah 1: Persiapan Kain untuk Batik Warna Alami</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-yellow-50 px-5 rounded-b-2xl">
+       <div class="card-enter bg-white rounded-xl p-5 shadow-sm border-l-4 border-yellow-500">
+        <p class="text-gray-700 text-sm md:text-base">Kain yang akan diwarnai dengan pewarna alami hampir sama dengan kain yang diwarnai dengan pewarna sintetis, yaitu tidak mengandung plastik pada kain itu. Kain katun, kain sutra, dan bahan berserat alam lainnya sangat cocok untuk digunakan sebagai bahan dasar kain dengan pewarna alami. Hanya saja perbedaan untuk kain yang akan diwarnai dengan pewarna alami, tidak akan lebih baik kalau kain di-mordanting terlebih dahulu.</p>
+       </div>
+      </div>
+     </div>
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #ca8a04, #b45309);"> <span>💧 b. Langkah 2: Pemordanan Kain untuk Batik Warna Alami</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-yellow-50 px-5 rounded-b-2xl">
+       <div class="card-enter space-y-4">
+        <div class="bg-white rounded-xl p-5 shadow-sm border-l-4 border-yellow-500">
+         <p class="text-gray-700 mb-4 text-sm md:text-base">Proses mordanting pada kain batik warna alami sangat penting karena berperan untuk membuat warna alam akan mudah pudar warnanya tanpa adanya proses mordanting lebih dahulu.</p>
+         <p class="text-gray-700 font-semibold mb-3 text-sm md:text-base">📋 Contoh Resep Mordanting:</p>
+         <ol class="space-y-2 text-gray-700 text-sm md:text-base ml-4 list-decimal">
+          <li>Rendam kain ke dalam larutan detergen atau TRO selama semalam dengan perbandingan 4 g untuk tiap liter air.</li>
+          <li>Setelah direndam semalam kain dicuci dan dibilas dengan air bersih.</li>
+          <li>Rebus kain dengan air mendidih dengan dicampur 200 g tawas serta dicampur soda abu sebanyak 60 g ke dalam 3 liter air.</li>
+         </ol>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #ca8a04, #b45309);"> <span>🎨 c. Langkah 3: Pewarnaan</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-yellow-50 px-5 rounded-b-2xl">
+       <div class="card-enter space-y-4">
+        <div class="bg-white rounded-xl p-5 shadow-sm border-l-4 border-yellow-500">
+         <p class="text-gray-700 mb-4 text-sm md:text-base">Setelah pewarna alami siap untuk mewarnai, berikut kami sajikan langkah-langkah pewarnaan atau pencelupan kain pada pewarna alami:</p>
+         <ol class="space-y-2 text-gray-700 text-sm md:text-base ml-4 list-decimal">
+          <li>Kain batik dicelup lagi dalam larutan TRO atau kalau tidak ada dengan larutan detergen lalu diangkat dan dibuang agak kering.</li>
+          <li>Setelah agak kering masukkan kain ke dalam pewarna alami sampai merata dengan cara ditekan dan dibolak-balik.</li>
+          <li>Setelah kain batik dicelup, jemur kain di tempat yang teduh atau diangin-anginkan sampai agak kering, lalu ulangi lagi pencelupan dengan bahan yang sama sampai mendapatkan warna yang diinginkan.</li>
+         </ol>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #ca8a04, #b45309);"> <span>🔒 d. Langkah 4: Fiksasi atau Penguncian Warna</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-yellow-50 px-5 rounded-b-2xl">
+       <div class="card-enter space-y-4">
+        <div class="bg-white rounded-xl p-5 shadow-sm border-l-4 border-yellow-500">
+         <p class="text-gray-700 mb-4 text-sm md:text-base">Setelah pewarnaan kain batik pada pewarna alami selesai proses selanjutnya adalah fiksasi atau penguncian warna. Fungsi dari fiksasi adalah memperkuat warna pada kain dan arah warna dari hasil fiksasi sesuai dengan jenis logam yang mengikatnya.</p>
+         <p class="text-gray-700 mb-3 font-semibold text-sm md:text-base">Ada tiga jenis fiksasi yang umum digunakan:</p>
+         <div class="space-y-3">
+          <div class="bg-yellow-100 p-3 rounded-lg">
+           <p class="text-gray-700 font-semibold text-sm">🔹 Tawas</p>
+           <p class="text-gray-700 text-sm">Menghasilkan warna asli sesuai dengan warna awal pada kain. Takaran: 70 g tiap 1 liter air.</p>
+          </div>
+          <div class="bg-yellow-100 p-3 rounded-lg">
+           <p class="text-gray-700 font-semibold text-sm">🔹 Kapur</p>
+           <p class="text-gray-700 text-sm">Menghasilkan warna lebih tua dari warna asli pada kain. Takaran: 50 g atau 1 gelas air.</p>
+          </div>
+          <div class="bg-yellow-100 p-3 rounded-lg">
+           <p class="text-gray-700 font-semibold text-sm">🔹 Tunjung</p>
+           <p class="text-gray-700 text-sm">Menghasilkan warna ke arah hitam tua atau gelap dari warna aslinya. Takaran: 20 g untuk 1 liter air.</p>
+          </div>
+         </div>
+         <p class="text-gray-700 mt-4 font-semibold text-sm md:text-base">Cara penguncian batik warna alam pada larutan fiksasi:</p>
+         <ul class="space-y-2 text-gray-700 text-sm md:text-base ml-4 list-disc mt-2">
+          <li>Siapkan kain kering yang telah dicelup warna alami.</li>
+          <li>Pilih larutan fiksasi yang diinginkan sesuai arah warna yang diinginkan.</li>
+          <li>Kain batik dicelupkan pada larutan fiksasi dan lakukan sesuai dengan intensitas warna yang diinginkan.</li>
+          <li>Bilas kain yang telah difiksasi dengan air bersih dan biarkan kain kering.</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #ca8a04, #b45309);"> <span>🔥 e. Langkah 5: Pelorodan Batik Warna Alami</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-yellow-50 px-5 rounded-b-2xl">
+       <div class="card-enter bg-white rounded-xl p-5 shadow-sm border-l-4 border-yellow-500">
+        <p class="text-gray-700 text-sm md:text-base">Pelorodan adalah proses menghilangkan lilin yang menempel pada kain dengan cara kain dicelup dengan air mendidih pada sebuah panci agar lilin mudah mengelupas. Untuk membantu proses pelorodan diperlukan tambahan zat lain seperti soda abu, waterglass atau kanji. Mudah dan sulitnya proses pelorodan lilin tergantung pada jenis kain dan juga jenis lilin batik.</p>
+       </div>
+      </div>
+     </div>
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #ca8a04, #b45309);"> <span>🔥 e. Langkah 5: Pelorodan Batik Warna Alami</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-yellow-50 px-5 rounded-b-2xl">
+       <div class="card-enter bg-white rounded-xl p-5 shadow-sm border-l-4 border-yellow-500">
+        <p class="text-gray-700 text-sm md:text-base">Pelorodan adalah proses menghilangkan lilin yang menempel pada kain dengan cara kain dicelup dengan air mendidih pada sebuah panci agar lilin mudah mengelupas. Untuk membantu proses pelorodan diperlukan tambahan zat lain seperti soda abu, waterglass atau kanji. Mudah dan sulitnya proses pelorodan lilin tergantung pada jenis kain dan juga jenis lilin batik.</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- SECTION 6: KELEBIHAN DAN KELEMAHAN WARNA ALAMI PADA KAIN -->
+    <section class="section-block mb-10">
+     <div class="flex items-center gap-3 mb-6"><span class="text-3xl">⚖️</span>
+      <h2 class="title-font text-2xl md:text-3xl font-bold" style="color: #7c2d12;">6. Kelebihan dan Kelemahan Pemakaian Warna Alami pada Kain</h2>
+     </div>
+     <div class="mb-4 rounded-2xl overflow-hidden shadow-md"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #b45309, #7c2d12);"> <span>📊 Perbandingan Kelebihan dan Kelemahan</span> <span class="indicator text-xl">+</span> </button>
+      <div class="accordion-content bg-amber-50 px-5 rounded-b-2xl">
+       <div class="card-enter space-y-4"><!-- Kelemahan -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #ef4444, #b91c1c);"> <span class="text-sm">⚠️ Kelemahan Warna Alami</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-red-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-red-400">
+           <p class="text-gray-700 text-sm md:text-base">Kendala dalam penggunaan warna alami adalah variasi warnanya sangat terbatas dan ketersediaan bahannya tidak siap pakai. Jadi diperlukan proses-proses khusus untuk dijadikan larutan pewarna sehingga kurang praktis penggunaannya.</p>
+          </div>
+         </div>
+        </div><!-- Kelebihan -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #22c55e, #16a34a);"> <span class="text-sm">✅ Kelebihan Warna Alami</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-green-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-green-400">
+           <p class="text-gray-700 mb-3 text-sm md:text-base">Kelebihan batik warna alam adalah:</p>
+           <ul class="space-y-2 text-gray-700 text-sm md:text-base ml-4 list-disc">
+            <li>Ramah lingkungan</li>
+            <li>Memiliki potensi pasar yang tinggi sebagai komoditas unggulan produk Indonesia untuk memasuki pasar global dengan karakteristik yang unik, etnik, dan eksklusif</li>
+            <li>Memiliki daya jual yang lebih tinggi daripada batik warna sintetis</li>
+           </ul>
+          </div>
+         </div>
+        </div><!-- Manfaat Umum -->
+        <div class="rounded-xl overflow-hidden shadow-sm"><button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #0891b2, #0d9488);"> <span class="text-sm">🌍 Manfaat Penggunaan Pewarna Alami</span> <span class="indicator text-lg">+</span> </button>
+         <div class="accordion-content bg-cyan-50 rounded-b-xl">
+          <div class="bg-white rounded-b-xl p-4 border-l-4 border-cyan-400">
+           <p class="text-gray-700 mb-3 text-sm md:text-base">Manfaat yang dapat diperoleh dari penggunaan tumbuh-tumbuhan sebagai pewarna alami adalah:</p>
+           <ul class="space-y-2 text-gray-700 text-sm md:text-base ml-4 list-disc">
+            <li>Ikut mendorong pembudidayaan tanaman-tanaman yang kurang dikenal masyarakat dapat dijadikan sumber warna</li>
+            <li>Mendorong pelestarian keanekaragaman hayati</li>
+            <li>Sumber warna bisa diperoleh secara gratis dari pasar swalayan dan pasar tradisional, sayuran dan buah-buahan yang sudah tidak layak jual (manggis, rambutan, jengkol, alpukat)</li>
+            <li>Sama artinya kita mendaur ulang sampah, bukan?</li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
    </div>
-  </div>
-  <footer class="text-center text-gray-400 text-xs pb-6 pt-2">
-   Materi Pembelajaran — Pewarna Alami &amp; Buatan 🎨
+  </div><!-- FOOTER -->
+  <footer class="text-center text-gray-400 text-xs py-6 px-4">
+   <p>Materi Pembelajaran — Pewarna Alami &amp; Buatan 🎨</p>
   </footer>
   <script>
     const defaultConfig = {
       page_title: 'Pewarna Alami & Buatan',
-      background_color: '#fef3c7',
-      title_color: '#7c3aed',
-      text_color: '#374151',
-      primary_action_color: '#22c55e',
-      surface_color: '#ffffff'
+      page_subtitle: 'Materi Pembelajaran Interaktif — Klik setiap sub bab untuk membuka isi!',
+      section_1_title: '1. Pewarna Alami',
+      section_2_title: '2. Pewarna Buatan',
+      section_3_title: '3. Tanaman Penghasil Pewarna Makanan'
     };
 
     function toggle(btn) {
@@ -271,42 +663,50 @@
       indicator.textContent = isOpen ? '+' : '−';
     }
 
-    function applyConfig(config) {
-      const title = document.getElementById('page-title');
-      if (title) {
-        title.textContent = config.page_title || defaultConfig.page_title;
-        title.style.color = config.title_color || defaultConfig.title_color;
+    async function applyConfig(config) {
+      const pageTitle = document.getElementById('page-title');
+      if (pageTitle) {
+        pageTitle.textContent = config.page_title || defaultConfig.page_title;
       }
-      const app = document.getElementById('app');
-      if (app) {
-        const bg = config.background_color || defaultConfig.background_color;
-        app.style.background = `linear-gradient(135deg, ${bg} 0%, #fce7f3 50%, #e0e7ff 100%)`;
+
+      const pageSubtitle = document.getElementById('page-subtitle');
+      if (pageSubtitle) {
+        pageSubtitle.textContent = config.page_subtitle || defaultConfig.page_subtitle;
       }
-      document.querySelectorAll('.card-enter, [class*="bg-white"]').forEach(el => {
-        el.style.backgroundColor = config.surface_color || defaultConfig.surface_color;
-      });
-      document.body.style.color = config.text_color || defaultConfig.text_color;
+
+      const section1Title = document.getElementById('section-1-title');
+      if (section1Title) {
+        section1Title.textContent = config.section_1_title || defaultConfig.section_1_title;
+      }
+
+      const section2Title = document.getElementById('section-2-title');
+      if (section2Title) {
+        section2Title.textContent = config.section_2_title || defaultConfig.section_2_title;
+      }
+
+      const section3Title = document.getElementById('section-3-title');
+      if (section3Title) {
+        section3Title.textContent = config.section_3_title || defaultConfig.section_3_title;
+      }
     }
 
     window.elementSdk.init({
       defaultConfig,
-      onConfigChange: async (config) => { applyConfig(config); },
-      mapToCapabilities: (config) => ({
-        recolorables: [
-          { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
-          { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
-          { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
-          { get: () => config.title_color || defaultConfig.title_color, set: (v) => { config.title_color = v; window.elementSdk.setConfig({ title_color: v }); } },
-          { get: () => config.primary_action_color || defaultConfig.primary_action_color, set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); } }
-        ],
+      onConfigChange: applyConfig,
+      mapToCapabilities: () => ({
+        recolorables: [],
         borderables: [],
         fontEditable: undefined,
         fontSizeable: undefined
       }),
       mapToEditPanelValues: (config) => new Map([
-        ['page_title', config.page_title || defaultConfig.page_title]
+        ['page_title', config.page_title || defaultConfig.page_title],
+        ['page_subtitle', config.page_subtitle || defaultConfig.page_subtitle],
+        ['section_1_title', config.section_1_title || defaultConfig.section_1_title],
+        ['section_2_title', config.section_2_title || defaultConfig.section_2_title],
+        ['section_3_title', config.section_3_title || defaultConfig.section_3_title]
       ])
     });
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9eaf023d8405d8a3',t:'MTc3NTk2MzEyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9eb0eb36e0960557',t:'MTc3NTk4MzE0OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

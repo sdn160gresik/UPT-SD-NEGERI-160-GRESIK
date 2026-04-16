@@ -1,186 +1,649 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Istana Pancasila</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pembagian Wilayah NKRI</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=Fredoka+One&amp;display=swap" rel="stylesheet">
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      height: 100%;
-      width: 100%;
-      overflow-x: hidden;
-      background: url('https://i.imgur.com/Bc2M7hb.png') no-repeat center center fixed;
-      background-size: cover;
-      background-position: center;
-      color: #fff;
+    html, body { height: 100%; }
+    body { font-family: 'Nunito', sans-serif; display: flex; flex-direction: column; }
+    #app { display: flex; flex-direction: column; min-height: 100%; }
+    .main-content { flex: 1; }
+    .title-font { font-family: 'Fredoka One', cursive; }
+    
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.3s ease;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
     }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
+    
+    .accordion-content.open {
+      max-height: 3000px;
+      opacity: 1;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
     }
-
-    .nav-left img {
-      height: 45px;
-      margin-right: 0.5rem;
+    
+    .accordion-header {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
     }
-
-    .nav-right {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+    
+    .accordion-header:hover {
+      transform: translateY(-2px);
     }
-
-    .nav-right a {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      text-decoration: none;
-      color: #0288d1;
-      font-weight: bold;
-      font-size: 0.9rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .nav-right a:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .title-section {
-      text-align: center;
-      margin: 20px 15px 10px;
-    }
-
-    .title-section h1 {
-      font-size: 2rem;
-      background: rgba(255,255,255,0.85);
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      border-radius: 12px;
-      color: #0288d1;
-      text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
-    }
-
-    .title-section p {
-      background: rgba(255,255,255,0.8);
-      color: #0288d1;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      max-width: 90%;
-      margin: 10px auto;
-      font-size: 1rem;
-    }
-
-    .map-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 15px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .map-item {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      padding: 15px;
-      text-align: center;
-      color: #0288d1;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    
+    .indicator {
       transition: transform 0.3s ease;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
+      display: inline-block;
     }
-
-    .map-item:hover {
-      transform: scale(1.05);
-      background-color: #dff6ff;
+    
+    .indicator.rotated {
+      transform: rotate(45deg);
     }
-
-    .map-item .emoji {
-      font-size: 2rem;
-      display: block;
-      margin-bottom: 8px;
+    
+    .card-enter {
+      animation: cardSlideIn 0.4s ease forwards;
     }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: rgba(255,255,255,0.2);
-      color: #fff;
-      margin-top: 30px;
-      font-size: 0.9rem;
+    
+    @keyframes cardSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .section-block {
+      animation: fadeUp 0.5s ease forwards;
+      opacity: 0;
+    }
+    
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .section-block:nth-child(1) {
+      animation-delay: 0.1s;
+      transform: translateY(20px);
+    }
+    
+    .section-block:nth-child(2) {
+      animation-delay: 0.2s;
+      transform: translateY(20px);
     }
   </style>
-</head>
-<body>
-
-  <!-- Navigasi -->
-  <nav>
-    <div class="nav-left">
-      <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
-      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 50px;">
-      <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah">
-    </div>
-    <div class="nav-right">
-      <a href="../../index.html">🏠 Beranda</a>
-      <a href="../Petualangan-Kelas-5.html">◀️ kembali</a>
-      <a href="#">🖼️ Galeri</a>
-      <a href="kelas.html">🏫 Kelas</a>
-    </div>
-  </nav>
-
-  <!-- Judul Halaman -->
-  <div class="title-section">
-    <h1>🏛️ Istana Pancasila</h1>
-    <p>Jelajahi lima ruang kebajikan dan temukan makna Pancasila dalam petualangan seru!</p>
-  </div>
-
-  <!-- Menu Interaktif -->
-  <div class="map-grid">
-    <a href="sejarah-kelahiran-pancasila-5.html" class="map-item"><span class="emoji">📜</span>Sejarah Kelahiran Pancasila</a>
-    <a href="#keteladanan" class="map-item"><span class="emoji">🌟</span>Keteladanan dalam Pancasila</a>
-    <a href="#hubungan-sila" class="map-item"><span class="emoji">🔗</span>Hubungan Antarsila</a>
-    <a href="#penerapan-warga" class="map-item"><span class="emoji">🧍</span>Penerapan bagi Warga Negara</a>
-    <a href="#gotong-royong" class="map-item"><span class="emoji">🤝</span>Tradisi Gotong Royong</a>
-    <a href="#gotong-kota" class="map-item"><span class="emoji">🏙️</span>Gotong Royong di Kota & Kabupaten</a>
-    <a href="buku-incer/norma.html" class="map-item"><span class="emoji">👫</span>Norma</a>
-    <a href="keragaman/keragaman.html" class="map-item">  <span class="emoji">🎭</span>Keragaman</a>
-    <a href="pembagian_wilayah.html" class="map-item">  <span class="emoji">🗺️</span>Wilayah</a>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-amber-50 overflow-auto">
+  <div id="app" class="w-full" style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 50%, #fca5a5 100%); display: flex; flex-direction: column; min-height: 100%;">
+   <div class="main-content">
+    <div class="max-w-4xl mx-auto px-4 py-8"><!-- HEADER -->
+     <header class="text-center mb-12">
+      <div class="mb-4 flex items-center justify-between">
+       <div class="flex items-center gap-2"><img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik" loading="lazy" class="h-10" onerror="console.error('Image failed to load:', this.src); this.style.background='#e5e7eb'; this.alt='Image unavailable';"> <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" loading="lazy" class="h-10" onerror="console.error('Image failed to load:', this.src); this.style.background='#e5e7eb'; this.alt='Image unavailable';"> <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah" loading="lazy" class="h-10" onerror="console.error('Image failed to load:', this.src); this.style.background='#e5e7eb'; this.alt='Image unavailable';">
+       </div>
+       <div class="flex items-center gap-4 text-sm md:text-base"><a href="../../index.html" class="flex items-center gap-1 text-red-600 hover:text-red-800 font-semibold transition-colors">🏠 Beranda</a> <a href="../Petualangan-Kelas-5.html" class="flex items-center gap-1 text-red-600 hover:text-red-800 font-semibold transition-colors">◀️ Kembali</a> <a href="../kelas.html" class="flex items-center gap-1 text-red-600 hover:text-red-800 font-semibold transition-colors">🏫 Kelas</a>
+       </div>
       </div>
+      <div class="inline-block mb-3 text-5xl">
+       🗺️
+      </div>
+      <h1 id="page-title" class="title-font text-3xl md:text-4xl font-bold mb-3" style="color: #dc2626;">Pembagian Wilayah Negara Kesatuan Republik Indonesia</h1>
+      <p id="page-subtitle" class="text-gray-600 text-sm md:text-base font-medium">Materi Pembelajaran Interaktif — Klik setiap sub bab untuk membuka isi!</p>
+     </header><!-- SECTION 1: PEMBAGIAN ADMINISTRATIF -->
+     <section class="section-block mb-10">
+      <div class="flex items-center gap-3 mb-6">
+       <span class="text-3xl">🏛️</span>
+       <h2 id="section-1-title" class="title-font text-2xl md:text-3xl font-bold" style="color: #dc2626;">1. Pembagian Wilayah Administratif</h2>
+      </div>
+      <div class="mb-4 rounded-2xl overflow-hidden shadow-md">
+       <button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #ef4444, #dc2626);"><span>📍 Pengantar Pembagian Administratif</span><span class="indicator text-xl">+</span></button>
+       <div class="accordion-content bg-red-50 px-5 rounded-b-2xl">
+        <div class="card-enter bg-white rounded-xl p-5 shadow-sm border-l-4 border-red-400">
+         <p class="text-gray-700 leading-relaxed text-sm md:text-base">Pembagian wilayah administratif di Indonesia bertujuan untuk memudahkan pemerintahan dan pengelolaan daerah. Wilayah administratif ini diatur dalam Undang-Undang Dasar 1945 serta Undang-Undang tentang Pemerintahan Daerah. Struktur pembagian ini mencakup tingkatan hierarki dari atas ke bawah.</p>
+        </div>
+       </div>
+      </div>
+      <div class="mb-4 rounded-2xl overflow-hidden shadow-md">
+       <button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #f87171, #ef4444);"><span>🏙️ Tingkatan Pembagian Wilayah</span><span class="indicator text-xl">+</span></button>
+       <div class="accordion-content bg-red-50 px-5 rounded-b-2xl">
+        <div class="card-enter space-y-4">
+         <div class="rounded-xl overflow-hidden shadow-sm">
+          <button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #dc2626, #b91c1c);"><span class="text-sm">🏛️ a. Provinsi</span><span class="indicator text-lg">+</span></button>
+          <div class="accordion-content bg-red-50 rounded-b-xl">
+           <div class="bg-white rounded-b-xl p-4 border-l-4 border-red-400">
+            <p class="text-gray-700 mb-3 text-sm md:text-base"><strong>Indonesia dibagi menjadi 38 provinsi (sejak 2022)</strong>, yang merupakan wilayah pemerintahan terbesar di bawah pemerintahan pusat. Setiap provinsi dipimpin oleh seorang <strong>Gubernur</strong>.</p>
+           </div>
+          </div>
+         </div>
+         <div class="rounded-xl overflow-hidden shadow-sm">
+          <button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #f97316, #ea580c);"><span class="text-sm">🏘️ b. Kabupaten dan Kota</span><span class="indicator text-lg">+</span></button>
+          <div class="accordion-content bg-orange-50 rounded-b-xl">
+           <div class="bg-white rounded-b-xl p-4 border-l-4 border-orange-400">
+            <p class="text-gray-700 mb-3 text-sm md:text-base">Setiap provinsi dibagi menjadi <strong>kabupaten dan kota</strong>. Indonesia memiliki lebih dari 500 kabupaten/kota.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+             <div class="bg-orange-100 p-3 rounded-lg">
+              <p class="text-gray-700 font-semibold mb-2 text-sm">🏞️ Kabupaten</p>
+              <ul class="space-y-1 text-gray-700 text-xs list-disc ml-4">
+               <li>Dipimpin oleh <strong>Bupati</strong></li>
+               <li>Wilayah lebih luas, pedesaan</li>
+               <li>Mata pencaharian: pertanian/perikanan</li>
+              </ul>
+             </div>
+             <div class="bg-blue-100 p-3 rounded-lg">
+              <p class="text-gray-700 font-semibold mb-2 text-sm">🏙️ Kota</p>
+              <ul class="space-y-1 text-gray-700 text-xs list-disc ml-4">
+               <li>Dipimpin oleh <strong>Wali Kota</strong></li>
+               <li>Wilayah lebih kecil, urban</li>
+               <li>Mata pencaharian: perdagangan/industri</li>
+              </ul>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="rounded-xl overflow-hidden shadow-sm">
+          <button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);"><span class="text-sm">🏢 c. Kecamatan</span><span class="indicator text-lg">+</span></button>
+          <div class="accordion-content bg-amber-50 rounded-b-xl">
+           <div class="bg-white rounded-b-xl p-4 border-l-4 border-amber-400">
+            <p class="text-gray-700 text-sm md:text-base">Kabupaten dan kota terbagi lagi menjadi <strong>kecamatan</strong>, yang dipimpin oleh seorang <strong>Camat</strong>. Kecamatan adalah pembagian wilayah untuk mempermudah koordinasi pemerintahan di tingkat lokal.</p>
+           </div>
+          </div>
+         </div>
+         <div class="rounded-xl overflow-hidden shadow-sm">
+          <button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-4 py-3 text-left font-semibold text-white rounded-xl" style="background: linear-gradient(135deg, #10b981, #059669);"><span class="text-sm">🏘️ d. Kelurahan dan Desa</span><span class="indicator text-lg">+</span></button>
+          <div class="accordion-content bg-emerald-50 rounded-b-xl">
+           <div class="bg-white rounded-b-xl p-4 border-l-4 border-emerald-400">
+            <p class="text-gray-700 font-semibold mb-3 text-sm">Kecamatan terdiri dari:</p>
+            <div class="space-y-2">
+             <div class="bg-green-100 p-2 rounded">
+              <p class="text-gray-700 font-semibold text-sm">🏛️ Kelurahan</p>
+              <p class="text-gray-700 text-xs mt-1">Dipimpin oleh <strong>Lurah</strong>, di wilayah urban/perkotaan</p>
+             </div>
+             <div class="bg-amber-100 p-2 rounded">
+              <p class="text-gray-700 font-semibold text-sm">🌾 Desa</p>
+              <p class="text-gray-700 text-xs mt-1">Dipimpin oleh <strong>Kepala Desa</strong>, di wilayah pedesaan dengan sistem pemerintahan mandiri</p>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="mb-4 rounded-2xl overflow-hidden shadow-md">
+       <button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #f87171, #ef4444);"><span>⏰ Pembagian Berdasarkan Zona Waktu</span><span class="indicator text-xl">+</span></button>
+       <div class="accordion-content bg-red-50 px-5 rounded-b-2xl">
+        <div class="card-enter bg-white rounded-xl p-5 shadow-sm border-l-4 border-red-400">
+         <p class="text-gray-700 mb-4 text-sm md:text-base">Indonesia dibagi menjadi <strong>3 zona waktu resmi</strong> yang disesuaikan dengan lokasi geografis negara yang sangat luas:</p>
+         <div class="space-y-2 text-gray-700 text-sm md:text-base">
+          <p><strong>🟡 WIB (Waktu Indonesia Barat):</strong> Sumatera, Jawa, Kalimantan Barat, Kalimantan Tengah</p>
+          <p><strong>🟠 WITA (Waktu Indonesia Tengah):</strong> Bali, Nusa Tenggara, Kalimantan Selatan, Kalimantan Timur, Sulawesi</p>
+          <p><strong>🔴 WIT (Waktu Indonesia Timur):</strong> Maluku dan Papua</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- SECTION 2: DAFTAR 38 PROVINSI -->
+     <section class="section-block mb-10">
+      <div class="flex items-center gap-3 mb-6">
+       <span class="text-3xl">📋</span>
+       <h2 id="section-2-title" class="title-font text-2xl md:text-3xl font-bold" style="color: #0891b2;">2. Daftar 38 Provinsi di Indonesia</h2>
+      </div>
+      <div class="mb-4 rounded-2xl overflow-hidden shadow-md">
+       <button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #06b6d4, #0891b2);"><span>📍 Provinsi Indonesia Lengkap</span><span class="indicator text-xl">+</span></button>
+       <div class="accordion-content bg-cyan-50 px-5 rounded-b-2xl">
+        <div class="card-enter bg-white rounded-xl p-5 shadow-sm border-l-4 border-cyan-400">
+         <div class="overflow-x-auto">
+          <table class="w-full text-sm md:text-base">
+           <thead>
+            <tr class="bg-cyan-100">
+             <th class="p-2 text-left border-b border-cyan-300">No</th>
+             <th class="p-2 text-left border-b border-cyan-300">Provinsi</th>
+             <th class="p-2 text-left border-b border-cyan-300">Ibu Kota</th>
+            </tr>
+           </thead>
+           <tbody class="text-gray-700 text-xs md:text-sm">
+            <tr>
+             <td class="p-2 border-b">1</td>
+             <td class="p-2 border-b">Aceh</td>
+             <td class="p-2 border-b">Banda Aceh</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">2</td>
+             <td class="p-2 border-b">Sumatra Utara</td>
+             <td class="p-2 border-b">Medan</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">3</td>
+             <td class="p-2 border-b">Sumatra Barat</td>
+             <td class="p-2 border-b">Padang</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">4</td>
+             <td class="p-2 border-b">Riau</td>
+             <td class="p-2 border-b">Pekanbaru</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">5</td>
+             <td class="p-2 border-b">Jambi</td>
+             <td class="p-2 border-b">Jambi</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">6</td>
+             <td class="p-2 border-b">Sumatra Selatan</td>
+             <td class="p-2 border-b">Palembang</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">7</td>
+             <td class="p-2 border-b">Bengkulu</td>
+             <td class="p-2 border-b">Bengkulu</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">8</td>
+             <td class="p-2 border-b">Lampung</td>
+             <td class="p-2 border-b">Lampung</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">9</td>
+             <td class="p-2 border-b">Kepulauan Bangka Belitung</td>
+             <td class="p-2 border-b">Pangkal Pinang</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">10</td>
+             <td class="p-2 border-b">Kepulauan Riau</td>
+             <td class="p-2 border-b">Tanjung Pinang</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">11</td>
+             <td class="p-2 border-b">Jakarta</td>
+             <td class="p-2 border-b">Jakarta</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">12</td>
+             <td class="p-2 border-b">Banten</td>
+             <td class="p-2 border-b">Serang</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">13</td>
+             <td class="p-2 border-b">Jawa Barat</td>
+             <td class="p-2 border-b">Bandung</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">14</td>
+             <td class="p-2 border-b">Jawa Tengah</td>
+             <td class="p-2 border-b">Semarang</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">15</td>
+             <td class="p-2 border-b">D.I Yogyakarta</td>
+             <td class="p-2 border-b">Yogyakarta</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">16</td>
+             <td class="p-2 border-b">Jawa Timur</td>
+             <td class="p-2 border-b">Surabaya</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">17</td>
+             <td class="p-2 border-b">Bali</td>
+             <td class="p-2 border-b">Denpasar</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">18</td>
+             <td class="p-2 border-b">Nusa Tenggara Barat</td>
+             <td class="p-2 border-b">Mataram</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">19</td>
+             <td class="p-2 border-b">Nusa Tenggara Timur</td>
+             <td class="p-2 border-b">Kupang</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">20</td>
+             <td class="p-2 border-b">Kalimantan Barat</td>
+             <td class="p-2 border-b">Pontianak</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">21</td>
+             <td class="p-2 border-b">Kalimantan Tengah</td>
+             <td class="p-2 border-b">Palangka Raya</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">22</td>
+             <td class="p-2 border-b">Kalimantan Selatan</td>
+             <td class="p-2 border-b">Banjarmasin</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">23</td>
+             <td class="p-2 border-b">Kalimantan Timur</td>
+             <td class="p-2 border-b">Samarinda</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">24</td>
+             <td class="p-2 border-b">Kalimantan Utara</td>
+             <td class="p-2 border-b">Tanjung Selor</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">25</td>
+             <td class="p-2 border-b">Sulawesi Utara</td>
+             <td class="p-2 border-b">Manado</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">26</td>
+             <td class="p-2 border-b">Sulawesi Tengah</td>
+             <td class="p-2 border-b">Palu</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">27</td>
+             <td class="p-2 border-b">Sulawesi Selatan</td>
+             <td class="p-2 border-b">Makassar</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">28</td>
+             <td class="p-2 border-b">Sulawesi Tenggara</td>
+             <td class="p-2 border-b">Kendari</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">29</td>
+             <td class="p-2 border-b">Gorontalo</td>
+             <td class="p-2 border-b">Gorontalo</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">30</td>
+             <td class="p-2 border-b">Sulawesi Barat</td>
+             <td class="p-2 border-b">Mamuju</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">31</td>
+             <td class="p-2 border-b">Maluku</td>
+             <td class="p-2 border-b">Ambon</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">32</td>
+             <td class="p-2 border-b">Maluku Utara</td>
+             <td class="p-2 border-b">Sofifi</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">33</td>
+             <td class="p-2 border-b">Papua</td>
+             <td class="p-2 border-b">Jayapura</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">34</td>
+             <td class="p-2 border-b">Papua Barat</td>
+             <td class="p-2 border-b">Manokwari</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">35</td>
+             <td class="p-2 border-b">Papua Barat Daya</td>
+             <td class="p-2 border-b">Sorong</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">36</td>
+             <td class="p-2 border-b">Papua Tengah</td>
+             <td class="p-2 border-b">Nabire</td>
+            </tr>
+            <tr>
+             <td class="p-2 border-b">37</td>
+             <td class="p-2 border-b">Papua Pegunungan</td>
+             <td class="p-2 border-b">Wamena</td>
+            </tr>
+            <tr>
+             <td class="p-2">38</td>
+             <td class="p-2">Papua Selatan</td>
+             <td class="p-2">Merauke</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- SECTION 3: KABUPATEN/KOTA -->
+     <section class="section-block mb-10">
+      <div class="flex items-center gap-3 mb-6">
+       <span class="text-3xl">🏙️</span>
+       <h2 id="section-3-title" class="title-font text-2xl md:text-3xl font-bold" style="color: #ea580c;">3. Pembagian Berdasarkan Kabupaten/Kota</h2>
+      </div>
+      <div class="mb-4 rounded-2xl overflow-hidden shadow-md">
+       <button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #f97316, #ea580c);"><span>📊 Perbedaan Kabupaten dan Kota</span><span class="indicator text-xl">+</span></button>
+       <div class="accordion-content bg-orange-50 px-5 rounded-b-2xl">
+        <div class="card-enter bg-white rounded-xl p-5 shadow-sm border-l-4 border-orange-400">
+         <p class="text-gray-700 mb-4 text-sm md:text-base">Indonesia memiliki lebih dari 500 kabupaten/kota yang tersebar di 38 provinsi. Berikut adalah perbedaan karakteristik kehidupan di wilayah kabupaten dan kota:</p>
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-green-100 p-4 rounded-lg border-l-4 border-green-600">
+           <p class="text-gray-700 font-bold mb-3 text-sm">🏞️ Kabupaten</p>
+           <ul class="space-y-2 text-gray-700 text-xs md:text-sm">
+            <li>✓ Dipimpin oleh <strong>Bupati</strong></li>
+            <li>✓ Wilayah lebih luas</li>
+            <li>✓ Karakteristik pedesaan</li>
+            <li>✓ Banyak desa dan kecamatan</li>
+            <li>✓ Mata pencaharian: pertanian/perikanan</li>
+            <li>✓ Wilayah heterogen geografis</li>
+           </ul>
+          </div>
+          <div class="bg-blue-100 p-4 rounded-lg border-l-4 border-blue-600">
+           <p class="text-gray-700 font-bold mb-3 text-sm">🏙️ Kota</p>
+           <ul class="space-y-2 text-gray-700 text-xs md:text-sm">
+            <li>✓ Dipimpin oleh <strong>Wali Kota</strong></li>
+            <li>✓ Wilayah lebih kecil</li>
+            <li>✓ Bersifat urban/perkotaan</li>
+            <li>✓ Padat penduduk</li>
+            <li>✓ Mata pencaharian: perdagangan/industri/jasa</li>
+            <li>✓ Infrastruktur lebih maju</li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="mb-4 rounded-2xl overflow-hidden shadow-md">
+       <button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #f97316, #ea580c);"><span>👔 Tugas Wali Kota dan Bupati</span><span class="indicator text-xl">+</span></button>
+       <div class="accordion-content bg-orange-50 px-5 rounded-b-2xl">
+        <div class="card-enter bg-white rounded-xl p-5 shadow-sm border-l-4 border-orange-400">
+         <p class="text-gray-700 mb-4 text-sm md:text-base">Sebagai kepala daerah, Wali Kota dan Bupati memiliki tugas penting:</p>
+         <ol class="space-y-2 text-gray-700 text-sm md:text-base ml-4 list-decimal">
+          <li>Memimpin pelaksanaan urusan pemerintahan wilayah sesuai undang-undang</li>
+          <li>Memelihara ketentraman dan ketertiban masyarakat</li>
+          <li>Menyusun dan mengajukan rancangan Perda (Peraturan daerah)</li>
+          <li>Mengusulkan pengangkatan wakil wali kota dan wakil bupati</li>
+          <li>Mewakili daerahnya di dalam dan di luar pengadilan</li>
+          <li>Melaksanakan tugas lain sesuai dengan ketentuan peraturan perundang-undangan</li>
+         </ol>
+         <div class="bg-orange-100 p-3 rounded-lg mt-4 border-l-4 border-orange-600">
+          <p class="text-gray-700 font-semibold text-sm">💡 Tahukah Kamu?</p>
+          <p class="text-gray-700 text-xs md:text-sm mt-2">Jabatan walikota dan bupati merupakan jabatan politis karena dipilih melalui pemilu, bukan penunjukan. Dalam pemilu, setiap orang bebas menentukan calon kepala daerah sesuai dengan pilihannya.</p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="mb-4 rounded-2xl overflow-hidden shadow-md">
+       <button onclick="toggle(this)" class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left font-bold text-white rounded-2xl hover:shadow-lg" style="background: linear-gradient(135deg, #f97316, #ea580c);"><span>🤝 Fasilitas dan Kegiatan Daerah</span><span class="indicator text-xl">+</span></button>
+       <div class="accordion-content bg-orange-50 px-5 rounded-b-2xl">
+        <div class="card-enter space-y-3">
+         <div class="bg-white rounded-xl p-4 shadow-sm border-l-4 border-orange-400">
+          <p class="text-gray-700 font-semibold mb-3 text-sm md:text-base">Contoh Fasilitas yang Dibuat Pemerintah Kabupaten/Kota:</p>
+          <ul class="space-y-2 text-gray-700 text-sm md:text-base ml-4 list-disc">
+           <li>Sarana dan prasarana transportasi untuk kemudahan mobilitas warga</li>
+           <li>Alun-alun sebagai ruang berkumpul dan beraktivitas</li>
+           <li>Sarana dan prasarana wisata untuk meningkatkan pariwisata dan pendapatan daerah</li>
+           <li>Festival daerah untuk meningkatkan persatuan dan kerukunan warga</li>
+           <li>Kegiatan masyarakat seperti Pekan Olahraga Pelajar Daerah (POPDA)</li>
+          </ul>
+         </div>
+         <div class="bg-white rounded-xl p-4 shadow-sm border-l-4 border-orange-400">
+          <p class="text-gray-700 font-semibold mb-3 text-sm md:text-base">Tata Cara Berperilaku di Lingkungan Kabupaten/Kota:</p>
+          <ul class="space-y-2 text-gray-700 text-sm md:text-base ml-4 list-disc">
+           <li>Menjaga fasilitas umum dengan tidak merusak dan mengotorinya</li>
+           <li>Ikut serta dalam upaya memperindah wilayah kabupaten dan kota</li>
+           <li>Ikut serta dalam berbagai kegiatan pemerintah (olahraga, sosial, kemasyarakatan)</li>
+           <li>Mendukung pengembangan sektor pariwisata</li>
+           <li>Bermain sesuai tempatnya dan tidak mengganggu ketertiban umum</li>
+          </ul>
+         </div>
+         <div class="bg-white rounded-xl p-4 shadow-sm border-l-4 border-orange-400">
+          <p class="text-gray-700 font-semibold mb-3 text-sm md:text-base">Kerja Sama di Lingkup Kabupaten/Kota:</p>
+          <ul class="space-y-2 text-gray-700 text-sm md:text-base ml-4 list-disc">
+           <li>Mengikuti kompetisi olahraga daerah</li>
+           <li>Mematuhi aturan pemerintah</li>
+           <li>Menjaga fasilitas umum yang dibuat pemerintah</li>
+           <li>Mengikuti festival daerah dengan tertib</li>
+           <li>Mengikuti kerja bakti</li>
+           <li>Mengikuti kegiatan pemilihan umum</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- LATIHAN BUTTON -->
+     <div class="mt-12 mb-8 text-center"><button id="latihan-btn" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold rounded-xl hover:from-red-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-base md:text-lg"> <span>📝 Latihan</span> </button>
+     </div>
+    </div>
+   </div>
+  </div><!-- FOOTER -->
+  <footer class="w-full mt-auto px-4 py-6 border-t-4 border-red-300 bg-gradient-to-r from-red-100 via-orange-100 to-red-100">
+   <div class="max-w-4xl mx-auto text-center">
+    <p class="text-gray-600 text-sm">© 2024 Materi Pembelajaran Interaktif</p>
+   </div>
+  </footer><!-- Modal Peringatan -->
+  <div id="warning-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
+   <div class="bg-white rounded-2xl p-8 max-w-md mx-4 shadow-2xl animate-bounce-in">
+    <div class="text-center">
+     <div class="text-5xl mb-4">
+      ⏰
+     </div>
+     <h3 class="text-xl font-bold text-gray-800 mb-3">Maaf!</h3>
+     <p class="text-gray-600 mb-6">Latihan dapat dikerjakan pada pukul 07.00 atau setelah jam tersebut.</p><button onclick="closeWarning()" class="px-6 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition-colors">Tutup</button>
+    </div>
+   </div>
+  </div>
+  <style>
+    @keyframes bounce-in {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    .animate-bounce-in {
+      animation: bounce-in 0.5s ease-out;
+    }
+  </style>
+  <script>
+    const defaultConfig = {
+      page_title: 'Pembagian Wilayah Negara Kesatuan Republik Indonesia',
+      page_subtitle: 'Materi Pembelajaran Interaktif — Klik setiap sub bab untuk membuka isi!',
+      section_1_title: '1. Pembagian Wilayah Administratif',
+      section_2_title: '2. Daftar 38 Provinsi di Indonesia',
+      section_3_title: '3. Pembagian Berdasarkan Kabupaten/Kota'
+    };
 
- 
-</body>
+    // Fungsi untuk cek akses latihan
+    function checkLatihanAccess() {
+      const openDate = new Date(2026, 3, 17, 7, 0, 0); // 17 April 2026, 07:00
+      const currentTime = new Date();
+      
+      if (currentTime <= openDate) {
+        showWarning();
+        return false;
+      }
+      return true;
+    }
 
+    // Fungsi tampilkan peringatan
+    function showWarning() {
+      const modal = document.getElementById('warning-modal');
+      modal.classList.remove('hidden');
+    }
+
+    // Fungsi tutup peringatan
+    function closeWarning() {
+      const modal = document.getElementById('warning-modal');
+      modal.classList.add('hidden');
+    }
+
+    // Handle klik tombol latihan
+    document.getElementById('latihan-btn').addEventListener('click', function(e) {
+      if (checkLatihanAccess()) {
+        window.location.href = 'soal/wilayah/pembagian_wilayah.html';
+      }
+    });
+
+    function toggle(btn) {
+      const content = btn.nextElementSibling;
+      const indicator = btn.querySelector('.indicator');
+      const isOpen = content.classList.contains('open');
+      content.classList.toggle('open');
+      indicator.classList.toggle('rotated');
+      indicator.textContent = isOpen ? '+' : '−';
+    }
+
+    async function applyConfig(config) {
+      const pageTitle = document.getElementById('page-title');
+      if (pageTitle) {
+        pageTitle.textContent = config.page_title || defaultConfig.page_title;
+      }
+
+      const pageSubtitle = document.getElementById('page-subtitle');
+      if (pageSubtitle) {
+        pageSubtitle.textContent = config.page_subtitle || defaultConfig.page_subtitle;
+      }
+
+      const section1Title = document.getElementById('section-1-title');
+      if (section1Title) {
+        section1Title.textContent = config.section_1_title || defaultConfig.section_1_title;
+      }
+
+      const section2Title = document.getElementById('section-2-title');
+      if (section2Title) {
+        section2Title.textContent = config.section_2_title || defaultConfig.section_2_title;
+      }
+
+      const section3Title = document.getElementById('section-3-title');
+      if (section3Title) {
+        section3Title.textContent = config.section_3_title || defaultConfig.section_3_title;
+      }
+    }
+
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: applyConfig,
+      mapToCapabilities: () => ({
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['page_title', config.page_title || defaultConfig.page_title],
+        ['page_subtitle', config.page_subtitle || defaultConfig.page_subtitle],
+        ['section_1_title', config.section_1_title || defaultConfig.section_1_title],
+        ['section_2_title', config.section_2_title || defaultConfig.section_2_title],
+        ['section_3_title', config.section_3_title || defaultConfig.section_3_title]
+      ])
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ed519db279bea86',t:'MTc3NjM2MjU0Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

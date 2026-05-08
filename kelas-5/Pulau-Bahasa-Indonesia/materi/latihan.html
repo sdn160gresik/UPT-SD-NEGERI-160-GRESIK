@@ -344,8 +344,8 @@
   answer: "A dan B"
 },
 {
-  question: "Bacalah teks eksposisi berikut!\n“Para pedagang daging sapi di pasar-pasar tradisional mengeluhkan dampak pemberitaan mengenai impor daging ilegal. Sebab, hampir seminggu terakhir mereka kehilangan pembeli sampai 70 persen.”\nTeks eksposisi di atas termasuk ke dalam jenis teks eksposisi .....\nA. Pertentangan\nB. Perbandingan\nC. Definisi\nD. Berita",
-  answer: "D. Berita"
+  question: "Bacalah teks eksposisi berikut!\n“Para pedagang daging sapi di pasar-pasar tradisional\n mengeluhkan dampak pemberitaan mengenai impor\n daging ilegal. Sebab, hampir seminggu terakhir mereka\n kehilangan pembeli sampai 70 persen.”\n\nTeks eksposisi di atas termasuk ke dalam jenis teks eksposisi .....\nA. Pertentangan\nB. Perbandingan\nC. Definisi\nD. Berita",
+  answer: "Berita"
 },
 {
   question: "Pernyataan berikut merupakan ciri-ciri teks eksposisi, tentukan benar atau salah!\nMemberikan informasi atau pengetahuan",
@@ -467,9 +467,8 @@
     }
     
     function getRandomQuestions(count) {
-      let shuffled = [...questionBank].sort(() => Math.random() - 0.5);
-      return shuffled.slice(0, count);
-    }
+  return questionBank;
+}
     
     function startGame() {
       score = 0;
@@ -480,7 +479,7 @@
       updateScore();
       updateMistakes();
       
-      usedQuestions = getRandomQuestions(10);
+      usedQuestions = questionBank;
       currentQuestion = usedQuestions[0];
       
       showScreen('game-screen');

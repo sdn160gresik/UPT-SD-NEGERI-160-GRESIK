@@ -230,12 +230,7 @@
       <p class="text-center text-gray-500 text-xs mb-2 font-semibold">📝 Jawaban:</p>
       <div id="answer-slots" class="flex flex-wrap justify-center gap-1"></div>
      </div>
-<input 
-  type="text"
-  id="mobile-keyboard"
-  class="absolute opacity-0 pointer-events-none"
-  autocomplete="off"
-/>
+
      <div id="feedback" class="text-center mb-2 h-8 flex items-center justify-center"></div>
      <div class="mt-auto">
       <p class="text-center text-gray-500 text-xs mb-2 font-semibold">Pilih Huruf (A-Z):</p>
@@ -605,11 +600,6 @@ if (answer.length > 10) {
       });
       
       document.getElementById('feedback').innerHTML = '';
-const mobileKeyboard = document.getElementById('mobile-keyboard');
-
-setTimeout(() => {
-  mobileKeyboard.focus();
-}, 300);
     }
     
     function selectLetter(btn) {
@@ -709,44 +699,70 @@ document.getElementById('mobile-keyboard').focus();
     }
     
     function removeLetterFromSlot(slotIndex) {
-      const slot = answerSlots[slotIndex];
-      if (!slot.letter) return;
-      
-      const usedIndex = usedLetters.findIndex(u => u.slotIndex === slotIndex);
-      if (usedIndex !== -1) {
-        const { btn } = usedLetters[usedIndex];
-        btn.dataset.usedCount = (parseInt(btn.dataset.usedCount) - 1).toString();
-        usedLetters.splice(usedIndex, 1);
+  const slot = answerSlots[slotIndex];
+
+  if (!slot.letter) return;
+
+  const usedIndex = usedLetters.findIndex(
+    u => u.slotIndex === slotIndex
+  );
+
+  if (usedIndex !== -1) {
+
+    const { btn } = usedLetters[usedIndex];
+
+    btn.dataset.usedCount =
+      (parseInt(btn.dataset.usedCount) - 1).toString();
+
+    usedLetters.splice(usedIndex, 1);
+
+  }
+
+  slot.letter = null;
+
+  slot.element.textContent = '';
+
+  slot.element.classList.remove('slot-filled');
+
+  lastClickedLetter = null;
+
+  for (let i = slotIndex + 1; i < answerSlots.length; i++) {
+
+    if (answerSlots[i].letter) {
+
+      answerSlots[slotIndex].letter =
+        answerSlots[i].letter;
+
+      answerSlots[slotIndex].element.textContent =
+        answerSlots[i].letter;
+
+      answerSlots[slotIndex].element.classList.add(
+        'slot-filled'
+      );
+
+      const usedRef =
+        usedLetters.find(u => u.slotIndex === i);
+
+      if (usedRef) {
+        usedRef.slotIndex = slotIndex;
       }
-      
-      slot.letter = null;
-      slot.element.textContent = '';
-      slot.element.classList.remove('slot-filled');
-      
-      lastClickedLetter = null;
-      
-      for (let i = slotIndex + 1; i < answerSlots.length; i++) {
-        if (answerSlots[i].letter) {
-          answerSlots[slotIndex].letter = answerSlots[i].letter;
-          answerSlots[slotIndex].element.textContent = answerSlots[i].letter;
-          answerSlots[slotIndex].element.classList.add('slot-filled');
-          
-          const usedRef = usedLetters.find(u => u.slotIndex === i);
-          if (usedRef) {
-            usedRef.slotIndex = slotIndex;
-          }
-          
-          answerSlots[i].letter = null;
-          answerSlots[i].element.textContent = '';
-          answerSlots[i].element.classList.remove('slot-filled');
-          
-          slotIndex = i;
-        }
-      }
-      
-      updateAllButtonAppearances();
-document.getElementById('mobile-keyboard').focus();
+
+      answerSlots[i].letter = null;
+
+      answerSlots[i].element.textContent = '';
+
+      answerSlots[i].element.classList.remove(
+        'slot-filled'
+      );
+
+      slotIndex = i;
+
     }
+
+  }
+
+  updateAllButtonAppearances();
+}
     
     function checkAnswer() {
       const correctAnswer = currentQuestion.answer
@@ -800,7 +816,6 @@ const userAnswer = answerSlots
 
 function resetAnswer() {
 
-  // Kosongkan semua slot
   answerSlots.forEach(slot => {
 
     slot.letter = null;
@@ -811,13 +826,12 @@ function resetAnswer() {
 
   });
 
-  // Reset data huruf
   usedLetters = [];
 
   lastClickedLetter = null;
 
-  // Aktifkan kembali semua tombol huruf
-  const buttons = document.querySelectorAll('#letter-buttons button');
+  const buttons =
+    document.querySelectorAll('#letter-buttons button');
 
   buttons.forEach(btn => {
 
@@ -831,8 +845,6 @@ function resetAnswer() {
   });
 
   showFeedback('🔄 Jawaban diulang!', 'success');
-
-  document.getElementById('mobile-keyboard').focus();
 
 }
     function showRetryOverlay() {

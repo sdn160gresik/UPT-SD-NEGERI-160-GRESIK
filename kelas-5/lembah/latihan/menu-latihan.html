@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latihan Matematika</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Nunito', sans-serif; }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    
+    @keyframes pop-in {
+      0% { transform: scale(0.5); opacity: 0; }
+      70% { transform: scale(1.08); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .card-item { animation: pop-in 0.4s ease-out both; }
+    .card-item:nth-child(1) { animation-delay: 0.05s; }
+    .card-item:nth-child(2) { animation-delay: 0.1s; }
+    .card-item:nth-child(3) { animation-delay: 0.15s; }
+    .card-item:nth-child(4) { animation-delay: 0.2s; }
+    .card-item:nth-child(5) { animation-delay: 0.25s; }
+    .card-item:nth-child(6) { animation-delay: 0.3s; }
+    .card-item:nth-child(7) { animation-delay: 0.35s; }
+    .card-item:nth-child(8) { animation-delay: 0.4s; }
+    
+    .card-item:hover { animation: float 1.5s ease-in-out infinite; }
+    
+    .btn-bounce:active { transform: scale(0.92); }
+    
+    @keyframes fadeOut {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+   <div class="max-w-4xl mx-auto px-4 py-10"><!-- Back Button -->
+    <div class="mb-6">
+     <a href="pulau.html" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-4 py-2 rounded-full transition-all border border-white/20"> <i data-lucide="arrow-left" style="width:20px;height:20px;"></i> <span>Kembali ke Pulau</span> </a>
+    </div><!-- Header -->
+    <div class="text-center mb-10">
+     <div class="inline-block mb-3"><span class="text-5xl">🧮</span>
+     </div>
+     <h1 id="title" class="text-4xl md:text-5xl font-black text-white mb-2 tracking-tight">Latihan Matematika</h1>
+     <p id="subtitle" class="text-lg text-indigo-200 font-semibold">Kuasai berbagai konsep matematika! 🧮 Klik untuk memulai latihan</p>
+    </div><!-- Grid -->
+    <div id="grid" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+    </div><!-- Selected state -->
+    <div id="selected-state" class="hidden mt-8 text-center">
+     <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+      <p id="selected-text" class="text-2xl font-bold text-white mb-6"></p>
+      <div id="exercise-content" class="mb-6 text-white/90 bg-white/5 rounded-xl p-6"></div><button onclick="startExercise()" class="btn-bounce bg-emerald-500 hover:bg-emerald-400 text-white font-bold px-8 py-3 rounded-full text-lg transition-all shadow-lg shadow-emerald-500/30"> Mulai Latihan <i data-lucide="arrow-right" style="width:20px;height:20px;display:inline-block;vertical-align:middle;"></i> </button> <button onclick="goBack()" class="btn-bounce ml-3 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full text-lg transition-all border border-white/20"> Kembali </button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    const exercises = [
+      { id: 1, emoji: '➕', label: 'Latihan 1', color: '#ff006e', icon: 'plus' },
+      { id: 2, emoji: '➖', label: 'Latihan 2', color: '#fb5607', icon: 'minus' },
+      { id: 3, emoji: '✖️', label: 'Latihan 3', color: '#ffbe0b', icon: 'x' },
+      { id: 4, emoji: '➗', label: 'Latihan 4', color: '#8338ec', icon: 'divide' },
+      { id: 5, emoji: '⚡', label: 'Latihan 5', color: '#3a86ff', icon: 'zap' },
+      { id: 6, emoji: '√', label: 'Latihan 6', color: '#06ffa5', icon: 'radical' },
+      { id: 7, emoji: '📐', label: 'Latihan 7', color: '#ff1744', icon: 'triangle' },
+      { id: 8, emoji: '%', label: 'Latihan 8', color: '#00e5ff', icon: 'percent' },
+    ];
+
+    const grid = document.getElementById('grid');
+
+    exercises.forEach(ex => {
+      const card = document.createElement('div');
+      card.className = 'card-item';
+      card.innerHTML = `
+        <button onclick="showToast()" class="btn-bounce w-full rounded-2xl p-5 md:p-6 text-center transition-all duration-200 hover:scale-105 cursor-pointer border-2 border-white shadow-lg" style="background:${ex.color}; box-shadow: 0 8px 24px ${ex.color}40;">
+          <div class="text-4xl md:text-5xl mb-2">${ex.emoji}</div>
+          <div class="text-white font-extrabold text-base md:text-lg">${ex.label}</div>
+        </button>
+      `;
+      grid.appendChild(card);
+    });
+
+    function showToast() {
+      const toast = document.createElement('div');
+      toast.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50';
+      toast.innerHTML = `
+        <div class="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20 text-center max-w-md relative">
+          <button onclick="this.closest('[class*=fixed]').style.animation='fadeOut 0.5s ease-out forwards'; setTimeout(() => this.closest('[class*=fixed]').remove(), 500);" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+            <i data-lucide="x" style="width:24px;height:24px;"></i>
+          </button>
+          <div class="text-5xl mb-4">🙏😊</div>
+          <p class="text-2xl font-bold text-gray-800 mb-3">Mohon maaf!</p>
+          <p class="text-lg text-gray-700 mb-2">Saat ini masih dalam tahap persiapan ya ✨📚</p>
+          <p class="text-base text-gray-600 mb-4">Tetap semangat 💪😄 dan nantikan informasi selanjutnya 🌟🚀</p>
+        </div>
+      `;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        if (document.body.contains(toast)) {
+          toast.style.animation = 'fadeOut 0.5s ease-out forwards';
+          setTimeout(() => toast.remove(), 500);
+        }
+      }, 2500);
+      
+      lucide.createIcons();
+    }
+
+    // Element SDK
+    const defaultConfig = {
+      page_title: 'Latihan Matematika',
+      subtitle: 'Kuasai berbagai konsep matematika! 🧮 Klik untuk memulai latihan',
+      background_color: '#1a1a2e',
+      text_color: '#ffffff',
+      accent_color: '#8b5cf6',
+      font_family: 'Nunito',
+      font_size: 16
+    };
+
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => {
+        const c = { ...defaultConfig, ...config };
+        document.getElementById('title').textContent = c.page_title;
+        document.getElementById('subtitle').textContent = c.subtitle;
+        document.getElementById('title').style.color = c.text_color;
+        document.getElementById('title').style.fontFamily = `${c.font_family}, Nunito, sans-serif`;
+        document.getElementById('subtitle').style.fontFamily = `${c.font_family}, Nunito, sans-serif`;
+        document.getElementById('title').style.fontSize = `${c.font_size * 2.5}px`;
+        document.getElementById('subtitle').style.fontSize = `${c.font_size * 1.1}px`;
+        document.getElementById('app').style.background = `linear-gradient(135deg, ${c.background_color} 0%, #16213e 50%, #0f3460 100%)`;
+      },
+      mapToCapabilities: (config) => {
+        const c = { ...defaultConfig, ...config };
+        return {
+          recolorables: [
+            { get: () => c.background_color, set: (v) => { c.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+            { get: () => c.text_color, set: (v) => { c.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+            { get: () => c.accent_color, set: (v) => { c.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); } },
+          ],
+          borderables: [],
+          fontEditable: { get: () => c.font_family, set: (v) => { c.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+          fontSizeable: { get: () => c.font_size, set: (v) => { c.font_size = v; window.elementSdk.setConfig({ font_size: v }); } },
+        };
+      },
+      mapToEditPanelValues: (config) => {
+        const c = { ...defaultConfig, ...config };
+        return new Map([
+          ['page_title', c.page_title],
+          ['subtitle', c.subtitle],
+        ]);
+      }
+    });
+
+    lucide.createIcons();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f9a2b73839aa8c3',t:'MTc3ODQyODk2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

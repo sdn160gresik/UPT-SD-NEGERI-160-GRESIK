@@ -70,15 +70,78 @@
   </div>
   <script>
     const exercises = [
-      { id: 1, emoji: '🎸', label: 'Latihan 1', color: '#f43f5e', icon: 'music' },
-      { id: 2, emoji: '🎹', label: 'Latihan 2', color: '#f97316', icon: 'music-2' },
-      { id: 3, emoji: '🥁', label: 'Latihan 3', color: '#eab308', icon: 'music-4' },
-      { id: 4, emoji: '🎺', label: 'Latihan 4', color: '#22c55e', icon: 'music-3' },
-      { id: 5, emoji: '🎻', label: 'Latihan 5', color: '#06b6d4', icon: 'musical-note' },
-      { id: 6, emoji: '🎤', label: 'Latihan 6', color: '#8b5cf6', icon: 'mic' },
-      { id: 7, emoji: '🥁🎵', label: 'Latihan 7', color: '#ec4899', icon: 'music' },
-      { id: 8, emoji: '🎼', label: 'Latihan 8', color: '#14b8a6', icon: 'award' },
-    ];
+  { 
+    id: 1, 
+    emoji: '🎸', 
+    label: 'Latihan 1', 
+    color: '#f43f5e', 
+    icon: 'music',
+    link: '#'
+  },
+
+  { 
+    id: 2, 
+    emoji: '🎹', 
+    label: 'Latihan 2', 
+    color: '#f97316', 
+    icon: 'music',
+    link: 'latihan_2.html'
+  },
+
+  { 
+    id: 3, 
+    emoji: '🥁', 
+    label: 'Latihan 3', 
+    color: '#eab308', 
+    icon: 'music',
+    link: '#'
+  },
+
+  { 
+    id: 4, 
+    emoji: '🎺', 
+    label: 'Latihan 4', 
+    color: '#22c55e', 
+    icon: 'music',
+    link: '#'
+  },
+
+  { 
+    id: 5, 
+    emoji: '🎻', 
+    label: 'Latihan 5', 
+    color: '#06b6d4', 
+    icon: 'music',
+    link: '#'
+  },
+
+  { 
+    id: 6, 
+    emoji: '🎤', 
+    label: 'Latihan 6', 
+    color: '#8b5cf6', 
+    icon: 'mic',
+    link: '#'
+  },
+
+  { 
+    id: 7, 
+    emoji: '🥁🎵', 
+    label: 'Latihan 7', 
+    color: '#ec4899', 
+    icon: 'music',
+    link: '#'
+  },
+
+  { 
+    id: 8, 
+    emoji: '🎼', 
+    label: 'Latihan 8', 
+    color: '#14b8a6', 
+    icon: 'award',
+    link: '#'
+  },
+];
 
     const grid = document.getElementById('grid');
 
@@ -86,39 +149,72 @@
       const card = document.createElement('div');
       card.className = 'card-item';
       card.innerHTML = `
-        <button onclick="showToast()" class="btn-bounce w-full rounded-2xl p-5 md:p-6 text-center transition-all duration-200 hover:scale-105 cursor-pointer border-2 border-transparent hover:border-white/30 shadow-lg" style="background:${ex.color}20; box-shadow: 0 8px 24px ${ex.color}30;">
-          <div class="text-4xl md:text-5xl mb-2">${ex.emoji}</div>
-          <div class="text-white font-extrabold text-base md:text-lg">${ex.label}</div>
-        </button>
-      `;
+  <button 
+    onclick="openExercise('${ex.link}')"
+    class="btn-bounce w-full rounded-2xl p-5 md:p-6 text-center transition-all duration-200 hover:scale-105 cursor-pointer border-2 border-transparent hover:border-white/30 shadow-lg" 
+    style="background:${ex.color}20; box-shadow: 0 8px 24px ${ex.color}30;"
+  >
+    <div class="text-4xl md:text-5xl mb-2">${ex.emoji}</div>
+    <div class="text-white font-extrabold text-base md:text-lg">${ex.label}</div>
+  </button>
+`;
       grid.appendChild(card);
     });
 
     function showToast() {
-      const toast = document.createElement('div');
-      toast.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50';
-      toast.innerHTML = `
-        <div class="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20 text-center max-w-md relative">
-          <button onclick="this.closest('[class*=fixed]').style.animation='fadeOut 0.5s ease-out forwards'; setTimeout(() => this.closest('[class*=fixed]').remove(), 500);" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
-            <i data-lucide="x" style="width:24px;height:24px;"></i>
-          </button>
-          <div class="text-5xl mb-4">🙏😊</div>
-          <p class="text-2xl font-bold text-gray-800 mb-3">Mohon maaf!</p>
-          <p class="text-lg text-gray-700 mb-2">Saat ini masih dalam tahap persiapan ya ✨📚</p>
-          <p class="text-base text-gray-600 mb-4">Tetap semangat 💪😄 dan nantikan informasi selanjutnya 🌟🚀</p>
-        </div>
-      `;
-      document.body.appendChild(toast);
+  const toast = document.createElement('div');
+
+  toast.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50';
+
+  toast.innerHTML = `
+    <div class="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20 text-center max-w-md relative">
       
-      setTimeout(() => {
-        if (document.body.contains(toast)) {
-          toast.style.animation = 'fadeOut 0.5s ease-out forwards';
-          setTimeout(() => toast.remove(), 500);
-        }
-      }, 2500);
-      
-      lucide.createIcons();
+      <button 
+        onclick="this.closest('[class*=fixed]').style.animation='fadeOut 0.5s ease-out forwards'; setTimeout(() => this.closest('[class*=fixed]').remove(), 500);" 
+        class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+      >
+        <i data-lucide="x" style="width:24px;height:24px;"></i>
+      </button>
+
+      <div class="text-5xl mb-4">🙏😊</div>
+
+      <p class="text-2xl font-bold text-gray-800 mb-3">
+        Mohon maaf!
+      </p>
+
+      <p class="text-lg text-gray-700 mb-2">
+        Saat ini masih dalam tahap persiapan ya ✨📚
+      </p>
+
+      <p class="text-base text-gray-600 mb-4">
+        Tetap semangat 💪😄 dan nantikan informasi selanjutnya 🌟🚀
+      </p>
+
+    </div>
+  `;
+
+  document.body.appendChild(toast);
+
+  setTimeout(() => {
+    if (document.body.contains(toast)) {
+      toast.style.animation = 'fadeOut 0.5s ease-out forwards';
+
+      setTimeout(() => toast.remove(), 500);
     }
+  }, 2500);
+
+  lucide.createIcons();
+}
+
+function openExercise(link) {
+
+  if (link === '#') {
+    showToast();
+    return;
+  }
+
+  window.location.href = link;
+}
 
     // Element SDK
     const defaultConfig = {

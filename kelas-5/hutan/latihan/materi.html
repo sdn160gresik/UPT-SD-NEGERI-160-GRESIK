@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kegiatan Ekonomi di Indonesia</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Playfair+Display:wght@700;800&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: { 50:'#f0faf4',100:'#d4f0e0',200:'#a8e0c1',500:'#2d8a56',600:'#236b43',700:'#1a5233',800:'#133d26',900:'#0d2b1b' },
+            sand: { 50:'#fdf9f3',100:'#f9f0e1',200:'#f0dfc4',400:'#d4a95a',500:'#c49340' },
+            ocean: { 50:'#eff8ff',100:'#dbeafe',200:'#bdd7ee',500:'#2979a8',600:'#1e6690' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .heading-font { font-family: 'Playfair Display', serif; }
+    .tab-btn { transition: all 0.25s ease; }
+    .fade-in { animation: fadeIn 0.5s ease forwards; opacity: 0; }
+    @keyframes fadeIn { to { opacity: 1; } }
+    .sub-card { animation: slideUp 0.4s ease forwards; opacity: 0; transform: translateY(12px); }
+    @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+  </style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
+ </head>
+ <body data-template-id="__page-root" class="h-full w-full overflow-auto"><!-- Header -->
+  <header class="relative overflow-hidden" style="background: linear-gradient(135deg, #133d26 0%, #1a5233 40%, #236b43 100%);">
+   <div class="absolute inset-0 opacity-10">
+    <svg width="100%" height="100%">
+     <pattern id="p" width="40" height="40" patternunits="userSpaceOnUse">
+      <circle cx="20" cy="20" r="1.5" fill="white" />
+     </pattern><rect width="100%" height="100%" fill="url(#p)" />
+    </svg>
+   </div>
+   <div class="relative max-w-4xl mx-auto px-6 py-10 text-center">
+    <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur rounded-full px-4 py-1.5 mb-4"><span data-template-id="badge-text" class="canva-text text-sm font-medium"></span>
+    </div>
+    <h1 data-template-id="main-title" class="canva-text heading-font mb-3"></h1>
+    <p data-template-id="intro-subtitle" class="canva-text max-w-2xl mx-auto leading-relaxed"></p>
+    <div class="mt-6 flex items-center justify-center gap-3"><span class="text-forest-200 text-xs">Progres Belajar</span>
+     <div class="w-40 h-2 bg-white/20 rounded-full overflow-hidden">
+      <div id="progressBar" class="h-full bg-yellow-500 rounded-full transition-all duration-500" style="width:0%"></div>
+     </div><span id="progressText" class="text-yellow-400 text-xs font-semibold">0%</span>
+    </div>
+   </div>
+  </header><!-- Navigation -->
+  <nav class="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-forest-100 shadow-sm">
+   <div class="max-w-4xl mx-auto px-4 flex gap-1 overflow-x-auto py-2" id="tabNav"><button onclick="showSection(0)" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap bg-forest-600 text-white" data-tab="0">🏠 Pendahuluan</button> <button onclick="showSection(1)" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-forest-700 hover:bg-forest-50" data-tab="1">📖 Informasi Umum</button> <button onclick="showSection(2)" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-forest-700 hover:bg-forest-50" data-tab="2">🌿 Pengaruh Alam</button> <button onclick="showSection(3)" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-forest-700 hover:bg-forest-50" data-tab="3">🏛️ Peran Pemerintah</button> <button onclick="showSection(4)" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-forest-700 hover:bg-forest-50" data-tab="4">⚡ Tantangan</button> <button onclick="showSection(5)" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-forest-700 hover:bg-forest-50" data-tab="5">💼 Pengelolaan</button> <button onclick="showSection(6)" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-forest-700 hover:bg-forest-50" data-tab="6">🌍 SDA</button> <button onclick="showSection(7)" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-forest-700 hover:bg-forest-50" data-tab="7">✅ Kuis</button>
+   </div>
+  </nav><!-- Content -->
+  <main class="max-w-4xl mx-auto px-4 py-8"><!-- Section 0: Pendahuluan -->
+   <section id="sec0" class="fade-in">
+    <div class="bg-white rounded-2xl shadow-sm border border-forest-100 p-6 md:p-8">
+     <div class="flex items-start gap-4 mb-6">
+      <div class="w-12 h-12 rounded-xl bg-forest-600 flex items-center justify-center text-white text-2xl shrink-0">
+       🇮🇩
+      </div>
+      <div>
+       <h2 data-template-id="sec0-title" class="canva-text heading-font mb-2"></h2>
+       <p data-template-id="sec0-desc" class="canva-text text-sm leading-relaxed"></p>
+      </div>
+     </div>
+     <div class="bg-forest-50 border border-forest-100 rounded-xl p-5 mb-6">
+      <p class="text-forest-700 leading-relaxed text-sm mb-4">Indonesia, sebagai negara yang kaya akan keragaman budaya, juga memiliki beragam kegiatan ekonomi yang unik dan bervariasi.</p>
+      <p class="text-forest-700 leading-relaxed text-sm mb-4">Mulai dari pertanian di dataran tinggi, perikanan di sepanjang pesisir, hingga industri kreatif di kota-kota besar, semua ini menunjukkan betapa pentingnya kegiatan ekonomi dalam kehidupan sehari-hari masyarakat Indonesia.</p>
+      <p class="text-forest-700 leading-relaxed text-sm mb-4">Kegiatan ekonomi tidak hanya membantu memenuhi kebutuhan kita, tetapi juga menjadi <strong class="text-forest-800">tulang punggung perekonomian nasional</strong>, menciptakan lapangan kerja, dan meningkatkan kesejahteraan masyarakat.</p>
+      <p class="text-forest-700 leading-relaxed text-sm">Melalui pemahaman tentang kegiatan ekonomi di Indonesia, kita dapat lebih menghargai upaya dan kerja keras yang dilakukan oleh setiap orang untuk menjaga keberlanjutan dan kemajuan bangsa kita.</p>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="sub-card bg-forest-50 rounded-xl p-5 border border-forest-100" style="animation-delay:0.1s">
+       <div class="text-3xl mb-3">
+        🌾
+       </div>
+       <h3 class="font-semibold text-forest-800 text-sm mb-1">Pertanian</h3>
+       <p class="text-forest-600 text-xs">Dataran tinggi menghasilkan berbagai komoditas pertanian</p>
+      </div>
+      <div class="sub-card bg-ocean-50 rounded-xl p-5 border border-ocean-200" style="animation-delay:0.2s">
+       <div class="text-3xl mb-3">
+        🐟
+       </div>
+       <h3 class="font-semibold text-forest-800 text-sm mb-1">Perikanan</h3>
+       <p class="text-forest-600 text-xs">Pesisir panjang menjadi sumber perikanan melimpah</p>
+      </div>
+      <div class="sub-card bg-sand-50 rounded-xl p-5 border border-sand-200" style="animation-delay:0.3s">
+       <div class="text-3xl mb-3">
+        🎨
+       </div>
+       <h3 class="font-semibold text-forest-800 text-sm mb-1">Industri Kreatif</h3>
+       <p class="text-forest-600 text-xs">Kota-kota besar menjadi pusat kreativitas ekonomi</p>
+      </div>
+     </div>
+     <div class="mt-6 bg-sand-50 border border-sand-200 rounded-xl p-4">
+      <p class="text-forest-700 text-sm leading-relaxed"><strong class="text-forest-800">💡 Poin Penting:</strong> Kegiatan ekonomi menjadi tulang punggung perekonomian nasional, menciptakan lapangan kerja, dan meningkatkan kesejahteraan masyarakat.</p>
+     </div>
+    </div>
+   </section><!-- Section 1: Informasi Umum -->
+   <section id="sec1" class="hidden">
+    <div class="space-y-6 fade-in"><!-- Pengertian -->
+     <div class="bg-white rounded-2xl shadow-sm border border-forest-100 overflow-hidden"><button onclick="toggleSection('pengertian')" class="w-full text-left p-6 hover:bg-forest-50 transition-all flex items-center justify-between"> <h2 class="heading-font text-xl font-bold text-forest-800 flex items-center gap-2">📌 Pengertian Kegiatan Ekonomi</h2><i id="pengertian-icon" data-lucide="chevron-down" class="w-5 h-5 text-forest-600 transition-transform"></i> </button>
+      <div id="pengertian-content" class="hidden border-t border-forest-100 p-6">
+       <p class="text-forest-700 text-sm leading-relaxed mb-4"><strong class="text-forest-800">Kegiatan ekonomi</strong> adalah semua kegiatan yang dilakukan oleh orang-orang untuk memenuhi kebutuhan sehari-hari.</p>
+       <div class="flex flex-wrap gap-3 mb-4"><span class="bg-forest-50 text-forest-700 px-3 py-1.5 rounded-lg text-xs font-medium border border-forest-100">🏭 Menghasilkan barang atau jasa</span> <span class="bg-ocean-50 text-ocean-600 px-3 py-1.5 rounded-lg text-xs font-medium border border-ocean-200">🛒 Menjual barang atau jasa</span> <span class="bg-sand-50 text-sand-500 px-3 py-1.5 rounded-lg text-xs font-medium border border-sand-200">🛍️ Membeli barang atau jasa</span>
+       </div>
+       <div class="bg-forest-50 rounded-lg p-4 border border-forest-100 mb-4">
+        <p class="font-semibold text-forest-800 text-sm mb-3">💡 Poin-poin Penting:</p>
+        <ul class="space-y-2">
+         <li class="flex items-start gap-2 text-forest-700 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i><span><strong>Melibatkan semua orang:</strong> Setiap individu berperan dalam kegiatan ekonomi, baik sebagai produsen, distributor, maupun konsumen.</span></li>
+         <li class="flex items-start gap-2 text-forest-700 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i><span><strong>Memenuhi kebutuhan:</strong> Tujuan utama kegiatan ekonomi adalah memenuhi kebutuhan dasar manusia seperti makanan, pakaian, dan tempat tinggal.</span></li>
+         <li class="flex items-start gap-2 text-forest-700 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i><span><strong>Berkelanjutan:</strong> Kegiatan ekonomi harus berkelanjutan agar dapat memenuhi kebutuhan generasi sekarang dan masa depan.</span></li>
+         <li class="flex items-start gap-2 text-forest-700 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i><span><strong>Menciptakan nilai:</strong> Kegiatan ekonomi mengubah bahan baku menjadi produk yang bernilai dan bermanfaat bagi masyarakat.</span></li>
+         <li class="flex items-start gap-2 text-forest-700 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i><span><strong>Saling ketergantungan:</strong> Produsen, distributor, dan konsumen saling bergantung satu sama lain dalam rantai kegiatan ekonomi.</span></li>
+        </ul>
+       </div>
+       <div class="bg-sand-50 rounded-lg p-4 border border-sand-200">
+        <p class="text-forest-700 text-sm leading-relaxed mb-4">Informasi umum tentang kegiatan ekonomi membantu kita memahami bagaimana barang dan jasa yang kita nikmati sehari-hari sampai ke tangan kita, dan bagaimana keputusan ekonomi yang kita buat berdampak pada kehidupan orang lain, baik di sekitar kita maupun di seluruh dunia.</p>
+        <p class="text-forest-700 text-sm leading-relaxed">Memahami dasar-dasar kegiatan ekonomi memungkinkan kita untuk menjadi konsumen yang lebih bijak, produsen yang lebih efisien, dan anggota masyarakat yang lebih sadar akan pentingnya peran kita dalam ekonomi global.</p>
+       </div>
+      </div>
+     </div><!-- Fungsi -->
+     <div class="bg-white rounded-2xl shadow-sm border border-forest-100 overflow-hidden"><button onclick="toggleSection('fungsi')" class="w-full text-left p-6 hover:bg-forest-50 transition-all flex items-center justify-between"> <h2 class="heading-font text-xl font-bold text-forest-800 flex items-center gap-2">⚙️ Fungsi Kegiatan Ekonomi</h2><i id="fungsi-icon" data-lucide="chevron-down" class="w-5 h-5 text-forest-600 transition-transform"></i> </button>
+      <div id="fungsi-content" class="hidden border-t border-forest-100 p-6">
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="fungsiGrid"></div>
+      </div>
+     </div><!-- Jenis -->
+     <div class="bg-white rounded-2xl shadow-sm border border-forest-100 overflow-hidden"><button onclick="toggleSection('jenis')" class="w-full text-left p-6 hover:bg-forest-50 transition-all flex items-center justify-between"> <h2 class="heading-font text-xl font-bold text-forest-800 flex items-center gap-2">🔄 Jenis Kegiatan Ekonomi</h2><i id="jenis-icon" data-lucide="chevron-down" class="w-5 h-5 text-forest-600 transition-transform"></i> </button>
+      <div id="jenis-content" class="hidden border-t border-forest-100 p-6">
+       <div class="flex gap-2 mb-5"><button onclick="showJenis(0)" class="jenis-tab px-4 py-2 rounded-lg text-sm font-semibold bg-forest-600 text-white">Produksi</button> <button onclick="showJenis(1)" class="jenis-tab px-4 py-2 rounded-lg text-sm font-medium text-forest-700 hover:bg-forest-50 border border-forest-100">Distribusi</button> <button onclick="showJenis(2)" class="jenis-tab px-4 py-2 rounded-lg text-sm font-medium text-forest-700 hover:bg-forest-50 border border-forest-100">Konsumsi</button>
+       </div>
+       <div id="jenisContent"></div>
+      </div>
+     </div><!-- Alur -->
+     <div class="bg-white rounded-2xl shadow-sm border border-forest-100 p-6">
+      <h2 class="heading-font text-xl font-bold text-forest-800 mb-4">🔗 Alur Kegiatan Ekonomi</h2>
+      <div class="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4">
+       <div class="bg-forest-600 text-white rounded-xl px-6 py-4 text-center shadow-md">
+        <div class="text-2xl mb-1">
+         🏭
+        </div>
+        <div class="font-bold text-sm">
+         PRODUKSI
+        </div>
+        <div class="text-xs text-forest-200">
+         Membuat barang/jasa
+        </div>
+       </div>
+       <div class="text-forest-400 rotate-90 md:rotate-0">
+        <i data-lucide="arrow-right" class="w-6 h-6"></i>
+       </div>
+       <div class="bg-ocean-500 text-white rounded-xl px-6 py-4 text-center shadow-md">
+        <div class="text-2xl mb-1">
+         🚚
+        </div>
+        <div class="font-bold text-sm">
+         DISTRIBUSI
+        </div>
+        <div class="text-xs text-blue-200">
+         Menyalurkan ke konsumen
+        </div>
+       </div>
+       <div class="text-forest-400 rotate-90 md:rotate-0">
+        <i data-lucide="arrow-right" class="w-6 h-6"></i>
+       </div>
+       <div class="bg-sand-400 text-white rounded-xl px-6 py-4 text-center shadow-md">
+        <div class="text-2xl mb-1">
+         🛍️
+        </div>
+        <div class="font-bold text-sm">
+         KONSUMSI
+        </div>
+        <div class="text-xs">
+         Menggunakan barang/jasa
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Section 2: Pengaruh Alam -->
+   <section id="sec2" class="hidden">
+    <div class="space-y-6 fade-in">
+     <div class="bg-white rounded-2xl shadow-sm border border-forest-100 overflow-hidden">
+      <div class="p-6 md:p-8">
+       <h2 class="heading-font text-2xl font-bold text-forest-800 mb-2">🌿 Pengaruh Kondisi Alam Terhadap Kegiatan Ekonomi</h2>
+       <p class="text-forest-700 text-sm leading-relaxed">Kondisi alam seperti iklim, tanah, dan sumber daya alam sangat memengaruhi jenis pekerjaan yang berkembang di suatu daerah.</p>
+      </div><!-- Iklim --> <button onclick="toggleSection('iklim')" class="w-full text-left p-6 hover:bg-forest-50 transition-all flex items-start justify-between border-t border-forest-100">
+       <div class="flex items-start gap-4 flex-1">
+        <div class="w-10 h-10 rounded-lg bg-forest-100 flex items-center justify-center text-xl shrink-0">
+         🌡️
+        </div>
+        <div>
+         <h3 class="heading-font text-lg font-bold text-forest-800">a. Iklim</h3>
+         <p class="text-forest-600 text-xs mt-1">Pengaruh iklim terhadap pertanian dan pariwisata</p>
+        </div>
+       </div><i id="iklim-icon" data-lucide="chevron-down" class="w-5 h-5 text-forest-600 transition-transform shrink-0 mt-1"></i> </button>
+      <div id="iklim-content" class="hidden border-t border-forest-100 px-6 pb-6">
+       <p class="text-forest-700 text-sm leading-relaxed mb-4 mt-4">Iklim menentukan jenis tanaman yang bisa tumbuh di suatu daerah. Di wilayah tropis seperti Indonesia, tanaman padi, kelapa sawit, dan karet bisa tumbuh dengan baik.</p>
+       <p class="text-forest-700 text-sm leading-relaxed mb-4">Iklim juga memengaruhi sektor pariwisata. Daerah dengan iklim hangat sepanjang tahun seperti Bali menjadi destinasi wisata favorit.</p>
+       <div class="bg-forest-50 rounded-lg p-4 border border-forest-100">
+        <p class="font-semibold text-forest-800 text-sm mb-2">💡 Dampak Iklim:</p>
+        <ul class="space-y-1.5">
+         <li class="flex items-start gap-2 text-forest-700 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i><span>Menentukan jenis tanaman yang dapat ditanam</span></li>
+         <li class="flex items-start gap-2 text-forest-700 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i><span>Mempengaruhi produktivitas pertanian</span></li>
+         <li class="flex items-start gap-2 text-forest-700 text-sm"><i data-lucide="check-circle" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i><span>Mengembangkan sektor pariwisata</span></li>
+        </ul>
+       </div>
+      </div><!-- Tanah --> <button onclick="toggleSection('tanah')" class="w-full text-left p-6 hover:bg-forest-50 transition-all flex items-start justify-between border-t border-forest-100">
+       <div class="flex items-start gap-4 flex-1">
+        <div class="w-10 h-10 rounded-lg bg-ocean-100 flex items-center justify-center text-xl shrink-0">
+         🏔️
+        </div>
+        <div>
+         <h3 class="heading-font text-lg font-bold text-forest-800">b. Tanah</h3>
+         <p class="text-forest-600 text-xs mt-1">Pengaruh jenis tanah terhadap pertanian</p>
+        </div>
+       </div><i id="tanah-icon" data-lucide="chevron-down" class="w-5 h-5 text-forest-600 transition-transform shrink-0 mt-1"></i> </button>
+      <div id="tanah-content" class="hidden border-t border-forest-100 px-6 pb-6">
+       <p class="text-forest-700 text-sm leading-relaxed mb-4 mt-4">Tanah vulkanik seperti di Pulau Jawa sangat subur untuk pertanian padi, sayuran, dan buah-buahan. Di daerah pesisir dengan tanah berpasir, masyarakat lebih bergantung pada perikanan.</p>
+       <div class="space-y-2">
+        <div class="flex items-start gap-2 bg-forest-50 rounded p-3 border border-forest-100">
+         <span>🌾</span>
+         <div>
+          <p class="font-semibold text-forest-800 text-xs">Tanah Vulkanik (Jawa)</p>
+          <p class="text-forest-600 text-xs">Subur → Pertanian padi, sayuran, buah</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-2 bg-ocean-50 rounded p-3 border border-ocean-200">
+         <span>🏜️</span>
+         <div>
+          <p class="font-semibold text-forest-800 text-xs">Tanah Berpasir (Pesisir)</p>
+          <p class="text-forest-600 text-xs">Kurang subur → Perikanan, pariwisata pantai</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- SDA --> <button onclick="toggleSection('sda')" class="w-full text-left p-6 hover:bg-forest-50 transition-all flex items-start justify-between border-t border-forest-100">
+       <div class="flex items-start gap-4 flex-1">
+        <div class="w-10 h-10 rounded-lg bg-sand-100 flex items-center justify-center text-xl shrink-0">
+         🌍
+        </div>
+        <div>
+         <h3 class="heading-font text-lg font-bold text-forest-800">c. Sumber Daya Alam</h3>
+         <p class="text-forest-600 text-xs mt-1">Pengaruh SDA terhadap industri</p>
+        </div>
+       </div><i id="sda-icon" data-lucide="chevron-down" class="w-5 h-5 text-forest-600 transition-transform shrink-0 mt-1"></i> </button>
+      <div id="sda-content" class="hidden border-t border-forest-100 px-6 pb-6">
+       <div class="space-y-3 mt-4">
+        <div class="bg-sand-50 rounded-lg p-4 border border-sand-200">
+         <h4 class="font-semibold text-forest-800 text-sm mb-2">💎 Pertambangan</h4>
+         <p class="text-forest-700 text-sm">Kalimantan kaya batu bara, mendorong industri pertambangan dan menciptakan lapangan kerja.</p>
+        </div>
+        <div class="bg-sand-50 rounded-lg p-4 border border-sand-200">
+         <h4 class="font-semibold text-forest-800 text-sm mb-2">🐟 Kelautan &amp; Perikanan</h4>
+         <p class="text-forest-700 text-sm">Sumber daya laut melimpah membuat banyak penduduk bekerja sebagai nelayan atau di industri pengolahan hasil laut.</p>
+        </div>
+       </div>
+      </div><!-- Contoh Regional --> <button onclick="toggleSection('contoh')" class="w-full text-left p-6 hover:bg-forest-50 transition-all flex items-start justify-between border-t border-forest-100">
+       <div class="flex items-start gap-4 flex-1">
+        <div class="w-10 h-10 rounded-lg bg-sand-50 flex items-center justify-center text-xl shrink-0">
+         🗺️
+        </div>
+        <div>
+         <h3 class="heading-font text-lg font-bold text-forest-800">🗺️ Contoh Regional</h3>
+         <p class="text-forest-600 text-xs mt-1">Contoh dari berbagai wilayah Indonesia</p>
+        </div>
+       </div><i id="contoh-icon" data-lucide="chevron-down" class="w-5 h-5 text-forest-600 transition-transform shrink-0 mt-1"></i> </button>
+      <div id="contoh-content" class="hidden border-t border-forest-100 px-6 pb-6">
+       <div class="space-y-3 mt-4">
+        <div class="flex items-start gap-4 bg-forest-50 rounded-lg p-4 border border-forest-100">
+         <span class="text-2xl">🌄</span>
+         <div>
+          <p class="font-semibold text-forest-800 text-sm">Dataran Tinggi</p>
+          <p class="text-forest-600 text-xs">Pertanian hortikultura, pariwisata alam</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-4 bg-ocean-50 rounded-lg p-4 border border-ocean-200">
+         <span class="text-2xl">🐟</span>
+         <div>
+          <p class="font-semibold text-forest-800 text-sm">Pesisir &amp; Laut</p>
+          <p class="text-forest-600 text-xs">Perikanan, budidaya, pariwisata bahari</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-4 bg-sand-50 rounded-lg p-4 border border-sand-200">
+         <span class="text-2xl">⛏️</span>
+         <div>
+          <p class="font-semibold text-forest-800 text-sm">Wilayah Pertambangan</p>
+          <p class="text-forest-600 text-xs">Batu bara, minyak bumi, mineral</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-4 bg-sand-50 rounded-lg p-4 border border-sand-200">
+         <span class="text-2xl">🏙️</span>
+         <div>
+          <p class="font-semibold text-forest-800 text-sm">Kota Besar</p>
+          <p class="text-forest-600 text-xs">Industri kreatif, teknologi, jasa</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Section 3: Peran Pemerintah -->
+   <section id="sec3" class="hidden">
+    <div class="space-y-6 fade-in">
+     <div class="bg-white rounded-2xl shadow-sm border border-forest-100 overflow-hidden">
+      <div class="p-6 md:p-8">
+       <h2 class="heading-font text-2xl font-bold text-forest-800 mb-2">🏛️ Peran Pemerintah dalam Kegiatan Ekonomi</h2>
+       <p class="text-forest-700 text-sm leading-relaxed">Pemerintah memiliki peran penting dalam mendukung dan mengatur kegiatan ekonomi agar berjalan dengan baik dan berkelanjutan.</p>
+      </div><button onclick="toggleSection('regulasi')" class="w-full text-left p-6 hover:bg-forest-50 transition-all flex items-start justify-between border-t border-forest-100">
+       <div class="flex items-start gap-4 flex-1">
+        <div class="w-10 h-10 rounded-lg bg-forest-100 flex items-center justify-center text-xl shrink-0">
+         📋
+        </div>
+        <div>
+         <h3 class="heading-font text-lg font-bold text-forest-800">a. Regulasi dan Kebijakan</h3>
+         <p class="text-forest-600 text-xs mt-1">Aturan untuk mengatur kegiatan ekonomi</p>
+        </div>
+       </div><i id="regulasi-icon" data-lucide="chevron-down" class="w-5 h-5 text-forest-600 transition-transform shrink-0 mt-1"></i> </button>
+      <div id="regulasi-content" class="hidden border-t border-forest-100 px-6 pb-6">
+       <div class="space-y-4 mt-4">
+        <div class="bg-forest-50 rounded-lg p-4 border border-forest-100">
+         <h4 class="font-semibold text-forest-800 text-sm mb-3">Kebijakan Perdagangan</h4>
+         <p class="text-forest-700 text-sm leading-relaxed mb-3">Pemerintah menetapkan aturan perdagangan domestik dan internasional, termasuk tarif impor, subsidi produk lokal, dan perjanjian dagang.</p>
+         <div class="bg-white rounded-lg p-3 border border-forest-100 space-y-2">
+          <div class="flex items-start gap-2">
+           <i data-lucide="check-circle" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i>
+           <div>
+            <p class="font-semibold text-forest-800 text-xs">Tarif Impor</p>
+            <p class="text-forest-600 text-xs">Melindungi produk lokal dari kompetisi asing</p>
+           </div>
+          </div>
+          <div class="flex items-start gap-2">
+           <i data-lucide="check-circle" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i>
+           <div>
+            <p class="font-semibold text-forest-800 text-xs">Subsidi</p>
+            <p class="text-forest-600 text-xs">Bantuan untuk petani dan UMKM</p>
+           </div>
+          </div>
+          <div class="flex items-start gap-2">
+           <i data-lucide="check-circle" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i>
+           <div>
+            <p class="font-semibold text-forest-800 text-xs">Perjanjian Dagang</p>
+            <p class="text-forest-600 text-xs">Membuka peluang ekspor</p>
+           </div>
+          </div>
+         </div>
+         <div class="mt-3 bg-sand-50 rounded-lg p-3 border border-sand-200">
+          <p class="text-forest-700 text-xs"><strong>💡 Contoh:</strong> Tarif impor beras untuk melindungi petani lokal, subsidi pupuk untuk meningkatkan produktivitas.</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Section 4: Tantangan -->
+   <section id="sec4" class="hidden">
+    <div class="space-y-6 fade-in">
+     <div class="bg-white rounded-2xl shadow-sm border border-forest-100 p-6 md:p-8">
+      <h2 class="heading-font text-2xl font-bold text-forest-800 mb-2">⚡ Tantangan dan Peluang dalam Kegiatan Ekonomi</h2>
+      <p class="text-forest-700 text-sm leading-relaxed">Kegiatan ekonomi di Indonesia tidak lepas dari berbagai tantangan dan peluang yang perlu diperhatikan untuk mencapai pertumbuhan yang berkelanjutan dan inklusif.</p>
+     </div>
+    </div>
+   </section><!-- Section 5: Pengelolaan Usaha -->
+   <section id="sec5" class="hidden">
+    <div class="space-y-6 fade-in">
+     <div class="bg-white rounded-2xl shadow-sm border border-forest-100 p-6 md:p-8">
+      <h2 class="heading-font text-2xl font-bold text-forest-800 mb-2">💼 Pengelolaan Usaha Kegiatan Ekonomi</h2>
+      <p class="text-forest-700 text-sm leading-relaxed">Pengelolaan usaha adalah proses mengatur, merencanakan, dan mengendalikan semua kegiatan usaha agar tujuan usaha dapat tercapai dengan baik dan menghasilkan keuntungan.</p>
+     </div>
+    </div>
+   </section><!-- Section 6: SDA -->
+   <section id="sec6" class="hidden">
+    <div class="space-y-6 fade-in">
+     <div class="bg-white rounded-2xl shadow-sm border border-forest-100 p-6 md:p-8">
+      <h2 class="heading-font text-2xl font-bold text-forest-800 mb-2">🌍 Sumber Daya Alam</h2>
+      <p class="text-forest-700 text-sm leading-relaxed">Sumber daya alam adalah segala sesuatu yang berasal dari alam dan dapat dimanfaatkan oleh manusia untuk memenuhi kebutuhan hidupnya.</p>
+     </div>
+    </div>
+   </section><!-- Section 7: Kuis -->
+   <section id="sec7" class="hidden">
+    <div class="fade-in space-y-6">
+     <div class="bg-white rounded-2xl shadow-sm border border-forest-100 p-6 md:p-8">
+      <h2 class="heading-font text-2xl font-bold text-forest-800 mb-2">💪 Menu Latihan</h2>
+      <p class="text-forest-600 text-sm mb-6">Pilih latihan berikut untuk memperdalam pemahaman materi:</p>
+      <div id="exerciseMenu" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+      <div id="exerciseContent" class="hidden mt-6"></div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <footer class="text-center py-6">
+   <p data-template-id="footer-text" class="canva-text text-xs"></p>
+  </footer>
+  <script src="/_sdk/editing_sdk.js"></script>
+  <script>
+    // Toggle accordion
+    function toggleSection(id) {
+      const content = document.getElementById(id + '-content');
+      const icon = document.getElementById(id + '-icon');
+      const isHidden = content.classList.contains('hidden');
+      content.classList.toggle('hidden');
+      if (icon) icon.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+
+    // Sections & tabs
+    let currentSection = 0;
+    let sectionsVisited = new Set([0]);
+
+    function showSection(idx) {
+      for (let i = 0; i < 8; i++) {
+        const s = document.getElementById('sec' + i);
+        if (s) { s.classList.add('hidden'); s.classList.remove('fade-in'); }
+      }
+      const sec = document.getElementById('sec' + idx);
+      if (sec) { sec.classList.remove('hidden'); void sec.offsetWidth; sec.classList.add('fade-in'); }
+      currentSection = idx;
+      sectionsVisited.add(idx);
+      updateTabs();
+      updateProgress();
+    }
+
+    function updateTabs() {
+      document.querySelectorAll('#tabNav .tab-btn').forEach(btn => {
+        const t = parseInt(btn.dataset.tab);
+        btn.className = t === currentSection
+          ? 'tab-btn px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap bg-forest-600 text-white'
+          : 'tab-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-forest-700 hover:bg-forest-50';
+      });
+    }
+
+    function updateProgress() {
+      const pct = Math.round((sectionsVisited.size / 8) * 100);
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('progressText').textContent = pct + '%';
+    }
+
+    // Fungsi cards
+    const fungsiData = [
+      { icon:'🎯', title:'Memenuhi Kebutuhan', desc:'Memenuhi kebutuhan dan keinginan masyarakat' },
+      { icon:'💼', title:'Lapangan Kerja', desc:'Menciptakan peluang pekerjaan' },
+      { icon:'📈', title:'Pertumbuhan Ekonomi', desc:'Mendorong peningkatan ekonomi nasional' },
+      { icon:'♻️', title:'Optimalisasi Sumber Daya', desc:'Mengoptimalkan penggunaan sumber daya' },
+      { icon:'🤝', title:'Kesejahteraan Sosial', desc:'Meningkatkan taraf hidup masyarakat' },
+      { icon:'🏗️', title:'Infrastruktur', desc:'Menyediakan infrastruktur dan layanan' }
+    ];
+
+    function renderFungsi() {
+      const grid = document.getElementById('fungsiGrid');
+      if (!grid) return;
+      grid.innerHTML = fungsiData.map((f, i) => `
+        <div class="sub-card flex items-start gap-3 p-4 rounded-xl bg-forest-50 border border-forest-100" style="animation-delay:${i*0.08}s">
+          <span class="text-xl">${f.icon}</span>
+          <div><h4 class="font-semibold text-forest-800 text-sm">${f.title}</h4><p class="text-forest-600 text-xs">${f.desc}</p></div>
+        </div>
+      `).join('');
+    }
+
+    // Jenis tabs
+    const jenisData = [
+      { title:'Produksi', desc:'Kegiatan ekonomi yang melibatkan pembuatan atau penciptaan barang fisik yang dibutuhkan oleh masyarakat, seperti makanan, pakaian, kendaraan, dan peralatan elektronik. Contoh kegiatan produksi termasuk pertanian, manufaktur, dan industri.', examples:['🌾 Pertanian','🏭 Manufaktur','🎨 Industri kreatif'] },
+      { title:'Distribusi', desc:'', examples:[] },
+      { title:'Konsumsi', desc:'', examples:[] }
+    ];
+
+    function showJenis(idx) {
+      document.querySelectorAll('.jenis-tab').forEach((btn, i) => {
+        btn.className = i === idx
+          ? 'jenis-tab px-4 py-2 rounded-lg text-sm font-semibold bg-forest-600 text-white'
+          : 'jenis-tab px-4 py-2 rounded-lg text-sm font-medium text-forest-700 hover:bg-forest-50 border border-forest-100';
+      });
+      const d = jenisData[idx];
+      let content = '';
+
+      if (idx === 0) {
+        content = `
+          <div class="bg-forest-50 rounded-xl p-5 border border-forest-100">
+            <h4 class="font-semibold text-forest-800 text-sm mb-2">${d.title}</h4>
+            <p class="text-forest-700 text-sm mb-4">${d.desc}</p>
+            <div class="space-y-3">
+              <div class="bg-white rounded-lg p-4 border border-forest-100">
+                <div class="flex items-start gap-3">
+                  <span class="text-2xl">🌾</span>
+                  <div>
+                    <h5 class="font-semibold text-forest-800 text-sm mb-1">Pertanian</h5>
+                    <p class="text-forest-600 text-xs leading-relaxed">Kegiatan mengolah lahan untuk menanam berbagai jenis tanaman seperti padi, jagung, sayuran, dan buah-buahan. Pertanian merupakan sektor utama yang menyediakan pangan dan bahan baku untuk masyarakat Indonesia.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-white rounded-lg p-4 border border-forest-100">
+                <div class="flex items-start gap-3">
+                  <span class="text-2xl">🏭</span>
+                  <div>
+                    <h5 class="font-semibold text-forest-800 text-sm mb-1">Manufaktur</h5>
+                    <p class="text-forest-600 text-xs leading-relaxed">Proses mengubah bahan baku menjadi produk jadi melalui mesin dan tenaga kerja. Industri manufaktur mencakup pembuatan tekstil, elektronik, kendaraan, dan produk konsumsi lainnya yang memenuhi kebutuhan pasar.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-white rounded-lg p-4 border border-forest-100">
+                <div class="flex items-start gap-3">
+                  <span class="text-2xl">🎨</span>
+                  <div>
+                    <h5 class="font-semibold text-forest-800 text-sm mb-1">Industri Kreatif</h5>
+                    <p class="text-forest-600 text-xs leading-relaxed">Kegiatan produksi yang mengandalkan kreativitas dan inovasi, seperti desain, seni, musik, film, dan teknologi. Sektor ini berkembang pesat di kota-kota besar dan memberikan kontribusi signifikan terhadap perekonomian nasional.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-forest-100">
+              <h4 class="font-semibold text-forest-800 text-sm mb-3">Contoh Kegiatan Produksi di Indonesia</h4>
+              <ul class="space-y-2 text-forest-700 text-sm">
+                <li class="flex items-start gap-2"><i data-lucide="factory" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i><span>Pabrik tekstil di Bandung</span></li>
+                <li class="flex items-start gap-2"><i data-lucide="factory" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i><span>Pabrik sepatu di Jakarta</span></li>
+                <li class="flex items-start gap-2"><i data-lucide="factory" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i><span>Industri otomotif di Karawang</span></li>
+                <li class="flex items-start gap-2"><i data-lucide="leaf" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i><span>Perkebunan kelapa sawit di Sumatra</span></li>
+                <li class="flex items-start gap-2"><i data-lucide="fish" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i><span>Tambak ikan di Sulawesi</span></li>
+                <li class="flex items-start gap-2"><i data-lucide="zap" class="w-4 h-4 text-forest-600 mt-0.5 shrink-0"></i><span>Pabrik elektronik di Jatim</span></li>
+              </ul>
+            </div>
+          </div>
+        `;
+      } else if (idx === 1) {
+        content = `
+          <div class="space-y-4">
+            <div class="bg-forest-50 rounded-xl p-5 border border-forest-100">
+              <h4 class="font-semibold text-forest-800 text-sm mb-3">a. Distribusi Barang</h4>
+              <p class="text-forest-700 text-sm leading-relaxed mb-4">Setelah barang diproduksi, mereka perlu didistribusikan dari produsen ke konsumen. Ini mencakup semua kegiatan yang terkait dengan pengangkutan, penyimpanan, dan penjualan barang, baik di pasar tradisional maupun modern. Perusahaan logistik dan toko ritel adalah bagian dari kegiatan distribusi.</p>
+              <div class="space-y-2">
+                <div class="flex items-start gap-2 bg-white rounded-lg p-3 border border-forest-100">
+                  <span class="text-lg">🚚</span>
+                  <div>
+                    <p class="font-semibold text-forest-800 text-xs">Pengangkutan</p>
+                    <p class="text-forest-600 text-xs leading-relaxed">Proses mengirimkan barang dari pabrik/gudang ke toko atau konsumen menggunakan kendaraan seperti truk, kapal, atau pesawat. Layanan kurir dan ekspedisi memastikan barang sampai tepat waktu.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 bg-white rounded-lg p-3 border border-forest-100">
+                  <span class="text-lg">📦</span>
+                  <div>
+                    <p class="font-semibold text-forest-800 text-xs">Penyimpanan</p>
+                    <p class="text-forest-600 text-xs leading-relaxed">Menyimpan barang di gudang atau pusat distribusi sambil menunggu pengiriman ke toko atau langsung ke konsumen. Penyimpanan yang baik menjaga kualitas barang tetap terjaga.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 bg-white rounded-lg p-3 border border-forest-100">
+                  <span class="text-lg">🏪</span>
+                  <div>
+                    <p class="font-semibold text-forest-800 text-xs">Ritel</p>
+                    <p class="text-forest-600 text-xs leading-relaxed">Menjual barang langsung kepada konsumen melalui toko, pasar, atau platform online. Ritel menghubungkan produsen dengan pembeli akhir yang membutuhkan produk.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-ocean-50 rounded-xl p-5 border border-ocean-200">
+              <h4 class="font-semibold text-forest-800 text-sm mb-3">b. Distribusi Jasa</h4>
+              <p class="text-forest-700 text-sm leading-relaxed mb-4">Sama seperti barang, jasa juga perlu disalurkan ke konsumen. Jasa adalah kegiatan ekonomi yang tidak menghasilkan produk fisik, tetapi memberikan manfaat atau layanan kepada orang lain. Distribusi jasa melibatkan penyediaan layanan melalui berbagai saluran dan media untuk memastikan konsumen dapat mengakses layanan dengan mudah dan efisien.</p>
+              <div class="space-y-2">
+                <div class="flex items-start gap-2 bg-white rounded-lg p-3 border border-ocean-200">
+                  <span class="text-lg">🏥</span>
+                  <div>
+                    <p class="font-semibold text-forest-800 text-xs">Penyediaan Tempat</p>
+                    <p class="text-forest-600 text-xs leading-relaxed">Menyediakan fasilitas atau lokasi tempat jasa diberikan kepada konsumen, seperti rumah sakit untuk layanan kesehatan, sekolah untuk pendidikan, atau salon untuk jasa kecantikan. Tempat yang nyaman dan lengkap mendukung kualitas layanan.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 bg-white rounded-lg p-3 border border-ocean-200">
+                  <span class="text-lg">👥</span>
+                  <div>
+                    <p class="font-semibold text-forest-800 text-xs">Tenaga Profesional</p>
+                    <p class="text-forest-600 text-xs leading-relaxed">Menyediakan tenaga kerja terampil dan profesional yang memberikan layanan langsung kepada konsumen. Misalnya, dokter di rumah sakit, guru di sekolah, atau mekanik di bengkel. Kualitas tenaga profesional menentukan kepuasan konsumen.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 bg-white rounded-lg p-3 border border-ocean-200">
+                  <span class="text-lg">💻</span>
+                  <div>
+                    <p class="font-semibold text-forest-800 text-xs">Platform Digital</p>
+                    <p class="text-forest-600 text-xs leading-relaxed">Menyalurkan jasa melalui platform online atau teknologi digital, memungkinkan konsumen mengakses layanan dari mana saja. Contohnya, kelas online, konsultasi video, atau aplikasi transportasi yang menghubungkan penyedia jasa dengan konsumen.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        `;
+      } else if (idx === 2) {
+        content = `
+          <div class="space-y-4">
+            <div class="bg-sand-50 rounded-xl p-5 border border-sand-200">
+              <h4 class="font-semibold text-forest-800 text-sm mb-3">a. Konsumsi Barang</h4>
+              <p class="text-forest-700 text-sm leading-relaxed mb-4">Tahap di mana barang yang diproduksi dan didistribusikan akhirnya dibeli dan digunakan oleh konsumen. Konsumsi barang mencakup penggunaan produk seperti makanan, pakaian, dan elektronik oleh individu atau keluarga.</p>
+              <div class="space-y-2">
+                <div class="flex items-start gap-2 bg-white rounded-lg p-3 border border-sand-200">
+                  <span class="text-lg">🍽️</span>
+                  <div>
+                    <p class="font-semibold text-forest-800 text-xs">Makanan</p>
+                    <p class="text-forest-600 text-xs leading-relaxed">Konsumsi makanan meliputi pembelian dan penggunaan bahan pangan sehari-hari seperti beras, sayuran, daging, dan buah-buahan. Makanan adalah kebutuhan pokok yang harus terpenuhi untuk menjaga kesehatan dan energi tubuh.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 bg-white rounded-lg p-3 border border-sand-200">
+                  <span class="text-lg">👕</span>
+                  <div>
+                    <p class="font-semibold text-forest-800 text-xs">Pakaian</p>
+                    <p class="text-forest-600 text-xs leading-relaxed">Konsumsi pakaian adalah pembelian dan penggunaan berbagai jenis pakaian untuk kebutuhan sehari-hari dan acara khusus. Pakaian melindungi tubuh dari cuaca dan menjadi bagian penting dari identitas dan penampilan seseorang.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 bg-white rounded-lg p-3 border border-sand-200">
+                  <span class="text-lg">📱</span>
+                  <div>
+                    <p class="font-semibold text-forest-800 text-xs">Elektronik</p>
+                    <p class="text-forest-600 text-xs leading-relaxed">Konsumsi elektronik mencakup pembelian perangkat seperti telepon pintar, laptop, televisi, dan peralatan rumah tangga. Elektronik membantu meningkatkan efisiensi hidup dan memberikan akses ke informasi dan hiburan.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-ocean-50 rounded-xl p-5 border border-ocean-200">
+              <h4 class="font-semibold text-forest-800 text-sm mb-3">b. Konsumsi Jasa</h4>
+              <p class="text-forest-700 text-sm leading-relaxed mb-4">Tahap di mana jasa yang disediakan dan didistribusikan akhirnya digunakan oleh konsumen. Konsumsi jasa meliputi penggunaan layanan seperti pendidikan, kesehatan, transportasi, dan hiburan untuk memenuhi kebutuhan dan meningkatkan kualitas hidup sehari-hari.</p>
+              <div class="space-y-2">
+                <div class="flex items-start gap-2 bg-white rounded-lg p-3 border border-ocean-200">
+                  <span class="text-lg">🏥</span>
+                  <div>
+                    <p class="font-semibold text-forest-800 text-xs">Kesehatan</p>
+                    <p class="text-forest-600 text-xs leading-relaxed">Konsumsi jasa kesehatan meliputi penggunaan layanan medis seperti pemeriksaan dokter, perawatan rumah sakit, dan konsultasi kesehatan. Jasa kesehatan penting untuk menjaga kesejahteraan fisik dan mental individu serta keluarga.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 bg-white rounded-lg p-3 border border-ocean-200">
+                  <span class="text-lg">📚</span>
+                  <div>
+                    <p class="font-semibold text-forest-800 text-xs">Pendidikan</p>
+                    <p class="text-forest-600 text-xs leading-relaxed">Konsumsi jasa pendidikan adalah menggunakan layanan pembelajaran di sekolah, universitas, atau kursus. Pendidikan membantu mengembangkan pengetahuan, keterampilan, dan potensi diri untuk masa depan yang lebih baik.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 bg-white rounded-lg p-3 border border-ocean-200">
+                  <span class="text-lg">🚗</span>
+                  <div>
+                    <p class="font-semibold text-forest-800 text-xs">Transportasi</p>
+                    <p class="text-forest-600 text-xs leading-relaxed">Konsumsi jasa transportasi mencakup penggunaan layanan angkutan seperti bus, taksi, ojek online, atau pesawat. Transportasi memudahkan masyarakat berpergian untuk bekerja, belajar, atau berkegiatan lainnya dengan nyaman dan aman.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 bg-white rounded-lg p-3 border border-ocean-200">
+                  <span class="text-lg">🎬</span>
+                  <div>
+                    <p class="font-semibold text-forest-800 text-xs">Hiburan</p>
+                    <p class="text-forest-600 text-xs leading-relaxed">Konsumsi jasa hiburan adalah menggunakan layanan rekreasi seperti menonton di bioskop, bermain di taman hiburan, atau menghadiri konser. Hiburan memberikan kesenangan, relaksasi, dan membantu melepas penat dari rutinitas sehari-hari.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      document.getElementById('jenisContent').innerHTML = content;
+    }
+
+    // Exercise Menu
+    const exercises = [
+      { num: 1, title: 'Latihan 1', subtitle: '' },
+      { num: 2, title: 'Latihan 2', subtitle: '' },
+      { num: 3, title: 'Latihan 3', subtitle: '' },
+      { num: 4, title: 'Latihan 4', subtitle: '' },
+      { num: 5, title: 'Latihan 5', subtitle: '' },
+      { num: 6, title: 'Latihan 6', subtitle: '' },
+      { num: 7, title: 'Latihan 7', subtitle: '' },
+      { num: 8, title: 'Latihan 8', subtitle: '' },
+      { num: 9, title: 'Latihan 9', subtitle: '' },
+      { num: 10, title: 'Latihan 10', subtitle: '' }
+    ];
+
+    function renderExerciseMenu() {
+  const menu = document.getElementById('exerciseMenu');
+
+  menu.innerHTML = exercises.map(ex => `
+    <button 
+      onclick="window.location.href='latihan${ex.num}.html'"
+      class="text-left p-4 rounded-lg bg-gradient-to-br from-forest-50 to-forest-100 border border-forest-200 hover:shadow-md transition-shadow"
+    >
+      <div class="font-bold text-forest-800 text-base">
+        ${ex.title}
+      </div>
+
+      <div class="text-forest-600 text-xs mt-1">
+        ${ex.subtitle}
+      </div>
+    </button>
+  `).join('');
+}
+
+    function showExercise(num) {
+      const menu = document.getElementById('exerciseMenu');
+      const content = document.getElementById('exerciseContent');
+      menu.classList.add('hidden');
+      content.classList.remove('hidden');
+
+      content.innerHTML = `
+        <div class="bg-white rounded-2xl shadow-sm border border-forest-100 p-6 md:p-8">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="heading-font text-2xl font-bold text-forest-800">Latihan ${num}</h3>
+            <button onclick="backToMenu()" class="px-4 py-2 bg-forest-100 hover:bg-forest-200 text-forest-700 rounded-lg text-sm font-medium transition">← Kembali</button>
+          </div>
+          <div class="bg-white rounded-lg p-4 border border-forest-100">
+            <textarea id="exerciseAnswer" placeholder="Tuliskan jawaban kamu di sini..." class="w-full p-4 border border-forest-200 rounded-lg text-sm focus:outline-none focus:border-forest-600 focus:ring-2 focus:ring-forest-200 resize-none" rows="8"></textarea>
+            <div class="flex gap-3 mt-4">
+              <button onclick="saveAnswer(${num})" class="px-6 py-2 bg-forest-600 hover:bg-forest-700 text-white rounded-lg text-sm font-medium transition">💾 Simpan Jawaban</button>
+              <div id="saveStatus" class="flex items-center text-green-600 text-sm hidden"><i data-lucide="check-circle" class="w-4 h-4 mr-2"></i><span>Tersimpan!</span></div>
+            </div>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function backToMenu() {
+      document.getElementById('exerciseMenu').classList.remove('hidden');
+      document.getElementById('exerciseContent').classList.add('hidden');
+    }
+
+    function saveAnswer(num) {
+      const answer = document.getElementById('exerciseAnswer').value;
+      if (answer.trim() === '') {
+        alert('Mohon tulis jawaban terlebih dahulu!');
+        return;
+      }
+      localStorage.setItem(`exercise_${num}`, answer);
+      const status = document.getElementById('saveStatus');
+      status.classList.remove('hidden');
+      setTimeout(() => status.classList.add('hidden'), 2000);
+    }
+
+    // Init
+    renderFungsi();
+    showJenis(0);
+    renderExerciseMenu();
+    lucide.createIcons();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f9e5a9e84e66494',t:'MTc3ODQ3MjgzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

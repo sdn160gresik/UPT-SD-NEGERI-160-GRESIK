@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="id">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Keliling Segitiga</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Nunito', sans-serif;
+    }
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      box-sizing: border-box;
+    }
+    .option-btn {
+      transition: all 0.2s ease;
+    }
+    .option-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .option-btn:disabled {
+      cursor: not-allowed;
+    }
+    .correct {
+      background: #10b981 !important;
+      color: white !important;
+      border-color: #10b981 !important;
+    }
+    .wrong {
+      background: #ef4444 !important;
+      color: white !important;
+      border-color: #ef4444 !important;
+    }
+    .fade-in {
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body>
+  <div id="app" class="h-full w-full bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 overflow-auto flex items-center justify-center p-4">
+   <div class="w-full max-w-lg"><!-- Header Section -->
+    <div class="mb-6 text-center">
+     <h2 class="text-xs font-600 text-yellow-300 uppercase tracking-wider mb-2">Latihan Soal</h2>
+     <h1 class="text-3xl font-800 text-white mb-1">Keliling Bangun Datar</h1>
+     <p class="text-white/60 text-sm">Segitiga - Setiap jawaban benar = 10 poin</p>
+    </div><!-- Quiz Area -->
+    <div id="quiz-container" class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 fade-in">
+     <div class="flex justify-between items-center mb-4">
+      <h3 id="title" class="text-lg font-700 text-white">Soal</h3><span id="score-display" class="bg-yellow-400 text-indigo-900 font-bold px-3 py-1 rounded-full text-sm">Skor: 0</span>
+     </div>
+     <div id="progress" class="w-full bg-white/20 rounded-full h-2 mb-6">
+      <div id="progress-bar" class="bg-yellow-400 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+     </div>
+     <div id="question-area"></div>
+    </div><!-- Result Area (hidden) -->
+    <div id="result-container" class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 text-center hidden fade-in">
+     <div class="text-6xl mb-4">
+      🏆
+     </div>
+     <h2 class="text-2xl font-800 text-white mb-2">Hasil Akhir</h2>
+     <p id="result-score" class="text-5xl font-800 text-yellow-400 mb-2"></p>
+     <p id="result-detail" class="text-white/70 mb-6"></p>
+     <div class="flex flex-col gap-3"><button onclick="restartQuiz()" class="bg-yellow-400 hover:bg-yellow-300 text-indigo-900 font-bold py-3 px-6 rounded-xl transition"> Ulangi Quiz </button> <a href="menu-latihan.html" class="bg-white/20 hover:bg-white/30 text-white font-bold py-3 px-6 rounded-xl transition inline-block"> ← Kembali ke Menu </a>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    const questions = [
+      {
+  question: "Keliling sebuah persegi panjang adalah 66 cm. Jika panjangnya adalah 24 cm, berapakah lebarnya? … cm",
+  answer: "9"
+},
+{
+  question: "Hitunglah panjang sisi CD, jika diketahui keliling persegi panjang ABCD adalah 70 cm! (Diketahui sisi atas = 10 cm)",
+  answer: "25"
+},
+{
+  question: "Suatu sawah berbentuk persegi panjang memiliki panjang 20 meter dan lebarnya setengah dari panjangnya. Hitunglah keliling dari sawah tersebut!",
+  answer: "60"
+},
+{
+  question: "Hitunglah keliling persegi panjang di bawah ini! Panjang = 24 cm Lebar = 13 cm",
+  answer: "74"
+},
+{
+  question: "Mika memiliki lukisan yang panjangnya 70 cm dan lebarnya 50 cm. Di sekeliling lukisan akan dihias oleh pita berwarna. Berapa centimeter pita yang diperlukan?",
+  answer: "240"
+},
+{
+  question: "Rani membuat hiasan dinding berbentuk segitiga sama sisi. Rani ingin memberikan pita di sekeliling hiasan dinding yang dibuatnya. Jika panjang sisi hiasan dinding tersebut 32 cm, berapa panjang pita yang diperlukan Rani?",
+  answer: "96"
+},
+{
+  question: "Keliling sebuah kebun berbentuk segitiga sama sisi 150 meter. Berapa panjang sisi kebun tersebut?",
+  answer: "50"
+},
+{
+  question: "Lapangan arena lomba berbentuk segitiga sama kaki. Di sekeliling sisinya dipasang tali dengan panjang yang sama 150 meter. Jika keliling lapangan segitiga sama kaki tersebut adalah 500 meter, maka hitunglah sisi lain dari lapangan segitiga sama kaki tersebut!",
+  answer: "200"
+},
+{
+  question: "Hitunglah keliling segitiga sama sisi di samping, jika diketahui sisinya 28 cm!",
+  answer: "84"
+},
+{
+  question: "Sebuah taman berbentuk persegi panjang memiliki panjang 35 meter dan lebar 15 meter. Di sekeliling taman akan dipasang pagar. Berapa panjang pagar yang diperlukan?",
+  answer: "100"
+}
+    ];
+
+    let current = 0;
+    let score = 0;
+    let answered = false;
+
+    function renderQuestion() {
+      answered = false;
+      const q = questions[current];
+      const area = document.getElementById('question-area');
+      const progressPercent = ((current) / questions.length) * 100;
+      document.getElementById('progress-bar').style.width = progressPercent + '%';
+
+      let optionsHTML = '';
+      for (let i = 0; i < q.options.length; i++) {
+        optionsHTML += `
+          <button onclick="checkAnswer(${i})" id="opt-${i}" class="option-btn w-full text-left px-4 py-3 rounded-xl border-2 border-white/30 text-white font-600 bg-white/5 hover:bg-white/15">
+            ${String.fromCharCode(65 + i)}. ${q.options[i]}
+          </button>
+        `;
+      }
+
+      area.innerHTML = `
+        <p class="text-white/60 text-sm mb-1">Soal ${current + 1} dari ${questions.length}</p>
+        <p class="text-white text-lg font-600 mb-5">${q.q}</p>
+        <div class="grid gap-3">
+          ${optionsHTML}
+        </div>
+        <div id="feedback" class="mt-4 text-center hidden"></div>
+        <button onclick="nextQuestion()" id="next-btn" class="hidden w-full mt-6 bg-yellow-400 hover:bg-yellow-300 text-indigo-900 font-bold py-3 px-4 rounded-xl transition">
+          Lanjut →
+        </button>
+      `;
+    }
+
+    function checkAnswer(idx) {
+      if (answered) return;
+      answered = true;
+      const q = questions[current];
+      const btns = document.querySelectorAll('.option-btn');
+      for (let i = 0; i < btns.length; i++) {
+        btns[i].disabled = true;
+      }
+
+      document.getElementById('opt-' + q.answer).classList.add('correct');
+      const feedback = document.getElementById('feedback');
+      feedback.classList.remove('hidden');
+
+      if (idx === q.answer) {
+        score += 10;
+        feedback.innerHTML = '<span class="text-green-400 font-bold">✓ Benar! +10 poin</span>';
+      } else {
+        document.getElementById('opt-' + idx).classList.add('wrong');
+        feedback.innerHTML = '<span class="text-red-400 font-bold">✗ Salah!</span>';
+      }
+
+      document.getElementById('score-display').textContent = 'Skor: ' + score;
+      document.getElementById('next-btn').classList.remove('hidden');
+    }
+
+    function nextQuestion() {
+      current++;
+      if (current < questions.length) {
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.getElementById('quiz-container').classList.add('hidden');
+      const rc = document.getElementById('result-container');
+      rc.classList.remove('hidden');
+      rc.classList.add('fade-in');
+      document.getElementById('result-score').textContent = score + ' / ' + (questions.length * 10);
+      document.getElementById('result-detail').textContent = 'Kamu menjawab ' + (score / 10) + ' dari ' + questions.length + ' soal dengan benar';
+      document.getElementById('progress-bar').style.width = '100%';
+    }
+
+    function restartQuiz() {
+      current = 0;
+      score = 0;
+      document.getElementById('score-display').textContent = 'Skor: 0';
+      document.getElementById('result-container').classList.add('hidden');
+      document.getElementById('quiz-container').classList.remove('hidden');
+      renderQuestion();
+    }
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', function() {
+      renderQuestion();
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f9a6677d4a1603e',t:'MTc3ODQzMTM3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

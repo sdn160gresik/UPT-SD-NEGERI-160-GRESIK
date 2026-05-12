@@ -87,7 +87,17 @@
   </style>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <style>body { box-sizing: border-box; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  function showToast() {
+  const toast = document.getElementById("toast");
+
+  if (!toast) return; // safety check
+
+  toast.classList.remove("hidden");
+
+  setTimeout(() => {
+    toast.classList.add("hidden");
+  }, 3000);
+}
  </head>
  <body class="h-full bg-amber-50 overflow-auto">
   <div id="app" class="w-full" style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 50%, #fca5a5 100%); display: flex; flex-direction: column; min-height: 100%;">
@@ -512,8 +522,98 @@
        </div>
       </div>
      </section><!-- LATIHAN BUTTON -->
-     <div class="mt-12 mb-8 text-center"><button id="latihan-btn" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold rounded-xl hover:from-red-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-base md:text-lg"> <span>📝 Latihan</span> </button>
-     </div>
+     <!-- LATIHAN BUTTON -->
+<div class="mt-12 mb-8 text-center">
+
+  <button id="latihan-btn"
+    class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold rounded-xl hover:from-red-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-base md:text-lg">
+
+    <span>📝 Latihan</span>
+
+  </button>
+
+</div>
+
+<!-- MODAL LATIHAN -->
+<div id="latihan-modal"
+  class="fixed inset-0 hidden items-center justify-center bg-black/50 z-50">
+
+  <div class="bg-white rounded-3xl p-6 w-[90%] max-w-md shadow-2xl animate-bounce-in">
+
+    <div class="text-center mb-5">
+      <div class="text-5xl mb-2">📝</div>
+
+      <h2 class="text-2xl font-bold text-red-600">
+        Pilih Latihan
+      </h2>
+
+      <p class="text-gray-500 text-sm mt-1">
+        Yuk kerjakan latihan dengan semangat ✨
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3">
+
+      <button onclick="openLatihan('soal/wilayah/latihan1.html')"
+  class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl text-center transition">
+  Latihan 1
+</button>
+
+      <button onclick="openLatihan('soal/wilayah/latihan2.html')"
+  class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl text-center transition">
+  Latihan 2
+</button>
+
+      <button onclick="openLatihan('soal/wilayah/latihan3.html')"
+  class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl text-center transition">
+  Latihan 3
+</button>
+
+      <button onclick="openLatihan('soal/wilayah/latihan4.html')"
+  class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl text-center transition">
+  Latihan 4
+</button>
+
+      <button onclick="openLatihan('soal/wilayah/latihan5.html')"
+  class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl text-center transition">
+  Latihan 5
+</button>
+
+      <button onclick="openLatihan('soal/wilayah/latihan6.html')"
+  class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl text-center transition">
+  Latihan 6
+</button>
+
+      <button onclick="openLatihan('soal/wilayah/latihan7.html')"
+  class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl text-center transition">
+  Latihan 7
+</button>
+
+      <button onclick="openLatihan('soal/wilayah/latihan8.html')"
+  class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl text-center transition">
+  Latihan 8
+</button>
+
+      <button onclick="openLatihan('soal/wilayah/latihan9.html')"
+  class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl text-center transition">
+  Latihan 9
+</button>
+
+      <button onclick="openLatihan('soal/wilayah/latihan10.html')"
+  class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl text-center transition">
+  Latihan 10
+</button>
+
+    </div>
+
+    <button onclick="closeLatihanModal()"
+      class="mt-5 w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 rounded-xl transition">
+      Tutup
+    </button>
+
+  </div>
+
+</div>
     </div>
    </div>
   </div><!-- FOOTER -->
@@ -552,6 +652,7 @@
     }
   </style>
   <script>
+
     const defaultConfig = {
       page_title: 'Pembagian Wilayah Negara Kesatuan Republik Indonesia',
       page_subtitle: 'Materi Pembelajaran Interaktif — Klik setiap sub bab untuk membuka isi!',
@@ -584,12 +685,38 @@
       modal.classList.add('hidden');
     }
 
-    // Handle klik tombol latihan
-    document.getElementById('latihan-btn').addEventListener('click', function(e) {
-      if (checkLatihanAccess()) {
-        window.location.href = 'soal/wilayah/pembagian_wilayah.html';
-      }
-    });
+  // Buka modal latihan
+function openLatihanModal() {
+
+  document.getElementById('latihan-modal')
+    .classList.remove('hidden');
+
+  document.getElementById('latihan-modal')
+    .classList.add('flex');
+
+}
+
+// Tutup modal latihan
+function closeLatihanModal() {
+
+  document.getElementById('latihan-modal')
+    .classList.add('hidden');
+
+  document.getElementById('latihan-modal')
+    .classList.remove('flex');
+
+}
+
+// Handle klik tombol latihan
+document.getElementById('latihan-btn').addEventListener('click', function() {
+
+  if (checkLatihanAccess()) {
+    openLatihanModal();
+  } else {
+    showToast(); // 🔥 ini yang membuat pesan melayang muncul
+  }
+
+});
 
     function toggle(btn) {
       const content = btn.nextElementSibling;
@@ -644,6 +771,30 @@
         ['section_3_title', config.section_3_title || defaultConfig.section_3_title]
       ])
     });
+// 🔥 BUKA LATIHAN (CEK LINK ADA ATAU TIDAK)
+// 🔥 BUKA LATIHAN (CEK LINK ADA ATAU TIDAK)
+function openLatihan(link) {
+  if (!link || link === "#") {
+    showWarning(); // pakai modal yang sudah ada
+    return;
+  }
+  window.location.href = link;
+}
+
+// ❌ HAPUS showWarningLatihan & closeWarningLatihan (TIDAK DIPAKAI LAGI)
+
+function closeWarningLatihan() {
+  const modal = document.getElementById("warning-latihan");
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+}
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ed519db279bea86',t:'MTc3NjM2MjU0Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ed519db279bea86',t:'MTc3NjM2MjU0Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+<!-- 🚧 TOAST PESAN MELAYANG -->
+<div id="toast"
+  class="fixed bottom-6 left-1/2 -translate-x-1/2 hidden bg-black text-white px-6 py-3 rounded-xl shadow-lg text-sm z-50 text-center">
+  🚧✨ Mohon maaf, halaman ini masih dalam proses persiapan 😊🙏<br>
+  Tetap semangat belajar yaa! 💪📚🌈
+</div>
+</body>
 </html>

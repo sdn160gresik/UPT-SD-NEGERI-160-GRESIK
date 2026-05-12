@@ -499,25 +499,45 @@ style="animation-delay: 0.95s; background: rgba(153, 51, 102, 0.85);">
       margin: auto;
     ">
 
-      <button class="btn-back" onclick="window.location.href='latihan1.html'">📘 Latihan 1</button>
+      <button class="btn-back" onclick="bukaLatihan(1)">
+  📘 Latihan 1
+</button>
 
-      <button class="btn-back" onclick="window.location.href='latihan2.html'">✏️ Latihan 2</button>
+<button class="btn-back" onclick="bukaLatihan(2)">
+  ✏️ Latihan 2
+</button>
 
-      <button class="btn-back" onclick="window.location.href='latihan3.html'">📚 Latihan 3</button>
+<button class="btn-back" onclick="bukaLatihan(3)">
+  📚 Latihan 3
+</button>
 
-      <button class="btn-back" onclick="window.location.href='latihan4.html'">🎯 Latihan 4</button>
+<button class="btn-back" onclick="bukaLatihan(4)">
+  🎯 Latihan 4
+</button>
 
-      <button class="btn-back" onclick="window.location.href='latihan5.html'">🧠 Latihan 5</button>
+<button class="btn-back" onclick="bukaLatihan(5)">
+  🧠 Latihan 5
+</button>
 
-      <button class="btn-back" onclick="window.location.href='latihan6.html'">🚀 Latihan 6</button>
+<button class="btn-back" onclick="bukaLatihan(6)">
+  🚀 Latihan 6
+</button>
 
-      <button class="btn-back" onclick="window.location.href='latihan7.html'">🌟 Latihan 7</button>
+<button class="btn-back" onclick="bukaLatihan(7)">
+  🌟 Latihan 7
+</button>
 
-      <button class="btn-back" onclick="window.location.href='latihan8.html'">🎵 Latihan 8</button>
+<button class="btn-back" onclick="bukaLatihan(8)">
+  🎵 Latihan 8
+</button>
 
-      <button class="btn-back" onclick="window.location.href='latihan9.html'">🔥 Latihan 9</button>
+<button class="btn-back" onclick="bukaLatihan(9)">
+  🔥 Latihan 9
+</button>
 
-      <button class="btn-back" onclick="window.location.href='latihan10.html'">🏆 Latihan 10</button>
+<button class="btn-back" onclick="bukaLatihan(10)">
+  🏆 Latihan 10
+</button>
 
     </div>
 
@@ -611,18 +631,218 @@ style="animation-delay: 0.95s; background: rgba(153, 51, 102, 0.85);">
     lucide.createIcons();
    
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f89bfb151597324',t:'MTc3ODI1Njc3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
- document.getElementById("btnLatihan").addEventListener("click", function () {
+ <script>
 
-  const menu = document.getElementById("menuLatihan");
+  // =========================
+  // TOGGLE MENU LATIHAN
+  // =========================
+  document.getElementById("btnLatihan").addEventListener("click", function () {
 
-  if (menu.style.display === "none") {
-    menu.style.display = "block";
-  } else {
-    menu.style.display = "none";
+    const menu = document.getElementById("menuLatihan");
+
+    if (menu.style.display === "none") {
+      menu.style.display = "block";
+    } else {
+      menu.style.display = "none";
+    }
+
+  });
+
+
+  // =========================
+  // DATA LINK LATIHAN
+  // =========================
+  const latihanLinks = {
+    1: "latihan1.html",
+    2: "",
+    3: "",
+    4: "",
+    5: "",
+    6: "",
+    7: "",
+    8: "",
+    9: "",
+    10: ""
+  };
+
+
+  // =========================
+  // FUNGSI BUKA LATIHAN
+  // =========================
+  function bukaLatihan(no) {
+
+    const link = latihanLinks[no];
+
+    // Jika link tersedia
+    if (link && link.trim() !== "") {
+
+      window.location.href = link;
+
+    }
+
+    // Jika belum tersedia
+    else {
+
+      tampilPesanPersiapan();
+
+    }
+
   }
 
-});
- </script>
+
+  // =========================
+  // POPUP PESAN
+  // =========================
+  function tampilPesanPersiapan() {
+
+    // Hapus popup lama
+    const lama = document.getElementById("popupPersiapan");
+
+    if (lama) {
+      lama.remove();
+    }
+
+    // Buat popup baru
+    const popup = document.createElement("div");
+
+    popup.id = "popupPersiapan";
+
+    popup.innerHTML = `
+      <div style="
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      ">
+        🚧✨
+      </div>
+
+      <div style="
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      ">
+        Maaf, halaman ini masih dalam persiapan ya!
+      </div>
+
+      <div style="
+        font-size: 1rem;
+        line-height: 1.7;
+      ">
+        Kami sedang menyiapkan sesuatu yang seru dan menarik untukmu 😄📚<br>
+        Tunggu sebentar lagi yaa! 🌈🎉
+      </div>
+    `;
+
+    popup.style.cssText = `
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+
+      background: linear-gradient(
+        135deg,
+        #ff6ec4,
+        #7873f5,
+        #4ADEDE,
+        #f9ca24
+      );
+
+      background-size: 400% 400%;
+
+      animation:
+        gradientMove 6s ease infinite,
+        popupShow 0.4s ease forwards;
+
+      color: white;
+
+      padding: 2rem;
+
+      border-radius: 2rem;
+
+      text-align: center;
+
+      width: 90%;
+      max-width: 420px;
+
+      z-index: 9999;
+
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+
+      font-family: 'Comfortaa', sans-serif;
+    `;
+
+    document.body.appendChild(popup);
+
+    // Hilang otomatis
+    setTimeout(() => {
+
+      popup.style.animation = "popupHide 0.4s ease forwards";
+
+      setTimeout(() => {
+
+        popup.remove();
+
+      }, 400);
+
+    }, 3500);
+
+  }
+
+
+  // =========================
+  // STYLE ANIMASI
+  // =========================
+  const style = document.createElement("style");
+
+  style.innerHTML = `
+
+    @keyframes popupShow {
+
+      from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.7);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+    }
+
+    @keyframes popupHide {
+
+      from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.7);
+      }
+
+    }
+
+    @keyframes gradientMove {
+
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+
+    }
+
+  `;
+
+  document.head.appendChild(style);
+
+</script>
  </body>
 </html>

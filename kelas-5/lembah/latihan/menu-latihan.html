@@ -84,39 +84,194 @@
       const card = document.createElement('div');
       card.className = 'card-item';
       card.innerHTML = `
-  <button onclick="window.location.href='latihan${ex.id}.html'" class="btn-bounce w-full rounded-2xl p-5 md:p-6 text-center transition-all duration-200 hover:scale-105 cursor-pointer border-2 border-white shadow-lg" style="background:${ex.color}; box-shadow: 0 8px 24px ${ex.color}40;">
+  <button onclick="openExercise(${ex.id})" class="btn-bounce w-full rounded-2xl p-5 md:p-6 text-center transition-all duration-200 hover:scale-105 cursor-pointer border-2 border-white shadow-lg" style="background:${ex.color}; box-shadow: 0 8px 24px ${ex.color}40;">
     <div class="text-4xl md:text-5xl mb-2">${ex.emoji}</div>
     <div class="text-white font-extrabold text-base md:text-lg">${ex.label}</div>
   </button>
 `;
       grid.appendChild(card);
     });
+function openExercise(id) {
 
-    function showToast() {
-      const toast = document.createElement('div');
-      toast.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50';
-      toast.innerHTML = `
-        <div class="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20 text-center max-w-md relative">
-          <button onclick="this.closest('[class*=fixed]').style.animation='fadeOut 0.5s ease-out forwards'; setTimeout(() => this.closest('[class*=fixed]').remove(), 500);" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
-            <i data-lucide="x" style="width:24px;height:24px;"></i>
-          </button>
-          <div class="text-5xl mb-4">🙏😊</div>
-          <p class="text-2xl font-bold text-gray-800 mb-3">Mohon maaf!</p>
-          <p class="text-lg text-gray-700 mb-2">Saat ini masih dalam tahap persiapan ya ✨📚</p>
-          <p class="text-base text-gray-600 mb-4">Tetap semangat 💪😄 dan nantikan informasi selanjutnya 🌟🚀</p>
-        </div>
-      `;
-      document.body.appendChild(toast);
-      
-      setTimeout(() => {
-        if (document.body.contains(toast)) {
-          toast.style.animation = 'fadeOut 0.5s ease-out forwards';
-          setTimeout(() => toast.remove(), 500);
-        }
-      }, 2500);
-      
-      lucide.createIcons();
+  // Jika klik Latihan 7
+  if (id === 7) {
+
+    showQuestionMenu();
+
+  } else {
+
+    // Selain latihan 7
+    showToast();
+
+  }
+
+}
+
+function showQuestionMenu() {
+
+  const modal = document.createElement('div');
+
+  modal.className =
+    'fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4';
+
+  let buttons = '';
+
+  // Membuat tombol soal 1 sampai 10
+  for (let i = 1; i <= 10; i++) {
+
+    buttons += `
+      <button
+        onclick="openQuestion(${i})"
+        class="bg-pink-500 hover:bg-pink-400 text-white font-black rounded-2xl py-4 text-lg shadow-lg transition-all hover:scale-105">
+        📘 Soal ${i}
+      </button>
+    `;
+
+  }
+
+  modal.innerHTML = `
+
+    <div class="bg-white rounded-3xl p-8 max-w-2xl w-full text-center relative animate-[pop-in_0.4s_ease-out]">
+
+      <!-- Tombol Tutup -->
+      <button
+        onclick="closeQuestionMenu(this)"
+        class="absolute top-4 right-4 text-2xl hover:scale-110 transition">
+        ✖️
+      </button>
+
+      <!-- Icon -->
+      <div class="text-6xl mb-3">
+        📐✨
+      </div>
+
+      <!-- Judul -->
+      <h2 class="text-3xl font-black text-pink-500 mb-2">
+        Pilih Soal
+      </h2>
+
+      <!-- Deskripsi -->
+      <p class="text-gray-600 mb-6 font-bold">
+        Yuk pilih latihan yang ingin dikerjakan 😄📚
+      </p>
+
+      <!-- Tombol Soal -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+
+        ${buttons}
+
+      </div>
+
+    </div>
+
+  `;
+
+  document.body.appendChild(modal);
+
+}
+
+function closeQuestionMenu(button) {
+
+  const modal = button.closest('.fixed');
+
+  modal.style.animation =
+    'fadeOut 0.4s ease-out forwards';
+
+  setTimeout(() => {
+
+    modal.remove();
+
+  }, 400);
+
+}
+
+function openQuestion(number) {
+
+  // Menuju file soal
+  // contoh:
+  // soal1.html
+  // soal2.html
+
+  window.location.href = `soal${number}.html`;
+
+}
+
+function showToast() {
+
+  const toast = document.createElement('div');
+
+  toast.className =
+    'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50';
+
+  toast.innerHTML = `
+    <div class="bg-white/95 backdrop-blur-md rounded-3xl p-8 shadow-2xl border-4 border-yellow-300 text-center max-w-md relative animate-bounce">
+
+      <button
+        onclick="closeToast(this)"
+        class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-xl font-bold">
+        ✖️
+      </button>
+
+      <div class="text-6xl mb-4">
+        🚧✨
+      </div>
+
+      <h2 class="text-2xl font-black text-yellow-500 mb-3">
+        Masih Dalam Persiapan!
+      </h2>
+
+      <p class="text-gray-700 text-lg font-bold mb-3">
+        🚀 Maaf, halaman ini masih dalam persiapan ya!
+      </p>
+
+      <p class="text-gray-600 mb-2">
+        Kami sedang menyiapkan sesuatu yang
+        <span class="font-bold text-pink-500">seru</span>
+        dan
+        <span class="font-bold text-blue-500">menarik</span>
+        untukmu 😄📚
+      </p>
+
+      <p class="text-lg font-bold text-green-500">
+        Tunggu sebentar lagi yaa! 🌈🎉
+      </p>
+
+    </div>
+  `;
+
+  document.body.appendChild(toast);
+
+  // Hilang otomatis
+  setTimeout(() => {
+
+    if (document.body.contains(toast)) {
+
+      toast.style.animation =
+        'fadeOut 0.5s ease-out forwards';
+
+      setTimeout(() => toast.remove(), 500);
+
     }
+
+  }, 3500);
+
+}
+
+function closeToast(button) {
+
+  const toast =
+    button.closest('.fixed');
+
+  toast.style.animation =
+    'fadeOut 0.5s ease-out forwards';
+
+  setTimeout(() => {
+
+    toast.remove();
+
+  }, 500);
+
+}
 
     // Element SDK
     const defaultConfig = {

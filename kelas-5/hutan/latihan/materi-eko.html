@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu IPS SD</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Nunito', sans-serif; }
+    .card-1 { background: linear-gradient(135deg, #FFE066, #FF9F43); }
+    .card-2 { background: linear-gradient(135deg, #A8E6CF, #3CB371); }
+    .cloud {
+      position: absolute;
+      background: rgba(255,255,255,0.6);
+      border-radius: 9999px;
+      animation: float 8s ease-in-out infinite;
+    }
+    .cloud::before, .cloud::after {
+      content: '';
+      position: absolute;
+      background: rgba(255,255,255,0.6);
+      border-radius: 9999px;
+    }
+    .cloud::before { width: 60%; height: 80%; top: -40%; left: 20%; }
+    .cloud::after { width: 50%; height: 70%; top: -30%; left: 50%; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .btn-bounce:hover { animation: bounce 0.4s; }
+    @keyframes bounce {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="w-full h-full overflow-auto relative" style="background: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 50%, #FFF9C4 100%);">
+   <!-- Clouds -->
+   <div class="cloud" style="width:120px;height:40px;top:8%;left:5%;animation-delay:0s;"></div>
+   <div class="cloud" style="width:90px;height:30px;top:12%;right:10%;animation-delay:2s;"></div>
+   <div class="cloud" style="width:100px;height:35px;top:5%;left:55%;animation-delay:4s;"></div>
+   <div class="relative z-10 max-w-4xl mx-auto px-4 py-10">
+    <!-- Header -->
+    <div class="text-center mb-10">
+     <h1 id="title" class="text-4xl md:text-5xl font-black text-blue-900 drop-shadow-md mb-3">📘 Materi IPAS SD</h1>
+     <p id="subtitle" class="text-xl md:text-2xl font-bold text-blue-700">Ayo belajar dengan menyenangkan! 🌈</p>
+    </div><!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+     <!-- Card 1 -->
+     <div class="card-1 rounded-3xl shadow-2xl p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-3xl">
+      <div class="text-center">
+       <div class="text-6xl mb-4">
+        💰🏪
+       </div>
+       <h2 class="text-2xl font-black text-orange-900 mb-3">Kegiatan Ekonomi di Indonesia</h2>
+       <p class="text-orange-800 font-semibold text-base mb-6">Pelajari kegiatan produksi, distribusi, dan konsumsi dalam kehidupan masyarakat Indonesia.</p><a href="materi.html" class="inline-block btn-bounce bg-white text-orange-600 font-black text-lg px-8 py-3 rounded-full shadow-lg hover:bg-orange-50 transition-colors">🚀 Mulai Belajar</a>
+      </div>
+     </div><!-- Card 2 -->
+     <div class="card-2 rounded-3xl shadow-2xl p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-3xl">
+      <div class="text-center">
+       <div class="text-6xl mb-4">
+        🌾⛰️
+       </div>
+       <h2 class="text-2xl font-black text-green-900 mb-3">Pengaruh Kondisi Alam terhadap Kegiatan Ekonomi</h2>
+       <p class="text-green-800 font-semibold text-base mb-6">Cari tahu bagaimana kondisi alam memengaruhi pekerjaan dan kegiatan ekonomi masyarakat.</p><a href="kondisi_alam.html" class="inline-block btn-bounce bg-white text-green-600 font-black text-lg px-8 py-3 rounded-full shadow-lg hover:bg-green-50 transition-colors">🚀 Mulai Belajar</a>
+      </div>
+     </div>
+    </div><!-- Footer -->
+    <div class="text-center">
+     <p id="footer" class="text-xl font-bold text-blue-800">✨ Semangat belajar dan raih prestasi ✨</p>
+     <div class="mt-2 text-3xl">
+      📚🎒✏️
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: '📘 Materi IPAS SD',
+      subtitle: 'Ayo belajar dengan menyenangkan! 🌈',
+      footer_text: '✨ Semangat belajar dan raih prestasi ✨',
+      background_color: '#87CEEB',
+      surface_color: '#FFFFFF',
+      text_color: '#1E3A5F',
+      primary_action: '#FF9F43',
+      secondary_action: '#3CB371',
+      font_family: 'Nunito',
+      font_size: 16
+    };
+
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => {
+        document.getElementById('title').textContent = config.main_title || defaultConfig.main_title;
+        document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+        document.getElementById('footer').textContent = config.footer_text || defaultConfig.footer_text;
+
+        const font = config.font_family || defaultConfig.font_family;
+        document.body.style.fontFamily = `${font}, Nunito, sans-serif`;
+
+        const size = config.font_size || defaultConfig.font_size;
+        document.getElementById('title').style.fontSize = `${size * 2.8}px`;
+        document.getElementById('subtitle').style.fontSize = `${size * 1.4}px`;
+        document.getElementById('footer').style.fontSize = `${size * 1.2}px`;
+      },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+          { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+          { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+          { get: () => config.primary_action || defaultConfig.primary_action, set: (v) => { config.primary_action = v; window.elementSdk.setConfig({ primary_action: v }); } },
+          { get: () => config.secondary_action || defaultConfig.secondary_action, set: (v) => { config.secondary_action = v; window.elementSdk.setConfig({ secondary_action: v }); } }
+        ],
+        borderables: [],
+        fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+        fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['main_title', config.main_title || defaultConfig.main_title],
+        ['subtitle', config.subtitle || defaultConfig.subtitle],
+        ['footer_text', config.footer_text || defaultConfig.footer_text]
+      ])
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9fae2de6c22da029',t:'MTc3ODYzODc3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

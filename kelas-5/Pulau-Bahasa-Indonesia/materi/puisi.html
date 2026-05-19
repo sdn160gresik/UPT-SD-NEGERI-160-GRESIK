@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi Puisi Interaktif</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Source+Sans+3:wght@300;400;600&amp;display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Source Sans 3', sans-serif; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
+    .accordion-content.open { max-height: 2000px; padding-top: 1rem; padding-bottom: 1rem; }
+    .accordion-header:hover { transform: translateX(4px); }
+    .accordion-header { transition: transform 0.2s ease, background 0.2s ease; }
+    .chevron { transition: transform 0.3s ease; }
+    .chevron.rotated { transform: rotate(90deg); }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+   <div class="max-w-3xl mx-auto px-4 py-10">
+    <header class="text-center mb-10">
+     <h1 id="pageTitle" class="text-4xl md:text-5xl font-bold text-amber-300 mb-2">Materi Puisi</h1>
+     <p class="text-slate-400 text-lg">Klik setiap bagian untuk membuka materi</p>
+    </header>
+    <div class="flex justify-center gap-4 mb-8">
+      <a href="../pulau.html" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg"> 
+        <i data-lucide="arrow-left" class="w-5 h-5"></i> 
+      <span>Kembali</span> </a> 
+      <a href="latihan2.html" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg"> 
+     <span>Latihan</span> <i data-lucide="arrow-right" class="w-5 h-5"></i> </a>
+    </div>
+    <div id="accordion-container" class="space-y-3">
+    </div>
+   </div>
+  </div>
+  <script>
+    const sections = [
+      {
+        title: "Pengertian Puisi",
+        content: `<p class="text-slate-300 leading-relaxed">Puisi adalah salah satu bentuk karya sastra yang mengungkapkan perasaan, pikiran, dan imajinasi penulisnya secara padat, indah, dan bermakna. Puisi biasanya disusun dalam baris-baris yang teratur dan memiliki irama atau rima tertentu. Bahasa yang digunakan dalam puisi cenderung figuratif, penuh kiasan, dan memiliki makna yang mendalam.</p>`
+      },
+      {
+        title: "Ciri-ciri Puisi",
+        content: `
+          <div class="space-y-4 text-slate-300">
+            <div class="border-l-2 border-amber-400 pl-4"><strong class="text-amber-200">1. Bahasa yang Indah dan Kiasan</strong><p class="mt-1">Puisi menggunakan gaya bahasa yang lebih indah dan tidak lugas, seperti majas (kiasan) untuk memperkuat pesan yang ingin disampaikan.</p></div>
+            <div class="border-l-2 border-amber-400 pl-4"><strong class="text-amber-200">2. Penyusunan Berbentuk Baris</strong><p class="mt-1">Puisi disusun dalam bentuk baris-baris, bukan paragraf seperti dalam prosa.</p></div>
+            <div class="border-l-2 border-amber-400 pl-4"><strong class="text-amber-200">3. Pemadatan Makna</strong><p class="mt-1">Dalam puisi, kata-kata dipilih secara cermat untuk memberikan makna yang lebih padat dan dalam.</p></div>
+            <div class="border-l-2 border-amber-400 pl-4"><strong class="text-amber-200">4. Irama dan Rima</strong><p class="mt-1">Puisi sering memiliki irama (nada atau ritme) dan rima (persamaan bunyi pada akhir kata dalam baris-barisnya), meskipun ada juga puisi yang tidak memiliki rima (puisi bebas).</p></div>
+          </div>`
+      },
+      {
+        title: "Unsur-unsur Puisi",
+        content: `
+          <div class="space-y-4 text-slate-300">
+            <div class="border-l-2 border-teal-400 pl-4"><strong class="text-teal-200">1. Tema</strong><p class="mt-1">Tema adalah pokok pikiran atau ide utama yang menjadi dasar dalam puisi. Tema bisa berupa cinta, alam, perjuangan, kemanusiaan, dan lain-lain.</p></div>
+            <div class="border-l-2 border-teal-400 pl-4"><strong class="text-teal-200">2. Diksi</strong><p class="mt-1">Diksi adalah pilihan kata yang digunakan dalam puisi. Penyair memilih kata-kata yang sesuai agar puisi terasa lebih indah dan bermakna.</p></div>
+            <div class="border-l-2 border-teal-400 pl-4"><strong class="text-teal-200">3. Majas</strong><p class="mt-1">Majas adalah gaya bahasa yang digunakan untuk memberikan efek estetis dan makna yang lebih dalam. Contoh: metafora, personifikasi, dan hiperbola.</p></div>
+            <div class="border-l-2 border-teal-400 pl-4"><strong class="text-teal-200">4. Rima dan Irama</strong><p class="mt-1">Rima adalah persamaan bunyi dalam baris-baris puisi, sedangkan irama adalah ritme atau alunan nada yang tercipta dari susunan kata-kata dalam puisi.</p></div>
+            <div class="border-l-2 border-teal-400 pl-4"><strong class="text-teal-200">5. Larik dan Bait</strong><p class="mt-1">Larik adalah satu baris dalam puisi, sedangkan bait adalah kumpulan beberapa larik yang membentuk satu bagian dalam puisi.</p></div>
+          </div>`
+      },
+      {
+        title: "Jenis-jenis Puisi",
+        content: `
+          <div class="space-y-5 text-slate-300">
+            <div class="bg-white/5 rounded-lg p-4">
+              <h4 class="text-rose-300 font-bold mb-2">1. Puisi Lama</h4>
+              <p>Puisi lama adalah puisi yang terikat oleh aturan-aturan seperti jumlah baris, suku kata, dan rima. Contoh: <span class="text-rose-200">pantun, syair, dan gurindam</span>.</p>
+            </div>
+            <div class="bg-white/5 rounded-lg p-4">
+              <h4 class="text-rose-300 font-bold mb-2">2. Puisi Baru</h4>
+              <p>Puisi baru adalah puisi yang tidak terikat oleh aturan-aturan tertentu. Contoh: <span class="text-rose-200">puisi bebas, soneta, dan balada</span>.</p>
+            </div>
+          </div>`
+      },
+      {
+        title: "Denotatif",
+        content: `
+          <div class="text-slate-300">
+            <p class="mb-3">Kalimat denotatif adalah kalimat yang menggambarkan makna secara konkret dan sesuai dengan arti sebenarnya.</p>
+            <h4 class="text-violet-200 font-semibold mb-2">Ciri-ciri denotatif:</h4>
+            <ul class="list-disc list-inside space-y-1 pl-2">
+              <li>Makna jelas</li>
+              <li>Acuan jelas</li>
+              <li>Sering digunakan dalam karya tulis ilmiah</li>
+            </ul>
+          </div>`
+      },
+      {
+        title: "Konotatif",
+        content: `
+          <div class="text-slate-300">
+            <p class="mb-3">Konotasi adalah tautan pikiran yang menimbulkan nilai rasa pada diri seseorang ketika ia sedang berhadapan dengan sebuah kata.</p>
+            <h4 class="text-violet-200 font-semibold mb-2">Ciri-ciri konotatif:</h4>
+            <ul class="list-disc list-inside space-y-1 pl-2">
+              <li>Memiliki nilai rasa</li>
+              <li>Makna bisa berubah-ubah</li>
+              <li>Berbeda tiap daerah</li>
+            </ul>
+          </div>`
+      },
+      {
+        title: "Majas",
+        content: `
+          <div class="text-slate-300">
+            <p class="mb-3">Majas adalah gaya bahasa yang dapat berupa kiasan, ibarat, atau perumpamaan yang bertujuan untuk mempercantik makna dan pesan sebuah kalimat.</p>
+            <h4 class="text-amber-200 font-semibold mb-2">Jenis-jenis majas:</h4>
+            <div class="space-y-2 pl-2">
+              <p>• <strong>Metafora</strong> – perbandingan langsung tanpa kata penghubung</p>
+              <p>• <strong>Hiperbola</strong> – pernyataan berlebihan</p>
+              <p>• <strong>Personifikasi</strong> – memberi sifat manusia pada benda mati</p>
+            </div>
+          </div>`
+      }
+    ];
+
+    const container = document.getElementById('accordion-container');
+
+    sections.forEach((section, index) => {
+      const item = document.createElement('div');
+      item.className = 'rounded-xl overflow-hidden bg-white/5 backdrop-blur-sm border border-white/10';
+      item.innerHTML = `
+        <button class="accordion-header w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer" onclick="toggle(${index})">
+          <h2 class="text-lg md:text-xl font-bold text-slate-100">${section.title}</h2>
+          <i data-lucide="chevron-right" id="chevron-${index}" class="chevron w-5 h-5 text-amber-300 flex-shrink-0"></i>
+        </button>
+        <div id="content-${index}" class="accordion-content px-5">
+          ${section.content}
+        </div>
+      `;
+      container.appendChild(item);
+    });
+
+    function toggle(index) {
+      const content = document.getElementById(`content-${index}`);
+      const chevron = document.getElementById(`chevron-${index}`);
+      content.classList.toggle('open');
+      chevron.classList.toggle('rotated');
+    }
+
+    lucide.createIcons();
+
+    // Element SDK
+    const defaultConfig = {
+      page_title: 'Materi Puisi',
+      background_color: '#1a1a2e',
+      text_color: '#f1f5f9',
+      accent_color: '#fbbf24',
+      font_family: 'Playfair Display'
+    };
+
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => {
+        document.getElementById('pageTitle').textContent = config.page_title || defaultConfig.page_title;
+        const app = document.getElementById('app');
+        app.style.background = `linear-gradient(135deg, ${config.background_color || defaultConfig.background_color} 0%, #16213e 50%, #0f3460 100%)`;
+        document.getElementById('pageTitle').style.color = config.accent_color || defaultConfig.accent_color;
+        document.getElementById('pageTitle').style.fontFamily = `${config.font_family || defaultConfig.font_family}, serif`;
+      },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+          { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+          { get: () => config.accent_color || defaultConfig.accent_color, set: (v) => { config.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); } }
+        ],
+        borderables: [],
+        fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+        fontSizeable: undefined
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ["page_title", config.page_title || defaultConfig.page_title]
+      ])
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9fe094b283960c16',t:'MTc3OTE2NzI3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

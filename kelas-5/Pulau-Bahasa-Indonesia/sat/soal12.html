@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal 12</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
+
+    .nav-soal{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:25px;
+    }
+
+    .nav-soal a{
+      width:45px;
+      height:45px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      background:#3498db;
+      color:white;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .nav-soal a:hover{
+      background:#2980b9;
+    }
+
+    .nav-soal a.active{
+      background:#27ae60;
+      pointer-events:none;
+    }
+
+    .container{
+      background:white;
+      padding:25px;
+      border-radius:12px;
+      max-width:1000px;
+      margin:auto;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    p{
+      line-height:1.8;
+    }
+
+    button{
+      margin-top:20px;
+      padding:12px 20px;
+      background:#27ae60;
+      color:white;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#1e8449;
+    }
+
+    .tombol-kembali{
+      display:inline-block;
+      margin-top:-5px;
+      margin-bottom:20px;
+      padding:10px 18px;
+      background:#e67e22;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+    }
+
+    .tombol-kembali:hover{
+      background:#ca6f1e;
+    }
+
+    .tombol-bacaan{
+      background:#8e44ad;
+      margin-bottom:20px;
+      font-weight:bold;
+    }
+
+    .tombol-bacaan:hover{
+      background:#6c3483;
+    }
+
+    /* Popup */
+    .popup{
+      display:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.6);
+      z-index:999;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .popup-content{
+      width:90%;
+      max-width:800px;
+      background:white;
+      padding:30px;
+      border-radius:20px;
+      position:relative;
+      line-height:1.9;
+      animation:muncul 0.3s ease;
+      box-shadow:0 0 25px rgba(0,0,0,0.3);
+    }
+
+    .popup-content h3{
+      margin-top:0;
+      color:#8e44ad;
+      text-align:center;
+      font-size:28px;
+    }
+
+    @keyframes muncul{
+      from{
+        transform:scale(0.7);
+        opacity:0;
+      }
+      to{
+        transform:scale(1);
+        opacity:1;
+      }
+    }
+
+    .tutup{
+      position:absolute;
+      top:10px;
+      right:15px;
+      width:40px;
+      height:40px;
+      border:none;
+      border-radius:50%;
+      background:#e74c3c;
+      color:white;
+      font-size:20px;
+      font-weight:bold;
+      cursor:pointer;
+    }
+
+    .tutup:hover{
+      background:#c0392b;
+    }
+
+    .pasangan{
+      margin-top:25px;
+      background:#f9f9f9;
+      padding:20px;
+      border-radius:12px;
+      border:2px dashed #8e44ad;
+    }
+
+    .baris{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+
+    .kata{
+      width:220px;
+      font-weight:bold;
+      color:#2c3e50;
+    }
+
+    select{
+      flex:1;
+      padding:10px;
+      border-radius:8px;
+      border:2px solid #3498db;
+      font-size:16px;
+    }
+
+    #hasil{
+      margin-top:20px;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    .benar{
+      color:green;
+    }
+
+    .salah{
+      color:red;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="nav-soal">
+    <a href="soal1.html">1</a>
+    <a href="soal2.html">2</a>
+    <a href="soal3.html">3</a>
+    <a href="soal4.html">4</a>
+    <a href="soal5.html">5</a>
+    <a href="soal6.html">6</a>
+    <a href="soal7.html">7</a>
+    <a href="soal8.html">8</a>
+    <a href="soal9.html">9</a>
+    <a href="soal10.html">10</a>
+    <a href="soal11.html">11</a>
+    <a href="soal12.html" class="active">12</a>
+    <a href="soal13.html">13</a>
+    <a href="soal14.html">14</a>
+    <a href="soal15.html">15</a>
+  </div>
+
+  <a href="pulau.html" class="tombol-kembali">← Kembali</a>
+
+  <div class="container">
+
+    <h2>Soal 12</h2>
+
+    <!-- Tombol Bacaan -->
+    <button class="tombol-bacaan" onclick="bukaPopup()">
+      📖 Buka Bacaan
+    </button>
+
+    <p>
+      Hubungkan kata berimbuhan <b>ter-</b> berikut dengan fungsi yang tepat!
+    </p>
+
+    <div class="pasangan">
+
+      <div class="baris">
+        <div class="kata">Terbuka</div>
+
+        <select id="jawaban1">
+          <option value="">-- Pilih Jawaban --</option>
+          <option value="tidak">Menyatakan tindakan/peristiwa yang tidak disengaja</option>
+          <option value="superlatif">Menyatakan tingkatan paling tinggi/superlatif</option>
+          <option value="pelaku">Menyatakan pelaku/subjek</option>
+        </select>
+      </div>
+
+      <div class="baris">
+        <div class="kata">Terpandai</div>
+
+        <select id="jawaban2">
+          <option value="">-- Pilih Jawaban --</option>
+          <option value="tidak">Menyatakan tindakan/peristiwa yang tidak disengaja</option>
+          <option value="superlatif">Menyatakan tingkatan paling tinggi/superlatif</option>
+          <option value="pelaku">Menyatakan pelaku/subjek</option>
+        </select>
+      </div>
+
+      <div class="baris">
+        <div class="kata">Tertuduh</div>
+
+        <select id="jawaban3">
+          <option value="">-- Pilih Jawaban --</option>
+          <option value="tidak">Menyatakan tindakan/peristiwa yang tidak disengaja</option>
+          <option value="superlatif">Menyatakan tingkatan paling tinggi/superlatif</option>
+          <option value="pelaku">Menyatakan pelaku/subjek</option>
+        </select>
+      </div>
+
+    </div>
+
+    <button onclick="periksaJawaban()">Periksa Jawaban</button>
+
+    <div id="hasil"></div>
+
+  </div>
+
+  <!-- Popup Bacaan -->
+  <div class="popup" id="popupBacaan">
+
+    <div class="popup-content">
+
+      <button class="tutup" onclick="tutupPopup()">✕</button>
+
+      <h3>📚 Bacaan</h3>
+
+      <p>
+        Dalam bahasa Indonesia, imbuhan memiliki beberapa jenis,
+        salah satunya adalah imbuhan <b>ter-</b>.
+        Imbuhan <b>ter-</b> dapat digunakan untuk menunjukkan
+        berbagai makna, seperti keadaan yang tidak disengaja,
+        tingkat paling tinggi, maupun pelaku dalam suatu peristiwa.
+        Contohnya adalah <i>terjatuh</i>, <i>terindah</i>,
+        dan <i>terdakwa</i>.
+      </p>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    function bukaPopup(){
+      document.getElementById("popupBacaan").style.display = "flex";
+    }
+
+    function tutupPopup(){
+      document.getElementById("popupBacaan").style.display = "none";
+    }
+
+    function periksaJawaban(){
+
+      let j1 = document.getElementById("jawaban1").value;
+      let j2 = document.getElementById("jawaban2").value;
+      let j3 = document.getElementById("jawaban3").value;
+
+      let hasil = document.getElementById("hasil");
+
+      if(j1 === "" || j2 === "" || j3 === ""){
+        hasil.innerHTML =
+          "⚠️ Semua jawaban harus dipilih terlebih dahulu!";
+        hasil.className = "salah";
+        return;
+      }
+
+      if(
+        j1 === "tidak" &&
+        j2 === "superlatif" &&
+        j3 === "pelaku"
+      ){
+        hasil.innerHTML = "✅ Jawaban benar!";
+        hasil.className = "benar";
+      } else {
+        hasil.innerHTML =
+          "❌ Jawaban salah. Coba periksa kembali!";
+        hasil.className = "salah";
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>

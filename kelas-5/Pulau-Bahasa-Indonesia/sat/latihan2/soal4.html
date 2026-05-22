@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal 4</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
+
+    .nav-soal{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:25px;
+    }
+
+    .nav-soal a{
+      width:45px;
+      height:45px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      background:#3498db;
+      color:white;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .nav-soal a:hover{
+      background:#2980b9;
+    }
+
+    /* Tombol soal aktif */
+    .nav-soal a.active{
+      background:#27ae60;
+      pointer-events:none;
+    }
+
+    .container{
+      background:white;
+      padding:25px;
+      border-radius:12px;
+      max-width:1000px;
+      margin:auto;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:20px;
+    }
+
+    th, td{
+      border:1px solid #999;
+      padding:12px;
+      text-align:center;
+    }
+
+    th{
+      background:#e8e8e8;
+    }
+
+    td:first-child{
+      text-align:left;
+    }
+
+    button{
+      margin-top:20px;
+      padding:12px 20px;
+      background:#27ae60;
+      color:white;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    button:hover{
+      background:#1e8449;
+    }
+
+    #hasil{
+      margin-top:20px;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    .benar{
+      color:green;
+    }
+
+    .salah{
+      color:red;
+    }
+
+    /* Tombol kembali */
+    .tombol-kembali{
+      display:inline-block;
+      margin-top:-5px;
+      margin-bottom:20px;
+      padding:10px 18px;
+      background:#e67e22;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .tombol-kembali:hover{
+      background:#ca6f1e;
+    }
+
+    /* Tombol bacaan */
+    .btn-bacaan{
+      background:#3498db;
+      margin-bottom:20px;
+    }
+
+    .btn-bacaan:hover{
+      background:#2980b9;
+    }
+
+    /* Popup */
+    .popup{
+      display:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.6);
+      justify-content:center;
+      align-items:center;
+      z-index:999;
+    }
+
+    .popup-content{
+      background:white;
+      width:90%;
+      max-width:750px;
+      padding:25px;
+      border-radius:15px;
+      box-shadow:0 0 15px rgba(0,0,0,0.3);
+      position:relative;
+      animation:muncul 0.3s ease;
+      line-height:1.8;
+      max-height:85vh;
+      overflow-y:auto;
+    }
+
+    @keyframes muncul{
+      from{
+        transform:scale(0.8);
+        opacity:0;
+      }
+      to{
+        transform:scale(1);
+        opacity:1;
+      }
+    }
+
+    .close-btn{
+      position:absolute;
+      top:10px;
+      right:15px;
+      font-size:28px;
+      cursor:pointer;
+      color:#e74c3c;
+      font-weight:bold;
+    }
+
+    .close-btn:hover{
+      color:#c0392b;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigasi Soal -->
+  <div class="nav-soal">
+    <a href="soal1.html">1</a>
+    <a href="soal2.html">2</a>
+    <a href="soal3.html">3</a>
+    <a href="soal4.html" class="active">4</a>
+    <a href="soal5.html">5</a>
+    <a href="soal6.html">6</a>
+    <a href="soal7.html">7</a>
+    <a href="soal8.html">8</a>
+    <a href="soal9.html">9</a>
+    <a href="soal10.html">10</a>
+    <a href="soal11.html">11</a>
+    <a href="soal12.html">12</a>
+    <a href="soal13.html">13</a>
+    <a href="soal14.html">14</a>
+    <a href="soal15.html">15</a>
+    <a href="soal16.html">16</a>
+    <a href="soal17.html">17</a>
+    <a href="soal18.html">18</a>
+    <a href="soal19.html">19</a>
+    <a href="soal20.html">20</a>
+  </div>
+
+  <!-- Tombol kembali -->
+  <a href="../menu.html" class="tombol-kembali">
+    ← Kembali
+  </a>
+
+  <div class="container">
+
+    <h2>Soal 4</h2>
+
+    <!-- Tombol Bacaan -->
+    <button class="btn-bacaan" onclick="bukaPopup()">
+      📖 Bacaan
+    </button>
+
+    <p>
+      Berilah tanda centang (√) pada kolom Benar untuk pernyataan yang sesuai
+      dan beri tanda centang (√) pada kolom Salah untuk pernyataan yang tidak
+      sesuai dengan bacaan!
+    </p>
+
+    <table>
+      <tr>
+        <th>Pernyataan</th>
+        <th>Benar</th>
+        <th>Salah</th>
+      </tr>
+
+      <tr>
+        <td>
+          Imbuhan pe-an pada kata “perkembangan”
+          berfungsi mengubah kata menjadi kata benda.
+        </td>
+
+        <td>
+          <input type="radio" name="q1" value="benar">
+        </td>
+
+        <td>
+          <input type="radio" name="q1" value="salah">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Dalam teks tersebut, kegiatan pentas budaya dilakukan
+          untuk mengurangi kerja sama siswa.
+        </td>
+
+        <td>
+          <input type="radio" name="q2" value="benar">
+        </td>
+        <td>
+          <input type="radio" name="q2" value="salah">
+        </td>
+
+      </tr>
+
+      <tr>
+        <td>
+          Kata “penyusunan” berasal dari kata dasar “susun”.
+        </td>
+
+        <td>
+          <input type="radio" name="q3" value="benar">
+        </td>
+
+        <td>
+          <input type="radio" name="q3" value="salah">
+        </td>
+      </tr>
+
+    </table>
+
+    <button onclick="periksaJawaban()">
+      Periksa Jawaban
+    </button>
+
+    <div id="hasil"></div>
+
+  </div>
+
+  <!-- Popup Bacaan -->
+  <div class="popup" id="popupBacaan">
+
+    <div class="popup-content">
+
+      <!-- Tombol tutup -->
+      <span class="close-btn" onclick="tutupPopup()">
+        &times;
+      </span>
+
+      <h3>Bacaan</h3>
+
+      <p>
+        “Para siswa kelas VI sedang mempersiapkan pentas budaya
+        yang akan dilaksanakan di lapangan sekolah. Ibu Guru
+        memberikan pengarahan tentang penyusunan acara agar
+        kegiatan berjalan tertib dan meriah. Beberapa siswa tampak
+        melakukan pemasangan dekorasi dan menata kursi penonton.
+        Suasana sekolah menjadi semakin hidup karena adanya
+        percakapan seru mengenai penampilan kelompok terbaik.
+        Melalui kegiatan ini, sekolah berharap terjadi perkembangan
+        bakat dan kerja sama antarsiswa.”
+      </p>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    // Membuka popup
+    function bukaPopup(){
+      document.getElementById("popupBacaan").style.display = "flex";
+    }
+
+    // Menutup popup
+    function tutupPopup(){
+      document.getElementById("popupBacaan").style.display = "none";
+    }
+
+    // Tutup popup jika klik luar kotak
+    window.onclick = function(event){
+
+      let popup = document.getElementById("popupBacaan");
+
+      if(event.target == popup){
+        popup.style.display = "none";
+      }
+    }
+
+    // Periksa jawaban
+    function periksaJawaban(){
+
+      const jawabanBenar = {
+        q1: "benar",
+        q2: "salah",
+        q3: "benar"
+      };
+
+      let skor = 0;
+      let total = 3;
+
+      for(let key in jawabanBenar){
+
+        let pilihan = document.querySelector(
+          'input[name="'+key+'"]:checked'
+        );
+
+        if(pilihan && pilihan.value === jawabanBenar[key]){
+          skor++;
+        }
+      }
+
+      let hasil = document.getElementById("hasil");
+
+      if(skor === total){
+
+        hasil.innerHTML =
+          "✅ Semua jawaban benar! Skor: " +
+          skor + "/" + total;
+
+        hasil.className = "benar";
+
+      } else {
+
+        hasil.innerHTML =
+          "❌ Ada jawaban yang salah. Skor: " +
+          skor + "/" + total;
+
+        hasil.className = "salah";
+      }
+    }
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal 5</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
+
+    .nav-soal{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:25px;
+    }
+
+    .nav-soal a{
+      width:45px;
+      height:45px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      background:#3498db;
+      color:white;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .nav-soal a:hover{
+      background:#2980b9;
+    }
+
+    /* Tombol aktif */
+    .nav-soal a.active{
+      background:#27ae60;
+      pointer-events:none;
+    }
+
+    .container{
+      background:white;
+      padding:25px;
+      border-radius:12px;
+      max-width:1000px;
+      margin:auto;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    p{
+      line-height:1.7;
+    }
+
+    .pilihan{
+      margin-top:20px;
+      line-height:2;
+      font-size:17px;
+    }
+
+    textarea{
+      width:100%;
+      margin-top:15px;
+      padding:15px;
+      border-radius:10px;
+      border:1px solid #999;
+      font-size:16px;
+      resize:vertical;
+      min-height:120px;
+      box-sizing:border-box;
+    }
+
+    button{
+      margin-top:20px;
+      padding:12px 20px;
+      background:#27ae60;
+      color:white;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    button:hover{
+      background:#1e8449;
+    }
+
+    #hasil{
+      margin-top:20px;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    .benar{
+      color:green;
+    }
+
+    .salah{
+      color:red;
+    }
+
+    /* Tombol kembali */
+    .tombol-kembali{
+      display:inline-block;
+      margin-top:-5px;
+      margin-bottom:20px;
+      padding:10px 18px;
+      background:#e67e22;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .tombol-kembali:hover{
+      background:#ca6f1e;
+    }
+
+    /* Tombol bacaan */
+    .btn-bacaan{
+      background:#3498db;
+      margin-bottom:20px;
+    }
+
+    .btn-bacaan:hover{
+      background:#2980b9;
+    }
+
+    /* Popup */
+    .popup{
+      display:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.6);
+      justify-content:center;
+      align-items:center;
+      z-index:999;
+    }
+
+    .popup-content{
+      background:white;
+      width:90%;
+      max-width:750px;
+      padding:25px;
+      border-radius:15px;
+      box-shadow:0 0 15px rgba(0,0,0,0.3);
+      position:relative;
+      animation:muncul 0.3s ease;
+      line-height:1.8;
+      max-height:85vh;
+      overflow-y:auto;
+    }
+
+    @keyframes muncul{
+      from{
+        transform:scale(0.8);
+        opacity:0;
+      }
+      to{
+        transform:scale(1);
+        opacity:1;
+      }
+    }
+
+    .close-btn{
+      position:absolute;
+      top:10px;
+      right:15px;
+      font-size:28px;
+      cursor:pointer;
+      color:#e74c3c;
+      font-weight:bold;
+    }
+
+    .close-btn:hover{
+      color:#c0392b;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigasi -->
+  <div class="nav-soal">
+    <a href="soal1.html">1</a>
+    <a href="soal2.html">2</a>
+    <a href="soal3.html">3</a>
+    <a href="soal4.html">4</a>
+    <a href="soal5.html" class="active">5</a>
+    <a href="soal6.html">6</a>
+    <a href="soal7.html">7</a>
+    <a href="soal8.html">8</a>
+    <a href="soal9.html">9</a>
+    <a href="soal10.html">10</a>
+    <a href="soal11.html">11</a>
+    <a href="soal12.html">12</a>
+    <a href="soal13.html">13</a>
+    <a href="soal14.html">14</a>
+    <a href="soal15.html">15</a>
+    <a href="soal16.html">16</a>
+    <a href="soal17.html">17</a>
+    <a href="soal18.html">18</a>
+    <a href="soal19.html">19</a>
+    <a href="soal20.html">20</a>
+  </div>
+
+  <!-- Tombol kembali -->
+  <a href="../menu.html" class="tombol-kembali">
+    ← Kembali
+  </a>
+
+  <div class="container">
+
+    <h2>Soal 5</h2>
+
+    <!-- Tombol Bacaan -->
+    <button class="btn-bacaan" onclick="bukaPopup()">
+      📖 Bacaan
+    </button>
+
+    <p>
+      Menurut kalian, apakah kalimat opini dapat memengaruhi
+      pendapat pembaca meskipun belum tentu benar?
+    </p>
+
+    <div class="pilihan">
+
+      <label>
+        <input type="radio" name="jawaban" value="ya">
+        Ya
+      </label>
+
+      <br>
+
+      <label>
+        <input type="radio" name="jawaban" value="tidak">
+        Tidak
+      </label>
+
+    </div>
+
+    <p><b>Tuliskan alasan kamu!</b></p>
+
+    <textarea
+      id="alasan"
+      placeholder="Tuliskan alasanmu di sini..."></textarea>
+
+    <button onclick="periksaJawaban()">
+      Kirim Jawaban
+    </button>
+
+    <div id="hasil"></div>
+
+  </div>
+
+  <!-- Popup Bacaan -->
+  <div class="popup" id="popupBacaan">
+
+    <div class="popup-content">
+
+      <!-- Tombol tutup -->
+      <span class="close-btn" onclick="tutupPopup()">
+        &times;
+      </span>
+
+      <h3>Bacaan</h3>
+
+      <p>
+        Fakta adalah kalimat yang berisi kejadian nyata dan dapat
+        dibuktikan kebenarannya. Kalimat fakta biasanya bersifat
+        objektif serta didukung data yang jelas.
+      </p>
+
+      <p>
+        Opini adalah kalimat yang berisi pendapat, saran,
+        atau pandangan seseorang terhadap suatu hal.
+        Kalimat opini bersifat subjektif dan belum tentu benar.
+      </p>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    // Membuka popup
+    function bukaPopup(){
+      document.getElementById("popupBacaan").style.display = "flex";
+    }
+
+    // Menutup popup
+    function tutupPopup(){
+      document.getElementById("popupBacaan").style.display = "none";
+    }
+
+    // Tutup popup jika klik luar
+    window.onclick = function(event){
+
+      let popup = document.getElementById("popupBacaan");
+
+      if(event.target == popup){
+        popup.style.display = "none";
+      }
+    }
+
+    // Periksa jawaban
+    function periksaJawaban(){
+
+      let pilihan = document.querySelector(
+        'input[name="jawaban"]:checked'
+      );
+
+      let alasan = document.getElementById("alasan").value;
+
+      let hasil = document.getElementById("hasil");
+
+      if(!pilihan){
+
+        hasil.innerHTML =
+          "⚠️ Pilih jawaban terlebih dahulu!";
+
+        hasil.className = "salah";
+        return;
+      }
+
+      if(alasan.trim() === ""){
+
+        hasil.innerHTML =
+          "⚠️ Tuliskan alasanmu terlebih dahulu!";
+
+        hasil.className = "salah";
+        return;
+      }
+
+      hasil.innerHTML =
+        "✅ Jawaban berhasil dikirim!";
+
+      hasil.className = "benar";
+    }
+
+  </script>
+
+</body>
+</html>

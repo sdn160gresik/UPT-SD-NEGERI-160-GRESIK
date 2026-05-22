@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal 1</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
+
+    .nav-soal{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:25px;
+    }
+
+    .nav-soal a{
+      width:45px;
+      height:45px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      background:#3498db;
+      color:white;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .nav-soal a:hover{
+      background:#2980b9;
+    }
+
+    .nav-soal a.active{
+      background:#27ae60;
+      pointer-events:none;
+    }
+
+    .container{
+      background:white;
+      padding:25px;
+      border-radius:12px;
+      max-width:1000px;
+      margin:auto;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    p{
+      line-height:1.7;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:20px;
+    }
+
+    th, td{
+      border:1px solid #999;
+      padding:12px;
+      text-align:left;
+    }
+
+    th{
+      background:#e8e8e8;
+      text-align:center;
+    }
+
+    td:nth-child(2),
+    td:nth-child(3){
+      text-align:center;
+      width:120px;
+    }
+
+    button{
+      margin-top:20px;
+      padding:12px 20px;
+      background:#27ae60;
+      color:white;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    button:hover{
+      background:#1e8449;
+    }
+
+    #hasil{
+      margin-top:20px;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    .benar{
+      color:green;
+    }
+
+    .salah{
+      color:red;
+    }
+
+    .tombol-kembali{
+      display:inline-block;
+      margin-top:-5px;
+      margin-bottom:20px;
+      padding:10px 18px;
+      background:#e67e22;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .tombol-kembali:hover{
+      background:#ca6f1e;
+    }
+
+    /* Tombol bacaan */
+    .btn-bacaan{
+      background:#3498db;
+      margin-bottom:20px;
+    }
+
+    .btn-bacaan:hover{
+      background:#2980b9;
+    }
+
+    /* Popup */
+    .popup{
+      display:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.6);
+      justify-content:center;
+      align-items:center;
+      z-index:999;
+    }
+
+    .popup-content{
+      background:white;
+      width:90%;
+      max-width:700px;
+      padding:25px;
+      border-radius:15px;
+      box-shadow:0 0 15px rgba(0,0,0,0.3);
+      position:relative;
+      animation:muncul 0.3s ease;
+      line-height:1.8;
+    }
+
+    @keyframes muncul{
+      from{
+        transform:scale(0.8);
+        opacity:0;
+      }
+      to{
+        transform:scale(1);
+        opacity:1;
+      }
+    }
+
+    .close-btn{
+      position:absolute;
+      top:10px;
+      right:15px;
+      font-size:24px;
+      cursor:pointer;
+      color:#e74c3c;
+      font-weight:bold;
+    }
+
+    .close-btn:hover{
+      color:#c0392b;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigasi Soal -->
+  <div class="nav-soal">
+    <a href="soal1.html" class="active">1</a>
+    <a href="soal2.html">2</a>
+    <a href="soal3.html">3</a>
+    <a href="soal4.html">4</a>
+    <a href="soal5.html">5</a>
+    <a href="soal6.html">6</a>
+    <a href="soal7.html">7</a>
+    <a href="soal8.html">8</a>
+    <a href="soal9.html">9</a>
+    <a href="soal10.html">10</a>
+    <a href="soal11.html">11</a>
+    <a href="soal12.html">12</a>
+    <a href="soal13.html">13</a>
+    <a href="soal14.html">14</a>
+    <a href="soal15.html">15</a>
+<a href="soal16.html">16</a>
+  <a href="soal17.html">17</a>
+  <a href="soal18.html">18</a>
+  <a href="soal19.html">19</a>
+  <a href="soal20.html">20</a>
+  </div>
+
+  <!-- Tombol Kembali -->
+  <a href="../menu.html" class="tombol-kembali">
+    ← Kembali
+  </a>
+
+  <div class="container">
+    <h2>Soal 1</h2>
+
+    <!-- Tombol Bacaan -->
+    <button class="btn-bacaan" onclick="bukaPopup()">
+      📖 Bacaan
+    </button>
+
+    <p>
+      Mengapa tindakan Deni yang mengajak teman-teman menjauhi Raka
+      termasuk perundungan mental?
+    </p>
+
+    <table>
+      <tr>
+        <th>Pilihan Jawaban</th>
+      </tr>
+
+      <tr>
+        <td>
+          <input type="radio" name="jawaban" value="a">
+          a. Karena dilakukan dengan memukul dan mendorong Raka.
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input type="radio" name="jawaban" value="b">
+          b. Karena menyebabkan Raka terluka secara fisik.
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input type="radio" name="jawaban" value="c">
+          c. Karena dilakukan melalui pesan singkat di internet.
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input type="radio" name="jawaban" value="d">
+          d. Karena membuat Raka merasa sedih dan dikucilkan.
+        </td>
+      </tr>
+    </table>
+
+    <button onclick="periksaJawaban()">
+      Periksa Jawaban
+    </button>
+
+    <div id="hasil"></div>
+  </div>
+
+  <!-- Popup Bacaan -->
+  <div class="popup" id="popupBacaan">
+    <div class="popup-content">
+
+      <span class="close-btn" onclick="tutupPopup()">
+        &times;
+      </span>
+
+      <h3>Bacaan</h3>
+
+      <p>
+        Di kelas VI SD Harapan Bangsa, terdapat seorang siswa bernama
+        Raka yang sangat suka membaca buku cerita. Namun, beberapa teman
+        sering mengganggu Raka karena menganggap hobinya aneh. Deni dan
+        kelompoknya kerap menertawakan Raka saat sedang membaca di
+        perpustakaan. Mereka juga sering mengajak teman-teman lain untuk
+        tidak duduk bersama Raka saat jam istirahat. Akibatnya, Raka
+        merasa sedih, malu, dan memilih menyendiri di kelas.
+      </p>
+
+      <p>
+        Suatu hari, Sinta melihat kejadian tersebut dan merasa prihatin.
+        Ia mencoba menemani Raka dan mengatakan kepada teman-temannya
+        bahwa mengejek orang lain adalah tindakan yang tidak baik.
+        Sinta juga melaporkan kejadian itu kepada guru agar masalah
+        tersebut dapat diselesaikan dengan baik. Setelah diberi nasihat
+        oleh guru, Deni akhirnya meminta maaf kepada Raka dan berjanji
+        tidak mengulanginya lagi.
+      </p>
+
+    </div>
+  </div>
+
+  <script>
+
+    // Popup bacaan
+    function bukaPopup(){
+      document.getElementById("popupBacaan").style.display = "flex";
+    }
+
+    function tutupPopup(){
+      document.getElementById("popupBacaan").style.display = "none";
+    }
+
+    // Periksa jawaban
+    function periksaJawaban(){
+
+      const jawabanBenar = "d";
+
+      let pilihan = document.querySelector(
+        'input[name="jawaban"]:checked'
+      );
+
+      let hasil = document.getElementById("hasil");
+
+      if(!pilihan){
+        hasil.innerHTML = "⚠️ Pilih salah satu jawaban terlebih dahulu!";
+        hasil.className = "salah";
+        return;
+      }
+
+      if(pilihan.value === jawabanBenar){
+        hasil.innerHTML = "✅ Jawaban benar!";
+        hasil.className = "benar";
+      } else {
+        hasil.innerHTML = "❌ Jawaban salah!";
+        hasil.className = "salah";
+      }
+    }
+
+    // Tutup popup jika klik area luar
+    window.onclick = function(event){
+      let popup = document.getElementById("popupBacaan");
+
+      if(event.target == popup){
+        popup.style.display = "none";
+      }
+    }
+
+  </script>
+
+</body>
+</html>

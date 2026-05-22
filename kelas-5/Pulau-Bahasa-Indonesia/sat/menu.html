@@ -50,60 +50,61 @@
     </div>
 
     <!-- Menu Tombol -->
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+  <!-- Menu Tombol -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
 
-      <button onclick="bukaLatihan('soal1.html', true)"
-        class="btn-hover bg-red-500 text-white font-bold py-5 rounded-2xl transition duration-300">
-        🎯 Latihan 1
-      </button>
+  <button onclick="bukaLatihan('soal1.html')"
+    class="btn-hover bg-red-500 text-white font-bold py-5 rounded-2xl transition duration-300">
+    🎯 Latihan 1
+  </button>
 
-      <button onclick="bukaLatihan('soal2.html', true)"
-        class="btn-hover bg-orange-500 text-white font-bold py-5 rounded-2xl transition duration-300">
-        🎯 Latihan 2
-      </button>
+  <button onclick="bukaLatihan('soal2.html')"
+    class="btn-hover bg-orange-500 text-white font-bold py-5 rounded-2xl transition duration-300">
+    🎯 Latihan 2
+  </button>
 
-      <button onclick="bukaLatihan('soal3.html', false)"
-        class="btn-hover bg-yellow-400 text-black font-bold py-5 rounded-2xl transition duration-300">
-        🎯 Latihan 3
-      </button>
+  <button onclick="bukaLatihan('soal3.html')"
+    class="btn-hover bg-yellow-400 text-black font-bold py-5 rounded-2xl transition duration-300">
+    🎯 Latihan 3
+  </button>
 
-      <button onclick="bukaLatihan('soal4.html', false)"
-        class="btn-hover bg-green-500 text-white font-bold py-5 rounded-2xl transition duration-300">
-        🎯 Latihan 4
-      </button>
+  <button onclick="bukaLatihan('soal4.html')"
+    class="btn-hover bg-green-500 text-white font-bold py-5 rounded-2xl transition duration-300">
+    🎯 Latihan 4
+  </button>
 
-      <button onclick="bukaLatihan('soal5.html', false)"
-        class="btn-hover bg-emerald-500 text-white font-bold py-5 rounded-2xl transition duration-300">
-        🎯 Latihan 5
-      </button>
+  <button onclick="bukaLatihan('soal5.html')"
+    class="btn-hover bg-emerald-500 text-white font-bold py-5 rounded-2xl transition duration-300">
+    🎯 Latihan 5
+  </button>
 
-      <button onclick="bukaLatihan('soal6.html', false)"
-        class="btn-hover bg-cyan-500 text-white font-bold py-5 rounded-2xl transition duration-300">
-        🎯 Latihan 6
-      </button>
+  <button onclick="bukaLatihan('soal6.html')"
+    class="btn-hover bg-cyan-500 text-white font-bold py-5 rounded-2xl transition duration-300">
+    🎯 Latihan 6
+  </button>
 
-      <button onclick="bukaLatihan('soal7.html', false)"
-        class="btn-hover bg-blue-500 text-white font-bold py-5 rounded-2xl transition duration-300">
-        🎯 Latihan 7
-      </button>
+  <button onclick="bukaLatihan('soal7.html')"
+    class="btn-hover bg-blue-500 text-white font-bold py-5 rounded-2xl transition duration-300">
+    🎯 Latihan 7
+  </button>
 
-      <button onclick="bukaLatihan('soal8.html', false)"
-        class="btn-hover bg-indigo-500 text-white font-bold py-5 rounded-2xl transition duration-300">
-        🎯 Latihan 8
-      </button>
+  <button onclick="bukaLatihan('soal8.html')"
+    class="btn-hover bg-indigo-500 text-white font-bold py-5 rounded-2xl transition duration-300">
+    🎯 Latihan 8
+  </button>
 
-      <button onclick="bukaLatihan('soal9.html', false)"
-        class="btn-hover bg-purple-500 text-white font-bold py-5 rounded-2xl transition duration-300">
-        🎯 Latihan 9
-      </button>
+  <button onclick="bukaLatihan('soal9.html')"
+    class="btn-hover bg-purple-500 text-white font-bold py-5 rounded-2xl transition duration-300">
+    🎯 Latihan 9
+  </button>
 
-      <button onclick="bukaLatihan('soal10.html', false)"
-        class="btn-hover bg-pink-500 text-white font-bold py-5 rounded-2xl transition duration-300">
-        🎯 Latihan 10
-      </button>
+  <button onclick="bukaLatihan('soal10.html')"
+    class="btn-hover bg-pink-500 text-white font-bold py-5 rounded-2xl transition duration-300">
+    🎯 Latihan 10
+  </button>
 
-    </div>
-  </div>
+</div>
+ 
 
   <!-- Popup -->
   <div id="popup"
@@ -133,21 +134,53 @@
     </div>
   </div>
 
-  <script>
-    function bukaLatihan(link, tersedia) {
+ <script>
 
-      if (tersedia) {
+  async function bukaLatihan(link) {
+
+    try {
+
+      // Mengecek apakah file tersedia
+      const response = await fetch(link, {
+        method: 'HEAD'
+      });
+
+      // Jika file ditemukan
+      if (response.ok) {
+
         window.location.href = link;
+
       } else {
-        document.getElementById("popup").classList.remove("hidden");
+
+        // Jika file tidak ditemukan
+        tampilkanPopup();
+
       }
 
+    } catch (error) {
+
+      // Jika terjadi error
+      tampilkanPopup();
+
     }
 
-    function tutupPopup() {
-      document.getElementById("popup").classList.add("hidden");
-    }
-  </script>
+  }
+
+  function tampilkanPopup() {
+
+    document.getElementById("popup")
+      .classList.remove("hidden");
+
+  }
+
+  function tutupPopup() {
+
+    document.getElementById("popup")
+      .classList.add("hidden");
+
+  }
+
+</script>
 
 </body>
 </html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal 20</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
+
+    .nav-soal{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:25px;
+    }
+
+    .nav-soal a{
+      width:45px;
+      height:45px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      background:#3498db;
+      color:white;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .nav-soal a:hover{
+      background:#2980b9;
+    }
+
+    .nav-soal a.active{
+      background:#27ae60;
+      pointer-events:none;
+    }
+
+    .container{
+      background:white;
+      padding:25px;
+      border-radius:12px;
+      max-width:1000px;
+      margin:auto;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    .tombol-bacaan{
+      background:#3498db;
+      margin-bottom:20px;
+    }
+
+    .tombol-bacaan:hover{
+      background:#2980b9;
+    }
+
+    .pilihan{
+      margin-top:20px;
+    }
+
+    .pilihan label{
+      display:block;
+      margin-bottom:15px;
+      font-size:17px;
+      cursor:pointer;
+      line-height:1.7;
+    }
+
+    button{
+      margin-top:20px;
+      padding:12px 20px;
+      background:#27ae60;
+      color:white;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#1e8449;
+    }
+
+    #hasil{
+      margin-top:20px;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    .benar{
+      color:green;
+    }
+
+    .salah{
+      color:red;
+    }
+
+    .tombol-kembali{
+      display:inline-block;
+      margin-top:-5px;
+      margin-bottom:20px;
+      padding:10px 18px;
+      background:#e67e22;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .tombol-kembali:hover{
+      background:#ca6f1e;
+    }
+
+    /* POPUP BACAAN */
+
+    .popup{
+      display:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.6);
+      justify-content:center;
+      align-items:center;
+      z-index:999;
+    }
+
+    .popup-content{
+      background:white;
+      width:90%;
+      max-width:750px;
+      padding:30px;
+      border-radius:18px;
+      position:relative;
+      line-height:1.9;
+      max-height:80vh;
+      overflow-y:auto;
+      animation:muncul 0.3s ease;
+      box-shadow:0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .popup-content h3{
+      margin-top:0;
+      text-align:center;
+      color:#d35400;
+    }
+
+    @keyframes muncul{
+      from{
+        transform:scale(0.8);
+        opacity:0;
+      }
+      to{
+        transform:scale(1);
+        opacity:1;
+      }
+    }
+
+    .close{
+      position:absolute;
+      top:10px;
+      right:15px;
+      font-size:30px;
+      cursor:pointer;
+      color:red;
+      font-weight:bold;
+    }
+
+    .close:hover{
+      color:darkred;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigasi Soal -->
+  <div class="nav-soal">
+    <a href="soal1.html">1</a>
+    <a href="soal2.html">2</a>
+    <a href="soal3.html">3</a>
+    <a href="soal4.html">4</a>
+    <a href="soal5.html">5</a>
+    <a href="soal6.html">6</a>
+    <a href="soal7.html">7</a>
+    <a href="soal8.html">8</a>
+    <a href="soal9.html">9</a>
+    <a href="soal10.html">10</a>
+    <a href="soal11.html">11</a>
+    <a href="soal12.html">12</a>
+    <a href="soal13.html">13</a>
+    <a href="soal14.html">14</a>
+    <a href="soal15.html">15</a>
+    <a href="soal16.html">16</a>
+    <a href="soal17.html">17</a>
+    <a href="soal18.html">18</a>
+    <a href="soal19.html">19</a>
+    <a href="soal20.html" class="active">20</a>
+  </div>
+
+  <a href="../menu.html" class="tombol-kembali">
+    ← Kembali
+  </a>
+
+  <div class="container">
+
+    <h2>Soal 20</h2>
+
+    <p><b>Bacalah teks untuk menjawab soal!</b></p>
+
+    <!-- Tombol Bacaan -->
+    <button class="tombol-bacaan" onclick="bukaPopup()">
+      📖 Bacaan
+    </button>
+
+    <p>
+      Berdasarkan sapaan “siswa-siswi yang saya banggakan”, siapa kemungkinan besar yang menyampaikan pidato tersebut?
+    </p>
+
+    <div class="pilihan">
+
+      <label>
+        <input type="radio" name="jawaban" value="a">
+        a. Seorang siswa peserta lomba
+      </label>
+
+      <label>
+        <input type="radio" name="jawaban" value="b">
+        b. Kepala sekolah atau guru
+      </label>
+
+      <label>
+        <input type="radio" name="jawaban" value="c">
+        c. Penjual makanan di kantin sekolah
+      </label>
+
+      <label>
+        <input type="radio" name="jawaban" value="d">
+        d. Petugas kebersihan sekolah
+      </label>
+
+    </div>
+
+    <button onclick="periksaJawaban()">
+      Periksa Jawaban
+    </button>
+
+    <div id="hasil"></div>
+
+  </div>
+
+  <!-- Popup Bacaan -->
+  <div class="popup" id="popupBacaan">
+
+    <div class="popup-content">
+
+      <span class="close" onclick="tutupPopup()">&times;</span>
+
+      <h3>📚 Bacaan</h3>
+
+      <p>
+        Selamat pagi Bapak dan Ibu Guru serta siswa-siswi yang saya banggakan.
+        Marilah kita bersyukur kepada Tuhan Yang Maha Esa karena hari ini kita
+        dapat berkumpul dalam keadaan sehat. Pada kesempatan ini, saya ingin
+        mengajak seluruh warga sekolah untuk lebih disiplin dalam menjaga
+        kebersihan lingkungan sekolah.
+      </p>
+
+      <p>
+        Sekolah yang bersih dan rapi akan membuat suasana belajar menjadi lebih
+        nyaman dan menyenangkan. Oleh sebab itu, kita harus membiasakan diri
+        membuang sampah pada tempatnya, menjaga fasilitas sekolah, serta
+        melaksanakan tugas piket dengan penuh tanggung jawab. Dengan begitu,
+        sekolah kita akan menjadi tempat belajar yang sehat dan nyaman bagi semua.
+      </p>
+
+      <p>
+        Demikian pidato singkat yang dapat saya sampaikan. Terima kasih atas
+        perhatian kalian semua dan selamat pagi.
+      </p>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    function bukaPopup(){
+      document.getElementById("popupBacaan").style.display = "flex";
+    }
+
+    function tutupPopup(){
+      document.getElementById("popupBacaan").style.display = "none";
+    }
+
+    function periksaJawaban(){
+
+      let jawaban =
+        document.querySelector('input[name="jawaban"]:checked');
+
+      let hasil = document.getElementById("hasil");
+
+      if(!jawaban){
+        hasil.innerHTML =
+          "⚠️ Pilih jawaban terlebih dahulu!";
+        hasil.className = "salah";
+        return;
+      }
+
+      if(jawaban.value === "b"){
+
+        hasil.innerHTML =
+          "✅ Jawaban benar! Sapaan tersebut menunjukkan bahwa pidato kemungkinan disampaikan oleh kepala sekolah atau guru.";
+
+        hasil.className = "benar";
+
+      } else {
+
+        hasil.innerHTML =
+          "❌ Jawaban salah. Coba lagi!";
+
+        hasil.className = "salah";
+      }
+    }
+
+    // Tutup popup saat klik area gelap
+    window.onclick = function(event){
+
+      let popup =
+        document.getElementById("popupBacaan");
+
+      if(event.target == popup){
+        popup.style.display = "none";
+      }
+    }
+
+  </script>
+
+</body>
+</html>

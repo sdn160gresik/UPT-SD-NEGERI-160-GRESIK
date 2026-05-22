@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal 10</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
+
+    .nav-soal{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:25px;
+    }
+
+    .nav-soal a{
+      width:45px;
+      height:45px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      background:#3498db;
+      color:white;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .nav-soal a:hover{
+      background:#2980b9;
+    }
+
+    .nav-soal a.active{
+      background:#27ae60;
+      pointer-events:none;
+    }
+
+    .container{
+      background:white;
+      padding:25px;
+      border-radius:12px;
+      max-width:1000px;
+      margin:auto;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    label{
+      display:block;
+      margin:12px 0;
+      cursor:pointer;
+      line-height:1.7;
+    }
+
+    button{
+      margin-top:20px;
+      padding:12px 20px;
+      background:#27ae60;
+      color:white;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#1e8449;
+    }
+
+    #hasil{
+      margin-top:20px;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    .benar{ color:green; }
+    .salah{ color:red; }
+
+    .tombol-kembali{
+      display:inline-block;
+      margin-bottom:20px;
+      padding:10px 18px;
+      background:#e67e22;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+    }
+
+    .tombol-kembali:hover{
+      background:#ca6f1e;
+    }
+
+    .tombol-bacaan{
+      background:#8e44ad;
+      margin-bottom:15px;
+      font-weight:bold;
+    }
+
+    .tombol-bacaan:hover{
+      background:#6c3483;
+    }
+
+    /* POPUP */
+    .popup{
+      display:none;
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.6);
+      z-index:999;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .popup-content{
+      width:90%;
+      max-width:750px;
+      background:#fff8dc;
+      padding:25px;
+      border-radius:15px;
+      position:relative;
+      line-height:1.8;
+      animation:fade 0.3s ease;
+    }
+
+    @keyframes fade{
+      from{transform:scale(0.8); opacity:0;}
+      to{transform:scale(1); opacity:1;}
+    }
+
+    .tutup{
+      position:absolute;
+      top:10px;
+      right:10px;
+      width:35px;
+      height:35px;
+      border:none;
+      border-radius:50%;
+      background:#e74c3c;
+      color:white;
+      font-size:18px;
+      cursor:pointer;
+    }
+
+    .tutup:hover{
+      background:#c0392b;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="nav-soal">
+    <a href="soal1.html">1</a>
+    <a href="soal2.html">2</a>
+    <a href="soal3.html">3</a>
+    <a href="soal4.html">4</a>
+    <a href="soal5.html">5</a>
+    <a href="soal6.html">6</a>
+    <a href="soal7.html">7</a>
+    <a href="soal8.html">8</a>
+    <a href="soal9.html">9</a>
+    <a href="soal10.html" class="active">10</a>
+    <a href="soal11.html">11</a>
+    <a href="soal12.html">12</a>
+    <a href="soal13.html">13</a>
+    <a href="soal14.html">14</a>
+    <a href="soal15.html">15</a>
+  </div>
+
+<a href="../menu.html" class="tombol-kembali">
+  ← Kembali
+</a>
+  <div class="container">
+
+    <h2>Soal 10</h2>
+
+    <!-- Tombol bacaan -->
+    <button class="tombol-bacaan" onclick="bukaPopup()">📖 Bacaan</button>
+
+    <p><b>Apa ide pokok dari paragraf tersebut?</b></p>
+
+    <label><input type="radio" name="jawaban" value="a"> a. Cara merawat tanaman agar tumbuh subur di rumah.</label>
+    <label><input type="radio" name="jawaban" value="b"> b. Tanaman dapat menyerap air hujan dengan baik.</label>
+    <label><input type="radio" name="jawaban" value="c"> c. Manfaat menanam tanaman bagi lingkungan rumah.</label>
+    <label><input type="radio" name="jawaban" value="d"> d. Pentingnya memberi pupuk pada tanaman setiap hari.</label>
+
+    <button onclick="periksaJawaban()">Periksa Jawaban</button>
+
+    <div id="hasil"></div>
+
+  </div>
+
+  <!-- POPUP BACaan -->
+  <div class="popup" id="popup">
+
+    <div class="popup-content">
+      <button class="tutup" onclick="tutupPopup()">✕</button>
+
+      <h3>📚 Bacaan</h3>
+
+      <p>
+        Keuntungan Menanam Tanaman di Halaman Rumah<br><br>
+
+        Menanam tanaman di halaman rumah memiliki banyak manfaat.
+        Tanaman dapat membuat udara menjadi lebih bersih dan segar karena menghasilkan oksigen.
+        Selain itu, keberadaan tanaman juga membantu menyerap air saat hujan sehingga halaman tidak mudah becek.
+        Tanaman yang rindang dapat memberikan keteduhan sehingga suasana rumah terasa lebih nyaman dan sejuk.
+        Oleh karena itu, menanam tanaman sangat baik untuk menjaga lingkungan rumah tetap indah dan sehat.
+      </p>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    function bukaPopup(){
+      document.getElementById("popup").style.display = "flex";
+    }
+
+    function tutupPopup(){
+      document.getElementById("popup").style.display = "none";
+    }
+
+    function periksaJawaban(){
+
+      let jawaban =
+        document.querySelector('input[name="jawaban"]:checked');
+
+      let hasil = document.getElementById("hasil");
+
+      if(!jawaban){
+        hasil.innerHTML = "⚠️ Pilih jawaban terlebih dahulu!";
+        hasil.className = "salah";
+        return;
+      }
+
+      if(jawaban.value === "c"){
+        hasil.innerHTML = "✅ Jawaban benar!";
+        hasil.className = "benar";
+      } else {
+        hasil.innerHTML = "❌ Jawaban salah. Jawaban yang benar adalah C.";
+        hasil.className = "salah";
+      }
+    }
+
+  </script>
+
+</body>
+</html>

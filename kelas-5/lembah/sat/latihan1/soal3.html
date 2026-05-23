@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal 3</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
+
+    .nav-soal{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:25px;
+    }
+
+    .nav-soal a{
+      width:45px;
+      height:45px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      background:#3498db;
+      color:white;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .nav-soal a:hover{
+      background:#2980b9;
+    }
+
+    .nav-soal a.active{
+      background:#27ae60;
+      pointer-events:none;
+    }
+
+    .container{
+      background:white;
+      padding:25px;
+      border-radius:12px;
+      max-width:1000px;
+      margin:auto;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    p{
+      font-size:17px;
+      line-height:1.8;
+    }
+
+    .soal-box{
+      margin-top:20px;
+    }
+
+    .item{
+      margin:12px 0;
+      font-size:16px;
+    }
+
+    button{
+      margin-top:25px;
+      padding:12px 20px;
+      background:#27ae60;
+      color:white;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#1e8449;
+    }
+
+    #hasil{
+      margin-top:20px;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    .benar{
+      color:green;
+    }
+
+    .salah{
+      color:red;
+    }
+
+    .tombol-kembali{
+      display:inline-block;
+      margin-top:-5px;
+      margin-bottom:20px;
+      padding:10px 18px;
+      background:#e67e22;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .tombol-kembali:hover{
+      background:#ca6f1e;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigasi Soal -->
+  <div class="nav-soal">
+    <a href="soal1.html">1</a>
+    <a href="soal2.html">2</a>
+    <a href="soal3.html" class="active">3</a>
+    <a href="soal4.html">4</a>
+    <a href="soal5.html">5</a>
+    <a href="soal6.html">6</a>
+    <a href="soal7.html">7</a>
+    <a href="soal8.html">8</a>
+    <a href="soal9.html">9</a>
+    <a href="soal10.html">10</a>
+    <a href="soal11.html">11</a>
+    <a href="soal12.html">12</a>
+    <a href="soal13.html">13</a>
+    <a href="soal14.html">14</a>
+    <a href="soal15.html">15</a>
+    
+  </div>
+
+  <a href="../sas.html" class="tombol-kembali">← Kembali</a>
+
+  <div class="container">
+
+    <h2>Soal 3</h2>
+
+    <p>
+      Dalam kegiatan pembelajaran matematika, siswa kelas 5 diminta mengukur beberapa sudut menggunakan busur derajat, yaitu 45°, 90°, dan 135°.
+      Berdasarkan informasi tersebut, beri tanda centang (✔) pada pernyataan yang benar!
+    </p>
+
+    <div class="soal-box">
+
+      <div class="item">
+        <input type="checkbox" id="q1">
+        <label>Sudut 45° termasuk sudut lancip</label>
+      </div>
+
+      <div class="item">
+        <input type="checkbox" id="q2">
+        <label>Sudut 90° termasuk sudut tumpul</label>
+      </div>
+
+      <div class="item">
+        <input type="checkbox" id="q3">
+        <label>Sudut 135° termasuk sudut tumpul</label>
+      </div>
+
+      <div class="item">
+        <input type="checkbox" id="q4">
+        <label>Sudut 45° termasuk sudut siku-siku</label>
+      </div>
+
+      <div class="item">
+        <input type="checkbox" id="q5">
+        <label>Semua sudut yang diberikan termasuk sudut lancip</label>
+      </div>
+
+    </div>
+
+    <button onclick="periksaJawaban()">Periksa Jawaban</button>
+
+    <div id="hasil"></div>
+
+  </div>
+
+  <script>
+    function periksaJawaban(){
+
+      // jawaban benar: 1 dan 3 saja
+      const benar = ["q1", "q3"];
+
+      const semua = ["q1","q2","q3","q4","q5"];
+
+      let skor = 0;
+
+      semua.forEach(id => {
+        const checked = document.getElementById(id).checked;
+
+        if(benar.includes(id) && checked){
+          skor++;
+        }
+
+        if(!benar.includes(id) && checked){
+          skor--;
+        }
+      });
+
+      let hasil = document.getElementById("hasil");
+
+      if(skor === benar.length){
+        hasil.innerHTML = "✔ Semua jawaban benar!";
+        hasil.className = "benar";
+      } else {
+        hasil.innerHTML = "✘ Ada jawaban yang salah!";
+        hasil.className = "salah";
+      }
+    }
+  </script>
+
+</body>
+</html>

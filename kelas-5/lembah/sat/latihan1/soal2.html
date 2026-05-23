@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal 2</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
+
+    .nav-soal{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:25px;
+    }
+
+    .nav-soal a{
+      width:45px;
+      height:45px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      background:#3498db;
+      color:white;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .nav-soal a:hover{
+      background:#2980b9;
+    }
+
+    .nav-soal a.active{
+      background:#27ae60;
+      pointer-events:none;
+    }
+
+    .container{
+      background:white;
+      padding:25px;
+      border-radius:12px;
+      max-width:1000px;
+      margin:auto;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    p{
+      font-size:17px;
+      line-height:1.8;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:25px;
+    }
+
+    th, td{
+      border:1px solid #999;
+      padding:14px;
+      text-align:center;
+      font-size:16px;
+    }
+
+    th{
+      background:#e8e8e8;
+    }
+
+    td:first-child{
+      text-align:left;
+    }
+
+    select{
+      padding:8px;
+      border-radius:6px;
+      font-size:15px;
+      width:100%;
+      max-width:180px;
+    }
+
+    button{
+      margin-top:25px;
+      padding:12px 20px;
+      background:#27ae60;
+      color:white;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#1e8449;
+    }
+
+    #hasil{
+      margin-top:20px;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    .benar{
+      color:green;
+    }
+
+    .salah{
+      color:red;
+    }
+
+    .tombol-kembali{
+      display:inline-block;
+      margin-top:-5px;
+      margin-bottom:20px;
+      padding:10px 18px;
+      background:#e67e22;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .tombol-kembali:hover{
+      background:#ca6f1e;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigasi Soal -->
+  <div class="nav-soal">
+    <a href="soal1.html">1</a>
+    <a href="soal2.html" class="active">2</a>
+    <a href="soal3.html">3</a>
+    <a href="soal4.html">4</a>
+    <a href="soal5.html">5</a>
+    <a href="soal6.html">6</a>
+    <a href="soal7.html">7</a>
+    <a href="soal8.html">8</a>
+    <a href="soal9.html">9</a>
+    <a href="soal10.html">10</a>
+    <a href="soal11.html">11</a>
+    <a href="soal12.html">12</a>
+    <a href="soal13.html">13</a>
+    <a href="soal14.html">14</a>
+    <a href="soal15.html">15</a>
+  
+  </div>
+
+  <a href="../sas.html" class="tombol-kembali">
+    ← Kembali
+  </a>
+
+  <div class="container">
+
+    <h2>Soal 2</h2>
+
+    <p>Data Berat Badan Siswa Kelas V</p>
+
+    <table>
+      <tr>
+        <th>Berat Badan (kg)</th>
+        <th>Banyak Siswa</th>
+      </tr>
+      <tr><td>30</td><td>8</td></tr>
+      <tr><td>32</td><td>7</td></tr>
+      <tr><td>34</td><td>9</td></tr>
+      <tr><td>36</td><td>5</td></tr>
+      <tr><td>38</td><td>6</td></tr>
+      <tr><td>40</td><td>5</td></tr>
+    </table>
+
+    <p><b>Jumlah seluruh siswa adalah …</b></p>
+
+    <div class="pilihan">
+      <label><input type="radio" name="jawaban" value="A"> a. 38</label><br>
+      <label><input type="radio" name="jawaban" value="B"> b. 39</label><br>
+      <label><input type="radio" name="jawaban" value="C"> c. 40</label><br>
+      <label><input type="radio" name="jawaban" value="D"> d. 41</label><br>
+    </div>
+
+    <button onclick="periksaJawaban()">Periksa Jawaban</button>
+
+    <div id="hasil"></div>
+
+  </div>
+
+  <script>
+    function periksaJawaban(){
+      let jawaban =
+        document.querySelector('input[name="jawaban"]:checked');
+
+      let hasil = document.getElementById("hasil");
+
+      if(!jawaban){
+        hasil.innerHTML = "⚠️ Pilih jawaban terlebih dahulu!";
+        hasil.className = "salah";
+        return;
+      }
+
+      if(jawaban.value === "C"){
+        hasil.innerHTML = "✅ Jawaban benar! Jumlah siswa = 40.";
+        hasil.className = "benar";
+      } else {
+        hasil.innerHTML = "❌ Jawaban salah. Coba lagi!";
+        hasil.className = "salah";
+      }
+    }
+  </script>
+
+</body>
+</html>

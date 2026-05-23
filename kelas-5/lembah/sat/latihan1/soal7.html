@@ -1,0 +1,290 @@
+bagaimna agar 3 jawaban mirip di nyatakan benar
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal 7</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
+
+    .nav-soal{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:25px;
+    }
+
+    .nav-soal a{
+      width:45px;
+      height:45px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      background:#3498db;
+      color:white;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .nav-soal a:hover{
+      background:#2980b9;
+    }
+
+    .nav-soal a.active{
+      background:#27ae60;
+      pointer-events:none;
+    }
+
+    .container{
+      background:white;
+      padding:25px;
+      border-radius:12px;
+      max-width:1000px;
+      margin:auto;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    p{
+      font-size:17px;
+      line-height:1.8;
+    }
+
+    .gambar{
+      text-align:center;
+      margin:20px 0;
+    }
+
+    .gambar img{
+      width:220px;
+      max-width:100%;
+      border:2px solid #ccc;
+      border-radius:10px;
+      padding:8px;
+      background:white;
+    }
+
+    .jawaban{
+      margin-top:20px;
+    }
+
+    textarea{
+      width:100%;
+      min-height:160px;
+      padding:15px;
+      border-radius:10px;
+      border:1px solid #999;
+      font-size:16px;
+      resize:vertical;
+      box-sizing:border-box;
+      line-height:1.7;
+    }
+
+    button{
+      margin-top:20px;
+      padding:12px 20px;
+      background:#27ae60;
+      color:white;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#1e8449;
+    }
+
+    #hasil{
+      margin-top:20px;
+      font-size:18px;
+      font-weight:bold;
+      line-height:1.8;
+    }
+
+    .benar{
+      color:green;
+    }
+
+    .salah{
+      color:red;
+    }
+
+    .tombol-kembali{
+      display:inline-block;
+      margin-top:-5px;
+      margin-bottom:20px;
+      padding:10px 18px;
+      background:#e67e22;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .tombol-kembali:hover{
+      background:#ca6f1e;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigasi Soal -->
+  <div class="nav-soal">
+    <a href="soal1.html">1</a>
+    <a href="soal2.html">2</a>
+    <a href="soal3.html">3</a>
+    <a href="soal4.html">4</a>
+    <a href="soal5.html">5</a>
+    <a href="soal6.html">6</a>
+    <a href="soal7.html" class="active">7</a>
+    <a href="soal8.html">8</a>
+    <a href="soal9.html">9</a>
+    <a href="soal10.html">10</a>
+    <a href="soal11.html">11</a>
+    <a href="soal12.html">12</a>
+    <a href="soal13.html">13</a>
+    <a href="soal14.html">14</a>
+    <a href="soal15.html">15</a>
+
+  </div>
+
+  <a href="../sas.html" class="tombol-kembali">
+    ← Kembali
+  </a>
+
+  <div class="container">
+
+    <h2>Soal 7</h2>
+
+    <p>
+      Sebutkan 4 karakteristik bangun datar berikut!
+    </p>
+
+    <div class="gambar">
+      <img src="https://i.imgur.com/YTxRhYU.png" alt="Bangun Datar Persegi Panjang">
+    </div>
+
+    <div class="jawaban">
+
+      <textarea id="jawaban"
+      placeholder="Tuliskan 3 karakteristik bangun datar tersebut di sini..."></textarea>
+
+    </div>
+
+    <button onclick="periksaJawaban()">
+      Periksa Jawaban
+    </button>
+
+    <div id="hasil"></div>
+
+  </div>
+
+  <script>
+
+function periksaJawaban(){
+
+  let jawaban =
+    document.getElementById("jawaban")
+    .value.toLowerCase();
+
+  let skor = 0;
+
+  /* Kelompok jawaban mirip */
+  const kelompokJawaban = [
+
+    // Karakteristik 1
+    [
+      "empat sisi",
+      "4 sisi",
+      "memiliki 4 sisi"
+    ],
+
+    // Karakteristik 2
+    [
+      "sisi berhadapan sama panjang",
+      "dua sisi sama panjang",
+      "sisi yang berhadapan sama panjang"
+    ],
+
+    // Karakteristik 3
+    [
+      "dua pasang sisi sejajar",
+      "sisi sejajar",
+      "memiliki sisi sejajar"
+    ],
+
+    // Karakteristik 4
+    [
+      "sudut siku-siku",
+      "sudut 90",
+      "semua sudut 90 derajat",
+      "keempat sudut siku-siku"
+    ],
+
+    // Karakteristik 5
+    [
+      "dua diagonal",
+      "memiliki diagonal",
+      "diagonal berpotongan",
+      "diagonal saling berpotongan"
+    ]
+
+  ];
+
+  /* Cek tiap kelompok */
+  for(let i = 0; i < kelompokJawaban.length; i++){
+
+    let ditemukan = false;
+
+    for(let j = 0; j < kelompokJawaban[i].length; j++){
+
+      if(jawaban.includes(kelompokJawaban[i][j])){
+        ditemukan = true;
+        break;
+      }
+    }
+
+    if(ditemukan){
+      skor++;
+    }
+  }
+
+  let hasil =
+    document.getElementById("hasil");
+
+  if(skor >= 3){
+
+    hasil.innerHTML =
+      "✅ Jawaban bagus! Kamu berhasil menyebutkan karakteristik persegi panjang.";
+
+    hasil.className = "benar";
+
+  } else {
+
+    hasil.innerHTML =
+      "❌ Jawaban masih kurang lengkap. Coba sebutkan lagi ciri-ciri persegi panjang.";
+
+    hasil.className = "salah";
+  }
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal 1</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
+
+    .nav-soal{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:25px;
+    }
+
+    .nav-soal a{
+      width:45px;
+      height:45px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      background:#3498db;
+      color:white;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .nav-soal a:hover{
+      background:#2980b9;
+    }
+
+    .nav-soal a.active{
+      background:#27ae60;
+      pointer-events:none;
+    }
+
+    .container{
+      background:white;
+      padding:25px;
+      border-radius:12px;
+      max-width:1000px;
+      margin:auto;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    p{
+      font-size:17px;
+      line-height:1.8;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:25px;
+    }
+
+    th, td{
+      border:1px solid #999;
+      padding:14px;
+      text-align:center;
+      font-size:16px;
+    }
+
+    th{
+      background:#e8e8e8;
+    }
+
+    td:first-child{
+      text-align:left;
+    }
+
+    select{
+      padding:8px;
+      border-radius:6px;
+      font-size:15px;
+      width:100%;
+      max-width:220px;
+    }
+
+    button{
+      margin-top:25px;
+      padding:12px 20px;
+      background:#27ae60;
+      color:white;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#1e8449;
+    }
+
+    #hasil{
+      margin-top:20px;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    .benar{
+      color:green;
+    }
+
+    .salah{
+      color:red;
+    }
+
+    .tombol-kembali{
+      display:inline-block;
+      margin-top:-5px;
+      margin-bottom:20px;
+      padding:10px 18px;
+      background:#e67e22;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .tombol-kembali:hover{
+      background:#ca6f1e;
+    }
+
+    .data-nilai{
+      background:#f9f9f9;
+      padding:15px;
+      border-radius:10px;
+      margin-top:15px;
+      line-height:2;
+      font-size:16px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigasi Soal -->
+  <div class="nav-soal">
+    <a href="soal1.html" class="active">1</a>
+    <a href="soal2.html">2</a>
+    <a href="soal3.html">3</a>
+    <a href="soal4.html">4</a>
+    <a href="soal5.html">5</a>
+    <a href="soal6.html">6</a>
+    <a href="soal7.html">7</a>
+    <a href="soal8.html">8</a>
+    <a href="soal9.html">9</a>
+    <a href="soal10.html">10</a>
+    <a href="soal11.html">11</a>
+    <a href="soal12.html">12</a>
+    <a href="soal13.html">13</a>
+    <a href="soal14.html">14</a>
+    <a href="soal15.html">15</a>
+
+  </div>
+
+  <a href="../sas.html" class="tombol-kembali">
+    ← Kembali
+  </a>
+
+  <div class="container">
+
+    <h2>Soal 1</h2>
+
+    <p>
+      Data nilai ulangan Matematika siswa kelas 5 UPT SDN 160 GRESIK sebagai berikut:
+    </p>
+
+    <div class="data-nilai">
+      75, 80, 78, 82, 80, 85, 85, 90, 88, 79,<br>
+      80, 76, 85, 88, 90, 92, 78, 80, 79, 85
+    </div>
+
+    <p>
+      Seorang siswa diminta mengolah data tersebut menjadi tabel frekuensi,
+      menentukan nilai yang paling sering muncul, serta menghitung jumlah siswa.
+    </p>
+
+    <table>
+
+      <tr>
+        <th>Pernyataan</th>
+        <th>Jawaban</th>
+      </tr>
+
+      <tr>
+        <td>Jumlah seluruh siswa</td>
+        <td>
+          <select id="q1">
+            <option value="">-- Pilih --</option>
+            <option value="A">18 siswa</option>
+            <option value="B">20 siswa</option>
+            <option value="C">22 siswa</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Nilai yang paling sering muncul</td>
+        <td>
+          <select id="q2">
+            <option value="">-- Pilih --</option>
+            <option value="A">75 dan 76</option>
+            <option value="B">78 dan 79</option>
+            <option value="C">80 dan 85</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Banyak siswa yang mendapat nilai 80</td>
+        <td>
+          <select id="q3">
+            <option value="">-- Pilih --</option>
+            <option value="A">2 siswa</option>
+            <option value="B">3 siswa</option>
+            <option value="C">4 siswa</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Banyak siswa yang mendapat nilai 85</td>
+        <td>
+          <select id="q4">
+            <option value="">-- Pilih --</option>
+            <option value="A">4 siswa</option>
+            <option value="B">3 siswa</option>
+            <option value="C">2 siswa</option>
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Banyak siswa yang mendapat nilai 78</td>
+        <td>
+          <select id="q5">
+            <option value="">-- Pilih --</option>
+            <option value="A">1 siswa</option>
+            <option value="B">2 siswa</option>
+            <option value="C">3 siswa</option>
+          </select>
+        </td>
+      </tr>
+
+    </table>
+
+    <button onclick="periksaJawaban()">
+      Periksa Jawaban
+    </button>
+
+    <div id="hasil"></div>
+
+  </div>
+
+  <script>
+
+    function periksaJawaban(){
+
+      const jawabanBenar = {
+        q1: "B",
+        q2: "C",
+        q3: "C",
+        q4: "A",
+        q5: "B"
+      };
+
+      let skor = 0;
+      let total = 5;
+
+      for(let key in jawabanBenar){
+
+        let jawaban =
+          document.getElementById(key).value;
+
+        if(jawaban === jawabanBenar[key]){
+          skor++;
+        }
+      }
+
+      let hasil =
+        document.getElementById("hasil");
+
+      if(skor === total){
+
+        hasil.innerHTML =
+          "✅ Semua jawaban benar! Skor: " +
+          skor + "/" + total;
+
+        hasil.className = "benar";
+
+      } else {
+
+        hasil.innerHTML =
+          "❌ Ada jawaban yang salah. Skor: " +
+          skor + "/" + total;
+
+        hasil.className = "salah";
+      }
+    }
+
+  </script>
+
+</body>
+</html>

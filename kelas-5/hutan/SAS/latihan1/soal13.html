@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal 13</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
+
+    .container{
+      background:white;
+      padding:25px;
+      border-radius:12px;
+      max-width:1000px;
+      margin:auto;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    .pilihan{
+      margin-top:20px;
+    }
+
+    .pilihan label{
+      display:block;
+      margin-bottom:15px;
+      font-size:17px;
+      cursor:pointer;
+    }
+
+    button{
+      margin-top:20px;
+      padding:12px 20px;
+      background:#27ae60;
+      color:white;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#1e8449;
+    }
+
+    #hasil{
+      margin-top:20px;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    .benar{
+      color:green;
+    }
+
+    .salah{
+      color:red;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <h2>Soal 13</h2>
+
+    <p>
+      Berilah tanda centang (√) pada pernyataan yang benar mengenai pengaruh penjajahan bangsa Eropa terhadap kehidupan masyarakat di daerah jajahan! (Jawaban lebih dari 1)
+    </p>
+
+    <div class="pilihan">
+
+      <label>
+        <input type="checkbox" name="jawaban" value="1">
+        Penjajahan menyebabkan banyak rakyat mengalami kesulitan ekonomi
+      </label>
+
+      <label>
+        <input type="checkbox" name="jawaban" value="2">
+        Penjajahan mendorong munculnya perlawanan dari rakyat setempat
+      </label>
+
+      <label>
+        <input type="checkbox" name="jawaban" value="3">
+        Penjajahan membuat seluruh rakyat hidup makmur dan sejahtera
+      </label>
+
+      <label>
+        <input type="checkbox" name="jawaban" value="4">
+        Penjajahan membawa perubahan dalam bidang pendidikan bagi sebagian penduduk pribumi
+      </label>
+
+    </div>
+
+    <button onclick="periksaJawaban()">
+      Periksa Jawaban
+    </button>
+
+    <div id="hasil"></div>
+
+  </div>
+
+  <script>
+
+    function periksaJawaban(){
+
+      let pilihan =
+        document.querySelectorAll('input[name="jawaban"]:checked');
+
+      let hasil = document.getElementById("hasil");
+
+      let jawaban = [];
+
+      pilihan.forEach((item)=>{
+        jawaban.push(item.value);
+      });
+
+      if(jawaban.length === 0){
+        hasil.innerHTML = "⚠️ Pilih jawaban terlebih dahulu!";
+        hasil.className = "salah";
+        return;
+      }
+
+      let benar =
+        jawaban.includes("1") &&
+        jawaban.includes("2") &&
+        jawaban.includes("4") &&
+        !jawaban.includes("3");
+
+      if(benar){
+
+        hasil.innerHTML =
+          "✅ Jawaban benar! Penjajahan menyebabkan kesulitan ekonomi, munculnya perlawanan rakyat, dan perubahan pendidikan bagi sebagian pribumi.";
+
+        hasil.className = "benar";
+
+      } else {
+
+        hasil.innerHTML =
+          "❌ Jawaban kurang tepat. Coba periksa kembali pilihan yang benar!";
+
+        hasil.className = "salah";
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal 9</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
+
+    .nav-soal{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:25px;
+    }
+
+    .nav-soal a{
+      width:45px;
+      height:45px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      background:#3498db;
+      color:white;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .nav-soal a:hover{
+      background:#2980b9;
+    }
+
+    .nav-soal a.active{
+      background:#27ae60;
+      pointer-events:none;
+    }
+
+    .container{
+      background:white;
+      padding:25px;
+      border-radius:12px;
+      max-width:850px;
+      margin:auto;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    p{
+      font-size:17px;
+      line-height:1.8;
+    }
+
+    .soal-box{
+      background:#f9f9f9;
+      border-left:5px solid #3498db;
+      padding:20px;
+      border-radius:10px;
+      margin:20px 0;
+      line-height:2;
+      font-size:18px;
+    }
+
+    .pilihan{
+      margin-top:20px;
+    }
+
+    .pilihan label{
+      display:block;
+      margin-bottom:15px;
+      font-size:18px;
+      cursor:pointer;
+      line-height:1.8;
+    }
+
+    input[type="radio"]{
+      transform:scale(1.2);
+      margin-right:10px;
+    }
+
+    button{
+      margin-top:25px;
+      padding:12px 20px;
+      background:#27ae60;
+      color:white;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#1e8449;
+    }
+
+    #hasil{
+      margin-top:20px;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    .benar{
+      color:green;
+    }
+
+    .salah{
+      color:red;
+    }
+
+    .tombol-kembali{
+      display:inline-block;
+      margin-top:-5px;
+      margin-bottom:20px;
+      padding:10px 18px;
+      background:#e67e22;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .tombol-kembali:hover{
+      background:#ca6f1e;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigasi Soal -->
+  <div class="nav-soal">
+    <a href="soal1.html">1</a>
+    <a href="soal2.html">2</a>
+    <a href="soal3.html">3</a>
+    <a href="soal4.html">4</a>
+    <a href="soal5.html">5</a>
+    <a href="soal6.html">6</a>
+    <a href="soal7.html">7</a>
+    <a href="soal8.html">8</a>
+    <a href="soal9.html" class="active">9</a>
+    <a href="soal10.html">10</a>
+    <a href="soal11.html">11</a>
+    <a href="soal12.html">12</a>
+    <a href="soal13.html">13</a>
+    <a href="soal14.html">14</a>
+    <a href="soal15.html">15</a>
+  </div>
+
+  <a href="../sas.html" class="tombol-kembali">
+    ← Kembali
+  </a>
+
+  <div class="container">
+
+    <h2>Soal 9</h2>
+
+    <div class="soal-box">
+
+      <b>Perhatikan data berikut!</b><br><br>
+
+      Sebuah persegi panjang A memiliki panjang 12 cm dan lebar 8 cm.<br>
+      Persegi panjang B memiliki panjang 15 cm dan lebar 7 cm.<br><br>
+
+      Setelah dihitung, luas persegi panjang A ............ luas persegi panjang B.
+
+    </div>
+
+    <p>
+      Tanda perbandingan yang tepat adalah...
+    </p>
+
+    <div class="pilihan">
+
+      <label>
+        <input type="radio" name="jawaban" value="a">
+        a. >
+      </label>
+
+      <label>
+        <input type="radio" name="jawaban" value="b">
+        b. <
+      </label>
+
+      <label>
+        <input type="radio" name="jawaban" value="c">
+        c. =
+      </label>
+
+      <label>
+        <input type="radio" name="jawaban" value="d">
+        d. ≥
+      </label>
+
+    </div>
+
+    <button onclick="periksaJawaban()">
+      Periksa Jawaban
+    </button>
+
+    <div id="hasil"></div>
+
+  </div>
+
+  <script>
+
+    function periksaJawaban(){
+
+      let jawaban =
+        document.querySelector('input[name="jawaban"]:checked');
+
+      let hasil =
+        document.getElementById("hasil");
+
+      if(!jawaban){
+
+        hasil.innerHTML =
+          "⚠️ Pilih salah satu jawaban terlebih dahulu!";
+
+        hasil.className = "salah";
+
+        return;
+      }
+
+      if(jawaban.value === "b"){
+
+        hasil.innerHTML =
+          "✅ Jawaban benar! Luas persegi panjang A = 96 cm² dan luas persegi panjang B = 105 cm², sehingga 96 < 105.";
+
+        hasil.className = "benar";
+
+      } else {
+
+        hasil.innerHTML =
+          "❌ Jawaban salah. Jawaban yang benar adalah <";
+
+        hasil.className = "salah";
+      }
+    }
+
+  </script>
+
+</body>
+</html>

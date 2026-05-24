@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+bagaiman caranya jika jawaban berbeda tetapi masih memiki makna sama dianggap benar<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -244,7 +244,8 @@
     let alasan =
       document.getElementById("alasan")
       .value
-      .toLowerCase();
+      .toLowerCase()
+      .replace(/[^\w\s]/g, "");
 
     let hasil =
       document.getElementById("hasil");
@@ -258,14 +259,37 @@
       return;
     }
 
+    /* Daftar kata kunci jawaban benar */
+    let kataKunci = [
+
+      "ora seneng",
+      "ora bungah",
+      "sedih",
+      "duka",
+
+      "akeh korban",
+      "akeh sing gugur",
+      "akeh sedulur gugur",
+
+      "prajurit gugur",
+      "akeh prajurit gugur",
+      "akeh prajurit mati",
+
+      "korban perang"
+
+    ];
+
+    /* Mengecek apakah ada kata yang cocok */
+    let cocok = kataKunci.some(function(kata){
+
+      return alasan.includes(kata);
+
+    });
+
+    /* Jika jawaban dan alasan benar */
     if(
       jawaban.value === "kliru" &&
-      (
-        alasan.includes("ora seneng") ||
-        alasan.includes("akeh korban") ||
-        alasan.includes("akeh sedulur gugur") ||
-        alasan.includes("prajurit gugur")
-      )
+      cocok
     ){
 
       hasil.innerHTML =

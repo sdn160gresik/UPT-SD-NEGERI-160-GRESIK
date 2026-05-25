@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal 8</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
+
+    /* Judul Halaman */
+    .judul-halaman{
+      text-align:center;
+      background:#8e44ad;
+      color:white;
+      padding:15px;
+      border-radius:12px;
+      margin-bottom:25px;
+      font-size:30px;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-soal{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:25px;
+    }
+
+    .nav-soal a{
+      width:45px;
+      height:45px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      background:#3498db;
+      color:white;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .nav-soal a:hover{
+      background:#2980b9;
+    }
+
+    .nav-soal a.active{
+      background:#27ae60;
+      pointer-events:none;
+    }
+
+    .container{
+      background:white;
+      padding:25px;
+      border-radius:12px;
+      max-width:1000px;
+      margin:auto;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+      line-height:1.8;
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    .teks{
+      background:#f9f9f9;
+      padding:18px;
+      border-radius:10px;
+      margin-bottom:25px;
+      border-left:6px solid #8e44ad;
+    }
+
+    .pilihan label{
+      display:block;
+      margin-bottom:15px;
+      padding:12px;
+      background:#f9f9f9;
+      border-radius:8px;
+      cursor:pointer;
+      transition:0.3s;
+      border:1px solid #ddd;
+    }
+
+    .pilihan label:hover{
+      background:#eef6ff;
+    }
+
+    input[type="radio"]{
+      margin-right:10px;
+    }
+
+    textarea{
+      width:100%;
+      min-height:120px;
+      padding:12px;
+      border-radius:8px;
+      border:1px solid #ccc;
+      font-size:16px;
+      resize:vertical;
+      margin-top:10px;
+    }
+
+    button{
+      margin-top:20px;
+      padding:12px 20px;
+      background:#27ae60;
+      color:white;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#1e8449;
+    }
+
+    #hasil{
+      margin-top:20px;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    .benar{
+      color:green;
+    }
+
+    .salah{
+      color:red;
+    }
+
+    .tombol-kembali{
+      display:inline-block;
+      margin-top:-5px;
+      margin-bottom:20px;
+      padding:10px 18px;
+      background:#e67e22;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .tombol-kembali:hover{
+      background:#ca6f1e;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- Judul -->
+<h1 class="judul-halaman">📚 Latihan SAS PLH</h1>
+
+<!-- Navigasi Soal -->
+<div class="nav-soal">
+  <a href="soal1.html">1</a>
+  <a href="soal2.html">2</a>
+  <a href="soal3.html">3</a>
+  <a href="soal4.html">4</a>
+  <a href="soal5.html">5</a>
+  <a href="soal6.html">6</a>
+  <a href="soal7.html">7</a>
+  <a href="soal8.html" class="active">8</a>
+  <a href="soal9.html">9</a>
+  <a href="soal10.html">10</a>
+  <a href="soal11.html">11</a>
+  <a href="soal12.html">12</a>
+  <a href="soal13.html">13</a>
+  <a href="soal14.html">14</a>
+  <a href="soal15.html">15</a>
+  <a href="soal16.html">16</a>
+  <a href="soal17.html">17</a>
+  <a href="soal18.html">18</a>
+  <a href="soal19.html">19</a>
+  <a href="soal20.html">20</a>
+</div>
+
+<a href="../sat.html" class="tombol-kembali">
+  ← Kembali
+</a>
+
+<div class="container">
+
+  <h2>Soal 8</h2>
+
+  <div class="teks">
+    Saat acara syukuran di rumah, nenek membuat nasi kuning dengan warna kuning cerah yang tampak alami. Menurut pendapatku, warna kuning pada nasi tersebut berasal dari kunyit sebagai pewarna alami.
+  </div>
+
+  <p>
+    Apakah kamu setuju dengan pernyataan tersebut?
+  </p>
+
+  <div class="pilihan">
+
+    <label>
+      <input type="radio" name="jawaban" value="setuju">
+      Setuju
+    </label>
+
+    <label>
+      <input type="radio" name="jawaban" value="tidak">
+      Tidak Setuju
+    </label>
+
+  </div>
+
+  <p>
+    <strong>Jelaskan alasanmu!</strong>
+  </p>
+
+  <textarea
+    id="alasan"
+    placeholder="Tuliskan alasanmu di sini..."
+  ></textarea>
+
+  <button onclick="periksaJawaban()">
+    Kirim Jawaban
+  </button>
+
+  <div id="hasil"></div>
+
+</div>
+
+<script>
+
+function periksaJawaban(){
+
+  let jawaban =
+    document.querySelector('input[name="jawaban"]:checked');
+
+  let alasan =
+    document.getElementById("alasan").value;
+
+  let hasil =
+    document.getElementById("hasil");
+
+  if(!jawaban){
+
+    hasil.innerHTML =
+      "⚠️ Pilih jawaban terlebih dahulu!";
+
+    hasil.className = "salah";
+    return;
+  }
+
+  if(alasan.trim() === ""){
+
+    hasil.innerHTML =
+      "⚠️ Tuliskan alasan terlebih dahulu!";
+
+    hasil.className = "salah";
+    return;
+  }
+
+  if(jawaban.value === "setuju"){
+
+    hasil.innerHTML =
+      "✅ Jawaban berhasil dikirim! Kunyit memang sering digunakan sebagai pewarna alami makanan.";
+
+    hasil.className = "benar";
+
+  } else {
+
+    hasil.innerHTML =
+      "✅ Jawaban berhasil dikirim!";
+
+    hasil.className = "benar";
+  }
+
+}
+
+</script>
+
+</body>
+</html>

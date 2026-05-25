@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soal 14</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f4f4;
+      margin:0;
+      padding:20px;
+    }
+
+    .judul-halaman{
+      text-align:center;
+      background:#8e44ad;
+      color:white;
+      padding:15px;
+      border-radius:12px;
+      margin-bottom:25px;
+      font-size:30px;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-soal{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:25px;
+    }
+
+    .nav-soal a{
+      width:45px;
+      height:45px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      background:#3498db;
+      color:white;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .nav-soal a:hover{
+      background:#2980b9;
+    }
+
+    .nav-soal a.active{
+      background:#27ae60;
+      pointer-events:none;
+    }
+
+    .container{
+      background:white;
+      padding:25px;
+      border-radius:12px;
+      max-width:1000px;
+      margin:auto;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+      line-height:1.8;
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    .teks{
+      background:#f9f9f9;
+      padding:18px;
+      border-radius:10px;
+      margin-bottom:25px;
+      border-left:6px solid #8e44ad;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:20px;
+    }
+
+    table, th, td{
+      border:1px solid #ccc;
+    }
+
+    th, td{
+      padding:12px;
+      text-align:left;
+    }
+
+    th{
+      background:#8e44ad;
+      color:white;
+    }
+
+    input[type="number"]{
+      width:60px;
+      padding:8px;
+      border-radius:6px;
+      border:1px solid #ccc;
+      text-align:center;
+    }
+
+    button{
+      margin-top:20px;
+      padding:12px 20px;
+      background:#27ae60;
+      color:white;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#1e8449;
+    }
+
+    #hasil{
+      margin-top:20px;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    .benar{
+      color:green;
+    }
+
+    .salah{
+      color:red;
+    }
+
+    .tombol-kembali{
+      display:inline-block;
+      margin-top:-5px;
+      margin-bottom:20px;
+      padding:10px 18px;
+      background:#e67e22;
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .tombol-kembali:hover{
+      background:#ca6f1e;
+    }
+
+  </style>
+</head>
+<body>
+
+<h1 class="judul-halaman">📚 Latihan SAS PLH</h1>
+
+<div class="nav-soal">
+  <a href="soal1.html">1</a>
+  <a href="soal2.html">2</a>
+  <a href="soal3.html">3</a>
+  <a href="soal4.html">4</a>
+  <a href="soal5.html">5</a>
+  <a href="soal6.html">6</a>
+  <a href="soal7.html">7</a>
+  <a href="soal8.html">8</a>
+  <a href="soal9.html">9</a>
+  <a href="soal10.html">10</a>
+  <a href="soal11.html">11</a>
+  <a href="soal12.html">12</a>
+  <a href="soal13.html">13</a>
+  <a href="soal14.html" class="active">14</a>
+  <a href="soal15.html">15</a>
+  <a href="soal16.html">16</a>
+  <a href="soal17.html">17</a>
+  <a href="soal18.html">18</a>
+  <a href="soal19.html">19</a>
+  <a href="soal20.html">20</a>
+</div>
+
+<a href="../sat.html" class="tombol-kembali">
+  ← Kembali
+</a>
+
+<div class="container">
+
+  <h2>Soal 14</h2>
+
+  <div class="teks">
+    <strong>
+      Untuk membuat kain batik dengan pewarna alami yang berkualitas, 
+      pengrajin harus mengikuti tahapan pewarnaan dengan urutan yang benar.
+      Berilah nomor pada tahapan proses berikut sesuai urutan yang tepat!
+    </strong>
+  </div>
+
+  <table>
+    <tr>
+      <th>No</th>
+      <th>Tahapan Membatik</th>
+    </tr>
+
+    <tr>
+      <td><input type="number" id="warna" min="1" max="5"></td>
+      <td>Pemberian warna pada kain</td>
+    </tr>
+
+    <tr>
+      <td><input type="number" id="persiapan" min="1" max="5"></td>
+      <td>Persiapan kain sebelum dibatik</td>
+    </tr>
+
+    <tr>
+      <td><input type="number" id="mordant" min="1" max="5"></td>
+      <td>Perendaman kain menggunakan bahan mordant</td>
+    </tr>
+
+    <tr>
+      <td><input type="number" id="penguncian" min="1" max="5"></td>
+      <td>Penguncian warna agar tidak mudah luntur</td>
+    </tr>
+
+    <tr>
+      <td><input type="number" id="lilin" min="1" max="5"></td>
+      <td>Menghilangkan lilin batik dari kain</td>
+    </tr>
+
+  </table>
+
+  <button onclick="periksaJawaban()">
+    Periksa Jawaban
+  </button>
+
+  <div id="hasil"></div>
+
+</div>
+
+<script>
+
+function periksaJawaban(){
+
+  let warna = document.getElementById("warna").value;
+  let persiapan = document.getElementById("persiapan").value;
+  let mordant = document.getElementById("mordant").value;
+  let penguncian = document.getElementById("penguncian").value;
+  let lilin = document.getElementById("lilin").value;
+
+  let hasil = document.getElementById("hasil");
+
+  if(
+    warna === "" ||
+    persiapan === "" ||
+    mordant === "" ||
+    penguncian === "" ||
+    lilin === ""
+  ){
+
+    hasil.innerHTML = "⚠️ Semua nomor harus diisi!";
+    hasil.className = "salah";
+    return;
+  }
+
+  if(
+    warna == "3" &&
+    persiapan == "1" &&
+    mordant == "2" &&
+    penguncian == "4" &&
+    lilin == "5"
+  ){
+
+    hasil.innerHTML =
+    "✅ Jawaban benar! Urutan proses membatik sudah tepat.";
+
+    hasil.className = "benar";
+
+  } else {
+
+    hasil.innerHTML =
+    "❌ Jawaban belum tepat. Periksa kembali urutan tahapan membatik.";
+
+    hasil.className = "salah";
+  }
+
+}
+
+</script>
+
+</body>
+</html>

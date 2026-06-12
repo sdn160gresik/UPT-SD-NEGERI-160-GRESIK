@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Soal Cerita</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI', Arial, sans-serif;
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f172a,#1e3a8a);
+    padding:25px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+}
+
+.header{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    text-align:center;
+    margin-bottom:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.15);
+}
+
+.header h1{
+    color:#1565c0;
+    font-size:2rem;
+    margin-bottom:8px;
+}
+
+.header p{
+    color:#666;
+    font-size:1rem;
+}
+
+.menu{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+}
+
+.card{
+    color:white;
+    border-radius:20px;
+    padding:25px 20px;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 8px 20px rgba(0,0,0,0.18);
+    text-align:center;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+}
+
+.card .icon{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.card .title{
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.card .subtitle{
+    font-size:14px;
+    opacity:0.9;
+}
+
+/* Warna berbeda tiap menu */
+.c1{background:linear-gradient(135deg,#3b82f6,#2563eb);}
+.c2{background:linear-gradient(135deg,#10b981,#059669);}
+.c3{background:linear-gradient(135deg,#f59e0b,#d97706);}
+.c4{background:linear-gradient(135deg,#ef4444,#dc2626);}
+.c5{background:linear-gradient(135deg,#8b5cf6,#7c3aed);}
+.c6{background:linear-gradient(135deg,#ec4899,#db2777);}
+.c7{background:linear-gradient(135deg,#14b8a6,#0f766e);}
+.c8{background:linear-gradient(135deg,#f97316,#ea580c);}
+.c9{background:linear-gradient(135deg,#6366f1,#4338ca);}
+.c10{background:linear-gradient(135deg,#84cc16,#65a30d);}
+
+/* Overlay */
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+    display:none;
+    z-index:999;
+}
+
+.overlay.show{
+    display:block;
+}
+
+/* Popup */
+.popup{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    width:90%;
+    max-width:420px;
+    background:linear-gradient(135deg,#FFD54F,#FF8A65);
+    color:white;
+    text-align:center;
+    padding:25px;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.3);
+    transition:0.3s;
+    z-index:1000;
+}
+
+.popup.show{
+    transform:translate(-50%,-50%) scale(1);
+}
+
+.popup h2{
+    margin-bottom:10px;
+    font-size:28px;
+}
+
+.popup p{
+    font-size:18px;
+    line-height:1.6;
+}
+
+.close-btn{
+    margin-top:15px;
+    background:white;
+    color:#ff7043;
+    border:none;
+    border-radius:12px;
+    padding:10px 24px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.close-btn:hover{
+    transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>📖 Menu Soal Cerita</h1>
+        <p>Pilih petualangan soal cerita yang ingin kamu kerjakan.</p>
+    </div>
+
+    <div class="menu">
+
+        <div class="card c1" onclick="bukaHalaman('cerita1.html')">
+            <div class="icon">📘</div>
+            <div class="title">Soal Cerita 1</div>
+            
+        </div>
+
+        <div class="card c2" onclick="bukaHalaman('cerita2.html')">
+            <div class="icon">📗</div>
+            <div class="title">Soal Cerita 2</div>
+            
+        </div>
+
+        <div class="card c3" onclick="bukaHalaman('cerita3.html')">
+            <div class="icon">📙</div>
+            <div class="title">Soal Cerita 3</div>
+            
+        </div>
+
+        <div class="card c4" onclick="bukaHalaman('cerita4.html')">
+            <div class="icon">📕</div>
+            <div class="title">Soal Cerita 4</div>
+            
+        </div>
+
+        <div class="card c5" onclick="bukaHalaman('cerita5.html')">
+            <div class="icon">🚀</div>
+            <div class="title">Soal Cerita 5</div>
+           
+        </div>
+
+        <div class="card c6" onclick="bukaHalaman('cerita6.html')">
+            <div class="icon">⭐</div>
+            <div class="title">Soal Cerita 6</div>
+            
+        </div>
+
+        <div class="card c7" onclick="bukaHalaman('cerita7.html')">
+            <div class="icon">🎯</div>
+            <div class="title">Soal Cerita 7</div>
+            
+        </div>
+
+        <div class="card c8" onclick="bukaHalaman('cerita8.html')">
+            <div class="icon">🏆</div>
+            <div class="title">Soal Cerita 8</div>
+            
+        </div>
+
+        <div class="card c9" onclick="bukaHalaman('cerita9.html')">
+            <div class="icon">💡</div>
+            <div class="title">Soal Cerita 9</div>
+           
+        </div>
+
+        <div class="card c10" onclick="bukaHalaman('cerita10.html')">
+            <div class="icon">🎉</div>
+            <div class="title">Soal Cerita 10</div>
+            
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+   <h2>🎒 Petualangan Belajar Menanti</h2>
+<p>
+    Halaman ini masih disiapkan.<br>
+    Nantikan keseruannya! 🌈
+</p>
+    <button class="close-btn" onclick="closePopup()">OK 👍</button>
+</div>
+
+<script>
+
+async function bukaHalaman(url){
+
+    try{
+        const response = await fetch(url,{method:'HEAD'});
+
+        if(response.ok){
+            window.location.href = url;
+        }else{
+            showPopup();
+        }
+
+    }catch(error){
+        showPopup();
+    }
+
+}
+
+function showPopup(){
+    document.getElementById('popup').classList.add('show');
+    document.getElementById('overlay').classList.add('show');
+}
+
+function closePopup(){
+    document.getElementById('popup').classList.remove('show');
+    document.getElementById('overlay').classList.remove('show');
+}
+
+document.getElementById('overlay').addEventListener('click', closePopup);
+
+</script>
+
+</body>
+</html>

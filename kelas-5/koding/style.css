@@ -277,9 +277,11 @@ body{
 
 .viewer{
 
+    position:relative;
+
     display:flex;
 
-    flex-direction:column;
+    justify-content:center;
 
     align-items:center;
 
@@ -303,25 +305,39 @@ body{
 
 }
 
+/* ===========================
+   Tombol Navigasi
+=========================== */
+
 .navigation{
 
-    margin:20px 0;
+    position:absolute;
+
+    top:50%;
+
+    left:-90px;
+
+    width:calc(100% + 180px);
+
+    transform:translateY(-50%);
 
     display:flex;
 
+    justify-content:space-between;
+
     align-items:center;
 
-    gap:20px;
+    pointer-events:none;
 
 }
 
 .navigation button{
 
-    width:55px;
+    pointer-events:auto;
 
-    height:55px;
+    width:60px;
 
-    font-size:22px;
+    height:60px;
 
     border:none;
 
@@ -329,9 +345,17 @@ body{
 
     background:#4CAF50;
 
-    color:white;
+    color:#fff;
+
+    font-size:28px;
+
+    font-weight:bold;
 
     cursor:pointer;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.25);
+
+    transition:.2s;
 
 }
 
@@ -339,11 +363,13 @@ body{
 
     background:#388E3C;
 
+    transform:scale(1.08);
+
 }
 
 .navigation button:disabled{
 
-    background:#bbbbbb;
+    background:#bdbdbd;
 
     cursor:not-allowed;
 
@@ -351,8 +377,6 @@ body{
 
 #pageIndicator{
 
-    font-size:18px;
-
-    font-weight:bold;
+    display:none;
 
 }

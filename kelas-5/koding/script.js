@@ -94,7 +94,7 @@ async function loadBook() {
 function initializeBook() {
 
     initLightbox();
-
+initNavigation();
 }
 
 let currentPage = 1;

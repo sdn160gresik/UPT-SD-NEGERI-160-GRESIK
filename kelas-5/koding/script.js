@@ -97,7 +97,49 @@ function initializeBook() {
 
 }
 
+let currentPage = 1;
 
+function initNavigation(){
+
+    const pages = document.querySelectorAll(".page");
+
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    if(!prevBtn || !nextBtn) return;
+
+    function showPage(page){
+
+        pages[page-1].scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+        currentPage = page;
+
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = currentPage === pages.length;
+    }
+
+    prevBtn.addEventListener("click",()=>{
+
+        if(currentPage>1){
+            showPage(currentPage-1);
+        }
+
+    });
+
+    nextBtn.addEventListener("click",()=>{
+
+        if(currentPage<pages.length){
+            showPage(currentPage+1);
+        }
+
+    });
+
+    showPage(1);
+
+}
 /* ==========================================================
    LIGHTBOX
 ========================================================== */

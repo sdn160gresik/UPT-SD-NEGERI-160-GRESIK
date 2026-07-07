@@ -1,0 +1,239 @@
+/* =====================================================
+   style.css
+   Buku Digital HTML - Template Dasar
+   ===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --page-width:210mm;
+    --page-min-height:297mm;
+    --green:#7cc28c;
+    --orange:#d97b45;
+    --light:#f7f7f7;
+    --border:#d9d9d9;
+    --text:#333;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#e6e6e6;
+    color:var(--text);
+    padding:30px;
+}
+
+.book-wrapper{
+    display:flex;
+    justify-content:center;
+}
+
+#book{
+    width:100%;
+    max-width:900px;
+}
+
+.page{
+    width:var(--page-width);
+    min-height:var(--page-min-height);
+    margin:0 auto 30px;
+    background:#fff;
+    border:1px solid var(--border);
+    box-shadow:0 8px 24px rgba(0,0,0,.15);
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-image img,
+.image-frame img{
+    display:block;
+    width:100%;
+    height:auto;
+    cursor:pointer;
+}
+
+.image-caption{
+    text-align:center;
+    font-size:12px;
+    color:#666;
+    padding:6px 12px;
+}
+
+.chapter-header{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    padding:30px 40px 10px;
+}
+
+.chapter-badge{
+    width:120px;
+    height:140px;
+    background:#a8dfd4;
+    border-radius:24px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.chapter-text{
+    font-size:28px;
+    font-weight:bold;
+}
+
+.chapter-number{
+    font-size:60px;
+    font-weight:bold;
+}
+
+.chapter-title h1{
+    color:var(--green);
+    font-size:42px;
+    line-height:1.2;
+}
+
+.chapter-content{
+    padding:10px 48px 60px;
+}
+
+.chapter-content p{
+    text-align:justify;
+    line-height:1.9;
+    font-size:20px;
+}
+
+.box{
+    margin:28px 40px;
+    border:1px solid #cfcfcf;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.box-title{
+    background:var(--green);
+    color:#fff;
+    font-weight:bold;
+    padding:10px 16px;
+}
+
+.box-content{
+    padding:18px 22px;
+}
+
+.section-label{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin:0 40px 18px;
+    background:var(--orange);
+    color:#fff;
+    padding:8px 16px;
+    border-radius:8px;
+}
+
+.concept-map{
+    margin:0 40px 30px;
+    border:2px dashed #9fd3e2;
+    min-height:260px;
+    padding:20px;
+}
+
+.keyword-box{
+    margin:30px 40px;
+    background:#e9f8ff;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.keyword-title{
+    background:var(--orange);
+    color:#fff;
+    padding:10px 16px;
+    font-weight:bold;
+}
+
+.keyword-content{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    padding:20px;
+}
+
+.page-footer{
+    position:absolute;
+    left:40px;
+    bottom:18px;
+    color:#c77742;
+    font-size:14px;
+}
+
+.page-number{
+    position:absolute;
+    right:24px;
+    bottom:18px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#d9a27c;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.lightbox{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.lightbox.show{
+    display:flex;
+}
+
+.lightbox img{
+    max-width:90%;
+    max-height:90%;
+}
+
+.close{
+    position:absolute;
+    top:20px;
+    right:30px;
+    color:#fff;
+    font-size:42px;
+    cursor:pointer;
+}
+
+@media (max-width:900px){
+    body{padding:10px;}
+    .page{
+        width:100%;
+        min-height:auto;
+    }
+    .chapter-header{
+        flex-direction:column;
+        text-align:center;
+    }
+    .chapter-title h1{
+        font-size:32px;
+    }
+    .chapter-content{
+        padding:20px;
+    }
+    .chapter-content p{
+        font-size:17px;
+    }
+    .keyword-content{
+        grid-template-columns:1fr;
+    }
+}

@@ -26,7 +26,7 @@ Contoh
 
 */
 
-
+let currentPage = 1;
 /* ==========================================================
    LOAD HALAMAN
 ========================================================== */
@@ -95,6 +95,7 @@ function initializeBook() {
 
     initLightbox();
 initNavigation();
+   initLightbox();
 }
 
 let currentPage = 1;
@@ -133,6 +134,90 @@ function initNavigation(){
 
         if(currentPage<pages.length){
             showPage(currentPage+1);
+        }
+
+    });
+
+    showPage(1);
+
+}
+function initNavigation(){
+
+    const pages =
+        document.querySelectorAll(".page");
+
+    const prevBtn =
+        document.getElementById("prevBtn");
+
+    const nextBtn =
+        document.getElementById("nextBtn");
+
+    const indicator =
+        document.getElementById("pageIndicator");
+
+    function showPage(page){
+
+        pages.forEach(item=>{
+
+            item.classList.remove("active");
+
+        });
+
+        pages[page-1].classList.add("active");
+
+        currentPage=page;
+
+        indicator.textContent=
+            `${currentPage} / ${pages.length}`;
+
+        prevBtn.disabled=
+            currentPage===1;
+
+        nextBtn.disabled=
+            currentPage===pages.length;
+
+    }
+
+    prevBtn.addEventListener("click",()=>{
+
+        if(currentPage>1){
+
+            showPage(currentPage-1);
+
+        }
+
+    });
+
+    nextBtn.addEventListener("click",()=>{
+
+        if(currentPage<pages.length){
+
+            showPage(currentPage+1);
+
+        }
+
+    });
+
+    document.addEventListener("keydown",e=>{
+
+        if(e.key==="ArrowLeft"){
+
+            if(currentPage>1){
+
+                showPage(currentPage-1);
+
+            }
+
+        }
+
+        if(e.key==="ArrowRight"){
+
+            if(currentPage<pages.length){
+
+                showPage(currentPage+1);
+
+            }
+
         }
 
     });

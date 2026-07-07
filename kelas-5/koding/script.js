@@ -93,7 +93,6 @@ async function loadBook() {
 
 function initializeBook() {
 
-    initLightbox();
 initNavigation();
    initLightbox();
 }

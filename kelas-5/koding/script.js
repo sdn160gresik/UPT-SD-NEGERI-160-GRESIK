@@ -98,7 +98,6 @@ initNavigation();
    initLightbox();
 }
 
-let currentPage = 1;
 
 
 function initNavigation(){

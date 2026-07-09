@@ -1,1 +1,421 @@
-.page{display:none;width:100%;min-height:100%;padding:40px;background:#fff;border-radius:16px}.page.active{display:block}.hero img,.hero-image img{width:100%;height:auto}.chapter-header{display:flex;gap:22px}.chapter-title h1{font-size:44px}.chapter-content p{font-size:22px;line-height:2}
+/*==================================================
+BOOK.CSS
+Koding dan Kecerdasan Artifisial
+SD/MI Kelas V
+==================================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.page{
+    display:none;
+    position:relative;
+    width:100%;
+    min-height:100%;
+    padding:48px 56px;
+    background:#fff;
+    border-radius:20px;
+}
+
+.page.active{
+    display:block;
+}
+
+/*==================================================
+TYPOGRAPHY
+==================================================*/
+
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    color:#333;
+}
+
+p{
+    font-size:20px;
+    line-height:1.9;
+    text-align:justify;
+}
+
+h1{
+    line-height:1.2;
+}
+
+/*==================================================
+HERO IMAGE
+==================================================*/
+
+.hero{
+    margin-bottom:35px;
+}
+
+.hero-image{
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.hero-image img{
+    width:100%;
+    display:block;
+}
+
+.image-caption{
+    margin-top:10px;
+    text-align:right;
+    font-size:13px;
+    color:#666;
+}
+
+/*==================================================
+BAB
+==================================================*/
+
+.chapter-header{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    margin-bottom:30px;
+}
+
+.chapter-badge{
+    width:95px;
+    height:95px;
+    background:#1565c0;
+    color:#fff;
+    border-radius:18px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0 6px 15px rgba(0,0,0,.2);
+}
+
+.chapter-text{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.chapter-number{
+    font-size:42px;
+    font-weight:700;
+}
+
+.chapter-title h1{
+    font-size:42px;
+    color:#0d47a1;
+}
+
+/*==================================================
+ISI
+==================================================*/
+
+.chapter-content{
+    margin-top:20px;
+}
+
+/*==================================================
+BOX
+==================================================*/
+
+.box{
+    margin-bottom:35px;
+    border-radius:18px;
+    overflow:hidden;
+    border:2px solid #d9e8d9;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.box-title{
+    padding:14px 22px;
+    color:#fff;
+    font-size:22px;
+    font-weight:700;
+}
+
+.bg-green{
+    background:#2e7d32;
+}
+
+.box-content{
+    background:#fff;
+    padding:22px 30px;
+}
+
+.box-content ol{
+    padding-left:28px;
+}
+
+.box-content li{
+    margin-bottom:14px;
+    font-size:19px;
+    line-height:1.8;
+}
+
+/*==================================================
+SECTION LABEL
+==================================================*/
+
+.section-label{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:20px;
+    font-size:24px;
+    font-weight:bold;
+    color:#1565c0;
+}
+
+.icon-circle{
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    background:#e3f2fd;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.icon-circle img{
+    width:34px;
+}
+
+/*==================================================
+CONCEPT MAP
+==================================================*/
+
+.concept-map{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:22px;
+
+    margin-bottom:40px;
+
+}
+
+.node{
+
+    background:#1976d2;
+
+    color:#fff;
+
+    padding:18px;
+
+    border-radius:16px;
+
+    text-align:center;
+
+    font-weight:600;
+
+    line-height:1.5;
+
+    box-shadow:0 6px 15px rgba(0,0,0,.15);
+
+}
+
+.node-left{
+    grid-column:1;
+}
+
+.node-center{
+    grid-column:2;
+}
+
+.node-top-right{
+    grid-column:3;
+}
+
+.node-middle-right{
+    grid-column:3;
+}
+
+.node-bottom-center{
+    grid-column:2;
+}
+
+.node-bottom-right{
+    grid-column:3;
+}
+
+/*==================================================
+KEYWORD
+==================================================*/
+
+.keyword-box{
+
+    border:2px solid #90caf9;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    margin-top:15px;
+
+}
+
+.keyword-title{
+
+    background:#1976d2;
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:15px 22px;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+}
+
+.keyword-title img{
+
+    width:28px;
+
+}
+
+.keyword-content{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+    padding:24px;
+
+}
+
+.keyword-content ul{
+
+    padding-left:24px;
+
+}
+
+.keyword-content li{
+
+    margin-bottom:12px;
+
+    font-size:19px;
+
+}
+
+/*==================================================
+FOOTER
+==================================================*/
+
+.page-footer{
+
+    margin-top:45px;
+
+    padding-top:15px;
+
+    border-top:2px solid #ddd;
+
+    text-align:center;
+
+    font-size:17px;
+
+    color:#666;
+
+}
+
+.page-footer strong{
+
+    color:#1565c0;
+
+}
+
+/*==================================================
+PAGE NUMBER
+==================================================*/
+
+.page-number{
+
+    position:absolute;
+
+    bottom:20px;
+
+    right:35px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#1565c0;
+
+}
+
+/*==================================================
+IMAGE
+==================================================*/
+
+img{
+
+    max-width:100%;
+
+    height:auto;
+
+}
+
+/*==================================================
+RESPONSIVE
+==================================================*/
+
+@media(max-width:900px){
+
+.page{
+
+padding:28px;
+
+}
+
+.chapter-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.chapter-title h1{
+
+font-size:32px;
+
+}
+
+.concept-map{
+
+grid-template-columns:1fr;
+
+}
+
+.keyword-content{
+
+grid-template-columns:1fr;
+
+}
+
+.box-title{
+
+font-size:20px;
+
+}
+
+p{
+
+font-size:18px;
+
+}
+
+}

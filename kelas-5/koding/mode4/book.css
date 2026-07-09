@@ -1,27 +1,561 @@
-/* book.css */
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Arial,sans-serif;color:#333}
-.page{display:none;position:relative;width:100%;min-height:100%;padding:48px 56px;background:#fff;border-radius:20px}
-.page.active{display:block}
-.hero{margin-bottom:35px}.hero-image{border-radius:18px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,.15)}
-.hero-image img,img{width:100%;height:auto;display:block}
-.image-caption{margin-top:10px;text-align:right;font-size:13px;color:#666}
-.chapter-header{display:flex;align-items:center;gap:24px;margin-bottom:30px}
-.chapter-badge{width:95px;height:95px;background:#1565c0;color:#fff;border-radius:18px;display:flex;flex-direction:column;justify-content:center;align-items:center}
-.chapter-text{font-size:17px;font-weight:700}.chapter-number{font-size:42px;font-weight:700}
-.chapter-title h1{font-size:42px;color:#0d47a1}
-.chapter-content p{font-size:20px;line-height:1.9}
-.box{margin-bottom:45px;border:2px solid #d9e8d9;border-radius:18px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,.08)}
-.box-title{padding:14px 22px;color:#fff;font-size:22px;font-weight:700}.bg-green{background:#2e7d32}
-.box-content{padding:22px 30px}.box-content li{margin-bottom:14px;line-height:1.8}
-.section-label{display:flex;align-items:center;gap:14px;margin-bottom:20px;font-size:24px;font-weight:700;color:#1565c0}
-.icon-circle{width:60px;height:60px;border-radius:50%;background:#e3f2fd;display:flex;justify-content:center;align-items:center}
-.icon-circle img{width:32px;height:32px;object-fit:contain}
-.concept-map{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.node{background:#1976d2;color:#fff;padding:18px;border-radius:16px;text-align:center;font-weight:600}
-.keyword-box{margin-top:40px;border:2px solid #90caf9;border-radius:18px;overflow:hidden}
-.keyword-title{background:#1976d2;color:#fff;padding:15px 22px;display:flex;align-items:center;gap:12px;font-size:22px;font-weight:700}
-.keyword-title img{width:28px}.keyword-content{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:24px}
-.page-footer{margin-top:50px;padding-top:15px;border-top:2px solid #ddd;text-align:center}
-.page-number{position:absolute;right:35px;bottom:20px;font-weight:700;color:#1565c0}
-@media(max-width:900px){.page{padding:28px}.chapter-header{flex-direction:column;align-items:flex-start}.concept-map,.keyword-content{grid-template-columns:1fr}}
+/* =========================================================
+   BOOK.CSS
+   Buku Digital Interaktif
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',Arial,sans-serif;
+    color:#333;
+    background:#f3f6fb;
+}
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page{
+    display:none;
+    position:relative;
+    width:100%;
+    min-height:100%;
+    background:#fff;
+    border-radius:20px;
+    padding:48px 56px;
+}
+
+.page.active{
+    display:block;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    margin-bottom:35px;
+}
+
+.hero-image{
+    overflow:hidden;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.hero-image img,
+img{
+    width:100%;
+    height:auto;
+    display:block;
+}
+
+.image-caption{
+    margin-top:10px;
+    text-align:right;
+    font-size:13px;
+    color:#777;
+}
+
+/* =========================================================
+   CHAPTER
+========================================================= */
+
+.chapter-header{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    margin-bottom:35px;
+}
+
+.chapter-badge{
+    width:95px;
+    height:95px;
+    background:#1565c0;
+    color:#fff;
+    border-radius:20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.chapter-text{
+    font-size:17px;
+    font-weight:700;
+}
+
+.chapter-number{
+    font-size:42px;
+    font-weight:700;
+}
+
+.chapter-title h1{
+    font-size:42px;
+    color:#0d47a1;
+}
+
+.chapter-content p{
+    font-size:20px;
+    line-height:1.9;
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content-section{
+    margin-bottom:35px;
+}
+
+.chapter-title{
+    font-size:34px;
+    color:#0d47a1;
+    font-weight:700;
+    margin-bottom:20px;
+    position:relative;
+}
+
+.chapter-title::after{
+    content:"";
+    width:90px;
+    height:4px;
+    background:#1976d2;
+    display:block;
+    margin-top:10px;
+    border-radius:20px;
+}
+
+.sub-title{
+    color:#1565c0;
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.content-section p{
+    font-size:19px;
+    text-align:justify;
+    line-height:1.9;
+}
+
+/* =========================================================
+   BOX
+========================================================= */
+
+.box{
+    margin-bottom:45px;
+    border:2px solid #d9e8d9;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.box-title{
+    padding:14px 22px;
+    color:#fff;
+    font-size:22px;
+    font-weight:700;
+}
+
+.bg-green{
+    background:#2e7d32;
+}
+
+.box-content{
+    padding:22px 30px;
+}
+
+.box-content li{
+    margin-bottom:14px;
+    line-height:1.8;
+}
+
+/* =========================================================
+   ICON LABEL
+========================================================= */
+
+.section-label{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:20px;
+    font-size:24px;
+    font-weight:700;
+    color:#1565c0;
+}
+
+.icon-circle{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#e3f2fd;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.icon-circle img{
+    width:32px;
+    height:32px;
+    object-fit:contain;
+}
+
+/* =========================================================
+   CONCEPT MAP
+========================================================= */
+
+.concept-map{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.node{
+    background:#1976d2;
+    color:#fff;
+    padding:18px;
+    border-radius:16px;
+    text-align:center;
+    font-weight:600;
+    box-shadow:0 6px 12px rgba(0,0,0,.08);
+}
+
+/* =========================================================
+   KEYWORD
+========================================================= */
+
+.keyword-box{
+    margin-top:40px;
+    border:2px solid #90caf9;
+    border-radius:18px;
+    overflow:hidden;
+}
+
+.keyword-title{
+    background:#1976d2;
+    color:#fff;
+    padding:15px 22px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:22px;
+    font-weight:700;
+}
+
+.keyword-title img{
+    width:28px;
+}
+
+.keyword-content{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    padding:24px;
+}
+
+/* =========================================================
+   AYO AMATI
+========================================================= */
+
+.observe-box{
+
+    margin:40px 0;
+
+    border:2px solid #d7e8ff;
+
+    border-radius:20px;
+
+    background:#fff;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+    overflow:hidden;
+
+}
+
+.observe-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:18px 25px;
+
+    background:#eaf4ff;
+
+    color:#0d47a1;
+
+    font-size:26px;
+
+    font-weight:700;
+
+}
+
+.observe-title img{
+
+    width:42px;
+
+}
+
+.observe-layout{
+
+    display:grid;
+
+    grid-template-columns:1.2fr 1fr;
+
+    gap:30px;
+
+    padding:28px;
+
+    align-items:start;
+
+}
+
+.observe-image{
+
+    margin:0;
+
+}
+
+.observe-image img{
+
+    width:100%;
+
+    border-radius:16px;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.18);
+
+}
+
+.observe-image figcaption{
+
+    margin-top:12px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    color:#666;
+
+    line-height:1.5;
+
+}
+
+.observe-right{
+
+    background:#f8fbff;
+
+    border-radius:16px;
+
+    padding:24px;
+
+    border-left:5px solid #1976d2;
+
+}
+
+.observe-right h4{
+
+    color:#1565c0;
+
+    font-size:24px;
+
+    margin-bottom:15px;
+
+}
+
+.observe-right p{
+
+    margin-bottom:15px;
+
+    line-height:1.8;
+
+    font-size:18px;
+
+}
+
+.observe-right ol{
+
+    padding-left:25px;
+
+}
+
+.observe-right li{
+
+    margin-bottom:14px;
+
+    line-height:1.8;
+
+    font-size:18px;
+
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.page-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:45px;
+
+    padding-top:15px;
+
+    border-top:2px solid #dcdcdc;
+
+    color:#555;
+
+    font-size:15px;
+
+}
+
+.page-footer span:first-child{
+
+    font-weight:700;
+
+    color:#1565c0;
+
+}
+
+.page-number{
+
+    position:absolute;
+
+    right:40px;
+
+    bottom:20px;
+
+    width:38px;
+
+    height:38px;
+
+    border-radius:50%;
+
+    background:#1565c0;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:700;
+
+    font-size:16px;
+
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+.page{
+
+padding:30px;
+
+}
+
+.chapter-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.chapter-title{
+
+font-size:28px;
+
+}
+
+.sub-title{
+
+font-size:24px;
+
+}
+
+.concept-map,
+
+.keyword-content{
+
+grid-template-columns:1fr;
+
+}
+
+.observe-layout{
+
+grid-template-columns:1fr;
+
+}
+
+.observe-right{
+
+margin-top:10px;
+
+}
+
+.page-footer{
+
+flex-direction:column;
+
+gap:8px;
+
+text-align:center;
+
+}
+
+}
+
+@media(max-width:600px){
+
+.page{
+
+padding:22px;
+
+}
+
+.chapter-title{
+
+font-size:24px;
+
+}
+
+.content-section p,
+
+.observe-right p,
+
+.observe-right li{
+
+font-size:17px;
+
+}
+
+.observe-title{
+
+font-size:22px;
+
+}
+
+.chapter-content p{
+
+font-size:18px;
+
+}
+
+}

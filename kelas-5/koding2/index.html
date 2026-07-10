@@ -38,95 +38,48 @@
 
     <div class="hud-container">
 
-        <!-- FRAME -->
+    <div class="hud">
 
         <img
             src="assets/frame.png"
             class="hud-frame"
             alt="HUD Frame">
 
-        <!-- BOOK -->
+        <div class="hud-viewport">
 
-        <section class="book-wrapper">
+            <main id="book"></main>
 
-            <div class="viewer">
+            <div class="navigation">
 
-                <main id="book">
+                <button id="prevBtn" type="button">
+                    ◀
+                </button>
 
-                    <!-- Halaman dimuat otomatis oleh script.js -->
+                <span id="pageIndicator">
+                    1 / 1
+                </span>
 
-                </main>
-
-                <!-- NAVIGATION -->
-
-                <nav class="navigation" aria-label="Navigasi Halaman">
-
-                    <button
-                        id="prevBtn"
-                        type="button"
-                        title="Halaman Sebelumnya"
-                        aria-label="Halaman Sebelumnya">
-
-                        ◀
-
-                    </button>
-
-                    <span
-                        id="pageIndicator"
-                        aria-live="polite">
-
-                        1 / 1
-
-                    </span>
-
-                    <button
-                        id="nextBtn"
-                        type="button"
-                        title="Halaman Berikutnya"
-                        aria-label="Halaman Berikutnya">
-
-                        ▶
-
-                    </button>
-
-                </nav>
+                <button id="nextBtn" type="button">
+                    ▶
+                </button>
 
             </div>
 
-        </section>
+        </div>
 
     </div>
 
-    <!-- =====================================================
-         LIGHTBOX
-    ====================================================== -->
+</div>
 
-    <div
-        id="lightbox"
-        class="lightbox"
-        role="dialog"
-        aria-hidden="true">
+<div id="lightbox" class="lightbox">
 
-        <button
-            class="close"
-            type="button"
-            aria-label="Tutup">
+    <span class="close">&times;</span>
 
-            &times;
+    <img id="lightbox-image">
 
-        </button>
+</div>
 
-        <img
-            id="lightbox-image"
-            alt="Preview Gambar">
-
-    </div>
-
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 

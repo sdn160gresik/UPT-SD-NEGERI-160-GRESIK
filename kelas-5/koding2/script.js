@@ -2,249 +2,121 @@
    HUD DIGITAL BOOK
    script.js
 ========================================================== */
-
 "use strict";
 
-/* ==========================================================
-   KONFIGURASI
-========================================================== */
-
-// Ubah sesuai jumlah halaman HTML
-const TOTAL_PAGE = 1;
+const TOTAL_PAGE = 1; // ubah sesuai jumlah halaman
 
 let currentPage = 1;
 let pages = [];
 
-/* ==========================================================
-   START
-========================================================== */
-
 document.addEventListener("DOMContentLoaded", async () => {
-
     await loadPages();
-
     initializeBook();
-
     initializeLightbox();
-
     initializeKeyboard();
-
+    initializeTouch();
 });
 
-/* ==========================================================
-   LOAD SEMUA HALAMAN
-========================================================== */
-
 async function loadPages(){
-
-    const book = document.getElementById("book");
-
+    const book=document.getElementById("book");
     if(!book) return;
 
-    for(let i = 1; i <= TOTAL_PAGE; i++){
-
-        const filename =
-            `pages/page${String(i).padStart(3,"0")}.html`;
-
+    for(let i=1;i<=TOTAL_PAGE;i++){
+        const file=`pages/page${String(i).padStart(3,"0")}.html`;
         try{
-
-            const response = await fetch(filename);
-
-            if(!response.ok){
-
-                console.warn("Tidak menemukan:", filename);
-
-                continue;
-
-            }
-
-            const html = await response.text();
-
-            book.insertAdjacentHTML("beforeend", html);
-
+            const res=await fetch(file);
+            if(!res.ok) continue;
+            book.insertAdjacentHTML("beforeend",await res.text());
+        }catch(e){
+            console.error(e);
         }
-
-        catch(error){
-
-            console.error("Gagal memuat", filename);
-
-        }
-
     }
-
 }
-
-/* ==========================================================
-   INISIALISASI
-========================================================== */
 
 function initializeBook(){
+    pages=[...document.querySelectorAll(".page")];
+    if(!pages.length) return;
 
-    pages = [...document.querySelectorAll(".page")];
-
-    if(pages.length === 0){
-
-        console.warn("Tidak ada halaman ditemukan.");
-
-        return;
-
-    }
-
-    document
-        .getElementById("prevBtn")
-        .addEventListener("click", previousPage);
-
-    document
-        .getElementById("nextBtn")
-        .addEventListener("click", nextPage);
+    document.getElementById("prevBtn").onclick=previousPage;
+    document.getElementById("nextBtn").onclick=nextPage;
 
     showPage(1);
-
 }
 
-/* ==========================================================
-   TAMPILKAN HALAMAN
-========================================================== */
+function showPage(n){
+    currentPage=Math.max(1,Math.min(n,pages.length));
 
-function showPage(number){
+    pages.forEach(p=>p.classList.remove("active"));
+    pages[currentPage-1].classList.add("active");
 
-    currentPage = Math.max(
-        1,
-        Math.min(number, pages.length)
-    );
+    document.getElementById("pageIndicator").textContent=
+        `${currentPage} / ${pages.length}`;
 
-    pages.forEach(page=>{
+    document.getElementById("prevBtn").disabled=currentPage===1;
+    document.getElementById("nextBtn").disabled=currentPage===pages.length;
 
-        page.classList.remove("active");
-
-    });
-
-    pages[currentPage-1]
-        .classList.add("active");
-
-    updateNavigation();
-
+    document.getElementById("book").scrollTop=0;
 }
-
-/* ==========================================================
-   NAVIGASI
-========================================================== */
 
 function previousPage(){
-
-    if(currentPage>1){
-
-        showPage(currentPage-1);
-
-    }
-
+    if(currentPage>1) showPage(currentPage-1);
 }
 
 function nextPage(){
-
-    if(currentPage<pages.length){
-
-        showPage(currentPage+1);
-
-    }
-
+    if(currentPage<pages.length) showPage(currentPage+1);
 }
-
-function updateNavigation(){
-
-    document.getElementById("pageIndicator").textContent =
-        `${currentPage} / ${pages.length}`;
-
-    document.getElementById("prevBtn").disabled =
-        currentPage===1;
-
-    document.getElementById("nextBtn").disabled =
-        currentPage===pages.length;
-
-}
-
-/* ==========================================================
-   KEYBOARD
-========================================================== */
 
 function initializeKeyboard(){
-
-    document.addEventListener("keydown",(event)=>{
-
-        switch(event.key){
-
-            case "ArrowLeft":
-
-                previousPage();
-
-                break;
-
-            case "ArrowRight":
-
-                nextPage();
-
-                break;
-
-            case "Escape":
-
-                closeLightbox();
-
-                break;
-
-        }
-
+    document.addEventListener("keydown",e=>{
+        if(e.key==="ArrowLeft") previousPage();
+        if(e.key==="ArrowRight") nextPage();
+        if(e.key==="Escape") closeLightbox();
     });
-
 }
 
-/* ==========================================================
-   LIGHTBOX
-========================================================== */
+function initializeTouch(){
+    let startX=0;
+
+    document.getElementById("book").addEventListener("touchstart",e=>{
+        startX=e.changedTouches[0].clientX;
+    });
+
+    document.getElementById("book").addEventListener("touchend",e=>{
+        const endX=e.changedTouches[0].clientX;
+        const diff=endX-startX;
+
+        if(diff>80) previousPage();
+        if(diff<-80) nextPage();
+    });
+}
 
 function initializeLightbox(){
 
-    const lightbox =
-        document.getElementById("lightbox");
+    const lightbox=document.getElementById("lightbox");
+    const preview=document.getElementById("lightbox-image");
 
-    const preview =
-        document.getElementById("lightbox-image");
+    document.querySelectorAll("#book img").forEach(img=>{
 
-    document.querySelectorAll("#book img").forEach(image=>{
+        img.onclick=()=>{
 
-        image.addEventListener("click",()=>{
-
-            preview.src = image.src;
-
+            preview.src=img.src;
             lightbox.classList.add("show");
 
-        });
+        };
 
     });
 
-    document
-        .querySelector(".close")
-        .addEventListener("click", closeLightbox);
+    document.querySelector(".close").onclick=closeLightbox;
 
-    lightbox.addEventListener("click",(event)=>{
-
-        if(event.target===lightbox){
-
-            closeLightbox();
-
-        }
-
-    });
+    lightbox.onclick=e=>{
+        if(e.target===lightbox) closeLightbox();
+    };
 
 }
 
-/* ==========================================================
-   CLOSE LIGHTBOX
-========================================================== */
-
 function closeLightbox(){
 
-    document
-        .getElementById("lightbox")
+    document.getElementById("lightbox")
         .classList.remove("show");
 
 }

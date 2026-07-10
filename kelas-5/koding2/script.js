@@ -1,191 +1,177 @@
 /* ==========================================================
-   Futuristic Digital Book
+   HUD DIGITAL BOOK
    script.js
 ========================================================== */
 
 "use strict";
 
 /* ==========================================================
-   CONFIG
+   KONFIGURASI
 ========================================================== */
 
-const CONFIG = {
+// Ubah sesuai jumlah halaman HTML
+const TOTAL_PAGE = 1;
 
-    TOTAL_PAGE: 1,          // Ubah sesuai jumlah halaman
-    PAGE_FOLDER: "pages",
-    PAGE_PREFIX: "page",
-    PAGE_EXTENSION: ".html",
-
-    ANIMATION_TIME: 250
-
-};
-
-/* ==========================================================
-   STATE
-========================================================== */
-
-const Book = {
-
-    currentPage: 1,
-
-    totalPage: 0,
-
-    pages: [],
-
-    book: null,
-
-    prev: null,
-
-    next: null,
-
-    indicator: null
-
-};
+let currentPage = 1;
+let pages = [];
 
 /* ==========================================================
    START
 ========================================================== */
 
-document.addEventListener("DOMContentLoaded", init);
-
-/* ==========================================================
-   INITIALIZE
-========================================================== */
-
-async function init() {
-
-    Book.book = document.getElementById("book");
-    Book.prev = document.getElementById("prevBtn");
-    Book.next = document.getElementById("nextBtn");
-    Book.indicator = document.getElementById("pageIndicator");
+document.addEventListener("DOMContentLoaded", async () => {
 
     await loadPages();
 
-    bindNavigation();
+    initializeBook();
 
-    bindKeyboard();
+    initializeLightbox();
 
-    bindSwipe();
+    initializeKeyboard();
 
-    bindLightbox();
-
-    updateLayout();
-
-    window.addEventListener("resize", updateLayout);
-
-}
+});
 
 /* ==========================================================
-   LOAD PAGES
+   LOAD SEMUA HALAMAN
 ========================================================== */
 
-async function loadPages() {
+async function loadPages(){
 
-    for (let i = 1; i <= CONFIG.TOTAL_PAGE; i++) {
+    const book = document.getElementById("book");
 
-        const file =
-            `${CONFIG.PAGE_FOLDER}/` +
-            `${CONFIG.PAGE_PREFIX}${String(i).padStart(3, "0")}` +
-            `${CONFIG.PAGE_EXTENSION}`;
+    if(!book) return;
 
-        try {
+    for(let i = 1; i <= TOTAL_PAGE; i++){
 
-            const response = await fetch(file);
+        const filename =
+            `pages/page${String(i).padStart(3,"0")}.html`;
 
-            if (!response.ok) continue;
+        try{
+
+            const response = await fetch(filename);
+
+            if(!response.ok){
+
+                console.warn("Tidak menemukan:", filename);
+
+                continue;
+
+            }
 
             const html = await response.text();
 
-            Book.book.insertAdjacentHTML("beforeend", html);
+            book.insertAdjacentHTML("beforeend", html);
 
         }
 
-        catch (error) {
+        catch(error){
 
-            console.error(file, error);
+            console.error("Gagal memuat", filename);
 
         }
 
     }
 
-    Book.pages = [...document.querySelectorAll(".page")];
+}
 
-    Book.totalPage = Book.pages.length;
+/* ==========================================================
+   INISIALISASI
+========================================================== */
+
+function initializeBook(){
+
+    pages = [...document.querySelectorAll(".page")];
+
+    if(pages.length === 0){
+
+        console.warn("Tidak ada halaman ditemukan.");
+
+        return;
+
+    }
+
+    document
+        .getElementById("prevBtn")
+        .addEventListener("click", previousPage);
+
+    document
+        .getElementById("nextBtn")
+        .addEventListener("click", nextPage);
 
     showPage(1);
 
 }
 
 /* ==========================================================
-   SHOW PAGE
+   TAMPILKAN HALAMAN
 ========================================================== */
 
-function showPage(index) {
+function showPage(number){
 
-    if (!Book.pages.length) return;
+    currentPage = Math.max(
+        1,
+        Math.min(number, pages.length)
+    );
 
-    index = Math.max(1, Math.min(index, Book.totalPage));
-
-    Book.pages.forEach(page => {
+    pages.forEach(page=>{
 
         page.classList.remove("active");
 
     });
 
-    Book.currentPage = index;
-
-    const page = Book.pages[index - 1];
-
-    page.classList.add("active");
-
-    page.scrollTop = 0;
+    pages[currentPage-1]
+        .classList.add("active");
 
     updateNavigation();
 
 }
 
 /* ==========================================================
-   UPDATE NAVIGATION
+   NAVIGASI
 ========================================================== */
 
-function updateNavigation() {
+function previousPage(){
 
-    Book.indicator.textContent =
-        `${Book.currentPage} / ${Book.totalPage}`;
+    if(currentPage>1){
 
-    Book.prev.disabled =
-        Book.currentPage === 1;
+        showPage(currentPage-1);
 
-    Book.next.disabled =
-        Book.currentPage === Book.totalPage;
+    }
+
+}
+
+function nextPage(){
+
+    if(currentPage<pages.length){
+
+        showPage(currentPage+1);
+
+    }
+
+}
+
+function updateNavigation(){
+
+    document.getElementById("pageIndicator").textContent =
+        `${currentPage} / ${pages.length}`;
+
+    document.getElementById("prevBtn").disabled =
+        currentPage===1;
+
+    document.getElementById("nextBtn").disabled =
+        currentPage===pages.length;
 
 }
 
 /* ==========================================================
-   EVENTS
+   KEYBOARD
 ========================================================== */
 
-function bindNavigation() {
+function initializeKeyboard(){
 
-    Book.prev.addEventListener("click", () => {
+    document.addEventListener("keydown",(event)=>{
 
-        previousPage();
-
-    });
-
-    Book.next.addEventListener("click", () => {
-
-        nextPage();
-
-    });
-
-}
-
-function bindKeyboard() {
-
-    document.addEventListener("keydown", event => {
-
-        switch (event.key) {
+        switch(event.key){
 
             case "ArrowLeft":
 
@@ -196,18 +182,6 @@ function bindKeyboard() {
             case "ArrowRight":
 
                 nextPage();
-
-                break;
-
-            case "Home":
-
-                showPage(1);
-
-                break;
-
-            case "End":
-
-                showPage(Book.totalPage);
 
                 break;
 
@@ -224,94 +198,36 @@ function bindKeyboard() {
 }
 
 /* ==========================================================
-   NEXT / PREVIOUS
-========================================================== */
-
-function nextPage() {
-
-    if (Book.currentPage < Book.totalPage) {
-
-        showPage(Book.currentPage + 1);
-
-    }
-
-}
-
-function previousPage() {
-
-    if (Book.currentPage > 1) {
-
-        showPage(Book.currentPage - 1);
-
-    }
-
-}
-
-/* ==========================================================
-   SWIPE
-========================================================== */
-
-function bindSwipe() {
-
-    let startX = 0;
-
-    let endX = 0;
-
-    Book.book.addEventListener("touchstart", e => {
-
-        startX = e.changedTouches[0].clientX;
-
-    });
-
-    Book.book.addEventListener("touchend", e => {
-
-        endX = e.changedTouches[0].clientX;
-
-        const distance = endX - startX;
-
-        if (Math.abs(distance) < 80) return;
-
-        if (distance > 0) {
-
-            previousPage();
-
-        } else {
-
-            nextPage();
-
-        }
-
-    });
-
-}
-
-/* ==========================================================
    LIGHTBOX
 ========================================================== */
 
-function bindLightbox() {
+function initializeLightbox(){
 
-    const lightbox = document.getElementById("lightbox");
+    const lightbox =
+        document.getElementById("lightbox");
 
-    const image = document.getElementById("lightbox-image");
+    const preview =
+        document.getElementById("lightbox-image");
 
-    Book.book.addEventListener("click", event => {
+    document.querySelectorAll("#book img").forEach(image=>{
 
-        if (!event.target.matches("img")) return;
+        image.addEventListener("click",()=>{
 
-        image.src = event.target.src;
+            preview.src = image.src;
 
-        lightbox.classList.add("show");
+            lightbox.classList.add("show");
 
-        lightbox.setAttribute("aria-hidden", "false");
+        });
 
     });
 
-    document.querySelector(".close").addEventListener("click", closeLightbox);
+    document
+        .querySelector(".close")
+        .addEventListener("click", closeLightbox);
 
-    lightbox.addEventListener("click", event => {
+    lightbox.addEventListener("click",(event)=>{
 
-        if (event.target === lightbox) {
+        if(event.target===lightbox){
 
             closeLightbox();
 
@@ -321,39 +237,14 @@ function bindLightbox() {
 
 }
 
-function closeLightbox() {
-
-    const lightbox = document.getElementById("lightbox");
-
-    lightbox.classList.remove("show");
-
-    lightbox.setAttribute("aria-hidden", "true");
-
-}
-
 /* ==========================================================
-   LAYOUT
+   CLOSE LIGHTBOX
 ========================================================== */
 
-function updateLayout() {
+function closeLightbox(){
 
-    const nav = document.querySelector(".navigation");
-
-    Book.book.style.paddingBottom =
-        (nav.offsetHeight + 30) + "px";
+    document
+        .getElementById("lightbox")
+        .classList.remove("show");
 
 }
-
-/* ==========================================================
-   PUBLIC API
-========================================================== */
-
-window.BookViewer = {
-
-    next: nextPage,
-
-    previous: previousPage,
-
-    goTo: showPage
-
-};

@@ -1,10 +1,6 @@
 /* ==========================================================
-   style.css
-   Futuristic HUD Digital Book
-========================================================== */
-
-/* ==========================================================
-   RESET
+   STYLE.CSS
+   HUD BOOK VIEWER
 ========================================================== */
 
 *{
@@ -17,32 +13,16 @@ html,
 body{
     width:100%;
     height:100%;
-}
+    overflow:hidden;
 
-/* ==========================================================
-   BODY
-========================================================== */
-
-body{
-
-    font-family:
-        "Segoe UI",
-        Arial,
-        sans-serif;
+    font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
 
     background:
-        radial-gradient(circle at top,
-            #17344d 0%,
-            #08131f 45%,
-            #03070d 100%);
-
-    color:#eef7ff;
-
-    overflow:hidden;
+        radial-gradient(circle at top,#0f2742,#07111d 65%,#02060d);
 }
 
 /* ==========================================================
-   HUD CONTAINER
+   CONTAINER
 ========================================================== */
 
 .hud-container{
@@ -50,15 +30,13 @@ body{
     position:relative;
 
     width:100vw;
-
     height:100vh;
 
     display:flex;
-
     justify-content:center;
-
     align-items:center;
 
+    overflow:hidden;
 }
 
 /* ==========================================================
@@ -69,48 +47,46 @@ body{
 
     position:absolute;
 
-    width:100%;
-
-    height:100%;
+    width:96vw;
+    height:96vh;
 
     object-fit:contain;
 
     pointer-events:none;
-
     user-select:none;
 
     z-index:20;
 
+    filter:
+        drop-shadow(0 0 15px rgba(0,180,255,.35))
+        drop-shadow(0 0 30px rgba(0,180,255,.25));
 }
 
 /* ==========================================================
-   BOOK AREA
+   AREA BUKU
 ========================================================== */
 
 .book-wrapper{
 
     position:absolute;
 
-    left:7%;
+    left:18%;
+    top:15%;
 
-    top:7%;
-
-    width:86%;
-
-    height:84%;
+    width:64%;
+    height:68%;
 
     z-index:10;
 
+    overflow:hidden;
 }
 
 .viewer{
 
-    position:relative;
-
     width:100%;
-
     height:100%;
 
+    position:relative;
 }
 
 /* ==========================================================
@@ -120,128 +96,108 @@ body{
 #book{
 
     width:100%;
-
     height:100%;
 
     overflow-y:auto;
-
     overflow-x:hidden;
 
-    padding:15px 20px 90px;
+    padding:20px 25px 90px;
 
     scroll-behavior:smooth;
+
+    color:white;
+
+    scrollbar-width:thin;
+}
+
+#book::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+#book::-webkit-scrollbar-thumb{
+
+    background:#16d8ff;
+    border-radius:20px;
 
 }
 
 /* ==========================================================
-   NAVIGATION
+   NAVIGASI
 ========================================================== */
 
 .navigation{
 
     position:absolute;
 
+    bottom:10px;
     left:50%;
-
-    bottom:15px;
 
     transform:translateX(-50%);
 
     display:flex;
-
     align-items:center;
+    gap:20px;
 
-    gap:18px;
+    padding:10px 20px;
 
-    padding:10px 22px;
+    border-radius:50px;
 
-    border-radius:40px;
+    background:rgba(5,20,40,.75);
 
-    background:rgba(7,20,35,.90);
+    backdrop-filter:blur(12px);
 
-    border:1px solid rgba(0,255,255,.18);
+    border:1px solid rgba(0,255,255,.2);
 
-    backdrop-filter:blur(10px);
-
-    box-shadow:
-
-        0 0 20px rgba(0,255,255,.15);
-
+    z-index:30;
 }
-
-/* ==========================================================
-   BUTTON
-========================================================== */
 
 .navigation button{
 
     width:48px;
-
     height:48px;
 
     border:none;
-
     border-radius:50%;
-
-    background:#12354d;
-
-    color:#77e9ff;
-
-    font-size:20px;
 
     cursor:pointer;
 
-    transition:
-        .25s ease;
+    font-size:22px;
 
+    color:#8de8ff;
+
+    background:#0d2342;
+
+    transition:.25s;
 }
 
 .navigation button:hover{
 
-    background:#1d5677;
+    background:#14bfff;
+
+    color:#fff;
 
     transform:scale(1.08);
-
-    box-shadow:
-
-        0 0 18px cyan;
-
-}
-
-.navigation button:active{
-
-    transform:scale(.95);
-
 }
 
 .navigation button:disabled{
 
     opacity:.35;
-
     cursor:not-allowed;
-
-    box-shadow:none;
-
 }
-
-/* ==========================================================
-   PAGE INDICATOR
-========================================================== */
 
 #pageIndicator{
 
-    min-width:90px;
+    min-width:80px;
 
     text-align:center;
 
-    color:#9df6ff;
+    font-size:18px;
 
-    font-weight:600;
+    color:#d7f6ff;
 
-    letter-spacing:1px;
-
-    font-size:16px;
-
+    font-weight:bold;
 }
 
 /* ==========================================================
@@ -251,142 +207,106 @@ body{
 .lightbox{
 
     position:fixed;
-
     inset:0;
 
-    display:flex;
+    display:none;
 
     justify-content:center;
-
     align-items:center;
 
-    background:rgba(0,0,0,.92);
+    background:rgba(0,0,0,.85);
 
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:.3s;
-
-    z-index:999;
-
+    z-index:9999;
 }
 
 .lightbox.show{
 
-    opacity:1;
-
-    visibility:visible;
-
+    display:flex;
 }
 
 #lightbox-image{
 
-    max-width:90%;
-
-    max-height:90%;
+    max-width:90vw;
+    max-height:90vh;
 
     border-radius:12px;
 
-    box-shadow:
-
-        0 0 40px rgba(0,255,255,.35);
-
+    box-shadow:0 0 40px rgba(0,255,255,.3);
 }
 
 .close{
 
     position:absolute;
 
-    top:25px;
-
-    right:35px;
+    top:30px;
+    right:40px;
 
     color:white;
 
-    font-size:45px;
+    font-size:42px;
 
     cursor:pointer;
-
-    transition:.25s;
-
-}
-
-.close:hover{
-
-    color:#67f2ff;
-
-    transform:rotate(90deg);
-
-}
-
-/* ==========================================================
-   SCROLLBAR
-========================================================== */
-
-#book::-webkit-scrollbar{
-
-    width:10px;
-
-}
-
-#book::-webkit-scrollbar-track{
-
-    background:#07111b;
-
-}
-
-#book::-webkit-scrollbar-thumb{
-
-    background:#1aa6d6;
-
-    border-radius:30px;
-
-}
-
-#book::-webkit-scrollbar-thumb:hover{
-
-    background:#49e4ff;
-
 }
 
 /* ==========================================================
    RESPONSIVE
 ========================================================== */
 
-@media (max-width:1024px){
+@media (max-width:1200px){
+
+    .hud-frame{
+
+        width:98vw;
+        height:98vh;
+
+    }
 
     .book-wrapper{
 
-        left:6%;
+        left:17%;
+        top:14%;
 
-        width:88%;
+        width:66%;
+        height:69%;
+    }
 
-        top:6%;
+}
 
-        height:86%;
+@media (max-width:900px){
+
+    .hud-frame{
+
+        width:100vw;
+        height:100vh;
+
+    }
+
+    .book-wrapper{
+
+        left:13%;
+        top:12%;
+
+        width:74%;
+        height:74%;
+    }
+
+    .navigation{
+
+        transform:translateX(-50%) scale(.9);
 
     }
 
 }
 
-@media (max-width:768px){
+@media (max-width:600px){
 
     .book-wrapper{
 
-        left:5%;
+        left:10%;
+        top:11%;
 
-        width:90%;
-
-        top:5%;
-
-        height:88%;
-
-    }
-
-    #book{
-
-        padding:12px 15px 90px;
+        width:80%;
+        height:76%;
 
     }
 
@@ -394,40 +314,16 @@ body{
 
         gap:12px;
 
-        padding:8px 16px;
+        padding:8px 15px;
 
     }
 
     .navigation button{
 
         width:42px;
-
         height:42px;
 
         font-size:18px;
-
-    }
-
-}
-
-@media (max-width:480px){
-
-    .book-wrapper{
-
-        left:4%;
-
-        top:4%;
-
-        width:92%;
-
-        height:90%;
-
-    }
-
-    .navigation{
-
-        bottom:10px;
-
     }
 
 }

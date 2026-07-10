@@ -1,9 +1,11 @@
 /* ==========================================================
-   STYLE.CSS
-   HUD BOOK VIEWER
+   HUD DIGITAL BOOK
+   style.css
 ========================================================== */
 
-*{
+*,
+*::before,
+*::after{
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -11,18 +13,27 @@
 
 html,
 body{
+
     width:100%;
     height:100%;
+
     overflow:hidden;
 
-    font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+    font-family:
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
 
     background:
-        radial-gradient(circle at top,#0f2742,#07111d 65%,#02060d);
+        radial-gradient(circle at center,
+        #0d223c 0%,
+        #07111d 45%,
+        #04090f 100%);
 }
 
 /* ==========================================================
-   CONTAINER
+   HUD CONTAINER
 ========================================================== */
 
 .hud-container{
@@ -37,6 +48,7 @@ body{
     align-items:center;
 
     overflow:hidden;
+
 }
 
 /* ==========================================================
@@ -47,19 +59,20 @@ body{
 
     position:absolute;
 
-    width:96vw;
-    height:96vh;
+    width:min(96vw,1450px);
 
-    object-fit:contain;
+    height:auto;
+
+    z-index:10;
 
     pointer-events:none;
+
     user-select:none;
 
-    z-index:20;
-
     filter:
-        drop-shadow(0 0 15px rgba(0,180,255,.35))
-        drop-shadow(0 0 30px rgba(0,180,255,.25));
+        drop-shadow(0 0 12px rgba(0,180,255,.25))
+        drop-shadow(0 0 40px rgba(0,180,255,.15));
+
 }
 
 /* ==========================================================
@@ -70,23 +83,35 @@ body{
 
     position:absolute;
 
-    left:18%;
-    top:15%;
+    z-index:5;
 
-    width:64%;
-    height:68%;
+    width:min(72vw,1120px);
 
-    z-index:10;
+    height:min(62vh,720px);
 
-    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
 }
 
+/* ==========================================================
+   VIEWER
+========================================================== */
+
 .viewer{
+
+    position:relative;
 
     width:100%;
     height:100%;
 
-    position:relative;
+    overflow:hidden;
+
 }
 
 /* ==========================================================
@@ -101,103 +126,134 @@ body{
     overflow-y:auto;
     overflow-x:hidden;
 
-    padding:20px 25px 90px;
+    padding:
+        35px
+        40px
+        95px;
 
-    scroll-behavior:smooth;
+    border-radius:18px;
 
     color:white;
 
+    background:
+        rgba(5,18,30,.25);
+
+    backdrop-filter:blur(2px);
+
     scrollbar-width:thin;
+
+    scrollbar-color:#33cfff transparent;
+
 }
+
+/* Chrome */
 
 #book::-webkit-scrollbar{
 
-    width:10px;
+    width:8px;
+
+}
+
+#book::-webkit-scrollbar-track{
+
+    background:transparent;
 
 }
 
 #book::-webkit-scrollbar-thumb{
 
-    background:#16d8ff;
-    border-radius:20px;
+    background:#1eb7ff;
+
+    border-radius:10px;
 
 }
 
 /* ==========================================================
-   NAVIGASI
+   NAVIGATION
 ========================================================== */
 
 .navigation{
 
     position:absolute;
 
-    bottom:10px;
     left:50%;
+    bottom:18px;
 
     transform:translateX(-50%);
 
     display:flex;
     align-items:center;
-    gap:20px;
+    justify-content:center;
 
-    padding:10px 20px;
+    gap:18px;
 
-    border-radius:50px;
+    z-index:20;
 
-    background:rgba(5,20,40,.75);
-
-    backdrop-filter:blur(12px);
-
-    border:1px solid rgba(0,255,255,.2);
-
-    z-index:30;
 }
+
+/* ==========================================================
+   BUTTON
+========================================================== */
 
 .navigation button{
 
-    width:48px;
-    height:48px;
+    width:54px;
+    height:54px;
 
     border:none;
+
     border-radius:50%;
 
     cursor:pointer;
 
+    color:white;
+
     font-size:22px;
 
-    color:#8de8ff;
-
-    background:#0d2342;
+    background:
+        rgba(20,40,70,.9);
 
     transition:.25s;
+
+    box-shadow:
+        0 0 10px rgba(0,180,255,.25);
+
 }
 
 .navigation button:hover{
 
-    background:#14bfff;
-
-    color:#fff;
-
     transform:scale(1.08);
+
+    background:#00bfff;
+
 }
 
 .navigation button:disabled{
 
     opacity:.35;
+
     cursor:not-allowed;
+
 }
+
+/* ==========================================================
+   PAGE NUMBER
+========================================================== */
 
 #pageIndicator{
 
-    min-width:80px;
-
-    text-align:center;
+    color:#8de9ff;
 
     font-size:18px;
 
-    color:#d7f6ff;
+    font-weight:600;
 
-    font-weight:bold;
+    letter-spacing:1px;
+
+    min-width:70px;
+
+    text-align:center;
+
 }
 
 /* ==========================================================
@@ -207,6 +263,7 @@ body{
 .lightbox{
 
     position:fixed;
+
     inset:0;
 
     display:none;
@@ -214,24 +271,26 @@ body{
     justify-content:center;
     align-items:center;
 
-    background:rgba(0,0,0,.85);
+    background:
+        rgba(0,0,0,.92);
 
-    z-index:9999;
+    z-index:999;
+
 }
 
 .lightbox.show{
 
     display:flex;
+
 }
 
 #lightbox-image{
 
-    max-width:90vw;
-    max-height:90vh;
+    max-width:92%;
+    max-height:92%;
 
-    border-radius:12px;
+    border-radius:10px;
 
-    box-shadow:0 0 40px rgba(0,255,255,.3);
 }
 
 .close{
@@ -239,60 +298,90 @@ body{
     position:absolute;
 
     top:30px;
-    right:40px;
-
-    color:white;
+    right:45px;
 
     font-size:42px;
 
+    color:white;
+
     cursor:pointer;
+
 }
 
 /* ==========================================================
    RESPONSIVE
 ========================================================== */
 
-@media (max-width:1200px){
+@media (max-width:1400px){
 
     .hud-frame{
 
-        width:98vw;
-        height:98vh;
+        width:95vw;
 
     }
 
     .book-wrapper{
 
-        left:17%;
-        top:14%;
+        width:74vw;
+        height:60vh;
 
-        width:66%;
-        height:69%;
     }
 
 }
 
-@media (max-width:900px){
+@media (max-width:1200px){
+
+    .book-wrapper{
+
+        width:76vw;
+        height:58vh;
+
+    }
+
+}
+
+@media (max-width:992px){
 
     .hud-frame{
 
-        width:100vw;
-        height:100vh;
+        width:98vw;
 
     }
 
     .book-wrapper{
 
-        left:13%;
-        top:12%;
+        width:78vw;
+        height:56vh;
 
-        width:74%;
-        height:74%;
     }
 
-    .navigation{
+}
 
-        transform:translateX(-50%) scale(.9);
+@media (max-width:768px){
+
+    .hud-frame{
+
+        width:100vw;
+
+    }
+
+    .book-wrapper{
+
+        width:82vw;
+        height:52vh;
+
+    }
+
+    #book{
+
+        padding:25px 25px 85px;
+
+    }
+
+    .navigation button{
+
+        width:46px;
+        height:46px;
 
     }
 
@@ -302,11 +391,31 @@ body{
 
     .book-wrapper{
 
-        left:10%;
-        top:11%;
+        width:84vw;
+        height:50vh;
 
-        width:80%;
-        height:76%;
+    }
+
+    #pageIndicator{
+
+        font-size:15px;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .book-wrapper{
+
+        width:86vw;
+        height:48vh;
+
+    }
+
+    #book{
+
+        padding:18px 18px 80px;
 
     }
 
@@ -314,16 +423,6 @@ body{
 
         gap:12px;
 
-        padding:8px 15px;
-
-    }
-
-    .navigation button{
-
-        width:42px;
-        height:42px;
-
-        font-size:18px;
     }
 
 }

@@ -1,56 +1,133 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Koding dan Kecerdasan Artifisial</title>
-<link rel="stylesheet" href="style.css">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Buku Digital Koding dan Kecerdasan Artifisial">
+
+    <meta name="theme-color" content="#07131d">
+
+    <title>Koding dan Kecerdasan Artifisial</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/icon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
     <link rel="stylesheet" href="book.css">
+
 </head>
+
 <body>
 
-<div class="hud-container">
+    <!-- =====================================================
+         HUD CONTAINER
+    ====================================================== -->
 
-    <img
-        src="assets/frame.png"
-        class="hud-frame"
-        alt="HUD Frame">
+    <div class="hud-container">
 
-    <div class="book-wrapper">
+        <!-- FRAME -->
 
-        <div class="viewer">
+        <img
+            src="assets/frame.png"
+            class="hud-frame"
+            alt="HUD Frame">
 
-            <main id="book"></main>
+        <!-- BOOK -->
 
-            <div class="navigation">
+        <section class="book-wrapper">
 
-                <button id="prevBtn" type="button">◀</button>
+            <div class="viewer">
 
-                <span id="pageIndicator">
+                <main id="book">
 
-                    1 / 1
+                    <!-- Halaman dimuat otomatis oleh script.js -->
 
-                </span>
+                </main>
 
-                <button id="nextBtn" type="button">▶</button>
+                <!-- NAVIGATION -->
+
+                <nav class="navigation" aria-label="Navigasi Halaman">
+
+                    <button
+                        id="prevBtn"
+                        type="button"
+                        title="Halaman Sebelumnya"
+                        aria-label="Halaman Sebelumnya">
+
+                        ◀
+
+                    </button>
+
+                    <span
+                        id="pageIndicator"
+                        aria-live="polite">
+
+                        1 / 1
+
+                    </span>
+
+                    <button
+                        id="nextBtn"
+                        type="button"
+                        title="Halaman Berikutnya"
+                        aria-label="Halaman Berikutnya">
+
+                        ▶
+
+                    </button>
+
+                </nav>
 
             </div>
 
-        </div>
+        </section>
 
     </div>
 
-</div>
+    <!-- =====================================================
+         LIGHTBOX
+    ====================================================== -->
 
-<div id="lightbox" class="lightbox">
+    <div
+        id="lightbox"
+        class="lightbox"
+        role="dialog"
+        aria-hidden="true">
 
-    <span class="close">&times;</span>
+        <button
+            class="close"
+            type="button"
+            aria-label="Tutup">
 
-    <img id="lightbox-image" alt="Preview">
+            &times;
 
-</div>
+        </button>
 
-<script src="script.js"></script>
+        <img
+            id="lightbox-image"
+            alt="Preview Gambar">
+
+    </div>
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>

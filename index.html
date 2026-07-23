@@ -48,7 +48,7 @@
       background-attachment: fixed;
     }
 
-    nav > a {
+    nav a {
       margin: 0 1rem;
       color: white;
       text-decoration: none;
@@ -107,125 +107,7 @@
       background-color: #0277bd;
     }
     
-/* ===========================
-   DROPDOWN MENU PROGRAM
-=========================== */
-
-.menu-kanan{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:flex-end;
-  align-items:center;
-  gap:.5rem;
-  margin-left:auto;
-}
-
-.menu-item{
-  background:rgba(255,255,255,.9);
-  padding:.5rem 1rem;
-  border-radius:6px;
-  color:#0288d1;
-  text-decoration:none;
-  font-weight:bold;
-  display:block;
-  transition:.3s;
-}
-
-.menu-item:hover{
-  background:#0288d1;
-  color:#fff;
-}
-
-.dropdown{
-    position:relative;
-}
-
-.dropdown-content{
-    position:absolute;
-    top:110%;
-    left:0;
-    min-width:240px;
-    background:#fff;
-    border-radius:10px;
-    box-shadow:0 8px 20px rgba(0,0,0,.18);
-    overflow:hidden;
-
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(10px);
-    transition:.25s;
-
-    z-index:999;
-}
-
-.dropdown:hover .dropdown-content{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0);
-}
-
-/* Saat diklik di HP */
-.dropdown.active .dropdown-content{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0);
-}
-
-/* ==========================
-   DROPDOWN RESPONSIVE (HP)
-========================== */
-@media only screen and (max-width:768px){
-
-  .menu-kanan{
-    width:100%;
-    justify-content:center;
-    flex-direction:column;
-    align-items:stretch;
-  }
-
-  .dropdown{
-    width:100%;
-  }
-
-  .menu-item{
-    text-align:center;
-  }
-
-  .dropdown-content{
-    position:static;
-    width:100%;
-    margin-top:5px;
-    box-shadow:none;
-    border:1px solid #ddd;
-
-    /* disembunyikan saat pertama kali */
-    max-height:0;
-    overflow:hidden;
-
-    opacity:1;
-    visibility:visible;
-    transform:none;
-
-    transition:max-height .35s ease;
-  }
-
-  /* tampil ketika diklik */
-  .dropdown.active .dropdown-content{
-    max-height:500px;
-  }
-/* Nonaktifkan efek hover di HP */
-.dropdown:hover .dropdown-content{
-    max-height:0;
-    opacity:1;
-    visibility:visible;
-    transform:none;
-}
-
-.dropdown.active:hover .dropdown-content{
-    max-height:500px;
-}
-
-}  </style>
+  </style>
 </head>
 <body>
   <div class="background-wrapper">
@@ -238,37 +120,14 @@
       </div>
 
       <!-- Menu di kanan -->
-      <!-- Menu -->
-<div class="menu-kanan">
-
-  <a href="index.html" class="menu-item">🏠 Beranda</a>
-
-  <div class="dropdown">
-    <a href="#" class="menu-item">
-      📚 Program ▾
-    </a>
-
-    <div class="dropdown-content">
-      <a href="catatan.html">📖 Program Sekolah</a>
-      <a href="ekstra-komputer/daftar-isi.html">💻 Ekstra Komputer</a>
-      <a href="kelas-5/kelas.html">🎓 Kelas 5</a>
-    </div>
-  </div>
-
-  <div class="dropdown">
-    <a href="#" class="menu-item">
-      🖼️ Galeri ▾
-    </a>
-
-    <div class="dropdown-content">
-      <a href="galeri-depan.html">📷 Foto Sekolah</a>
-      <a href="komik/komik.html">📚 Komik Edukasi</a>
-    </div>
-  </div>
-
-  <a href="kontak.html" class="menu-item">☎ Kontak</a>
-
-</div>
+      <div style="display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-left: auto;">
+        <a href="#" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Beranda</a>
+        <a href="catatan.html" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Program</a>
+        <a href="galeri-depan.html" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Galeri</a>
+        <a href="kelas-5/kelas.html" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Kelas</a>
+        <a href="komik/komik.html" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Komik</a>
+        <a href="ekstra-komputer/daftar-isi.html" style="background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px; color: #0288d1;">Ekstra Komputer</a>
+      </div>
     </nav>
 
     <section class="hero" style="margin-top: -40px;">
@@ -292,50 +151,7 @@
     document.querySelectorAll("a, button, .kelas-button").forEach(el => {
       el.addEventListener("click", playClickSound);
     });
- 
-
-/* ===========================
-   .......................
-=========================== */
-
-
-const dropdowns = document.querySelectorAll(".dropdown");
-
-dropdowns.forEach(drop => {
-
-    const tombol = drop.querySelector(".menu-item");
-
-    tombol.addEventListener("click", function(e){
-
-        if(window.innerWidth <= 768){
-
-            e.preventDefault();
-
-            dropdowns.forEach(d=>{
-                if(d!==drop){
-                    d.classList.remove("active");
-                }
-            });
-
-            drop.classList.toggle("active");
-        }
-
-    });
-
-});
-
-document.addEventListener("click", function(e){
-
-    dropdowns.forEach(drop=>{
-
-        if(!drop.contains(e.target)){
-            drop.classList.remove("active");
-        }
-
-    });
-
-});
-</script>
+  </script>
 </body>
 </html>
 

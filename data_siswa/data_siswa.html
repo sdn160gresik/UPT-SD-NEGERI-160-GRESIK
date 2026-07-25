@@ -507,20 +507,189 @@ Hapus
 
 </footer>
 
+
+<!-- ===========================
+     MODAL FORM DATA SISWA
+=========================== -->
+
+<div class="modal" id="modalSiswa">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>📋 Form Data Siswa</h2>
+
+            <button class="close" onclick="tutupModal()">&times;</button>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Foto Siswa</label>
+                <input type="file" id="foto" accept="image/*">
+            </div>
+
+            <div class="form-group">
+                <label>NIS</label>
+                <input type="text" id="nis">
+            </div>
+
+            <div class="form-group">
+                <label>NISN</label>
+                <input type="text" id="nisn">
+            </div>
+
+            <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input type="text" id="nama">
+            </div>
+
+            <div class="form-group">
+                <label>Nama Panggilan</label>
+                <input type="text" id="panggilan">
+            </div>
+
+            <div class="form-group">
+                <label>Jenis Kelamin</label>
+                <select id="jk">
+                    <option value="">Pilih</option>
+                    <option>L</option>
+                    <option>P</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Tempat Lahir</label>
+                <input type="text" id="tempat">
+            </div>
+
+            <div class="form-group">
+                <label>Tanggal Lahir</label>
+                <input type="date" id="tgl">
+            </div>
+
+            <div class="form-group">
+                <label>Agama</label>
+                <input type="text" id="agama">
+            </div>
+
+            <div class="form-group">
+                <label>Kelas</label>
+                <select id="kelas">
+
+                    <option>I</option>
+                    <option>II</option>
+                    <option>III</option>
+                    <option>IV</option>
+                    <option>V</option>
+                    <option>VI</option>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Tahun Masuk</label>
+                <input type="number" id="tahun">
+            </div>
+
+            <div class="form-group full">
+                <label>Alamat</label>
+                <textarea id="alamat"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Nama Ayah</label>
+                <input type="text" id="ayah">
+            </div>
+
+            <div class="form-group">
+                <label>Nama Ibu</label>
+                <input type="text" id="ibu">
+            </div>
+
+            <div class="form-group">
+                <label>No HP Orang Tua</label>
+                <input type="text" id="hp">
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="btn-simpan" id="btnSimpan">
+                💾 Simpan
+            </button>
+
+            <button class="btn-batal" onclick="tutupModal()">
+                Batal
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 <script>
 // ===============================
 // BUKU INDUK DIGITAL
 // ===============================
 
-// Data siswa
+// ===============================
+// DATA SISWA
+// ===============================
+
 let siswa = JSON.parse(localStorage.getItem("siswa")) || [];
+
+
+// DATA AWAL JIKA BELUM ADA DATA
+
+if(siswa.length==0){
+
+    siswa=[
+        {
+            foto:"",
+            nis:"23001",
+            nisn:"1234567890",
+            nama:"Contoh Siswa",
+            panggilan:"Contoh",
+            jk:"L",
+            kelas:"V",
+            tahun:"2026",
+            agama:"Islam",
+            alamat:"-",
+            ayah:"-",
+            ibu:"-",
+            hp:"-"
+        }
+    ];
+
+    localStorage.setItem(
+        "siswa",
+        JSON.stringify(siswa)
+    );
+
+}
+
 
 // Menyimpan index ketika edit
 let editIndex = -1;
 
+
 // Foto sementara
 let fotoBase64 = "";
 
+
+// Menyimpan data ke LocalStorage
+function simpanData() {
+
+    localStorage.setItem(
+        "siswa",
+        JSON.stringify(siswa)
+    );
+
+}
 // Menyimpan data ke LocalStorage
 function simpanData() {
     localStorage.setItem("siswa", JSON.stringify(siswa));
@@ -624,53 +793,50 @@ document
 function simpanSiswa(){
 
     if(
-        nis.value.trim()=="" ||
-        nisn.value.trim()=="" ||
-        nama.value.trim()=="" ||
-        jk.value=="" ||
-        kelas.value==""
-    ){
+    document.getElementById("nis").value.trim()=="" ||
+    document.getElementById("nisn").value.trim()=="" ||
+    document.getElementById("nama").value.trim()=="" ||
+    document.getElementById("jk").value=="" ||
+    document.getElementById("kelas").value==""
+)
+{
+    alert("Silakan lengkapi data terlebih dahulu.");
+    return;
+}
+    
+   const data={
 
-        alert("Silakan lengkapi data terlebih dahulu.");
+foto:fotoBase64,
 
-        return;
+nis:document.getElementById("nis").value,
 
-    }
+nisn:document.getElementById("nisn").value,
 
-    const data={
+nama:document.getElementById("nama").value,
 
-        
-        foto:fotoBase64,
+panggilan:document.getElementById("panggilan").value,
 
-        nis:nis.value,
+jk:document.getElementById("jk").value,
 
-        nisn:nisn.value,
+tempat:document.getElementById("tempat").value,
 
-        nama:nama.value,
+tgl:document.getElementById("tgl").value,
 
-        panggilan:panggilan.value,
+agama:document.getElementById("agama").value,
 
-        jk:jk.value,
+kelas:document.getElementById("kelas").value,
 
-        tempat:tempat.value,
+tahun:document.getElementById("tahun").value,
 
-        tgl:tgl.value,
+alamat:document.getElementById("alamat").value,
 
-        agama:agama.value,
+ayah:document.getElementById("ayah").value,
 
-        kelas:kelas.value,
+ibu:document.getElementById("ibu").value,
 
-        tahun:tahun.value,
+hp:document.getElementById("hp").value
 
-        alamat:alamat.value,
-
-        ayah:ayah.value,
-
-        ibu:ibu.value,
-
-        hp:hp.value
-
-    };
+};
 
     if(editIndex==-1){
 
@@ -678,11 +844,11 @@ function simpanSiswa(){
 
     }else{
 
-        if(data.foto==""){
+        if(fotoBase64==""){
 
-            data.foto=siswa[editIndex].foto;
+    data.foto=siswa[editIndex].foto;
 
-        }
+}
 
         siswa[editIndex]=data;
 
@@ -837,10 +1003,21 @@ function tutupModal() {
 // ===============================
 document.getElementById("btnTambah").addEventListener("click", function () {
 
-    // kosongkan form
+    // Pastikan mode tambah baru
+    editIndex = -1;
+
+    // Kosongkan form
     bersihkanForm();
 
-    // tampilkan modal
+    // Kembalikan judul modal
+    document.querySelector(".modal-header h2").innerHTML =
+        "📋 Form Data Siswa";
+
+    // Kembalikan tombol simpan
+    document.getElementById("btnSimpan").innerHTML =
+        "💾 Simpan";
+
+    // Tampilkan modal
     bukaModal();
 
 });
@@ -881,130 +1058,46 @@ document.getElementById("foto").addEventListener("change", function(e){
     reader.readAsDataURL(file);
 
 });
+    document.getElementById("search")
+.addEventListener("keyup",function(){
+
+let kata=this.value.toLowerCase();
+
+document.querySelectorAll("#dataSiswa tr")
+.forEach(row=>{
+
+let teks=row.innerText.toLowerCase();
+
+row.style.display =
+teks.includes(kata) ? "" : "none";
+
+});
+    });
+    document.getElementById("kelasFilter")
+.addEventListener("change",function(){
+
+let kelas=this.value;
+
+document.querySelectorAll("#dataSiswa tr")
+.forEach(row=>{
+
+if(kelas==""){
+row.style.display="";
+}
+else{
+
+let kolom=row.children[4].innerText;
+
+row.style.display =
+kolom==kelas ? "" : "none";
+
+}
+
+});
+
+});
+
+
 </script>
-<!-- ===========================
-     MODAL FORM DATA SISWA
-=========================== -->
-
-<div class="modal" id="modalSiswa">
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-
-            <h2>📋 Form Data Siswa</h2>
-
-            <button class="close" onclick="tutupModal()">&times;</button>
-
-        </div>
-
-        <div class="form-grid">
-
-            <div class="form-group">
-                <label>Foto Siswa</label>
-                <input type="file" id="foto" accept="image/*">
-            </div>
-
-            <div class="form-group">
-                <label>NIS</label>
-                <input type="text" id="nis">
-            </div>
-
-            <div class="form-group">
-                <label>NISN</label>
-                <input type="text" id="nisn">
-            </div>
-
-            <div class="form-group">
-                <label>Nama Lengkap</label>
-                <input type="text" id="nama">
-            </div>
-
-            <div class="form-group">
-                <label>Nama Panggilan</label>
-                <input type="text" id="panggilan">
-            </div>
-
-            <div class="form-group">
-                <label>Jenis Kelamin</label>
-                <select id="jk">
-                    <option value="">Pilih</option>
-                    <option>L</option>
-                    <option>P</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Tempat Lahir</label>
-                <input type="text" id="tempat">
-            </div>
-
-            <div class="form-group">
-                <label>Tanggal Lahir</label>
-                <input type="date" id="tgl">
-            </div>
-
-            <div class="form-group">
-                <label>Agama</label>
-                <input type="text" id="agama">
-            </div>
-
-            <div class="form-group">
-                <label>Kelas</label>
-                <select id="kelas">
-
-                    <option>I</option>
-                    <option>II</option>
-                    <option>III</option>
-                    <option>IV</option>
-                    <option>V</option>
-                    <option>VI</option>
-
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Tahun Masuk</label>
-                <input type="number" id="tahun">
-            </div>
-
-            <div class="form-group full">
-                <label>Alamat</label>
-                <textarea id="alamat"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>Nama Ayah</label>
-                <input type="text" id="ayah">
-            </div>
-
-            <div class="form-group">
-                <label>Nama Ibu</label>
-                <input type="text" id="ibu">
-            </div>
-
-            <div class="form-group">
-                <label>No HP Orang Tua</label>
-                <input type="text" id="hp">
-            </div>
-
-        </div>
-
-        <div class="modal-footer">
-
-            <button class="btn-simpan" id="btnSimpan">
-                💾 Simpan
-            </button>
-
-            <button class="btn-batal" onclick="tutupModal()">
-                Batal
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
 </body>
 </html>

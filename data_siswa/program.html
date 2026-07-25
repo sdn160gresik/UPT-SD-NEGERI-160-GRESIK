@@ -10,6 +10,19 @@
     <style>
         body{
             font-family: Arial, Helvetica, sans-serif;
+
+            /* Background */
+            background-image: url('https://i.imgur.com/lmGzHl3.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* Lapisan gelap agar tulisan lebih jelas */
+        .overlay{
+            background: rgba(255,255,255,0.75);
+            min-height: 100vh;
         }
 
         .menu-card{
@@ -22,10 +35,12 @@
     </style>
 </head>
 
-<body class="bg-gradient-to-br from-blue-100 via-white to-blue-50 min-h-screen">
+<body>
+
+<div class="overlay">
 
     <!-- Header -->
-    <header class="bg-blue-700 shadow-lg">
+    <header class="bg-blue-700/90 backdrop-blur shadow-lg">
         <div class="max-w-7xl mx-auto px-6 py-8 text-center">
 
             <h1 class="text-4xl font-bold text-white">
@@ -42,7 +57,7 @@
     <!-- Dashboard -->
     <main class="max-w-7xl mx-auto px-6 py-12">
 
-        <h2 class="text-3xl font-bold text-center text-gray-700 mb-10">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">
             Dashboard Menu
         </h2>
 
@@ -161,15 +176,17 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t mt-16">
+    <footer class="bg-white/90 backdrop-blur border-t mt-16">
 
-        <div class="max-w-7xl mx-auto py-6 text-center text-gray-500">
+        <div class="max-w-7xl mx-auto py-6 text-center text-gray-600">
 
             © 2026 Sistem Akademik Sekolah
 
         </div>
 
     </footer>
+
+</div>
 
 </body>
 </html>

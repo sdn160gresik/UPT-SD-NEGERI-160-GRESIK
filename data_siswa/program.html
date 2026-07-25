@@ -32,6 +32,20 @@
         .menu-card:hover{
             transform: translateY(-8px);
         }
+        @keyframes popup {
+    from{
+        transform: scale(.8);
+        opacity:0;
+    }
+    to{
+        transform: scale(1);
+        opacity:1;
+    }
+}
+
+.animate-popup{
+    animation: popup .3s ease;
+}
     </style>
 </head>
 
@@ -58,8 +72,9 @@
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
 
             <!-- ================= DATA SISWA ================= -->
-            <a href="data_siswa.html"
-               class="menu-card bg-white rounded-3xl shadow-lg hover:shadow-2xl p-8 text-center border-t-8 border-green-500">
+            <a href="javascript:void(0)"
+   onclick="loginDataSiswa(); return false;"
+   class="menu-card bg-white rounded-3xl shadow-lg hover:shadow-2xl p-8 text-center border-t-8 border-green-500">
 
                 <div class="text-7xl mb-5">
                     👨‍🎓
@@ -168,6 +183,179 @@
     </footer>
 
 </div>
+    <!-- ================= LOGIN POPUP ================= -->
+
+<div id="loginModal"
+class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50">
+
+    <div class="bg-white rounded-3xl shadow-2xl w-96 p-8 relative animate-popup">
+
+        <button onclick="tutupLogin()"
+        class="absolute top-4 right-5 text-2xl hover:text-red-600">
+            ✕
+        </button>
+
+        <div class="text-center">
+
+            <div class="text-6xl mb-4">
+                🔒
+            </div>
+
+            <h2 class="text-3xl font-bold text-blue-700">
+                Login Data Siswa
+            </h2>
+
+            <p class="text-gray-500 mt-2">
+                Masukkan password
+            </p>
+
+        </div>
+
+        <div class="relative mt-6">
+
+    <input
+        id="password"
+        type="password"
+        placeholder="Masukkan Password"
+        class="w-full border-2 rounded-xl p-3 pr-12 focus:ring-4 focus:ring-blue-300 outline-none">
+
+    <button
+        type="button"
+        onclick="togglePassword()"
+        class="absolute right-3 top-3 text-xl">
+
+        👁️
+
+    </button>
+
+</div>
+
+        <button
+    id="btnLogin"
+    onclick="cekPassword()"
+    class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl mt-5 font-bold transition">
+
+            LOGIN
+
+        </button>
+
+        <p id="error"
+        class="text-red-600 text-center mt-3 hidden">
+            Password salah!
+        </p>
+
+    </div>
+
+</div>
+    <script>
+
+const PASSWORD = "admin160";
+
+function loginDataSiswa(){
+
+    document.getElementById("loginModal").classList.remove("hidden");
+    document.getElementById("loginModal").classList.add("flex");
+
+    document.getElementById("password").value="";
+    document.getElementById("error").classList.add("hidden");
+    const btn=document.getElementById("btnLogin");
+
+btn.innerHTML="LOGIN";
+btn.disabled=false;
+
+    setTimeout(function(){
+
+        document.getElementById("password").focus();
+
+    },100);
+
+}
+
+function tutupLogin(){
+
+    document.getElementById("loginModal").classList.remove("flex");
+    document.getElementById("loginModal").classList.add("hidden");
+
+    document.getElementById("password").value="";
+    document.getElementById("error").classList.add("hidden");
+
+}
+
+function cekPassword(){
+
+    let pass=document.getElementById("password").value;
+
+    if(pass===PASSWORD){
+
+        const btn=document.getElementById("btnLogin");
+
+        btn.innerHTML="⏳ Membuka...";
+        btn.disabled=true;
+
+        setTimeout(function(){
+
+            window.location.href="data_siswa.html";
+
+        },700);
+
+    }else{
+
+        document.getElementById("error").classList.remove("hidden");
+        document.getElementById("password").value="";
+        document.getElementById("password").focus();
+
+    }
+
+}
+        function togglePassword(){
+
+    let p=document.getElementById("password");
+
+    if(p.type==="password"){
+
+        p.type="text";
+
+    }else{
+
+        p.type="password";
+
+    }
+
+}
+
+document.getElementById("password").addEventListener("keydown",function(e){
+
+    if(e.key==="Enter"){
+
+        cekPassword();
+
+    }
+
+});
+
+window.onclick=function(e){
+
+    let modal=document.getElementById("loginModal");
+
+    if(e.target===modal){
+
+        tutupLogin();
+
+    }
+
+}
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="Escape"){
+
+        tutupLogin();
+
+    }
+
+});
+
+</script>
 
 </body>
 </html>

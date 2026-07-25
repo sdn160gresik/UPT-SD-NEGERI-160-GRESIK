@@ -857,6 +857,30 @@ window.onclick = function(event){
     }
 
 };
+        // ===============================
+// UPLOAD FOTO
+// ===============================
+
+document.getElementById("foto").addEventListener("change", function(e){
+
+    const file = e.target.files[0];
+
+    if(!file){
+        fotoBase64="";
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload=function(){
+
+        fotoBase64 = reader.result;
+
+    }
+
+    reader.readAsDataURL(file);
+
+});
 </script>
 <!-- ===========================
      MODAL FORM DATA SISWA
@@ -981,29 +1005,6 @@ window.onclick = function(event){
     </div>
 
 </div>
-    // ===============================
-// UPLOAD FOTO
-// ===============================
 
-document.getElementById("foto").addEventListener("change", function(e){
-
-    const file = e.target.files[0];
-
-    if(!file){
-        fotoBase64="";
-        return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload=function(){
-
-        fotoBase64 = reader.result;
-
-    }
-
-    reader.readAsDataURL(file);
-
-});
 </body>
 </html>

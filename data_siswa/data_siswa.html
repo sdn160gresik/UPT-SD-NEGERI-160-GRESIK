@@ -637,85 +637,71 @@ Hapus
 // ===============================
 
 // ===============================
+// GOOGLE APPS SCRIPT
+// ===============================
+
+const URL_WEBAPP = "https://script.google.com/macros/s/AKfycbxxxxxxxxxxxxxxxxxxxxxxxx/exec";
+    
+
+// ===============================
 // DATA SISWA
 // ===============================
 
-let siswa = JSON.parse(localStorage.getItem("siswa")) || [];
+// ===============================
+// VARIABEL GLOBAL
+// ===============================
 
-
-// DATA AWAL JIKA BELUM ADA DATA
-
-if(siswa.length==0){
-
-    siswa=[
-        {
-            foto:"",
-            nis:"23001",
-            nisn:"1234567890",
-            nama:"Contoh Siswa",
-            panggilan:"Contoh",
-            jk:"L",
-            kelas:"V",
-            tahun:"2026",
-            agama:"Islam",
-            alamat:"-",
-            ayah:"-",
-            ibu:"-",
-            hp:"-"
-        }
-    ];
-
-    localStorage.setItem(
-        "siswa",
-        JSON.stringify(siswa)
-    );
-
-}
-
-
-// Menyimpan index ketika edit
+let siswa = [];
 let editIndex = -1;
-
-
-// Foto sementara
 let fotoBase64 = "";
-
-
-
-// Menyimpan data ke LocalStorage
-function simpanData() {
-    localStorage.setItem("siswa", JSON.stringify(siswa));
-}
-
-// Menghitung dashboard
-function updateDashboard() {
-
-    document.getElementById("jmlSiswa").innerText =
-        siswa.length;
-
-
-    document.getElementById("jmlL").innerText =
-        siswa.filter(x => x.jk === "L").length;
-
-
-    document.getElementById("jmlP").innerText =
-        siswa.filter(x => x.jk === "P").length;
-
-
-    document.getElementById("jmlKelas").innerText =
-        [...new Set(siswa.map(x=>x.kelas))].length;
-
-}
-
-// Dipanggil saat pertama dibuka
-updateDashboard();
-
-
-// ===============================
-// MENAMPILKAN DATA
+    // ===============================
+// LOAD DATA DARI GOOGLE SHEET
 // ===============================
 
-function tampilkanData(){
+async function loadData(){
+
+    try{
+
+        const response = await fetch(URL_WEBAPP);
+        const json = await response.json();
+
+        siswa = [];
+
+        json.forEach(function(r){
+
+            siswa.push({
+
+                id        : r[0],
+                foto      : r[1],
+                nis       : r[2],
+                nisn      : r[3],
+                nama      : r[4],
+                panggilan : r[5],
+                jk        : r[6],
+                tempat    : r[7],
+                tgl       : r[8],
+                agama     : r[9],
+                kelas     : r[10],
+                tahun     : r[11],
+                alamat    : r[12],
+                ayah      : r[13],
+                ibu       : r[14],
+                hp        : r[15]
+
+            });
+
+        });
+
+        tampilkanData();
+
+    }catch(err){
+
+        console.error(err);
+        alert("Gagal mengambil data dari Google Spreadsheet.");
+
+    }
+
+}
 
     const tbody=document.getElementById("dataSiswa");
 
@@ -776,10 +762,23 @@ Hapus
     });
 
     updateDashboard();
+function updateDashboard() {
+
+    document.getElementById("jmlSiswa").textContent = siswa.length;
+
+    const laki = siswa.filter(s => s.jk === "L").length;
+    const perempuan = siswa.filter(s => s.jk === "P").length;
+
+    document.getElementById("jmlL").textContent = laki;
+    document.getElementById("jmlP").textContent = perempuan;
+
+    const kelas = [...new Set(siswa.map(s => s.kelas))];
+    document.getElementById("jmlKelas").textContent = kelas.length;
 
 }
+}
 
-tampilkanData();
+loadData();
 
 // ===============================
 // SIMPAN DATA
@@ -789,79 +788,104 @@ document
 .getElementById("btnSimpan")
 .addEventListener("click",simpanSiswa);
 
-function simpanSiswa(){
+async function simpanSiswa(){
 
     if(
-    document.getElementById("nis").value.trim()=="" ||
-    document.getElementById("nisn").value.trim()=="" ||
-    document.getElementById("nama").value.trim()=="" ||
-    document.getElementById("jk").value=="" ||
-    document.getElementById("kelas").value==""
-)
-{
-    alert("Silakan lengkapi data terlebih dahulu.");
-    return;
-}
-    
-   const data={
+        document.getElementById("nis").value.trim()=="" ||
+        document.getElementById("nisn").value.trim()=="" ||
+        document.getElementById("nama").value.trim()=="" ||
+        document.getElementById("jk").value=="" ||
+        document.getElementById("kelas").value==""
+    ){
+        alert("Silakan lengkapi data terlebih dahulu.");
+        return;
+    }
 
-foto:fotoBase64,
+    const data = {
 
-nis:document.getElementById("nis").value,
+        id         : editIndex==-1 ? "" : siswa[editIndex].id,
 
-nisn:document.getElementById("nisn").value,
+        foto       : fotoBase64,
 
-nama:document.getElementById("nama").value,
+        nis        : document.getElementById("nis").value,
 
-panggilan:document.getElementById("panggilan").value,
+        nisn       : document.getElementById("nisn").value,
 
-jk:document.getElementById("jk").value,
+        nama       : document.getElementById("nama").value,
 
-tempat:document.getElementById("tempat").value,
+        panggilan  : document.getElementById("panggilan").value,
 
-tgl:document.getElementById("tgl").value,
+        jk         : document.getElementById("jk").value,
 
-agama:document.getElementById("agama").value,
+        tempat     : document.getElementById("tempat").value,
 
-kelas:document.getElementById("kelas").value,
+        tgl        : document.getElementById("tgl").value,
 
-tahun:document.getElementById("tahun").value,
+        agama      : document.getElementById("agama").value,
 
-alamat:document.getElementById("alamat").value,
+        kelas      : document.getElementById("kelas").value,
 
-ayah:document.getElementById("ayah").value,
+        tahun      : document.getElementById("tahun").value,
 
-ibu:document.getElementById("ibu").value,
+        alamat     : document.getElementById("alamat").value,
 
-hp:document.getElementById("hp").value
+        ayah       : document.getElementById("ayah").value,
 
-};
+        ibu        : document.getElementById("ibu").value,
 
-    if(editIndex==-1){
+        hp         : document.getElementById("hp").value
 
-        siswa.push(data);
+    };
 
-    }else{
+    if(editIndex!=-1 && fotoBase64==""){
 
-        if(fotoBase64==""){
-
-    data.foto = siswa[editIndex].foto || "";
-
-}
-
-        siswa[editIndex]=data;
-
-        editIndex=-1;
+        data.foto = siswa[editIndex].foto;
 
     }
 
-    simpanData();
+    try{
 
-    tampilkanData();
+        const response = await fetch(URL_WEBAPP,{
 
-    tutupModal();
+            method:"POST",
 
-    bersihkanForm();
+            body:JSON.stringify({
+
+                aksi : editIndex==-1 ? "tambah" : "edit",
+
+                data : data
+
+            })
+
+        });
+
+        const hasil = await response.text();
+
+        if(hasil=="OK"){
+
+            alert("Data berhasil disimpan.");
+
+            editIndex=-1;
+
+            bersihkanForm();
+
+            tutupModal();
+
+            await loadData();
+
+        }else{
+
+            alert(hasil);
+
+        }
+
+    }catch(err){
+
+        console.error(err);
+
+        alert("Gagal menyimpan data.");
+
+    }
 
 }
 // ===============================
@@ -910,15 +934,47 @@ function editSiswa(index){
     // ===============================
 // HAPUS DATA SISWA
 // ===============================
-function hapusSiswa(index){
+async function hapusSiswa(index){
 
-    if(confirm("Yakin ingin menghapus data siswa?")){
+    if(!confirm("Yakin ingin menghapus data siswa?")){
+        return;
+    }
 
-        siswa.splice(index,1);
+    try{
 
-        simpanData();
+        const response = await fetch(URL_WEBAPP,{
 
-        tampilkanData();
+            method:"POST",
+
+            body:JSON.stringify({
+
+                aksi:"hapus",
+
+                id:siswa[index].id
+
+            })
+
+        });
+
+        const hasil = await response.text();
+
+        if(hasil=="OK"){
+
+            alert("Data berhasil dihapus.");
+
+            await loadData();
+
+        }else{
+
+            alert(hasil);
+
+        }
+
+    }catch(err){
+
+        console.error(err);
+
+        alert("Gagal menghapus data.");
 
     }
 

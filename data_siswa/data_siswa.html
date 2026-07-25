@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Buku Induk Digital Sekolah</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f6fb;
+    color:#333;
+}
+
+header{
+    background:linear-gradient(135deg,#1565C0,#0D47A1);
+    color:white;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.2);
+}
+
+header h1{
+    font-size:30px;
+}
+
+header p{
+    margin-top:5px;
+    opacity:.9;
+}
+
+.container{
+    width:95%;
+    max-width:1400px;
+    margin:25px auto;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+    text-align:center;
+}
+
+.card h2{
+    color:#1565C0;
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+.card span{
+    color:#777;
+    font-size:15px;
+}
+
+.toolbar{
+    background:white;
+    padding:18px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.toolbar input,
+.toolbar select{
+    flex:1;
+    min-width:180px;
+    padding:11px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    outline:none;
+}
+
+.toolbar button{
+    padding:11px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    color:white;
+    background:#1565C0;
+    transition:.3s;
+}
+
+.toolbar button:hover{
+    background:#0D47A1;
+}
+
+.table-box{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#1565C0;
+    color:white;
+}
+
+th{
+    padding:14px;
+    font-size:14px;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #eee;
+    text-align:center;
+}
+
+tbody tr:hover{
+    background:#f5f9ff;
+}
+
+.foto{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.action button{
+    margin:2px;
+    padding:7px 12px;
+    border:none;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;
+}
+
+.detail{
+    background:#009688;
+}
+
+.edit{
+    background:#F9A825;
+}
+
+.hapus{
+    background:#D32F2F;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    color:#777;
+    font-size:14px;
+}
+
+@media(max-width:768px){
+
+header h1{
+    font-size:24px;
+}
+
+.toolbar{
+    flex-direction:column;
+}
+
+.toolbar button{
+    width:100%;
+}
+
+table{
+    font-size:13px;
+}
+
+}
+/* ===========================
+   MODAL
+=========================== */
+
+.modal{
+
+display:none;
+
+position:fixed;
+
+left:0;
+top:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,.45);
+
+justify-content:center;
+align-items:center;
+
+padding:20px;
+
+z-index:999;
+
+}
+
+.modal-content{
+
+background:white;
+
+width:900px;
+
+max-height:90vh;
+
+overflow:auto;
+
+border-radius:15px;
+
+padding:25px;
+
+}
+
+.modal-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:20px;
+
+}
+
+.close{
+
+font-size:28px;
+
+border:none;
+
+background:none;
+
+cursor:pointer;
+
+}
+
+.form-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:15px;
+
+}
+
+.form-group{
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.form-group label{
+
+font-weight:600;
+
+margin-bottom:5px;
+
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+
+padding:10px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+font-size:14px;
+
+}
+
+textarea{
+
+height:80px;
+
+resize:vertical;
+
+}
+
+.full{
+
+grid-column:1/-1;
+
+}
+
+.modal-footer{
+
+margin-top:20px;
+
+display:flex;
+
+gap:10px;
+
+justify-content:flex-end;
+
+}
+
+.btn-simpan{
+
+background:#1565C0;
+
+color:white;
+
+padding:10px 20px;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+.btn-batal{
+
+background:#D32F2F;
+
+color:white;
+
+padding:10px 20px;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>📚 Buku Induk Digital Sekolah</h1>
+
+<p>Sistem Pendataan Siswa</p>
+
+</header>
+
+<div class="container">
+
+<!-- Dashboard -->
+
+<div class="dashboard">
+
+<div class="card">
+<h2 id="jmlSiswa">0</h2>
+<span>Jumlah Siswa</span>
+</div>
+
+<div class="card">
+<h2 id="jmlL">0</h2>
+<span>Laki-laki</span>
+</div>
+
+<div class="card">
+<h2 id="jmlP">0</h2>
+<span>Perempuan</span>
+</div>
+
+<div class="card">
+<h2 id="jmlKelas">6</h2>
+<span>Kelas</span>
+</div>
+
+</div>
+
+<!-- Toolbar -->
+
+<div class="toolbar">
+
+<input
+type="text"
+id="search"
+placeholder="🔍 Cari Nama, NIS atau NISN">
+
+<select id="kelasFilter">
+
+<option value="">Semua Kelas</option>
+
+<option>I</option>
+<option>II</option>
+<option>III</option>
+<option>IV</option>
+<option>V</option>
+<option>VI</option>
+
+</select>
+
+<button id="btnTambah">
+
+➕ Tambah Siswa
+
+</button>
+
+</div>
+
+<!-- Tabel -->
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Foto</th>
+
+<th>NIS</th>
+
+<th>NISN</th>
+
+<th>Nama</th>
+
+<th>Kelas</th>
+
+<th>JK</th>
+
+<th>Aksi</th>
+
+</tr>
+
+</thead>
+
+<tbody id="dataSiswa">
+
+<tr>
+
+<td>
+<img
+class="foto"
+src="https://via.placeholder.com/55">
+</td>
+
+<td>23001</td>
+
+<td>1234567890</td>
+
+<td>Contoh Siswa</td>
+
+<td>V</td>
+
+<td>L</td>
+
+<td class="action">
+
+<button class="detail">
+Detail
+</button>
+
+<button class="edit">
+Edit
+</button>
+
+<button class="hapus">
+Hapus
+</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 Buku Induk Digital Sekolah
+
+</footer>
+
+<script>
+// ===============================
+// BUKU INDUK DIGITAL
+// ===============================
+
+// Data siswa
+let siswa = JSON.parse(localStorage.getItem("siswa")) || [];
+
+// Menyimpan index ketika edit
+let editIndex = -1;
+
+// Foto sementara
+let fotoBase64 = "";
+
+// Menyimpan data ke LocalStorage
+function simpanData() {
+    localStorage.setItem("siswa", JSON.stringify(siswa));
+}
+
+// Menghitung dashboard
+function updateDashboard() {
+
+    document.getElementById("jmlSiswa").innerText = siswa.length;
+
+    document.getElementById("jmlL").innerText =
+        siswa.filter(x => x.jk === "L").length;
+
+    document.getElementById("jmlP").innerText =
+        siswa.filter(x => x.jk === "P").length;
+
+}
+
+// Dipanggil saat pertama dibuka
+updateDashboard();
+// ===============================
+// UPLOAD FOTO
+// ===============================
+
+document.getElementById("foto").addEventListener("change", function(e){
+
+    const file = e.target.files[0];
+
+    if(!file){
+        fotoBase64="";
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload=function(){
+
+        fotoBase64 = reader.result;
+
+    }
+
+    reader.readAsDataURL(file);
+
+});
+
+// ===============================
+// MENAMPILKAN DATA
+// ===============================
+
+function tampilkanData(){
+
+    const tbody=document.getElementById("dataSiswa");
+
+    tbody.innerHTML="";
+
+    siswa.forEach((item,index)=>{
+
+        tbody.innerHTML+=`
+
+<tr>
+
+<td>
+
+<img class="foto"
+src="${item.foto || 'https://via.placeholder.com/55'}">
+
+</td>
+
+<td>${item.nis}</td>
+
+<td>${item.nisn}</td>
+
+<td>${item.nama}</td>
+
+<td>${item.kelas}</td>
+
+<td>${item.jk}</td>
+
+<td class="action">
+
+<button class="detail"
+onclick="detailSiswa(${index})">
+
+Detail
+
+</button>
+
+<button class="edit"
+onclick="editSiswa(${index})">
+
+Edit
+
+</button>
+
+<button class="hapus"
+onclick="hapusSiswa(${index})">
+
+Hapus
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+    });
+
+    updateDashboard();
+
+}
+
+tampilkanData();
+
+// ===============================
+// SIMPAN DATA
+// ===============================
+
+document
+.getElementById("btnSimpan")
+.addEventListener("click",simpanSiswa);
+
+function simpanSiswa(){
+
+    if(
+        nis.value.trim()=="" ||
+        nisn.value.trim()=="" ||
+        nama.value.trim()=="" ||
+        jk.value=="" ||
+        kelas.value==""
+    ){
+
+        alert("Silakan lengkapi data terlebih dahulu.");
+
+        return;
+
+    }
+
+    const data={
+
+        foto:fotoBase64,
+
+        nis:nis.value,
+
+        nisn:nisn.value,
+
+        nama:nama.value,
+
+        panggilan:panggilan.value,
+
+        jk:jk.value,
+
+        tempat:tempat.value,
+
+        tgl:tgl.value,
+
+        agama:agama.value,
+
+        kelas:kelas.value,
+
+        tahun:tahun.value,
+
+        alamat:alamat.value,
+
+        ayah:ayah.value,
+
+        ibu:ibu.value,
+
+        hp:hp.value
+
+    };
+        foto:fotoBase64,
+
+        nis:nis.value,
+
+        nisn:nisn.value,
+
+        nama:nama.value,
+
+        panggilan:panggilan.value,
+
+        jk:jk.value,
+
+        tempat:tempat.value,
+
+        tgl:tgl.value,
+
+        agama:agama.value,
+
+        kelas:kelas.value,
+
+        tahun:tahun.value,
+
+        alamat:alamat.value,
+
+        ayah:ayah.value,
+
+        ibu:ibu.value,
+
+        hp:hp.value
+
+    };
+
+    if(editIndex==-1){
+
+        siswa.push(data);
+
+    }else{
+
+        if(data.foto==""){
+
+            data.foto=siswa[editIndex].foto;
+
+        }
+
+        siswa[editIndex]=data;
+
+        editIndex=-1;
+
+    }
+
+    simpanData();
+
+    tampilkanData();
+
+    tutupModal();
+
+    bersihkanForm();
+
+}
+// ===============================
+// EDIT DATA SISWA
+// ===============================
+
+function editSiswa(index){
+
+    // Simpan index yang sedang diedit
+    editIndex = index;
+
+    // Ambil data siswa
+    const data = siswa[index];
+
+    // Isi form
+    document.getElementById("nis").value = data.nis;
+    document.getElementById("nisn").value = data.nisn;
+    document.getElementById("nama").value = data.nama;
+    document.getElementById("panggilan").value = data.panggilan;
+    document.getElementById("jk").value = data.jk;
+    document.getElementById("tempat").value = data.tempat;
+    document.getElementById("tgl").value = data.tgl;
+    document.getElementById("agama").value = data.agama;
+    document.getElementById("kelas").value = data.kelas;
+    document.getElementById("tahun").value = data.tahun;
+    document.getElementById("alamat").value = data.alamat;
+    document.getElementById("ayah").value = data.ayah;
+    document.getElementById("ibu").value = data.ibu;
+    document.getElementById("hp").value = data.hp;
+
+    // Simpan foto lama
+    fotoBase64 = data.foto || "";
+
+    // Ubah judul modal
+    document.querySelector(".modal-header h2").innerHTML =
+        "✏ Edit Data Siswa";
+
+    // Ubah teks tombol
+    document.getElementById("btnSimpan").innerHTML =
+        "💾 Update Data";
+
+    // Tampilkan modal
+    bukaModal();
+
+}
+// ===============================
+// MEMBERSIHKAN FORM
+// ===============================
+
+function bersihkanForm(){
+
+    document.getElementById("foto").value = "";
+
+    document.getElementById("nis").value = "";
+    document.getElementById("nisn").value = "";
+    document.getElementById("nama").value = "";
+    document.getElementById("panggilan").value = "";
+    document.getElementById("jk").value = "";
+    document.getElementById("tempat").value = "";
+    document.getElementById("tgl").value = "";
+    document.getElementById("agama").value = "";
+    document.getElementById("kelas").selectedIndex = 0;
+    document.getElementById("tahun").value = "";
+    document.getElementById("alamat").value = "";
+    document.getElementById("ayah").value = "";
+    document.getElementById("ibu").value = "";
+    document.getElementById("hp").value = "";
+
+    fotoBase64 = "";
+    editIndex = -1;
+
+    document.querySelector(".modal-header h2").innerHTML =
+        "📋 Form Data Siswa";
+
+    document.getElementById("btnSimpan").innerHTML =
+        "💾 Simpan";
+
+}
+// ===============================
+// MEMBUKA MODAL
+// ===============================
+function bukaModal() {
+    document.getElementById("modalSiswa").style.display = "flex";
+}
+
+// ===============================
+// MENUTUP MODAL
+// ===============================
+function tutupModal() {
+    document.getElementById("modalSiswa").style.display = "none";
+}
+
+// ===============================
+// TOMBOL TAMBAH SISWA
+// ===============================
+document.getElementById("btnTambah").addEventListener("click", function () {
+
+    // kosongkan form
+    bersihkanForm();
+
+    // tampilkan modal
+    bukaModal();
+
+});
+
+// ===============================
+// TUTUP MODAL SAAT KLIK DI LUAR
+// ===============================
+window.onclick = function(event){
+
+    const modal = document.getElementById("modalSiswa");
+
+    if(event.target == modal){
+        tutupModal();
+    }
+
+};
+</script>
+<!-- ===========================
+     MODAL FORM DATA SISWA
+=========================== -->
+
+<div class="modal" id="modalSiswa">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>📋 Form Data Siswa</h2>
+
+            <button class="close" onclick="tutupModal()">&times;</button>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Foto Siswa</label>
+                <input type="file" id="foto" accept="image/*">
+            </div>
+
+            <div class="form-group">
+                <label>NIS</label>
+                <input type="text" id="nis">
+            </div>
+
+            <div class="form-group">
+                <label>NISN</label>
+                <input type="text" id="nisn">
+            </div>
+
+            <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input type="text" id="nama">
+            </div>
+
+            <div class="form-group">
+                <label>Nama Panggilan</label>
+                <input type="text" id="panggilan">
+            </div>
+
+            <div class="form-group">
+                <label>Jenis Kelamin</label>
+                <select id="jk">
+                    <option value="">Pilih</option>
+                    <option>L</option>
+                    <option>P</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Tempat Lahir</label>
+                <input type="text" id="tempat">
+            </div>
+
+            <div class="form-group">
+                <label>Tanggal Lahir</label>
+                <input type="date" id="tgl">
+            </div>
+
+            <div class="form-group">
+                <label>Agama</label>
+                <input type="text" id="agama">
+            </div>
+
+            <div class="form-group">
+                <label>Kelas</label>
+                <select id="kelas">
+
+                    <option>I</option>
+                    <option>II</option>
+                    <option>III</option>
+                    <option>IV</option>
+                    <option>V</option>
+                    <option>VI</option>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Tahun Masuk</label>
+                <input type="number" id="tahun">
+            </div>
+
+            <div class="form-group full">
+                <label>Alamat</label>
+                <textarea id="alamat"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Nama Ayah</label>
+                <input type="text" id="ayah">
+            </div>
+
+            <div class="form-group">
+                <label>Nama Ibu</label>
+                <input type="text" id="ibu">
+            </div>
+
+            <div class="form-group">
+                <label>No HP Orang Tua</label>
+                <input type="text" id="hp">
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="btn-simpan" id="btnSimpan">
+                💾 Simpan
+            </button>
+
+            <button class="btn-batal" onclick="tutupModal()">
+                Batal
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

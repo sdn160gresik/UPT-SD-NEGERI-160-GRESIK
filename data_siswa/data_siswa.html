@@ -640,7 +640,8 @@ Hapus
 // GOOGLE APPS SCRIPT
 // ===============================
 
-const URL_WEBAPP = "https://script.google.com/macros/s/AKfycbxxxxxxxxxxxxxxxxxxxxxxxx/exec";
+const URL_WEBAPP = "const URL_WEBAPP =
+"https://script.google.com/macros/s/AKfycbwXFkhsqZcYJQ_CVT2Ih04-HsZTbPUpFlxtTBjo1rdo_DesTn13mz2wfmD-7aMVtJVrdg/exec";
     
 
 // ===============================
@@ -703,65 +704,55 @@ async function loadData(){
 
 }
 
-    const tbody=document.getElementById("dataSiswa");
+    function tampilkanData(){
 
-    tbody.innerHTML="";
+    const tbody = document.getElementById("dataSiswa");
+
+    tbody.innerHTML = "";
 
     siswa.forEach((item,index)=>{
 
-        tbody.innerHTML+=`
+        tbody.innerHTML += `
+        <tr>
 
-<tr>
+            <td>
+                <img class="foto"
+                src="${item.foto || 'https://via.placeholder.com/55'}">
+            </td>
 
-<td>
+            <td>${item.nis}</td>
+            <td>${item.nisn}</td>
+            <td>${item.nama}</td>
+            <td>${item.kelas}</td>
+            <td>${item.jk}</td>
 
-<img class="foto"
-src="${item.foto || 'https://via.placeholder.com/55'}">
+            <td class="action">
 
-</td>
+                <button class="detail"
+                onclick="detailSiswa(${index})">
+                Detail
+                </button>
 
-<td>${item.nis}</td>
+                <button class="edit"
+                onclick="editSiswa(${index})">
+                Edit
+                </button>
 
-<td>${item.nisn}</td>
+                <button class="hapus"
+                onclick="hapusSiswa(${index})">
+                Hapus
+                </button>
 
-<td>${item.nama}</td>
+            </td>
 
-<td>${item.kelas}</td>
-
-<td>${item.jk}</td>
-
-<td class="action">
-
-<button class="detail"
-onclick="detailSiswa(${index})">
-
-Detail
-
-</button>
-
-<button class="edit"
-onclick="editSiswa(${index})">
-
-Edit
-
-</button>
-
-<button class="hapus"
-onclick="hapusSiswa(${index})">
-
-Hapus
-
-</button>
-
-</td>
-
-</tr>
-
-`;
+        </tr>
+        `;
 
     });
 
     updateDashboard();
+
+}
 function updateDashboard() {
 
     document.getElementById("jmlSiswa").textContent = siswa.length;
@@ -776,7 +767,7 @@ function updateDashboard() {
     document.getElementById("jmlKelas").textContent = kelas.length;
 
 }
-}
+
 
 loadData();
 
@@ -800,12 +791,28 @@ async function simpanSiswa(){
         alert("Silakan lengkapi data terlebih dahulu.");
         return;
     }
+if(isNaN(document.getElementById("nis").value)){
 
+    alert("NIS harus berupa angka");
+    return;
+
+}
+
+if(isNaN(document.getElementById("nisn").value)){
+
+    alert("NISN harus berupa angka");
+    return;
+
+}
     const data = {
 
         id         : editIndex==-1 ? "" : siswa[editIndex].id,
 
-        foto       : fotoBase64,
+        foto :
+fotoBase64 ||
+(editIndex!=-1
+? siswa[editIndex].foto
+: ""),
 
         nis        : document.getElementById("nis").value,
 
@@ -1121,7 +1128,9 @@ let kata=this.value.toLowerCase();
 document.querySelectorAll("#dataSiswa tr")
 .forEach(row=>{
 
-let teks=row.innerText.toLowerCase();
+let teks =
+(row.innerText || "")
+.toLowerCase();
 
 row.style.display =
 teks.includes(kata) ? "" : "none";
@@ -1141,7 +1150,10 @@ row.style.display="";
 }
 else{
 
-let kolom=row.children[4].innerText;
+let kolom =
+row.children[4] ?
+row.children[4].innerText :
+"";
 
 row.style.display =
 kolom==kelas ? "" : "none";

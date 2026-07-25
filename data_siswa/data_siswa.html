@@ -541,30 +541,7 @@ function updateDashboard() {
 
 // Dipanggil saat pertama dibuka
 updateDashboard();
-// ===============================
-// UPLOAD FOTO
-// ===============================
 
-document.getElementById("foto").addEventListener("change", function(e){
-
-    const file = e.target.files[0];
-
-    if(!file){
-        fotoBase64="";
-        return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload=function(){
-
-        fotoBase64 = reader.result;
-
-    }
-
-    reader.readAsDataURL(file);
-
-});
 
 // ===============================
 // MENAMPILKAN DATA
@@ -662,37 +639,7 @@ function simpanSiswa(){
 
     const data={
 
-        foto:fotoBase64,
-
-        nis:nis.value,
-
-        nisn:nisn.value,
-
-        nama:nama.value,
-
-        panggilan:panggilan.value,
-
-        jk:jk.value,
-
-        tempat:tempat.value,
-
-        tgl:tgl.value,
-
-        agama:agama.value,
-
-        kelas:kelas.value,
-
-        tahun:tahun.value,
-
-        alamat:alamat.value,
-
-        ayah:ayah.value,
-
-        ibu:ibu.value,
-
-        hp:hp.value
-
-    };
+        
         foto:fotoBase64,
 
         nis:nis.value,
@@ -793,6 +740,49 @@ function editSiswa(index){
 
     // Tampilkan modal
     bukaModal();
+
+}
+    // ===============================
+// HAPUS DATA SISWA
+// ===============================
+function hapusSiswa(index){
+
+    if(confirm("Yakin ingin menghapus data siswa?")){
+
+        siswa.splice(index,1);
+
+        simpanData();
+
+        tampilkanData();
+
+    }
+
+}
+
+// ===============================
+// DETAIL DATA SISWA
+// ===============================
+function detailSiswa(index){
+
+    const s = siswa[index];
+
+    alert(
+        "===== DETAIL SISWA =====\n\n" +
+        "Nama             : " + s.nama + "\n" +
+        "NIS              : " + s.nis + "\n" +
+        "NISN             : " + s.nisn + "\n" +
+        "Nama Panggilan   : " + s.panggilan + "\n" +
+        "Jenis Kelamin    : " + s.jk + "\n" +
+        "Tempat Lahir     : " + s.tempat + "\n" +
+        "Tanggal Lahir    : " + s.tgl + "\n" +
+        "Agama            : " + s.agama + "\n" +
+        "Kelas            : " + s.kelas + "\n" +
+        "Tahun Masuk      : " + s.tahun + "\n\n" +
+        "Alamat           : " + s.alamat + "\n\n" +
+        "Nama Ayah        : " + s.ayah + "\n" +
+        "Nama Ibu         : " + s.ibu + "\n" +
+        "No HP Orang Tua  : " + s.hp
+    );
 
 }
 // ===============================
@@ -991,5 +981,29 @@ window.onclick = function(event){
     </div>
 
 </div>
+    // ===============================
+// UPLOAD FOTO
+// ===============================
+
+document.getElementById("foto").addEventListener("change", function(e){
+
+    const file = e.target.files[0];
+
+    if(!file){
+        fotoBase64="";
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload=function(){
+
+        fotoBase64 = reader.result;
+
+    }
+
+    reader.readAsDataURL(file);
+
+});
 </body>
 </html>

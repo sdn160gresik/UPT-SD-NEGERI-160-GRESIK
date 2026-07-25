@@ -681,15 +681,7 @@ let editIndex = -1;
 let fotoBase64 = "";
 
 
-// Menyimpan data ke LocalStorage
-function simpanData() {
 
-    localStorage.setItem(
-        "siswa",
-        JSON.stringify(siswa)
-    );
-
-}
 // Menyimpan data ke LocalStorage
 function simpanData() {
     localStorage.setItem("siswa", JSON.stringify(siswa));
@@ -698,13 +690,20 @@ function simpanData() {
 // Menghitung dashboard
 function updateDashboard() {
 
-    document.getElementById("jmlSiswa").innerText = siswa.length;
+    document.getElementById("jmlSiswa").innerText =
+        siswa.length;
+
 
     document.getElementById("jmlL").innerText =
         siswa.filter(x => x.jk === "L").length;
 
+
     document.getElementById("jmlP").innerText =
         siswa.filter(x => x.jk === "P").length;
+
+
+    document.getElementById("jmlKelas").innerText =
+        [...new Set(siswa.map(x=>x.kelas))].length;
 
 }
 
@@ -846,7 +845,7 @@ hp:document.getElementById("hp").value
 
         if(fotoBase64==""){
 
-    data.foto=siswa[editIndex].foto;
+    data.foto = siswa[editIndex].foto || "";
 
 }
 

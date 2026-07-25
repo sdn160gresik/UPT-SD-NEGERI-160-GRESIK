@@ -462,7 +462,7 @@ placeholder="🔍 Cari Nama, NIS atau NISN">
 <td>
 <img
 class="foto"
-src="https://via.placeholder.com/55">
+src="https://placehold.co/55x55">
 </td>
 
 <td>23001</td>
@@ -641,7 +641,7 @@ Hapus
 // ===============================
 
 const URL_WEBAPP = 
-"https://script.google.com/macros/s/AKfycbwXFkhsqZcYJQ_CVT2Ih04-HsZTbPUpFlxtTBjo1rdo_DesTn13mz2wfmD-7aMVtJVrdg/exec;
+"https://script.google.com/macros/s/AKfycbwXFkhsqZcYJQ_CVT2Ih04-HsZTbPUpFlxtTBjo1rdo_DesTn13mz2wfmD-7aMVtJVrdg/exec";
     
 
 // ===============================
@@ -788,103 +788,58 @@ async function simpanSiswa(){
         document.getElementById("jk").value=="" ||
         document.getElementById("kelas").value==""
     ){
-        alert("Silakan lengkapi data terlebih dahulu.");
+        alert("Silakan lengkapi data.");
         return;
     }
-if(isNaN(document.getElementById("nis").value)){
 
-    alert("NIS harus berupa angka");
-    return;
+    const data={
 
-}
+        id: editIndex==-1 ? "" : siswa[editIndex].id,
 
-if(isNaN(document.getElementById("nisn").value)){
+        foto:
+            fotoBase64 ||
+            (editIndex!=-1 ? siswa[editIndex].foto : ""),
 
-    alert("NISN harus berupa angka");
-    return;
-
-}
-    const data = {
-
-        id         : editIndex==-1 ? "" : siswa[editIndex].id,
-
-        foto :
-fotoBase64 ||
-(editIndex!=-1
-? siswa[editIndex].foto
-: ""),
-
-        nis        : document.getElementById("nis").value,
-
-        nisn       : document.getElementById("nisn").value,
-
-        nama       : document.getElementById("nama").value,
-
-        panggilan  : document.getElementById("panggilan").value,
-
-        jk         : document.getElementById("jk").value,
-
-        tempat     : document.getElementById("tempat").value,
-
-        tgl        : document.getElementById("tgl").value,
-
-        agama      : document.getElementById("agama").value,
-
-        kelas      : document.getElementById("kelas").value,
-
-        tahun      : document.getElementById("tahun").value,
-
-        alamat     : document.getElementById("alamat").value,
-
-        ayah       : document.getElementById("ayah").value,
-
-        ibu        : document.getElementById("ibu").value,
-
-        hp         : document.getElementById("hp").value
+        nis:document.getElementById("nis").value,
+        nisn:document.getElementById("nisn").value,
+        nama:document.getElementById("nama").value,
+        panggilan:document.getElementById("panggilan").value,
+        jk:document.getElementById("jk").value,
+        tempat:document.getElementById("tempat").value,
+        tgl:document.getElementById("tgl").value,
+        agama:document.getElementById("agama").value,
+        kelas:document.getElementById("kelas").value,
+        tahun:document.getElementById("tahun").value,
+        alamat:document.getElementById("alamat").value,
+        ayah:document.getElementById("ayah").value,
+        ibu:document.getElementById("ibu").value,
+        hp:document.getElementById("hp").value
 
     };
 
-    if(editIndex!=-1 && fotoBase64==""){
-
-        data.foto = siswa[editIndex].foto;
-
-    }
-
     try{
 
-        const response = await fetch(URL_WEBAPP,{
-
+        await fetch(URL_WEBAPP,{
             method:"POST",
-
+            mode:"no-cors",
+            headers:{
+                "Content-Type":"text/plain"
+            },
             body:JSON.stringify({
-
-                aksi : editIndex==-1 ? "tambah" : "edit",
-
-                data : data
-
+                aksi: editIndex==-1 ? "tambah":"edit",
+                data:data
             })
-
         });
 
-        const hasil = await response.text();
+        alert("Data berhasil dikirim.");
 
-        if(hasil=="OK"){
+        editIndex=-1;
 
-            alert("Data berhasil disimpan.");
+        bersihkanForm();
 
-            editIndex=-1;
+        tutupModal();
 
-            bersihkanForm();
-
-            tutupModal();
-
-            await loadData();
-
-        }else{
-
-            alert(hasil);
-
-        }
+        setTimeout(loadData,1500);
 
     }catch(err){
 
@@ -949,33 +904,21 @@ async function hapusSiswa(index){
 
     try{
 
-        const response = await fetch(URL_WEBAPP,{
-
+        await fetch(URL_WEBAPP,{
             method:"POST",
-
+            mode:"no-cors",
+            headers:{
+                "Content-Type":"text/plain"
+            },
             body:JSON.stringify({
-
                 aksi:"hapus",
-
                 id:siswa[index].id
-
             })
-
         });
 
-        const hasil = await response.text();
+        alert("Data berhasil dihapus.");
 
-        if(hasil=="OK"){
-
-            alert("Data berhasil dihapus.");
-
-            await loadData();
-
-        }else{
-
-            alert(hasil);
-
-        }
+        setTimeout(loadData,1500);
 
     }catch(err){
 

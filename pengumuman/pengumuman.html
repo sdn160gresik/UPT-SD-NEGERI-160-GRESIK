@@ -175,22 +175,49 @@ class="btn">
 <h3>Data Siswa</h3>
 
 <p>
-Silakan mengisi atau memperbarui data siswa
-dengan lengkap dan benar sesuai identitas peserta didik.
+Data Peserta Didik UPT SD Negeri 160 Gresik.
 </p>
 
-<a href="../data_siswa/data_siswa1.html"
-target="_blank"
-class="btn">
+<a href="#"
+class="btn"
+onclick="cekPassword(); return false;">
 👨‍🎓 Data Siswa
 </a>
 
 <div class="badge">Terbaru</div>
+
 </div>
 
 </div>
 
 </section>
+<script>
 
+function cekPassword(){
+
+    // Password yang dimasukkan pengguna
+    let password = prompt("🔒 Masukkan Password Data Siswa");
+
+    // Password yang benar
+    const passwordBenar = "uptsdn160";
+
+    if(password === null){
+        return;
+    }
+
+    if(password === passwordBenar){
+
+        // Membuka halaman Data Siswa
+        window.open("../data_siswa/data_siswa1.html","_blank");
+
+    }else{
+
+        alert("❌ Password salah!\nSilakan coba lagi.");
+
+    }
+
+}
+
+</script>
 </body>
 </html>

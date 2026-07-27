@@ -74,6 +74,7 @@
   <audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
 
   <script>
+    
     // ===== Data Soal (20 soal) =====
     const soalMaster = [
       { q: "Bilangan 27.791 jika ditulis dengan huruf adalah …", a: ["Dua puluh tujuh ribu sembilan ratus tujuh puluh satu", "Dua puluh tujuh ribu tujuh ratus sembilan puluh satu", "Dua puluh tujuh ribu sembilan ratus sebelas", "Dua puluh tujuh ribu tujuh ratus sembilan belas"], k: 1 },
@@ -240,21 +241,36 @@
       window.location.href = "🏰Kerajaan-Angka-Ajaib.html";
     }
 
-    // ===== Kirim Nilai ke Google Form =====
-    function kirimNilai(nilai){
-      const nama = document.getElementById('nama').value.trim();
-      const kelas = document.getElementById('kelas').value.trim();
-      const absen = document.getElementById('absen').value.trim();
+    // ===== Kirim Nilai ke supabase =====
+    async function kirimNilai(nilai){
 
-      const url = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSelHdrYuEkUQI9kFr21EcWXZa4lbXFXXEApbZ0JzhNoPzHZXw/formResponse";
-      const formData = new FormData();
-      formData.append("entry.1114641071", nama);
-      formData.append("entry.687539915", kelas);
-      formData.append("entry.1445858210", absen);
-      formData.append("entry.175130881", nilai);
+    const nama = document.getElementById("nama").value.trim();
+    const kelas = document.getElementById("kelas").value.trim();
+    const absen = parseInt(document.getElementById("absen").value);
 
-      fetch(url, { method: 'POST', body: formData, mode: 'no-cors' });
+    console.log("Mengirim data...");
+
+    const { data, error } = await supabaseClient
+        .from("nilai_kuis")
+        .insert([
+            {
+                nama: nama,
+                kelas: kelas,
+                absen: absen,
+                nilai: nilai
+            }
+        ])
+        .select();
+
+    console.log(data);
+    console.log(error);
+
+    if(error){
+        alert(error.message);
+    }else{
+        alert("Nilai berhasil disimpan");
     }
+}
 
     // ===== Suara =====
     function mainkanSuaraKlik(){ const s = document.getElementById('suaraKlik'); s.currentTime = 0; s.play(); }
@@ -263,5 +279,15 @@
     function mainkanSuaraNext(){ const s = document.getElementById('suaraNext'); s.currentTime = 0; s.play(); }
     function mainkanSuaraUlangi(){ const s = document.getElementById('suaraUlangi'); s.currentTime = 0; s.play(); }
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+const SUPABASE_URL = "https://hfjbwodvckqaxitgiidg.supabase.co";
+const SUPABASE_KEY = "sb_publishable_f_WtHcI-dpJefFg9RSsRvw_ELQsMgQK";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+</script>
 </body>
 </html>

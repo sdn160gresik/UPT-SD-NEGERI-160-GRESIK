@@ -250,7 +250,7 @@
 
     console.log("Mengirim data...");
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
         .from("nilai_kuis")
         .insert([
             {
@@ -283,9 +283,9 @@
   <script>
     const SUPABASE_URL = "https://hfjbwodvckqaxitgiidg.supabase.co";
 
-const SUPABASE_KEY = "sb_publishable_f_WtHcI-dpJefFg9RSsRvw_ELQsMgQK";
+_KEY = "sb_publishable_f_WtHcI-dpJefFg9RSsRvw_ELQsMgQK";
 
-const supabase = window.supabase.createClient(
+const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );

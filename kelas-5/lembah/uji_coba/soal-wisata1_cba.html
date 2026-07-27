@@ -248,7 +248,9 @@
     const kelas = document.getElementById("kelas").value.trim();
     const absen = parseInt(document.getElementById("absen").value);
 
-    const { error } = await supabase
+    console.log("Mengirim data...");
+
+    const { data, error } = await supabase
         .from("nilai_kuis")
         .insert([
             {
@@ -257,15 +259,17 @@
                 absen: absen,
                 nilai: nilai
             }
-        ]);
+        ])
+        .select();
+
+    console.log(data);
+    console.log(error);
 
     if(error){
-        console.error(error);
-        alert("❌ Gagal menyimpan nilai");
+        alert(error.message);
     }else{
-        console.log("✅ Nilai berhasil disimpan");
+        alert("Nilai berhasil disimpan");
     }
-
 }
 
     // ===== Suara =====

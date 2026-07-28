@@ -108,7 +108,12 @@ const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
+// ==============================
+// Identitas Halaman Latihan
+// ==============================
 
+const MAPEL = "Matematika";
+const LATIHAN = "Kerajaan Angka Ajaib - Latihan 1";
     // ===== Data Soal (20 soal) =====
     const soalMaster = [
       { q: "Bilangan 27.791 jika ditulis dengan huruf adalah …", a: ["Dua puluh tujuh ribu sembilan ratus tujuh puluh satu", "Dua puluh tujuh ribu tujuh ratus sembilan puluh satu", "Dua puluh tujuh ribu sembilan ratus sebelas", "Dua puluh tujuh ribu tujuh ratus sembilan belas"], k: 1 },
@@ -287,13 +292,15 @@ const supabaseClient = window.supabase.createClient(
         const { data, error } = await supabaseClient
             .from("nilai_kuis")
             .insert([
-                {
-                    nama,
-                    kelas,
-                    absen,
-                    nilai
-                }
-            ])
+{
+    nama,
+    kelas,
+    absen,
+    mapel: MAPEL,
+    latihan: LATIHAN,
+    nilai
+}
+])
             .select();
 
         if(error){

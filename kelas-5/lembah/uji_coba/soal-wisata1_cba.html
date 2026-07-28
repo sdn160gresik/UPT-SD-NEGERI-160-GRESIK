@@ -63,7 +63,28 @@
     </div>
 
     <div id="progress" class="progress" style="display:none;">Soal 1/10</div>
-    <div id="quiz" style="display:none;"></div>
+<div id="quiz" style="display:none;"></div>
+
+<!-- Leaderboard -->
+<div id="leaderboard" style="display:none;max-width:700px;width:100%;margin-top:25px;">
+    <h2 style="text-align:center;">🏆 Leaderboard Top 10</h2>
+
+    <table style="width:100%;background:white;border-collapse:collapse;border:2px solid #add8e6;border-radius:10px;overflow:hidden;">
+
+        <thead style="background:#4CAF50;color:white;">
+            <tr>
+                <th>Peringkat</th>
+                <th>Nama</th>
+                <th>Kelas</th>
+                <th>Nilai</th>
+            </tr>
+        </thead>
+
+        <tbody id="isiLeaderboard"></tbody>
+
+    </table>
+
+</div>
   </div>
 
   <!-- Suara -->
@@ -73,8 +94,21 @@
   <audio id="suaraKlik" src="../../suara/mouse-clicks.mp3"></audio>
   <audio id="suaraPeringatan" src="../../suara/tada-234709.mp3"></audio>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    
+const SUPABASE_URL = "https://hfjbwodvckqaxitgiidg.supabase.co";
+const SUPABASE_KEY = "sb_publishable_f_WtHcI-dpJefFg9RSsRvw_ELQsMgQK";
+
+if (!window.supabase) {
+    alert("Library Supabase gagal dimuat.");
+    throw new Error("Supabase belum dimuat.");
+}
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
     // ===== Data Soal (20 soal) =====
     const soalMaster = [
       { q: "Bilangan 27.791 jika ditulis dengan huruf adalah …", a: ["Dua puluh tujuh ribu sembilan ratus tujuh puluh satu", "Dua puluh tujuh ribu tujuh ratus sembilan puluh satu", "Dua puluh tujuh ribu sembilan ratus sebelas", "Dua puluh tujuh ribu tujuh ratus sembilan belas"], k: 1 },
@@ -244,32 +278,97 @@
     // ===== Kirim Nilai ke supabase =====
     async function kirimNilai(nilai){
 
-    const nama = document.getElementById("nama").value.trim();
-    const kelas = document.getElementById("kelas").value.trim();
-    const absen = parseInt(document.getElementById("absen").value);
+    try{
 
-    console.log("Mengirim data...");
+        const nama = document.getElementById("nama").value.trim();
+        const kelas = document.getElementById("kelas").value.trim();
+        const absen = parseInt(document.getElementById("absen").value,10);
 
-    const { data, error } = await supabaseClient
-        .from("nilai_kuis")
-        .insert([
-            {
-                nama: nama,
-                kelas: kelas,
-                absen: absen,
-                nilai: nilai
-            }
-        ])
-        .select();
+        const { data, error } = await supabaseClient
+            .from("nilai_kuis")
+            .insert([
+                {
+                    nama,
+                    kelas,
+                    absen,
+                    nilai
+                }
+            ])
+            .select();
 
-    console.log(data);
-    console.log(error);
+        if(error){
+            throw error;
+        }
 
-    if(error){
-        alert(error.message);
-    }else{
-        alert("Nilai berhasil disimpan");
+        await tampilkanLeaderboard();
+
+    }catch(err){
+
+        console.error(err);
+        alert(err.message);
+
     }
+
+}
+    async function tampilkanLeaderboard(){
+
+    try{
+
+        const { data, error } = await supabaseClient
+            .from("nilai_kuis")
+            .select("nama,kelas,nilai")
+            .order("nilai",{ascending:false})
+            .order("created_at",{ascending:true})
+            .limit(10);
+
+        if(error){
+            throw error;
+        }
+
+        const isi = document.getElementById("isiLeaderboard");
+        isi.innerHTML="";
+
+        if (!data || data.length === 0) {
+
+    isi.innerHTML = `
+        <tr>
+            <td colspan="4" style="padding:20px;text-align:center;">
+                Belum ada data.
+            </td>
+        </tr>
+    `;
+
+} else {
+
+    data.forEach((item,index)=>{
+
+        let ranking=index+1;
+
+        if(index===0) ranking="🥇";
+        else if(index===1) ranking="🥈";
+        else if(index===2) ranking="🥉";
+
+        isi.innerHTML += `
+            <tr style="text-align:center;border-bottom:1px solid #ddd;height:40px;">
+                <td>${ranking}</td>
+                <td>${item.nama}</td>
+                <td>${item.kelas}</td>
+                <td><b>${item.nilai}</b></td>
+            </tr>
+        `;
+
+    });
+
+}
+
+        document.getElementById("leaderboard").style.display="block";
+
+    }catch(err){
+
+        console.error(err);
+
+    }
+
 }
 
     // ===== Suara =====
@@ -278,16 +377,12 @@
     function mainkanSuaraKetik(){ const s = document.getElementById('suaraKetik'); s.currentTime = 0; s.play(); }
     function mainkanSuaraNext(){ const s = document.getElementById('suaraNext'); s.currentTime = 0; s.play(); }
     function mainkanSuaraUlangi(){ const s = document.getElementById('suaraUlangi'); s.currentTime = 0; s.play(); }
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-const SUPABASE_URL = "https://hfjbwodvckqaxitgiidg.supabase.co";
-const SUPABASE_KEY = "sb_publishable_f_WtHcI-dpJefFg9RSsRvw_ELQsMgQK";
+    window.onload=function(){
 
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-</script>
+    tampilkanLeaderboard();
+
+}
+  </script>
+  
 </body>
 </html>

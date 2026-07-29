@@ -177,7 +177,7 @@ color:#1565C0;
 /* Grafik */
 
 .chart-box{
-
+height:380px;
 background:white;
 
 margin:0 25px;
@@ -398,30 +398,6 @@ UPT SDN 160 GRESIK
 
 <input
 type="text"
-placeholder="Cari Nama">
-
-<select>
-
-<option>Semua Kelas</option>
-
-<option>I</option>
-
-<option>II</option>
-
-<option>III</option>
-
-<option>IV</option>
-
-<option>V</option>
-
-<option>VI</option>
-
-</select>
-
-<select>
-
-<input
-type="text"
 id="cariNama"
 placeholder="Cari Nama">
 
@@ -492,8 +468,7 @@ placeholder="Cari Nama">
 <script>
 
 const SUPABASE_URL="https://hfjbwodvckqaxitgiidg.supabase.co";
-const SUPABASE_KEY="YOUR_ANON_KEY";
-
+const SUPABASE_KEY="sb_publishable_f_WtHcI-dpJefFg9RSsRvw_ELQsMgQK";
 const supabaseClient=
 supabase.createClient(
 SUPABASE_URL,
@@ -572,7 +547,9 @@ function dataFilter(){
         return(
 
             (nama==""||
-            item.nama.toLowerCase().includes(nama))
+            (item.nama || "")
+             .toLowerCase()
+             .includes(nama))
 
             &&
 
@@ -649,23 +626,27 @@ function updateDashboard(){
 
     const data=dataFilter();
 
-    document.getElementById("totalSiswa").innerHTML=
+    const total=
     new Set(data.map(x=>x.nama)).size;
 
+    document.getElementById("totalSiswa").innerHTML=
+    total;
+
     document.getElementById("sudah").innerHTML=
-    data.length;
+    total;
+
+    document.getElementById("belum").innerHTML=
+    0;
 
     let rata=0;
 
     if(data.length){
 
         rata=Math.round(
-
             data.reduce(
                 (a,b)=>a+Number(b.nilai),
                 0
             )/data.length
-
         );
 
     }
@@ -734,6 +715,18 @@ function buatGrafik(){
             },
 
             options:{
+
+    responsive:true,
+
+    maintainAspectRatio:false,
+
+    plugins:{
+        legend:{
+            display:false
+        }
+    }
+
+}
 
                 plugins:{
 

@@ -420,22 +420,31 @@ placeholder="Cari Nama">
 
 <select>
 
-<option>Semua Mapel</option>
+<input
+type="text"
+id="cariNama"
+placeholder="Cari Nama">
 
-<option>Matematika</option>
-
-<option>IPAS</option>
-
-<option>Bahasa Indonesia</option>
-
-<option>Seni</option>
-
+<select id="filterKelas">
+    <option value="">Semua Kelas</option>
+    <option>I</option>
+    <option>II</option>
+    <option>III</option>
+    <option>IV</option>
+    <option>V</option>
+    <option>VI</option>
 </select>
 
-<select>
+<select id="filterMapel">
+    <option value="">Semua Mapel</option>
+    <option>Matematika</option>
+    <option>IPAS</option>
+    <option>Bahasa Indonesia</option>
+    <option>Seni</option>
+</select>
 
-<option>Semua Latihan</option>
-
+<select id="filterLatihan">
+    <option value="">Semua Latihan</option>
 </select>
 
 </div>
@@ -478,9 +487,313 @@ placeholder="Cari Nama">
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 
-// sementara kosong
+const SUPABASE_URL="https://hfjbwodvckqaxitgiidg.supabase.co";
+const SUPABASE_KEY="YOUR_ANON_KEY";
+
+const supabaseClient=
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+let semuaData=[];
+let grafik;
+
+async function loadData(){
+
+    const {data,error}=await supabaseClient
+    .from("nilai_kuis")
+    .select("*")
+    .order("created_at",{ascending:false});
+
+    if(error){
+
+        alert(error.message);
+
+        return;
+
+    }
+
+    semuaData=data;
+
+    isiFilterLatihan();
+
+    refreshDashboard();
+
+}
+
+function isiFilterLatihan(){
+
+    const daftar=[
+        ...new Set(
+            semuaData.map(x=>x.latihan)
+        )
+    ];
+
+    const filter=
+    document.getElementById("filterLatihan");
+
+    filter.innerHTML=
+    "<option value=''>Semua Latihan</option>";
+
+    daftar.forEach(item=>{
+
+        filter.innerHTML+=`
+        <option value="${item}">
+        ${item}
+        </option>`;
+
+    });
+
+}
+
+function dataFilter(){
+
+    const nama=
+    document.getElementById("cariNama")
+    .value
+    .toLowerCase();
+
+    const kelas=
+    document.getElementById("filterKelas").value;
+
+    const mapel=
+    document.getElementById("filterMapel").value;
+
+    const latihan=
+    document.getElementById("filterLatihan").value;
+
+    return semuaData.filter(item=>{
+
+        return(
+
+            (nama==""||
+            item.nama.toLowerCase().includes(nama))
+
+            &&
+
+            (kelas==""||
+            item.kelas==kelas)
+
+            &&
+
+            (mapel==""||
+            item.mapel==mapel)
+
+            &&
+
+            (latihan==""||
+            item.latihan==latihan)
+
+        );
+
+    });
+
+}
+
+function tampilkanData(){
+
+    const data=dataFilter();
+
+    const tbody=
+    document.getElementById("isiData");
+
+    tbody.innerHTML="";
+
+    data.forEach((item,index)=>{
+
+        tbody.innerHTML+=`
+
+        <tr>
+
+        <td>${index+1}</td>
+
+        <td>${item.nama}</td>
+
+        <td>${item.kelas}</td>
+
+        <td>${item.absen}</td>
+
+        <td>${item.mapel}</td>
+
+        <td>${item.latihan}</td>
+
+        <td>${item.nilai}</td>
+
+        <td>
+
+        ${
+        item.created_at
+        ?
+        new Date(item.created_at)
+        .toLocaleString("id-ID")
+        :
+        "-"
+        }
+
+        </td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+function updateDashboard(){
+
+    const data=dataFilter();
+
+    document.getElementById("totalSiswa").innerHTML=
+    new Set(data.map(x=>x.nama)).size;
+
+    document.getElementById("sudah").innerHTML=
+    data.length;
+
+    let rata=0;
+
+    if(data.length){
+
+        rata=Math.round(
+
+            data.reduce(
+                (a,b)=>a+Number(b.nilai),
+                0
+            )/data.length
+
+        );
+
+    }
+
+    document.getElementById("rata").innerHTML=rata;
+
+}
+
+function buatGrafik(){
+
+    const data=dataFilter();
+
+    const nilai100=
+    data.filter(x=>x.nilai==100).length;
+
+    const nilai80=
+    data.filter(x=>x.nilai>=80&&x.nilai<100).length;
+
+    const nilai60=
+    data.filter(x=>x.nilai>=60&&x.nilai<80).length;
+
+    const nilai0=
+    data.filter(x=>x.nilai<60).length;
+
+    if(grafik){
+
+        grafik.destroy();
+
+    }
+
+    grafik=new Chart(
+
+        document.getElementById("grafikNilai"),
+
+        {
+
+            type:"bar",
+
+            data:{
+
+                labels:[
+                    "100",
+                    "80-99",
+                    "60-79",
+                    "<60"
+                ],
+
+                datasets:[{
+
+                    data:[
+                        nilai100,
+                        nilai80,
+                        nilai60,
+                        nilai0
+                    ],
+
+                    backgroundColor:[
+                        "#4CAF50",
+                        "#2196F3",
+                        "#FFC107",
+                        "#F44336"
+                    ]
+
+                }]
+
+            },
+
+            options:{
+
+                plugins:{
+
+                    legend:{
+
+                        display:false
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    );
+
+}
+
+function refreshDashboard(){
+
+    tampilkanData();
+
+    updateDashboard();
+
+    buatGrafik();
+
+}
+
+document
+.getElementById("cariNama")
+.addEventListener(
+"input",
+refreshDashboard
+);
+
+document
+.getElementById("filterKelas")
+.addEventListener(
+"change",
+refreshDashboard
+);
+
+document
+.getElementById("filterMapel")
+.addEventListener(
+"change",
+refreshDashboard
+);
+
+document
+.getElementById("filterLatihan")
+.addEventListener(
+"change",
+refreshDashboard
+);
+
+loadData();
+
+setInterval(loadData,30000);
 
 </script>
 

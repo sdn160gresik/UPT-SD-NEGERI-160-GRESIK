@@ -7,11 +7,24 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pilih Kelas - UPT SD Negeri 160 Gresik</title>
+<title>Portal Pembelajaran Digital | UPT SD Negeri 160 Gresik</title>
+
+<meta name="description" content="Portal Pembelajaran Digital UPT SD Negeri 160 Gresik">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 <style>
+
+/* =======================================================
+   RESET
+======================================================= */
 
 *{
     margin:0;
@@ -19,247 +32,906 @@
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
 
     font-family:'Poppins',sans-serif;
 
-    background:url('https://i.imgur.com/Gup5sKD.png') center center/cover no-repeat fixed;
+    background:
+    linear-gradient(rgba(8,37,73,.55),rgba(8,37,73,.55)),
+    url("https://i.imgur.com/Gup5sKD.png");
 
-    min-height:100vh;
+    background-size:cover;
+
+    background-position:center;
+
+    background-attachment:fixed;
+
+    color:#1d3557;
 
     overflow-x:hidden;
 
-    position:relative;
 }
 
-/* ===========================
-   Overlay Background
-=========================== */
+/* =======================================================
+   WARNA
+======================================================= */
 
-.overlay{
+:root{
+
+    --primary:#1565C0;
+
+    --secondary:#00ACC1;
+
+    --accent:#4CAF50;
+
+    --warning:#FF9800;
+
+    --danger:#E53935;
+
+    --dark:#0D47A1;
+
+    --white:#ffffff;
+
+    --glass:rgba(255,255,255,.18);
+
+    --shadow:
+    0 15px 40px rgba(0,0,0,.18);
+
+}
+
+/* =======================================================
+   CONTAINER
+======================================================= */
+
+.container{
+
+    width:min(1200px,92%);
+
+    margin:auto;
+
+}
+/* =======================================================
+   TOP BAR
+======================================================= */
+
+.topbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:42px;
+    background:linear-gradient(90deg,#0D47A1,#1976D2,#2196F3);
+    color:#fff;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+    font-size:14px;
+}
+
+.topbar-container{
+    width:min(1280px,94%);
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.topbar-left,
+.topbar-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+}
+
+.topbar i{
+    color:#FFD54F;
+    margin-right:6px;
+}
+
+.topbar span{
+    display:flex;
+    align-items:center;
+    white-space:nowrap;
+}
+
+.topbar a{
+    color:#fff;
+    text-decoration:none;
+}
+
+.topbar a:hover{
+    opacity:.85;
+}
+    
+    
+/* =======================================================
+   NAVBAR
+======================================================= */
+
+nav{
 
     position:fixed;
 
-    inset:0;
+    top:42px;
 
-    background:
-    linear-gradient(
-        rgba(0,0,0,.18),
-        rgba(0,0,0,.25)
-    );
+    left:0;
 
-    z-index:-1;
+    width:100%;
+
+    z-index:999;
+
+    transition:.35s;
+
+    background:rgba(255,255,255,.10);
+
+    backdrop-filter:blur(14px);
+
+    border-bottom:1px solid rgba(255,255,255,.15);
+
 }
 
-/* ===========================
-        NAVBAR
-=========================== */
+nav.scrolled{
 
-nav{
+    background:white;
+
+    box-shadow:0 8px 30px rgba(0,0,0,.12);
+
+}
+
+.nav-container{
+
+    width:min(1280px,94%);
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px 0;
+
+}
+
+/* =======================================================
+   LOGO
+======================================================= */
+
+.logo-group{
 
     display:flex;
 
     align-items:center;
 
-    justify-content:space-between;
-
-    flex-wrap:wrap;
-
-    gap:20px;
-
-    padding:15px 35px;
-
-    background:rgba(255,255,255,.18);
-
-    backdrop-filter:blur(15px);
-
-    border-bottom:1px solid rgba(255,255,255,.35);
-
-    box-shadow:0 10px 30px rgba(0,0,0,.18);
+    gap:15px;
 
 }
 
-.nav-logo{
+.logo-group img{
+
+    height:58px;
+
+    transition:.3s;
+
+}
+
+.logo-group img:hover{
+
+    transform:scale(1.08);
+
+}
+
+.school-name{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.school-name h1{
+
+    color:white;
+
+    font-size:24px;
+
+    font-weight:800;
+
+    line-height:1.1;
+
+}
+
+.school-name span{
+
+    color:white;
+
+    opacity:.95;
+
+    font-size:14px;
+
+}
+
+nav.scrolled .school-name h1{
+
+    color:var(--dark);
+
+}
+
+nav.scrolled .school-name span{
+
+    color:#555;
+
+}
+
+/* =======================================================
+   MENU
+======================================================= */
+
+.menu{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.menu a{
+
+    text-decoration:none;
+
+    color:white;
+
+    padding:11px 18px;
+
+    border-radius:50px;
+
+    transition:.3s;
+
+    font-weight:600;
+
+    font-size:15px;
+
+}
+
+.menu a:hover{
+
+    background:rgba(255,255,255,.20);
+
+}
+
+nav.scrolled .menu a{
+
+    color:#333;
+
+}
+
+nav.scrolled .menu a:hover{
+
+    background:#EEF5FF;
+
+    color:var(--primary);
+
+}
+
+/* =======================================================
+   TOMBOL
+======================================================= */
+
+.btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    text-decoration:none;
+
+    border:none;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    border-radius:50px;
+
+    padding:14px 28px;
+
+    font-weight:700;
+
+    font-size:15px;
+
+}
+
+.btn-primary{
+
+    background:linear-gradient(135deg,#1976D2,#2196F3);
+
+    color:white;
+
+    box-shadow:0 12px 25px rgba(25,118,210,.35);
+
+}
+
+.btn-primary:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 18px 30px rgba(25,118,210,.45);
+
+}
+
+.btn-outline{
+
+    border:2px solid white;
+
+    color:white;
+
+    background:transparent;
+
+}
+
+.btn-outline:hover{
+
+    background:white;
+
+    color:var(--primary);
+
+}
+
+/* =======================================================
+   HERO
+======================================================= */
+
+.hero{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    padding-top:165px;
+
+}
+
+.hero-content{
+
+    display:grid;
+
+    grid-template-columns:1.2fr .8fr;
+
+    gap:60px;
+
+    align-items:center;
+
+}
+
+.hero-text h2{
+
+    color:white;
+
+    font-size:52px;
+
+    line-height:1.2;
+
+    font-weight:800;
+
+}
+
+.hero-text p{
+
+    color:white;
+
+    opacity:.95;
+
+    margin:25px 0;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+}
+
+.hero-button{
+
+    display:flex;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+}
+
+.hero-image{
+
+    text-align:center;
+
+}
+
+.hero-image img{
+
+    width:100%;
+
+    max-width:470px;
+
+    animation:float 5s ease-in-out infinite;
+
+}
+
+/* =======================================================
+   ANIMASI
+======================================================= */
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-18px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.fade-up{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:1s;
+
+}
+
+.fade-up.show{
+
+    opacity:1;
+
+    transform:none;
+
+}
+    /* =======================================================
+   SECTION
+======================================================= */
+
+section{
+    padding:80px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-title h2{
+    font-size:38px;
+    color:var(--dark);
+    font-weight:800;
+}
+
+.section-title p{
+    margin-top:12px;
+    color:#666;
+    font-size:17px;
+}
+
+/* =======================================================
+   STATISTIK
+======================================================= */
+
+.stats{
+
+    margin-top:-70px;
+
+    position:relative;
+
+    z-index:5;
+
+}
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+
+}
+
+.stat-card{
+
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:22px;
+
+    padding:35px 20px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+    transition:.35s;
+
+    border:1px solid rgba(255,255,255,.35);
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.stat-card i{
+
+    width:72px;
+
+    height:72px;
+
+    line-height:72px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#1976D2,#42A5F5);
+
+    color:#fff;
+
+    font-size:30px;
+
+    margin-bottom:18px;
+
+}
+
+.stat-card h3{
+
+    font-size:38px;
+
+    color:var(--primary);
+
+    font-weight:800;
+
+}
+
+.stat-card span{
+
+    display:block;
+
+    margin-top:8px;
+
+    color:#666;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+/* =======================================================
+   MENU CEPAT
+======================================================= */
+
+.quick-menu{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+
+    margin-top:45px;
+
+}
+
+.quick-item{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:28px;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    color:#333;
+
+    transition:.35s;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+}
+
+.quick-item:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 35px rgba(0,0,0,.15);
+
+}
+
+.quick-item i{
+
+    width:80px;
+
+    height:80px;
+
+    line-height:80px;
+
+    border-radius:20px;
+
+    font-size:34px;
+
+    color:#fff;
+
+    margin-bottom:18px;
+
+    background:linear-gradient(135deg,#1976D2,#4FC3F7);
+
+}
+
+.quick-item h3{
+
+    font-size:20px;
+
+    margin-bottom:10px;
+
+    color:var(--dark);
+
+}
+
+.quick-item p{
+
+    font-size:14px;
+
+    color:#666;
+
+    line-height:1.6;
+
+}
+
+/* =======================================================
+   MARQUEE PENGUMUMAN
+======================================================= */
+
+.info-bar{
+
+    margin-top:45px;
+
+    background:linear-gradient(90deg,#1565C0,#2196F3);
+
+    color:#fff;
+
+    border-radius:18px;
+
+    padding:16px 25px;
 
     display:flex;
 
     align-items:center;
 
     gap:18px;
-}
 
-.nav-logo img{
+    overflow:hidden;
 
-    height:60px;
-
-    transition:.3s;
-}
-
-.nav-logo img:hover{
-
-    transform:scale(1.08);
-}
-
-.nav-title{
-
-    flex:1;
-
-    text-align:center;
-
-    color:white;
-}
-
-.nav-title h1{
-
-    font-size:30px;
-
-    font-weight:800;
-
-    letter-spacing:1px;
-
-    text-shadow:
-    2px 2px 10px rgba(0,0,0,.4);
+    box-shadow:var(--shadow);
 
 }
 
-.nav-title p{
+.info-bar i{
 
-    margin-top:6px;
+    font-size:26px;
 
-    font-size:15px;
-
-    font-weight:400;
-
-    opacity:.95;
 }
 
-/* ===========================
-        MENU
-=========================== */
-
-.nav-menu{
-
-    display:flex;
-
-    gap:10px;
-
-    flex-wrap:wrap;
-}
-
-.nav-menu a{
-
-    text-decoration:none;
-
-    color:white;
-
-    background:rgba(255,255,255,.15);
-
-    backdrop-filter:blur(10px);
-
-    border:1px solid rgba(255,255,255,.45);
-
-    padding:10px 20px;
-
-    border-radius:50px;
-
-    transition:.3s;
-
-    font-size:15px;
+.info-bar marquee{
 
     font-weight:600;
 
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    font-size:16px;
+
 }
 
-.nav-menu a:hover{
+/* =======================================================
+   RESPONSIVE
+======================================================= */
+
+@media(max-width:992px){
+
+    .stats-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .quick-menu{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .stats{
+
+        margin-top:20px;
+
+    }
+
+    .stats-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .quick-menu{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .section-title h2{
+
+        font-size:30px;
+
+    }
+
+}
+    /* =======================================================
+   KELAS
+======================================================= */
+
+.kelas-section{
+
+    background:#f7fbff;
+
+}
+
+.kelas-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+    margin-top:50px;
+
+}
+
+/* =======================================================
+   CARD KELAS
+======================================================= */
+
+.kelas-card{
+
+    position:relative;
+
+    overflow:hidden;
 
     background:white;
 
-    color:#0288d1;
+    border-radius:28px;
 
-    transform:translateY(-3px);
+    padding:35px;
 
-    box-shadow:0 8px 20px rgba(0,0,0,.18);
+    text-align:center;
+
+    box-shadow:0 18px 45px rgba(0,0,0,.10);
+
+    transition:.35s;
+
 }
 
-/* ===========================
-      CONTAINER
-=========================== */
+.kelas-card:hover{
 
-.container{
+    transform:
+        translateY(-12px)
+        scale(1.02);
+
+    box-shadow:
+        0 25px 55px rgba(0,0,0,.18);
+
+}
+
+.kelas-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
 
     width:100%;
 
-    max-width:1200px;
+    height:8px;
 
-    margin:auto;
-
-    padding:70px 20px;
-
-    text-align:center;
 }
 
-.subjudul{
+/* =======================================================
+   WARNA TIAP KELAS
+======================================================= */
 
-    display:inline-block;
+.kelas1::before{
 
-    padding:18px 35px;
+    background:#FFC107;
 
-    background:rgba(0,0,0,.35);
-
-    backdrop-filter:blur(10px);
-
-    color:white;
-
-    border-radius:50px;
-
-    font-size:30px;
-
-    font-weight:700;
-
-    box-shadow:0 12px 30px rgba(0,0,0,.25);
-
-    margin-bottom:50px;
 }
 
-.judul-kelas{
+.kelas2::before{
 
-    font-size:44px;
+    background:#4CAF50;
 
-    color:white;
-
-    font-weight:800;
-
-    letter-spacing:2px;
-
-    margin-bottom:35px;
-
-    text-shadow:
-    3px 3px 12px rgba(0,0,0,.45);
 }
 
-/* ===========================
-      TOMBOL KELAS
-=========================== */
+.kelas3::before{
 
-.kelas-baris{
+    background:#2196F3;
 
-    display:flex;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:28px;
 }
 
-.button-kelas{
+.kelas4::before{
+
+    background:#FF9800;
+
+}
+
+.kelas5::before{
+
+    background:#7B1FA2;
+
+}
+
+.kelas6::before{
+
+    background:#E53935;
+
+}
+
+/* =======================================================
+   ICON
+======================================================= */
+
+.kelas-icon{
 
     width:100px;
 
     height:100px;
 
-    border-radius:50%;
+    margin:auto;
+
+    border-radius:30px;
 
     display:flex;
 
@@ -267,518 +939,1273 @@ nav{
 
     justify-content:center;
 
-    text-decoration:none;
-
-    font-size:38px;
-
-    font-weight:800;
-
     color:white;
 
-    border:5px solid white;
+    font-size:42px;
 
-    text-shadow:
-    1px 2px 4px rgba(0,0,0,.4);
+    margin-bottom:22px;
 
-    box-shadow:
-    0 12px 28px rgba(0,0,0,.25);
-
-    transition:.35s;
 }
 
-.button-kelas:hover{
+.kelas1 .kelas-icon{
 
-    transform:
-    scale(1.12)
-    rotate(-5deg);
+    background:linear-gradient(135deg,#FFD54F,#FFB300);
 
-    box-shadow:
-    0 20px 35px rgba(0,0,0,.35);
 }
 
-/* ===========================
-    WARNA TOMBOL
-=========================== */
+.kelas2 .kelas-icon{
 
-.kelas1{
+    background:linear-gradient(135deg,#81C784,#43A047);
 
-    background:linear-gradient(135deg,#FFD54F,#F9A825);
 }
 
-.kelas2{
+.kelas3 .kelas-icon{
 
-    background:linear-gradient(135deg,#8D6E63,#5D4037);
+    background:linear-gradient(135deg,#64B5F6,#1E88E5);
+
 }
 
-.kelas3{
+.kelas4 .kelas-icon{
 
-    background:linear-gradient(135deg,#FF80AB,#EC407A);
+    background:linear-gradient(135deg,#FFB74D,#FB8C00);
+
 }
 
-.kelas4{
+.kelas5 .kelas-icon{
 
-    background:linear-gradient(135deg,#FFB74D,#F57C00);
+    background:linear-gradient(135deg,#AB47BC,#6A1B9A);
+
 }
 
-.kelas5{
+.kelas6 .kelas-icon{
 
-    background:linear-gradient(135deg,#424242,#000000);
+    background:linear-gradient(135deg,#EF5350,#C62828);
+
 }
 
-.kelas6{
+/* =======================================================
+   TEXT
+======================================================= */
 
-    background:linear-gradient(135deg,#E53935,#8E0000);
+.kelas-card h3{
+
+    font-size:30px;
+
+    color:var(--dark);
+
+    margin-bottom:10px;
+
+    font-weight:700;
+
 }
 
-/* ===========================
-        POPUP
-=========================== */
+.kelas-card p{
 
-.popup{
+    color:#666;
 
-    position:fixed;
-
-    top:50%;
-
-    left:50%;
-
-    transform:
-    translate(-50%,-50%)
-    scale(.7);
-
-    width:360px;
-
-    max-width:90%;
-
-    padding:35px;
-
-    border-radius:22px;
-
-    background:white;
-
-    text-align:center;
-
-    box-shadow:
-    0 25px 45px rgba(0,0,0,.3);
-
-    opacity:0;
-
-    pointer-events:none;
-
-    transition:.3s;
-
-    z-index:999;
-}
-
-.popup.show{
-
-    opacity:1;
-
-    pointer-events:auto;
-
-    transform:
-    translate(-50%,-50%)
-    scale(1);
-}
-
-.popup button{
-
-    margin-top:22px;
-
-    border:none;
-
-    background:#0288d1;
-
-    color:white;
-
-    padding:12px 28px;
-
-    border-radius:40px;
-
-    font-size:16px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.popup button:hover{
-
-    background:#01579B;
-}
-
-/* ===========================
-        FOOTER
-=========================== */
-
-.footer{
-
-    margin-top:80px;
-
-    padding:28px;
-
-    text-align:center;
-
-    color:white;
-
-    background:rgba(0,0,0,.35);
-
-    backdrop-filter:blur(12px);
+    line-height:1.7;
 
     font-size:15px;
 
-    line-height:1.8;
+    margin-bottom:25px;
+
 }
 
-/* ===========================
-      RESPONSIVE
-=========================== */
+/* =======================================================
+   BADGE
+======================================================= */
 
-@media(max-width:900px){
+.badge{
 
-    nav{
+    position:absolute;
 
-        flex-direction:column;
+    top:18px;
 
-        text-align:center;
-    }
+    right:-45px;
 
-    .nav-title{
+    transform:rotate(35deg);
 
-        order:3;
+    width:180px;
+
+    text-align:center;
+
+    background:#E53935;
+
+    color:white;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    padding:8px;
+
+    letter-spacing:1px;
+
+}
+
+.badge.active{
+
+    background:#4CAF50;
+
+}
+
+/* =======================================================
+   BUTTON
+======================================================= */
+
+.kelas-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    padding:14px 30px;
+
+    border-radius:50px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:.3s;
+
+    color:white;
+
+}
+
+.kelas1 .kelas-btn{
+
+    background:#FFC107;
+
+}
+
+.kelas2 .kelas-btn{
+
+    background:#43A047;
+
+}
+
+.kelas3 .kelas-btn{
+
+    background:#1E88E5;
+
+}
+
+.kelas4 .kelas-btn{
+
+    background:#FB8C00;
+
+}
+
+.kelas5 .kelas-btn{
+
+    background:#7B1FA2;
+
+}
+
+.kelas6 .kelas-btn{
+
+    background:#C62828;
+
+}
+
+.kelas-btn:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 15px 25px rgba(0,0,0,.20);
+
+}
+
+/* =======================================================
+   EFEK GLOW
+======================================================= */
+
+.kelas-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    top:-90px;
+
+    right:-90px;
+
+    background:rgba(255,255,255,.18);
+
+    transition:.4s;
+
+}
+
+.kelas-card:hover::after{
+
+    transform:scale(1.4);
+
+}
+
+/* =======================================================
+   RESPONSIVE
+======================================================= */
+
+@media(max-width:1100px){
+
+    .kelas-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
     }
 
 }
 
 @media(max-width:768px){
 
-    .nav-title h1{
+    .kelas-grid{
 
-        font-size:22px;
+        grid-template-columns:1fr;
+
     }
 
-    .subjudul{
+    .kelas-card{
 
-        font-size:22px;
+        padding:28px;
 
-        padding:15px 25px;
     }
 
-    .judul-kelas{
+    .kelas-card h3{
 
-        font-size:34px;
+        font-size:26px;
+
     }
 
-    .button-kelas{
+    .kelas-icon{
 
-        width:80px;
+        width:85px;
 
-        height:80px;
+        height:85px;
 
-        font-size:30px;
+        font-size:36px;
+
+    }
+
+}
+    /* =======================================================
+   PENGUMUMAN
+======================================================= */
+
+.announcement{
+
+    background:#f8fbff;
+
+}
+
+.announcement-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+    margin-top:50px;
+
+}
+
+.announcement-card{
+
+    background:white;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.announcement-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+.announcement-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:6px;
+
+    background:linear-gradient(90deg,#1565C0,#42A5F5);
+
+}
+
+.announcement-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:18px;
+
+    background:linear-gradient(135deg,#1976D2,#42A5F5);
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:28px;
+
+    margin-bottom:20px;
+
+}
+
+.announcement-card h3{
+
+    color:var(--dark);
+
+    font-size:22px;
+
+    margin-bottom:10px;
+
+}
+
+.announcement-date{
+
+    color:#888;
+
+    font-size:14px;
+
+    margin-bottom:15px;
+
+}
+
+.announcement-card p{
+
+    color:#666;
+
+    line-height:1.7;
+
+    margin-bottom:20px;
+
+}
+
+.announcement-card a{
+
+    color:var(--primary);
+
+    text-decoration:none;
+
+    font-weight:700;
+
+}
+
+/* =======================================================
+   POPUP
+======================================================= */
+
+.popup-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.55);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:9999;
+
+}
+
+.popup-overlay.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+.popup{
+
+    width:420px;
+
+    max-width:92%;
+
+    background:white;
+
+    border-radius:28px;
+
+    padding:35px;
+
+    text-align:center;
+
+    transform:scale(.8);
+
+    transition:.35s;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.25);
+
+}
+
+.popup-overlay.show .popup{
+
+    transform:scale(1);
+
+}
+
+.popup i{
+
+    font-size:70px;
+
+    color:#FF9800;
+
+    margin-bottom:20px;
+
+}
+
+.popup h2{
+
+    color:var(--dark);
+
+    margin-bottom:12px;
+
+}
+
+.popup p{
+
+    color:#666;
+
+    line-height:1.8;
+
+    margin-bottom:25px;
+
+}
+
+.popup button{
+
+    border:none;
+
+    background:linear-gradient(135deg,#1976D2,#42A5F5);
+
+    color:white;
+
+    padding:14px 35px;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    transition:.3s;
+
+}
+
+.popup button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/* =======================================================
+   FOOTER
+======================================================= */
+
+footer{
+
+    background:#0D47A1;
+
+    color:white;
+
+    margin-top:80px;
+
+}
+
+.footer-top{
+
+    padding:60px 0;
+
+}
+
+.footer-grid{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr 1fr 1fr;
+
+    gap:40px;
+
+}
+
+.footer-logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:20px;
+
+}
+
+.footer-logo img{
+
+    height:58px;
+
+}
+
+.footer-about p{
+
+    opacity:.9;
+
+    line-height:1.9;
+
+}
+
+.footer-title{
+
+    font-size:18px;
+
+    margin-bottom:20px;
+
+    font-weight:700;
+
+}
+
+.footer-links{
+
+    list-style:none;
+
+}
+
+.footer-links li{
+
+    margin-bottom:12px;
+
+}
+
+.footer-links a{
+
+    color:white;
+
+    opacity:.9;
+
+    text-decoration:none;
+
+}
+
+.footer-links a:hover{
+
+    opacity:1;
+
+}
+
+.footer-bottom{
+
+    text-align:center;
+
+    padding:20px;
+
+    background:rgba(255,255,255,.08);
+
+    font-size:14px;
+
+}
+
+/* =======================================================
+   RIPPLE BUTTON
+======================================================= */
+
+.ripple{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.ripple span{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    transform:scale(0);
+
+    animation:ripple .6s linear;
+
+    background:rgba(255,255,255,.45);
+
+}
+
+@keyframes ripple{
+
+    to{
+
+        transform:scale(4);
+
+        opacity:0;
+
+    }
+
+}
+
+/* =======================================================
+   ANIMASI
+======================================================= */
+
+.zoom{
+
+    animation:zoom .7s ease;
+
+}
+
+@keyframes zoom{
+
+    from{
+
+        transform:scale(.9);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+.slide-left{
+
+    animation:slideLeft .8s ease;
+
+}
+
+@keyframes slideLeft{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(-40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+.slide-right{
+
+    animation:slideRight .8s ease;
+
+}
+
+@keyframes slideRight{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+/* =======================================================
+   RESPONSIVE
+======================================================= */
+
+@media(max-width:992px){
+
+    .announcement-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .footer-grid{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .hero-content{
+
+        grid-template-columns:1fr;
+
+        text-align:center;
+
+    }
+
+    .hero-text h2{
+
+        font-size:38px;
+
+    }
+
+    .hero-button{
+
+        justify-content:center;
+
+    }
+
+    .footer-grid{
+
+        grid-template-columns:1fr;
+
+        text-align:center;
+
+    }
+
+    .footer-logo{
+
+        justify-content:center;
+
     }
 
 }
 
 @media(max-width:480px){
 
-    .nav-logo img{
+    .hero-text h2{
 
-        height:45px;
+        font-size:30px;
+
     }
 
-    .button-kelas{
+    .hero-text p{
 
-        width:70px;
+        font-size:16px;
 
-        height:70px;
-
-        font-size:24px;
     }
 
-    .kelas-baris{
+    .popup{
 
-        gap:18px;
+        padding:25px;
+
     }
 
 }
-
-</style>
+    </style>
 
 </head>
+
 <body>
+    <div class="topbar">
 
-<div class="overlay"></div>
+    <div class="topbar-container">
 
-<!-- ==========================
-        NAVBAR
-=========================== -->
+        <div class="topbar-left">
 
-<nav>
+            <span>
+                <i class="fas fa-clock"></i>
+                <strong id="jamDigital">00:00:00</strong>
+            </span>
 
-    <div class="nav-logo">
+            <span>
+                <i class="fas fa-calendar-days"></i>
+                <span id="tanggalIndonesia"></span>
+            </span>
 
-        <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
+        </div>
 
-        <img src="https://i.imgur.com/tGA5UBc.png"
-             alt="Logo Tut Wuri"
-             style="height:68px;">
+        <div class="topbar-right">
 
-        <img src="https://i.imgur.com/oWB8vKW.png"
-             alt="Logo Sekolah">
+            <span>
+                <i class="fas fa-location-dot"></i>
+                UPT SD Negeri 160 Gresik
+            </span>
+
+            <span>
+                <i class="fas fa-envelope"></i>
+                info@sdn160gresik.sch.id
+            </span>
+
+            <span>
+                <i class="fas fa-phone"></i>
+                (031) 1234567
+            </span>
+
+        </div>
 
     </div>
 
-    <div class="nav-title">
+</div>
+    <!-- =========================
+     NAVBAR
+========================= -->
 
-        <h1>UPT SD NEGERI 160 GRESIK</h1>
+<nav id="navbar">
 
-        <p>Portal Pembelajaran Digital</p>
+    <div class="nav-container">
 
-    </div>
+        <div class="logo-group">
 
-    <div class="nav-menu">
+            <img src="logo.png" alt="Logo">
 
-        <a href="../index.html">
-            🏠 Beranda
-        </a>
+            <div class="school-name">
+                <h1>UPT SD Negeri 160 Gresik</h1>
+                <span>Portal Pembelajaran Digital</span>
+            </div>
 
-        <a href="pengumuman/pengumuman.html">
-            📌 Pengumuman
-        </a>
+        </div>
 
-        <a href="#">
-            📞 Kontak
-        </a>
+        <div class="menu">
+
+            <a href="#beranda">Beranda</a>
+            <a href="#kelas">Kelas</a>
+            <a href="#pengumuman">Pengumuman</a>
+            <a href="#kontak">Kontak</a>
+
+        </div>
 
     </div>
 
 </nav>
+    <section class="hero" id="beranda">
 
-<!-- ==========================
-        KONTEN
-=========================== -->
+    <div class="container hero-content">
+
+        <div class="hero-text">
+
+            <h2>Selamat Datang di Portal Pembelajaran Digital</h2>
+
+            <p>
+                Media pembelajaran interaktif
+                UPT SD Negeri 160 Gresik.
+            </p>
+
+            <div class="hero-button">
+
+                <a href="#kelas" class="btn btn-primary">
+                    Mulai Belajar
+                </a>
+
+                <a href="#pengumuman" class="btn btn-outline">
+                    Pengumuman
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img src="hero.png" alt="Hero">
+
+        </div>
+
+    </div>
+
+</section>
+    <!-- =========================
+     STATISTIK
+========================= -->
+
+<section class="stats fade-up">
+
+    <div class="container">
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <h3>250+</h3>
+                <span>Siswa Aktif</span>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h3>18</h3>
+                <span>Guru</span>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-book-open"></i>
+                <h3>6</h3>
+                <span>Tingkat Kelas</span>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-laptop"></i>
+                <h3>100%</h3>
+                <span>Pembelajaran Digital</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+    <section>
 
 <div class="container">
 
-    <div class="subjudul">
+<div class="section-title">
+<h2>Menu Cepat</h2>
+<p>Akses layanan pembelajaran digital.</p>
+</div>
 
-        📚 Selamat Datang di Portal Pembelajaran
+<div class="quick-menu">
 
-    </div>
+<a href="#" class="quick-item">
+<i class="fas fa-book"></i>
+<h3>Materi</h3>
+<p>Kumpulan materi pembelajaran.</p>
+</a>
 
-    <h2 class="judul-kelas">
+<a href="#" class="quick-item">
+<i class="fas fa-pen"></i>
+<h3>Latihan</h3>
+<p>Soal latihan interaktif.</p>
+</a>
 
-        PILIH KELAS
+<a href="#" class="quick-item">
+<i class="fas fa-trophy"></i>
+<h3>Prestasi</h3>
+<p>Prestasi siswa.</p>
+</a>
 
-    </h2>
-
-    <div class="kelas-baris">
-
-        <a href="kelas1.html"
-           class="button-kelas kelas1"
-           title="Kelas 1">
-            1
-        </a>
-
-        <a href="kelas2.html"
-           class="button-kelas kelas2"
-           title="Kelas 2">
-            2
-        </a>
-
-        <a href="kelas3.html"
-           class="button-kelas kelas3"
-           title="Kelas 3">
-            3
-        </a>
-
-        <a href="kelas4.html"
-           class="button-kelas kelas4"
-           title="Kelas 4">
-            4
-        </a>
-
-        <a href="Petualangan-Kelas-5.html"
-           class="button-kelas kelas5"
-           title="Kelas 5">
-            5
-        </a>
-
-        <a href="kelas6.html"
-           class="button-kelas kelas6"
-           title="Kelas 6">
-            6
-        </a>
-
-    </div>
+<a href="#" class="quick-item">
+<i class="fas fa-image"></i>
+<h3>Galeri</h3>
+<p>Dokumentasi kegiatan sekolah.</p>
+</a>
 
 </div>
 
-<!-- ==========================
-        POPUP
-=========================== -->
+<div class="info-bar">
 
-<div id="popup" class="popup">
+<i class="fas fa-bullhorn"></i>
 
-    <h2 style="margin-bottom:15px;">
-
-        🚧 Informasi
-
-    </h2>
-
-    <div id="popup-text">
-
-        Kelas ini sedang dipersiapkan.
-
-    </div>
-
-    <button onclick="closePopup()">
-
-        OK
-
-    </button>
+<marquee>
+Selamat datang di Portal Pembelajaran Digital UPT SD Negeri 160 Gresik.
+</marquee>
 
 </div>
 
-<!-- ==========================
-        FOOTER
-=========================== -->
+</div>
 
-<footer class="footer">
+</section>
+    <section class="kelas-section" id="kelas">
 
-    <strong>
-        UPT SD NEGERI 160 GRESIK
-    </strong>
+<div class="container">
 
-    <br><br>
+<div class="section-title">
 
-    Portal Pembelajaran Digital
+<h2>Pilih Tingkat Kelas</h2>
 
-    <br>
+<p>Silakan memilih kelas untuk memulai pembelajaran.</p>
 
-    Tahun Pelajaran 2026/2027
+</div>
 
-    <br><br>
+<div class="kelas-grid">
 
-    © 2026 UPT SD Negeri 160 Gresik.
-    All Rights Reserved.
+<div class="kelas-card kelas1">
+<div class="badge active">AKTIF</div>
+<div class="kelas-icon"><i class="fas fa-school"></i></div>
+<h3>Kelas I</h3>
+<p>Pembelajaran Kelas 1</p>
+<a href="#" class="kelas-btn">Masuk</a>
+</div>
+
+<div class="kelas-card kelas2">
+<div class="badge active">AKTIF</div>
+<div class="kelas-icon"><i class="fas fa-school"></i></div>
+<h3>Kelas II</h3>
+<p>Pembelajaran Kelas 2</p>
+<a href="#" class="kelas-btn">Masuk</a>
+</div>
+
+<div class="kelas-card kelas3">
+<div class="badge active">AKTIF</div>
+<div class="kelas-icon"><i class="fas fa-school"></i></div>
+<h3>Kelas III</h3>
+<p>Pembelajaran Kelas 3</p>
+<a href="#" class="kelas-btn">Masuk</a>
+</div>
+
+<div class="kelas-card kelas4">
+<div class="badge active">AKTIF</div>
+<div class="kelas-icon"><i class="fas fa-school"></i></div>
+<h3>Kelas IV</h3>
+<p>Pembelajaran Kelas 4</p>
+<a href="#" class="kelas-btn">Masuk</a>
+</div>
+
+<div class="kelas-card kelas5">
+<div class="badge active">AKTIF</div>
+<div class="kelas-icon"><i class="fas fa-school"></i></div>
+<h3>Kelas V</h3>
+<p>Pembelajaran Kelas 5</p>
+<a href="#" class="kelas-btn">Masuk</a>
+</div>
+
+<div class="kelas-card kelas6">
+<div class="badge active">AKTIF</div>
+<div class="kelas-icon"><i class="fas fa-school"></i></div>
+<h3>Kelas VI</h3>
+<p>Pembelajaran Kelas 6</p>
+<a href="#" class="kelas-btn">Masuk</a>
+</div>
+
+</div>
+
+</div>
+
+</section>
+    <section class="announcement" id="pengumuman">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>Pengumuman</h2>
+
+<p>Informasi terbaru sekolah.</p>
+
+</div>
+
+<div class="announcement-grid">
+
+<div class="announcement-card">
+<div class="announcement-icon"><i class="fas fa-bullhorn"></i></div>
+<h3>PPDB</h3>
+<div class="announcement-date">30 Juli 2026</div>
+<p>Pendaftaran peserta didik baru telah dibuka.</p>
+<a href="#">Selengkapnya →</a>
+</div>
+
+<div class="announcement-card">
+<div class="announcement-icon"><i class="fas fa-calendar"></i></div>
+<h3>Agenda Sekolah</h3>
+<div class="announcement-date">30 Juli 2026</div>
+<p>Jadwal kegiatan semester ganjil.</p>
+<a href="#">Selengkapnya →</a>
+</div>
+
+<div class="announcement-card">
+<div class="announcement-icon"><i class="fas fa-award"></i></div>
+<h3>Prestasi</h3>
+<div class="announcement-date">30 Juli 2026</div>
+<p>Prestasi siswa terbaru.</p>
+<a href="#">Selengkapnya →</a>
+</div>
+
+</div>
+
+</div>
+
+</section>
+    <footer id="kontak">
+
+<div class="footer-top">
+
+<div class="container">
+
+<div class="footer-grid">
+
+<div class="footer-about">
+
+<div class="footer-logo">
+
+<img src="logo.png">
+
+<div>
+
+<h3>UPT SD Negeri 160 Gresik</h3>
+
+</div>
+
+</div>
+
+<p>
+Portal Pembelajaran Digital untuk mendukung proses belajar mengajar.
+</p>
+
+</div>
+
+<div>
+
+<h3 class="footer-title">Menu</h3>
+
+<ul class="footer-links">
+
+<li><a href="#">Beranda</a></li>
+
+<li><a href="#">Kelas</a></li>
+
+<li><a href="#">Pengumuman</a></li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h3 class="footer-title">Kontak</h3>
+
+<ul class="footer-links">
+
+<li>info@sdn160gresik.sch.id</li>
+
+<li>(031)1234567</li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h3 class="footer-title">Alamat</h3>
+
+<p>UPT SD Negeri 160 Gresik</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+© 2026 UPT SD Negeri 160 Gresik
+
+</div>
 
 </footer>
+    <div class="popup-overlay" id="popup">
 
-<!-- ==========================
-        JAVASCRIPT
-=========================== -->
+<div class="popup">
 
-<script>
-<script>
+<i class="fas fa-circle-info"></i>
 
-// ===============================
-//      SOUND
-// ===============================
+<h2>Selamat Datang</h2>
 
-const clickSound = new Audio("../suara/blub.mp3");
-clickSound.volume = 0.8;
+<p>
+Portal Pembelajaran Digital UPT SD Negeri 160 Gresik.
+</p>
 
-// ===============================
-//      ELEMENT
-// ===============================
+<button onclick="document.getElementById('popup').classList.remove('show')">
+Tutup
+</button>
 
-const popup = document.getElementById("popup");
-const popupText = document.getElementById("popup-text");
+</div>
 
-// ===============================
-//      PLAY SOUND
-// ===============================
+</div>
+    <script>
 
-function playClickSound(){
+function updateClock(){
 
-    clickSound.currentTime = 0;
+    const now=new Date();
 
-    clickSound.play().catch(()=>{});
+    document.getElementById("jamDigital").innerHTML=
+        now.toLocaleTimeString("id-ID");
 
-}
-
-// ===============================
-//      POPUP
-// ===============================
-
-function showPopup(text){
-
-    popupText.innerHTML = text;
-
-    popup.classList.add("show");
+    document.getElementById("tanggalIndonesia").innerHTML=
+        now.toLocaleDateString("id-ID",{
+            weekday:'long',
+            day:'numeric',
+            month:'long',
+            year:'numeric'
+        });
 
 }
 
-function closePopup(){
+setInterval(updateClock,1000);
+updateClock();
 
-    popup.classList.remove("show");
+window.addEventListener("scroll",()=>{
 
-}
+    const nav=document.getElementById("navbar");
 
-// Tutup popup jika klik area luar
-window.addEventListener("click",function(e){
+    if(window.scrollY>50){
 
-    if(e.target===popup){
+        nav.classList.add("scrolled");
 
-        closePopup();
+    }else{
+
+        nav.classList.remove("scrolled");
 
     }
 
 });
+/* Efek Fade */
 
-// Tutup popup dengan tombol ESC
-document.addEventListener("keydown",function(e){
+const observer = new IntersectionObserver((entries)=>{
 
-    if(e.key==="Escape"){
+    entries.forEach(entry=>{
 
-        closePopup();
+        if(entry.isIntersecting){
 
-    }
-
-});
-
-// ===============================
-//      NAVIGASI
-// ===============================
-
-document.querySelectorAll("a").forEach(link=>{
-
-    link.addEventListener("click",function(e){
-
-        playClickSound();
-
-        // Jika bukan tombol kelas,
-        // biarkan langsung menuju halaman
-        if(!this.classList.contains("button-kelas")){
-
-            return;
-
-        }
-
-        const kelas=this.textContent.trim();
-
-        // Hanya kelas 5 yang aktif
-        if(kelas!=="5"){
-
-            e.preventDefault();
-
-            showPopup(
-
-                "🚧 <b>Kelas "+kelas+"</b><br><br>" +
-
-                "Materi pembelajaran masih dalam tahap pengembangan.<br><br>" +
-
-                "Silakan kembali lagi nanti.<br><br>" +
-
-                "Terima kasih 😊"
-
-            );
-
-            return;
+            entry.target.classList.add("show");
 
         }
 
@@ -786,32 +2213,19 @@ document.querySelectorAll("a").forEach(link=>{
 
 });
 
-// ===============================
-//      EFEK HOVER
-// ===============================
+document.querySelectorAll(".fade-up").forEach(el=>observer.observe(el));
 
-document.querySelectorAll(".button-kelas").forEach(btn=>{
+/* Popup */
 
-    btn.addEventListener("mouseenter",()=>{
+window.onload=function(){
 
-        btn.style.transition=".25s";
+    setTimeout(()=>{
 
-    });
+        document.getElementById("popup").classList.add("show");
 
-});
+    },1000);
 
-// ===============================
-//      LOADING
-// ===============================
-
-window.addEventListener("load",()=>{
-
-    document.body.style.opacity="1";
-
-});
-
+};
 </script>
-
 </body>
-
 </html>

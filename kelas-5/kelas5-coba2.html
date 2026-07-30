@@ -167,21 +167,25 @@ nav{
 
     z-index:999;
 
-    transition:.35s;
+    transition:.4s;
 
-    background:rgba(255,255,255,.10);
+    background:rgba(255,255,255,.08);
 
-    backdrop-filter:blur(14px);
+    backdrop-filter:blur(18px);
 
-    border-bottom:1px solid rgba(255,255,255,.15);
+    border-bottom:1px solid rgba(255,255,255,.18);
+
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
 
 }
 
 nav.scrolled{
 
-    background:white;
+    background:rgba(255,255,255,.97);
 
-    box-shadow:0 8px 30px rgba(0,0,0,.12);
+    backdrop-filter:blur(20px);
+
+    box-shadow:0 10px 35px rgba(0,0,0,.12);
 
 }
 
@@ -287,6 +291,8 @@ nav.scrolled .school-name span{
 
 .menu a{
 
+    position:relative;
+
     text-decoration:none;
 
     color:white;
@@ -295,11 +301,39 @@ nav.scrolled .school-name span{
 
     border-radius:50px;
 
-    transition:.3s;
+    transition:.35s;
 
     font-weight:600;
 
     font-size:15px;
+
+}
+
+.menu a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:18px;
+
+    bottom:6px;
+
+    width:0;
+
+    height:3px;
+
+    border-radius:50px;
+
+    background:#FFD54F;
+
+    transition:.35s;
+
+}
+
+.menu a:hover::after{
+
+    width:calc(100% - 36px);
 
 }
 
@@ -403,7 +437,54 @@ nav.scrolled .menu a:hover{
 
     align-items:center;
 
-    padding-top:165px;
+    padding-top:170px;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+   .hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:650px;
+
+    height:650px;
+
+    background:radial-gradient(circle,
+    rgba(255,255,255,.18),
+    transparent 70%);
+
+    right:-180px;
+
+    top:-180px;
+
+    border-radius:50%;
+
+}
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:450px;
+
+    height:450px;
+
+    background:radial-gradient(circle,
+    rgba(255,255,255,.12),
+    transparent 70%);
+
+    left:-120px;
+
+    bottom:-120px;
+
+    border-radius:50%;
 
 }
 
@@ -423,11 +504,13 @@ nav.scrolled .menu a:hover{
 
     color:white;
 
-    font-size:52px;
+    font-size:58px;
 
-    line-height:1.2;
+    line-height:1.15;
 
     font-weight:800;
+
+    text-shadow:0 5px 20px rgba(0,0,0,.30);
 
 }
 
@@ -465,7 +548,11 @@ nav.scrolled .menu a:hover{
 
     width:100%;
 
-    max-width:470px;
+    max-width:520px;
+
+    filter:
+
+        drop-shadow(0 25px 45px rgba(0,0,0,.30));
 
     animation:float 5s ease-in-out infinite;
 
@@ -1710,9 +1797,15 @@ footer{
 
     .hero-button{
 
-        justify-content:center;
+    display:flex;
 
-    }
+    gap:18px;
+
+    flex-wrap:wrap;
+
+    align-items:center;
+
+}
 
     .footer-grid{
 
@@ -1861,7 +1954,39 @@ footer{
         </div>
 
     </div>
+<div class="hero-wave">
 
+<svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+
+<path fill="#ffffff"
+d="M0,64L60,74.7C120,85,240,107,360,112C480,117,600,107,720,90.7C840,75,960,53,1080,48C1200,43,1320,53,1380,58.7L1440,64L1440,160L0,160Z"></path>
+
+</svg>
+
+</div>
+       .hero-wave{
+
+    position:absolute;
+
+    left:0;
+
+    bottom:0;
+
+    width:100%;
+
+    line-height:0;
+
+}
+
+.hero-wave svg{
+
+    display:block;
+
+    width:100%;
+
+    height:110px;
+
+}
 </section>
     <!-- =========================
      STATISTIK

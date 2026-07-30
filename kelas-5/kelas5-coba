@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pilih Kelas - UPT SD Negeri 160 Gresik</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:url('https://i.imgur.com/Gup5sKD.png') center center/cover no-repeat fixed;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    position:relative;
+}
+
+/* ===========================
+   Overlay Background
+=========================== */
+
+.overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,.18),
+        rgba(0,0,0,.25)
+    );
+
+    z-index:-1;
+}
+
+/* ===========================
+        NAVBAR
+=========================== */
+
+nav{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+    padding:15px 35px;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(15px);
+
+    border-bottom:1px solid rgba(255,255,255,.35);
+
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
+
+}
+
+.nav-logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+}
+
+.nav-logo img{
+
+    height:60px;
+
+    transition:.3s;
+}
+
+.nav-logo img:hover{
+
+    transform:scale(1.08);
+}
+
+.nav-title{
+
+    flex:1;
+
+    text-align:center;
+
+    color:white;
+}
+
+.nav-title h1{
+
+    font-size:30px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    text-shadow:
+    2px 2px 10px rgba(0,0,0,.4);
+
+}
+
+.nav-title p{
+
+    margin-top:6px;
+
+    font-size:15px;
+
+    font-weight:400;
+
+    opacity:.95;
+}
+
+/* ===========================
+        MENU
+=========================== */
+
+.nav-menu{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+.nav-menu a{
+
+    text-decoration:none;
+
+    color:white;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,.45);
+
+    padding:10px 20px;
+
+    border-radius:50px;
+
+    transition:.3s;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.nav-menu a:hover{
+
+    background:white;
+
+    color:#0288d1;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.18);
+}
+
+/* ===========================
+      CONTAINER
+=========================== */
+
+.container{
+
+    width:100%;
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:70px 20px;
+
+    text-align:center;
+}
+
+.subjudul{
+
+    display:inline-block;
+
+    padding:18px 35px;
+
+    background:rgba(0,0,0,.35);
+
+    backdrop-filter:blur(10px);
+
+    color:white;
+
+    border-radius:50px;
+
+    font-size:30px;
+
+    font-weight:700;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.25);
+
+    margin-bottom:50px;
+}
+
+.judul-kelas{
+
+    font-size:44px;
+
+    color:white;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    margin-bottom:35px;
+
+    text-shadow:
+    3px 3px 12px rgba(0,0,0,.45);
+}
+
+/* ===========================
+      TOMBOL KELAS
+=========================== */
+
+.kelas-baris{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:28px;
+}
+
+.button-kelas{
+
+    width:100px;
+
+    height:100px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    font-size:38px;
+
+    font-weight:800;
+
+    color:white;
+
+    border:5px solid white;
+
+    text-shadow:
+    1px 2px 4px rgba(0,0,0,.4);
+
+    box-shadow:
+    0 12px 28px rgba(0,0,0,.25);
+
+    transition:.35s;
+}
+
+.button-kelas:hover{
+
+    transform:
+    scale(1.12)
+    rotate(-5deg);
+
+    box-shadow:
+    0 20px 35px rgba(0,0,0,.35);
+}
+
+/* ===========================
+    WARNA TOMBOL
+=========================== */
+
+.kelas1{
+
+    background:linear-gradient(135deg,#FFD54F,#F9A825);
+}
+
+.kelas2{
+
+    background:linear-gradient(135deg,#8D6E63,#5D4037);
+}
+
+.kelas3{
+
+    background:linear-gradient(135deg,#FF80AB,#EC407A);
+}
+
+.kelas4{
+
+    background:linear-gradient(135deg,#FFB74D,#F57C00);
+}
+
+.kelas5{
+
+    background:linear-gradient(135deg,#424242,#000000);
+}
+
+.kelas6{
+
+    background:linear-gradient(135deg,#E53935,#8E0000);
+}
+
+/* ===========================
+        POPUP
+=========================== */
+
+.popup{
+
+    position:fixed;
+
+    top:50%;
+
+    left:50%;
+
+    transform:
+    translate(-50%,-50%)
+    scale(.7);
+
+    width:360px;
+
+    max-width:90%;
+
+    padding:35px;
+
+    border-radius:22px;
+
+    background:white;
+
+    text-align:center;
+
+    box-shadow:
+    0 25px 45px rgba(0,0,0,.3);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.3s;
+
+    z-index:999;
+}
+
+.popup.show{
+
+    opacity:1;
+
+    pointer-events:auto;
+
+    transform:
+    translate(-50%,-50%)
+    scale(1);
+}
+
+.popup button{
+
+    margin-top:22px;
+
+    border:none;
+
+    background:#0288d1;
+
+    color:white;
+
+    padding:12px 28px;
+
+    border-radius:40px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.popup button:hover{
+
+    background:#01579B;
+}
+
+/* ===========================
+        FOOTER
+=========================== */
+
+.footer{
+
+    margin-top:80px;
+
+    padding:28px;
+
+    text-align:center;
+
+    color:white;
+
+    background:rgba(0,0,0,.35);
+
+    backdrop-filter:blur(12px);
+
+    font-size:15px;
+
+    line-height:1.8;
+}
+
+/* ===========================
+      RESPONSIVE
+=========================== */
+
+@media(max-width:900px){
+
+    nav{
+
+        flex-direction:column;
+
+        text-align:center;
+    }
+
+    .nav-title{
+
+        order:3;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .nav-title h1{
+
+        font-size:22px;
+    }
+
+    .subjudul{
+
+        font-size:22px;
+
+        padding:15px 25px;
+    }
+
+    .judul-kelas{
+
+        font-size:34px;
+    }
+
+    .button-kelas{
+
+        width:80px;
+
+        height:80px;
+
+        font-size:30px;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .nav-logo img{
+
+        height:45px;
+    }
+
+    .button-kelas{
+
+        width:70px;
+
+        height:70px;
+
+        font-size:24px;
+    }
+
+    .kelas-baris{
+
+        gap:18px;
+    }
+
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="overlay"></div>
+
+<!-- ==========================
+        NAVBAR
+=========================== -->
+
+<nav>
+
+    <div class="nav-logo">
+
+        <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
+
+        <img src="https://i.imgur.com/tGA5UBc.png"
+             alt="Logo Tut Wuri"
+             style="height:68px;">
+
+        <img src="https://i.imgur.com/oWB8vKW.png"
+             alt="Logo Sekolah">
+
+    </div>
+
+    <div class="nav-title">
+
+        <h1>UPT SD NEGERI 160 GRESIK</h1>
+
+        <p>Portal Pembelajaran Digital</p>
+
+    </div>
+
+    <div class="nav-menu">
+
+        <a href="../index.html">
+            🏠 Beranda
+        </a>
+
+        <a href="pengumuman/pengumuman.html">
+            📌 Pengumuman
+        </a>
+
+        <a href="#">
+            📞 Kontak
+        </a>
+
+    </div>
+
+</nav>
+
+<!-- ==========================
+        KONTEN
+=========================== -->
+
+<div class="container">
+
+    <div class="subjudul">
+
+        📚 Selamat Datang di Portal Pembelajaran
+
+    </div>
+
+    <h2 class="judul-kelas">
+
+        PILIH KELAS
+
+    </h2>
+
+    <div class="kelas-baris">
+
+        <a href="kelas1.html"
+           class="button-kelas kelas1"
+           title="Kelas 1">
+            1
+        </a>
+
+        <a href="kelas2.html"
+           class="button-kelas kelas2"
+           title="Kelas 2">
+            2
+        </a>
+
+        <a href="kelas3.html"
+           class="button-kelas kelas3"
+           title="Kelas 3">
+            3
+        </a>
+
+        <a href="kelas4.html"
+           class="button-kelas kelas4"
+           title="Kelas 4">
+            4
+        </a>
+
+        <a href="Petualangan-Kelas-5.html"
+           class="button-kelas kelas5"
+           title="Kelas 5">
+            5
+        </a>
+
+        <a href="kelas6.html"
+           class="button-kelas kelas6"
+           title="Kelas 6">
+            6
+        </a>
+
+    </div>
+
+</div>
+
+<!-- ==========================
+        POPUP
+=========================== -->
+
+<div id="popup" class="popup">
+
+    <h2 style="margin-bottom:15px;">
+
+        🚧 Informasi
+
+    </h2>
+
+    <div id="popup-text">
+
+        Kelas ini sedang dipersiapkan.
+
+    </div>
+
+    <button onclick="closePopup()">
+
+        OK
+
+    </button>
+
+</div>
+
+<!-- ==========================
+        FOOTER
+=========================== -->
+
+<footer class="footer">
+
+    <strong>
+        UPT SD NEGERI 160 GRESIK
+    </strong>
+
+    <br><br>
+
+    Portal Pembelajaran Digital
+
+    <br>
+
+    Tahun Pelajaran 2026/2027
+
+    <br><br>
+
+    © 2026 UPT SD Negeri 160 Gresik.
+    All Rights Reserved.
+
+</footer>
+
+<!-- ==========================
+        JAVASCRIPT
+=========================== -->
+
+<script>
+<script>
+
+// ===============================
+//      SOUND
+// ===============================
+
+const clickSound = new Audio("../suara/blub.mp3");
+clickSound.volume = 0.8;
+
+// ===============================
+//      ELEMENT
+// ===============================
+
+const popup = document.getElementById("popup");
+const popupText = document.getElementById("popup-text");
+
+// ===============================
+//      PLAY SOUND
+// ===============================
+
+function playClickSound(){
+
+    clickSound.currentTime = 0;
+
+    clickSound.play().catch(()=>{});
+
+}
+
+// ===============================
+//      POPUP
+// ===============================
+
+function showPopup(text){
+
+    popupText.innerHTML = text;
+
+    popup.classList.add("show");
+
+}
+
+function closePopup(){
+
+    popup.classList.remove("show");
+
+}
+
+// Tutup popup jika klik area luar
+window.addEventListener("click",function(e){
+
+    if(e.target===popup){
+
+        closePopup();
+
+    }
+
+});
+
+// Tutup popup dengan tombol ESC
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="Escape"){
+
+        closePopup();
+
+    }
+
+});
+
+// ===============================
+//      NAVIGASI
+// ===============================
+
+document.querySelectorAll("a").forEach(link=>{
+
+    link.addEventListener("click",function(e){
+
+        playClickSound();
+
+        // Jika bukan tombol kelas,
+        // biarkan langsung menuju halaman
+        if(!this.classList.contains("button-kelas")){
+
+            return;
+
+        }
+
+        const kelas=this.textContent.trim();
+
+        // Hanya kelas 5 yang aktif
+        if(kelas!=="5"){
+
+            e.preventDefault();
+
+            showPopup(
+
+                "🚧 <b>Kelas "+kelas+"</b><br><br>" +
+
+                "Materi pembelajaran masih dalam tahap pengembangan.<br><br>" +
+
+                "Silakan kembali lagi nanti.<br><br>" +
+
+                "Terima kasih 😊"
+
+            );
+
+            return;
+
+        }
+
+    });
+
+});
+
+// ===============================
+//      EFEK HOVER
+// ===============================
+
+document.querySelectorAll(".button-kelas").forEach(btn=>{
+
+    btn.addEventListener("mouseenter",()=>{
+
+        btn.style.transition=".25s";
+
+    });
+
+});
+
+// ===============================
+//      LOADING
+// ===============================
+
+window.addEventListener("load",()=>{
+
+    document.body.style.opacity="1";
+
+});
+
+</script>
+
+</body>
+
+</html>

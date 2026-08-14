@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Tugas Mewarnai</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    /* =====================================================
+       DASAR
+    ===================================================== */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+
+      margin: 0;
+      padding: 0;
+
+      width: 100%;
+      min-height: 100%;
+
+      font-family: 'Poppins', sans-serif;
+
+      overflow-x: hidden;
+
+      color: #333;
+
+      background:
+        linear-gradient(
+          rgba(255,255,255,0.80),
+          rgba(255,255,255,0.80)
+        ),
+        url('https://i.imgur.com/ZhICw8Q.jpeg')
+        no-repeat center center fixed;
+
+      background-size: cover;
+    }
+
+
+    /* =====================================================
+       NAVBAR
+    ===================================================== */
+
+    nav {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 15px;
+
+      padding: 1rem 2rem;
+
+      background:
+        rgba(255,255,255,0.55);
+
+      backdrop-filter: blur(8px);
+
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+
+    .nav-left {
+
+      display: flex;
+
+      align-items: center;
+
+      flex-wrap: wrap;
+
+      gap: 5px;
+    }
+
+
+    .nav-left img {
+
+      height: 45px;
+
+      width: auto;
+
+      object-fit: contain;
+
+      margin-right: 0.5rem;
+    }
+
+
+    .nav-right {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 0.5rem;
+
+      align-items: center;
+    }
+
+
+    .nav-right a {
+
+      background:
+        rgba(255,255,255,0.95);
+
+      padding:
+        0.5rem
+        0.9rem;
+
+      border-radius: 8px;
+
+      text-decoration: none;
+
+      color: #0288d1;
+
+      font-weight: 700;
+
+      font-size: 0.9rem;
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+
+    .nav-right a:hover {
+
+      transform: scale(1.05);
+
+      box-shadow:
+        0 4px 8px
+        rgba(0,0,0,0.2);
+    }
+
+
+    /* =====================================================
+       JUDUL
+    ===================================================== */
+
+    .title-section {
+
+      text-align: center;
+
+      margin:
+        25px
+        15px
+        20px;
+    }
+
+
+    .title-section h1 {
+
+      display: inline-block;
+
+      margin: 0;
+
+      padding:
+        10px
+        22px;
+
+      font-size:
+        clamp(1.5rem, 5vw, 2rem);
+
+      background:
+        rgba(255,255,255,0.92);
+
+      border-radius: 14px;
+
+      color: #0288d1;
+
+      box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.12);
+    }
+
+
+    /* =====================================================
+       KARTU TUGAS
+    ===================================================== */
+
+    .task-card {
+
+      width:
+        min(94%, 850px);
+
+      margin:
+        0 auto
+        40px;
+
+      padding:
+        25px;
+
+      background:
+        rgba(255,255,255,0.95);
+
+      border-radius: 22px;
+
+      box-shadow:
+        0 10px 30px
+        rgba(0,0,0,0.17);
+
+      animation:
+        muncul 0.6s ease;
+    }
+
+
+    @keyframes muncul {
+
+      from {
+
+        opacity: 0;
+
+        transform:
+          translateY(20px);
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform:
+          translateY(0);
+      }
+    }
+
+
+    /* =====================================================
+       HEADER TUGAS
+    ===================================================== */
+
+    .task-header {
+
+      text-align: center;
+
+      margin-bottom: 22px;
+    }
+
+
+    .task-icon {
+
+      width: 70px;
+
+      height: 70px;
+
+      margin:
+        0 auto
+        12px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff176,
+          #ffb74d
+        );
+
+      font-size: 2rem;
+
+      box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.15);
+    }
+
+
+    .task-header h2 {
+
+      margin: 0;
+
+      color: #0288d1;
+
+      font-size:
+        clamp(1.2rem, 4vw, 1.65rem);
+
+      font-weight: 700;
+    }
+
+
+    /* =====================================================
+       GAMBAR TUGAS
+    ===================================================== */
+
+    .image-box {
+
+      width: 100%;
+
+      padding: 12px;
+
+      background: #fff;
+
+      border-radius: 16px;
+
+      border:
+        1px solid #e5e5e5;
+
+      box-shadow:
+        0 4px 15px
+        rgba(0,0,0,0.08);
+
+      margin-bottom: 25px;
+    }
+
+
+    .image-box img {
+
+      display: block;
+
+      width: 100%;
+
+      max-width: 700px;
+
+      max-height: 800px;
+
+      object-fit: contain;
+
+      margin: auto;
+
+      border-radius: 10px;
+    }
+
+
+    /* =====================================================
+       PETUNJUK MENGERJAKAN
+    ===================================================== */
+
+    .instruction-box {
+
+      margin-top: 20px;
+
+      padding: 22px;
+
+      border-radius: 17px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fffde7,
+          #fff8e1
+        );
+
+      border:
+        1px solid #ffe082;
+
+      color: #5d4037;
+    }
+
+
+    .instruction-title {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      margin-bottom: 13px;
+
+      color: #795548;
+
+      font-size: 1.05rem;
+
+      font-weight: 700;
+    }
+
+
+    .instruction-box ol {
+
+      margin: 0;
+
+      padding-left: 23px;
+
+      line-height: 1.9;
+
+      font-size: 0.88rem;
+    }
+
+
+    .instruction-box li {
+
+      padding-left: 4px;
+
+      margin-bottom: 3px;
+    }
+
+
+    /* =====================================================
+       DOWNLOAD FILE
+    ===================================================== */
+
+    .download-section {
+
+      text-align: center;
+
+      margin-top: 25px;
+
+      padding:
+        20px
+        15px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #e3f2fd,
+          #e0f7fa
+        );
+
+      border-radius: 17px;
+
+      border:
+        1px solid #b3e5fc;
+    }
+
+
+    .download-title {
+
+      margin-bottom: 12px;
+
+      color: #0277bd;
+
+      font-size: 1rem;
+
+      font-weight: 700;
+    }
+
+
+    .download-button {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 9px;
+
+      width:
+        min(100%, 350px);
+
+      padding:
+        14px
+        20px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #0288d1,
+          #00acc1
+        );
+
+      color: white;
+
+      text-decoration: none;
+
+      border-radius: 13px;
+
+      font-size: 0.95rem;
+
+      font-weight: 700;
+
+      box-shadow:
+        0 7px 18px
+        rgba(2,136,209,0.30);
+
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+
+    .download-button:hover {
+
+      transform:
+        translateY(-3px);
+
+      box-shadow:
+        0 10px 23px
+        rgba(2,136,209,0.40);
+    }
+
+
+    .download-button:active {
+
+      transform:
+        scale(0.97);
+    }
+
+
+    /* =====================================================
+       MOTIVASI
+    ===================================================== */
+
+    .motivation {
+
+      margin-top: 20px;
+
+      padding: 16px;
+
+      text-align: center;
+
+      border-radius: 15px;
+
+      background:
+        rgba(255,255,255,0.85);
+
+      color: #0277bd;
+
+      font-size: 0.85rem;
+
+      font-weight: 600;
+
+      line-height: 1.7;
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 700px) {
+
+      nav {
+
+        flex-direction: column;
+
+        padding:
+          12px
+          15px;
+      }
+
+
+      .nav-left {
+
+        justify-content: center;
+      }
+
+
+      .nav-left img {
+
+        height: 38px;
+
+        margin-right: 3px;
+      }
+
+
+      .nav-left img:nth-child(2) {
+
+        height: 42px;
+      }
+
+
+      .nav-right {
+
+        justify-content: center;
+
+        width: 100%;
+      }
+
+
+      .nav-right a {
+
+        font-size: 0.77rem;
+
+        padding:
+          8px
+          10px;
+      }
+
+
+      .task-card {
+
+        padding: 17px;
+
+        border-radius: 18px;
+      }
+
+
+      .instruction-box {
+
+        padding: 17px;
+      }
+
+    }
+
+
+    @media (max-width: 450px) {
+
+      .title-section {
+
+        margin-top: 20px;
+      }
+
+
+      .title-section h1 {
+
+        font-size: 1.35rem;
+
+        padding:
+          9px
+          16px;
+      }
+
+
+      .task-icon {
+
+        width: 60px;
+
+        height: 60px;
+
+        font-size: 1.7rem;
+      }
+
+
+      .task-header h2 {
+
+        font-size: 1.15rem;
+      }
+
+
+      .image-box {
+
+        padding: 7px;
+      }
+
+
+      .instruction-box ol {
+
+        font-size: 0.82rem;
+
+        line-height: 1.8;
+      }
+
+
+      .download-button {
+
+        font-size: 0.88rem;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav>
+
+  <div class="nav-left">
+
+    <img
+      src="https://i.imgur.com/sxm7RR1.png"
+      alt="Logo Sekolah"
+    >
+
+    <img
+      src="https://i.imgur.com/tGA5UBc.png"
+      alt="Logo Pendidikan"
+      style="height:50px"
+    >
+
+    <img
+      src="https://i.imgur.com/oWB8vKW.png"
+      alt="Logo Sekolah"
+    >
+
+  </div>
+
+
+  <div class="nav-right">
+
+    <a href="../../index.html">
+      🏠 Beranda
+    </a>
+
+    <a href="../tugas.html">
+      ◀️ Kembali
+    </a>
+
+    <a href="#">
+      🖼️ Galeri
+    </a>
+
+  </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     JUDUL
+===================================================== -->
+
+<div class="title-section">
+
+  <h1>
+    🎨 Tugas Mewarnai
+  </h1>
+
+</div>
+
+
+
+<!-- =====================================================
+     KARTU TUGAS
+===================================================== -->
+
+<div class="task-card">
+
+
+  <!-- HEADER -->
+
+  <div class="task-header">
+
+    <div class="task-icon">
+      🎨
+    </div>
+
+    <h2>
+      Mewarnai Tema Kemerdekaan Indonesia
+    </h2>
+
+  </div>
+
+
+
+  <!-- ===================================================
+       GAMBAR TUGAS
+  ==================================================== -->
+
+  <div class="image-box">
+
+    <img
+      src="T5Sh085.png"
+      alt=""
+    >
+
+  </div>
+
+
+
+  <!-- ===================================================
+       PETUNJUK MENGERJAKAN TUGAS
+  ==================================================== -->
+
+  <div class="instruction-box">
+
+    <div class="instruction-title">
+
+      📚 Petunjuk Mengerjakan Tugas
+
+    </div>
+
+
+    <ol>
+
+      <li>
+        Klik tombol
+        <strong>Download File Tugas</strong>
+        untuk mengunduh gambar.
+      </li>
+
+      <li>
+        Cetak gambar tugas pada kertas
+        yang telah disediakan.
+      </li>
+
+      <li>
+        Warnai gambar dengan
+        <strong>rapi, kreatif, dan menarik</strong>.
+      </li>
+
+      <li>
+        Gunakan kombinasi warna yang sesuai
+        dengan tema kemerdekaan Indonesia.
+      </li>
+
+      <li>
+        Kerjakan dengan teliti dan
+        jangan terburu-buru.
+      </li>
+
+      <li>
+        Setelah selesai, periksa kembali
+        hasil pekerjaanmu.
+      </li>
+
+      <li>
+        Kumpulkan tugas sesuai dengan
+        petunjuk dari guru.
+      </li>
+
+    </ol>
+
+  </div>
+
+
+
+  <!-- ===================================================
+       DOWNLOAD FILE TUGAS
+  ==================================================== -->
+
+  <div class="download-section">
+
+    <div class="download-title">
+
+      📥 Download File Tugas Mewarnai
+
+    </div>
+
+
+    <a
+      class="download-button"
+      href="T5Sh085.png"
+      download="Tugas-Mewarnai-HUT-RI.png"
+    >
+
+      ⬇️ Download File Tugas
+
+    </a>
+
+  </div>
+
+
+
+  <!-- ===================================================
+       MOTIVASI
+  ==================================================== -->
+
+  <div class="motivation">
+
+    🎨
+    <strong>Selamat berkarya!</strong>
+    <br>
+
+    Tunjukkan kreativitasmu melalui warna
+    dan hasil karya terbaikmu. ✨
+
+  </div>
+
+
+</div>
+
+
+</body>
+
+</html>

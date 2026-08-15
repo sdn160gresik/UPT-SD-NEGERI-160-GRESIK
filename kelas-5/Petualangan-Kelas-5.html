@@ -99,6 +99,64 @@ const supabaseClient =
 
 <style>
     /* =====================================================
+   SAPAAN SISWA
+===================================================== */
+
+.welcome-student{
+    margin:15px auto 8px;
+    width:fit-content;
+    max-width:90%;
+    padding:10px 22px;
+    background:rgba(255,255,255,.95);
+    color:#7b1fa2;
+    border-radius:14px;
+    font-size:1.15rem;
+    font-weight:700;
+    box-shadow:0 5px 12px rgba(0,0,0,.2);
+    animation:welcomePop .6s ease;
+}
+
+.welcome-message{
+    text-align:center;
+    color:white;
+    font-size:1rem;
+    font-weight:600;
+    margin:8px 0 5px;
+    text-shadow:1px 2px 3px rgba(0,0,0,.5);
+}
+
+@keyframes welcomePop{
+
+    0%{
+        opacity:0;
+        transform:translateY(-15px) scale(.95);
+    }
+
+    100%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .welcome-student{
+        font-size:1rem;
+        padding:9px 15px;
+        text-align:center;
+    }
+
+    .welcome-message{
+        font-size:.9rem;
+        padding:0 15px;
+    }
+
+}
+    /* =====================================================
    INFORMASI SISWA
 ===================================================== */
 
@@ -426,7 +484,16 @@ opacity:1;
 
 <h1>📖 Petualangan Belajar Kelas 5</h1>
 
+<div id="welcomeStudent" class="welcome-student">
+    👋 Selamat datang, <span id="welcomeName">Siswa</span>!
+</div>
+
+<div class="welcome-message">
+    🌟 Yuk lanjutkan petualangan belajarmu hari ini!
+</div>
+
 <div class="pengumuman-box">
+    
 <a href="../pdf-tofas/tofas.html" class="pengumuman-btn">
 📢 Pengumuman
 </a>
@@ -670,12 +737,24 @@ async function tampilkanSiswa(){
         }
 
 
-        /* Tampilkan nama */
+       /* =====================================================
+   TAMPILKAN NAMA SISWA
+===================================================== */
 
-        document.getElementById(
-            "studentInfo"
-        ).textContent =
-            `👋 ${siswa.nama}`;
+document.getElementById(
+    "studentInfo"
+).textContent =
+    `👤 ${siswa.nama}`;
+
+
+/* =====================================================
+   SAPAAN DI BAGIAN JUDUL
+===================================================== */
+
+document.getElementById(
+    "welcomeName"
+).textContent =
+    siswa.nama;
 
 
     }catch(error){

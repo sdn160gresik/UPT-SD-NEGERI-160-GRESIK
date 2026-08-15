@@ -301,7 +301,18 @@ opacity:1;
 <a href="galeri.html">🖼️ Galeri</a>
 <a href="kelas.html">🏫 Kelas</a>
 </div>
-
+<button id="logoutBtn" style="
+    background:#d32f2f;
+    color:white;
+    border:none;
+    padding:.5rem 1rem;
+    border-radius:6px;
+    font-family:'Poppins',sans-serif;
+    font-weight:bold;
+    cursor:pointer;
+">
+    🚪 Keluar
+</button>
 </nav>
 
 
@@ -409,7 +420,16 @@ clickSound.currentTime=0;
 clickSound.play();
 });
 });
+<script>
+document.getElementById("logoutBtn").addEventListener("click", async () => {
 
+    await supabaseClient.auth.signOut();
+
+    window.location.replace("login.html");
+
+});
+</script>
+    
 </script>
 
 </body>

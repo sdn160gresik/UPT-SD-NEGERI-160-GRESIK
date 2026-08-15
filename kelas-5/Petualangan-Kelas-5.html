@@ -99,6 +99,44 @@ const supabaseClient =
 
 <style>
     /* =====================================================
+   INFORMASI SISWA
+===================================================== */
+
+.student-info{
+    background:rgba(255,255,255,.95);
+    color:#0288d1;
+    padding:.5rem 1rem;
+    border-radius:8px;
+    font-size:.85rem;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:.3rem;
+    box-shadow:0 3px 8px rgba(0,0,0,.15);
+}
+
+
+/* =====================================================
+   TOMBOL LOGOUT
+===================================================== */
+
+.logout-btn{
+    background:#d32f2f;
+    color:white;
+    border:none;
+    padding:.55rem 1rem;
+    border-radius:8px;
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.logout-btn:hover{
+    background:#b71c1c;
+    transform:scale(1.05);
+}
+    /* =====================================================
    HALAMAN TERSEMBUNYI SAMPAI LOGIN TERVALIDASI
 ===================================================== */
 
@@ -359,30 +397,26 @@ opacity:1;
 
 <nav>
 
-<div class="nav-left">
-<img src="https://i.imgur.com/sxm7RR1.png">
-<img src="https://i.imgur.com/tGA5UBc.png" style="height:62px;">
-<img src="https://i.imgur.com/oWB8vKW.png">
+<div class="nav-right">
+
+<a href="../index.html">🏠 Beranda</a>
+
+<a href="#">📌 Program</a>
+
+<a href="galeri.html">🖼️ Galeri</a>
+
+<a href="kelas.html">🏫 Kelas</a>
+
+<div id="studentInfo" class="student-info">
+    👤 Memuat...
 </div>
 
-<div class="nav-right">
-<a href="../index.html">🏠 Beranda</a>
-<a href="#">📌 Program</a>
-<a href="galeri.html">🖼️ Galeri</a>
-<a href="kelas.html">🏫 Kelas</a>
-</div>
-<button id="logoutBtn" style="
-    background:#d32f2f;
-    color:white;
-    border:none;
-    padding:.5rem 1rem;
-    border-radius:6px;
-    font-family:'Poppins',sans-serif;
-    font-weight:bold;
-    cursor:pointer;
-">
+<button id="logoutBtn" class="logout-btn">
     🚪 Keluar
 </button>
+
+</div>
+
 </nav>
 
 
@@ -547,7 +581,113 @@ document
 
         }
     );
+/* =====================================================
+   TAMPILKAN DATA SISWA
+===================================================== */
 
+async function tampilkanSiswa(){
+
+    try{
+
+        /* Ambil session yang sedang aktif */
+
+        const {
+            data: sessionData,
+            error: sessionError
+        } = await supabaseClient
+            .auth
+            .getSession();
+
+
+        if(
+            sessionError ||
+            !sessionData.session
+        ){
+
+            window.location.replace(
+                "login.html"
+            );
+
+            return;
+
+        }
+
+
+        const email =
+            sessionData
+                .session
+                .user
+                .email;
+
+
+        /* Cari data siswa */
+
+        const {
+            data: siswa,
+            error: siswaError
+        } = await supabaseClient
+
+            .from("siswa_login")
+
+            .select(
+                "nama,username,email"
+            )
+
+            .eq(
+                "email",
+                email
+            )
+
+            .maybeSingle();
+
+
+        if(siswaError){
+
+            console.error(
+                "Gagal mengambil data siswa:",
+                siswaError
+            );
+
+            document.getElementById(
+                "studentInfo"
+            ).textContent =
+                "👤 Siswa";
+
+            return;
+
+        }
+
+
+        if(!siswa){
+
+            document.getElementById(
+                "studentInfo"
+            ).textContent =
+                "👤 Siswa";
+
+            return;
+
+        }
+
+
+        /* Tampilkan nama */
+
+        document.getElementById(
+            "studentInfo"
+        ).textContent =
+            `👋 ${siswa.nama}`;
+
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+tampilkanSiswa();
 </script>
 
 </body>

@@ -4,6 +4,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Petualangan-Kelas-5</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL =
+    "https://dnasyoyvnzphbmuhihan.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_zQqU29LLgS2i0J50XJAM0w_N7coZMHf";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+(async function () {
+
+    const {
+        data,
+        error
+    } = await supabaseClient.auth.getSession();
+
+    if (error || !data.session) {
+
+        window.location.replace("login.html");
+
+        return;
+    }
+
+})();
+</script>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 

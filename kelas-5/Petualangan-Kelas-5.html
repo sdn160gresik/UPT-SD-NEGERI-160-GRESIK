@@ -11,6 +11,10 @@
 
 <title>Petualangan-Kelas-5</title>
 
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -29,57 +33,83 @@ const supabaseClient =
 
 
 /* =====================================================
-   CEK SESSION SEBELUM HALAMAN DITAMPILKAN
+   CEK LOGIN
 ===================================================== */
 
-(async function(){
+async function cekLogin(){
 
-    try {
+    try{
 
         const {
             data,
             error
-        } = await supabaseClient
-            .auth
-            .getSession();
+        } = await supabaseClient.auth.getSession();
 
 
-        console.log(
-            "SESSION:",
-            data.session
-        );
+        if(error){
 
+            console.error(error);
 
-        /* TIDAK ADA SESSION */
-
-        if(
-            error ||
-            !data ||
-            !data.session
-        ){
-
-            window.location.replace(
-                "login.html"
-            );
+            window.location.replace("login.html");
 
             return;
 
         }
 
 
-        /* ADA SESSION */
+        if(
+            !data ||
+            !data.session
+        ){
 
-        document.documentElement.classList.add(
-            "authenticated"
+            window.location.replace("login.html");
+
+            return;
+
+        }
+
+
+        /* =================================================
+           LOGIN BERHASIL
+        ================================================= */
+
+        const user =
+            data.session.user;
+
+
+        const nama =
+            user.user_metadata?.nama ||
+            user.user_metadata?.name ||
+            user.email ||
+            "Siswa";
+
+
+        const username =
+            user.user_metadata?.username ||
+            "";
+
+
+        console.log(
+            "Siswa login:",
+            nama
+        );
+
+        console.log(
+            "Username:",
+            username
         );
 
 
-    } catch(error){
+        /* Tampilkan halaman */
 
-        console.error(
-            "Kesalahan autentikasi:",
-            error
-        );
+        document.body.style.display =
+            "block";
+
+
+    }
+    catch(error){
+
+        console.error(error);
 
         window.location.replace(
             "login.html"
@@ -87,10 +117,13 @@ const supabaseClient =
 
     }
 
-})();
+}
+
+
+cekLogin();
 
 </script>
-
+<script src="siswa-presence.js"></script>
 
 <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"

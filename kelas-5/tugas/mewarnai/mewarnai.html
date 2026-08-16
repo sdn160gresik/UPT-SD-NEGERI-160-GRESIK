@@ -2,7 +2,93 @@
 <html lang="id">
 
 <head>
+<!-- =====================================================
+     SUPABASE LOGIN PROTECTION
+===================================================== -->
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+    "https://dnasyoyvnzphbmuhihan.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_zQqU29LLgS2i0J50XJAM0w_N7coZMHf";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+/* =====================================================
+   CEK LOGIN
+===================================================== */
+
+(async function(){
+
+    try {
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .auth
+            .getSession();
+
+
+        console.log(
+            "SESSION:",
+            data ? data.session : null
+        );
+
+
+        /* ==============================================
+           BELUM LOGIN
+        ============================================== */
+
+        if(
+            error ||
+            !data ||
+            !data.session
+        ){
+
+            window.location.replace(
+                "../../login.html"
+            );
+
+            return;
+
+        }
+
+
+        /* ==============================================
+           SUDAH LOGIN
+        ============================================== */
+
+        document.documentElement.classList.add(
+            "authenticated"
+        );
+
+
+    } catch(error){
+
+        console.error(
+            "Kesalahan autentikasi:",
+            error
+        );
+
+        window.location.replace(
+            "../../login.html"
+        );
+
+    }
+
+})();
+
+</script>
   <meta charset="UTF-8">
 
   <meta
@@ -18,7 +104,17 @@
   >
 
   <style>
+/* =====================================================
+   PROTEKSI HALAMAN
+===================================================== */
 
+body{
+    display:none;
+}
+
+html.authenticated body{
+    display:block;
+}
     /* =====================================================
        DASAR
     ===================================================== */

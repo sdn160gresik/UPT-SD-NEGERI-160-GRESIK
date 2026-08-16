@@ -1,150 +1,881 @@
-<!DOCTYPE html> 
+
+<!DOCTYPE html>
 <html lang="id">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tugas Kelas 5</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      height: 100%;
-      width: 100%;
-      overflow-x: hidden;
-      background: url('https://i.imgur.com/ZhICw8Q.jpeg') no-repeat center center fixed;
-      background-size: cover;
-      color: #333;
-    }
 
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-    }
+    <meta charset="UTF-8">
 
-    .nav-left img {
-      height: 45px;
-      margin-right: 0.5rem;
-    }
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    .nav-right {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-    }
+    <title>Tugas Kelas 5</title>
 
-    .nav-right a {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      text-decoration: none;
-      color: #0288d1;
-      font-weight: bold;
-      font-size: 0.9rem;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
 
-    .nav-right a:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
 
-    .title-section {
-      text-align: center;
-      margin: 20px 15px 10px;
-    }
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
-    .title-section h1 {
-      font-size: 2rem;
-      background: rgba(255,255,255,0.85);
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      border-radius: 12px;
-      color: #0288d1;
-      text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
-    }
 
-    /* Tombol Tugas */
-    .task-container {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin: 30px auto;
-      max-width: 900px;
-    }
+    <!-- =====================================================
+         SUPABASE
+    ====================================================== -->
 
-    .task-container a {
-      flex: 1 1 250px;
-      background: rgba(255,255,255,0.9);
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      font-weight: bold;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      color: #0288d1;
-      text-decoration: none;
-      width: 250px;
-    }
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    .task-container a:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-    }
-  </style>
+
+    <!-- =====================================================
+         STYLE
+    ====================================================== -->
+
+    <style>
+
+        /* =================================================
+           RESET
+        ================================================= */
+
+        *{
+
+            margin:0;
+            padding:0;
+
+            box-sizing:border-box;
+
+        }
+
+
+        /* =================================================
+           BODY
+        ================================================= */
+
+        html,
+        body{
+
+            width:100%;
+            min-height:100%;
+
+        }
+
+
+        body{
+
+            font-family:
+                'Poppins',
+                sans-serif;
+
+            min-height:100vh;
+
+            overflow-x:hidden;
+
+            background:
+                url(
+                    'https://i.imgur.com/ZhICw8Q.jpeg'
+                )
+                no-repeat
+                center
+                center
+                fixed;
+
+            background-size:cover;
+
+            color:#333;
+
+        }
+
+
+        /* =================================================
+           NAVIGASI
+        ================================================= */
+
+        nav{
+
+            display:flex;
+
+            flex-wrap:wrap;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            gap:15px;
+
+            padding:
+                1rem
+                2rem;
+
+        }
+
+
+        /* =================================================
+           NAV KIRI
+        ================================================= */
+
+        .nav-left{
+
+            display:flex;
+
+            align-items:center;
+
+            flex-wrap:wrap;
+
+            gap:8px;
+
+        }
+
+
+        .nav-left img{
+
+            height:45px;
+
+            width:auto;
+
+            object-fit:contain;
+
+        }
+
+
+        /* =================================================
+           NAV KANAN
+        ================================================= */
+
+        .nav-right{
+
+            display:flex;
+
+            flex-wrap:wrap;
+
+            gap:.5rem;
+
+            align-items:center;
+
+        }
+
+
+        .nav-right a{
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .90
+                );
+
+            padding:
+                .4rem
+                .8rem;
+
+            border-radius:6px;
+
+            text-decoration:none;
+
+            color:#0288d1;
+
+            font-weight:bold;
+
+            font-size:.9rem;
+
+            border:none;
+
+            cursor:pointer;
+
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease;
+
+        }
+
+
+        .nav-right a:hover{
+
+            transform:
+                scale(1.05);
+
+            box-shadow:
+                0 4px 8px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    .20
+                );
+
+        }
+
+
+        /* =================================================
+           JUDUL
+        ================================================= */
+
+        .title-section{
+
+            text-align:center;
+
+            margin:
+                20px
+                15px
+                10px;
+
+        }
+
+
+        .title-section h1{
+
+            font-size:2rem;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .85
+                );
+
+            display:inline-block;
+
+            padding:
+                .5rem
+                1rem;
+
+            border-radius:12px;
+
+            color:#0288d1;
+
+            text-shadow:
+                1px
+                1px
+                2px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .60
+                );
+
+        }
+
+
+        /* =================================================
+           INFORMASI AKTIVITAS SENDIRI
+        ================================================= */
+
+        .activity-status{
+
+            width:fit-content;
+
+            max-width:90%;
+
+            margin:
+                10px
+                auto
+                20px;
+
+            padding:
+                9px
+                18px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .94
+                );
+
+            border-radius:12px;
+
+            color:#0288d1;
+
+            font-size:.9rem;
+
+            font-weight:600;
+
+            box-shadow:
+                0 4px 10px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    .15
+                );
+
+        }
+
+
+        /* =================================================
+           CONTAINER TUGAS
+        ================================================= */
+
+        .task-container{
+
+            display:flex;
+
+            justify-content:center;
+
+            flex-wrap:wrap;
+
+            gap:20px;
+
+            margin:
+                30px
+                auto;
+
+            max-width:900px;
+
+            padding:
+                0
+                20px;
+
+        }
+
+
+        /* =================================================
+           KARTU TUGAS
+        ================================================= */
+
+        .task-container a{
+
+            flex:
+                1
+                1
+                250px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .90
+                );
+
+            border-radius:12px;
+
+            padding:20px;
+
+            text-align:center;
+
+            font-weight:bold;
+
+            font-size:1.1rem;
+
+            cursor:pointer;
+
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease;
+
+            color:#0288d1;
+
+            text-decoration:none;
+
+            width:250px;
+
+        }
+
+
+        .task-container a:hover{
+
+            transform:
+                translateY(-5px);
+
+            box-shadow:
+                0 6px 12px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    .25
+                );
+
+        }
+
+
+        /* =================================================
+           EFEK KLIK
+        ================================================= */
+
+        .task-container a:active{
+
+            transform:
+                scale(.97);
+
+        }
+
+
+        /* =================================================
+           RESPONSIVE
+        ================================================= */
+
+        @media(max-width:768px){
+
+            nav{
+
+                flex-direction:column;
+
+                align-items:center;
+
+                padding:
+                    1rem;
+
+            }
+
+
+            .nav-left{
+
+                justify-content:center;
+
+            }
+
+
+            .nav-right{
+
+                justify-content:center;
+
+            }
+
+
+            .title-section h1{
+
+                font-size:1.5rem;
+
+            }
+
+
+            .task-container{
+
+                gap:15px;
+
+                padding:
+                    0
+                    15px;
+
+            }
+
+
+            .task-container a{
+
+                flex:
+                    1
+                    1
+                    100%;
+
+                width:100%;
+
+                max-width:400px;
+
+                font-size:1rem;
+
+            }
+
+        }
+
+
+        @media(max-width:480px){
+
+            .nav-left img{
+
+                height:38px;
+
+            }
+
+
+            .nav-right a{
+
+                font-size:.8rem;
+
+                padding:
+                    .4rem
+                    .6rem;
+
+            }
+
+
+            .title-section h1{
+
+                font-size:1.3rem;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
+
 <body>
 
-  <!-- Navigasi -->
-  <nav>
-    <div class="nav-left">
-      <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
-      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 50px;">
-      <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah">
+
+    <!-- =====================================================
+         NAVIGASI
+    ====================================================== -->
+
+    <nav>
+
+
+        <!-- ================================================
+             LOGO
+        ================================================= -->
+
+        <div class="nav-left">
+
+            <img
+                src="https://i.imgur.com/sxm7RR1.png"
+                alt="Logo Gresik"
+            >
+
+            <img
+                src="https://i.imgur.com/tGA5UBc.png"
+                alt="Logo Tut Wuri"
+                style="height:50px;"
+            >
+
+            <img
+                src="https://i.imgur.com/oWB8vKW.png"
+                alt="Logo Sekolah"
+            >
+
+        </div>
+
+
+        <!-- ================================================
+             MENU
+        ================================================= -->
+
+        <div class="nav-right">
+
+            <a href="../../index.html">
+                🏠 Beranda
+            </a>
+
+
+            <a href="../Petualangan-Kelas-5.html">
+                ◀️ Kembali
+            </a>
+
+
+            <a href="#">
+                🖼️ Galeri
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         JUDUL
+    ====================================================== -->
+
+    <div class="title-section">
+
+        <h1>
+            📚 Tugas Kelas 5
+        </h1>
+
     </div>
-    <div class="nav-right">
-      <a href="../../index.html">🏠 Beranda</a>
-      <a href="../Petualangan-Kelas-5.html">◀️ Kembali</a>
-      <a href="#">🖼️ Galeri</a>
+
+
+    <!-- =====================================================
+         STATUS AKTIVITAS
+         
+         Bagian ini hanya menunjukkan kepada siswa bahwa
+         aktivitas mereka sedang dicatat.
+    ====================================================== -->
+
+    <div
+        id="activityStatus"
+        class="activity-status"
+    >
+
+        🟢 Aktivitas:
+        sedang memilih tugas
+
     </div>
-  </nav>
 
-  <!-- Judul Halaman -->
-  <div class="title-section">
-    <h1>📚 Tugas Kelas 5</h1>
-  </div>
 
-  <!-- Tombol Mapel -->
-  <div class="task-container">
-    <a href="tugas-bIndo.html">📚 Bahasa Indonesia</a>
-    <a href="matematika/tugas_matematika.html">📐 Matematika</a>
-    <a href="pancasila/10022026.html">🏛️ Pancasila</a>
-    <a href="tugas-IPAS.html">🌍 IPAS</a>
-    <a href="tugas-BJ.html">🎋 Bahasa Jawa</a>
-    <a href="seni/tugas_seni_120226.html">🎼 Seni</a>
-    <a href="mewarnai/mewarnai.html">✏️ Mewarnai</a>
-  </div>
+    <!-- =====================================================
+         DAFTAR TUGAS
+    ====================================================== -->
 
-  <!-- Suara klik interaktif -->
-  <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
-  <script>
-    document.querySelectorAll(".task-container a").forEach(link => {
-      link.addEventListener("click", () => {
-        const clickSound = document.getElementById("clickSound");
-        clickSound.currentTime = 0;
-        clickSound.play();
-      });
-    });
-  </script>
+    <div class="task-container">
+
+
+        <!-- =================================================
+             BAHASA INDONESIA
+        ================================================== -->
+
+        <a
+            href="tugas-bIndo.html"
+            data-activity="📚 Sedang mengerjakan Tugas Bahasa Indonesia"
+        >
+
+            📚 Bahasa Indonesia
+
+        </a>
+
+
+        <!-- =================================================
+             MATEMATIKA
+        ================================================== -->
+
+        <a
+            href="matematika/tugas_matematika.html"
+            data-activity="🧮 Sedang mengerjakan Tugas Matematika"
+        >
+
+            📐 Matematika
+
+        </a>
+
+
+        <!-- =================================================
+             PANCASILA
+        ================================================== -->
+
+        <a
+            href="pancasila/10022026.html"
+            data-activity="⭐ Sedang mengerjakan Tugas Pancasila"
+        >
+
+            🏛️ Pancasila
+
+        </a>
+
+
+        <!-- =================================================
+             IPAS
+        ================================================== -->
+
+        <a
+            href="tugas-IPAS.html"
+            data-activity="🌿 Sedang mengerjakan Tugas IPAS"
+        >
+
+            🌍 IPAS
+
+        </a>
+
+
+        <!-- =================================================
+             BAHASA JAWA
+        ================================================== -->
+
+        <a
+            href="tugas-BJ.html"
+            data-activity="🏡 Sedang mengerjakan Tugas Bahasa Jawa"
+        >
+
+            🎋 Bahasa Jawa
+
+        </a>
+
+
+        <!-- =================================================
+             SENI
+        ================================================== -->
+
+        <a
+            href="seni/tugas_seni_120226.html"
+            data-activity="🎨 Sedang mengerjakan Tugas Seni"
+        >
+
+            🎼 Seni
+
+        </a>
+
+
+        <!-- =================================================
+             MEWARNAI
+        ================================================== -->
+
+        <a
+            href="mewarnai/mewarnai.html"
+            data-activity="✏️ Sedang mengerjakan Tugas Mewarnai"
+        >
+
+            ✏️ Mewarnai
+
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         AUDIO KLIK
+    ====================================================== -->
+
+    <audio
+        id="clickSound"
+        src="suara/button-press.mp3"
+        preload="auto"
+    ></audio>
+
+
+    <!-- =====================================================
+         SISTEM PRESENCE SISWA
+         
+         Karena:
+         
+         Petualangan-Kelas-5.html
+         siswa-presence.js
+         
+         dan:
+         
+         tugas/
+         tugas.html
+         
+         maka path:
+         
+         ../siswa-presence.js
+    ====================================================== -->
+
+    <script src="../siswa-presence.js"></script>
+
+
+    <!-- =====================================================
+         SCRIPT HALAMAN TUGAS
+    ====================================================== -->
+
+    <script>
+
+        /* =================================================
+           ELEMENT
+        ================================================= */
+
+        const activityStatus =
+            document.getElementById(
+                "activityStatus"
+            );
+
+
+        const taskLinks =
+            document.querySelectorAll(
+                ".task-container a"
+            );
+
+
+        /* =================================================
+           AKTIVITAS AWAL
+           
+           Ketika baru masuk halaman tugas.
+        ================================================= */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function(){
+
+                setTimeout(
+                    function(){
+
+                        if(
+                            typeof updateHalamanSiswa ===
+                            "function"
+                        ){
+
+                            updateHalamanSiswa(
+                                "🧠 Sedang memilih tugas"
+                            );
+
+                        }
+
+                    },
+                    1000
+                );
+
+            }
+        );
+
+
+        /* =================================================
+           KLIK TUGAS
+           
+           Sebelum berpindah halaman, kita kirim aktivitas
+           yang dipilih.
+        ================================================= */
+
+        taskLinks.forEach(
+            function(link){
+
+                link.addEventListener(
+                    "click",
+                    function(){
+
+                        const activity =
+                            link.dataset.activity ||
+                            "🧠 Sedang mengerjakan tugas";
+
+
+                        /* =====================================
+                           TAMPILKAN DI HALAMAN SENDIRI
+                        ===================================== */
+
+                        if(activityStatus){
+
+                            activityStatus.textContent =
+                                "🟢 Aktivitas: " +
+                                activity;
+
+                        }
+
+
+                        /* =====================================
+                           UPDATE PRESENCE
+                        ===================================== */
+
+                        if(
+                            typeof updateHalamanSiswa ===
+                            "function"
+                        ){
+
+                            updateHalamanSiswa(
+                                activity
+                            );
+
+                        }
+
+
+                        /* =====================================
+                           AUDIO
+                        ===================================== */
+
+                        const clickSound =
+                            document.getElementById(
+                                "clickSound"
+                            );
+
+
+                        if(clickSound){
+
+                            clickSound.currentTime =
+                                0;
+
+                            clickSound
+                                .play()
+                                .catch(
+                                    function(){
+                                        // Audio dapat diblokir browser.
+                                    }
+                                );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
 
 </body>
+
 </html>

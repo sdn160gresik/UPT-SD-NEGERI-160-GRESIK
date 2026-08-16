@@ -1,68 +1,229 @@
-
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
 
-    <!-- =====================================================
-         INFORMASI DASAR DOKUMEN
-    ====================================================== -->
+<meta charset="UTF-8">
 
-    <meta charset="UTF-8">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Petualangan Belajar Kelas 5 UPT SDN 160 Gresik"
-    >
-
-    <title>Petualangan-Kelas-5</title>
+<title>Petualangan-Kelas-5</title>
 
 
-    <!-- =====================================================
-         SUPABASE
-    ====================================================== -->
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
 
-    <!-- =====================================================
-         INISIALISASI SUPABASE
-    ====================================================== -->
+const SUPABASE_URL =
+    "https://dnasyoyvnzphbmuhihan.supabase.co";
 
-    <script>
-
-        const SUPABASE_URL =
-            "https://dnasyoyvnzphbmuhihan.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_zQqU29LLgS2i0J50XJAM0w_N7coZMHf";
 
 
-        const SUPABASE_PUBLISHABLE_KEY =
-            "sb_publishable_zQqU29LLgS2i0J50XJAM0w_N7coZMHf";
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
 
 
-        const supabaseClient =
-            window.supabase.createClient(
-                SUPABASE_URL,
-                SUPABASE_PUBLISHABLE_KEY
-            );
+/* =====================================================
+   DATA SISWA
+===================================================== */
+
+let siswaLogin = null;
+
+let namaSiswa = "Siswa";
+
+let usernameSiswa = "";
 
 
-        /* =====================================================
-   CEK LOGIN SISWA
+/* =====================================================
+   FUNGSI MENGAMBIL NAMA SISWA
+===================================================== */
+
+function ambilNamaSiswa(user){
+
+    if(!user){
+
+        return "Siswa";
+
+    }
+
+
+    const metadata =
+        user.user_metadata || {};
+
+
+    console.log(
+        "===================================="
+    );
+
+    console.log(
+        "DATA USER SUPABASE"
+    );
+
+    console.log(
+        "User ID:",
+        user.id
+    );
+
+    console.log(
+        "Email:",
+        user.email
+    );
+
+    console.log(
+        "User Metadata:",
+        metadata
+    );
+
+    console.log(
+        "App Metadata:",
+        user.app_metadata
+    );
+
+    console.log(
+        "===================================="
+    );
+
+
+    /* =================================================
+       CEK BEBERAPA KEMUNGKINAN NAMA
+    ================================================= */
+
+    const kemungkinanNama = [
+
+        metadata.nama,
+
+        metadata.nama_siswa,
+
+        metadata.namaSiswa,
+
+        metadata.name,
+
+        metadata.full_name,
+
+        metadata.fullName,
+
+        metadata.display_name,
+
+        metadata.displayName,
+
+        metadata.student_name,
+
+        metadata.studentName,
+
+        metadata.nama_lengkap,
+
+        metadata.namaLengkap
+
+    ];
+
+
+    /* =================================================
+       CARI NAMA PERTAMA YANG VALID
+    ================================================= */
+
+    for(
+        const nama of kemungkinanNama
+    ){
+
+        if(
+            typeof nama === "string" &&
+            nama.trim() !== ""
+        ){
+
+            /*
+             * Jangan menerima email
+             * sebagai nama siswa.
+             */
+
+            if(
+                !nama.includes("@")
+            ){
+
+                return nama.trim();
+
+            }
+
+        }
+
+    }
+
+
+    /* =================================================
+       JIKA NAMA TIDAK DITEMUKAN
+    ================================================= */
+
+    return "Siswa";
+
+}
+
+
+/* =====================================================
+   AMBIL USERNAME
+===================================================== */
+
+function ambilUsername(user){
+
+    if(!user){
+
+        return "";
+
+    }
+
+
+    const metadata =
+        user.user_metadata || {};
+
+
+    return (
+
+        metadata.username ||
+
+        metadata.user_name ||
+
+        metadata.username_siswa ||
+
+        ""
+
+    );
+
+}
+
+
+/* =====================================================
+   CEK LOGIN
 ===================================================== */
 
 async function cekLogin(){
 
     try{
 
+        console.log(
+            "Memeriksa login siswa..."
+        );
+
+
         const {
+
             data,
+
             error
-        } = await supabaseClient.auth.getSession();
+
+        } =
+            await supabaseClient
+                .auth
+                .getSession();
 
 
         /* =================================================
@@ -76,11 +237,14 @@ async function cekLogin(){
                 error
             );
 
+
             window.location.replace(
                 "login.html"
             );
 
+
             return;
+
         }
 
 
@@ -90,96 +254,54 @@ async function cekLogin(){
 
         if(
             !data ||
-            !data.session ||
-            !data.session.user
+            !data.session
         ){
 
             console.log(
                 "Tidak ada siswa yang login."
             );
 
+
             window.location.replace(
                 "login.html"
             );
 
+
             return;
+
         }
 
 
         /* =================================================
-           DATA USER
+           USER LOGIN
         ================================================= */
 
         const user =
             data.session.user;
 
 
-        /* =================================================
-           AMBIL DATA METADATA
-        ================================================= */
-
-        const metadata =
-            user.user_metadata || {};
-
-
-        console.log(
-            "Data user lengkap:",
-            user
-        );
-
-        console.log(
-            "Metadata siswa:",
-            metadata
-        );
+        siswaLogin =
+            user;
 
 
         /* =================================================
            AMBIL NAMA SISWA
-           
-           PRIORITAS:
-           1. nama
-           2. name
-           3. full_name
-           4. display_name
         ================================================= */
 
-        const namaSiswa =
-            metadata.nama ||
-            metadata.name ||
-            metadata.full_name ||
-            metadata.display_name ||
-            "Siswa";
+        namaSiswa =
+            ambilNamaSiswa(
+                user
+            );
 
 
         /* =================================================
            AMBIL USERNAME
         ================================================= */
 
-        const usernameSiswa =
-            metadata.username ||
-            "";
-
-
-        /* =================================================
-           SIMPAN DATA SISWA SECARA GLOBAL
-           Agar siswa-presence.js bisa menggunakannya
-        ================================================= */
-
-        window.currentSiswa = {
-
-            id:
-                user.id,
-
-            nama:
-                namaSiswa,
-
-            username:
-                usernameSiswa,
-
-            email:
-                user.email || ""
-
-        };
+        usernameSiswa =
+            ambilUsername(
+                user
+            );
 
 
         /* =================================================
@@ -187,40 +309,24 @@ async function cekLogin(){
         ================================================= */
 
         console.log(
-            "================================"
-        );
-
-        console.log(
-            "SISWA LOGIN"
-        );
-
-        console.log(
-            "ID:",
-            user.id
-        );
-
-        console.log(
-            "Nama:",
+            "Nama siswa:",
             namaSiswa
         );
 
         console.log(
-            "Username:",
+            "Username siswa:",
             usernameSiswa
         );
 
-        console.log(
-            "Email:",
-            user.email
-        );
 
         console.log(
-            "================================"
+            "Email akun:",
+            user.email
         );
 
 
         /* =================================================
-           TAMPILKAN NAMA DI SAPAAN
+           TAMPILKAN NAMA DI UCAPAN SELAMAT DATANG
         ================================================= */
 
         const welcomeName =
@@ -256,6 +362,24 @@ async function cekLogin(){
 
 
         /* =================================================
+           SIMPAN DATA UNTUK PRESENCE
+        ================================================= */
+
+        window.currentSiswa = {
+
+            id:
+                user.id,
+
+            nama:
+                namaSiswa,
+
+            username:
+                usernameSiswa
+
+        };
+
+
+        /* =================================================
            TAMPILKAN HALAMAN
         ================================================= */
 
@@ -264,17 +388,9 @@ async function cekLogin(){
         );
 
 
-        /* =================================================
-           MULAI PRESENCE SETELAH LOGIN BERHASIL
-        ================================================= */
-
-        if(
-            typeof mulaiPresence === "function"
-        ){
-
-            mulaiPresence();
-
-        }
+        console.log(
+            "Login siswa berhasil."
+        );
 
 
     }
@@ -285,6 +401,7 @@ async function cekLogin(){
             error
         );
 
+
         window.location.replace(
             "login.html"
         );
@@ -294,1114 +411,991 @@ async function cekLogin(){
 }
 
 
-        /* =====================================================
-           JALANKAN CEK LOGIN SETELAH HTML SIAP
-        ====================================================== */
+/* =====================================================
+   JALANKAN CEK LOGIN
+===================================================== */
 
-        document.addEventListener(
-            "DOMContentLoaded",
-            cekLogin
+document.addEventListener(
+    "DOMContentLoaded",
+    cekLogin
+);
+
+
+/* =====================================================
+   JIKA SESSION BERUBAH
+===================================================== */
+
+supabaseClient
+    .auth
+    .onAuthStateChange(
+        (event, session) => {
+
+            console.log(
+                "Perubahan autentikasi:",
+                event
+            );
+
+
+            if(
+                event === "SIGNED_OUT"
+            ){
+
+                window.location.replace(
+                    "login.html"
+                );
+
+            }
+
+        }
+    );
+
+</script>
+
+
+<!-- =====================================================
+     FONT
+===================================================== -->
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+
+<!-- =====================================================
+     STYLE
+===================================================== -->
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+
+    box-sizing:border-box;
+
+}
+
+
+html,
+body{
+
+    margin:0;
+
+    padding:0;
+
+}
+
+
+/* =====================================================
+   HALAMAN TERSEMBUNYI
+   SAMPAI LOGIN VALID
+===================================================== */
+
+body{
+
+    display:none;
+
+    min-height:100vh;
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    background:
+        url(
+            'https://i.imgur.com/clG3P3n.png'
+        )
+        no-repeat
+        center
+        center
+        fixed;
+
+    background-size:cover;
+
+    color:#fff;
+
+}
+
+
+html.authenticated body{
+
+    display:block;
+
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+nav{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    padding:1rem 2rem;
+
+    box-shadow:
+        0 4px 8px
+        rgba(0,0,0,.20);
+
+}
+
+
+.nav-right{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:.5rem;
+
+    flex-wrap:wrap;
+
+}
+
+
+/* =====================================================
+   LINK NAVBAR
+===================================================== */
+
+nav a{
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .95
         );
 
-    </script>
+    padding:
+        .5rem
+        1rem;
 
+    border-radius:8px;
 
-    <!-- =====================================================
-         FONT
-    ====================================================== -->
+    text-decoration:none;
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+    color:#0288d1;
 
+    font-weight:700;
 
-    <!-- =====================================================
-         CSS
-    ====================================================== -->
+    display:flex;
 
-    <style>
+    align-items:center;
 
-        /* =====================================================
-           RESET
-        ====================================================== */
+    gap:.4rem;
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
 
+}
 
-        /* =====================================================
-           BODY
-        ====================================================== */
 
-        body {
+nav a:hover{
 
-            min-height: 100vh;
+    transform:
+        translateY(-2px)
+        scale(1.04);
 
-            margin: 0;
+    box-shadow:
+        0 6px 12px
+        rgba(0,0,0,.20);
 
-            font-family:
-                'Poppins',
-                sans-serif;
+}
 
-            background:
-                url('https://i.imgur.com/clG3P3n.png')
-                no-repeat
-                center
-                center
-                fixed;
 
-            background-size: cover;
+/* =====================================================
+   INFORMASI SISWA
+===================================================== */
 
-            color: #ffffff;
+.student-info{
 
-            overflow-x: hidden;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .95
+        );
 
-        }
+    color:#0288d1;
 
+    padding:
+        .5rem
+        1rem;
 
-        /* =====================================================
-           SEMBUNYIKAN HALAMAN SEBELUM LOGIN VALID
-        ====================================================== */
+    border-radius:8px;
 
-        body {
-            display: none;
-        }
+    font-size:.85rem;
 
+    font-weight:700;
 
-        html.authenticated body {
-            display: block;
-        }
+    display:flex;
 
+    align-items:center;
 
-        /* =====================================================
-           NAVBAR
-        ====================================================== */
+    gap:.3rem;
 
-        nav {
+    box-shadow:
+        0 3px 8px
+        rgba(0,0,0,.15);
 
-            width: 100%;
+}
 
-            display: flex;
 
-            justify-content: center;
+/* =====================================================
+   LOGOUT
+===================================================== */
 
-            align-items: center;
+.logout-btn{
 
-            padding:
-                1rem
-                2rem;
+    background:#d32f2f;
 
-            background:
-                rgba(0, 0, 0, 0.15);
+    color:#fff;
 
-            box-shadow:
-                0 4px 12px
-                rgba(0, 0, 0, 0.20);
+    border:none;
 
-            backdrop-filter:
-                blur(5px);
+    padding:
+        .55rem
+        1rem;
 
-            -webkit-backdrop-filter:
-                blur(5px);
+    border-radius:8px;
 
-        }
+    font-family:
+        'Poppins',
+        sans-serif;
 
+    font-weight:700;
 
-        /* =====================================================
-           NAV RIGHT
-        ====================================================== */
+    cursor:pointer;
 
-        .nav-right {
+    transition:
+        .25s;
 
-            width: 100%;
+}
 
-            max-width: 1200px;
 
-            display: flex;
+.logout-btn:hover{
 
-            justify-content: center;
+    background:#b71c1c;
 
-            align-items: center;
+    transform:
+        scale(1.05);
 
-            gap: 0.6rem;
+}
 
-            flex-wrap: wrap;
 
-        }
+/* =====================================================
+   JUDUL
+===================================================== */
 
+.title-section{
 
-        /* =====================================================
-           LINK NAVBAR
-        ====================================================== */
+    text-align:center;
 
-        nav a {
+    margin:
+        30px
+        20px
+        10px;
 
-            background:
-                rgba(255, 255, 255, 0.95);
+}
 
-            padding:
-                0.55rem
-                1rem;
 
-            border-radius:
-                8px;
+.title-section h1{
 
-            text-decoration:
-                none;
+    font-size:2rem;
 
-            color:
-                #0288d1;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .88
+        );
 
-            font-weight:
-                700;
+    display:inline-block;
 
-            font-size:
-                0.9rem;
+    padding:
+        .5rem
+        1.5rem;
 
-            display:
-                flex;
+    border-radius:12px;
 
-            align-items:
-                center;
+    color:#0288d1;
 
-            justify-content:
-                center;
+    text-shadow:
+        1px
+        1px
+        2px
+        rgba(
+            255,
+            255,
+            255,
+            .6
+        );
 
-            gap:
-                0.4rem;
+}
 
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease,
-                background 0.25s ease;
 
-            box-shadow:
-                0 3px 8px
-                rgba(0, 0, 0, 0.12);
+/* =====================================================
+   UCAPAN SELAMAT DATANG
+===================================================== */
 
-        }
+.welcome-student{
 
+    margin:
+        15px
+        auto
+        8px;
 
-        nav a:hover {
+    width:
+        fit-content;
 
-            transform:
-                translateY(-2px)
-                scale(1.03);
+    max-width:90%;
 
-            box-shadow:
-                0 6px 14px
-                rgba(0, 0, 0, 0.20);
+    padding:
+        10px
+        22px;
 
-            background:
-                #ffffff;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .95
+        );
 
-        }
+    color:#7b1fa2;
 
+    border-radius:14px;
 
-        /* =====================================================
-           INFORMASI SISWA
-        ====================================================== */
+    font-size:1.15rem;
 
-        .student-info {
+    font-weight:700;
 
-            background:
-                rgba(255, 255, 255, 0.95);
+    box-shadow:
+        0 5px 12px
+        rgba(0,0,0,.20);
 
-            color:
-                #0288d1;
+    animation:
+        welcomePop
+        .6s
+        ease;
 
-            padding:
-                0.55rem
-                1rem;
+}
 
-            border-radius:
-                8px;
 
-            font-size:
-                0.85rem;
+.welcome-message{
 
-            font-weight:
-                700;
+    text-align:center;
 
-            display:
-                flex;
+    color:#fff;
 
-            align-items:
-                center;
+    font-size:1rem;
 
-            justify-content:
-                center;
+    font-weight:600;
 
-            gap:
-                0.3rem;
+    margin:
+        8px
+        0
+        5px;
 
-            box-shadow:
-                0 3px 8px
-                rgba(0, 0, 0, 0.15);
+    text-shadow:
+        1px
+        2px
+        3px
+        rgba(0,0,0,.50);
 
-            min-height:
-                38px;
+}
 
-        }
 
+@keyframes welcomePop{
 
-        /* =====================================================
-           TOMBOL LOGOUT
-        ====================================================== */
+    0%{
 
-        .logout-btn {
+        opacity:0;
 
-            background:
-                #d32f2f;
+        transform:
+            translateY(-15px)
+            scale(.95);
 
-            color:
-                #ffffff;
+    }
 
-            border:
-                none;
 
-            padding:
-                0.55rem
-                1rem;
+    100%{
 
-            border-radius:
-                8px;
+        opacity:1;
 
-            font-family:
-                'Poppins',
-                sans-serif;
+        transform:
+            translateY(0)
+            scale(1);
 
-            font-weight:
-                700;
+    }
 
-            font-size:
-                0.85rem;
+}
 
-            cursor:
-                pointer;
 
-            transition:
-                transform 0.25s ease,
-                background 0.25s ease,
-                box-shadow 0.25s ease;
+/* =====================================================
+   PENGUMUMAN
+===================================================== */
 
-            box-shadow:
-                0 3px 8px
-                rgba(0, 0, 0, 0.15);
+.pengumuman-box{
 
-        }
+    display:flex;
 
+    justify-content:center;
 
-        .logout-btn:hover {
+    margin-top:18px;
 
-            background:
-                #b71c1c;
+}
 
-            transform:
-                scale(1.05);
 
-            box-shadow:
-                0 5px 12px
-                rgba(0, 0, 0, 0.25);
+.pengumuman-btn{
 
-        }
+    background:
+        linear-gradient(
+            45deg,
+            #0288d1,
+            #7b1fa2
+        );
 
+    padding:
+        12px
+        28px;
 
-        /* =====================================================
-           BAGIAN JUDUL
-        ====================================================== */
+    border-radius:12px;
 
-        .title-section {
+    text-decoration:none;
 
-            text-align:
-                center;
+    font-size:1.2rem;
 
-            margin:
-                30px
-                20px
-                10px;
+    font-weight:bold;
 
-        }
+    color:#fff;
 
+    border:
+        3px
+        solid
+        #fff;
 
-        /* =====================================================
-           JUDUL UTAMA
-        ====================================================== */
+    box-shadow:
+        0 6px 12px
+        rgba(0,0,0,.30);
 
-        .title-section h1 {
+    transition:
+        all .3s ease;
 
-            font-size:
-                2rem;
+}
 
-            line-height:
-                1.3;
 
-            background:
-                rgba(255, 255, 255, 0.90);
+.pengumuman-btn:hover{
 
-            display:
-                inline-block;
+    transform:
+        scale(1.08);
 
-            padding:
-                0.6rem
-                1.5rem;
+    background:
+        linear-gradient(
+            45deg,
+            #039be5,
+            #9c27b0
+        );
 
-            border-radius:
-                14px;
+}
 
-            color:
-                #0288d1;
 
-            text-shadow:
-                1px
-                1px
-                2px
-                rgba(255, 255, 255, 0.6);
+/* =====================================================
+   DAFTAR SISWA AKTIF
+===================================================== */
 
-            box-shadow:
-                0 5px 14px
-                rgba(0, 0, 0, 0.18);
+#daftarSiswaAktif{
 
-        }
+    max-width:700px;
 
+    margin:
+        20px
+        auto;
 
-        /* =====================================================
-           SAPAAN SISWA
-        ====================================================== */
+    padding:
+        0
+        20px;
 
-        .welcome-student {
+}
 
-            margin:
-                15px
-                auto
-                8px;
 
-            width:
-                fit-content;
+.jumlah-siswa-online{
 
-            max-width:
-                90%;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .95
+        );
 
-            padding:
-                10px
-                22px;
+    color:#0288d1;
 
-            background:
-                rgba(255, 255, 255, 0.95);
+    padding:
+        12px
+        18px;
 
-            color:
-                #7b1fa2;
+    border-radius:12px;
 
-            border-radius:
-                14px;
+    font-weight:bold;
 
-            font-size:
-                1.15rem;
+    margin-bottom:12px;
 
-            font-weight:
-                700;
+    text-align:center;
 
-            box-shadow:
-                0 5px 12px
-                rgba(0, 0, 0, 0.20);
+    box-shadow:
+        0 4px 10px
+        rgba(0,0,0,.20);
 
-            animation:
-                welcomePop
-                0.6s
-                ease;
+}
 
-        }
 
+.siswa-online-item{
 
-        /* =====================================================
-           PESAN SELAMAT DATANG
-        ====================================================== */
+    display:flex;
 
-        .welcome-message {
+    align-items:center;
 
-            text-align:
-                center;
+    gap:12px;
 
-            color:
-                #ffffff;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .95
+        );
 
-            font-size:
-                1rem;
+    color:#333;
 
-            font-weight:
-                600;
+    padding:
+        12px
+        16px;
 
-            margin:
-                8px
-                0
-                5px;
+    margin-bottom:8px;
 
-            text-shadow:
-                1px
-                2px
-                3px
-                rgba(0, 0, 0, 0.5);
+    border-radius:12px;
 
-        }
+    box-shadow:
+        0 3px 8px
+        rgba(0,0,0,.15);
 
+}
 
-        /* =====================================================
-           ANIMASI SAPAAN
-        ====================================================== */
 
-        @keyframes welcomePop {
+.status-online{
 
-            0% {
+    font-size:20px;
 
-                opacity:
-                    0;
+}
 
-                transform:
-                    translateY(-15px)
-                    scale(0.95);
 
-            }
+.siswa-info{
 
-            100% {
+    flex:1;
 
-                opacity:
-                    1;
+}
 
-                transform:
-                    translateY(0)
-                    scale(1);
 
-            }
+.siswa-nama{
 
-        }
+    font-weight:bold;
 
+    color:#0288d1;
 
-        /* =====================================================
-           PENGUMUMAN
-        ====================================================== */
+}
 
-        .pengumuman-box {
 
-            display:
-                flex;
+.siswa-halaman{
 
-            justify-content:
-                center;
+    font-size:13px;
 
-            margin-top:
-                18px;
+    margin-top:3px;
 
-        }
+    color:#555;
 
+}
 
-        .pengumuman-btn {
 
-            background:
-                linear-gradient(
-                    45deg,
-                    #0288d1,
-                    #7b1fa2
-                );
+.siswa-kosong{
 
-            padding:
-                12px
-                28px;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .90
+        );
 
-            border-radius:
-                12px;
+    color:#555;
 
-            text-decoration:
-                none;
+    padding:15px;
 
-            font-size:
-                1.2rem;
+    border-radius:12px;
 
-            font-weight:
-                700;
+    text-align:center;
 
-            color:
-                #ffffff;
+}
 
-            border:
-                3px
-                solid
-                #ffffff;
 
-            box-shadow:
-                0 6px 12px
-                rgba(0, 0, 0, 0.30);
+/* =====================================================
+   GRID PETUALANGAN
+===================================================== */
 
-            transition:
-                transform 0.3s ease,
-                background 0.3s ease,
-                box-shadow 0.3s ease;
+.map-grid{
 
-        }
+    display:grid;
 
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(
+                220px,
+                1fr
+            )
+        );
 
-        .pengumuman-btn:hover {
+    gap:20px;
 
-            transform:
-                scale(1.08);
+    padding:30px;
 
-            background:
-                linear-gradient(
-                    45deg,
-                    #039be5,
-                    #9c27b0
-                );
+    max-width:1100px;
 
-            box-shadow:
-                0 8px 18px
-                rgba(0, 0, 0, 0.35);
+    margin:auto;
 
-        }
+}
 
 
-        /* =====================================================
-           DAFTAR SISWA AKTIF
-        ====================================================== */
+/* =====================================================
+   KARTU PETUALANGAN
+===================================================== */
 
-        #daftarSiswaAktif {
+.map-item{
 
-            max-width:
-                700px;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .90
+        );
 
-            margin:
-                20px
-                auto;
+    border-radius:15px;
 
-            padding:
-                0
-                20px;
+    padding:20px;
 
-        }
+    text-align:center;
 
+    color:#0288d1;
 
-        /* =====================================================
-           JUMLAH SISWA ONLINE
-        ====================================================== */
+    box-shadow:
+        0 4px 10px
+        rgba(0,0,0,.20);
 
-        .jumlah-siswa-online {
+    transition:
+        transform .3s ease;
 
-            background:
-                rgba(255, 255, 255, 0.95);
+    text-decoration:none;
 
-            color:
-                #0288d1;
+    font-weight:bold;
 
-            padding:
-                12px
-                18px;
+    font-size:1.1rem;
 
-            border-radius:
-                12px;
+}
 
-            font-weight:
-                700;
 
-            margin-bottom:
-                12px;
+.map-item:hover{
 
-            text-align:
-                center;
+    transform:
+        scale(1.05);
 
-            box-shadow:
-                0 4px 10px
-                rgba(0, 0, 0, 0.20);
+    background-color:
+        #dff6ff;
 
-        }
+}
 
 
-        /* =====================================================
-           ITEM SISWA ONLINE
-        ====================================================== */
+.map-item .emoji{
 
-        .siswa-online-item {
+    font-size:2.5rem;
 
-            display:
-                flex;
+    display:block;
 
-            align-items:
-                center;
+    margin-bottom:10px;
 
-            gap:
-                12px;
+}
 
-            background:
-                rgba(255, 255, 255, 0.95);
 
-            color:
-                #333333;
+/* =====================================================
+   MENU TERSEMBUNYI
+===================================================== */
 
-            padding:
-                12px
-                16px;
+.map-item.hide-menu{
 
-            margin-bottom:
-                8px;
+    display:none !important;
 
-            border-radius:
-                12px;
+}
 
-            box-shadow:
-                0 3px 8px
-                rgba(0, 0, 0, 0.15);
 
-        }
+/* =====================================================
+   RESPONSIVE
+===================================================== */
 
+@media(max-width:768px){
 
-        /* =====================================================
-           STATUS ONLINE
-        ====================================================== */
+    nav{
 
-        .status-online {
+        flex-direction:column;
 
-            font-size:
-                20px;
+        align-items:stretch;
 
-            flex-shrink:
-                0;
+        padding:
+            1rem;
 
-        }
+    }
 
 
-        /* =====================================================
-           INFORMASI SISWA ONLINE
-        ====================================================== */
+    .nav-right{
 
-        .siswa-info {
+        justify-content:center;
 
-            flex:
-                1;
+    }
 
-            min-width:
-                0;
 
-        }
+    nav a,
+    .student-info,
+    .logout-btn{
 
+        font-size:.8rem;
 
-        .siswa-nama {
+        padding:
+            .5rem
+            .7rem;
 
-            font-weight:
-                700;
+    }
 
-            color:
-                #0288d1;
 
-            word-break:
-                break-word;
+    .title-section h1{
 
-        }
+        font-size:1.5rem;
 
+        padding:
+            .5rem
+            1rem;
 
-        .siswa-halaman {
+    }
 
-            font-size:
-                13px;
 
-            margin-top:
-                3px;
+    .welcome-student{
 
-            color:
-                #555555;
+        font-size:1rem;
 
-            word-break:
-                break-word;
+        padding:
+            9px
+            15px;
 
-        }
+        text-align:center;
 
+    }
 
-        /* =====================================================
-           JIKA TIDAK ADA SISWA
-        ====================================================== */
 
-        .siswa-kosong {
+    .welcome-message{
 
-            background:
-                rgba(255, 255, 255, 0.90);
+        font-size:.9rem;
 
-            color:
-                #555555;
+        padding:
+            0
+            15px;
 
-            padding:
-                15px;
+    }
 
-            border-radius:
-                12px;
 
-            text-align:
-                center;
+    .map-grid{
 
-        }
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
 
+        gap:12px;
 
-        /* =====================================================
-           GRID PETA PETUALANGAN
-        ====================================================== */
+        padding:20px 15px;
 
-        .map-grid {
+    }
 
-            display:
-                grid;
 
-            grid-template-columns:
-                repeat(
-                    auto-fit,
-                    minmax(
-                        220px,
-                        1fr
-                    )
-                );
+    .map-item{
 
-            gap:
-                20px;
+        font-size:1rem;
 
-            padding:
-                30px;
+        padding:15px 10px;
 
-            max-width:
-                1100px;
+    }
 
-            margin:
-                auto;
 
-        }
+    .map-item .emoji{
 
+        font-size:2rem;
 
-        /* =====================================================
-           ITEM PETA
-        ====================================================== */
+    }
 
-        .map-item {
+}
 
-            background:
-                rgba(255, 255, 255, 0.90);
 
-            border-radius:
-                15px;
+@media(max-width:480px){
 
-            padding:
-                20px;
+    .map-grid{
 
-            text-align:
-                center;
+        grid-template-columns:
+            1fr;
 
-            color:
-                #0288d1;
+    }
 
-            box-shadow:
-                0 4px 10px
-                rgba(0, 0, 0, 0.20);
+}
 
-            transition:
-                transform 0.3s ease,
-                background 0.3s ease,
-                box-shadow 0.3s ease;
 
-            text-decoration:
-                none;
+/* =====================================================
+   ANIMASI GALERI
+===================================================== */
 
-            font-weight:
-                700;
+.gallery-grid{
 
-            font-size:
-                1.1rem;
+    display:grid;
 
-        }
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(
+                200px,
+                1fr
+            )
+        );
 
+    gap:20px;
 
-        .map-item:hover {
+    padding:30px;
 
-            transform:
-                translateY(-5px)
-                scale(1.03);
+    max-width:900px;
 
-            background:
-                #dff6ff;
+    margin:auto;
 
-            box-shadow:
-                0 8px 18px
-                rgba(0, 0, 0, 0.25);
+}
 
-        }
 
+.gallery-item{
 
-        /* =====================================================
-           EMOJI PETA
-        ====================================================== */
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .90
+        );
 
-        .map-item .emoji {
+    border-radius:15px;
 
-            font-size:
-                2.5rem;
+    padding:25px;
 
-            display:
-                block;
+    text-align:center;
 
-            margin-bottom:
-                10px;
+    color:#0288d1;
 
-            transition:
-                transform 0.3s ease;
+    box-shadow:
+        0 4px 10px
+        rgba(0,0,0,.20);
 
-        }
+    text-decoration:none;
 
+    font-weight:bold;
 
-        .map-item:hover .emoji {
+    font-size:1.1rem;
 
-            transform:
-                scale(1.15);
+    transition:
+        transform .3s ease;
 
-        }
+    animation:
+        fadeUp
+        .6s
+        ease
+        forwards;
 
+    opacity:0;
 
-        /* =====================================================
-           SEMBUNYIKAN MENU KHUSUS
-        ====================================================== */
+}
 
-        .map-item.hide-menu {
 
-            display:
-                none !important;
+.gallery-item:hover{
 
-        }
+    transform:
+        scale(1.07);
 
+    background:#dff6ff;
 
-        /* =====================================================
-           RESPONSIVE TABLET
-        ====================================================== */
+}
 
-        @media (max-width: 768px) {
 
-            nav {
+.gallery-item span{
 
-                padding:
-                    0.8rem
-                    1rem;
+    font-size:2.5rem;
 
-            }
+    display:block;
 
+    margin-bottom:10px;
 
-            .nav-right {
+    transition:
+        transform .3s;
 
-                justify-content:
-                    center;
+}
 
-                gap:
-                    0.4rem;
 
-            }
+.gallery-item:hover span{
 
+    transform:
+        scale(1.3)
+        rotate(5deg);
 
-            nav a,
-            .student-info,
-            .logout-btn {
+}
 
-                font-size:
-                    0.78rem;
 
-                padding:
-                    0.5rem
-                    0.7rem;
+@keyframes fadeUp{
 
-            }
+    from{
 
+        transform:
+            translateY(30px);
 
-            .title-section {
+        opacity:0;
 
-                margin-top:
-                    20px;
+    }
 
-            }
 
+    to{
 
-            .title-section h1 {
+        transform:
+            translateY(0);
 
-                font-size:
-                    1.5rem;
+        opacity:1;
 
-                padding:
-                    0.5rem
-                    1rem;
+    }
 
-            }
+}
 
-
-            .welcome-student {
-
-                font-size:
-                    1rem;
-
-                padding:
-                    9px
-                    15px;
-
-                text-align:
-                    center;
-
-            }
-
-
-            .welcome-message {
-
-                font-size:
-                    0.9rem;
-
-                padding:
-                    0
-                    15px;
-
-            }
-
-
-            .map-grid {
-
-                grid-template-columns:
-                    repeat(
-                        2,
-                        minmax(
-                            0,
-                            1fr
-                        )
-                    );
-
-                gap:
-                    14px;
-
-                padding:
-                    20px;
-
-            }
-
-
-            .map-item {
-
-                font-size:
-                    1rem;
-
-                padding:
-                    15px;
-
-            }
-
-
-            .map-item .emoji {
-
-                font-size:
-                    2rem;
-
-            }
-
-
-            #daftarSiswaAktif {
-
-                padding:
-                    0
-                    15px;
-
-            }
-
-        }
-
-
-        /* =====================================================
-           RESPONSIVE HP KECIL
-        ====================================================== */
-
-        @media (max-width: 480px) {
-
-            .nav-right {
-
-                display:
-                    grid;
-
-                grid-template-columns:
-                    repeat(
-                        2,
-                        1fr
-                    );
-
-                width:
-                    100%;
-
-            }
-
-
-            nav a,
-            .student-info,
-            .logout-btn {
-
-                width:
-                    100%;
-
-                font-size:
-                    0.75rem;
-
-            }
-
-
-            .student-info {
-
-                grid-column:
-                    span 2;
-
-            }
-
-
-            .logout-btn {
-
-                grid-column:
-                    span 2;
-
-            }
-
-
-            .title-section h1 {
-
-                font-size:
-                    1.25rem;
-
-            }
-
-
-            .map-grid {
-
-                grid-template-columns:
-                    1fr;
-
-                padding:
-                    15px;
-
-            }
-
-
-            .map-item {
-
-                padding:
-                    18px;
-
-            }
-
-
-            .pengumuman-btn {
-
-                font-size:
-                    1rem;
-
-                padding:
-                    10px
-                    20px;
-
-            }
-
-        }
-
-    </style>
+</style>
 
 </head>
 
@@ -1409,602 +1403,546 @@ async function cekLogin(){
 <body>
 
 
-    <!-- =====================================================
-         NAVIGASI
-    ====================================================== -->
+<!-- =====================================================
+     NAVIGASI
+===================================================== -->
 
-    <nav>
+<nav>
 
-        <div class="nav-right">
+    <div class="nav-right">
 
-            <!-- BERANDA -->
-
-            <a href="../index.html">
-                🏠 Beranda
-            </a>
+        <a href="../index.html">
+            🏠 Beranda
+        </a>
 
 
-            <!-- PROGRAM -->
-
-            <a href="#">
-                📌 Program
-            </a>
+        <a href="#">
+            📌 Program
+        </a>
 
 
-            <!-- GALERI -->
-
-            <a href="galeri.html">
-                🖼️ Galeri
-            </a>
+        <a href="galeri.html">
+            🖼️ Galeri
+        </a>
 
 
-            <!-- KELAS -->
+        <a href="kelas.html">
+            🏫 Kelas
+        </a>
 
-            <a href="kelas.html">
-                🏫 Kelas
-            </a>
-
-
-            <!-- INFORMASI SISWA -->
-
-            <div
-                id="studentInfo"
-                class="student-info"
-            >
-                👤 Memuat...
-            </div>
-
-
-            <!-- LOGOUT -->
-
-            <button
-                type="button"
-                id="logoutBtn"
-                class="logout-btn"
-            >
-                🚪 Keluar
-            </button>
-
-        </div>
-
-    </nav>
-
-
-    <!-- =====================================================
-         BAGIAN JUDUL
-    ====================================================== -->
-
-    <section class="title-section">
-
-
-        <!-- JUDUL -->
-
-        <h1>
-            📖 Petualangan Belajar Kelas 5
-        </h1>
-
-
-        <!-- =================================================
-             DAFTAR SISWA AKTIF
-        ================================================== -->
 
         <div
-            id="daftarSiswaAktif"
-        ></div>
-
-
-        <!-- =================================================
-             SAPAAN SISWA
-        ================================================== -->
-
-        <div
-            id="welcomeStudent"
-            class="welcome-student"
+            id="studentInfo"
+            class="student-info"
         >
-
-            👋 Selamat datang,
-            <span id="welcomeName">
-                Siswa
-            </span>!
-
+            👤 Memuat...
         </div>
 
 
-        <!-- PESAN -->
+        <button
+            id="logoutBtn"
+            class="logout-btn"
+            type="button"
+        >
+            🚪 Keluar
+        </button>
 
-        <div class="welcome-message">
+    </div>
 
-            🌟 Yuk lanjutkan petualangan
-            belajarmu hari ini!
-
-        </div>
-
-
-        <!-- =================================================
-             PENGUMUMAN
-        ================================================== -->
-
-        <div class="pengumuman-box">
-
-            <a
-                href="../pdf-tofas/tofas.html"
-                class="pengumuman-btn"
-            >
-                📢 Pengumuman
-            </a>
-
-        </div>
-
-    </section>
+</nav>
 
 
-    <!-- =====================================================
-         PETA PETUALANGAN
-    ====================================================== -->
+<!-- =====================================================
+     JUDUL
+===================================================== -->
 
-    <main class="map-grid">
+<div class="title-section">
+
+    <h1>
+        📖 Petualangan Belajar Kelas 5
+    </h1>
 
 
-        <!-- =================================================
-             ISTANA PANCASILA
-        ================================================== -->
+    <!-- =================================================
+         DAFTAR SISWA AKTIF
+    ================================================= -->
+
+    <div
+        id="daftarSiswaAktif"
+    ></div>
+
+
+    <!-- =================================================
+         SAPAAN
+    ================================================= -->
+
+    <div
+        id="welcomeStudent"
+        class="welcome-student"
+    >
+
+        👋 Selamat datang,
+        <span id="welcomeName">
+            Siswa
+        </span>!
+
+    </div>
+
+
+    <div class="welcome-message">
+
+        🌟 Yuk lanjutkan petualangan
+        belajarmu hari ini!
+
+    </div>
+
+
+    <!-- =================================================
+         PENGUMUMAN
+    ================================================= -->
+
+    <div class="pengumuman-box">
 
         <a
-            href="istanap-pancasila/Istana_Pancasila.html"
-            class="map-item"
+            href="../pdf-tofas/tofas.html"
+            class="pengumuman-btn"
         >
 
-            <span class="emoji">
-                ⭐
-            </span>
-
-            Istana Pancasila
+            📢 Pengumuman
 
         </a>
 
+    </div>
 
-        <!-- =================================================
-             PULAU BAHASA INDONESIA
-        ================================================== -->
+</div>
 
-        <a
-            href="Pulau-Bahasa-Indonesia/pulau.html"
-            class="map-item"
-        >
 
-            <span class="emoji">
-                📚
-            </span>
+<!-- =====================================================
+     PETA PETUALANGAN
+===================================================== -->
 
-            Pulau Bahasa Indonesia
+<div class="map-grid">
 
-        </a>
 
+    <a
+        href="istanap-pancasila/Istana_Pancasila.html"
+        class="map-item"
+    >
 
-        <!-- =================================================
-             LEMBAH MATEMATIKA
-        ================================================== -->
+        <span class="emoji">
+            ⭐
+        </span>
 
-        <a
-            href="lembah/lembah.html"
-            class="map-item"
-        >
+        Istana Pancasila
 
-            <span class="emoji">
-                ⛰️
-            </span>
+    </a>
 
-            Lembah Matematika
 
-        </a>
+    <a
+        href="Pulau-Bahasa-Indonesia/pulau.html"
+        class="map-item"
+    >
 
+        <span class="emoji">
+            📚
+        </span>
 
-        <!-- =================================================
-             HUTAN IPAS
-        ================================================== -->
+        Pulau Bahasa Indonesia
 
-        <a
-            href="hutan/hutan.html"
-            class="map-item"
-        >
+    </a>
 
-            <span class="emoji">
-                🌿
-            </span>
 
-            Hutan IPAS
+    <a
+        href="lembah/lembah.html"
+        class="map-item"
+    >
 
-        </a>
+        <span class="emoji">
+            ⛰️
+        </span>
 
+        Lembah Matematika
 
-        <!-- =================================================
-             GUNUNG SENI BUDAYA
-        ================================================== -->
+    </a>
 
-        <a
-            href="Gunung-Seni-Budaya/gunung.html"
-            class="map-item"
-        >
 
-            <span class="emoji">
-                🎨
-            </span>
+    <a
+        href="hutan/hutan.html"
+        class="map-item"
+    >
 
-            Gunung Seni Budaya
+        <span class="emoji">
+            🌿
+        </span>
 
-        </a>
+        Hutan IPAS
 
+    </a>
 
-        <!-- =================================================
-             DESA BAHASA JAWA
-        ================================================== -->
 
-        <a
-            href="Basa_Jawa/landing-page-bahasa-jawa.html"
-            class="map-item"
-        >
+    <a
+        href="Gunung-Seni-Budaya/gunung.html"
+        class="map-item"
+    >
 
-            <span class="emoji">
-                🏡
-            </span>
+        <span class="emoji">
+            🎨
+        </span>
 
-            Desa Bahasa Jawa
+        Gunung Seni Budaya
 
-        </a>
+    </a>
 
 
-        <!-- =================================================
-             KODING
-             TERSEMBUNYI
-        ================================================== -->
+    <a
+        href="Basa_Jawa/landing-page-bahasa-jawa.html"
+        class="map-item"
+    >
 
-        <a
-            href="koding/index.html"
-            class="map-item hide-menu"
-        >
+        <span class="emoji">
+            🏡
+        </span>
 
-            <span class="emoji">
-                💻
-            </span>
+        Desa Bahasa Jawa
 
-            KODING
+    </a>
 
-        </a>
 
+    <!-- =============================================
+         MENU TERSEMBUNYI
+    ============================================== -->
 
-        <!-- KODING 2 -->
+    <a
+        href="koding/index.html"
+        class="map-item hide-menu"
+    >
 
-        <a
-            href="koding2/index.html"
-            class="map-item hide-menu"
-        >
+        <span class="emoji">
+            💻
+        </span>
 
-            <span class="emoji">
-                💻
-            </span>
+        KODING
 
-            KODING-2
+    </a>
 
-        </a>
 
+    <a
+        href="koding2/index.html"
+        class="map-item hide-menu"
+    >
 
-        <!-- KODING 3 -->
+        <span class="emoji">
+            💻
+        </span>
 
-        <a
-            href="koding/mode3/index.html"
-            class="map-item hide-menu"
-        >
+        KODING-2
 
-            <span class="emoji">
-                💻
-            </span>
+    </a>
 
-            KODING-3
 
-        </a>
+    <a
+        href="koding/mode3/index.html"
+        class="map-item hide-menu"
+    >
 
+        <span class="emoji">
+            💻
+        </span>
 
-        <!-- KODING 4 -->
+        KODING-3
 
-        <a
-            href="koding/mode4/index.html"
-            class="map-item hide-menu"
-        >
+    </a>
 
-            <span class="emoji">
-                💻
-            </span>
 
-            KODING-4
+    <a
+        href="koding/mode4/index.html"
+        class="map-item hide-menu"
+    >
 
-        </a>
+        <span class="emoji">
+            💻
+        </span>
 
+        KODING-4
 
-        <!-- KODING 5 -->
+    </a>
 
-        <a
-            href="koding/mode5/index.html"
-            class="map-item hide-menu"
-        >
 
-            <span class="emoji">
-                💻
-            </span>
+    <a
+        href="koding/mode5/index.html"
+        class="map-item hide-menu"
+    >
 
-            KODING-5
+        <span class="emoji">
+            💻
+        </span>
 
-        </a>
+        KODING-5
 
+    </a>
 
-        <!-- =================================================
-             TUGAS
-        ================================================== -->
 
-        <a
-            href="tugas/tugas.html"
-            class="map-item"
-        >
+    <!-- =============================================
+         TUGAS
+    ============================================== -->
 
-            <span class="emoji">
-                🧠
-            </span>
+    <a
+        href="tugas/tugas.html"
+        class="map-item"
+    >
 
-            Tugas
+        <span class="emoji">
+            🧠
+        </span>
 
-        </a>
+        Tugas
 
+    </a>
 
-        <!-- =================================================
-             UJI COBA
-             TERSEMBUNYI
-        ================================================== -->
 
-        <a
-            href="lembah/uji_coba/soal-wisata1_cba.html"
-            class="map-item hide-menu"
-        >
+    <!-- =============================================
+         UJI COBA
+    ============================================== -->
 
-            <span class="emoji">
-                🧪
-            </span>
+    <a
+        href="lembah/uji_coba/soal-wisata1_cba.html"
+        class="map-item hide-menu"
+    >
 
-            Uji Coba
+        <span class="emoji">
+            🧪
+        </span>
 
-        </a>
+        Uji Coba
 
+    </a>
 
-        <!-- =================================================
-             DASHBOARD GURU
-             TERSEMBUNYI
-        ================================================== -->
 
-        <a
-            href="../dashboard_guru/dashboard-guru.html"
-            class="map-item hide-menu"
-        >
+    <!-- =============================================
+         DASHBOARD GURU
+    ============================================== -->
 
-            <span class="emoji">
-                👨‍🏫
-            </span>
+    <a
+        href="../dashboard_guru/dashboard-guru.html"
+        class="map-item hide-menu"
+    >
 
-            Dashboard Guru
+        <span class="emoji">
+            👨‍🏫
+        </span>
 
-        </a>
+        Dashboard Guru
 
-    </main>
+    </a>
 
+</div>
 
-    <!-- =====================================================
-         AUDIO KLIK
-    ====================================================== -->
 
-    <audio
-        id="clickSound"
-        src="suara/button-press.mp3"
-        preload="auto"
-    ></audio>
+<!-- =====================================================
+     AUDIO KLIK
+===================================================== -->
 
+<audio
+    id="clickSound"
+    src="suara/button-press.mp3"
+    preload="auto"
+></audio>
 
-    <!-- =====================================================
-         JAVASCRIPT HALAMAN
-    ====================================================== -->
 
-    <script>
+<script>
 
-        /* =====================================================
-           AUDIO KLIK
-        ====================================================== */
+/* =====================================================
+   AUDIO KLIK
+===================================================== */
 
-        document.addEventListener(
-            "DOMContentLoaded",
-            () => {
+const clickSound =
+    document.getElementById(
+        "clickSound"
+    );
 
-                const clickSound =
-                    document.getElementById(
-                        "clickSound"
-                    );
 
+/* =====================================================
+   PASANG AUDIO KE TOMBOL
+===================================================== */
 
-                if (!clickSound) {
+const allButtons =
+    document.querySelectorAll(
+        "a, button"
+    );
 
-                    console.warn(
-                        "Elemen audio #clickSound tidak ditemukan."
-                    );
+
+allButtons.forEach(
+    function(button){
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                if(!clickSound){
 
                     return;
+
                 }
 
 
-                const allButtons =
-                    document.querySelectorAll(
-                        "a, button, .map-item"
+                clickSound.currentTime =
+                    0;
+
+
+                clickSound
+                    .play()
+                    .catch(
+                        function(){
+
+                            /*
+                             * Browser dapat
+                             * memblokir audio
+                             * sebelum interaksi.
+                             */
+
+                        }
                     );
 
+            }
+        );
 
-                allButtons.forEach(
-                    button => {
-
-                        button.addEventListener(
-                            "click",
-                            () => {
-
-                                clickSound.currentTime =
-                                    0;
+    }
+);
 
 
-                                clickSound
-                                    .play()
-                                    .catch(
-                                        () => {}
-                                    );
+/* =====================================================
+   LOGOUT
+===================================================== */
 
-                            }
+const logoutBtn =
+    document.getElementById(
+        "logoutBtn"
+    );
+
+
+if(logoutBtn){
+
+    logoutBtn.addEventListener(
+        "click",
+        async function(){
+
+            try{
+
+                /*
+                 * Matikan presence
+                 * sebelum logout.
+                 */
+
+                if(
+                    window.siswaPresenceChannel
+                ){
+
+                    try{
+
+                        await
+                            window.siswaPresenceChannel
+                                .untrack();
+
+                    }
+                    catch(error){
+
+                        console.warn(
+                            "Gagal untrack presence:",
+                            error
                         );
 
                     }
-                );
-
-            }
-        );
 
 
-        /* =====================================================
-           LOGOUT
-        ====================================================== */
+                    try{
 
-        document.addEventListener(
-            "DOMContentLoaded",
-            () => {
+                        await
+                            supabaseClient
+                                .removeChannel(
+                                    window.siswaPresenceChannel
+                                );
 
-                const logoutBtn =
-                    document.getElementById(
-                        "logoutBtn"
-                    );
+                    }
+                    catch(error){
 
+                        console.warn(
+                            "Gagal menutup channel:",
+                            error
+                        );
 
-                if (!logoutBtn) {
+                    }
 
-                    console.warn(
-                        "Tombol logout tidak ditemukan."
-                    );
-
-                    return;
                 }
 
 
-                logoutBtn.addEventListener(
-                    "click",
-                    async () => {
+                /* =====================================
+                   LOGOUT SUPABASE
+                ===================================== */
 
-                        /* -----------------------------------------
-                           NONAKTIFKAN TOMBOL SEMENTARA
-                        ----------------------------------------- */
-
-                        logoutBtn.disabled =
-                            true;
-
-
-                        logoutBtn.textContent =
-                            "⏳ Keluar...";
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .signOut();
 
 
-                        try {
+                if(error){
 
-                            const {
-                                error
-                            } =
-                                await supabaseClient
-                                    .auth
-                                    .signOut();
+                    console.error(
+                        "Gagal logout:",
+                        error
+                    );
 
 
-                            /* -------------------------------------
-                               JIKA LOGOUT GAGAL
-                            ------------------------------------- */
-
-                            if (error) {
-
-                                console.error(
-                                    "Gagal logout:",
-                                    error
-                                );
+                    alert(
+                        "Gagal keluar. Silakan coba lagi."
+                    );
 
 
-                                alert(
-                                    "Gagal keluar. Silakan coba lagi."
-                                );
+                    return;
+
+                }
 
 
-                                logoutBtn.disabled =
-                                    false;
+                /* =====================================
+                   KEMBALI KE LOGIN
+                ===================================== */
 
-
-                                logoutBtn.textContent =
-                                    "🚪 Keluar";
-
-
-                                return;
-
-                            }
-
-
-                            /* -------------------------------------
-                               LOGOUT BERHASIL
-                            ------------------------------------- */
-
-                            window.location.replace(
-                                "login.html"
-                            );
-
-                        }
-                        catch (error) {
-
-                            console.error(
-                                "Kesalahan saat logout:",
-                                error
-                            );
-
-
-                            alert(
-                                "Terjadi kesalahan saat keluar."
-                            );
-
-
-                            logoutBtn.disabled =
-                                false;
-
-
-                            logoutBtn.textContent =
-                                "🚪 Keluar";
-
-                        }
-
-                    }
+                window.location.replace(
+                    "login.html"
                 );
 
             }
-        );
+            catch(error){
 
-    </script>
+                console.error(
+                    "Kesalahan logout:",
+                    error
+                );
 
 
-    <!-- =====================================================
-         SISTEM PRESENCE SISWA
-         
-         PENTING:
-         File ini hanya dipanggil SATU KALI.
-         
-         Supabase sudah dibuat di bagian <head>,
-         sehingga siswa-presence.js dapat menggunakan
-         variabel supabaseClient.
-    ====================================================== -->
+                alert(
+                    "Terjadi kesalahan saat keluar."
+                );
 
-    <script
-        src="siswa-presence.js"
-    ></script>
+            }
+
+        }
+    );
+
+}
+
+</script>
+
+
+<!-- =====================================================
+     SISTEM PRESENCE SISWA
+===================================================== -->
+
+<script src="siswa-presence.js"></script>
 
 
 </body>
 
 </html>
-```

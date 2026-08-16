@@ -19,7 +19,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <script>
+
+/* =====================================================
+   KONFIGURASI SUPABASE
+===================================================== */
 
 const SUPABASE_URL =
     "https://dnasyoyvnzphbmuhihan.supabase.co";
@@ -27,6 +32,10 @@ const SUPABASE_URL =
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_zQqU29LLgS2i0J50XJAM0w_N7coZMHf";
 
+
+/* =====================================================
+   MEMBUAT CLIENT SUPABASE
+===================================================== */
 
 const supabaseClient =
     window.supabase.createClient(
@@ -36,7 +45,7 @@ const supabaseClient =
 
 
 /* =====================================================
-   DATA SISWA
+   DATA SISWA LOGIN
 ===================================================== */
 
 let siswaLogin = null;
@@ -47,28 +56,56 @@ let usernameSiswa = "";
 
 
 /* =====================================================
-   FUNGSI MENGAMBIL NAMA SISWA
+   FUNGSI MENGAMBIL DATA SISWA
+=====================================================
+
+   SUMBER UTAMA:
+   TABEL siswa_login
+
+   KOLOM:
+   - nama
+   - username
+   - email
+
 ===================================================== */
 
-function ambilNamaSiswa(user){
+async function ambilDataSiswa(user){
+
+    /* -------------------------------------------------
+       CEK USER
+    ------------------------------------------------- */
 
     if(!user){
 
-        return "Siswa";
+        console.warn(
+            "User tidak ditemukan."
+        );
+
+        return {
+
+            nama: "Siswa",
+
+            username: ""
+
+        };
 
     }
 
 
-    const metadata =
-        user.user_metadata || {};
+    /* -------------------------------------------------
+       EMAIL USER YANG SEDANG LOGIN
+    ------------------------------------------------- */
+
+    const emailLogin =
+        (user.email || "").trim().toLowerCase();
 
 
     console.log(
-        "===================================="
+        "========================================"
     );
 
     console.log(
-        "DATA USER SUPABASE"
+        "MENGAMBIL DATA SISWA"
     );
 
     console.log(
@@ -77,28 +114,155 @@ function ambilNamaSiswa(user){
     );
 
     console.log(
-        "Email:",
-        user.email
+        "Email Auth:",
+        emailLogin
     );
 
     console.log(
         "User Metadata:",
-        metadata
+        user.user_metadata
     );
 
     console.log(
-        "App Metadata:",
-        user.app_metadata
-    );
-
-    console.log(
-        "===================================="
+        "========================================"
     );
 
 
     /* =================================================
-       CEK BEBERAPA KEMUNGKINAN NAMA
+       1. AMBIL DATA DARI TABEL siswa_login
     ================================================= */
+
+    if(emailLogin){
+
+        try{
+
+            const {
+
+                data: dataSiswa,
+
+                error: errorSiswa
+
+            } =
+                await supabaseClient
+                    .from("siswa_login")
+                    .select(
+                        "nama,username,email"
+                    )
+                    .eq(
+                        "email",
+                        emailLogin
+                    )
+                    .limit(1)
+                    .maybeSingle();
+
+
+            /* -----------------------------------------
+               ERROR DATABASE
+            ----------------------------------------- */
+
+            if(errorSiswa){
+
+                console.error(
+                    "Gagal mengambil data dari siswa_login:",
+                    errorSiswa
+                );
+
+            }
+
+
+            /* -----------------------------------------
+               DATA SISWA DITEMUKAN
+            ----------------------------------------- */
+
+            if(
+                dataSiswa &&
+                dataSiswa.nama &&
+                dataSiswa.nama.trim() !== ""
+            ){
+
+                const nama =
+                    dataSiswa.nama.trim();
+
+
+                const username =
+                    dataSiswa.username
+                        ? dataSiswa.username.trim()
+                        : "";
+
+
+                console.log(
+                    "========================================"
+                );
+
+                console.log(
+                    "DATA SISWA DITEMUKAN"
+                );
+
+                console.log(
+                    "Nama:",
+                    nama
+                );
+
+                console.log(
+                    "Username:",
+                    username
+                );
+
+                console.log(
+                    "Email:",
+                    dataSiswa.email
+                );
+
+                console.log(
+                    "========================================"
+                );
+
+
+                return {
+
+                    nama: nama,
+
+                    username: username
+
+                };
+
+            }
+
+
+            /* -----------------------------------------
+               SISWA TIDAK DITEMUKAN
+            ----------------------------------------- */
+
+            console.warn(
+                "Email tidak ditemukan di tabel siswa_login:",
+                emailLogin
+            );
+
+        }
+        catch(error){
+
+            console.error(
+                "Kesalahan saat mengambil siswa_login:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =================================================
+       2. CADANGAN DARI USER METADATA
+    =================================================
+
+       Digunakan jika data siswa_login tidak berhasil
+       ditemukan.
+
+    ================================================= */
+
+    const metadata =
+        user.user_metadata || {};
+
 
     const kemungkinanNama = [
 
@@ -129,31 +293,34 @@ function ambilNamaSiswa(user){
     ];
 
 
-    /* =================================================
-       CARI NAMA PERTAMA YANG VALID
-    ================================================= */
-
     for(
         const nama of kemungkinanNama
     ){
 
         if(
             typeof nama === "string" &&
-            nama.trim() !== ""
+            nama.trim() !== "" &&
+            !nama.includes("@")
         ){
 
-            /*
-             * Jangan menerima email
-             * sebagai nama siswa.
-             */
+            console.log(
+                "Nama diambil dari User Metadata:",
+                nama.trim()
+            );
 
-            if(
-                !nama.includes("@")
-            ){
 
-                return nama.trim();
+            return {
 
-            }
+                nama:
+                    nama.trim(),
+
+                username:
+                    metadata.username ||
+                    metadata.user_name ||
+                    metadata.username_siswa ||
+                    ""
+
+            };
 
         }
 
@@ -161,48 +328,27 @@ function ambilNamaSiswa(user){
 
 
     /* =================================================
-       JIKA NAMA TIDAK DITEMUKAN
+       3. JIKA SEMUA TIDAK DITEMUKAN
     ================================================= */
 
-    return "Siswa";
-
-}
-
-
-/* =====================================================
-   AMBIL USERNAME
-===================================================== */
-
-function ambilUsername(user){
-
-    if(!user){
-
-        return "";
-
-    }
-
-
-    const metadata =
-        user.user_metadata || {};
-
-
-    return (
-
-        metadata.username ||
-
-        metadata.user_name ||
-
-        metadata.username_siswa ||
-
-        ""
-
+    console.warn(
+        "Nama siswa tidak ditemukan."
     );
 
+
+    return {
+
+        nama: "Siswa",
+
+        username: ""
+
+    };
+
 }
 
 
 /* =====================================================
-   CEK LOGIN
+   FUNGSI CEK LOGIN
 ===================================================== */
 
 async function cekLogin(){
@@ -213,6 +359,10 @@ async function cekLogin(){
             "Memeriksa login siswa..."
         );
 
+
+        /* =================================================
+           AMBIL SESSION
+        ================================================= */
 
         const {
 
@@ -227,7 +377,7 @@ async function cekLogin(){
 
 
         /* =================================================
-           JIKA TERJADI ERROR
+           JIKA ERROR
         ================================================= */
 
         if(error){
@@ -273,7 +423,7 @@ async function cekLogin(){
 
 
         /* =================================================
-           USER LOGIN
+           USER YANG LOGIN
         ================================================= */
 
         const user =
@@ -284,24 +434,34 @@ async function cekLogin(){
             user;
 
 
+        console.log(
+            "User berhasil ditemukan:",
+            user
+        );
+
+
         /* =================================================
-           AMBIL NAMA SISWA
+           AMBIL DATA SISWA DARI siswa_login
+        ================================================= */
+
+        const dataSiswa =
+            await ambilDataSiswa(
+                user
+            );
+
+
+        /* =================================================
+           SIMPAN DATA SISWA
         ================================================= */
 
         namaSiswa =
-            ambilNamaSiswa(
-                user
-            );
+            dataSiswa.nama ||
+            "Siswa";
 
-
-        /* =================================================
-           AMBIL USERNAME
-        ================================================= */
 
         usernameSiswa =
-            ambilUsername(
-                user
-            );
+            dataSiswa.username ||
+            "";
 
 
         /* =================================================
@@ -309,19 +469,30 @@ async function cekLogin(){
         ================================================= */
 
         console.log(
+            "========================================"
+        );
+
+        console.log(
+            "HASIL DATA SISWA"
+        );
+
+        console.log(
             "Nama siswa:",
             namaSiswa
         );
 
         console.log(
-            "Username siswa:",
+            "Username:",
             usernameSiswa
         );
 
+        console.log(
+            "Email login:",
+            user.email
+        );
 
         console.log(
-            "Email akun:",
-            user.email
+            "========================================"
         );
 
 
@@ -362,7 +533,7 @@ async function cekLogin(){
 
 
         /* =================================================
-           SIMPAN DATA UNTUK PRESENCE
+           SIMPAN DATA UNTUK SISTEM PRESENCE
         ================================================= */
 
         window.currentSiswa = {
@@ -374,7 +545,10 @@ async function cekLogin(){
                 namaSiswa,
 
             username:
-                usernameSiswa
+                usernameSiswa,
+
+            email:
+                user.email || ""
 
         };
 
@@ -422,7 +596,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   JIKA SESSION BERUBAH
+   MONITOR PERUBAHAN LOGIN
 ===================================================== */
 
 supabaseClient
@@ -435,6 +609,10 @@ supabaseClient
                 event
             );
 
+
+            /* -----------------------------------------
+               JIKA SISWA LOGOUT
+            ----------------------------------------- */
 
             if(
                 event === "SIGNED_OUT"
@@ -539,7 +717,9 @@ nav{
 
     align-items:center;
 
-    padding:1rem 2rem;
+    padding:
+        1rem
+        2rem;
 
     box-shadow:
         0 4px 8px
@@ -759,8 +939,7 @@ nav a:hover{
         auto
         8px;
 
-    width:
-        fit-content;
+    width:fit-content;
 
     max-width:90%;
 
@@ -831,7 +1010,6 @@ nav a:hover{
             scale(.95);
 
     }
-
 
     100%{
 
@@ -1152,125 +1330,7 @@ nav a:hover{
 
 
 /* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media(max-width:768px){
-
-    nav{
-
-        flex-direction:column;
-
-        align-items:stretch;
-
-        padding:
-            1rem;
-
-    }
-
-
-    .nav-right{
-
-        justify-content:center;
-
-    }
-
-
-    nav a,
-    .student-info,
-    .logout-btn{
-
-        font-size:.8rem;
-
-        padding:
-            .5rem
-            .7rem;
-
-    }
-
-
-    .title-section h1{
-
-        font-size:1.5rem;
-
-        padding:
-            .5rem
-            1rem;
-
-    }
-
-
-    .welcome-student{
-
-        font-size:1rem;
-
-        padding:
-            9px
-            15px;
-
-        text-align:center;
-
-    }
-
-
-    .welcome-message{
-
-        font-size:.9rem;
-
-        padding:
-            0
-            15px;
-
-    }
-
-
-    .map-grid{
-
-        grid-template-columns:
-            repeat(
-                2,
-                1fr
-            );
-
-        gap:12px;
-
-        padding:20px 15px;
-
-    }
-
-
-    .map-item{
-
-        font-size:1rem;
-
-        padding:15px 10px;
-
-    }
-
-
-    .map-item .emoji{
-
-        font-size:2rem;
-
-    }
-
-}
-
-
-@media(max-width:480px){
-
-    .map-grid{
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-}
-
-
-/* =====================================================
-   ANIMASI GALERI
+   GALERI
 ===================================================== */
 
 .gallery-grid{
@@ -1383,13 +1443,136 @@ nav a:hover{
 
     }
 
-
     to{
 
         transform:
             translateY(0);
 
         opacity:1;
+
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE TABLET
+===================================================== */
+
+@media(max-width:768px){
+
+    nav{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+        padding:1rem;
+
+    }
+
+
+    .nav-right{
+
+        justify-content:center;
+
+    }
+
+
+    nav a,
+    .student-info,
+    .logout-btn{
+
+        font-size:.8rem;
+
+        padding:
+            .5rem
+            .7rem;
+
+    }
+
+
+    .title-section h1{
+
+        font-size:1.5rem;
+
+        padding:
+            .5rem
+            1rem;
+
+    }
+
+
+    .welcome-student{
+
+        font-size:1rem;
+
+        padding:
+            9px
+            15px;
+
+        text-align:center;
+
+    }
+
+
+    .welcome-message{
+
+        font-size:.9rem;
+
+        padding:
+            0
+            15px;
+
+    }
+
+
+    .map-grid{
+
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+
+        gap:12px;
+
+        padding:
+            20px
+            15px;
+
+    }
+
+
+    .map-item{
+
+        font-size:1rem;
+
+        padding:
+            15px
+            10px;
+
+    }
+
+
+    .map-item .emoji{
+
+        font-size:2rem;
+
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE HP
+===================================================== */
+
+@media(max-width:480px){
+
+    .map-grid{
+
+        grid-template-columns:1fr;
 
     }
 
@@ -1453,10 +1636,11 @@ nav a:hover{
 
 
 <!-- =====================================================
-     JUDUL
+     JUDUL DAN SAPAAN
 ===================================================== -->
 
 <div class="title-section">
+
 
     <h1>
         📖 Petualangan Belajar Kelas 5
@@ -1473,7 +1657,7 @@ nav a:hover{
 
 
     <!-- =================================================
-         SAPAAN
+         UCAPAN SELAMAT DATANG
     ================================================= -->
 
     <div
@@ -1524,6 +1708,10 @@ nav a:hover{
 <div class="map-grid">
 
 
+    <!-- =================================================
+         PANCASILA
+    ================================================= -->
+
     <a
         href="istanap-pancasila/Istana_Pancasila.html"
         class="map-item"
@@ -1537,6 +1725,10 @@ nav a:hover{
 
     </a>
 
+
+    <!-- =================================================
+         BAHASA INDONESIA
+    ================================================= -->
 
     <a
         href="Pulau-Bahasa-Indonesia/pulau.html"
@@ -1552,6 +1744,10 @@ nav a:hover{
     </a>
 
 
+    <!-- =================================================
+         MATEMATIKA
+    ================================================= -->
+
     <a
         href="lembah/lembah.html"
         class="map-item"
@@ -1565,6 +1761,10 @@ nav a:hover{
 
     </a>
 
+
+    <!-- =================================================
+         IPAS
+    ================================================= -->
 
     <a
         href="hutan/hutan.html"
@@ -1580,6 +1780,10 @@ nav a:hover{
     </a>
 
 
+    <!-- =================================================
+         SENI BUDAYA
+    ================================================= -->
+
     <a
         href="Gunung-Seni-Budaya/gunung.html"
         class="map-item"
@@ -1593,6 +1797,10 @@ nav a:hover{
 
     </a>
 
+
+    <!-- =================================================
+         BAHASA JAWA
+    ================================================= -->
 
     <a
         href="Basa_Jawa/landing-page-bahasa-jawa.html"
@@ -1608,9 +1816,9 @@ nav a:hover{
     </a>
 
 
-    <!-- =============================================
-         MENU TERSEMBUNYI
-    ============================================== -->
+    <!-- =================================================
+         KODING 1
+    ================================================= -->
 
     <a
         href="koding/index.html"
@@ -1626,6 +1834,10 @@ nav a:hover{
     </a>
 
 
+    <!-- =================================================
+         KODING 2
+    ================================================= -->
+
     <a
         href="koding2/index.html"
         class="map-item hide-menu"
@@ -1639,6 +1851,10 @@ nav a:hover{
 
     </a>
 
+
+    <!-- =================================================
+         KODING 3
+    ================================================= -->
 
     <a
         href="koding/mode3/index.html"
@@ -1654,6 +1870,10 @@ nav a:hover{
     </a>
 
 
+    <!-- =================================================
+         KODING 4
+    ================================================= -->
+
     <a
         href="koding/mode4/index.html"
         class="map-item hide-menu"
@@ -1667,6 +1887,10 @@ nav a:hover{
 
     </a>
 
+
+    <!-- =================================================
+         KODING 5
+    ================================================= -->
 
     <a
         href="koding/mode5/index.html"
@@ -1682,9 +1906,9 @@ nav a:hover{
     </a>
 
 
-    <!-- =============================================
+    <!-- =================================================
          TUGAS
-    ============================================== -->
+    ================================================= -->
 
     <a
         href="tugas/tugas.html"
@@ -1700,9 +1924,9 @@ nav a:hover{
     </a>
 
 
-    <!-- =============================================
+    <!-- =================================================
          UJI COBA
-    ============================================== -->
+    ================================================= -->
 
     <a
         href="lembah/uji_coba/soal-wisata1_cba.html"
@@ -1718,9 +1942,9 @@ nav a:hover{
     </a>
 
 
-    <!-- =============================================
+    <!-- =================================================
          DASHBOARD GURU
-    ============================================== -->
+    ================================================= -->
 
     <a
         href="../dashboard_guru/dashboard-guru.html"
@@ -1739,7 +1963,7 @@ nav a:hover{
 
 
 <!-- =====================================================
-     AUDIO KLIK
+     AUDIO
 ===================================================== -->
 
 <audio
@@ -1762,7 +1986,7 @@ const clickSound =
 
 
 /* =====================================================
-   PASANG AUDIO KE TOMBOL
+   PASANG AUDIO KE LINK DAN BUTTON
 ===================================================== */
 
 const allButtons =
@@ -1796,8 +2020,7 @@ allButtons.forEach(
 
                             /*
                              * Browser dapat
-                             * memblokir audio
-                             * sebelum interaksi.
+                             * memblokir audio.
                              */
 
                         }
@@ -1828,10 +2051,9 @@ if(logoutBtn){
 
             try{
 
-                /*
-                 * Matikan presence
-                 * sebelum logout.
-                 */
+                /* =====================================
+                   MATIKAN PRESENCE
+                ===================================== */
 
                 if(
                     window.siswaPresenceChannel
@@ -1880,7 +2102,9 @@ if(logoutBtn){
                 ===================================== */
 
                 const {
+
                     error
+
                 } =
                     await supabaseClient
                         .auth

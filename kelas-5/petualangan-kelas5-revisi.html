@@ -19,7 +19,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
 <script>
 
 /* =====================================================
@@ -29,13 +28,10 @@
 const SUPABASE_URL =
     "https://dnasyoyvnzphbmuhihan.supabase.co";
 
+
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_zQqU29LLgS2i0J50XJAM0w_N7coZMHf";
 
-
-/* =====================================================
-   MEMBUAT CLIENT SUPABASE
-===================================================== */
 
 const supabaseClient =
     window.supabase.createClient(
@@ -45,7 +41,7 @@ const supabaseClient =
 
 
 /* =====================================================
-   DATA SISWA LOGIN
+   DATA SISWA
 ===================================================== */
 
 let siswaLogin = null;
@@ -56,299 +52,523 @@ let usernameSiswa = "";
 
 
 /* =====================================================
-   FUNGSI MENGAMBIL DATA SISWA
-=====================================================
-
-   SUMBER UTAMA:
-   TABEL siswa_login
-
-   KOLOM:
-   - nama
-   - username
-   - email
-
+   VALIDASI NAMA SISWA
 ===================================================== */
 
-async function ambilDataSiswa(user){
+function validasiNamaSiswa(nama){
 
-    /* -------------------------------------------------
-       CEK USER
-    ------------------------------------------------- */
+    /*
+     * Nama harus berupa teks.
+     */
 
-    if(!user){
-
-        console.warn(
-            "User tidak ditemukan."
-        );
-
-        return {
-
-            nama: "Siswa",
-
-            username: ""
-
-        };
-
-    }
-
-
-    /* -------------------------------------------------
-       EMAIL USER YANG SEDANG LOGIN
-    ------------------------------------------------- */
-
-    const emailLogin =
-        (user.email || "").trim().toLowerCase();
-
-
-    console.log(
-        "========================================"
-    );
-
-    console.log(
-        "MENGAMBIL DATA SISWA"
-    );
-
-    console.log(
-        "User ID:",
-        user.id
-    );
-
-    console.log(
-        "Email Auth:",
-        emailLogin
-    );
-
-    console.log(
-        "User Metadata:",
-        user.user_metadata
-    );
-
-    console.log(
-        "========================================"
-    );
-
-
-    /* =================================================
-       1. AMBIL DATA DARI TABEL siswa_login
-    ================================================= */
-
-    if(emailLogin){
-
-        try{
-
-            const {
-
-                data: dataSiswa,
-
-                error: errorSiswa
-
-            } =
-                await supabaseClient
-                    .from("siswa_login")
-                    .select(
-                        "nama,username,email"
-                    )
-                    .eq(
-                        "email",
-                        emailLogin
-                    )
-                    .limit(1)
-                    .maybeSingle();
-
-
-            /* -----------------------------------------
-               ERROR DATABASE
-            ----------------------------------------- */
-
-            if(errorSiswa){
-
-                console.error(
-                    "Gagal mengambil data dari siswa_login:",
-                    errorSiswa
-                );
-
-            }
-
-
-            /* -----------------------------------------
-               DATA SISWA DITEMUKAN
-            ----------------------------------------- */
-
-            if(
-                dataSiswa &&
-                dataSiswa.nama &&
-                dataSiswa.nama.trim() !== ""
-            ){
-
-                const nama =
-                    dataSiswa.nama.trim();
-
-
-                const username =
-                    dataSiswa.username
-                        ? dataSiswa.username.trim()
-                        : "";
-
-
-                console.log(
-                    "========================================"
-                );
-
-                console.log(
-                    "DATA SISWA DITEMUKAN"
-                );
-
-                console.log(
-                    "Nama:",
-                    nama
-                );
-
-                console.log(
-                    "Username:",
-                    username
-                );
-
-                console.log(
-                    "Email:",
-                    dataSiswa.email
-                );
-
-                console.log(
-                    "========================================"
-                );
-
-
-                return {
-
-                    nama: nama,
-
-                    username: username
-
-                };
-
-            }
-
-
-            /* -----------------------------------------
-               SISWA TIDAK DITEMUKAN
-            ----------------------------------------- */
-
-            console.warn(
-                "Email tidak ditemukan di tabel siswa_login:",
-                emailLogin
-            );
-
-        }
-        catch(error){
-
-            console.error(
-                "Kesalahan saat mengambil siswa_login:",
-                error
-            );
-
-        }
-
-    }
-
-
-    /* =================================================
-       2. CADANGAN DARI USER METADATA
-    =================================================
-
-       Digunakan jika data siswa_login tidak berhasil
-       ditemukan.
-
-    ================================================= */
-
-    const metadata =
-        user.user_metadata || {};
-
-
-    const kemungkinanNama = [
-
-        metadata.nama,
-
-        metadata.nama_siswa,
-
-        metadata.namaSiswa,
-
-        metadata.name,
-
-        metadata.full_name,
-
-        metadata.fullName,
-
-        metadata.display_name,
-
-        metadata.displayName,
-
-        metadata.student_name,
-
-        metadata.studentName,
-
-        metadata.nama_lengkap,
-
-        metadata.namaLengkap
-
-    ];
-
-
-    for(
-        const nama of kemungkinanNama
+    if(
+        typeof nama !== "string"
     ){
 
-        if(
-            typeof nama === "string" &&
-            nama.trim() !== "" &&
-            !nama.includes("@")
-        ){
-
-            console.log(
-                "Nama diambil dari User Metadata:",
-                nama.trim()
-            );
-
-
-            return {
-
-                nama:
-                    nama.trim(),
-
-                username:
-                    metadata.username ||
-                    metadata.user_name ||
-                    metadata.username_siswa ||
-                    ""
-
-            };
-
-        }
+        return false;
 
     }
 
 
-    /* =================================================
-       3. JIKA SEMUA TIDAK DITEMUKAN
-    ================================================= */
+    /*
+     * Hilangkan spasi di awal dan akhir.
+     */
 
-    console.warn(
-        "Nama siswa tidak ditemukan."
-    );
+    nama =
+        nama.trim();
 
 
-    return {
+    /*
+     * Tidak boleh kosong.
+     */
 
-        nama: "Siswa",
+    if(
+        nama === ""
+    ){
 
-        username: ""
+        return false;
 
-    };
+    }
+
+
+    /*
+     * JANGAN PERNAH menggunakan email
+     * sebagai nama siswa.
+     */
+
+    if(
+        nama.includes("@")
+    ){
+
+        return false;
+
+    }
+
+
+    /*
+     * Jangan gunakan nilai default
+     * sebagai nama siswa.
+     */
+
+    if(
+        nama.toLowerCase() === "siswa"
+    ){
+
+        return false;
+
+    }
+
+
+    return true;
 
 }
 
 
 /* =====================================================
-   FUNGSI CEK LOGIN
+   AMBIL DATA SISWA DARI SESSION STORAGE
+===================================================== */
+
+function ambilDataSessionStorage(){
+
+    try{
+
+        const data =
+            sessionStorage.getItem(
+                "siswa_login"
+            );
+
+
+        /*
+         * Jika tidak ada data,
+         * kembalikan null.
+         */
+
+        if(!data){
+
+            console.log(
+                "Data siswa di sessionStorage tidak ditemukan."
+            );
+
+            return null;
+
+        }
+
+
+        /*
+         * Ubah JSON menjadi object.
+         */
+
+        const siswa =
+            JSON.parse(data);
+
+
+        console.log(
+            "Data siswa dari sessionStorage:",
+            siswa
+        );
+
+
+        /*
+         * Pastikan data memiliki nama
+         * yang valid.
+         */
+
+        if(
+            !siswa ||
+            !validasiNamaSiswa(
+                siswa.nama
+            )
+        ){
+
+            console.warn(
+                "Nama siswa di sessionStorage tidak valid."
+            );
+
+
+            return null;
+
+        }
+
+
+        return siswa;
+
+    }
+    catch(error){
+
+        console.error(
+            "Gagal membaca sessionStorage:",
+            error
+        );
+
+
+        return null;
+
+    }
+
+}
+
+
+/* =====================================================
+   AMBIL DATA SISWA DARI DATABASE
+===================================================== */
+
+async function ambilDataSiswaDariDatabase(user){
+
+    /*
+     * Pastikan user tersedia.
+     */
+
+    if(!user){
+
+        return null;
+
+    }
+
+
+    /*
+     * Pastikan email tersedia.
+     */
+
+    if(!user.email){
+
+        console.error(
+            "Email user Supabase tidak tersedia."
+        );
+
+
+        return null;
+
+    }
+
+
+    try{
+
+        console.log(
+            "Mencari data siswa dari tabel siswa_login..."
+        );
+
+
+        /*
+         * =================================================
+         * AMBIL DATA DARI TABEL siswa_login
+         * =================================================
+         *
+         * Kolom yang digunakan:
+         *
+         * id
+         * nama
+         * username
+         * email
+         *
+         * NAMA SISWA DIAMBIL DARI:
+         *
+         * siswa.nama
+         */
+
+        const {
+
+            data: siswa,
+
+            error
+
+        } =
+            await supabaseClient
+
+                .from("siswa_login")
+
+                .select(
+                    "id,nama,username,email"
+                )
+
+                .eq(
+                    "email",
+                    user.email
+                )
+
+                .maybeSingle();
+
+
+        /*
+         * Jika terjadi error database.
+         */
+
+        if(error){
+
+            console.error(
+                "Gagal mengambil data siswa:",
+                error
+            );
+
+
+            return null;
+
+        }
+
+
+        /*
+         * Jika siswa tidak ditemukan.
+         */
+
+        if(!siswa){
+
+            console.warn(
+                "Data siswa tidak ditemukan berdasarkan email:",
+                user.email
+            );
+
+
+            return null;
+
+        }
+
+
+        /*
+         * Pastikan nama siswa valid.
+         */
+
+        if(
+            !validasiNamaSiswa(
+                siswa.nama
+            )
+        ){
+
+            console.error(
+                "Kolom nama siswa kosong atau tidak valid:",
+                siswa
+            );
+
+
+            return null;
+
+        }
+
+
+        console.log(
+            "Data siswa berhasil ditemukan:",
+            siswa
+        );
+
+
+        return siswa;
+
+    }
+    catch(error){
+
+        console.error(
+            "Kesalahan mengambil data siswa:",
+            error
+        );
+
+
+        return null;
+
+    }
+
+}
+
+
+/* =====================================================
+   TAMPILKAN DATA SISWA
+===================================================== */
+
+function tampilkanDataSiswa(siswa){
+
+    /*
+     * Pastikan object siswa tersedia.
+     */
+
+    if(!siswa){
+
+        console.error(
+            "Data siswa tidak tersedia."
+        );
+
+
+        return;
+
+    }
+
+
+    /*
+     * =================================================
+     * NAMA SISWA
+     * =================================================
+     *
+     * Nama WAJIB berasal dari:
+     *
+     * siswa.nama
+     *
+     * BUKAN:
+     *
+     * user.email
+     */
+
+    if(
+        validasiNamaSiswa(
+            siswa.nama
+        )
+    ){
+
+        namaSiswa =
+            siswa.nama.trim();
+
+    }
+    else{
+
+        console.error(
+            "Nama siswa tidak valid."
+        );
+
+
+        namaSiswa =
+            "Siswa";
+
+    }
+
+
+    /*
+     * =================================================
+     * USERNAME
+     * =================================================
+     */
+
+    usernameSiswa =
+        typeof siswa.username === "string"
+            ? siswa.username.trim()
+            : "";
+
+
+    /*
+     * =================================================
+     * SIMPAN DATA SISWA
+     * =================================================
+     */
+
+    siswaLogin = {
+
+        id:
+            siswa.id || "",
+
+        nama:
+            namaSiswa,
+
+        username:
+            usernameSiswa,
+
+        email:
+            siswa.email || ""
+
+    };
+
+
+    /*
+     * =================================================
+     * SIMPAN KE WINDOW
+     * =================================================
+     *
+     * Digunakan oleh siswa-presence.js
+     */
+
+    window.currentSiswa = {
+
+        id:
+            siswaLogin.id,
+
+        nama:
+            siswaLogin.nama,
+
+        username:
+            siswaLogin.username,
+
+        email:
+            siswaLogin.email
+
+    };
+
+
+    /*
+     * =================================================
+     * TAMPILKAN NAMA PADA UCAPAN SELAMAT DATANG
+     * =================================================
+     */
+
+    const welcomeName =
+        document.getElementById(
+            "welcomeName"
+        );
+
+
+    if(welcomeName){
+
+        welcomeName.textContent =
+            namaSiswa;
+
+    }
+
+
+    /*
+     * =================================================
+     * TAMPILKAN NAMA PADA NAVBAR
+     * =================================================
+     */
+
+    const studentInfo =
+        document.getElementById(
+            "studentInfo"
+        );
+
+
+    if(studentInfo){
+
+        studentInfo.textContent =
+            `👤 ${namaSiswa}`;
+
+    }
+
+
+    /*
+     * =================================================
+     * DEBUG
+     * =================================================
+     */
+
+    console.log(
+        "===================================="
+    );
+
+    console.log(
+        "DATA SISWA LOGIN"
+    );
+
+    console.log(
+        "ID:",
+        siswaLogin.id
+    );
+
+    console.log(
+        "Nama siswa:",
+        siswaLogin.nama
+    );
+
+    console.log(
+        "Username:",
+        siswaLogin.username
+    );
+
+    console.log(
+        "Email:",
+        siswaLogin.email
+    );
+
+    console.log(
+        "===================================="
+    );
+
+}
+
+
+/* =====================================================
+   CEK LOGIN
 ===================================================== */
 
 async function cekLogin(){
@@ -356,12 +576,20 @@ async function cekLogin(){
     try{
 
         console.log(
-            "Memeriksa login siswa..."
+            "===================================="
+        );
+
+        console.log(
+            "MEMERIKSA LOGIN SISWA"
+        );
+
+        console.log(
+            "===================================="
         );
 
 
         /* =================================================
-           AMBIL SESSION
+           CEK SESSION SUPABASE
         ================================================= */
 
         const {
@@ -376,14 +604,14 @@ async function cekLogin(){
                 .getSession();
 
 
-        /* =================================================
-           JIKA ERROR
-        ================================================= */
+        /*
+         * Jika terjadi error.
+         */
 
         if(error){
 
             console.error(
-                "Gagal mengecek login:",
+                "Gagal mengecek session:",
                 error
             );
 
@@ -398,9 +626,11 @@ async function cekLogin(){
         }
 
 
-        /* =================================================
-           JIKA TIDAK ADA SESSION
-        ================================================= */
+        /*
+         * =================================================
+         * TIDAK ADA SESSION
+         * =================================================
+         */
 
         if(
             !data ||
@@ -408,7 +638,7 @@ async function cekLogin(){
         ){
 
             console.log(
-                "Tidak ada siswa yang login."
+                "Tidak ada session login."
             );
 
 
@@ -422,135 +652,128 @@ async function cekLogin(){
         }
 
 
-        /* =================================================
-           USER YANG LOGIN
-        ================================================= */
+        /*
+         * =================================================
+         * USER SUPABASE
+         * =================================================
+         */
 
         const user =
             data.session.user;
 
 
-        siswaLogin =
-            user;
-
-
         console.log(
-            "User berhasil ditemukan:",
+            "User Supabase:",
             user
         );
 
 
+        let siswa = null;
+
+
         /* =================================================
-           AMBIL DATA SISWA DARI siswa_login
+           PRIORITAS 1
+           AMBIL DARI SESSION STORAGE
         ================================================= */
 
-        const dataSiswa =
-            await ambilDataSiswa(
-                user
+        siswa =
+            ambilDataSessionStorage();
+
+
+        /*
+         * Jika data sessionStorage valid,
+         * gunakan data tersebut.
+         */
+
+        if(siswa){
+
+            console.log(
+                "Menggunakan data siswa dari sessionStorage."
             );
-
-
-        /* =================================================
-           SIMPAN DATA SISWA
-        ================================================= */
-
-        namaSiswa =
-            dataSiswa.nama ||
-            "Siswa";
-
-
-        usernameSiswa =
-            dataSiswa.username ||
-            "";
-
-
-        /* =================================================
-           DEBUG
-        ================================================= */
-
-        console.log(
-            "========================================"
-        );
-
-        console.log(
-            "HASIL DATA SISWA"
-        );
-
-        console.log(
-            "Nama siswa:",
-            namaSiswa
-        );
-
-        console.log(
-            "Username:",
-            usernameSiswa
-        );
-
-        console.log(
-            "Email login:",
-            user.email
-        );
-
-        console.log(
-            "========================================"
-        );
-
-
-        /* =================================================
-           TAMPILKAN NAMA DI UCAPAN SELAMAT DATANG
-        ================================================= */
-
-        const welcomeName =
-            document.getElementById(
-                "welcomeName"
-            );
-
-
-        if(welcomeName){
-
-            welcomeName.textContent =
-                namaSiswa;
 
         }
 
 
         /* =================================================
-           TAMPILKAN NAMA DI NAVBAR
+           PRIORITAS 2
+           AMBIL DARI DATABASE
         ================================================= */
 
-        const studentInfo =
-            document.getElementById(
-                "studentInfo"
+        if(!siswa){
+
+            console.log(
+                "SessionStorage tidak tersedia."
+            );
+
+            console.log(
+                "Mengambil data siswa langsung dari database."
             );
 
 
-        if(studentInfo){
-
-            studentInfo.textContent =
-                `👤 ${namaSiswa}`;
+            siswa =
+                await ambilDataSiswaDariDatabase(
+                    user
+                );
 
         }
 
 
         /* =================================================
-           SIMPAN DATA UNTUK SISTEM PRESENCE
+           JIKA DATA SISWA TIDAK DITEMUKAN
         ================================================= */
 
-        window.currentSiswa = {
+        if(
+            !siswa ||
+            !validasiNamaSiswa(
+                siswa.nama
+            )
+        ){
 
-            id:
-                user.id,
+            console.error(
+                "Nama siswa tidak ditemukan."
+            );
 
-            nama:
-                namaSiswa,
 
-            username:
-                usernameSiswa,
+            /*
+             * Jangan menampilkan email
+             * sebagai nama siswa.
+             */
 
-            email:
-                user.email || ""
+            alert(
+                "Data nama siswa tidak ditemukan. Silakan login kembali."
+            );
 
-        };
+
+            /*
+             * Hapus session login.
+             */
+
+            await supabaseClient
+                .auth
+                .signOut();
+
+
+            /*
+             * Kembali ke halaman login.
+             */
+
+            window.location.replace(
+                "login.html"
+            );
+
+
+            return;
+
+        }
+
+
+        /* =================================================
+           TAMPILKAN DATA SISWA
+        ================================================= */
+
+        tampilkanDataSiswa(
+            siswa
+        );
 
 
         /* =================================================
@@ -571,7 +794,7 @@ async function cekLogin(){
     catch(error){
 
         console.error(
-            "Kesalahan login:",
+            "Kesalahan cek login:",
             error
         );
 
@@ -586,7 +809,7 @@ async function cekLogin(){
 
 
 /* =====================================================
-   JALANKAN CEK LOGIN
+   JALANKAN CEK LOGIN SETELAH HTML SELESAI
 ===================================================== */
 
 document.addEventListener(
@@ -596,7 +819,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   MONITOR PERUBAHAN LOGIN
+   PANTAU PERUBAHAN SESSION
 ===================================================== */
 
 supabaseClient
@@ -610,9 +833,10 @@ supabaseClient
             );
 
 
-            /* -----------------------------------------
-               JIKA SISWA LOGOUT
-            ----------------------------------------- */
+            /*
+             * Jika logout,
+             * kembali ke halaman login.
+             */
 
             if(
                 event === "SIGNED_OUT"
@@ -639,10 +863,6 @@ supabaseClient
     rel="stylesheet"
 >
 
-
-<!-- =====================================================
-     STYLE
-===================================================== -->
 
 <style>
 
@@ -860,8 +1080,7 @@ nav a:hover{
 
     cursor:pointer;
 
-    transition:
-        .25s;
+    transition:.25s;
 
 }
 
@@ -1330,7 +1549,127 @@ nav a:hover{
 
 
 /* =====================================================
-   GALERI
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:768px){
+
+    nav{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+        padding:1rem;
+
+    }
+
+
+    .nav-right{
+
+        justify-content:center;
+
+    }
+
+
+    nav a,
+    .student-info,
+    .logout-btn{
+
+        font-size:.8rem;
+
+        padding:
+            .5rem
+            .7rem;
+
+    }
+
+
+    .title-section h1{
+
+        font-size:1.5rem;
+
+        padding:
+            .5rem
+            1rem;
+
+    }
+
+
+    .welcome-student{
+
+        font-size:1rem;
+
+        padding:
+            9px
+            15px;
+
+        text-align:center;
+
+    }
+
+
+    .welcome-message{
+
+        font-size:.9rem;
+
+        padding:
+            0
+            15px;
+
+    }
+
+
+    .map-grid{
+
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+
+        gap:12px;
+
+        padding:
+            20px
+            15px;
+
+    }
+
+
+    .map-item{
+
+        font-size:1rem;
+
+        padding:
+            15px
+            10px;
+
+    }
+
+
+    .map-item .emoji{
+
+        font-size:2rem;
+
+    }
+
+}
+
+
+@media(max-width:480px){
+
+    .map-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+/* =====================================================
+   ANIMASI GALERI
 ===================================================== */
 
 .gallery-grid{
@@ -1454,130 +1793,6 @@ nav a:hover{
 
 }
 
-
-/* =====================================================
-   RESPONSIVE TABLET
-===================================================== */
-
-@media(max-width:768px){
-
-    nav{
-
-        flex-direction:column;
-
-        align-items:stretch;
-
-        padding:1rem;
-
-    }
-
-
-    .nav-right{
-
-        justify-content:center;
-
-    }
-
-
-    nav a,
-    .student-info,
-    .logout-btn{
-
-        font-size:.8rem;
-
-        padding:
-            .5rem
-            .7rem;
-
-    }
-
-
-    .title-section h1{
-
-        font-size:1.5rem;
-
-        padding:
-            .5rem
-            1rem;
-
-    }
-
-
-    .welcome-student{
-
-        font-size:1rem;
-
-        padding:
-            9px
-            15px;
-
-        text-align:center;
-
-    }
-
-
-    .welcome-message{
-
-        font-size:.9rem;
-
-        padding:
-            0
-            15px;
-
-    }
-
-
-    .map-grid{
-
-        grid-template-columns:
-            repeat(
-                2,
-                1fr
-            );
-
-        gap:12px;
-
-        padding:
-            20px
-            15px;
-
-    }
-
-
-    .map-item{
-
-        font-size:1rem;
-
-        padding:
-            15px
-            10px;
-
-    }
-
-
-    .map-item .emoji{
-
-        font-size:2rem;
-
-    }
-
-}
-
-
-/* =====================================================
-   RESPONSIVE HP
-===================================================== */
-
-@media(max-width:480px){
-
-    .map-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
 </style>
 
 </head>
@@ -1636,11 +1851,10 @@ nav a:hover{
 
 
 <!-- =====================================================
-     JUDUL DAN SAPAAN
+     JUDUL
 ===================================================== -->
 
 <div class="title-section">
-
 
     <h1>
         📖 Petualangan Belajar Kelas 5
@@ -1657,7 +1871,7 @@ nav a:hover{
 
 
     <!-- =================================================
-         UCAPAN SELAMAT DATANG
+         SAPAAN SISWA
     ================================================= -->
 
     <div
@@ -1709,7 +1923,7 @@ nav a:hover{
 
 
     <!-- =================================================
-         PANCASILA
+         ISTANA PANCASILA
     ================================================= -->
 
     <a
@@ -1817,7 +2031,8 @@ nav a:hover{
 
 
     <!-- =================================================
-         KODING 1
+         KODING
+         TERSEMBUNYI
     ================================================= -->
 
     <a
@@ -1834,10 +2049,6 @@ nav a:hover{
     </a>
 
 
-    <!-- =================================================
-         KODING 2
-    ================================================= -->
-
     <a
         href="koding2/index.html"
         class="map-item hide-menu"
@@ -1851,10 +2062,6 @@ nav a:hover{
 
     </a>
 
-
-    <!-- =================================================
-         KODING 3
-    ================================================= -->
 
     <a
         href="koding/mode3/index.html"
@@ -1870,10 +2077,6 @@ nav a:hover{
     </a>
 
 
-    <!-- =================================================
-         KODING 4
-    ================================================= -->
-
     <a
         href="koding/mode4/index.html"
         class="map-item hide-menu"
@@ -1887,10 +2090,6 @@ nav a:hover{
 
     </a>
 
-
-    <!-- =================================================
-         KODING 5
-    ================================================= -->
 
     <a
         href="koding/mode5/index.html"
@@ -1963,7 +2162,7 @@ nav a:hover{
 
 
 <!-- =====================================================
-     AUDIO
+     AUDIO KLIK
 ===================================================== -->
 
 <audio
@@ -2019,8 +2218,8 @@ allButtons.forEach(
                         function(){
 
                             /*
-                             * Browser dapat
-                             * memblokir audio.
+                             * Browser dapat memblokir
+                             * audio sebelum interaksi.
                              */
 
                         }
@@ -2051,9 +2250,11 @@ if(logoutBtn){
 
             try{
 
-                /* =====================================
-                   MATIKAN PRESENCE
-                ===================================== */
+                /*
+                 * =================================================
+                 * MATIKAN PRESENCE
+                 * =================================================
+                 */
 
                 if(
                     window.siswaPresenceChannel
@@ -2062,7 +2263,8 @@ if(logoutBtn){
                     try{
 
                         await
-                            window.siswaPresenceChannel
+                            window
+                                .siswaPresenceChannel
                                 .untrack();
 
                     }
@@ -2097,14 +2299,14 @@ if(logoutBtn){
                 }
 
 
-                /* =====================================
-                   LOGOUT SUPABASE
-                ===================================== */
+                /*
+                 * =================================================
+                 * LOGOUT SUPABASE
+                 * =================================================
+                 */
 
                 const {
-
                     error
-
                 } =
                     await supabaseClient
                         .auth
@@ -2129,9 +2331,22 @@ if(logoutBtn){
                 }
 
 
-                /* =====================================
-                   KEMBALI KE LOGIN
-                ===================================== */
+                /*
+                 * =================================================
+                 * HAPUS DATA SISWA DARI SESSION STORAGE
+                 * =================================================
+                 */
+
+                sessionStorage.removeItem(
+                    "siswa_login"
+                );
+
+
+                /*
+                 * =================================================
+                 * KEMBALI KE LOGIN
+                 * =================================================
+                 */
 
                 window.location.replace(
                     "login.html"

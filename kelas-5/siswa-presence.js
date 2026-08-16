@@ -1,37 +1,93 @@
 /* =========================================================
    SISTEM PRESENCE SISWA
    UPT SDN 160 GRESIK
+   KELAS 5
    ========================================================= */
 
-const PRESENCE_CHANNEL = "siswa-online-kelas-5";
+
+/* ---------------------------------------------------------
+   NAMA CHANNEL PRESENCE
+--------------------------------------------------------- */
+
+const PRESENCE_CHANNEL =
+    "siswa-online-kelas-5";
+
+
+/* ---------------------------------------------------------
+   CEK SUPABASE
+--------------------------------------------------------- */
+
+if(
+    typeof supabaseClient === "undefined"
+){
+
+    console.error(
+        "supabaseClient belum tersedia."
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   DATA SISWA
+--------------------------------------------------------- */
 
 let currentUser = null;
+
 let currentNama = "Siswa";
+
 let currentUsername = "";
-let currentPage = document.title || "Halaman";
 
-window.siswaPresenceChannel = null;
+let currentPage =
+    document.title ||
+    "Petualangan Kelas 5";
 
 
-/* =========================================================
-   MULAI PRESENCE
-========================================================= */
+/* ---------------------------------------------------------
+   AMBIL SESSION
+--------------------------------------------------------- */
 
-async function mulaiPresence() {
+async function mulaiPresence(){
 
-    try {
+    try{
+
+        /* =================================================
+           AMBIL SESSION
+        ================================================= */
 
         const {
             data,
             error
-        } = await supabaseClient.auth.getSession();
+        } =
+            await supabaseClient
+                .auth
+                .getSession();
 
 
-        /* -------------------------------------------------
-           BELUM LOGIN
-        ------------------------------------------------- */
+        /* =================================================
+           ERROR
+        ================================================= */
 
-        if (error || !data.session) {
+        if(error){
+
+            console.error(
+                "Gagal mengambil session Presence:",
+                error
+            );
+
+            return;
+        }
+
+
+        /* =================================================
+           TIDAK ADA SESSION
+        ================================================= */
+
+        if(
+            !data ||
+            !data.session ||
+            !data.session.user
+        ){
 
             console.log(
                 "Tidak ada siswa yang login."
@@ -41,65 +97,143 @@ async function mulaiPresence() {
         }
 
 
-        /* -------------------------------------------------
-           DATA USER
-        ------------------------------------------------- */
+        /* =================================================
+           USER
+        ================================================= */
 
         currentUser =
             data.session.user;
 
 
+        /* =================================================
+           METADATA
+        ================================================= */
+
+        const metadata =
+            currentUser.user_metadata || {};
+
+
+        /* =================================================
+           AMBIL NAMA SISWA
+           
+           JANGAN GUNAKAN EMAIL SEBAGAI NAMA
+        ================================================= */
+
         currentNama =
-            currentUser.user_metadata?.nama ||
-            currentUser.user_metadata?.name ||
-            currentUser.email ||
+            metadata.nama ||
+            metadata.name ||
+            metadata.full_name ||
+            metadata.display_name ||
+            window.currentSiswa?.nama ||
             "Siswa";
 
 
+        /* =================================================
+           USERNAME
+        ================================================= */
+
         currentUsername =
-            currentUser.user_metadata?.username ||
+            metadata.username ||
+            window.currentSiswa?.username ||
             "";
 
 
-        /* -------------------------------------------------
-           NAMA HALAMAN
-        ------------------------------------------------- */
+        /* =================================================
+           JIKA DATA SUDAH DISET DARI HALAMAN
+        ================================================= */
 
-        currentPage =
-            document.title ||
-            "Sedang belajar";
+        if(
+            window.currentSiswa
+        ){
+
+            currentNama =
+                window.currentSiswa.nama ||
+                currentNama;
+
+            currentUsername =
+                window.currentSiswa.username ||
+                currentUsername;
+
+        }
 
 
-        /* -------------------------------------------------
+        /* =================================================
+           DEBUG
+        ================================================= */
+
+        console.log(
+            "================================"
+        );
+
+        console.log(
+            "PRESENCE SISWA"
+        );
+
+        console.log(
+            "Nama:",
+            currentNama
+        );
+
+        console.log(
+            "Username:",
+            currentUsername
+        );
+
+        console.log(
+            "Halaman:",
+            currentPage
+        );
+
+        console.log(
+            "================================"
+        );
+
+
+        /* =================================================
            BUAT CHANNEL
-        ------------------------------------------------- */
+        ================================================= */
 
         const channel =
             supabaseClient.channel(
                 PRESENCE_CHANNEL,
                 {
+
                     config: {
+
                         presence: {
-                            key: currentUser.id
+
+                            key:
+                                currentUser.id
+
                         }
+
                     }
+
                 }
             );
 
+
+        /* =================================================
+           SIMPAN CHANNEL SECARA GLOBAL
+        ================================================= */
 
         window.siswaPresenceChannel =
             channel;
 
 
         /* =================================================
-           PRESENCE SYNC
+           EVENT SYNC
         ================================================= */
 
         channel.on(
+
             "presence",
+
             {
-                event: "sync"
+                event:
+                    "sync"
             },
+
             () => {
 
                 const state =
@@ -117,19 +251,27 @@ async function mulaiPresence() {
                 );
 
             }
+
         );
 
 
         /* =================================================
-           SISWA MASUK
+           EVENT JOIN
         ================================================= */
 
         channel.on(
+
             "presence",
+
             {
-                event: "join"
+                event:
+                    "join"
             },
-            ({ key, newPresences }) => {
+
+            ({
+                key,
+                newPresences
+            }) => {
 
                 console.log(
                     "Siswa masuk:",
@@ -138,19 +280,27 @@ async function mulaiPresence() {
                 );
 
             }
+
         );
 
 
         /* =================================================
-           SISWA KELUAR
+           EVENT LEAVE
         ================================================= */
 
         channel.on(
+
             "presence",
+
             {
-                event: "leave"
+                event:
+                    "leave"
             },
-            ({ key, leftPresences }) => {
+
+            ({
+                key,
+                leftPresences
+            }) => {
 
                 console.log(
                     "Siswa keluar:",
@@ -159,15 +309,18 @@ async function mulaiPresence() {
                 );
 
             }
+
         );
 
 
         /* =================================================
-           CONNECT
+           SUBSCRIBE
         ================================================= */
 
         await channel.subscribe(
+
             async (status) => {
+
 
                 console.log(
                     "Status Presence:",
@@ -175,27 +328,54 @@ async function mulaiPresence() {
                 );
 
 
-                if (
+                if(
                     status === "SUBSCRIBED"
-                ) {
+                ){
 
-                    await kirimPresence();
+                    /* =====================================
+                       KIRIM DATA SISWA
+                    ===================================== */
+
+                    await channel.track({
+
+                        user_id:
+                            currentUser.id,
+
+                        nama:
+                            currentNama,
+
+                        username:
+                            currentUsername,
+
+                        halaman:
+                            currentPage,
+
+                        status:
+                            "online",
+
+                        waktu:
+                            new Date()
+                                .toISOString()
+
+                    });
+
 
                     console.log(
-                        "🟢 Presence siswa aktif."
+                        "Presence siswa aktif:",
+                        currentNama
                     );
 
                 }
 
             }
+
         );
 
-
     }
-    catch (error) {
+    catch(error){
 
         console.error(
-            "Presence error:",
+            "Kesalahan sistem Presence:",
             error
         );
 
@@ -204,51 +384,11 @@ async function mulaiPresence() {
 }
 
 
-/* =========================================================
-   KIRIM STATUS SISWA
-========================================================= */
-
-async function kirimPresence() {
-
-    if (
-        !window.siswaPresenceChannel ||
-        !currentUser
-    ) {
-
-        return;
-    }
-
-
-    await window.siswaPresenceChannel.track({
-
-        user_id:
-            currentUser.id,
-
-        nama:
-            currentNama,
-
-        username:
-            currentUsername,
-
-        halaman:
-            currentPage,
-
-        status:
-            "online",
-
-        waktu:
-            new Date().toISOString()
-
-    });
-
-}
-
-
-/* =========================================================
+/* ---------------------------------------------------------
    TAMPILKAN SISWA AKTIF
-========================================================= */
+--------------------------------------------------------- */
 
-function tampilkanSiswaAktif(state) {
+function tampilkanSiswaAktif(state){
 
     const container =
         document.getElementById(
@@ -256,28 +396,31 @@ function tampilkanSiswaAktif(state) {
         );
 
 
-    if (!container) {
-
+    if(!container)
         return;
-    }
 
 
     const siswa = [];
 
 
-    Object.keys(state).forEach(
-        key => {
+    /* =====================================================
+       BACA STATE PRESENCE
+    ===================================================== */
+
+    Object.keys(state)
+        .forEach(key => {
 
             const daftar =
                 state[key];
 
 
-            if (
+            if(
                 !daftar ||
                 !daftar.length
-            ) {
+            ){
 
                 return;
+
             }
 
 
@@ -287,36 +430,28 @@ function tampilkanSiswaAktif(state) {
                 ];
 
 
-            siswa.push(data);
-
-        }
-    );
+            if(!data)
+                return;
 
 
-    /* -----------------------------------------------------
-       URUTKAN BERDASARKAN NAMA
-    ----------------------------------------------------- */
+            siswa.push(
+                data
+            );
 
-    siswa.sort(
-        (a, b) =>
-            String(a.nama || "")
-                .localeCompare(
-                    String(b.nama || ""),
-                    "id"
-                )
-    );
+        });
 
 
-    /* -----------------------------------------------------
-       BERSIHKAN
-    ----------------------------------------------------- */
+    /* =====================================================
+       BERSIHKAN CONTAINER
+    ===================================================== */
 
-    container.innerHTML = "";
+    container.innerHTML =
+        "";
 
 
-    /* -----------------------------------------------------
-       JUMLAH ONLINE
-    ----------------------------------------------------- */
+    /* =====================================================
+       JUMLAH SISWA
+    ===================================================== */
 
     const jumlah =
         document.createElement(
@@ -328,7 +463,7 @@ function tampilkanSiswaAktif(state) {
         "jumlah-siswa-online";
 
 
-    jumlah.innerHTML =
+    jumlah.textContent =
         `🟢 ${siswa.length} siswa sedang online`;
 
 
@@ -337,13 +472,13 @@ function tampilkanSiswaAktif(state) {
     );
 
 
-    /* -----------------------------------------------------
-       TIDAK ADA SISWA
-    ----------------------------------------------------- */
+    /* =====================================================
+       JIKA KOSONG
+    ===================================================== */
 
-    if (
+    if(
         siswa.length === 0
-    ) {
+    ){
 
         const kosong =
             document.createElement(
@@ -365,15 +500,17 @@ function tampilkanSiswaAktif(state) {
 
 
         return;
+
     }
 
 
-    /* -----------------------------------------------------
-       DAFTAR SISWA
-    ----------------------------------------------------- */
+    /* =====================================================
+       TAMPILKAN DAFTAR SISWA
+    ===================================================== */
 
     siswa.forEach(
         data => {
+
 
             const item =
                 document.createElement(
@@ -385,6 +522,22 @@ function tampilkanSiswaAktif(state) {
                 "siswa-online-item";
 
 
+            /* =============================================
+               NAMA SISWA
+               
+               TIDAK MENAMPILKAN EMAIL
+            ============================================= */
+
+            const nama =
+                data.nama ||
+                "Siswa";
+
+
+            const halaman =
+                data.halaman ||
+                "Sedang belajar";
+
+
             item.innerHTML = `
 
                 <div class="status-online">
@@ -394,22 +547,11 @@ function tampilkanSiswaAktif(state) {
                 <div class="siswa-info">
 
                     <div class="siswa-nama">
-                        ${escapeHTML(
-                            data.nama ||
-                            "Siswa"
-                        )}
+                        ${escapeHTML(nama)}
                     </div>
 
                     <div class="siswa-halaman">
-
-                        📖 Sedang membuka:
-                        <strong>
-                            ${escapeHTML(
-                                data.halaman ||
-                                "Sedang belajar"
-                            )}
-                        </strong>
-
+                        📖 ${escapeHTML(halaman)}
                     </div>
 
                 </div>
@@ -427,59 +569,105 @@ function tampilkanSiswaAktif(state) {
 }
 
 
-/* =========================================================
-   UPDATE HALAMAN
-   Dipanggil jika siswa berpindah halaman
-========================================================= */
+/* ---------------------------------------------------------
+   UPDATE HALAMAN SISWA
+--------------------------------------------------------- */
 
 async function updateHalamanSiswa(
     namaHalaman
-) {
+){
 
     currentPage =
-        namaHalaman ||
-        document.title ||
-        "Sedang belajar";
+        namaHalaman;
 
 
-    await kirimPresence();
+    if(
+        !window.siswaPresenceChannel ||
+        !currentUser
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        await window
+            .siswaPresenceChannel
+            .track({
+
+                user_id:
+                    currentUser.id,
+
+                nama:
+                    currentNama,
+
+                username:
+                    currentUsername,
+
+                halaman:
+                    currentPage,
+
+                status:
+                    "online",
+
+                waktu:
+                    new Date()
+                        .toISOString()
+
+            });
+
+
+        console.log(
+            "Halaman Presence diperbarui:",
+            currentPage
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Gagal memperbarui halaman:",
+            error
+        );
+
+    }
 
 }
 
 
-/* =========================================================
-   KEAMANAN HTML
-========================================================= */
+/* ---------------------------------------------------------
+   KEAMANAN TEKS
+--------------------------------------------------------- */
 
-function escapeHTML(text) {
+function escapeHTML(text){
 
     return String(text)
+
         .replaceAll(
             "&",
             "&amp;"
         )
+
         .replaceAll(
             "<",
             "&lt;"
         )
+
         .replaceAll(
             ">",
             "&gt;"
         )
+
         .replaceAll(
             '"',
             "&quot;"
         )
+
         .replaceAll(
             "'",
             "&#039;"
         );
 
 }
-
-
-/* =========================================================
-   JALANKAN
-========================================================= */
-
-mulaiPresence();

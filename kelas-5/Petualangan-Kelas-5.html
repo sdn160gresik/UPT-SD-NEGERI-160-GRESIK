@@ -1428,6 +1428,186 @@ audio{
 
 }
 
+
+
+/* =====================================================
+   TATA LETAK HEADER PETUALANGAN
+   Judul di kiri — Siswa Online di kanan
+===================================================== */
+
+.hero-layout{
+    width:calc(100% - 60px);
+    max-width:1180px;
+    margin:26px auto 10px;
+    display:grid;
+    grid-template-columns:minmax(0, 1.15fr) minmax(340px, .85fr);
+    gap:28px;
+    align-items:center;
+}
+
+.hero-left{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:12px 10px;
+}
+
+.hero-left .title-section{
+    margin:0 0 12px;
+    text-align:center;
+}
+
+.hero-left .title-section h1{
+    margin:0;
+    font-size:clamp(1.7rem, 3vw, 2.35rem);
+    padding:.65rem 1.4rem;
+    line-height:1.25;
+}
+
+.hero-left .welcome-student{
+    margin:8px auto 6px;
+}
+
+.hero-left .welcome-message{
+    margin:5px 0 12px;
+}
+
+.hero-left .pengumuman-box{
+    margin-top:8px;
+}
+
+.hero-right{
+    width:100%;
+    max-width:430px;
+    justify-self:end;
+    padding:14px;
+    border-radius:20px;
+    background:rgba(255,255,255,.16);
+    border:2px solid rgba(255,255,255,.35);
+    box-shadow:0 8px 22px rgba(0,0,0,.20);
+    backdrop-filter:blur(4px);
+}
+
+.online-title{
+    color:#fff;
+    text-align:center;
+    font-size:1.05rem;
+    font-weight:700;
+    margin-bottom:8px;
+    text-shadow:1px 2px 3px rgba(0,0,0,.4);
+}
+
+/* Kotak online dibuat lebih pendek agar tidak mendominasi halaman */
+.hero-right #daftarSiswaAktif{
+    width:100%;
+    max-width:none;
+    height:205px;
+    margin:0;
+    padding:10px;
+    border-radius:14px;
+}
+
+.hero-right .daftar-siswa-scroll{
+    height:132px;
+}
+
+.hero-right .jumlah-siswa-online{
+    padding:8px 10px;
+    margin-bottom:7px;
+    font-size:.88rem;
+}
+
+.hero-right .siswa-online-item{
+    padding:7px 9px;
+    margin-bottom:5px;
+}
+
+.hero-right .siswa-nama{
+    font-size:.84rem;
+}
+
+.hero-right .siswa-status,
+.hero-right .siswa-halaman{
+    font-size:.68rem;
+}
+
+.hero-right .siswa-waktu{
+    font-size:.62rem;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:900px){
+
+    .hero-layout{
+        grid-template-columns:1fr 1fr;
+        gap:18px;
+        width:calc(100% - 30px);
+    }
+
+    .hero-right{
+        max-width:none;
+    }
+
+    .hero-left .title-section h1{
+        font-size:1.65rem;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .hero-layout{
+        grid-template-columns:1fr;
+        width:calc(100% - 30px);
+        gap:14px;
+        margin-top:18px;
+    }
+
+    .hero-left{
+        padding:5px 0;
+    }
+
+    .hero-left .title-section{
+        margin-bottom:8px;
+    }
+
+    .hero-left .title-section h1{
+        font-size:1.5rem;
+    }
+
+    .hero-right{
+        width:100%;
+        max-width:520px;
+        justify-self:center;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .hero-layout{
+        width:calc(100% - 20px);
+    }
+
+    .hero-right{
+        padding:10px;
+    }
+
+    .hero-right #daftarSiswaAktif{
+        height:190px;
+    }
+
+    .hero-right .daftar-siswa-scroll{
+        height:118px;
+    }
+
+}
+
 </style>
 
 </head>
@@ -1486,69 +1666,62 @@ audio{
 
 
 <!-- =====================================================
-     JUDUL
+     HEADER PETUALANGAN & SISWA ONLINE
 ===================================================== -->
 
-<div class="title-section">
-
-    <h1>
-        📖 Petualangan Belajar Kelas 5
-    </h1>
-
+<section class="hero-layout">
 
     <!-- =================================================
-         KOTAK AKTIVITAS SISWA
+         SISI KIRI: JUDUL DAN SAPAAN
     ================================================= -->
 
-    <div
-        id="daftarSiswaAktif"
-    ></div>
+    <div class="hero-left">
 
+        <div class="title-section">
+            <h1>
+                📖 Petualangan Belajar Kelas 5
+            </h1>
+        </div>
 
-    <!-- =================================================
-         SAPAAN
-    ================================================= -->
-
-    <div
-        id="welcomeStudent"
-        class="welcome-student"
-    >
-
-        👋 Selamat datang,
-        <span id="welcomeName">
-            Siswa
-        </span>!
-
-    </div>
-
-
-    <div class="welcome-message">
-
-        🌟 Yuk lanjutkan petualangan
-        belajarmu hari ini!
-
-    </div>
-
-
-    <!-- =================================================
-         PENGUMUMAN
-    ================================================= -->
-
-    <div class="pengumuman-box">
-
-        <a
-            href="../pdf-tofas/tofas.html"
-            class="pengumuman-btn"
+        <div
+            id="welcomeStudent"
+            class="welcome-student"
         >
+            👋 Selamat datang,
+            <span id="welcomeName">Siswa</span>!
+        </div>
 
-            📢 Pengumuman
+        <div class="welcome-message">
+            🌟 Yuk lanjutkan petualangan belajarmu hari ini!
+        </div>
 
-        </a>
+        <div class="pengumuman-box">
+            <a
+                href="../pdf-tofas/tofas.html"
+                class="pengumuman-btn"
+            >
+                📢 Pengumuman
+            </a>
+        </div>
 
     </div>
 
-</div>
 
+    <!-- =================================================
+         SISI KANAN: SISWA ONLINE
+    ================================================= -->
+
+    <div class="hero-right">
+
+        <div class="online-title">
+            👥 Aktivitas Siswa
+        </div>
+
+        <div id="daftarSiswaAktif"></div>
+
+    </div>
+
+</section>
 
 <!-- =====================================================
      PETA PETUALANGAN

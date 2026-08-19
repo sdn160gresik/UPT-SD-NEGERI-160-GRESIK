@@ -1,15 +1,18 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pilih Kelas - UPT SD Negeri 160 Gresik</title>
+
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: url('https://i.imgur.com/Gup5sKD.png') no-repeat center center fixed;
       background-size: cover;
+      min-height: 100vh;
     }
 
     nav {
@@ -23,6 +26,8 @@
 
     nav img {
       height: 55px;
+      max-width: 100%;
+      object-fit: contain;
     }
 
     .nav-logo {
@@ -34,6 +39,7 @@
     .nav-menu {
       display: flex;
       gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     nav a {
@@ -98,48 +104,65 @@
       transform: scale(1.1);
     }
 
-    .kelas1 { background-color: #f9b208; }
-    .kelas2 { background-color: #7a5230; }
-    .kelas3 { background-color: #ff5d73; }
-    .kelas4 { background-color: #ff8c00; }
-    .kelas5 { background-color: #000000; }
-    .kelas6 { background-color: #9b0000; }
-
-    /* Popup peringatan */
-    .popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.7);
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      text-align: center;
-      z-index: 999;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s ease;
+    .kelas1 {
+      background-color: #f9b208;
     }
 
-    .popup.show {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-      pointer-events: auto;
+    .kelas2 {
+      background-color: #7a5230;
     }
 
-    .popup button {
-      margin-top: 15px;
-      padding: 8px 15px;
-      border: none;
-      background: #0288d1;
-      color: white;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
+    .kelas3 {
+      background-color: #ff5d73;
+    }
+
+    .kelas4 {
+      background-color: #ff8c00;
+    }
+
+    .kelas5 {
+      background-color: #000000;
+    }
+
+    .kelas6 {
+      background-color: #9b0000;
     }
 
     @media (max-width: 600px) {
+
+      nav {
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .nav-logo {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      nav img {
+        height: 45px;
+      }
+
+      .nav-menu {
+        justify-content: center;
+        width: 100%;
+      }
+
+      nav a {
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+
+      .container {
+        padding: 30px 15px;
+      }
+
+      .subjudul {
+        font-size: 16px;
+        padding: 8px 12px;
+      }
+
       .button-kelas {
         width: 50px;
         height: 50px;
@@ -148,81 +171,150 @@
     }
   </style>
 </head>
+
 <body>
 
   <nav>
+
     <div class="nav-logo">
-      <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
-      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 62px;">
-      <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah">
+
+      <img
+        src="https://i.imgur.com/sxm7RR1.png"
+        alt="Logo Gresik"
+      >
+
+      <img
+        src="https://i.imgur.com/tGA5UBc.png"
+        alt="Logo Tut Wuri"
+        style="height: 62px;"
+      >
+
+      <img
+        src="https://i.imgur.com/oWB8vKW.png"
+        alt="Logo Sekolah"
+      >
+
     </div>
+
     <div class="nav-menu">
-      <a href="../index.html">🏠 Beranda</a>
-      <a href="pengumuman/pengumuman.html">📌 Pengumuman</a>
-      <a href="#">📞 Kontak</a>
+
+      <a href="../index.html">
+        🏠 Beranda
+      </a>
+
+      <a href="pengumuman/pengumuman.html">
+        📌 Pengumuman
+      </a>
+
+      <a href="#">
+        📞 Kontak
+      </a>
+
     </div>
+
   </nav>
 
+
   <div class="container">
-    <div class="subjudul">📚 Siap Belajar Hari Ini? Pilih Kelasmu! 🌟</div>
+
+    <div class="subjudul">
+      📚 Siap Belajar Hari Ini? Pilih Kelasmu! 🌟
+    </div>
+
 
     <div class="kelas-baris">
-      <a href="../kelas-1/kelas1.html" class="button-kelas kelas1">1</a>
-      <a href="kelas2.html" class="button-kelas kelas2">2</a>
-      <a href="kelas3.html" class="button-kelas kelas3">3</a>
-      <a href="../kelas-4/kelas4.html" class="button-kelas kelas4">4</a>
-      <a href="login.html" class="button-kelas kelas5">5</a>
-      <a href="kelas6.html" class="button-kelas kelas6">6</a>
-      
+
+      <!-- KELAS 1 -->
+      <a
+        href="../kelas-1/kelas1.html"
+        class="button-kelas kelas1"
+        title="Kelas 1"
+      >
+        1
+      </a>
+
+
+      <!-- KELAS 2 -->
+      <a
+        href="../kelas-2/kelas2.html"
+        class="button-kelas kelas2"
+        title="Kelas 2"
+      >
+        2
+      </a>
+
+
+      <!-- KELAS 3 -->
+      <a
+        href="../kelas-3/kelas3.html"
+        class="button-kelas kelas3"
+        title="Kelas 3"
+      >
+        3
+      </a>
+
+
+      <!-- KELAS 4 -->
+      <a
+        href="../kelas-4/kelas4.html"
+        class="button-kelas kelas4"
+        title="Kelas 4"
+      >
+        4
+      </a>
+
+
+      <!-- KELAS 5 -->
+      <a
+        href="login.html"
+        class="button-kelas kelas5"
+        title="Kelas 5"
+      >
+        5
+      </a>
+
+
+      <!-- KELAS 6 -->
+      <a
+        href="../kelas-6/kelas6.html"
+        class="button-kelas kelas6"
+        title="Kelas 6"
+      >
+        6
+      </a>
+
     </div>
+
   </div>
 
-  <!-- Popup -->
-  <div id="popup" class="popup">
-    <div id="popup-text">🚧 Kelas ini sedang disiapkan. Sabar ya, bintang kelas! 🌟</div>
-    <button onclick="closePopup()">OK</button>
-  </div>
 
   <script>
-    // Ganti ke jalur ../ karena folder suara ada di luar kelas-5
+
+    // Suara ketika tombol/link diklik
     const clickSound = new Audio('../suara/blub.mp3');
-    const popup = document.getElementById('popup');
-    const popupText = document.getElementById('popup-text');
 
     function playClickSound() {
+
       clickSound.currentTime = 0;
-      clickSound.play();
+
+      clickSound.play().catch(() => {});
+
     }
 
-    function showPopup(text) {
-      popupText.textContent = text;
-      popup.classList.add('show');
-    }
 
-    function closePopup() {
-      popup.classList.remove('show');
-    }
-
-    // Event klik untuk semua link (nav dan tombol kelas)
+    // Event klik untuk semua link
     document.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', function(e) {
+
+      link.addEventListener('click', function() {
+
         playClickSound();
 
-        // Cek kalau tombol kelas yang belum tersedia
-        if (this.classList.contains('button-kelas')) {
-          const kelas = this.textContent.trim();
-          if (['2','3','6'].includes(kelas)) {
-            e.preventDefault();
-            showPopup(`🚧 Wah, Kelas ${kelas} masih dalam proses persiapan. Sabar ya, calon juara! 🏆`);
-          }
-        }
       });
+
     });
 
-    // Event klik tombol popup
-    document.querySelector('#popup button').addEventListener('click', playClickSound);
   </script>
 
 </body>
 </html>
-
+```

@@ -1,532 +1,1303 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pengumuman</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-body{
-    background:#f4f7fb;
-    padding:30px;
-}
-
-.pengumuman{
-    max-width:900px;
-    margin:auto;
-}
-
-.judul{
-    text-align:center;
-    color:#0d47a1;
-    font-size:34px;
-    margin-bottom:10px;
-}
-
-.subjudul{
-    text-align:center;
-    color:#666;
-    margin-bottom:35px;
-}
-
-.menu{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:25px;
-}
-
-.card{
-    background:#fff;
-    border-radius:18px;
-    padding:30px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    transition:.3s;
-    text-align:center;
-}
-
-.card:hover{
-    transform:translateY(-6px);
-}
-
-.icon{
-    font-size:60px;
-    margin-bottom:15px;
-}
-
-.card h3{
-    color:#0d47a1;
-    margin-bottom:10px;
-}
-
-.card p{
-    color:#555;
-    line-height:1.7;
-    margin-bottom:20px;
-}
-
-.btn{
-    display:inline-block;
-    padding:14px 28px;
-    background:linear-gradient(135deg,#1976d2,#42a5f5);
-    color:#fff;
-    text-decoration:none;
-    border-radius:35px;
-    font-weight:600;
-    transition:.3s;
-}
 
-.btn:hover{
-    transform:scale(1.05);
-    box-shadow:0 8px 20px rgba(25,118,210,.35);
-}
+    <meta charset="UTF-8">
 
-.badge{
-    display:inline-block;
-    margin-top:10px;
-    background:#ff9800;
-    color:#fff;
-    padding:5px 12px;
-    border-radius:30px;
-    font-size:12px;
-}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-@media(max-width:768px){
+    <title>Pengumuman - UPT SDN 160 GRESIK</title>
 
-body{
-    padding:15px;
-}
 
-.judul{
-    font-size:28px;
-}
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
 
-}
-    /* =======================================================
-   MODAL LOGIN DATA SISWA
-======================================================= */
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+        rel="stylesheet">
 
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-}
 
-.modal-box{
+    <!-- =====================================================
+         CSS
+    ====================================================== -->
 
-    width:400px;
-    max-width:92%;
+    <style>
 
-    background:#fff;
 
-    border-radius:20px;
+        /* =====================================================
+           RESET
+        ====================================================== */
 
-    padding:35px;
+        * {
 
-    text-align:center;
+            margin: 0;
 
-    box-shadow:0 25px 60px rgba(0,0,0,.25);
+            padding: 0;
 
-    animation:muncul .25s ease;
+            box-sizing: border-box;
 
-}
+            font-family: 'Poppins', sans-serif;
 
-@keyframes muncul{
+        }
 
-from{
-    transform:translateY(-30px);
-    opacity:0;
-}
 
-to{
-    transform:translateY(0);
-    opacity:1;
-}
+        /* =====================================================
+           BODY
+        ====================================================== */
 
-}
+        body {
 
-.lock-icon{
+            background: #f4f7fb;
 
-    width:80px;
-    height:80px;
+            padding: 30px;
 
-    margin:auto;
+            min-height: 100vh;
 
-    margin-bottom:20px;
+        }
 
-    border-radius:50%;
 
-    background:linear-gradient(135deg,#1976d2,#42a5f5);
+        /* =====================================================
+           CONTAINER UTAMA
+        ====================================================== */
 
-    color:white;
+        .pengumuman {
 
-    display:flex;
+            max-width: 1100px;
 
-    align-items:center;
+            margin: auto;
 
-    justify-content:center;
+        }
 
-    font-size:40px;
 
-}
+        /* =====================================================
+           JUDUL
+        ====================================================== */
 
-.modal-box h2{
+        .judul {
 
-    color:#0d47a1;
+            text-align: center;
 
-    margin-bottom:8px;
+            color: #0d47a1;
 
-}
+            font-size: 34px;
 
-.modal-box p{
+            font-weight: 700;
 
-    color:#666;
+            margin-bottom: 10px;
 
-    margin-bottom:22px;
+        }
 
-    line-height:1.6;
 
-}
+        /* =====================================================
+           SUBJUDUL
+        ====================================================== */
 
-.modal-box input{
+        .subjudul {
 
-    width:100%;
+            text-align: center;
 
-    padding:14px 15px;
+            color: #666;
 
-    border:2px solid #ddd;
+            margin-bottom: 35px;
 
-    border-radius:10px;
+            font-size: 16px;
 
-    outline:none;
+            line-height: 1.6;
 
-    font-size:16px;
+        }
 
-    transition:.25s;
 
-}
+        /* =====================================================
+           MENU GRID
+        ====================================================== */
 
-.modal-box input:focus{
+        .menu {
 
-    border-color:#1976d2;
+            display: grid;
 
-}
+            grid-template-columns:
+                repeat(auto-fit, minmax(300px, 1fr));
 
-.modal-button{
+            gap: 25px;
 
-    display:flex;
+        }
 
-    gap:12px;
 
-    margin-top:22px;
+        /* =====================================================
+           CARD
+        ====================================================== */
 
-}
+        .card {
 
-.modal-button button{
+            background: #ffffff;
 
-    flex:1;
+            border-radius: 18px;
 
-    padding:14px;
+            padding: 30px;
 
-    border:none;
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.08);
 
-    border-radius:10px;
+            transition: all 0.3s ease;
 
-    cursor:pointer;
+            text-align: center;
 
-    font-size:15px;
+            position: relative;
 
-    font-weight:600;
+            overflow: hidden;
 
-    transition:.3s;
+        }
 
-}
 
-.btn-login{
+        /* =====================================================
+           EFEK CARD
+        ====================================================== */
 
-    background:#1976d2;
+        .card:hover {
 
-    color:white;
+            transform: translateY(-6px);
 
-}
+            box-shadow:
+                0 18px 35px rgba(0, 0, 0, 0.13);
 
-.btn-login:hover{
+        }
 
-    background:#1565c0;
 
-}
+        /* =====================================================
+           GARIS ATAS CARD
+        ====================================================== */
 
-.btn-batal{
+        .card::before {
 
-    background:#ececec;
+            content: "";
 
-}
+            position: absolute;
 
-.btn-batal:hover{
+            top: 0;
 
-    background:#dcdcdc;
+            left: 0;
 
-}
+            width: 100%;
 
-#pesanError{
+            height: 5px;
 
-    margin-top:15px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #1976d2,
+                    #42a5f5
+                );
 
-    color:#d32f2f;
+        }
 
-    font-size:14px;
 
-    min-height:20px;
+        /* =====================================================
+           ICON
+        ====================================================== */
 
-}
-</style>
+        .icon {
+
+            font-size: 60px;
+
+            margin-bottom: 15px;
+
+            line-height: 1;
+
+        }
+
+
+        /* =====================================================
+           JUDUL CARD
+        ====================================================== */
+
+        .card h3 {
+
+            color: #0d47a1;
+
+            margin-bottom: 10px;
+
+            font-size: 21px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =====================================================
+           DESKRIPSI CARD
+        ====================================================== */
+
+        .card p {
+
+            color: #555;
+
+            line-height: 1.7;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =====================================================
+           BUTTON
+        ====================================================== */
+
+        .btn {
+
+            display: inline-block;
+
+            padding: 14px 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1976d2,
+                    #42a5f5
+                );
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            border-radius: 35px;
+
+            font-weight: 600;
+
+            transition: all 0.3s ease;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =====================================================
+           BUTTON HOVER
+        ====================================================== */
+
+        .btn:hover {
+
+            transform: scale(1.05);
+
+            box-shadow:
+                0 8px 20px rgba(
+                    25,
+                    118,
+                    210,
+                    0.35
+                );
+
+        }
+
+
+        /* =====================================================
+           MODAL LOGIN DATA SISWA
+        ====================================================== */
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.55
+                );
+
+            justify-content: center;
+
+            align-items: center;
+
+            z-index: 9999;
+
+            padding: 20px;
+
+        }
+
+
+        /* =====================================================
+           MODAL BOX
+        ====================================================== */
+
+        .modal-box {
+
+            width: 400px;
+
+            max-width: 92%;
+
+            background: #ffffff;
+
+            border-radius: 20px;
+
+            padding: 35px;
+
+            text-align: center;
+
+            box-shadow:
+                0 25px 60px rgba(
+                    0,
+                    0,
+                    0,
+                    0.25
+                );
+
+            animation:
+                muncul 0.25s ease;
+
+        }
+
+
+        /* =====================================================
+           ANIMASI MODAL
+        ====================================================== */
+
+        @keyframes muncul {
+
+            from {
+
+                transform:
+                    translateY(-30px);
+
+                opacity: 0;
+
+            }
+
+            to {
+
+                transform:
+                    translateY(0);
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           ICON LOCK
+        ====================================================== */
+
+        .lock-icon {
+
+            width: 80px;
+
+            height: 80px;
+
+            margin: auto;
+
+            margin-bottom: 20px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1976d2,
+                    #42a5f5
+                );
+
+            color: #ffffff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 40px;
+
+        }
+
+
+        /* =====================================================
+           JUDUL MODAL
+        ====================================================== */
+
+        .modal-box h2 {
+
+            color: #0d47a1;
+
+            margin-bottom: 8px;
+
+            font-size: 23px;
+
+        }
+
+
+        /* =====================================================
+           DESKRIPSI MODAL
+        ====================================================== */
+
+        .modal-box p {
+
+            color: #666;
+
+            margin-bottom: 22px;
+
+            line-height: 1.6;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =====================================================
+           INPUT PASSWORD
+        ====================================================== */
+
+        .modal-box input {
+
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border:
+                2px solid #ddd;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 16px;
+
+            transition: 0.25s;
+
+        }
+
+
+        /* =====================================================
+           INPUT FOCUS
+        ====================================================== */
+
+        .modal-box input:focus {
+
+            border-color: #1976d2;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(
+                    25,
+                    118,
+                    210,
+                    0.10
+                );
+
+        }
+
+
+        /* =====================================================
+           TOMBOL MODAL
+        ====================================================== */
+
+        .modal-button {
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 22px;
+
+        }
+
+
+        /* =====================================================
+           BUTTON MODAL
+        ====================================================== */
+
+        .modal-button button {
+
+            flex: 1;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+
+        }
+
+
+        /* =====================================================
+           BUTTON LOGIN
+        ====================================================== */
+
+        .btn-login {
+
+            background: #1976d2;
+
+            color: #ffffff;
+
+        }
+
+
+        /* =====================================================
+           HOVER BUTTON LOGIN
+        ====================================================== */
+
+        .btn-login:hover {
+
+            background: #1565c0;
+
+        }
+
+
+        /* =====================================================
+           BUTTON BATAL
+        ====================================================== */
+
+        .btn-batal {
+
+            background: #ececec;
+
+            color: #333;
+
+        }
+
+
+        /* =====================================================
+           HOVER BUTTON BATAL
+        ====================================================== */
+
+        .btn-batal:hover {
+
+            background: #dcdcdc;
+
+        }
+
+
+        /* =====================================================
+           PESAN ERROR
+        ====================================================== */
+
+        #pesanError {
+
+            margin-top: 15px;
+
+            color: #d32f2f;
+
+            font-size: 14px;
+
+            min-height: 20px;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE TABLET
+        ====================================================== */
+
+        @media (max-width: 768px) {
+
+            body {
+
+                padding: 15px;
+
+            }
+
+
+            .judul {
+
+                font-size: 28px;
+
+            }
+
+
+            .subjudul {
+
+                font-size: 14px;
+
+                margin-bottom: 25px;
+
+            }
+
+
+            .menu {
+
+                grid-template-columns: 1fr;
+
+                gap: 18px;
+
+            }
+
+
+            .card {
+
+                padding: 25px 20px;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE HP KECIL
+        ====================================================== */
+
+        @media (max-width: 480px) {
+
+            body {
+
+                padding: 10px;
+
+            }
+
+
+            .judul {
+
+                font-size: 24px;
+
+            }
+
+
+            .icon {
+
+                font-size: 52px;
+
+            }
+
+
+            .card h3 {
+
+                font-size: 19px;
+
+            }
+
+
+            .card p {
+
+                font-size: 13px;
+
+            }
+
+
+            .btn {
+
+                padding:
+                    12px 22px;
+
+                font-size: 13px;
+
+            }
+
+
+            .modal-box {
+
+                padding: 25px 20px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<section class="pengumuman">
 
-<h1 class="judul">📢 Pengumuman</h1>
+    <!-- =====================================================
+         BAGIAN UTAMA
+    ====================================================== -->
 
-<p class="subjudul">
-Silakan pilih menu sesuai kebutuhan Anda.
-</p>
-
-<div class="menu">
-
-<!-- Menu 1 -->
-<div class="card">
-
-<div class="icon">📝</div>
-
-<h3>Ekstrakurikuler</h3>
-
-<p>
-Pendaftaran peserta didik untuk mengikuti
-Ekstrakurikuler.
-</p>
-
-<a href="https://docs.google.com/forms/d/e/1FAIpQLScP0zw373XI43C3hljD2xWxhbqA7dAzZWlTNs4KovG_rzEWuA/alreadyresponded"
-target="_blank"
-class="btn">
-📝 Isi Formulir
-</a>
-
-</div>
-
-<!-- Menu 2 -->
-<div class="card">
-
-<div class="icon">📋</div>
-
-<h3>Data CKG SD</h3>
-
-<p>
-Kepada Bapak/Ibu Wali murid dimohon mengisi
-Data CKG SD dengan lengkap dan benar.
-</p>
-
-<a href="https://forms.gle/MU9N8y8ZMX4VcqkG6"
-target="_blank"
-class="btn">
-📄 Isi Data CKG SD
-</a>
-
-<div class="badge">Baru</div>
+    <section class="pengumuman">
 
 
-</div>
-    <!-- Menu 3 -->
-<div class="card">
+        <!-- =================================================
+             JUDUL HALAMAN
+        ================================================== -->
 
-<div class="icon">🎓</div>
+        <h1 class="judul">
 
-<h3>Data Siswa</h3>
+            📢 Pengumuman
 
-<p>
-Silakan mengisi atau memperbarui data siswa
-dengan lengkap dan benar sesuai identitas peserta didik.
-</p>
+        </h1>
 
-<a href="#"
-class="btn"
-onclick="bukaLogin(); return false;">
-👨‍🎓 Data Siswa
-</a>
 
-<div class="badge">Terbaru</div>
+        <!-- =================================================
+             SUBJUDUL
+        ================================================== -->
 
-</div>
-<!-- Menu 4 -->
-<div class="card">
+        <p class="subjudul">
 
-    <div class="icon">🎮</div>
+            Silakan pilih menu sesuai kebutuhan Anda.
 
-    <h3>Petualangan Kelas 5</h3>
-
-    <p>
-        Yuk ikuti petualangan belajar Kelas 5!
-        Selesaikan berbagai tantangan dan permainan
-        pembelajaran yang seru dan menyenangkan.
-    </p>
-
-    <a href="../kelas-5/Petualangan-Kelas-5-Desain-Baru.html"
-       class="btn">
-        🚀 Mulai Petualangan
-    </a>
-
-    <div class="badge">Seru!</div>
-
-</div>
-    <!-- Menu 5 -->
-<div class="card">
-
-    <div class="icon">📝</div>
-
-    <h3>Tugas 1</h3>
-
-    <p>
-        Silakan mengerjakan Tugas 1 Kelas 5
-        dengan teliti dan penuh semangat.
-    </p>
-
-    <a href="../kelas-5/tugas/tugas-1.html"
-       class="btn">
-        📚 Buka Tugas 1
-    </a>
-
-    <div class="badge">Tugas Baru</div>
-
-</div>
-</div>
-
-</section>
-    <!-- ===================================================
-     MODAL LOGIN
-=================================================== -->
-
-<div id="loginModal" class="modal">
-
-    <div class="modal-box">
-
-        <div class="lock-icon">
-            🔒
-        </div>
-
-        <h2>Login Data Siswa</h2>
-
-        <p>
-            Masukkan password untuk membuka halaman
-            Data Siswa.
         </p>
 
-        <input
-            type="password"
-            id="passwordInput"
-            placeholder="Masukkan password">
 
-        <div class="modal-button">
+        <!-- =================================================
+             GRID MENU
+        ================================================== -->
 
-            <button
-                class="btn-login"
-                onclick="cekPassword()">
-                Masuk
-            </button>
+        <div class="menu">
 
-            <button
-                class="btn-batal"
-                onclick="tutupLogin()">
-                Batal
-            </button>
+
+            <!-- =================================================
+                 MENU 1
+                 EKSTRAKURIKULER
+            ================================================== -->
+
+            <div class="card">
+
+
+                <div class="icon">
+
+                    📝
+
+                </div>
+
+
+                <h3>
+
+                    Ekstrakurikuler
+
+                </h3>
+
+
+                <p>
+
+                    Pendaftaran peserta didik untuk mengikuti
+                    Ekstrakurikuler.
+
+                </p>
+
+
+                <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLScP0zw373XI43C3hljD2xWxhbqA7dAzZWlTNs4KovG_rzEWuA/alreadyresponded"
+                    target="_blank"
+                    class="btn">
+
+                    📝 Isi Formulir
+
+                </a>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 MENU 2
+                 DATA CKG SD
+            ================================================== -->
+
+            <div class="card">
+
+
+                <div class="icon">
+
+                    📋
+
+                </div>
+
+
+                <h3>
+
+                    Data CKG SD
+
+                </h3>
+
+
+                <p>
+
+                    Kepada Bapak/Ibu Wali Murid dimohon
+                    mengisi Data CKG SD dengan lengkap
+                    dan benar.
+
+                </p>
+
+
+                <a
+                    href="https://forms.gle/MU9N8y8ZMX4VcqkG6"
+                    target="_blank"
+                    class="btn">
+
+                    📄 Isi Data CKG SD
+
+                </a>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 MENU 3
+                 DATA SISWA
+            ================================================== -->
+
+            <div class="card">
+
+
+                <div class="icon">
+
+                    🎓
+
+                </div>
+
+
+                <h3>
+
+                    Data Siswa
+
+                </h3>
+
+
+                <p>
+
+                    Silakan mengisi atau memperbarui data
+                    siswa dengan lengkap dan benar sesuai
+                    identitas peserta didik.
+
+                </p>
+
+
+                <a
+                    href="#"
+                    class="btn"
+                    onclick="bukaLogin(); return false;">
+
+                    👨‍🎓 Data Siswa
+
+                </a>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 MENU 4
+                 PETUALANGAN KELAS 5
+            ================================================== -->
+
+            <div class="card">
+
+
+                <div class="icon">
+
+                    🎮
+
+                </div>
+
+
+                <h3>
+
+                    Petualangan Kelas 5
+
+                </h3>
+
+
+                <p>
+
+                    Yuk ikuti petualangan belajar Kelas 5!
+                    Selesaikan berbagai tantangan dan
+                    permainan pembelajaran yang seru
+                    dan menyenangkan.
+
+                </p>
+
+
+                <a
+                    href="../kelas-5/Petualangan-Kelas-5-Desain-Baru.html"
+                    class="btn">
+
+                    🚀 Mulai Petualangan
+
+                </a>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 MENU 5
+                 TUGAS 1
+            ================================================== -->
+
+            <div class="card">
+
+
+                <div class="icon">
+
+                    📝
+
+                </div>
+
+
+                <h3>
+
+                    Tugas 1
+
+                </h3>
+
+
+                <p>
+
+                    Silakan mengerjakan Tugas 1 Kelas 5
+                    dengan teliti dan penuh semangat.
+
+                </p>
+
+
+                <a
+                    href="../kelas-5/tugas/tugas-1.html"
+                    class="btn">
+
+                    📚 Buka Tugas 1
+
+                </a>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 MENU 6
+                 PENGELOLAAN SAMPAH
+            ================================================== -->
+
+            <div class="card">
+
+
+                <div class="icon">
+
+                    ♻️
+
+                </div>
+
+
+                <h3>
+
+                    Pengelolaan Sampah
+
+                </h3>
+
+
+                <p>
+
+                    Mari belajar mengelola sampah dengan
+                    baik dan benar. Kenali jenis sampah,
+                    pilah sampah organik dan anorganik,
+                    serta belajar menjaga lingkungan.
+
+                </p>
+
+
+                <a
+                    href="../sampah/sampah.html"
+                    class="btn">
+
+                    ♻️ Kelola Sampah
+
+                </a>
+
+
+            </div>
+
 
         </div>
 
-        <div id="pesanError"></div>
+    </section>
+
+
+    <!-- =====================================================
+         MODAL LOGIN DATA SISWA
+    ====================================================== -->
+
+    <div
+        id="loginModal"
+        class="modal">
+
+
+        <!-- =================================================
+             MODAL BOX
+        ================================================== -->
+
+        <div class="modal-box">
+
+
+            <!-- =================================================
+                 ICON LOCK
+            ================================================== -->
+
+            <div class="lock-icon">
+
+                🔒
+
+            </div>
+
+
+            <!-- =================================================
+                 JUDUL LOGIN
+            ================================================== -->
+
+            <h2>
+
+                Login Data Siswa
+
+            </h2>
+
+
+            <!-- =================================================
+                 DESKRIPSI LOGIN
+            ================================================== -->
+
+            <p>
+
+                Masukkan password untuk membuka halaman
+                Data Siswa.
+
+            </p>
+
+
+            <!-- =================================================
+                 INPUT PASSWORD
+            ================================================== -->
+
+            <input
+                type="password"
+                id="passwordInput"
+                placeholder="Masukkan password"
+                autocomplete="off">
+
+
+            <!-- =================================================
+                 TOMBOL LOGIN
+            ================================================== -->
+
+            <div class="modal-button">
+
+
+                <!-- BUTTON MASUK -->
+
+                <button
+                    type="button"
+                    class="btn-login"
+                    onclick="cekPassword()">
+
+                    Masuk
+
+                </button>
+
+
+                <!-- BUTTON BATAL -->
+
+                <button
+                    type="button"
+                    class="btn-batal"
+                    onclick="tutupLogin()">
+
+                    Batal
+
+                </button>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 PESAN ERROR
+            ================================================== -->
+
+            <div id="pesanError"></div>
+
+
+        </div>
 
     </div>
 
-</div>
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
 
     <script>
 
-const passwordBenar = "sdn160123*";
 
-function bukaLogin(){
+        /* =====================================================
+           PASSWORD DATA SISWA
+        ====================================================== */
 
-    document.getElementById("loginModal").style.display="flex";
+        const passwordBenar = "sdn160123*";
 
-    document.getElementById("passwordInput").value="";
 
-    document.getElementById("pesanError").innerHTML="";
+        /* =====================================================
+           FUNGSI MEMBUKA MODAL LOGIN
+        ====================================================== */
 
-    setTimeout(function(){
+        function bukaLogin() {
 
-        document.getElementById("passwordInput").focus();
 
-    },100);
+            // Menampilkan modal
 
-}
+            document.getElementById(
+                "loginModal"
+            ).style.display = "flex";
 
-function tutupLogin(){
 
-    document.getElementById("loginModal").style.display="none";
+            // Mengosongkan input password
 
-}
+            document.getElementById(
+                "passwordInput"
+            ).value = "";
 
-function cekPassword(){
 
-    let password =
-    document.getElementById("passwordInput").value;
+            // Menghapus pesan error
 
-    if(password===passwordBenar){
+            document.getElementById(
+                "pesanError"
+            ).innerHTML = "";
 
-        tutupLogin();
 
-        window.open("../data_siswa/data_siswa1.html","_blank");
+            // Memberikan fokus ke input password
 
-    }else{
+            setTimeout(function () {
 
-        document.getElementById("pesanError").innerHTML =
-        "❌ Password yang Anda masukkan salah.";
+                document.getElementById(
+                    "passwordInput"
+                ).focus();
 
-        document.getElementById("passwordInput").select();
+            }, 100);
 
-    }
+        }
 
-}
 
-document.getElementById("passwordInput").addEventListener("keydown",function(e){
+        /* =====================================================
+           FUNGSI MENUTUP MODAL LOGIN
+        ====================================================== */
 
-    if(e.key==="Enter"){
+        function tutupLogin() {
 
-        cekPassword();
 
-    }
+            document.getElementById(
+                "loginModal"
+            ).style.display = "none";
 
-});
+        }
 
-window.onclick=function(e){
 
-    if(e.target===document.getElementById("loginModal")){
+        /* =====================================================
+           FUNGSI CEK PASSWORD
+        ====================================================== */
 
-        tutupLogin();
+        function cekPassword() {
 
-    }
 
-}
+            // Mengambil nilai password
 
-</script>
+            let password =
+                document.getElementById(
+                    "passwordInput"
+                ).value;
+
+
+            // Membandingkan password
+
+            if (password === passwordBenar) {
+
+
+                // Tutup modal
+
+                tutupLogin();
+
+
+                // Membuka halaman Data Siswa
+
+                window.open(
+                    "../data_siswa/data_siswa1.html",
+                    "_blank"
+                );
+
+
+            } else {
+
+
+                // Menampilkan pesan kesalahan
+
+                document.getElementById(
+                    "pesanError"
+                ).innerHTML =
+                    "❌ Password yang Anda masukkan salah.";
+
+
+                // Memilih teks password
+
+                document.getElementById(
+                    "passwordInput"
+                ).select();
+
+            }
+
+        }
+
+
+        /* =====================================================
+           ENTER UNTUK LOGIN
+        ====================================================== */
+
+        document
+            .getElementById("passwordInput")
+            .addEventListener(
+                "keydown",
+                function (e) {
+
+
+                    if (e.key === "Enter") {
+
+                        cekPassword();
+
+                    }
+
+                }
+            );
+
+
+        /* =====================================================
+           KLIK DI LUAR MODAL
+           UNTUK MENUTUP MODAL
+        ====================================================== */
+
+        window.onclick = function (e) {
+
+
+            const modal =
+                document.getElementById(
+                    "loginModal"
+                );
+
+
+            if (e.target === modal) {
+
+                tutupLogin();
+
+            }
+
+        };
+
+
+    </script>
+
+
 </body>
+
 </html>

@@ -25,21 +25,24 @@
 
     <style>
 
-
         /* =====================================================
            RESET
         ====================================================== */
 
         * {
-
             margin: 0;
-
             padding: 0;
-
             box-sizing: border-box;
-
             font-family: 'Poppins', sans-serif;
+        }
 
+
+        /* =====================================================
+           HTML
+        ====================================================== */
+
+        html {
+            scroll-behavior: smooth;
         }
 
 
@@ -48,13 +51,9 @@
         ====================================================== */
 
         body {
-
             background: #f4f7fb;
-
             padding: 30px;
-
             min-height: 100vh;
-
         }
 
 
@@ -63,11 +62,9 @@
         ====================================================== */
 
         .pengumuman {
-
+            width: 100%;
             max-width: 1100px;
-
-            margin: auto;
-
+            margin: 0 auto;
         }
 
 
@@ -76,17 +73,11 @@
         ====================================================== */
 
         .judul {
-
             text-align: center;
-
             color: #0d47a1;
-
             font-size: 34px;
-
             font-weight: 700;
-
             margin-bottom: 10px;
-
         }
 
 
@@ -95,17 +86,11 @@
         ====================================================== */
 
         .subjudul {
-
             text-align: center;
-
             color: #666;
-
             margin-bottom: 35px;
-
             font-size: 16px;
-
             line-height: 1.6;
-
         }
 
 
@@ -114,14 +99,11 @@
         ====================================================== */
 
         .menu {
-
             display: grid;
-
             grid-template-columns:
                 repeat(auto-fit, minmax(300px, 1fr));
 
             gap: 25px;
-
         }
 
 
@@ -130,7 +112,6 @@
         ====================================================== */
 
         .card {
-
             background: #ffffff;
 
             border-radius: 18px;
@@ -140,7 +121,9 @@
             box-shadow:
                 0 10px 25px rgba(0, 0, 0, 0.08);
 
-            transition: all 0.3s ease;
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
 
             text-align: center;
 
@@ -148,20 +131,23 @@
 
             overflow: hidden;
 
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
         }
 
 
         /* =====================================================
-           EFEK CARD
+           EFEK CARD HOVER
         ====================================================== */
 
         .card:hover {
-
             transform: translateY(-6px);
 
             box-shadow:
                 0 18px 35px rgba(0, 0, 0, 0.13);
-
         }
 
 
@@ -170,13 +156,11 @@
         ====================================================== */
 
         .card::before {
-
             content: "";
 
             position: absolute;
 
             top: 0;
-
             left: 0;
 
             width: 100%;
@@ -189,22 +173,19 @@
                     #1976d2,
                     #42a5f5
                 );
-
         }
 
 
         /* =====================================================
-           ICON
+           ICON CARD
         ====================================================== */
 
         .icon {
-
             font-size: 60px;
 
             margin-bottom: 15px;
 
             line-height: 1;
-
         }
 
 
@@ -213,7 +194,6 @@
         ====================================================== */
 
         .card h3 {
-
             color: #0d47a1;
 
             margin-bottom: 10px;
@@ -221,7 +201,6 @@
             font-size: 21px;
 
             font-weight: 700;
-
         }
 
 
@@ -230,7 +209,6 @@
         ====================================================== */
 
         .card p {
-
             color: #555;
 
             line-height: 1.7;
@@ -239,15 +217,15 @@
 
             font-size: 14px;
 
+            max-width: 420px;
         }
 
 
         /* =====================================================
-           BUTTON
+           BUTTON UTAMA
         ====================================================== */
 
         .btn {
-
             display: inline-block;
 
             padding: 14px 28px;
@@ -267,7 +245,10 @@
 
             font-weight: 600;
 
-            transition: all 0.3s ease;
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                background 0.3s ease;
 
             border: none;
 
@@ -275,6 +256,7 @@
 
             font-size: 14px;
 
+            margin-top: auto;
         }
 
 
@@ -283,7 +265,6 @@
         ====================================================== */
 
         .btn:hover {
-
             transform: scale(1.05);
 
             box-shadow:
@@ -293,7 +274,116 @@
                     210,
                     0.35
                 );
+        }
 
+
+        /* =====================================================
+           BUTTON ACTIVE
+        ====================================================== */
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+
+        /* =====================================================
+           AREA TOMBOL KEMBALI
+        ====================================================== */
+
+        .area-kembali {
+            width: 100%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            margin-top: 35px;
+
+            padding-top: 5px;
+
+            padding-bottom: 10px;
+        }
+
+
+        /* =====================================================
+           TOMBOL KEMBALI
+        ====================================================== */
+
+        .btn-kembali {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            min-width: 210px;
+
+            padding: 14px 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #455a64,
+                    #607d8b
+                );
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            border-radius: 35px;
+
+            font-weight: 600;
+
+            font-size: 14px;
+
+            box-shadow:
+                0 8px 18px rgba(
+                    69,
+                    90,
+                    100,
+                    0.20
+                );
+
+            transition:
+                all 0.3s ease;
+        }
+
+
+        /* =====================================================
+           HOVER TOMBOL KEMBALI
+        ====================================================== */
+
+        .btn-kembali:hover {
+            transform: translateY(-3px);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #37474f,
+                    #546e7a
+                );
+
+            box-shadow:
+                0 12px 24px rgba(
+                    69,
+                    90,
+                    100,
+                    0.30
+                );
+        }
+
+
+        /* =====================================================
+           ACTIVE TOMBOL KEMBALI
+        ====================================================== */
+
+        .btn-kembali:active {
+            transform: scale(0.97);
         }
 
 
@@ -302,7 +392,6 @@
         ====================================================== */
 
         .modal {
-
             display: none;
 
             position: fixed;
@@ -324,7 +413,6 @@
             z-index: 9999;
 
             padding: 20px;
-
         }
 
 
@@ -333,7 +421,6 @@
         ====================================================== */
 
         .modal-box {
-
             width: 400px;
 
             max-width: 92%;
@@ -356,7 +443,6 @@
 
             animation:
                 muncul 0.25s ease;
-
         }
 
 
@@ -367,21 +453,17 @@
         @keyframes muncul {
 
             from {
-
                 transform:
                     translateY(-30px);
 
                 opacity: 0;
-
             }
 
             to {
-
                 transform:
                     translateY(0);
 
                 opacity: 1;
-
             }
 
         }
@@ -392,7 +474,6 @@
         ====================================================== */
 
         .lock-icon {
-
             width: 80px;
 
             height: 80px;
@@ -419,7 +500,6 @@
             justify-content: center;
 
             font-size: 40px;
-
         }
 
 
@@ -428,13 +508,11 @@
         ====================================================== */
 
         .modal-box h2 {
-
             color: #0d47a1;
 
             margin-bottom: 8px;
 
             font-size: 23px;
-
         }
 
 
@@ -443,7 +521,6 @@
         ====================================================== */
 
         .modal-box p {
-
             color: #666;
 
             margin-bottom: 22px;
@@ -451,7 +528,6 @@
             line-height: 1.6;
 
             font-size: 14px;
-
         }
 
 
@@ -460,7 +536,6 @@
         ====================================================== */
 
         .modal-box input {
-
             width: 100%;
 
             padding: 14px 15px;
@@ -475,7 +550,6 @@
             font-size: 16px;
 
             transition: 0.25s;
-
         }
 
 
@@ -484,7 +558,6 @@
         ====================================================== */
 
         .modal-box input:focus {
-
             border-color: #1976d2;
 
             box-shadow:
@@ -495,7 +568,6 @@
                     210,
                     0.10
                 );
-
         }
 
 
@@ -504,13 +576,11 @@
         ====================================================== */
 
         .modal-button {
-
             display: flex;
 
             gap: 12px;
 
             margin-top: 22px;
-
         }
 
 
@@ -519,7 +589,6 @@
         ====================================================== */
 
         .modal-button button {
-
             flex: 1;
 
             padding: 14px;
@@ -535,7 +604,6 @@
             font-weight: 600;
 
             transition: 0.3s;
-
         }
 
 
@@ -544,11 +612,9 @@
         ====================================================== */
 
         .btn-login {
-
             background: #1976d2;
 
             color: #ffffff;
-
         }
 
 
@@ -557,9 +623,7 @@
         ====================================================== */
 
         .btn-login:hover {
-
             background: #1565c0;
-
         }
 
 
@@ -568,11 +632,9 @@
         ====================================================== */
 
         .btn-batal {
-
             background: #ececec;
 
             color: #333;
-
         }
 
 
@@ -581,9 +643,7 @@
         ====================================================== */
 
         .btn-batal:hover {
-
             background: #dcdcdc;
-
         }
 
 
@@ -592,7 +652,6 @@
         ====================================================== */
 
         #pesanError {
-
             margin-top: 15px;
 
             color: #d32f2f;
@@ -600,7 +659,6 @@
             font-size: 14px;
 
             min-height: 20px;
-
         }
 
 
@@ -611,41 +669,43 @@
         @media (max-width: 768px) {
 
             body {
-
                 padding: 15px;
-
             }
 
 
             .judul {
-
                 font-size: 28px;
-
             }
 
 
             .subjudul {
-
                 font-size: 14px;
 
                 margin-bottom: 25px;
-
             }
 
 
             .menu {
-
                 grid-template-columns: 1fr;
 
                 gap: 18px;
-
             }
 
 
             .card {
-
                 padding: 25px 20px;
+            }
 
+
+            .area-kembali {
+                margin-top: 25px;
+            }
+
+
+            .btn-kembali {
+                width: 100%;
+
+                max-width: 320px;
             }
 
         }
@@ -658,54 +718,68 @@
         @media (max-width: 480px) {
 
             body {
-
                 padding: 10px;
-
             }
 
 
             .judul {
-
                 font-size: 24px;
+            }
 
+
+            .subjudul {
+                font-size: 13px;
             }
 
 
             .icon {
-
                 font-size: 52px;
-
             }
 
 
             .card h3 {
-
                 font-size: 19px;
-
             }
 
 
             .card p {
-
                 font-size: 13px;
-
             }
 
 
             .btn {
+                padding:
+                    12px 22px;
 
+                font-size: 13px;
+            }
+
+
+            .btn-kembali {
                 padding:
                     12px 22px;
 
                 font-size: 13px;
 
+                min-width: 0;
+
+                width: 100%;
             }
 
 
             .modal-box {
+                padding:
+                    25px 20px;
+            }
 
-                padding: 25px 20px;
 
+            .modal-button {
+                flex-direction: column;
+            }
+
+
+            .modal-button button {
+                width: 100%;
             }
 
         }
@@ -730,9 +804,7 @@
         ================================================== -->
 
         <h1 class="judul">
-
             📢 Pengumuman
-
         </h1>
 
 
@@ -741,9 +813,7 @@
         ================================================== -->
 
         <p class="subjudul">
-
             Silakan pilih menu sesuai kebutuhan Anda.
-
         </p>
 
 
@@ -761,38 +831,28 @@
 
             <div class="card">
 
-
                 <div class="icon">
-
                     📝
-
                 </div>
 
-
                 <h3>
-
                     Ekstrakurikuler
-
                 </h3>
 
-
                 <p>
-
                     Pendaftaran peserta didik untuk mengikuti
                     Ekstrakurikuler.
-
                 </p>
-
 
                 <a
                     href="https://docs.google.com/forms/d/e/1FAIpQLScP0zw373XI43C3hljD2xWxhbqA7dAzZWlTNs4KovG_rzEWuA/alreadyresponded"
                     target="_blank"
+                    rel="noopener noreferrer"
                     class="btn">
 
                     📝 Isi Formulir
 
                 </a>
-
 
             </div>
 
@@ -804,39 +864,29 @@
 
             <div class="card">
 
-
                 <div class="icon">
-
                     📋
-
                 </div>
 
-
                 <h3>
-
                     Data CKG SD
-
                 </h3>
 
-
                 <p>
-
                     Kepada Bapak/Ibu Wali Murid dimohon
                     mengisi Data CKG SD dengan lengkap
                     dan benar.
-
                 </p>
-
 
                 <a
                     href="https://forms.gle/MU9N8y8ZMX4VcqkG6"
                     target="_blank"
+                    rel="noopener noreferrer"
                     class="btn">
 
                     📄 Isi Data CKG SD
 
                 </a>
-
 
             </div>
 
@@ -848,29 +898,19 @@
 
             <div class="card">
 
-
                 <div class="icon">
-
                     🎓
-
                 </div>
 
-
                 <h3>
-
                     Data Siswa
-
                 </h3>
 
-
                 <p>
-
                     Silakan mengisi atau memperbarui data
                     siswa dengan lengkap dan benar sesuai
                     identitas peserta didik.
-
                 </p>
-
 
                 <a
                     href="#"
@@ -881,127 +921,30 @@
 
                 </a>
 
-
             </div>
 
 
             <!-- =================================================
                  MENU 4
-                 PETUALANGAN KELAS 5
-            ================================================== -->
-
-            <div class="card">
-
-
-                <div class="icon">
-
-                    🎮
-
-                </div>
-
-
-                <h3>
-
-                    Petualangan Kelas 5
-
-                </h3>
-
-
-                <p>
-
-                    Yuk ikuti petualangan belajar Kelas 5!
-                    Selesaikan berbagai tantangan dan
-                    permainan pembelajaran yang seru
-                    dan menyenangkan.
-
-                </p>
-
-
-                <a
-                    href="../kelas-5/Petualangan-Kelas-5-Desain-Baru.html"
-                    class="btn">
-
-                    🚀 Mulai Petualangan
-
-                </a>
-
-
-            </div>
-
-
-            <!-- =================================================
-                 MENU 5
-                 TUGAS 1
-            ================================================== -->
-
-            <div class="card">
-
-
-                <div class="icon">
-
-                    📝
-
-                </div>
-
-
-                <h3>
-
-                    Tugas 1
-
-                </h3>
-
-
-                <p>
-
-                    Silakan mengerjakan Tugas 1 Kelas 5
-                    dengan teliti dan penuh semangat.
-
-                </p>
-
-
-                <a
-                    href="../kelas-5/tugas/tugas-1.html"
-                    class="btn">
-
-                    📚 Buka Tugas 1
-
-                </a>
-
-
-            </div>
-
-
-            <!-- =================================================
-                 MENU 6
                  PENGELOLAAN SAMPAH
             ================================================== -->
 
             <div class="card">
 
-
                 <div class="icon">
-
                     ♻️
-
                 </div>
 
-
                 <h3>
-
                     Pengelolaan Sampah
-
                 </h3>
 
-
                 <p>
-
                     Mari belajar mengelola sampah dengan
                     baik dan benar. Kenali jenis sampah,
                     pilah sampah organik dan anorganik,
                     serta belajar menjaga lingkungan.
-
                 </p>
-
 
                 <a
                     href="../sampah/sampah.html"
@@ -1011,11 +954,28 @@
 
                 </a>
 
-
             </div>
 
 
         </div>
+
+
+        <!-- =================================================
+             TOMBOL KEMBALI KE INDEX.HTML
+        ================================================== -->
+
+        <div class="area-kembali">
+
+            <a
+                href="../index.html"
+                class="btn-kembali">
+
+              Kembali
+
+            </a>
+
+        </div>
+
 
     </section>
 
@@ -1041,9 +1001,7 @@
             ================================================== -->
 
             <div class="lock-icon">
-
                 🔒
-
             </div>
 
 
@@ -1052,9 +1010,7 @@
             ================================================== -->
 
             <h2>
-
                 Login Data Siswa
-
             </h2>
 
 
@@ -1063,10 +1019,8 @@
             ================================================== -->
 
             <p>
-
                 Masukkan password untuk membuka halaman
                 Data Siswa.
-
             </p>
 
 
@@ -1147,7 +1101,6 @@
 
         function bukaLogin() {
 
-
             // Menampilkan modal
 
             document.getElementById(
@@ -1188,7 +1141,6 @@
 
         function tutupLogin() {
 
-
             document.getElementById(
                 "loginModal"
             ).style.display = "none";
@@ -1201,7 +1153,6 @@
         ====================================================== */
 
         function cekPassword() {
-
 
             // Mengambil nilai password
 
@@ -1261,7 +1212,6 @@
                 "keydown",
                 function (e) {
 
-
                     if (e.key === "Enter") {
 
                         cekPassword();
@@ -1279,7 +1229,6 @@
 
         window.onclick = function (e) {
 
-
             const modal =
                 document.getElementById(
                     "loginModal"
@@ -1293,6 +1242,24 @@
             }
 
         };
+
+
+        /* =====================================================
+           TOMBOL ESC UNTUK MENUTUP MODAL
+        ====================================================== */
+
+        document.addEventListener(
+            "keydown",
+            function (e) {
+
+                if (e.key === "Escape") {
+
+                    tutupLogin();
+
+                }
+
+            }
+        );
 
 
     </script>

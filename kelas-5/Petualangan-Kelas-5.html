@@ -144,199 +144,181 @@ async function cekLogin(){
     try{
 
         const {
-
             data,
             error
-
-        } =
-            await supabaseClient
-                .auth
-                .getSession();
-
+        } = await supabaseClient
+            .auth
+            .getSession();
 
         if(error){
-
-            console.error(
-                "Gagal mengecek login:",
-                error
-            );
-
-            window.location.replace(
-                "login.html"
-            );
-
-            return;
-
+            console.warn("Gagal mengecek session Supabase:", error);
         }
-
-
-        if(
-            !data ||
-            !data.session
-        ){
-
-            window.location.replace(
-                "login.html"
-            );
-
-            return;
-
-        }
-
-
-        const user =
-            data.session.user;
-
-
-        siswaLogin =
-            user;
-
-
-        namaSiswa =
-            ambilNamaSiswa(
-                user
-            );
-
-
-        usernameSiswa =
-            ambilUsername(
-                user
-            );
-
 
         /* =================================================
-           DATA DARI LOGIN / SESSION STORAGE
+           LOGIN OPSIONAL
+           Tidak ada redirect ke login.html.
         ================================================= */
 
-        try{
+        const user =
+            data && data.session
+                ? data.session.user
+                : null;
 
-            const dataLogin =
-                JSON.parse(
-                    sessionStorage.getItem(
-                        "siswa_login"
-                    )
-                );
+        if(user){
 
-            if(dataLogin){
+            siswaLogin = user;
 
-                if(
-                    dataLogin.nama &&
-                    dataLogin.nama.trim() !== ""
-                ){
+            namaSiswa =
+                ambilNamaSiswa(user);
 
-                    namaSiswa =
-                        dataLogin.nama;
+            usernameSiswa =
+                ambilUsername(user);
 
-                }
+            try{
 
-                if(
-                    dataLogin.username
-                ){
+                const dataLogin =
+                    JSON.parse(
+                        sessionStorage.getItem("siswa_login")
+                    );
 
-                    usernameSiswa =
-                        dataLogin.username;
+                if(dataLogin){
+
+                    if(
+                        dataLogin.nama &&
+                        dataLogin.nama.trim() !== ""
+                    ){
+                        namaSiswa = dataLogin.nama;
+                    }
+
+                    if(dataLogin.username){
+                        usernameSiswa = dataLogin.username;
+                    }
 
                 }
 
             }
+            catch(error){
+                console.warn(
+                    "Session siswa tidak dapat dibaca:",
+                    error
+                );
+            }
 
-        }
-        catch(error){
+            window.currentSiswa = {
+                id: user.id,
+                nama: namaSiswa,
+                username: usernameSiswa
+            };
 
-            console.warn(
-                "Session siswa tidak dapat dibaca:",
-                error
+            const welcomeName =
+                document.getElementById("welcomeName");
+
+            if(welcomeName){
+                welcomeName.textContent = namaSiswa;
+            }
+
+            const studentInfo =
+                document.getElementById("studentInfo");
+
+            if(studentInfo){
+                studentInfo.textContent =
+                    `👤 ${namaSiswa}`;
+            }
+
+            document.documentElement.classList.add(
+                "authenticated"
             );
 
-        }
-
-
-        /* =================================================
-           DATA GLOBAL SISWA
-        ================================================= */
-
-        window.currentSiswa = {
-
-            id:
-                user.id,
-
-            nama:
-                namaSiswa,
-
-            username:
-                usernameSiswa
-
-        };
-
-
-        /* =================================================
-           TAMPILKAN NAMA
-        ================================================= */
-
-        const welcomeName =
-            document.getElementById(
-                "welcomeName"
+            console.log(
+                "Session aktif:",
+                namaSiswa
             );
 
-        if(welcomeName){
-
-            welcomeName.textContent =
-                namaSiswa;
+            /* Presence hanya untuk siswa yang login. */
+            mulaiPresence();
 
         }
+        else{
 
+            /* =============================================
+               MODE TANPA LOGIN
+               Halaman tetap dapat digunakan.
+            ============================================= */
 
-        const studentInfo =
-            document.getElementById(
-                "studentInfo"
+            siswaLogin = null;
+            namaSiswa = "Siswa";
+            usernameSiswa = "";
+
+            window.currentSiswa = {
+                id: null,
+                nama: "Siswa",
+                username: ""
+            };
+
+            const welcomeName =
+                document.getElementById("welcomeName");
+
+            if(welcomeName){
+                welcomeName.textContent = "Siswa";
+            }
+
+            const studentInfo =
+                document.getElementById("studentInfo");
+
+            if(studentInfo){
+                studentInfo.textContent =
+                    "👤 Mode tanpa login";
+            }
+
+            document.documentElement.classList.add(
+                "authenticated"
             );
 
-        if(studentInfo){
-
-            studentInfo.textContent =
-                `👤 ${namaSiswa}`;
-
+            console.log(
+                "Halaman dibuka tanpa login."
+            );
         }
-
-
-        /* =================================================
-           TAMPILKAN HALAMAN
-        ================================================= */
-
-        document.documentElement.classList.add(
-            "authenticated"
-        );
-
-
-        console.log(
-            "Login berhasil:",
-            namaSiswa
-        );
-
-
-        /* =================================================
-           MULAI PRESENCE
-        ================================================= */
-
-        mulaiPresence();
 
     }
     catch(error){
 
-        console.error(
-            "Kesalahan login:",
+        /* Jika Supabase gagal, halaman tetap dibuka. */
+        console.warn(
+            "Supabase bermasalah. Menggunakan mode tanpa login:",
             error
         );
 
-        window.location.replace(
-            "login.html"
-        );
+        siswaLogin = null;
+        namaSiswa = "Siswa";
+        usernameSiswa = "";
 
+        window.currentSiswa = {
+            id: null,
+            nama: "Siswa",
+            username: ""
+        };
+
+        const welcomeName =
+            document.getElementById("welcomeName");
+
+        if(welcomeName){
+            welcomeName.textContent = "Siswa";
+        }
+
+        const studentInfo =
+            document.getElementById("studentInfo");
+
+        if(studentInfo){
+            studentInfo.textContent =
+                "👤 Mode tanpa login";
+        }
+
+        document.documentElement.classList.add(
+            "authenticated"
+        );
     }
 
 }
-
-
 /* =====================================================
    CEK SESSION SAAT HALAMAN DIBUKA
 ===================================================== */
@@ -362,13 +344,31 @@ supabaseClient
             );
 
 
-            if(
-                event === "SIGNED_OUT"
-            ){
+            if(event === "SIGNED_OUT"){
 
-                window.location.replace(
-                    "login.html"
-                );
+                siswaLogin = null;
+
+                if(siswaPresenceChannel){
+                    try{
+                        await siswaPresenceChannel.untrack();
+                    }catch(e){}
+
+                    try{
+                        await supabaseClient.removeChannel(
+                            siswaPresenceChannel
+                        );
+                    }catch(e){}
+
+                    siswaPresenceChannel = null;
+                }
+
+                const studentInfo =
+                    document.getElementById("studentInfo");
+
+                if(studentInfo){
+                    studentInfo.textContent =
+                        "👤 Mode tanpa login";
+                }
 
             }
 
@@ -421,7 +421,7 @@ body{
 
 body{
 
-    display:none;
+    display:block;
 
     min-height:100vh;
 
@@ -446,9 +446,7 @@ body{
 
 
 html.authenticated body{
-
     display:block;
-
 }
 
 
@@ -2105,9 +2103,13 @@ if(logoutBtn){
                 );
 
 
-                window.location.replace(
-                    "login.html"
-                );
+                const studentInfo =
+                    document.getElementById("studentInfo");
+
+                if(studentInfo){
+                    studentInfo.textContent =
+                        "👤 Mode tanpa login";
+                }
 
             }
             catch(error){

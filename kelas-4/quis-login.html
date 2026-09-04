@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -39,7 +40,6 @@ body{
 
 /* =========================================================
    LATAR INPUT IDENTITAS
-   Khusus tampilan awal agar card berada tepat di tengah.
    ========================================================= */
 
 body:has(#identitas:not(.hidden)){
@@ -150,8 +150,6 @@ h1{
     0 8px 20px rgba(86,45,20,.10);
 }
 
-/* Hiasan bagian atas */
-
 #identitas:before{
   content:"";
   display:block;
@@ -174,8 +172,6 @@ h1{
   padding-top:18px;
 }
 
-/* Isi form */
-
 #identitas .identity-content{
   padding:4px 34px 30px;
 }
@@ -197,8 +193,6 @@ h1{
   max-width:390px;
 }
 
-/* Ikon mangkuk */
-
 .identity-icon{
   width:72px;
   height:72px;
@@ -214,8 +208,6 @@ h1{
     inset 0 2px 4px rgba(255,255,255,.8);
   font-size:38px;
 }
-
-/* Form */
 
 .form-grid{
   display:grid;
@@ -280,8 +272,6 @@ select:hover{
   border-color:#d7ad7d;
 }
 
-/* Tombol */
-
 .identity-action{
   margin-top:22px;
 }
@@ -312,8 +302,6 @@ select:hover{
   transform:translateY(0);
 }
 
-/* Informasi bawah */
-
 .identity-note{
   margin:20px auto 0;
   padding:11px 14px;
@@ -326,8 +314,6 @@ select:hover{
   text-align:center;
 }
 
-/* Dekorasi kuliner */
-
 .food-decoration{
   text-align:center;
   margin-top:18px;
@@ -337,7 +323,7 @@ select:hover{
 }
 
 /* =========================================================
-   KOMPONEN KUIS — TIDAK DIUBAH FUNGSINYA
+   KOMPONEN KUIS
    ========================================================= */
 
 .btn{
@@ -347,12 +333,26 @@ select:hover{
   font-weight:900;
   font-size:16px;
   cursor:pointer;
-  transition:.2s;
+  transition:
+    transform .2s,
+    box-shadow .2s,
+    opacity .2s;
   box-shadow:0 5px 12px rgba(0,0,0,.10);
 }
 
 .btn:hover{
   transform:translateY(-2px);
+}
+
+.btn:active{
+  transform:translateY(0);
+}
+
+.btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
 }
 
 .primary{
@@ -400,65 +400,217 @@ select:hover{
   border:1px solid #efd5a7;
 }
 
+/* =========================================================
+   KOTAK KUIS FLOATING
+   ========================================================= */
+
+#kuis{
+  width:min(760px,100%);
+  margin:30px auto 0;
+  padding:24px;
+  background:rgba(255,253,248,.985);
+  border:1px solid rgba(234,215,188,.95);
+  border-radius:28px;
+  box-shadow:
+    0 25px 70px rgba(86,45,20,.20),
+    0 8px 25px rgba(86,45,20,.10);
+  position:relative;
+  overflow:hidden;
+}
+
+#kuis:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:7px;
+  background:linear-gradient(
+    90deg,
+    #9b4d20,
+    #d96b26,
+    #f4b942,
+    #2e8b57
+  );
+}
+
+#kuis .info{
+  margin-top:3px;
+}
+
 .progress-wrap{
-  height:12px;
+  height:11px;
   background:#eadfd4;
   border-radius:99px;
   overflow:hidden;
-  margin:17px 0 22px;
+  margin:17px 0 25px;
 }
 
 .progress{
   height:100%;
-  background:linear-gradient(90deg,#9b4d20,#e67e22,#f4b942);
+  background:linear-gradient(
+    90deg,
+    #9b4d20,
+    #e67e22,
+    #f4b942
+  );
   width:0;
   transition:.3s;
+}
+
+/* =========================================================
+   AREA SOAL
+   ========================================================= */
+
+#soalArea{
+  width:min(650px,100%);
+  margin:0 auto;
 }
 
 .question-no{
   color:#9b4d20;
   font-weight:900;
+  font-size:14px;
+  letter-spacing:.5px;
+  margin-bottom:8px;
 }
 
 .question{
-  font-size:22px;
-  line-height:1.5;
+  background:#fffaf0;
+  border:2px solid #efdfc6;
+  border-radius:20px;
+  padding:20px 22px;
+  font-size:21px;
+  line-height:1.55;
   font-weight:850;
-  margin:10px 0 20px;
+  margin:0 0 18px;
+  box-shadow:
+    0 8px 20px rgba(120,65,28,.06);
 }
 
 .answers{
   display:grid;
-  gap:12px;
+  gap:11px;
 }
 
 .answer{
   border:2px solid #eadfd4;
   border-radius:16px;
-  padding:14px;
+  padding:13px 15px;
   cursor:pointer;
   display:flex;
   gap:12px;
   align-items:flex-start;
-  transition:.2s;
+  transition:
+    .2s;
   background:#fff;
 }
 
 .answer:hover{
   border-color:#e5b477;
   background:#fff8eb;
+  transform:translateY(-1px);
+  box-shadow:0 5px 12px rgba(120,65,28,.07);
 }
 
 .answer input{
   width:auto;
   margin-top:4px;
   accent-color:#9b4d20;
+  flex:none;
 }
+
+.answer span{
+  line-height:1.5;
+}
+
+/* =========================================================
+   NAVIGASI SOAL
+   ========================================================= */
 
 .nav-row{
   display:flex;
-  justify-content:flex-end;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
   margin-top:22px;
+}
+
+.nav-left,
+.nav-right{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.nav-btn{
+  min-width:145px;
+  padding:13px 18px;
+  border-radius:15px;
+  font-weight:900;
+  font-size:15px;
+  border:0;
+  cursor:pointer;
+  transition:
+    transform .2s,
+    box-shadow .2s,
+    opacity .2s;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:7px;
+}
+
+.nav-btn:hover{
+  transform:translateY(-2px);
+}
+
+.nav-btn:active{
+  transform:translateY(0);
+}
+
+.nav-btn.previous{
+  background:linear-gradient(
+    135deg,
+    #eadfd4,
+    #f4e9dc
+  );
+  color:#5b463a;
+  border:1px solid #ddcbbb;
+  box-shadow:0 5px 12px rgba(80,45,25,.09);
+}
+
+.nav-btn.next{
+  background:linear-gradient(
+    135deg,
+    #9b4d20,
+    #d96b26,
+    #e58a35
+  );
+  color:#fff;
+  box-shadow:
+    0 7px 16px rgba(155,77,32,.24);
+}
+
+.nav-btn.next:hover{
+  box-shadow:
+    0 10px 22px rgba(155,77,32,.30);
+}
+
+.nav-btn.previous:disabled{
+  opacity:.38;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
+}
+
+/* =========================================================
+   HASIL
+   ========================================================= */
+
+#hasil{
+  width:min(760px,100%);
+  margin:30px auto 0;
 }
 
 .result-score{
@@ -490,7 +642,6 @@ select:hover{
   font-size:24px;
   display:block;
 }
-
 
 .note{
   font-size:13px;
@@ -551,8 +702,36 @@ select:hover{
     padding:18px;
   }
 
+  #kuis{
+    width:100%;
+    padding:18px;
+    margin-top:20px;
+    border-radius:22px;
+  }
+
+  #soalArea{
+    width:100%;
+  }
+
   .question{
     font-size:19px;
+    padding:17px;
+  }
+
+  .nav-row{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .nav-left,
+  .nav-right{
+    width:100%;
+  }
+
+  .nav-btn{
+    flex:1;
+    min-width:0;
+    width:100%;
   }
 
   th:nth-child(3),
@@ -561,7 +740,9 @@ select:hover{
   }
 }
 
-/* Layar sangat kecil */
+/* =========================================================
+   LAYAR SANGAT KECIL
+   ========================================================= */
 
 @media(max-width:380px){
 
@@ -588,6 +769,24 @@ select:hover{
   #identitas h2{
     font-size:20px;
   }
+
+  #kuis{
+    padding:15px;
+  }
+
+  .question{
+    font-size:18px;
+    padding:15px;
+  }
+
+  .answer{
+    padding:12px;
+  }
+
+  .nav-btn{
+    font-size:14px;
+    padding:12px 10px;
+  }
 }
 </style>
 </head>
@@ -601,17 +800,24 @@ select:hover{
        ===================================================== -->
 
   <header class="header">
-    <span class="badge">🏫 UPT SDN 160 GRESIK</span>
-    <h1>🧠 Kuis Seru Bilangan</h1>
+
+    <span class="badge">
+      🏫 UPT SDN 160 GRESIK
+    </span>
+
+    <h1>
+      🧠 Kuis Seru Bilangan
+    </h1>
+
     <p class="subtitle">
       Perbandingan & Urutan Bilangan sampai 100.000
     </p>
+
   </header>
 
 
   <!-- =====================================================
        INPUT IDENTITAS SISWA
-       BAGIAN YANG DIDESAIN ULANG
        ===================================================== -->
 
   <section id="identitas" class="card">
@@ -622,7 +828,9 @@ select:hover{
         🍲
       </div>
 
-      <h2>🍽️ Yuk, Kenalkan Dirimu!</h2>
+      <h2>
+        🍽️ Yuk, Kenalkan Dirimu!
+      </h2>
 
       <p class="identity-subtitle">
         Sebelum memulai petualangan kuliner matematika,
@@ -632,42 +840,53 @@ select:hover{
       <div class="form-grid">
 
         <div class="field">
+
           <label for="nama">
             👤 Nama Siswa
           </label>
 
           <div class="input-wrap">
-           
+
+          
             <input
               id="nama"
               placeholder="Tulis nama lengkap"
               autocomplete="name"
             >
+
           </div>
+
         </div>
 
 
         <div class="field">
+
           <label for="kelas">
             🏫 Kelas
           </label>
 
           <div class="input-wrap">
+
             
+
             <input
               id="kelas"
-              placeholder="Contoh: IV"
+              placeholder="Contoh: V-A"
             >
+
           </div>
+
         </div>
 
 
         <div class="field">
+
           <label for="absen">
             🔢 Nomor Absen
           </label>
 
           <div class="input-wrap">
+
             
             <input
               id="absen"
@@ -675,29 +894,38 @@ select:hover{
               min="1"
               placeholder="Masukkan nomor absen"
             >
+
           </div>
+
         </div>
 
       </div>
 
 
       <div class="identity-action">
+
         <button
           class="btn primary"
           onclick="mulai()"
         >
           🍜 Mulai Petualangan
         </button>
+
       </div>
 
 
       <div class="identity-note">
+
         🥢 Pastikan nama, kelas, dan nomor absen
         sudah benar sebelum melanjutkan.
+
       </div>
 
+
       <div class="food-decoration">
+
         🌾 Kuliner Nusantara • Belajar • Bermain • Berprestasi 🌾
+
       </div>
 
     </div>
@@ -712,13 +940,23 @@ select:hover{
   <section id="kuis" class="card hidden">
 
     <div class="info">
+
       <span id="siswaInfo"></span>
+
       <span id="counter"></span>
+
     </div>
 
+
     <div class="progress-wrap">
-      <div id="progress" class="progress"></div>
+
+      <div
+        id="progress"
+        class="progress"
+      ></div>
+
     </div>
+
 
     <div id="soalArea"></div>
 
@@ -729,14 +967,18 @@ select:hover{
        HASIL
        ===================================================== -->
 
-  <section id="hasil" class="card hidden"></section>
-
-
+  <section
+    id="hasil"
+    class="card hidden"
+  ></section>
 
 </div>
 
 
-<div id="toast" class="toast hidden"></div>
+<div
+  id="toast"
+  class="toast hidden"
+></div>
 
 
 <!-- =========================================================
@@ -863,7 +1105,12 @@ const soal = [
   },
   {
     "q":"Toko A menjual 45.750 pensil, Toko B menjual 54.570 pensil, dan Toko C menjual 45.705 pensil. Toko mana yang menjual pensil paling banyak?",
-    "a":["Toko A","Toko B","Toko C","Semua sama banyak"],
+    "a":[
+      "Toko A",
+      "Toko B",
+      "Toko C",
+      "Semua sama banyak"
+    ],
     "k":1
   },
   {
@@ -911,9 +1158,11 @@ function acak(arr){
 
     [arr[i],arr[j]]=
     [arr[j],arr[i]];
+
   }
 
   return arr;
+
 }
 
 
@@ -964,6 +1213,7 @@ function mulai(){
     );
 
     return;
+
   }
 
 
@@ -981,7 +1231,9 @@ function mulai(){
       })
     );
 
+
     ops=acak(ops);
+
 
     return {
       ...s,
@@ -995,9 +1247,12 @@ function mulai(){
   document
     .getElementById("identitas")
     .classList.add("hidden");
+
+
   document
     .getElementById("hasil")
     .classList.add("hidden");
+
 
   document
     .getElementById("kuis")
@@ -1005,6 +1260,7 @@ function mulai(){
 
 
   renderSoal();
+
 }
 
 
@@ -1047,9 +1303,11 @@ function renderSoal(){
       SOAL ${index+1}
     </div>
 
+
     <div class="question">
       ${escapeHTML(s.q)}
     </div>
+
 
     <div class="answers">
 
@@ -1061,6 +1319,7 @@ function renderSoal(){
             type="radio"
             name="jawaban"
             value="${i}"
+            ${jawabanDipilih[index]===i ? "checked" : ""}
           >
 
           <span>
@@ -1074,30 +1333,49 @@ function renderSoal(){
 
     </div>
 
+
     <div class="nav-row">
 
-      <button
-        class="btn primary"
-        onclick="nextSoal()"
-      >
-        ${
-          index===bankSoal.length-1
-          ?"🏁 Selesai"
-          :"➡️ Berikutnya"
-        }
-      </button>
+      <div class="nav-left">
+
+        <button
+          class="nav-btn previous"
+          onclick="soalSebelumnya()"
+          ${index===0 ? "disabled" : ""}
+        >
+          ⬅️ Sebelumnya
+        </button>
+
+      </div>
+
+
+      <div class="nav-right">
+
+        <button
+          class="nav-btn next"
+          onclick="nextSoal()"
+        >
+          ${
+            index===bankSoal.length-1
+            ?"🏁 Selesai"
+            :"➡️ Berikutnya"
+          }
+        </button>
+
+      </div>
 
     </div>
 
   `;
+
 }
 
 
 /* =========================================================
-   SOAL BERIKUTNYA
+   SIMPAN JAWABAN SAAT BERPINDAH
    ========================================================= */
 
-function nextSoal(){
+function simpanJawaban(){
 
   const el=
     document.querySelector(
@@ -1107,23 +1385,74 @@ function nextSoal(){
 
   if(!el){
 
+    return false;
+
+  }
+
+
+  jawabanDipilih[index]=
+    Number(el.value);
+
+
+  return true;
+
+}
+
+
+/* =========================================================
+   SOAL SEBELUMNYA
+   ========================================================= */
+
+function soalSebelumnya(){
+
+  if(index<=0){
+
+    return;
+
+  }
+
+
+  const el=
+    document.querySelector(
+      'input[name="jawaban"]:checked'
+    );
+
+
+  if(el){
+
+    jawabanDipilih[index]=
+      Number(el.value);
+
+  }
+
+
+  index--;
+
+  renderSoal();
+
+}
+
+
+/* =========================================================
+   SOAL BERIKUTNYA
+   ========================================================= */
+
+function nextSoal(){
+
+  const berhasil=
+    simpanJawaban();
+
+
+  if(!berhasil){
+
     toast(
       "⚠️ Pilih salah satu jawaban terlebih dahulu."
     );
 
     return;
+
   }
 
-
-  const v=Number(el.value);
-
-
-  if(v===bankSoal[index].k){
-    benar++;
-  }
-
-
-  jawabanDipilih.push(v);
 
   index++;
 
@@ -1134,9 +1463,44 @@ function nextSoal(){
 
   }else{
 
-    selesai();
+    hitungNilai();
 
   }
+
+}
+
+
+/* =========================================================
+   HITUNG NILAI
+
+   Digunakan setelah seluruh soal selesai.
+   ========================================================= */
+
+function hitungNilai(){
+
+  benar=0;
+
+
+  for(
+    let i=0;
+    i<bankSoal.length;
+    i++
+  ){
+
+    if(
+      jawabanDipilih[i]===
+      bankSoal[i].k
+    ){
+
+      benar++;
+
+    }
+
+  }
+
+
+  selesai();
+
 }
 
 
@@ -1274,10 +1638,12 @@ function selesai(){
 
   const total=bankSoal.length;
 
+
   const nilai=
     Math.round(
       benar/total*100
     );
+
 
   const persen=
     Math.round(
@@ -1333,7 +1699,6 @@ function selesai(){
 
   }
 
-
 }
 
 
@@ -1359,37 +1724,59 @@ function tampilkanHasil(data){
 
     <div class="center">
 
-      <h2>🎉 Kuis Selesai!</h2>
+      <h2>
+        🎉 Kuis Selesai!
+      </h2>
 
-      <p>${pesan}</p>
+
+      <p>
+        ${pesan}
+      </p>
+
 
       <div class="result-score">
         ${data.nilai}
       </div>
 
+
       <div class="stats">
 
         <div class="stat">
+
           <b>
             ${data.benar}/${data.total}
           </b>
+
           Jawaban Benar
+
         </div>
 
+
         <div class="stat">
+
           <b>
             ${data.persen}%
           </b>
+
           Persentase Benar
+
         </div>
 
       </div>
 
+
       <p>
-        <b>${escapeHTML(data.nama)}</b>
+
+        <b>
+          ${escapeHTML(data.nama)}
+        </b>
+
         • Kelas ${escapeHTML(data.kelas)}
+
         • Absen ${escapeHTML(data.absen)}
+
       </p>
+
 
       <div class="actions">
 
@@ -1399,6 +1786,7 @@ function tampilkanHasil(data){
         >
           🔄 Kerjakan Lagi
         </button>
+
 
         <button
           class="btn gray"
@@ -1419,11 +1807,6 @@ function tampilkanHasil(data){
     .classList.remove("hidden");
 
 }
-
-
-
-
-
 
 
 /* =========================================================
@@ -1464,11 +1847,9 @@ function ulang(){
    ========================================================= */
 
 
-
 /* =========================================================
    HAPUS DATA LOKAL
    ========================================================= */
-
 
 
 /* =========================================================
@@ -1484,6 +1865,7 @@ function toast(msg){
 
 
   t.textContent=msg;
+
 
   t.classList.remove(
     "hidden"
@@ -1515,3 +1897,4 @@ function toast(msg){
 
 </body>
 </html>
+

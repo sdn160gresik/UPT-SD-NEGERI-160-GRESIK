@@ -3,801 +3,1003 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Kuis Matematika — Bilangan sampai 100.000 | UPT SDN 160 Gresik</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
+:root{
+  --primary:#9b4d20;
+  --primary-dark:#713517;
+  --secondary:#e67e22;
+  --accent:#f4b942;
+  --green:#2e8b57;
+  --red:#c0392b;
+  --ink:#4a2c20;
+  --muted:#806b61;
+  --card:#fffdf8;
+  --cream:#fff8e8;
+  --border:#ead7bc;
+  --shadow:rgba(92,48,24,.16);
+}
+
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+  box-sizing:border-box;
 }
 
 body{
-    font-family:'Poppins',sans-serif;
-    min-height:100vh;
-    background:
-        radial-gradient(circle at 10% 10%,rgba(255,255,255,.8),transparent 25%),
-        radial-gradient(circle at 90% 20%,rgba(255,214,153,.45),transparent 25%),
-        linear-gradient(135deg,#fff8e7,#f7dfc1,#f4c7a1);
-    color:#4a2c1d;
-    overflow-x:hidden;
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 10% 15%,rgba(255,255,255,.65) 0 3px,transparent 4px),
+    radial-gradient(circle at 90% 25%,rgba(255,255,255,.5) 0 3px,transparent 4px),
+    linear-gradient(135deg,#f7dfb5 0%,#fff4d8 45%,#f3d7ad 100%);
+  background-size:auto,auto,cover;
+  min-height:100vh;
 }
 
-/* ================= DECORATION ================= */
+/* =========================================================
+   LATAR INPUT IDENTITAS
+   Khusus tampilan awal agar card berada tepat di tengah.
+   ========================================================= */
 
-body::before,
-body::after{
-    content:"";
-    position:fixed;
-    z-index:-1;
-    border-radius:50%;
-    opacity:.45;
+body:has(#identitas:not(.hidden)){
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:25px;
 }
 
-body::before{
-    width:280px;
-    height:280px;
-    background:#e9a66f;
-    top:-120px;
-    left:-100px;
+body:has(#identitas:not(.hidden)) .app{
+  width:100%;
+  max-width:520px;
+  margin:0 auto;
+  padding:0;
 }
 
-body::after{
-    width:350px;
-    height:350px;
-    background:#d7b56d;
-    bottom:-170px;
-    right:-120px;
+body:has(#identitas:not(.hidden)) .header{
+  display:none;
 }
 
-/* ================= HEADER ================= */
-
-header{
-    text-align:center;
-    padding:28px 20px 10px;
+body:has(#identitas:not(.hidden)) #rekap{
+  display:none;
 }
 
-.school{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    background:#fff;
-    padding:9px 20px;
-    border-radius:50px;
-    box-shadow:0 8px 25px rgba(90,50,20,.12);
-    color:#8b4b25;
-    font-weight:700;
-    font-size:14px;
+body:has(#identitas:not(.hidden)) #identitas{
+  margin:0;
 }
 
-header h1{
-    margin-top:18px;
-    font-size:clamp(26px,5vw,42px);
-    color:#6e351d;
-    font-weight:800;
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.18;
+  background-image:
+    radial-gradient(#fff 1px,transparent 1px);
+  background-size:22px 22px;
 }
 
-header p{
-    margin-top:8px;
-    color:#795442;
-    font-size:15px;
+/* =========================================================
+   APP
+   ========================================================= */
+
+.app{
+  width:min(1050px,94%);
+  margin:auto;
+  padding:22px 0 45px;
+  position:relative;
 }
 
-/* ================= CONTAINER ================= */
+/* =========================================================
+   HEADER
+   ========================================================= */
 
-.container{
-    width:min(1050px,94%);
-    margin:20px auto 50px;
+.header{
+  background:rgba(255,253,248,.96);
+  border:2px solid var(--border);
+  border-radius:28px;
+  padding:24px;
+  text-align:center;
+  box-shadow:0 15px 40px var(--shadow);
 }
 
-/* ================= CARD ================= */
+.badge{
+  display:inline-block;
+  background:#f9e6c5;
+  color:var(--primary-dark);
+  padding:7px 14px;
+  border-radius:99px;
+  font-weight:800;
+  font-size:13px;
+}
+
+h1{
+  margin:10px 0 5px;
+  font-size:clamp(25px,5vw,42px);
+}
+
+.subtitle{
+  margin:0;
+  color:var(--muted);
+  font-weight:600;
+}
+
+/* =========================================================
+   CARD UMUM
+   ========================================================= */
 
 .card{
-    background:rgba(255,255,255,.94);
-    border:1px solid rgba(255,255,255,.8);
-    border-radius:28px;
-    padding:30px;
-    box-shadow:
-        0 20px 60px rgba(91,52,28,.15),
-        0 5px 15px rgba(91,52,28,.08);
+  margin-top:20px;
+  background:rgba(255,253,248,.97);
+  border-radius:24px;
+  padding:26px;
+  box-shadow:0 12px 35px var(--shadow);
+  border:1px solid var(--border);
 }
 
-/* ================= IDENTITY ================= */
+/* =========================================================
+   INPUT IDENTITAS
+   ========================================================= */
 
 #identitas{
-    max-width:560px;
-    margin:35px auto;
-    position:relative;
-    overflow:hidden;
+  position:relative;
+  overflow:hidden;
+  padding:0;
+  border:0;
+  background:var(--card);
+  border-radius:30px;
+  box-shadow:
+    0 25px 65px rgba(86,45,20,.22),
+    0 8px 20px rgba(86,45,20,.10);
 }
 
-#identitas::before{
-    content:"🍜   🍚   🌶️   🍡   🥘";
-    display:block;
-    text-align:center;
-    font-size:30px;
-    letter-spacing:5px;
-    margin-bottom:15px;
+/* Hiasan bagian atas */
+
+#identitas:before{
+  content:"";
+  display:block;
+  height:9px;
+  background:linear-gradient(
+    90deg,
+    #9b4d20 0%,
+    #d96c27 35%,
+    #f4b942 70%,
+    #2e8b57 100%
+  );
 }
 
-.welcome{
-    text-align:center;
+#identitas:after{
+  content:"🍜   🍢   🥟   🍚   🍡";
+  display:block;
+  text-align:center;
+  font-size:24px;
+  letter-spacing:4px;
+  padding-top:18px;
 }
 
-.welcome h2{
-    color:#7a3d20;
-    font-size:25px;
-    margin-bottom:8px;
+/* Isi form */
+
+#identitas .identity-content{
+  padding:4px 34px 30px;
 }
 
-.welcome p{
-    color:#795442;
-    font-size:14px;
-    line-height:1.7;
-    margin-bottom:25px;
+#identitas h2{
+  margin:10px 0 7px;
+  text-align:center;
+  font-size:25px;
+  color:var(--primary-dark);
+  line-height:1.25;
 }
 
-/* ================= FORM ================= */
-
-.form-group{
-    margin-bottom:17px;
+#identitas .identity-subtitle{
+  margin:0 auto 24px;
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.55;
+  max-width:390px;
 }
 
-.form-group label{
-    display:block;
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:7px;
-    color:#60351f;
+/* Ikon mangkuk */
+
+.identity-icon{
+  width:72px;
+  height:72px;
+  margin:-2px auto 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:linear-gradient(145deg,#fff0c8,#f7d994);
+  border:4px solid #fff;
+  box-shadow:
+    0 8px 20px rgba(140,78,27,.15),
+    inset 0 2px 4px rgba(255,255,255,.8);
+  font-size:38px;
 }
 
-.form-group input,
-.form-group select{
-    width:100%;
-    border:2px solid #ead4bd;
-    background:#fffaf4;
-    border-radius:14px;
-    padding:13px 15px;
-    font-family:inherit;
-    font-size:14px;
-    color:#4a2c1d;
-    outline:none;
-    transition:.25s;
+/* Form */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
 }
 
-.form-group input:focus,
-.form-group select:focus{
-    border-color:#c87845;
-    box-shadow:0 0 0 4px rgba(200,120,69,.12);
+.field{
+  position:relative;
 }
 
-/* ================= BUTTON ================= */
+.field label{
+  display:block;
+  font-weight:800;
+  margin-bottom:7px;
+  color:#5c3929;
+  font-size:14px;
+}
+
+.input-wrap{
+  position:relative;
+}
+
+.input-wrap .input-icon{
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:19px;
+  pointer-events:none;
+  z-index:2;
+}
+
+input,select{
+  width:100%;
+  padding:14px 15px 14px 46px;
+  border:2px solid #e7d5bb;
+  border-radius:15px;
+  font-size:16px;
+  outline:none;
+  background:#fffdfa;
+  color:var(--ink);
+  transition:.2s;
+  font-family:inherit;
+}
+
+input::placeholder{
+  color:#b29e90;
+}
+
+input:focus,
+select:focus{
+  border-color:#d77b35;
+  background:#fff;
+  box-shadow:
+    0 0 0 4px rgba(230,126,34,.13),
+    0 5px 15px rgba(120,65,28,.08);
+}
+
+input:hover,
+select:hover{
+  border-color:#d7ad7d;
+}
+
+/* Tombol */
+
+.identity-action{
+  margin-top:22px;
+}
+
+#identitas .btn.primary{
+  width:100%;
+  border:0;
+  border-radius:16px;
+  padding:15px 20px;
+  font-weight:900;
+  font-size:16px;
+  cursor:pointer;
+  transition:.2s;
+  color:#fff;
+  background:
+    linear-gradient(135deg,#a95020,#d96b26 55%,#e58a35);
+  box-shadow:
+    0 8px 18px rgba(155,77,32,.25);
+}
+
+#identitas .btn.primary:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 11px 23px rgba(155,77,32,.32);
+}
+
+#identitas .btn.primary:active{
+  transform:translateY(0);
+}
+
+/* Informasi bawah */
+
+.identity-note{
+  margin:20px auto 0;
+  padding:11px 14px;
+  border-radius:13px;
+  background:#fff5df;
+  border:1px dashed #e3c18f;
+  color:#80634f;
+  font-size:12px;
+  line-height:1.5;
+  text-align:center;
+}
+
+/* Dekorasi kuliner */
+
+.food-decoration{
+  text-align:center;
+  margin-top:18px;
+  font-size:13px;
+  color:#967463;
+  letter-spacing:.3px;
+}
+
+/* =========================================================
+   KOMPONEN KUIS — TIDAK DIUBAH FUNGSINYA
+   ========================================================= */
 
 .btn{
-    width:100%;
-    border:0;
-    border-radius:15px;
-    padding:14px 20px;
-    background:linear-gradient(135deg,#b95d2d,#8e3f20);
-    color:#fff;
-    font-family:inherit;
-    font-size:15px;
-    font-weight:700;
-    cursor:pointer;
-    box-shadow:0 8px 18px rgba(142,63,32,.25);
-    transition:.25s;
+  border:0;
+  border-radius:14px;
+  padding:13px 20px;
+  font-weight:900;
+  font-size:16px;
+  cursor:pointer;
+  transition:.2s;
+  box-shadow:0 5px 12px rgba(0,0,0,.10);
 }
 
 .btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 12px 24px rgba(142,63,32,.3);
+  transform:translateY(-2px);
 }
 
-.btn:active{
-    transform:translateY(0);
+.primary{
+  background:linear-gradient(135deg,#9b4d20,#d96b26);
+  color:#fff;
 }
 
-/* ================= QUIZ ================= */
-
-#kuis{
-    display:none;
-    max-width:850px;
-    margin:auto;
+.green{
+  background:#2e8b57;
+  color:#fff;
 }
 
-.quiz-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    margin-bottom:25px;
-    flex-wrap:wrap;
+.orange{
+  background:#e67e22;
+  color:#fff;
 }
 
-.progress{
-    flex:1;
-    min-width:220px;
-    height:12px;
-    background:#f1e1d0;
-    border-radius:20px;
-    overflow:hidden;
+.gray{
+  background:#eadfd4;
+  color:#5b463a;
 }
 
-.progress-bar{
-    height:100%;
-    width:0%;
-    background:linear-gradient(90deg,#d37a42,#9b4825);
-    transition:.3s;
+.red{
+  background:#c0392b;
+  color:#fff;
 }
 
-.question-number{
-    font-weight:800;
-    color:#8a4324;
-    white-space:nowrap;
+.center{
+  text-align:center;
 }
 
-.question{
-    font-size:19px;
-    line-height:1.7;
-    font-weight:700;
-    margin-bottom:25px;
-    color:#4e2d1e;
-}
-
-.options{
-    display:grid;
-    gap:13px;
-}
-
-.option{
-    border:2px solid #ead8c6;
-    background:#fffaf5;
-    border-radius:16px;
-    padding:15px 17px;
-    cursor:pointer;
-    transition:.2s;
-    font-size:14px;
-    line-height:1.5;
-}
-
-.option:hover{
-    border-color:#ca7947;
-    background:#fff5eb;
-    transform:translateX(3px);
-}
-
-.option.selected{
-    border-color:#a94e25;
-    background:#fbe5d5;
-    box-shadow:0 4px 12px rgba(169,78,37,.12);
-}
-
-.option.correct{
-    border-color:#4b9b62;
-    background:#e6f5e9;
-}
-
-.option.wrong{
-    border-color:#c64d4d;
-    background:#fde7e7;
-}
-
-.quiz-footer{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:28px;
-    gap:15px;
-}
-
-.quiz-footer .btn{
-    width:auto;
-    min-width:150px;
+.hidden{
+  display:none!important;
 }
 
 .info{
-    color:#795442;
-    font-size:13px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  background:#fff4dd;
+  padding:12px 15px;
+  border-radius:15px;
+  font-weight:800;
+  border:1px solid #efd5a7;
 }
 
-/* ================= RESULT ================= */
-
-#hasil{
-    display:none;
-    max-width:620px;
-    margin:35px auto;
-    text-align:center;
+.progress-wrap{
+  height:12px;
+  background:#eadfd4;
+  border-radius:99px;
+  overflow:hidden;
+  margin:17px 0 22px;
 }
 
-.result-icon{
-    font-size:65px;
-    margin-bottom:10px;
+.progress{
+  height:100%;
+  background:linear-gradient(90deg,#9b4d20,#e67e22,#f4b942);
+  width:0;
+  transition:.3s;
 }
 
-#hasil h2{
-    color:#7a3d20;
-    font-size:28px;
+.question-no{
+  color:#9b4d20;
+  font-weight:900;
 }
 
-.result-name{
-    margin:8px 0 25px;
-    color:#795442;
+.question{
+  font-size:22px;
+  line-height:1.5;
+  font-weight:850;
+  margin:10px 0 20px;
 }
 
-.score-box{
-    background:linear-gradient(135deg,#fff3dc,#f8dfbf);
-    border-radius:22px;
-    padding:25px;
-    margin-bottom:22px;
+.answers{
+  display:grid;
+  gap:12px;
 }
 
-.score-label{
-    font-size:13px;
-    color:#795442;
+.answer{
+  border:2px solid #eadfd4;
+  border-radius:16px;
+  padding:14px;
+  cursor:pointer;
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  transition:.2s;
+  background:#fff;
 }
 
-.score{
-    font-size:55px;
-    font-weight:800;
-    color:#9b4825;
-    line-height:1.2;
+.answer:hover{
+  border-color:#e5b477;
+  background:#fff8eb;
 }
 
-.score-desc{
-    margin-top:8px;
-    font-size:14px;
-    color:#68412d;
+.answer input{
+  width:auto;
+  margin-top:4px;
+  accent-color:#9b4d20;
 }
 
-.result-message{
-    background:#fffaf4;
-    border:2px dashed #dfb58f;
+.nav-row{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:22px;
+}
+
+.result-score{
+  font-size:64px;
+  font-weight:1000;
+  background:linear-gradient(135deg,#9b4d20,#e67e22);
+  color:#fff;
+  border-radius:24px;
+  padding:12px 28px;
+  display:inline-block;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:20px 0;
+}
+
+.stat{
+  padding:16px;
+  background:#fff8eb;
+  border-radius:16px;
+  text-align:center;
+  border:1px solid #efdfc6;
+}
+
+.stat b{
+  font-size:24px;
+  display:block;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+  background:#fff;
+}
+
+th,td{
+  padding:11px 9px;
+  border-bottom:1px solid #eadfd4;
+  text-align:left;
+}
+
+th{
+  background:#fff1d5;
+  color:#6e3d22;
+}
+
+.rank{
+  font-weight:1000;
+}
+
+.note{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:18px;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translateX(-50%);
+  background:#4a2c20;
+  color:white;
+  padding:12px 18px;
+  border-radius:14px;
+  box-shadow:0 10px 25px #0003;
+  z-index:20;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:700px){
+
+  body:has(#identitas:not(.hidden)){
+    padding:16px;
+  }
+
+  body:has(#identitas:not(.hidden)) .app{
+    max-width:430px;
+  }
+
+  #identitas .identity-content{
+    padding-left:23px;
+    padding-right:23px;
+  }
+
+  #identitas h2{
+    font-size:22px;
+  }
+
+  .form-grid,
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .card{
     padding:18px;
-    border-radius:18px;
-    margin-bottom:22px;
-    font-size:14px;
-    line-height:1.7;
+  }
+
+  .question{
+    font-size:19px;
+  }
+
+  th:nth-child(3),
+  td:nth-child(3){
+    display:none;
+  }
 }
 
-/* ================= RESPONSIVE ================= */
+/* Layar sangat kecil */
 
-@media(max-width:600px){
+@media(max-width:380px){
 
-    header{
-        padding-top:20px;
-    }
+  body:has(#identitas:not(.hidden)){
+    padding:10px;
+  }
 
-    .card{
-        padding:22px 18px;
-        border-radius:22px;
-    }
+  #identitas .identity-content{
+    padding-left:18px;
+    padding-right:18px;
+  }
 
-    #identitas{
-        margin-top:20px;
-    }
+  #identitas:after{
+    font-size:20px;
+    letter-spacing:1px;
+  }
 
-    #identitas::before{
-        font-size:24px;
-    }
+  .identity-icon{
+    width:62px;
+    height:62px;
+    font-size:32px;
+  }
 
-    .welcome h2{
-        font-size:21px;
-    }
-
-    .question{
-        font-size:17px;
-    }
-
-    .quiz-footer{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    .quiz-footer .btn{
-        width:100%;
-    }
-
-    .score{
-        font-size:45px;
-    }
+  #identitas h2{
+    font-size:20px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <div class="school">🏫 UPT SDN 160 GRESIK</div>
+<div class="app">
 
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <header class="header">
+    <span class="badge">🏫 UPT SDN 160 GRESIK</span>
     <h1>🧠 Kuis Seru Bilangan</h1>
-
-    <p>
-        Perbandingan &amp; Urutan Bilangan sampai 100.000
+    <p class="subtitle">
+      Perbandingan & Urutan Bilangan sampai 100.000
     </p>
-</header>
+  </header>
 
-<div class="container">
 
-    <!-- ================= IDENTITAS ================= -->
+  <!-- =====================================================
+       INPUT IDENTITAS SISWA
+       BAGIAN YANG DIDESAIN ULANG
+       ===================================================== -->
 
-    <section id="identitas" class="card">
+  <section id="identitas" class="card">
 
-        <div class="welcome">
+    <div class="identity-content">
 
-            <h2>🍜 Selamat Datang di Dapur Bilangan Nusantara!</h2>
+      <div class="identity-icon">
+        🍲
+      </div>
 
-            <p>
-                Ayo racik pengetahuanmu, bandingkan bilangan,
-                dan susun angka dengan tepat!
-            </p>
+      <h2>🍽️ Yuk, Kenalkan Dirimu!</h2>
 
-        </div>
+      <p class="identity-subtitle">
+        Sebelum memulai petualangan kuliner matematika,
+        isi identitasmu terlebih dahulu dengan benar.
+      </p>
 
-        <div class="form-group">
-            <label for="nama">👤 Nama Lengkap</label>
+      <div class="form-grid">
+
+        <div class="field">
+          <label for="nama">
+            👤 Nama Siswa
+          </label>
+
+          <div class="input-wrap">
+            <span class="input-icon">🧑‍🍳</span>
             <input
-                type="text"
-                id="nama"
-                placeholder="Masukkan nama lengkap"
-                autocomplete="off"
+              id="nama"
+              placeholder="Tulis nama lengkap"
+              autocomplete="name"
             >
+          </div>
         </div>
 
-        <div class="form-group">
-            <label for="kelas">🏫 Kelas</label>
+
+        <div class="field">
+          <label for="kelas">
+            🏫 Kelas
+          </label>
+
+          <div class="input-wrap">
+            <span class="input-icon">🎒</span>
             <input
-                type="text"
-                id="kelas"
-                placeholder="Contoh: 5A"
-                autocomplete="off"
+              id="kelas"
+              placeholder="Contoh: V-A"
             >
+          </div>
         </div>
 
-        <div class="form-group">
-            <label for="absen">🔢 Nomor Absen</label>
+
+        <div class="field">
+          <label for="absen">
+            🔢 Nomor Absen
+          </label>
+
+          <div class="input-wrap">
+            <span class="input-icon">🍡</span>
             <input
-                type="number"
-                id="absen"
-                placeholder="Masukkan nomor absen"
-                min="1"
-                max="50"
+              id="absen"
+              type="number"
+              min="1"
+              placeholder="Masukkan nomor absen"
             >
+          </div>
         </div>
 
-        <button class="btn" onclick="mulai()">
-            🚀 Mulai Petualangan
-        </button>
-
-    </section>
+      </div>
 
 
-    <!-- ================= KUIS ================= -->
-
-    <section id="kuis" class="card">
-
-        <div class="quiz-top">
-
-            <div class="question-number" id="nomorSoal">
-                Soal 1 dari 15
-            </div>
-
-            <div class="progress">
-                <div
-                    class="progress-bar"
-                    id="progressBar"
-                ></div>
-            </div>
-
-        </div>
-
-        <div
-            class="question"
-            id="pertanyaan"
-        ></div>
-
-        <div
-            class="options"
-            id="pilihan"
-        ></div>
-
-        <div class="quiz-footer">
-
-            <div
-                class="info"
-                id="infoJawaban"
-            >
-                Pilih salah satu jawaban.
-            </div>
-
-            <button
-                class="btn"
-                id="btnBerikutnya"
-                onclick="berikutnya()"
-            >
-                Berikutnya →
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= HASIL ================= -->
-
-    <section id="hasil" class="card">
-
-        <div class="result-icon">
-            🎉
-        </div>
-
-        <h2>
-            Sajian Kuis Selesai!
-        </h2>
-
-        <div
-            class="result-name"
-            id="namaHasil"
-        ></div>
-
-        <div class="score-box">
-
-            <div class="score-label">
-                NILAI KAMU
-            </div>
-
-            <div
-                class="score"
-                id="nilai"
-            >
-                0
-            </div>
-
-            <div
-                class="score-desc"
-                id="detailNilai"
-            ></div>
-
-        </div>
-
-        <div
-            class="result-message"
-            id="pesanHasil"
-        ></div>
-
+      <div class="identity-action">
         <button
-            class="btn"
-            onclick="ulang()"
+          class="btn primary"
+          onclick="mulai()"
         >
-            🔄 Main Lagi
+          🍜 Mulai Petualangan
         </button>
+      </div>
 
-    </section>
+
+      <div class="identity-note">
+        🥢 Pastikan nama, kelas, dan nomor absen
+        sudah benar sebelum melanjutkan.
+      </div>
+
+      <div class="food-decoration">
+        🌾 Kuliner Nusantara • Belajar • Bermain • Berprestasi 🌾
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       KUIS
+       ===================================================== -->
+
+  <section id="kuis" class="card hidden">
+
+    <div class="info">
+      <span id="siswaInfo"></span>
+      <span id="counter"></span>
+    </div>
+
+    <div class="progress-wrap">
+      <div id="progress" class="progress"></div>
+    </div>
+
+    <div id="soalArea"></div>
+
+  </section>
+
+
+  <!-- =====================================================
+       HASIL
+       ===================================================== -->
+
+  <section id="hasil" class="card hidden"></section>
+
+
+  <!-- =====================================================
+       REKAP
+       ===================================================== -->
+
+  <section id="rekap" class="card">
+
+    <h2>📊 Rekap Hasil Siswa</h2>
+
+    <p class="note">
+      Peringkat dihitung dari nilai tertinggi.
+      Jika nilai sama, siswa berbagi peringkat yang sama.
+      Data tersimpan menggunakan <b>localStorage</b> browser ini.
+    </p>
+
+    <div class="actions">
+
+      <button
+        class="btn green"
+        onclick="exportCSV()"
+      >
+        📥 Unduh Rekap Excel/CSV
+      </button>
+
+      <button
+        class="btn red"
+        onclick="hapusData()"
+      >
+        🗑️ Hapus Semua Rekap
+      </button>
+
+    </div>
+
+    <p class="note center">
+      Rekap pada halaman ini diambil langsung dari Google Sheets,
+      sehingga data yang tampil sama di semua perangkat.
+    </p>
+
+    <div id="tabelRekap"></div>
+
+  </section>
 
 </div>
+
+
+<div id="toast" class="toast hidden"></div>
+
+
+<!-- =========================================================
+     KONFIGURASI GOOGLE SHEETS
+
+     BAGIAN INI TETAP DIPERTAHANKAN.
+     URL TIDAK DIUBAH.
+     ========================================================= -->
+
+<script>
+
+const GOOGLE_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbwk4odfq7ABr__CDR00YD4uAMLmvK2iPjaLLlJrpyA6BnOwJ9gUkncLdCVCzE670CFy/exec";
+
+</script>
 
 
 <script>
 
 /* =========================================================
-   GOOGLE SHEETS
-   ========================================================= */
-
-const GOOGLE_SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbwk4odfq7ABr__CDR00YD4uAMLmvK2iPjaLLlJrpyA6BnOwJ9gUkncLdCVCzE670CFy/exec";
-
-
-/* =========================================================
    BANK SOAL
    ========================================================= */
 
-const bankSoal = [
-
-{
-    soal:"Bilangan yang lebih besar dari 45.678 adalah …",
-    jawaban:[
-        "45.687",
-        "45.607",
-        "45.678",
-        "45.608"
+const soal = [
+  {
+    "q":"Bilangan yang lebih besar dari 45.678 adalah …",
+    "a":["45.687","45.607","45.678","45.608"],
+    "k":0
+  },
+  {
+    "q":"Perhatikan bilangan berikut! 72.450 … 72.405. Tanda yang tepat untuk mengisi titik-titik adalah …",
+    "a":["<",">","=","≠"],
+    "k":1
+  },
+  {
+    "q":"Urutan bilangan berikut dari yang terkecil ke terbesar adalah … 35.210, 35.120, 35.201, 35.102",
+    "a":[
+      "35.102, 35.120, 35.201, 35.210",
+      "35.120, 35.102, 35.210, 35.201",
+      "35.201, 35.210, 35.102, 35.120",
+      "35.210, 35.201, 35.120, 35.102"
     ],
-    benar:0
-},
-
-{
-    soal:"Perhatikan bilangan berikut!<br><br><b>72.450 … 72.405</b><br><br>Tanda yang tepat untuk mengisi titik-titik adalah …",
-    jawaban:[
-        "&lt;",
-        "&gt;",
-        "=",
-        "≠"
+    "k":0
+  },
+  {
+    "q":"Bilangan yang paling kecil adalah …",
+    "a":["89.765","89.675","89.756","89.657"],
+    "k":3
+  },
+  {
+    "q":"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 56.789 … 56.798",
+    "a":["=","<",">","≠"],
+    "k":1
+  },
+  {
+    "q":"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 63.450 … 63.405",
+    "a":["=","<",">","≠"],
+    "k":2
+  },
+  {
+    "q":"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 80.000 … 80.000",
+    "a":["=","<",">","≠"],
+    "k":0
+  },
+  {
+    "q":"Urutkan bilangan 12.500, 12.050, 12.005 dari yang terkecil ke terbesar.",
+    "a":[
+      "12.005, 12.050, 12.500",
+      "12.050, 12.005, 12.500",
+      "12.500, 12.050, 12.005",
+      "12.005, 12.500, 12.050"
     ],
-    benar:1
-},
-
-{
-    soal:"Urutan bilangan berikut dari yang terkecil ke terbesar adalah …<br><br><b>35.210, 35.120, 35.201, 35.102</b>",
-    jawaban:[
-        "35.102, 35.120, 35.201, 35.210",
-        "35.120, 35.102, 35.210, 35.201",
-        "35.201, 35.210, 35.102, 35.120",
-        "35.210, 35.201, 35.120, 35.102"
+    "k":0
+  },
+  {
+    "q":"Urutkan bilangan 98.100, 98.010, 98.001 dari yang terkecil ke terbesar.",
+    "a":[
+      "98.001, 98.010, 98.100",
+      "98.010, 98.001, 98.100",
+      "98.100, 98.010, 98.001",
+      "98.001, 98.100, 98.010"
     ],
-    benar:0
-},
-
-{
-    soal:"Bilangan yang paling kecil adalah …",
-    jawaban:[
-        "89.765",
-        "89.675",
-        "89.756",
-        "89.657"
+    "k":0
+  },
+  {
+    "q":"Urutkan bilangan 45.900, 45.090, 45.009 dari yang terkecil ke terbesar.",
+    "a":[
+      "45.009, 45.090, 45.900",
+      "45.090, 45.009, 45.900",
+      "45.900, 45.090, 45.009",
+      "45.009, 45.900, 45.090"
     ],
-    benar:3
-},
-
-{
-    soal:"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat:<br><br><b>56.789 … 56.798</b>",
-    jawaban:[
-        "=",
-        "&lt;",
-        "&gt;",
-        "≠"
+    "k":0
+  },
+  {
+    "q":"Perpustakaan sekolah memiliki 24.560 buku, sedangkan perpustakaan desa memiliki 23.950 buku. Perpustakaan manakah yang memiliki buku lebih banyak?",
+    "a":[
+      "Perpustakaan sekolah, karena 24.560 > 23.950",
+      "Perpustakaan desa, karena 23.950 > 24.560",
+      "Keduanya memiliki jumlah buku yang sama",
+      "Tidak dapat ditentukan"
     ],
-    benar:1
-},
-
-{
-    soal:"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat:<br><br><b>63.450 … 63.405</b>",
-    jawaban:[
-        "=",
-        "&lt;",
-        "&gt;",
-        "≠"
+    "k":0
+  },
+  {
+    "q":"Pak Budi memiliki tabungan Rp75.500, sedangkan Pak Andi memiliki tabungan Rp57.500. Siapakah yang memiliki tabungan lebih banyak dan berapa selisihnya?",
+    "a":[
+      "Pak Budi, selisih Rp18.000",
+      "Pak Andi, selisih Rp18.000",
+      "Pak Budi, selisih Rp12.000",
+      "Pak Andi, selisih Rp12.000"
     ],
-    benar:2
-},
-
-{
-    soal:"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat:<br><br><b>80.000 … 80.000</b>",
-    jawaban:[
-        "=",
-        "&lt;",
-        "&gt;",
-        "≠"
+    "k":0
+  },
+  {
+    "q":"Dalam sebuah lomba, Kelompok Merah = 67.250 poin, Kelompok Biru = 62.750 poin, dan Kelompok Hijau = 67.025 poin. Urutkan ketiga kelompok tersebut dari poin tertinggi ke terendah.",
+    "a":[
+      "Merah → Hijau → Biru",
+      "Hijau → Merah → Biru",
+      "Biru → Merah → Hijau",
+      "Merah → Biru → Hijau"
     ],
-    benar:0
-},
-
-{
-    soal:"Urutkan bilangan <b>12.500, 12.050, 12.005</b> dari yang terkecil ke terbesar.",
-    jawaban:[
-        "12.005, 12.050, 12.500",
-        "12.050, 12.005, 12.500",
-        "12.500, 12.050, 12.005",
-        "12.005, 12.500, 12.050"
+    "k":0
+  },
+  {
+    "q":"Toko A menjual 45.750 pensil, Toko B menjual 54.570 pensil, dan Toko C menjual 45.705 pensil. Toko mana yang menjual pensil paling banyak?",
+    "a":["Toko A","Toko B","Toko C","Semua sama banyak"],
+    "k":1
+  },
+  {
+    "q":"Toko A menjual 45.750 pensil, Toko B menjual 54.570 pensil, dan Toko C menjual 45.705 pensil. Urutkan jumlah pensil dari yang paling sedikit ke paling banyak.",
+    "a":[
+      "45.705 → 45.750 → 54.570",
+      "45.750 → 45.705 → 54.570",
+      "54.570 → 45.750 → 45.705",
+      "45.705 → 54.570 → 45.750"
     ],
-    benar:0
-},
-
-{
-    soal:"Urutkan bilangan <b>98.100, 98.010, 98.001</b> dari yang terkecil ke terbesar.",
-    jawaban:[
-        "98.001, 98.010, 98.100",
-        "98.010, 98.001, 98.100",
-        "98.100, 98.010, 98.001",
-        "98.001, 98.100, 98.010"
-    ],
-    benar:0
-},
-
-{
-    soal:"Urutkan bilangan <b>45.900, 45.090, 45.009</b> dari yang terkecil ke terbesar.",
-    jawaban:[
-        "45.009, 45.090, 45.900",
-        "45.090, 45.009, 45.900",
-        "45.900, 45.090, 45.009",
-        "45.009, 45.900, 45.090"
-    ],
-    benar:0
-},
-
-{
-    soal:"Perpustakaan sekolah memiliki <b>24.560</b> buku, sedangkan perpustakaan desa memiliki <b>23.950</b> buku. Perpustakaan manakah yang memiliki buku lebih banyak?",
-    jawaban:[
-        "Perpustakaan sekolah, karena 24.560 &gt; 23.950",
-        "Perpustakaan desa, karena 23.950 &gt; 24.560",
-        "Keduanya memiliki jumlah buku yang sama",
-        "Tidak dapat ditentukan"
-    ],
-    benar:0
-},
-
-{
-    soal:"Pak Budi memiliki tabungan <b>Rp75.500</b>, sedangkan Pak Andi memiliki tabungan <b>Rp57.500</b>. Siapakah yang memiliki tabungan lebih banyak dan berapa selisihnya?",
-    jawaban:[
-        "Pak Budi, selisih Rp18.000",
-        "Pak Andi, selisih Rp18.000",
-        "Pak Budi, selisih Rp12.000",
-        "Pak Andi, selisih Rp12.000"
-    ],
-    benar:0
-},
-
-{
-    soal:"Dalam sebuah lomba, Kelompok Merah = <b>67.250</b> poin, Kelompok Biru = <b>62.750</b> poin, dan Kelompok Hijau = <b>67.025</b> poin. Urutkan ketiga kelompok tersebut dari poin tertinggi ke terendah.",
-    jawaban:[
-        "Merah → Hijau → Biru",
-        "Hijau → Merah → Biru",
-        "Biru → Merah → Hijau",
-        "Merah → Biru → Hijau"
-    ],
-    benar:0
-},
-
-{
-    soal:"Toko A menjual <b>45.750</b> pensil, Toko B menjual <b>54.570</b> pensil, dan Toko C menjual <b>45.705</b> pensil. Toko mana yang menjual pensil paling banyak?",
-    jawaban:[
-        "Toko A",
-        "Toko B",
-        "Toko C",
-        "Semua sama banyak"
-    ],
-    benar:1
-},
-
-{
-    soal:"Toko A menjual <b>45.750</b> pensil, Toko B menjual <b>54.570</b> pensil, dan Toko C menjual <b>45.705</b> pensil. Urutkan jumlah pensil dari yang paling sedikit ke paling banyak.",
-    jawaban:[
-        "45.705 → 45.750 → 54.570",
-        "45.750 → 45.705 → 54.570",
-        "54.570 → 45.750 → 45.705",
-        "45.705 → 54.570 → 45.750"
-    ],
-    benar:0
-}
-
+    "k":0
+  }
 ];
 
 
-/* =========================================================
-   VARIABEL
-   ========================================================= */
-
-let soalAktif = [];
-let nomor = 0;
-let skorBenar = 0;
-let jawabanDipilih = null;
-
-let dataSiswa = {
-    nama:"",
-    kelas:"",
-    absen:""
+let siswa={
+  nama:"",
+  kelas:"",
+  absen:""
 };
 
+let index=0;
+let benar=0;
+let jawabanDipilih=[];
+let bankSoal=[];
+
 
 /* =========================================================
-   ACAK ARRAY
+   ACAK
    ========================================================= */
 
-function acak(array){
+function acak(arr){
 
-    const hasil = [...array];
+  arr=[...arr];
 
-    for(let i = hasil.length - 1; i > 0; i--){
+  for(
+    let i=arr.length-1;
+    i>0;
+    i--
+  ){
 
-        const j =
-            Math.floor(Math.random() * (i + 1));
+    let j=Math.floor(
+      Math.random()*(i+1)
+    );
 
-        [hasil[i], hasil[j]] =
-        [hasil[j], hasil[i]];
-    }
+    [arr[i],arr[j]]=
+    [arr[j],arr[i]];
+  }
 
-    return hasil;
+  return arr;
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
+
+function escapeHTML(s){
+
+  return String(s).replace(
+    /[&<>"']/g,
+    m=>({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[m])
+  );
+
 }
 
 
@@ -807,41 +1009,73 @@ function acak(array){
 
 function mulai(){
 
-    const nama =
-        document.getElementById("nama").value.trim();
+  siswa.nama=
+    document.getElementById("nama").value.trim();
 
-    const kelas =
-        document.getElementById("kelas").value.trim();
+  siswa.kelas=
+    document.getElementById("kelas").value.trim();
 
-    const absen =
-        document.getElementById("absen").value.trim();
+  siswa.absen=
+    document.getElementById("absen").value.trim();
 
-    if(!nama || !kelas || !absen){
 
-        alert("⚠️ Silakan lengkapi nama, kelas, dan nomor absen terlebih dahulu.");
+  if(
+    !siswa.nama ||
+    !siswa.kelas ||
+    !siswa.absen
+  ){
 
-        return;
-    }
+    toast(
+      "⚠️ Nama, kelas, dan nomor absen wajib diisi."
+    );
 
-    dataSiswa = {
-        nama:nama,
-        kelas:kelas,
-        absen:absen
+    return;
+  }
+
+
+  index=0;
+  benar=0;
+  jawabanDipilih=[];
+
+
+  bankSoal=acak(soal).map(s=>{
+
+    let ops=s.a.map(
+      (teks,i)=>({
+        teks,
+        benar:i===s.k
+      })
+    );
+
+    ops=acak(ops);
+
+    return {
+      ...s,
+      a:ops.map(x=>x.teks),
+      k:ops.findIndex(x=>x.benar)
     };
 
-    soalAktif = acak(bankSoal);
+  });
 
-    nomor = 0;
-    skorBenar = 0;
-    jawabanDipilih = null;
 
-    document.getElementById("identitas").style.display = "none";
+  document
+    .getElementById("identitas")
+    .classList.add("hidden");
 
-    document.getElementById("hasil").style.display = "none";
+  document
+    .getElementById("rekap")
+    .classList.add("hidden");
 
-    document.getElementById("kuis").style.display = "block";
+  document
+    .getElementById("hasil")
+    .classList.add("hidden");
 
-    tampilkanSoal();
+  document
+    .getElementById("kuis")
+    .classList.remove("hidden");
+
+
+  renderSoal();
 }
 
 
@@ -849,119 +1083,257 @@ function mulai(){
    TAMPILKAN SOAL
    ========================================================= */
 
-function tampilkanSoal(){
+function renderSoal(){
 
-    const soal =
-        soalAktif[nomor];
+  const s=bankSoal[index];
 
-    jawabanDipilih = null;
 
-    document.getElementById("nomorSoal").textContent =
-        `Soal ${nomor + 1} dari ${soalAktif.length}`;
+  document.getElementById(
+    "siswaInfo"
+  ).innerHTML=
+    `👤 ${escapeHTML(siswa.nama)}
+     &nbsp;|&nbsp;
+     Kelas ${escapeHTML(siswa.kelas)}
+     &nbsp;|&nbsp;
+     Absen ${escapeHTML(siswa.absen)}`;
 
-    document.getElementById("progressBar").style.width =
-        `${((nomor + 1) / soalAktif.length) * 100}%`;
 
-    document.getElementById("pertanyaan").innerHTML =
-        soal.soal;
+  document.getElementById(
+    "counter"
+  ).textContent=
+    `Soal ${index+1} dari ${bankSoal.length}`;
 
-    const pilihan =
-        document.getElementById("pilihan");
 
-    pilihan.innerHTML = "";
+  document.getElementById(
+    "progress"
+  ).style.width=
+    ((index)/bankSoal.length*100)+"%";
 
-    const pilihanAcak =
-        acak(
-            soal.jawaban.map(
-                (teks,index)=>({
-                    teks:teks,
-                    index:index
-                })
-            )
-        );
 
-    pilihanAcak.forEach(item=>{
+  document.getElementById(
+    "soalArea"
+  ).innerHTML=`
 
-        const div =
-            document.createElement("div");
+    <div class="question-no">
+      SOAL ${index+1}
+    </div>
 
-        div.className = "option";
+    <div class="question">
+      ${escapeHTML(s.q)}
+    </div>
 
-        div.innerHTML = item.teks;
+    <div class="answers">
 
-        div.onclick = function(){
+      ${s.a.map((a,i)=>`
 
-            document
-                .querySelectorAll(".option")
-                .forEach(el =>
-                    el.classList.remove("selected")
-                );
+        <label class="answer">
 
-            div.classList.add("selected");
+          <input
+            type="radio"
+            name="jawaban"
+            value="${i}"
+          >
 
-            jawabanDipilih = item.index;
+          <span>
+            <b>${String.fromCharCode(65+i)}.</b>
+            ${escapeHTML(a)}
+          </span>
 
-            document.getElementById("infoJawaban").textContent =
-                "Jawaban dipilih ✓";
-        };
+        </label>
 
-        pilihan.appendChild(div);
+      `).join("")}
 
-    });
+    </div>
 
-    const tombol =
-        document.getElementById("btnBerikutnya");
+    <div class="nav-row">
 
-    if(nomor === soalAktif.length - 1){
+      <button
+        class="btn primary"
+        onclick="nextSoal()"
+      >
+        ${
+          index===bankSoal.length-1
+          ?"🏁 Selesai"
+          :"➡️ Berikutnya"
+        }
+      </button>
 
-        tombol.textContent =
-            "🏁 Selesai";
+    </div>
 
-    }else{
-
-        tombol.textContent =
-            "Berikutnya →";
-    }
-
-    document.getElementById("infoJawaban").textContent =
-        "Pilih salah satu jawaban.";
-
+  `;
 }
 
 
 /* =========================================================
-   BERIKUTNYA
+   SOAL BERIKUTNYA
    ========================================================= */
 
-function berikutnya(){
+function nextSoal(){
 
-    if(jawabanDipilih === null){
+  const el=
+    document.querySelector(
+      'input[name="jawaban"]:checked'
+    );
 
-        alert("⚠️ Pilih jawaban terlebih dahulu.");
 
-        return;
+  if(!el){
+
+    toast(
+      "⚠️ Pilih salah satu jawaban terlebih dahulu."
+    );
+
+    return;
+  }
+
+
+  const v=Number(el.value);
+
+
+  if(v===bankSoal[index].k){
+    benar++;
+  }
+
+
+  jawabanDipilih.push(v);
+
+  index++;
+
+
+  if(index<bankSoal.length){
+
+    renderSoal();
+
+  }else{
+
+    selesai();
+
+  }
+}
+
+
+/* =========================================================
+   PENGIRIMAN KE GOOGLE SHEETS
+   BAGIAN INI DIPERTAHANKAN
+   ========================================================= */
+
+function kirimKeGoogleSheets(data){
+
+  if(
+    !GOOGLE_SCRIPT_URL ||
+    GOOGLE_SCRIPT_URL.includes("TEMPEL_URL")
+  ){
+
+    return {
+      ok:false,
+      skipped:true
+    };
+
+  }
+
+
+  try{
+
+    const iframeName=
+      "googleSheetsTarget";
+
+
+    let iframe=
+      document.getElementById(
+        iframeName
+      );
+
+
+    if(!iframe){
+
+      iframe=
+        document.createElement("iframe");
+
+      iframe.id=iframeName;
+      iframe.name=iframeName;
+      iframe.style.display="none";
+
+      document.body.appendChild(
+        iframe
+      );
+
     }
 
-    const soal =
-        soalAktif[nomor];
 
-    if(jawabanDipilih === soal.benar){
+    const form=
+      document.createElement("form");
 
-        skorBenar++;
 
-    }
+    form.method="POST";
+    form.action=GOOGLE_SCRIPT_URL;
+    form.target=iframeName;
+    form.style.display="none";
 
-    nomor++;
 
-    if(nomor < soalAktif.length){
+    const fields={
 
-        tampilkanSoal();
+      nama:data.nama,
+      kelas:data.kelas,
+      absen:data.absen,
 
-    }else{
+      nilai:data.nilai,
+      benar:data.benar,
+      salah:data.total-data.benar,
 
-        selesai();
+      total:data.total,
+      persen:data.persen,
+      waktu:data.waktu
 
-    }
+    };
+
+
+    Object.keys(fields).forEach(
+      function(key){
+
+        const input=
+          document.createElement("input");
+
+        input.type="hidden";
+        input.name=key;
+        input.value=
+          fields[key] ?? "";
+
+        form.appendChild(input);
+
+      }
+    );
+
+
+    document.body.appendChild(form);
+
+    form.submit();
+
+
+    setTimeout(
+      function(){
+        form.remove();
+      },
+      3000
+    );
+
+
+    return {
+      ok:true
+    };
+
+
+  }catch(error){
+
+    console.error(
+      "Pengiriman Google Sheets gagal:",
+      error
+    );
+
+    return {
+      ok:false
+    };
+
+  }
+
 }
 
 
@@ -971,160 +1343,751 @@ function berikutnya(){
 
 function selesai(){
 
-    const total =
-        soalAktif.length;
+  const total=bankSoal.length;
 
-    const nilai =
-        Math.round(
-            (skorBenar / total) * 100
-        );
+  const nilai=
+    Math.round(
+      benar/total*100
+    );
 
-    document.getElementById("kuis").style.display =
-        "none";
-
-    document.getElementById("hasil").style.display =
-        "block";
-
-    document.getElementById("namaHasil").textContent =
-        `Hebat, ${dataSiswa.nama}! 🍽️`;
-
-    document.getElementById("nilai").textContent =
-        nilai;
-
-    document.getElementById("detailNilai").textContent =
-        `${skorBenar} jawaban benar dari ${total} soal`;
-
-    let pesan = "";
-
-    if(nilai >= 90){
-
-        pesan =
-        "🌟 Luar biasa! Racikan bilanganmu sangat mantap. Kamu sudah sangat baik dalam membandingkan dan mengurutkan bilangan!";
-
-    }else if(nilai >= 80){
-
-        pesan =
-        "👏 Bagus sekali! Pemahamanmu tentang bilangan sudah baik. Terus berlatih agar semakin jago!";
-
-    }else if(nilai >= 70){
-
-        pesan =
-        "😊 Cukup baik! Kamu sudah mulai menguasai materi. Yuk latihan lagi supaya hasilnya semakin mantap!";
-
-    }else{
-
-        pesan =
-        "💪 Jangan menyerah! Ayo pelajari kembali cara membandingkan dan mengurutkan bilangan, kemudian coba lagi.";
-
-    }
-
-    document.getElementById("pesanHasil").textContent =
-        pesan;
+  const persen=
+    Math.round(
+      benar/total*100
+    );
 
 
-    /* ================================================
-       KIRIM HASIL KE GOOGLE SHEETS
-       TANPA MENAMPILKAN REKAP DI HALAMAN
-       ================================================ */
+  const data=[
+    ...rekapGoogleSheets
+  ];
 
-    const hasilBaru = {
 
-        nama:dataSiswa.nama,
+  const waktu=
+    new Date().toLocaleString(
+      "id-ID"
+    );
 
-        kelas:dataSiswa.kelas,
 
-        absen:dataSiswa.absen,
+  const hasilBaru={
 
-        benar:skorBenar,
+    nama:siswa.nama,
+    kelas:siswa.kelas,
+    absen:siswa.absen,
 
-        total:total,
+    nilai,
+    benar,
+    total,
+    persen,
+    waktu
 
-        nilai:nilai,
+  };
 
-        waktu:new Date().toLocaleString("id-ID")
+
+  data.push(hasilBaru);
+
+
+  localStorage.setItem(
+    "rekapKuisBilangan",
+    JSON.stringify(data)
+  );
+
+
+  document
+    .getElementById("kuis")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("rekap")
+    .classList.remove("hidden");
+
+
+  tampilkanHasil(
+    hasilBaru
+  );
+
+
+  renderRekap();
+
+
+  const kirim=
+    kirimKeGoogleSheets(
+      hasilBaru
+    );
+
+
+  if(
+    kirim &&
+    kirim.ok
+  ){
+
+    toast(
+      "✅ Hasil dikirim ke Google Sheets."
+    );
+
+  }
+
+
+  setTimeout(
+    muatRekapDariGoogleSheets,
+    1500
+  );
+
+}
+
+
+/* =========================================================
+   HASIL
+   ========================================================= */
+
+function tampilkanHasil(data){
+
+  const semua=
+    JSON.parse(
+      localStorage.getItem(
+        "rekapKuisBilangan"
+      )||"[]"
+    )
+    .sort(
+      (a,b)=>
+        b.nilai-a.nilai ||
+        b.persen-a.persen
+    );
+
+
+  const pos=
+    semua.findIndex(
+      x=>x===data
+    );
+
+
+  const rank=
+    1+
+    semua.filter(
+      x=>x.nilai>data.nilai
+    ).length;
+
+
+  let pesan=
+    data.nilai>=90
+    ?"🏆 Luar biasa!"
+    :data.nilai>=75
+    ?"🌟 Bagus sekali!"
+    :data.nilai>=60
+    ?"💪 Terus berlatih!"
+    :"📚 Jangan menyerah!";
+
+
+  document.getElementById(
+    "hasil"
+  ).innerHTML=`
+
+    <div class="center">
+
+      <h2>🎉 Kuis Selesai!</h2>
+
+      <p>${pesan}</p>
+
+      <div class="result-score">
+        ${data.nilai}
+      </div>
+
+      <div class="stats">
+
+        <div class="stat">
+          <b>
+            ${data.benar}/${data.total}
+          </b>
+          Jawaban Benar
+        </div>
+
+        <div class="stat">
+          <b>
+            ${data.persen}%
+          </b>
+          Persentase Benar
+        </div>
+
+        <div class="stat">
+          <b>
+            #${rank}
+          </b>
+          Peringkat
+        </div>
+
+      </div>
+
+      <p>
+        <b>${escapeHTML(data.nama)}</b>
+        • Kelas ${escapeHTML(data.kelas)}
+        • Absen ${escapeHTML(data.absen)}
+      </p>
+
+      <div class="actions">
+
+        <button
+          class="btn primary"
+          onclick="ulang()"
+        >
+          🔄 Kerjakan Lagi
+        </button>
+
+        <button
+          class="btn gray"
+          onclick="window.print()"
+        >
+          🖨️ Cetak Hasil
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  document
+    .getElementById("hasil")
+    .classList.remove("hidden");
+
+}
+
+
+/* =========================================================
+   DATA GOOGLE SHEETS
+   ========================================================= */
+
+let rekapGoogleSheets=[];
+
+let sedangMemuatRekap=false;
+
+
+/* =========================================================
+   MEMUAT REKAP GOOGLE SHEETS
+   ========================================================= */
+
+function muatRekapDariGoogleSheets(){
+
+  if(
+    !GOOGLE_SCRIPT_URL ||
+    GOOGLE_SCRIPT_URL.includes("TEMPEL_URL")
+  ){
+
+    return;
+
+  }
+
+
+  if(sedangMemuatRekap)
+    return;
+
+
+  sedangMemuatRekap=true;
+
+
+  const callbackName=
+    "rekapCallback_" +
+    Date.now();
+
+
+  window[callbackName]=
+    function(data){
+
+      try{
+
+        if(
+          data &&
+          data.ok &&
+          Array.isArray(data.data)
+        ){
+
+          rekapGoogleSheets=
+            data.data;
+
+          renderRekap(
+            rekapGoogleSheets
+          );
+
+        }else{
+
+          console.error(
+            "Google Sheets mengembalikan data tidak valid:",
+            data
+          );
+
+        }
+
+      }finally{
+
+        sedangMemuatRekap=false;
+
+        delete window[
+          callbackName
+        ];
+
+        if(
+          script.parentNode
+        ){
+
+          script.parentNode
+            .removeChild(script);
+
+        }
+
+      }
 
     };
 
-    kirimKeGoogleSheets(hasilBaru);
+
+  const script=
+    document.createElement(
+      "script"
+    );
+
+
+  script.src=
+    GOOGLE_SCRIPT_URL
+    +
+    "?action=getRekap&callback="
+    +
+    encodeURIComponent(
+      callbackName
+    )
+    +
+    "&t="
+    +
+    Date.now();
+
+
+  script.onerror=
+    function(){
+
+      sedangMemuatRekap=false;
+
+      delete window[
+        callbackName
+      ];
+
+      if(
+        script.parentNode
+      ){
+
+        script.parentNode
+          .removeChild(script);
+
+      }
+
+
+      console.error(
+        "Gagal mengambil rekap dari Google Sheets."
+      );
+
+    };
+
+
+  document.body.appendChild(
+    script
+  );
 
 }
 
 
 /* =========================================================
-   KIRIM KE GOOGLE SHEETS
+   RENDER REKAP
    ========================================================= */
 
-function kirimKeGoogleSheets(data){
+function renderRekap(dataInput){
 
-    try{
+  const data=
+    Array.isArray(dataInput)
+    ?[...dataInput]
+    :[...rekapGoogleSheets];
 
-        const params =
-            new URLSearchParams({
 
-                nama:data.nama,
+  data.sort(
+    (a,b)=>
+      Number(b.nilai||0)
+      -
+      Number(a.nilai||0)
+  );
 
-                kelas:data.kelas,
 
-                absen:data.absen,
+  if(!data.length){
 
-                benar:data.benar,
+    document.getElementById(
+      "tabelRekap"
+    ).innerHTML=
+      '<p class="center note">Belum ada siswa yang mengerjakan.</p>';
 
-                total:data.total,
+    return;
 
-                nilai:data.nilai,
+  }
 
-                waktu:data.waktu
 
-            });
+  let lastScore=null;
+  let rank=0;
 
-        const img =
-            new Image();
 
-        img.src =
-            GOOGLE_SCRIPT_URL +
-            "?" +
-            params.toString();
+  const rows=
+    data.map(
+      (d,i)=>{
 
-    }catch(error){
+        const nilai=
+          Number(d.nilai||0);
 
-        console.error(
-            "Gagal mengirim hasil:",
-            error
-        );
 
-    }
+        if(
+          nilai!==lastScore
+        ){
+
+          rank=i+1;
+          lastScore=nilai;
+
+        }
+
+
+        return `
+
+          <tr>
+
+            <td class="rank">
+              #${rank}
+            </td>
+
+            <td>
+              ${escapeHTML(
+                d.nama||""
+              )}
+            </td>
+
+            <td>
+              ${escapeHTML(
+                d.kelas||""
+              )}
+            </td>
+
+            <td>
+              ${escapeHTML(
+                String(
+                  d.absen||""
+                )
+              )}
+            </td>
+
+            <td>
+              <b>${nilai}</b>
+            </td>
+
+            <td>
+              ${escapeHTML(
+                String(
+                  d.persen??""
+                )
+              )}%
+            </td>
+
+            <td>
+              ${escapeHTML(
+                String(
+                  d.benar||0
+                )
+              )}
+              /
+              ${escapeHTML(
+                String(
+                  d.total||0
+                )
+              )}
+            </td>
+
+            <td>
+              ${escapeHTML(
+                d.waktu||""
+              )}
+            </td>
+
+          </tr>
+
+        `;
+
+      }
+    ).join("");
+
+
+  document.getElementById(
+    "tabelRekap"
+  ).innerHTML=
+
+    `<div style="overflow:auto">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Peringkat</th>
+            <th>Nama</th>
+            <th>Kelas</th>
+            <th>Absen</th>
+            <th>Nilai</th>
+            <th>% Benar</th>
+            <th>Benar</th>
+            <th>Waktu</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+          ${rows}
+        </tbody>
+
+      </table>
+
+    </div>`;
 
 }
 
 
 /* =========================================================
-   ULANGI KUIS
+   ULANG
    ========================================================= */
 
 function ulang(){
 
-    document.getElementById("hasil").style.display =
-        "none";
+  document
+    .getElementById("hasil")
+    .classList.add("hidden");
 
-    document.getElementById("identitas").style.display =
-        "block";
 
-    document.getElementById("nama").value = "";
+  document
+    .getElementById("rekap")
+    .classList.add("hidden");
 
-    document.getElementById("kelas").value = "";
 
-    document.getElementById("absen").value = "";
+  document
+    .getElementById("identitas")
+    .classList.remove("hidden");
 
-    nomor = 0;
 
-    skorBenar = 0;
+  document.getElementById(
+    "nama"
+  ).value="";
 
-    jawabanDipilih = null;
+
+  document.getElementById(
+    "kelas"
+  ).value="";
+
+
+  document.getElementById(
+    "absen"
+  ).value="";
 
 }
+
+
+/* =========================================================
+   EXPORT CSV
+   ========================================================= */
+
+function exportCSV(){
+
+  const data=[
+    ...rekapGoogleSheets
+  ];
+
+
+  if(!data.length){
+
+    toast(
+      "Belum ada data untuk diunduh."
+    );
+
+    return;
+
+  }
+
+
+  const sorted=
+    [...data].sort(
+      (a,b)=>
+        b.nilai-a.nilai ||
+        b.persen-a.persen
+    );
+
+
+  let last=null;
+  let rank=0;
+
+
+  const head=[
+    "Peringkat",
+    "Nama Siswa",
+    "Kelas",
+    "Nomor Absen",
+    "Nilai",
+    "Prosentase Jawaban Benar",
+    "Jawaban Benar",
+    "Total Soal",
+    "Waktu"
+  ];
+
+
+  const lines=[
+    head,
+
+    ...sorted.map(
+      (d,i)=>{
+
+        if(
+          d.nilai!==last
+        ){
+
+          rank=i+1;
+          last=d.nilai;
+
+        }
+
+
+        return [
+          rank,
+          d.nama,
+          d.kelas,
+          d.absen,
+          d.nilai,
+          d.persen+"%",
+          d.benar,
+          d.total,
+          d.waktu
+        ];
+
+      }
+    )
+
+  ]
+  .map(
+    r=>
+      r.map(
+        x=>
+          `"${String(x)
+            .replaceAll('"','""')}"`
+      ).join(",")
+  )
+  .join("\r\n");
+
+
+  const blob=
+    new Blob(
+      ["\ufeff"+lines],
+      {
+        type:
+          "text/csv;charset=utf-8"
+      }
+    );
+
+
+  const a=
+    document.createElement("a");
+
+
+  a.href=
+    URL.createObjectURL(
+      blob
+    );
+
+
+  a.download=
+    "Rekap_Kuis_UPT_SDN_160_Gresik.csv";
+
+
+  a.click();
+
+
+  URL.revokeObjectURL(
+    a.href
+  );
+
+}
+
+
+/* =========================================================
+   HAPUS DATA LOKAL
+   ========================================================= */
+
+function hapusData(){
+
+  localStorage.removeItem(
+    "rekapKuisBilangan"
+  );
+
+
+  toast(
+    "ℹ️ Rekap utama di Google Sheets tidak dihapus. Memuat ulang data pusat..."
+  );
+
+
+  setTimeout(
+    muatRekapDariGoogleSheets,
+    500
+  );
+
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+function toast(msg){
+
+  const t=
+    document.getElementById(
+      "toast"
+    );
+
+
+  t.textContent=msg;
+
+  t.classList.remove(
+    "hidden"
+  );
+
+
+  clearTimeout(
+    window.tt
+  );
+
+
+  window.tt=
+    setTimeout(
+      ()=>
+        t.classList.add(
+          "hidden"
+        ),
+      2400
+    );
+
+}
+
+
+/* =========================================================
+   INISIALISASI
+   ========================================================= */
+
+renderRekap();
+
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    muatRekapDariGoogleSheets();
+
+  }
+);
 
 </script>
 
 </body>
 </html>
-

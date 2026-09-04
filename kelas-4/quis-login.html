@@ -131,7 +131,7 @@ th{background:#eff6ff;color:#1e3a8a}
       <button class="btn green" onclick="exportCSV()">📥 Unduh Rekap Excel/CSV</button>
       <button class="btn red" onclick="hapusData()">🗑️ Hapus Semua Rekap</button>
     </div>
-    <p class="note center">Hasil siswa juga dapat dikirim otomatis ke Google Sheets setelah URL Web App Apps Script dipasang.</p>
+    <p class="note center">Rekap pada halaman ini diambil langsung dari Google Sheets, sehingga data yang tampil sama di semua perangkat.</p>
     <div id="tabelRekap"></div>
   </section>
 </div>
@@ -249,7 +249,7 @@ function kirimKeGoogleSheets(data){
 
 function selesai(){
   const total=bankSoal.length, nilai=Math.round(benar/total*100), persen=Math.round(benar/total*100);
-  const data=JSON.parse(localStorage.getItem("rekapKuisBilangan")||"[]");
+  const data=[...rekapGoogleSheets];
   const waktu=new Date().toLocaleString("id-ID");
   const hasilBaru={nama:siswa.nama,kelas:siswa.kelas,absen:siswa.absen,nilai,benar,total,persen,waktu};
 
@@ -260,16 +260,9 @@ function selesai(){
   document.getElementById("rekap").classList.remove("hidden");
   tampilkanHasil(hasilBaru);
   renderRekap();
-
   const kirim = kirimKeGoogleSheets(hasilBaru);
-
-  if(kirim && kirim.ok){
-    toast("✅ Hasil dikirim ke Google Sheets.");
-  }else if(kirim && kirim.skipped){
-    toast("ℹ️ Hasil tersimpan di perangkat. Google Sheets belum dipasang.");
-  }else{
-    toast("⚠️ Hasil tersimpan di perangkat, tetapi gagal dikirim ke Google Sheets.");
-  }
+  if(kirim && kirim.ok) toast("✅ Hasil dikirim ke Google Sheets.");
+  setTimeout(muatRekapDariGoogleSheets, 1500);
 }
 function tampilkanHasil(data){
   const semua=JSON.parse(localStorage.getItem("rekapKuisBilangan")||"[]").sort((a,b)=>b.nilai-a.nilai||b.persen-a.persen);
@@ -294,16 +287,90 @@ function tampilkanHasil(data){
     </div>`;
   document.getElementById("hasil").classList.remove("hidden");
 }
-function renderRekap(){
-  const data=JSON.parse(localStorage.getItem("rekapKuisBilangan")||"[]").sort((a,b)=>b.nilai-a.nilai||b.persen-a.persen);
-  if(!data.length){document.getElementById("tabelRekap").innerHTML='<p class="center note">Belum ada siswa yang mengerjakan.</p>';return}
+let rekapGoogleSheets = [];
+let sedangMemuatRekap = false;
+
+function muatRekapDariGoogleSheets(){
+  if(!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("TEMPEL_URL")){
+    return;
+  }
+  if(sedangMemuatRekap) return;
+  sedangMemuatRekap = true;
+
+  const callbackName = "rekapCallback_" + Date.now();
+
+  window[callbackName] = function(data){
+    try{
+      if(data && data.ok && Array.isArray(data.data)){
+        rekapGoogleSheets = data.data;
+        renderRekap(rekapGoogleSheets);
+      }else{
+        console.error("Google Sheets mengembalikan data tidak valid:", data);
+      }
+    }finally{
+      sedangMemuatRekap = false;
+      delete window[callbackName];
+      if(script.parentNode) script.parentNode.removeChild(script);
+    }
+  };
+
+  const script = document.createElement("script");
+  script.src = GOOGLE_SCRIPT_URL
+    + "?action=getRekap&callback=" + encodeURIComponent(callbackName)
+    + "&t=" + Date.now();
+  script.onerror = function(){
+    sedangMemuatRekap = false;
+    delete window[callbackName];
+    if(script.parentNode) script.parentNode.removeChild(script);
+    console.error("Gagal mengambil rekap dari Google Sheets.");
+  };
+  document.body.appendChild(script);
+}
+
+function renderRekap(dataInput){
+  const data = Array.isArray(dataInput)
+    ? [...dataInput]
+    : [...rekapGoogleSheets];
+
+  data.sort((a,b)=>Number(b.nilai||0)-Number(a.nilai||0));
+
+  if(!data.length){
+    document.getElementById("tabelRekap").innerHTML =
+      '<p class="center note">Belum ada siswa yang mengerjakan.</p>';
+    return;
+  }
+
   let lastScore=null,rank=0;
   const rows=data.map((d,i)=>{
-    if(d.nilai!==lastScore){rank=i+1;lastScore=d.nilai}
-    return `<tr><td class="rank">#${rank}</td><td>${escapeHTML(d.nama)}</td><td>${escapeHTML(d.kelas)}</td><td>${escapeHTML(d.absen)}</td><td><b>${d.nilai}</b></td><td>${d.persen}%</td><td>${d.benar}/${d.total}</td><td>${escapeHTML(d.waktu)}</td></tr>`
+    const nilai=Number(d.nilai||0);
+    if(nilai!==lastScore){rank=i+1;lastScore=nilai}
+    return `<tr>
+      <td class="rank">#${rank}</td>
+      <td>${escapeHTML(d.nama||"")}</td>
+      <td>${escapeHTML(d.kelas||"")}</td>
+      <td>${escapeHTML(String(d.absen||""))}</td>
+      <td><b>${nilai}</b></td>
+      <td>${escapeHTML(String(d.persen??""))}%</td>
+      <td>${escapeHTML(String(d.benar||0))}/${escapeHTML(String(d.total||0))}</td>
+      <td>${escapeHTML(d.waktu||"")}</td>
+    </tr>`;
   }).join("");
-  document.getElementById("tabelRekap").innerHTML=`<div style="overflow:auto"><table><thead><tr><th>Peringkat</th><th>Nama</th><th>Kelas</th><th>Absen</th><th>Nilai</th><th>% Benar</th><th>Benar</th><th>Waktu</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+
+  document.getElementById("tabelRekap").innerHTML=
+    `<div style="overflow:auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Peringkat</th><th>Nama</th><th>Kelas</th><th>Absen</th>
+            <th>Nilai</th><th>% Benar</th><th>Benar</th><th>Waktu</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
 }
+
+
 function ulang(){
   document.getElementById("hasil").classList.add("hidden");
   document.getElementById("rekap").classList.add("hidden");
@@ -311,7 +378,7 @@ function ulang(){
   document.getElementById("nama").value="";document.getElementById("kelas").value="";document.getElementById("absen").value="";
 }
 function exportCSV(){
-  const data=JSON.parse(localStorage.getItem("rekapKuisBilangan")||"[]");
+  const data=[...rekapGoogleSheets];
   if(!data.length){toast("Belum ada data untuk diunduh.");return}
   const sorted=[...data].sort((a,b)=>b.nilai-a.nilai||b.persen-a.persen);
   let last=null,rank=0;
@@ -322,15 +389,19 @@ function exportCSV(){
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="Rekap_Kuis_UPT_SDN_160_Gresik.csv";a.click();URL.revokeObjectURL(a.href);
 }
 function hapusData(){
-  if(confirm("Yakin ingin menghapus seluruh rekap siswa dari perangkat ini?")){
-    localStorage.removeItem("rekapKuisBilangan");renderRekap();toast("🗑️ Semua rekap telah dihapus.");
-  }
+  localStorage.removeItem("rekapKuisBilangan");
+  toast("ℹ️ Rekap utama di Google Sheets tidak dihapus. Memuat ulang data pusat...");
+  setTimeout(muatRekapDariGoogleSheets, 500);
 }
+
 function toast(msg){
   const t=document.getElementById("toast");t.textContent=msg;t.classList.remove("hidden");
   clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.add("hidden"),2400);
 }
 renderRekap();
+document.addEventListener("DOMContentLoaded", function(){
+  muatRekapDariGoogleSheets();
+});
 </script>
 </body>
 </html>

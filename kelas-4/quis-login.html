@@ -62,10 +62,6 @@ body:has(#identitas:not(.hidden)) .header{
   display:none;
 }
 
-body:has(#identitas:not(.hidden)) #rekap{
-  display:none;
-}
-
 body:has(#identitas:not(.hidden)) #identitas{
   margin:0;
 }
@@ -496,27 +492,6 @@ select:hover{
   display:block;
 }
 
-table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:15px;
-  background:#fff;
-}
-
-th,td{
-  padding:11px 9px;
-  border-bottom:1px solid #eadfd4;
-  text-align:left;
-}
-
-th{
-  background:#fff1d5;
-  color:#6e3d22;
-}
-
-.rank{
-  font-weight:1000;
-}
 
 .note{
   font-size:13px;
@@ -758,46 +733,7 @@ th{
   <section id="hasil" class="card hidden"></section>
 
 
-  <!-- =====================================================
-       REKAP
-       ===================================================== -->
 
-  <section id="rekap" class="card">
-
-    <h2>📊 Rekap Hasil Siswa</h2>
-
-    <p class="note">
-      Peringkat dihitung dari nilai tertinggi.
-      Jika nilai sama, siswa berbagi peringkat yang sama.
-      Data tersimpan menggunakan <b>localStorage</b> browser ini.
-    </p>
-
-    <div class="actions">
-
-      <button
-        class="btn green"
-        onclick="exportCSV()"
-      >
-        📥 Unduh Rekap Excel/CSV
-      </button>
-
-      <button
-        class="btn red"
-        onclick="hapusData()"
-      >
-        🗑️ Hapus Semua Rekap
-      </button>
-
-    </div>
-
-    <p class="note center">
-      Rekap pada halaman ini diambil langsung dari Google Sheets,
-      sehingga data yang tampil sama di semua perangkat.
-    </p>
-
-    <div id="tabelRekap"></div>
-
-  </section>
 
 </div>
 
@@ -1060,10 +996,6 @@ function mulai(){
 
   document
     .getElementById("identitas")
-    .classList.add("hidden");
-
-  document
-    .getElementById("rekap")
     .classList.add("hidden");
 
   document
@@ -1356,10 +1288,6 @@ function selesai(){
     );
 
 
-  const data=[
-    ...rekapGoogleSheets
-  ];
-
 
   const waktu=
     new Date().toLocaleString(
@@ -1382,14 +1310,6 @@ function selesai(){
   };
 
 
-  data.push(hasilBaru);
-
-
-  localStorage.setItem(
-    "rekapKuisBilangan",
-    JSON.stringify(data)
-  );
-
 
   document
     .getElementById("kuis")
@@ -1405,8 +1325,6 @@ function selesai(){
     hasilBaru
   );
 
-
-  renderRekap();
 
 
   const kirim=
@@ -1426,11 +1344,6 @@ function selesai(){
 
   }
 
-
-  setTimeout(
-    muatRekapDariGoogleSheets,
-    1500
-  );
 
 }
 
@@ -1509,10 +1422,8 @@ function tampilkanHasil(data){
 
         <div class="stat">
           <b>
-            #${rank}
           </b>
-          Peringkat
-        </div>
+          </div>
 
       </div>
 
@@ -1553,303 +1464,6 @@ function tampilkanHasil(data){
 
 
 /* =========================================================
-   DATA GOOGLE SHEETS
-   ========================================================= */
-
-let rekapGoogleSheets=[];
-
-let sedangMemuatRekap=false;
-
-
-/* =========================================================
-   MEMUAT REKAP GOOGLE SHEETS
-   ========================================================= */
-
-function muatRekapDariGoogleSheets(){
-
-  if(
-    !GOOGLE_SCRIPT_URL ||
-    GOOGLE_SCRIPT_URL.includes("TEMPEL_URL")
-  ){
-
-    return;
-
-  }
-
-
-  if(sedangMemuatRekap)
-    return;
-
-
-  sedangMemuatRekap=true;
-
-
-  const callbackName=
-    "rekapCallback_" +
-    Date.now();
-
-
-  window[callbackName]=
-    function(data){
-
-      try{
-
-        if(
-          data &&
-          data.ok &&
-          Array.isArray(data.data)
-        ){
-
-          rekapGoogleSheets=
-            data.data;
-
-          renderRekap(
-            rekapGoogleSheets
-          );
-
-        }else{
-
-          console.error(
-            "Google Sheets mengembalikan data tidak valid:",
-            data
-          );
-
-        }
-
-      }finally{
-
-        sedangMemuatRekap=false;
-
-        delete window[
-          callbackName
-        ];
-
-        if(
-          script.parentNode
-        ){
-
-          script.parentNode
-            .removeChild(script);
-
-        }
-
-      }
-
-    };
-
-
-  const script=
-    document.createElement(
-      "script"
-    );
-
-
-  script.src=
-    GOOGLE_SCRIPT_URL
-    +
-    "?action=getRekap&callback="
-    +
-    encodeURIComponent(
-      callbackName
-    )
-    +
-    "&t="
-    +
-    Date.now();
-
-
-  script.onerror=
-    function(){
-
-      sedangMemuatRekap=false;
-
-      delete window[
-        callbackName
-      ];
-
-      if(
-        script.parentNode
-      ){
-
-        script.parentNode
-          .removeChild(script);
-
-      }
-
-
-      console.error(
-        "Gagal mengambil rekap dari Google Sheets."
-      );
-
-    };
-
-
-  document.body.appendChild(
-    script
-  );
-
-}
-
-
-/* =========================================================
-   RENDER REKAP
-   ========================================================= */
-
-function renderRekap(dataInput){
-
-  const data=
-    Array.isArray(dataInput)
-    ?[...dataInput]
-    :[...rekapGoogleSheets];
-
-
-  data.sort(
-    (a,b)=>
-      Number(b.nilai||0)
-      -
-      Number(a.nilai||0)
-  );
-
-
-  if(!data.length){
-
-    document.getElementById(
-      "tabelRekap"
-    ).innerHTML=
-      '<p class="center note">Belum ada siswa yang mengerjakan.</p>';
-
-    return;
-
-  }
-
-
-  let lastScore=null;
-  let rank=0;
-
-
-  const rows=
-    data.map(
-      (d,i)=>{
-
-        const nilai=
-          Number(d.nilai||0);
-
-
-        if(
-          nilai!==lastScore
-        ){
-
-          rank=i+1;
-          lastScore=nilai;
-
-        }
-
-
-        return `
-
-          <tr>
-
-            <td class="rank">
-              #${rank}
-            </td>
-
-            <td>
-              ${escapeHTML(
-                d.nama||""
-              )}
-            </td>
-
-            <td>
-              ${escapeHTML(
-                d.kelas||""
-              )}
-            </td>
-
-            <td>
-              ${escapeHTML(
-                String(
-                  d.absen||""
-                )
-              )}
-            </td>
-
-            <td>
-              <b>${nilai}</b>
-            </td>
-
-            <td>
-              ${escapeHTML(
-                String(
-                  d.persen??""
-                )
-              )}%
-            </td>
-
-            <td>
-              ${escapeHTML(
-                String(
-                  d.benar||0
-                )
-              )}
-              /
-              ${escapeHTML(
-                String(
-                  d.total||0
-                )
-              )}
-            </td>
-
-            <td>
-              ${escapeHTML(
-                d.waktu||""
-              )}
-            </td>
-
-          </tr>
-
-        `;
-
-      }
-    ).join("");
-
-
-  document.getElementById(
-    "tabelRekap"
-  ).innerHTML=
-
-    `<div style="overflow:auto">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>Peringkat</th>
-            <th>Nama</th>
-            <th>Kelas</th>
-            <th>Absen</th>
-            <th>Nilai</th>
-            <th>% Benar</th>
-            <th>Benar</th>
-            <th>Waktu</th>
-
-          </tr>
-
-        </thead>
-
-        <tbody>
-          ${rows}
-        </tbody>
-
-      </table>
-
-    </div>`;
-
-}
-
-
-/* =========================================================
    ULANG
    ========================================================= */
 
@@ -1859,10 +1473,6 @@ function ulang(){
     .getElementById("hasil")
     .classList.add("hidden");
 
-
-  document
-    .getElementById("rekap")
-    .classList.add("hidden");
 
 
   document
@@ -1891,148 +1501,12 @@ function ulang(){
    EXPORT CSV
    ========================================================= */
 
-function exportCSV(){
-
-  const data=[
-    ...rekapGoogleSheets
-  ];
-
-
-  if(!data.length){
-
-    toast(
-      "Belum ada data untuk diunduh."
-    );
-
-    return;
-
-  }
-
-
-  const sorted=
-    [...data].sort(
-      (a,b)=>
-        b.nilai-a.nilai ||
-        b.persen-a.persen
-    );
-
-
-  let last=null;
-  let rank=0;
-
-
-  const head=[
-    "Peringkat",
-    "Nama Siswa",
-    "Kelas",
-    "Nomor Absen",
-    "Nilai",
-    "Prosentase Jawaban Benar",
-    "Jawaban Benar",
-    "Total Soal",
-    "Waktu"
-  ];
-
-
-  const lines=[
-    head,
-
-    ...sorted.map(
-      (d,i)=>{
-
-        if(
-          d.nilai!==last
-        ){
-
-          rank=i+1;
-          last=d.nilai;
-
-        }
-
-
-        return [
-          rank,
-          d.nama,
-          d.kelas,
-          d.absen,
-          d.nilai,
-          d.persen+"%",
-          d.benar,
-          d.total,
-          d.waktu
-        ];
-
-      }
-    )
-
-  ]
-  .map(
-    r=>
-      r.map(
-        x=>
-          `"${String(x)
-            .replaceAll('"','""')}"`
-      ).join(",")
-  )
-  .join("\r\n");
-
-
-  const blob=
-    new Blob(
-      ["\ufeff"+lines],
-      {
-        type:
-          "text/csv;charset=utf-8"
-      }
-    );
-
-
-  const a=
-    document.createElement("a");
-
-
-  a.href=
-    URL.createObjectURL(
-      blob
-    );
-
-
-  a.download=
-    "Rekap_Kuis_UPT_SDN_160_Gresik.csv";
-
-
-  a.click();
-
-
-  URL.revokeObjectURL(
-    a.href
-  );
-
-}
 
 
 /* =========================================================
    HAPUS DATA LOKAL
    ========================================================= */
 
-function hapusData(){
-
-  localStorage.removeItem(
-    "rekapKuisBilangan"
-  );
-
-
-  toast(
-    "ℹ️ Rekap utama di Google Sheets tidak dihapus. Memuat ulang data pusat..."
-  );
-
-
-  setTimeout(
-    muatRekapDariGoogleSheets,
-    500
-  );
-
-}
 
 
 /* =========================================================
@@ -2075,17 +1549,6 @@ function toast(msg){
    INISIALISASI
    ========================================================= */
 
-renderRekap();
-
-
-document.addEventListener(
-  "DOMContentLoaded",
-  function(){
-
-    muatRekapDariGoogleSheets();
-
-  }
-);
 
 </script>
 

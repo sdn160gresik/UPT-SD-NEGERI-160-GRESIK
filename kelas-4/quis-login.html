@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -638,7 +637,7 @@ select:hover{
           </label>
 
           <div class="input-wrap">
-            
+            <span class="input-icon">🧑‍🍳</span>
             <input
               id="nama"
               placeholder="Tulis nama lengkap"
@@ -654,10 +653,10 @@ select:hover{
           </label>
 
           <div class="input-wrap">
-            
+            <span class="input-icon">🎒</span>
             <input
               id="kelas"
-              placeholder="Contoh: 4"
+              placeholder="Contoh: V-A"
             >
           </div>
         </div>
@@ -669,7 +668,7 @@ select:hover{
           </label>
 
           <div class="input-wrap">
-            
+            <span class="input-icon">🍡</span>
             <input
               id="absen"
               type="number"
@@ -731,7 +730,6 @@ select:hover{
        ===================================================== -->
 
   <section id="hasil" class="card hidden"></section>
-
 
 
 
@@ -997,7 +995,6 @@ function mulai(){
   document
     .getElementById("identitas")
     .classList.add("hidden");
-
   document
     .getElementById("hasil")
     .classList.add("hidden");
@@ -1288,7 +1285,6 @@ function selesai(){
     );
 
 
-
   const waktu=
     new Date().toLocaleString(
       "id-ID"
@@ -1310,21 +1306,14 @@ function selesai(){
   };
 
 
-
   document
     .getElementById("kuis")
     .classList.add("hidden");
 
 
-  document
-    .getElementById("rekap")
-    .classList.remove("hidden");
-
-
   tampilkanHasil(
     hasilBaru
   );
-
 
 
   const kirim=
@@ -1353,32 +1342,6 @@ function selesai(){
    ========================================================= */
 
 function tampilkanHasil(data){
-
-  const semua=
-    JSON.parse(
-      localStorage.getItem(
-        "rekapKuisBilangan"
-      )||"[]"
-    )
-    .sort(
-      (a,b)=>
-        b.nilai-a.nilai ||
-        b.persen-a.persen
-    );
-
-
-  const pos=
-    semua.findIndex(
-      x=>x===data
-    );
-
-
-  const rank=
-    1+
-    semua.filter(
-      x=>x.nilai>data.nilai
-    ).length;
-
 
   let pesan=
     data.nilai>=90
@@ -1420,11 +1383,6 @@ function tampilkanHasil(data){
           Persentase Benar
         </div>
 
-        <div class="stat">
-          <b>
-          </b>
-          </div>
-
       </div>
 
       <p>
@@ -1463,6 +1421,11 @@ function tampilkanHasil(data){
 }
 
 
+
+
+
+
+
 /* =========================================================
    ULANG
    ========================================================= */
@@ -1472,7 +1435,6 @@ function ulang(){
   document
     .getElementById("hasil")
     .classList.add("hidden");
-
 
 
   document
@@ -1548,7 +1510,6 @@ function toast(msg){
 /* =========================================================
    INISIALISASI
    ========================================================= */
-
 
 </script>
 

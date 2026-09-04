@@ -148,7 +148,7 @@ th{background:#eff6ff;color:#1e3a8a}
      6. Salin URL /exec ke GOOGLE_SCRIPT_URL di bawah.
      ========================================================= -->
 <script>
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzQk5kYoW_IOUpOgm7LHVIbpWvKVx33zczZKUhiJFUKNJ6wpWExzCqCRz_UG2ei40g/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwk4odfq7ABr__CDR00YD4uAMLmvK2iPjaLLlJrpyA6BnOwJ9gUkncLdCVCzE670CFy/exec";
 </script>
 
 <script>
@@ -203,33 +203,32 @@ function nextSoal(){
 }
 async function kirimKeGoogleSheets(data){
   if(!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("TEMPEL_URL")){
-    return {ok:false, skipped:true, message:"URL Google Apps Script belum dipasang."};
+    return {ok:false, skipped:true};
   }
 
-  try{
-    const payload = {
-      nama: data.nama,
-      kelas: data.kelas,
-      absen: data.absen,
-      nilai: data.nilai,
-      benar: data.benar,
-      salah: data.total - data.benar,
-      total: data.total,
-      persen: data.persen,
-      waktu: data.waktu
-    };
+  const payload={
+    nama:data.nama,
+    kelas:data.kelas,
+    absen:data.absen,
+    nilai:data.nilai,
+    benar:data.benar,
+    salah:data.total-data.benar,
+    total:data.total,
+    persen:data.persen,
+    waktu:data.waktu
+  };
 
-    const response = await fetch(GOOGLE_SCRIPT_URL, {
+  try{
+    await fetch(GOOGLE_SCRIPT_URL,{
       method:"POST",
+      mode:"no-cors",
       headers:{"Content-Type":"text/plain;charset=utf-8"},
       body:JSON.stringify(payload)
     });
-
-    const result = await response.json();
-    return result;
+    return {ok:true};
   }catch(error){
-    console.error("Gagal mengirim ke Google Sheets:", error);
-    return {ok:false, message:"Gagal terhubung ke Google Sheets."};
+    console.error("Pengiriman Google Sheets gagal:",error);
+    return {ok:false};
   }
 }
 
@@ -250,7 +249,7 @@ async function selesai(){
   const kirim = await kirimKeGoogleSheets(hasilBaru);
 
   if(kirim && kirim.ok){
-    toast("✅ Hasil berhasil tersimpan ke Google Sheets.");
+    toast("✅ Hasil dikirim ke Google Sheets.");
   }else if(kirim && kirim.skipped){
     toast("ℹ️ Hasil tersimpan di perangkat. Google Sheets belum dipasang.");
   }else{

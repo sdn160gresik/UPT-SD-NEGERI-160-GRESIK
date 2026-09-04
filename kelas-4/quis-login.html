@@ -201,30 +201,45 @@ function nextSoal(){
   index++;
   if(index<bankSoal.length) renderSoal(); else selesai();
 }
-async function kirimKeGoogleSheets(data){
+function kirimKeGoogleSheets(data){
   if(!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("TEMPEL_URL")){
     return {ok:false, skipped:true};
   }
 
-  const payload={
-    nama:data.nama,
-    kelas:data.kelas,
-    absen:data.absen,
-    nilai:data.nilai,
-    benar:data.benar,
-    salah:data.total-data.benar,
-    total:data.total,
-    persen:data.persen,
-    waktu:data.waktu
-  };
-
   try{
-    await fetch(GOOGLE_SCRIPT_URL,{
-      method:"POST",
-      mode:"no-cors",
-      headers:{"Content-Type":"text/plain;charset=utf-8"},
-      body:JSON.stringify(payload)
+    const iframeName = "googleSheetsTarget";
+    let iframe = document.getElementById(iframeName);
+    if(!iframe){
+      iframe = document.createElement("iframe");
+      iframe.id = iframeName;
+      iframe.name = iframeName;
+      iframe.style.display = "none";
+      document.body.appendChild(iframe);
+    }
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = GOOGLE_SCRIPT_URL;
+    form.target = iframeName;
+    form.style.display = "none";
+
+    const fields = {
+      nama:data.nama, kelas:data.kelas, absen:data.absen,
+      nilai:data.nilai, benar:data.benar, salah:data.total-data.benar,
+      total:data.total, persen:data.persen, waktu:data.waktu
+    };
+
+    Object.keys(fields).forEach(function(key){
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = key;
+      input.value = fields[key] ?? "";
+      form.appendChild(input);
     });
+
+    document.body.appendChild(form);
+    form.submit();
+    setTimeout(function(){ form.remove(); }, 3000);
     return {ok:true};
   }catch(error){
     console.error("Pengiriman Google Sheets gagal:",error);
@@ -232,7 +247,7 @@ async function kirimKeGoogleSheets(data){
   }
 }
 
-async function selesai(){
+function selesai(){
   const total=bankSoal.length, nilai=Math.round(benar/total*100), persen=Math.round(benar/total*100);
   const data=JSON.parse(localStorage.getItem("rekapKuisBilangan")||"[]");
   const waktu=new Date().toLocaleString("id-ID");
@@ -246,7 +261,7 @@ async function selesai(){
   tampilkanHasil(hasilBaru);
   renderRekap();
 
-  const kirim = await kirimKeGoogleSheets(hasilBaru);
+  const kirim = kirimKeGoogleSheets(hasilBaru);
 
   if(kirim && kirim.ok){
     toast("✅ Hasil dikirim ke Google Sheets.");

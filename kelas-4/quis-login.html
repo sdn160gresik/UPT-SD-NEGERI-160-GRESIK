@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -863,8 +864,6 @@ isi identitasmu terlebih dahulu dengan benar.
 
 <div class="input-wrap">
 
-
-
 <input
 id="nama"
 placeholder="Tulis nama lengkap"
@@ -884,8 +883,6 @@ autocomplete="name"
 
 <div class="input-wrap">
 
-
-
 <input
 id="kelas"
 placeholder="Contoh: V-A"
@@ -903,8 +900,6 @@ placeholder="Contoh: V-A"
 </label>
 
 <div class="input-wrap">
-
-
 
 <input
 id="absen"
@@ -994,1406 +989,1357 @@ class="toast hidden"
 <script>
 
 const GOOGLE_SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbwk4odfq7ABr__CDR00YD4uAMLmvK2iPjaLLlJrpyA6BnOwJ9gUkncLdCVCzE670CFy/exec";
-
-</script>
-
-
-<script>
-
-const soal = [
-
-{
-"q":"Bilangan yang lebih besar dari 45.678 adalah …",
-"a":["45.687","45.607","45.678","45.608"],
-"k":0
-},
-
-{
-"q":"Perhatikan bilangan berikut! 72.450 … 72.405. Tanda yang tepat untuk mengisi titik-titik adalah …",
-"a":["<",">","=","≠"],
-"k":1
-},
-
-{
-"q":"Urutan bilangan berikut dari yang terkecil ke terbesar adalah … 35.210, 35.120, 35.201, 35.102",
-"a":[
-"35.102, 35.120, 35.201, 35.210",
-"35.120, 35.102, 35.210, 35.201",
-"35.201, 35.210, 35.102, 35.120",
-"35.210, 35.201, 35.120, 35.102"
-],
-"k":0
-},
-
-{
-"q":"Bilangan yang paling kecil adalah …",
-"a":["89.765","89.675","89.756","89.657"],
-"k":3
-},
-
-{
-"q":"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 56.789 … 56.798",
-"a":["=","<",">","≠"],
-"k":1
-},
-
-{
-"q":"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 63.450 … 63.405",
-"a":["=","<",">","≠"],
-"k":2
-},
-
-{
-"q":"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 80.000 … 80.000",
-"a":["=","<",">","≠"],
-"k":0
-},
-
-{
-"q":"Urutkan bilangan 12.500, 12.050, 12.005 dari yang terkecil ke terbesar.",
-"a":[
-"12.005, 12.050, 12.500",
-"12.050, 12.005, 12.500",
-"12.500, 12.050, 12.005",
-"12.005, 12.500, 12.050"
-],
-"k":0
-},
-
-{
-"q":"Urutkan bilangan 98.100, 98.010, 98.001 dari yang terkecil ke terbesar.",
-"a":[
-"98.001, 98.010, 98.100",
-"98.010, 98.001, 98.100",
-"98.100, 98.010, 98.001",
-"98.001, 98.100, 98.010"
-],
-"k":0
-},
-
-{
-"q":"Urutkan bilangan 45.900, 45.090, 45.009 dari yang terkecil ke terbesar.",
-"a":[
-"45.009, 45.090, 45.900",
-"45.090, 45.009, 45.900",
-"45.900, 45.090, 45.009",
-"45.009, 45.900, 45.090"
-],
-"k":0
-},
-
-{
-"q":"Perpustakaan sekolah memiliki 24.560 buku, sedangkan perpustakaan desa memiliki 23.950 buku. Perpustakaan manakah yang memiliki buku lebih banyak?",
-"a":[
-"Perpustakaan sekolah, karena 24.560 > 23.950",
-"Perpustakaan desa, karena 23.950 > 24.560",
-"Keduanya memiliki jumlah buku yang sama",
-"Tidak dapat ditentukan"
-],
-"k":0
-},
-
-{
-"q":"Pak Budi memiliki tabungan Rp75.500, sedangkan Pak Andi memiliki tabungan Rp57.500. Siapakah yang memiliki tabungan lebih banyak dan berapa selisihnya?",
-"a":[
-"Pak Budi, selisih Rp18.000",
-"Pak Andi, selisih Rp18.000",
-"Pak Budi, selisih Rp12.000",
-"Pak Andi, selisih Rp12.000"
-],
-"k":0
-},
-
-{
-"q":"Dalam sebuah lomba, Kelompok Merah = 67.250 poin, Kelompok Biru = 62.750 poin, dan Kelompok Hijau = 67.025 poin. Urutkan ketiga kelompok tersebut dari poin tertinggi ke terendah.",
-"a":[
-"Merah → Hijau → Biru",
-"Hijau → Merah → Biru",
-"Biru → Merah → Hijau",
-"Merah → Biru → Hijau"
-],
-"k":0
-},
-
-{
-"q":"Toko A menjual 45.750 pensil, Toko B menjual 54.570 pensil, dan Toko C menjual 45.705 pensil. Toko mana yang menjual pensil paling banyak?",
-"a":[
-"Toko A",
-"Toko B",
-"Toko C",
-"Semua sama banyak"
-],
-"k":1
-},
-
-{
-"q":"Toko A menjual 45.750 pensil, Toko B menjual 54.570 pensil, dan Toko C menjual 45.705 pensil. Urutkan jumlah pensil dari yang paling sedikit ke paling banyak.",
-"a":[
-"45.705 → 45.750 → 54.570",
-"45.750 → 45.705 → 54.570",
-"54.570 → 45.750 → 45.705",
-"45.705 → 54.570 → 45.750"
-],
-"k":0
-}
+"https://script.google.com/macros/s/AKfycbwk4odfq7ABr__CDR00YD4uAMLmvK2iPjaLLlJrpyA6BnOwJ9gUkncLdCVCzE670CFy/exec"; 
+
+</script> 
+
+
+<script> 
+
+const soal = [ 
+
+{ 
+"q":"Bilangan yang lebih besar dari 45.678 adalah …", 
+"a":["45.687","45.607","45.678","45.608"], 
+"k":0 
+}, 
+
+{ 
+"q":"Perhatikan bilangan berikut! 72.450 … 72.405. Tanda yang tepat untuk mengisi titik-titik adalah …", 
+"a":["<",">","=","≠"], 
+"k":1 
+}, 
+
+{ 
+"q":"Urutan bilangan berikut dari yang terkecil ke terbesar adalah … 35.210, 35.120, 35.201, 35.102", 
+"a":[ 
+"35.102, 35.120, 35.201, 35.210", 
+"35.120, 35.102, 35.210, 35.201", 
+"35.201, 35.210, 35.102, 35.120", 
+"35.210, 35.201, 35.120, 35.102" 
+], 
+"k":0 
+}, 
+
+{ 
+"q":"Bilangan yang paling kecil adalah …", 
+"a":["89.765","89.675","89.756","89.657"], 
+"k":3 
+}, 
+
+{ 
+"q":"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 56.789 … 56.798", 
+"a":["=","<",">","≠"], 
+"k":1 
+}, 
+
+{ 
+"q":"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 63.450 … 63.405", 
+"a":["=","<",">","≠"], 
+"k":2 
+}, 
+
+{ 
+"q":"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 80.000 … 80.000", 
+"a":["=","<",">","≠"], 
+"k":0 
+}, 
+
+{ 
+"q":"Urutkan bilangan 12.500, 12.050, 12.005 dari yang terkecil ke terbesar.", 
+"a":[ 
+"12.005, 12.050, 12.500", 
+"12.050, 12.005, 12.500", 
+"12.500, 12.050, 12.005", 
+"12.005, 12.500, 12.050" 
+], 
+"k":0 
+}, 
+
+{ 
+"q":"Urutkan bilangan 98.100, 98.010, 98.001 dari yang terkecil ke terbesar.", 
+"a":[ 
+"98.001, 98.010, 98.100", 
+"98.010, 98.001, 98.100", 
+"98.100, 98.010, 98.001", 
+"98.001, 98.100, 98.010" 
+], 
+"k":0 
+}, 
+
+{ 
+"q":"Urutkan bilangan 45.900, 45.090, 45.009 dari yang terkecil ke terbesar.", 
+"a":[ 
+"45.009, 45.090, 45.900", 
+"45.090, 45.009, 45.900", 
+"45.900, 45.090, 45.009", 
+"45.009, 45.900, 45.090" 
+], 
+"k":0 
+}, 
+
+{ 
+"q":"Perpustakaan sekolah memiliki 24.560 buku, sedangkan perpustakaan desa memiliki 23.950 buku. Perpustakaan manakah yang memiliki buku lebih banyak?", 
+"a":[ 
+"Perpustakaan sekolah, karena 24.560 > 23.950", 
+"Perpustakaan desa, karena 23.950 > 24.560", 
+"Keduanya memiliki jumlah buku yang sama", 
+"Tidak dapat ditentukan" 
+], 
+"k":0 
+}, 
+
+{ 
+"q":"Pak Budi memiliki tabungan Rp75.500, sedangkan Pak Andi memiliki tabungan Rp57.500. Siapakah yang memiliki tabungan lebih banyak dan berapa selisihnya?", 
+"a":[ 
+"Pak Budi, selisih Rp18.000", 
+"Pak Andi, selisih Rp18.000", 
+"Pak Budi, selisih Rp12.000", 
+"Pak Andi, selisih Rp12.000" 
+], 
+"k":0 
+}, 
+
+{ 
+"q":"Dalam sebuah lomba, Kelompok Merah = 67.250 poin, Kelompok Biru = 62.750 poin, dan Kelompok Hijau = 67.025 poin. Urutkan ketiga kelompok tersebut dari poin tertinggi ke terendah.", 
+"a":[ 
+"Merah → Hijau → Biru", 
+"Hijau → Merah → Biru", 
+"Biru → Merah → Hijau", 
+"Merah → Biru → Hijau" 
+], 
+"k":0 
+}, 
+
+{ 
+"q":"Toko A menjual 45.750 pensil, Toko B menjual 54.570 pensil, dan Toko C menjual 45.705 pensil. Toko mana yang menjual pensil paling banyak?", 
+"a":[ 
+"Toko A", 
+"Toko B", 
+"Toko C", 
+"Semua sama banyak" 
+], 
+"k":1 
+}, 
+
+{ 
+"q":"Toko A menjual 45.750 pensil, Toko B menjual 54.570 pensil, dan Toko C menjual 45.705 pensil. Urutkan jumlah pensil dari yang paling sedikit ke paling banyak.", 
+"a":[ 
+"45.705 → 45.750 → 54.570", 
+"45.750 → 45.705 → 54.570", 
+"54.570 → 45.750 → 45.705", 
+"45.705 → 54.570 → 45.750" 
+], 
+"k":0 
+} 
 
-];
+]; 
 
 
-let siswa={
-nama:"",
-kelas:"",
-absen:""
-};
+let siswa={ 
+nama:"", 
+kelas:"", 
+absen:"" 
+}; 
 
-let index=0;
-let benar=0;
-let jawabanDipilih=[];
-let bankSoal=[];
+let index=0; 
+let benar=0; 
+let jawabanDipilih=[]; 
+let bankSoal=[]; 
 
 
-/* =========================================================
-   ACAK
-   ========================================================= */
+/* ========================================================= 
+   ACAK 
+   ========================================================= */ 
 
-function acak(arr){
+function acak(arr){ 
 
-arr=[...arr];
+arr=[...arr]; 
 
-for(
-let i=arr.length-1;
-i>0;
-i--
-){
+for( 
+let i=arr.length-1; 
+i>0; 
+i-- 
+){ 
 
-let j=Math.floor(
-Math.random()*(i+1)
-);
+let j=Math.floor( 
+Math.random()*(i+1) 
+); 
 
-[arr[i],arr[j]]=
-[arr[j],arr[i]];
+[arr[i],arr[j]]= 
+[arr[j],arr[i]]; 
 
-}
+} 
 
-return arr;
+return arr; 
 
-}
+} 
 
 
-/* =========================================================
-   ESCAPE HTML
-   ========================================================= */
+/* ========================================================= 
+   ESCAPE HTML 
+   ========================================================= */ 
 
-function escapeHTML(s){
+function escapeHTML(s){ 
 
-return String(s).replace(
-/[&<>"']/g,
-m=>({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-}[m])
-);
+return String(s).replace( 
+/[&<>"']/g, 
+m=>({ 
+"&":"&amp;", 
+"<":"&lt;", 
+">":"&gt;", 
+'"':"&quot;", 
+"'":"&#039;" 
+}[m]) 
+); 
 
-}
+} 
 
 
-/* =========================================================
-   MULAI KUIS
-   ========================================================= */
+/* ========================================================= 
+   MULAI KUIS 
+   ========================================================= */ 
 
-function mulai(){
+function mulai(){ 
 
-siswa.nama=
-document.getElementById("nama").value.trim();
+siswa.nama= 
+document.getElementById("nama").value.trim(); 
 
-siswa.kelas=
-document.getElementById("kelas").value.trim();
+siswa.kelas= 
+document.getElementById("kelas").value.trim(); 
 
-siswa.absen=
-document.getElementById("absen").value.trim();
+siswa.absen= 
+document.getElementById("absen").value.trim(); 
 
 
-if(
-!siswa.nama ||
-!siswa.kelas ||
-!siswa.absen
-){
+if( 
+!siswa.nama || 
+!siswa.kelas || 
+!siswa.absen 
+){ 
 
-toast(
-"⚠️ Nama, kelas, dan nomor absen wajib diisi."
-);
+toast( 
+"⚠️ Nama, kelas, dan nomor absen wajib diisi." 
+); 
 
-return;
+return; 
 
-}
+} 
 
 
-index=0;
-benar=0;
-jawabanDipilih=[];
+index=0; 
+benar=0; 
+jawabanDipilih=[]; 
 
 
-bankSoal=acak(soal).map(s=>{
+bankSoal=acak(soal).map(s=>{ 
 
-let ops=s.a.map(
-(teks,i)=>({
-teks,
-benar:i===s.k
-})
-);
+let ops=s.a.map( 
+(teks,i)=>({ 
+teks, 
+benar:i===s.k 
+}) 
+); 
 
-ops=acak(ops);
+ops=acak(ops); 
 
-return {
-...s,
-a:ops.map(x=>x.teks),
-k:ops.findIndex(x=>x.benar)
-};
+return { 
+...s, 
+a:ops.map(x=>x.teks), 
+k:ops.findIndex(x=>x.benar) 
+}; 
 
-});
+}); 
 
 
-document
-.getElementById("identitas")
-.classList.add("hidden");
+document 
+.getElementById("identitas") 
+.classList.add("hidden"); 
 
 
-document
-.getElementById("hasil")
-.classList.add("hidden");
+document 
+.getElementById("hasil") 
+.classList.add("hidden"); 
 
 
-document
-.getElementById("kuis")
-.classList.remove("hidden");
+document 
+.getElementById("kuis") 
+.classList.remove("hidden"); 
 
 
-renderSoal();
+renderSoal(); 
 
-}
+} 
 
 
-/* =========================================================
-   TAMPILKAN SOAL
-   ========================================================= */
+/* ========================================================= 
+   TAMPILKAN SOAL 
+   ========================================================= */ 
 
-function renderSoal(){
+function renderSoal(){ 
 
-const s=bankSoal[index];
+const s=bankSoal[index]; 
 
 
-document.getElementById(
-"siswaInfo"
-).innerHTML=
-`👤 ${escapeHTML(siswa.nama)}
-&nbsp;|&nbsp;
-Kelas ${escapeHTML(siswa.kelas)}
-&nbsp;|&nbsp;
-Absen ${escapeHTML(siswa.absen)}`;
+document.getElementById( 
+"siswaInfo" 
+).innerHTML= 
+`👤 ${escapeHTML(siswa.nama)} 
+&nbsp;|&nbsp; 
+Kelas ${escapeHTML(siswa.kelas)} 
+&nbsp;|&nbsp; 
+Absen ${escapeHTML(siswa.absen)}`; 
 
 
-document.getElementById(
-"counter"
-).textContent=
-`Soal ${index+1} dari ${bankSoal.length}`;
+document.getElementById( 
+"counter" 
+).textContent= 
+`Soal ${index+1} dari ${bankSoal.length}`; 
 
 
-document.getElementById(
-"progress"
-).style.width=
-((index)/bankSoal.length*100)+"%";
+document.getElementById( 
+"progress" 
+).style.width= 
+((index)/bankSoal.length*100)+"%"; 
 
 
-document.getElementById(
-"soalArea"
-).innerHTML=`
+document.getElementById( 
+"soalArea" 
+).innerHTML=` 
 
-<div class="question-no">
-SOAL ${index+1}
-</div>
+<div class="question-no"> 
+SOAL ${index+1} 
+</div> 
 
-<div class="question">
-${escapeHTML(s.q)}
-</div>
+<div class="question"> 
+${escapeHTML(s.q)} 
+</div> 
 
-<div class="answers">
+<div class="answers"> 
 
-${s.a.map((a,i)=>`
+${s.a.map((a,i)=>` 
 
-<label class="answer">
+<label class="answer"> 
 
-<input
-type="radio"
-name="jawaban"
-value="${i}"
-${jawabanDipilih[index]===i ? "checked" : ""}
->
+<input 
+type="radio" 
+name="jawaban" 
+value="${i}" 
+${jawabanDipilih[index]===i ? "checked" : ""} 
+> 
 
-<span>
-<b>${String.fromCharCode(65+i)}.</b>
-${escapeHTML(a)}
-</span>
+<span> 
+<b>${String.fromCharCode(65+i)}.</b> 
+${escapeHTML(a)} 
+</span> 
 
-</label>
+</label> 
 
-`).join("")}
+`).join("")} 
 
-</div>
+</div> 
 
 
-<div class="nav-row">
+<div class="nav-row"> 
 
-<div class="nav-left">
+<div class="nav-left"> 
 
-<button
-class="nav-btn previous"
-onclick="soalSebelumnya()"
-${index===0 ? "disabled" : ""}
->
-⬅️ Sebelumnya
-</button>
+<button 
+class="nav-btn previous" 
+onclick="soalSebelumnya()" 
+${index===0 ? "disabled" : ""} 
+> 
+⬅️ Sebelumnya 
+</button> 
 
-</div>
+</div> 
 
 
-<div class="nav-right">
+<div class="nav-right"> 
 
-<button
-class="nav-btn next"
-onclick="nextSoal()"
->
-${
-index===bankSoal.length-1
-?"🏁 Selesai"
-:"➡️ Berikutnya"
-}
-</button>
+<button 
+class="nav-btn next" 
+onclick="nextSoal()" 
+> 
+${ 
+index===bankSoal.length-1 
+?"🏁 Selesai" 
+:"➡️ Berikutnya" 
+} 
+</button> 
 
-</div>
+</div> 
 
-</div>
+</div> 
 
-`;
+`; 
 
-}
+} 
 
 
-/* =========================================================
-   SIMPAN JAWABAN SAAT BERPINDAH
-   ========================================================= */
+/* ========================================================= 
+   SIMPAN JAWABAN SAAT BERPINDAH 
+   ========================================================= */ 
 
-function simpanJawaban(){
+function simpanJawaban(){ 
 
-const el=
-document.querySelector(
-'input[name="jawaban"]:checked'
-);
+const el= 
+document.querySelector( 
+'input[name="jawaban"]:checked' 
+); 
 
 
-if(!el){
+if(!el){ 
 
-return false;
+return false; 
 
-}
+} 
 
 
-jawabanDipilih[index]=
-Number(el.value);
+jawabanDipilih[index]= 
+Number(el.value); 
 
 
-return true;
+return true; 
 
-}
+} 
 
 
-/* =========================================================
-   SOAL SEBELUMNYA
-   ========================================================= */
+/* ========================================================= 
+   SOAL SEBELUMNYA 
+   ========================================================= */ 
 
-function soalSebelumnya(){
+function soalSebelumnya(){ 
 
-if(index<=0){
+if(index<=0){ 
 
-return;
+return; 
 
-}
+} 
 
 
-const el=
-document.querySelector(
-'input[name="jawaban"]:checked'
-);
+const el= 
+document.querySelector( 
+'input[name="jawaban"]:checked' 
+); 
 
 
-if(el){
+if(el){ 
 
-jawabanDipilih[index]=
-Number(el.value);
+jawabanDipilih[index]= 
+Number(el.value); 
 
-}
+} 
 
 
-index--;
+index--; 
 
-renderSoal();
+renderSoal(); 
 
-}
+} 
 
 
-/* =========================================================
-   SOAL BERIKUTNYA
-   ========================================================= */
+/* ========================================================= 
+   SOAL BERIKUTNYA 
+   ========================================================= */ 
 
-function nextSoal(){
+function nextSoal(){ 
 
-const berhasil=
-simpanJawaban();
+const berhasil= 
+simpanJawaban(); 
 
 
-if(!berhasil){
+if(!berhasil){ 
 
-toast(
-"⚠️ Pilih salah satu jawaban terlebih dahulu."
-);
+toast( 
+"⚠️ Pilih salah satu jawaban terlebih dahulu." 
+); 
 
-return;
+return; 
 
-}
+} 
 
 
-index++;
+index++; 
 
 
-if(index<bankSoal.length){
+if(index<bankSoal.length){ 
 
-renderSoal();
+renderSoal(); 
 
-}else{
+}else{ 
 
-hitungNilai();
+hitungNilai(); 
 
-}
+} 
 
-}
+} 
 
 
-/* =========================================================
-   HITUNG NILAI
-   ========================================================= */
+/* ========================================================= 
+   HITUNG NILAI 
+   ========================================================= */ 
 
-function hitungNilai(){
+function hitungNilai(){ 
 
-benar=0;
+benar=0; 
 
 
-for(
-let i=0;
-i<bankSoal.length;
-i++
-){
+for( 
+let i=0; 
+i<bankSoal.length; 
+i++ 
+){ 
 
-if(
-jawabanDipilih[i]===
-bankSoal[i].k
-){
+if( 
+jawabanDipilih[i]=== 
+bankSoal[i].k 
+){ 
 
-benar++;
+benar++; 
 
-}
+} 
 
-}
+} 
 
 
-selesai();
+selesai(); 
 
-}
+} 
 
 
-/* =========================================================
-   PENGIRIMAN KE GOOGLE SHEETS
-   BAGIAN INI TETAP DIPERTAHANKAN
-   ========================================================= */
+/* ========================================================= 
+   PENGIRIMAN KE GOOGLE SHEETS 
+   BAGIAN INI TETAP DIPERTAHANKAN 
+   ========================================================= */ 
 
-function kirimKeGoogleSheets(data){
+function kirimKeGoogleSheets(data){ 
 
-if(
-!GOOGLE_SCRIPT_URL ||
-GOOGLE_SCRIPT_URL.includes("TEMPEL_URL")
-){
+if( 
+!GOOGLE_SCRIPT_URL || 
+GOOGLE_SCRIPT_URL.includes("TEMPEL_URL") 
+){ 
 
-return {
-ok:false,
-skipped:true
-};
+return { 
+ok:false, 
+skipped:true 
+}; 
 
-}
+} 
 
 
-try{
+try{ 
 
-const iframeName=
-"googleSheetsTarget";
+const iframeName= 
+"googleSheetsTarget"; 
 
 
-let iframe=
-document.getElementById(
-iframeName
-);
+let iframe= 
+document.getElementById( 
+iframeName 
+); 
 
 
-if(!iframe){
+if(!iframe){ 
 
-iframe=
-document.createElement("iframe");
+iframe= 
+document.createElement("iframe"); 
 
-iframe.id=iframeName;
-iframe.name=iframeName;
-iframe.style.display="none";
+iframe.id=iframeName; 
+iframe.name=iframeName; 
+iframe.style.display="none"; 
 
-document.body.appendChild(
-iframe
-);
+document.body.appendChild( 
+iframe 
+); 
 
-}
+} 
 
 
-const form=
-document.createElement("form");
+const form= 
+document.createElement("form"); 
 
 
-form.method="POST";
-form.action=GOOGLE_SCRIPT_URL;
-form.target=iframeName;
-form.style.display="none";
+form.method="POST"; 
+form.action=GOOGLE_SCRIPT_URL; 
+form.target=iframeName; 
+form.style.display="none"; 
 
 
-const fields={
+const fields={ 
 
-nama:data.nama,
-kelas:data.kelas,
-absen:data.absen,
+nama:data.nama, 
+kelas:data.kelas, 
+absen:data.absen, 
 
-nilai:data.nilai,
-benar:data.benar,
-salah:data.total-data.benar,
+nilai:data.nilai, 
+benar:data.benar, 
+salah:data.total-data.benar, 
 
-total:data.total,
-persen:data.persen,
-waktu:data.waktu
+total:data.total, 
+persen:data.persen, 
+waktu:data.waktu 
 
-};
+}; 
 
 
-Object.keys(fields).forEach(
-function(key){
+Object.keys(fields).forEach( 
+function(key){ 
 
-const input=
-document.createElement("input");
+const input= 
+document.createElement("input"); 
 
-input.type="hidden";
-input.name=key;
-input.value=
-fields[key] ?? "";
+input.type="hidden"; 
+input.name=key; 
+input.value= 
+fields[key] ?? ""; 
 
-form.appendChild(input);
+form.appendChild(input); 
 
-}
-);
+} 
+); 
 
 
-document.body.appendChild(form);
+document.body.appendChild(form); 
 
-form.submit();
+form.submit(); 
 
 
-setTimeout(
-function(){
-form.remove();
-},
-3000
-);
+setTimeout( 
+function(){ 
+form.remove(); 
+}, 
+3000 
+); 
 
 
-return {
-ok:true
-};
+return { 
+ok:true 
+}; 
 
 
-}catch(error){
+}catch(error){ 
 
-console.error(
-"Pengiriman Google Sheets gagal:",
-error
-);
+console.error( 
+"Pengiriman Google Sheets gagal:", 
+error 
+); 
 
-return {
-ok:false
-};
+return { 
+ok:false 
+}; 
 
-}
+} 
 
-}
+} 
 
 
-/* =========================================================
-   TAMBAHAN:
-   AMBIL DATA HASIL DARI GOOGLE SHEETS
-   ========================================================= */
+/* ========================================================= 
+   TAMBAHAN: 
+   AMBIL DATA HASIL DARI GOOGLE SHEETS 
+   ========================================================= */ 
 
-async function ambilDataPeringkat(){
+async function ambilDataPeringkat(){ 
 
-if(!GOOGLE_SCRIPT_URL){
+if(!GOOGLE_SCRIPT_URL){ 
 
-throw new Error(
-"URL Google Script belum tersedia."
-);
+throw new Error( 
+"URL Google Script belum tersedia." 
+); 
 
-}
+} 
 
 
-const response=
-await fetch(
-GOOGLE_SCRIPT_URL+
-"?action=ranking&t="+
-Date.now(),
-{
-method:"GET",
-cache:"no-store"
-}
-);
+const response= 
+await fetch( 
+GOOGLE_SCRIPT_URL+ 
+"?action=ranking&t="+ 
+Date.now(), 
+{ 
+method:"GET", 
+cache:"no-store" 
+} 
+); 
 
 
-if(!response.ok){
+if(!response.ok){ 
 
-throw new Error(
-"Gagal mengambil data Google Sheets."
-);
+throw new Error( 
+"Gagal mengambil data Google Sheets." 
+); 
 
-}
+} 
 
 
-const data=
-await response.json();
+const data= 
+await response.json(); 
 
 
-if(
-!data ||
-!Array.isArray(data.data)
-){
+if( 
+!data || 
+!Array.isArray(data.data) 
+){ 
 
-throw new Error(
-"Format data ranking dari Google Sheets tidak valid."
-);
+throw new Error( 
+"Format data ranking dari Google Sheets tidak valid." 
+); 
 
-}
+} 
 
 
-return data.data;
+return data.data; 
 
-}
+} 
 
 
-/* =========================================================
-   TAMBAHAN:
-   NORMALISASI NILAI
-   ========================================================= */
+/* ========================================================= 
+   TAMBAHAN: 
+   NORMALISASI NILAI 
+   ========================================================= */ 
 
-function angkaNilai(value){
+function angkaNilai(value){ 
 
-const n=
-Number(
-String(value)
-.replace(",",".")
-);
+const n= 
+Number( 
+String(value) 
+.replace(",",".") 
+); 
 
 
-return Number.isFinite(n)
-?n
-:0;
+return Number.isFinite(n) 
+?n 
+:0; 
 
-}
+} 
 
 
-/* =========================================================
-   TAMBAHAN:
-   NORMALISASI WAKTU
-   ========================================================= */
+/* ========================================================= 
+   TAMBAHAN: 
+   NORMALISASI WAKTU 
+   ========================================================= */ 
 
-function waktuRanking(value){
+function waktuRanking(value){ 
 
-const waktu=
-new Date(value).getTime();
+const waktu= 
+new Date(value).getTime(); 
 
 
-if(Number.isNaN(waktu)){
+if(Number.isNaN(waktu)){ 
 
-return Number.MAX_SAFE_INTEGER;
+return Number.MAX_SAFE_INTEGER; 
 
-}
+} 
 
 
-return waktu;
+return waktu; 
 
-}
+} 
 
 
-/* =========================================================
-   TAMBAHAN:
-   HITUNG PERINGKAT DARI DATA GOOGLE SHEETS
-   ========================================================= */
+/* ========================================================= 
+   TAMBAHAN: 
+   HITUNG PERINGKAT DARI DATA GOOGLE SHEETS 
+   ========================================================= */ 
 
-function hitungPeringkat(data){
+function hitungPeringkat(data){ 
 
-const peserta=
-data
-.filter(row=>{
+const peserta= 
+data 
+.filter(row=>{ 
 
-return row &&
-row.nama &&
-row.nilai !== undefined &&
-row.nilai !== "";
+return row && 
+row.nama && 
+row.nilai !== undefined && 
+row.nilai !== ""; 
 
-})
-.map(row=>({
+}) 
+.map(row=>({ 
 
-nama:String(row.nama),
-kelas:String(row.kelas ?? ""),
-absen:String(row.absen ?? ""),
-nilai:angkaNilai(row.nilai),
-waktu:waktuRanking(row.waktu)
+nama:String(row.nama), 
+kelas:String(row.kelas ?? ""), 
+absen:String(row.absen ?? ""), 
+nilai:angkaNilai(row.nilai), 
+waktu:waktuRanking(row.waktu) 
 
-}));
+})); 
 
 
-peserta.sort(
-(a,b)=>{
+peserta.sort( 
+(a,b)=>{ 
 
-if(b.nilai!==a.nilai){
+if(b.nilai!==a.nilai){ 
 
-return b.nilai-a.nilai;
+return b.nilai-a.nilai; 
 
-}
+} 
 
-return a.waktu-b.waktu;
+return a.waktu-b.waktu; 
 
-}
-);
+} 
+); 
 
 
-/*
-   Menggunakan nama + kelas + absen
-   sebagai identitas hasil siswa.
-*/
+/* 
+   Menggunakan nama + kelas + absen 
+   sebagai identitas hasil siswa. 
+*/ 
 
-const posisi=
-peserta.findIndex(row=>
+const posisi= 
+peserta.findIndex(row=> 
 
-row.nama.trim().toLowerCase()===
-siswa.nama.trim().toLowerCase()
+row.nama.trim().toLowerCase()=== 
+siswa.nama.trim().toLowerCase() 
 
-&&
+&& 
 
-row.kelas.trim().toLowerCase()===
-siswa.kelas.trim().toLowerCase()
+row.kelas.trim().toLowerCase()=== 
+siswa.kelas.trim().toLowerCase() 
 
-&&
+&& 
 
-row.absen.trim()===
-siswa.absen.trim()
+row.absen.trim()=== 
+siswa.absen.trim() 
 
-);
+); 
 
 
-if(posisi===-1){
+if(posisi===-1){ 
 
-return {
-peringkat:null,
-total:peserta.length
-};
+return { 
+peringkat:null, 
+total:peserta.length 
+}; 
 
-}
+} 
 
 
-return {
-peringkat:posisi+1,
-total:peserta.length
-};
+return { 
+peringkat:posisi+1, 
+total:peserta.length 
+}; 
 
-}
+} 
 
 
-/* =========================================================
-   TAMBAHAN:
-   TAMPILKAN PERINGKAT
-   ========================================================= */
+/* ========================================================= 
+   TAMBAHAN: 
+   TAMPILKAN PERINGKAT 
+   ========================================================= */ 
 
-function tampilkanPeringkatLoading(){
+function tampilkanPeringkatLoading(){ 
 
-const area=
-document.getElementById(
-"rankingArea"
-);
+const area= 
+document.getElementById( 
+"rankingArea" 
+); 
 
 
-if(!area){
+if(!area){ 
 
-return;
+return; 
 
-}
+} 
 
 
-area.innerHTML=`
+area.innerHTML=` 
 
-<div class="ranking-icon">
-🏆
-</div>
+<div class="ranking-icon"> 
+🏆 
+</div> 
 
-<div class="ranking-title">
-Peringkat
-</div>
+<div class="ranking-title"> 
+Peringkat 
+</div> 
 
-<div class="ranking-loading">
-⏳ Mengambil peringkat dari Google Sheets...
-</div>
+<div class="ranking-loading"> 
+⏳ Mengambil peringkat dari Google Sheets... 
+</div> 
 
-<div class="ranking-message">
-Peringkat dihitung berdasarkan data hasil yang tersimpan
-di Google Sheets.
-</div>
+<div class="ranking-message"> 
+Peringkat dihitung berdasarkan data hasil yang tersimpan 
+di Google Sheets. 
+</div> 
 
-`;
+`; 
 
-}
+} 
 
 
-/* =========================================================
-   TAMBAHAN:
-   TAMPILKAN PERINGKAT BERHASIL
-   ========================================================= */
+/* ========================================================= 
+   TAMBAHAN: 
+   TAMPILKAN PERINGKAT BERHASIL 
+   ========================================================= */ 
 
-function tampilkanPeringkat(data){
+function tampilkanPeringkat(data){ 
 
-const area=
-document.getElementById(
-"rankingArea"
-);
+const area= 
+document.getElementById( 
+"rankingArea" 
+); 
 
 
-if(!area){
+if(!area){ 
 
-return;
+return; 
 
-}
+} 
 
 
-if(data.peringkat===null){
+if(data.peringkat===null){ 
 
-area.innerHTML=`
+return; 
 
-<div class="ranking-icon">
-🏆
-</div>
+} 
 
-<div class="ranking-title">
-Peringkat
-</div>
 
-<div class="ranking-error">
-⚠️ Data hasilmu belum ditemukan di Google Sheets.
-<br>
-Silakan tunggu beberapa detik lalu coba lagi.
-</div>
+area.innerHTML=` 
 
-`;
+<div class="ranking-icon"> 
+🏆 
+</div> 
 
-return;
+<div class="ranking-title"> 
+Peringkatmu 
+</div> 
 
-}
+<div class="ranking-number"> 
+${data.peringkat} 
+</div> 
 
+<div class="ranking-total"> 
+dari ${data.total} siswa 
+</div> 
 
-area.innerHTML=`
+<div class="ranking-message"> 
 
-<div class="ranking-icon">
-🏆
-</div>
+Peringkat dihitung berdasarkan nilai tertinggi 
+dari seluruh siswa yang telah mengerjakan. 
 
-<div class="ranking-title">
-Peringkatmu
-</div>
+<br><br> 
 
-<div class="ranking-number">
-${data.peringkat}
-</div>
+🌐 Data peringkat berasal dari Google Sheets, 
+sehingga peringkat dapat sama di semua perangkat. 
 
-<div class="ranking-total">
-dari ${data.total} siswa
-</div>
+</div> 
 
-<div class="ranking-message">
+`; 
 
-Peringkat dihitung berdasarkan nilai tertinggi
-dari seluruh siswa yang telah mengerjakan.
+} 
 
-<br><br>
 
-🌐 Data peringkat berasal dari Google Sheets,
-sehingga peringkat dapat sama di semua perangkat.
+/* ========================================================= 
+   TAMBAHAN: 
+   GAGAL MENGAMBIL PERINGKAT 
+   
+   PESAN ERROR DIHAPUS.
+   TIDAK ADA PERUBAHAN PADA PENGIRIMAN DATA SISWA.
+   ========================================================= */ 
 
-</div>
+function tampilkanPeringkatError(){ 
 
-`;
+return; 
 
-}
+} 
 
 
-/* =========================================================
-   TAMBAHAN:
-   GAGAL MENGAMBIL PERINGKAT
-   ========================================================= */
+/* ========================================================= 
+   TAMBAHAN: 
+   COBA AMBIL PERINGKAT BERULANG 
+   ========================================================= */ 
 
-function tampilkanPeringkatError(){
+async function ambilPeringkatDenganRetry(){ 
 
-const area=
-document.getElementById(
-"rankingArea"
-);
+tampilkanPeringkatLoading(); 
 
 
-if(!area){
+const maksimalPercobaan=6; 
 
-return;
 
-}
+/* 
+   Jeda bertambah: 
+   1 detik 
+   1,5 detik 
+   2 detik 
+   2,5 detik 
+   3 detik 
+   4 detik 
+*/ 
 
+for( 
+let percobaan=1; 
+percobaan<=maksimalPercobaan; 
+percobaan++ 
+){ 
 
-area.innerHTML=`
+try{ 
 
-<div class="ranking-icon">
-🏆
-</div>
+const data= 
+await ambilDataPeringkat(); 
 
-<div class="ranking-title">
-Peringkat
-</div>
 
-<div class="ranking-error">
+const hasil= 
+hitungPeringkat(data); 
 
-⚠️ Peringkat belum dapat diambil dari Google Sheets.
 
-<br><br>
+if( 
+hasil.peringkat!==null 
+){ 
 
-Hasil kuismu tetap tersimpan.
-Silakan tunggu beberapa saat dan muat ulang halaman
-jika diperlukan.
+tampilkanPeringkat( 
+hasil 
+); 
 
-</div>
+return; 
 
-`;
+} 
 
-}
 
+}catch(error){ 
 
-/* =========================================================
-   TAMBAHAN:
-   COBA AMBIL PERINGKAT BERULANG
-   ========================================================= */
+console.error( 
+"Percobaan ranking gagal:", 
+error 
+); 
 
-async function ambilPeringkatDenganRetry(){
+} 
 
-tampilkanPeringkatLoading();
 
+if( 
+percobaan<maksimalPercobaan 
+){ 
 
-const maksimalPercobaan=6;
+const jeda= 
+1000+ 
+(percobaan-1)*500; 
 
 
-/*
-   Jeda bertambah:
-   1 detik
-   1,5 detik
-   2 detik
-   2,5 detik
-   3 detik
-   4 detik
-*/
+await new Promise( 
+resolve=> 
+setTimeout( 
+resolve, 
+jeda 
+) 
+); 
 
-for(
-let percobaan=1;
-percobaan<=maksimalPercobaan;
-percobaan++
-){
+} 
 
-try{
+} 
 
-const data=
-await ambilDataPeringkat();
 
+tampilkanPeringkatError(); 
 
-const hasil=
-hitungPeringkat(data);
+} 
 
 
-if(
-hasil.peringkat!==null
-){
+/* ========================================================= 
+   SELESAI 
+   ========================================================= */ 
 
-tampilkanPeringkat(
-hasil
-);
+function selesai(){ 
 
-return;
+const total=bankSoal.length; 
 
-}
 
+const nilai= 
+Math.round( 
+benar/total*100 
+); 
 
-}catch(error){
 
-console.error(
-"Percobaan ranking gagal:",
-error
-);
+const persen= 
+Math.round( 
+benar/total*100 
+); 
 
-}
 
+const waktu= 
+new Date().toLocaleString( 
+"id-ID" 
+); 
 
-if(
-percobaan<maksimalPercobaan
-){
 
-const jeda=
-1000+
-(percobaan-1)*500;
+const hasilBaru={ 
 
+nama:siswa.nama, 
+kelas:siswa.kelas, 
+absen:siswa.absen, 
 
-await new Promise(
-resolve=>
-setTimeout(
-resolve,
-jeda
-)
-);
+nilai, 
+benar, 
+total, 
+persen, 
+waktu 
 
-}
+}; 
 
-}
 
+document 
+.getElementById("kuis") 
+.classList.add("hidden"); 
 
-tampilkanPeringkatError();
 
-}
+tampilkanHasil( 
+hasilBaru 
+); 
 
 
-/* =========================================================
-   SELESAI
-   ========================================================= */
+/* 
+   PENGIRIMAN INI TETAP SAMA. 
+   Tidak mengubah fields maupun metode POST. 
+*/ 
 
-function selesai(){
+const kirim= 
+kirimKeGoogleSheets( 
+hasilBaru 
+); 
 
-const total=bankSoal.length;
 
+if( 
+kirim && 
+kirim.ok 
+){ 
 
-const nilai=
-Math.round(
-benar/total*100
-);
+toast( 
+"✅ Hasil dikirim ke Google Sheets." 
+); 
 
+} 
 
-const persen=
-Math.round(
-benar/total*100
-);
 
+/* 
+   Ranking diambil setelah proses 
+   pengiriman dijalankan. 
+*/ 
 
-const waktu=
-new Date().toLocaleString(
-"id-ID"
-);
+setTimeout( 
+function(){ 
 
+ambilPeringkatDenganRetry(); 
 
-const hasilBaru={
+}, 
+1000 
+); 
 
-nama:siswa.nama,
-kelas:siswa.kelas,
-absen:siswa.absen,
+} 
 
-nilai,
-benar,
-total,
-persen,
-waktu
 
-};
+/* ========================================================= 
+   HASIL 
+   ========================================================= */ 
 
+function tampilkanHasil(data){ 
 
-document
-.getElementById("kuis")
-.classList.add("hidden");
+let pesan= 
+data.nilai>=90 
+?"🏆 Luar biasa!" 
+:data.nilai>=75 
+?"🌟 Bagus sekali!" 
+:data.nilai>=60 
+?"💪 Terus berlatih!" 
+:"📚 Jangan menyerah!"; 
 
 
-tampilkanHasil(
-hasilBaru
-);
+document.getElementById( 
+"hasil" 
+).innerHTML=` 
 
+<div class="center"> 
 
-/*
-   PENGIRIMAN INI TETAP SAMA.
-   Tidak mengubah fields maupun metode POST.
-*/
+<h2> 
+🎉 Kuis Selesai! 
+</h2> 
 
-const kirim=
-kirimKeGoogleSheets(
-hasilBaru
-);
 
+<p> 
+${pesan} 
+</p> 
 
-if(
-kirim &&
-kirim.ok
-){
 
-toast(
-"✅ Hasil dikirim ke Google Sheets."
-);
+<div class="result-score"> 
+${data.nilai} 
+</div> 
 
-}
 
+<div class="stats"> 
 
-/*
-   Ranking diambil setelah proses
-   pengiriman dijalankan.
-*/
+<div class="stat"> 
 
-setTimeout(
-function(){
+<b> 
+${data.benar}/${data.total} 
+</b> 
 
-ambilPeringkatDenganRetry();
+Jawaban Benar 
 
-},
-1000
-);
+</div> 
 
-}
 
+<div class="stat"> 
 
-/* =========================================================
-   HASIL
-   ========================================================= */
+<b> 
+${data.persen}% 
+</b> 
 
-function tampilkanHasil(data){
+Persentase Benar 
 
-let pesan=
-data.nilai>=90
-?"🏆 Luar biasa!"
-:data.nilai>=75
-?"🌟 Bagus sekali!"
-:data.nilai>=60
-?"💪 Terus berlatih!"
-:"📚 Jangan menyerah!";
+</div> 
 
+</div> 
 
-document.getElementById(
-"hasil"
-).innerHTML=`
 
-<div class="center">
+<p> 
 
-<h2>
-🎉 Kuis Selesai!
-</h2>
+<b> 
+${escapeHTML(data.nama)} 
+</b> 
 
+• Kelas ${escapeHTML(data.kelas)} 
 
-<p>
-${pesan}
-</p>
+• Absen ${escapeHTML(data.absen)} 
 
-
-<div class="result-score">
-${data.nilai}
-</div>
-
-
-<div class="stats">
-
-<div class="stat">
-
-<b>
-${data.benar}/${data.total}
-</b>
-
-Jawaban Benar
-
-</div>
-
-
-<div class="stat">
-
-<b>
-${data.persen}%
-</b>
-
-Persentase Benar
-
-</div>
-
-</div>
-
-
-<p>
-
-<b>
-${escapeHTML(data.nama)}
-</b>
-
-• Kelas ${escapeHTML(data.kelas)}
-
-• Absen ${escapeHTML(data.absen)}
-
-</p>
+</p> 
 
 
 <!-- =====================================================
-     TAMBAHAN PERINGKAT
-     ===================================================== -->
+     TAMBAHAN PERINGKAT 
+     ===================================================== --> 
 
-<div
-id="rankingArea"
-class="ranking-box"
->
+<div 
+id="rankingArea" 
+class="ranking-box" 
+> 
 
-<div class="ranking-icon">
-🏆
-</div>
+<div class="ranking-icon"> 
+🏆 
+</div> 
 
-<div class="ranking-title">
-Peringkat
-</div>
+<div class="ranking-title"> 
+Peringkat 
+</div> 
 
-<div class="ranking-loading">
-⏳ Menghubungkan dengan Google Sheets...
-</div>
+<div class="ranking-loading"> 
+⏳ Menghubungkan dengan Google Sheets... 
+</div> 
 
-</div>
-
-
-<div class="actions">
-
-<button
-class="btn primary"
-onclick="ulang()"
->
-🔄 Kerjakan Lagi
-</button>
+</div> 
 
 
-<button
-class="btn gray"
-onclick="window.print()"
->
-🖨️ Cetak Hasil
-</button>
+<div class="actions"> 
 
-</div>
-
-</div>
-
-`;
+<button 
+class="btn primary" 
+onclick="ulang()" 
+> 
+🔄 Kerjakan Lagi 
+</button> 
 
 
-document
-.getElementById("hasil")
-.classList.remove("hidden");
+<button 
+class="btn gray" 
+onclick="window.print()" 
+> 
+🖨️ Cetak Hasil 
+</button> 
 
-}
+</div> 
 
+</div> 
 
-/* =========================================================
-   ULANG
-   ========================================================= */
-
-function ulang(){
-
-document
-.getElementById("hasil")
-.classList.add("hidden");
+`; 
 
 
-document
-.getElementById("identitas")
-.classList.remove("hidden");
+document 
+.getElementById("hasil") 
+.classList.remove("hidden"); 
+
+} 
 
 
-document.getElementById(
-"nama"
-).value="";
+/* ========================================================= 
+   ULANG 
+   ========================================================= */ 
+
+function ulang(){ 
+
+document 
+.getElementById("hasil") 
+.classList.add("hidden"); 
 
 
-document.getElementById(
-"kelas"
-).value="";
+document 
+.getElementById("identitas") 
+.classList.remove("hidden"); 
 
 
-document.getElementById(
-"absen"
-).value="";
-
-}
+document.getElementById( 
+"nama" 
+).value=""; 
 
 
-/* =========================================================
-   EXPORT CSV
-   ========================================================= */
+document.getElementById( 
+"kelas" 
+).value=""; 
 
 
-/* =========================================================
-   HAPUS DATA LOKAL
-   ========================================================= */
+document.getElementById( 
+"absen" 
+).value=""; 
+
+} 
 
 
-/* =========================================================
-   TOAST
-   ========================================================= */
-
-function toast(msg){
-
-const t=
-document.getElementById(
-"toast"
-);
+/* ========================================================= 
+   EXPORT CSV 
+   ========================================================= */ 
 
 
-t.textContent=msg;
+/* ========================================================= 
+   HAPUS DATA LOKAL 
+   ========================================================= */ 
 
 
-t.classList.remove(
-"hidden"
-);
+/* ========================================================= 
+   TOAST 
+   ========================================================= */ 
+
+function toast(msg){ 
+
+const t= 
+document.getElementById( 
+"toast" 
+); 
 
 
-clearTimeout(
-window.tt
-);
+t.textContent=msg; 
 
 
-window.tt=
-setTimeout(
-()=>
-t.classList.add(
-"hidden"
-),
-2400
-);
-
-}
+t.classList.remove( 
+"hidden" 
+); 
 
 
-/* =========================================================
-   INISIALISASI
-   ========================================================= */
+clearTimeout( 
+window.tt 
+); 
 
-</script>
 
-</body>
+window.tt= 
+setTimeout( 
+()=> 
+t.classList.add( 
+"hidden" 
+), 
+2400 
+); 
+
+} 
+
+
+/* ========================================================= 
+   INISIALISASI 
+   ========================================================= */ 
+
+</script> 
+
+</body> 
 </html>
+

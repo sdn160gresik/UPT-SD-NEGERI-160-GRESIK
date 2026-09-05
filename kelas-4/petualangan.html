@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -27,7 +28,8 @@
   padding:0;
 }
 
-html,body{
+html,
+body{
   min-height:100%;
   font-family:"Trebuchet MS",Arial,sans-serif;
 }
@@ -61,6 +63,7 @@ body{
   overflow-x:hidden;
 }
 
+/* Dekorasi background */
 body:before,
 body:after{
   content:"";
@@ -86,19 +89,25 @@ body:after{
   background:rgba(139,92,246,.08);
 }
 
+/* Container utama */
 .shell{
   width:min(1120px,100%);
   position:relative;
   z-index:1;
 }
 
+/* Panel utama */
 .panel{
   background:var(--glass);
   border:1px solid rgba(255,255,255,.9);
+
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
+
   border-radius:36px;
+
   padding:42px;
+
   box-shadow:
     var(--shadow),
     0 8px 25px rgba(15,23,42,.06);
@@ -117,17 +126,20 @@ body:after{
 .back-btn{
   display:inline-flex;
   align-items:center;
-  gap:9px;
+  justify-content:center;
 
-  padding:11px 18px;
+  padding:11px 20px;
 
   border-radius:999px;
+
   border:1px solid rgba(154,52,18,.16);
 
   background:rgba(255,255,255,.88);
+
   color:var(--primary);
 
   text-decoration:none;
+
   font-size:14px;
   font-weight:900;
 
@@ -140,21 +152,13 @@ body:after{
     background .22s ease;
 }
 
-.back-btn .arrow{
-  font-size:19px;
-  line-height:1;
-  transition:transform .22s ease;
-}
-
 .back-btn:hover{
   transform:translateY(-3px);
+
   background:#fff;
+
   box-shadow:
     0 14px 28px rgba(91,44,27,.13);
-}
-
-.back-btn:hover .arrow{
-  transform:translateX(-4px);
 }
 
 .back-btn:active{
@@ -173,12 +177,15 @@ body:after{
 .badge{
   display:inline-flex;
   align-items:center;
+  justify-content:center;
   gap:8px;
 
   padding:9px 16px;
+
   border-radius:999px;
 
   background:#fff;
+
   color:var(--primary);
 
   font-size:13px;
@@ -192,8 +199,11 @@ body:after{
 
 h1{
   color:var(--navy);
+
   font-size:clamp(34px,5vw,56px);
+
   line-height:1;
+
   letter-spacing:-2px;
 }
 
@@ -207,9 +217,13 @@ h1 span:last-child{
 
 .subtitle{
   max-width:700px;
+
   margin:15px auto 0;
+
   color:var(--muted);
+
   line-height:1.65;
+
   font-size:16px;
 }
 
@@ -219,20 +233,25 @@ h1 span:last-child{
 
 .menu{
   display:grid;
+
   grid-template-columns:repeat(2,1fr);
+
   gap:18px;
 }
 
 .menu-card{
   position:relative;
+
   min-height:190px;
 
   padding:25px;
 
   border:1px solid rgba(154,52,18,.10);
+
   border-radius:25px;
 
   text-decoration:none;
+
   color:var(--ink);
 
   background:rgba(255,255,255,.78);
@@ -242,9 +261,13 @@ h1 span:last-child{
   box-shadow:
     0 12px 30px rgba(91,44,27,.08);
 
-  transition:.25s ease;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
 }
 
+/* Dekorasi lingkaran */
 .menu-card:before{
   content:"";
 
@@ -276,6 +299,10 @@ h1 span:last-child{
   transform:scale(1.35);
 }
 
+/* =========================
+   IKON
+========================= */
+
 .icon{
   width:60px;
   height:60px;
@@ -293,52 +320,40 @@ h1 span:last-child{
 
   box-shadow:
     0 8px 20px rgba(91,44,27,.08);
+
+  position:relative;
+  z-index:1;
 }
+
+/* =========================
+   TEKS KARTU
+========================= */
 
 .menu-card h2{
   color:var(--navy);
+
   font-size:23px;
+
   margin-bottom:8px;
+
+  position:relative;
+  z-index:1;
 }
 
 .menu-card p{
   color:var(--muted);
+
   font-size:14px;
+
   line-height:1.55;
+
   max-width:390px;
+
+  position:relative;
+  z-index:1;
 }
 
-.go{
-  position:absolute;
-
-  right:23px;
-  bottom:22px;
-
-  width:38px;
-  height:38px;
-
-  display:grid;
-  place-items:center;
-
-  border-radius:50%;
-
-  background:var(--primary);
-  color:#fff;
-
-  font-size:20px;
-  font-weight:900;
-
-  transition:.2s;
-}
-
-.go:after{
-  content:"→";
-}
-
-.menu-card:hover .go{
-  transform:translateX(4px);
-}
-
+/* Warna ikon */
 .objective .icon{
   background:#eff6ff;
 }
@@ -355,31 +370,17 @@ h1 span:last-child{
   background:#f0fdf4;
 }
 
-.objective .go{
-  background:#2563eb;
-}
-
-.video .go{
-  background:#be185d;
-}
-
-.monopoly .go{
-  background:#d97706;
-}
-
-.assessment .go{
-  background:#3f7d3a;
-}
-
 /* =========================
    FOOTER
 ========================= */
 
 .footer{
   text-align:center;
+
   margin-top:23px;
 
   color:#64748b;
+
   font-size:12px;
 }
 
@@ -388,7 +389,7 @@ h1 span:last-child{
 }
 
 /* =========================
-   TABLET / HP
+   RESPONSIVE TABLET / HP
 ========================= */
 
 @media(max-width:720px){
@@ -399,6 +400,7 @@ h1 span:last-child{
 
   .panel{
     padding:25px 18px;
+
     border-radius:28px;
   }
 
@@ -407,7 +409,8 @@ h1 span:last-child{
   }
 
   .back-btn{
-    padding:10px 15px;
+    padding:10px 18px;
+
     font-size:13px;
   }
 
@@ -419,6 +422,10 @@ h1 span:last-child{
     min-height:165px;
   }
 }
+
+/* =========================
+   HP KECIL
+========================= */
 
 @media(max-width:420px){
 
@@ -440,10 +447,10 @@ h1 span:last-child{
 
   .back-btn{
     width:100%;
-    justify-content:center;
   }
 }
 </style>
+
 </head>
 
 <body>
@@ -452,117 +459,156 @@ h1 span:last-child{
 
   <section class="panel">
 
-    <!-- TOMBOL KEMBALI -->
-    <div class="back-area">
-      <a
-        href="halamandepan-revisi-petualangan.html"
-        class="back-btn"
-        aria-label="Kembali ke halaman depan petualangan"
-      >
-               <span>Kembali</span>
-      </a>
+
+<!-- =====================
+     TOMBOL KEMBALI
+====================== -->
+<div class="back-area">
+
+  <a
+    href="halamandepan-revisi-petualangan.html"
+    class="back-btn"
+    aria-label="Kembali ke halaman depan petualangan"
+  >
+    Kembali
+  </a>
+
+</div>
+
+
+<!-- =====================
+     HEADER
+====================== -->
+<header class="header">
+
+  <div class="badge">
+    🔢 MATEMATIKA KELAS IV • BILANGAN CACAH 2.0
+  </div>
+
+  <h1>
+    Jelajah
+    <span>Bilangan</span>
+    <span>Cacah!</span>
+  </h1>
+
+  <p class="subtitle">
+    Pilih perjalanan belajar yang ingin kamu mulai.
+    Pelajari konsep, simak video, bermain Monopoli,
+    atau uji pemahamanmu melalui asesmen.
+  </p>
+
+</header>
+
+
+<!-- =====================
+     MENU PEMBELAJARAN
+====================== -->
+<nav
+  class="menu"
+  aria-label="Menu pembelajaran"
+>
+
+  <!-- TUJUAN PEMBELAJARAN -->
+  <a
+    class="menu-card objective"
+    href="tujuan.html"
+  >
+
+    <div class="icon">
+      🎯
     </div>
 
-    <!-- HEADER -->
-    <header class="header">
+    <h2>
+      Tujuan Pembelajaran
+    </h2>
 
-      <div class="badge">
-        🔢 MATEMATIKA KELAS IV • BILANGAN CACAH 2.0
-      </div>
+    <p>
+      Kenali tujuan yang akan dicapai dalam
+      petualangan belajar bilangan cacah.
+    </p>
 
-      <h1>
-        Jelajah
-        <span>Bilangan</span>
-        <span>Cacah!</span>
-      </h1>
+  </a>
 
-      <p class="subtitle">
-        Pilih perjalanan belajar yang ingin kamu mulai.
-        Pelajari konsep, simak video, bermain Monopoli,
-        atau uji pemahamanmu melalui asesmen.
-      </p>
 
-    </header>
+  <!-- VIDEO PEMBELAJARAN -->
+  <a
+    class="menu-card video"
+    href="video.html"
+  >
 
-    <!-- MENU PEMBELAJARAN -->
-    <nav class="menu" aria-label="Menu pembelajaran">
+    <div class="icon">
+      ▶️
+    </div>
 
-      <!-- TUJUAN -->
-      <a
-        class="menu-card objective"
-        href="tujuan.html"
-      >
-        <div class="icon">🎯</div>
+    <h2>
+      Video Pembelajaran
+    </h2>
 
-        <h2>Tujuan Pembelajaran</h2>
+    <p>
+      Saksikan video pembelajaran untuk memahami
+      materi dengan cara yang lebih menarik.
+    </p>
 
-        <p>
-          Kenali tujuan yang akan dicapai dalam
-          petualangan belajar bilangan cacah.
-        </p>
+  </a>
 
-        <span class="go" aria-hidden="true"></span>
-      </a>
 
-      <!-- VIDEO -->
-      <a
-        class="menu-card video"
-        href="video.html"
-      >
-        <div class="icon">▶️</div>
+  <!-- MONOPOLI -->
+  <a
+    class="menu-card monopoly"
+    href="monopoli.html"
+  >
 
-        <h2>Video Pembelajaran</h2>
+    <div class="icon">
+      🎲
+    </div>
 
-        <p>
-          Saksikan video pembelajaran untuk memahami
-          materi dengan cara yang lebih menarik.
-        </p>
+    <h2>
+      Monopoli
+    </h2>
 
-        <span class="go" aria-hidden="true"></span>
-      </a>
+    <p>
+      Mainkan aktivitas Monopoli matematika dan
+      tantang kemampuanmu dalam bilangan cacah.
+    </p>
 
-      <!-- MONOPOLI -->
-      <a
-        class="menu-card monopoly"
-        href="monopoli.html"
-      >
-        <div class="icon">🎲</div>
+  </a>
 
-        <h2>Monopoli</h2>
 
-        <p>
-          Mainkan aktivitas Monopoli matematika dan
-          tantang kemampuanmu dalam bilangan cacah.
-        </p>
+  <!-- ASESMEN -->
+  <a
+    class="menu-card assessment"
+    href="assessmen.html"
+  >
 
-        <span class="go" aria-hidden="true"></span>
-      </a>
+    <div class="icon">
+      🏆
+    </div>
 
-      <!-- ASESMEN -->
-      <a
-        class="menu-card assessment"
-        href="assessmen.html"
-      >
-        <div class="icon">🏆</div>
+    <h2>
+      Asesmen
+    </h2>
 
-        <h2>Asesmen</h2>
+    <p>
+      Kerjakan asesmen untuk mengukur pemahamanmu
+      setelah menyelesaikan pembelajaran.
+    </p>
 
-        <p>
-          Kerjakan asesmen untuk mengukur pemahamanmu
-          setelah menyelesaikan pembelajaran.
-        </p>
+  </a>
 
-        <span class="go" aria-hidden="true"></span>
-      </a>
+</nav>
 
-    </nav>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <b>UPT SDN 160 GRESIK</b>
-      • Belajar dengan semangat, berpikir cerdas,
-      berani mencoba! 🌟
-    </footer>
+<!-- =====================
+     FOOTER
+====================== -->
+<footer class="footer">
+
+  <b>UPT SDN 160 GRESIK</b>
+  • Belajar dengan semangat,
+  berpikir cerdas, berani mencoba! 🌟
+
+</footer>
+
 
   </section>
 

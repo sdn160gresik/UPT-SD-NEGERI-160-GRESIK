@@ -4,64 +4,80 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#9b4d20">
-<meta name="apple-mobile-web-app-capable" content="yes">
 
-<title>Jejak Capaian | Bilangan Cacah</title>
+<title>Jejak Capaian | UPT SDN 160 GRESIK</title>
 
 <style>
 :root{
-  --primary:#9b4d20;
-  --primary-dark:#713517;
-  --secondary:#d96b26;
-  --orange:#e67e22;
-  --yellow:#f4b942;
-  --green:#2e8b57;
-  --green-dark:#246b45;
+    --primary:#9b4d20;
+    --primary-dark:#713517;
+    --secondary:#d96b26;
+    --orange:#e67e22;
+    --yellow:#f4b942;
+    --green:#2e8b57;
+    --green-dark:#246b45;
 
-  --ink:#4a2c20;
-  --muted:#806b61;
+    --ink:#4a2c20;
+    --muted:#806b61;
 
-  --cream:#fff8e8;
-  --card:#fffdf8;
-  --white:#ffffff;
-  --border:#ead7bc;
+    --cream:#fff8e8;
+    --cream2:#fff1d2;
+    --card:#fffdf8;
+    --white:#ffffff;
 
-  --gold:#d89b18;
+    --border:#ead7bc;
+    --gold:#d89b18;
 
-  --shadow:rgba(92,48,24,.16);
+    --shadow:
+        0 12px 30px rgba(92,48,24,.12);
+
+    --shadow-hover:
+        0 18px 40px rgba(92,48,24,.18);
+
+    --radius:24px;
 }
 
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html,
-body{
-  width:100%;
-  min-height:100%;
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+    min-height:100vh;
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 
-  color:var(--ink);
+    color:var(--ink);
 
-  background:
-    radial-gradient(circle at 10% 10%, rgba(244,185,66,.22), transparent 25%),
-    radial-gradient(circle at 90% 15%, rgba(217,107,38,.18), transparent 25%),
-    radial-gradient(circle at 20% 90%, rgba(46,139,87,.12), transparent 25%),
-    linear-gradient(135deg,#fffaf0,#fff3dc);
+    background:
+        radial-gradient(
+            circle at 8% 12%,
+            rgba(244,185,66,.18) 0 80px,
+            transparent 81px
+        ),
+        radial-gradient(
+            circle at 92% 78%,
+            rgba(46,139,87,.10) 0 110px,
+            transparent 111px
+        ),
+        linear-gradient(
+            135deg,
+            #fff8e8 0%,
+            #fff3da 50%,
+            #fffaf0 100%
+        );
 
-  min-height:100vh;
-  overflow-x:hidden;
+    overflow-x:hidden;
 }
 
 /* =========================
@@ -69,198 +85,259 @@ body{
 ========================= */
 
 body::before{
-  content:"";
-  position:fixed;
-  width:280px;
-  height:280px;
-  border-radius:50%;
-  background:rgba(244,185,66,.10);
-  top:-100px;
-  left:-100px;
-  z-index:-1;
+    content:"";
+    position:fixed;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:rgba(230,126,34,.07);
+    top:80px;
+    left:-90px;
+    z-index:-1;
 }
 
 body::after{
-  content:"";
-  position:fixed;
-  width:350px;
-  height:350px;
-  border-radius:50%;
-  background:rgba(46,139,87,.08);
-  right:-140px;
-  bottom:-140px;
-  z-index:-1;
+    content:"";
+    position:fixed;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:rgba(46,139,87,.06);
+    right:-110px;
+    bottom:30px;
+    z-index:-1;
 }
 
 /* =========================
-   APP
+   CONTAINER
 ========================= */
 
-.app{
-  width:100%;
-  min-height:100vh;
-  padding:20px;
-}
-
-.wrapper{
-  width:min(1180px,100%);
-  margin:auto;
+.container{
+    width:min(1100px, calc(100% - 28px));
+    margin:auto;
 }
 
 /* =========================
-   TOP BAR
-========================= */
-
-.topbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
-
-  margin-bottom:18px;
-}
-
-.back-btn,
-.refresh-btn{
-  border:none;
-  cursor:pointer;
-
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-
-  padding:12px 18px;
-
-  border-radius:14px;
-
-  font-weight:800;
-  font-size:14px;
-
-  transition:.25s ease;
-
-  box-shadow:0 7px 18px var(--shadow);
-}
-
-.back-btn{
-  background:var(--primary);
-  color:white;
-}
-
-.back-btn:hover{
-  background:var(--primary-dark);
-  transform:translateY(-2px);
-}
-
-.refresh-btn{
-  background:white;
-  color:var(--primary);
-  border:1px solid var(--border);
-}
-
-.refresh-btn:hover{
-  background:#fff8ed;
-  transform:translateY(-2px);
-}
-
-/* =========================
-   HERO
+   HEADER
 ========================= */
 
 .hero{
-  position:relative;
-  overflow:hidden;
+    position:relative;
+    overflow:hidden;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(155,77,32,.98),
-      rgba(113,53,23,.98)
-    );
+    margin-top:24px;
 
-  color:white;
+    padding:
+        34px
+        34px
+        38px;
 
-  border-radius:28px;
+    border-radius:
+        0
+        0
+        28px
+        28px;
 
-  padding:34px 36px;
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary-dark),
+            var(--primary),
+            #a95625
+        );
 
-  box-shadow:
-    0 20px 45px rgba(92,48,24,.22);
+    color:white;
 
-  margin-bottom:22px;
+    box-shadow:
+        0 16px 35px rgba(113,53,23,.20);
 }
 
 .hero::before{
-  content:"";
-  position:absolute;
+    content:"";
+    position:absolute;
 
-  width:180px;
-  height:180px;
+    width:190px;
+    height:190px;
 
-  border-radius:50%;
+    right:-70px;
+    bottom:-110px;
 
-  background:rgba(255,255,255,.08);
+    border-radius:50%;
 
-  right:-50px;
-  top:-80px;
+    background:rgba(244,185,66,.15);
 }
 
 .hero::after{
-  content:"";
-  position:absolute;
+    content:"";
+    position:absolute;
 
-  width:120px;
-  height:120px;
+    width:90px;
+    height:90px;
 
-  border-radius:50%;
+    right:100px;
+    top:-45px;
 
-  background:rgba(244,185,66,.12);
+    border-radius:50%;
 
-  right:100px;
-  bottom:-70px;
-}
-
-.hero-content{
-  position:relative;
-  z-index:2;
-}
-
-.food-icons{
-  font-size:34px;
-  letter-spacing:8px;
-  margin-bottom:12px;
+    background:rgba(255,255,255,.06);
 }
 
 .school-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
 
-  background:rgba(255,255,255,.14);
-  border:1px solid rgba(255,255,255,.25);
+    padding:8px 14px;
 
-  padding:7px 13px;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:999px;
 
-  border-radius:999px;
+    background:rgba(255,255,255,.10);
 
-  font-size:12px;
-  font-weight:800;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.4px;
 
-  margin-bottom:15px;
+    margin-bottom:16px;
 }
 
-.hero h1{
-  font-size:clamp(30px,5vw,48px);
-  line-height:1.05;
-  margin-bottom:12px;
-  letter-spacing:-1px;
+.hero-title{
+    position:relative;
+    z-index:2;
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    font-size:
+        clamp(32px, 5vw, 50px);
+
+    line-height:1;
+
+    font-weight:900;
+
+    letter-spacing:-1.5px;
+
+    margin-bottom:15px;
 }
 
-.hero p{
-  max-width:720px;
-  color:rgba(255,255,255,.88);
-  font-size:16px;
-  line-height:1.65;
+.hero-icon{
+    font-size:
+        clamp(40px, 6vw, 60px);
+
+    filter:
+        drop-shadow(
+            0 4px 3px rgba(0,0,0,.20)
+        );
+}
+
+.hero-description{
+    position:relative;
+    z-index:2;
+
+    max-width:760px;
+
+    color:
+        rgba(255,255,255,.92);
+
+    font-size:15px;
+    line-height:1.75;
+}
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+
+    margin-top:20px;
+    margin-bottom:18px;
+
+    flex-wrap:wrap;
+}
+
+.toolbar-left,
+.toolbar-right{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:0;
+    outline:none;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    min-height:44px;
+
+    padding:11px 18px;
+
+    border-radius:14px;
+
+    font-size:14px;
+    font-weight:800;
+
+    cursor:pointer;
+
+    text-decoration:none;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn:active{
+    transform:translateY(0);
+}
+
+.btn-primary{
+    background:var(--primary);
+    color:white;
+
+    box-shadow:
+        0 8px 18px rgba(155,77,32,.22);
+}
+
+.btn-primary:hover{
+    background:var(--primary-dark);
+
+    box-shadow:
+        0 12px 25px rgba(155,77,32,.28);
+}
+
+.btn-secondary{
+    background:white;
+    color:var(--primary);
+
+    border:1px solid var(--border);
+
+    box-shadow:
+        0 6px 16px rgba(92,48,24,.08);
+}
+
+.btn-secondary:hover{
+    background:var(--cream2);
+}
+
+.btn-green{
+    background:var(--green);
+    color:white;
+
+    box-shadow:
+        0 8px 18px rgba(46,139,87,.20);
 }
 
 /* =========================
@@ -268,64 +345,100 @@ body::after{
 ========================= */
 
 .status{
-  display:flex;
-  align-items:center;
-  gap:10px;
+    min-height:44px;
 
-  padding:13px 16px;
+    display:flex;
+    align-items:center;
 
-  background:white;
+    padding:12px 17px;
 
-  border:1px solid var(--border);
+    margin-bottom:24px;
 
-  border-radius:15px;
+    border-radius:14px;
 
-  margin-bottom:20px;
+    border:1px solid var(--border);
 
-  font-size:14px;
-  font-weight:700;
+    background:
+        rgba(255,255,255,.75);
 
-  box-shadow:0 8px 20px var(--shadow);
+    font-size:13px;
+    font-weight:800;
+
+    box-shadow:
+        0 5px 15px rgba(92,48,24,.06);
 }
 
 .status.loading{
-  color:var(--primary);
+    color:#936a12;
+
+    background:#fff9df;
+
+    border-color:#ecd99c;
 }
 
 .status.success{
-  color:var(--green-dark);
-  background:#f1fbf5;
-  border-color:#b9dfc7;
+    color:var(--green-dark);
+
+    background:#edf9f2;
+
+    border-color:#b9dfc8;
 }
 
 .status.error{
-  color:#a33b28;
-  background:#fff3f0;
-  border-color:#edc0b5;
+    color:#a63d2c;
+
+    background:#fff0ec;
+
+    border-color:#efb9ae;
+}
+
+.status.empty{
+    color:#806b61;
+
+    background:#fffaf2;
 }
 
 /* =========================
    SECTION
 ========================= */
 
+.section{
+    margin-top:28px;
+}
+
+.section-heading{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-bottom:14px;
+}
+
+.section-title-wrap{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+}
+
+.section-icon{
+    font-size:28px;
+    line-height:1;
+}
+
 .section-title{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-
-  gap:15px;
-
-  margin:25px 0 14px;
+    font-size:24px;
+    font-weight:900;
+    line-height:1.15;
 }
 
-.section-title h2{
-  font-size:23px;
-  color:var(--primary-dark);
-}
+.section-subtitle{
+    color:var(--muted);
 
-.section-title p{
-  font-size:13px;
-  color:var(--muted);
+    font-size:12px;
+
+    margin-top:4px;
 }
 
 /* =========================
@@ -333,225 +446,309 @@ body::after{
 ========================= */
 
 .top-three{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
+    display:grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:16px;
 }
 
-.rank-card{
-  position:relative;
+.champion{
+    position:relative;
 
-  background:var(--card);
+    min-height:205px;
 
-  border:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 
-  border-radius:22px;
+    padding:25px 18px;
 
-  padding:25px 20px;
+    text-align:center;
 
-  text-align:center;
+    border-radius:22px;
 
-  box-shadow:0 10px 26px var(--shadow);
+    border:1px solid var(--border);
 
-  transition:.25s ease;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.96),
+            rgba(255,250,240,.96)
+        );
 
-  overflow:hidden;
+    box-shadow:var(--shadow);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
-.rank-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 16px 30px rgba(92,48,24,.20);
+.champion:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow-hover);
 }
 
-.rank-card.first{
-  border:2px solid #e2b338;
-  background:linear-gradient(180deg,#fffdf3,#fff9e5);
+.champion.first{
+    border-color:#efb52a;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf3,
+            #fff8df
+        );
 }
 
-.rank-card.second{
-  background:linear-gradient(180deg,#fffdfb,#f9f5ef);
+.champion.second{
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f8f7f4
+        );
 }
 
-.rank-card.third{
-  background:linear-gradient(180deg,#fffdf8,#fff5e8);
+.champion.third{
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf9,
+            #fff3e8
+        );
 }
 
-.rank-number{
-  font-size:36px;
-  margin-bottom:7px;
+.medal{
+    font-size:48px;
+
+    line-height:1;
+
+    margin-bottom:10px;
+
+    filter:
+        drop-shadow(
+            0 4px 4px rgba(0,0,0,.15)
+        );
 }
 
 .rank-label{
-  font-size:12px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  color:var(--muted);
+    color:#806b61;
+
+    font-size:11px;
+    font-weight:900;
+
+    letter-spacing:.8px;
+
+    margin-bottom:8px;
 }
 
-.rank-name{
-  margin-top:9px;
+.student-name{
+    max-width:100%;
 
-  font-size:18px;
-  font-weight:900;
+    font-size:18px;
+    font-weight:900;
 
-  color:var(--primary-dark);
+    color:var(--primary);
 
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
-.rank-score{
-  margin-top:13px;
+.student-score{
+    margin-top:12px;
 
-  font-size:32px;
-  font-weight:1000;
+    color:var(--green-dark);
 
-  color:var(--green-dark);
+    font-size:21px;
+    font-weight:900;
 }
 
-.rank-score small{
-  font-size:13px;
-  color:var(--muted);
-  font-weight:800;
+.student-score small{
+    font-size:11px;
+    font-weight:700;
+    color:var(--muted);
+}
+
+.empty-name{
+    color:var(--primary);
+
+    font-size:17px;
+    font-weight:900;
 }
 
 /* =========================
    TABLE CARD
 ========================= */
 
-.card{
-  background:rgba(255,253,248,.94);
+.table-card{
+    overflow:hidden;
 
-  border:1px solid var(--border);
+    border-radius:22px;
 
-  border-radius:24px;
+    border:1px solid var(--border);
 
-  box-shadow:0 12px 30px var(--shadow);
+    background:
+        rgba(255,255,255,.90);
 
-  overflow:hidden;
+    box-shadow:var(--shadow);
 }
 
-.card-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+.table-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-  gap:15px;
+    gap:15px;
 
-  padding:20px 22px;
+    padding:18px 20px;
 
-  border-bottom:1px solid var(--border);
+    background:
+        linear-gradient(
+            135deg,
+            #fff9ed,
+            #fff2dc
+        );
 
-  background:
-    linear-gradient(
-      90deg,
-      rgba(155,77,32,.07),
-      rgba(244,185,66,.08)
-    );
+    border-bottom:1px solid var(--border);
 }
 
-.card-header h3{
-  font-size:18px;
-  color:var(--primary-dark);
+.table-header-title{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    font-size:15px;
+    font-weight:900;
 }
 
-.card-header span{
-  font-size:13px;
-  color:var(--muted);
-  font-weight:700;
+.student-count{
+    color:var(--muted);
+
+    font-size:12px;
+    font-weight:800;
 }
 
-/* =========================
-   TABLE
-========================= */
-
-.table-wrap{
-  width:100%;
-  overflow-x:auto;
+.table-wrapper{
+    overflow-x:auto;
 }
 
 table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:650px;
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:650px;
 }
 
 thead th{
-  padding:15px 16px;
+    padding:13px 14px;
 
-  background:#fff5df;
+    text-align:left;
 
-  color:var(--primary-dark);
+    background:#fff4dc;
 
-  font-size:12px;
+    color:#7a462a;
 
-  text-transform:uppercase;
+    font-size:10px;
+    font-weight:900;
 
-  letter-spacing:.5px;
+    letter-spacing:.5px;
 
-  text-align:left;
+    text-transform:uppercase;
 
-  white-space:nowrap;
+    border-bottom:1px solid var(--border);
 }
 
 tbody td{
-  padding:15px 16px;
+    padding:14px;
 
-  border-top:1px solid #f0e4d2;
+    font-size:13px;
 
-  font-size:14px;
+    border-bottom:1px solid #f0e3d1;
+}
 
-  font-weight:650;
+tbody tr:last-child td{
+    border-bottom:0;
 }
 
 tbody tr{
-  transition:.2s ease;
+    transition:background .15s ease;
 }
 
 tbody tr:hover{
-  background:#fffaf1;
+    background:#fffaf0;
 }
 
 .rank-cell{
-  width:80px;
-  font-weight:900;
-  color:var(--primary);
+    width:80px;
+
+    font-weight:900;
+
+    color:var(--primary);
+}
+
+.rank-number{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    min-width:30px;
+    height:30px;
+
+    border-radius:10px;
+
+    background:#fff1d2;
+
+    color:var(--primary);
+
+    font-size:12px;
 }
 
 .name-cell{
-  font-weight:900;
-  color:var(--ink);
+    font-weight:900;
+}
+
+.absen-cell,
+.kelas-cell{
+    color:var(--muted);
+    font-weight:700;
 }
 
 .score-cell{
-  font-size:18px;
-  font-weight:1000;
-  color:var(--green-dark);
+    font-weight:900;
 }
 
-.badge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
+.score-badge{
+    display:inline-flex;
 
-  padding:6px 10px;
+    align-items:center;
+    justify-content:center;
 
-  border-radius:999px;
+    min-width:55px;
 
-  background:#fff1cc;
+    padding:7px 10px;
 
-  color:#8b5b00;
+    border-radius:10px;
 
-  font-size:12px;
+    background:#eaf7ef;
 
-  font-weight:900;
+    color:var(--green-dark);
+
+    font-weight:900;
 }
 
-.top-badge{
-  background:#e9f7ef;
-  color:var(--green-dark);
+.no-data{
+    padding:35px 20px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:13px;
 }
 
 /* =========================
@@ -559,95 +756,59 @@ tbody tr:hover{
 ========================= */
 
 .all-section{
-  margin-top:22px;
-  display:none;
+    display:none;
+
+    margin-top:28px;
+
+    animation:
+        fadeIn .3s ease;
 }
 
 .all-section.show{
-  display:block;
+    display:block;
 }
 
-.toggle-container{
-  display:flex;
-  justify-content:center;
-  margin:22px 0;
-}
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
 
-.toggle-btn{
-  border:none;
-  cursor:pointer;
-
-  background:var(--secondary);
-  color:white;
-
-  padding:13px 22px;
-
-  border-radius:15px;
-
-  font-size:14px;
-  font-weight:900;
-
-  box-shadow:0 8px 18px rgba(155,77,32,.20);
-
-  transition:.25s ease;
-}
-
-.toggle-btn:hover{
-  background:var(--primary-dark);
-  transform:translateY(-2px);
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 /* =========================
    EMPTY STATE
 ========================= */
 
-.empty{
-  padding:38px 20px;
+.empty-state{
+    padding:35px 20px;
 
-  text-align:center;
+    text-align:center;
 
-  color:var(--muted);
+    color:var(--muted);
 }
 
-.empty-icon{
-  font-size:42px;
-  margin-bottom:10px;
+.empty-state-icon{
+    font-size:42px;
+
+    margin-bottom:10px;
 }
 
-.empty strong{
-  display:block;
-  color:var(--primary-dark);
-  margin-bottom:5px;
+.empty-state-title{
+    color:var(--primary);
+
+    font-size:17px;
+    font-weight:900;
+
+    margin-bottom:5px;
 }
 
-/* =========================
-   LOADING
-========================= */
-
-.loading-box{
-  padding:40px 20px;
-  text-align:center;
-  color:var(--muted);
-}
-
-.spinner{
-  width:36px;
-  height:36px;
-
-  margin:0 auto 13px;
-
-  border:4px solid #f0dfc8;
-  border-top-color:var(--primary);
-
-  border-radius:50%;
-
-  animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
+.empty-state-text{
+    font-size:13px;
 }
 
 /* =========================
@@ -655,183 +816,186 @@ tbody tr:hover{
 ========================= */
 
 footer{
-  text-align:center;
+    margin-top:45px;
+    padding:24px 15px 30px;
 
-  padding:30px 10px 15px;
+    text-align:center;
 
-  color:var(--muted);
+    color:#806b61;
 
-  font-size:13px;
-
-  font-weight:700;
+    font-size:12px;
+    font-weight:700;
 }
 
 /* =========================
-   ANIMATION
+   LOADING
 ========================= */
 
-.fade-up{
-  animation:fadeUp .55s ease both;
+.loading-row{
+    text-align:center;
+
+    padding:35px;
+
+    color:var(--muted);
 }
 
-@keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(12px);
-  }
+.spinner{
+    width:25px;
+    height:25px;
 
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+    border-radius:50%;
+
+    border:3px solid #ead7bc;
+    border-top-color:var(--primary);
+
+    animation:
+        spin .8s linear infinite;
+
+    margin:0 auto 10px;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
 }
 
 /* =========================
    RESPONSIVE
 ========================= */
 
-@media(max-width:760px){
+@media(max-width:800px){
 
-  .app{
-    padding:12px;
-  }
+    .hero{
+        padding:28px 22px 32px;
+    }
 
-  .topbar{
-    margin-bottom:12px;
-  }
+    .top-three{
+        grid-template-columns:1fr;
+    }
 
-  .back-btn,
-  .refresh-btn{
-    padding:10px 13px;
-    font-size:12px;
-  }
+    .champion{
+        min-height:180px;
+    }
 
-  .hero{
-    padding:25px 21px;
-    border-radius:22px;
-  }
-
-  .food-icons{
-    font-size:27px;
-  }
-
-  .hero h1{
-    font-size:32px;
-  }
-
-  .hero p{
-    font-size:14px;
-  }
-
-  .top-three{
-    grid-template-columns:1fr;
-  }
-
-  .rank-card{
-    padding:20px;
-  }
-
-  .rank-score{
-    font-size:28px;
-  }
-
-  .section-title{
-    display:block;
-  }
-
-  .section-title p{
-    margin-top:5px;
-  }
-
-  .card{
-    border-radius:20px;
-  }
 }
 
-@media(max-width:450px){
+@media(max-width:600px){
 
-  .topbar{
-    gap:8px;
-  }
+    .container{
+        width:min(
+            100% - 18px,
+            1100px
+        );
+    }
 
-  .back-btn span.label,
-  .refresh-btn span.label{
-    display:none;
-  }
+    .hero{
+        margin-top:10px;
 
-  .hero h1{
-    font-size:28px;
-  }
+        border-radius:
+            0
+            0
+            22px
+            22px;
+    }
 
-  .school-badge{
-    font-size:10px;
-  }
+    .hero-title{
+        gap:10px;
+
+        font-size:32px;
+    }
+
+    .hero-icon{
+        font-size:40px;
+    }
+
+    .hero-description{
+        font-size:13px;
+        line-height:1.65;
+    }
+
+    .toolbar{
+        align-items:stretch;
+    }
+
+    .toolbar-left,
+    .toolbar-right{
+        width:100%;
+    }
+
+    .toolbar .btn{
+        flex:1;
+    }
+
+    .section-title{
+        font-size:21px;
+    }
+
+    .table-header{
+        padding:15px;
+    }
+
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
-
-  <div class="wrapper">
-
-    <!-- =========================
-         TOP BAR
-    ========================== -->
-
-    <div class="topbar">
-
-      <button
-        class="back-btn"
-        onclick="kembaliKePetualangan()"
-        title="Kembali ke Petualangan"
-      >
-        <span>←</span>
-        <span class="label">Kembali</span>
-      </button>
-
-      <button
-        class="refresh-btn"
-        onclick="loadData()"
-        title="Muat ulang data"
-      >
-        <span>↻</span>
-        <span class="label">Refresh</span>
-      </button>
-
-    </div>
-
+<div class="container">
 
     <!-- =========================
          HERO
     ========================== -->
 
-    <section class="hero fade-up">
-
-      <div class="hero-content">
-
-        <div class="food-icons">
-          🍜 🌟 🏆 🌟 🍡
-        </div>
+    <header class="hero">
 
         <div class="school-badge">
-          🏫 UPT SDN 160 GRESIK
+            🏫 UPT SDN 160 GRESIK
         </div>
 
-        <h1>
-          🌟 Jejak Capaian
+        <h1 class="hero-title">
+            <span class="hero-icon">🌟</span>
+            <span>Jejak Capaian</span>
         </h1>
 
-        <p>
-          Lihat perjalanan prestasi para penjelajah bilangan.
-          Siapa yang berhasil meraih nilai terbaik dan menjadi
-          juara dalam petualangan belajar hari ini?
+        <p class="hero-description">
+            Lihat perjalanan prestasi para penjelajah bilangan.
+            Siapa yang berhasil meraih nilai terbaik dan menjadi
+            juara dalam petualangan belajar hari ini?
         </p>
 
-      </div>
+    </header>
 
-    </section>
+
+    <!-- =========================
+         TOOLBAR
+    ========================== -->
+
+    <div class="toolbar">
+
+        <div class="toolbar-left">
+
+            <a
+                href="petualangan.html"
+                class="btn btn-secondary"
+            >
+                ← Kembali ke Petualangan
+            </a>
+
+        </div>
+
+        <div class="toolbar-right">
+
+            <button
+                class="btn btn-primary"
+                onclick="loadData()"
+            >
+                🔄 Refresh Data
+            </button>
+
+        </div>
+
+    </div>
 
 
     <!-- =========================
@@ -839,52 +1003,118 @@ footer{
     ========================== -->
 
     <div
-      id="status"
-      class="status loading"
+        id="status"
+        class="status loading"
     >
-      <span>⏳</span>
-      <span>Menyiapkan data capaian siswa...</span>
+        ⏳ Menghubungkan dengan Google Sheet...
     </div>
 
 
     <!-- =========================
-         TOP THREE
+         PARA JUARA
     ========================== -->
 
-    <div class="section-title">
+    <section class="section">
 
-      <div>
-        <h2>🏆 Para Juara</h2>
-        <p>Penjelajah dengan capaian nilai terbaik</p>
-      </div>
+        <div class="section-heading">
 
-    </div>
+            <div class="section-title-wrap">
 
-    <section
-      id="topThree"
-      class="top-three"
-    >
+                <div class="section-icon">
+                    🏆
+                </div>
 
-      <div class="rank-card first">
-        <div class="rank-number">🥇</div>
-        <div class="rank-label">Juara 1</div>
-        <div class="rank-name">Memuat...</div>
-        <div class="rank-score">-</div>
-      </div>
+                <div>
 
-      <div class="rank-card second">
-        <div class="rank-number">🥈</div>
-        <div class="rank-label">Juara 2</div>
-        <div class="rank-name">Memuat...</div>
-        <div class="rank-score">-</div>
-      </div>
+                    <h2 class="section-title">
+                        Para Juara
+                    </h2>
 
-      <div class="rank-card third">
-        <div class="rank-number">🥉</div>
-        <div class="rank-label">Juara 3</div>
-        <div class="rank-name">Memuat...</div>
-        <div class="rank-score">-</div>
-      </div>
+                    <p class="section-subtitle">
+                        Penjelajah dengan capaian nilai terbaik
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="topThree"
+            class="top-three"
+        >
+
+            <!-- JUARA 1 -->
+
+            <div class="champion first">
+
+                <div class="medal">
+                    🥇
+                </div>
+
+                <div class="rank-label">
+                    JUARA 1
+                </div>
+
+                <div class="empty-name">
+                    Menunggu data
+                </div>
+
+                <div class="student-score">
+                    -
+                </div>
+
+            </div>
+
+
+            <!-- JUARA 2 -->
+
+            <div class="champion second">
+
+                <div class="medal">
+                    🥈
+                </div>
+
+                <div class="rank-label">
+                    JUARA 2
+                </div>
+
+                <div class="empty-name">
+                    Menunggu data
+                </div>
+
+                <div class="student-score">
+                    -
+                </div>
+
+            </div>
+
+
+            <!-- JUARA 3 -->
+
+            <div class="champion third">
+
+                <div class="medal">
+                    🥉
+                </div>
+
+                <div class="rank-label">
+                    JUARA 3
+                </div>
+
+                <div class="empty-name">
+                    Menunggu data
+                </div>
+
+                <div class="student-score">
+                    -
+                </div>
+
+            </div>
+
+        </div>
 
     </section>
 
@@ -893,67 +1123,109 @@ footer{
          TOP 10
     ========================== -->
 
-    <div class="section-title">
+    <section class="section">
 
-      <div>
-        <h2>🌟 10 Nilai Terbaik</h2>
-        <p>Daftar capaian dengan nilai tertinggi</p>
-      </div>
+        <div class="section-heading">
 
-    </div>
+            <div class="section-title-wrap">
 
-    <section
-      class="card fade-up"
-      id="topTableContainer"
-    >
+                <div class="section-icon">
+                    🌟
+                </div>
 
-      <div class="card-header">
+                <div>
 
-        <h3>📊 Peringkat Capaian</h3>
+                    <h2 class="section-title">
+                        10 Nilai Terbaik
+                    </h2>
 
-        <span id="topCount">
-          0 siswa
-        </span>
-
-      </div>
-
-      <div class="table-wrap">
-
-        <table>
-
-          <thead>
-
-            <tr>
-              <th>Peringkat</th>
-              <th>Nama Siswa</th>
-              <th>No. Absen</th>
-              <th>Kelas</th>
-              <th>Nilai</th>
-            </tr>
-
-          </thead>
-
-          <tbody id="topTableBody">
-
-            <tr>
-              <td colspan="5">
-
-                <div class="loading-box">
-
-                  <div class="spinner"></div>
-
-                  Memuat data capaian...
+                    <p class="section-subtitle">
+                        Daftar capaian dengan nilai tertinggi
+                    </p>
 
                 </div>
 
-              </td>
-            </tr>
+            </div>
 
-          </tbody>
+        </div>
 
-        </table>
 
-      </div>
+        <div class="table-card">
+
+            <div class="table-header">
+
+                <div class="table-header-title">
+                    📊 Peringkat Capaian
+                </div>
+
+                <div
+                    id="studentCount"
+                    class="student-count"
+                >
+                    0 siswa
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Peringkat
+                            </th>
+
+                            <th>
+                                Nama Siswa
+                            </th>
+
+                            <th>
+                                No. Absen
+                            </th>
+
+                            <th>
+                                Kelas
+                            </th>
+
+                            <th>
+                                Nilai
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody
+                        id="topTableBody"
+                    >
+
+                        <tr>
+
+                            <td
+                                colspan="5"
+                                class="loading-row"
+                            >
+
+                                <div class="spinner"></div>
+
+                                Memuat data...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
 
     </section>
 
@@ -962,15 +1234,22 @@ footer{
          BUTTON ALL DATA
     ========================== -->
 
-    <div class="toggle-container">
+    <div
+        style="
+            display:flex;
+            justify-content:center;
+            margin-top:22px;
+        "
+    >
 
-      <button
-        id="allDataButton"
-        class="toggle-btn"
-        onclick="toggleAllData()"
-      >
-        👥 Tampilkan Semua Data
-      </button>
+        <button
+            id="allDataButton"
+            class="btn btn-green"
+            onclick="toggleAllData()"
+            style="display:none;"
+        >
+            📋 Lihat Semua Data
+        </button>
 
     </div>
 
@@ -980,57 +1259,94 @@ footer{
     ========================== -->
 
     <section
-      id="allDataSection"
-      class="all-section"
+        id="allDataSection"
+        class="all-section"
     >
 
-      <div class="section-title">
+        <div class="section-heading">
 
-        <div>
-          <h2>📚 Semua Capaian</h2>
-          <p>Seluruh data hasil belajar yang tersimpan</p>
-        </div>
+            <div class="section-title-wrap">
 
-      </div>
+                <div class="section-icon">
+                    📚
+                </div>
 
-      <div
-        class="card"
-        id="allTableContainer"
-      >
+                <div>
 
-        <div class="card-header">
+                    <h2 class="section-title">
+                        Semua Data Capaian
+                    </h2>
 
-          <h3>📋 Data Siswa</h3>
+                    <p class="section-subtitle">
+                        Seluruh hasil yang tersimpan pada Google Sheet
+                    </p>
 
-          <span id="allCount">
-            0 siswa
-          </span>
+                </div>
 
-        </div>
-
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-
-              <tr>
-                <th>Peringkat</th>
-                <th>Nama Siswa</th>
-                <th>No. Absen</th>
-                <th>Kelas</th>
-                <th>Nilai</th>
-              </tr>
-
-            </thead>
-
-            <tbody id="allTableBody"></tbody>
-
-          </table>
+            </div>
 
         </div>
 
-      </div>
+
+        <div class="table-card">
+
+            <div class="table-header">
+
+                <div class="table-header-title">
+                    📋 Data Lengkap
+                </div>
+
+                <div
+                    id="allStudentCount"
+                    class="student-count"
+                >
+                    0 data
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Peringkat
+                            </th>
+
+                            <th>
+                                Nama Siswa
+                            </th>
+
+                            <th>
+                                No. Absen
+                            </th>
+
+                            <th>
+                                Kelas
+                            </th>
+
+                            <th>
+                                Nilai
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody
+                        id="allTableBody"
+                    ></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
 
     </section>
 
@@ -1040,10 +1356,23 @@ footer{
     ========================== -->
 
     <footer>
-      🌾 Kuliner Nusantara • Belajar • Bermain • Berprestasi 🌾
-    </footer>
 
-  </div>
+        🌾 Kuliner Nusantara
+        •
+        Belajar
+        •
+        Bermain
+        •
+        Berprestasi
+        🌾
+
+        <br><br>
+
+        <span>
+            UPT SDN 160 GRESIK
+        </span>
+
+    </footer>
 
 </div>
 
@@ -1059,7 +1388,7 @@ const API_URL =
 
 
 /* =====================================================
-   DATA GLOBAL
+   VARIABEL
 ===================================================== */
 
 let semuaData = [];
@@ -1068,325 +1397,358 @@ let semuaDataDitampilkan = false;
 
 
 /* =====================================================
-   KEMBALI KE PETUALANGAN
-===================================================== */
-
-function kembaliKePetualangan(){
-
-  window.location.href = "petualangan.html";
-
-}
-
-
-/* =====================================================
    LOAD DATA
 ===================================================== */
 
 async function loadData(){
 
-  setStatus(
-    "⏳ Memuat data capaian siswa...",
-    "loading"
-  );
-
-  document.getElementById("topTableBody").innerHTML = `
-    <tr>
-      <td colspan="5">
-
-        <div class="loading-box">
-
-          <div class="spinner"></div>
-
-          Mengambil data dari Google Sheet...
-
-        </div>
-
-      </td>
-    </tr>
-  `;
-
-
-  try{
-
-    const url =
-      API_URL +
-      "?action=ranking&ts=" +
-      Date.now();
-
-
-    const response = await fetch(
-      url,
-      {
-        method:"GET",
-        cache:"no-store"
-      }
-    );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "Server mengembalikan status " +
-        response.status
-      );
-
-    }
-
-
-    const result =
-      await response.json();
-
-
-    if(!result.ok){
-
-      throw new Error(
-        result.message ||
-        "Data tidak berhasil diperoleh."
-      );
-
-    }
-
-
-    if(!Array.isArray(result.data)){
-
-      throw new Error(
-        "Format data dari server tidak sesuai."
-      );
-
-    }
-
-
-    semuaData =
-      result.data
-      .map(item => {
-
-        return {
-
-          waktu: item.waktu || "",
-
-          nama: String(
-            item.nama || ""
-          ).trim(),
-
-          kelas: String(
-            item.kelas || ""
-          ).trim(),
-
-          absen: String(
-            item.absen || ""
-          ).trim(),
-
-          nilai:
-            Number(item.nilai) || 0,
-
-          benar:
-            Number(item.benar) || 0,
-
-          salah:
-            Number(item.salah) || 0,
-
-          total:
-            Number(item.total) || 0,
-
-          persen:
-            Number(item.persen) || 0
-
-        };
-
-      })
-      .filter(item => item.nama !== "");
-
-
-    /* -----------------------------------------------
-       URUTKAN NILAI TERTINGGI
-    ------------------------------------------------ */
-
-    semuaData.sort(
-      (a,b) => b.nilai - a.nilai
-    );
-
-
-    /* -----------------------------------------------
-       TENTUKAN PERINGKAT
-       Sistem kompetisi:
-       1, 2, 2, 4
-    ------------------------------------------------ */
-
-    assignRanks(
-      semuaData
-    );
-
-
-    /* -----------------------------------------------
-       TAMPILKAN TOP 3
-    ------------------------------------------------ */
-
-    renderTopThree(
-      semuaData
-    );
-
-
-    /* -----------------------------------------------
-       TAMPILKAN TOP 10
-    ------------------------------------------------ */
-
-    renderTable(
-      semuaData.slice(0,10),
-      "topTableBody"
-    );
-
-
-    document.getElementById(
-      "topCount"
-    ).textContent =
-      Math.min(
-        semuaData.length,
-        10
-      ) +
-      " siswa";
-
-
-    /* -----------------------------------------------
-       RESET DATA SEMUA
-    ------------------------------------------------ */
-
-    semuaDataDitampilkan = false;
-
-    document.getElementById(
-      "allDataSection"
-    ).classList.remove("show");
-
-
-    document.getElementById(
-      "allDataButton"
-    ).textContent =
-      "👥 Tampilkan Semua Data";
-
-
-    /* -----------------------------------------------
-       STATUS
-    ------------------------------------------------ */
-
     setStatus(
-      "✅ Data capaian berhasil dimuat. " +
-      semuaData.length +
-      " data ditemukan.",
-      "success"
-    );
-
-  }
-
-  catch(error){
-
-    console.error(
-      "Gagal mengambil data:",
-      error
+        "⏳ Mengambil data capaian dari Google Sheet...",
+        "loading"
     );
 
 
-    setStatus(
-      "⚠️ Data belum dapat dimuat. " +
-      error.message,
-      "error"
-    );
+    const topBody =
+        document.getElementById(
+            "topTableBody"
+        );
 
 
-    document.getElementById(
-      "topThree"
-    ).innerHTML = `
-
-      <div class="rank-card first">
-        <div class="rank-number">🥇</div>
-        <div class="rank-label">Juara 1</div>
-        <div class="rank-name">Belum tersedia</div>
-        <div class="rank-score">-</div>
-      </div>
-
-      <div class="rank-card second">
-        <div class="rank-number">🥈</div>
-        <div class="rank-label">Juara 2</div>
-        <div class="rank-name">Belum tersedia</div>
-        <div class="rank-score">-</div>
-      </div>
-
-      <div class="rank-card third">
-        <div class="rank-number">🥉</div>
-        <div class="rank-label">Juara 3</div>
-        <div class="rank-name">Belum tersedia</div>
-        <div class="rank-score">-</div>
-      </div>
-
+    topBody.innerHTML = `
+        <tr>
+            <td colspan="5" class="loading-row">
+                <div class="spinner"></div>
+                Menghubungkan dengan Google Sheet...
+            </td>
+        </tr>
     `;
 
 
-    document.getElementById(
-      "topTableBody"
-    ).innerHTML = `
+    try{
 
-      <tr>
+        const url =
+            API_URL +
+            "?action=ranking&ts=" +
+            Date.now();
 
-        <td colspan="5">
 
-          <div class="empty">
+        console.log(
+            "Mengambil data dari:",
+            url
+        );
 
-            <div class="empty-icon">
-              📭
-            </div>
 
-            <strong>
-              Data belum tersedia
-            </strong>
+        const response =
+            await fetch(
+                url,
+                {
+                    method:"GET",
+                    cache:"no-store",
+                    mode:"cors"
+                }
+            );
 
-            <span>
-              Pastikan Web App Google Apps Script
-              sudah di-deploy dan dapat diakses.
-            </span>
 
-          </div>
+        if(!response.ok){
 
-        </td>
+            throw new Error(
+                "HTTP " +
+                response.status
+            );
 
-      </tr>
+        }
 
-    `;
 
-  }
+        const result =
+            await response.json();
+
+
+        console.log(
+            "Respons Google Apps Script:",
+            result
+        );
+
+
+        if(!result){
+
+            throw new Error(
+                "Respons kosong dari server."
+            );
+
+        }
+
+
+        if(result.ok !== true){
+
+            throw new Error(
+                result.message ||
+                "Google Apps Script mengembalikan kesalahan."
+            );
+
+        }
+
+
+        if(!Array.isArray(result.data)){
+
+            throw new Error(
+                "Format data dari Google Sheet tidak valid."
+            );
+
+        }
+
+
+        /* =========================
+           BERSIHKAN DATA
+        ========================== */
+
+        semuaData =
+            result.data
+
+            .filter(function(item){
+
+                return (
+                    item &&
+                    String(
+                        item.nama || ""
+                    ).trim() !== ""
+                );
+
+            })
+
+            .map(function(item){
+
+                return {
+
+                    waktu:
+                        item.waktu || "",
+
+                    nama:
+                        String(
+                            item.nama || ""
+                        ),
+
+                    kelas:
+                        String(
+                            item.kelas || ""
+                        ),
+
+                    absen:
+                        String(
+                            item.absen || ""
+                        ),
+
+                    nilai:
+                        Number(
+                            item.nilai
+                        ) || 0,
+
+                    benar:
+                        Number(
+                            item.benar
+                        ) || 0,
+
+                    salah:
+                        Number(
+                            item.salah
+                        ) || 0,
+
+                    total:
+                        Number(
+                            item.total
+                        ) || 0,
+
+                    persen:
+                        Number(
+                            item.persen
+                        ) || 0
+
+                };
+
+            });
+
+
+        /* =========================
+           URUTKAN NILAI
+        ========================== */
+
+        semuaData.sort(
+            function(a,b){
+
+                return (
+                    b.nilai -
+                    a.nilai
+                );
+
+            }
+        );
+
+
+        /* =========================
+           TENTUKAN PERINGKAT
+           
+           Contoh:
+           40 = 1
+           40 = 1
+           33 = 3
+           33 = 3
+           27 = 5
+        ========================== */
+
+        semuaData =
+            assignRanks(
+                semuaData
+            );
+
+
+        /* =========================
+           RENDER
+        ========================== */
+
+        renderTopThree(
+            semuaData
+        );
+
+
+        renderTable(
+            semuaData.slice(0,10),
+            "topTableBody"
+        );
+
+
+        renderTable(
+            semuaData,
+            "allTableBody"
+        );
+
+
+        /* =========================
+           JUMLAH DATA
+        ========================== */
+
+        document.getElementById(
+            "studentCount"
+        ).textContent =
+            semuaData.length +
+            " siswa";
+
+
+        document.getElementById(
+            "allStudentCount"
+        ).textContent =
+            semuaData.length +
+            " data";
+
+
+        /* =========================
+           TOMBOL SEMUA DATA
+        ========================== */
+
+        const allButton =
+            document.getElementById(
+                "allDataButton"
+            );
+
+
+        if(semuaData.length > 0){
+
+            allButton.style.display =
+                "inline-flex";
+
+        }else{
+
+            allButton.style.display =
+                "none";
+
+        }
+
+
+        /* =========================
+           STATUS
+        ========================== */
+
+        if(semuaData.length === 0){
+
+            setStatus(
+                "⚠️ Belum ada data capaian yang dapat ditampilkan.",
+                "empty"
+            );
+
+        }else{
+
+            setStatus(
+                "✅ Data berhasil dimuat • " +
+                semuaData.length +
+                " data capaian",
+                "success"
+            );
+
+        }
+
+
+    }catch(error){
+
+        console.error(
+            "Gagal mengambil data:",
+            error
+        );
+
+
+        renderEmpty(
+            "topTableBody",
+            "Data belum dapat ditampilkan."
+        );
+
+
+        setStatus(
+            "⚠️ Data belum dapat dimuat. " +
+            getFriendlyError(error),
+            "error"
+        );
+
+    }
 
 }
 
 
 /* =====================================================
-   ASSIGN RANK
+   PERINGKAT
 ===================================================== */
 
 function assignRanks(data){
 
-  let previousScore = null;
+    let lastScore = null;
 
-  let currentRank = 0;
+    let rank = 0;
 
 
-  data.forEach(
-    (item,index) => {
+    return data.map(
+        function(item,index){
 
-      if(
-        previousScore === null ||
-        item.nilai !== previousScore
-      ){
+            if(
+                item.nilai !==
+                lastScore
+            ){
 
-        currentRank =
-          index + 1;
+                rank =
+                    index + 1;
 
-      }
+                lastScore =
+                    item.nilai;
 
-      item.peringkat =
-        currentRank;
+            }
 
-      previousScore =
-        item.nilai;
 
-    }
-  );
+            return {
+
+                ...item,
+
+                peringkat:
+                    rank
+
+            };
+
+        }
+    );
 
 }
 
@@ -1397,103 +1759,185 @@ function assignRanks(data){
 
 function renderTopThree(data){
 
-  const container =
-    document.getElementById(
-      "topThree"
-    );
+    const container =
+        document.getElementById(
+            "topThree"
+        );
 
 
-  const winners = [
-    {
-      emoji:"🥇",
-      label:"Juara 1",
-      className:"first"
-    },
-    {
-      emoji:"🥈",
-      label:"Juara 2",
-      className:"second"
-    },
-    {
-      emoji:"🥉",
-      label:"Juara 3",
-      className:"third"
-    }
-  ];
+    if(!data.length){
 
+        container.innerHTML = `
 
-  container.innerHTML =
-    winners.map(
-      (winner,index) => {
+            <div class="champion first">
 
-        const siswa =
-          data[index];
+                <div class="medal">
+                    🥇
+                </div>
 
+                <div class="rank-label">
+                    JUARA 1
+                </div>
 
-        if(!siswa){
+                <div class="empty-name">
+                    Belum tersedia
+                </div>
 
-          return `
-
-            <div class="rank-card ${winner.className}">
-
-              <div class="rank-number">
-                ${winner.emoji}
-              </div>
-
-              <div class="rank-label">
-                ${winner.label}
-              </div>
-
-              <div class="rank-name">
-                Belum tersedia
-              </div>
-
-              <div class="rank-score">
-                -
-              </div>
+                <div class="student-score">
+                    -
+                </div>
 
             </div>
 
-          `;
 
-        }
+            <div class="champion second">
 
+                <div class="medal">
+                    🥈
+                </div>
 
-        return `
+                <div class="rank-label">
+                    JUARA 2
+                </div>
 
-          <div class="rank-card ${winner.className} fade-up">
+                <div class="empty-name">
+                    Belum tersedia
+                </div>
 
-            <div class="rank-number">
-              ${winner.emoji}
-            </div>
-
-            <div class="rank-label">
-              ${winner.label}
-            </div>
-
-            <div
-              class="rank-name"
-              title="${escapeHTML(siswa.nama)}"
-            >
-              ${escapeHTML(siswa.nama)}
-            </div>
-
-            <div class="rank-score">
-
-              ${formatScore(siswa.nilai)}
-
-              <small>
-                nilai
-              </small>
+                <div class="student-score">
+                    -
+                </div>
 
             </div>
 
-          </div>
+
+            <div class="champion third">
+
+                <div class="medal">
+                    🥉
+                </div>
+
+                <div class="rank-label">
+                    JUARA 3
+                </div>
+
+                <div class="empty-name">
+                    Belum tersedia
+                </div>
+
+                <div class="student-score">
+                    -
+                </div>
+
+            </div>
 
         `;
 
-      }
-    ).join("");
+        return;
+    }
+
+
+    const champions =
+        data.slice(0,3);
+
+
+    const medals = [
+        "🥇",
+        "🥈",
+        "🥉"
+    ];
+
+
+    const classes = [
+        "first",
+        "second",
+        "third"
+    ];
+
+
+    const labels = [
+        "JUARA 1",
+        "JUARA 2",
+        "JUARA 3"
+    ];
+
+
+    let html = "";
+
+
+    for(
+        let i = 0;
+        i < 3;
+        i++
+    ){
+
+        const item =
+            champions[i];
+
+
+        if(item){
+
+            html += `
+
+                <div class="champion ${classes[i]}">
+
+                    <div class="medal">
+                        ${medals[i]}
+                    </div>
+
+                    <div class="rank-label">
+                        ${labels[i]}
+                    </div>
+
+                    <div
+                        class="student-name"
+                        title="${escapeHTML(item.nama)}"
+                    >
+                        ${escapeHTML(item.nama)}
+                    </div>
+
+                    <div class="student-score">
+                        ${formatScore(item.nilai)}
+                        <small>nilai</small>
+                    </div>
+
+                </div>
+
+            `;
+
+        }else{
+
+            html += `
+
+                <div class="champion ${classes[i]}">
+
+                    <div class="medal">
+                        ${medals[i]}
+                    </div>
+
+                    <div class="rank-label">
+                        ${labels[i]}
+                    </div>
+
+                    <div class="empty-name">
+                        Belum tersedia
+                    </div>
+
+                    <div class="student-score">
+                        -
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+
+    container.innerHTML =
+        html;
 
 }
 
@@ -1503,171 +1947,105 @@ function renderTopThree(data){
 ===================================================== */
 
 function renderTable(
-  data,
-  bodyId
+    data,
+    bodyId
 ){
 
-  const body =
-    document.getElementById(
-      bodyId
+    const body =
+        document.getElementById(
+            bodyId
+        );
+
+
+    if(!body){
+
+        return;
+
+    }
+
+
+    if(!data.length){
+
+        renderEmpty(
+            bodyId,
+            "Belum ada data yang dapat ditampilkan."
+        );
+
+        return;
+
+    }
+
+
+    let html = "";
+
+
+    data.forEach(
+        function(item){
+
+            html += `
+
+                <tr>
+
+                    <td class="rank-cell">
+
+                        <span class="rank-number">
+
+                            ${item.peringkat}
+
+                        </span>
+
+                    </td>
+
+
+                    <td class="name-cell">
+
+                        ${escapeHTML(
+                            item.nama
+                        )}
+
+                    </td>
+
+
+                    <td class="absen-cell">
+
+                        ${escapeHTML(
+                            item.absen
+                        )}
+
+                    </td>
+
+
+                    <td class="kelas-cell">
+
+                        ${escapeHTML(
+                            item.kelas
+                        )}
+
+                    </td>
+
+
+                    <td class="score-cell">
+
+                        <span class="score-badge">
+
+                            ${formatScore(
+                                item.nilai
+                            )}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
     );
 
 
-  if(!data.length){
-
-    body.innerHTML = `
-
-      <tr>
-
-        <td colspan="5">
-
-          <div class="empty">
-
-            <div class="empty-icon">
-              📭
-            </div>
-
-            <strong>
-              Belum ada data
-            </strong>
-
-            <span>
-              Data capaian siswa belum tersedia.
-            </span>
-
-          </div>
-
-        </td>
-
-      </tr>
-
-    `;
-
-    return;
-
-  }
-
-
-  body.innerHTML =
-    data.map(
-      (item,index) => {
-
-        let rankClass = "";
-
-
-        if(item.peringkat === 1){
-
-          rankClass =
-            "🥇";
-
-        }
-        else if(item.peringkat === 2){
-
-          rankClass =
-            "🥈";
-
-        }
-        else if(item.peringkat === 3){
-
-          rankClass =
-            "🥉";
-
-        }
-        else{
-
-          rankClass =
-            item.peringkat;
-
-        }
-
-
-        return `
-
-          <tr>
-
-            <td class="rank-cell">
-
-              <span class="badge">
-                ${rankClass}
-              </span>
-
-            </td>
-
-
-            <td class="name-cell">
-
-              ${escapeHTML(
-                item.nama
-              )}
-
-            </td>
-
-
-            <td>
-
-              ${escapeHTML(
-                item.absen || "-"
-              )}
-
-            </td>
-
-
-            <td>
-
-              ${
-                item.kelas
-                ?
-                `<span class="badge top-badge">
-                  ${escapeHTML(item.kelas)}
-                </span>`
-                :
-                "-"
-              }
-
-            </td>
-
-
-            <td class="score-cell">
-
-              ${formatScore(
-                item.nilai
-              )}
-
-            </td>
-
-          </tr>
-
-        `;
-
-      }
-    ).join("");
-
-}
-
-
-/* =====================================================
-   FORMAT NILAI
-===================================================== */
-
-function formatScore(score){
-
-  const number =
-    Number(score) || 0;
-
-
-  if(
-    Number.isInteger(number)
-  ){
-
-    return number.toString();
-
-  }
-
-
-  return number
-    .toFixed(2)
-    .replace(/\.00$/,"")
-    .replace(/(\.\d)0$/,"$1");
+    body.innerHTML =
+        html;
 
 }
 
@@ -1678,83 +2056,77 @@ function formatScore(score){
 
 function toggleAllData(){
 
-  const section =
-    document.getElementById(
-      "allDataSection"
+    const section =
+        document.getElementById(
+            "allDataSection"
+        );
+
+
+    const button =
+        document.getElementById(
+            "allDataButton"
+        );
+
+
+    semuaDataDitampilkan =
+        !semuaDataDitampilkan;
+
+
+    if(
+        semuaDataDitampilkan
+    ){
+
+        section.classList.add(
+            "show"
+        );
+
+
+        button.innerHTML =
+            "🔼 Sembunyikan Semua Data";
+
+
+        setTimeout(
+            function(){
+
+                section.scrollIntoView({
+                    behavior:"smooth",
+                    block:"start"
+                });
+
+            },
+            100
+        );
+
+    }else{
+
+        section.classList.remove(
+            "show"
+        );
+
+
+        button.innerHTML =
+            "📋 Lihat Semua Data";
+
+    }
+
+}
+
+
+/* =====================================================
+   FORMAT NILAI
+===================================================== */
+
+function formatScore(
+    value
+){
+
+    const number =
+        Number(value) || 0;
+
+
+    return number.toLocaleString(
+        "id-ID"
     );
-
-  const button =
-    document.getElementById(
-      "allDataButton"
-    );
-
-
-  if(!semuaData.length){
-
-    setStatus(
-      "⚠️ Belum ada data yang dapat ditampilkan.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  semuaDataDitampilkan =
-    !semuaDataDitampilkan;
-
-
-  if(
-    semuaDataDitampilkan
-  ){
-
-    section.classList.add(
-      "show"
-    );
-
-
-    renderTable(
-      semuaData,
-      "allTableBody"
-    );
-
-
-    document.getElementById(
-      "allCount"
-    ).textContent =
-      semuaData.length +
-      " siswa";
-
-
-    button.textContent =
-      "✕ Sembunyikan Semua Data";
-
-
-    setTimeout(
-      () => {
-
-        section.scrollIntoView({
-          behavior:"smooth",
-          block:"start"
-        });
-
-      },
-      100
-    );
-
-  }
-  else{
-
-    section.classList.remove(
-      "show"
-    );
-
-
-    button.textContent =
-      "👥 Tampilkan Semua Data";
-
-  }
 
 }
 
@@ -1764,23 +2136,149 @@ function toggleAllData(){
 ===================================================== */
 
 function setStatus(
-  message,
-  type
+    message,
+    type
 ){
 
-  const status =
-    document.getElementById(
-      "status"
-    );
+    const status =
+        document.getElementById(
+            "status"
+        );
 
 
-  status.className =
-    "status " +
-    type;
+    status.textContent =
+        message;
 
 
-  status.innerHTML =
-    `<span>${message}</span>`;
+    status.className =
+        "status " +
+        (
+            type ||
+            ""
+        );
+
+}
+
+
+/* =====================================================
+   ERROR FRIENDLY
+===================================================== */
+
+function getFriendlyError(
+    error
+){
+
+    const message =
+        String(
+            error?.message ||
+            error ||
+            ""
+        );
+
+
+    if(
+        message
+            .toLowerCase()
+            .includes(
+                "failed to fetch"
+            )
+    ){
+
+        return (
+            "Koneksi ke Google Apps Script gagal. " +
+            "Pastikan Web App sudah dideploy dan dapat diakses."
+        );
+
+    }
+
+
+    if(
+        message
+            .toLowerCase()
+            .includes(
+                "cors"
+            )
+    ){
+
+        return (
+            "Koneksi diblokir oleh browser. " +
+            "Periksa deployment Web App Google Apps Script."
+        );
+
+    }
+
+
+    if(
+        message
+            .toLowerCase()
+            .includes(
+                "http"
+            )
+    ){
+
+        return (
+            "Server mengembalikan " +
+            message +
+            ". Periksa URL Web App."
+        );
+
+    }
+
+
+    return message ||
+        "Terjadi kesalahan saat mengambil data.";
+
+}
+
+
+/* =====================================================
+   EMPTY TABLE
+===================================================== */
+
+function renderEmpty(
+    bodyId,
+    message
+){
+
+    const body =
+        document.getElementById(
+            bodyId
+        );
+
+
+    if(!body){
+
+        return;
+
+    }
+
+
+    body.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="5"
+                class="no-data"
+            >
+
+                <div class="empty-state-icon">
+                    📭
+                </div>
+
+                <div class="empty-state-title">
+                    Belum ada data
+                </div>
+
+                <div class="empty-state-text">
+                    ${escapeHTML(message)}
+                </div>
+
+            </td>
+
+        </tr>
+
+    `;
 
 }
 
@@ -1789,44 +2287,48 @@ function setStatus(
    ESCAPE HTML
 ===================================================== */
 
-function escapeHTML(value){
+function escapeHTML(
+    value
+){
 
-  return String(value)
-    .replace(
-      /&/g,
-      "&amp;"
+    return String(
+        value ?? ""
     )
     .replace(
-      /</g,
-      "&lt;"
+        /&/g,
+        "&amp;"
     )
     .replace(
-      />/g,
-      "&gt;"
+        /</g,
+        "&lt;"
     )
     .replace(
-      /"/g,
-      "&quot;"
+        />/g,
+        "&gt;"
     )
     .replace(
-      /'/g,
-      "&#039;"
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
     );
 
 }
 
 
 /* =====================================================
-   JALANKAN SAAT HALAMAN DIBUKA
+   MULAI SAAT HALAMAN DIBUKA
 ===================================================== */
 
 document.addEventListener(
-  "DOMContentLoaded",
-  () => {
+    "DOMContentLoaded",
+    function(){
 
-    loadData();
+        loadData();
 
-  }
+    }
 );
 
 </script>

@@ -21,20 +21,13 @@
     --muted:#806b61;
 
     --cream:#fff8e8;
-    --cream2:#fff1d2;
     --card:#fffdf8;
     --white:#ffffff;
 
     --border:#ead7bc;
     --gold:#d89b18;
 
-    --shadow:
-        0 12px 30px rgba(92,48,24,.12);
-
-    --shadow-hover:
-        0 18px 40px rgba(92,48,24,.18);
-
-    --radius:24px;
+    --shadow:rgba(92,48,24,.16);
 }
 
 *{
@@ -50,62 +43,30 @@ html{
 body{
     min-height:100vh;
     font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
         "Segoe UI",
+        Arial,
+        Helvetica,
         sans-serif;
 
     color:var(--ink);
 
     background:
         radial-gradient(
-            circle at 8% 12%,
-            rgba(244,185,66,.18) 0 80px,
-            transparent 81px
+            circle at 8% 18%,
+            rgba(244,185,66,.16) 0 75px,
+            transparent 76px
         ),
         radial-gradient(
-            circle at 92% 78%,
-            rgba(46,139,87,.10) 0 110px,
-            transparent 111px
+            circle at 94% 75%,
+            rgba(46,139,87,.09) 0 105px,
+            transparent 106px
         ),
         linear-gradient(
             135deg,
-            #fff8e8 0%,
-            #fff3da 50%,
-            #fffaf0 100%
+            #fff9ec 0%,
+            #fff2d8 48%,
+            #fffaf1 100%
         );
-
-    overflow-x:hidden;
-}
-
-/* =========================
-   BACKGROUND DECORATION
-========================= */
-
-body::before{
-    content:"";
-    position:fixed;
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    background:rgba(230,126,34,.07);
-    top:80px;
-    left:-90px;
-    z-index:-1;
-}
-
-body::after{
-    content:"";
-    position:fixed;
-    width:220px;
-    height:220px;
-    border-radius:50%;
-    background:rgba(46,139,87,.06);
-    right:-110px;
-    bottom:30px;
-    z-index:-1;
 }
 
 /* =========================
@@ -113,73 +74,74 @@ body::after{
 ========================= */
 
 .container{
-    width:min(1100px, calc(100% - 28px));
+    width:min(1080px, calc(100% - 32px));
     margin:auto;
 }
 
 /* =========================
-   HEADER
+   HERO
 ========================= */
 
 .hero{
-    position:relative;
-    overflow:hidden;
+    margin-top:22px;
+    margin-bottom:22px;
 
-    margin-top:24px;
+    padding:34px 36px;
 
-    padding:
-        34px
-        34px
-        38px;
+    min-height:190px;
 
-    border-radius:
-        0
-        0
-        28px
-        28px;
+    border-radius:0 0 28px 28px;
 
     background:
         linear-gradient(
             135deg,
-            var(--primary-dark),
-            var(--primary),
-            #a95625
+            #8d421b,
+            #9b4d20 55%,
+            #a95a24
         );
 
     color:white;
 
+    position:relative;
+    overflow:hidden;
+
     box-shadow:
-        0 16px 35px rgba(113,53,23,.20);
+        0 18px 35px rgba(92,48,24,.17);
 }
 
 .hero::before{
     content:"";
     position:absolute;
 
-    width:190px;
-    height:190px;
+    width:150px;
+    height:150px;
 
-    right:-70px;
-    bottom:-110px;
+    right:-35px;
+    bottom:-75px;
 
     border-radius:50%;
 
-    background:rgba(244,185,66,.15);
+    background:rgba(244,185,66,.18);
 }
 
 .hero::after{
     content:"";
     position:absolute;
 
-    width:90px;
-    height:90px;
+    width:80px;
+    height:80px;
 
-    right:100px;
-    top:-45px;
+    right:90px;
+    top:-35px;
 
     border-radius:50%;
 
-    background:rgba(255,255,255,.06);
+    background:rgba(255,255,255,.07);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
 }
 
 .school-badge{
@@ -187,61 +149,43 @@ body::after{
     align-items:center;
     gap:8px;
 
-    padding:8px 14px;
+    padding:7px 12px;
 
-    border:1px solid rgba(255,255,255,.25);
+    margin-bottom:14px;
+
     border-radius:999px;
 
-    background:rgba(255,255,255,.10);
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.2);
 
     font-size:12px;
-    font-weight:800;
-    letter-spacing:.4px;
-
-    margin-bottom:16px;
+    font-weight:700;
 }
 
-.hero-title{
-    position:relative;
-    z-index:2;
+.hero h1{
+    font-size:clamp(32px,5vw,52px);
+    line-height:1.05;
+    font-weight:900;
 
     display:flex;
     align-items:center;
-    gap:15px;
+    gap:14px;
 
-    font-size:
-        clamp(32px, 5vw, 50px);
-
-    line-height:1;
-
-    font-weight:900;
-
-    letter-spacing:-1.5px;
-
-    margin-bottom:15px;
+    margin-bottom:12px;
 }
 
-.hero-icon{
-    font-size:
-        clamp(40px, 6vw, 60px);
-
-    filter:
-        drop-shadow(
-            0 4px 3px rgba(0,0,0,.20)
-        );
+.hero h1 span{
+    font-size:.85em;
 }
 
-.hero-description{
-    position:relative;
-    z-index:2;
+.hero p{
+    max-width:780px;
 
-    max-width:760px;
+    line-height:1.7;
 
-    color:
-        rgba(255,255,255,.92);
+    font-size:14px;
 
-    font-size:15px;
-    line-height:1.75;
+    color:rgba(255,255,255,.94);
 }
 
 /* =========================
@@ -252,42 +196,24 @@ body::after{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:12px;
 
-    margin-top:20px;
-    margin-bottom:18px;
+    gap:15px;
 
-    flex-wrap:wrap;
-}
-
-.toolbar-left,
-.toolbar-right{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
+    margin:18px 0;
 }
 
 .btn{
     border:0;
-    outline:none;
-
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-
-    min-height:44px;
-
-    padding:11px 18px;
-
-    border-radius:14px;
-
-    font-size:14px;
-    font-weight:800;
-
     cursor:pointer;
 
-    text-decoration:none;
+    min-height:43px;
+
+    padding:11px 17px;
+
+    border-radius:13px;
+
+    font-size:13px;
+    font-weight:800;
 
     transition:
         transform .2s ease,
@@ -303,41 +229,45 @@ body::after{
     transform:translateY(0);
 }
 
-.btn-primary{
-    background:var(--primary);
-    color:white;
-
-    box-shadow:
-        0 8px 18px rgba(155,77,32,.22);
-}
-
-.btn-primary:hover{
-    background:var(--primary-dark);
-
-    box-shadow:
-        0 12px 25px rgba(155,77,32,.28);
-}
-
-.btn-secondary{
-    background:white;
+.btn-back{
     color:var(--primary);
+
+    background:white;
 
     border:1px solid var(--border);
 
     box-shadow:
-        0 6px 16px rgba(92,48,24,.08);
+        0 5px 15px rgba(92,48,24,.07);
 }
 
-.btn-secondary:hover{
-    background:var(--cream2);
-}
-
-.btn-green{
-    background:var(--green);
+.btn-refresh{
     color:white;
 
+    background:var(--primary);
+
     box-shadow:
-        0 8px 18px rgba(46,139,87,.20);
+        0 7px 18px rgba(155,77,32,.22);
+}
+
+.btn-refresh:hover{
+    background:var(--primary-dark);
+}
+
+.btn-all{
+    width:100%;
+
+    margin-top:16px;
+
+    color:white;
+
+    background:var(--green);
+
+    box-shadow:
+        0 7px 18px rgba(46,139,87,.18);
+}
+
+.btn-all:hover{
+    background:var(--green-dark);
 }
 
 /* =========================
@@ -345,100 +275,74 @@ body::after{
 ========================= */
 
 .status{
-    min-height:44px;
+    min-height:43px;
 
     display:flex;
     align-items:center;
 
-    padding:12px 17px;
+    padding:11px 16px;
 
-    margin-bottom:24px;
+    margin:10px 0 24px;
 
-    border-radius:14px;
-
-    border:1px solid var(--border);
-
-    background:
-        rgba(255,255,255,.75);
+    border-radius:13px;
 
     font-size:13px;
-    font-weight:800;
+    font-weight:700;
 
-    box-shadow:
-        0 5px 15px rgba(92,48,24,.06);
+    border:1px solid transparent;
 }
 
 .status.loading{
-    color:#936a12;
-
-    background:#fff9df;
-
-    border-color:#ecd99c;
+    color:#76551d;
+    background:#fff8df;
+    border-color:#efd98e;
 }
 
 .status.success{
-    color:var(--green-dark);
-
-    background:#edf9f2;
-
-    border-color:#b9dfc8;
+    color:#246b45;
+    background:#edf9f1;
+    border-color:#b8dfc5;
 }
 
 .status.error{
-    color:#a63d2c;
-
-    background:#fff0ec;
-
-    border-color:#efb9ae;
-}
-
-.status.empty{
-    color:#806b61;
-
-    background:#fffaf2;
+    color:#a43e2d;
+    background:#fff0ed;
+    border-color:#efbdb4;
 }
 
 /* =========================
-   SECTION
+   SECTION TITLE
 ========================= */
 
 .section{
-    margin-top:28px;
-}
-
-.section-heading{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-
-    gap:15px;
-
-    margin-bottom:14px;
-}
-
-.section-title-wrap{
-    display:flex;
-    align-items:flex-start;
-    gap:12px;
-}
-
-.section-icon{
-    font-size:28px;
-    line-height:1;
+    margin-top:24px;
 }
 
 .section-title{
-    font-size:24px;
-    font-weight:900;
-    line-height:1.15;
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin-bottom:12px;
 }
 
-.section-subtitle{
-    color:var(--muted);
+.section-icon{
+    font-size:30px;
+    line-height:1;
+}
+
+.section-title h2{
+    font-size:23px;
+    line-height:1.1;
+
+    font-weight:900;
+}
+
+.section-title p{
+    margin-top:4px;
 
     font-size:12px;
-
-    margin-top:4px;
+    color:var(--muted);
 }
 
 /* =========================
@@ -449,134 +353,112 @@ body::after{
     display:grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(3,1fr);
 
     gap:16px;
 }
 
 .champion{
-    position:relative;
-
-    min-height:205px;
+    min-height:190px;
 
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
 
-    padding:25px 18px;
-
     text-align:center;
 
-    border-radius:22px;
+    padding:20px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffef9,
+            #fff8e7
+        );
 
     border:1px solid var(--border);
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.96),
-            rgba(255,250,240,.96)
-        );
+    box-shadow:
+        0 13px 25px rgba(92,48,24,.10);
 
-    box-shadow:var(--shadow);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease;
+    position:relative;
+    overflow:hidden;
 }
 
-.champion:hover{
-    transform:translateY(-4px);
-    box-shadow:var(--shadow-hover);
+.champion:nth-child(1){
+    border-color:#efb42b;
 }
 
-.champion.first{
-    border-color:#efb52a;
+.champion::after{
+    content:"";
 
-    background:
-        linear-gradient(
-            145deg,
-            #fffdf3,
-            #fff8df
-        );
-}
+    position:absolute;
 
-.champion.second{
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #f8f7f4
-        );
-}
+    width:100px;
+    height:100px;
 
-.champion.third{
-    background:
-        linear-gradient(
-            145deg,
-            #fffdf9,
-            #fff3e8
-        );
+    right:-50px;
+    bottom:-50px;
+
+    border-radius:50%;
+
+    background:rgba(244,185,66,.07);
 }
 
 .medal{
-    font-size:48px;
+    font-size:49px;
 
     line-height:1;
 
-    margin-bottom:10px;
+    margin-bottom:9px;
 
-    filter:
-        drop-shadow(
-            0 4px 4px rgba(0,0,0,.15)
-        );
+    position:relative;
+    z-index:2;
 }
 
-.rank-label{
-    color:#806b61;
-
+.place{
     font-size:11px;
+
     font-weight:900;
 
     letter-spacing:.8px;
 
-    margin-bottom:8px;
+    color:#826e63;
+
+    margin-bottom:9px;
 }
 
 .student-name{
+    font-size:17px;
+
+    font-weight:900;
+
+    color:var(--primary);
+
+    margin-bottom:10px;
+
     max-width:100%;
 
-    font-size:18px;
-    font-weight:900;
-
-    color:var(--primary);
-
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    word-break:break-word;
 }
 
-.student-score{
-    margin-top:12px;
+.score{
+    font-size:20px;
+
+    font-weight:900;
 
     color:var(--green-dark);
-
-    font-size:21px;
-    font-weight:900;
 }
 
-.student-score small{
-    font-size:11px;
-    font-weight:700;
+.student-meta{
+    margin-top:4px;
+
     color:var(--muted);
-}
 
-.empty-name{
-    color:var(--primary);
-
-    font-size:17px;
-    font-weight:900;
+    font-size:11px;
 }
 
 /* =========================
@@ -584,54 +466,55 @@ body::after{
 ========================= */
 
 .table-card{
-    overflow:hidden;
-
-    border-radius:22px;
+    background:rgba(255,253,248,.94);
 
     border:1px solid var(--border);
 
-    background:
-        rgba(255,255,255,.90);
+    border-radius:19px;
 
-    box-shadow:var(--shadow);
+    overflow:hidden;
+
+    box-shadow:
+        0 13px 28px rgba(92,48,24,.09);
 }
 
-.table-header{
+.table-head{
+    min-height:54px;
+
+    padding:13px 18px;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
 
-    gap:15px;
-
-    padding:18px 20px;
+    border-bottom:1px solid var(--border);
 
     background:
         linear-gradient(
-            135deg,
-            #fff9ed,
-            #fff2dc
+            90deg,
+            #fff8e9,
+            #fffdf7
         );
-
-    border-bottom:1px solid var(--border);
 }
 
-.table-header-title{
-    display:flex;
-    align-items:center;
-    gap:8px;
-
-    font-size:15px;
+.table-title{
+    font-size:14px;
     font-weight:900;
 }
 
 .student-count{
-    color:var(--muted);
-
-    font-size:12px;
+    font-size:11px;
     font-weight:800;
+
+    color:var(--muted);
 }
 
+/* =========================
+   TABLE
+========================= */
+
 .table-wrapper{
+    width:100%;
     overflow-x:auto;
 }
 
@@ -643,128 +526,118 @@ table{
     min-width:650px;
 }
 
-thead th{
-    padding:13px 14px;
+thead{
+    background:#fff4dc;
+}
+
+th{
+    padding:12px 14px;
 
     text-align:left;
 
-    background:#fff4dc;
-
-    color:#7a462a;
-
     font-size:10px;
-    font-weight:900;
 
     letter-spacing:.5px;
 
-    text-transform:uppercase;
+    color:#7b4a2e;
+
+    white-space:nowrap;
 
     border-bottom:1px solid var(--border);
 }
 
-tbody td{
-    padding:14px;
+td{
+    padding:12px 14px;
 
     font-size:13px;
 
-    border-bottom:1px solid #f0e3d1;
+    border-bottom:1px solid #f0e5d4;
+
+    vertical-align:middle;
+}
+
+tbody tr{
+    transition:background .2s ease;
+}
+
+tbody tr:hover{
+    background:#fff9ed;
 }
 
 tbody tr:last-child td{
     border-bottom:0;
 }
 
-tbody tr{
-    transition:background .15s ease;
-}
-
-tbody tr:hover{
-    background:#fffaf0;
-}
-
-.rank-cell{
-    width:80px;
-
-    font-weight:900;
-
-    color:var(--primary);
-}
-
 .rank-number{
+    width:35px;
+    height:35px;
+
     display:inline-flex;
 
     align-items:center;
     justify-content:center;
 
-    min-width:30px;
-    height:30px;
+    border-radius:50%;
 
-    border-radius:10px;
-
-    background:#fff1d2;
+    background:#fff0cf;
 
     color:var(--primary);
+
+    font-weight:900;
 
     font-size:12px;
 }
 
-.name-cell{
-    font-weight:900;
+.rank-1{
+    background:#ffe39a;
+    color:#805500;
 }
 
-.absen-cell,
-.kelas-cell{
-    color:var(--muted);
-    font-weight:700;
+.rank-2{
+    background:#e7e7e7;
+    color:#5d5d5d;
+}
+
+.rank-3{
+    background:#f2c9a5;
+    color:#80461e;
+}
+
+.name-cell{
+    font-weight:800;
+    color:var(--ink);
 }
 
 .score-cell{
     font-weight:900;
-}
-
-.score-badge{
-    display:inline-flex;
-
-    align-items:center;
-    justify-content:center;
-
-    min-width:55px;
-
-    padding:7px 10px;
-
-    border-radius:10px;
-
-    background:#eaf7ef;
-
     color:var(--green-dark);
-
-    font-weight:900;
 }
 
-.no-data{
-    padding:35px 20px;
+/* =========================
+   EMPTY
+========================= */
 
+.empty-row{
     text-align:center;
 
-    color:var(--muted);
+    padding:30px !important;
 
-    font-size:13px;
+    color:var(--muted);
 }
 
 /* =========================
    ALL DATA
 ========================= */
 
-.all-section{
+.all-data{
     display:none;
 
-    margin-top:28px;
+    margin-top:18px;
 
-    animation:
-        fadeIn .3s ease;
+    animation:fadeIn .25s ease;
 }
 
-.all-section.show{
+.all-data.show{
     display:block;
 }
 
@@ -781,83 +654,19 @@ tbody tr:hover{
 }
 
 /* =========================
-   EMPTY STATE
-========================= */
-
-.empty-state{
-    padding:35px 20px;
-
-    text-align:center;
-
-    color:var(--muted);
-}
-
-.empty-state-icon{
-    font-size:42px;
-
-    margin-bottom:10px;
-}
-
-.empty-state-title{
-    color:var(--primary);
-
-    font-size:17px;
-    font-weight:900;
-
-    margin-bottom:5px;
-}
-
-.empty-state-text{
-    font-size:13px;
-}
-
-/* =========================
    FOOTER
 ========================= */
 
 footer{
-    margin-top:45px;
-    padding:24px 15px 30px;
+    margin-top:40px;
+
+    padding:24px 10px 30px;
 
     text-align:center;
-
-    color:#806b61;
 
     font-size:12px;
-    font-weight:700;
-}
-
-/* =========================
-   LOADING
-========================= */
-
-.loading-row{
-    text-align:center;
-
-    padding:35px;
 
     color:var(--muted);
-}
-
-.spinner{
-    width:25px;
-    height:25px;
-
-    border-radius:50%;
-
-    border:3px solid #ead7bc;
-    border-top-color:var(--primary);
-
-    animation:
-        spin .8s linear infinite;
-
-    margin:0 auto 10px;
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
 }
 
 /* =========================
@@ -867,7 +676,7 @@ footer{
 @media(max-width:800px){
 
     .hero{
-        padding:28px 22px 32px;
+        padding:27px 24px;
     }
 
     .top-three{
@@ -875,69 +684,56 @@ footer{
     }
 
     .champion{
-        min-height:180px;
+        min-height:160px;
     }
 
 }
 
-@media(max-width:600px){
+@media(max-width:560px){
 
     .container{
-        width:min(
-            100% - 18px,
-            1100px
-        );
+        width:min(100% - 20px,1080px);
     }
 
     .hero{
         margin-top:10px;
 
-        border-radius:
-            0
-            0
-            22px
-            22px;
+        border-radius:0 0 22px 22px;
+
+        padding:25px 20px;
     }
 
-    .hero-title{
-        gap:10px;
+    .hero h1{
+        font-size:34px;
 
-        font-size:32px;
+        gap:9px;
     }
 
-    .hero-icon{
-        font-size:40px;
-    }
-
-    .hero-description{
+    .hero p{
         font-size:13px;
-        line-height:1.65;
     }
 
     .toolbar{
+        flex-direction:column;
         align-items:stretch;
     }
 
-    .toolbar-left,
-    .toolbar-right{
+    .btn{
         width:100%;
     }
 
-    .toolbar .btn{
-        flex:1;
+    .section-title h2{
+        font-size:20px;
     }
 
-    .section-title{
-        font-size:21px;
-    }
-
-    .table-header{
-        padding:15px;
+    .champion{
+        min-height:150px;
     }
 
 }
 </style>
 </head>
+
 
 <body>
 
@@ -949,20 +745,24 @@ footer{
 
     <header class="hero">
 
-        <div class="school-badge">
-            🏫 UPT SDN 160 GRESIK
+        <div class="hero-content">
+
+            <div class="school-badge">
+                🏫 UPT SDN 160 GRESIK
+            </div>
+
+            <h1>
+                <span>🌟</span>
+                Jejak Capaian
+            </h1>
+
+            <p>
+                Lihat perjalanan prestasi para penjelajah bilangan.
+                Siapa yang berhasil meraih nilai terbaik dan menjadi
+                juara dalam petualangan belajar hari ini?
+            </p>
+
         </div>
-
-        <h1 class="hero-title">
-            <span class="hero-icon">🌟</span>
-            <span>Jejak Capaian</span>
-        </h1>
-
-        <p class="hero-description">
-            Lihat perjalanan prestasi para penjelajah bilangan.
-            Siapa yang berhasil meraih nilai terbaik dan menjadi
-            juara dalam petualangan belajar hari ini?
-        </p>
 
     </header>
 
@@ -973,27 +773,21 @@ footer{
 
     <div class="toolbar">
 
-        <div class="toolbar-left">
+        <button
+            class="btn btn-back"
+            onclick="kembaliKePetualangan()"
+        >
+            ← Kembali ke Petualangan
+        </button>
 
-            <a
-                href="petualangan.html"
-                class="btn btn-secondary"
-            >
-                ← Kembali ke Petualangan
-            </a>
 
-        </div>
-
-        <div class="toolbar-right">
-
-            <button
-                class="btn btn-primary"
-                onclick="loadData()"
-            >
-                🔄 Refresh Data
-            </button>
-
-        </div>
+        <button
+            class="btn btn-refresh"
+            onclick="loadData()"
+            id="refreshButton"
+        >
+            🔄 Refresh Data
+        </button>
 
     </div>
 
@@ -1006,7 +800,7 @@ footer{
         id="status"
         class="status loading"
     >
-        ⏳ Menghubungkan dengan Google Sheet...
+        ⏳ Menghubungkan ke data capaian...
     </div>
 
 
@@ -1016,26 +810,18 @@ footer{
 
     <section class="section">
 
-        <div class="section-heading">
+        <div class="section-title">
 
-            <div class="section-title-wrap">
+            <div class="section-icon">
+                🏆
+            </div>
 
-                <div class="section-icon">
-                    🏆
-                </div>
+            <div>
+                <h2>Para Juara</h2>
 
-                <div>
-
-                    <h2 class="section-title">
-                        Para Juara
-                    </h2>
-
-                    <p class="section-subtitle">
-                        Penjelajah dengan capaian nilai terbaik
-                    </p>
-
-                </div>
-
+                <p>
+                    Penjelajah dengan capaian nilai terbaik
+                </p>
             </div>
 
         </div>
@@ -1046,72 +832,27 @@ footer{
             class="top-three"
         >
 
-            <!-- JUARA 1 -->
-
-            <div class="champion first">
-
-                <div class="medal">
-                    🥇
-                </div>
-
-                <div class="rank-label">
-                    JUARA 1
-                </div>
-
-                <div class="empty-name">
-                    Menunggu data
-                </div>
-
-                <div class="student-score">
-                    -
-                </div>
-
+            <div class="champion">
+                <div class="medal">🥇</div>
+                <div class="place">JUARA 1</div>
+                <div class="student-name">Memuat data...</div>
+                <div class="score">-</div>
             </div>
 
 
-            <!-- JUARA 2 -->
-
-            <div class="champion second">
-
-                <div class="medal">
-                    🥈
-                </div>
-
-                <div class="rank-label">
-                    JUARA 2
-                </div>
-
-                <div class="empty-name">
-                    Menunggu data
-                </div>
-
-                <div class="student-score">
-                    -
-                </div>
-
+            <div class="champion">
+                <div class="medal">🥈</div>
+                <div class="place">JUARA 2</div>
+                <div class="student-name">Memuat data...</div>
+                <div class="score">-</div>
             </div>
 
 
-            <!-- JUARA 3 -->
-
-            <div class="champion third">
-
-                <div class="medal">
-                    🥉
-                </div>
-
-                <div class="rank-label">
-                    JUARA 3
-                </div>
-
-                <div class="empty-name">
-                    Menunggu data
-                </div>
-
-                <div class="student-score">
-                    -
-                </div>
-
+            <div class="champion">
+                <div class="medal">🥉</div>
+                <div class="place">JUARA 3</div>
+                <div class="student-name">Memuat data...</div>
+                <div class="score">-</div>
             </div>
 
         </div>
@@ -1125,26 +866,18 @@ footer{
 
     <section class="section">
 
-        <div class="section-heading">
+        <div class="section-title">
 
-            <div class="section-title-wrap">
+            <div class="section-icon">
+                🌟
+            </div>
 
-                <div class="section-icon">
-                    🌟
-                </div>
+            <div>
+                <h2>10 Nilai Terbaik</h2>
 
-                <div>
-
-                    <h2 class="section-title">
-                        10 Nilai Terbaik
-                    </h2>
-
-                    <p class="section-subtitle">
-                        Daftar capaian dengan nilai tertinggi
-                    </p>
-
-                </div>
-
+                <p>
+                    Daftar capaian dengan nilai tertinggi
+                </p>
             </div>
 
         </div>
@@ -1152,9 +885,9 @@ footer{
 
         <div class="table-card">
 
-            <div class="table-header">
+            <div class="table-head">
 
-                <div class="table-header-title">
+                <div class="table-title">
                     📊 Peringkat Capaian
                 </div>
 
@@ -1177,43 +910,39 @@ footer{
                         <tr>
 
                             <th>
-                                Peringkat
+                                PERINGKAT
                             </th>
 
                             <th>
-                                Nama Siswa
+                                NAMA SISWA
                             </th>
 
                             <th>
-                                No. Absen
+                                NO. ABSEN
                             </th>
 
                             <th>
-                                Kelas
+                                KELAS
                             </th>
 
                             <th>
-                                Nilai
+                                NILAI
                             </th>
 
                         </tr>
 
                     </thead>
 
-                    <tbody
-                        id="topTableBody"
-                    >
+
+                    <tbody id="topTableBody">
 
                         <tr>
 
                             <td
                                 colspan="5"
-                                class="loading-row"
+                                class="empty-row"
                             >
-
-                                <div class="spinner"></div>
-
-                                Memuat data...
+                                ⏳ Memuat data...
 
                             </td>
 
@@ -1227,122 +956,83 @@ footer{
 
         </div>
 
-    </section>
-
-
-    <!-- =========================
-         BUTTON ALL DATA
-    ========================== -->
-
-    <div
-        style="
-            display:flex;
-            justify-content:center;
-            margin-top:22px;
-        "
-    >
 
         <button
+            class="btn btn-all"
             id="allDataButton"
-            class="btn btn-green"
             onclick="toggleAllData()"
-            style="display:none;"
         >
-            📋 Lihat Semua Data
+            👥 Tampilkan Semua Data
         </button>
 
-    </div>
 
+        <!-- =========================
+             SEMUA DATA
+        ========================== -->
 
-    <!-- =========================
-         ALL DATA
-    ========================== -->
+        <div
+            id="allDataSection"
+            class="all-data"
+        >
 
-    <section
-        id="allDataSection"
-        class="all-section"
-    >
+            <div class="table-card">
 
-        <div class="section-heading">
+                <div class="table-head">
 
-            <div class="section-title-wrap">
+                    <div class="table-title">
+                        📋 Semua Data Capaian
+                    </div>
 
-                <div class="section-icon">
-                    📚
-                </div>
-
-                <div>
-
-                    <h2 class="section-title">
-                        Semua Data Capaian
-                    </h2>
-
-                    <p class="section-subtitle">
-                        Seluruh hasil yang tersimpan pada Google Sheet
-                    </p>
+                    <div
+                        id="allStudentCount"
+                        class="student-count"
+                    >
+                        0 siswa
+                    </div>
 
                 </div>
 
-            </div>
 
-        </div>
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    PERINGKAT
+                                </th>
+
+                                <th>
+                                    NAMA SISWA
+                                </th>
+
+                                <th>
+                                    NO. ABSEN
+                                </th>
+
+                                <th>
+                                    KELAS
+                                </th>
+
+                                <th>
+                                    NILAI
+                                </th>
+
+                            </tr>
+
+                        </thead>
 
 
-        <div class="table-card">
+                        <tbody id="allTableBody">
 
-            <div class="table-header">
+                        </tbody>
 
-                <div class="table-header-title">
-                    📋 Data Lengkap
+                    </table>
+
                 </div>
-
-                <div
-                    id="allStudentCount"
-                    class="student-count"
-                >
-                    0 data
-                </div>
-
-            </div>
-
-
-            <div class="table-wrapper">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                Peringkat
-                            </th>
-
-                            <th>
-                                Nama Siswa
-                            </th>
-
-                            <th>
-                                No. Absen
-                            </th>
-
-                            <th>
-                                Kelas
-                            </th>
-
-                            <th>
-                                Nilai
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody
-                        id="allTableBody"
-                    ></tbody>
-
-                </table>
 
             </div>
 
@@ -1356,22 +1046,9 @@ footer{
     ========================== -->
 
     <footer>
-
-        🌾 Kuliner Nusantara
-        •
-        Belajar
-        •
-        Bermain
-        •
-        Berprestasi
-        🌾
-
-        <br><br>
-
-        <span>
-            UPT SDN 160 GRESIK
-        </span>
-
+        🌾 Kuliner Nusantara • Belajar • Bermain • Berprestasi 🌾
+        <br>
+        <strong>UPT SDN 160 GRESIK</strong>
     </footer>
 
 </div>
@@ -1379,330 +1056,313 @@ footer{
 
 <script>
 
-/* =====================================================
+/* =========================================================
    KONFIGURASI GOOGLE APPS SCRIPT
-===================================================== */
+========================================================= */
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbwk4odfq7ABr__CDR00YD4uAMLmvK2iPjaLLlJrpyA6BnOwJ9gUkncLdCVCzE670CFy/exec";
 
 
-/* =====================================================
+/* =========================================================
    VARIABEL
-===================================================== */
+========================================================= */
 
 let semuaData = [];
 
 let semuaDataDitampilkan = false;
 
 
-/* =====================================================
-   LOAD DATA
-===================================================== */
+/* =========================================================
+   KEMBALI KE PETUALANGAN
+========================================================= */
 
-async function loadData(){
+function kembaliKePetualangan(){
 
-    setStatus(
-        "⏳ Mengambil data capaian dari Google Sheet...",
-        "loading"
-    );
+    window.location.href =
+        "petualangan.html";
 
-
-    const topBody =
-        document.getElementById(
-            "topTableBody"
-        );
+}
 
 
-    topBody.innerHTML = `
-        <tr>
-            <td colspan="5" class="loading-row">
-                <div class="spinner"></div>
-                Menghubungkan dengan Google Sheet...
-            </td>
-        </tr>
-    `;
+/* =========================================================
+   LOAD DATA DENGAN JSONP
+   TIDAK MENGGUNAKAN FETCH
+========================================================= */
+
+function loadData(){
+
+    const status =
+        document.getElementById("status");
+
+    const refreshButton =
+        document.getElementById("refreshButton");
 
 
-    try{
+    status.className =
+        "status loading";
 
-        const url =
-            API_URL +
-            "?action=ranking&ts=" +
-            Date.now();
-
-
-        console.log(
-            "Mengambil data dari:",
-            url
-        );
+    status.innerHTML =
+        "⏳ Mengambil data capaian dari Google Sheet...";
 
 
-        const response =
-            await fetch(
-                url,
-                {
-                    method:"GET",
-                    cache:"no-store",
-                    mode:"cors"
+    refreshButton.disabled = true;
+
+    refreshButton.innerHTML =
+        "⏳ Memuat...";
+
+
+    /*
+     * Nama callback dibuat unik.
+     */
+
+    const callbackName =
+        "terimaDataCapaian_" +
+        Date.now();
+
+
+    /*
+     * Fungsi callback global.
+     */
+
+    window[callbackName] =
+        function(result){
+
+            try{
+
+                if(
+                    !result ||
+                    result.ok !== true
+                ){
+
+                    throw new Error(
+                        result &&
+                        result.message
+                            ? result.message
+                            : "Data tidak valid."
+                    );
+
                 }
-            );
 
 
-        if(!response.ok){
-
-            throw new Error(
-                "HTTP " +
-                response.status
-            );
-
-        }
+                semuaData =
+                    Array.isArray(result.data)
+                        ? result.data
+                        : [];
 
 
-        const result =
-            await response.json();
+                /*
+                 * Bersihkan data kosong.
+                 */
+
+                semuaData =
+                    semuaData.filter(
+                        function(item){
+
+                            return (
+                                item &&
+                                String(
+                                    item.nama || ""
+                                ).trim() !== ""
+                            );
+
+                        }
+                    );
 
 
-        console.log(
-            "Respons Google Apps Script:",
-            result
-        );
+                /*
+                 * Urutkan nilai tertinggi.
+                 */
 
+                semuaData.sort(
+                    function(a,b){
 
-        if(!result){
+                        return (
+                            Number(b.nilai || 0) -
+                            Number(a.nilai || 0)
+                        );
 
-            throw new Error(
-                "Respons kosong dari server."
-            );
-
-        }
-
-
-        if(result.ok !== true){
-
-            throw new Error(
-                result.message ||
-                "Google Apps Script mengembalikan kesalahan."
-            );
-
-        }
-
-
-        if(!Array.isArray(result.data)){
-
-            throw new Error(
-                "Format data dari Google Sheet tidak valid."
-            );
-
-        }
-
-
-        /* =========================
-           BERSIHKAN DATA
-        ========================== */
-
-        semuaData =
-            result.data
-
-            .filter(function(item){
-
-                return (
-                    item &&
-                    String(
-                        item.nama || ""
-                    ).trim() !== ""
+                    }
                 );
 
-            })
 
-            .map(function(item){
+                /*
+                 * Tentukan peringkat.
+                 *
+                 * Contoh:
+                 * 40 = peringkat 1
+                 * 40 = peringkat 1
+                 * 33 = peringkat 3
+                 */
 
-                return {
-
-                    waktu:
-                        item.waktu || "",
-
-                    nama:
-                        String(
-                            item.nama || ""
-                        ),
-
-                    kelas:
-                        String(
-                            item.kelas || ""
-                        ),
-
-                    absen:
-                        String(
-                            item.absen || ""
-                        ),
-
-                    nilai:
-                        Number(
-                            item.nilai
-                        ) || 0,
-
-                    benar:
-                        Number(
-                            item.benar
-                        ) || 0,
-
-                    salah:
-                        Number(
-                            item.salah
-                        ) || 0,
-
-                    total:
-                        Number(
-                            item.total
-                        ) || 0,
-
-                    persen:
-                        Number(
-                            item.persen
-                        ) || 0
-
-                };
-
-            });
+                assignRanks(semuaData);
 
 
-        /* =========================
-           URUTKAN NILAI
-        ========================== */
+                renderTopThree(
+                    semuaData
+                );
 
-        semuaData.sort(
-            function(a,b){
 
-                return (
-                    b.nilai -
-                    a.nilai
+                renderTable(
+                    semuaData.slice(0,10),
+                    "topTableBody"
+                );
+
+
+                document.getElementById(
+                    "studentCount"
+                ).textContent =
+                    semuaData.length +
+                    " siswa";
+
+
+                renderTable(
+                    semuaData,
+                    "allTableBody"
+                );
+
+
+                document.getElementById(
+                    "allStudentCount"
+                ).textContent =
+                    semuaData.length +
+                    " siswa";
+
+
+                if(semuaData.length > 0){
+
+                    status.className =
+                        "status success";
+
+                    status.innerHTML =
+                        "✅ Data berhasil dimuat. " +
+                        semuaData.length +
+                        " data capaian ditemukan.";
+
+                }else{
+
+                    status.className =
+                        "status loading";
+
+                    status.innerHTML =
+                        "⚠️ Belum ada data capaian yang dapat ditampilkan.";
+
+                }
+
+
+            }catch(error){
+
+                tampilkanError(
+                    error.message
                 );
 
             }
-        );
 
 
-        /* =========================
-           TENTUKAN PERINGKAT
-           
-           Contoh:
-           40 = 1
-           40 = 1
-           33 = 3
-           33 = 3
-           27 = 5
-        ========================== */
+            /*
+             * Hapus script JSONP
+             */
 
-        semuaData =
-            assignRanks(
-                semuaData
+            hapusScriptJSONP(
+                script
             );
 
 
-        /* =========================
-           RENDER
-        ========================== */
+            /*
+             * Hapus callback.
+             */
 
-        renderTopThree(
-            semuaData
-        );
-
-
-        renderTable(
-            semuaData.slice(0,10),
-            "topTableBody"
-        );
+            try{
+                delete window[callbackName];
+            }catch(e){}
 
 
-        renderTable(
-            semuaData,
-            "allTableBody"
-        );
+            refreshButton.disabled =
+                false;
+
+            refreshButton.innerHTML =
+                "🔄 Refresh Data";
+
+        };
 
 
-        /* =========================
-           JUMLAH DATA
-        ========================== */
+    /*
+     * Buat elemen script.
+     */
 
-        document.getElementById(
-            "studentCount"
-        ).textContent =
-            semuaData.length +
-            " siswa";
+    const script =
+        document.createElement("script");
 
 
-        document.getElementById(
-            "allStudentCount"
-        ).textContent =
-            semuaData.length +
-            " data";
+    /*
+     * Tambahkan callback.
+     */
+
+    script.src =
+        API_URL +
+        "?action=ranking" +
+        "&callback=" +
+        encodeURIComponent(
+            callbackName
+        ) +
+        "&ts=" +
+        Date.now();
 
 
-        /* =========================
-           TOMBOL SEMUA DATA
-        ========================== */
+    script.async = true;
 
-        const allButton =
-            document.getElementById(
-                "allDataButton"
+
+    /*
+     * Jika terjadi error jaringan.
+     */
+
+    script.onerror =
+        function(){
+
+            tampilkanError(
+                "Google Apps Script tidak dapat dihubungi."
             );
 
 
-        if(semuaData.length > 0){
-
-            allButton.style.display =
-                "inline-flex";
-
-        }else{
-
-            allButton.style.display =
-                "none";
-
-        }
+            try{
+                delete window[callbackName];
+            }catch(e){}
 
 
-        /* =========================
-           STATUS
-        ========================== */
-
-        if(semuaData.length === 0){
-
-            setStatus(
-                "⚠️ Belum ada data capaian yang dapat ditampilkan.",
-                "empty"
+            hapusScriptJSONP(
+                script
             );
 
-        }else{
 
-            setStatus(
-                "✅ Data berhasil dimuat • " +
-                semuaData.length +
-                " data capaian",
-                "success"
-            );
+            refreshButton.disabled =
+                false;
 
-        }
+            refreshButton.innerHTML =
+                "🔄 Refresh Data";
+
+        };
 
 
-    }catch(error){
+    document.body.appendChild(
+        script
+    );
 
-        console.error(
-            "Gagal mengambil data:",
-            error
-        );
-
-
-        renderEmpty(
-            "topTableBody",
-            "Data belum dapat ditampilkan."
-        );
+}
 
 
-        setStatus(
-            "⚠️ Data belum dapat dimuat. " +
-            getFriendlyError(error),
-            "error"
+/* =========================================================
+   HAPUS SCRIPT JSONP
+========================================================= */
+
+function hapusScriptJSONP(script){
+
+    if(
+        script &&
+        script.parentNode
+    ){
+
+        script.parentNode.removeChild(
+            script
         );
 
     }
@@ -1710,42 +1370,68 @@ async function loadData(){
 }
 
 
-/* =====================================================
-   PERINGKAT
-===================================================== */
+/* =========================================================
+   ERROR
+========================================================= */
+
+function tampilkanError(message){
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    status.className =
+        "status error";
+
+
+    status.innerHTML =
+        "⚠️ Data belum dapat dimuat. " +
+        escapeHTML(
+            message
+        );
+
+}
+
+
+/* =========================================================
+   ASSIGN RANK
+========================================================= */
 
 function assignRanks(data){
 
-    let lastScore = null;
+    let previousScore = null;
 
-    let rank = 0;
+    let currentRank = 0;
 
 
-    return data.map(
+    data.forEach(
         function(item,index){
 
+            const score =
+                Number(
+                    item.nilai || 0
+                );
+
+
             if(
-                item.nilai !==
-                lastScore
+                previousScore === null ||
+                score !== previousScore
             ){
 
-                rank =
+                currentRank =
                     index + 1;
-
-                lastScore =
-                    item.nilai;
 
             }
 
 
-            return {
+            item.rank =
+                currentRank;
 
-                ...item,
 
-                peringkat:
-                    rank
-
-            };
+            previousScore =
+                score;
 
         }
     );
@@ -1753,9 +1439,9 @@ function assignRanks(data){
 }
 
 
-/* =====================================================
-   TOP THREE
-===================================================== */
+/* =========================================================
+   RENDER TOP THREE
+========================================================= */
 
 function renderTopThree(data){
 
@@ -1765,82 +1451,6 @@ function renderTopThree(data){
         );
 
 
-    if(!data.length){
-
-        container.innerHTML = `
-
-            <div class="champion first">
-
-                <div class="medal">
-                    🥇
-                </div>
-
-                <div class="rank-label">
-                    JUARA 1
-                </div>
-
-                <div class="empty-name">
-                    Belum tersedia
-                </div>
-
-                <div class="student-score">
-                    -
-                </div>
-
-            </div>
-
-
-            <div class="champion second">
-
-                <div class="medal">
-                    🥈
-                </div>
-
-                <div class="rank-label">
-                    JUARA 2
-                </div>
-
-                <div class="empty-name">
-                    Belum tersedia
-                </div>
-
-                <div class="student-score">
-                    -
-                </div>
-
-            </div>
-
-
-            <div class="champion third">
-
-                <div class="medal">
-                    🥉
-                </div>
-
-                <div class="rank-label">
-                    JUARA 3
-                </div>
-
-                <div class="empty-name">
-                    Belum tersedia
-                </div>
-
-                <div class="student-score">
-                    -
-                </div>
-
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    const champions =
-        data.slice(0,3);
-
-
     const medals = [
         "🥇",
         "🥈",
@@ -1848,82 +1458,41 @@ function renderTopThree(data){
     ];
 
 
-    const classes = [
-        "first",
-        "second",
-        "third"
-    ];
-
-
-    const labels = [
+    const places = [
         "JUARA 1",
         "JUARA 2",
         "JUARA 3"
     ];
 
 
-    let html = "";
+    if(!data.length){
+
+        container.innerHTML = "";
 
 
-    for(
-        let i = 0;
-        i < 3;
-        i++
-    ){
+        for(
+            let i=0;
+            i<3;
+            i++
+        ){
 
-        const item =
-            champions[i];
+            container.innerHTML += `
 
-
-        if(item){
-
-            html += `
-
-                <div class="champion ${classes[i]}">
+                <div class="champion">
 
                     <div class="medal">
                         ${medals[i]}
                     </div>
 
-                    <div class="rank-label">
-                        ${labels[i]}
+                    <div class="place">
+                        ${places[i]}
                     </div>
 
-                    <div
-                        class="student-name"
-                        title="${escapeHTML(item.nama)}"
-                    >
-                        ${escapeHTML(item.nama)}
-                    </div>
-
-                    <div class="student-score">
-                        ${formatScore(item.nilai)}
-                        <small>nilai</small>
-                    </div>
-
-                </div>
-
-            `;
-
-        }else{
-
-            html += `
-
-                <div class="champion ${classes[i]}">
-
-                    <div class="medal">
-                        ${medals[i]}
-                    </div>
-
-                    <div class="rank-label">
-                        ${labels[i]}
-                    </div>
-
-                    <div class="empty-name">
+                    <div class="student-name">
                         Belum tersedia
                     </div>
 
-                    <div class="student-score">
+                    <div class="score">
                         -
                     </div>
 
@@ -1933,126 +1502,255 @@ function renderTopThree(data){
 
         }
 
+        return;
+
     }
 
 
-    container.innerHTML =
-        html;
+    container.innerHTML = "";
+
+
+    for(
+        let i=0;
+        i<3;
+        i++
+    ){
+
+        const item =
+            data[i];
+
+
+        if(!item){
+
+            container.innerHTML += `
+
+                <div class="champion">
+
+                    <div class="medal">
+                        ${medals[i]}
+                    </div>
+
+                    <div class="place">
+                        ${places[i]}
+                    </div>
+
+                    <div class="student-name">
+                        Belum tersedia
+                    </div>
+
+                    <div class="score">
+                        -
+                    </div>
+
+                </div>
+
+            `;
+
+            continue;
+
+        }
+
+
+        container.innerHTML += `
+
+            <div class="champion">
+
+                <div class="medal">
+                    ${medals[i]}
+                </div>
+
+                <div class="place">
+                    PERINGKAT ${item.rank}
+                </div>
+
+                <div class="student-name">
+                    ${escapeHTML(
+                        item.nama
+                    )}
+                </div>
+
+                <div class="score">
+                    ${formatScore(
+                        item.nilai
+                    )}
+                </div>
+
+                <div class="student-meta">
+                    Absen ${escapeHTML(
+                        item.absen
+                    )}
+                    • Kelas ${escapeHTML(
+                        item.kelas
+                    )}
+                </div>
+
+            </div>
+
+        `;
+
+    }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    RENDER TABLE
-===================================================== */
+========================================================= */
 
 function renderTable(
     data,
     bodyId
 ){
 
-    const body =
+    const tbody =
         document.getElementById(
             bodyId
         );
 
 
-    if(!body){
-
+    if(!tbody){
         return;
-
     }
 
 
     if(!data.length){
 
-        renderEmpty(
-            bodyId,
-            "Belum ada data yang dapat ditampilkan."
-        );
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="5"
+                    class="empty-row"
+                >
+                    📭 Belum ada data capaian.
+
+                </td>
+
+            </tr>
+
+        `;
 
         return;
 
     }
 
 
-    let html = "";
+    tbody.innerHTML = "";
 
 
     data.forEach(
         function(item){
 
-            html += `
-
-                <tr>
-
-                    <td class="rank-cell">
-
-                        <span class="rank-number">
-
-                            ${item.peringkat}
-
-                        </span>
-
-                    </td>
+            let rankClass = "";
 
 
-                    <td class="name-cell">
+            if(item.rank === 1){
+                rankClass = "rank-1";
+            }
 
-                        ${escapeHTML(
-                            item.nama
-                        )}
+            else if(item.rank === 2){
+                rankClass = "rank-2";
+            }
 
-                    </td>
-
-
-                    <td class="absen-cell">
-
-                        ${escapeHTML(
-                            item.absen
-                        )}
-
-                    </td>
+            else if(item.rank === 3){
+                rankClass = "rank-3";
+            }
 
 
-                    <td class="kelas-cell">
-
-                        ${escapeHTML(
-                            item.kelas
-                        )}
-
-                    </td>
+            const row =
+                document.createElement(
+                    "tr"
+                );
 
 
-                    <td class="score-cell">
+            row.innerHTML = `
 
-                        <span class="score-badge">
+                <td>
 
-                            ${formatScore(
-                                item.nilai
-                            )}
+                    <span
+                        class="rank-number ${rankClass}"
+                    >
+                        ${item.rank}
+                    </span>
 
-                        </span>
+                </td>
 
-                    </td>
 
-                </tr>
+                <td
+                    class="name-cell"
+                >
+                    ${escapeHTML(
+                        item.nama
+                    )}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(
+                        item.absen
+                    )}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(
+                        item.kelas
+                    )}
+                </td>
+
+
+                <td
+                    class="score-cell"
+                >
+                    ${formatScore(
+                        item.nilai
+                    )}
+                </td>
 
             `;
+
+
+            tbody.appendChild(
+                row
+            );
 
         }
     );
 
+}
 
-    body.innerHTML =
-        html;
+
+/* =========================================================
+   FORMAT NILAI
+========================================================= */
+
+function formatScore(score){
+
+    const number =
+        Number(score);
+
+
+    if(
+        Number.isNaN(number)
+    ){
+
+        return "-";
+
+    }
+
+
+    return number
+        .toLocaleString(
+            "id-ID"
+        );
 
 }
 
 
-/* =====================================================
+/* =========================================================
    TOGGLE SEMUA DATA
-===================================================== */
+========================================================= */
 
 function toggleAllData(){
 
@@ -2082,7 +1780,7 @@ function toggleAllData(){
 
 
         button.innerHTML =
-            "🔼 Sembunyikan Semua Data";
+            "🔽 Sembunyikan Semua Data";
 
 
         setTimeout(
@@ -2105,191 +1803,18 @@ function toggleAllData(){
 
 
         button.innerHTML =
-            "📋 Lihat Semua Data";
+            "👥 Tampilkan Semua Data";
 
     }
 
 }
 
 
-/* =====================================================
-   FORMAT NILAI
-===================================================== */
-
-function formatScore(
-    value
-){
-
-    const number =
-        Number(value) || 0;
-
-
-    return number.toLocaleString(
-        "id-ID"
-    );
-
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-function setStatus(
-    message,
-    type
-){
-
-    const status =
-        document.getElementById(
-            "status"
-        );
-
-
-    status.textContent =
-        message;
-
-
-    status.className =
-        "status " +
-        (
-            type ||
-            ""
-        );
-
-}
-
-
-/* =====================================================
-   ERROR FRIENDLY
-===================================================== */
-
-function getFriendlyError(
-    error
-){
-
-    const message =
-        String(
-            error?.message ||
-            error ||
-            ""
-        );
-
-
-    if(
-        message
-            .toLowerCase()
-            .includes(
-                "failed to fetch"
-            )
-    ){
-
-        return (
-            "Koneksi ke Google Apps Script gagal. " +
-            "Pastikan Web App sudah dideploy dan dapat diakses."
-        );
-
-    }
-
-
-    if(
-        message
-            .toLowerCase()
-            .includes(
-                "cors"
-            )
-    ){
-
-        return (
-            "Koneksi diblokir oleh browser. " +
-            "Periksa deployment Web App Google Apps Script."
-        );
-
-    }
-
-
-    if(
-        message
-            .toLowerCase()
-            .includes(
-                "http"
-            )
-    ){
-
-        return (
-            "Server mengembalikan " +
-            message +
-            ". Periksa URL Web App."
-        );
-
-    }
-
-
-    return message ||
-        "Terjadi kesalahan saat mengambil data.";
-
-}
-
-
-/* =====================================================
-   EMPTY TABLE
-===================================================== */
-
-function renderEmpty(
-    bodyId,
-    message
-){
-
-    const body =
-        document.getElementById(
-            bodyId
-        );
-
-
-    if(!body){
-
-        return;
-
-    }
-
-
-    body.innerHTML = `
-
-        <tr>
-
-            <td
-                colspan="5"
-                class="no-data"
-            >
-
-                <div class="empty-state-icon">
-                    📭
-                </div>
-
-                <div class="empty-state-title">
-                    Belum ada data
-                </div>
-
-                <div class="empty-state-text">
-                    ${escapeHTML(message)}
-                </div>
-
-            </td>
-
-        </tr>
-
-    `;
-
-}
-
-
-/* =====================================================
+/* =========================================================
    ESCAPE HTML
-===================================================== */
+========================================================= */
 
-function escapeHTML(
-    value
-){
+function escapeHTML(value){
 
     return String(
         value ?? ""
@@ -2318,9 +1843,9 @@ function escapeHTML(
 }
 
 
-/* =====================================================
-   MULAI SAAT HALAMAN DIBUKA
-===================================================== */
+/* =========================================================
+   JALANKAN OTOMATIS
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",

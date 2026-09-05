@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2563eb">
+<title>Jelajah Kuliner Bilangan Cacah 2.0 | Jelajah Kuliner Nusantara</title>
+
+<style>
+:root{
+  --blue:#9a3412;
+  --blue2:#d97706;
+  --navy:#5b2c1b;
+  --yellow:#facc15;
+  --orange:#ea580c;
+  --green:#3f7d3a;
+  --purple:#8b5cf6;
+  --pink:#be185d;
+  --red:#ef4444;
+  --white:#fff;
+  --ink:#17324d;
+  --muted:#64748b;
+  --glass:rgba(255,255,255,.82);
+  --shadow:0 20px 60px rgba(30,64,175,.15);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  font-family:"Trebuchet MS",Arial,sans-serif;
+  color:var(--ink);
+  background:#fff7ed url("kuliner-tradisional-bg.svg") center top/cover fixed no-repeat;
+  overflow-x:hidden;
+}
+
+button,
+a{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+button:focus-visible,
+a:focus-visible{
+  outline:4px solid #fbbf24;
+  outline-offset:3px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* ==============================
+   APP SHELL
+============================== */
+
+.app{
+  width:min(1180px,100%);
+  max-width:1180px;
+  margin:0 auto;
+  padding:0;
+  position:relative;
+  z-index:1;
+}
+
+/* ==============================
+   HERO
+============================== */
+
+.hero{
+  width:100%;
+  min-height:430px;
+  margin:0 auto;
+
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:30px;
+  align-items:center;
+
+  background:rgba(255,250,245,.68);
+  border:1px solid rgba(255,255,255,.85);
+  backdrop-filter:blur(10px);
+
+  border-radius:36px;
+  padding:45px;
+
+  box-shadow:
+    0 28px 80px rgba(91,44,27,.20),
+    0 8px 28px rgba(15,23,42,.08);
+
+  transform:translateY(0);
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.hero:hover{
+  transform:translateY(-4px);
+
+  box-shadow:
+    0 34px 90px rgba(91,44,27,.23),
+    0 12px 34px rgba(15,23,42,.10);
+}
+
+/* ==============================
+   BADGE
+============================== */
+
+.badge{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+
+  background:#fff;
+  border-radius:999px;
+
+  padding:9px 15px;
+
+  color:var(--blue);
+  font-weight:900;
+
+  box-shadow:
+    0 8px 20px rgba(15,23,42,.07);
+
+  margin-bottom:17px;
+}
+
+/* ==============================
+   TITLE
+============================== */
+
+h1{
+  font-size:clamp(42px,6vw,72px);
+  line-height:.98;
+  letter-spacing:-3px;
+  color:var(--navy);
+}
+
+h1 .blue{
+  color:var(--blue);
+}
+
+h1 .orange{
+  color:var(--orange);
+}
+
+.hero p{
+  font-size:17px;
+  line-height:1.7;
+  color:#475569;
+  max-width:650px;
+  margin:20px 0;
+}
+
+/* ==============================
+   ACTION BUTTON
+============================== */
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/*
+  Tombol Mulai Petualangan
+  diposisikan agak ke tengah
+  tepat di bawah judul.
+*/
+
+.start-action{
+  width:100%;
+  justify-content:center;
+  margin-top:28px;
+}
+
+.start-action .btn{
+  min-width:220px;
+  justify-content:center;
+  padding:15px 28px;
+}
+
+/* ==============================
+   BUTTON
+============================== */
+
+.btn{
+  border:0;
+  border-radius:16px;
+
+  padding:14px 20px;
+
+  font-weight:900;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+
+  transition:.2s;
+
+  box-shadow:
+    0 9px 24px rgba(15,23,42,.09);
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+}
+
+.primary{
+  color:#fff;
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--blue2)
+    );
+}
+
+.secondary{
+  background:#fff;
+  color:var(--navy);
+}
+
+.challenge{
+  background:
+    linear-gradient(
+      135deg,
+      #f59e0b,
+      var(--orange)
+    );
+  color:#fff;
+}
+
+/* ==============================
+   HERO ART
+============================== */
+
+.hero-art{
+  height:330px;
+  display:grid;
+  place-items:center;
+  position:relative;
+}
+
+.number-orb{
+  width:min(310px,72vw);
+  height:min(310px,72vw);
+
+  border-radius:38%;
+
+  display:grid;
+  place-items:center;
+
+  background:rgba(255,252,248,.88);
+
+  border:3px solid rgba(255,255,255,.95);
+
+  box-shadow:
+    0 30px 70px rgba(120,53,15,.18);
+
+  animation:orb 5s ease-in-out infinite;
+}
+
+.big-number{
+  font-size:clamp(70px,10vw,112px);
+
+  font-weight:900;
+  letter-spacing:-9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--purple),
+      var(--pink)
+    );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+
+  color:transparent;
+}
+
+.symbol{
+  position:absolute;
+  font-size:38px;
+  font-weight:900;
+}
+
+.s1{
+  top:25px;
+  left:12%;
+  color:var(--orange);
+}
+
+.s2{
+  top:55px;
+  right:10%;
+  color:var(--green);
+}
+
+.s3{
+  bottom:35px;
+  left:13%;
+  color:var(--purple);
+}
+
+.s4{
+  bottom:18px;
+  right:15%;
+  color:var(--pink);
+}
+
+@keyframes orb{
+  50%{
+    transform:
+      translateY(-12px)
+      rotate(2deg);
+  }
+}
+
+/* ==============================
+   MINI INFORMATION CARDS
+============================== */
+
+.mini{
+  position:absolute;
+
+  background:#fff;
+
+  padding:10px 14px;
+
+  border-radius:15px;
+
+  box-shadow:
+    0 12px 30px rgba(15,23,42,.12);
+
+  font-size:12px;
+  font-weight:900;
+}
+
+.mini strong{
+  display:block;
+  font-size:17px;
+  color:var(--blue);
+}
+
+.mi1{
+  left:0;
+  top:80px;
+}
+
+.mi2{
+  right:0;
+  bottom:70px;
+}
+
+/* ==============================
+   MODAL
+============================== */
+
+.modal{
+  position:fixed;
+  inset:0;
+
+  z-index:100;
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:18px;
+
+  background:rgba(15,23,42,.5);
+
+  backdrop-filter:blur(8px);
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(760px,100%);
+  max-height:90vh;
+  overflow:auto;
+
+  background:#fff;
+
+  border-radius:28px;
+
+  box-shadow:
+    0 35px 100px rgba(15,23,42,.25);
+
+  padding:28px;
+
+  position:relative;
+
+  border-color:rgba(154,52,18,.10);
+}
+
+.close{
+  position:absolute;
+
+  right:16px;
+  top:16px;
+
+  border:0;
+
+  background:#f1f5f9;
+
+  border-radius:12px;
+
+  width:40px;
+  height:40px;
+
+  font-size:20px;
+}
+
+.modal-title{
+  padding-right:50px;
+
+  color:var(--navy);
+
+  font-size:28px;
+}
+
+.modal-sub{
+  color:var(--muted);
+
+  margin:7px 0 20px;
+
+  line-height:1.6;
+}
+
+/* ==============================
+   LESSON
+============================== */
+
+.lesson-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.lesson-box{
+  padding:17px;
+
+  border-radius:18px;
+
+  background:#fffaf5;
+
+  border:1px solid #fed7aa;
+}
+
+.lesson-box h4{
+  color:var(--blue);
+  margin-bottom:7px;
+}
+
+.example{
+  margin-top:15px;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff7ed,
+      #fffbeb
+    );
+
+  text-align:center;
+
+  font-size:28px;
+  font-weight:900;
+}
+
+.tip{
+  margin-top:15px;
+
+  padding:13px;
+
+  border-radius:15px;
+
+  background:#fef3c7;
+
+  color:#78350f;
+
+  font-size:14px;
+
+  line-height:1.5;
+}
+
+/* ==============================
+   GAME
+============================== */
+
+.question{
+  text-align:center;
+  padding:12px;
+}
+
+.question .num{
+  font-size:42px;
+
+  font-weight:900;
+
+  color:var(--navy);
+
+  margin:15px;
+}
+
+.choice-row{
+  display:flex;
+
+  justify-content:center;
+
+  gap:12px;
+
+  flex-wrap:wrap;
+}
+
+.choice{
+  min-width:90px;
+
+  border:0;
+
+  padding:15px 22px;
+
+  border-radius:16px;
+
+  background:#eff6ff;
+
+  color:var(--blue);
+
+  font-size:24px;
+
+  font-weight:900;
+
+  transition:.2s;
+}
+
+.choice:hover{
+  transform:scale(1.05);
+}
+
+.choice.correct{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.choice.wrong{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.feedback{
+  text-align:center;
+
+  min-height:55px;
+
+  margin-top:18px;
+
+  font-weight:900;
+
+  font-size:17px;
+}
+
+.next-row{
+  text-align:center;
+  margin-top:8px;
+}
+
+/* ==============================
+   ORDER GAME
+============================== */
+
+.order-items{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  justify-content:center;
+
+  gap:10px;
+
+  margin:18px 0;
+}
+
+.drag-item{
+  user-select:none;
+
+  padding:14px 18px;
+
+  border-radius:15px;
+
+  background:#fff;
+
+  border:2px solid #bfdbfe;
+
+  box-shadow:
+    0 8px 18px rgba(15,23,42,.07);
+
+  font-size:20px;
+
+  font-weight:900;
+
+  cursor:grab;
+}
+
+.drag-item.selected{
+  border-color:var(--orange);
+
+  transform:translateY(-3px);
+
+  background:#fff7ed;
+}
+
+.drop-zone{
+  min-height:70px;
+
+  border:3px dashed #93c5fd;
+
+  border-radius:18px;
+
+  padding:10px;
+
+  display:flex;
+
+  gap:8px;
+
+  flex-wrap:wrap;
+
+  align-items:center;
+
+  justify-content:center;
+}
+
+.drop-zone .slot{
+  padding:12px 18px;
+
+  border-radius:14px;
+
+  background:#dbeafe;
+
+  font-weight:900;
+}
+
+.drop-zone .slot.empty{
+  background:#f8fafc;
+  color:#94a3b8;
+}
+
+/* ==============================
+   QUIZ
+============================== */
+
+.quiz-option{
+  width:100%;
+
+  text-align:left;
+
+  border:2px solid #e2e8f0;
+
+  background:#fff;
+
+  padding:14px;
+
+  border-radius:15px;
+
+  margin:8px 0;
+
+  font-weight:800;
+}
+
+.quiz-option:hover{
+  border-color:#93c5fd;
+  background:#eff6ff;
+}
+
+.quiz-option.correct{
+  border-color:#22c55e;
+  background:#dcfce7;
+}
+
+.quiz-option.wrong{
+  border-color:#ef4444;
+  background:#fee2e2;
+}
+
+/* ==============================
+   TOAST
+============================== */
+
+.toast{
+  position:fixed;
+
+  right:20px;
+  bottom:20px;
+
+  z-index:200;
+
+  background:#17356b;
+
+  color:#fff;
+
+  padding:14px 18px;
+
+  border-radius:15px;
+
+  box-shadow:
+    0 15px 35px rgba(15,23,42,.25);
+
+  transform:translateY(130px);
+
+  transition:.35s;
+
+  font-weight:800;
+}
+
+.toast.show{
+  transform:translateY(0);
+}
+
+/* ==============================
+   CONFETTI
+============================== */
+
+.confetti{
+  position:fixed;
+
+  top:-20px;
+
+  width:9px;
+  height:15px;
+
+  z-index:250;
+
+  animation:
+    fall 1.8s linear forwards;
+
+  pointer-events:none;
+}
+
+@keyframes fall{
+  to{
+    transform:
+      translateY(110vh)
+      rotate(720deg);
+
+    opacity:0;
+  }
+}
+
+/* ==============================
+   FOOTER
+============================== */
+
+footer{
+  width:min(1180px,100%);
+
+  margin:14px auto 0;
+
+  padding:10px 0 0;
+
+  text-align:center;
+
+  color:#475569;
+
+  font-size:13px;
+}
+
+footer b{
+  color:var(--navy);
+}
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media(max-width:900px){
+
+  body{
+    padding:16px;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+
+    text-align:center;
+
+    padding:32px 22px;
+
+    min-height:auto;
+  }
+
+  .hero p{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .actions{
+    justify-content:center;
+  }
+
+  .hero-art{
+    height:300px;
+  }
+
+  .mini{
+    display:none;
+  }
+}
+
+@media(max-width:620px){
+
+  body{
+    padding:12px;
+    align-items:center;
+  }
+
+  .app{
+    width:100%;
+  }
+
+  h1{
+    font-size:44px;
+  }
+
+  .hero{
+    border-radius:26px;
+  }
+
+  .lesson-grid{
+    grid-template-columns:1fr;
+  }
+
+  .modal-box{
+    padding:22px;
+  }
+
+  .modal-title{
+    font-size:23px;
+  }
+
+  .number-orb{
+    width:245px;
+    height:245px;
+  }
+
+  .big-number{
+    font-size:78px;
+  }
+
+  .start-action{
+    margin-top:24px;
+  }
+
+  .start-action .btn{
+    min-width:210px;
+  }
+
+  footer{
+    font-size:11px;
+    padding-bottom:4px;
+  }
+}
+
+@media(max-width:390px){
+
+  .choice{
+    min-width:70px;
+  }
+
+  .start-action .btn{
+    width:100%;
+    min-width:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="app">
+
+  <!-- =========================
+       HALAMAN UTAMA
+  ========================== -->
+
+  <section class="hero">
+
+    <div>
+
+      <div class="badge">
+        🚀 JELAJAH KULINER NUSANTARA • MATEMATIKA 2.0
+      </div>
+
+      <h1>
+        Jelajahi
+        <span class="blue">Bilangan</span>
+        <span class="orange">Cacah!</span>
+      </h1>
+
+      <!-- Tombol berada di tengah di bawah judul -->
+      <div class="actions start-action">
+
+        <button
+          class="btn primary"
+          onclick="startAdventure()">
+          🚀 Mulai Petualangan
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         ILUSTRASI ANGKA
+    ========================== -->
+
+    <div class="hero-art">
+
+      <div class="number-orb">
+
+        <div class="big-number">
+          123
+        </div>
+
+        <div class="symbol s1">+</div>
+        <div class="symbol s2">≥</div>
+        <div class="symbol s3">456</div>
+        <div class="symbol s4">≤</div>
+
+      </div>
+
+
+      <div class="mini mi1">
+        🍡 Bandingkan
+        <strong>234 ? 243</strong>
+      </div>
+
+      <div class="mini mi2">
+        🍚 Urutkan
+        <strong>125 → 210 → 450</strong>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer>
+  <b>
+    MATEMATIKA KELAS IV • JELAJAH KULINER NUSANTARA
+  </b>
+  <br>
+  Belajar dengan semangat, berpikir cerdas, berani mencoba! 🌟
+</footer>
+
+
+<!-- =========================
+     MODAL MATERI
+========================== -->
+
+<div class="modal" id="materiModal">
+
+  <div class="modal-box">
+
+    <button
+      class="close"
+      onclick="closeModal('materiModal')">
+      ×
+    </button>
+
+    <h2 class="modal-title">
+      📚 Bekal Penjelajah Kuliner
+    </h2>
+
+    <p class="modal-sub">
+      Pelajari konsep inti sebelum memasuki pos kuliner.
+    </p>
+
+
+    <div class="lesson-grid">
+
+      <div class="lesson-box">
+        <h4>🔢 Bilangan Cacah</h4>
+        <p>
+          Bilangan cacah dimulai dari
+          0, 1, 2, 3, dan seterusnya.
+        </p>
+      </div>
+
+      <div class="lesson-box">
+        <h4>🔎 Pasar Perbandingan</h4>
+        <p>
+          Gunakan &gt; untuk lebih besar,
+          &lt; untuk lebih kecil,
+          dan = untuk sama dengan.
+        </p>
+      </div>
+
+      <div class="lesson-box">
+        <h4>📊 Dapur Pengurutan</h4>
+        <p>
+          Urutan naik berarti kecil
+          → besar.
+          Urutan turun berarti besar
+          → kecil.
+        </p>
+      </div>
+
+      <div class="lesson-box">
+        <h4>💡 Strategi</h4>
+        <p>
+          Bandingkan banyak digit terlebih dahulu.
+          Jika sama, bandingkan nilai tempat
+          dari kiri.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="example">
+      4.250 &nbsp; &gt; &nbsp; 4.205
+    </div>
+
+
+    <div class="tip">
+      💡 Ingat: mulai membandingkan dari angka paling kiri.
+      Jika sama, lanjutkan ke angka berikutnya.
+    </div>
+
+
+    <div
+      class="actions"
+      style="justify-content:center;margin-top:20px">
+
+      <button
+        class="btn primary"
+        onclick="completeMission(1);closeModal('materiModal')">
+
+        🚀 Saya Siap!
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     MODAL COMPARE GAME
+========================== -->
+
+<div class="modal" id="compareModal">
+
+  <div class="modal-box">
+
+    <button
+      class="close"
+      onclick="closeModal('compareModal')">
+      ×
+    </button>
+
+    <h2 class="modal-title">
+      🔍 Misi 2 — Detektif Rasa & Angka
+    </h2>
+
+    <p class="modal-sub">
+      Pilih tanda yang tepat.
+    </p>
+
+    <div class="question">
+
+      <div>
+        Manakah hubungan yang benar?
+      </div>
+
+      <div
+        class="num"
+        id="compareQuestion">
+        234 ? 243
+      </div>
+
+      <div class="choice-row">
+
+        <button
+          class="choice"
+          onclick="answerCompare('<')">
+          &lt;
+        </button>
+
+        <button
+          class="choice"
+          onclick="answerCompare('=')">
+          =
+        </button>
+
+        <button
+          class="choice"
+          onclick="answerCompare('>')">
+          &gt;
+        </button>
+
+      </div>
+
+      <div
+        class="feedback"
+        id="compareFeedback">
+      </div>
+
+      <div class="next-row">
+
+        <button
+          class="btn primary hidden"
+          id="compareNext"
+          onclick="nextCompare()">
+
+          ➡️ Soal Berikutnya
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     MODAL ORDER GAME
+========================== -->
+
+<div class="modal" id="orderModal">
+
+  <div class="modal-box">
+
+    <button
+      class="close"
+      onclick="closeModal('orderModal')">
+      ×
+    </button>
+
+    <h2 class="modal-title">
+      📊 Misi 3 — Chef Pengurut
+    </h2>
+
+    <p class="modal-sub">
+      Klik angka sesuai urutan dari yang terkecil
+      ke terbesar.
+    </p>
+
+    <div class="question">
+
+      <div
+        class="order-items"
+        id="orderItems">
+      </div>
+
+      <div
+        class="drop-zone"
+        id="orderZone">
+
+        <span style="color:#94a3b8">
+          Urutanmu akan muncul di sini...
+        </span>
+
+      </div>
+
+      <div
+        class="feedback"
+        id="orderFeedback">
+      </div>
+
+      <button
+        class="btn primary"
+        id="orderCheck"
+        onclick="checkOrder()">
+
+        ✅ Periksa Jawaban
+
+      </button>
+
+      <button
+        class="btn secondary hidden"
+        id="orderNext"
+        onclick="nextOrder()">
+
+        ➡️ Soal Berikutnya
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     MODAL QUIZ
+========================== -->
+
+<div class="modal" id="quizModal">
+
+  <div class="modal-box">
+
+    <button
+      class="close"
+      onclick="closeModal('quizModal')">
+      ×
+    </button>
+
+    <h2 class="modal-title">
+      🏆 Tantangan Kuliner Akhir
+    </h2>
+
+    <p
+      class="modal-sub"
+      id="quizCounter">
+      Soal 1 dari 5
+    </p>
+
+    <div id="quizBody"></div>
+
+    <div
+      class="feedback"
+      id="quizFeedback">
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     MODAL HASIL
+========================== -->
+
+<div class="modal" id="resultModal">
+
+  <div
+    class="modal-box"
+    style="text-align:center">
+
+    <h2
+      class="modal-title"
+      style="padding-right:0">
+
+      🎉 Petualangan Selesai!
+
+    </h2>
+
+    <p class="modal-sub">
+      Hebat! Kamu telah menyelesaikan
+      perjalanan Bilangan Cacah.
+    </p>
+
+    <div style="font-size:70px;margin:10px">
+      🏆
+    </div>
+
+    <h2
+      id="resultScore"
+      style="color:var(--blue);font-size:34px">
+
+      0 XP
+
+    </h2>
+
+    <p
+      id="resultMessage"
+      style="margin:10px 0 20px;color:var(--muted)">
+    </p>
+
+    <button
+      class="btn primary"
+      onclick="closeModal('resultModal')">
+
+      ✨ Selesai
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     TOAST
+========================== -->
+
+<div
+  class="toast"
+  id="toast">
+</div>
+
+
+<script>
+
+/* =========================================
+   STATE
+========================================= */
+
+const KEY = "petualanganBilanganCacah2";
+
+let state =
+  JSON.parse(
+    localStorage.getItem(KEY) || "null"
+  ) ||
+  {
+    xp:0,
+    completed:[],
+    streak:0,
+    sound:true
+  };
+
+
+let compareIndex = 0;
+let orderIndex = 0;
+let quizIndex = 0;
+let quizScore = 0;
+
+let selectedOrder = [];
+
+
+/* =========================================
+   DATA SOAL PERBANDINGAN
+========================================= */
+
+const compareQuestions = [
+
+  {
+    a:234,
+    b:243,
+    ans:"<"
+  },
+
+  {
+    a:725,
+    b:725,
+    ans:"="
+  },
+
+  {
+    a:908,
+    b:890,
+    ans:">"
+  },
+
+  {
+    a:1200,
+    b:999,
+    ans:">"
+  },
+
+  {
+    a:4500,
+    b:5400,
+    ans:"<"
+  }
+
+];
+
+
+/* =========================================
+   DATA SOAL PENGURUTAN
+========================================= */
+
+const orderQuestions = [
+
+  {
+    nums:[450,125,320,210],
+    ans:[125,210,320,450]
+  },
+
+  {
+    nums:[900,150,750,300],
+    ans:[150,300,750,900]
+  },
+
+  {
+    nums:[1200,1020,1100,1002],
+    ans:[1002,1020,1100,1200]
+  }
+
+];
+
+
+/* =========================================
+   DATA SOAL KUIS
+========================================= */
+
+const quizQuestions = [
+
+  {
+    q:"Bilangan manakah yang lebih besar?",
+    opts:[
+      "2.345",
+      "2.435",
+      "2.354",
+      "2.405"
+    ],
+    ans:1
+  },
+
+  {
+    q:"Tanda yang tepat: 7.250 ? 7.205",
+    opts:[
+      "<",
+      "=",
+      ">"
+    ],
+    ans:2
+  },
+
+  {
+    q:"Urutan naik yang benar untuk 500, 125, 300 adalah ...",
+    opts:[
+      "125, 300, 500",
+      "500, 300, 125",
+      "300, 125, 500"
+    ],
+    ans:0
+  },
+
+  {
+    q:"Bilangan terbesar adalah ...",
+    opts:[
+      "9.099",
+      "9.909",
+      "9.090",
+      "9.900"
+    ],
+    ans:1
+  },
+
+  {
+    q:"Urutan turun 1.250, 1.025, 1.500 adalah ...",
+    opts:[
+      "1.025, 1.250, 1.500",
+      "1.500, 1.250, 1.025",
+      "1.250, 1.500, 1.025"
+    ],
+    ans:1
+  }
+
+];
+
+
+/* =========================================
+   BASIC UI
+========================================= */
+
+function save(){
+
+  localStorage.setItem(
+    KEY,
+    JSON.stringify(state)
+  );
+
+  updateUI();
+
+}
+
+
+function updateUI(){
+
+  renderOrderZone();
+
+  const feedback =
+    document.getElementById(
+      "orderFeedback"
+    );
+
+  if(feedback){
+    feedback.textContent="";
+  }
+
+  const check =
+    document.getElementById(
+      "orderCheck"
+    );
+
+  const next =
+    document.getElementById(
+      "orderNext"
+    );
+
+  if(check){
+    check.classList.remove("hidden");
+  }
+
+  if(next){
+    next.classList.add("hidden");
+  }
+
+}
+
+
+/* =========================================
+   XP
+========================================= */
+
+function addXP(points){
+
+  state.xp += points;
+  state.streak++;
+
+  save();
+
+}
+
+
+/* =========================================
+   COMPLETE MISSION
+========================================= */
+
+function completeMission(id){
+
+  if(
+    !state.completed.includes(id)
+  ){
+
+    state.completed.push(id);
+
+    addXP(10);
+
+  }
+
+}
+
+
+/* =========================================
+   START ADVENTURE
+========================================= */
+
+function startAdventure(){
+
+  window.location.href = "petualangan.html";
+
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+function openModal(id){
+
+  const modal =
+    document.getElementById(id);
+
+  if(modal){
+    modal.classList.add("show");
+  }
+
+}
+
+
+function closeModal(id){
+
+  const modal =
+    document.getElementById(id);
+
+  if(modal){
+    modal.classList.remove("show");
+  }
+
+}
+
+
+/* =========================================
+   ORDER
+========================================= */
+
+function selectOrder(n,el){
+
+  if(
+    selectedOrder.includes(n)
+  ){
+    return;
+  }
+
+  selectedOrder.push(n);
+
+  el.classList.add("selected");
+
+  beep(500,.07);
+
+  renderOrderZone();
+
+}
+
+
+function renderOrderZone(){
+
+  const z =
+    document.getElementById(
+      "orderZone"
+    );
+
+  if(!z){
+    return;
+  }
+
+  z.innerHTML="";
+
+  if(
+    !selectedOrder.length
+  ){
+
+    z.innerHTML =
+      '<span style="color:#94a3b8">Urutanmu akan muncul di sini...</span>';
+
+    return;
+
+  }
+
+
+  selectedOrder.forEach(
+    (n,i)=>{
+
+      const s =
+        document.createElement(
+          "span"
+        );
+
+      s.className="slot";
+
+      s.textContent =
+        (i+1) +
+        ". " +
+        n.toLocaleString("id-ID");
+
+      z.appendChild(s);
+
+    }
+  );
+
+}
+
+
+function renderOrder(){
+
+  selectedOrder=[];
+
+  const container =
+    document.getElementById(
+      "orderItems"
+    );
+
+  if(!container){
+    return;
+  }
+
+  container.innerHTML="";
+
+  const data =
+    orderQuestions[
+      orderIndex
+    ];
+
+  data.nums.forEach(
+    n=>{
+
+      const item =
+        document.createElement(
+          "button"
+        );
+
+      item.className =
+        "drag-item";
+
+      item.textContent =
+        n.toLocaleString("id-ID");
+
+      item.onclick=()=>{
+        selectOrder(
+          n,
+          item
+        );
+      };
+
+      container.appendChild(item);
+
+    }
+  );
+
+  renderOrderZone();
+
+}
+
+
+function checkOrder(){
+
+  const ans =
+    orderQuestions[
+      orderIndex
+    ].ans;
+
+  if(
+    selectedOrder.length !==
+    ans.length
+  ){
+
+    document.getElementById(
+      "orderFeedback"
+    ).textContent =
+      "💡 Pilih semua bilangan terlebih dahulu.";
+
+    return;
+
+  }
+
+
+  const ok =
+    selectedOrder.every(
+      (v,i)=>
+        v===ans[i]
+    );
+
+
+  if(ok){
+
+    document.getElementById(
+      "orderFeedback"
+    ).textContent =
+      "🎉 Tepat! Urutanmu benar.";
+
+    addXP(15);
+
+    document.getElementById(
+      "orderCheck"
+    ).classList.add(
+      "hidden"
+    );
+
+    document.getElementById(
+      "orderNext"
+    ).classList.remove(
+      "hidden"
+    );
+
+  }else{
+
+    document.getElementById(
+      "orderFeedback"
+    ).textContent =
+      "💡 Masih ada yang tertukar. Ingat, mulai dari bilangan terkecil.";
+
+    state.streak=0;
+
+    save();
+
+    beep(220,.18);
+
+  }
+
+}
+
+
+function nextOrder(){
+
+  orderIndex++;
+
+  if(
+    orderIndex >=
+    orderQuestions.length
+  ){
+
+    completeMission(3);
+
+    closeModal(
+      "orderModal"
+    );
+
+    toast(
+      "📊 Misi 3 selesai!"
+    );
+
+    return;
+
+  }
+
+  renderOrder();
+
+}
+
+
+/* =========================================
+   COMPARE
+========================================= */
+
+function renderCompare(){
+
+  const q =
+    compareQuestions[
+      compareIndex
+    ];
+
+  document.getElementById(
+    "compareQuestion"
+  ).textContent =
+    q.a.toLocaleString("id-ID") +
+    " ? " +
+    q.b.toLocaleString("id-ID");
+
+  document.getElementById(
+    "compareFeedback"
+  ).textContent="";
+
+  document.getElementById(
+    "compareNext"
+  ).classList.add(
+    "hidden"
+  );
+
+}
+
+
+function answerCompare(answer){
+
+  const q =
+    compareQuestions[
+      compareIndex
+    ];
+
+  const feedback =
+    document.getElementById(
+      "compareFeedback"
+    );
+
+  if(
+    answer===q.ans
+  ){
+
+    feedback.textContent =
+      "🎉 Benar!";
+
+    addXP(10);
+
+    document.getElementById(
+      "compareNext"
+    ).classList.remove(
+      "hidden"
+    );
+
+  }else{
+
+    feedback.textContent =
+      "💡 Belum tepat. Coba perhatikan nilai tempat.";
+
+    state.streak=0;
+
+    save();
+
+    beep(220,.18);
+
+  }
+
+}
+
+
+function nextCompare(){
+
+  compareIndex++;
+
+  if(
+    compareIndex >=
+    compareQuestions.length
+  ){
+
+    completeMission(2);
+
+    closeModal(
+      "compareModal"
+    );
+
+    toast(
+      "🔍 Misi 2 selesai!"
+    );
+
+    return;
+
+  }
+
+  renderCompare();
+
+}
+
+
+/* =========================================
+   QUIZ
+========================================= */
+
+function openGame(mode){
+
+  quizIndex=0;
+
+  quizScore=0;
+
+  renderQuiz();
+
+  openModal(
+    "quizModal"
+  );
+
+}
+
+
+function renderQuiz(){
+
+  const q =
+    quizQuestions[
+      quizIndex
+    ];
+
+  document.getElementById(
+    "quizCounter"
+  ).textContent =
+    `Soal ${quizIndex+1} dari ${quizQuestions.length}`;
+
+
+  document.getElementById(
+    "quizFeedback"
+  ).textContent="";
+
+
+  const body =
+    document.getElementById(
+      "quizBody"
+    );
+
+
+  body.innerHTML =
+    `<div class="question">
+      <h3>${q.q}</h3>
+    </div>`;
+
+
+  q.opts.forEach(
+    (o,i)=>{
+
+      const b =
+        document.createElement(
+          "button"
+        );
+
+      b.className =
+        "quiz-option";
+
+      b.textContent=o;
+
+      b.onclick=()=>{
+        answerQuiz(
+          i,
+          b
+        );
+      };
+
+      body.appendChild(b);
+
+    }
+  );
+
+}
+
+
+function answerQuiz(i,btn){
+
+  const q =
+    quizQuestions[
+      quizIndex
+    ];
+
+  document
+    .querySelectorAll(
+      ".quiz-option"
+    )
+    .forEach(
+      b=>{
+        b.disabled=true;
+      }
+    );
+
+
+  if(
+    i===q.ans
+  ){
+
+    btn.classList.add(
+      "correct"
+    );
+
+    quizScore++;
+
+    addXP(10);
+
+    document.getElementById(
+      "quizFeedback"
+    ).textContent =
+      "🎉 Benar!";
+
+  }else{
+
+    btn.classList.add(
+      "wrong"
+    );
+
+    document.getElementById(
+      "quizFeedback"
+    ).textContent =
+      `💡 Jawaban yang benar: ${q.opts[q.ans]}`;
+
+    state.streak=0;
+
+    save();
+
+    beep(220,.18);
+
+  }
+
+
+  const next =
+    document.createElement(
+      "button"
+    );
+
+  next.className =
+    "btn primary";
+
+  next.style.marginTop =
+    "12px";
+
+  next.textContent =
+    quizIndex ===
+    quizQuestions.length-1
+      ? "🏁 Lihat Hasil"
+      : "➡️ Soal Berikutnya";
+
+
+  next.onclick=()=>{
+
+    quizIndex++;
+
+    if(
+      quizIndex >=
+      quizQuestions.length
+    ){
+
+      completeMission(4);
+      completeMission(5);
+
+      closeModal(
+        "quizModal"
+      );
+
+      document.getElementById(
+        "resultScore"
+      ).textContent =
+        state.xp +
+        " XP";
+
+      document.getElementById(
+        "resultMessage"
+      ).textContent =
+        `Kamu menjawab ${quizScore} dari ${quizQuestions.length} soal dengan benar. Terus berlatih dan jadilah Penjelajah Bilangan!`;
+
+      openModal(
+        "resultModal"
+      );
+
+      confetti();
+
+    }else{
+
+      renderQuiz();
+
+    }
+
+  };
+
+
+  document.getElementById(
+    "quizFeedback"
+  ).appendChild(
+    document.createElement(
+      "br"
+    )
+  );
+
+
+  document.getElementById(
+    "quizFeedback"
+  ).appendChild(
+    next
+  );
+
+}
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+function toast(message){
+
+  const el =
+    document.getElementById(
+      "toast"
+    );
+
+  el.textContent=message;
+
+  el.classList.add(
+    "show"
+  );
+
+
+  setTimeout(
+    ()=>{
+      el.classList.remove(
+        "show"
+      );
+    },
+    2500
+  );
+
+}
+
+
+/* =========================================
+   CONFETTI
+========================================= */
+
+function confetti(){
+
+  for(
+    let i=0;
+    i<70;
+    i++
+  ){
+
+    const piece =
+      document.createElement(
+        "div"
+      );
+
+    piece.className =
+      "confetti";
+
+    piece.style.left =
+      Math.random()*100 +
+      "vw";
+
+    piece.style.animationDelay =
+      Math.random()*.8 +
+      "s";
+
+    piece.style.transform =
+      `rotate(${Math.random()*360}deg)`;
+
+    document.body.appendChild(
+      piece
+    );
+
+
+    setTimeout(
+      ()=>{
+        piece.remove();
+      },
+      2500
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   SOUND
+========================================= */
+
+function beep(freq,duration){
+
+  if(!state.sound){
+    return;
+  }
+
+  try{
+
+    const AudioContext =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
+    const ctx =
+      new AudioContext();
+
+    const oscillator =
+      ctx.createOscillator();
+
+    const gain =
+      ctx.createGain();
+
+    oscillator.frequency.value =
+      freq;
+
+    oscillator.type =
+      "sine";
+
+    gain.gain.value =
+      0.05;
+
+    oscillator.connect(gain);
+
+    gain.connect(
+      ctx.destination
+    );
+
+    oscillator.start();
+
+    setTimeout(
+      ()=>{
+        oscillator.stop();
+        ctx.close();
+      },
+      duration*1000
+    );
+
+  }catch(e){}
+
+}
+
+
+/* =========================================
+   CLOSE MODAL BY BACKDROP
+========================================= */
+
+document
+  .querySelectorAll(".modal")
+  .forEach(
+    m=>
+      m.addEventListener(
+        "click",
+        e=>{
+          if(
+            e.target===m
+          ){
+            m.classList.remove(
+              "show"
+            );
+          }
+        }
+      )
+  );
+
+
+/* =========================================
+   INIT
+========================================= */
+
+updateUI();
+
+</script>
+
+</body>
+</html>

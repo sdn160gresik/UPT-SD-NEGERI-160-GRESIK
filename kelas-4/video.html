@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#9a3412">
+
+<title>Video Pembelajaran | Jelajah Bilangan Cacah 2.0</title>
+
+<style>
+:root{
+  --primary:#9a3412;
+  --primary2:#d97706;
+  --navy:#5b2c1b;
+  --orange:#ea580c;
+  --ink:#17324d;
+  --muted:#64748b;
+  --glass:rgba(255,250,245,.80);
+  --shadow:0 28px 80px rgba(91,44,27,.18);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,
+body{
+  min-height:100%;
+  font-family:"Trebuchet MS",Arial,sans-serif;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+
+  color:var(--ink);
+
+  background:
+    radial-gradient(circle at 15% 20%,rgba(217,119,6,.13),transparent 25%),
+    radial-gradient(circle at 85% 80%,rgba(154,52,18,.12),transparent 27%),
+    linear-gradient(135deg,#fffaf5,#fff7ed 48%,#fffbeb);
+
+  overflow-x:hidden;
+}
+
+/* Ornamen latar */
+
+body:before,
+body:after{
+  content:"";
+  position:fixed;
+  border-radius:50%;
+  pointer-events:none;
+  filter:blur(2px);
+}
+
+body:before{
+  width:300px;
+  height:300px;
+  top:-130px;
+  left:-100px;
+  background:rgba(234,88,12,.08);
+}
+
+body:after{
+  width:360px;
+  height:360px;
+  right:-150px;
+  bottom:-150px;
+  background:rgba(139,92,246,.08);
+}
+
+/* Ornamen angka */
+
+.number{
+  position:fixed;
+  z-index:0;
+  color:rgba(154,52,18,.06);
+  font-weight:900;
+  pointer-events:none;
+  user-select:none;
+}
+
+.number.one{
+  top:8%;
+  left:5%;
+  font-size:90px;
+  transform:rotate(-12deg);
+}
+
+.number.two{
+  bottom:8%;
+  right:6%;
+  font-size:100px;
+  transform:rotate(10deg);
+}
+
+.number.three{
+  top:20%;
+  right:6%;
+  font-size:70px;
+  transform:rotate(8deg);
+}
+
+.shell{
+  width:min(1050px,100%);
+  position:relative;
+  z-index:1;
+}
+
+.panel{
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,.9);
+
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+
+  border-radius:36px;
+  padding:40px;
+
+  box-shadow:
+    var(--shadow),
+    0 8px 25px rgba(15,23,42,.06);
+}
+
+/* Header */
+
+.header{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  padding:9px 17px;
+  border-radius:999px;
+
+  background:#fff;
+  color:var(--primary);
+
+  font-size:13px;
+  font-weight:900;
+
+  box-shadow:0 8px 20px rgba(15,23,42,.07);
+
+  margin-bottom:15px;
+}
+
+h1{
+  color:var(--navy);
+  font-size:clamp(34px,5vw,54px);
+  line-height:1.05;
+  letter-spacing:-2px;
+}
+
+h1 span{
+  color:var(--orange);
+}
+
+.subtitle{
+  max-width:700px;
+  margin:13px auto 0;
+
+  color:var(--muted);
+
+  font-size:15px;
+  line-height:1.65;
+}
+
+/* Video */
+
+.video-section{
+  max-width:900px;
+  margin:0 auto;
+}
+
+.video-card{
+  position:relative;
+
+  padding:10px;
+
+  border-radius:27px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(154,52,18,.95),
+      rgba(217,119,6,.95)
+    );
+
+  box-shadow:
+    0 22px 50px rgba(91,44,27,.18);
+
+  animation:videoAppear .7s ease both;
+}
+
+.video-wrapper{
+  position:relative;
+
+  width:100%;
+
+  aspect-ratio:16 / 9;
+
+  overflow:hidden;
+
+  border-radius:20px;
+
+  background:#1e293b;
+}
+
+.video-wrapper iframe{
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  border:0;
+}
+
+/* Label */
+
+.video-label{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+
+  margin-top:17px;
+
+  color:var(--navy);
+
+  font-size:14px;
+  font-weight:900;
+}
+
+.video-label span{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  width:32px;
+  height:32px;
+
+  border-radius:10px;
+
+  background:#fff7ed;
+
+  box-shadow:0 6px 15px rgba(91,44,27,.08);
+}
+
+/* Petunjuk */
+
+.info{
+  max-width:900px;
+
+  margin:20px auto 0;
+
+  padding:17px 20px;
+
+  border-radius:19px;
+
+  background:rgba(255,255,255,.72);
+
+  border:1px solid rgba(154,52,18,.08);
+
+  color:var(--muted);
+
+  font-size:13px;
+  line-height:1.6;
+
+  text-align:center;
+}
+
+/* Tombol */
+
+.actions{
+  display:flex;
+  justify-content:center;
+  gap:13px;
+
+  margin-top:25px;
+
+  flex-wrap:wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  min-width:185px;
+
+  padding:13px 22px;
+
+  border-radius:15px;
+
+  text-decoration:none;
+
+  font-size:14px;
+  font-weight:900;
+
+  cursor:pointer;
+
+  transition:.25s ease;
+}
+
+.btn-back{
+  color:var(--primary);
+
+  background:#fff;
+
+  border:1px solid rgba(154,52,18,.12);
+
+  box-shadow:0 8px 20px rgba(91,44,27,.07);
+}
+
+.btn-back:hover{
+  transform:translateY(-3px);
+
+  box-shadow:0 14px 28px rgba(91,44,27,.12);
+}
+
+.btn-close{
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      var(--orange)
+    );
+
+  border:none;
+
+  box-shadow:
+    0 10px 23px rgba(154,52,18,.20);
+}
+
+.btn-close:hover{
+  transform:translateY(-3px);
+
+  box-shadow:
+    0 15px 30px rgba(154,52,18,.28);
+}
+
+/* Footer */
+
+.footer{
+  text-align:center;
+
+  margin-top:22px;
+
+  color:#64748b;
+
+  font-size:12px;
+}
+
+.footer b{
+  color:var(--navy);
+}
+
+/* Animasi */
+
+@keyframes videoAppear{
+
+  from{
+    opacity:0;
+    transform:translateY(20px) scale(.98);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+
+}
+
+/* Responsive */
+
+@media(max-width:720px){
+
+  body{
+    padding:15px;
+  }
+
+  .panel{
+    padding:28px 18px;
+    border-radius:28px;
+  }
+
+  .number{
+    display:none;
+  }
+
+  .subtitle{
+    font-size:14px;
+  }
+
+  .video-card{
+    padding:7px;
+    border-radius:22px;
+  }
+
+  .video-wrapper{
+    border-radius:16px;
+  }
+
+}
+
+@media(max-width:420px){
+
+  h1{
+    font-size:35px;
+  }
+
+  .badge{
+    font-size:11px;
+  }
+
+  .actions{
+    flex-direction:column;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- Ornamen dekoratif -->
+
+<div class="number one">100</div>
+<div class="number two">50</div>
+<div class="number three">&gt;</div>
+
+<main class="shell">
+
+<section class="panel">
+
+<header class="header">
+
+  <div class="badge">
+    ▶️ VIDEO PEMBELAJARAN • MATEMATIKA KELAS IV
+  </div>
+
+  <h1>
+    <span>Jelajah</span> Bilangan Cacah!
+  </h1>
+
+  <p class="subtitle">
+    Yuk, simak video pembelajaran berikut untuk memahami
+    cara membandingkan dan mengurutkan bilangan cacah
+    sampai <strong>100.000</strong>.
+  </p>
+
+</header>
+
+<section class="video-section">
+
+  <div class="video-card">
+
+```
+<div class="video-wrapper">
+
+  <iframe
+    src="https://www.youtube.com/embed/xnleP8sQxCA"
+    title="Video Pembelajaran Bilangan Cacah"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+  </iframe>
+
+</div>
+```
+
+  </div>
+
+  <div class="video-label">
+    <span>🎬</span>
+    Yuk, simak video sampai selesai!
+  </div>
+
+  <div class="info">
+    💡 <strong>Tips:</strong>
+    Perhatikan contoh bilangan yang diberikan dalam video.
+    Catat hal-hal penting yang kamu temukan agar lebih mudah
+    mengerjakan aktivitas dan asesmen berikutnya.
+  </div>
+
+</section>
+
+<div class="actions">
+
+<a
+ href="petualangan.html"
+ class="btn btn-back">
+🏠 Kembali ke Petualangan </a>
+
+<button
+ class="btn btn-close"
+ onclick="tutupVideo()">
+✕ Tutup </button>
+
+</div>
+
+<footer class="footer">
+  <b>UPT SDN 160 GRESIK</b>
+  • Belajar dengan semangat, berpikir cerdas, berani mencoba! 🌟
+</footer>
+
+</section>
+
+</main>
+
+<script>
+
+function tutupVideo(){
+
+  /*
+   * Mencoba menutup tab/jendela jika halaman
+   * dibuka melalui window.open().
+   */
+
+  if(window.opener){
+
+    window.close();
+
+  }else{
+
+    /*
+     * Jika browser tidak mengizinkan window.close(),
+     * arahkan kembali ke halaman petualangan.
+     */
+
+    window.location.href = "petualangan.html";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>

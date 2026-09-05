@@ -169,12 +169,6 @@ body::before{
   box-shadow:0 7px 16px rgba(124,63,32,.22);
 }
 
-.btn-fullscreen{
-  color:#fff;
-  background:linear-gradient(135deg,var(--orange),#D65D18);
-  box-shadow:0 7px 16px rgba(230,126,34,.22);
-}
-
 .viewer{
   width:min(1400px,100%);
   flex:1 1 auto;
@@ -235,14 +229,12 @@ body::before{
 }
 
 iframe{
-  position:absolute;
-  inset:0;
   width:100%;
   height:100%;
   min-height:0;
   display:block;
   border:0;
-  background:#fff;
+  background:white;
 }
 
 .loading{
@@ -388,9 +380,6 @@ iframe{
       <button class="btn btn-back" onclick="goBack()" title="Kembali ke petualangan">
         🏠 <span class="label">Kembali</span>
       </button>
-      <button class="btn btn-fullscreen" id="fullscreenBtn" onclick="toggleFullscreen()" title="Layar penuh">
-        ⛶ <span class="label">Penuh</span>
-      </button>
       <button class="btn btn-close" onclick="closePage()" title="Tutup halaman">
         ✕ <span class="label">Tutup</span>
       </button>
@@ -423,12 +412,10 @@ iframe{
 
       <iframe
         id="gameFrame"
-        src="https://monopoli-nusantara.netlify.app/"
+        src="https://monopoli-nusantara.netlify.app"
         title="Monopoli Nusantara — Game Edukasi Budaya Indonesia"
-        allow="fullscreen; autoplay; gamepad"
-        allowfullscreen
-        loading="eager"
-        referrerpolicy="strict-origin-when-cross-origin">
+        allow="fullscreen"
+        loading="eager">
       </iframe>
 
     </div>
@@ -456,63 +443,22 @@ function goBack(){
 }
 
 function closePage(){
-  if(document.fullscreenElement){
-    document.exitFullscreen().catch(()=>{});
-  }
+  // Jika halaman dibuka sebagai popup/tab yang mengizinkan script menutup,
+  // browser akan menutupnya. Jika tidak, kembali ke halaman petualangan.
+  try{
+    window.close();
+  }catch(e){}
 
-  // Browser biasanya hanya mengizinkan window.close()
-  // untuk tab yang dibuka melalui script.
-  window.close();
-
-  // Fallback yang aman jika tab tidak dapat ditutup.
   setTimeout(()=>{
     if(!document.hidden){
       window.location.href = "petualangan.html";
     }
-  },250);
+  },150);
 }
-
-async function toggleFullscreen(){
-  const btn = document.getElementById('fullscreenBtn');
-
-  try{
-    if(!document.fullscreenElement){
-      await document.documentElement.requestFullscreen();
-    }else{
-      await document.exitFullscreen();
-    }
-  }catch(error){
-    // Fallback untuk browser yang tidak mengizinkan Fullscreen API.
-    document.body.classList.toggle('fullscreen-mode');
-    updateFullscreenButton();
-  }
-}
-
-function updateFullscreenButton(){
-  const btn = document.getElementById('fullscreenBtn');
-  const active = !!document.fullscreenElement ||
-                 document.body.classList.contains('fullscreen-mode');
-
-  if(active){
-    btn.innerHTML = '⛶ <span class="label">Keluar</span>';
-    btn.title = 'Keluar dari layar penuh';
-  }else{
-    btn.innerHTML = '⛶ <span class="label">Penuh</span>';
-    btn.title = 'Layar penuh';
-  }
-}
-
-document.addEventListener('fullscreenchange', function(){
-  document.body.classList.toggle('fullscreen-mode', !!document.fullscreenElement);
-  updateFullscreenButton();
-});
 
 document.addEventListener('keydown', function(event){
   if(event.key === 'Escape'){
-    if(document.fullscreenElement){
-      document.exitFullscreen();
-      event.preventDefault();
-    }
+    goBack();
   }
 });
 </script>

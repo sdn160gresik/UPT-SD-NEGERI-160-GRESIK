@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -209,7 +209,12 @@ h1 .second{
   width:100%;
   height:100%;
   border-radius:20px;
-  background:linear-gradient(90deg,var(--primary),var(--primary2),var(--orange));
+  background:linear-gradient(
+    90deg,
+    var(--primary),
+    var(--primary2),
+    var(--orange)
+  );
 }
 
 /* Tujuan */
@@ -321,7 +326,7 @@ h1 .second{
 /* Motivasi */
 .motivation{
   margin-top:25px;
-  padding:20px 24px;
+  padding:24px;
   border-radius:22px;
   background:linear-gradient(
     135deg,
@@ -333,24 +338,66 @@ h1 .second{
   box-shadow:0 10px 25px rgba(91,44,27,.06);
 }
 
-.motivation-icon{
-  font-size:30px;
-  margin-bottom:7px;
+/* Tombol 🚀 */
+.start-adventure{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-width:260px;
+  padding:15px 30px;
+  border-radius:18px;
+  background:linear-gradient(
+    135deg,
+    #9a3412,
+    #ea580c,
+    #d97706
+  );
+  color:#fff;
+  text-decoration:none;
+  font-size:17px;
+  font-weight:900;
+  box-shadow:0 10px 25px rgba(154,52,18,.25);
+  transition:.25s ease;
+  position:relative;
+  overflow:hidden;
 }
 
-.motivation h3{
-  color:var(--navy);
-  font-size:19px;
-  margin-bottom:5px;
+/* Efek cahaya tombol */
+.start-adventure::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:60%;
+  height:100%;
+  background:rgba(255,255,255,.25);
+  transform:skewX(-25deg);
+  transition:.55s ease;
+}
+
+.start-adventure:hover::after{
+  left:130%;
+}
+
+.start-adventure:hover{
+  transform:translateY(-4px) scale(1.02);
+  box-shadow:0 16px 32px rgba(154,52,18,.32);
+}
+
+.start-adventure:active{
+  transform:translateY(0) scale(.98);
 }
 
 .motivation p{
+  max-width:700px;
+  margin:13px auto 0;
   color:var(--muted);
   font-size:13.5px;
   line-height:1.6;
 }
 
-/* Tombol */
+/* Navigasi */
 .actions{
   display:flex;
   justify-content:center;
@@ -386,7 +433,11 @@ h1 .second{
 
 .btn-next{
   color:#fff;
-  background:linear-gradient(135deg,var(--primary),var(--orange));
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--orange)
+  );
   box-shadow:0 10px 23px rgba(154,52,18,.20);
 }
 
@@ -413,9 +464,20 @@ h1 .second{
     opacity:0;
     transform:translateY(15px);
   }
+
   to{
     opacity:1;
     transform:translateY(0);
+  }
+}
+
+@keyframes rocketFloat{
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-3px);
   }
 }
 
@@ -427,11 +489,29 @@ h1 .second{
   animation:fadeUp .65s ease both;
 }
 
-.objective-card:nth-child(1){animation-delay:.05s}
-.objective-card:nth-child(2){animation-delay:.10s}
-.objective-card:nth-child(3){animation-delay:.15s}
-.objective-card:nth-child(4){animation-delay:.20s}
-.objective-card:nth-child(5){animation-delay:.25s}
+.objective-card:nth-child(1){
+  animation-delay:.05s;
+}
+
+.objective-card:nth-child(2){
+  animation-delay:.10s;
+}
+
+.objective-card:nth-child(3){
+  animation-delay:.15s;
+}
+
+.objective-card:nth-child(4){
+  animation-delay:.20s;
+}
+
+.objective-card:nth-child(5){
+  animation-delay:.25s;
+}
+
+.start-adventure{
+  animation:rocketFloat 2s ease-in-out infinite;
+}
 
 /* Responsive */
 @media(max-width:720px){
@@ -470,6 +550,11 @@ h1 .second{
   .number-decoration{
     display:none;
   }
+
+  .start-adventure{
+    width:100%;
+    min-width:0;
+  }
 }
 
 @media(max-width:420px){
@@ -501,15 +586,18 @@ h1 .second{
   .btn{
     width:100%;
   }
+
+  .start-adventure{
+    font-size:15px;
+    padding:14px 20px;
+  }
 }
 </style>
-
 </head>
 
 <body>
 
 <!-- Ornamen angka -->
-
 <div class="number-decoration n1">100</div>
 <div class="number-decoration n2">50</div>
 <div class="number-decoration n3">&lt;</div>
@@ -519,6 +607,7 @@ h1 .second{
 
 <section class="panel">
 
+<!-- Header -->
 <header class="header">
 
   <div class="badge">
@@ -539,7 +628,6 @@ h1 .second{
 </header>
 
 <!-- Progress -->
-
 <div class="progress-box">
 
   <div class="progress-top">
@@ -554,99 +642,99 @@ h1 .second{
 </div>
 
 <!-- Tujuan Pembelajaran -->
-
 <section class="objectives" aria-label="Tujuan Pembelajaran">
 
   <article class="objective-card">
 
+    <div class="number">1</div>
 
-<div class="number">1</div>
+    <div class="card-content">
+      <h2>🔍 Membandingkan Bilangan</h2>
 
-<div class="card-content">
-  <h2>🔍 Membandingkan Bilangan</h2>
-  <p>
-    Membandingkan dua bilangan cacah sampai
-    <strong>100.000</strong> dengan tepat.
-  </p>
-</div>
-
-
-  </article>
-
-  <article class="objective-card">
-
-
-<div class="number">2</div>
-
-<div class="card-content">
-  <h2>🏆 Menentukan Bilangan</h2>
-  <p>
-    Menentukan bilangan yang lebih besar atau
-    lebih kecil berdasarkan nilai bilangannya.
-  </p>
-</div>
-
+      <p>
+        Membandingkan dua bilangan cacah sampai
+        <strong>100.000</strong> dengan tepat.
+      </p>
+    </div>
 
   </article>
 
+
   <article class="objective-card">
 
+    <div class="number">2</div>
 
-<div class="number">3</div>
+    <div class="card-content">
+      <h2>🏆 Menentukan Bilangan</h2>
 
-<div class="card-content">
-  <h2>⚖️ Menggunakan Tanda</h2>
-  <p>
-    Menggunakan tanda <strong>&gt;</strong>,
-    <strong>&lt;</strong>, dan <strong>=</strong>
-    dengan tepat.
-  </p>
-</div>
-
+      <p>
+        Menentukan bilangan yang lebih besar atau
+        lebih kecil berdasarkan nilai bilangannya.
+      </p>
+    </div>
 
   </article>
 
+
   <article class="objective-card">
 
+    <div class="number">3</div>
 
-<div class="number">4</div>
+    <div class="card-content">
+      <h2>⚖️ Menggunakan Tanda</h2>
 
-<div class="card-content">
-  <h2>📈 Mengurutkan dari Terkecil</h2>
-  <p>
-    Mengurutkan beberapa bilangan cacah dari
-    yang <strong>terkecil ke terbesar</strong>.
-  </p>
-</div>
-
+      <p>
+        Menggunakan tanda
+        <strong>&gt;</strong>,
+        <strong>&lt;</strong>, dan
+        <strong>=</strong>
+        dengan tepat.
+      </p>
+    </div>
 
   </article>
 
+
   <article class="objective-card">
 
+    <div class="number">4</div>
 
-<div class="number">5</div>
+    <div class="card-content">
+      <h2>📈 Mengurutkan dari Terkecil</h2>
 
-<div class="card-content">
-  <h2>📉 Mengurutkan dari Terbesar</h2>
-  <p>
-    Mengurutkan beberapa bilangan cacah dari
-    yang <strong>terbesar ke terkecil</strong>.
-  </p>
-</div>
+      <p>
+        Mengurutkan beberapa bilangan cacah dari
+        yang <strong>terkecil ke terbesar</strong>.
+      </p>
+    </div>
 
+  </article>
+
+
+  <article class="objective-card">
+
+    <div class="number">5</div>
+
+    <div class="card-content">
+      <h2>📉 Mengurutkan dari Terbesar</h2>
+
+      <p>
+        Mengurutkan beberapa bilangan cacah dari
+        yang <strong>terbesar ke terkecil</strong>.
+      </p>
+    </div>
 
   </article>
 
 </section>
 
-<!-- Motivasi -->
 
+<!-- Tombol Mulai Petualangan -->
 <div class="motivation">
 
-  <div class="motivation-icon">🚀</div>
-
-  <h3>Siap Memulai Petualangan?</h3>
+  <a href="ingat.html" class="start-adventure">
+    🚀 Siap Memulai Petualangan?
+  </a>
 
   <p>
     Kenali bilangan, bandingkan nilainya, lalu susun
@@ -656,8 +744,8 @@ h1 .second{
 
 </div>
 
-<!-- Navigasi -->
 
+<!-- Navigasi -->
 <div class="actions">
 
   <a href="petualangan.html" class="btn btn-home">
@@ -670,9 +758,13 @@ h1 .second{
 
 </div>
 
+
+<!-- Footer -->
 <footer class="footer">
+
   <b>UPT SDN 160 GRESIK</b>
   • Belajar dengan semangat, berpikir cerdas, berani mencoba! 🌟
+
 </footer>
 
 </section>

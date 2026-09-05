@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -76,6 +77,64 @@ body:before{
   margin:auto;
   padding:22px 0 45px;
   position:relative;
+}
+
+/* =========================================================
+   TAMBAHAN: TOMBOL KEMBALI
+   Tidak mengubah kode yang sudah ada
+   ========================================================= */
+
+.back-area{
+  width:100%;
+  display:flex;
+  justify-content:flex-start;
+  margin-bottom:12px;
+}
+
+.back-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:10px 20px;
+
+  border-radius:999px;
+
+  border:2px solid var(--border);
+
+  background:rgba(255,253,248,.96);
+
+  color:var(--primary-dark);
+
+  text-decoration:none;
+
+  font-size:14px;
+  font-weight:900;
+
+  box-shadow:
+    0 6px 15px rgba(92,48,24,.10);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+.back-btn:hover{
+  transform:translateY(-2px);
+
+  background:#fff;
+
+  box-shadow:
+    0 9px 20px rgba(92,48,24,.16);
+}
+
+.back-btn:active{
+  transform:translateY(0);
+}
+
+body:has(#identitas:not(.hidden)) .back-area{
+  display:none;
 }
 
 .header{
@@ -692,6 +751,16 @@ select:hover{
   td:nth-child(3){
     display:none;
   }
+
+  /* Tambahan tombol kembali */
+  .back-area{
+    margin-bottom:10px;
+  }
+
+  .back-btn{
+    padding:9px 17px;
+    font-size:13px;
+  }
 }
 
 @media(max-width:380px){
@@ -739,11 +808,27 @@ select:hover{
   }
 }
 </style>
+
 </head>
 
 <body>
 
 <div class="app">
+
+<!-- =========================================================
+     TOMBOL KEMBALI
+     SATU-SATUNYA KOMPONEN YANG DITAMBAHKAN
+========================================================= -->
+
+<div class="back-area">
+  <a
+    href="petualangan.html"
+    class="back-btn"
+    aria-label="Kembali ke halaman petualangan"
+  >
+    Kembali
+  </a>
+</div>
 
 <header class="header">
 
@@ -760,7 +845,6 @@ Perbandingan & Urutan Bilangan sampai 100.000
 </p>
 
 </header>
-
 
 <section id="identitas" class="card">
 
@@ -793,12 +877,12 @@ isi identitasmu terlebih dahulu dengan benar.
 id="nama"
 placeholder="Tulis nama lengkap"
 autocomplete="name"
+
 >
 
 </div>
 
 </div>
-
 
 <div class="field">
 
@@ -811,12 +895,12 @@ autocomplete="name"
 <input
 id="kelas"
 placeholder="Contoh: V-A"
+
 >
 
 </div>
 
 </div>
-
 
 <div class="field">
 
@@ -831,6 +915,7 @@ id="absen"
 type="number"
 min="1"
 placeholder="Masukkan nomor absen"
+
 >
 
 </div>
@@ -838,19 +923,18 @@ placeholder="Masukkan nomor absen"
 </div>
 
 </div>
-
 
 <div class="identity-action">
 
 <button
 class="btn primary"
 onclick="mulai()"
+
 >
-🍜 Mulai Petualangan
-</button>
+
+🍜 Mulai Petualangan </button>
 
 </div>
-
 
 <div class="identity-note">
 
@@ -858,7 +942,6 @@ onclick="mulai()"
 sudah benar sebelum melanjutkan.
 
 </div>
-
 
 <div class="food-decoration">
 
@@ -870,7 +953,6 @@ sudah benar sebelum melanjutkan.
 
 </section>
 
-
 <section id="kuis" class="card hidden">
 
 <div class="info">
@@ -881,7 +963,6 @@ sudah benar sebelum melanjutkan.
 
 </div>
 
-
 <div class="progress-wrap">
 
 <div
@@ -891,11 +972,9 @@ class="progress"
 
 </div>
 
-
 <div id="soalArea"></div>
 
 </section>
-
 
 <section
 id="hasil"
@@ -904,12 +983,10 @@ class="card hidden"
 
 </div>
 
-
 <div
 id="toast"
 class="toast hidden"
 ></div>
-
 
 <script>
 
@@ -917,7 +994,6 @@ const GOOGLE_SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbwk4odfq7ABr__CDR00YD4uAMLmvK2iPjaLLlJrpyA6BnOwJ9gUkncLdCVCzE670CFy/exec";
 
 </script>
-
 
 <script>
 

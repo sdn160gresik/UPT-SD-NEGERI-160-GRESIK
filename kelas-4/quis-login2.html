@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Kuis Matematika — Bilangan sampai 100.000 | UPT SDN 160 Gresik</title>
+
+<style>
+:root{
+  --primary:#9b4d20;
+  --primary-dark:#713517;
+  --secondary:#e67e22;
+  --accent:#f4b942;
+  --green:#2e8b57;
+  --red:#c0392b;
+  --ink:#4a2c20;
+  --muted:#806b61;
+  --card:#fffdf8;
+  --cream:#fff8e8;
+  --border:#ead7bc;
+  --shadow:rgba(92,48,24,.16);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 10% 15%,rgba(255,255,255,.65) 0 3px,transparent 4px),
+    radial-gradient(circle at 90% 25%,rgba(255,255,255,.5) 0 3px,transparent 4px),
+    linear-gradient(135deg,#f7dfb5 0%,#fff4d8 45%,#f3d7ad 100%);
+  background-size:auto,auto,cover;
+  min-height:100vh;
+}
+
+body:has(#identitas:not(.hidden)){
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:25px;
+}
+
+body:has(#identitas:not(.hidden)) .app{
+  width:100%;
+  max-width:520px;
+  margin:0 auto;
+  padding:0;
+}
+
+body:has(#identitas:not(.hidden)) .header{
+  display:none;
+}
+
+body:has(#identitas:not(.hidden)) #identitas{
+  margin:0;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.18;
+  background-image:
+    radial-gradient(#fff 1px,transparent 1px);
+  background-size:22px 22px;
+}
+
+.app{
+  width:min(1050px,94%);
+  margin:auto;
+  padding:22px 0 45px;
+  position:relative;
+}
+
+/* =========================================================
+   TOMBOL KEMBALI
+========================================================= */
+
+.back-area{
+  width:100%;
+  display:flex;
+  justify-content:flex-start;
+  margin-bottom:12px;
+}
+
+.back-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 20px;
+  border-radius:999px;
+  border:2px solid var(--border);
+  background:rgba(255,253,248,.96);
+  color:var(--primary-dark);
+  text-decoration:none;
+  font-size:14px;
+  font-weight:900;
+  box-shadow:0 6px 15px rgba(92,48,24,.10);
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+.back-btn:hover{
+  transform:translateY(-2px);
+  background:#fff;
+  box-shadow:0 9px 20px rgba(92,48,24,.16);
+}
+
+.back-btn:active{
+  transform:translateY(0);
+}
+
+body:has(#identitas:not(.hidden)) .back-area{
+  display:none;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+  background:rgba(255,253,248,.96);
+  border:2px solid var(--border);
+  border-radius:28px;
+  padding:24px;
+  text-align:center;
+  box-shadow:0 15px 40px var(--shadow);
+}
+
+.badge{
+  display:inline-block;
+  background:#f9e6c5;
+  color:var(--primary-dark);
+  padding:7px 14px;
+  border-radius:99px;
+  font-weight:800;
+  font-size:13px;
+}
+
+h1{
+  margin:10px 0 5px;
+  font-size:clamp(25px,5vw,42px);
+}
+
+.subtitle{
+  margin:0;
+  color:var(--muted);
+  font-weight:600;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+  margin-top:20px;
+  background:rgba(255,253,248,.97);
+  border-radius:24px;
+  padding:26px;
+  box-shadow:0 12px 35px var(--shadow);
+  border:1px solid var(--border);
+}
+
+/* =========================================================
+   IDENTITAS
+========================================================= */
+
+#identitas{
+  position:relative;
+  overflow:hidden;
+  padding:0;
+  border:0;
+  background:var(--card);
+  border-radius:30px;
+  box-shadow:
+    0 25px 65px rgba(86,45,20,.22),
+    0 8px 20px rgba(86,45,20,.10);
+}
+
+#identitas:before{
+  content:"";
+  display:block;
+  height:9px;
+  background:linear-gradient(
+    90deg,
+    #9b4d20 0%,
+    #d96c27 35%,
+    #f4b942 70%,
+    #2e8b57 100%
+  );
+}
+
+#identitas:after{
+  content:"🍜   🍢   🥟   🍚   🍡";
+  display:block;
+  text-align:center;
+  font-size:24px;
+  letter-spacing:4px;
+  padding-top:18px;
+}
+
+#identitas .identity-content{
+  padding:4px 34px 30px;
+}
+
+#identitas h2{
+  margin:10px 0 7px;
+  text-align:center;
+  font-size:25px;
+  color:var(--primary-dark);
+  line-height:1.25;
+}
+
+#identitas .identity-subtitle{
+  margin:0 auto 24px;
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.55;
+  max-width:390px;
+}
+
+.identity-icon{
+  width:72px;
+  height:72px;
+  margin:-2px auto 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:linear-gradient(145deg,#fff0c8,#f7d994);
+  border:4px solid #fff;
+  box-shadow:
+    0 8px 20px rgba(140,78,27,.15),
+    inset 0 2px 4px rgba(255,255,255,.8);
+  font-size:38px;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+}
+
+.field{
+  position:relative;
+}
+
+.field label{
+  display:block;
+  font-weight:800;
+  margin-bottom:7px;
+  color:#5c3929;
+  font-size:14px;
+}
+
+.input-wrap{
+  position:relative;
+}
+
+.input-wrap .input-icon{
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:19px;
+  pointer-events:none;
+  z-index:2;
+}
+
+input,
+select{
+  width:100%;
+  padding:14px 15px 14px 46px;
+  border:2px solid #e7d5bb;
+  border-radius:15px;
+  font-size:16px;
+  outline:none;
+  background:#fffdfa;
+  color:var(--ink);
+  transition:.2s;
+  font-family:inherit;
+}
+
+input::placeholder{
+  color:#b29e90;
+}
+
+input:focus,
+select:focus{
+  border-color:#d77b35;
+  background:#fff;
+  box-shadow:
+    0 0 0 4px rgba(230,126,34,.13),
+    0 5px 15px rgba(120,65,28,.08);
+}
+
+input:hover,
+select:hover{
+  border-color:#d7ad7d;
+}
+
+/* =========================================================
+   TOMBOL IDENTITAS
+========================================================= */
+
+.identity-action{
+  margin-top:22px;
+  display:flex;
+  gap:12px;
+  align-items:stretch;
+}
+
+/* Tombol mulai */
+#identitas .btn.primary{
+  flex:1;
+  border:0;
+  border-radius:16px;
+  padding:15px 16px;
+  font-weight:900;
+  font-size:15px;
+  cursor:pointer;
+  transition:.2s;
+  color:#fff;
+  background:
+    linear-gradient(135deg,#a95020,#d96b26 55%,#e58a35);
+  box-shadow:
+    0 8px 18px rgba(155,77,32,.25);
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+#identitas .btn.primary:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 11px 23px rgba(155,77,32,.32);
+}
+
+#identitas .btn.primary:active{
+  transform:translateY(0);
+}
+
+/* =========================================================
+   TOMBOL JEJAK CAPAIAN
+========================================================= */
+
+.capaian-btn{
+  flex:1;
+  border:0;
+  border-radius:16px;
+  padding:15px 16px;
+  font-weight:900;
+  font-size:15px;
+  cursor:pointer;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+  color:#fff;
+  background:
+    linear-gradient(135deg,#2e8b57,#3aa66b,#5dbd7e);
+  box-shadow:
+    0 8px 18px rgba(46,139,87,.23);
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.capaian-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 11px 23px rgba(46,139,87,.30);
+}
+
+.capaian-btn:active{
+  transform:translateY(0);
+}
+
+.identity-note{
+  margin:20px auto 0;
+  padding:11px 14px;
+  border-radius:13px;
+  background:#fff5df;
+  border:1px dashed #e3c18f;
+  color:#80634f;
+  font-size:12px;
+  line-height:1.5;
+  text-align:center;
+}
+
+.food-decoration{
+  text-align:center;
+  margin-top:18px;
+  font-size:13px;
+  color:#967463;
+  letter-spacing:.3px;
+}
+
+/* =========================================================
+   BUTTON UMUM
+========================================================= */
+
+.btn{
+  border:0;
+  border-radius:14px;
+  padding:13px 20px;
+  font-weight:900;
+  font-size:16px;
+  cursor:pointer;
+  transition:
+    transform .2s,
+    box-shadow .2s,
+    opacity .2s;
+  box-shadow:0 5px 12px rgba(0,0,0,.10);
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.btn:active{
+  transform:translateY(0);
+}
+
+.btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
+}
+
+.primary{
+  background:linear-gradient(135deg,#9b4d20,#d96b26);
+  color:#fff;
+}
+
+.green{
+  background:#2e8b57;
+  color:#fff;
+}
+
+.orange{
+  background:#e67e22;
+  color:#fff;
+}
+
+.gray{
+  background:#eadfd4;
+  color:#5b463a;
+}
+
+.red{
+  background:#c0392b;
+  color:#fff;
+}
+
+.center{
+  text-align:center;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* =========================================================
+   KUIS
+========================================================= */
+
+.info{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  background:#fff4dd;
+  padding:12px 15px;
+  border-radius:15px;
+  font-weight:800;
+  border:1px solid #efd5a7;
+}
+
+#kuis{
+  width:min(760px,100%);
+  margin:30px auto 0;
+  padding:24px;
+  background:rgba(255,253,248,.985);
+  border:1px solid rgba(234,215,188,.95);
+  border-radius:28px;
+  box-shadow:
+    0 25px 70px rgba(86,45,20,.20),
+    0 8px 25px rgba(86,45,20,.10);
+  position:relative;
+  overflow:hidden;
+}
+
+#kuis:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:7px;
+  background:linear-gradient(
+    90deg,
+    #9b4d20,
+    #d96b26,
+    #f4b942,
+    #2e8b57
+  );
+}
+
+#kuis .info{
+  margin-top:3px;
+}
+
+.progress-wrap{
+  height:11px;
+  background:#eadfd4;
+  border-radius:99px;
+  overflow:hidden;
+  margin:17px 0 25px;
+}
+
+.progress{
+  height:100%;
+  background:linear-gradient(
+    90deg,
+    #9b4d20,
+    #e67e22,
+    #f4b942
+  );
+  width:0;
+  transition:.3s;
+}
+
+#soalArea{
+  width:min(650px,100%);
+  margin:0 auto;
+}
+
+.question-no{
+  color:#9b4d20;
+  font-weight:900;
+  font-size:14px;
+  letter-spacing:.5px;
+  margin-bottom:8px;
+}
+
+.question{
+  background:#fffaf0;
+  border:2px solid #efdfc6;
+  border-radius:20px;
+  padding:20px 22px;
+  font-size:21px;
+  line-height:1.55;
+  font-weight:850;
+  margin:0 0 18px;
+  box-shadow:
+    0 8px 20px rgba(120,65,28,.06);
+}
+
+.answers{
+  display:grid;
+  gap:11px;
+}
+
+.answer{
+  border:2px solid #eadfd4;
+  border-radius:16px;
+  padding:13px 15px;
+  cursor:pointer;
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  transition:.2s;
+  background:#fff;
+}
+
+.answer:hover{
+  border-color:#e5b477;
+  background:#fff8eb;
+  transform:translateY(-1px);
+  box-shadow:0 5px 12px rgba(120,65,28,.07);
+}
+
+.answer input{
+  width:auto;
+  margin-top:4px;
+  accent-color:#9b4d20;
+  flex:none;
+}
+
+.answer span{
+  line-height:1.5;
+}
+
+.nav-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-top:22px;
+}
+
+.nav-left,
+.nav-right{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.nav-btn{
+  min-width:145px;
+  padding:13px 18px;
+  border-radius:15px;
+  font-weight:900;
+  font-size:15px;
+  border:0;
+  cursor:pointer;
+  transition:
+    transform .2s,
+    box-shadow .2s,
+    opacity .2s;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:7px;
+}
+
+.nav-btn:hover{
+  transform:translateY(-2px);
+}
+
+.nav-btn:active{
+  transform:translateY(0);
+}
+
+.nav-btn.previous{
+  background:linear-gradient(
+    135deg,
+    #eadfd4,
+    #f4e9dc
+  );
+  color:#5b463a;
+  border:1px solid #ddcbbb;
+  box-shadow:0 5px 12px rgba(80,45,25,.09);
+}
+
+.nav-btn.next{
+  background:linear-gradient(
+    135deg,
+    #9b4d20,
+    #d96b26,
+    #e58a35
+  );
+  color:#fff;
+  box-shadow:
+    0 7px 16px rgba(155,77,32,.24);
+}
+
+.nav-btn.next:hover{
+  box-shadow:
+    0 10px 22px rgba(155,77,32,.30);
+}
+
+.nav-btn.previous:disabled{
+  opacity:.38;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
+}
+
+/* =========================================================
+   HASIL
+========================================================= */
+
+#hasil{
+  width:min(760px,100%);
+  margin:30px auto 0;
+}
+
+.result-score{
+  font-size:64px;
+  font-weight:1000;
+  background:linear-gradient(135deg,#9b4d20,#e67e22);
+  color:#fff;
+  border-radius:24px;
+  padding:12px 28px;
+  display:inline-block;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:20px 0;
+}
+
+.stat{
+  padding:16px;
+  background:#fff8eb;
+  border-radius:16px;
+  text-align:center;
+  border:1px solid #efdfc6;
+}
+
+.stat b{
+  font-size:24px;
+  display:block;
+}
+
+.note{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:18px;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translateX(-50%);
+  background:#4a2c20;
+  color:white;
+  padding:12px 18px;
+  border-radius:14px;
+  box-shadow:0 10px 25px #0003;
+  z-index:20;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:700px){
+
+  body:has(#identitas:not(.hidden)){
+    padding:16px;
+  }
+
+  body:has(#identitas:not(.hidden)) .app{
+    max-width:430px;
+  }
+
+  #identitas .identity-content{
+    padding-left:23px;
+    padding-right:23px;
+  }
+
+  #identitas h2{
+    font-size:22px;
+  }
+
+  .form-grid,
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    padding:18px;
+  }
+
+  #kuis{
+    width:100%;
+    padding:18px;
+    margin-top:20px;
+    border-radius:22px;
+  }
+
+  #soalArea{
+    width:100%;
+  }
+
+  .question{
+    font-size:19px;
+    padding:17px;
+  }
+
+  .identity-action{
+    flex-direction:column;
+  }
+
+  #identitas .btn.primary,
+  .capaian-btn{
+    width:100%;
+    flex:none;
+  }
+
+  .nav-row{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .nav-left,
+  .nav-right{
+    width:100%;
+  }
+
+  .nav-btn{
+    flex:1;
+    min-width:0;
+    width:100%;
+  }
+
+  .back-area{
+    margin-bottom:10px;
+  }
+
+  .back-btn{
+    padding:9px 17px;
+    font-size:13px;
+  }
+}
+
+@media(max-width:380px){
+
+  body:has(#identitas:not(.hidden)){
+    padding:10px;
+  }
+
+  #identitas .identity-content{
+    padding-left:18px;
+    padding-right:18px;
+  }
+
+  #identitas:after{
+    font-size:20px;
+    letter-spacing:1px;
+  }
+
+  .identity-icon{
+    width:62px;
+    height:62px;
+    font-size:32px;
+  }
+
+  #identitas h2{
+    font-size:20px;
+  }
+
+  #kuis{
+    padding:15px;
+  }
+
+  .question{
+    font-size:18px;
+    padding:15px;
+  }
+
+  .answer{
+    padding:12px;
+  }
+
+  .nav-btn{
+    font-size:14px;
+    padding:12px 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- =========================================================
+     TOMBOL KEMBALI
+========================================================= -->
+
+<div class="back-area">
+  <a
+    href="petualangan.html"
+    class="back-btn"
+    aria-label="Kembali ke halaman petualangan"
+  >
+    Kembali
+  </a>
+</div>
+
+<header class="header">
+
+  <span class="badge">
+    🏫 UPT SDN 160 GRESIK
+  </span>
+
+  <h1>
+    🧠 Kuis Seru Bilangan
+  </h1>
+
+  <p class="subtitle">
+    Perbandingan & Urutan Bilangan sampai 100.000
+  </p>
+
+</header>
+
+<section id="identitas" class="card">
+
+  <div class="identity-content">
+
+    <div class="identity-icon">
+      🍲
+    </div>
+
+    <h2>
+      🍽️ Yuk, Kenalkan Dirimu!
+    </h2>
+
+    <p class="identity-subtitle">
+      Sebelum memulai petualangan kuliner matematika,
+      isi identitasmu terlebih dahulu dengan benar.
+    </p>
+
+    <div class="form-grid">
+
+      <div class="field">
+
+        <label for="nama">
+          👤 Nama Siswa
+        </label>
+
+        <div class="input-wrap">
+
+          <input
+            id="nama"
+            placeholder="Tulis nama lengkap"
+            autocomplete="name"
+          >
+
+        </div>
+
+      </div>
+
+      <div class="field">
+
+        <label for="kelas">
+          🏫 Kelas
+        </label>
+
+        <div class="input-wrap">
+
+          <input
+            id="kelas"
+            placeholder="Contoh: V-A"
+          >
+
+        </div>
+
+      </div>
+
+      <div class="field">
+
+        <label for="absen">
+          🔢 Nomor Absen
+        </label>
+
+        <div class="input-wrap">
+
+          <input
+            id="absen"
+            type="number"
+            min="1"
+            placeholder="Masukkan nomor absen"
+          >
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- =====================================================
+         DUA MENU UTAMA
+    ====================================================== -->
+
+    <div class="identity-action">
+
+      <button
+        class="btn primary"
+        onclick="mulai()"
+      >
+        🍜 Mulai Petualangan
+      </button>
+
+      <a
+        href="capaian.html"
+        class="capaian-btn"
+        aria-label="Menuju Jejak Capaian"
+      >
+        🌟 Jejak Capaian
+      </a>
+
+    </div>
+
+    <div class="identity-note">
+
+      🥢 Pastikan nama, kelas, dan nomor absen
+      sudah benar sebelum melanjutkan.
+
+    </div>
+
+    <div class="food-decoration">
+
+      🌾 Kuliner Nusantara • Belajar • Bermain • Berprestasi 🌾
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="kuis" class="card hidden">
+
+  <div class="info">
+
+    <span id="siswaInfo"></span>
+
+    <span id="counter"></span>
+
+  </div>
+
+  <div class="progress-wrap">
+
+    <div
+      id="progress"
+      class="progress"
+    ></div>
+
+  </div>
+
+  <div id="soalArea"></div>
+
+</section>
+
+<section
+  id="hasil"
+  class="card hidden"
+></section>
+
+</div>
+
+<div
+  id="toast"
+  class="toast hidden"
+></div>
+
+<script>
+
+const GOOGLE_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbwk4odfq7ABr__CDR00YD4uAMLmvK2iPjaLLlJrpyA6BnOwJ9gUkncLdCVCzE670CFy/exec";
+
+
+const soal = [
+
+{
+  q:"Bilangan yang lebih besar dari 45.678 adalah …",
+  a:["45.687","45.607","45.678","45.608"],
+  k:0
+},
+
+{
+  q:"Perhatikan bilangan berikut! 72.450 … 72.405. Tanda yang tepat untuk mengisi titik-titik adalah …",
+  a:["<",">","=","≠"],
+  k:1
+},
+
+{
+  q:"Urutan bilangan berikut dari yang terkecil ke terbesar adalah … 35.210, 35.120, 35.201, 35.102",
+  a:[
+    "35.102, 35.120, 35.201, 35.210",
+    "35.120, 35.102, 35.210, 35.201",
+    "35.201, 35.210, 35.102, 35.120",
+    "35.210, 35.201, 35.120, 35.102"
+  ],
+  k:0
+},
+
+{
+  q:"Bilangan yang paling kecil adalah …",
+  a:["89.765","89.675","89.756","89.657"],
+  k:3
+},
+
+{
+  q:"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 56.789 … 56.798",
+  a:["=","<",">","≠"],
+  k:1
+},
+
+{
+  q:"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 63.450 … 63.405",
+  a:["=","<",">","≠"],
+  k:2
+},
+
+{
+  q:"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 80.000 … 80.000",
+  a:["=","<",">","≠"],
+  k:0
+},
+
+{
+  q:"Urutkan bilangan 12.500, 12.050, 12.005 dari yang terkecil ke terbesar.",
+  a:[
+    "12.005, 12.050, 12.500",
+    "12.050, 12.005, 12.500",
+    "12.500, 12.050, 12.005",
+    "12.005, 12.500, 12.050"
+  ],
+  k:0
+},
+
+{
+  q:"Urutkan bilangan 98.100, 98.010, 98.001 dari yang terkecil ke terbesar.",
+  a:[
+    "98.001, 98.010, 98.100",
+    "98.010, 98.001, 98.100",
+    "98.100, 98.010, 98.001",
+    "98.001, 98.100, 98.010"
+  ],
+  k:0
+},
+
+{
+  q:"Urutkan bilangan 45.900, 45.090, 45.009 dari yang terkecil ke terbesar.",
+  a:[
+    "45.009, 45.090, 45.900",
+    "45.090, 45.009, 45.900",
+    "45.900, 45.090, 45.009",
+    "45.009, 45.900, 45.090"
+  ],
+  k:0
+},
+
+{
+  q:"Perpustakaan sekolah memiliki 24.560 buku, sedangkan perpustakaan desa memiliki 23.950 buku. Perpustakaan manakah yang memiliki buku lebih banyak?",
+  a:[
+    "Perpustakaan sekolah, karena 24.560 > 23.950",
+    "Perpustakaan desa, karena 23.950 > 24.560",
+    "Keduanya memiliki jumlah buku yang sama",
+    "Tidak dapat ditentukan"
+  ],
+  k:0
+},
+
+{
+  q:"Pak Budi memiliki tabungan Rp75.500, sedangkan Pak Andi memiliki tabungan Rp57.500. Siapakah yang memiliki tabungan lebih banyak dan berapa selisihnya?",
+  a:[
+    "Pak Budi, selisih Rp18.000",
+    "Pak Andi, selisih Rp18.000",
+    "Pak Budi, selisih Rp12.000",
+    "Pak Andi, selisih Rp12.000"
+  ],
+  k:0
+},
+
+{
+  q:"Dalam sebuah lomba, Kelompok Merah = 67.250 poin, Kelompok Biru = 62.750 poin, dan Kelompok Hijau = 67.025 poin. Urutkan ketiga kelompok tersebut dari poin tertinggi ke terendah.",
+  a:[
+    "Merah → Hijau → Biru",
+    "Hijau → Merah → Biru",
+    "Biru → Merah → Hijau",
+    "Merah → Biru → Hijau"
+  ],
+  k:0
+},
+
+{
+  q:"Toko A menjual 45.750 pensil, Toko B menjual 54.570 pensil, dan Toko C menjual 45.705 pensil. Toko mana yang menjual pensil paling banyak?",
+  a:[
+    "Toko A",
+    "Toko B",
+    "Toko C",
+    "Semua sama banyak"
+  ],
+  k:1
+},
+
+{
+  q:"Toko A menjual 45.750 pensil, Toko B menjual 54.570 pensil, dan Toko C menjual 45.705 pensil. Urutkan jumlah pensil dari yang paling sedikit ke paling banyak.",
+  a:[
+    "45.705 → 45.750 → 54.570",
+    "45.750 → 45.705 → 54.570",
+    "54.570 → 45.750 → 45.705",
+    "45.705 → 54.570 → 45.750"
+  ],
+  k:0
+}
+
+];
+
+
+let siswa={
+  nama:"",
+  kelas:"",
+  absen:""
+};
+
+let index=0;
+let benar=0;
+let jawabanDipilih=[];
+let bankSoal=[];
+
+
+/* =========================================================
+   ACAK
+========================================================= */
+
+function acak(arr){
+
+  arr=[...arr];
+
+  for(
+    let i=arr.length-1;
+    i>0;
+    i--
+  ){
+
+    let j=Math.floor(
+      Math.random()*(i+1)
+    );
+
+    [arr[i],arr[j]]=
+    [arr[j],arr[i]];
+
+  }
+
+  return arr;
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(s){
+
+  return String(s).replace(
+    /[&<>"']/g,
+    m=>({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[m])
+  );
+
+}
+
+
+/* =========================================================
+   MULAI KUIS
+========================================================= */
+
+function mulai(){
+
+  siswa.nama=
+    document.getElementById("nama").value.trim();
+
+  siswa.kelas=
+    document.getElementById("kelas").value.trim();
+
+  siswa.absen=
+    document.getElementById("absen").value.trim();
+
+
+  if(
+    !siswa.nama ||
+    !siswa.kelas ||
+    !siswa.absen
+  ){
+
+    toast(
+      "⚠️ Nama, kelas, dan nomor absen wajib diisi."
+    );
+
+    return;
+
+  }
+
+
+  index=0;
+  benar=0;
+  jawabanDipilih=[];
+
+
+  bankSoal=acak(soal).map(s=>{
+
+    let ops=s.a.map(
+      (teks,i)=>({
+        teks,
+        benar:i===s.k
+      })
+    );
+
+    ops=acak(ops);
+
+    return {
+      ...s,
+      a:ops.map(x=>x.teks),
+      k:ops.findIndex(x=>x.benar)
+    };
+
+  });
+
+
+  document
+    .getElementById("identitas")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("hasil")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("kuis")
+    .classList.remove("hidden");
+
+
+  renderSoal();
+
+}
+
+
+/* =========================================================
+   TAMPILKAN SOAL
+========================================================= */
+
+function renderSoal(){
+
+  const s=bankSoal[index];
+
+
+  document.getElementById(
+    "siswaInfo"
+  ).innerHTML=
+  `👤 ${escapeHTML(siswa.nama)}
+   &nbsp;|&nbsp;
+   Kelas ${escapeHTML(siswa.kelas)}
+   &nbsp;|&nbsp;
+   Absen ${escapeHTML(siswa.absen)}`;
+
+
+  document.getElementById(
+    "counter"
+  ).textContent=
+  `Soal ${index+1} dari ${bankSoal.length}`;
+
+
+  document.getElementById(
+    "progress"
+  ).style.width=
+  ((index)/bankSoal.length*100)+"%";
+
+
+  document.getElementById(
+    "soalArea"
+  ).innerHTML=`
+
+    <div class="question-no">
+      SOAL ${index+1}
+    </div>
+
+    <div class="question">
+      ${escapeHTML(s.q)}
+    </div>
+
+    <div class="answers">
+
+      ${s.a.map((a,i)=>`
+
+        <label class="answer">
+
+          <input
+            type="radio"
+            name="jawaban"
+            value="${i}"
+            ${jawabanDipilih[index]===i ? "checked" : ""}
+          >
+
+          <span>
+            <b>${String.fromCharCode(65+i)}.</b>
+            ${escapeHTML(a)}
+          </span>
+
+        </label>
+
+      `).join("")}
+
+    </div>
+
+    <div class="nav-row">
+
+      <div class="nav-left">
+
+        <button
+          class="nav-btn previous"
+          onclick="soalSebelumnya()"
+          ${index===0 ? "disabled" : ""}
+        >
+          ⬅️ Sebelumnya
+        </button>
+
+      </div>
+
+      <div class="nav-right">
+
+        <button
+          class="nav-btn next"
+          onclick="nextSoal()"
+        >
+          ${
+            index===bankSoal.length-1
+            ?"🏁 Selesai"
+            :"➡️ Berikutnya"
+          }
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   SIMPAN JAWABAN
+========================================================= */
+
+function simpanJawaban(){
+
+  const el=
+    document.querySelector(
+      'input[name="jawaban"]:checked'
+    );
+
+
+  if(!el){
+    return false;
+  }
+
+
+  jawabanDipilih[index]=
+    Number(el.value);
+
+
+  return true;
+
+}
+
+
+/* =========================================================
+   SOAL SEBELUMNYA
+========================================================= */
+
+function soalSebelumnya(){
+
+  if(index<=0){
+    return;
+  }
+
+
+  const el=
+    document.querySelector(
+      'input[name="jawaban"]:checked'
+    );
+
+
+  if(el){
+
+    jawabanDipilih[index]=
+      Number(el.value);
+
+  }
+
+
+  index--;
+
+  renderSoal();
+
+}
+
+
+/* =========================================================
+   SOAL BERIKUTNYA
+========================================================= */
+
+function nextSoal(){
+
+  const berhasil=
+    simpanJawaban();
+
+
+  if(!berhasil){
+
+    toast(
+      "⚠️ Pilih salah satu jawaban terlebih dahulu."
+    );
+
+    return;
+
+  }
+
+
+  index++;
+
+
+  if(index<bankSoal.length){
+
+    renderSoal();
+
+  }else{
+
+    hitungNilai();
+
+  }
+
+}
+
+
+/* =========================================================
+   HITUNG NILAI
+========================================================= */
+
+function hitungNilai(){
+
+  benar=0;
+
+
+  for(
+    let i=0;
+    i<bankSoal.length;
+    i++
+  ){
+
+    if(
+      jawabanDipilih[i]===
+      bankSoal[i].k
+    ){
+
+      benar++;
+
+    }
+
+  }
+
+
+  selesai();
+
+}
+
+
+/* =========================================================
+   PENGIRIMAN GOOGLE SHEETS
+========================================================= */
+
+function kirimKeGoogleSheets(data){
+
+  if(
+    !GOOGLE_SCRIPT_URL ||
+    GOOGLE_SCRIPT_URL.includes("TEMPEL_URL")
+  ){
+
+    return {
+      ok:false,
+      skipped:true
+    };
+
+  }
+
+
+  try{
+
+    const iframeName=
+      "googleSheetsTarget";
+
+
+    let iframe=
+      document.getElementById(
+        iframeName
+      );
+
+
+    if(!iframe){
+
+      iframe=
+        document.createElement("iframe");
+
+      iframe.id=iframeName;
+      iframe.name=iframeName;
+      iframe.style.display="none";
+
+      document.body.appendChild(
+        iframe
+      );
+
+    }
+
+
+    const form=
+      document.createElement("form");
+
+
+    form.method="POST";
+    form.action=GOOGLE_SCRIPT_URL;
+    form.target=iframeName;
+    form.style.display="none";
+
+
+    const fields={
+
+      nama:data.nama,
+      kelas:data.kelas,
+      absen:data.absen,
+
+      nilai:data.nilai,
+      benar:data.benar,
+      salah:data.total-data.benar,
+
+      total:data.total,
+      persen:data.persen,
+      waktu:data.waktu
+
+    };
+
+
+    Object.keys(fields).forEach(
+      function(key){
+
+        const input=
+          document.createElement("input");
+
+        input.type="hidden";
+        input.name=key;
+        input.value=
+          fields[key] ?? "";
+
+        form.appendChild(input);
+
+      }
+    );
+
+
+    document.body.appendChild(form);
+
+    form.submit();
+
+
+    setTimeout(
+      function(){
+        form.remove();
+      },
+      3000
+    );
+
+
+    return {
+      ok:true
+    };
+
+
+  }catch(error){
+
+    console.error(
+      "Pengiriman Google Sheets gagal:",
+      error
+    );
+
+    return {
+      ok:false
+    };
+
+  }
+
+}
+
+
+/* =========================================================
+   SELESAI
+========================================================= */
+
+function selesai(){
+
+  const total=bankSoal.length;
+
+
+  const nilai=
+    Math.round(
+      benar/total*100
+    );
+
+
+  const persen=
+    Math.round(
+      benar/total*100
+    );
+
+
+  const waktu=
+    new Date().toLocaleString(
+      "id-ID"
+    );
+
+
+  const hasilBaru={
+
+    nama:siswa.nama,
+    kelas:siswa.kelas,
+    absen:siswa.absen,
+
+    nilai,
+    benar,
+    total,
+    persen,
+    waktu
+
+  };
+
+
+  document
+    .getElementById("kuis")
+    .classList.add("hidden");
+
+
+  tampilkanHasil(
+    hasilBaru
+  );
+
+
+  const kirim=
+    kirimKeGoogleSheets(
+      hasilBaru
+    );
+
+
+  if(
+    kirim &&
+    kirim.ok
+  ){
+
+    toast(
+      "✅ Hasil dikirim ke Google Sheets."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   HASIL
+========================================================= */
+
+function tampilkanHasil(data){
+
+  let pesan=
+    data.nilai>=90
+    ?"🏆 Luar biasa!"
+    :data.nilai>=75
+    ?"🌟 Bagus sekali!"
+    :data.nilai>=60
+    ?"💪 Terus berlatih!"
+    :"📚 Jangan menyerah!";
+
+
+  document.getElementById(
+    "hasil"
+  ).innerHTML=`
+
+    <div class="center">
+
+      <h2>
+        🎉 Kuis Selesai!
+      </h2>
+
+      <p>
+        ${pesan}
+      </p>
+
+      <div class="result-score">
+        ${data.nilai}
+      </div>
+
+      <div class="stats">
+
+        <div class="stat">
+
+          <b>
+            ${data.benar}/${data.total}
+          </b>
+
+          Jawaban Benar
+
+        </div>
+
+        <div class="stat">
+
+          <b>
+            ${data.persen}%
+          </b>
+
+          Persentase Benar
+
+        </div>
+
+      </div>
+
+      <p>
+
+        <b>
+          ${escapeHTML(data.nama)}
+        </b>
+
+        • Kelas ${escapeHTML(data.kelas)}
+
+        • Absen ${escapeHTML(data.absen)}
+
+      </p>
+
+      <div class="actions">
+
+        <button
+          class="btn primary"
+          onclick="ulang()"
+        >
+          🔄 Kerjakan Lagi
+        </button>
+
+        <button
+          class="btn green"
+          onclick="window.location.href='capaian.html'"
+        >
+          🌟 Jejak Capaian
+        </button>
+
+        <button
+          class="btn gray"
+          onclick="window.print()"
+        >
+          🖨️ Cetak Hasil
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  document
+    .getElementById("hasil")
+    .classList.remove("hidden");
+
+}
+
+
+/* =========================================================
+   ULANG
+========================================================= */
+
+function ulang(){
+
+  document
+    .getElementById("hasil")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("identitas")
+    .classList.remove("hidden");
+
+
+  document.getElementById(
+    "nama"
+  ).value="";
+
+
+  document.getElementById(
+    "kelas"
+  ).value="";
+
+
+  document.getElementById(
+    "absen"
+  ).value="";
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function toast(msg){
+
+  const t=
+    document.getElementById(
+      "toast"
+    );
+
+
+  t.textContent=msg;
+
+
+  t.classList.remove(
+    "hidden"
+  );
+
+
+  clearTimeout(
+    window.tt
+  );
+
+
+  window.tt=
+    setTimeout(
+      ()=>
+        t.classList.add(
+          "hidden"
+        ),
+      2400
+    );
+
+}
+
+</script>
+
+</body>
+</html>

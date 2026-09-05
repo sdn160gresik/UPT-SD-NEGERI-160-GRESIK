@@ -169,6 +169,12 @@ body::before{
   box-shadow:0 7px 16px rgba(124,63,32,.22);
 }
 
+.btn-fullscreen{
+  color:#fff;
+  background:linear-gradient(135deg,var(--orange),#D65D18);
+  box-shadow:0 7px 16px rgba(230,126,34,.22);
+}
+
 .viewer{
   width:min(1400px,100%);
   flex:1 1 auto;
@@ -380,6 +386,9 @@ iframe{
       <button class="btn btn-back" onclick="goBack()" title="Kembali ke petualangan">
         🏠 <span class="label">Kembali</span>
       </button>
+      <button class="btn btn-fullscreen" id="fullscreenBtn" onclick="toggleFullscreen()" title="Layar penuh">
+        ⛶ <span class="label">Penuh</span>
+      </button>
       <button class="btn btn-close" onclick="closePage()" title="Tutup halaman">
         ✕ <span class="label">Tutup</span>
       </button>
@@ -456,9 +465,57 @@ function closePage(){
   },150);
 }
 
+async function toggleFullscreen(){
+  const btn = document.getElementById('fullscreenBtn');
+
+  try{
+    if(!document.fullscreenElement){
+      if(document.documentElement.requestFullscreen){
+        await document.documentElement.requestFullscreen();
+      }
+      document.body.classList.add('fullscreen-mode');
+      btn.innerHTML = '⛶ <span class="label">Keluar</span>';
+      btn.title = 'Keluar dari layar penuh';
+    }else{
+      if(document.exitFullscreen){
+        await document.exitFullscreen();
+      }
+      document.body.classList.remove('fullscreen-mode');
+      btn.innerHTML = '⛶ <span class="label">Penuh</span>';
+      btn.title = 'Layar penuh';
+    }
+  }catch(error){
+    // Fallback jika Fullscreen API tidak tersedia
+    document.body.classList.toggle('fullscreen-mode');
+    const active = document.body.classList.contains('fullscreen-mode');
+    btn.innerHTML = active
+      ? '⛶ <span class="label">Keluar</span>'
+      : '⛶ <span class="label">Penuh</span>';
+  }
+}
+
+document.addEventListener('fullscreenchange', function(){
+  const btn = document.getElementById('fullscreenBtn');
+  const active = !!document.fullscreenElement;
+
+  document.body.classList.toggle('fullscreen-mode', active);
+
+  if(active){
+    btn.innerHTML = '⛶ <span class="label">Keluar</span>';
+    btn.title = 'Keluar dari layar penuh';
+  }else{
+    btn.innerHTML = '⛶ <span class="label">Penuh</span>';
+    btn.title = 'Layar penuh';
+  }
+});
+
 document.addEventListener('keydown', function(event){
   if(event.key === 'Escape'){
-    goBack();
+    if(document.fullscreenElement){
+      document.exitFullscreen();
+    }else{
+      goBack();
+    }
   }
 });
 </script>

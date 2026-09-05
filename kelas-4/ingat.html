@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ingat Kembali — Bilangan Cacah</title>
+
+<style>
+:root{
+  --brown:#7C3F20;
+  --brown-dark:#542713;
+  --orange:#E67E22;
+  --orange-light:#F6B35F;
+  --gold:#F4C542;
+  --cream:#FFF4DF;
+  --cream-2:#FFE8BF;
+  --caramel:#B96F3D;
+  --green:#4F8A45;
+  --green-light:#E6F4E3;
+  --red:#D94B35;
+  --red-light:#FDE8E4;
+  --blue:#3B82C4;
+  --blue-light:#E7F2FC;
+  --white:#FFFFFF;
+  --text:#4A2A1A;
+  --muted:#8A6754;
+  --line:#E7C9A9;
+  --shadow:0 24px 70px rgba(91,52,27,.18);
+}
+
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 10% 10%,rgba(244,197,66,.28),transparent 25%),
+    radial-gradient(circle at 90% 20%,rgba(230,126,34,.18),transparent 28%),
+    radial-gradient(circle at 20% 90%,rgba(79,138,69,.12),transparent 25%),
+    linear-gradient(135deg,#FFF9EE 0%,#FFF1D9 50%,#FFE8C4 100%);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.35;
+  background-image:
+    radial-gradient(rgba(124,63,32,.09) 1px,transparent 1px);
+  background-size:22px 22px;
+  z-index:-1;
+}
+
+.float{
+  position:fixed;
+  z-index:0;
+  font-size:clamp(28px,4vw,48px);
+  opacity:.16;
+  pointer-events:none;
+  animation:float 6s ease-in-out infinite;
+  filter:drop-shadow(0 6px 8px rgba(124,63,32,.15));
+}
+
+.f1{top:7%;left:5%;animation-delay:0s}
+.f2{top:16%;right:6%;animation-delay:1.2s}
+.f3{bottom:14%;left:7%;animation-delay:2s}
+.f4{bottom:7%;right:8%;animation-delay:.7s}
+.f5{top:48%;right:2%;animation-delay:2.8s}
+
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(-4deg)}
+  50%{transform:translateY(-15px) rotate(5deg)}
+}
+
+.app{
+  width:min(920px,calc(100% - 28px));
+  margin:0 auto;
+  padding:28px 0;
+  position:relative;
+  z-index:1;
+}
+
+.card{
+  background:rgba(255,250,240,.94);
+  border:2px solid rgba(124,63,32,.18);
+  border-radius:30px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  backdrop-filter:blur(12px);
+  animation:cardIn .6s ease both;
+}
+
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(18px) scale(.985)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+.header{
+  padding:30px 34px 22px;
+  text-align:center;
+  background:
+    linear-gradient(135deg,rgba(255,232,191,.72),rgba(255,247,231,.96));
+  border-bottom:1px solid var(--line);
+  position:relative;
+}
+
+.header::after{
+  content:"";
+  position:absolute;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:rgba(244,197,66,.22);
+  top:-65px;
+  right:-35px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:var(--white);
+  border:1px solid #E9C894;
+  color:var(--brown);
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.3px;
+  box-shadow:0 5px 15px rgba(124,63,32,.08);
+}
+
+h1{
+  margin:15px 0 7px;
+  font-size:clamp(28px,5vw,43px);
+  line-height:1.1;
+  color:var(--brown);
+  letter-spacing:-1px;
+}
+
+h1 span{
+  color:var(--orange);
+}
+
+.subtitle{
+  margin:0 auto;
+  max-width:650px;
+  color:var(--muted);
+  line-height:1.65;
+  font-size:15px;
+}
+
+.content{
+  padding:28px 34px 30px;
+}
+
+.progress-wrap{
+  margin-bottom:24px;
+}
+
+.progress-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:9px;
+  font-size:13px;
+  font-weight:800;
+  color:var(--brown);
+}
+
+.progress-track{
+  height:12px;
+  background:#F0D8B9;
+  border-radius:999px;
+  overflow:hidden;
+  border:1px solid #E5C29D;
+}
+
+.progress-bar{
+  height:100%;
+  width:0;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--orange),var(--gold),var(--green));
+  transition:width .45s cubic-bezier(.22,1,.36,1);
+}
+
+.question-box{
+  position:relative;
+  padding:24px;
+  margin-bottom:20px;
+  border-radius:22px;
+  border:2px solid #E8C68F;
+  background:
+    linear-gradient(135deg,#FFF8E9,#FFF0C9);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+.question-label{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  color:var(--orange);
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:9px;
+}
+
+.question{
+  margin:0;
+  font-size:clamp(19px,3vw,25px);
+  line-height:1.5;
+  font-weight:850;
+  color:var(--brown-dark);
+}
+
+.options{
+  display:grid;
+  gap:12px;
+}
+
+.option{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  text-align:left;
+  padding:15px 16px;
+  border-radius:17px;
+  border:2px solid #E7D0B4;
+  background:#FFFDF8;
+  color:var(--text);
+  cursor:pointer;
+  font-size:15px;
+  font-weight:700;
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    background .18s ease,
+    box-shadow .18s ease;
+}
+
+.option:hover:not(:disabled){
+  transform:translateY(-2px);
+  border-color:var(--orange);
+  background:#FFF6E7;
+  box-shadow:0 8px 18px rgba(230,126,34,.14);
+}
+
+.option:active:not(:disabled){
+  transform:translateY(0);
+}
+
+.option:disabled{
+  cursor:default;
+}
+
+.option-letter{
+  flex:0 0 38px;
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:var(--cream-2);
+  color:var(--brown);
+  font-weight:900;
+  border:1px solid #E6C083;
+}
+
+.option.correct{
+  background:var(--green-light);
+  border-color:#83B979;
+  color:#285A27;
+}
+
+.option.correct .option-letter{
+  background:#BFE3B8;
+  color:#285A27;
+  border-color:#83B979;
+}
+
+.option.wrong{
+  background:var(--red-light);
+  border-color:#E69A8C;
+  color:#8B2C20;
+}
+
+.option.wrong .option-letter{
+  background:#F7C7BE;
+  color:#8B2C20;
+  border-color:#E69A8C;
+}
+
+.controls{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:23px;
+}
+
+.btn{
+  border:0;
+  border-radius:14px;
+  padding:12px 18px;
+  min-height:46px;
+  font-size:14px;
+  font-weight:850;
+  cursor:pointer;
+  transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.03);
+}
+
+.btn:active{
+  transform:translateY(0);
+}
+
+.btn-primary{
+  color:white;
+  background:linear-gradient(135deg,var(--orange),#D65D18);
+  box-shadow:0 9px 20px rgba(214,93,24,.25);
+}
+
+.btn-secondary{
+  color:var(--brown);
+  background:#FFF5E4;
+  border:2px solid #DDBB91;
+}
+
+.btn-green{
+  color:white;
+  background:linear-gradient(135deg,var(--green),#3C7135);
+  box-shadow:0 9px 20px rgba(79,138,69,.22);
+}
+
+.result{
+  display:none;
+  margin-top:22px;
+  padding:20px;
+  border-radius:19px;
+  text-align:center;
+  background:linear-gradient(135deg,#FFF2C8,#FFE6B4);
+  border:2px solid #E8C36F;
+}
+
+.result.show{
+  display:block;
+  animation:pop .4s ease both;
+}
+
+@keyframes pop{
+  from{opacity:0;transform:scale(.96)}
+  to{opacity:1;transform:scale(1)}
+}
+
+.score{
+  font-size:34px;
+  font-weight:950;
+  color:var(--brown);
+  margin:5px 0;
+}
+
+.score-text{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.footer{
+  text-align:center;
+  padding:16px 20px 22px;
+  color:#9A7661;
+  font-size:12px;
+}
+
+.footer strong{
+  color:var(--brown);
+}
+
+/* Modal */
+.overlay{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(72,39,20,.42);
+  backdrop-filter:blur(7px);
+}
+
+.overlay.show{
+  display:flex;
+  animation:fadeIn .2s ease both;
+}
+
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+.modal{
+  width:min(460px,100%);
+  background:#FFFDF8;
+  border:2px solid #E4C49E;
+  border-radius:25px;
+  box-shadow:0 25px 80px rgba(65,36,19,.28);
+  padding:27px;
+  text-align:center;
+  animation:modalIn .3s cubic-bezier(.22,1,.36,1) both;
+}
+
+@keyframes modalIn{
+  from{opacity:0;transform:translateY(15px) scale(.94)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+.feedback-icon{
+  width:64px;
+  height:64px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 13px;
+  border-radius:20px;
+  font-size:32px;
+  background:#FFF1CF;
+  border:2px solid #E7C071;
+}
+
+.modal h2{
+  margin:0 0 8px;
+  color:var(--brown);
+  font-size:24px;
+}
+
+.modal p{
+  margin:0 0 20px;
+  color:var(--muted);
+  line-height:1.6;
+  font-size:14px;
+}
+
+.modal .btn{
+  min-width:130px;
+}
+
+/* Confetti */
+.confetti{
+  position:fixed;
+  z-index:150;
+  top:-20px;
+  width:9px;
+  height:15px;
+  pointer-events:none;
+  animation:fall 1.5s linear forwards;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(720deg);
+    opacity:0;
+  }
+}
+
+/* Responsive */
+@media(max-width:650px){
+  .app{
+    width:min(100% - 16px,920px);
+    padding:10px 0;
+  }
+
+  .card{
+    border-radius:22px;
+  }
+
+  .header{
+    padding:24px 19px 19px;
+  }
+
+  .content{
+    padding:21px 17px 23px;
+  }
+
+  .question-box{
+    padding:19px;
+    border-radius:18px;
+  }
+
+  .option{
+    padding:13px;
+    font-size:14px;
+  }
+
+  .option-letter{
+    flex-basis:34px;
+    width:34px;
+    height:34px;
+  }
+
+  .controls .btn{
+    flex:1 1 135px;
+  }
+
+  .float{
+    opacity:.10;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="float f1">🍡</div>
+<div class="float f2">🍚</div>
+<div class="float f3">🌿</div>
+<div class="float f4">🥥</div>
+<div class="float f5">🥟</div>
+
+<main class="app">
+  <section class="card">
+
+    <header class="header">
+      <div class="badge">🍽️ JELAJAH KULINER NUSANTARA • MATEMATIKA</div>
+      <h1>Ingat <span>Kembali!</span></h1>
+      <p class="subtitle">
+        Yuk, hangatkan kembali ingatanmu tentang <strong>bilangan cacah</strong>.
+        Baca soal dengan teliti dan pilih jawaban yang paling tepat!
+      </p>
+    </header>
+
+    <div class="content">
+
+      <div class="progress-wrap">
+        <div class="progress-top">
+          <span id="progressText">Soal 1 dari 2</span>
+          <span id="scoreText">Skor: 0</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <div class="question-label">🍴 Pertanyaan</div>
+        <p class="question" id="question"></p>
+      </div>
+
+      <div class="options" id="options"></div>
+
+      <div class="controls">
+        <button class="btn btn-secondary" id="resetBtn" onclick="resetQuestion()">
+          ↻ Ulangi Soal
+        </button>
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" style="display:none">
+          Lanjut ➜
+        </button>
+        <button class="btn btn-green" id="finishBtn" onclick="finishQuiz()" style="display:none">
+          🏆 Lihat Hasil
+        </button>
+        <button class="btn btn-secondary" onclick="goBack()">
+          🏠 Kembali
+        </button>
+      </div>
+
+      <div class="result" id="result">
+        <div>🎉 Petualangan Selesai!</div>
+        <div class="score" id="finalScore">0 / 2</div>
+        <div class="score-text" id="finalMessage">
+          Hebat! Terus semangat belajar matematika.
+        </div>
+        <div class="controls">
+          <button class="btn btn-primary" onclick="restartQuiz()">🔄 Coba Lagi</button>
+          <button class="btn btn-secondary" onclick="goBack()">🏠 Kembali</button>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <strong>UPT SDN 160 GRESIK</strong> • Belajar Matematika dengan Seru 🌟
+    </footer>
+
+  </section>
+</main>
+
+<div class="overlay" id="feedbackOverlay" onclick="overlayClick(event)">
+  <div class="modal">
+    <div class="feedback-icon" id="feedbackIcon">✨</div>
+    <h2 id="feedbackTitle">Bagus!</h2>
+    <p id="feedbackMessage"></p>
+    <button class="btn btn-primary" onclick="closeFeedback()">Lanjut</button>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    question: 'Bilangan <strong>87.986</strong> dibaca sebagai ....',
+    options: [
+      'Delapan ribu tujuh ratus sembilan puluh delapan enam',
+      'Delapan puluh tujuh ribu sembilan ratus delapan puluh enam',
+      'Delapan puluh tujuh ribu sembilan ratus delapan puluh enam puluh',
+      'Delapan puluh tujuh ribu sembilan puluh delapan enam'
+    ],
+    answer: 1,
+    explanation: 'Bilangan 87.986 dibaca “Delapan puluh tujuh ribu sembilan ratus delapan puluh enam”.'
+  },
+  {
+    question: 'Pada bilangan <strong>35.678</strong>, angka <strong>5</strong> menempati nilai tempat ....',
+    options: [
+      'Puluhan',
+      'Ribuan',
+      'Ratusan',
+      'Satuan'
+    ],
+    answer: 1,
+    explanation: 'Pada 35.678, angka 5 berada pada posisi ribuan.'
+  }
+];
+
+let currentQuestion = 0;
+let answered = false;
+let score = 0;
+
+const questionEl = document.getElementById('question');
+const optionsEl = document.getElementById('options');
+const progressTextEl = document.getElementById('progressText');
+const scoreTextEl = document.getElementById('scoreText');
+const progressBarEl = document.getElementById('progressBar');
+const nextBtn = document.getElementById('nextBtn');
+const finishBtn = document.getElementById('finishBtn');
+const resetBtn = document.getElementById('resetBtn');
+const resultEl = document.getElementById('result');
+const feedbackOverlay = document.getElementById('feedbackOverlay');
+const feedbackIcon = document.getElementById('feedbackIcon');
+const feedbackTitle = document.getElementById('feedbackTitle');
+const feedbackMessage = document.getElementById('feedbackMessage');
+
+function renderQuestion(){
+  const q = questions[currentQuestion];
+
+  answered = false;
+  questionEl.innerHTML = q.question;
+  optionsEl.innerHTML = '';
+
+  q.options.forEach((option,index)=>{
+    const button = document.createElement('button');
+    button.className = 'option';
+    button.type = 'button';
+    button.innerHTML = `
+      <span class="option-letter">${String.fromCharCode(65 + index)}</span>
+      <span>${option}</span>
+    `;
+    button.onclick = ()=>checkAnswer(index);
+    optionsEl.appendChild(button);
+  });
+
+  progressTextEl.textContent = `Soal ${currentQuestion + 1} dari ${questions.length}`;
+  scoreTextEl.textContent = `Skor: ${score}`;
+  progressBarEl.style.width =
+    `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+  nextBtn.style.display = 'none';
+  finishBtn.style.display = 'none';
+  resetBtn.style.display = 'inline-flex';
+
+  resultEl.classList.remove('show');
+}
+
+function checkAnswer(selected){
+  if(answered) return;
+
+  answered = true;
+  const q = questions[currentQuestion];
+  const optionButtons = document.querySelectorAll('.option');
+
+  optionButtons.forEach(btn=>btn.disabled = true);
+
+  optionButtons[q.answer].classList.add('correct');
+
+  if(selected === q.answer){
+    score++;
+    scoreTextEl.textContent = `Skor: ${score}`;
+    showFeedback(
+      true,
+      'Jawaban Benar! 🎉',
+      q.explanation
+    );
+    confetti();
+  }else{
+    optionButtons[selected].classList.add('wrong');
+    showFeedback(
+      false,
+      'Belum Tepat 😊',
+      `Jawaban yang benar adalah <strong>${String.fromCharCode(65 + q.answer)}. ${q.options[q.answer]}</strong>.<br><br>${q.explanation}`
+    );
+  }
+
+  if(currentQuestion < questions.length - 1){
+    nextBtn.style.display = 'inline-flex';
+  }else{
+    finishBtn.style.display = 'inline-flex';
+  }
+}
+
+function showFeedback(correct,title,message){
+  feedbackIcon.textContent = correct ? '🎉' : '💡';
+  feedbackTitle.textContent = title;
+  feedbackMessage.innerHTML = message;
+  feedbackOverlay.classList.add('show');
+}
+
+function closeFeedback(){
+  feedbackOverlay.classList.remove('show');
+}
+
+function overlayClick(event){
+  if(event.target === feedbackOverlay){
+    closeFeedback();
+  }
+}
+
+function resetQuestion(){
+  renderQuestion();
+}
+
+function nextQuestion(){
+  if(currentQuestion < questions.length - 1){
+    currentQuestion++;
+    renderQuestion();
+  }
+}
+
+function finishQuiz(){
+  closeFeedback();
+
+  const percentage = Math.round((score / questions.length) * 100);
+
+  document.getElementById('finalScore').textContent =
+    `${score} / ${questions.length} (${percentage}%)`;
+
+  let message = '';
+
+  if(percentage === 100){
+    message = 'Luar biasa! Kamu menguasai bilangan cacah dengan sangat baik! 🌟';
+  }else if(percentage >= 50){
+    message = 'Bagus! Tinggal sedikit lagi. Yuk, terus berlatih! 💪';
+  }else{
+    message = 'Tetap semangat! Coba lagi dan perhatikan nilai tempat setiap angka. 🌱';
+  }
+
+  document.getElementById('finalMessage').textContent = message;
+
+  resultEl.classList.add('show');
+
+  resultEl.scrollIntoView({
+    behavior:'smooth',
+    block:'center'
+  });
+
+  if(percentage === 100){
+    confetti();
+    setTimeout(confetti,300);
+  }
+}
+
+function restartQuiz(){
+  currentQuestion = 0;
+  answered = false;
+  score = 0;
+  closeFeedback();
+  renderQuestion();
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+}
+
+function goBack(){
+  window.location.href = "petualangan.html";
+}
+
+function playSound(type){
+  try{
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if(!AudioContext) return;
+
+    const ctx = new AudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.type = 'sine';
+    osc.frequency.value = type === 'correct' ? 660 : 220;
+
+    gain.gain.setValueAtTime(.0001,ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.08,ctx.currentTime + .01);
+    gain.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime + .16);
+
+    osc.start();
+    osc.stop(ctx.currentTime + .18);
+  }catch(e){}
+}
+
+function confetti(){
+  const symbols = ['●','◆','★','✦','🍡','🌟','✨','●','◆'];
+
+  for(let i=0;i<34;i++){
+    const piece = document.createElement('div');
+    piece.className = 'confetti';
+    piece.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+
+    piece.style.left = `${Math.random()*100}vw`;
+    piece.style.fontSize = `${10 + Math.random()*12}px`;
+    piece.style.animationDuration = `${1 + Math.random()*1.2}s`;
+    piece.style.animationDelay = `${Math.random()*.25}s`;
+
+    document.body.appendChild(piece);
+
+    setTimeout(()=>{
+      piece.remove();
+    },2600);
+  }
+}
+
+document.addEventListener('keydown',(event)=>{
+  if(event.key === 'Escape'){
+    closeFeedback();
+  }
+});
+
+renderQuestion();
+</script>
+
+</body>
+</html>

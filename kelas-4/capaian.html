@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#9b4d20">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<title>Jejak Capaian | Bilangan Cacah</title>
+
+<style>
+:root{
+  --primary:#9b4d20;
+  --primary-dark:#713517;
+  --secondary:#d96b26;
+  --orange:#e67e22;
+  --yellow:#f4b942;
+  --green:#2e8b57;
+  --green-dark:#246b45;
+
+  --ink:#4a2c20;
+  --muted:#806b61;
+
+  --cream:#fff8e8;
+  --card:#fffdf8;
+  --white:#ffffff;
+  --border:#ead7bc;
+
+  --gold:#d89b18;
+
+  --shadow:rgba(92,48,24,.16);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,
+body{
+  width:100%;
+  min-height:100%;
+}
+
+body{
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color:var(--ink);
+
+  background:
+    radial-gradient(circle at 10% 10%, rgba(244,185,66,.22), transparent 25%),
+    radial-gradient(circle at 90% 15%, rgba(217,107,38,.18), transparent 25%),
+    radial-gradient(circle at 20% 90%, rgba(46,139,87,.12), transparent 25%),
+    linear-gradient(135deg,#fffaf0,#fff3dc);
+
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* =========================
+   BACKGROUND DECORATION
+========================= */
+
+body::before{
+  content:"";
+  position:fixed;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  background:rgba(244,185,66,.10);
+  top:-100px;
+  left:-100px;
+  z-index:-1;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  width:350px;
+  height:350px;
+  border-radius:50%;
+  background:rgba(46,139,87,.08);
+  right:-140px;
+  bottom:-140px;
+  z-index:-1;
+}
+
+/* =========================
+   APP
+========================= */
+
+.app{
+  width:100%;
+  min-height:100vh;
+  padding:20px;
+}
+
+.wrapper{
+  width:min(1180px,100%);
+  margin:auto;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+
+  margin-bottom:18px;
+}
+
+.back-btn,
+.refresh-btn{
+  border:none;
+  cursor:pointer;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+
+  padding:12px 18px;
+
+  border-radius:14px;
+
+  font-weight:800;
+  font-size:14px;
+
+  transition:.25s ease;
+
+  box-shadow:0 7px 18px var(--shadow);
+}
+
+.back-btn{
+  background:var(--primary);
+  color:white;
+}
+
+.back-btn:hover{
+  background:var(--primary-dark);
+  transform:translateY(-2px);
+}
+
+.refresh-btn{
+  background:white;
+  color:var(--primary);
+  border:1px solid var(--border);
+}
+
+.refresh-btn:hover{
+  background:#fff8ed;
+  transform:translateY(-2px);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(155,77,32,.98),
+      rgba(113,53,23,.98)
+    );
+
+  color:white;
+
+  border-radius:28px;
+
+  padding:34px 36px;
+
+  box-shadow:
+    0 20px 45px rgba(92,48,24,.22);
+
+  margin-bottom:22px;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+
+  width:180px;
+  height:180px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.08);
+
+  right:-50px;
+  top:-80px;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+
+  width:120px;
+  height:120px;
+
+  border-radius:50%;
+
+  background:rgba(244,185,66,.12);
+
+  right:100px;
+  bottom:-70px;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+}
+
+.food-icons{
+  font-size:34px;
+  letter-spacing:8px;
+  margin-bottom:12px;
+}
+
+.school-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.25);
+
+  padding:7px 13px;
+
+  border-radius:999px;
+
+  font-size:12px;
+  font-weight:800;
+
+  margin-bottom:15px;
+}
+
+.hero h1{
+  font-size:clamp(30px,5vw,48px);
+  line-height:1.05;
+  margin-bottom:12px;
+  letter-spacing:-1px;
+}
+
+.hero p{
+  max-width:720px;
+  color:rgba(255,255,255,.88);
+  font-size:16px;
+  line-height:1.65;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  padding:13px 16px;
+
+  background:white;
+
+  border:1px solid var(--border);
+
+  border-radius:15px;
+
+  margin-bottom:20px;
+
+  font-size:14px;
+  font-weight:700;
+
+  box-shadow:0 8px 20px var(--shadow);
+}
+
+.status.loading{
+  color:var(--primary);
+}
+
+.status.success{
+  color:var(--green-dark);
+  background:#f1fbf5;
+  border-color:#b9dfc7;
+}
+
+.status.error{
+  color:#a33b28;
+  background:#fff3f0;
+  border-color:#edc0b5;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section-title{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+
+  gap:15px;
+
+  margin:25px 0 14px;
+}
+
+.section-title h2{
+  font-size:23px;
+  color:var(--primary-dark);
+}
+
+.section-title p{
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* =========================
+   TOP THREE
+========================= */
+
+.top-three{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.rank-card{
+  position:relative;
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:22px;
+
+  padding:25px 20px;
+
+  text-align:center;
+
+  box-shadow:0 10px 26px var(--shadow);
+
+  transition:.25s ease;
+
+  overflow:hidden;
+}
+
+.rank-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 16px 30px rgba(92,48,24,.20);
+}
+
+.rank-card.first{
+  border:2px solid #e2b338;
+  background:linear-gradient(180deg,#fffdf3,#fff9e5);
+}
+
+.rank-card.second{
+  background:linear-gradient(180deg,#fffdfb,#f9f5ef);
+}
+
+.rank-card.third{
+  background:linear-gradient(180deg,#fffdf8,#fff5e8);
+}
+
+.rank-number{
+  font-size:36px;
+  margin-bottom:7px;
+}
+
+.rank-label{
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:var(--muted);
+}
+
+.rank-name{
+  margin-top:9px;
+
+  font-size:18px;
+  font-weight:900;
+
+  color:var(--primary-dark);
+
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.rank-score{
+  margin-top:13px;
+
+  font-size:32px;
+  font-weight:1000;
+
+  color:var(--green-dark);
+}
+
+.rank-score small{
+  font-size:13px;
+  color:var(--muted);
+  font-weight:800;
+}
+
+/* =========================
+   TABLE CARD
+========================= */
+
+.card{
+  background:rgba(255,253,248,.94);
+
+  border:1px solid var(--border);
+
+  border-radius:24px;
+
+  box-shadow:0 12px 30px var(--shadow);
+
+  overflow:hidden;
+}
+
+.card-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:15px;
+
+  padding:20px 22px;
+
+  border-bottom:1px solid var(--border);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(155,77,32,.07),
+      rgba(244,185,66,.08)
+    );
+}
+
+.card-header h3{
+  font-size:18px;
+  color:var(--primary-dark);
+}
+
+.card-header span{
+  font-size:13px;
+  color:var(--muted);
+  font-weight:700;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:650px;
+}
+
+thead th{
+  padding:15px 16px;
+
+  background:#fff5df;
+
+  color:var(--primary-dark);
+
+  font-size:12px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.5px;
+
+  text-align:left;
+
+  white-space:nowrap;
+}
+
+tbody td{
+  padding:15px 16px;
+
+  border-top:1px solid #f0e4d2;
+
+  font-size:14px;
+
+  font-weight:650;
+}
+
+tbody tr{
+  transition:.2s ease;
+}
+
+tbody tr:hover{
+  background:#fffaf1;
+}
+
+.rank-cell{
+  width:80px;
+  font-weight:900;
+  color:var(--primary);
+}
+
+.name-cell{
+  font-weight:900;
+  color:var(--ink);
+}
+
+.score-cell{
+  font-size:18px;
+  font-weight:1000;
+  color:var(--green-dark);
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:6px 10px;
+
+  border-radius:999px;
+
+  background:#fff1cc;
+
+  color:#8b5b00;
+
+  font-size:12px;
+
+  font-weight:900;
+}
+
+.top-badge{
+  background:#e9f7ef;
+  color:var(--green-dark);
+}
+
+/* =========================
+   ALL DATA
+========================= */
+
+.all-section{
+  margin-top:22px;
+  display:none;
+}
+
+.all-section.show{
+  display:block;
+}
+
+.toggle-container{
+  display:flex;
+  justify-content:center;
+  margin:22px 0;
+}
+
+.toggle-btn{
+  border:none;
+  cursor:pointer;
+
+  background:var(--secondary);
+  color:white;
+
+  padding:13px 22px;
+
+  border-radius:15px;
+
+  font-size:14px;
+  font-weight:900;
+
+  box-shadow:0 8px 18px rgba(155,77,32,.20);
+
+  transition:.25s ease;
+}
+
+.toggle-btn:hover{
+  background:var(--primary-dark);
+  transform:translateY(-2px);
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty{
+  padding:38px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+}
+
+.empty-icon{
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.empty strong{
+  display:block;
+  color:var(--primary-dark);
+  margin-bottom:5px;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading-box{
+  padding:40px 20px;
+  text-align:center;
+  color:var(--muted);
+}
+
+.spinner{
+  width:36px;
+  height:36px;
+
+  margin:0 auto 13px;
+
+  border:4px solid #f0dfc8;
+  border-top-color:var(--primary);
+
+  border-radius:50%;
+
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  text-align:center;
+
+  padding:30px 10px 15px;
+
+  color:var(--muted);
+
+  font-size:13px;
+
+  font-weight:700;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+.fade-up{
+  animation:fadeUp .55s ease both;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:760px){
+
+  .app{
+    padding:12px;
+  }
+
+  .topbar{
+    margin-bottom:12px;
+  }
+
+  .back-btn,
+  .refresh-btn{
+    padding:10px 13px;
+    font-size:12px;
+  }
+
+  .hero{
+    padding:25px 21px;
+    border-radius:22px;
+  }
+
+  .food-icons{
+    font-size:27px;
+  }
+
+  .hero h1{
+    font-size:32px;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .top-three{
+    grid-template-columns:1fr;
+  }
+
+  .rank-card{
+    padding:20px;
+  }
+
+  .rank-score{
+    font-size:28px;
+  }
+
+  .section-title{
+    display:block;
+  }
+
+  .section-title p{
+    margin-top:5px;
+  }
+
+  .card{
+    border-radius:20px;
+  }
+}
+
+@media(max-width:450px){
+
+  .topbar{
+    gap:8px;
+  }
+
+  .back-btn span.label,
+  .refresh-btn span.label{
+    display:none;
+  }
+
+  .hero h1{
+    font-size:28px;
+  }
+
+  .school-badge{
+    font-size:10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="wrapper">
+
+    <!-- =========================
+         TOP BAR
+    ========================== -->
+
+    <div class="topbar">
+
+      <button
+        class="back-btn"
+        onclick="kembaliKePetualangan()"
+        title="Kembali ke Petualangan"
+      >
+        <span>←</span>
+        <span class="label">Kembali</span>
+      </button>
+
+      <button
+        class="refresh-btn"
+        onclick="loadData()"
+        title="Muat ulang data"
+      >
+        <span>↻</span>
+        <span class="label">Refresh</span>
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero fade-up">
+
+      <div class="hero-content">
+
+        <div class="food-icons">
+          🍜 🌟 🏆 🌟 🍡
+        </div>
+
+        <div class="school-badge">
+          🏫 UPT SDN 160 GRESIK
+        </div>
+
+        <h1>
+          🌟 Jejak Capaian
+        </h1>
+
+        <p>
+          Lihat perjalanan prestasi para penjelajah bilangan.
+          Siapa yang berhasil meraih nilai terbaik dan menjadi
+          juara dalam petualangan belajar hari ini?
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         STATUS
+    ========================== -->
+
+    <div
+      id="status"
+      class="status loading"
+    >
+      <span>⏳</span>
+      <span>Menyiapkan data capaian siswa...</span>
+    </div>
+
+
+    <!-- =========================
+         TOP THREE
+    ========================== -->
+
+    <div class="section-title">
+
+      <div>
+        <h2>🏆 Para Juara</h2>
+        <p>Penjelajah dengan capaian nilai terbaik</p>
+      </div>
+
+    </div>
+
+    <section
+      id="topThree"
+      class="top-three"
+    >
+
+      <div class="rank-card first">
+        <div class="rank-number">🥇</div>
+        <div class="rank-label">Juara 1</div>
+        <div class="rank-name">Memuat...</div>
+        <div class="rank-score">-</div>
+      </div>
+
+      <div class="rank-card second">
+        <div class="rank-number">🥈</div>
+        <div class="rank-label">Juara 2</div>
+        <div class="rank-name">Memuat...</div>
+        <div class="rank-score">-</div>
+      </div>
+
+      <div class="rank-card third">
+        <div class="rank-number">🥉</div>
+        <div class="rank-label">Juara 3</div>
+        <div class="rank-name">Memuat...</div>
+        <div class="rank-score">-</div>
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         TOP 10
+    ========================== -->
+
+    <div class="section-title">
+
+      <div>
+        <h2>🌟 10 Nilai Terbaik</h2>
+        <p>Daftar capaian dengan nilai tertinggi</p>
+      </div>
+
+    </div>
+
+    <section
+      class="card fade-up"
+      id="topTableContainer"
+    >
+
+      <div class="card-header">
+
+        <h3>📊 Peringkat Capaian</h3>
+
+        <span id="topCount">
+          0 siswa
+        </span>
+
+      </div>
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Peringkat</th>
+              <th>Nama Siswa</th>
+              <th>No. Absen</th>
+              <th>Kelas</th>
+              <th>Nilai</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="topTableBody">
+
+            <tr>
+              <td colspan="5">
+
+                <div class="loading-box">
+
+                  <div class="spinner"></div>
+
+                  Memuat data capaian...
+
+                </div>
+
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         BUTTON ALL DATA
+    ========================== -->
+
+    <div class="toggle-container">
+
+      <button
+        id="allDataButton"
+        class="toggle-btn"
+        onclick="toggleAllData()"
+      >
+        👥 Tampilkan Semua Data
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         ALL DATA
+    ========================== -->
+
+    <section
+      id="allDataSection"
+      class="all-section"
+    >
+
+      <div class="section-title">
+
+        <div>
+          <h2>📚 Semua Capaian</h2>
+          <p>Seluruh data hasil belajar yang tersimpan</p>
+        </div>
+
+      </div>
+
+      <div
+        class="card"
+        id="allTableContainer"
+      >
+
+        <div class="card-header">
+
+          <h3>📋 Data Siswa</h3>
+
+          <span id="allCount">
+            0 siswa
+          </span>
+
+        </div>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Peringkat</th>
+                <th>Nama Siswa</th>
+                <th>No. Absen</th>
+                <th>Kelas</th>
+                <th>Nilai</th>
+              </tr>
+
+            </thead>
+
+            <tbody id="allTableBody"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+      🌾 Kuliner Nusantara • Belajar • Bermain • Berprestasi 🌾
+    </footer>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   KONFIGURASI GOOGLE APPS SCRIPT
+===================================================== */
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbwk4odfq7ABr__CDR00YD4uAMLmvK2iPjaLLlJrpyA6BnOwJ9gUkncLdCVCzE670CFy/exec";
+
+
+/* =====================================================
+   DATA GLOBAL
+===================================================== */
+
+let semuaData = [];
+
+let semuaDataDitampilkan = false;
+
+
+/* =====================================================
+   KEMBALI KE PETUALANGAN
+===================================================== */
+
+function kembaliKePetualangan(){
+
+  window.location.href = "petualangan.html";
+
+}
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+async function loadData(){
+
+  setStatus(
+    "⏳ Memuat data capaian siswa...",
+    "loading"
+  );
+
+  document.getElementById("topTableBody").innerHTML = `
+    <tr>
+      <td colspan="5">
+
+        <div class="loading-box">
+
+          <div class="spinner"></div>
+
+          Mengambil data dari Google Sheet...
+
+        </div>
+
+      </td>
+    </tr>
+  `;
+
+
+  try{
+
+    const url =
+      API_URL +
+      "?action=ranking&ts=" +
+      Date.now();
+
+
+    const response = await fetch(
+      url,
+      {
+        method:"GET",
+        cache:"no-store"
+      }
+    );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Server mengembalikan status " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(!result.ok){
+
+      throw new Error(
+        result.message ||
+        "Data tidak berhasil diperoleh."
+      );
+
+    }
+
+
+    if(!Array.isArray(result.data)){
+
+      throw new Error(
+        "Format data dari server tidak sesuai."
+      );
+
+    }
+
+
+    semuaData =
+      result.data
+      .map(item => {
+
+        return {
+
+          waktu: item.waktu || "",
+
+          nama: String(
+            item.nama || ""
+          ).trim(),
+
+          kelas: String(
+            item.kelas || ""
+          ).trim(),
+
+          absen: String(
+            item.absen || ""
+          ).trim(),
+
+          nilai:
+            Number(item.nilai) || 0,
+
+          benar:
+            Number(item.benar) || 0,
+
+          salah:
+            Number(item.salah) || 0,
+
+          total:
+            Number(item.total) || 0,
+
+          persen:
+            Number(item.persen) || 0
+
+        };
+
+      })
+      .filter(item => item.nama !== "");
+
+
+    /* -----------------------------------------------
+       URUTKAN NILAI TERTINGGI
+    ------------------------------------------------ */
+
+    semuaData.sort(
+      (a,b) => b.nilai - a.nilai
+    );
+
+
+    /* -----------------------------------------------
+       TENTUKAN PERINGKAT
+       Sistem kompetisi:
+       1, 2, 2, 4
+    ------------------------------------------------ */
+
+    assignRanks(
+      semuaData
+    );
+
+
+    /* -----------------------------------------------
+       TAMPILKAN TOP 3
+    ------------------------------------------------ */
+
+    renderTopThree(
+      semuaData
+    );
+
+
+    /* -----------------------------------------------
+       TAMPILKAN TOP 10
+    ------------------------------------------------ */
+
+    renderTable(
+      semuaData.slice(0,10),
+      "topTableBody"
+    );
+
+
+    document.getElementById(
+      "topCount"
+    ).textContent =
+      Math.min(
+        semuaData.length,
+        10
+      ) +
+      " siswa";
+
+
+    /* -----------------------------------------------
+       RESET DATA SEMUA
+    ------------------------------------------------ */
+
+    semuaDataDitampilkan = false;
+
+    document.getElementById(
+      "allDataSection"
+    ).classList.remove("show");
+
+
+    document.getElementById(
+      "allDataButton"
+    ).textContent =
+      "👥 Tampilkan Semua Data";
+
+
+    /* -----------------------------------------------
+       STATUS
+    ------------------------------------------------ */
+
+    setStatus(
+      "✅ Data capaian berhasil dimuat. " +
+      semuaData.length +
+      " data ditemukan.",
+      "success"
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Gagal mengambil data:",
+      error
+    );
+
+
+    setStatus(
+      "⚠️ Data belum dapat dimuat. " +
+      error.message,
+      "error"
+    );
+
+
+    document.getElementById(
+      "topThree"
+    ).innerHTML = `
+
+      <div class="rank-card first">
+        <div class="rank-number">🥇</div>
+        <div class="rank-label">Juara 1</div>
+        <div class="rank-name">Belum tersedia</div>
+        <div class="rank-score">-</div>
+      </div>
+
+      <div class="rank-card second">
+        <div class="rank-number">🥈</div>
+        <div class="rank-label">Juara 2</div>
+        <div class="rank-name">Belum tersedia</div>
+        <div class="rank-score">-</div>
+      </div>
+
+      <div class="rank-card third">
+        <div class="rank-number">🥉</div>
+        <div class="rank-label">Juara 3</div>
+        <div class="rank-name">Belum tersedia</div>
+        <div class="rank-score">-</div>
+      </div>
+
+    `;
+
+
+    document.getElementById(
+      "topTableBody"
+    ).innerHTML = `
+
+      <tr>
+
+        <td colspan="5">
+
+          <div class="empty">
+
+            <div class="empty-icon">
+              📭
+            </div>
+
+            <strong>
+              Data belum tersedia
+            </strong>
+
+            <span>
+              Pastikan Web App Google Apps Script
+              sudah di-deploy dan dapat diakses.
+            </span>
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+  }
+
+}
+
+
+/* =====================================================
+   ASSIGN RANK
+===================================================== */
+
+function assignRanks(data){
+
+  let previousScore = null;
+
+  let currentRank = 0;
+
+
+  data.forEach(
+    (item,index) => {
+
+      if(
+        previousScore === null ||
+        item.nilai !== previousScore
+      ){
+
+        currentRank =
+          index + 1;
+
+      }
+
+      item.peringkat =
+        currentRank;
+
+      previousScore =
+        item.nilai;
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   TOP THREE
+===================================================== */
+
+function renderTopThree(data){
+
+  const container =
+    document.getElementById(
+      "topThree"
+    );
+
+
+  const winners = [
+    {
+      emoji:"🥇",
+      label:"Juara 1",
+      className:"first"
+    },
+    {
+      emoji:"🥈",
+      label:"Juara 2",
+      className:"second"
+    },
+    {
+      emoji:"🥉",
+      label:"Juara 3",
+      className:"third"
+    }
+  ];
+
+
+  container.innerHTML =
+    winners.map(
+      (winner,index) => {
+
+        const siswa =
+          data[index];
+
+
+        if(!siswa){
+
+          return `
+
+            <div class="rank-card ${winner.className}">
+
+              <div class="rank-number">
+                ${winner.emoji}
+              </div>
+
+              <div class="rank-label">
+                ${winner.label}
+              </div>
+
+              <div class="rank-name">
+                Belum tersedia
+              </div>
+
+              <div class="rank-score">
+                -
+              </div>
+
+            </div>
+
+          `;
+
+        }
+
+
+        return `
+
+          <div class="rank-card ${winner.className} fade-up">
+
+            <div class="rank-number">
+              ${winner.emoji}
+            </div>
+
+            <div class="rank-label">
+              ${winner.label}
+            </div>
+
+            <div
+              class="rank-name"
+              title="${escapeHTML(siswa.nama)}"
+            >
+              ${escapeHTML(siswa.nama)}
+            </div>
+
+            <div class="rank-score">
+
+              ${formatScore(siswa.nilai)}
+
+              <small>
+                nilai
+              </small>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+/* =====================================================
+   RENDER TABLE
+===================================================== */
+
+function renderTable(
+  data,
+  bodyId
+){
+
+  const body =
+    document.getElementById(
+      bodyId
+    );
+
+
+  if(!data.length){
+
+    body.innerHTML = `
+
+      <tr>
+
+        <td colspan="5">
+
+          <div class="empty">
+
+            <div class="empty-icon">
+              📭
+            </div>
+
+            <strong>
+              Belum ada data
+            </strong>
+
+            <span>
+              Data capaian siswa belum tersedia.
+            </span>
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  body.innerHTML =
+    data.map(
+      (item,index) => {
+
+        let rankClass = "";
+
+
+        if(item.peringkat === 1){
+
+          rankClass =
+            "🥇";
+
+        }
+        else if(item.peringkat === 2){
+
+          rankClass =
+            "🥈";
+
+        }
+        else if(item.peringkat === 3){
+
+          rankClass =
+            "🥉";
+
+        }
+        else{
+
+          rankClass =
+            item.peringkat;
+
+        }
+
+
+        return `
+
+          <tr>
+
+            <td class="rank-cell">
+
+              <span class="badge">
+                ${rankClass}
+              </span>
+
+            </td>
+
+
+            <td class="name-cell">
+
+              ${escapeHTML(
+                item.nama
+              )}
+
+            </td>
+
+
+            <td>
+
+              ${escapeHTML(
+                item.absen || "-"
+              )}
+
+            </td>
+
+
+            <td>
+
+              ${
+                item.kelas
+                ?
+                `<span class="badge top-badge">
+                  ${escapeHTML(item.kelas)}
+                </span>`
+                :
+                "-"
+              }
+
+            </td>
+
+
+            <td class="score-cell">
+
+              ${formatScore(
+                item.nilai
+              )}
+
+            </td>
+
+          </tr>
+
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+/* =====================================================
+   FORMAT NILAI
+===================================================== */
+
+function formatScore(score){
+
+  const number =
+    Number(score) || 0;
+
+
+  if(
+    Number.isInteger(number)
+  ){
+
+    return number.toString();
+
+  }
+
+
+  return number
+    .toFixed(2)
+    .replace(/\.00$/,"")
+    .replace(/(\.\d)0$/,"$1");
+
+}
+
+
+/* =====================================================
+   TOGGLE SEMUA DATA
+===================================================== */
+
+function toggleAllData(){
+
+  const section =
+    document.getElementById(
+      "allDataSection"
+    );
+
+  const button =
+    document.getElementById(
+      "allDataButton"
+    );
+
+
+  if(!semuaData.length){
+
+    setStatus(
+      "⚠️ Belum ada data yang dapat ditampilkan.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  semuaDataDitampilkan =
+    !semuaDataDitampilkan;
+
+
+  if(
+    semuaDataDitampilkan
+  ){
+
+    section.classList.add(
+      "show"
+    );
+
+
+    renderTable(
+      semuaData,
+      "allTableBody"
+    );
+
+
+    document.getElementById(
+      "allCount"
+    ).textContent =
+      semuaData.length +
+      " siswa";
+
+
+    button.textContent =
+      "✕ Sembunyikan Semua Data";
+
+
+    setTimeout(
+      () => {
+
+        section.scrollIntoView({
+          behavior:"smooth",
+          block:"start"
+        });
+
+      },
+      100
+    );
+
+  }
+  else{
+
+    section.classList.remove(
+      "show"
+    );
+
+
+    button.textContent =
+      "👥 Tampilkan Semua Data";
+
+  }
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function setStatus(
+  message,
+  type
+){
+
+  const status =
+    document.getElementById(
+      "status"
+    );
+
+
+  status.className =
+    "status " +
+    type;
+
+
+  status.innerHTML =
+    `<span>${message}</span>`;
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   JALANKAN SAAT HALAMAN DIBUKA
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    loadData();
+
+  }
+);
+
+</script>
+
+</body>
+</html>

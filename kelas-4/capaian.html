@@ -29,13 +29,6 @@
 
     --shadow:rgba(92,48,24,.16);
 
-    /* =========================
-       TAMBAHAN WARNA KATEGORI
-    ========================== */
-
-    --category-excellent:#2e8b57;
-    --category-good:#f4b942;
-    --category-needing:#d9534f;
 }
 
 *{
@@ -469,340 +462,6 @@ body{
     font-size:11px;
 }
 
-/* =========================================================
-   TAMBAHAN
-   GRAFIK NILAI RATA-RATA & PERSENTASE KATEGORI
-========================================================= */
-
-.capaian-dashboard{
-    display:grid;
-
-    grid-template-columns:
-        minmax(240px, .9fr)
-        minmax(0, 1.6fr);
-
-    gap:18px;
-
-    margin-top:16px;
-}
-
-.average-card{
-    min-height:330px;
-
-    padding:25px;
-
-    border-radius:22px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fffefb,
-            #fff7e5
-        );
-
-    border:1px solid var(--border);
-
-    box-shadow:
-        0 13px 28px rgba(92,48,24,.09);
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
-
-    position:relative;
-    overflow:hidden;
-}
-
-.average-card::before{
-    content:"";
-
-    position:absolute;
-
-    width:170px;
-    height:170px;
-
-    right:-85px;
-    top:-85px;
-
-    border-radius:50%;
-
-    background:rgba(244,185,66,.10);
-}
-
-.average-icon{
-    font-size:48px;
-
-    line-height:1;
-
-    margin-bottom:12px;
-
-    position:relative;
-    z-index:2;
-}
-
-.average-label{
-    font-size:12px;
-
-    font-weight:900;
-
-    letter-spacing:.8px;
-
-    color:var(--muted);
-
-    margin-bottom:7px;
-
-    position:relative;
-    z-index:2;
-}
-
-.average-value{
-    font-size:52px;
-
-    line-height:1;
-
-    font-weight:900;
-
-    color:var(--primary);
-
-    position:relative;
-    z-index:2;
-}
-
-.average-caption{
-    margin-top:10px;
-
-    max-width:220px;
-
-    font-size:12px;
-
-    line-height:1.6;
-
-    color:var(--muted);
-
-    position:relative;
-    z-index:2;
-}
-
-.average-category{
-    margin-top:15px;
-
-    padding:8px 14px;
-
-    border-radius:999px;
-
-    font-size:12px;
-
-    font-weight:900;
-
-    position:relative;
-    z-index:2;
-
-    background:#edf9f1;
-
-    color:var(--green-dark);
-
-    border:1px solid #b8dfc5;
-}
-
-.category-card{
-    min-height:330px;
-
-    padding:22px;
-
-    border-radius:22px;
-
-    background:
-        rgba(255,253,248,.96);
-
-    border:1px solid var(--border);
-
-    box-shadow:
-        0 13px 28px rgba(92,48,24,.09);
-}
-
-.category-head{
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:12px;
-
-    margin-bottom:20px;
-}
-
-.category-title{
-    font-size:15px;
-
-    font-weight:900;
-}
-
-.category-total{
-    font-size:11px;
-
-    color:var(--muted);
-
-    font-weight:800;
-}
-
-.category-item{
-    margin-bottom:19px;
-}
-
-.category-item:last-child{
-    margin-bottom:0;
-}
-
-.category-info{
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:10px;
-
-    margin-bottom:8px;
-}
-
-.category-name{
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    font-size:12px;
-
-    font-weight:900;
-}
-
-.category-dot{
-    width:11px;
-    height:11px;
-
-    border-radius:50%;
-
-    flex:0 0 11px;
-}
-
-.category-dot.excellent{
-    background:var(--category-excellent);
-}
-
-.category-dot.good{
-    background:var(--category-good);
-}
-
-.category-dot.needing{
-    background:var(--category-needing);
-}
-
-.category-percentage{
-    font-size:13px;
-
-    font-weight:900;
-
-    color:var(--ink);
-}
-
-.progress-track{
-    width:100%;
-
-    height:18px;
-
-    border-radius:999px;
-
-    background:#f1e8da;
-
-    overflow:hidden;
-
-    border:1px solid #eadcc8;
-
-    box-shadow:
-        inset 0 1px 3px rgba(92,48,24,.06);
-}
-
-.progress-bar{
-    height:100%;
-
-    width:0%;
-
-    border-radius:999px;
-
-    transition:
-        width .8s cubic-bezier(.22,1,.36,1);
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.progress-bar::after{
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.28),
-            transparent
-        );
-
-    transform:translateX(-100%);
-
-    animation:
-        progressShine 2s ease-in-out infinite;
-}
-
-.progress-bar.excellent{
-    background:var(--category-excellent);
-}
-
-.progress-bar.good{
-    background:var(--category-good);
-}
-
-.progress-bar.needing{
-    background:var(--category-needing);
-}
-
-.category-detail{
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-top:6px;
-
-    font-size:10px;
-
-    color:var(--muted);
-}
-
-@keyframes progressShine{
-
-    0%{
-        transform:translateX(-100%);
-    }
-
-    55%{
-        transform:translateX(100%);
-    }
-
-    100%{
-        transform:translateX(100%);
-    }
-
-}
-
 /* =========================
    TABLE CARD
 ========================= */
@@ -1028,21 +687,6 @@ footer{
     .champion{
         min-height:160px;
     }
-
-    /* TAMBAHAN RESPONSIVE GRAFIK */
-
-    .capaian-dashboard{
-        grid-template-columns:1fr;
-    }
-
-    .average-card{
-        min-height:260px;
-    }
-
-    .category-card{
-        min-height:300px;
-    }
-
 }
 
 @media(max-width:560px){
@@ -1085,34 +729,273 @@ footer{
     .champion{
         min-height:150px;
     }
-
-    /* TAMBAHAN RESPONSIVE GRAFIK */
-
-    .capaian-dashboard{
-        gap:14px;
-    }
-
-    .average-card{
-        padding:22px;
-
-        min-height:240px;
-    }
-
-    .average-value{
-        font-size:46px;
-    }
-
-    .category-card{
-        padding:18px;
-    }
-
-    .category-head{
-        align-items:flex-start;
-        flex-direction:column;
-        gap:4px;
-    }
-
 }
+
+
+<style>
+/* =========================================================
+   TAMBAHAN
+   GRAFIK BATANG NILAI RATA-RATA CAPAIAN
+   KODE LAMA TIDAK DIUBAH
+========================================================= */
+
+.nilai-rata-dashboard{
+    margin-top:18px;
+    padding:24px;
+    border-radius:22px;
+    background:#fffdf8;
+    border:1px solid #ead7bc;
+    box-shadow:0 13px 28px rgba(92,48,24,.09);
+}
+
+.nilai-rata-title{
+    margin:0 0 4px;
+    text-align:center;
+    font-size:clamp(22px,3vw,30px);
+    line-height:1.2;
+    font-weight:900;
+    color:#4a2c20;
+}
+
+.nilai-rata-subtitle{
+    margin:0 0 22px;
+    text-align:center;
+    font-size:12px;
+    line-height:1.6;
+    color:#806b61;
+}
+
+.nilai-rata-chart{
+    position:relative;
+    display:grid;
+    grid-template-columns:52px minmax(0,1fr);
+    min-height:420px;
+}
+
+.nilai-rata-yaxis{
+    position:relative;
+    margin-bottom:92px;
+}
+
+.nilai-rata-yaxis span{
+    position:absolute;
+    right:10px;
+    transform:translateY(50%);
+    font-size:10px;
+    font-weight:800;
+    color:#806b61;
+}
+
+.nilai-rata-plot{
+    position:relative;
+    min-height:420px;
+    border-left:1px solid #ead7bc;
+    border-bottom:1px solid #cdbda9;
+    background:
+        repeating-linear-gradient(
+            to top,
+            rgba(128,107,97,.11) 0,
+            rgba(128,107,97,.11) 1px,
+            transparent 1px,
+            transparent 10%
+        );
+}
+
+.nilai-rata-grid-labels{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+
+.nilai-rata-grid-labels span{
+    position:absolute;
+    left:8px;
+    font-size:9px;
+    color:#9a897e;
+    background:rgba(255,253,248,.82);
+    padding:1px 4px;
+    border-radius:4px;
+}
+
+.nilai-rata-bars{
+    position:absolute;
+    inset:18px 22px 0;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(80px,1fr));
+    align-items:end;
+    gap:clamp(18px,6vw,70px);
+}
+
+.nilai-rata-bar-wrap{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    align-items:center;
+    min-width:0;
+}
+
+.nilai-rata-bar-area{
+    width:100%;
+    height:calc(100% - 82px);
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+}
+
+.nilai-rata-bar{
+    position:relative;
+    width:min(115px,70%);
+    min-height:3px;
+    height:0;
+    border-radius:14px 14px 0 0;
+    box-shadow:0 8px 16px rgba(92,48,24,.13);
+    transition:height .8s cubic-bezier(.22,1,.36,1);
+}
+
+.nilai-rata-bar.excellent{
+    background:#2e8b57;
+}
+
+.nilai-rata-bar.good{
+    background:#f4b942;
+}
+
+.nilai-rata-bar.needing{
+    background:#d9534f;
+}
+
+.nilai-rata-average{
+    position:absolute;
+    left:50%;
+    top:-38px;
+    transform:translateX(-50%);
+    min-width:54px;
+    padding:5px 8px;
+    border-radius:10px;
+    background:#fff;
+    border:1px solid rgba(92,48,24,.13);
+    box-shadow:0 5px 12px rgba(92,48,24,.12);
+    text-align:center;
+    font-size:16px;
+    font-weight:900;
+    color:#4a2c20;
+    white-space:nowrap;
+}
+
+.nilai-rata-count{
+    margin-top:8px;
+    font-size:12px;
+    font-weight:900;
+    color:#4a2c20;
+    text-align:center;
+}
+
+.nilai-rata-category{
+    width:100%;
+    min-height:66px;
+    margin-top:5px;
+    text-align:center;
+}
+
+.nilai-rata-category-name{
+    display:block;
+    font-size:12px;
+    line-height:1.3;
+    font-weight:900;
+    color:#4a2c20;
+}
+
+.nilai-rata-range{
+    display:block;
+    margin-top:4px;
+    font-size:11px;
+    font-weight:800;
+    color:#806b61;
+}
+
+.nilai-rata-legend{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px 22px;
+    margin-top:18px;
+    padding-top:14px;
+    border-top:1px solid #ead7bc;
+}
+
+.nilai-rata-legend-item{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:11px;
+    font-weight:800;
+    color:#806b61;
+}
+
+.nilai-rata-legend-dot{
+    width:11px;
+    height:11px;
+    border-radius:50%;
+}
+
+.nilai-rata-legend-dot.excellent{
+    background:#2e8b57;
+}
+
+.nilai-rata-legend-dot.good{
+    background:#f4b942;
+}
+
+.nilai-rata-legend-dot.needing{
+    background:#d9534f;
+}
+
+@media(max-width:560px){
+    .nilai-rata-dashboard{
+        padding:18px 12px;
+    }
+
+    .nilai-rata-chart{
+        grid-template-columns:38px minmax(0,1fr);
+        min-height:390px;
+    }
+
+    .nilai-rata-plot{
+        min-height:390px;
+    }
+
+    .nilai-rata-bars{
+        inset:18px 8px 0;
+        gap:8px;
+    }
+
+    .nilai-rata-bar{
+        width:min(82px,72%);
+        border-radius:10px 10px 0 0;
+    }
+
+    .nilai-rata-average{
+        font-size:14px;
+        min-width:48px;
+        padding:4px 6px;
+    }
+
+    .nilai-rata-category-name{
+        font-size:10px;
+    }
+
+    .nilai-rata-range,
+    .nilai-rata-count{
+        font-size:9px;
+    }
+
+    .nilai-rata-yaxis span{
+        font-size:8px;
+        right:6px;
+    }
+}
+</style>
 </style>
 </head>
 
@@ -1243,259 +1126,181 @@ footer{
 
 
     <!-- =====================================================
-         TAMBAHAN
-         GRAFIK NILAI RATA-RATA DAN PERSENTASE CAPAIAN
+         NILAI RATA-RATA CAPAIAN
     ====================================================== -->
 
-    <section class="section">
+<section class="section">
+    <div class="nilai-rata-dashboard">
 
-        <div class="section-title">
+        <h2 class="nilai-rata-title">
+            Nilai Rata-rata Capaian
+        </h2>
 
-            <div class="section-icon">
-                📊
+        <p class="nilai-rata-subtitle">
+            Jumlah siswa berdasarkan kategori capaian nilai
+        </p>
+
+        <div class="nilai-rata-chart">
+
+            <div class="nilai-rata-yaxis" aria-hidden="true">
+                <span style="bottom:0%;">0</span>
+                <span style="bottom:10%;">10</span>
+                <span style="bottom:20%;">20</span>
+                <span style="bottom:30%;">30</span>
+                <span style="bottom:40%;">40</span>
+                <span style="bottom:50%;">50</span>
+                <span style="bottom:60%;">60</span>
+                <span style="bottom:70%;">70</span>
+                <span style="bottom:80%;">80</span>
+                <span style="bottom:90%;">90</span>
+                <span style="bottom:100%;">100</span>
             </div>
 
-            <div>
-                <h2>Grafik Capaian Siswa</h2>
+            <div class="nilai-rata-plot">
 
-                <p>
-                    Nilai rata-rata dan persentase capaian berdasarkan kategori
-                </p>
-            </div>
-
-        </div>
-
-
-        <div class="capaian-dashboard">
-
-
-            <!-- =========================
-                 NILAI RATA-RATA
-            ========================== -->
-
-            <div class="average-card">
-
-                <div class="average-icon">
-                    🎯
+                <div class="nilai-rata-grid-labels" aria-hidden="true">
+                    <span style="bottom:0%;">0</span>
+                    <span style="bottom:10%;">10</span>
+                    <span style="bottom:20%;">20</span>
+                    <span style="bottom:30%;">30</span>
+                    <span style="bottom:40%;">40</span>
+                    <span style="bottom:50%;">50</span>
+                    <span style="bottom:60%;">60</span>
+                    <span style="bottom:70%;">70</span>
+                    <span style="bottom:80%;">80</span>
+                    <span style="bottom:90%;">90</span>
+                    <span style="bottom:100%;">100</span>
                 </div>
 
-                <div class="average-label">
-                    NILAI RATA-RATA CAPAIAN
-                </div>
+                <div class="nilai-rata-bars">
 
-                <div
-                    id="averageScore"
-                    class="average-value"
-                >
-                    -
-                </div>
+                    <div class="nilai-rata-bar-wrap">
+                        <div class="nilai-rata-bar-area">
+                            <div
+                                id="nilaiRataExcellentBar"
+                                class="nilai-rata-bar excellent"
+                                style="height:0%;"
+                                title="Sangat Baik"
+                            >
+                                <div
+                                    id="nilaiRataExcellentAverage"
+                                    class="nilai-rata-average"
+                                >
+                                    -
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="average-caption">
-                    Rata-rata nilai seluruh siswa
-                    yang telah tercatat dalam data capaian.
-                </div>
+                        <div
+                            id="nilaiRataExcellentCount"
+                            class="nilai-rata-count"
+                        >
+                            0 siswa
+                        </div>
 
-                <div
-                    id="averageCategory"
-                    class="average-category"
-                >
-                    Menunggu data...
-                </div>
-
-            </div>
-
-
-            <!-- =========================
-                 GRAFIK KATEGORI
-            ========================== -->
-
-            <div class="category-card">
-
-                <div class="category-head">
-
-                    <div class="category-title">
-                        📈 Persentase Capaian
-                    </div>
-
-                    <div
-                        id="categoryTotal"
-                        class="category-total"
-                    >
-                        0 siswa
-                    </div>
-
-                </div>
-
-
-                <!-- =========================
-                     SANGAT BAIK
-                ========================== -->
-
-                <div class="category-item">
-
-                    <div class="category-info">
-
-                        <div class="category-name">
-
-                            <span class="category-dot excellent"></span>
-
-                            <span>
+                        <div class="nilai-rata-category">
+                            <span class="nilai-rata-category-name">
                                 Sangat Baik
                             </span>
-
+                            <span class="nilai-rata-range">
+                                80–100
+                            </span>
                         </div>
-
-                        <div
-                            id="excellentPercentage"
-                            class="category-percentage"
-                        >
-                            0%
-                        </div>
-
                     </div>
 
 
-                    <div class="progress-track">
+                    <div class="nilai-rata-bar-wrap">
+                        <div class="nilai-rata-bar-area">
+                            <div
+                                id="nilaiRataGoodBar"
+                                class="nilai-rata-bar good"
+                                style="height:0%;"
+                                title="Cukup Baik"
+                            >
+                                <div
+                                    id="nilaiRataGoodAverage"
+                                    class="nilai-rata-average"
+                                >
+                                    -
+                                </div>
+                            </div>
+                        </div>
 
                         <div
-                            id="excellentBar"
-                            class="progress-bar excellent"
-                        ></div>
-
-                    </div>
-
-
-                    <div class="category-detail">
-
-                        <span>
-                            Rentang nilai 80–100
-                        </span>
-
-                        <span
-                            id="excellentCount"
+                            id="nilaiRataGoodCount"
+                            class="nilai-rata-count"
                         >
                             0 siswa
-                        </span>
+                        </div>
 
-                    </div>
-
-                </div>
-
-
-                <!-- =========================
-                     CUKUP BAIK
-                ========================== -->
-
-                <div class="category-item">
-
-                    <div class="category-info">
-
-                        <div class="category-name">
-
-                            <span class="category-dot good"></span>
-
-                            <span>
+                        <div class="nilai-rata-category">
+                            <span class="nilai-rata-category-name">
                                 Cukup Baik
                             </span>
-
+                            <span class="nilai-rata-range">
+                                60–79
+                            </span>
                         </div>
-
-                        <div
-                            id="goodPercentage"
-                            class="category-percentage"
-                        >
-                            0%
-                        </div>
-
                     </div>
 
 
-                    <div class="progress-track">
+                    <div class="nilai-rata-bar-wrap">
+                        <div class="nilai-rata-bar-area">
+                            <div
+                                id="nilaiRataNeedingBar"
+                                class="nilai-rata-bar needing"
+                                style="height:0%;"
+                                title="Perlu Pendampingan"
+                            >
+                                <div
+                                    id="nilaiRataNeedingAverage"
+                                    class="nilai-rata-average"
+                                >
+                                    -
+                                </div>
+                            </div>
+                        </div>
 
                         <div
-                            id="goodBar"
-                            class="progress-bar good"
-                        ></div>
-
-                    </div>
-
-
-                    <div class="category-detail">
-
-                        <span>
-                            Rentang nilai 60–79
-                        </span>
-
-                        <span
-                            id="goodCount"
+                            id="nilaiRataNeedingCount"
+                            class="nilai-rata-count"
                         >
                             0 siswa
-                        </span>
+                        </div>
 
-                    </div>
-
-                </div>
-
-
-                <!-- =========================
-                     PERLU PENDAMPINGAN
-                ========================== -->
-
-                <div class="category-item">
-
-                    <div class="category-info">
-
-                        <div class="category-name">
-
-                            <span class="category-dot needing"></span>
-
-                            <span>
+                        <div class="nilai-rata-category">
+                            <span class="nilai-rata-category-name">
                                 Perlu Pendampingan
                             </span>
-
+                            <span class="nilai-rata-range">
+                                0–59
+                            </span>
                         </div>
-
-                        <div
-                            id="needingPercentage"
-                            class="category-percentage"
-                        >
-                            0%
-                        </div>
-
-                    </div>
-
-
-                    <div class="progress-track">
-
-                        <div
-                            id="needingBar"
-                            class="progress-bar needing"
-                        ></div>
-
-                    </div>
-
-
-                    <div class="category-detail">
-
-                        <span>
-                            Rentang nilai 0–59
-                        </span>
-
-                        <span
-                            id="needingCount"
-                        >
-                            0 siswa
-                        </span>
-
                     </div>
 
                 </div>
-
             </div>
-
         </div>
 
-    </section>
+        <div class="nilai-rata-legend">
+            <div class="nilai-rata-legend-item">
+                <span class="nilai-rata-legend-dot excellent"></span>
+                Sangat Baik — 80–100
+            </div>
+
+            <div class="nilai-rata-legend-item">
+                <span class="nilai-rata-legend-dot good"></span>
+                Cukup Baik — 60–79
+            </div>
+
+            <div class="nilai-rata-legend-item">
+                <span class="nilai-rata-legend-dot needing"></span>
+                Perlu Pendampingan — 0–59
+            </div>
+        </div>
+
+    </div>
+</section>
 
 
     <!-- =========================
@@ -1866,21 +1671,7 @@ function loadData(){
                 ).textContent =
                     semuaData.length +
                     " siswa";
-
-
-                /*
-                 * =====================================================
-                 * TAMBAHAN
-                 * HITUNG DAN TAMPILKAN GRAFIK CAPAIAN
-                 * =====================================================
-                 */
-
-                renderCapaianChart(
-                    semuaData
-                );
-
-
-                if(semuaData.length > 0){
+if(semuaData.length > 0){
 
                     status.className =
                         "status success";
@@ -2400,422 +2191,6 @@ function formatScore(score){
 
 
 /* =========================================================
-   TAMBAHAN
-   KATEGORI NILAI
-========================================================= */
-
-function getKategoriNilai(score){
-
-    const nilai =
-        Number(score);
-
-
-    if(
-        Number.isNaN(nilai)
-    ){
-
-        return "Perlu Pendampingan";
-
-    }
-
-
-    if(
-        nilai >= 80
-    ){
-
-        return "Sangat Baik";
-
-    }
-
-
-    if(
-        nilai >= 60
-    ){
-
-        return "Cukup Baik";
-
-    }
-
-
-    return "Perlu Pendampingan";
-
-}
-
-
-/* =========================================================
-   TAMBAHAN
-   RENDER GRAFIK CAPAIAN
-========================================================= */
-
-function renderCapaianChart(data){
-
-    const averageScore =
-        document.getElementById(
-            "averageScore"
-        );
-
-    const averageCategory =
-        document.getElementById(
-            "averageCategory"
-        );
-
-    const categoryTotal =
-        document.getElementById(
-            "categoryTotal"
-        );
-
-
-    const excellentPercentage =
-        document.getElementById(
-            "excellentPercentage"
-        );
-
-    const goodPercentage =
-        document.getElementById(
-            "goodPercentage"
-        );
-
-    const needingPercentage =
-        document.getElementById(
-            "needingPercentage"
-        );
-
-
-    const excellentBar =
-        document.getElementById(
-            "excellentBar"
-        );
-
-    const goodBar =
-        document.getElementById(
-            "goodBar"
-        );
-
-    const needingBar =
-        document.getElementById(
-            "needingBar"
-        );
-
-
-    const excellentCount =
-        document.getElementById(
-            "excellentCount"
-        );
-
-    const goodCount =
-        document.getElementById(
-            "goodCount"
-        );
-
-    const needingCount =
-        document.getElementById(
-            "needingCount"
-        );
-
-
-    /*
-     * Jika tidak ada data.
-     */
-
-    if(
-        !Array.isArray(data) ||
-        data.length === 0
-    ){
-
-        averageScore.textContent =
-            "-";
-
-        averageCategory.textContent =
-            "Belum ada data";
-
-        categoryTotal.textContent =
-            "0 siswa";
-
-        excellentPercentage.textContent =
-            "0%";
-
-        goodPercentage.textContent =
-            "0%";
-
-        needingPercentage.textContent =
-            "0%";
-
-        excellentBar.style.width =
-            "0%";
-
-        goodBar.style.width =
-            "0%";
-
-        needingBar.style.width =
-            "0%";
-
-        excellentCount.textContent =
-            "0 siswa";
-
-        goodCount.textContent =
-            "0 siswa";
-
-        needingCount.textContent =
-            "0 siswa";
-
-        return;
-
-    }
-
-
-    let totalNilai = 0;
-
-    let jumlahNilai = 0;
-
-
-    let sangatBaik = 0;
-
-    let cukupBaik = 0;
-
-    let perluPendampingan = 0;
-
-
-    /*
-     * Hitung nilai rata-rata
-     * dan jumlah siswa tiap kategori.
-     */
-
-    data.forEach(
-        function(item){
-
-            const nilai =
-                Number(
-                    item.nilai
-                );
-
-
-            if(
-                Number.isNaN(nilai)
-            ){
-
-                return;
-
-            }
-
-
-            totalNilai +=
-                nilai;
-
-            jumlahNilai++;
-
-
-            if(
-                nilai >= 80
-            ){
-
-                sangatBaik++;
-
-            }
-
-            else if(
-                nilai >= 60
-            ){
-
-                cukupBaik++;
-
-            }
-
-            else{
-
-                perluPendampingan++;
-
-            }
-
-        }
-    );
-
-
-    /*
-     * Jika tidak ada nilai valid.
-     */
-
-    if(
-        jumlahNilai === 0
-    ){
-
-        averageScore.textContent =
-            "-";
-
-        averageCategory.textContent =
-            "Belum ada nilai";
-
-        return;
-
-    }
-
-
-    /*
-     * Hitung rata-rata.
-     */
-
-    const rataRata =
-        totalNilai /
-        jumlahNilai;
-
-
-    /*
-     * Hitung persentase.
-     */
-
-    const persenSangatBaik =
-        (sangatBaik / jumlahNilai) *
-        100;
-
-
-    const persenCukupBaik =
-        (cukupBaik / jumlahNilai) *
-        100;
-
-
-    const persenPerluPendampingan =
-        (perluPendampingan / jumlahNilai) *
-        100;
-
-
-    /*
-     * Tampilkan nilai rata-rata.
-     */
-
-    averageScore.textContent =
-        rataRata.toLocaleString(
-            "id-ID",
-            {
-                minimumFractionDigits:1,
-                maximumFractionDigits:1
-            }
-        );
-
-
-    /*
-     * Tentukan kategori nilai rata-rata.
-     */
-
-    const kategoriRataRata =
-        getKategoriNilai(
-            rataRata
-        );
-
-
-    averageCategory.textContent =
-        "⭐ " +
-        kategoriRataRata;
-
-
-    /*
-     * Tampilkan jumlah siswa.
-     */
-
-    categoryTotal.textContent =
-        jumlahNilai +
-        " siswa";
-
-
-    /*
-     * Tampilkan persentase.
-     */
-
-    excellentPercentage.textContent =
-        formatPercentage(
-            persenSangatBaik
-        );
-
-
-    goodPercentage.textContent =
-        formatPercentage(
-            persenCukupBaik
-        );
-
-
-    needingPercentage.textContent =
-        formatPercentage(
-            persenPerluPendampingan
-        );
-
-
-    /*
-     * Atur panjang grafik.
-     */
-
-    setTimeout(
-        function(){
-
-            excellentBar.style.width =
-                persenSangatBaik +
-                "%";
-
-
-            goodBar.style.width =
-                persenCukupBaik +
-                "%";
-
-
-            needingBar.style.width =
-                persenPerluPendampingan +
-                "%";
-
-        },
-        50
-    );
-
-
-    /*
-     * Tampilkan jumlah siswa tiap kategori.
-     */
-
-    excellentCount.textContent =
-        sangatBaik +
-        " siswa";
-
-
-    goodCount.textContent =
-        cukupBaik +
-        " siswa";
-
-
-    needingCount.textContent =
-        perluPendampingan +
-        " siswa";
-
-}
-
-
-/* =========================================================
-   TAMBAHAN
-   FORMAT PERSENTASE
-========================================================= */
-
-function formatPercentage(value){
-
-    if(
-        Number.isNaN(
-            Number(value)
-        )
-    ){
-
-        return "0%";
-
-    }
-
-
-    return Number(value)
-        .toLocaleString(
-            "id-ID",
-            {
-                minimumFractionDigits:1,
-                maximumFractionDigits:1
-            }
-        ) +
-        "%";
-
-}
-
-
-/* =========================================================
    TOGGLE SEMUA DATA
 ========================================================= */
 
@@ -2925,444 +2300,6 @@ document.addEventListener(
 
 </script>
 
-
-<style>
-/* =========================================================
-   TAMBAHAN
-   GRAFIK BATANG NILAI RATA-RATA CAPAIAN
-   KODE LAMA TIDAK DIUBAH
-========================================================= */
-
-.nilai-rata-dashboard{
-    margin-top:18px;
-    padding:24px;
-    border-radius:22px;
-    background:#fffdf8;
-    border:1px solid #ead7bc;
-    box-shadow:0 13px 28px rgba(92,48,24,.09);
-}
-
-.nilai-rata-title{
-    margin:0 0 4px;
-    text-align:center;
-    font-size:clamp(22px,3vw,30px);
-    line-height:1.2;
-    font-weight:900;
-    color:#4a2c20;
-}
-
-.nilai-rata-subtitle{
-    margin:0 0 22px;
-    text-align:center;
-    font-size:12px;
-    line-height:1.6;
-    color:#806b61;
-}
-
-.nilai-rata-chart{
-    position:relative;
-    display:grid;
-    grid-template-columns:52px minmax(0,1fr);
-    min-height:420px;
-}
-
-.nilai-rata-yaxis{
-    position:relative;
-    margin-bottom:92px;
-}
-
-.nilai-rata-yaxis span{
-    position:absolute;
-    right:10px;
-    transform:translateY(50%);
-    font-size:10px;
-    font-weight:800;
-    color:#806b61;
-}
-
-.nilai-rata-plot{
-    position:relative;
-    min-height:420px;
-    border-left:1px solid #ead7bc;
-    border-bottom:1px solid #cdbda9;
-    background:
-        repeating-linear-gradient(
-            to top,
-            rgba(128,107,97,.11) 0,
-            rgba(128,107,97,.11) 1px,
-            transparent 1px,
-            transparent 10%
-        );
-}
-
-.nilai-rata-grid-labels{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-}
-
-.nilai-rata-grid-labels span{
-    position:absolute;
-    left:8px;
-    font-size:9px;
-    color:#9a897e;
-    background:rgba(255,253,248,.82);
-    padding:1px 4px;
-    border-radius:4px;
-}
-
-.nilai-rata-bars{
-    position:absolute;
-    inset:18px 22px 0;
-    display:grid;
-    grid-template-columns:repeat(3,minmax(80px,1fr));
-    align-items:end;
-    gap:clamp(18px,6vw,70px);
-}
-
-.nilai-rata-bar-wrap{
-    height:100%;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    align-items:center;
-    min-width:0;
-}
-
-.nilai-rata-bar-area{
-    width:100%;
-    height:calc(100% - 82px);
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-}
-
-.nilai-rata-bar{
-    position:relative;
-    width:min(115px,70%);
-    min-height:3px;
-    height:0;
-    border-radius:14px 14px 0 0;
-    box-shadow:0 8px 16px rgba(92,48,24,.13);
-    transition:height .8s cubic-bezier(.22,1,.36,1);
-}
-
-.nilai-rata-bar.excellent{
-    background:#2e8b57;
-}
-
-.nilai-rata-bar.good{
-    background:#f4b942;
-}
-
-.nilai-rata-bar.needing{
-    background:#d9534f;
-}
-
-.nilai-rata-average{
-    position:absolute;
-    left:50%;
-    top:-38px;
-    transform:translateX(-50%);
-    min-width:54px;
-    padding:5px 8px;
-    border-radius:10px;
-    background:#fff;
-    border:1px solid rgba(92,48,24,.13);
-    box-shadow:0 5px 12px rgba(92,48,24,.12);
-    text-align:center;
-    font-size:16px;
-    font-weight:900;
-    color:#4a2c20;
-    white-space:nowrap;
-}
-
-.nilai-rata-count{
-    margin-top:8px;
-    font-size:12px;
-    font-weight:900;
-    color:#4a2c20;
-    text-align:center;
-}
-
-.nilai-rata-category{
-    width:100%;
-    min-height:66px;
-    margin-top:5px;
-    text-align:center;
-}
-
-.nilai-rata-category-name{
-    display:block;
-    font-size:12px;
-    line-height:1.3;
-    font-weight:900;
-    color:#4a2c20;
-}
-
-.nilai-rata-range{
-    display:block;
-    margin-top:4px;
-    font-size:11px;
-    font-weight:800;
-    color:#806b61;
-}
-
-.nilai-rata-legend{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:10px 22px;
-    margin-top:18px;
-    padding-top:14px;
-    border-top:1px solid #ead7bc;
-}
-
-.nilai-rata-legend-item{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    font-size:11px;
-    font-weight:800;
-    color:#806b61;
-}
-
-.nilai-rata-legend-dot{
-    width:11px;
-    height:11px;
-    border-radius:50%;
-}
-
-.nilai-rata-legend-dot.excellent{
-    background:#2e8b57;
-}
-
-.nilai-rata-legend-dot.good{
-    background:#f4b942;
-}
-
-.nilai-rata-legend-dot.needing{
-    background:#d9534f;
-}
-
-@media(max-width:560px){
-    .nilai-rata-dashboard{
-        padding:18px 12px;
-    }
-
-    .nilai-rata-chart{
-        grid-template-columns:38px minmax(0,1fr);
-        min-height:390px;
-    }
-
-    .nilai-rata-plot{
-        min-height:390px;
-    }
-
-    .nilai-rata-bars{
-        inset:18px 8px 0;
-        gap:8px;
-    }
-
-    .nilai-rata-bar{
-        width:min(82px,72%);
-        border-radius:10px 10px 0 0;
-    }
-
-    .nilai-rata-average{
-        font-size:14px;
-        min-width:48px;
-        padding:4px 6px;
-    }
-
-    .nilai-rata-category-name{
-        font-size:10px;
-    }
-
-    .nilai-rata-range,
-    .nilai-rata-count{
-        font-size:9px;
-    }
-
-    .nilai-rata-yaxis span{
-        font-size:8px;
-        right:6px;
-    }
-}
-</style>
-
-<section class="section">
-    <div class="nilai-rata-dashboard">
-
-        <h2 class="nilai-rata-title">
-            Nilai Rata-rata Capaian
-        </h2>
-
-        <p class="nilai-rata-subtitle">
-            Jumlah siswa berdasarkan kategori capaian nilai
-        </p>
-
-        <div class="nilai-rata-chart">
-
-            <div class="nilai-rata-yaxis" aria-hidden="true">
-                <span style="bottom:0%;">0</span>
-                <span style="bottom:10%;">10</span>
-                <span style="bottom:20%;">20</span>
-                <span style="bottom:30%;">30</span>
-                <span style="bottom:40%;">40</span>
-                <span style="bottom:50%;">50</span>
-                <span style="bottom:60%;">60</span>
-                <span style="bottom:70%;">70</span>
-                <span style="bottom:80%;">80</span>
-                <span style="bottom:90%;">90</span>
-                <span style="bottom:100%;">100</span>
-            </div>
-
-            <div class="nilai-rata-plot">
-
-                <div class="nilai-rata-grid-labels" aria-hidden="true">
-                    <span style="bottom:0%;">0</span>
-                    <span style="bottom:10%;">10</span>
-                    <span style="bottom:20%;">20</span>
-                    <span style="bottom:30%;">30</span>
-                    <span style="bottom:40%;">40</span>
-                    <span style="bottom:50%;">50</span>
-                    <span style="bottom:60%;">60</span>
-                    <span style="bottom:70%;">70</span>
-                    <span style="bottom:80%;">80</span>
-                    <span style="bottom:90%;">90</span>
-                    <span style="bottom:100%;">100</span>
-                </div>
-
-                <div class="nilai-rata-bars">
-
-                    <div class="nilai-rata-bar-wrap">
-                        <div class="nilai-rata-bar-area">
-                            <div
-                                id="nilaiRataExcellentBar"
-                                class="nilai-rata-bar excellent"
-                                style="height:0%;"
-                                title="Sangat Baik"
-                            >
-                                <div
-                                    id="nilaiRataExcellentAverage"
-                                    class="nilai-rata-average"
-                                >
-                                    -
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            id="nilaiRataExcellentCount"
-                            class="nilai-rata-count"
-                        >
-                            0 siswa
-                        </div>
-
-                        <div class="nilai-rata-category">
-                            <span class="nilai-rata-category-name">
-                                Sangat Baik
-                            </span>
-                            <span class="nilai-rata-range">
-                                80–100
-                            </span>
-                        </div>
-                    </div>
-
-
-                    <div class="nilai-rata-bar-wrap">
-                        <div class="nilai-rata-bar-area">
-                            <div
-                                id="nilaiRataGoodBar"
-                                class="nilai-rata-bar good"
-                                style="height:0%;"
-                                title="Cukup Baik"
-                            >
-                                <div
-                                    id="nilaiRataGoodAverage"
-                                    class="nilai-rata-average"
-                                >
-                                    -
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            id="nilaiRataGoodCount"
-                            class="nilai-rata-count"
-                        >
-                            0 siswa
-                        </div>
-
-                        <div class="nilai-rata-category">
-                            <span class="nilai-rata-category-name">
-                                Cukup Baik
-                            </span>
-                            <span class="nilai-rata-range">
-                                60–79
-                            </span>
-                        </div>
-                    </div>
-
-
-                    <div class="nilai-rata-bar-wrap">
-                        <div class="nilai-rata-bar-area">
-                            <div
-                                id="nilaiRataNeedingBar"
-                                class="nilai-rata-bar needing"
-                                style="height:0%;"
-                                title="Perlu Pendampingan"
-                            >
-                                <div
-                                    id="nilaiRataNeedingAverage"
-                                    class="nilai-rata-average"
-                                >
-                                    -
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            id="nilaiRataNeedingCount"
-                            class="nilai-rata-count"
-                        >
-                            0 siswa
-                        </div>
-
-                        <div class="nilai-rata-category">
-                            <span class="nilai-rata-category-name">
-                                Perlu Pendampingan
-                            </span>
-                            <span class="nilai-rata-range">
-                                0–59
-                            </span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="nilai-rata-legend">
-            <div class="nilai-rata-legend-item">
-                <span class="nilai-rata-legend-dot excellent"></span>
-                Sangat Baik — 80–100
-            </div>
-
-            <div class="nilai-rata-legend-item">
-                <span class="nilai-rata-legend-dot good"></span>
-                Cukup Baik — 60–79
-            </div>
-
-            <div class="nilai-rata-legend-item">
-                <span class="nilai-rata-legend-dot needing"></span>
-                Perlu Pendampingan — 0–59
-            </div>
-        </div>
-
-    </div>
-</section>
 
 <script>
 /* =========================================================
@@ -3589,6 +2526,8 @@ document.addEventListener(
 
 })();
 </script>
+
+
 
 </body>
 </html>

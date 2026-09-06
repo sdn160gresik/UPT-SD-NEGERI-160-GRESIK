@@ -471,13 +471,12 @@ body{
 }
 
 /* =========================================================
-   TAMBAHAN
-   DIAGRAM BATANG CAPAIAN
+   DIAGRAM BATANG NILAI RATA-RATA CAPAIAN
 ========================================================= */
 
 .capaian-chart-card{
     background:
-        rgba(255,253,248,.96);
+        rgba(255,253,248,.97);
 
     border:1px solid var(--border);
 
@@ -492,7 +491,7 @@ body{
 }
 
 .chart-header{
-    padding:17px 20px;
+    padding:19px 21px;
 
     display:flex;
 
@@ -500,7 +499,7 @@ body{
 
     justify-content:space-between;
 
-    gap:15px;
+    gap:18px;
 
     border-bottom:1px solid var(--border);
 
@@ -513,13 +512,15 @@ body{
 }
 
 .chart-title{
-    font-size:15px;
+    font-size:19px;
 
     font-weight:900;
+
+    color:var(--ink);
 }
 
 .chart-subtitle{
-    margin-top:4px;
+    margin-top:5px;
 
     font-size:11px;
 
@@ -527,9 +528,9 @@ body{
 }
 
 .average-box{
-    min-width:150px;
+    min-width:180px;
 
-    padding:10px 14px;
+    padding:11px 15px;
 
     text-align:center;
 
@@ -551,9 +552,9 @@ body{
 }
 
 .average-value{
-    margin-top:3px;
+    margin-top:4px;
 
-    font-size:25px;
+    font-size:28px;
 
     line-height:1;
 
@@ -572,192 +573,331 @@ body{
     color:var(--green-dark);
 }
 
-.chart-body{
-    padding:24px 22px 20px;
+/* =========================================================
+   AREA DIAGRAM
+========================================================= */
+
+.vertical-chart-wrapper{
+    position:relative;
+
+    display:grid;
+
+    grid-template-columns:52px 1fr;
+
+    min-height:500px;
+
+    padding:30px 28px 22px 18px;
 }
 
-.bar-chart{
-    width:100%;
+/* =========================================================
+   SUMBU NILAI 0-100
+========================================================= */
+
+.chart-axis{
+    position:relative;
+
+    height:420px;
+
+    padding-bottom:0;
+}
+
+.axis-label{
+    position:absolute;
+
+    right:9px;
+
+    transform:translateY(50%);
+
+    font-size:10px;
+
+    font-weight:800;
+
+    color:#806b61;
+
+    line-height:1;
+}
+
+/*
+ * Posisi angka:
+ * 100 berada paling atas
+ * 0 berada paling bawah
+ */
+
+.axis-100{
+    top:0;
+    transform:translateY(-50%);
+}
+
+.axis-90{
+    top:10%;
+}
+
+.axis-80{
+    top:20%;
+}
+
+.axis-70{
+    top:30%;
+}
+
+.axis-60{
+    top:40%;
+}
+
+.axis-50{
+    top:50%;
+}
+
+.axis-40{
+    top:60%;
+}
+
+.axis-30{
+    top:70%;
+}
+
+.axis-20{
+    top:80%;
+}
+
+.axis-10{
+    top:90%;
+}
+
+.axis-0{
+    top:100%;
+    transform:translateY(-50%);
+}
+
+/* =========================================================
+   AREA BATANG
+========================================================= */
+
+.vertical-chart{
+    position:relative;
+
+    height:420px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-around;
+
+    gap:28px;
+
+    border-bottom:2px solid #cdbda9;
+
+    border-left:1px solid #e1d5c6;
+}
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.chart-grid{
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:0;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent calc(10% - 1px),
+            rgba(128,107,97,.15) calc(10% - 1px),
+            rgba(128,107,97,.15) 10%
+        );
+}
+
+/* =========================================================
+   BAR ITEM
+========================================================= */
+
+.vertical-bar-item{
+    height:100%;
+
+    flex:1;
+
+    max-width:190px;
 
     display:flex;
 
     flex-direction:column;
 
-    gap:22px;
-}
-
-.bar-item{
-    width:100%;
-}
-
-.bar-info{
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:10px;
-
-    margin-bottom:8px;
-}
-
-.bar-name{
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    font-size:12px;
-
-    font-weight:900;
-}
-
-.bar-dot{
-    width:12px;
-    height:12px;
-
-    border-radius:50%;
-
-    flex:0 0 12px;
-}
-
-.bar-dot.excellent{
-    background:var(--excellent);
-}
-
-.bar-dot.good{
-    background:var(--good);
-}
-
-.bar-dot.needing{
-    background:var(--needing);
-}
-
-.bar-value{
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    font-size:12px;
-
-    font-weight:900;
-
-    color:var(--ink);
-}
-
-.bar-percentage{
-    min-width:46px;
-
-    text-align:right;
-}
-
-.bar-track{
-    width:100%;
-
-    height:31px;
-
-    border-radius:9px;
-
-    background:#f2eadf;
-
-    border:1px solid #e8dccb;
-
-    overflow:hidden;
-
-    box-shadow:
-        inset 0 1px 3px rgba(92,48,24,.07);
-}
-
-.bar-fill{
-    width:0%;
-
-    height:100%;
-
-    border-radius:8px;
-
-    display:flex;
-
-    align-items:center;
-
     justify-content:flex-end;
 
-    padding-right:10px;
-
-    font-size:10px;
-
-    font-weight:900;
-
-    color:white;
-
-    transition:
-        width 1s cubic-bezier(.22,1,.36,1);
+    align-items:center;
 
     position:relative;
 
-    overflow:hidden;
+    z-index:2;
 }
 
-.bar-fill::after{
+/* =========================================================
+   NILAI DI ATAS BATANG
+========================================================= */
+
+.vertical-value{
+    position:absolute;
+
+    left:50%;
+
+    transform:
+        translateX(-50%)
+        translateY(-5px);
+
+    font-size:20px;
+
+    font-weight:900;
+
+    line-height:1;
+
+    white-space:nowrap;
+
+    z-index:5;
+}
+
+.vertical-value.excellent{
+    color:var(--excellent);
+}
+
+.vertical-value.good{
+    color:#9b7113;
+}
+
+.vertical-value.needing{
+    color:var(--needing);
+}
+
+/* =========================================================
+   BATANG
+========================================================= */
+
+.vertical-bar-track{
+    width:100%;
+
+    height:100%;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:center;
+
+    position:relative;
+}
+
+.vertical-bar-fill{
+    width:min(105px,72%);
+
+    height:0%;
+
+    min-height:0;
+
+    border-radius:12px 12px 3px 3px;
+
+    position:relative;
+
+    transition:
+        height 1.2s cubic-bezier(.22,1,.36,1);
+
+    box-shadow:
+        0 8px 16px rgba(92,48,24,.13);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+}
+
+.vertical-bar-fill::before{
     content:"";
 
     position:absolute;
 
     top:0;
-    left:-100%;
+    left:0;
 
-    width:60%;
+    width:100%;
 
-    height:100%;
+    height:4px;
 
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.3),
-            transparent
-        );
+    border-radius:12px 12px 0 0;
 
-    animation:
-        barShine 2.2s ease-in-out infinite;
+    background:rgba(255,255,255,.45);
 }
 
-.bar-fill.excellent{
+.vertical-bar-fill.excellent{
     background:var(--excellent);
 }
 
-.bar-fill.good{
+.vertical-bar-fill.good{
     background:var(--good);
 }
 
-.bar-fill.needing{
+.vertical-bar-fill.needing{
     background:var(--needing);
 }
 
-.bar-detail{
+/* =========================================================
+   LABEL BAWAH BATANG
+========================================================= */
+
+.vertical-label{
+    width:100%;
+
+    min-height:73px;
+
     display:flex;
 
-    justify-content:space-between;
+    flex-direction:column;
 
     align-items:center;
 
-    gap:10px;
+    justify-content:flex-start;
 
-    margin-top:6px;
+    text-align:center;
+
+    padding-top:13px;
+}
+
+.vertical-category{
+    font-size:12px;
+
+    font-weight:900;
+
+    line-height:1.3;
+
+    color:var(--ink);
+}
+
+.vertical-range{
+    margin-top:4px;
 
     font-size:10px;
+
+    font-weight:800;
 
     color:var(--muted);
 }
 
-.category-description{
-    font-size:10px;
+.vertical-student-count{
+    margin-top:4px;
 
-    font-style:italic;
+    font-size:9px;
+
+    color:var(--muted);
 }
+
+/* =========================================================
+   RINGKASAN KATEGORI
+========================================================= */
 
 .chart-summary{
     display:grid;
@@ -767,7 +907,7 @@ body{
 
     gap:10px;
 
-    margin-top:23px;
+    margin:0 22px 22px;
 
     padding-top:18px;
 
@@ -822,11 +962,23 @@ body{
     color:var(--muted);
 }
 
+.summary-average{
+    margin-top:5px;
+
+    font-size:10px;
+
+    font-weight:900;
+}
+
 .summary-box.excellent{
     border-color:#b8dfc5;
 }
 
 .summary-box.excellent .summary-count{
+    color:var(--green-dark);
+}
+
+.summary-box.excellent .summary-average{
     color:var(--green-dark);
 }
 
@@ -838,6 +990,10 @@ body{
     color:#9b7113;
 }
 
+.summary-box.good .summary-average{
+    color:#9b7113;
+}
+
 .summary-box.needing{
     border-color:#efbdb4;
 }
@@ -846,25 +1002,13 @@ body{
     color:#a43e2d;
 }
 
-@keyframes barShine{
-
-    0%{
-        left:-100%;
-    }
-
-    55%{
-        left:130%;
-    }
-
-    100%{
-        left:130%;
-    }
-
+.summary-box.needing .summary-average{
+    color:#a43e2d;
 }
 
-/* =========================
+/* =========================================================
    TABLE CARD
-========================= */
+========================================================= */
 
 .table-card{
     background:rgba(255,253,248,.94);
@@ -1088,8 +1232,6 @@ footer{
         min-height:160px;
     }
 
-    /* TAMBAHAN RESPONSIVE DIAGRAM */
-
     .chart-header{
         flex-direction:column;
 
@@ -1102,6 +1244,24 @@ footer{
 
     .chart-summary{
         grid-template-columns:1fr;
+    }
+
+    .vertical-chart-wrapper{
+        grid-template-columns:42px 1fr;
+
+        padding:
+            28px
+            15px
+            20px
+            10px;
+    }
+
+    .vertical-chart{
+        gap:15px;
+    }
+
+    .vertical-bar-fill{
+        width:min(82px,70%);
     }
 
 }
@@ -1147,38 +1307,107 @@ footer{
         min-height:150px;
     }
 
-    /* TAMBAHAN RESPONSIVE DIAGRAM */
-
-    .chart-body{
-        padding:20px 15px;
+    .chart-title{
+        font-size:17px;
     }
 
-    .bar-track{
-        height:27px;
+    .chart-subtitle{
+        line-height:1.5;
     }
 
-    .bar-info{
-        align-items:flex-start;
+    .vertical-chart-wrapper{
+        grid-template-columns:35px 1fr;
+
+        min-height:405px;
+
+        padding:
+            28px
+            10px
+            15px
+            5px;
     }
 
-    .bar-name{
-        line-height:1.4;
+    .chart-axis{
+        height:330px;
     }
 
-    .bar-value{
-        flex-direction:column;
+    .vertical-chart{
+        height:330px;
 
-        align-items:flex-end;
-
-        gap:1px;
+        gap:7px;
     }
 
-    .category-description{
-        display:block;
+    .axis-label{
+        font-size:8px;
 
-        max-width:190px;
+        right:6px;
+    }
 
-        line-height:1.4;
+    .vertical-value{
+        font-size:16px;
+    }
+
+    .vertical-bar-fill{
+        width:62px;
+
+        border-radius:9px 9px 2px 2px;
+    }
+
+    .vertical-label{
+        min-height:72px;
+
+        padding-top:10px;
+    }
+
+    .vertical-category{
+        font-size:10px;
+    }
+
+    .vertical-range{
+        font-size:8px;
+    }
+
+    .vertical-student-count{
+        font-size:8px;
+    }
+
+    .chart-summary{
+        margin:
+            0
+            12px
+            16px;
+    }
+
+}
+
+/* =========================
+   PRINT
+========================= */
+
+@media print{
+
+    body{
+        background:white;
+    }
+
+    .toolbar,
+    .status,
+    #allDataButton{
+        display:none !important;
+    }
+
+    .hero{
+        box-shadow:none;
+    }
+
+    .capaian-chart-card,
+    .table-card,
+    .champion{
+        box-shadow:none;
+    }
+
+    .vertical-bar-fill{
+        transition:none;
     }
 
 }
@@ -1312,8 +1541,7 @@ footer{
 
 
     <!-- =====================================================
-         TAMBAHAN
-         DIAGRAM BATANG NILAI RATA-RATA DAN PERSENTASE
+         DIAGRAM BATANG NILAI RATA-RATA
     ====================================================== -->
 
     <section class="section">
@@ -1325,10 +1553,10 @@ footer{
             </div>
 
             <div>
-                <h2>Grafik Capaian Siswa</h2>
+                <h2>Nilai Rata-rata Capaian</h2>
 
                 <p>
-                    Diagram batang nilai rata-rata dan persentase capaian siswa
+                    Perbandingan rata-rata nilai berdasarkan kategori capaian
                 </p>
             </div>
 
@@ -1347,11 +1575,11 @@ footer{
                 <div>
 
                     <div class="chart-title">
-                        📈 Diagram Batang Capaian
+                        Nilai Rata-rata Capaian
                     </div>
 
                     <div class="chart-subtitle">
-                        Persentase siswa berdasarkan kategori nilai
+                        Tinggi batang menunjukkan rata-rata nilai siswa pada setiap kategori
                     </div>
 
                 </div>
@@ -1360,7 +1588,7 @@ footer{
                 <div class="average-box">
 
                     <div class="average-label">
-                        NILAI RATA-RATA CAPAIAN
+                        NILAI RATA-RATA SELURUH SISWA
                     </div>
 
                     <div
@@ -1389,206 +1617,215 @@ footer{
             <div class="chart-body">
 
 
-                <div class="bar-chart">
+                <div class="vertical-chart-wrapper">
 
 
                     <!-- =========================
-                         SANGAT BAIK
+                         SUMBU Y
                     ========================== -->
 
-                    <div class="bar-item">
+                    <div class="chart-axis">
 
-                        <div class="bar-info">
+                        <span class="axis-label axis-100">
+                            100
+                        </span>
 
-                            <div class="bar-name">
+                        <span class="axis-label axis-90">
+                            90
+                        </span>
 
-                                <span
-                                    class="bar-dot excellent"
-                                ></span>
+                        <span class="axis-label axis-80">
+                            80
+                        </span>
 
-                                <span>
+                        <span class="axis-label axis-70">
+                            70
+                        </span>
+
+                        <span class="axis-label axis-60">
+                            60
+                        </span>
+
+                        <span class="axis-label axis-50">
+                            50
+                        </span>
+
+                        <span class="axis-label axis-40">
+                            40
+                        </span>
+
+                        <span class="axis-label axis-30">
+                            30
+                        </span>
+
+                        <span class="axis-label axis-20">
+                            20
+                        </span>
+
+                        <span class="axis-label axis-10">
+                            10
+                        </span>
+
+                        <span class="axis-label axis-0">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <!-- =========================
+                         DIAGRAM VERTIKAL
+                    ========================== -->
+
+                    <div class="vertical-chart">
+
+
+                        <!-- GRID -->
+                        <div class="chart-grid"></div>
+
+
+                        <!-- =========================
+                             SANGAT BAIK
+                        ========================== -->
+
+                        <div class="vertical-bar-item">
+
+                            <div
+                                id="excellentVerticalValue"
+                                class="vertical-value excellent"
+                            >
+                                -
+                            </div>
+
+
+                            <div class="vertical-bar-track">
+
+                                <div
+                                    id="excellentVerticalBar"
+                                    class="vertical-bar-fill excellent"
+                                >
+                                </div>
+
+                            </div>
+
+
+                            <div class="vertical-label">
+
+                                <div class="vertical-category">
                                     🟢 Sangat Baik
-                                </span>
+                                </div>
 
-                            </div>
+                                <div class="vertical-range">
+                                    80–100
+                                </div>
 
-                            <div class="bar-value">
-
-                                <span
-                                    id="excellentCount"
+                                <div
+                                    id="excellentVerticalCount"
+                                    class="vertical-student-count"
                                 >
                                     0 siswa
-                                </span>
-
-                                <span
-                                    id="excellentPercentage"
-                                    class="bar-percentage"
-                                >
-                                    0%
-                                </span>
+                                </div>
 
                             </div>
 
                         </div>
 
 
-                        <div class="bar-track">
+                        <!-- =========================
+                             CUKUP BAIK
+                        ========================== -->
+
+                        <div class="vertical-bar-item">
 
                             <div
-                                id="excellentBar"
-                                class="bar-fill excellent"
+                                id="goodVerticalValue"
+                                class="vertical-value good"
                             >
+                                -
                             </div>
 
-                        </div>
+
+                            <div class="vertical-bar-track">
+
+                                <div
+                                    id="goodVerticalBar"
+                                    class="vertical-bar-fill good"
+                                >
+                                </div>
+
+                            </div>
 
 
-                        <div class="bar-detail">
+                            <div class="vertical-label">
 
-                            <span>
-                                Rentang nilai 80–100
-                            </span>
-
-                            <span class="category-description">
-                                Telah mencapai tujuan pembelajaran dengan baik
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- =========================
-                         CUKUP BAIK
-                    ========================== -->
-
-                    <div class="bar-item">
-
-                        <div class="bar-info">
-
-                            <div class="bar-name">
-
-                                <span
-                                    class="bar-dot good"
-                                ></span>
-
-                                <span>
+                                <div class="vertical-category">
                                     🟡 Cukup Baik
-                                </span>
+                                </div>
 
-                            </div>
+                                <div class="vertical-range">
+                                    60–79
+                                </div>
 
-                            <div class="bar-value">
-
-                                <span
-                                    id="goodCount"
+                                <div
+                                    id="goodVerticalCount"
+                                    class="vertical-student-count"
                                 >
                                     0 siswa
-                                </span>
-
-                                <span
-                                    id="goodPercentage"
-                                    class="bar-percentage"
-                                >
-                                    0%
-                                </span>
+                                </div>
 
                             </div>
 
                         </div>
 
 
-                        <div class="bar-track">
+                        <!-- =========================
+                             PERLU PENDAMPINGAN
+                        ========================== -->
+
+                        <div class="vertical-bar-item">
 
                             <div
-                                id="goodBar"
-                                class="bar-fill good"
+                                id="needingVerticalValue"
+                                class="vertical-value needing"
                             >
+                                -
                             </div>
 
-                        </div>
+
+                            <div class="vertical-bar-track">
+
+                                <div
+                                    id="needingVerticalBar"
+                                    class="vertical-bar-fill needing"
+                                >
+                                </div>
+
+                            </div>
 
 
-                        <div class="bar-detail">
+                            <div class="vertical-label">
 
-                            <span>
-                                Rentang nilai 60–79
-                            </span>
-
-                            <span class="category-description">
-                                Mulai mencapai tujuan pembelajaran
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- =========================
-                         PERLU PENDAMPINGAN
-                    ========================== -->
-
-                    <div class="bar-item">
-
-                        <div class="bar-info">
-
-                            <div class="bar-name">
-
-                                <span
-                                    class="bar-dot needing"
-                                ></span>
-
-                                <span>
+                                <div class="vertical-category">
                                     🔴 Perlu Pendampingan
-                                </span>
+                                </div>
 
-                            </div>
+                                <div class="vertical-range">
+                                    0–59
+                                </div>
 
-                            <div class="bar-value">
-
-                                <span
-                                    id="needingCount"
+                                <div
+                                    id="needingVerticalCount"
+                                    class="vertical-student-count"
                                 >
                                     0 siswa
-                                </span>
-
-                                <span
-                                    id="needingPercentage"
-                                    class="bar-percentage"
-                                >
-                                    0%
-                                </span>
+                                </div>
 
                             </div>
 
                         </div>
 
-
-                        <div class="bar-track">
-
-                            <div
-                                id="needingBar"
-                                class="bar-fill needing"
-                            >
-                            </div>
-
-                        </div>
-
-
-                        <div class="bar-detail">
-
-                            <span>
-                                Rentang nilai 0–59
-                            </span>
-
-                            <span class="category-description">
-                                Belum mencapai tujuan pembelajaran
-                            </span>
-
-                        </div>
 
                     </div>
-
 
                 </div>
 
@@ -1618,7 +1855,7 @@ footer{
                             id="excellentSummaryCount"
                             class="summary-count"
                         >
-                            0
+                            0 siswa
                         </div>
 
                         <div
@@ -1626,6 +1863,13 @@ footer{
                             class="summary-percent"
                         >
                             0%
+                        </div>
+
+                        <div
+                            id="excellentSummaryAverage"
+                            class="summary-average"
+                        >
+                            Rata-rata: -
                         </div>
 
                     </div>
@@ -1649,7 +1893,7 @@ footer{
                             id="goodSummaryCount"
                             class="summary-count"
                         >
-                            0
+                            0 siswa
                         </div>
 
                         <div
@@ -1657,6 +1901,13 @@ footer{
                             class="summary-percent"
                         >
                             0%
+                        </div>
+
+                        <div
+                            id="goodSummaryAverage"
+                            class="summary-average"
+                        >
+                            Rata-rata: -
                         </div>
 
                     </div>
@@ -1680,7 +1931,7 @@ footer{
                             id="needingSummaryCount"
                             class="summary-count"
                         >
-                            0
+                            0 siswa
                         </div>
 
                         <div
@@ -1688,6 +1939,13 @@ footer{
                             class="summary-percent"
                         >
                             0%
+                        </div>
+
+                        <div
+                            id="needingSummaryAverage"
+                            class="summary-average"
+                        >
+                            Rata-rata: -
                         </div>
 
                     </div>
@@ -2074,8 +2332,7 @@ function loadData(){
 
                 /*
                  * =====================================================
-                 * TAMBAHAN
-                 * RENDER DIAGRAM BATANG CAPAIAN
+                 * RENDER DIAGRAM BATANG NILAI RATA-RATA
                  * =====================================================
                  */
 
@@ -2604,7 +2861,6 @@ function formatScore(score){
 
 
 /* =========================================================
-   TAMBAHAN
    MENENTUKAN KATEGORI NILAI
 ========================================================= */
 
@@ -2647,7 +2903,6 @@ function getKategoriNilai(score){
 
 
 /* =========================================================
-   TAMBAHAN
    FORMAT PERSENTASE
 ========================================================= */
 
@@ -2678,8 +2933,37 @@ function formatPercentage(value){
 
 
 /* =========================================================
-   TAMBAHAN
-   RENDER DIAGRAM BATANG CAPAIAN
+   FORMAT RATA-RATA
+========================================================= */
+
+function formatAverage(value){
+
+    const number =
+        Number(value);
+
+
+    if(
+        Number.isNaN(number)
+    ){
+
+        return "-";
+
+    }
+
+
+    return number.toLocaleString(
+        "id-ID",
+        {
+            minimumFractionDigits:1,
+            maximumFractionDigits:1
+        }
+    );
+
+}
+
+
+/* =========================================================
+   RENDER DIAGRAM BATANG NILAI RATA-RATA CAPAIAN
 ========================================================= */
 
 function renderCapaianChart(data){
@@ -2696,59 +2980,75 @@ function renderCapaianChart(data){
         );
 
 
-    const excellentPercentage =
-        document.getElementById(
-            "excellentPercentage"
-        );
-
-
-    const goodPercentage =
-        document.getElementById(
-            "goodPercentage"
-        );
-
-
-    const needingPercentage =
-        document.getElementById(
-            "needingPercentage"
-        );
-
-
-    const excellentCount =
-        document.getElementById(
-            "excellentCount"
-        );
-
-
-    const goodCount =
-        document.getElementById(
-            "goodCount"
-        );
-
-
-    const needingCount =
-        document.getElementById(
-            "needingCount"
-        );
-
+    /*
+     * Elemen batang.
+     */
 
     const excellentBar =
         document.getElementById(
-            "excellentBar"
+            "excellentVerticalBar"
         );
 
 
     const goodBar =
         document.getElementById(
-            "goodBar"
+            "goodVerticalBar"
         );
 
 
     const needingBar =
         document.getElementById(
-            "needingBar"
+            "needingVerticalBar"
         );
 
+
+    /*
+     * Elemen angka rata-rata di atas batang.
+     */
+
+    const excellentValue =
+        document.getElementById(
+            "excellentVerticalValue"
+        );
+
+
+    const goodValue =
+        document.getElementById(
+            "goodVerticalValue"
+        );
+
+
+    const needingValue =
+        document.getElementById(
+            "needingVerticalValue"
+        );
+
+
+    /*
+     * Jumlah siswa.
+     */
+
+    const excellentCount =
+        document.getElementById(
+            "excellentVerticalCount"
+        );
+
+
+    const goodCount =
+        document.getElementById(
+            "goodVerticalCount"
+        );
+
+
+    const needingCount =
+        document.getElementById(
+            "needingVerticalCount"
+        );
+
+
+    /*
+     * Ringkasan.
+     */
 
     const excellentSummaryCount =
         document.getElementById(
@@ -2786,8 +3086,28 @@ function renderCapaianChart(data){
         );
 
 
+    const excellentSummaryAverage =
+        document.getElementById(
+            "excellentSummaryAverage"
+        );
+
+
+    const goodSummaryAverage =
+        document.getElementById(
+            "goodSummaryAverage"
+        );
+
+
+    const needingSummaryAverage =
+        document.getElementById(
+            "needingSummaryAverage"
+        );
+
+
     /*
-     * Reset apabila data kosong.
+     * =====================================================
+     * RESET
+     * =====================================================
      */
 
     if(
@@ -2803,16 +3123,28 @@ function renderCapaianChart(data){
             "Belum ada data";
 
 
-        excellentPercentage.textContent =
+        excellentBar.style.height =
             "0%";
 
 
-        goodPercentage.textContent =
+        goodBar.style.height =
             "0%";
 
 
-        needingPercentage.textContent =
+        needingBar.style.height =
             "0%";
+
+
+        excellentValue.textContent =
+            "-";
+
+
+        goodValue.textContent =
+            "-";
+
+
+        needingValue.textContent =
+            "-";
 
 
         excellentCount.textContent =
@@ -2827,28 +3159,16 @@ function renderCapaianChart(data){
             "0 siswa";
 
 
-        excellentBar.style.width =
-            "0%";
-
-
-        goodBar.style.width =
-            "0%";
-
-
-        needingBar.style.width =
-            "0%";
-
-
         excellentSummaryCount.textContent =
-            "0";
+            "0 siswa";
 
 
         goodSummaryCount.textContent =
-            "0";
+            "0 siswa";
 
 
         needingSummaryCount.textContent =
-            "0";
+            "0 siswa";
 
 
         excellentSummaryPercentage.textContent =
@@ -2863,10 +3183,28 @@ function renderCapaianChart(data){
             "0%";
 
 
+        excellentSummaryAverage.textContent =
+            "Rata-rata: -";
+
+
+        goodSummaryAverage.textContent =
+            "Rata-rata: -";
+
+
+        needingSummaryAverage.textContent =
+            "Rata-rata: -";
+
+
         return;
 
     }
 
+
+    /*
+     * =====================================================
+     * VARIABEL PERHITUNGAN
+     * =====================================================
+     */
 
     let totalNilai = 0;
 
@@ -2880,8 +3218,17 @@ function renderCapaianChart(data){
     let perluPendampingan = 0;
 
 
+    let totalSangatBaik = 0;
+
+    let totalCukupBaik = 0;
+
+    let totalPerluPendampingan = 0;
+
+
     /*
-     * Hitung data.
+     * =====================================================
+     * HITUNG NILAI
+     * =====================================================
      */
 
     data.forEach(
@@ -2894,8 +3241,8 @@ function renderCapaianChart(data){
 
 
             /*
-             * Nilai yang tidak valid
-             * tidak dimasukkan ke perhitungan.
+             * Nilai tidak valid
+             * tidak dihitung.
              */
 
             if(
@@ -2915,6 +3262,7 @@ function renderCapaianChart(data){
 
 
             /*
+             * SANGAT BAIK
              * 80–100
              */
 
@@ -2924,10 +3272,14 @@ function renderCapaianChart(data){
 
                 sangatBaik++;
 
+                totalSangatBaik +=
+                    nilai;
+
             }
 
 
             /*
+             * CUKUP BAIK
              * 60–79
              */
 
@@ -2937,16 +3289,23 @@ function renderCapaianChart(data){
 
                 cukupBaik++;
 
+                totalCukupBaik +=
+                    nilai;
+
             }
 
 
             /*
+             * PERLU PENDAMPINGAN
              * 0–59
              */
 
             else{
 
                 perluPendampingan++;
+
+                totalPerluPendampingan +=
+                    nilai;
 
             }
 
@@ -2955,7 +3314,9 @@ function renderCapaianChart(data){
 
 
     /*
-     * Jika tidak terdapat nilai valid.
+     * =====================================================
+     * JIKA TIDAK ADA NILAI VALID
+     * =====================================================
      */
 
     if(
@@ -2977,7 +3338,7 @@ function renderCapaianChart(data){
 
     /*
      * =====================================================
-     * NILAI RATA-RATA
+     * RATA-RATA SELURUH SISWA
      * =====================================================
      */
 
@@ -2987,12 +3348,8 @@ function renderCapaianChart(data){
 
 
     averageScore.textContent =
-        rataRata.toLocaleString(
-            "id-ID",
-            {
-                minimumFractionDigits:1,
-                maximumFractionDigits:1
-            }
+        formatAverage(
+            rataRata
         );
 
 
@@ -3005,7 +3362,35 @@ function renderCapaianChart(data){
 
     /*
      * =====================================================
-     * PERSENTASE
+     * RATA-RATA SETIAP KATEGORI
+     * =====================================================
+     */
+
+    const rataSangatBaik =
+        sangatBaik > 0
+            ? totalSangatBaik / sangatBaik
+            : 0;
+
+
+    const rataCukupBaik =
+        cukupBaik > 0
+            ? totalCukupBaik / cukupBaik
+            : 0;
+
+
+    const rataPerluPendampingan =
+        perluPendampingan > 0
+            ? totalPerluPendampingan /
+              perluPendampingan
+            : 0;
+
+
+    /*
+     * =====================================================
+     * PERSENTASE JUMLAH SISWA
+     *
+     * HANYA UNTUK INFORMASI PENDUKUNG,
+     * BUKAN UKURAN BATANG.
      * =====================================================
      */
 
@@ -3035,26 +3420,32 @@ function renderCapaianChart(data){
 
     /*
      * =====================================================
-     * TAMPILKAN PERSENTASE
+     * TAMPILKAN NILAI DI ATAS BATANG
      * =====================================================
      */
 
-    excellentPercentage.textContent =
-        formatPercentage(
-            persenSangatBaik
-        );
+    excellentValue.textContent =
+        sangatBaik > 0
+            ? formatAverage(
+                rataSangatBaik
+              )
+            : "-";
 
 
-    goodPercentage.textContent =
-        formatPercentage(
-            persenCukupBaik
-        );
+    goodValue.textContent =
+        cukupBaik > 0
+            ? formatAverage(
+                rataCukupBaik
+              )
+            : "-";
 
 
-    needingPercentage.textContent =
-        formatPercentage(
-            persenPerluPendampingan
-        );
+    needingValue.textContent =
+        perluPendampingan > 0
+            ? formatAverage(
+                rataPerluPendampingan
+              )
+            : "-";
 
 
     /*
@@ -3119,25 +3510,81 @@ function renderCapaianChart(data){
 
     /*
      * =====================================================
-     * ANIMASI DIAGRAM BATANG
+     * TAMPILKAN RATA-RATA KATEGORI
+     * =====================================================
+     */
+
+    excellentSummaryAverage.textContent =
+        sangatBaik > 0
+            ? "Rata-rata: " +
+              formatAverage(
+                  rataSangatBaik
+              )
+            : "Rata-rata: -";
+
+
+    goodSummaryAverage.textContent =
+        cukupBaik > 0
+            ? "Rata-rata: " +
+              formatAverage(
+                  rataCukupBaik
+              )
+            : "Rata-rata: -";
+
+
+    needingSummaryAverage.textContent =
+        perluPendampingan > 0
+            ? "Rata-rata: " +
+              formatAverage(
+                  rataPerluPendampingan
+              )
+            : "Rata-rata: -";
+
+
+    /*
+     * =====================================================
+     * ANIMASI BATANG
+     *
+     * PENTING:
+     * Tinggi batang menggunakan RATA-RATA NILAI.
+     *
+     * BUKAN PERSENTASE.
      * =====================================================
      */
 
     setTimeout(
         function(){
 
-            excellentBar.style.width =
-                persenSangatBaik +
+            excellentBar.style.height =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        rataSangatBaik
+                    )
+                ) +
                 "%";
 
 
-            goodBar.style.width =
-                persenCukupBaik +
+            goodBar.style.height =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        rataCukupBaik
+                    )
+                ) +
                 "%";
 
 
-            needingBar.style.width =
-                persenPerluPendampingan +
+            needingBar.style.height =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        rataPerluPendampingan
+                    )
+                ) +
                 "%";
 
         },
@@ -3259,4 +3706,3 @@ document.addEventListener(
 
 </body>
 </html>
-

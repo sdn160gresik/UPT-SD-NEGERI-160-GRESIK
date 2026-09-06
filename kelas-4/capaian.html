@@ -865,23 +865,6 @@ footer{
     background:#d9534f;
 }
 
-.nilai-rata-average{
-    position:absolute;
-    left:50%;
-    top:-38px;
-    transform:translateX(-50%);
-    min-width:54px;
-    padding:5px 8px;
-    border-radius:10px;
-    background:#fff;
-    border:1px solid rgba(92,48,24,.13);
-    box-shadow:0 5px 12px rgba(92,48,24,.12);
-    text-align:center;
-    font-size:16px;
-    font-weight:900;
-    color:#4a2c20;
-    white-space:nowrap;
-}
 
 .nilai-rata-count{
     margin-top:8px;
@@ -975,11 +958,7 @@ footer{
         border-radius:10px 10px 0 0;
     }
 
-    .nilai-rata-average{
-        font-size:14px;
-        min-width:48px;
-        padding:4px 6px;
-    }
+
 
     .nilai-rata-category-name{
         font-size:10px;
@@ -995,7 +974,6 @@ footer{
         right:6px;
     }
 }
-</style>
 </style>
 </head>
 
@@ -1182,12 +1160,6 @@ footer{
                                 style="height:0%;"
                                 title="Sangat Baik"
                             >
-                                <div
-                                    id="nilaiRataExcellentAverage"
-                                    class="nilai-rata-average"
-                                >
-                                    -
-                                </div>
                             </div>
                         </div>
 
@@ -1217,12 +1189,6 @@ footer{
                                 style="height:0%;"
                                 title="Cukup Baik"
                             >
-                                <div
-                                    id="nilaiRataGoodAverage"
-                                    class="nilai-rata-average"
-                                >
-                                    -
-                                </div>
                             </div>
                         </div>
 
@@ -1252,12 +1218,6 @@ footer{
                                 style="height:0%;"
                                 title="Perlu Pendampingan"
                             >
-                                <div
-                                    id="nilaiRataNeedingAverage"
-                                    class="nilai-rata-average"
-                                >
-                                    -
-                                </div>
                             </div>
                         </div>
 
@@ -2305,6 +2265,7 @@ document.addEventListener(
 /* =========================================================
    TAMBAHAN
    AKTUALISASI GRAFIK NILAI RATA-RATA CAPAIAN
+   HANYA JUMLAH SISWA YANG DITAMPILKAN
    KODE LAMA TIDAK DIUBAH
 ========================================================= */
 
@@ -2312,44 +2273,12 @@ document.addEventListener(
 
     let dataTerakhir = null;
 
-    function angkaValid(value){
-        const number = Number(value);
-
-        return Number.isFinite(number);
-    }
-
-    function formatRataRataNilai(value){
-
-        if(!angkaValid(value)){
-            return "-";
-        }
-
-        return Number(value).toLocaleString(
-            "id-ID",
-            {
-                minimumFractionDigits:1,
-                maximumFractionDigits:1
-            }
-        );
-    }
-
     function hitungKategori(data){
 
         const hasil = {
-            excellent:{
-                count:0,
-                total:0
-            },
-
-            good:{
-                count:0,
-                total:0
-            },
-
-            needing:{
-                count:0,
-                total:0
-            }
+            excellent:{ count:0 },
+            good:{ count:0 },
+            needing:{ count:0 }
         };
 
         if(!Array.isArray(data)){
@@ -2368,30 +2297,15 @@ document.addEventListener(
             }
 
             if(nilai >= 80){
-
                 hasil.excellent.count++;
-
-                hasil.excellent.total +=
-                    nilai;
-
             }
 
             else if(nilai >= 60){
-
                 hasil.good.count++;
-
-                hasil.good.total +=
-                    nilai;
-
             }
 
             else{
-
                 hasil.needing.count++;
-
-                hasil.needing.total +=
-                    nilai;
-
             }
 
         });
@@ -2424,19 +2338,16 @@ document.addEventListener(
             {
                 key:"excellent",
                 bar:"nilaiRataExcellentBar",
-                average:"nilaiRataExcellentAverage",
                 count:"nilaiRataExcellentCount"
             },
             {
                 key:"good",
                 bar:"nilaiRataGoodBar",
-                average:"nilaiRataGoodAverage",
                 count:"nilaiRataGoodCount"
             },
             {
                 key:"needing",
                 bar:"nilaiRataNeedingBar",
-                average:"nilaiRataNeedingAverage",
                 count:"nilaiRataNeedingCount"
             }
         ];
@@ -2451,31 +2362,20 @@ document.addEventListener(
                     item.bar
                 );
 
-            const average =
-                document.getElementById(
-                    item.average
-                );
-
             const count =
                 document.getElementById(
                     item.count
                 );
 
-            if(!bar || !average || !count){
+            if(!bar || !count){
                 return;
             }
 
-            const rata =
-                data.count > 0
-                    ? data.total / data.count
-                    : null;
-
             /*
-             * Sumbu vertikal 0–100 menggambarkan
-             * jumlah siswa, bukan persentase nilai.
-             *
-             * Nilai rata-rata kategori ditampilkan
-             * sebagai angka di atas batang.
+             * Sumbu vertikal 0–100 digunakan sebagai
+             * skala jumlah siswa.
+             * Tinggi batang menunjukkan jumlah siswa,
+             * bukan persentase dan bukan nilai rata-rata.
              */
             const tinggi =
                 Math.min(
@@ -2485,11 +2385,6 @@ document.addEventListener(
 
             bar.style.height =
                 tinggi + "%";
-
-            average.textContent =
-                rata === null
-                    ? "-"
-                    : formatRataRataNilai(rata);
 
             count.textContent =
                 data.count +

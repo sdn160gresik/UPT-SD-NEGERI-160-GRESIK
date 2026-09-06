@@ -2,19 +2,38 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#9b4d20">
 
-<title>Jejak Capaian | UPT SDN 160 GRESIK</title>
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+name="theme-color"
+content="#9b4d20"
+>
+
+<title>
+Jejak Capaian | UPT SDN 160 GRESIK
+</title>
 
 <style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
 :root{
+
     --primary:#9b4d20;
     --primary-dark:#713517;
+
     --secondary:#d96b26;
     --orange:#e67e22;
     --yellow:#f4b942;
+
     --green:#2e8b57;
     --green-dark:#246b45;
 
@@ -28,16 +47,19 @@
     --border:#ead7bc;
     --gold:#d89b18;
 
-    --shadow:rgba(92,48,24,.16);
-
-    /* =========================
-       TAMBAHAN WARNA GRAFIK
-    ========================== */
+    --shadow:
+    rgba(92,48,24,.16);
 
     --excellent:#2e8b57;
     --good:#f4b942;
     --needing:#d9534f;
+
 }
+
+
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
     box-sizing:border-box;
@@ -50,736 +72,780 @@ html{
 }
 
 body{
+
     min-height:100vh;
+
     font-family:
-        "Segoe UI",
-        Arial,
-        Helvetica,
-        sans-serif;
+    "Segoe UI",
+    Arial,
+    Helvetica,
+    sans-serif;
 
     color:var(--ink);
 
     background:
-        radial-gradient(
-            circle at 8% 18%,
-            rgba(244,185,66,.16) 0 75px,
-            transparent 76px
-        ),
-        radial-gradient(
-            circle at 94% 75%,
-            rgba(46,139,87,.09) 0 105px,
-            transparent 106px
-        ),
-        linear-gradient(
-            135deg,
-            #fff9ec 0%,
-            #fff2d8 48%,
-            #fffaf1 100%
-        );
+    radial-gradient(
+        circle at top left,
+        rgba(244,185,66,.18),
+        transparent 30%
+    ),
+
+    radial-gradient(
+        circle at bottom right,
+        rgba(46,139,87,.10),
+        transparent 30%
+    ),
+
+    linear-gradient(
+        135deg,
+        #fffaf0,
+        #fff7e8
+    );
+
 }
 
-/* =========================
+
+/* =========================================================
    CONTAINER
-========================= */
+========================================================= */
 
 .container{
-    width:min(1080px, calc(100% - 32px));
-    margin:auto;
+
+    width:100%;
+    max-width:1080px;
+
+    margin:0 auto;
+
+    padding:
+    22px
+    18px
+    40px;
+
 }
 
-/* =========================
+
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero{
-    margin-top:22px;
-    margin-bottom:22px;
-
-    padding:34px 36px;
-
-    min-height:190px;
-
-    border-radius:0 0 28px 28px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #8d421b,
-            #9b4d20 55%,
-            #a95a24
-        );
-
-    color:white;
 
     position:relative;
-    overflow:hidden;
 
-    box-shadow:
-        0 18px 35px rgba(92,48,24,.17);
-}
+    text-align:center;
 
-.hero::before{
-    content:"";
-    position:absolute;
+    padding:
+    20px
+    10px
+    24px;
 
-    width:150px;
-    height:150px;
-
-    right:-35px;
-    bottom:-75px;
-
-    border-radius:50%;
-
-    background:rgba(244,185,66,.18);
-}
-
-.hero::after{
-    content:"";
-    position:absolute;
-
-    width:80px;
-    height:80px;
-
-    right:90px;
-    top:-35px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.07);
-}
-
-.hero-content{
-    position:relative;
-    z-index:2;
 }
 
 .school-badge{
+
     display:inline-flex;
-    align-items:center;
-    gap:8px;
 
-    padding:7px 12px;
-
-    margin-bottom:14px;
-
-    border-radius:999px;
-
-    background:rgba(255,255,255,.14);
-    border:1px solid rgba(255,255,255,.2);
-
-    font-size:12px;
-    font-weight:700;
-}
-
-.hero h1{
-    font-size:clamp(32px,5vw,52px);
-    line-height:1.05;
-    font-weight:900;
-
-    display:flex;
-    align-items:center;
-    gap:14px;
-
-    margin-bottom:12px;
-}
-
-.hero h1 span{
-    font-size:.85em;
-}
-
-.hero p{
-    max-width:780px;
-
-    line-height:1.7;
-
-    font-size:14px;
-
-    color:rgba(255,255,255,.94);
-}
-
-/* =========================
-   TOOLBAR
-========================= */
-
-.toolbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    gap:15px;
-
-    margin:18px 0;
-}
-
-.btn{
-    border:0;
-    cursor:pointer;
-
-    min-height:43px;
-
-    padding:11px 17px;
-
-    border-radius:13px;
-
-    font-size:13px;
-    font-weight:800;
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-.btn:active{
-    transform:translateY(0);
-}
-
-.btn-back{
-    color:var(--primary);
-
-    background:white;
-
-    border:1px solid var(--border);
-
-    box-shadow:
-        0 5px 15px rgba(92,48,24,.07);
-}
-
-.btn-refresh{
-    color:white;
-
-    background:var(--primary);
-
-    box-shadow:
-        0 7px 18px rgba(155,77,32,.22);
-}
-
-.btn-refresh:hover{
-    background:var(--primary-dark);
-}
-
-.btn-all{
-    width:100%;
-
-    margin-top:16px;
-
-    color:white;
-
-    background:var(--green);
-
-    box-shadow:
-        0 7px 18px rgba(46,139,87,.18);
-}
-
-.btn-all:hover{
-    background:var(--green-dark);
-}
-
-/* =========================
-   STATUS
-========================= */
-
-.status{
-    min-height:43px;
-
-    display:flex;
-    align-items:center;
-
-    padding:11px 16px;
-
-    margin:10px 0 24px;
-
-    border-radius:13px;
-
-    font-size:13px;
-    font-weight:700;
-
-    border:1px solid transparent;
-}
-
-.status.loading{
-    color:#76551d;
-    background:#fff8df;
-    border-color:#efd98e;
-}
-
-.status.success{
-    color:#246b45;
-    background:#edf9f1;
-    border-color:#b8dfc5;
-}
-
-.status.error{
-    color:#a43e2d;
-    background:#fff0ed;
-    border-color:#efbdb4;
-}
-
-/* =========================
-   SECTION TITLE
-========================= */
-
-.section{
-    margin-top:24px;
-}
-
-.section-title{
-    display:flex;
-    align-items:center;
-    gap:10px;
-
-    margin-bottom:12px;
-}
-
-.section-icon{
-    font-size:30px;
-    line-height:1;
-}
-
-.section-title h2{
-    font-size:23px;
-    line-height:1.1;
-
-    font-weight:900;
-}
-
-.section-title p{
-    margin-top:4px;
-
-    font-size:12px;
-    color:var(--muted);
-}
-
-/* =========================
-   TOP THREE
-========================= */
-
-.top-three{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:16px;
-}
-
-.champion{
-    min-height:190px;
-
-    display:flex;
-    flex-direction:column;
     align-items:center;
     justify-content:center;
 
-    text-align:center;
+    gap:7px;
 
-    padding:20px;
+    padding:
+    8px
+    15px;
 
-    border-radius:20px;
+    border-radius:999px;
 
-    background:
-        linear-gradient(
-            145deg,
-            #fffef9,
-            #fff8e7
-        );
+    background:#fff;
 
-    border:1px solid var(--border);
+    border:
+    1px solid
+    var(--border);
+
+    color:
+    var(--primary);
+
+    font-size:13px;
+
+    font-weight:900;
 
     box-shadow:
-        0 13px 25px rgba(92,48,24,.10);
+    0 5px 14px
+    rgba(92,48,24,.08);
 
-    position:relative;
-    overflow:hidden;
 }
 
-.champion:nth-child(1){
-    border-color:#efb42b;
+.hero h1{
+
+    margin-top:14px;
+
+    font-size:
+    clamp(
+        30px,
+        5vw,
+        48px
+    );
+
+    line-height:1.1;
+
+    color:
+    var(--primary-dark);
+
+    font-weight:950;
+
 }
 
-.champion::after{
-    content:"";
+.hero p{
 
-    position:absolute;
+    max-width:720px;
 
-    width:100px;
-    height:100px;
+    margin:
+    12px auto
+    0;
 
-    right:-50px;
-    bottom:-50px;
+    color:
+    var(--muted);
 
-    border-radius:50%;
+    line-height:1.6;
 
-    background:rgba(244,185,66,.07);
+    font-size:
+    clamp(
+        14px,
+        2vw,
+        16px
+    );
+
 }
 
-.medal{
-    font-size:49px;
-
-    line-height:1;
-
-    margin-bottom:9px;
-
-    position:relative;
-    z-index:2;
-}
-
-.place{
-    font-size:11px;
-
-    font-weight:900;
-
-    letter-spacing:.8px;
-
-    color:#826e63;
-
-    margin-bottom:9px;
-}
-
-.student-name{
-    font-size:17px;
-
-    font-weight:900;
-
-    color:var(--primary);
-
-    margin-bottom:10px;
-
-    max-width:100%;
-
-    word-break:break-word;
-}
-
-.score{
-    font-size:20px;
-
-    font-weight:900;
-
-    color:var(--green-dark);
-}
-
-.student-meta{
-    margin-top:4px;
-
-    color:var(--muted);
-
-    font-size:11px;
-}
 
 /* =========================================================
-   DIAGRAM BATANG NILAI RATA-RATA CAPAIAN
+   TOOLBAR
 ========================================================= */
 
-.capaian-chart-card{
-    background:
-        rgba(255,253,248,.97);
+.toolbar{
 
-    border:1px solid var(--border);
+    display:flex;
 
-    border-radius:20px;
+    justify-content:space-between;
 
-    overflow:hidden;
+    align-items:center;
 
-    box-shadow:
-        0 13px 28px rgba(92,48,24,.09);
+    gap:12px;
 
-    margin-top:16px;
+    margin-bottom:18px;
+
+    flex-wrap:wrap;
+
 }
 
-.chart-header{
-    padding:19px 21px;
+.toolbar-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    border:0;
+
+    border-radius:14px;
+
+    padding:
+    12px
+    16px;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+
+}
+
+.toolbar-btn:hover{
+
+    transform:
+    translateY(-2px);
+
+}
+
+.back-btn{
+
+    color:#fff;
+
+    background:
+    linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    box-shadow:
+    0 7px 17px
+    rgba(155,77,32,.20);
+
+}
+
+.refresh-btn{
+
+    color:#fff;
+
+    background:
+    linear-gradient(
+        135deg,
+        var(--green),
+        #3aa66b
+    );
+
+    box-shadow:
+    0 7px 17px
+    rgba(46,139,87,.20);
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status{
 
     display:flex;
 
     align-items:center;
 
-    justify-content:space-between;
+    justify-content:center;
 
-    gap:18px;
+    min-height:46px;
 
-    border-bottom:1px solid var(--border);
+    margin-bottom:18px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #fff8e9,
-            #fffdf7
-        );
-}
-
-.chart-title{
-    font-size:19px;
-
-    font-weight:900;
-
-    color:var(--ink);
-}
-
-.chart-subtitle{
-    margin-top:5px;
-
-    font-size:11px;
-
-    color:var(--muted);
-}
-
-.average-box{
-    min-width:180px;
-
-    padding:11px 15px;
-
-    text-align:center;
+    padding:
+    11px
+    15px;
 
     border-radius:14px;
 
-    background:#fff4dc;
+    background:
+    rgba(255,255,255,.80);
 
-    border:1px solid #efd9a4;
+    border:
+    1px solid
+    var(--border);
+
+    color:
+    var(--muted);
+
+    font-size:13px;
+
+    font-weight:700;
+
+    text-align:center;
+
 }
 
-.average-label{
-    font-size:9px;
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+
+    background:
+    rgba(255,253,248,.96);
+
+    border:
+    1px solid
+    var(--border);
+
+    border-radius:22px;
+
+    box-shadow:
+    0 12px 30px
+    var(--shadow);
+
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.section-title{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+}
+
+.section-title h2{
+
+    font-size:
+    clamp(
+        22px,
+        4vw,
+        30px
+    );
+
+    color:
+    var(--primary-dark);
+
+    font-weight:950;
+
+}
+
+.section-title p{
+
+    margin-top:6px;
+
+    color:
+    var(--muted);
+
+    font-size:13px;
+
+    line-height:1.5;
+
+}
+
+
+/* =========================================================
+   TOP THREE
+========================================================= */
+
+.top-three-section{
+
+    padding:24px;
+
+    margin-bottom:22px;
+
+}
+
+.champions{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:16px;
+
+}
+
+.champion{
+
+    position:relative;
+
+    overflow:hidden;
+
+    text-align:center;
+
+    padding:
+    22px
+    15px
+    18px;
+
+    border-radius:18px;
+
+    border:
+    1px solid
+    var(--border);
+
+    background:
+    linear-gradient(
+        145deg,
+        #fff,
+        #fff8e8
+    );
+
+    transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+
+}
+
+.champion:hover{
+
+    transform:
+    translateY(-4px);
+
+    box-shadow:
+    0 10px 24px
+    rgba(92,48,24,.12);
+
+}
+
+.champion.medal-1{
+
+    border-color:
+    rgba(216,155,24,.55);
+
+}
+
+.champion.medal-2{
+
+    border-color:
+    rgba(128,128,128,.35);
+
+}
+
+.champion.medal-3{
+
+    border-color:
+    rgba(166,102,62,.35);
+
+}
+
+.medal{
+
+    font-size:38px;
+
+    margin-bottom:8px;
+
+}
+
+.champion-rank{
+
+    display:inline-block;
+
+    padding:
+    4px
+    10px;
+
+    border-radius:999px;
+
+    background:#fff;
+
+    border:
+    1px solid
+    var(--border);
+
+    color:
+    var(--muted);
+
+    font-size:11px;
 
     font-weight:900;
 
-    color:var(--muted);
-
-    letter-spacing:.5px;
 }
 
-.average-value{
-    margin-top:4px;
+.champion-name{
 
-    font-size:28px;
+    margin-top:10px;
 
-    line-height:1;
+    font-size:17px;
 
-    font-weight:900;
+    font-weight:950;
 
-    color:var(--primary);
+    color:
+    var(--ink);
+
+    word-break:break-word;
+
 }
 
-.average-category{
-    margin-top:5px;
+.champion-score{
+
+    margin-top:7px;
+
+    font-size:30px;
+
+    font-weight:950;
+
+    color:
+    var(--primary);
+
+}
+
+.champion-class{
+
+    margin-top:3px;
+
+    font-size:12px;
+
+    color:
+    var(--muted);
+
+}
+
+
+/* =========================================================
+   CHART CARD
+========================================================= */
+
+.chart-card{
+
+    margin-bottom:22px;
+
+    padding:24px;
+
+    background:
+    #fffefa;
+
+    border:
+    1px solid
+    var(--border);
+
+    border-radius:22px;
+
+    box-shadow:
+    0 12px 30px
+    var(--shadow);
+
+}
+
+.chart-header{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    margin-bottom:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.chart-header-title h2{
+
+    font-size:
+    clamp(
+        21px,
+        4vw,
+        28px
+    );
+
+    color:
+    var(--primary-dark);
+
+    font-weight:950;
+
+}
+
+.chart-header-title p{
+
+    margin-top:6px;
+
+    color:
+    var(--muted);
+
+    font-size:13px;
+
+    line-height:1.5;
+
+}
+
+.overall-average{
+
+    min-width:145px;
+
+    padding:
+    12px
+    16px;
+
+    border-radius:16px;
+
+    background:
+    #fff8e8;
+
+    border:
+    1px solid
+    #ead7bc;
+
+    text-align:center;
+
+}
+
+.overall-average span{
+
+    display:block;
+
+    color:
+    var(--muted);
 
     font-size:10px;
 
-    font-weight:800;
+    font-weight:900;
 
-    color:var(--green-dark);
+    letter-spacing:.5px;
+
 }
 
+.overall-average strong{
+
+    display:block;
+
+    margin-top:2px;
+
+    color:
+    var(--primary);
+
+    font-size:27px;
+
+    font-weight:950;
+
+}
+
+
 /* =========================================================
-   AREA DIAGRAM
+   VERTICAL BAR CHART
+   BERDASARKAN JUMLAH SISWA
 ========================================================= */
 
-.vertical-chart-wrapper{
+.vertical-chart{
+
+    width:100%;
+
+    padding:
+    8px
+    4px
+    0;
+
+}
+
+.chart-plot{
+
     position:relative;
 
     display:grid;
 
-    grid-template-columns:52px 1fr;
+    grid-template-columns:
+    42px
+    1fr;
 
-    min-height:500px;
+    gap:12px;
 
-    padding:30px 28px 22px 18px;
+    min-height:360px;
+
 }
 
-/* =========================================================
-   SUMBU NILAI 0-100
-========================================================= */
+.y-axis{
 
-.chart-axis{
     position:relative;
 
-    height:420px;
+    height:310px;
 
-    padding-bottom:0;
+    border-right:
+    1px solid
+    #dfcfb9;
+
 }
 
-.axis-label{
+.y-label{
+
     position:absolute;
 
-    right:9px;
+    right:7px;
 
-    transform:translateY(50%);
+    transform:
+    translateY(50%);
 
-    font-size:10px;
+    color:
+    #8b786c;
+
+    font-size:11px;
 
     font-weight:800;
 
-    color:#806b61;
-
-    line-height:1;
 }
 
-/*
- * Posisi angka:
- * 100 berada paling atas
- * 0 berada paling bawah
- */
 
-.axis-100{
-    top:0;
-    transform:translateY(-50%);
-}
+/* ---------------------------------------------------------
+   PLOT AREA
+--------------------------------------------------------- */
 
-.axis-90{
-    top:10%;
-}
+.plot-area{
 
-.axis-80{
-    top:20%;
-}
-
-.axis-70{
-    top:30%;
-}
-
-.axis-60{
-    top:40%;
-}
-
-.axis-50{
-    top:50%;
-}
-
-.axis-40{
-    top:60%;
-}
-
-.axis-30{
-    top:70%;
-}
-
-.axis-20{
-    top:80%;
-}
-
-.axis-10{
-    top:90%;
-}
-
-.axis-0{
-    top:100%;
-    transform:translateY(-50%);
-}
-
-/* =========================================================
-   AREA BATANG
-========================================================= */
-
-.vertical-chart{
     position:relative;
 
-    height:420px;
+    height:310px;
 
-    display:flex;
+    border-bottom:
+    1px solid
+    #d9c8b1;
 
-    align-items:flex-end;
-
-    justify-content:space-around;
-
-    gap:28px;
-
-    border-bottom:2px solid #cdbda9;
-
-    border-left:1px solid #e1d5c6;
 }
 
-/* =========================================================
-   GRID
-========================================================= */
 
-.chart-grid{
+/* ---------------------------------------------------------
+   GRIDLINES
+--------------------------------------------------------- */
+
+.grid-lines{
+
     position:absolute;
 
     inset:0;
 
     pointer-events:none;
 
-    z-index:0;
-
-    background:
-        repeating-linear-gradient(
-            to bottom,
-            transparent 0,
-            transparent calc(10% - 1px),
-            rgba(128,107,97,.15) calc(10% - 1px),
-            rgba(128,107,97,.15) 10%
-        );
 }
 
-/* =========================================================
-   BAR ITEM
-========================================================= */
+.grid-line{
 
-.vertical-bar-item{
-    height:100%;
-
-    flex:1;
-
-    max-width:190px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:flex-end;
-
-    align-items:center;
-
-    position:relative;
-
-    z-index:2;
-}
-
-/* =========================================================
-   NILAI DI ATAS BATANG
-========================================================= */
-
-.vertical-value{
     position:absolute;
 
-    left:50%;
+    left:0;
+    right:0;
 
-    transform:
-        translateX(-50%)
-        translateY(-5px);
+    border-top:
+    1px solid
+    rgba(128,107,97,.14);
 
-    font-size:20px;
-
-    font-weight:900;
-
-    line-height:1;
-
-    white-space:nowrap;
-
-    z-index:5;
 }
 
-.vertical-value.excellent{
-    color:var(--excellent);
+
+/* ---------------------------------------------------------
+   BARS
+--------------------------------------------------------- */
+
+.bars{
+
+    position:absolute;
+
+    inset:
+    0
+    0
+    0
+    0;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    align-items:end;
+
+    gap:
+    clamp(
+        16px,
+        5vw,
+        55px
+    );
+
+    padding:
+    0
+    clamp(
+        8px,
+        5vw,
+        45px
+    );
+
 }
 
-.vertical-value.good{
-    color:#9b7113;
-}
-
-.vertical-value.needing{
-    color:var(--needing);
-}
-
-/* =========================================================
-   BATANG
-========================================================= */
-
-.vertical-bar-track{
-    width:100%;
+.bar-item{
 
     height:100%;
 
@@ -790,1162 +856,1319 @@ body{
     justify-content:center;
 
     position:relative;
+
 }
 
-.vertical-bar-fill{
-    width:min(105px,72%);
-
-    height:0%;
-
-    min-height:0;
-
-    border-radius:12px 12px 3px 3px;
+.bar-track{
 
     position:relative;
 
-    transition:
-        height 1.2s cubic-bezier(.22,1,.36,1);
+    width:
+    min(
+        100px,
+        60%
+    );
 
-    box-shadow:
-        0 8px 16px rgba(92,48,24,.13);
+    height:100%;
 
     display:flex;
+
+    align-items:flex-end;
 
     justify-content:center;
 
-    align-items:flex-start;
 }
 
-.vertical-bar-fill::before{
-    content:"";
+.bar-fill{
+
+    position:relative;
+
+    width:100%;
+
+    height:0;
+
+    min-height:0;
+
+    border-radius:
+    12px
+    12px
+    4px
+    4px;
+
+    transition:
+    height 1s cubic-bezier(
+        .22,
+        1,
+        .36,
+        1
+    );
+
+    box-shadow:
+    inset 0 1px 0
+    rgba(255,255,255,.45),
+    0 6px 15px
+    rgba(92,48,24,.12);
+
+}
+
+.bar-fill.excellent{
+
+    background:
+    linear-gradient(
+        180deg,
+        #3da56b,
+        var(--excellent)
+    );
+
+}
+
+.bar-fill.good{
+
+    background:
+    linear-gradient(
+        180deg,
+        #f7c95f,
+        var(--good)
+    );
+
+}
+
+.bar-fill.needing{
+
+    background:
+    linear-gradient(
+        180deg,
+        #e76c67,
+        var(--needing)
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   BAR VALUE
+--------------------------------------------------------- */
+
+.bar-value{
 
     position:absolute;
 
-    top:0;
-    left:0;
+    left:50%;
 
-    width:100%;
+    top:-39px;
 
-    height:4px;
+    transform:
+    translateX(-50%);
 
-    border-radius:12px 12px 0 0;
+    min-width:44px;
 
-    background:rgba(255,255,255,.45);
-}
+    padding:
+    5px
+    8px;
 
-.vertical-bar-fill.excellent{
-    background:var(--excellent);
-}
+    border-radius:10px;
 
-.vertical-bar-fill.good{
-    background:var(--good);
-}
+    background:#fff;
 
-.vertical-bar-fill.needing{
-    background:var(--needing);
-}
+    border:
+    1px solid
+    var(--border);
 
-/* =========================================================
-   LABEL BAWAH BATANG
-========================================================= */
+    box-shadow:
+    0 4px 12px
+    rgba(92,48,24,.10);
 
-.vertical-label{
-    width:100%;
+    color:
+    var(--ink);
 
-    min-height:73px;
+    font-size:17px;
 
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:flex-start;
+    font-weight:950;
 
     text-align:center;
 
-    padding-top:13px;
+    white-space:nowrap;
+
 }
 
-.vertical-category{
+
+/* ---------------------------------------------------------
+   X LABELS
+--------------------------------------------------------- */
+
+.bar-labels{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:
+    clamp(
+        16px,
+        5vw,
+        55px
+    );
+
+    padding:
+    13px
+    clamp(
+        8px,
+        5vw,
+        45px
+    )
+    0
+    42px;
+
+}
+
+.bar-label{
+
+    text-align:center;
+
+}
+
+.bar-category{
+
+    display:block;
+
+    font-size:
+    clamp(
+        12px,
+        2vw,
+        15px
+    );
+
+    font-weight:950;
+
+    line-height:1.3;
+
+}
+
+.bar-category.excellent{
+
+    color:
+    var(--excellent);
+
+}
+
+.bar-category.good{
+
+    color:
+    #b38300;
+
+}
+
+.bar-category.needing{
+
+    color:
+    var(--needing);
+
+}
+
+.bar-range{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:
+    var(--muted);
+
+    font-size:11px;
+
+    font-weight:800;
+
+}
+
+
+/* =========================================================
+   CHART NOTE
+========================================================= */
+
+.chart-note{
+
+    margin-top:4px;
+
+    padding:
+    10px
+    13px;
+
+    border-radius:13px;
+
+    background:
+    #fff8e8;
+
+    border:
+    1px dashed
+    #dfc292;
+
+    color:
+    #765e4e;
+
+    text-align:center;
+
+    font-size:12px;
+
+    line-height:1.5;
+
+}
+
+
+/* =========================================================
+   CATEGORY SUMMARY
+========================================================= */
+
+.category-summary{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:12px;
+
+    margin-top:18px;
+
+}
+
+.category-box{
+
+    padding:
+    15px
+    12px;
+
+    border-radius:16px;
+
+    background:#fff;
+
+    border:
+    1px solid
+    var(--border);
+
+    text-align:center;
+
+}
+
+.category-dot{
+
+    width:10px;
+    height:10px;
+
+    display:inline-block;
+
+    border-radius:50%;
+
+    margin-right:5px;
+
+}
+
+.category-dot.excellent{
+
+    background:
+    var(--excellent);
+
+}
+
+.category-dot.good{
+
+    background:
+    var(--good);
+
+}
+
+.category-dot.needing{
+
+    background:
+    var(--needing);
+
+}
+
+.category-box-title{
+
     font-size:12px;
 
     font-weight:900;
 
-    line-height:1.3;
+    color:
+    var(--muted);
 
-    color:var(--ink);
 }
 
-.vertical-range{
-    margin-top:4px;
+.category-count{
 
-    font-size:10px;
-
-    font-weight:800;
-
-    color:var(--muted);
-}
-
-.vertical-student-count{
-    margin-top:4px;
-
-    font-size:9px;
-
-    color:var(--muted);
-}
-
-/* =========================================================
-   RINGKASAN KATEGORI
-========================================================= */
-
-.chart-summary{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:10px;
-
-    margin:0 22px 22px;
-
-    padding-top:18px;
-
-    border-top:1px solid #eee1cf;
-}
-
-.summary-box{
-    padding:12px;
-
-    border-radius:13px;
-
-    background:#fffaf0;
-
-    border:1px solid #eee0ca;
-
-    text-align:center;
-}
-
-.summary-icon{
-    font-size:20px;
-
-    margin-bottom:4px;
-}
-
-.summary-title{
-    font-size:10px;
-
-    font-weight:900;
-}
-
-.summary-range{
-    margin-top:3px;
-
-    font-size:9px;
-
-    color:var(--muted);
-}
-
-.summary-count{
-    margin-top:6px;
-
-    font-size:16px;
-
-    font-weight:900;
-}
-
-.summary-percent{
-    font-size:10px;
-
-    font-weight:800;
-
-    color:var(--muted);
-}
-
-.summary-average{
     margin-top:5px;
 
-    font-size:10px;
+    color:
+    var(--ink);
 
-    font-weight:900;
+    font-size:24px;
+
+    font-weight:950;
+
 }
 
-.summary-box.excellent{
-    border-color:#b8dfc5;
+.category-percentage{
+
+    margin-top:2px;
+
+    color:
+    var(--muted);
+
+    font-size:11px;
+
+    font-weight:800;
+
 }
 
-.summary-box.excellent .summary-count{
-    color:var(--green-dark);
-}
-
-.summary-box.excellent .summary-average{
-    color:var(--green-dark);
-}
-
-.summary-box.good{
-    border-color:#efd98e;
-}
-
-.summary-box.good .summary-count{
-    color:#9b7113;
-}
-
-.summary-box.good .summary-average{
-    color:#9b7113;
-}
-
-.summary-box.needing{
-    border-color:#efbdb4;
-}
-
-.summary-box.needing .summary-count{
-    color:#a43e2d;
-}
-
-.summary-box.needing .summary-average{
-    color:#a43e2d;
-}
 
 /* =========================================================
    TABLE CARD
 ========================================================= */
 
 .table-card{
-    background:rgba(255,253,248,.94);
 
-    border:1px solid var(--border);
+    padding:24px;
 
-    border-radius:19px;
+    margin-bottom:22px;
 
-    overflow:hidden;
-
-    box-shadow:
-        0 13px 28px rgba(92,48,24,.09);
 }
 
-.table-head{
-    min-height:54px;
-
-    padding:13px 18px;
+.table-header{
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
-    border-bottom:1px solid var(--border);
+    gap:15px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #fff8e9,
-            #fffdf7
-        );
+    margin-bottom:15px;
+
+    flex-wrap:wrap;
+
 }
 
-.table-title{
-    font-size:14px;
-    font-weight:900;
+.table-title h2{
+
+    color:
+    var(--primary-dark);
+
+    font-size:
+    clamp(
+        21px,
+        4vw,
+        28px
+    );
+
+    font-weight:950;
+
 }
 
 .student-count{
-    font-size:11px;
-    font-weight:800;
-
-    color:var(--muted);
-}
-
-/* =========================
-   TABLE
-========================= */
-
-.table-wrapper{
-    width:100%;
-    overflow-x:auto;
-}
-
-table{
-    width:100%;
-
-    border-collapse:collapse;
-
-    min-width:650px;
-}
-
-thead{
-    background:#fff4dc;
-}
-
-th{
-    padding:12px 14px;
-
-    text-align:left;
-
-    font-size:10px;
-
-    letter-spacing:.5px;
-
-    color:#7b4a2e;
-
-    white-space:nowrap;
-
-    border-bottom:1px solid var(--border);
-}
-
-td{
-    padding:12px 14px;
-
-    font-size:13px;
-
-    border-bottom:1px solid #f0e5d4;
-
-    vertical-align:middle;
-}
-
-tbody tr{
-    transition:background .2s ease;
-}
-
-tbody tr:hover{
-    background:#fff9ed;
-}
-
-tbody tr:last-child td{
-    border-bottom:0;
-}
-
-.rank-number{
-    width:35px;
-    height:35px;
 
     display:inline-flex;
 
     align-items:center;
-    justify-content:center;
 
-    border-radius:50%;
+    gap:5px;
 
-    background:#fff0cf;
+    padding:
+    7px
+    11px;
 
-    color:var(--primary);
+    border-radius:999px;
+
+    background:
+    #fff8e8;
+
+    border:
+    1px solid
+    var(--border);
+
+    color:
+    var(--muted);
+
+    font-size:12px;
 
     font-weight:900;
 
+}
+
+.table-wrap{
+
+    width:100%;
+
+    overflow-x:auto;
+
+    border-radius:15px;
+
+    border:
+    1px solid
+    var(--border);
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:620px;
+
+    background:#fff;
+
+}
+
+thead th{
+
+    padding:
+    12px
+    10px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #9b4d20,
+        #b96129
+    );
+
+    color:#fff;
+
     font-size:12px;
+
+    font-weight:900;
+
+    text-align:center;
+
+    white-space:nowrap;
+
 }
 
-.rank-1{
-    background:#ffe39a;
-    color:#805500;
+tbody td{
+
+    padding:
+    11px
+    10px;
+
+    border-bottom:
+    1px solid
+    #eee1d0;
+
+    font-size:13px;
+
+    text-align:center;
+
 }
 
-.rank-2{
-    background:#e7e7e7;
-    color:#5d5d5d;
+tbody tr:last-child td{
+
+    border-bottom:0;
+
 }
 
-.rank-3{
-    background:#f2c9a5;
-    color:#80461e;
+tbody tr:hover{
+
+    background:
+    #fffaf2;
+
 }
 
 .name-cell{
-    font-weight:800;
-    color:var(--ink);
+
+    text-align:left!important;
+
+    font-weight:900;
+
 }
 
 .score-cell{
-    font-weight:900;
-    color:var(--green-dark);
+
+    font-weight:950;
+
+    color:
+    var(--primary);
+
 }
 
-/* =========================
-   EMPTY
-========================= */
+.rank-number{
 
-.empty-row{
-    text-align:center;
+    display:inline-flex;
 
-    padding:30px !important;
+    align-items:center;
 
-    color:var(--muted);
-}
+    justify-content:center;
 
-/* =========================
-   ALL DATA
-========================= */
+    min-width:28px;
 
-.all-data{
-    display:none;
+    height:28px;
 
-    margin-top:18px;
+    padding:
+    0
+    6px;
 
-    animation:fadeIn .25s ease;
-}
+    border-radius:50%;
 
-.all-data.show{
-    display:block;
-}
+    background:
+    #fff3d5;
 
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(8px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-    margin-top:40px;
-
-    padding:24px 10px 30px;
-
-    text-align:center;
+    color:
+    var(--primary-dark);
 
     font-size:12px;
 
-    color:var(--muted);
+    font-weight:950;
+
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
 
-@media(max-width:800px){
+/* =========================================================
+   ALL DATA
+========================================================= */
 
-    .hero{
-        padding:27px 24px;
+.all-data-section{
+
+    margin-top:18px;
+
+}
+
+.all-data-header{
+
+    margin-bottom:12px;
+
+}
+
+.all-data-header h3{
+
+    color:
+    var(--primary-dark);
+
+    font-size:18px;
+
+    font-weight:950;
+
+}
+
+.all-data-header p{
+
+    margin-top:3px;
+
+    color:
+    var(--muted);
+
+    font-size:12px;
+
+}
+
+
+/* =========================================================
+   BUTTON ALL DATA
+========================================================= */
+
+.all-data-button{
+
+    display:block;
+
+    width:100%;
+
+    margin-top:16px;
+
+    padding:
+    13px
+    16px;
+
+    border:0;
+
+    border-radius:14px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #eadfd4,
+        #f3e9dd
+    );
+
+    color:
+    var(--primary-dark);
+
+    font-size:13px;
+
+    font-weight:950;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.all-data-button:hover{
+
+    transform:
+    translateY(-2px);
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+    padding:
+    10px
+    10px
+    25px;
+
+    text-align:center;
+
+    color:
+    var(--muted);
+
+    font-size:12px;
+
+    line-height:1.6;
+
+}
+
+.footer strong{
+
+    color:
+    var(--primary);
+
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state{
+
+    padding:
+    25px
+    15px;
+
+    text-align:center;
+
+    color:
+    var(--muted);
+
+    font-size:13px;
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading-dot{
+
+    display:inline-block;
+
+    width:7px;
+    height:7px;
+
+    margin-left:3px;
+
+    border-radius:50%;
+
+    background:
+    var(--primary);
+
+    animation:
+    loading .8s infinite alternate;
+
+}
+
+.loading-dot:nth-child(2){
+
+    animation-delay:.2s;
+
+}
+
+.loading-dot:nth-child(3){
+
+    animation-delay:.4s;
+
+}
+
+@keyframes loading{
+
+    from{
+        transform:translateY(0);
+        opacity:.35;
     }
 
-    .top-three{
+    to{
+        transform:translateY(-4px);
+        opacity:1;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE TABLET
+========================================================= */
+
+@media(max-width:760px){
+
+    .container{
+
+        padding:
+        15px
+        12px
+        30px;
+
+    }
+
+    .champions{
+
         grid-template-columns:1fr;
+
     }
 
     .champion{
-        min-height:160px;
+
+        padding:
+        17px;
+
+    }
+
+    .category-summary{
+
+        grid-template-columns:1fr;
+
     }
 
     .chart-header{
-        flex-direction:column;
 
         align-items:stretch;
+
     }
 
-    .average-box{
+    .overall-average{
+
         width:100%;
-    }
 
-    .chart-summary{
-        grid-template-columns:1fr;
-    }
-
-    .vertical-chart-wrapper{
-        grid-template-columns:42px 1fr;
-
-        padding:
-            28px
-            15px
-            20px
-            10px;
-    }
-
-    .vertical-chart{
-        gap:15px;
-    }
-
-    .vertical-bar-fill{
-        width:min(82px,70%);
     }
 
 }
+
+
+/* =========================================================
+   RESPONSIVE MOBILE
+========================================================= */
 
 @media(max-width:560px){
 
-    .container{
-        width:min(100% - 20px,1080px);
-    }
-
     .hero{
-        margin-top:10px;
 
-        border-radius:0 0 22px 22px;
+        padding-top:10px;
 
-        padding:25px 20px;
-    }
-
-    .hero h1{
-        font-size:34px;
-
-        gap:9px;
-    }
-
-    .hero p{
-        font-size:13px;
     }
 
     .toolbar{
+
         flex-direction:column;
-        align-items:stretch;
+
     }
 
-    .btn{
+    .toolbar-btn{
+
         width:100%;
+
     }
 
-    .section-title h2{
-        font-size:20px;
-    }
-
-    .champion{
-        min-height:150px;
-    }
-
-    .chart-title{
-        font-size:17px;
-    }
-
-    .chart-subtitle{
-        line-height:1.5;
-    }
-
-    .vertical-chart-wrapper{
-        grid-template-columns:35px 1fr;
-
-        min-height:405px;
+    .top-three-section,
+    .chart-card,
+    .table-card{
 
         padding:
-            28px
-            10px
-            15px
-            5px;
+        17px
+        13px;
+
+        border-radius:18px;
+
     }
 
-    .chart-axis{
-        height:330px;
-    }
+    .chart-plot{
 
-    .vertical-chart{
-        height:330px;
+        grid-template-columns:
+        31px
+        1fr;
 
         gap:7px;
+
+        min-height:300px;
+
     }
 
-    .axis-label{
-        font-size:8px;
+    .y-axis,
+    .plot-area{
 
-        right:6px;
+        height:255px;
+
     }
 
-    .vertical-value{
-        font-size:16px;
+    .y-label{
+
+        font-size:9px;
+
+        right:5px;
+
     }
 
-    .vertical-bar-fill{
-        width:62px;
+    .bars{
 
-        border-radius:9px 9px 2px 2px;
+        gap:8px;
+
+        padding:
+        0
+        5px;
+
     }
 
-    .vertical-label{
-        min-height:72px;
+    .bar-track{
 
-        padding-top:10px;
+        width:
+        min(
+            68px,
+            58%
+        );
+
     }
 
-    .vertical-category{
-        font-size:10px;
+    .bar-labels{
+
+        gap:8px;
+
+        padding:
+        11px
+        5px
+        25px;
+
     }
 
-    .vertical-range{
-        font-size:8px;
+    .bar-category{
+
+        font-size:11px;
+
     }
 
-    .vertical-student-count{
-        font-size:8px;
+    .bar-range{
+
+        font-size:9px;
+
     }
 
-    .chart-summary{
-        margin:
-            0
-            12px
-            16px;
+    .bar-value{
+
+        top:-34px;
+
+        min-width:34px;
+
+        padding:
+        4px
+        5px;
+
+        font-size:14px;
+
     }
 
 }
 
-/* =========================
+
+/* =========================================================
    PRINT
-========================= */
+========================================================= */
 
 @media print{
 
     body{
-        background:white;
+
+        background:#fff;
+
     }
 
     .toolbar,
     .status,
-    #allDataButton{
-        display:none !important;
+    .all-data-button{
+
+        display:none!important;
+
     }
 
-    .hero{
+    .container{
+
+        max-width:none;
+
+        padding:0;
+
+    }
+
+    .card,
+    .chart-card{
+
         box-shadow:none;
-    }
 
-    .capaian-chart-card,
-    .table-card,
-    .champion{
-        box-shadow:none;
-    }
+        border:
+        1px solid
+        #ccc;
 
-    .vertical-bar-fill{
-        transition:none;
     }
 
 }
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+button:focus-visible,
+a:focus-visible{
+
+    outline:
+    3px solid
+    rgba(230,126,34,.35);
+
+    outline-offset:3px;
+
+}
+
 </style>
+
 </head>
 
 
 <body>
 
+
 <div class="container">
 
-    <!-- =========================
-         HERO
-    ========================== -->
 
-    <header class="hero">
+<!-- =========================================================
+     HERO
+========================================================= -->
 
-        <div class="hero-content">
+<header class="hero">
 
-            <div class="school-badge">
-                🏫 UPT SDN 160 GRESIK
-            </div>
+    <span class="school-badge">
+        🏫 UPT SDN 160 GRESIK
+    </span>
 
-            <h1>
-                <span>🌟</span>
-                Jejak Capaian
-            </h1>
+    <h1>
+        🌟 Jejak Capaian
+    </h1>
+
+    <p>
+        Lihat perjalanan prestasi para penjelajah bilangan.
+        Siapa yang berhasil meraih nilai terbaik dan menjadi
+        juara dalam petualangan belajar hari ini?
+    </p>
+
+</header>
+
+
+<!-- =========================================================
+     TOOLBAR
+========================================================= -->
+
+<div class="toolbar">
+
+    <a
+        href="javascript:void(0)"
+        class="toolbar-btn back-btn"
+        onclick="kembaliKePetualangan()"
+        aria-label="Kembali ke Petualangan"
+    >
+        ← Kembali ke Petualangan
+    </a>
+
+
+    <button
+        class="toolbar-btn refresh-btn"
+        id="refreshButton"
+        onclick="loadData()"
+    >
+        🔄 Refresh Data
+    </button>
+
+</div>
+
+
+<!-- =========================================================
+     STATUS
+========================================================= -->
+
+<div
+    id="status"
+    class="status"
+>
+    Memuat data capaian siswa
+    <span class="loading-dot"></span>
+    <span class="loading-dot"></span>
+    <span class="loading-dot"></span>
+</div>
+
+
+<!-- =========================================================
+     PARA JUARA
+========================================================= -->
+
+<section
+    id="topThree"
+    class="card top-three-section"
+>
+
+    <div class="section-title">
+
+        <h2>
+            🏆 Para Juara
+        </h2>
+
+        <p>
+            Tiga siswa dengan nilai capaian tertinggi.
+        </p>
+
+    </div>
+
+
+    <div
+        id="champions"
+        class="champions"
+    >
+
+        <div class="empty-state">
+            Memuat data juara...
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     GRAFIK CAPAIAN
+========================================================= -->
+
+<section class="chart-card">
+
+    <div class="chart-header">
+
+        <div class="chart-header-title">
+
+            <h2>
+                📊 Jumlah Siswa Berdasarkan Kategori Nilai
+            </h2>
 
             <p>
-                Lihat perjalanan prestasi para penjelajah bilangan.
-                Siapa yang berhasil meraih nilai terbaik dan menjadi
-                juara dalam petualangan belajar hari ini?
+                Tinggi batang menunjukkan
+                <strong>jumlah siswa</strong>
+                pada setiap kategori nilai.
+                Bukan rata-rata nilai dan bukan persentase.
             </p>
 
         </div>
 
-    </header>
 
+        <div class="overall-average">
 
-    <!-- =========================
-         TOOLBAR
-    ========================== -->
+            <span>
+                RATA-RATA SELURUH SISWA
+            </span>
 
-    <div class="toolbar">
-
-        <button
-            class="btn btn-back"
-            onclick="kembaliKePetualangan()"
-        >
-            ← Kembali ke Petualangan
-        </button>
-
-
-        <button
-            class="btn btn-refresh"
-            onclick="loadData()"
-            id="refreshButton"
-        >
-            🔄 Refresh Data
-        </button>
-
-    </div>
-
-
-    <!-- =========================
-         STATUS
-    ========================== -->
-
-    <div
-        id="status"
-        class="status loading"
-    >
-        ⏳ Menghubungkan ke data capaian...
-    </div>
-
-
-    <!-- =========================
-         PARA JUARA
-    ========================== -->
-
-    <section class="section">
-
-        <div class="section-title">
-
-            <div class="section-icon">
-                🏆
-            </div>
-
-            <div>
-                <h2>Para Juara</h2>
-
-                <p>
-                    Penjelajah dengan capaian nilai terbaik
-                </p>
-            </div>
+            <strong id="overallAverage">
+                -
+            </strong>
 
         </div>
 
-
-        <div
-            id="topThree"
-            class="top-three"
-        >
-
-            <div class="champion">
-                <div class="medal">🥇</div>
-                <div class="place">JUARA 1</div>
-                <div class="student-name">Memuat data...</div>
-                <div class="score">-</div>
-            </div>
-
-
-            <div class="champion">
-                <div class="medal">🥈</div>
-                <div class="place">JUARA 2</div>
-                <div class="student-name">Memuat data...</div>
-                <div class="score">-</div>
-            </div>
-
-
-            <div class="champion">
-                <div class="medal">🥉</div>
-                <div class="place">JUARA 3</div>
-                <div class="student-name">Memuat data...</div>
-                <div class="score">-</div>
-            </div>
-
-        </div>
-
-    </section>
+    </div>
 
 
     <!-- =====================================================
-         DIAGRAM BATANG NILAI RATA-RATA
+         VERTICAL BAR CHART
     ====================================================== -->
 
-    <section class="section">
+    <div class="vertical-chart">
 
-        <div class="section-title">
+        <div class="chart-plot">
 
-            <div class="section-icon">
-                📊
+
+            <!-- Y AXIS -->
+
+            <div class="y-axis">
+
+                <span
+                    class="y-label"
+                    style="bottom:100%;"
+                >
+                    100
+                </span>
+
+                <span
+                    class="y-label"
+                    style="bottom:80%;"
+                >
+                    80
+                </span>
+
+                <span
+                    class="y-label"
+                    style="bottom:60%;"
+                >
+                    60
+                </span>
+
+                <span
+                    class="y-label"
+                    style="bottom:40%;"
+                >
+                    40
+                </span>
+
+                <span
+                    class="y-label"
+                    style="bottom:20%;"
+                >
+                    20
+                </span>
+
+                <span
+                    class="y-label"
+                    style="bottom:0%;"
+                >
+                    0
+                </span>
+
             </div>
 
-            <div>
-                <h2>Nilai Rata-rata Capaian</h2>
 
-                <p>
-                    Perbandingan rata-rata nilai berdasarkan kategori capaian
-                </p>
-            </div>
+            <!-- PLOT -->
 
-        </div>
+            <div class="plot-area">
 
 
-        <div class="capaian-chart-card">
+                <!-- GRID -->
 
-
-            <!-- =========================
-                 HEADER GRAFIK
-            ========================== -->
-
-            <div class="chart-header">
-
-                <div>
-
-                    <div class="chart-title">
-                        Nilai Rata-rata Capaian
-                    </div>
-
-                    <div class="chart-subtitle">
-                        Tinggi batang menunjukkan rata-rata nilai siswa pada setiap kategori
-                    </div>
-
-                </div>
-
-
-                <div class="average-box">
-
-                    <div class="average-label">
-                        NILAI RATA-RATA SELURUH SISWA
-                    </div>
+                <div class="grid-lines">
 
                     <div
-                        id="averageScore"
-                        class="average-value"
-                    >
-                        -
-                    </div>
+                        class="grid-line"
+                        style="top:0%;"
+                    ></div>
 
                     <div
-                        id="averageCategory"
-                        class="average-category"
-                    >
-                        Menunggu data...
-                    </div>
+                        class="grid-line"
+                        style="top:20%;"
+                    ></div>
+
+                    <div
+                        class="grid-line"
+                        style="top:40%;"
+                    ></div>
+
+                    <div
+                        class="grid-line"
+                        style="top:60%;"
+                    ></div>
+
+                    <div
+                        class="grid-line"
+                        style="top:80%;"
+                    ></div>
+
+                    <div
+                        class="grid-line"
+                        style="top:100%;"
+                    ></div>
 
                 </div>
 
-            </div>
+
+                <!-- BARS -->
+
+                <div class="bars">
 
 
-            <!-- =========================
-                 BADAN DIAGRAM
-            ========================== -->
+                    <!-- SANGAT BAIK -->
 
-            <div class="chart-body">
+                    <div class="bar-item">
 
-
-                <div class="vertical-chart-wrapper">
-
-
-                    <!-- =========================
-                         SUMBU Y
-                    ========================== -->
-
-                    <div class="chart-axis">
-
-                        <span class="axis-label axis-100">
-                            100
-                        </span>
-
-                        <span class="axis-label axis-90">
-                            90
-                        </span>
-
-                        <span class="axis-label axis-80">
-                            80
-                        </span>
-
-                        <span class="axis-label axis-70">
-                            70
-                        </span>
-
-                        <span class="axis-label axis-60">
-                            60
-                        </span>
-
-                        <span class="axis-label axis-50">
-                            50
-                        </span>
-
-                        <span class="axis-label axis-40">
-                            40
-                        </span>
-
-                        <span class="axis-label axis-30">
-                            30
-                        </span>
-
-                        <span class="axis-label axis-20">
-                            20
-                        </span>
-
-                        <span class="axis-label axis-10">
-                            10
-                        </span>
-
-                        <span class="axis-label axis-0">
-                            0
-                        </span>
-
-                    </div>
-
-
-                    <!-- =========================
-                         DIAGRAM VERTIKAL
-                    ========================== -->
-
-                    <div class="vertical-chart">
-
-
-                        <!-- GRID -->
-                        <div class="chart-grid"></div>
-
-
-                        <!-- =========================
-                             SANGAT BAIK
-                        ========================== -->
-
-                        <div class="vertical-bar-item">
+                        <div class="bar-track">
 
                             <div
-                                id="excellentVerticalValue"
-                                class="vertical-value excellent"
+                                id="excellentBar"
+                                class="bar-fill excellent"
+                                style="height:0%;"
                             >
-                                -
-                            </div>
-
-
-                            <div class="vertical-bar-track">
 
                                 <div
-                                    id="excellentVerticalBar"
-                                    class="vertical-bar-fill excellent"
+                                    id="excellentBarValue"
+                                    class="bar-value"
                                 >
-                                </div>
-
-                            </div>
-
-
-                            <div class="vertical-label">
-
-                                <div class="vertical-category">
-                                    🟢 Sangat Baik
-                                </div>
-
-                                <div class="vertical-range">
-                                    80–100
-                                </div>
-
-                                <div
-                                    id="excellentVerticalCount"
-                                    class="vertical-student-count"
-                                >
-                                    0 siswa
+                                    0
                                 </div>
 
                             </div>
 
                         </div>
 
+                    </div>
 
-                        <!-- =========================
-                             CUKUP BAIK
-                        ========================== -->
 
-                        <div class="vertical-bar-item">
+                    <!-- CUKUP BAIK -->
+
+                    <div class="bar-item">
+
+                        <div class="bar-track">
 
                             <div
-                                id="goodVerticalValue"
-                                class="vertical-value good"
+                                id="goodBar"
+                                class="bar-fill good"
+                                style="height:0%;"
                             >
-                                -
-                            </div>
-
-
-                            <div class="vertical-bar-track">
 
                                 <div
-                                    id="goodVerticalBar"
-                                    class="vertical-bar-fill good"
+                                    id="goodBarValue"
+                                    class="bar-value"
                                 >
-                                </div>
-
-                            </div>
-
-
-                            <div class="vertical-label">
-
-                                <div class="vertical-category">
-                                    🟡 Cukup Baik
-                                </div>
-
-                                <div class="vertical-range">
-                                    60–79
-                                </div>
-
-                                <div
-                                    id="goodVerticalCount"
-                                    class="vertical-student-count"
-                                >
-                                    0 siswa
+                                    0
                                 </div>
 
                             </div>
 
                         </div>
 
+                    </div>
 
-                        <!-- =========================
-                             PERLU PENDAMPINGAN
-                        ========================== -->
 
-                        <div class="vertical-bar-item">
+                    <!-- PERLU PENDAMPINGAN -->
+
+                    <div class="bar-item">
+
+                        <div class="bar-track">
 
                             <div
-                                id="needingVerticalValue"
-                                class="vertical-value needing"
+                                id="needingBar"
+                                class="bar-fill needing"
+                                style="height:0%;"
                             >
-                                -
-                            </div>
-
-
-                            <div class="vertical-bar-track">
 
                                 <div
-                                    id="needingVerticalBar"
-                                    class="vertical-bar-fill needing"
+                                    id="needingBarValue"
+                                    class="bar-value"
                                 >
+                                    0
                                 </div>
 
                             </div>
 
-
-                            <div class="vertical-label">
-
-                                <div class="vertical-category">
-                                    🔴 Perlu Pendampingan
-                                </div>
-
-                                <div class="vertical-range">
-                                    0–59
-                                </div>
-
-                                <div
-                                    id="needingVerticalCount"
-                                    class="vertical-student-count"
-                                >
-                                    0 siswa
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-
-                <!-- =========================
-                     RINGKASAN KATEGORI
-                ========================== -->
-
-                <div class="chart-summary">
-
-
-                    <div class="summary-box excellent">
-
-                        <div class="summary-icon">
-                            🟢
-                        </div>
-
-                        <div class="summary-title">
-                            SANGAT BAIK
-                        </div>
-
-                        <div class="summary-range">
-                            Nilai 80–100
-                        </div>
-
-                        <div
-                            id="excellentSummaryCount"
-                            class="summary-count"
-                        >
-                            0 siswa
-                        </div>
-
-                        <div
-                            id="excellentSummaryPercentage"
-                            class="summary-percent"
-                        >
-                            0%
-                        </div>
-
-                        <div
-                            id="excellentSummaryAverage"
-                            class="summary-average"
-                        >
-                            Rata-rata: -
-                        </div>
-
-                    </div>
-
-
-                    <div class="summary-box good">
-
-                        <div class="summary-icon">
-                            🟡
-                        </div>
-
-                        <div class="summary-title">
-                            CUKUP BAIK
-                        </div>
-
-                        <div class="summary-range">
-                            Nilai 60–79
-                        </div>
-
-                        <div
-                            id="goodSummaryCount"
-                            class="summary-count"
-                        >
-                            0 siswa
-                        </div>
-
-                        <div
-                            id="goodSummaryPercentage"
-                            class="summary-percent"
-                        >
-                            0%
-                        </div>
-
-                        <div
-                            id="goodSummaryAverage"
-                            class="summary-average"
-                        >
-                            Rata-rata: -
-                        </div>
-
-                    </div>
-
-
-                    <div class="summary-box needing">
-
-                        <div class="summary-icon">
-                            🔴
-                        </div>
-
-                        <div class="summary-title">
-                            PERLU PENDAMPINGAN
-                        </div>
-
-                        <div class="summary-range">
-                            Nilai 0–59
-                        </div>
-
-                        <div
-                            id="needingSummaryCount"
-                            class="summary-count"
-                        >
-                            0 siswa
-                        </div>
-
-                        <div
-                            id="needingSummaryPercentage"
-                            class="summary-percent"
-                        >
-                            0%
-                        </div>
-
-                        <div
-                            id="needingSummaryAverage"
-                            class="summary-average"
-                        >
-                            Rata-rata: -
                         </div>
 
                     </div>
@@ -1957,200 +2180,385 @@ footer{
 
         </div>
 
-    </section>
+
+        <!-- =================================================
+             CATEGORY LABELS
+        ================================================== -->
+
+        <div class="bar-labels">
 
 
-    <!-- =========================
-         TOP 10
-    ========================== -->
+            <div class="bar-label">
 
-    <section class="section">
+                <span
+                    class="bar-category excellent"
+                >
+                    🟢 Sangat Baik
+                </span>
 
-        <div class="section-title">
-
-            <div class="section-icon">
-                🌟
-            </div>
-
-            <div>
-                <h2>10 Nilai Terbaik</h2>
-
-                <p>
-                    Daftar capaian dengan nilai tertinggi
-                </p>
+                <span class="bar-range">
+                    80–100
+                </span>
 
             </div>
+
+
+            <div class="bar-label">
+
+                <span
+                    class="bar-category good"
+                >
+                    🟡 Cukup Baik
+                </span>
+
+                <span class="bar-range">
+                    60–79
+                </span>
+
+            </div>
+
+
+            <div class="bar-label">
+
+                <span
+                    class="bar-category needing"
+                >
+                    🔴 Perlu Pendampingan
+                </span>
+
+                <span class="bar-range">
+                    0–59
+                </span>
+
+            </div>
+
 
         </div>
 
 
-        <div class="table-card">
+        <!-- =================================================
+             NOTE
+        ================================================== -->
 
-            <div class="table-head">
+        <div class="chart-note">
 
-                <div class="table-title">
-                    📊 Peringkat Capaian
+            💡
+            <strong>
+                Cara membaca grafik:
+            </strong>
+
+            semakin tinggi batang,
+            semakin banyak jumlah siswa
+            yang berada pada kategori tersebut.
+
+            Contoh:
+            <strong>13 siswa</strong>
+            berarti batang mencapai angka
+            <strong>13</strong>
+            pada sumbu jumlah siswa.
+
+        </div>
+
+
+        <!-- =================================================
+             CATEGORY SUMMARY
+        ================================================== -->
+
+        <div class="category-summary">
+
+
+            <div class="category-box">
+
+                <div class="category-box-title">
+
+                    <span
+                        class="category-dot excellent"
+                    ></span>
+
+                    Sangat Baik
+
                 </div>
 
                 <div
-                    id="studentCount"
-                    class="student-count"
+                    id="excellentCount"
+                    class="category-count"
                 >
-                    0 siswa
+                    0
+                </div>
+
+                <div
+                    id="excellentPercentage"
+                    class="category-percentage"
+                >
+                    0%
                 </div>
 
             </div>
 
 
-            <div class="table-wrapper">
+            <div class="category-box">
 
-                <table>
+                <div class="category-box-title">
 
-                    <thead>
+                    <span
+                        class="category-dot good"
+                    ></span>
 
-                        <tr>
+                    Cukup Baik
 
-                            <th>
-                                PERINGKAT
-                            </th>
+                </div>
 
-                            <th>
-                                NAMA SISWA
-                            </th>
+                <div
+                    id="goodCount"
+                    class="category-count"
+                >
+                    0
+                </div>
 
-                            <th>
-                                NO. ABSEN
-                            </th>
-
-                            <th>
-                                KELAS
-                            </th>
-
-                            <th>
-                                NILAI
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody id="topTableBody">
-
-                        <tr>
-
-                            <td
-                                colspan="5"
-                                class="empty-row"
-                            >
-                                ⏳ Memuat data...
-
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
+                <div
+                    id="goodPercentage"
+                    class="category-percentage"
+                >
+                    0%
+                </div>
 
             </div>
 
+
+            <div class="category-box">
+
+                <div class="category-box-title">
+
+                    <span
+                        class="category-dot needing"
+                    ></span>
+
+                    Perlu Pendampingan
+
+                </div>
+
+                <div
+                    id="needingCount"
+                    class="category-count"
+                >
+                    0
+                </div>
+
+                <div
+                    id="needingPercentage"
+                    class="category-percentage"
+                >
+                    0%
+                </div>
+
+            </div>
+
+
         </div>
 
+    </div>
 
-        <button
-            class="btn btn-all"
-            id="allDataButton"
-            onclick="toggleAllData()"
-        >
-            👥 Tampilkan Semua Data
-        </button>
+</section>
 
 
-        <!-- =========================
-             SEMUA DATA
-        ========================== -->
+<!-- =========================================================
+     PERINGKAT CAPAIAN
+========================================================= -->
+
+<section class="card table-card">
+
+
+    <div class="table-header">
+
+        <div class="table-title">
+
+            <h2>
+                📊 10 Nilai Terbaik
+            </h2>
+
+        </div>
+
 
         <div
-            id="allDataSection"
-            class="all-data"
+            id="studentCount"
+            class="student-count"
         >
+            👥 0 siswa
+        </div>
 
-            <div class="table-card">
+    </div>
 
-                <div class="table-head">
 
-                    <div class="table-title">
-                        📋 Semua Data Capaian
-                    </div>
+    <div class="table-wrap">
 
-                    <div
-                        id="allStudentCount"
-                        class="student-count"
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Peringkat
+                    </th>
+
+                    <th>
+                        Nama Siswa
+                    </th>
+
+                    <th>
+                        No. Absen
+                    </th>
+
+                    <th>
+                        Kelas
+                    </th>
+
+                    <th>
+                        Nilai
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody
+                id="topTableBody"
+            >
+
+                <tr>
+
+                    <td
+                        colspan="5"
+                        class="empty-state"
                     >
-                        0 siswa
-                    </div>
+                        Memuat data...
+                    </td>
 
-                </div>
+                </tr>
 
+            </tbody>
 
-                <div class="table-wrapper">
+        </table>
 
-                    <table>
-
-                        <thead>
-
-                            <tr>
-
-                                <th>
-                                    PERINGKAT
-                                </th>
-
-                                <th>
-                                    NAMA SISWA
-                                </th>
-
-                                <th>
-                                    NO. ABSEN
-                                </th>
-
-                                <th>
-                                    KELAS
-                                </th>
-
-                                <th>
-                                    NILAI
-                                </th>
-
-                            </tr>
-
-                        </thead>
+    </div>
 
 
-                        <tbody id="allTableBody">
+    <!-- =====================================================
+         ALL DATA
+    ====================================================== -->
 
-                        </tbody>
+    <button
+        id="allDataButton"
+        class="all-data-button"
+        onclick="toggleAllData()"
+    >
+        👥 Lihat Semua Data Siswa
+    </button>
 
-                    </table>
 
-                </div>
+    <div
+        id="allDataSection"
+        class="all-data-section hidden"
+    >
 
+        <div class="all-data-header">
+
+            <h3>
+                📋 Seluruh Data Siswa
+            </h3>
+
+            <p>
+                Daftar lengkap capaian seluruh siswa.
+            </p>
+
+            <div
+                id="allStudentCount"
+                class="student-count"
+                style="margin-top:8px;"
+            >
+                👥 0 siswa
             </div>
 
         </div>
 
-    </section>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Peringkat
+                        </th>
+
+                        <th>
+                            Nama Siswa
+                        </th>
+
+                        <th>
+                            No. Absen
+                        </th>
+
+                        <th>
+                            Kelas
+                        </th>
+
+                        <th>
+                            Nilai
+                        </th>
+
+                    </tr>
+
+                </thead>
 
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
+                <tbody
+                    id="allTableBody"
+                >
 
-    <footer>
-        🌾 Kuliner Nusantara • Belajar • Bermain • Berprestasi 🌾
-        <br>
-        <strong>UPT SDN 160 GRESIK</strong>
-    </footer>
+                    <tr>
+
+                        <td
+                            colspan="5"
+                            class="empty-state"
+                        >
+                            Belum ada data.
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    <strong>
+        UPT SDN 160 GRESIK
+    </strong>
+
+    <br>
+
+    Jejak Capaian • Belajar • Bermain • Berprestasi
+
+</footer>
+
 
 </div>
 
@@ -2158,7 +2566,7 @@ footer{
 <script>
 
 /* =========================================================
-   KONFIGURASI GOOGLE APPS SCRIPT
+   KONFIGURASI API
 ========================================================= */
 
 const API_URL =
@@ -2166,7 +2574,7 @@ const API_URL =
 
 
 /* =========================================================
-   VARIABEL
+   VARIABEL GLOBAL
 ========================================================= */
 
 let semuaData = [];
@@ -2181,278 +2589,260 @@ let semuaDataDitampilkan = false;
 function kembaliKePetualangan(){
 
     window.location.href =
-        "petualangan.html";
+    "petualangan.html";
 
 }
 
 
 /* =========================================================
-   LOAD DATA DENGAN JSONP
-   TIDAK MENGGUNAKAN FETCH
+   LOAD DATA
 ========================================================= */
 
 function loadData(){
 
-    const status =
-        document.getElementById("status");
-
     const refreshButton =
-        document.getElementById("refreshButton");
+    document.getElementById(
+        "refreshButton"
+    );
+
+    const status =
+    document.getElementById(
+        "status"
+    );
 
 
-    status.className =
-        "status loading";
+    if(refreshButton){
+
+        refreshButton.disabled = true;
+
+        refreshButton.innerHTML =
+        "⏳ Memuat Data...";
+
+    }
+
 
     status.innerHTML =
-        "📜 Membaca Peta Perjalanan...";
+    `
+    Memuat data capaian siswa
+    <span class="loading-dot"></span>
+    <span class="loading-dot"></span>
+    <span class="loading-dot"></span>
+    `;
 
-
-    refreshButton.disabled = true;
-
-    refreshButton.innerHTML =
-        "⏳ Memuat...";
-
-
-    /*
-     * Nama callback dibuat unik.
-     */
 
     const callbackName =
-        "terimaDataCapaian_" +
-        Date.now();
+    "rankingCallback_" +
+    Date.now();
 
 
-    /*
-     * Fungsi callback global.
-     */
+    const script =
+    document.createElement("script");
+
+
+    const timeout =
+    setTimeout(
+        function(){
+
+            tampilkanError(
+                "Waktu pemuatan data habis. Silakan coba Refresh Data."
+            );
+
+            hapusScriptJSONP(
+                script,
+                callbackName
+            );
+
+        },
+        15000
+    );
+
 
     window[callbackName] =
-        function(result){
+    function(result){
 
-            try{
-
-                if(
-                    !result ||
-                    result.ok !== true
-                ){
-
-                    throw new Error(
-                        result &&
-                        result.message
-                            ? result.message
-                            : "Data tidak valid."
-                    );
-
-                }
+        clearTimeout(timeout);
 
 
-                semuaData =
-                    Array.isArray(result.data)
-                        ? result.data
-                        : [];
+        try{
 
+            if(
+                !result ||
+                result.ok !== true
+            ){
 
-                /*
-                 * Bersihkan data kosong.
-                 */
-
-                semuaData =
-                    semuaData.filter(
-                        function(item){
-
-                            return (
-                                item &&
-                                String(
-                                    item.nama || ""
-                                ).trim() !== ""
-                            );
-
-                        }
-                    );
-
-
-                /*
-                 * Urutkan nilai tertinggi.
-                 */
-
-                semuaData.sort(
-                    function(a,b){
-
-                        return (
-                            Number(b.nilai || 0) -
-                            Number(a.nilai || 0)
-                        );
-
-                    }
-                );
-
-
-                /*
-                 * Tentukan peringkat.
-                 *
-                 * Contoh:
-                 * 40 = peringkat 1
-                 * 40 = peringkat 1
-                 * 33 = peringkat 3
-                 */
-
-                assignRanks(semuaData);
-
-
-                renderTopThree(
-                    semuaData
-                );
-
-
-                renderTable(
-                    semuaData.slice(0,10),
-                    "topTableBody"
-                );
-
-
-                document.getElementById(
-                    "studentCount"
-                ).textContent =
-                    semuaData.length +
-                    " siswa";
-
-
-                renderTable(
-                    semuaData,
-                    "allTableBody"
-                );
-
-
-                document.getElementById(
-                    "allStudentCount"
-                ).textContent =
-                    semuaData.length +
-                    " siswa";
-
-
-                /*
-                 * =====================================================
-                 * RENDER DIAGRAM BATANG NILAI RATA-RATA
-                 * =====================================================
-                 */
-
-                renderCapaianChart(
-                    semuaData
-                );
-
-
-                if(semuaData.length > 0){
-
-                    status.className =
-                        "status success";
-
-                    status.innerHTML =
-                        "🗺️ Peta perjalanan berhasil dibuka! " +
-                        semuaData.length +
-                        " capaian telah ditemukan..";
-
-                }else{
-
-                    status.className =
-                        "status loading";
-
-                    status.innerHTML =
-                        "⚠️ Belum ada data capaian yang dapat ditampilkan.";
-
-                }
-
-
-            }catch(error){
-
-                tampilkanError(
-                    error.message
+                throw new Error(
+                    result &&
+                    result.message
+                    ?
+                    result.message
+                    :
+                    "Data tidak dapat dimuat."
                 );
 
             }
 
 
-            /*
-             * Hapus script JSONP
-             */
+            semuaData =
+            Array.isArray(
+                result.data
+            )
+            ?
+            result.data
+            :
+            [];
 
-            hapusScriptJSONP(
-                script
+
+            semuaData =
+            semuaData
+            .filter(function(item){
+
+                return (
+                    item &&
+                    String(
+                        item.nama ??
+                        ""
+                    ).trim() !== ""
+                );
+
+            });
+
+
+            semuaData.sort(
+                function(a,b){
+
+                    return (
+                        Number(
+                            b.nilai
+                        ) || 0
+                    )
+                    -
+                    (
+                        Number(
+                            a.nilai
+                        ) || 0
+                    );
+
+                }
             );
 
 
-            /*
-             * Hapus callback.
-             */
-
-            try{
-                delete window[callbackName];
-            }catch(e){}
+            assignRanks(
+                semuaData
+            );
 
 
-            refreshButton.disabled =
-                false;
-
-            refreshButton.innerHTML =
-                "🔄 Refresh Data";
-
-        };
+            renderTopThree(
+                semuaData
+            );
 
 
-    /*
-     * Buat elemen script.
-     */
-
-    const script =
-        document.createElement("script");
-
-
-    /*
-     * Tambahkan callback.
-     */
-
-    script.src =
-        API_URL +
-        "?action=ranking" +
-        "&callback=" +
-        encodeURIComponent(
-            callbackName
-        ) +
-        "&ts=" +
-        Date.now();
+            renderTable(
+                semuaData.slice(
+                    0,
+                    10
+                ),
+                "topTableBody"
+            );
 
 
-    script.async = true;
+            renderTable(
+                semuaData,
+                "allTableBody"
+            );
 
 
-    /*
-     * Jika terjadi error jaringan.
-     */
+            document.getElementById(
+                "studentCount"
+            ).textContent =
+            "👥 " +
+            semuaData.length +
+            " siswa";
 
-    script.onerror =
-        function(){
+
+            document.getElementById(
+                "allStudentCount"
+            ).textContent =
+            "👥 " +
+            semuaData.length +
+            " siswa";
+
+
+            renderCapaianChart(
+                semuaData
+            );
+
+
+            status.innerHTML =
+            "✅ Data capaian berhasil diperbarui • " +
+            semuaData.length +
+            " siswa";
+
+
+        }
+        catch(error){
 
             tampilkanError(
-                "Google Apps Script tidak dapat dihubungi."
+                error.message ||
+                "Terjadi kesalahan saat mengolah data."
             );
 
+        }
+        finally{
 
-            try{
-                delete window[callbackName];
-            }catch(e){}
+            if(refreshButton){
 
-
-            hapusScriptJSONP(
-                script
-            );
-
-
-            refreshButton.disabled =
+                refreshButton.disabled =
                 false;
 
-            refreshButton.innerHTML =
+                refreshButton.innerHTML =
                 "🔄 Refresh Data";
 
-        };
+            }
+
+            hapusScriptJSONP(
+                script,
+                callbackName
+            );
+
+        }
+
+    };
+
+
+    script.onerror =
+    function(){
+
+        clearTimeout(timeout);
+
+        tampilkanError(
+            "Tidak dapat terhubung ke sumber data."
+        );
+
+        if(refreshButton){
+
+            refreshButton.disabled =
+            false;
+
+            refreshButton.innerHTML =
+            "🔄 Refresh Data";
+
+        }
+
+        hapusScriptJSONP(
+            script,
+            callbackName
+        );
+
+    };
+
+
+    script.src =
+    API_URL +
+    "?action=ranking" +
+    "&callback=" +
+    callbackName +
+    "&ts=" +
+    Date.now();
 
 
     document.body.appendChild(
@@ -2466,7 +2856,10 @@ function loadData(){
    HAPUS SCRIPT JSONP
 ========================================================= */
 
-function hapusScriptJSONP(script){
+function hapusScriptJSONP(
+    script,
+    callbackName
+){
 
     if(
         script &&
@@ -2479,6 +2872,23 @@ function hapusScriptJSONP(script){
 
     }
 
+
+    try{
+
+        delete window[
+            callbackName
+        ];
+
+    }
+    catch(e){
+
+        window[
+            callbackName
+        ] =
+        undefined;
+
+    }
+
 }
 
 
@@ -2486,23 +2896,38 @@ function hapusScriptJSONP(script){
    ERROR
 ========================================================= */
 
-function tampilkanError(message){
+function tampilkanError(
+    message
+){
 
     const status =
-        document.getElementById(
-            "status"
-        );
-
-
-    status.className =
-        "status error";
+    document.getElementById(
+        "status"
+    );
 
 
     status.innerHTML =
-        "⚠️ Data belum dapat dimuat. " +
-        escapeHTML(
-            message
-        );
+    "❌ " +
+    escapeHTML(
+        message
+    );
+
+
+    const refreshButton =
+    document.getElementById(
+        "refreshButton"
+    );
+
+
+    if(refreshButton){
+
+        refreshButton.disabled =
+        false;
+
+        refreshButton.innerHTML =
+        "🔄 Refresh Data";
+
+    }
 
 }
 
@@ -2511,20 +2936,24 @@ function tampilkanError(message){
    ASSIGN RANK
 ========================================================= */
 
-function assignRanks(data){
+function assignRanks(
+    data
+){
 
-    let previousScore = null;
+    let previousScore =
+    null;
 
-    let currentRank = 0;
+    let previousRank =
+    0;
 
 
     data.forEach(
         function(item,index){
 
             const score =
-                Number(
-                    item.nilai || 0
-                );
+            Number(
+                item.nilai
+            ) || 0;
 
 
             if(
@@ -2532,18 +2961,18 @@ function assignRanks(data){
                 score !== previousScore
             ){
 
-                currentRank =
-                    index + 1;
+                previousRank =
+                index + 1;
 
             }
 
 
-            item.rank =
-                currentRank;
+            item.peringkat =
+            previousRank;
 
 
             previousScore =
-                score;
+            score;
 
         }
     );
@@ -2552,155 +2981,102 @@ function assignRanks(data){
 
 
 /* =========================================================
-   RENDER TOP THREE
+   TOP THREE
 ========================================================= */
 
-function renderTopThree(data){
+function renderTopThree(
+    data
+){
 
     const container =
-        document.getElementById(
-            "topThree"
-        );
-
-
-    const medals = [
-        "🥇",
-        "🥈",
-        "🥉"
-    ];
-
-
-    const places = [
-        "JUARA 1",
-        "JUARA 2",
-        "JUARA 3"
-    ];
+    document.getElementById(
+        "champions"
+    );
 
 
     if(!data.length){
 
-        container.innerHTML = "";
-
-
-        for(
-            let i=0;
-            i<3;
-            i++
-        ){
-
-            container.innerHTML += `
-
-                <div class="champion">
-
-                    <div class="medal">
-                        ${medals[i]}
-                    </div>
-
-                    <div class="place">
-                        ${places[i]}
-                    </div>
-
-                    <div class="student-name">
-                        Belum tersedia
-                    </div>
-
-                    <div class="score">
-                        -
-                    </div>
-
-                </div>
-
-            `;
-
-        }
+        container.innerHTML =
+        `
+        <div class="empty-state">
+            Belum ada data capaian siswa.
+        </div>
+        `;
 
         return;
 
     }
 
 
-    container.innerHTML = "";
+    const medals =
+    [
+        "🥇",
+        "🥈",
+        "🥉"
+    ];
 
 
-    for(
-        let i=0;
-        i<3;
-        i++
-    ){
-
-        const item =
-            data[i];
+    const classes =
+    [
+        "medal-1",
+        "medal-2",
+        "medal-3"
+    ];
 
 
-        if(!item){
-
-            container.innerHTML += `
-
-                <div class="champion">
-
-                    <div class="medal">
-                        ${medals[i]}
-                    </div>
-
-                    <div class="place">
-                        ${places[i]}
-                    </div>
-
-                    <div class="student-name">
-                        Belum tersedia
-                    </div>
-
-                    <div class="score">
-                        -
-                    </div>
-
-                </div>
-
-            `;
-
-            continue;
-
-        }
+    const top =
+    data.slice(
+        0,
+        3
+    );
 
 
-        container.innerHTML += `
+    container.innerHTML =
+    top.map(
+        function(item,index){
 
-            <div class="champion">
+            return `
+            <div
+                class="champion ${classes[index]}"
+            >
 
                 <div class="medal">
-                    ${medals[i]}
+                    ${medals[index]}
                 </div>
 
-                <div class="place">
-                    PERINGKAT ${item.rank}
-                </div>
+                <span class="champion-rank">
+                    Peringkat ${index + 1}
+                </span>
 
-                <div class="student-name">
+                <div class="champion-name">
                     ${escapeHTML(
                         item.nama
                     )}
                 </div>
 
-                <div class="score">
+                <div class="champion-score">
                     ${formatScore(
                         item.nilai
                     )}
                 </div>
 
-                <div class="student-meta">
-                    Absen ${escapeHTML(
-                        item.absen
+                <div class="champion-class">
+                    Kelas ${escapeHTML(
+                        item.kelas ??
+                        "-"
                     )}
-                    • Kelas ${escapeHTML(
-                        item.kelas
+                    •
+                    Absen ${escapeHTML(
+                        item.absen ??
+                        "-"
                     )}
                 </div>
 
             </div>
+            `;
 
-        `;
-
-    }
+        }
+    ).join("");
 
 }
 
@@ -2715,32 +3091,32 @@ function renderTable(
 ){
 
     const tbody =
-        document.getElementById(
-            bodyId
-        );
+    document.getElementById(
+        bodyId
+    );
 
 
     if(!tbody){
+
         return;
+
     }
 
 
     if(!data.length){
 
-        tbody.innerHTML = `
+        tbody.innerHTML =
+        `
+        <tr>
 
-            <tr>
+            <td
+                colspan="5"
+                class="empty-state"
+            >
+                Belum ada data siswa.
+            </td>
 
-                <td
-                    colspan="5"
-                    class="empty-row"
-                >
-                    📭 Belum ada data capaian.
-
-                </td>
-
-            </tr>
-
+        </tr>
         `;
 
         return;
@@ -2748,103 +3124,72 @@ function renderTable(
     }
 
 
-    tbody.innerHTML = "";
-
-
-    data.forEach(
+    tbody.innerHTML =
+    data.map(
         function(item){
 
-            let rankClass = "";
-
-
-            if(item.rank === 1){
-                rankClass = "rank-1";
-            }
-
-            else if(item.rank === 2){
-                rankClass = "rank-2";
-            }
-
-            else if(item.rank === 3){
-                rankClass = "rank-3";
-            }
-
-
-            const row =
-                document.createElement(
-                    "tr"
-                );
-
-
-            row.innerHTML = `
+            return `
+            <tr>
 
                 <td>
 
-                    <span
-                        class="rank-number ${rankClass}"
-                    >
-                        ${item.rank}
+                    <span class="rank-number">
+                        ${item.peringkat}
                     </span>
 
                 </td>
 
-
-                <td
-                    class="name-cell"
-                >
+                <td class="name-cell">
                     ${escapeHTML(
                         item.nama
                     )}
                 </td>
 
-
                 <td>
                     ${escapeHTML(
-                        item.absen
+                        item.absen ??
+                        "-"
                     )}
                 </td>
 
-
                 <td>
                     ${escapeHTML(
-                        item.kelas
+                        item.kelas ??
+                        "-"
                     )}
                 </td>
 
-
-                <td
-                    class="score-cell"
-                >
+                <td class="score-cell">
                     ${formatScore(
                         item.nilai
                     )}
                 </td>
 
+            </tr>
             `;
 
-
-            tbody.appendChild(
-                row
-            );
-
         }
-    );
+    ).join("");
 
 }
 
 
 /* =========================================================
-   FORMAT NILAI
+   FORMAT SCORE
 ========================================================= */
 
-function formatScore(score){
+function formatScore(
+    value
+){
 
     const number =
-        Number(score);
+    Number(value);
 
 
     if(
-        Number.isNaN(number)
+        !Number.isFinite(
+            number
+        )
     ){
 
         return "-";
@@ -2852,45 +3197,53 @@ function formatScore(score){
     }
 
 
-    return number
-        .toLocaleString(
-            "id-ID"
-        );
+    return number.toLocaleString(
+        "id-ID",
+        {
+            minimumFractionDigits:
+            number % 1 !== 0
+            ? 1
+            : 0,
+
+            maximumFractionDigits:
+            2
+        }
+    );
 
 }
 
 
 /* =========================================================
-   MENENTUKAN KATEGORI NILAI
+   KATEGORI NILAI
 ========================================================= */
 
-function getKategoriNilai(score){
+function getKategoriNilai(
+    nilai
+){
 
-    const nilai =
-        Number(score);
+    const score =
+    Number(nilai);
 
 
     if(
-        Number.isNaN(nilai)
+        !Number.isFinite(
+            score
+        )
     ){
 
-        return "Perlu Pendampingan";
+        return "";
 
     }
 
 
-    if(
-        nilai >= 80
-    ){
+    if(score >= 80){
 
         return "Sangat Baik";
 
     }
 
 
-    if(
-        nilai >= 60
-    ){
+    if(score >= 60){
 
         return "Cukup Baik";
 
@@ -2903,17 +3256,17 @@ function getKategoriNilai(score){
 
 
 /* =========================================================
-   FORMAT PERSENTASE
+   FORMAT PERCENTAGE
 ========================================================= */
 
-function formatPercentage(value){
-
-    const number =
-        Number(value);
-
+function formatPercentage(
+    value
+){
 
     if(
-        Number.isNaN(number)
+        !Number.isFinite(
+            value
+        )
     ){
 
         return "0%";
@@ -2921,10 +3274,9 @@ function formatPercentage(value){
     }
 
 
-    return number.toLocaleString(
+    return value.toLocaleString(
         "id-ID",
         {
-            minimumFractionDigits:1,
             maximumFractionDigits:1
         }
     ) + "%";
@@ -2933,17 +3285,17 @@ function formatPercentage(value){
 
 
 /* =========================================================
-   FORMAT RATA-RATA
+   FORMAT AVERAGE
 ========================================================= */
 
-function formatAverage(value){
-
-    const number =
-        Number(value);
-
+function formatAverage(
+    value
+){
 
     if(
-        Number.isNaN(number)
+        !Number.isFinite(
+            value
+        )
     ){
 
         return "-";
@@ -2951,10 +3303,14 @@ function formatAverage(value){
     }
 
 
-    return number.toLocaleString(
+    return value.toLocaleString(
         "id-ID",
         {
-            minimumFractionDigits:1,
+            minimumFractionDigits:
+            value % 1 !== 0
+            ? 1
+            : 0,
+
             maximumFractionDigits:1
         }
     );
@@ -2963,290 +3319,64 @@ function formatAverage(value){
 
 
 /* =========================================================
-   RENDER DIAGRAM BATANG NILAI RATA-RATA CAPAIAN
+   RENDER CAPAIAN CHART
+=========================================================
+
+   PENTING:
+
+   Diagram batang menggunakan JUMLAH SISWA.
+
+   BUKAN:
+   - rata-rata nilai
+   - persentase siswa
+
+   Contoh:
+
+   Sangat Baik = 2 siswa
+   Cukup Baik = 0 siswa
+   Perlu Pendampingan = 13 siswa
+
+   Maka tinggi batang:
+   2
+   0
+   13
+
 ========================================================= */
 
-function renderCapaianChart(data){
+function renderCapaianChart(
+    data
+){
 
-    const averageScore =
-        document.getElementById(
-            "averageScore"
-        );
+    let totalNilai =
+    0;
 
+    let jumlahNilai =
+    0;
 
-    const averageCategory =
-        document.getElementById(
-            "averageCategory"
-        );
 
+    let sangatBaik =
+    0;
 
-    /*
-     * Elemen batang.
-     */
+    let cukupBaik =
+    0;
 
-    const excellentBar =
-        document.getElementById(
-            "excellentVerticalBar"
-        );
+    let perluPendampingan =
+    0;
 
-
-    const goodBar =
-        document.getElementById(
-            "goodVerticalBar"
-        );
-
-
-    const needingBar =
-        document.getElementById(
-            "needingVerticalBar"
-        );
-
-
-    /*
-     * Elemen angka rata-rata di atas batang.
-     */
-
-    const excellentValue =
-        document.getElementById(
-            "excellentVerticalValue"
-        );
-
-
-    const goodValue =
-        document.getElementById(
-            "goodVerticalValue"
-        );
-
-
-    const needingValue =
-        document.getElementById(
-            "needingVerticalValue"
-        );
-
-
-    /*
-     * Jumlah siswa.
-     */
-
-    const excellentCount =
-        document.getElementById(
-            "excellentVerticalCount"
-        );
-
-
-    const goodCount =
-        document.getElementById(
-            "goodVerticalCount"
-        );
-
-
-    const needingCount =
-        document.getElementById(
-            "needingVerticalCount"
-        );
-
-
-    /*
-     * Ringkasan.
-     */
-
-    const excellentSummaryCount =
-        document.getElementById(
-            "excellentSummaryCount"
-        );
-
-
-    const goodSummaryCount =
-        document.getElementById(
-            "goodSummaryCount"
-        );
-
-
-    const needingSummaryCount =
-        document.getElementById(
-            "needingSummaryCount"
-        );
-
-
-    const excellentSummaryPercentage =
-        document.getElementById(
-            "excellentSummaryPercentage"
-        );
-
-
-    const goodSummaryPercentage =
-        document.getElementById(
-            "goodSummaryPercentage"
-        );
-
-
-    const needingSummaryPercentage =
-        document.getElementById(
-            "needingSummaryPercentage"
-        );
-
-
-    const excellentSummaryAverage =
-        document.getElementById(
-            "excellentSummaryAverage"
-        );
-
-
-    const goodSummaryAverage =
-        document.getElementById(
-            "goodSummaryAverage"
-        );
-
-
-    const needingSummaryAverage =
-        document.getElementById(
-            "needingSummaryAverage"
-        );
-
-
-    /*
-     * =====================================================
-     * RESET
-     * =====================================================
-     */
-
-    if(
-        !Array.isArray(data) ||
-        data.length === 0
-    ){
-
-        averageScore.textContent =
-            "-";
-
-
-        averageCategory.textContent =
-            "Belum ada data";
-
-
-        excellentBar.style.height =
-            "0%";
-
-
-        goodBar.style.height =
-            "0%";
-
-
-        needingBar.style.height =
-            "0%";
-
-
-        excellentValue.textContent =
-            "-";
-
-
-        goodValue.textContent =
-            "-";
-
-
-        needingValue.textContent =
-            "-";
-
-
-        excellentCount.textContent =
-            "0 siswa";
-
-
-        goodCount.textContent =
-            "0 siswa";
-
-
-        needingCount.textContent =
-            "0 siswa";
-
-
-        excellentSummaryCount.textContent =
-            "0 siswa";
-
-
-        goodSummaryCount.textContent =
-            "0 siswa";
-
-
-        needingSummaryCount.textContent =
-            "0 siswa";
-
-
-        excellentSummaryPercentage.textContent =
-            "0%";
-
-
-        goodSummaryPercentage.textContent =
-            "0%";
-
-
-        needingSummaryPercentage.textContent =
-            "0%";
-
-
-        excellentSummaryAverage.textContent =
-            "Rata-rata: -";
-
-
-        goodSummaryAverage.textContent =
-            "Rata-rata: -";
-
-
-        needingSummaryAverage.textContent =
-            "Rata-rata: -";
-
-
-        return;
-
-    }
-
-
-    /*
-     * =====================================================
-     * VARIABEL PERHITUNGAN
-     * =====================================================
-     */
-
-    let totalNilai = 0;
-
-    let jumlahNilai = 0;
-
-
-    let sangatBaik = 0;
-
-    let cukupBaik = 0;
-
-    let perluPendampingan = 0;
-
-
-    let totalSangatBaik = 0;
-
-    let totalCukupBaik = 0;
-
-    let totalPerluPendampingan = 0;
-
-
-    /*
-     * =====================================================
-     * HITUNG NILAI
-     * =====================================================
-     */
 
     data.forEach(
         function(item){
 
             const nilai =
-                Number(
-                    item.nilai
-                );
+            Number(
+                item.nilai
+            );
 
-
-            /*
-             * Nilai tidak valid
-             * tidak dihitung.
-             */
 
             if(
-                Number.isNaN(nilai)
+                !Number.isFinite(
+                    nilai
+                )
             ){
 
                 return;
@@ -3255,57 +3385,39 @@ function renderCapaianChart(data){
 
 
             totalNilai +=
-                nilai;
-
+            nilai;
 
             jumlahNilai++;
 
 
-            /*
-             * SANGAT BAIK
-             * 80–100
-             */
+            const kategori =
+            getKategoriNilai(
+                nilai
+            );
+
 
             if(
-                nilai >= 80
+                kategori ===
+                "Sangat Baik"
             ){
 
                 sangatBaik++;
 
-                totalSangatBaik +=
-                    nilai;
-
             }
-
-
-            /*
-             * CUKUP BAIK
-             * 60–79
-             */
-
             else if(
-                nilai >= 60
+                kategori ===
+                "Cukup Baik"
             ){
 
                 cukupBaik++;
 
-                totalCukupBaik +=
-                    nilai;
-
             }
-
-
-            /*
-             * PERLU PENDAMPINGAN
-             * 0–59
-             */
-
-            else{
+            else if(
+                kategori ===
+                "Perlu Pendampingan"
+            ){
 
                 perluPendampingan++;
-
-                totalPerluPendampingan +=
-                    nilai;
 
             }
 
@@ -3313,343 +3425,321 @@ function renderCapaianChart(data){
     );
 
 
-    /*
-     * =====================================================
-     * JIKA TIDAK ADA NILAI VALID
-     * =====================================================
-     */
-
-    if(
-        jumlahNilai === 0
-    ){
-
-        averageScore.textContent =
-            "-";
-
-
-        averageCategory.textContent =
-            "Belum ada nilai";
-
-
-        return;
-
-    }
-
-
-    /*
-     * =====================================================
-     * RATA-RATA SELURUH SISWA
-     * =====================================================
-     */
+    /* =====================================================
+       RATA-RATA KESELURUHAN
+    ====================================================== */
 
     const rataRata =
-        totalNilai /
-        jumlahNilai;
+    jumlahNilai > 0
+    ?
+    totalNilai /
+    jumlahNilai
+    :
+    0;
 
 
-    averageScore.textContent =
-        formatAverage(
-            rataRata
-        );
+    document.getElementById(
+        "overallAverage"
+    ).textContent =
+    jumlahNilai > 0
+    ?
+    formatAverage(
+        rataRata
+    )
+    :
+    "-";
 
 
-    averageCategory.textContent =
-        "⭐ " +
-        getKategoriNilai(
-            rataRata
-        );
+    /* =====================================================
+       TOTAL SISWA
+    ====================================================== */
+
+    const totalSiswa =
+    sangatBaik +
+    cukupBaik +
+    perluPendampingan;
 
 
-    /*
-     * =====================================================
-     * RATA-RATA SETIAP KATEGORI
-     * =====================================================
-     */
+    /* =====================================================
+       PERSENTASE KATEGORI
 
-    const rataSangatBaik =
-        sangatBaik > 0
-            ? totalSangatBaik / sangatBaik
-            : 0;
+       Persentase hanya digunakan pada
+       kartu ringkasan di bawah grafik.
 
-
-    const rataCukupBaik =
-        cukupBaik > 0
-            ? totalCukupBaik / cukupBaik
-            : 0;
-
-
-    const rataPerluPendampingan =
-        perluPendampingan > 0
-            ? totalPerluPendampingan /
-              perluPendampingan
-            : 0;
-
-
-    /*
-     * =====================================================
-     * PERSENTASE JUMLAH SISWA
-     *
-     * HANYA UNTUK INFORMASI PENDUKUNG,
-     * BUKAN UKURAN BATANG.
-     * =====================================================
-     */
+       TINGGI BATANG TIDAK MENGGUNAKAN PERSENTASE.
+    ====================================================== */
 
     const persenSangatBaik =
-        (
-            sangatBaik /
-            jumlahNilai
-        ) *
-        100;
+    totalSiswa > 0
+    ?
+    sangatBaik /
+    totalSiswa *
+    100
+    :
+    0;
 
 
     const persenCukupBaik =
-        (
-            cukupBaik /
-            jumlahNilai
-        ) *
-        100;
+    totalSiswa > 0
+    ?
+    cukupBaik /
+    totalSiswa *
+    100
+    :
+    0;
 
 
     const persenPerluPendampingan =
-        (
-            perluPendampingan /
-            jumlahNilai
-        ) *
-        100;
+    totalSiswa > 0
+    ?
+    perluPendampingan /
+    totalSiswa *
+    100
+    :
+    0;
 
 
-    /*
-     * =====================================================
-     * TAMPILKAN NILAI DI ATAS BATANG
-     * =====================================================
-     */
+    /* =====================================================
+       TAMPILKAN JUMLAH SISWA
+    ====================================================== */
 
-    excellentValue.textContent =
-        sangatBaik > 0
-            ? formatAverage(
-                rataSangatBaik
-              )
-            : "-";
+    document.getElementById(
+        "excellentCount"
+    ).textContent =
+    sangatBaik +
+    " siswa";
 
 
-    goodValue.textContent =
-        cukupBaik > 0
-            ? formatAverage(
-                rataCukupBaik
-              )
-            : "-";
+    document.getElementById(
+        "goodCount"
+    ).textContent =
+    cukupBaik +
+    " siswa";
 
 
-    needingValue.textContent =
-        perluPendampingan > 0
-            ? formatAverage(
-                rataPerluPendampingan
-              )
-            : "-";
+    document.getElementById(
+        "needingCount"
+    ).textContent =
+    perluPendampingan +
+    " siswa";
 
 
-    /*
-     * =====================================================
-     * TAMPILKAN JUMLAH SISWA
-     * =====================================================
-     */
-
-    excellentCount.textContent =
-        sangatBaik +
-        " siswa";
+    document.getElementById(
+        "excellentPercentage"
+    ).textContent =
+    formatPercentage(
+        persenSangatBaik
+    );
 
 
-    goodCount.textContent =
-        cukupBaik +
-        " siswa";
+    document.getElementById(
+        "goodPercentage"
+    ).textContent =
+    formatPercentage(
+        persenCukupBaik
+    );
 
 
-    needingCount.textContent =
-        perluPendampingan +
-        " siswa";
+    document.getElementById(
+        "needingPercentage"
+    ).textContent =
+    formatPercentage(
+        persenPerluPendampingan
+    );
 
 
-    /*
-     * =====================================================
-     * TAMPILKAN RINGKASAN
-     * =====================================================
-     */
+    /* =====================================================
+       DIAGRAM BATANG
 
-    excellentSummaryCount.textContent =
-        sangatBaik +
-        " siswa";
+       SKALA VISUAL 0–100
 
+       Karena sumbu dibuat 0–100,
+       jumlah siswa akan dikonversi ke
+       tinggi relatif terhadap 100.
 
-    goodSummaryCount.textContent =
-        cukupBaik +
-        " siswa";
+       Misalnya:
+       13 siswa = 13% tinggi grafik
+       50 siswa = 50% tinggi grafik
 
+       Tetapi LABEL DI ATAS BATANG tetap
+       menampilkan JUMLAH ASLI siswa.
+    ====================================================== */
 
-    needingSummaryCount.textContent =
-        perluPendampingan +
-        " siswa";
+    const excellentBar =
+    document.getElementById(
+        "excellentBar"
+    );
 
+    const goodBar =
+    document.getElementById(
+        "goodBar"
+    );
 
-    excellentSummaryPercentage.textContent =
-        formatPercentage(
-            persenSangatBaik
-        );
-
-
-    goodSummaryPercentage.textContent =
-        formatPercentage(
-            persenCukupBaik
-        );
-
-
-    needingSummaryPercentage.textContent =
-        formatPercentage(
-            persenPerluPendampingan
-        );
+    const needingBar =
+    document.getElementById(
+        "needingBar"
+    );
 
 
-    /*
-     * =====================================================
-     * TAMPILKAN RATA-RATA KATEGORI
-     * =====================================================
-     */
+    const excellentBarValue =
+    document.getElementById(
+        "excellentBarValue"
+    );
 
-    excellentSummaryAverage.textContent =
-        sangatBaik > 0
-            ? "Rata-rata: " +
-              formatAverage(
-                  rataSangatBaik
-              )
-            : "Rata-rata: -";
+    const goodBarValue =
+    document.getElementById(
+        "goodBarValue"
+    );
 
-
-    goodSummaryAverage.textContent =
-        cukupBaik > 0
-            ? "Rata-rata: " +
-              formatAverage(
-                  rataCukupBaik
-              )
-            : "Rata-rata: -";
+    const needingBarValue =
+    document.getElementById(
+        "needingBarValue"
+    );
 
 
-    needingSummaryAverage.textContent =
-        perluPendampingan > 0
-            ? "Rata-rata: " +
-              formatAverage(
-                  rataPerluPendampingan
-              )
-            : "Rata-rata: -";
+    /* =====================================================
+       NILAI YANG DITAMPILKAN DI ATAS BATANG
+    ====================================================== */
+
+    excellentBarValue.textContent =
+    sangatBaik;
+
+    goodBarValue.textContent =
+    cukupBaik;
+
+    needingBarValue.textContent =
+    perluPendampingan;
 
 
-    /*
-     * =====================================================
-     * ANIMASI BATANG
-     *
-     * PENTING:
-     * Tinggi batang menggunakan RATA-RATA NILAI.
-     *
-     * BUKAN PERSENTASE.
-     * =====================================================
-     */
+    /* =====================================================
+       BATAS VISUAL
+
+       Grafik memiliki skala sampai 100.
+       Jika jumlah siswa lebih dari 100,
+       tinggi tetap dibatasi pada 100%.
+    ====================================================== */
+
+    const excellentHeight =
+    Math.min(
+        sangatBaik,
+        100
+    );
+
+
+    const goodHeight =
+    Math.min(
+        cukupBaik,
+        100
+    );
+
+
+    const needingHeight =
+    Math.min(
+        perluPendampingan,
+        100
+    );
+
+
+    /* =====================================================
+       RESET ANIMASI
+    ====================================================== */
+
+    excellentBar.style.height =
+    "0%";
+
+    goodBar.style.height =
+    "0%";
+
+    needingBar.style.height =
+    "0%";
+
+
+    /* =====================================================
+       ANIMASI BATANG
+    ====================================================== */
 
     setTimeout(
         function(){
 
             excellentBar.style.height =
-                Math.max(
-                    0,
-                    Math.min(
-                        100,
-                        rataSangatBaik
-                    )
-                ) +
-                "%";
+            excellentHeight +
+            "%";
 
 
             goodBar.style.height =
-                Math.max(
-                    0,
-                    Math.min(
-                        100,
-                        rataCukupBaik
-                    )
-                ) +
-                "%";
+            goodHeight +
+            "%";
 
 
             needingBar.style.height =
-                Math.max(
-                    0,
-                    Math.min(
-                        100,
-                        rataPerluPendampingan
-                    )
-                ) +
-                "%";
+            needingHeight +
+            "%";
 
         },
-        100
+        80
     );
 
 }
 
 
 /* =========================================================
-   TOGGLE SEMUA DATA
+   TOGGLE ALL DATA
 ========================================================= */
 
 function toggleAllData(){
 
     const section =
-        document.getElementById(
-            "allDataSection"
-        );
-
+    document.getElementById(
+        "allDataSection"
+    );
 
     const button =
-        document.getElementById(
-            "allDataButton"
-        );
+    document.getElementById(
+        "allDataButton"
+    );
 
 
     semuaDataDitampilkan =
-        !semuaDataDitampilkan;
+    !semuaDataDitampilkan;
 
 
     if(
         semuaDataDitampilkan
     ){
 
-        section.classList.add(
-            "show"
+        section.classList.remove(
+            "hidden"
         );
 
 
         button.innerHTML =
-            "🔽 Sembunyikan Semua Data";
+        "⬆️ Sembunyikan Semua Data";
 
 
         setTimeout(
             function(){
 
-                section.scrollIntoView({
-                    behavior:"smooth",
-                    block:"start"
-                });
+                section.scrollIntoView(
+                    {
+                        behavior:"smooth",
+                        block:"start"
+                    }
+                );
 
             },
-            100
+            50
         );
 
-    }else{
+    }
+    else{
 
-        section.classList.remove(
-            "show"
+        section.classList.add(
+            "hidden"
         );
 
 
         button.innerHTML =
-            "👥 Tampilkan Semua Data";
+        "👥 Lihat Semua Data Siswa";
 
     }
 
@@ -3660,10 +3750,13 @@ function toggleAllData(){
    ESCAPE HTML
 ========================================================= */
 
-function escapeHTML(value){
+function escapeHTML(
+    value
+){
 
     return String(
-        value ?? ""
+        value ??
+        ""
     )
     .replace(
         /&/g,
@@ -3690,7 +3783,7 @@ function escapeHTML(value){
 
 
 /* =========================================================
-   JALANKAN OTOMATIS
+   DOM READY
 ========================================================= */
 
 document.addEventListener(
@@ -3704,5 +3797,7 @@ document.addEventListener(
 
 </script>
 
+
 </body>
 </html>
+

@@ -7,1561 +7,1956 @@
 
 <style>
 :root{
-  --primary:#9b4d20;
-  --primary-dark:#713517;
-  --secondary:#e67e22;
-  --accent:#f4d03f;
-  --green:#2e8b57;
-  --green-dark:#216b43;
-  --cream:#fff8ec;
-  --white:#ffffff;
-  --text:#3d281f;
-  --muted:#7b665c;
-  --danger:#c0392b;
-  --shadow:0 10px 30px rgba(80,45,20,.14);
+--primary:#9b4d20;
+--primary-dark:#713517;
+--secondary:#e67e22;
+--accent:#f4b942;
+--green:#2e8b57;
+--red:#c0392b;
+--ink:#4a2c20;
+--muted:#806b61;
+--card:#fffdf8;
+--cream:#fff8e8;
+--border:#ead7bc;
+--shadow:rgba(92,48,24,.16);
 }
 
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+box-sizing:border-box;
+}
+
+html{
+min-height:100%;
 }
 
 body{
-  font-family:"Poppins","Segoe UI",Arial,sans-serif;
-  background:
-    radial-gradient(circle at top left,rgba(244,208,63,.22),transparent 30%),
-    radial-gradient(circle at bottom right,rgba(230,126,34,.18),transparent 30%),
-    linear-gradient(135deg,#fffaf2,#fff3df);
-  color:var(--text);
-  min-height:100vh;
-  padding:20px;
+margin:0;
+font-family:"Segoe UI",Arial,sans-serif;
+color:var(--ink);
+background:
+radial-gradient(circle at 10% 15%,rgba(255,255,255,.65) 0 3px,transparent 4px),
+radial-gradient(circle at 90% 25%,rgba(255,255,255,.5) 0 3px,transparent 4px),
+linear-gradient(135deg,#f7dfb5 0%,#fff4d8 45%,#f3d7ad 100%);
+background-size:auto,auto,cover;
+min-height:100vh;
 }
 
-.container{
-  width:100%;
-  max-width:1000px;
-  margin:auto;
+body:has(#identitas:not(.hidden)){
+display:flex;
+align-items:center;
+justify-content:center;
+min-height:100vh;
+padding:25px;
 }
 
-/* =========================
-   TOMBOL ATAS
-========================= */
+body:has(#identitas:not(.hidden)) .app{
+width:100%;
+max-width:560px;
+margin:0 auto;
+padding:0;
+}
+
+body:has(#identitas:not(.hidden)) .header{
+display:none;
+}
+
+body:has(#identitas:not(.hidden)) #identitas{
+margin:0;
+}
+
+body:before{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+opacity:.18;
+background-image:
+radial-gradient(#fff 1px,transparent 1px);
+background-size:22px 22px;
+}
+
+.app{
+width:min(1050px,94%);
+margin:auto;
+padding:22px 0 45px;
+position:relative;
+}
+
+/* =========================================================
+TOMBOL KEMBALI
+========================================================= */
+
 .back-area{
-  display:flex;
-  justify-content:flex-start;
-  align-items:center;
-  gap:10px;
-  margin-bottom:18px;
-  flex-wrap:wrap;
+width:100%;
+display:flex;
+justify-content:flex-start;
+gap:10px;
+margin-bottom:12px;
 }
 
 .back-btn,
 .download-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration:none;
-  padding:10px 20px;
-  border-radius:999px;
-  font-size:14px;
-  font-weight:800;
-  transition:.2s ease;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:10px 20px;
+border-radius:999px;
+text-decoration:none;
+font-size:14px;
+font-weight:900;
+transition:
+transform .2s ease,
+box-shadow .2s ease,
+background .2s ease;
 }
 
 .back-btn{
-  background:#fff;
-  color:var(--primary-dark);
-  border:2px solid var(--primary);
-  box-shadow:0 5px 14px rgba(155,77,32,.12);
+border:2px solid var(--border);
+background:rgba(255,253,248,.96);
+color:var(--primary-dark);
+box-shadow:0 6px 15px rgba(92,48,24,.10);
 }
 
 .back-btn:hover{
-  transform:translateY(-2px);
-  background:#fff4e8;
+transform:translateY(-2px);
+background:#fff;
+box-shadow:0 9px 20px rgba(92,48,24,.16);
 }
 
-/* Tombol download */
+.back-btn:active{
+transform:translateY(0);
+}
+
+/* =========================================================
+TOMBOL DOWNLOAD SOAL PDF
+========================================================= */
+
 .download-btn{
-  background:linear-gradient(135deg,#2e8b57,#3ca66b);
-  color:#fff;
-  border:2px solid #267449;
-  box-shadow:0 5px 14px rgba(46,139,87,.22);
+border:2px solid rgba(255,255,255,.7);
+background:
+linear-gradient(135deg,#2e8b57,#3aa66b,#5dbd7e);
+color:#fff;
+box-shadow:
+0 7px 17px rgba(46,139,87,.22);
 }
 
 .download-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 18px rgba(46,139,87,.30);
+transform:translateY(-2px);
+box-shadow:
+0 10px 23px rgba(46,139,87,.30);
 }
 
 .download-btn:active{
-  transform:translateY(0);
+transform:translateY(0);
 }
 
-/* =========================
-   HEADER
-========================= */
+body:has(#identitas:not(.hidden)) .back-area{
+display:none;
+}
+
+/* =========================================================
+HEADER
+========================================================= */
+
 .header{
-  background:linear-gradient(135deg,#9b4d20,#c76b2d);
-  color:#fff;
-  border-radius:28px;
-  padding:28px 25px;
-  text-align:center;
-  box-shadow:var(--shadow);
-  position:relative;
-  overflow:hidden;
+background:rgba(255,253,248,.96);
+border:2px solid var(--border);
+border-radius:28px;
+padding:24px;
+text-align:center;
+box-shadow:0 15px 40px var(--shadow);
 }
 
-.header::before{
-  content:"🍜  🍢  🥟  🍚  🍡";
-  position:absolute;
-  top:8px;
-  left:0;
-  right:0;
-  font-size:22px;
-  opacity:.20;
-  letter-spacing:10px;
+.badge{
+display:inline-block;
+background:#f9e6c5;
+color:var(--primary-dark);
+padding:7px 14px;
+border-radius:99px;
+font-weight:800;
+font-size:13px;
 }
 
-.header h1{
-  font-size:clamp(26px,4vw,42px);
-  margin-bottom:8px;
-  position:relative;
-  z-index:1;
+h1{
+margin:10px 0 5px;
+font-size:clamp(25px,5vw,42px);
 }
 
-.header p{
-  font-size:15px;
-  opacity:.95;
-  position:relative;
-  z-index:1;
+.subtitle{
+margin:0;
+color:var(--muted);
+font-weight:600;
 }
 
-.school-name{
-  margin-top:14px;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:1px;
-  position:relative;
-  z-index:1;
-}
+/* =========================================================
+CARD
+========================================================= */
 
-/* =========================
-   CARD
-========================= */
 .card{
-  background:rgba(255,255,255,.95);
-  border-radius:25px;
-  padding:25px;
-  margin-top:20px;
-  box-shadow:var(--shadow);
-  border:1px solid rgba(155,77,32,.08);
+margin-top:20px;
+background:rgba(255,253,248,.97);
+border-radius:24px;
+padding:26px;
+box-shadow:0 12px 35px var(--shadow);
+border:1px solid var(--border);
 }
 
-.card h2{
-  color:var(--primary-dark);
-  margin-bottom:8px;
-}
+/* =========================================================
+IDENTITAS
+========================================================= */
 
-.card-subtitle{
-  color:var(--muted);
-  font-size:14px;
-  margin-bottom:20px;
-}
-
-/* =========================
-   IDENTITAS
-========================= */
 #identitas{
-  display:block;
+position:relative;
+overflow:hidden;
+padding:0;
+border:3px solid #efd6ad;
+background:var(--card);
+border-radius:32px;
+box-shadow:
+0 28px 70px rgba(86,45,20,.24),
+0 10px 25px rgba(86,45,20,.12),
+inset 0 0 0 5px rgba(255,255,255,.72);
 }
+
+#identitas:before{
+content:"";
+display:block;
+height:10px;
+background:linear-gradient(
+90deg,
+#9b4d20 0%,
+#d96c27 35%,
+#f4b942 70%,
+#2e8b57 100%
+);
+}
+
+#identitas:after{
+content:"🍜   🍢   🥟   🍚   🍡";
+display:block;
+text-align:center;
+font-size:24px;
+letter-spacing:4px;
+padding-top:18px;
+}
+
+#identitas .identity-content{
+padding:4px 34px 32px;
+position:relative;
+}
+
+#identitas .identity-content:before{
+content:"";
+position:absolute;
+inset:14px;
+border:1px dashed rgba(217,108,39,.30);
+border-radius:24px;
+pointer-events:none;
+}
+
+#identitas h2{
+margin:10px 0 7px;
+text-align:center;
+font-size:25px;
+color:var(--primary-dark);
+line-height:1.25;
+position:relative;
+z-index:1;
+}
+
+#identitas .identity-subtitle{
+margin:0 auto 24px;
+text-align:center;
+color:var(--muted);
+font-size:14px;
+line-height:1.55;
+max-width:390px;
+position:relative;
+z-index:1;
+}
+
+.identity-icon{
+width:72px;
+height:72px;
+margin:-2px auto 10px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+background:linear-gradient(145deg,#fff0c8,#f7d994);
+border:4px solid #fff;
+box-shadow:
+0 8px 20px rgba(140,78,27,.15),
+inset 0 2px 4px rgba(255,255,255,.8);
+font-size:38px;
+position:relative;
+z-index:1;
+}
+
+/* =========================================================
+FORM
+========================================================= */
 
 .form-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
+display:grid;
+grid-template-columns:1fr;
+gap:16px;
+position:relative;
+z-index:1;
 }
 
-.form-group{
-  display:flex;
-  flex-direction:column;
+.field{
+position:relative;
 }
 
-.form-group label{
-  font-size:13px;
-  font-weight:800;
-  margin-bottom:7px;
-  color:var(--primary-dark);
+.field label{
+display:block;
+font-weight:800;
+margin-bottom:7px;
+color:#5c3929;
+font-size:14px;
 }
 
-.form-group input,
-.form-group select{
-  width:100%;
-  padding:13px 14px;
-  border:2px solid #ead8ca;
-  border-radius:14px;
-  outline:none;
-  font-family:inherit;
-  background:#fffdf9;
-  color:var(--text);
-  transition:.2s ease;
+.input-wrap{
+position:relative;
 }
 
-.form-group input:focus,
-.form-group select:focus{
-  border-color:var(--secondary);
-  box-shadow:0 0 0 4px rgba(230,126,34,.10);
+.input-wrap .input-icon{
+position:absolute;
+left:14px;
+top:50%;
+transform:translateY(-50%);
+font-size:19px;
+pointer-events:none;
+z-index:2;
 }
 
-/* =========================
-   BUTTON
-========================= */
-.btn-area{
-  display:flex;
-  gap:12px;
-  margin-top:20px;
-  flex-wrap:wrap;
+input,
+select{
+width:100%;
+padding:14px 15px 14px 46px;
+border:2px solid #e7d5bb;
+border-radius:15px;
+font-size:16px;
+outline:none;
+background:#fffdfa;
+color:var(--ink);
+transition:.2s;
+font-family:inherit;
 }
+
+input::placeholder{
+color:#b29e90;
+}
+
+input:focus,
+select:focus{
+border-color:#d77b35;
+background:#fff;
+box-shadow:
+0 0 0 4px rgba(230,126,34,.13),
+0 5px 15px rgba(120,65,28,.08);
+}
+
+input:hover,
+select:hover{
+border-color:#d7ad7d;
+}
+
+/* =========================================================
+TOMBOL IDENTITAS
+========================================================= */
+
+.identity-action{
+margin-top:22px;
+display:flex;
+gap:12px;
+align-items:stretch;
+position:relative;
+z-index:1;
+}
+
+/* Tombol mulai */
+
+#identitas .btn.primary{
+flex:1;
+border:0;
+border-radius:16px;
+padding:15px 16px;
+font-weight:900;
+font-size:15px;
+cursor:pointer;
+transition:.2s;
+color:#fff;
+background:
+linear-gradient(135deg,#a95020,#d96b26 55%,#e58a35);
+box-shadow:
+0 8px 18px rgba(155,77,32,.25);
+text-decoration:none;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+#identitas .btn.primary:hover{
+transform:translateY(-2px);
+box-shadow:
+0 11px 23px rgba(155,77,32,.32);
+}
+
+#identitas .btn.primary:active{
+transform:translateY(0);
+}
+
+/* =========================================================
+TOMBOL JEJAK CAPAIAN
+========================================================= */
+
+.capaian-btn{
+flex:1;
+border:0;
+border-radius:16px;
+padding:15px 16px;
+font-weight:900;
+font-size:15px;
+cursor:pointer;
+transition:
+transform .2s ease,
+box-shadow .2s ease,
+background .2s ease;
+color:#fff;
+background:
+linear-gradient(135deg,#2e8b57,#3aa66b,#5dbd7e);
+box-shadow:
+0 8px 18px rgba(46,139,87,.23);
+text-decoration:none;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.capaian-btn:hover{
+transform:translateY(-2px);
+box-shadow:
+0 11px 23px rgba(46,139,87,.30);
+}
+
+.capaian-btn:active{
+transform:translateY(0);
+}
+
+.identity-note{
+margin:20px auto 0;
+padding:11px 14px;
+border-radius:13px;
+background:#fff5df;
+border:1px dashed #e3c18f;
+color:#80634f;
+font-size:12px;
+line-height:1.5;
+text-align:center;
+position:relative;
+z-index:1;
+}
+
+.food-decoration{
+text-align:center;
+margin-top:18px;
+font-size:13px;
+color:#967463;
+letter-spacing:.3px;
+position:relative;
+z-index:1;
+}
+
+/* =========================================================
+BUTTON UMUM
+========================================================= */
 
 .btn{
-  border:none;
-  border-radius:15px;
-  padding:13px 20px;
-  font-family:inherit;
-  font-size:14px;
-  font-weight:900;
-  cursor:pointer;
-  transition:.2s ease;
+border:0;
+border-radius:14px;
+padding:13px 20px;
+font-weight:900;
+font-size:16px;
+cursor:pointer;
+transition:
+transform .2s,
+box-shadow .2s,
+opacity .2s;
+box-shadow:0 5px 12px rgba(0,0,0,.10);
 }
 
-.btn-primary{
-  background:linear-gradient(135deg,var(--primary),#c96c2e);
-  color:#fff;
-  box-shadow:0 7px 17px rgba(155,77,32,.22);
+.btn:hover{
+transform:translateY(-2px);
 }
 
-.btn-primary:hover{
-  transform:translateY(-2px);
+.btn:active{
+transform:translateY(0);
 }
 
-.btn-secondary{
-  background:#fff3df;
-  color:var(--primary-dark);
-  border:2px solid #efcba9;
+.btn:disabled{
+opacity:.45;
+cursor:not-allowed;
+transform:none;
+box-shadow:none;
 }
 
-.btn-secondary:hover{
-  background:#ffe8cb;
+.primary{
+background:linear-gradient(135deg,#9b4d20,#d96b26);
+color:#fff;
 }
 
-/* =========================
-   KUIS
-========================= */
-#quiz{
-  display:none;
+.green{
+background:#2e8b57;
+color:#fff;
 }
 
-.quiz-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:18px;
-  flex-wrap:wrap;
+.orange{
+background:#e67e22;
+color:#fff;
 }
 
-.question-number{
-  background:#fff0df;
-  color:var(--primary-dark);
-  padding:8px 13px;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:900;
+.gray{
+background:#eadfd4;
+color:#5b463a;
 }
 
-.score-info{
-  background:#edf8f1;
-  color:var(--green-dark);
-  padding:8px 13px;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:900;
+.red{
+background:#c0392b;
+color:#fff;
+}
+
+.center{
+text-align:center;
+}
+
+.hidden{
+display:none!important;
+}
+
+/* =========================================================
+KUIS
+========================================================= */
+
+.info{
+display:flex;
+justify-content:space-between;
+gap:10px;
+flex-wrap:wrap;
+background:#fff4dd;
+padding:12px 15px;
+border-radius:15px;
+font-weight:800;
+border:1px solid #efd5a7;
+}
+
+#kuis{
+width:min(760px,100%);
+margin:30px auto 0;
+padding:24px;
+background:rgba(255,253,248,.985);
+border:2px solid rgba(234,215,188,.95);
+border-radius:28px;
+box-shadow:
+0 25px 70px rgba(86,45,20,.20),
+0 8px 25px rgba(86,45,20,.10);
+position:relative;
+overflow:hidden;
+}
+
+#kuis:before{
+content:"";
+position:absolute;
+left:0;
+top:0;
+width:100%;
+height:7px;
+background:linear-gradient(
+90deg,
+#9b4d20,
+#d96b26,
+#f4b942,
+#2e8b57
+);
+}
+
+#kuis .info{
+margin-top:3px;
+}
+
+.progress-wrap{
+height:11px;
+background:#eadfd4;
+border-radius:99px;
+overflow:hidden;
+margin:17px 0 25px;
 }
 
 .progress{
-  width:100%;
-  height:10px;
-  background:#f2e5d9;
-  border-radius:999px;
-  overflow:hidden;
-  margin-bottom:24px;
+height:100%;
+background:linear-gradient(
+90deg,
+#9b4d20,
+#e67e22,
+#f4b942
+);
+width:0;
+transition:.3s;
 }
 
-.progress-bar{
-  width:0%;
-  height:100%;
-  background:linear-gradient(90deg,var(--secondary),var(--accent));
-  border-radius:999px;
-  transition:.3s ease;
+#soalArea{
+width:min(650px,100%);
+margin:0 auto;
 }
 
-.question-box{
-  background:linear-gradient(135deg,#fffaf4,#fff2df);
-  border:2px solid #f1dfce;
-  border-radius:20px;
-  padding:24px;
-  margin-bottom:20px;
+.question-no{
+color:#9b4d20;
+font-weight:900;
+font-size:14px;
+letter-spacing:.5px;
+margin-bottom:8px;
 }
 
-.question-box h3{
-  font-size:clamp(18px,2.5vw,23px);
-  line-height:1.6;
-  color:var(--text);
+.question{
+background:#fffaf0;
+border:2px solid #efdfc6;
+border-radius:20px;
+padding:20px 22px;
+font-size:21px;
+line-height:1.55;
+font-weight:850;
+margin:0 0 18px;
+box-shadow:
+0 8px 20px rgba(120,65,28,.06);
 }
 
-.options{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:13px;
+.answers{
+display:grid;
+gap:11px;
 }
 
-.option{
-  position:relative;
+.answer{
+border:2px solid #eadfd4;
+border-radius:16px;
+padding:13px 15px;
+cursor:pointer;
+display:flex;
+gap:12px;
+align-items:flex-start;
+transition:.2s;
+background:#fff;
 }
 
-.option input{
-  position:absolute;
-  opacity:0;
+.answer:hover{
+border-color:#e5b477;
+background:#fff8eb;
+transform:translateY(-1px);
+box-shadow:0 5px 12px rgba(120,65,28,.07);
 }
 
-.option label{
-  display:block;
-  padding:16px;
-  background:#fff;
-  border:2px solid #ead8ca;
-  border-radius:16px;
-  cursor:pointer;
-  font-weight:700;
-  transition:.2s ease;
-  height:100%;
+.answer input{
+width:auto;
+margin-top:4px;
+accent-color:#9b4d20;
+flex:none;
+padding:0;
 }
 
-.option label:hover{
-  border-color:var(--secondary);
-  transform:translateY(-2px);
+.answer span{
+line-height:1.5;
 }
 
-.option input:checked + label{
-  background:#fff0df;
-  border-color:var(--secondary);
-  color:var(--primary-dark);
-  box-shadow:0 5px 15px rgba(230,126,34,.14);
+.nav-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+margin-top:22px;
 }
 
-.navigation{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  margin-top:22px;
+.nav-left,
+.nav-right{
+display:flex;
+gap:10px;
+align-items:center;
 }
 
-/* =========================
-   HASIL
-========================= */
-#result{
-  display:none;
+.nav-btn{
+min-width:145px;
+padding:13px 18px;
+border-radius:15px;
+font-weight:900;
+font-size:15px;
+border:0;
+cursor:pointer;
+transition:
+transform .2s,
+box-shadow .2s,
+opacity .2s;
+display:inline-flex;
+justify-content:center;
+align-items:center;
+gap:7px;
 }
 
-.result-card{
-  text-align:center;
+.nav-btn:hover{
+transform:translateY(-2px);
 }
 
-.result-icon{
-  font-size:65px;
-  margin-bottom:10px;
+.nav-btn:active{
+transform:translateY(0);
 }
 
-.result-card h2{
-  font-size:30px;
+.nav-btn.previous{
+background:linear-gradient(
+135deg,
+#eadfd4,
+#f4e9dc
+);
+color:#5b463a;
+border:1px solid #ddcbbb;
+box-shadow:0 5px 12px rgba(80,45,25,.09);
 }
 
-.final-score{
-  font-size:60px;
-  font-weight:900;
-  color:var(--primary);
-  margin:15px 0;
+.nav-btn.next{
+background:linear-gradient(
+135deg,
+#9b4d20,
+#d96b26,
+#e58a35
+);
+color:#fff;
+box-shadow:
+0 7px 16px rgba(155,77,32,.24);
 }
 
-.result-info{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin:20px 0;
+.nav-btn.next:hover{
+box-shadow:
+0 10px 22px rgba(155,77,32,.30);
 }
 
-.result-item{
-  background:#fff8ef;
-  border:1px solid #efdcca;
-  border-radius:16px;
-  padding:15px;
+.nav-btn.previous:disabled{
+opacity:.38;
+cursor:not-allowed;
+transform:none;
+box-shadow:none;
 }
 
-.result-item span{
-  display:block;
-  font-size:12px;
-  color:var(--muted);
-  margin-bottom:5px;
+/* =========================================================
+HASIL
+========================================================= */
+
+#hasil{
+width:min(760px,100%);
+margin:30px auto 0;
+border:2px solid var(--border);
 }
 
-.result-item strong{
-  font-size:17px;
-  color:var(--primary-dark);
+.result-score{
+font-size:64px;
+font-weight:1000;
+background:linear-gradient(135deg,#9b4d20,#e67e22);
+color:#fff;
+border-radius:24px;
+padding:12px 28px;
+display:inline-block;
 }
 
-.result-actions{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:20px;
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin:20px 0;
 }
 
-/* =========================
-   FOOTER
-========================= */
-.footer{
-  text-align:center;
-  padding:22px 10px 5px;
-  color:var(--muted);
-  font-size:12px;
+.stat{
+padding:16px;
+background:#fff8eb;
+border-radius:16px;
+text-align:center;
+border:1px solid #efdfc6;
 }
 
-.footer strong{
-  color:var(--primary-dark);
+.stat b{
+font-size:24px;
+display:block;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+.note{
+font-size:13px;
+color:var(--muted);
+line-height:1.5;
+}
+
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+justify-content:center;
+margin-top:18px;
+}
+
+.toast{
+position:fixed;
+left:50%;
+bottom:25px;
+transform:translateX(-50%);
+background:#4a2c20;
+color:white;
+padding:12px 18px;
+border-radius:14px;
+box-shadow:0 10px 25px #0003;
+z-index:20;
+}
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
+
 @media(max-width:700px){
 
-  body{
-    padding:12px;
-  }
+body:has(#identitas:not(.hidden)){
+padding:16px;
+}
 
-  .header{
-    padding:24px 18px;
-    border-radius:22px;
-  }
+body:has(#identitas:not(.hidden)) .app{
+max-width:430px;
+}
 
-  .card{
-    padding:18px;
-    border-radius:20px;
-  }
+#identitas .identity-content{
+padding-left:23px;
+padding-right:23px;
+}
 
-  .form-grid{
-    grid-template-columns:1fr;
-  }
+#identitas h2{
+font-size:22px;
+}
 
-  .options{
-    grid-template-columns:1fr;
-  }
+.form-grid,
+.stats{
+grid-template-columns:1fr;
+}
 
-  .result-info{
-    grid-template-columns:1fr;
-  }
+.card{
+padding:18px;
+}
 
-  .navigation{
-    flex-direction:column;
-  }
+#kuis{
+width:100%;
+padding:18px;
+margin-top:20px;
+border-radius:22px;
+}
 
-  .navigation .btn{
-    width:100%;
-  }
+#soalArea{
+width:100%;
+}
 
-  .back-area{
-    gap:7px;
-  }
+.question{
+font-size:19px;
+padding:17px;
+}
 
-  .back-btn,
-  .download-btn{
-    font-size:12px;
-    padding:9px 14px;
-  }
+.identity-action{
+flex-direction:column;
+}
 
+#identitas .btn.primary,
+.capaian-btn{
+width:100%;
+flex:none;
+}
+
+.nav-row{
+flex-direction:column;
+align-items:stretch;
+}
+
+.nav-left,
+.nav-right{
+width:100%;
+}
+
+.nav-btn{
+flex:1;
+min-width:0;
+width:100%;
+}
+
+.back-area{
+margin-bottom:10px;
+flex-wrap:wrap;
+}
+
+.back-btn,
+.download-btn{
+padding:9px 17px;
+font-size:13px;
+}
+}
+
+@media(max-width:380px){
+
+body:has(#identitas:not(.hidden)){
+padding:10px;
+}
+
+#identitas .identity-content{
+padding-left:18px;
+padding-right:18px;
+}
+
+#identitas:after{
+font-size:20px;
+letter-spacing:1px;
+}
+
+.identity-icon{
+width:62px;
+height:62px;
+font-size:32px;
+}
+
+#identitas h2{
+font-size:20px;
+}
+
+#kuis{
+padding:15px;
+}
+
+.question{
+font-size:18px;
+padding:15px;
+}
+
+.answer{
+padding:12px;
+}
+
+.nav-btn{
+font-size:14px;
+padding:12px 10px;
+}
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
-  <!-- =========================
-       TOMBOL NAVIGASI
-  ========================== -->
-  <div class="back-area">
-
-    <a href="petualangan.html"
-       class="back-btn"
-       aria-label="Kembali ke halaman petualangan">
-       Kembali
-    </a>
-
-    <!-- Tombol DOWNLOAD soal.html -->
-    <a href="soal.pdf"
-       class="download-btn"
-       download="soal.pdf"
-       aria-label="Download soal">
-       Download Soal
-    </a>
-
-  </div>
-
-
-  <!-- =========================
-       HEADER
-  ========================== -->
-  <header class="header">
-
-    <h1>🧠 Kuis Seru Bilangan</h1>
-
-    <p>
-      Perbandingan &amp; Urutan Bilangan sampai 100.000
-    </p>
-
-    <div class="school-name">
-      UPT SDN 160 GRESIK
-    </div>
-
-  </header>
-
-
-  <!-- =========================
-       IDENTITAS SISWA
-  ========================== -->
-  <section class="card" id="identitas">
-
-    <h2>🍜 Petualangan Kuliner Matematika</h2>
-
-    <p class="card-subtitle">
-      Yuk, kenalkan dirimu sebelum memulai petualangan!
-    </p>
-
-    <div class="form-grid">
-
-      <div class="form-group">
-
-        <label for="nama">
-          Nama Lengkap
-        </label>
-
-        <input
-          type="text"
-          id="nama"
-          placeholder="Masukkan nama lengkap"
-          autocomplete="off">
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="kelas">
-          Kelas
-        </label>
-
-        <input
-          type="text"
-          id="kelas"
-          placeholder="Contoh: 5A"
-          autocomplete="off">
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="absen">
-          No. Absen
-        </label>
-
-        <input
-          type="number"
-          id="absen"
-          placeholder="Contoh: 1"
-          min="1"
-          autocomplete="off">
-
-      </div>
-
-    </div>
-
-
-    <div class="btn-area">
-
-      <button
-        type="button"
-        class="btn btn-primary"
-        onclick="mulaiKuis()">
-        🍜 Mulai Petualangan
-      </button>
-
-
-      <a
-        href="capaian.html"
-        class="btn btn-secondary"
-        style="text-decoration:none;">
-        🌟 Jejak Capaian
-      </a>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       BAGIAN KUIS
-  ========================== -->
-  <section class="card" id="quiz">
-
-    <div class="quiz-top">
-
-      <div
-        class="question-number"
-        id="questionNumber">
-        Soal 1 dari 15
-      </div>
-
-
-      <div
-        class="score-info"
-        id="scoreInfo">
-        Benar: 0
-      </div>
-
-    </div>
-
-
-    <div class="progress">
-
-      <div
-        class="progress-bar"
-        id="progressBar">
-      </div>
-
-    </div>
-
-
-    <div class="question-box">
-
-      <h3 id="questionText"></h3>
-
-    </div>
-
-
-    <div
-      class="options"
-      id="options">
-    </div>
-
-
-    <div class="navigation">
-
-      <button
-        type="button"
-        class="btn btn-secondary"
-        id="prevBtn"
-        onclick="soalSebelumnya()">
-        ◀️ Sebelumnya
-      </button>
-
-
-      <button
-        type="button"
-        class="btn btn-primary"
-        id="nextBtn"
-        onclick="soalBerikutnya()">
-        Berikutnya ▶️
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       HASIL KUIS
-  ========================== -->
-  <section
-    class="card result-card"
-    id="result">
-
-    <div
-      class="result-icon"
-      id="resultIcon">
-      🎉
-    </div>
-
-
-    <h2>
-      Petualangan Selesai!
-    </h2>
-
-
-    <p class="card-subtitle">
-      Hebat! Kamu telah menyelesaikan kuis matematika.
-    </p>
-
-
-    <div
-      class="final-score"
-      id="finalScore">
-      0
-    </div>
-
-
-    <div class="result-info">
-
-      <div class="result-item">
-
-        <span>
-          Nama
-        </span>
-
-        <strong id="resultNama">
-          -
-        </strong>
-
-      </div>
-
-
-      <div class="result-item">
-
-        <span>
-          Kelas
-        </span>
-
-        <strong id="resultKelas">
-          -
-        </strong>
-
-      </div>
-
-
-      <div class="result-item">
-
-        <span>
-          No. Absen
-        </span>
-
-        <strong id="resultAbsen">
-          -
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <div class="result-info">
-
-      <div class="result-item">
-
-        <span>
-          Jawaban Benar
-        </span>
-
-        <strong id="correctAnswers">
-          0
-        </strong>
-
-      </div>
-
-
-      <div class="result-item">
-
-        <span>
-          Jawaban Salah
-        </span>
-
-        <strong id="wrongAnswers">
-          0
-        </strong>
-
-      </div>
-
-
-      <div class="result-item">
-
-        <span>
-          Nilai
-        </span>
-
-        <strong id="resultNilai">
-          0
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <div class="result-actions">
-
-      <button
-        type="button"
-        class="btn btn-primary"
-        onclick="ulangKuis()">
-        🔄 Kerjakan Lagi
-      </button>
-
-
-      <a
-        href="capaian.html"
-        class="btn btn-secondary"
-        style="text-decoration:none;">
-        🌟 Jejak Capaian
-      </a>
-
-
-      <button
-        type="button"
-        class="btn btn-secondary"
-        onclick="window.print()">
-        🖨️ Cetak Hasil
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <div class="footer">
-
-    🍜 <strong>Kuliner Nusantara</strong>
-    • Belajar • Bermain • Berprestasi
-
-    <br>
-
-    UPT SDN 160 GRESIK
-
-  </div>
+<div class="app">
+
+<!-- =========================================================
+TOMBOL KEMBALI DAN DOWNLOAD
+========================================================= -->
+
+<div class="back-area">
+
+<a
+href="petualangan.html"
+class="back-btn"
+aria-label="Kembali ke halaman petualangan"
+>
+Kembali
+</a>
+
+<a
+href="soal.pdf"
+class="download-btn"
+download="soal.pdf"
+aria-label="Download Soal PDF"
+>
+⬇️ Download Soal PDF
+</a>
 
 </div>
 
+<header class="header">
+
+<span class="badge">
+🏫 UPT SDN 160 GRESIK
+</span>
+
+<h1>
+🧠 Kuis Seru Bilangan
+</h1>
+
+<p class="subtitle">
+Perbandingan & Urutan Bilangan sampai 100.000
+</p>
+
+</header>
+
+<section id="identitas" class="card">
+
+<div class="identity-content">
+
+<div class="identity-icon">
+🍲
+</div>
+
+<h2>
+🍽️ Yuk, Kenalkan Dirimu!
+</h2>
+
+<p class="identity-subtitle">
+Sebelum memulai petualangan kuliner matematika,
+isi identitasmu terlebih dahulu dengan benar.
+</p>
+
+<div class="form-grid">
+
+<div class="field">
+
+<label for="nama">
+👤 Nama Siswa
+</label>
+
+<div class="input-wrap">
+
+<input
+id="nama"
+placeholder="Tulis nama lengkap"
+autocomplete="name"
+>
+
+</div>
+
+</div>
+
+<div class="field">
+
+<label for="kelas">
+🏫 Kelas
+</label>
+
+<div class="input-wrap">
+
+<input
+id="kelas"
+placeholder="Contoh: 4"
+>
+
+</div>
+
+</div>
+
+<div class="field">
+
+<label for="absen">
+🔢 Nomor Absen
+</label>
+
+<div class="input-wrap">
+
+<input
+id="absen"
+type="number"
+min="1"
+placeholder="Masukkan nomor absen"
+>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+DUA MENU UTAMA
+====================================================== -->
+
+<div class="identity-action">
+
+<button
+class="btn primary"
+onclick="mulai()"
+>
+🍜 Mulai Petualangan
+</button>
+
+<a
+href="capaian.html"
+class="capaian-btn"
+aria-label="Menuju Jejak Capaian"
+>
+🌟 Jejak Capaian
+</a>
+
+</div>
+
+<div class="identity-note">
+
+🥢 Pastikan nama, kelas, dan nomor absen
+sudah benar sebelum melanjutkan.
+
+</div>
+
+<div class="food-decoration">
+
+🌾 Kuliner Nusantara • Belajar • Bermain • Berprestasi 🌾
+
+</div>
+
+</div>
+
+</section>
+
+<section id="kuis" class="card hidden">
+
+<div class="info">
+
+<span id="siswaInfo"></span>
+
+<span id="counter"></span>
+
+</div>
+
+<div class="progress-wrap">
+
+<div
+id="progress"
+class="progress"
+></div>
+
+</div>
+
+<div id="soalArea"></div>
+
+</section>
+
+<section
+id="hasil"
+class="card hidden"
+></section>
+
+</div>
+
+<div
+id="toast"
+class="toast hidden"
+></div>
 
 <script>
 
-/* =====================================================
-   DATA SOAL
-===================================================== */
+const GOOGLE_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbwk4odfq7ABr__CDR00YD4uAMLmvK2iPjaLLlJrpyA6BnOwJ9gUkncLdCVCzE670CFy/exec";
 
-const questions = [
+const soal = [
 
-  {
-    question:"Bilangan manakah yang lebih besar?",
-    options:[
-      "45.678",
-      "45.687",
-      "45.607",
-      "45.678"
-    ],
-    answer:"45.687"
-  },
+{
+q:"Bilangan yang lebih besar dari 45.678 adalah …",
+a:["45.687","45.607","45.678","45.608"],
+k:0
+},
 
-  {
-    question:"Manakah bilangan yang paling kecil?",
-    options:[
-      "32.450",
-      "32.405",
-      "32.540",
-      "32.504"
-    ],
-    answer:"32.405"
-  },
+{
+q:"Perhatikan bilangan berikut! 72.450 … 72.405. Tanda yang tepat untuk mengisi titik-titik adalah …",
+a:["<",">","=","≠"],
+k:1
+},
 
-  {
-    question:"Urutan bilangan dari yang terkecil adalah ...",
-    options:[
-      "12.345, 12.354, 12.435, 12.453",
-      "12.453, 12.435, 12.354, 12.345",
-      "12.354, 12.345, 12.453, 12.435",
-      "12.435, 12.345, 12.354, 12.453"
-    ],
-    answer:"12.345, 12.354, 12.435, 12.453"
-  },
+{
+q:"Urutan bilangan berikut dari yang terkecil ke terbesar adalah … 35.210, 35.120, 35.201, 35.102",
+a:[
+"35.102, 35.120, 35.201, 35.210",
+"35.120, 35.102, 35.210, 35.201",
+"35.201, 35.210, 35.102, 35.120",
+"35.210, 35.201, 35.120, 35.102"
+],
+k:0
+},
 
-  {
-    question:"Bilangan 67.890 dibandingkan dengan 67.809 adalah ...",
-    options:[
-      "lebih kecil",
-      "lebih besar",
-      "sama besar",
-      "tidak dapat dibandingkan"
-    ],
-    answer:"lebih besar"
-  },
+{
+q:"Bilangan yang paling kecil adalah …",
+a:["89.765","89.675","89.756","89.657"],
+k:3
+},
 
-  {
-    question:"Manakah bilangan terbesar?",
-    options:[
-      "78.901",
-      "78.910",
-      "78.091",
-      "78.109"
-    ],
-    answer:"78.910"
-  },
+{
+q:"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 56.789 … 56.798",
+a:["=","<",">","≠"],
+k:1
+},
 
-  {
-    question:"Urutan bilangan dari yang terbesar adalah ...",
-    options:[
-      "91.250, 91.205, 91.025, 90.999",
-      "90.999, 91.025, 91.205, 91.250",
-      "91.205, 91.250, 91.025, 90.999",
-      "91.025, 91.205, 90.999, 91.250"
-    ],
-    answer:"91.250, 91.205, 91.025, 90.999"
-  },
+{
+q:"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 63.450 … 63.405",
+a:["=","<",">","≠"],
+k:2
+},
 
-  {
-    question:"Bilangan manakah yang lebih kecil dari 54.321?",
-    options:[
-      "54.312",
-      "54.331",
-      "54.321",
-      "54.231"
-    ],
-    answer:"54.312"
-  },
+{
+q:"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 80.000 … 80.000",
+a:["=","<",">","≠"],
+k:0
+},
 
-  {
-    question:"Pernyataan yang benar adalah ...",
-    options:[
-      "23.456 > 23.546",
-      "45.678 < 45.687",
-      "78.900 < 78.090",
-      "90.123 > 91.123"
-    ],
-    answer:"45.678 < 45.687"
-  },
+{
+q:"Urutkan bilangan 12.500, 12.050, 12.005 dari yang terkecil ke terbesar.",
+a:[
+"12.005, 12.050, 12.500",
+"12.050, 12.005, 12.500",
+"12.500, 12.050, 12.005",
+"12.005, 12.500, 12.050"
+],
+k:0
+},
 
-  {
-    question:"Manakah urutan bilangan yang benar dari terkecil ke terbesar?",
-    options:[
-      "15.600, 15.060, 15.006, 15.660",
-      "15.006, 15.060, 15.600, 15.660",
-      "15.060, 15.006, 15.660, 15.600",
-      "15.660, 15.600, 15.060, 15.006"
-    ],
-    answer:"15.006, 15.060, 15.600, 15.660"
-  },
+{
+q:"Urutkan bilangan 98.100, 98.010, 98.001 dari yang terkecil ke terbesar.",
+a:[
+"98.001, 98.010, 98.100",
+"98.010, 98.001, 98.100",
+"98.100, 98.010, 98.001",
+"98.001, 98.100, 98.010"
+],
+k:0
+},
 
-  {
-    question:"Bilangan 99.999 merupakan bilangan ...",
-    options:[
-      "terkecil dari 99.990",
-      "lebih kecil dari 99.999",
-      "lebih besar dari 99.990",
-      "sama dengan 99.990"
-    ],
-    answer:"lebih besar dari 99.990"
-  },
+{
+q:"Urutkan bilangan 45.900, 45.090, 45.009 dari yang terkecil ke terbesar.",
+a:[
+"45.009, 45.090, 45.900",
+"45.090, 45.009, 45.900",
+"45.900, 45.090, 45.009",
+"45.009, 45.900, 45.090"
+],
+k:0
+},
 
-  {
-    question:"Manakah bilangan yang paling besar?",
-    options:[
-      "40.405",
-      "40.450",
-      "40.504",
-      "40.540"
-    ],
-    answer:"40.540"
-  },
+{
+q:"Perpustakaan sekolah memiliki 24.560 buku, sedangkan perpustakaan desa memiliki 23.950 buku. Perpustakaan manakah yang memiliki buku lebih banyak?",
+a:[
+"Perpustakaan sekolah, karena 24.560 > 23.950",
+"Perpustakaan desa, karena 23.950 > 24.560",
+"Keduanya memiliki jumlah buku yang sama",
+"Tidak dapat ditentukan"
+],
+k:0
+},
 
-  {
-    question:"Urutkan dari terbesar ke terkecil: 25.678, 25.876, 25.687, 25.768.",
-    options:[
-      "25.876, 25.768, 25.687, 25.678",
-      "25.678, 25.687, 25.768, 25.876",
-      "25.768, 25.876, 25.687, 25.678",
-      "25.876, 25.687, 25.768, 25.678"
-    ],
-    answer:"25.876, 25.768, 25.687, 25.678"
-  },
+{
+q:"Pak Budi memiliki tabungan Rp75.500, sedangkan Pak Andi memiliki tabungan Rp57.500. Siapakah yang memiliki tabungan lebih banyak dan berapa selisihnya?",
+a:[
+"Pak Budi, selisih Rp18.000",
+"Pak Andi, selisih Rp18.000",
+"Pak Budi, selisih Rp12.000",
+"Pak Andi, selisih Rp12.000"
+],
+k:0
+},
 
-  {
-    question:"Tanda yang tepat untuk 63.450 ... 63.405 adalah ...",
-    options:[
-      ">",
-      "<",
-      "=",
-      "≤"
-    ],
-    answer:">"
-  },
+{
+q:"Dalam sebuah lomba, Kelompok Merah = 67.250 poin, Kelompok Biru = 62.750 poin, dan Kelompok Hijau = 67.025 poin. Urutkan ketiga kelompok tersebut dari poin tertinggi ke terendah.",
+a:[
+"Merah → Hijau → Biru",
+"Hijau → Merah → Biru",
+"Biru → Merah → Hijau",
+"Merah → Biru → Hijau"
+],
+k:0
+},
 
-  {
-    question:"Bilangan yang terletak di antara 70.000 dan 80.000 adalah ...",
-    options:[
-      "69.999",
-      "70.001",
-      "80.001",
-      "89.999"
-    ],
-    answer:"70.001"
-  },
+{
+q:"Toko A menjual 45.750 pensil, Toko B menjual 54.570 pensil, dan Toko C menjual 45.705 pensil. Toko mana yang menjual pensil paling banyak?",
+a:[
+"Toko A",
+"Toko B",
+"Toko C",
+"Semua sama banyak"
+],
+k:1
+},
 
-  {
-    question:"Manakah pasangan bilangan yang memiliki nilai lebih besar?",
-    options:[
-      "88.120 dan 88.210",
-      "76.540 dan 76.450",
-      "92.300 dan 92.030",
-      "55.670 dan 55.760"
-    ],
-    answer:"88.120 dan 88.210"
-  }
+{
+q:"Toko A menjual 45.750 pensil, Toko B menjual 54.570 pensil, dan Toko C menjual 45.705 pensil. Urutkan jumlah pensil dari yang paling sedikit ke paling banyak.",
+a:[
+"45.705 → 45.750 → 54.570",
+"45.750 → 45.705 → 54.570",
+"54.570 → 45.750 → 45.705",
+"45.705 → 54.570 → 45.750"
+],
+k:0
+}
 
 ];
 
+let siswa={
+nama:"",
+kelas:"",
+absen:""
+};
 
-/* =====================================================
-   VARIABEL
-===================================================== */
+let index=0;
+let benar=0;
+let jawabanDipilih=[];
+let bankSoal=[];
 
-let currentQuestion = 0;
-let userAnswers = [];
-let quizQuestions = [];
-let studentName = "";
-let studentClass = "";
-let studentAbsen = "";
+/* =========================================================
+ACAK
+========================================================= */
 
+function acak(arr){
 
-/* =====================================================
-   ACAK ARRAY
-===================================================== */
+arr=[...arr];
 
-function shuffle(array){
+for(
+let i=arr.length-1;
+i>0;
+i--
+){
 
-  const newArray = [...array];
+let j=Math.floor(
+Math.random()*(i+1)
+);
 
-  for(let i = newArray.length - 1; i > 0; i--){
-
-    const j =
-      Math.floor(Math.random() * (i + 1));
-
-    [newArray[i],newArray[j]] =
-    [newArray[j],newArray[i]];
-
-  }
-
-  return newArray;
-}
-
-
-/* =====================================================
-   MULAI KUIS
-===================================================== */
-
-function mulaiKuis(){
-
-  studentName =
-    document.getElementById("nama").value.trim();
-
-  studentClass =
-    document.getElementById("kelas").value.trim();
-
-  studentAbsen =
-    document.getElementById("absen").value.trim();
-
-
-  if(!studentName){
-
-    alert(
-      "Silakan masukkan nama lengkap terlebih dahulu."
-    );
-
-    document.getElementById("nama").focus();
-
-    return;
-  }
-
-
-  if(!studentClass){
-
-    alert(
-      "Silakan masukkan kelas terlebih dahulu."
-    );
-
-    document.getElementById("kelas").focus();
-
-    return;
-  }
-
-
-  if(!studentAbsen){
-
-    alert(
-      "Silakan masukkan nomor absen terlebih dahulu."
-    );
-
-    document.getElementById("absen").focus();
-
-    return;
-  }
-
-
-  quizQuestions =
-    shuffle(questions);
-
-
-  userAnswers =
-    new Array(quizQuestions.length).fill(null);
-
-
-  currentQuestion = 0;
-
-
-  document.getElementById("identitas").style.display =
-    "none";
-
-  document.getElementById("quiz").style.display =
-    "block";
-
-  document.getElementById("result").style.display =
-    "none";
-
-
-  tampilkanSoal();
+[arr[i],arr[j]]=
+[arr[j],arr[i]];
 
 }
 
+return arr;
+}
 
-/* =====================================================
-   TAMPILKAN SOAL
-===================================================== */
+/* =========================================================
+ESCAPE HTML
+========================================================= */
 
-function tampilkanSoal(){
+function escapeHTML(s){
 
-  const question =
-    quizQuestions[currentQuestion];
-
-
-  document.getElementById("questionNumber").textContent =
-    `Soal ${currentQuestion + 1} dari ${quizQuestions.length}`;
-
-
-  document.getElementById("questionText").textContent =
-    question.question;
-
-
-  const optionsContainer =
-    document.getElementById("options");
-
-
-  optionsContainer.innerHTML = "";
-
-
-  const shuffledOptions =
-    shuffle(question.options);
-
-
-  shuffledOptions.forEach((option,index)=>{
-
-    const optionId =
-      `option-${currentQuestion}-${index}`;
-
-
-    const div =
-      document.createElement("div");
-
-
-    div.className = "option";
-
-
-    const input =
-      document.createElement("input");
-
-
-    input.type = "radio";
-    input.name = "answer";
-    input.id = optionId;
-    input.value = option;
-
-
-    const label =
-      document.createElement("label");
-
-
-    label.htmlFor = optionId;
-    label.textContent = option;
-
-
-    if(userAnswers[currentQuestion] === option){
-
-      input.checked = true;
-
-    }
-
-
-    input.addEventListener(
-      "change",
-      function(){
-
-        userAnswers[currentQuestion] =
-          this.value;
-
-        updateScoreInfo();
-
-      }
-    );
-
-
-    div.appendChild(input);
-
-    div.appendChild(label);
-
-    optionsContainer.appendChild(div);
-
-  });
-
-
-  const progress =
-    ((currentQuestion + 1) /
-    quizQuestions.length) * 100;
-
-
-  document.getElementById("progressBar").style.width =
-    progress + "%";
-
-
-  document.getElementById("prevBtn").disabled =
-    currentQuestion === 0;
-
-
-  document.getElementById("nextBtn").textContent =
-    currentQuestion === quizQuestions.length - 1
-      ? "🏁 Selesai"
-      : "Berikutnya ▶️";
-
-
-  updateScoreInfo();
+return String(s).replace(
+/[&<>"']/g,
+m=>({
+"&":"&",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m])
+);
 
 }
 
+/* =========================================================
+MULAI KUIS
+========================================================= */
 
-/* =====================================================
-   UPDATE SCORE
-===================================================== */
+function mulai(){
 
-function updateScoreInfo(){
+siswa.nama=
+document.getElementById("nama").value.trim();
 
-  let correct = 0;
+siswa.kelas=
+document.getElementById("kelas").value.trim();
 
+siswa.absen=
+document.getElementById("absen").value.trim();
 
-  quizQuestions.forEach(
-    (question,index)=>{
+if(
+!siswa.nama ||
+!siswa.kelas ||
+!siswa.absen
+){
 
-      if(
-        userAnswers[index] ===
-        question.answer
-      ){
+toast(
+"⚠️ Nama, kelas, dan nomor absen wajib diisi."
+);
 
-        correct++;
-
-      }
-
-    }
-  );
-
-
-  document.getElementById("scoreInfo").textContent =
-    `Benar: ${correct}`;
+return;
 
 }
 
+index=0;
+benar=0;
+jawabanDipilih=[];
 
-/* =====================================================
-   SOAL BERIKUTNYA
-===================================================== */
+bankSoal=acak(soal).map(s=>{
 
-function soalBerikutnya(){
+let ops=s.a.map(
+(teks,i)=>({
+teks,
+benar:i===s.k
+})
+);
 
-  if(!userAnswers[currentQuestion]){
+ops=acak(ops);
 
-    alert(
-      "Silakan pilih salah satu jawaban terlebih dahulu."
-    );
+return {
+...s,
+a:ops.map(x=>x.teks),
+k:ops.findIndex(x=>x.benar)
+};
 
-    return;
+});
 
-  }
+document
+.getElementById("identitas")
+.classList.add("hidden");
 
+document
+.getElementById("hasil")
+.classList.add("hidden");
 
-  if(
-    currentQuestion <
-    quizQuestions.length - 1
-  ){
+document
+.getElementById("kuis")
+.classList.remove("hidden");
 
-    currentQuestion++;
-
-    tampilkanSoal();
-
-  }else{
-
-    selesaiKuis();
-
-  }
+renderSoal();
 
 }
 
+/* =========================================================
+TAMPILKAN SOAL
+========================================================= */
 
-/* =====================================================
-   SOAL SEBELUMNYA
-===================================================== */
+function renderSoal(){
+
+const s=bankSoal[index];
+
+document.getElementById(
+"siswaInfo"
+).innerHTML=
+`👤 ${escapeHTML(siswa.nama)}
+ | 
+Kelas ${escapeHTML(siswa.kelas)}
+ | 
+Absen ${escapeHTML(siswa.absen)}`;
+
+document.getElementById(
+"counter"
+).textContent=
+`Soal ${index+1} dari ${bankSoal.length}`;
+
+document.getElementById(
+"progress"
+).style.width=
+((index)/bankSoal.length*100)+"%";
+
+document.getElementById(
+"soalArea"
+).innerHTML=`
+
+<div class="question-no">
+SOAL ${index+1}
+</div>
+
+<div class="question">
+${escapeHTML(s.q)}
+</div>
+
+<div class="answers">
+
+${s.a.map((a,i)=>`
+
+<label class="answer">
+
+<input
+type="radio"
+name="jawaban"
+value="${i}"
+${jawabanDipilih[index]===i ? "checked" : ""}
+>
+
+<span>
+<b>${String.fromCharCode(65+i)}.</b>
+${escapeHTML(a)}
+</span>
+
+</label>
+
+`).join("")}
+
+</div>
+
+<div class="nav-row">
+
+<div class="nav-left">
+
+<button
+class="nav-btn previous"
+onclick="soalSebelumnya()"
+${index===0 ? "disabled" : ""}
+>
+⬅️ Sebelumnya
+</button>
+
+</div>
+
+<div class="nav-right">
+
+<button
+class="nav-btn next"
+onclick="nextSoal()"
+>
+${
+index===bankSoal.length-1
+?"🏁 Selesai"
+:"➡️ Berikutnya"
+}
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+/* =========================================================
+SIMPAN JAWABAN
+========================================================= */
+
+function simpanJawaban(){
+
+const el=
+document.querySelector(
+'input[name="jawaban"]:checked'
+);
+
+if(!el){
+return false;
+}
+
+jawabanDipilih[index]=
+Number(el.value);
+
+return true;
+
+}
+
+/* =========================================================
+SOAL SEBELUMNYA
+========================================================= */
 
 function soalSebelumnya(){
 
-  if(currentQuestion > 0){
+if(index<=0){
+return;
+}
 
-    currentQuestion--;
+const el=
+document.querySelector(
+'input[name="jawaban"]:checked'
+);
 
-    tampilkanSoal();
+if(el){
 
-  }
+jawabanDipilih[index]=
+Number(el.value);
 
 }
 
+index--;
 
-/* =====================================================
-   SELESAI KUIS
-===================================================== */
-
-function selesaiKuis(){
-
-  const total =
-    quizQuestions.length;
-
-
-  let correct = 0;
-
-
-  quizQuestions.forEach(
-    (question,index)=>{
-
-      if(
-        userAnswers[index] ===
-        question.answer
-      ){
-
-        correct++;
-
-      }
-
-    }
-  );
-
-
-  const wrong =
-    total - correct;
-
-
-  const nilai =
-    Math.round(
-      (correct / total) * 100
-    );
-
-
-  document.getElementById("quiz").style.display =
-    "none";
-
-  document.getElementById("result").style.display =
-    "block";
-
-
-  document.getElementById("finalScore").textContent =
-    nilai;
-
-
-  document.getElementById("resultNama").textContent =
-    studentName;
-
-
-  document.getElementById("resultKelas").textContent =
-    studentClass;
-
-
-  document.getElementById("resultAbsen").textContent =
-    studentAbsen;
-
-
-  document.getElementById("correctAnswers").textContent =
-    correct;
-
-
-  document.getElementById("wrongAnswers").textContent =
-    wrong;
-
-
-  document.getElementById("resultNilai").textContent =
-    nilai;
-
-
-  let icon = "🎉";
-
-
-  if(nilai >= 90){
-
-    icon = "🏆";
-
-  }else if(nilai >= 80){
-
-    icon = "🌟";
-
-  }else if(nilai >= 70){
-
-    icon = "😊";
-
-  }else{
-
-    icon = "💪";
-
-  }
-
-
-  document.getElementById("resultIcon").textContent =
-    icon;
-
-
-  kirimHasilKeGoogleSheet(
-    studentName,
-    studentClass,
-    studentAbsen,
-    correct,
-    wrong,
-    nilai
-  );
+renderSoal();
 
 }
 
+/* =========================================================
+SOAL BERIKUTNYA
+========================================================= */
 
-/* =====================================================
-   ULANG KUIS
-===================================================== */
+function nextSoal(){
 
-function ulangKuis(){
+const berhasil=
+simpanJawaban();
 
-  document.getElementById("result").style.display =
-    "none";
+if(!berhasil){
 
+toast(
+"⚠️ Pilih salah satu jawaban terlebih dahulu."
+);
 
-  document.getElementById("quiz").style.display =
-    "none";
-
-
-  document.getElementById("identitas").style.display =
-    "block";
-
-
-  document.getElementById("nama").value =
-    studentName;
-
-
-  document.getElementById("kelas").value =
-    studentClass;
-
-
-  document.getElementById("absen").value =
-    studentAbsen;
+return;
 
 }
 
+index++;
 
-/* =====================================================
-   KIRIM KE GOOGLE SHEETS
-===================================================== */
+if(index<bankSoal.length){
 
-function kirimHasilKeGoogleSheet(
-  nama,
-  kelas,
-  absen,
-  benar,
-  salah,
-  nilai
+renderSoal();
+
+}else{
+
+hitungNilai();
+
+}
+
+}
+
+/* =========================================================
+HITUNG NILAI
+========================================================= */
+
+function hitungNilai(){
+
+benar=0;
+
+for(
+let i=0;
+i<bankSoal.length;
+i++
 ){
 
-  /*
-    GANTI URL DI BAWAH INI DENGAN
-    URL WEB APP GOOGLE APPS SCRIPT ANDA.
-  */
+if(
+jawabanDipilih[i]===
+bankSoal[i].k
+){
 
-  const scriptURL =
-    "https://script.google.com/macros/s/AKfycbxxxxxxxxxxxxxxxxxxxxxxxxxxxx/exec";
-
-
-  const data = {
-
-    nama:nama,
-
-    kelas:kelas,
-
-    absen:absen,
-
-    benar:benar,
-
-    salah:salah,
-
-    nilai:nilai,
-
-    waktu:new Date().toLocaleString("id-ID")
-
-  };
-
-
-  fetch(
-    scriptURL,
-    {
-
-      method:"POST",
-
-      mode:"no-cors",
-
-      headers:{
-        "Content-Type":"application/json"
-      },
-
-      body:JSON.stringify(data)
-
-    }
-  )
-  .catch(error=>{
-
-    console.log(
-      "Data tidak dapat dikirim:",
-      error
-    );
-
-  });
+benar++;
 
 }
 
+}
 
-/* =====================================================
-   SAAT HALAMAN DIBUKA
-===================================================== */
+selesai();
 
-document.addEventListener(
-  "DOMContentLoaded",
-  function(){
+}
 
-    document
-      .getElementById("identitas")
-      .style.display = "block";
+/* =========================================================
+PENGIRIMAN GOOGLE SHEETS
+========================================================= */
 
-  }
+function kirimKeGoogleSheets(data){
+
+if(
+!GOOGLE_SCRIPT_URL ||
+GOOGLE_SCRIPT_URL.includes("TEMPEL_URL")
+){
+
+return {
+ok:false,
+skipped:true
+};
+
+}
+
+try{
+
+const iframeName=
+"googleSheetsTarget";
+
+let iframe=
+document.getElementById(
+iframeName
 );
+
+if(!iframe){
+
+iframe=
+document.createElement("iframe");
+
+iframe.id=iframeName;
+iframe.name=iframeName;
+iframe.style.display="none";
+
+document.body.appendChild(
+iframe
+);
+
+}
+
+const form=
+document.createElement("form");
+
+form.method="POST";
+form.action=GOOGLE_SCRIPT_URL;
+form.target=iframeName;
+form.style.display="none";
+
+const fields={
+
+nama:data.nama,
+kelas:data.kelas,
+absen:data.absen,
+
+nilai:data.nilai,
+benar:data.benar,
+salah:data.total-data.benar,
+
+total:data.total,
+persen:data.persen,
+waktu:data.waktu
+
+};
+
+Object.keys(fields).forEach(
+function(key){
+
+const input=
+document.createElement("input");
+
+input.type="hidden";
+input.name=key;
+input.value=
+fields[key] ?? "";
+
+form.appendChild(input);
+
+}
+);
+
+document.body.appendChild(form);
+
+form.submit();
+
+setTimeout(
+function(){
+form.remove();
+},
+3000
+);
+
+return {
+ok:true
+};
+
+}catch(error){
+
+console.error(
+"Pengiriman Google Sheets gagal:",
+error
+);
+
+return {
+ok:false
+};
+
+}
+
+}
+
+/* =========================================================
+SELESAI
+========================================================= */
+
+function selesai(){
+
+const total=bankSoal.length;
+
+const nilai=
+Math.round(
+benar/total*100
+);
+
+const persen=
+Math.round(
+benar/total*100
+);
+
+const waktu=
+new Date().toLocaleString(
+"id-ID"
+);
+
+const hasilBaru={
+
+nama:siswa.nama,
+kelas:siswa.kelas,
+absen:siswa.absen,
+
+nilai,
+benar,
+total,
+persen,
+waktu
+
+};
+
+document
+.getElementById("kuis")
+.classList.add("hidden");
+
+tampilkanHasil(
+hasilBaru
+);
+
+const kirim=
+kirimKeGoogleSheets(
+hasilBaru
+);
+
+if(
+kirim &&
+kirim.ok
+){
+
+toast(
+"✅ Hasil dikirim ke Google Sheets."
+);
+
+}
+
+}
+
+/* =========================================================
+HASIL
+========================================================= */
+
+function tampilkanHasil(data){
+
+let pesan=
+data.nilai>=90
+?"🏆 Luar biasa!"
+:data.nilai>=75
+?"🌟 Bagus sekali!"
+:data.nilai>=60
+?"💪 Terus berlatih!"
+:"📚 Jangan menyerah!";
+
+document.getElementById(
+"hasil"
+).innerHTML=`
+
+<div class="center">
+
+<h2>
+🎉 Kuis Selesai!
+</h2>
+
+<p>
+${pesan}
+</p>
+
+<div class="result-score">
+${data.nilai}
+</div>
+
+<div class="stats">
+
+<div class="stat">
+
+<b>
+${data.benar}/${data.total}
+</b>
+
+Jawaban Benar
+
+</div>
+
+<div class="stat">
+
+<b>
+${data.persen}%
+</b>
+
+Persentase Benar
+
+</div>
+
+</div>
+
+<p>
+
+<b>
+${escapeHTML(data.nama)}
+</b>
+
+• Kelas ${escapeHTML(data.kelas)}
+
+• Absen ${escapeHTML(data.absen)}
+
+</p>
+
+<div class="actions">
+
+<button
+class="btn primary"
+onclick="ulang()"
+>
+🔄 Kerjakan Lagi
+</button>
+
+<button
+class="btn green"
+onclick="window.location.href='capaian.html'"
+>
+🌟 Jejak Capaian
+</button>
+
+<button
+class="btn gray"
+onclick="window.print()"
+>
+🖨️ Cetak Hasil
+</button>
+
+</div>
+
+</div>
+
+`;
+
+document
+.getElementById("hasil")
+.classList.remove("hidden");
+
+}
+
+/* =========================================================
+ULANG
+========================================================= */
+
+function ulang(){
+
+document
+.getElementById("hasil")
+.classList.add("hidden");
+
+document
+.getElementById("identitas")
+.classList.remove("hidden");
+
+document.getElementById(
+"nama"
+).value="";
+
+document.getElementById(
+"kelas"
+).value="";
+
+document.getElementById(
+"absen"
+).value="";
+
+}
+
+/* =========================================================
+TOAST
+========================================================= */
+
+function toast(msg){
+
+const t=
+document.getElementById(
+"toast"
+);
+
+t.textContent=msg;
+
+t.classList.remove(
+"hidden"
+);
+
+clearTimeout(
+window.tt
+);
+
+window.tt=
+setTimeout(
+()=>
+t.classList.add(
+"hidden"
+),
+2400
+);
+
+}
 
 </script>
 

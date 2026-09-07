@@ -1,5 +1,5 @@
-```html
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -895,152 +895,141 @@ z-index:20;
 }
 
 /* =========================================================
-DETAIL HASIL JAWABAN
-TAMBAHAN FITUR
+DETAIL JAWABAN
 ========================================================= */
 
-.detail-wrapper{
-margin-top:22px;
+.detail-toggle{
+width:100%;
+margin-top:20px;
+border:2px solid #d9b88f;
+border-radius:15px;
+padding:13px 17px;
+font-weight:900;
+font-size:15px;
+cursor:pointer;
+color:var(--primary-dark);
+background:linear-gradient(
+135deg,
+#fff8e9,
+#fff0d5
+);
+box-shadow:0 5px 12px rgba(92,48,24,.08);
+transition:
+transform .2s,
+box-shadow .2s,
+background .2s;
+}
+
+.detail-toggle:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 17px rgba(92,48,24,.13);
+background:#fff5e1;
+}
+
+.detail-toggle:active{
+transform:translateY(0);
+}
+
+.detail-jawaban{
+margin-top:12px;
+padding:14px;
+border:2px solid #ead7bc;
+border-radius:16px;
+background:#fffaf1;
 text-align:left;
 }
 
-.detail-title{
-margin:0 0 14px;
-padding:14px 16px;
-border-radius:15px;
-background:#fff4df;
-border:2px solid #ead0a9;
-color:var(--primary-dark);
-font-size:17px;
-font-weight:900;
-}
-
-.detail-card{
-background:#fff;
-border:2px solid #ead7bc;
-border-radius:16px;
-padding:15px;
-margin-bottom:12px;
-box-shadow:0 5px 14px rgba(92,48,24,.06);
-}
-
-.detail-card.correct{
-border-left:6px solid var(--green);
-}
-
-.detail-card.wrong{
-border-left:6px solid var(--red);
-}
-
-.detail-card.partial{
-border-left:6px solid var(--accent);
-}
-
 .detail-header{
+padding:10px 12px;
+margin-bottom:12px;
+border-radius:12px;
+background:#fff1d9;
+border:1px solid #e5c99f;
+font-size:13px;
+line-height:1.5;
+color:#684635;
+}
+
+.detail-item{
+border:2px solid #ead7bc;
+border-radius:14px;
+padding:13px;
+margin-bottom:10px;
+background:#fff;
+}
+
+.detail-item:last-child{
+margin-bottom:0;
+}
+
+.detail-item.benar{
+border-color:#9acfb0;
+background:#f5fff8;
+}
+
+.detail-item.salah{
+border-color:#e5aaa3;
+background:#fff8f7;
+}
+
+.detail-title{
 display:flex;
 justify-content:space-between;
 align-items:center;
 gap:10px;
-flex-wrap:wrap;
-margin-bottom:10px;
-}
-
-.detail-number{
 font-weight:900;
-color:var(--primary-dark);
-font-size:15px;
+margin-bottom:8px;
 }
 
 .detail-status{
-padding:5px 10px;
-border-radius:999px;
-font-size:12px;
+padding:5px 9px;
+border-radius:99px;
+font-size:11px;
 font-weight:900;
+white-space:nowrap;
 }
 
-.status-correct{
-background:#dff4e8;
-color:#176b40;
+.detail-status.benar{
+background:#d9f2e2;
+color:#216b42;
 }
 
-.status-wrong{
-background:#f9dddd;
-color:#a1261c;
+.detail-status.salah{
+background:#f8d9d5;
+color:#96362d;
 }
 
-.status-partial{
-background:#fff0c7;
-color:#8a5a00;
-}
-
-.detail-question{
-font-size:14px;
-font-weight:800;
-line-height:1.55;
-margin-bottom:10px;
-}
-
-.detail-answer,
-.detail-key,
-.detail-score{
-padding:9px 11px;
-border-radius:10px;
-margin-top:7px;
+.detail-row{
 font-size:13px;
-line-height:1.5;
+line-height:1.55;
+margin-top:5px;
 }
 
-.detail-answer{
-background:#f8f5f0;
-border:1px solid #eadfd4;
+.detail-label{
+font-weight:900;
+color:#684635;
 }
 
-.detail-key{
-background:#edf8f1;
-border:1px solid #cde8d7;
-}
-
-.detail-score{
-background:#fff5df;
-border:1px solid #ead0a9;
+.detail-poin{
+margin-top:9px;
+padding-top:8px;
+border-top:1px dashed #dfc8a8;
 font-weight:900;
 color:var(--primary-dark);
 }
 
-.detail-summary{
-margin-top:18px;
-padding:16px;
-border-radius:16px;
-background:linear-gradient(135deg,#fff8e9,#fff2d5);
-border:2px solid #ead0a9;
+.detail-answer-box{
+margin-top:6px;
+padding:8px 10px;
+border-radius:9px;
+background:#fffaf0;
+border:1px solid #ead7bc;
+word-break:break-word;
 }
 
-.detail-summary-row{
-display:flex;
-justify-content:space-between;
-gap:10px;
-padding:7px 0;
-border-bottom:1px dashed #dfc8a8;
-font-size:14px;
-}
-
-.detail-summary-row:last-child{
-border-bottom:0;
-}
-
-.detail-final{
-font-size:20px;
-font-weight:1000;
-color:var(--primary-dark);
-margin-top:8px;
-}
-
-.detail-toggle{
-margin-top:16px;
-}
-
-.detail-toggle button{
-width:100%;
+.detail-answer-box.empty{
+color:#9b8171;
+font-style:italic;
 }
 
 /* =========================================================
@@ -1168,14 +1157,11 @@ padding:9px 17px;
 font-size:13px;
 }
 
-.detail-header{
+.detail-title{
 align-items:flex-start;
+flex-direction:column;
 }
 
-.detail-summary-row{
-flex-direction:column;
-gap:3px;
-}
 }
 
 @media(max-width:380px){
@@ -1222,11 +1208,13 @@ font-size:14px;
 padding:12px 10px;
 }
 
-.detail-card{
-padding:12px;
+.detail-jawaban{
+padding:10px;
 }
+
 }
 </style>
+
 </head>
 
 <body>
@@ -1243,18 +1231,20 @@ TOMBOL KEMBALI DAN DOWNLOAD
 href="petualangan.html"
 class="back-btn"
 aria-label="Kembali ke halaman petualangan"
+
 >
-Kembali
-</a>
+
+Kembali </a>
 
 <a
 href="soal.pdf"
 class="download-btn"
 download="soal.pdf"
 aria-label="Download Soal PDF"
+
 >
-Download Soal
-</a>
+
+Download Soal </a>
 
 </div>
 
@@ -1305,6 +1295,7 @@ isi identitasmu terlebih dahulu dengan benar.
 id="nama"
 placeholder="Tulis nama lengkap"
 autocomplete="name"
+
 >
 
 </div>
@@ -1322,6 +1313,7 @@ autocomplete="name"
 <input
 id="kelas"
 placeholder="Contoh: 4"
+
 >
 
 </div>
@@ -1341,6 +1333,7 @@ id="absen"
 type="number"
 min="1"
 placeholder="Masukkan nomor absen"
+
 >
 
 </div>
@@ -1358,17 +1351,19 @@ DUA MENU UTAMA
 <button
 class="btn primary"
 onclick="mulai()"
+
 >
-🍜 Mulai Petualangan
-</button>
+
+🍜 Mulai Petualangan </button>
 
 <a
 href="capaian.html"
 class="capaian-btn"
 aria-label="Menuju Jejak Capaian"
+
 >
-🌟 Jejak Capaian
-</a>
+
+🌟 Jejak Capaian </a>
 
 </div>
 
@@ -1525,31 +1520,37 @@ q:"Jodohkan perbandingan bilangan pada Kolom A dengan jawaban yang tepat pada Ko
 pairs:[
 {
 text:"5.678 … 5.687",
+
 options:[
 "A. >",
 "B. <",
 "C. ="
 ],
+
 answer:"B"
 },
 
 {
 text:"6.450 … 6.405",
+
 options:[
 "A. >",
 "B. <",
 "C. ="
 ],
+
 answer:"A"
 },
 
 {
 text:"9.000 … 9.000",
+
 options:[
 "A. >",
 "B. <",
 "C. ="
 ],
+
 answer:"C"
 }
 ]
@@ -1567,31 +1568,37 @@ q:"Jodohkan kelompok bilangan dengan urutan dari terkecil ke terbesar!",
 pairs:[
 {
 text:"2.500, 2.050, 2.005",
+
 options:[
 "A. 1.009, 1.090, 1.900",
 "B. 2.005, 2.050, 2.500",
 "C. 4.008, 4.080, 4.800"
 ],
+
 answer:"B"
 },
 
 {
 text:"1.900, 1.090, 1.009",
+
 options:[
 "A. 1.009, 1.090, 1.900",
 "B. 2.005, 2.050, 2.500",
 "C. 4.008, 4.080, 4.800"
 ],
+
 answer:"A"
 },
 
 {
 text:"4.800, 4.080, 4.008",
+
 options:[
 "A. 1.009, 1.090, 1.900",
 "B. 2.005, 2.050, 2.500",
 "C. 4.008, 4.080, 4.800"
 ],
+
 answer:"C"
 }
 ]
@@ -2532,34 +2539,6 @@ skorPoin=0;
 
 benar=0;
 
-/*
-TOTAL MAKSIMAL = 10 POIN
-
-Nomor 1-4:
-masing-masing 1 poin = 4 poin
-
-Nomor 5:
-3 pasangan × 1/3 = 1 poin
-
-Nomor 6:
-3 pasangan × 1/3 = 1 poin
-
-Nomor 7:
-1 poin
-
-Nomor 8:
-1 poin
-
-Nomor 9:
-1 poin
-
-Nomor 10:
-a = 0,5 poin
-b = 0,5 poin
-
-TOTAL = 10 POIN
-*/
-
 for(
 let i=0;
 i<soal.length;
@@ -2570,10 +2549,6 @@ const s=soal[i];
 
 const j=
 jawabanDipilih[i];
-
-/* =====================================================
-PILIHAN GANDA
-===================================================== */
 
 if(s.type==="pg"){
 
@@ -2590,10 +2565,6 @@ benar++;
 }
 
 }
-
-/* =====================================================
-MENJODOHKAN
-===================================================== */
 
 else if(s.type==="matching"){
 
@@ -2638,10 +2609,6 @@ benar++;
 
 }
 
-/* =====================================================
-SOAL CERITA 7-9
-===================================================== */
-
 else if(s.type==="story"){
 
 if(
@@ -2660,11 +2627,6 @@ benar++;
 }
 
 }
-
-/* =====================================================
-SOAL 10
-A DAN B TERPISAH
-===================================================== */
 
 else if(s.type==="story10"){
 
@@ -2701,10 +2663,6 @@ benar++;
 }
 
 }
-
-/*
-10 poin menjadi nilai 100.
-*/
 
 const nilai=
 Math.round(
@@ -2838,6 +2796,356 @@ ok:false
 }
 
 /* =========================================================
+MEMBUAT DETAIL JAWABAN
+========================================================= */
+
+function buatDetailJawaban(){
+
+let html=`
+
+<div class="detail-header">
+
+<b>📊 Rincian Penilaian</b><br>
+
+Setiap nomor ditampilkan berdasarkan jawaban yang kamu kerjakan.
+Nomor 5 dan 6 dinilai berdasarkan jumlah pasangan yang benar.
+Nomor 10 memiliki dua bagian, masing-masing bernilai 0,5 poin.
+
+</div>
+
+`;
+
+for(
+let i=0;
+i<soal.length;
+i++
+){
+
+const s=soal[i];
+
+const j=jawabanDipilih[i];
+
+let benarSoal=false;
+
+let poinSoal=0;
+
+let jawabanSiswa="";
+
+let kunciJawaban="";
+
+/* =====================================================
+PILIHAN GANDA
+===================================================== */
+
+if(s.type==="pg"){
+
+benarSoal=
+j &&
+j.type==="pg" &&
+j.value===s.k;
+
+poinSoal=
+benarSoal ? 1 : 0;
+
+if(
+j &&
+j.type==="pg" &&
+s.a[j.value]!==undefined
+){
+
+jawabanSiswa=
+`${String.fromCharCode(65+j.value)}. ${s.a[j.value]}`;
+
+}else{
+
+jawabanSiswa="Belum dijawab";
+
+}
+
+kunciJawaban=
+`${String.fromCharCode(65+s.k)}. ${s.a[s.k]}`;
+
+}
+
+/* =====================================================
+MENJODOHKAN
+===================================================== */
+
+else if(s.type==="matching"){
+
+let jumlahBenar=0;
+
+let rincian=[];
+
+for(
+let p=0;
+p<s.pairs.length;
+p++
+){
+
+const jawaban=
+j &&
+j.type==="matching" &&
+j.values
+?j.values[p]
+:"";
+
+const benarPasangan=
+jawaban===
+s.pairs[p].answer;
+
+if(benarPasangan){
+jumlahBenar++;
+}
+
+const pilihanSiswa=
+jawaban
+?jawaban
+:"-";
+
+rincian.push(
+`Pasangan ${p+1}: ${pilihanSiswa} / Kunci ${s.pairs[p].answer}`
+);
+
+}
+
+poinSoal=
+jumlahBenar /
+s.pairs.length;
+
+benarSoal=
+jumlahBenar===
+s.pairs.length;
+
+jawabanSiswa=
+rincian.join("<br>");
+
+kunciJawaban=
+s.pairs
+.map(
+(pair,p)=>
+`Pasangan ${p+1}: ${pair.answer}`
+)
+.join("<br>");
+
+}
+
+/* =====================================================
+SOAL CERITA 7-9
+===================================================== */
+
+else if(s.type==="story"){
+
+jawabanSiswa=
+j &&
+j.type==="story"
+?j.value
+:"Belum dijawab";
+
+benarSoal=
+j &&
+j.type==="story" &&
+cekJawabanStory(
+s,
+j.value
+);
+
+poinSoal=
+benarSoal ? 1 : 0;
+
+if(s.requiredMeaning==="school_more"){
+
+kunciJawaban=
+"Perpustakaan sekolah lebih banyak. 6.250 > 5.825";
+
+}
+
+else if(s.requiredMeaning==="siti_more_450"){
+
+kunciJawaban=
+"Siti lebih banyak, dengan selisih 450 manik-manik.";
+
+}
+
+else if(s.requiredMeaning==="order_4b_4c_4a"){
+
+kunciJawaban=
+"4B, 4C, 4A atau 3.570, 3.705, 3.750";
+
+}
+
+}
+
+/* =====================================================
+SOAL 10
+===================================================== */
+
+else if(s.type==="story10"){
+
+const valueA=
+j &&
+j.type==="story10"
+?j.a
+:"";
+
+const valueB=
+j &&
+j.type==="story10"
+?j.b
+:"";
+
+const benarA=
+cekNomor10A(valueA);
+
+const benarB=
+cekNomor10B(valueB);
+
+poinSoal=
+(benarA ? 0.5 : 0) +
+(benarB ? 0.5 : 0);
+
+benarSoal=
+benarA &&
+benarB;
+
+jawabanSiswa=
+`a. ${valueA || "Belum dijawab"}
+<br>
+b. ${valueB || "Belum dijawab"}`;
+
+kunciJawaban=
+"a. Toko A / 4.850 buku<br>b. 4.580, 4.805, 4.850 atau Toko B, Toko C, Toko A";
+
+}
+
+const kelasStatus=
+benarSoal
+?"benar"
+:"salah";
+
+const statusText=
+benarSoal
+?"✅ BENAR"
+:"❌ SALAH";
+
+html+=`
+
+<div class="detail-item ${kelasStatus}">
+
+<div class="detail-title">
+
+<span>
+📝 Soal ${i+1}
+</span>
+
+<span class="detail-status ${kelasStatus}">
+${statusText}
+</span>
+
+</div>
+
+<div class="detail-row">
+
+<span class="detail-label">
+Jawaban:
+</span>
+
+<div class="detail-answer-box ${
+jawabanSiswa==="Belum dijawab"
+?"empty"
+:""
+}">
+
+${jawabanSiswa}
+
+</div>
+
+</div>
+
+<div class="detail-row">
+
+<span class="detail-label">
+Kunci / Jawaban yang benar:
+</span>
+
+<div class="detail-answer-box">
+
+${kunciJawaban}
+
+</div>
+
+</div>
+
+<div class="detail-poin">
+
+⭐ Nilai nomor ${i+1}: ${poinSoal} poin
+
+</div>
+
+</div>
+
+`;
+
+}
+
+html+=`
+
+<div class="detail-header" style="margin-top:12px;margin-bottom:0;">
+
+<b>🏆 Total Poin: ${Math.round(skorPoin*100)/100} dari 10 poin</b><br>
+
+<b>📈 Nilai Akhir: ${Math.round(skorPoin/10*100)}</b>
+
+</div>
+
+`;
+
+return html;
+
+}
+
+/* =========================================================
+BUKA / TUTUP DETAIL JAWABAN
+========================================================= */
+
+function toggleDetailJawaban(){
+
+const detail=
+document.getElementById(
+"detailJawaban"
+);
+
+const tombol=
+document.getElementById(
+"detailToggle"
+);
+
+if(!detail || !tombol){
+return;
+}
+
+const sedangTampil=
+!detail.classList.contains("hidden");
+
+if(sedangTampil){
+
+detail.classList.add("hidden");
+
+tombol.innerHTML=
+"📋 Lihat Detail Jawaban";
+
+}else{
+
+detail.classList.remove("hidden");
+
+tombol.innerHTML=
+"🔽 Tutup Detail Jawaban";
+
+}
+
+}
+
+/* =========================================================
 SELESAI
 ========================================================= */
 
@@ -2890,531 +3198,6 @@ kirim.ok
 
 toast(
 "✅ Hasil dikirim ke Google Sheets."
-);
-
-}
-
-}
-
-/* =========================================================
-MEMBUAT TEKS JAWABAN
-========================================================= */
-
-function teksJawabanSiswa(indexSoal){
-
-const s=soal[indexSoal];
-
-const j=
-jawabanDipilih[indexSoal];
-
-if(!j){
-
-return "Tidak dijawab";
-
-}
-
-if(s.type==="pg"){
-
-if(
-j.value===undefined ||
-!s.a[j.value]
-){
-
-return "Tidak dijawab";
-
-}
-
-return (
-String.fromCharCode(65+j.value) +
-". " +
-s.a[j.value]
-);
-
-}
-
-if(s.type==="matching"){
-
-if(!j.values){
-
-return "Tidak dijawab";
-
-}
-
-return j.values.map(
-(value,i)=>
-`${i+1}. ${value || "-"}`
-).join("<br>");
-
-}
-
-if(s.type==="story"){
-
-return j.value || "Tidak dijawab";
-
-}
-
-if(s.type==="story10"){
-
-return `
-<b>a.</b> ${escapeHTML(j.a || "Tidak dijawab")}<br>
-<b>b.</b> ${escapeHTML(j.b || "Tidak dijawab")}
-`;
-
-}
-
-return "Tidak dijawab";
-
-}
-
-/* =========================================================
-MEMBUAT KUNCI JAWABAN
-========================================================= */
-
-function teksKunciJawaban(indexSoal){
-
-const s=soal[indexSoal];
-
-if(s.type==="pg"){
-
-return (
-String.fromCharCode(65+s.k) +
-". " +
-escapeHTML(s.a[s.k])
-);
-
-}
-
-if(s.type==="matching"){
-
-return s.pairs.map(
-(pair,i)=>
-`${i+1}. ${escapeHTML(pair.answer)}`
-).join("<br>");
-
-}
-
-if(s.type==="story"){
-
-if(s.requiredMeaning==="school_more"){
-
-return `
-Perpustakaan sekolah lebih banyak.<br>
-6.250 > 5.825
-`;
-
-}
-
-if(s.requiredMeaning==="siti_more_450"){
-
-return `
-Siti lebih banyak.<br>
-Selisih = 450 manik-manik.
-`;
-
-}
-
-if(s.requiredMeaning==="order_4b_4c_4a"){
-
-return `
-Kelas 4B → Kelas 4C → Kelas 4A<br>
-3.570 → 3.705 → 3.750
-`;
-
-}
-
-}
-
-if(s.type==="story10"){
-
-return `
-<b>a.</b> Toko A<br>
-<b>b.</b> Toko B → Toko C → Toko A<br>
-4.580 → 4.805 → 4.850
-`;
-
-}
-
-return "-";
-
-}
-
-/* =========================================================
-MENGHITUNG NILAI DETAIL SETIAP NOMOR
-========================================================= */
-
-function hitungDetailSoal(indexSoal){
-
-const s=soal[indexSoal];
-
-const j=
-jawabanDipilih[indexSoal];
-
-let poin=0;
-
-let status="wrong";
-
-let statusText="❌ Salah";
-
-let benarDetail=false;
-
-let jawabanKosong=!j;
-
-/* =====================================================
-PILIHAN GANDA
-===================================================== */
-
-if(s.type==="pg"){
-
-if(
-j &&
-j.type==="pg" &&
-j.value===s.k
-){
-
-poin=1;
-status="correct";
-statusText="✅ Benar";
-benarDetail=true;
-
-}
-
-}
-
-/* =====================================================
-MENJODOHKAN
-===================================================== */
-
-else if(s.type==="matching"){
-
-if(
-j &&
-j.type==="matching" &&
-j.values
-){
-
-let jumlahBenar=0;
-
-for(
-let p=0;
-p<s.pairs.length;
-p++
-){
-
-if(
-j.values[p]===
-s.pairs[p].answer
-){
-
-jumlahBenar++;
-
-}
-
-}
-
-poin=
-jumlahBenar /
-s.pairs.length;
-
-if(jumlahBenar===s.pairs.length){
-
-status="correct";
-statusText="✅ Benar";
-benarDetail=true;
-
-}else if(jumlahBenar>0){
-
-status="partial";
-statusText="🟡 Sebagian Benar";
-
-}
-
-}
-
-}
-
-/* =====================================================
-SOAL CERITA
-===================================================== */
-
-else if(s.type==="story"){
-
-if(
-j &&
-j.type==="story"
-&&
-cekJawabanStory(
-s,
-j.value
-)
-){
-
-poin=1;
-status="correct";
-statusText="✅ Benar";
-benarDetail=true;
-
-}
-
-}
-
-/* =====================================================
-SOAL 10
-===================================================== */
-
-else if(s.type==="story10"){
-
-let benarA=false;
-let benarB=false;
-
-if(
-j &&
-j.type==="story10"
-){
-
-benarA=
-cekNomor10A(j.a);
-
-benarB=
-cekNomor10B(j.b);
-
-if(benarA){
-poin+=0.5;
-}
-
-if(benarB){
-poin+=0.5;
-}
-
-if(benarA && benarB){
-
-status="correct";
-statusText="✅ Benar";
-benarDetail=true;
-
-}else if(benarA || benarB){
-
-status="partial";
-statusText="🟡 Sebagian Benar";
-
-}
-
-}
-
-}
-
-if(jawabanKosong){
-
-status="wrong";
-statusText="❌ Tidak Dijawab";
-
-}
-
-return {
-poin,
-status,
-statusText,
-benarDetail
-};
-
-}
-
-/* =========================================================
-DETAIL HASIL SETIAP NOMOR
-========================================================= */
-
-function tampilkanDetailJawaban(){
-
-const container=
-document.getElementById(
-"detailJawaban"
-);
-
-if(!container){
-
-return;
-
-}
-
-let html="";
-
-let totalPoinDetail=0;
-
-for(
-let i=0;
-i<soal.length;
-i++
-){
-
-const s=soal[i];
-
-const detail=
-hitungDetailSoal(i);
-
-totalPoinDetail+=
-detail.poin;
-
-let kelasStatus=
-detail.status;
-
-let jawaban=
-teksJawabanSiswa(i);
-
-let kunci=
-teksKunciJawaban(i);
-
-let skorTampil=
-Math.round(
-detail.poin*100
-)/100;
-
-if(s.type==="matching"){
-
-skorTampil=
-`${skorTampil} poin`;
-
-}
-
-html+=`
-
-<div class="detail-card ${kelasStatus}">
-
-<div class="detail-header">
-
-<div class="detail-number">
-📝 Soal ${i+1}
-</div>
-
-<div class="detail-status ${
-detail.status==="correct"
-?"status-correct"
-:detail.status==="partial"
-?"status-partial"
-:"status-wrong"
-}">
-
-${detail.statusText}
-
-</div>
-
-</div>
-
-<div class="detail-question">
-
-${escapeHTML(s.q)}
-
-</div>
-
-<div class="detail-answer">
-
-<b>👤 Jawaban Siswa:</b><br>
-
-${jawaban}
-
-</div>
-
-<div class="detail-key">
-
-<b>🔑 Jawaban Benar:</b><br>
-
-${kunci}
-
-</div>
-
-<div class="detail-score">
-
-💰 Nilai Soal ${i+1}:
-<strong>${skorTampil}</strong> poin
-
-</div>
-
-</div>
-
-`;
-
-}
-
-/* =====================================================
-RINGKASAN NILAI
-===================================================== */
-
-html+=`
-
-<div class="detail-summary">
-
-<div class="detail-title">
-📊 Ringkasan Penilaian
-</div>
-
-<div class="detail-summary-row">
-
-<span>
-Total Poin
-</span>
-
-<strong>
-${Math.round(totalPoinDetail*100)/100} / 10
-</strong>
-
-</div>
-
-<div class="detail-summary-row">
-
-<span>
-Nilai Akhir
-</span>
-
-<strong>
-${Math.round(totalPoinDetail/10*100)}
-</strong>
-
-</div>
-
-<div class="detail-summary-row">
-
-<span>
-Rumus Penilaian
-</span>
-
-<strong>
-Poin ÷ 10 × 100
-</strong>
-
-</div>
-
-<div class="detail-final">
-
-🎯 Nilai Akhir:
-${Math.round(totalPoinDetail/10*100)}
-
-</div>
-
-</div>
-
-`;
-
-container.innerHTML=html;
-
-container.classList.remove(
-"hidden"
-);
-
-}
-
-/* =========================================================
-SEMBUNYIKAN DETAIL
-========================================================= */
-
-function sembunyikanDetailJawaban(){
-
-const container=
-document.getElementById(
-"detailJawaban"
-);
-
-if(container){
-
-container.classList.add(
-"hidden"
 );
 
 }
@@ -3508,14 +3291,29 @@ masing-masing sesuai kebenaran jawabannya.
 
 </p>
 
-<div class="actions">
+<!-- =====================================================
+TOMBOL DETAIL JAWABAN
+====================================================== -->
 
 <button
-class="btn orange"
-onclick="tampilkanDetailJawaban()"
+id="detailToggle"
+class="detail-toggle"
+onclick="toggleDetailJawaban()"
+type="button"
 >
 📋 Lihat Detail Jawaban
 </button>
+
+<div
+id="detailJawaban"
+class="detail-jawaban hidden"
+>
+
+${buatDetailJawaban()}
+
+</div>
+
+<div class="actions">
 
 <button
 class="btn primary"
@@ -3537,17 +3335,6 @@ onclick="window.print()"
 >
 🖨️ Cetak Hasil
 </button>
-
-</div>
-
-<div
-id="detailJawaban"
-class="detail-wrapper hidden"
->
-
-<div class="detail-title">
-📋 Detail Jawaban dan Penilaian Setiap Soal
-</div>
 
 </div>
 
@@ -3625,4 +3412,3 @@ t.classList.add(
 
 </body>
 </html>
-```

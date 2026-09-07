@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -377,8 +378,6 @@ position:relative;
 z-index:1;
 }
 
-/* Tombol mulai */
-
 #identitas .btn.primary{
 flex:1;
 border:0;
@@ -641,6 +640,80 @@ transition:.3s;
  position:relative;
 }
 
+.question-content{
+font-size:18px;
+line-height:1.65;
+font-weight:700;
+}
+
+.story-line{
+margin:8px 0;
+}
+
+.match-table{
+width:100%;
+border-collapse:collapse;
+margin-top:12px;
+font-size:15px;
+background:#fff;
+border-radius:12px;
+overflow:hidden;
+}
+
+.match-table th,
+.match-table td{
+border:1px solid #dfc8a8;
+padding:10px;
+vertical-align:middle;
+}
+
+.match-table th{
+background:#fff1d9;
+font-weight:900;
+text-align:center;
+}
+
+.match-table td:first-child{
+font-weight:700;
+}
+
+.match-table select{
+width:100%;
+padding:9px 10px;
+font-size:14px;
+border-radius:10px;
+}
+
+.story-input{
+margin-top:12px;
+width:100%;
+padding:13px 15px;
+border:2px solid #e2d0ba;
+border-radius:13px;
+font-size:16px;
+background:#fff;
+}
+
+.story-input:focus{
+border-color:#d77b35;
+outline:none;
+box-shadow:0 0 0 4px rgba(230,126,34,.10);
+}
+
+.part-box{
+margin-top:13px;
+padding:14px;
+background:#fffaf0;
+border:2px solid #ead7bc;
+border-radius:14px;
+}
+
+.part-title{
+font-weight:900;
+color:var(--primary-dark);
+margin-bottom:8px;
+}
+
 .answers{
  display:grid;
  gap:9px;
@@ -825,7 +898,6 @@ z-index:20;
 RESPONSIVE
 ========================================================= */
 
-
 @media(max-height:760px) and (min-width:701px){
  body{
   overflow:auto;
@@ -895,6 +967,19 @@ width:100%;
 .question{
 font-size:19px;
 padding:17px;
+}
+
+.question-content{
+font-size:16px;
+}
+
+.match-table{
+font-size:13px;
+}
+
+.match-table th,
+.match-table td{
+padding:7px;
 }
 
 .identity-action{
@@ -1182,144 +1267,296 @@ class="toast hidden"
 const GOOGLE_SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbwk4odfq7ABr__CDR00YD4uAMLmvK2iPjaLLlJrpyA6BnOwJ9gUkncLdCVCzE670CFy/exec";
 
+/* =========================================================
+BANK SOAL
+URUTAN TETAP 1 SAMPAI 10
+TIDAK DIACAK
+========================================================= */
+
 const soal = [
 
-{
-q:"Bilangan yang lebih besar dari 45.678 adalah …",
-a:["45.687","45.607","45.678","45.608"],
-k:0
-},
+/* =========================================================
+1. PILIHAN GANDA
+========================================================= */
 
 {
-q:"Perhatikan bilangan berikut! 72.450 … 72.405. Tanda yang tepat untuk mengisi titik-titik adalah …",
-a:["<",">","=","≠"],
+type:"pg",
+
+q:"Bilangan yang lebih besar dari 4.567 adalah …",
+
+a:[
+"4.507",
+"4.657",
+"4.567",
+"4.506"
+],
+
 k:1
 },
 
+/* =========================================================
+2. PILIHAN GANDA
+========================================================= */
+
 {
-q:"Urutan bilangan berikut dari yang terkecil ke terbesar adalah … 35.210, 35.120, 35.201, 35.102",
+type:"pg",
+
+q:"Tanda yang tepat untuk membandingkan 7.250 … 7.205 adalah …",
+
 a:[
-"35.102, 35.120, 35.201, 35.210",
-"35.120, 35.102, 35.210, 35.201",
-"35.201, 35.210, 35.102, 35.120",
-"35.210, 35.201, 35.120, 35.102"
+"<",
+">",
+"=",
+"+"
 ],
+
+k:1
+},
+
+/* =========================================================
+3. PILIHAN GANDA
+========================================================= */
+
+{
+type:"pg",
+
+q:"Urutan bilangan dari yang terkecil ke terbesar adalah … 3.450, 3.405, 3.540, 3.504",
+
+a:[
+"3.405, 3.450, 3.504, 3.540",
+"3.450, 3.405, 3.540, 3.504",
+"3.540, 3.504, 3.450, 3.405",
+"3.405, 3.504, 3.450, 3.540"
+],
+
 k:0
 },
 
+/* =========================================================
+4. PILIHAN GANDA
+========================================================= */
+
 {
+type:"pg",
+
 q:"Bilangan yang paling kecil adalah …",
-a:["89.765","89.675","89.756","89.657"],
+
+a:[
+"8.765",
+"8.675",
+"8.756",
+"8.657"
+],
+
 k:3
 },
 
-{
-q:"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 56.789 … 56.798",
-a:["=","<",">","≠"],
-k:1
-},
+/* =========================================================
+5. MENJODOHKAN
+========================================================= */
 
 {
-q:"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 63.450 … 63.405",
-a:["=","<",">","≠"],
-k:2
-},
+type:"matching",
 
-{
-q:"Jodohkan bilangan berikut dengan tanda perbandingan yang tepat: 80.000 … 80.000",
-a:["=","<",">","≠"],
-k:0
-},
+q:"Jodohkan perbandingan bilangan pada Kolom A dengan jawaban yang tepat pada Kolom B!",
 
+pairs:[
 {
-q:"Urutkan bilangan 12.500, 12.050, 12.005 dari yang terkecil ke terbesar.",
-a:[
-"12.005, 12.050, 12.500",
-"12.050, 12.005, 12.500",
-"12.500, 12.050, 12.005",
-"12.005, 12.500, 12.050"
+text:"5.678 … 5.687",
+options:[
+"A. >",
+"B. <",
+"C. ="
 ],
-k:0
+answer:"B"
 },
 
 {
-q:"Urutkan bilangan 98.100, 98.010, 98.001 dari yang terkecil ke terbesar.",
-a:[
-"98.001, 98.010, 98.100",
-"98.010, 98.001, 98.100",
-"98.100, 98.010, 98.001",
-"98.001, 98.100, 98.010"
+text:"6.450 … 6.405",
+options:[
+"A. >",
+"B. <",
+"C. ="
 ],
-k:0
+answer:"A"
 },
 
 {
-q:"Urutkan bilangan 45.900, 45.090, 45.009 dari yang terkecil ke terbesar.",
-a:[
-"45.009, 45.090, 45.900",
-"45.090, 45.009, 45.900",
-"45.900, 45.090, 45.009",
-"45.009, 45.900, 45.090"
+text:"9.000 … 9.000",
+options:[
+"A. >",
+"B. <",
+"C. ="
 ],
-k:0
+answer:"C"
+}
+]
+},
+
+/* =========================================================
+6. MENJODOHKAN
+========================================================= */
+
+{
+type:"matching",
+
+q:"Jodohkan kelompok bilangan dengan urutan dari terkecil ke terbesar!",
+
+pairs:[
+{
+text:"2.500, 2.050, 2.005",
+options:[
+"A. 1.009, 1.090, 1.900",
+"B. 2.005, 2.050, 2.500",
+"C. 4.008, 4.080, 4.800"
+],
+answer:"B"
 },
 
 {
-q:"Perpustakaan sekolah memiliki 24.560 buku, sedangkan perpustakaan desa memiliki 23.950 buku. Perpustakaan manakah yang memiliki buku lebih banyak?",
-a:[
-"Perpustakaan sekolah, karena 24.560 > 23.950",
-"Perpustakaan desa, karena 23.950 > 24.560",
-"Keduanya memiliki jumlah buku yang sama",
-"Tidak dapat ditentukan"
+text:"1.900, 1.090, 1.009",
+options:[
+"A. 1.009, 1.090, 1.900",
+"B. 2.005, 2.050, 2.500",
+"C. 4.008, 4.080, 4.800"
 ],
-k:0
+answer:"A"
 },
 
 {
-q:"Pak Budi memiliki tabungan Rp75.500, sedangkan Pak Andi memiliki tabungan Rp57.500. Siapakah yang memiliki tabungan lebih banyak dan berapa selisihnya?",
-a:[
-"Pak Budi, selisih Rp18.000",
-"Pak Andi, selisih Rp18.000",
-"Pak Budi, selisih Rp12.000",
-"Pak Andi, selisih Rp12.000"
+text:"4.800, 4.080, 4.008",
+options:[
+"A. 1.009, 1.090, 1.900",
+"B. 2.005, 2.050, 2.500",
+"C. 4.008, 4.080, 4.800"
 ],
-k:0
+answer:"C"
+}
+]
 },
 
-{
-q:"Dalam sebuah lomba, Kelompok Merah = 67.250 poin, Kelompok Biru = 62.750 poin, dan Kelompok Hijau = 67.025 poin. Urutkan ketiga kelompok tersebut dari poin tertinggi ke terendah.",
-a:[
-"Merah → Hijau → Biru",
-"Hijau → Merah → Biru",
-"Biru → Merah → Hijau",
-"Merah → Biru → Hijau"
-],
-k:0
-},
+/* =========================================================
+7. SOAL CERITA
+========================================================= */
 
 {
-q:"Toko A menjual 45.750 pensil, Toko B menjual 54.570 pensil, dan Toko C menjual 45.705 pensil. Toko mana yang menjual pensil paling banyak?",
-a:[
-"Toko A",
-"Toko B",
-"Toko C",
-"Semua sama banyak"
+type:"story",
+
+q:"Perpustakaan sekolah memiliki 6.250 buku, sedangkan perpustakaan kelas memiliki 5.825 buku. Perpustakaan mana yang memiliki buku lebih banyak? Tuliskan tanda perbandingannya!",
+
+answer:[
+"sekolah",
+"perpustakaan sekolah",
+"6.250 > 5.825",
+"6250 > 5825",
+"sekolah lebih banyak",
+"perpustakaan sekolah lebih banyak",
+"buku perpustakaan sekolah lebih banyak",
+"sekolah lebih banyak bukunya",
+"perpustakaan sekolah memiliki lebih banyak buku"
 ],
-k:1
+
+requiredMeaning:"school_more"
 },
 
+/* =========================================================
+8. SOAL CERITA
+========================================================= */
+
 {
-q:"Toko A menjual 45.750 pensil, Toko B menjual 54.570 pensil, dan Toko C menjual 45.705 pensil. Urutkan jumlah pensil dari yang paling sedikit ke paling banyak.",
-a:[
-"45.705 → 45.750 → 54.570",
-"45.750 → 45.705 → 54.570",
-"54.570 → 45.750 → 45.705",
-"45.705 → 54.570 → 45.750"
+type:"story",
+
+q:"Siti memiliki 7.500 manik-manik, sedangkan Rani memiliki 7.050 manik-manik. Siapa yang memiliki manik-manik lebih banyak? Berapa selisihnya?",
+
+answer:[
+"siti",
+"siti lebih banyak",
+"siti memiliki lebih banyak",
+"450",
+"450 manik-manik",
+"siti lebih banyak 450",
+"siti lebih banyak 450 manik-manik",
+"siti memiliki lebih banyak manik-manik dengan selisih 450",
+"siti memiliki 450 manik-manik lebih banyak"
 ],
-k:0
+
+requiredMeaning:"siti_more_450"
+},
+
+/* =========================================================
+9. SOAL CERITA
+========================================================= */
+
+{
+type:"story",
+
+q:"Tiga kelas mengikuti kegiatan pengumpulan botol plastik. Hasilnya: Kelas 4A = 3.750 botol, Kelas 4B = 3.570 botol, Kelas 4C = 3.705 botol. Urutkan jumlah botol dari yang paling sedikit ke paling banyak!",
+
+answer:[
+"4b 4c 4a",
+"4b, 4c, 4a",
+"4B, 4C, 4A",
+"kelas 4b kelas 4c kelas 4a",
+"kelas 4B, kelas 4C, kelas 4A",
+"3.570 3.705 3.750",
+"3570 3705 3750",
+"3.570 → 3.705 → 3.750",
+"3.570, 3.705, 3.750",
+"4B → 4C → 4A"
+],
+
+requiredMeaning:"order_4b_4c_4a"
+},
+
+/* =========================================================
+10. SOAL CERITA
+BAGIAN A DAN B DINILAI TERPISAH
+========================================================= */
+
+{
+type:"story10",
+
+q:"Tiga toko menjual buku tulis dalam satu bulan: Toko A = 4.850 buku, Toko B = 4.580 buku, Toko C = 4.805 buku.",
+
+partA:{
+label:"a. Toko mana yang menjual buku paling banyak?",
+
+answer:[
+"a",
+"toko a",
+"toko a paling banyak",
+"toko a menjual paling banyak",
+"toko a paling banyak buku",
+"toko a menjual buku paling banyak",
+"4.850",
+"4850",
+"toko a 4.850"
+]
+},
+
+partB:{
+label:"b. Urutkan jumlah penjualan dari terendah ke tertinggi!",
+
+answer:[
+"4.580 4.805 4.850",
+"4580 4805 4850",
+"4.580, 4.805, 4.850",
+"4.580 → 4.805 → 4.850",
+"4.580-4.805-4.850",
+"b 4.580 4.805 4.850",
+"toko b toko c toko a",
+"toko b → toko c → toko a",
+"4.580 buku, 4.805 buku, 4.850 buku"
+]
+}
+
 }
 
 ];
+
+/* =========================================================
+DATA SISWA
+========================================================= */
 
 let siswa={
 nama:"",
@@ -1328,35 +1565,12 @@ absen:""
 };
 
 let index=0;
+
 let benar=0;
+
+let skorPoin=0;
+
 let jawabanDipilih=[];
-let bankSoal=[];
-
-/* =========================================================
-ACAK
-========================================================= */
-
-function acak(arr){
-
-arr=[...arr];
-
-for(
-let i=arr.length-1;
-i>0;
-i--
-){
-
-let j=Math.floor(
-Math.random()*(i+1)
-);
-
-[arr[i],arr[j]]=
-[arr[j],arr[i]];
-
-}
-
-return arr;
-}
 
 /* =========================================================
 ESCAPE HTML
@@ -1367,13 +1581,227 @@ function escapeHTML(s){
 return String(s).replace(
 /[&<>"']/g,
 m=>({
-"&":"&",
+"&":"&amp;",
 "<":"&lt;",
 ">":"&gt;",
 '"':"&quot;",
 "'":"&#039;"
 }[m])
 );
+
+}
+
+/* =========================================================
+NORMALISASI JAWABAN
+========================================================= */
+
+function normalisasi(teks){
+
+return String(teks || "")
+.toLowerCase()
+.trim()
+.replace(/,/g," ")
+.replace(/\./g," ")
+.replace(/:/g," ")
+.replace(/;/g," ")
+.replace(/\s+/g," ");
+
+}
+
+/* =========================================================
+MENGUBAH ANGKA AGAR MUDAH DIBACA SISTEM
+========================================================= */
+
+function angkaBersih(teks){
+
+return String(teks || "")
+.replace(/\./g,"")
+.replace(/,/g,"")
+.replace(/\s+/g," ")
+.trim();
+
+}
+
+/* =========================================================
+PENILAIAN SOAL CERITA NOMOR 7
+========================================================= */
+
+function cekNomor7(jawaban){
+
+const j=normalisasi(jawaban);
+
+if(!j){
+return false;
+}
+
+/*
+HARUS MENYEBUT PERPUSTAKAAN SEKOLAH
+ATAU MENUNJUKKAN SEKOLAH LEBIH BANYAK.
+
+Angka 6.250 saja TIDAK cukup.
+*/
+
+const menyebutSekolah=
+j.includes("sekolah") ||
+j.includes("perpustakaan sekolah");
+
+const menyebutLebih=
+j.includes("lebih") ||
+j.includes("banyak") ||
+j.includes(">");
+
+const perbandinganBenar=
+j.includes("6250 > 5825") ||
+j.includes("6250>5825");
+
+return (
+(menyebutSekolah && menyebutLebih) ||
+(j.includes("sekolah lebih banyak")) ||
+perbandinganBenar
+);
+
+}
+
+/* =========================================================
+PENILAIAN SOAL CERITA NOMOR 8
+========================================================= */
+
+function cekNomor8(jawaban){
+
+const j=normalisasi(jawaban);
+
+if(!j){
+return false;
+}
+
+const menyebutSiti=
+j.includes("siti");
+
+const menyebutLebih=
+j.includes("lebih") ||
+j.includes("banyak");
+
+const menyebut450=
+j.includes("450");
+
+const angkaBenar=
+j.includes("7500") &&
+j.includes("7050");
+
+return (
+menyebutSiti &&
+menyebutLebih &&
+menyebut450
+) ||
+(
+menyebutSiti &&
+menyebutLebih &&
+angkaBenar
+);
+
+}
+
+/* =========================================================
+PENILAIAN SOAL CERITA NOMOR 9
+========================================================= */
+
+function cekNomor9(jawaban){
+
+const j=normalisasi(jawaban);
+
+/*
+Menerima:
+4B 4C 4A
+Kelas 4B, Kelas 4C, Kelas 4A
+3.570 3.705 3.750
+3570 3705 3750
+dan variasi penulisan lainnya.
+*/
+
+const polaKelas=
+/4\s*b.*4\s*c.*4\s*a/i;
+
+const polaAngka=
+/3570.*3705.*3750/;
+
+return (
+polaKelas.test(j) ||
+polaAngka.test(angkaBersih(j))
+);
+
+}
+
+/* =========================================================
+PENILAIAN NOMOR 10 BAGIAN A
+========================================================= */
+
+function cekNomor10A(jawaban){
+
+const j=normalisasi(jawaban);
+
+if(!j){
+return false;
+}
+
+const tokoA=
+j.includes("toko a") ||
+j==="a" ||
+j.startsWith("a ");
+
+const angka=
+j.includes("4850");
+
+return (
+tokoA ||
+(j.includes("paling banyak") && angka)
+);
+
+}
+
+/* =========================================================
+PENILAIAN NOMOR 10 BAGIAN B
+========================================================= */
+
+function cekNomor10B(jawaban){
+
+const j=normalisasi(jawaban);
+
+if(!j){
+return false;
+}
+
+const polaAngka=
+/4580.*4805.*4850/;
+
+const polaToko=
+/toko\s*b.*toko\s*c.*toko\s*a/i;
+
+return (
+polaAngka.test(angkaBersih(j)) ||
+polaToko.test(j)
+);
+
+}
+
+/* =========================================================
+PENILAIAN SOAL CERITA
+========================================================= */
+
+function cekJawabanStory(soal,jawaban){
+
+if(soal.requiredMeaning==="school_more"){
+return cekNomor7(jawaban);
+}
+
+if(soal.requiredMeaning==="siti_more_450"){
+return cekNomor8(jawaban);
+}
+
+if(soal.requiredMeaning==="order_4b_4c_4a"){
+return cekNomor9(jawaban);
+}
+
+return false;
 
 }
 
@@ -1407,27 +1835,18 @@ return;
 }
 
 index=0;
+
 benar=0;
+
+skorPoin=0;
+
 jawabanDipilih=[];
 
-bankSoal=acak(soal).map(s=>{
-
-let ops=s.a.map(
-(teks,i)=>({
-teks,
-benar:i===s.k
-})
-);
-
-ops=acak(ops);
-
-return {
-...s,
-a:ops.map(x=>x.teks),
-k:ops.findIndex(x=>x.benar)
-};
-
-});
+/*
+PENTING:
+TIDAK ADA ACAK.
+SOAL LANGSUNG MENGGUNAKAN URUTAN ASLI.
+*/
 
 document
 .getElementById("identitas")
@@ -1451,7 +1870,7 @@ TAMPILKAN SOAL
 
 function renderSoal(){
 
-const s=bankSoal[index];
+const s=soal[index];
 
 document.getElementById(
 "siswaInfo"
@@ -1465,23 +1884,27 @@ Absen ${escapeHTML(siswa.absen)}`;
 document.getElementById(
 "counter"
 ).textContent=
-`Soal ${index+1} dari ${bankSoal.length}`;
+`Soal ${index+1} dari ${soal.length}`;
 
 document.getElementById(
 "progress"
 ).style.width=
-((index)/bankSoal.length*100)+"%";
+((index)/soal.length*100)+"%";
 
-document.getElementById(
-"soalArea"
-).innerHTML=`
+let konten="";
 
-<div class="question-no">
-SOAL ${index+1}
-</div>
+/* =========================================================
+PILIHAN GANDA
+========================================================= */
+
+if(s.type==="pg"){
+
+konten=`
 
 <div class="question">
+
 ${escapeHTML(s.q)}
+
 </div>
 
 <div class="answers">
@@ -1494,7 +1917,12 @@ ${s.a.map((a,i)=>`
 type="radio"
 name="jawaban"
 value="${i}"
-${jawabanDipilih[index]===i ? "checked" : ""}
+${
+jawabanDipilih[index] &&
+jawabanDipilih[index].type==="pg" &&
+jawabanDipilih[index].value===i
+?"checked":""
+}
 >
 
 <span>
@@ -1507,6 +1935,218 @@ ${escapeHTML(a)}
 `).join("")}
 
 </div>
+
+`;
+
+}
+
+/* =========================================================
+MENJODOHKAN
+========================================================= */
+
+if(s.type==="matching"){
+
+konten=`
+
+<div class="question">
+
+<div class="question-content">
+
+${escapeHTML(s.q)}
+
+<table class="match-table">
+
+<thead>
+
+<tr>
+
+<th>Kolom A</th>
+
+<th>Kolom B</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${s.pairs.map((pair,i)=>`
+
+<tr>
+
+<td>
+${escapeHTML(pair.text)}
+</td>
+
+<td>
+
+<select
+class="match-select"
+data-match-index="${i}"
+>
+
+<option value="">
+-- Pilih --
+</option>
+
+${pair.options.map(option=>{
+
+const huruf=
+option.charAt(0);
+
+const selected=
+jawabanDipilih[index] &&
+jawabanDipilih[index].type==="matching" &&
+jawabanDipilih[index].values &&
+jawabanDipilih[index].values[i]===huruf
+?"selected":"";
+
+return `
+<option
+value="${huruf}"
+${selected}
+>
+${escapeHTML(option)}
+</option>
+`;
+
+}).join("")}
+
+</select>
+
+</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+/* =========================================================
+SOAL CERITA 7-9
+========================================================= */
+
+if(s.type==="story"){
+
+const oldValue=
+jawabanDipilih[index] &&
+jawabanDipilih[index].type==="story"
+?jawabanDipilih[index].value
+:"";
+
+konten=`
+
+<div class="question">
+
+<div class="question-content">
+
+${escapeHTML(s.q)}
+
+<input
+class="story-input"
+id="storyAnswer"
+type="text"
+value="${escapeHTML(oldValue)}"
+placeholder="Tulis jawabanmu di sini..."
+autocomplete="off"
+>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+/* =========================================================
+SOAL NOMOR 10
+BAGIAN A DAN B TERPISAH
+========================================================= */
+
+if(s.type==="story10"){
+
+const oldA=
+jawabanDipilih[index] &&
+jawabanDipilih[index].type==="story10"
+?jawabanDipilih[index].a
+:"";
+
+const oldB=
+jawabanDipilih[index] &&
+jawabanDipilih[index].type==="story10"
+?jawabanDipilih[index].b
+:"";
+
+konten=`
+
+<div class="question">
+
+<div class="question-content">
+
+${escapeHTML(s.q)}
+
+<div class="part-box">
+
+<div class="part-title">
+
+${escapeHTML(s.partA.label)}
+
+</div>
+
+<input
+class="story-input"
+id="story10a"
+type="text"
+value="${escapeHTML(oldA)}"
+placeholder="Tulis jawaban bagian a..."
+autocomplete="off"
+>
+
+</div>
+
+<div class="part-box">
+
+<div class="part-title">
+
+${escapeHTML(s.partB.label)}
+
+</div>
+
+<input
+class="story-input"
+id="story10b"
+type="text"
+value="${escapeHTML(oldB)}"
+placeholder="Tulis jawaban bagian b..."
+autocomplete="off"
+>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+/* =========================================================
+NAVIGASI
+========================================================= */
+
+konten+=`
 
 <div class="nav-row">
 
@@ -1529,7 +2169,7 @@ class="nav-btn next"
 onclick="nextSoal()"
 >
 ${
-index===bankSoal.length-1
+index===soal.length-1
 ?"🏁 Selesai"
 :"➡️ Berikutnya"
 }
@@ -1541,6 +2181,10 @@ index===bankSoal.length-1
 
 `;
 
+document.getElementById(
+"soalArea"
+).innerHTML=konten;
+
 }
 
 /* =========================================================
@@ -1548,6 +2192,14 @@ SIMPAN JAWABAN
 ========================================================= */
 
 function simpanJawaban(){
+
+const s=soal[index];
+
+/* =========================================================
+PILIHAN GANDA
+========================================================= */
+
+if(s.type==="pg"){
 
 const el=
 document.querySelector(
@@ -1558,10 +2210,130 @@ if(!el){
 return false;
 }
 
-jawabanDipilih[index]=
-Number(el.value);
+jawabanDipilih[index]={
+type:"pg",
+value:Number(el.value)
+};
 
 return true;
+
+}
+
+/* =========================================================
+MENJODOHKAN
+========================================================= */
+
+if(s.type==="matching"){
+
+const selects=
+document.querySelectorAll(
+".match-select"
+);
+
+let values=[];
+
+for(let i=0;i<selects.length;i++){
+
+if(!selects[i].value){
+
+return false;
+
+}
+
+values.push(
+selects[i].value
+);
+
+}
+
+jawabanDipilih[index]={
+type:"matching",
+values
+};
+
+return true;
+
+}
+
+/* =========================================================
+SOAL CERITA 7-9
+========================================================= */
+
+if(s.type==="story"){
+
+const el=
+document.getElementById(
+"storyAnswer"
+);
+
+if(!el){
+return false;
+}
+
+const value=
+el.value.trim();
+
+if(!value){
+
+return false;
+
+}
+
+jawabanDipilih[index]={
+type:"story",
+value
+};
+
+return true;
+
+}
+
+/* =========================================================
+SOAL 10
+A DAN B BOLEH DIISI SEBAGIAN
+========================================================= */
+
+if(s.type==="story10"){
+
+const a=
+document.getElementById(
+"story10a"
+);
+
+const b=
+document.getElementById(
+"story10b"
+);
+
+const valueA=
+a ? a.value.trim() : "";
+
+const valueB=
+b ? b.value.trim() : "";
+
+/*
+Keduanya boleh kosong sementara,
+tetapi ketika menekan berikutnya
+setidaknya satu bagian harus dijawab.
+*/
+
+if(!valueA && !valueB){
+
+return false;
+
+}
+
+jawabanDipilih[index]={
+type:"story10",
+a:valueA,
+b:valueB
+};
+
+return true;
+
+}
+
+return false;
 
 }
 
@@ -1575,17 +2347,13 @@ if(index<=0){
 return;
 }
 
-const el=
-document.querySelector(
-'input[name="jawaban"]:checked'
-);
+/*
+Simpan jawaban yang sudah ditulis,
+tetapi tidak memaksa semua bagian
+untuk valid ketika kembali.
+*/
 
-if(el){
-
-jawabanDipilih[index]=
-Number(el.value);
-
-}
+simpanJawaban();
 
 index--;
 
@@ -1605,7 +2373,7 @@ simpanJawaban();
 if(!berhasil){
 
 toast(
-"⚠️ Pilih salah satu jawaban terlebih dahulu."
+"⚠️ Jawablah soal terlebih dahulu."
 );
 
 return;
@@ -1614,7 +2382,7 @@ return;
 
 index++;
 
-if(index<bankSoal.length){
+if(index<soal.length){
 
 renderSoal();
 
@@ -1632,17 +2400,110 @@ HITUNG NILAI
 
 function hitungNilai(){
 
+skorPoin=0;
+
 benar=0;
+
+/*
+TOTAL MAKSIMAL = 10 POIN
+
+Nomor 1-4:
+masing-masing 1 poin = 4 poin
+
+Nomor 5:
+3 pasangan × 1/3 = 1 poin
+
+Nomor 6:
+3 pasangan × 1/3 = 1 poin
+
+Nomor 7:
+1 poin
+
+Nomor 8:
+1 poin
+
+Nomor 9:
+1 poin
+
+Nomor 10:
+a = 0,5 poin
+b = 0,5 poin
+
+TOTAL = 10 POIN
+*/
 
 for(
 let i=0;
-i<bankSoal.length;
+i<soal.length;
 i++
 ){
 
+const s=soal[i];
+
+const j=
+jawabanDipilih[i];
+
+/* =====================================================
+PILIHAN GANDA
+===================================================== */
+
+if(s.type==="pg"){
+
 if(
-jawabanDipilih[i]===
-bankSoal[i].k
+j &&
+j.type==="pg" &&
+j.value===s.k
+){
+
+skorPoin+=1;
+
+benar++;
+
+}
+
+}
+
+/* =====================================================
+MENJODOHKAN
+===================================================== */
+
+else if(s.type==="matching"){
+
+if(
+j &&
+j.type==="matching"
+){
+
+let benarPasangan=0;
+
+for(
+let p=0;
+p<s.pairs.length;
+p++
+){
+
+if(
+j.values[p]===
+s.pairs[p].answer
+){
+
+benarPasangan++;
+
+}
+
+}
+
+/*
+3 pasangan bernilai 1 poin total.
+*/
+
+skorPoin+=
+benarPasangan /
+s.pairs.length;
+
+if(
+benarPasangan===
+s.pairs.length
 ){
 
 benar++;
@@ -1651,7 +2512,100 @@ benar++;
 
 }
 
-selesai();
+}
+
+/* =====================================================
+SOAL CERITA 7-9
+===================================================== */
+
+else if(s.type==="story"){
+
+if(
+j &&
+j.type==="story" &&
+cekJawabanStory(
+s,
+j.value
+)
+){
+
+skorPoin+=1;
+
+benar++;
+
+}
+
+}
+
+/* =====================================================
+SOAL 10
+A DAN B TERPISAH
+===================================================== */
+
+else if(s.type==="story10"){
+
+if(
+j &&
+j.type==="story10"
+){
+
+const benarA=
+cekNomor10A(j.a);
+
+const benarB=
+cekNomor10B(j.b);
+
+/*
+Masing-masing bagian
+mendapat 0,5 poin.
+*/
+
+if(benarA){
+skorPoin+=0.5;
+}
+
+if(benarB){
+skorPoin+=0.5;
+}
+
+/*
+Nomor 10 dihitung sebagai soal benar
+jika kedua bagian benar.
+*/
+
+if(
+benarA &&
+benarB
+){
+
+benar++;
+
+}
+
+}
+
+}
+
+}
+
+/*
+10 poin menjadi nilai 100.
+*/
+
+const nilai=
+Math.round(
+skorPoin/10*100
+);
+
+const persen=
+Math.round(
+skorPoin/10*100
+);
+
+selesai(
+nilai,
+persen
+);
 
 }
 
@@ -1718,6 +2672,7 @@ salah:data.total-data.benar,
 
 total:data.total,
 persen:data.persen,
+poin:data.poin,
 waktu:data.waktu
 
 };
@@ -1772,19 +2727,9 @@ ok:false
 SELESAI
 ========================================================= */
 
-function selesai(){
+function selesai(nilai,persen){
 
-const total=bankSoal.length;
-
-const nilai=
-Math.round(
-benar/total*100
-);
-
-const persen=
-Math.round(
-benar/total*100
-);
+const total=soal.length;
 
 const waktu=
 new Date().toLocaleString(
@@ -1801,6 +2746,18 @@ nilai,
 benar,
 total,
 persen,
+
+/*
+Menyimpan poin mentah
+agar dapat diketahui
+bahwa nomor 10 dinilai terpisah.
+*/
+
+poin:
+Math.round(
+skorPoin*100
+)/100,
+
 waktu
 
 };
@@ -1882,7 +2839,17 @@ Jawaban Benar
 ${data.persen}%
 </b>
 
-Persentase Benar
+Persentase
+
+</div>
+
+<div class="stat">
+
+<b>
+${data.poin}
+</b>
+
+Poin
 
 </div>
 
@@ -1897,6 +2864,14 @@ ${escapeHTML(data.nama)}
 • Kelas ${escapeHTML(data.kelas)}
 
 • Absen ${escapeHTML(data.absen)}
+
+</p>
+
+<p class="note">
+
+Nomor 10 dinilai terpisah.
+Jawaban bagian a dan b dapat memperoleh poin
+masing-masing sesuai kebenaran jawabannya.
 
 </p>
 
@@ -1999,3 +2974,4 @@ t.classList.add(
 
 </body>
 </html>
+

@@ -3105,43 +3105,75 @@ return html;
 }
 
 /* =========================================================
-BUKA / TUTUP DETAIL JAWABAN
+   BUKA / TUTUP DETAIL JAWABAN
 ========================================================= */
 
 function toggleDetailJawaban(){
 
-const detail=
-document.getElementById(
-"detailJawaban"
-);
+  const detail=
+    document.getElementById(
+      "detailJawaban"
+    );
 
-const tombol=
-document.getElementById(
-"detailToggle"
-);
+  const tombol=
+    document.getElementById(
+      "detailToggle"
+    );
 
-if(!detail || !tombol){
-return;
-}
+  if(!detail || !tombol){
+    return;
+  }
 
-const sedangTampil=
-!detail.classList.contains("hidden");
+  const sedangTampil=
+    detail.getAttribute("data-open")==="true";
 
-if(sedangTampil){
+  if(sedangTampil){
 
-detail.classList.add("hidden");
+    detail.setAttribute(
+      "data-open",
+      "false"
+    );
 
-tombol.innerHTML=
-"📋 Lihat Detail Jawaban";
+    detail.classList.add("hidden");
 
-}else{
+    detail.style.setProperty(
+      "display",
+      "none",
+      "important"
+    );
 
-detail.classList.remove("hidden");
+    tombol.innerHTML=
+      "📋 Lihat Detail Jawaban";
 
-tombol.innerHTML=
-"🔽 Tutup Detail Jawaban";
+    tombol.setAttribute(
+      "aria-expanded",
+      "false"
+    );
 
-}
+  }else{
+
+    detail.setAttribute(
+      "data-open",
+      "true"
+    );
+
+    detail.classList.remove("hidden");
+
+    detail.style.setProperty(
+      "display",
+      "block",
+      "important"
+    );
+
+    tombol.innerHTML=
+      "🔽 Tutup Detail Jawaban";
+
+    tombol.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+  }
 
 }
 
@@ -3292,24 +3324,27 @@ masing-masing sesuai kebenaran jawabannya.
 </p>
 
 <!-- =====================================================
-TOMBOL DETAIL JAWABAN
+     TOMBOL DETAIL JAWABAN
 ====================================================== -->
 
 <button
-id="detailToggle"
-class="detail-toggle"
-onclick="toggleDetailJawaban()"
-type="button"
+  id="detailToggle"
+  class="detail-toggle"
+  onclick="toggleDetailJawaban()"
+  type="button"
+  aria-expanded="false"
 >
-📋 Lihat Detail Jawaban
+  📋 Lihat Detail Jawaban
 </button>
 
 <div
-id="detailJawaban"
-class="detail-jawaban hidden"
+  id="detailJawaban"
+  class="detail-jawaban hidden"
+  data-open="false"
+  style="display:none;"
 >
 
-${buatDetailJawaban()}
+  ${buatDetailJawaban()}
 
 </div>
 

@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -895,6 +895,155 @@ z-index:20;
 }
 
 /* =========================================================
+DETAIL HASIL JAWABAN
+TAMBAHAN FITUR
+========================================================= */
+
+.detail-wrapper{
+margin-top:22px;
+text-align:left;
+}
+
+.detail-title{
+margin:0 0 14px;
+padding:14px 16px;
+border-radius:15px;
+background:#fff4df;
+border:2px solid #ead0a9;
+color:var(--primary-dark);
+font-size:17px;
+font-weight:900;
+}
+
+.detail-card{
+background:#fff;
+border:2px solid #ead7bc;
+border-radius:16px;
+padding:15px;
+margin-bottom:12px;
+box-shadow:0 5px 14px rgba(92,48,24,.06);
+}
+
+.detail-card.correct{
+border-left:6px solid var(--green);
+}
+
+.detail-card.wrong{
+border-left:6px solid var(--red);
+}
+
+.detail-card.partial{
+border-left:6px solid var(--accent);
+}
+
+.detail-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:10px;
+}
+
+.detail-number{
+font-weight:900;
+color:var(--primary-dark);
+font-size:15px;
+}
+
+.detail-status{
+padding:5px 10px;
+border-radius:999px;
+font-size:12px;
+font-weight:900;
+}
+
+.status-correct{
+background:#dff4e8;
+color:#176b40;
+}
+
+.status-wrong{
+background:#f9dddd;
+color:#a1261c;
+}
+
+.status-partial{
+background:#fff0c7;
+color:#8a5a00;
+}
+
+.detail-question{
+font-size:14px;
+font-weight:800;
+line-height:1.55;
+margin-bottom:10px;
+}
+
+.detail-answer,
+.detail-key,
+.detail-score{
+padding:9px 11px;
+border-radius:10px;
+margin-top:7px;
+font-size:13px;
+line-height:1.5;
+}
+
+.detail-answer{
+background:#f8f5f0;
+border:1px solid #eadfd4;
+}
+
+.detail-key{
+background:#edf8f1;
+border:1px solid #cde8d7;
+}
+
+.detail-score{
+background:#fff5df;
+border:1px solid #ead0a9;
+font-weight:900;
+color:var(--primary-dark);
+}
+
+.detail-summary{
+margin-top:18px;
+padding:16px;
+border-radius:16px;
+background:linear-gradient(135deg,#fff8e9,#fff2d5);
+border:2px solid #ead0a9;
+}
+
+.detail-summary-row{
+display:flex;
+justify-content:space-between;
+gap:10px;
+padding:7px 0;
+border-bottom:1px dashed #dfc8a8;
+font-size:14px;
+}
+
+.detail-summary-row:last-child{
+border-bottom:0;
+}
+
+.detail-final{
+font-size:20px;
+font-weight:1000;
+color:var(--primary-dark);
+margin-top:8px;
+}
+
+.detail-toggle{
+margin-top:16px;
+}
+
+.detail-toggle button{
+width:100%;
+}
+
+/* =========================================================
 RESPONSIVE
 ========================================================= */
 
@@ -1018,6 +1167,15 @@ flex-wrap:wrap;
 padding:9px 17px;
 font-size:13px;
 }
+
+.detail-header{
+align-items:flex-start;
+}
+
+.detail-summary-row{
+flex-direction:column;
+gap:3px;
+}
 }
 
 @media(max-width:380px){
@@ -1062,6 +1220,10 @@ padding:12px;
 .nav-btn{
 font-size:14px;
 padding:12px 10px;
+}
+
+.detail-card{
+padding:12px;
 }
 }
 </style>
@@ -1634,13 +1796,6 @@ if(!j){
 return false;
 }
 
-/*
-HARUS MENYEBUT PERPUSTAKAAN SEKOLAH
-ATAU MENUNJUKKAN SEKOLAH LEBIH BANYAK.
-
-Angka 6.250 saja TIDAK cukup.
-*/
-
 const menyebutSekolah=
 j.includes("sekolah") ||
 j.includes("perpustakaan sekolah");
@@ -1708,15 +1863,6 @@ PENILAIAN SOAL CERITA NOMOR 9
 function cekNomor9(jawaban){
 
 const j=normalisasi(jawaban);
-
-/*
-Menerima:
-4B 4C 4A
-Kelas 4B, Kelas 4C, Kelas 4A
-3.570 3.705 3.750
-3570 3705 3750
-dan variasi penulisan lainnya.
-*/
 
 const polaKelas=
 /4\s*b.*4\s*c.*4\s*a/i;
@@ -1841,12 +1987,6 @@ benar=0;
 skorPoin=0;
 
 jawabanDipilih=[];
-
-/*
-PENTING:
-TIDAK ADA ACAK.
-SOAL LANGSUNG MENGGUNAKAN URUTAN ASLI.
-*/
 
 document
 .getElementById("identitas")
@@ -2311,12 +2451,6 @@ a ? a.value.trim() : "";
 const valueB=
 b ? b.value.trim() : "";
 
-/*
-Keduanya boleh kosong sementara,
-tetapi ketika menekan berikutnya
-setidaknya satu bagian harus dijawab.
-*/
-
 if(!valueA && !valueB){
 
 return false;
@@ -2346,12 +2480,6 @@ function soalSebelumnya(){
 if(index<=0){
 return;
 }
-
-/*
-Simpan jawaban yang sudah ditulis,
-tetapi tidak memaksa semua bagian
-untuk valid ketika kembali.
-*/
 
 simpanJawaban();
 
@@ -2493,10 +2621,6 @@ benarPasangan++;
 
 }
 
-/*
-3 pasangan bernilai 1 poin total.
-*/
-
 skorPoin+=
 benarPasangan /
 s.pairs.length;
@@ -2555,11 +2679,6 @@ cekNomor10A(j.a);
 const benarB=
 cekNomor10B(j.b);
 
-/*
-Masing-masing bagian
-mendapat 0,5 poin.
-*/
-
 if(benarA){
 skorPoin+=0.5;
 }
@@ -2567,11 +2686,6 @@ skorPoin+=0.5;
 if(benarB){
 skorPoin+=0.5;
 }
-
-/*
-Nomor 10 dihitung sebagai soal benar
-jika kedua bagian benar.
-*/
 
 if(
 benarA &&
@@ -2747,12 +2861,6 @@ benar,
 total,
 persen,
 
-/*
-Menyimpan poin mentah
-agar dapat diketahui
-bahwa nomor 10 dinilai terpisah.
-*/
-
 poin:
 Math.round(
 skorPoin*100
@@ -2782,6 +2890,531 @@ kirim.ok
 
 toast(
 "✅ Hasil dikirim ke Google Sheets."
+);
+
+}
+
+}
+
+/* =========================================================
+MEMBUAT TEKS JAWABAN
+========================================================= */
+
+function teksJawabanSiswa(indexSoal){
+
+const s=soal[indexSoal];
+
+const j=
+jawabanDipilih[indexSoal];
+
+if(!j){
+
+return "Tidak dijawab";
+
+}
+
+if(s.type==="pg"){
+
+if(
+j.value===undefined ||
+!s.a[j.value]
+){
+
+return "Tidak dijawab";
+
+}
+
+return (
+String.fromCharCode(65+j.value) +
+". " +
+s.a[j.value]
+);
+
+}
+
+if(s.type==="matching"){
+
+if(!j.values){
+
+return "Tidak dijawab";
+
+}
+
+return j.values.map(
+(value,i)=>
+`${i+1}. ${value || "-"}`
+).join("<br>");
+
+}
+
+if(s.type==="story"){
+
+return j.value || "Tidak dijawab";
+
+}
+
+if(s.type==="story10"){
+
+return `
+<b>a.</b> ${escapeHTML(j.a || "Tidak dijawab")}<br>
+<b>b.</b> ${escapeHTML(j.b || "Tidak dijawab")}
+`;
+
+}
+
+return "Tidak dijawab";
+
+}
+
+/* =========================================================
+MEMBUAT KUNCI JAWABAN
+========================================================= */
+
+function teksKunciJawaban(indexSoal){
+
+const s=soal[indexSoal];
+
+if(s.type==="pg"){
+
+return (
+String.fromCharCode(65+s.k) +
+". " +
+escapeHTML(s.a[s.k])
+);
+
+}
+
+if(s.type==="matching"){
+
+return s.pairs.map(
+(pair,i)=>
+`${i+1}. ${escapeHTML(pair.answer)}`
+).join("<br>");
+
+}
+
+if(s.type==="story"){
+
+if(s.requiredMeaning==="school_more"){
+
+return `
+Perpustakaan sekolah lebih banyak.<br>
+6.250 > 5.825
+`;
+
+}
+
+if(s.requiredMeaning==="siti_more_450"){
+
+return `
+Siti lebih banyak.<br>
+Selisih = 450 manik-manik.
+`;
+
+}
+
+if(s.requiredMeaning==="order_4b_4c_4a"){
+
+return `
+Kelas 4B → Kelas 4C → Kelas 4A<br>
+3.570 → 3.705 → 3.750
+`;
+
+}
+
+}
+
+if(s.type==="story10"){
+
+return `
+<b>a.</b> Toko A<br>
+<b>b.</b> Toko B → Toko C → Toko A<br>
+4.580 → 4.805 → 4.850
+`;
+
+}
+
+return "-";
+
+}
+
+/* =========================================================
+MENGHITUNG NILAI DETAIL SETIAP NOMOR
+========================================================= */
+
+function hitungDetailSoal(indexSoal){
+
+const s=soal[indexSoal];
+
+const j=
+jawabanDipilih[indexSoal];
+
+let poin=0;
+
+let status="wrong";
+
+let statusText="❌ Salah";
+
+let benarDetail=false;
+
+let jawabanKosong=!j;
+
+/* =====================================================
+PILIHAN GANDA
+===================================================== */
+
+if(s.type==="pg"){
+
+if(
+j &&
+j.type==="pg" &&
+j.value===s.k
+){
+
+poin=1;
+status="correct";
+statusText="✅ Benar";
+benarDetail=true;
+
+}
+
+}
+
+/* =====================================================
+MENJODOHKAN
+===================================================== */
+
+else if(s.type==="matching"){
+
+if(
+j &&
+j.type==="matching" &&
+j.values
+){
+
+let jumlahBenar=0;
+
+for(
+let p=0;
+p<s.pairs.length;
+p++
+){
+
+if(
+j.values[p]===
+s.pairs[p].answer
+){
+
+jumlahBenar++;
+
+}
+
+}
+
+poin=
+jumlahBenar /
+s.pairs.length;
+
+if(jumlahBenar===s.pairs.length){
+
+status="correct";
+statusText="✅ Benar";
+benarDetail=true;
+
+}else if(jumlahBenar>0){
+
+status="partial";
+statusText="🟡 Sebagian Benar";
+
+}
+
+}
+
+}
+
+/* =====================================================
+SOAL CERITA
+===================================================== */
+
+else if(s.type==="story"){
+
+if(
+j &&
+j.type==="story"
+&&
+cekJawabanStory(
+s,
+j.value
+)
+){
+
+poin=1;
+status="correct";
+statusText="✅ Benar";
+benarDetail=true;
+
+}
+
+}
+
+/* =====================================================
+SOAL 10
+===================================================== */
+
+else if(s.type==="story10"){
+
+let benarA=false;
+let benarB=false;
+
+if(
+j &&
+j.type==="story10"
+){
+
+benarA=
+cekNomor10A(j.a);
+
+benarB=
+cekNomor10B(j.b);
+
+if(benarA){
+poin+=0.5;
+}
+
+if(benarB){
+poin+=0.5;
+}
+
+if(benarA && benarB){
+
+status="correct";
+statusText="✅ Benar";
+benarDetail=true;
+
+}else if(benarA || benarB){
+
+status="partial";
+statusText="🟡 Sebagian Benar";
+
+}
+
+}
+
+}
+
+if(jawabanKosong){
+
+status="wrong";
+statusText="❌ Tidak Dijawab";
+
+}
+
+return {
+poin,
+status,
+statusText,
+benarDetail
+};
+
+}
+
+/* =========================================================
+DETAIL HASIL SETIAP NOMOR
+========================================================= */
+
+function tampilkanDetailJawaban(){
+
+const container=
+document.getElementById(
+"detailJawaban"
+);
+
+if(!container){
+
+return;
+
+}
+
+let html="";
+
+let totalPoinDetail=0;
+
+for(
+let i=0;
+i<soal.length;
+i++
+){
+
+const s=soal[i];
+
+const detail=
+hitungDetailSoal(i);
+
+totalPoinDetail+=
+detail.poin;
+
+let kelasStatus=
+detail.status;
+
+let jawaban=
+teksJawabanSiswa(i);
+
+let kunci=
+teksKunciJawaban(i);
+
+let skorTampil=
+Math.round(
+detail.poin*100
+)/100;
+
+if(s.type==="matching"){
+
+skorTampil=
+`${skorTampil} poin`;
+
+}
+
+html+=`
+
+<div class="detail-card ${kelasStatus}">
+
+<div class="detail-header">
+
+<div class="detail-number">
+📝 Soal ${i+1}
+</div>
+
+<div class="detail-status ${
+detail.status==="correct"
+?"status-correct"
+:detail.status==="partial"
+?"status-partial"
+:"status-wrong"
+}">
+
+${detail.statusText}
+
+</div>
+
+</div>
+
+<div class="detail-question">
+
+${escapeHTML(s.q)}
+
+</div>
+
+<div class="detail-answer">
+
+<b>👤 Jawaban Siswa:</b><br>
+
+${jawaban}
+
+</div>
+
+<div class="detail-key">
+
+<b>🔑 Jawaban Benar:</b><br>
+
+${kunci}
+
+</div>
+
+<div class="detail-score">
+
+💰 Nilai Soal ${i+1}:
+<strong>${skorTampil}</strong> poin
+
+</div>
+
+</div>
+
+`;
+
+}
+
+/* =====================================================
+RINGKASAN NILAI
+===================================================== */
+
+html+=`
+
+<div class="detail-summary">
+
+<div class="detail-title">
+📊 Ringkasan Penilaian
+</div>
+
+<div class="detail-summary-row">
+
+<span>
+Total Poin
+</span>
+
+<strong>
+${Math.round(totalPoinDetail*100)/100} / 10
+</strong>
+
+</div>
+
+<div class="detail-summary-row">
+
+<span>
+Nilai Akhir
+</span>
+
+<strong>
+${Math.round(totalPoinDetail/10*100)}
+</strong>
+
+</div>
+
+<div class="detail-summary-row">
+
+<span>
+Rumus Penilaian
+</span>
+
+<strong>
+Poin ÷ 10 × 100
+</strong>
+
+</div>
+
+<div class="detail-final">
+
+🎯 Nilai Akhir:
+${Math.round(totalPoinDetail/10*100)}
+
+</div>
+
+</div>
+
+`;
+
+container.innerHTML=html;
+
+container.classList.remove(
+"hidden"
+);
+
+}
+
+/* =========================================================
+SEMBUNYIKAN DETAIL
+========================================================= */
+
+function sembunyikanDetailJawaban(){
+
+const container=
+document.getElementById(
+"detailJawaban"
+);
+
+if(container){
+
+container.classList.add(
+"hidden"
 );
 
 }
@@ -2878,6 +3511,13 @@ masing-masing sesuai kebenaran jawabannya.
 <div class="actions">
 
 <button
+class="btn orange"
+onclick="tampilkanDetailJawaban()"
+>
+📋 Lihat Detail Jawaban
+</button>
+
+<button
 class="btn primary"
 onclick="ulang()"
 >
@@ -2897,6 +3537,17 @@ onclick="window.print()"
 >
 🖨️ Cetak Hasil
 </button>
+
+</div>
+
+<div
+id="detailJawaban"
+class="detail-wrapper hidden"
+>
+
+<div class="detail-title">
+📋 Detail Jawaban dan Penilaian Setiap Soal
+</div>
 
 </div>
 
@@ -2974,4 +3625,4 @@ t.classList.add(
 
 </body>
 </html>
-
+```

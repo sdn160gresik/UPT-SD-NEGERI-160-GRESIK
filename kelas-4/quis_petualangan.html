@@ -1,0 +1,3406 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Kuis Matematika — Bilangan sampai 10.000 | UPT SDN 160 Gresik</title>
+
+<style>
+:root{
+--primary:#9b4d20;
+--primary-dark:#713517;
+--secondary:#e67e22;
+--accent:#f4b942;
+--green:#2e8b57;
+--red:#c0392b;
+--ink:#4a2c20;
+--muted:#806b61;
+--card:#fffdf8;
+--cream:#fff8e8;
+--border:#ead7bc;
+--shadow:rgba(92,48,24,.16);
+}
+
+*{
+box-sizing:border-box;
+}
+
+html{
+min-height:100%;
+}
+
+body{
+margin:0;
+font-family:"Segoe UI",Arial,sans-serif;
+color:var(--ink);
+background:
+radial-gradient(circle at 10% 15%,rgba(255,255,255,.65) 0 3px,transparent 4px),
+radial-gradient(circle at 90% 25%,rgba(255,255,255,.5) 0 3px,transparent 4px),
+linear-gradient(135deg,#f7dfb5 0%,#fff4d8 45%,#f3d7ad 100%);
+background-size:auto,auto,cover;
+min-height:100vh;
+}
+
+body:has(#identitas:not(.hidden)){
+display:flex;
+align-items:center;
+justify-content:center;
+min-height:100vh;
+padding:25px;
+}
+
+body:has(#identitas:not(.hidden)) .app{
+width:100%;
+max-width:560px;
+margin:0 auto;
+padding:0;
+}
+
+body:has(#identitas:not(.hidden)) .header{
+display:none;
+}
+
+body:has(#identitas:not(.hidden)) #identitas{
+margin:0;
+}
+
+body:before{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+opacity:.18;
+background-image:
+radial-gradient(#fff 1px,transparent 1px);
+background-size:22px 22px;
+}
+
+.app{
+ width:min(1050px,94%);
+ margin:auto;
+ padding:14px 0 35px;
+ position:relative;
+}
+
+/* =========================================================
+TOMBOL KEMBALI
+========================================================= */
+
+.back-area{
+width:100%;
+display:flex;
+justify-content:flex-start;
+gap:10px;
+margin-bottom:12px;
+}
+
+.back-btn,
+.download-btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:10px 20px;
+border-radius:999px;
+text-decoration:none;
+font-size:14px;
+font-weight:900;
+transition:
+transform .2s ease,
+box-shadow .2s ease,
+background .2s ease;
+}
+
+.back-btn{
+border:2px solid var(--border);
+background:rgba(255,253,248,.96);
+color:var(--primary-dark);
+box-shadow:0 6px 15px rgba(92,48,24,.10);
+}
+
+.back-btn:hover{
+transform:translateY(-2px);
+background:#fff;
+box-shadow:0 9px 20px rgba(92,48,24,.16);
+}
+
+.back-btn:active{
+transform:translateY(0);
+}
+
+/* =========================================================
+TOMBOL DOWNLOAD SOAL PDF
+========================================================= */
+
+.download-btn{
+border:2px solid rgba(255,255,255,.7);
+background:
+linear-gradient(135deg,#2e8b57,#3aa66b,#5dbd7e);
+color:#fff;
+box-shadow:
+0 7px 17px rgba(46,139,87,.22);
+}
+
+.download-btn:hover{
+transform:translateY(-2px);
+box-shadow:
+0 10px 23px rgba(46,139,87,.30);
+}
+
+.download-btn:active{
+transform:translateY(0);
+}
+
+body:has(#identitas:not(.hidden)) .back-area{
+display:none;
+}
+
+/* =========================================================
+HEADER
+========================================================= */
+
+.header{
+ background:rgba(255,253,248,.97);
+ border:2px solid var(--border);
+ border-radius:20px;
+ padding:12px 18px 13px;
+ text-align:center;
+ box-shadow:0 9px 24px rgba(92,48,24,.12);
+}
+
+.badge{
+ display:inline-block;
+ background:#f9e6c5;
+ color:var(--primary-dark);
+ padding:5px 11px;
+ border-radius:99px;
+ font-weight:800;
+ font-size:11px;
+}
+
+h1{
+ margin:5px 0 2px;
+ font-size:clamp(20px,3vw,28px);
+}
+
+.subtitle{
+ margin:0;
+ color:var(--muted);
+ font-weight:600;
+ font-size:13px;
+}
+
+/* =========================================================
+CARD
+========================================================= */
+
+.card{
+margin-top:20px;
+background:rgba(255,253,248,.97);
+border-radius:24px;
+padding:26px;
+box-shadow:0 12px 35px var(--shadow);
+border:1px solid var(--border);
+}
+
+/* =========================================================
+IDENTITAS
+========================================================= */
+
+#identitas{
+position:relative;
+overflow:hidden;
+padding:0;
+border:3px solid #efd6ad;
+background:var(--card);
+border-radius:32px;
+box-shadow:
+0 28px 70px rgba(86,45,20,.24),
+0 10px 25px rgba(86,45,20,.12),
+inset 0 0 0 5px rgba(255,255,255,.72);
+}
+
+#identitas:before{
+content:"";
+display:block;
+height:10px;
+background:linear-gradient(
+90deg,
+#9b4d20 0%,
+#d96c27 35%,
+#f4b942 70%,
+#2e8b57 100%
+);
+}
+
+#identitas:after{
+content:"🍜   🍢   🥟   🍚   🍡";
+display:block;
+text-align:center;
+font-size:24px;
+letter-spacing:4px;
+padding-top:18px;
+}
+
+#identitas .identity-content{
+padding:4px 34px 32px;
+position:relative;
+}
+
+#identitas .identity-content:before{
+content:"";
+position:absolute;
+inset:14px;
+border:1px dashed rgba(217,108,39,.30);
+border-radius:24px;
+pointer-events:none;
+}
+
+#identitas h2{
+margin:10px 0 7px;
+text-align:center;
+font-size:25px;
+color:var(--primary-dark);
+line-height:1.25;
+position:relative;
+z-index:1;
+}
+
+#identitas .identity-subtitle{
+margin:0 auto 24px;
+text-align:center;
+color:var(--muted);
+font-size:14px;
+line-height:1.55;
+max-width:390px;
+position:relative;
+z-index:1;
+}
+
+.identity-icon{
+width:72px;
+height:72px;
+margin:-2px auto 10px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+background:linear-gradient(145deg,#fff0c8,#f7d994);
+border:4px solid #fff;
+box-shadow:
+0 8px 20px rgba(140,78,27,.15),
+inset 0 2px 4px rgba(255,255,255,.8);
+font-size:38px;
+position:relative;
+z-index:1;
+}
+
+/* =========================================================
+FORM
+========================================================= */
+
+.form-grid{
+display:grid;
+grid-template-columns:1fr;
+gap:16px;
+position:relative;
+z-index:1;
+}
+
+.field{
+position:relative;
+}
+
+.field label{
+display:block;
+font-weight:800;
+margin-bottom:7px;
+color:#5c3929;
+font-size:14px;
+}
+
+.input-wrap{
+position:relative;
+}
+
+.input-wrap .input-icon{
+position:absolute;
+left:14px;
+top:50%;
+transform:translateY(-50%);
+font-size:19px;
+pointer-events:none;
+z-index:2;
+}
+
+input,
+select{
+width:100%;
+padding:14px 15px 14px 46px;
+border:2px solid #e7d5bb;
+border-radius:15px;
+font-size:16px;
+outline:none;
+background:#fffdfa;
+color:var(--ink);
+transition:.2s;
+font-family:inherit;
+}
+
+input::placeholder{
+color:#b29e90;
+}
+
+input:focus,
+select:focus{
+border-color:#d77b35;
+background:#fff;
+box-shadow:
+0 0 0 4px rgba(230,126,34,.13),
+0 5px 15px rgba(120,65,28,.08);
+}
+
+input:hover,
+select:hover{
+border-color:#d7ad7d;
+}
+
+/* =========================================================
+TOMBOL IDENTITAS
+========================================================= */
+
+.identity-action{
+margin-top:22px;
+display:flex;
+gap:12px;
+align-items:stretch;
+position:relative;
+z-index:1;
+}
+
+#identitas .btn.primary{
+flex:1;
+border:0;
+border-radius:16px;
+padding:15px 16px;
+font-weight:900;
+font-size:15px;
+cursor:pointer;
+transition:.2s;
+color:#fff;
+background:
+linear-gradient(135deg,#a95020,#d96b26 55%,#e58a35);
+box-shadow:
+0 8px 18px rgba(155,77,32,.25);
+text-decoration:none;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+#identitas .btn.primary:hover{
+transform:translateY(-2px);
+box-shadow:
+0 11px 23px rgba(155,77,32,.32);
+}
+
+#identitas .btn.primary:active{
+transform:translateY(0);
+}
+
+/* =========================================================
+TOMBOL JEJAK CAPAIAN
+========================================================= */
+
+.capaian-btn{
+flex:1;
+border:0;
+border-radius:16px;
+padding:15px 16px;
+font-weight:900;
+font-size:15px;
+cursor:pointer;
+transition:
+transform .2s ease,
+box-shadow .2s ease,
+background .2s ease;
+color:#fff;
+background:
+linear-gradient(135deg,#2e8b57,#3aa66b,#5dbd7e);
+box-shadow:
+0 8px 18px rgba(46,139,87,.23);
+text-decoration:none;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.capaian-btn:hover{
+transform:translateY(-2px);
+box-shadow:
+0 11px 23px rgba(46,139,87,.30);
+}
+
+.capaian-btn:active{
+transform:translateY(0);
+}
+
+.identity-note{
+margin:20px auto 0;
+padding:11px 14px;
+border-radius:13px;
+background:#fff5df;
+border:1px dashed #e3c18f;
+color:#80634f;
+font-size:12px;
+line-height:1.5;
+text-align:center;
+position:relative;
+z-index:1;
+}
+
+.food-decoration{
+text-align:center;
+margin-top:18px;
+font-size:13px;
+color:#967463;
+letter-spacing:.3px;
+position:relative;
+z-index:1;
+}
+
+/* =========================================================
+BUTTON UMUM
+========================================================= */
+
+.btn{
+border:0;
+border-radius:14px;
+padding:13px 20px;
+font-weight:900;
+font-size:16px;
+cursor:pointer;
+transition:
+transform .2s,
+box-shadow .2s,
+opacity .2s;
+box-shadow:0 5px 12px rgba(0,0,0,.10);
+}
+
+.btn:hover{
+transform:translateY(-2px);
+}
+
+.btn:active{
+transform:translateY(0);
+}
+
+.btn:disabled{
+opacity:.45;
+cursor:not-allowed;
+transform:none;
+box-shadow:none;
+}
+
+.primary{
+background:linear-gradient(135deg,#9b4d20,#d96b26);
+color:#fff;
+}
+
+.green{
+background:#2e8b57;
+color:#fff;
+}
+
+.orange{
+background:#e67e22;
+color:#fff;
+}
+
+.gray{
+background:#eadfd4;
+color:#5b463a;
+}
+
+.red{
+background:#c0392b;
+color:#fff;
+}
+
+.center{
+text-align:center;
+}
+
+.hidden{
+display:none!important;
+}
+
+/* =========================================================
+KUIS
+========================================================= */
+
+.info{
+ display:flex;
+ justify-content:space-between;
+ gap:10px;
+ flex-wrap:wrap;
+ background:#fff8e9;
+ padding:9px 13px;
+ border-radius:13px;
+ font-weight:800;
+ font-size:13px;
+ border:1px solid #e7cda9;
+ box-shadow:0 4px 12px rgba(92,48,24,.06);
+}
+
+#kuis{
+ width:min(820px,94vw);
+ margin:22px auto 0;
+ padding:20px;
+ background:rgba(255,253,248,.985);
+ border:3px solid #e4c9a7;
+ border-radius:24px;
+ box-shadow:
+ 0 28px 70px rgba(86,45,20,.22),
+ 0 10px 28px rgba(86,45,20,.12),
+ inset 0 0 0 2px rgba(255,255,255,.8);
+ position:relative;
+ overflow:hidden;
+}
+
+#kuis:before{
+ content:"";
+ position:absolute;
+ left:0;
+ top:0;
+ width:100%;
+ height:5px;
+background:linear-gradient(
+90deg,
+#9b4d20,
+#d96b26,
+#f4b942,
+#2e8b57
+);
+}
+
+#kuis .info{
+margin-top:3px;
+}
+
+.progress-wrap{
+ height:9px;
+ background:#eadfd4;
+ border-radius:99px;
+ overflow:hidden;
+ margin:13px 0 19px;
+}
+
+.progress{
+height:100%;
+background:linear-gradient(
+90deg,
+#9b4d20,
+#e67e22,
+#f4b942
+);
+width:0;
+transition:.3s;
+}
+
+#soalArea{
+ width:min(700px,100%);
+ margin:0 auto;
+ padding:4px;
+}
+
+.question-no{
+ color:#9b4d20;
+ font-weight:900;
+ font-size:13px;
+ letter-spacing:.6px;
+ margin:2px 0 8px;
+ text-align:center;
+}
+
+.question{
+ background:linear-gradient(145deg,#fffdf8,#fff7e9);
+ border:3px solid #d9b88f;
+ border-radius:18px;
+ padding:18px 20px;
+ font-size:20px;
+ line-height:1.5;
+ font-weight:800;
+ margin:0 0 15px;
+ box-shadow:
+ 0 10px 25px rgba(120,65,28,.09),
+ inset 0 0 0 2px rgba(255,255,255,.75);
+ position:relative;
+}
+
+.question-content{
+font-size:18px;
+line-height:1.65;
+font-weight:700;
+}
+
+.story-line{
+margin:8px 0;
+}
+
+.match-table{
+width:100%;
+border-collapse:collapse;
+margin-top:12px;
+font-size:15px;
+background:#fff;
+border-radius:12px;
+overflow:hidden;
+}
+
+.match-table th,
+.match-table td{
+border:1px solid #dfc8a8;
+padding:10px;
+vertical-align:middle;
+}
+
+.match-table th{
+background:#fff1d9;
+font-weight:900;
+text-align:center;
+}
+
+.match-table td:first-child{
+font-weight:700;
+}
+
+.match-table select{
+width:100%;
+padding:9px 10px;
+font-size:14px;
+border-radius:10px;
+}
+
+.story-input{
+margin-top:12px;
+width:100%;
+padding:13px 15px;
+border:2px solid #e2d0ba;
+border-radius:13px;
+font-size:16px;
+background:#fff;
+}
+
+.story-input:focus{
+border-color:#d77b35;
+outline:none;
+box-shadow:0 0 0 4px rgba(230,126,34,.10);
+}
+
+.part-box{
+margin-top:13px;
+padding:14px;
+background:#fffaf0;
+border:2px solid #ead7bc;
+border-radius:14px;
+}
+
+.part-title{
+font-weight:900;
+color:var(--primary-dark);
+margin-bottom:8px;
+}
+
+.answers{
+ display:grid;
+ gap:9px;
+}
+
+.answer{
+ border:2px solid #e2d0ba;
+ border-radius:13px;
+ padding:11px 13px;
+ cursor:pointer;
+ display:flex;
+ gap:11px;
+ align-items:flex-start;
+ transition:.2s;
+ background:#fff;
+ box-shadow:0 3px 9px rgba(92,48,24,.045);
+}
+
+.answer:hover{
+border-color:#e5b477;
+background:#fff8eb;
+transform:translateY(-1px);
+box-shadow:0 5px 12px rgba(120,65,28,.07);
+}
+
+.answer input{
+width:auto;
+margin-top:4px;
+accent-color:#9b4d20;
+flex:none;
+padding:0;
+}
+
+.answer span{
+line-height:1.5;
+}
+
+.nav-row{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:12px;
+ margin-top:17px;
+}
+
+.nav-left,
+.nav-right{
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.nav-btn{
+ min-width:135px;
+ padding:11px 16px;
+ border-radius:13px;
+ font-weight:900;
+ font-size:14px;
+border:0;
+cursor:pointer;
+transition:
+transform .2s,
+box-shadow .2s,
+opacity .2s;
+display:inline-flex;
+justify-content:center;
+align-items:center;
+gap:7px;
+}
+
+.nav-btn:hover{
+transform:translateY(-2px);
+}
+
+.nav-btn:active{
+transform:translateY(0);
+}
+
+.nav-btn.previous{
+background:linear-gradient(
+135deg,
+#eadfd4,
+#f4e9dc
+);
+color:#5b463a;
+border:1px solid #ddcbbb;
+box-shadow:0 5px 12px rgba(80,45,25,.09);
+}
+
+.nav-btn.next{
+background:linear-gradient(
+135deg,
+#9b4d20,
+#d96b26,
+#e58a35
+);
+color:#fff;
+box-shadow:
+0 7px 16px rgba(155,77,32,.24);
+}
+
+.nav-btn.next:hover{
+box-shadow:
+0 10px 22px rgba(155,77,32,.30);
+}
+
+.nav-btn.previous:disabled{
+opacity:.38;
+cursor:not-allowed;
+transform:none;
+box-shadow:none;
+}
+
+/* =========================================================
+HASIL
+========================================================= */
+
+#hasil{
+width:min(760px,100%);
+margin:30px auto 0;
+border:2px solid var(--border);
+}
+
+.result-score{
+font-size:64px;
+font-weight:1000;
+background:linear-gradient(135deg,#9b4d20,#e67e22);
+color:#fff;
+border-radius:24px;
+padding:12px 28px;
+display:inline-block;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin:20px 0;
+}
+
+.stat{
+padding:16px;
+background:#fff8eb;
+border-radius:16px;
+text-align:center;
+border:1px solid #efdfc6;
+}
+
+.stat b{
+font-size:24px;
+display:block;
+}
+
+.note{
+font-size:13px;
+color:var(--muted);
+line-height:1.5;
+}
+
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+justify-content:center;
+margin-top:18px;
+}
+
+.toast{
+position:fixed;
+left:50%;
+bottom:25px;
+transform:translateX(-50%);
+background:#4a2c20;
+color:white;
+padding:12px 18px;
+border-radius:14px;
+box-shadow:0 10px 25px #0003;
+z-index:20;
+}
+
+/* =========================================================
+DETAIL JAWABAN
+========================================================= */
+
+.detail-toggle{
+width:100%;
+margin-top:20px;
+border:2px solid #d9b88f;
+border-radius:15px;
+padding:13px 17px;
+font-weight:900;
+font-size:15px;
+cursor:pointer;
+color:var(--primary-dark);
+background:linear-gradient(
+135deg,
+#fff8e9,
+#fff0d5
+);
+box-shadow:0 5px 12px rgba(92,48,24,.08);
+transition:
+transform .2s,
+box-shadow .2s,
+background .2s;
+}
+
+.detail-toggle:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 17px rgba(92,48,24,.13);
+background:#fff5e1;
+}
+
+.detail-toggle:active{
+transform:translateY(0);
+}
+
+.detail-jawaban{
+margin-top:12px;
+padding:14px;
+border:2px solid #ead7bc;
+border-radius:16px;
+background:#fffaf1;
+text-align:left;
+}
+
+.detail-header{
+padding:10px 12px;
+margin-bottom:12px;
+border-radius:12px;
+background:#fff1d9;
+border:1px solid #e5c99f;
+font-size:13px;
+line-height:1.5;
+color:#684635;
+}
+
+.detail-item{
+border:2px solid #ead7bc;
+border-radius:14px;
+padding:13px;
+margin-bottom:10px;
+background:#fff;
+}
+
+.detail-item:last-child{
+margin-bottom:0;
+}
+
+.detail-item.benar{
+border-color:#9acfb0;
+background:#f5fff8;
+}
+
+.detail-item.salah{
+border-color:#e5aaa3;
+background:#fff8f7;
+}
+
+.detail-title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+font-weight:900;
+margin-bottom:8px;
+}
+
+.detail-status{
+padding:5px 9px;
+border-radius:99px;
+font-size:11px;
+font-weight:900;
+white-space:nowrap;
+}
+
+.detail-status.benar{
+background:#d9f2e2;
+color:#216b42;
+}
+
+.detail-status.salah{
+background:#f8d9d5;
+color:#96362d;
+}
+
+.detail-row{
+font-size:13px;
+line-height:1.55;
+margin-top:5px;
+}
+
+.detail-label{
+font-weight:900;
+color:#684635;
+}
+
+.detail-poin{
+margin-top:9px;
+padding-top:8px;
+border-top:1px dashed #dfc8a8;
+font-weight:900;
+color:var(--primary-dark);
+}
+
+.detail-answer-box{
+margin-top:6px;
+padding:8px 10px;
+border-radius:9px;
+background:#fffaf0;
+border:1px solid #ead7bc;
+word-break:break-word;
+}
+
+.detail-answer-box.empty{
+color:#9b8171;
+font-style:italic;
+}
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
+
+@media(max-height:760px) and (min-width:701px){
+ body{
+  overflow:auto;
+ }
+ .app{
+  padding-top:8px;
+  padding-bottom:18px;
+ }
+ .header{
+  padding:9px 16px 10px;
+ }
+ #kuis{
+  margin-top:14px;
+  padding:16px;
+ }
+ .question{
+  padding:15px 18px;
+  font-size:19px;
+ }
+ .answer{
+  padding:9px 12px;
+ }
+ .nav-row{
+  margin-top:13px;
+ }
+}
+
+@media(max-width:700px){
+
+body:has(#identitas:not(.hidden)){
+padding:16px;
+}
+
+body:has(#identitas:not(.hidden)) .app{
+max-width:430px;
+}
+
+#identitas .identity-content{
+padding-left:23px;
+padding-right:23px;
+}
+
+#identitas h2{
+font-size:22px;
+}
+
+.form-grid,
+.stats{
+grid-template-columns:1fr;
+}
+
+.card{
+padding:18px;
+}
+
+#kuis{
+width:100%;
+padding:18px;
+margin-top:20px;
+border-radius:22px;
+}
+
+#soalArea{
+width:100%;
+}
+
+.question{
+font-size:19px;
+padding:17px;
+}
+
+.question-content{
+font-size:16px;
+}
+
+.match-table{
+font-size:13px;
+}
+
+.match-table th,
+.match-table td{
+padding:7px;
+}
+
+.identity-action{
+flex-direction:column;
+}
+
+#identitas .btn.primary,
+.capaian-btn{
+width:100%;
+flex:none;
+}
+
+.nav-row{
+flex-direction:column;
+align-items:stretch;
+}
+
+.nav-left,
+.nav-right{
+width:100%;
+}
+
+.nav-btn{
+flex:1;
+min-width:0;
+width:100%;
+}
+
+.back-area{
+margin-bottom:10px;
+flex-wrap:wrap;
+}
+
+.back-btn,
+.download-btn{
+padding:9px 17px;
+font-size:13px;
+}
+
+.detail-title{
+align-items:flex-start;
+flex-direction:column;
+}
+
+}
+
+@media(max-width:380px){
+
+body:has(#identitas:not(.hidden)){
+padding:10px;
+}
+
+#identitas .identity-content{
+padding-left:18px;
+padding-right:18px;
+}
+
+#identitas:after{
+font-size:20px;
+letter-spacing:1px;
+}
+
+.identity-icon{
+width:62px;
+height:62px;
+font-size:32px;
+}
+
+#identitas h2{
+font-size:20px;
+}
+
+#kuis{
+padding:15px;
+}
+
+.question{
+font-size:18px;
+padding:15px;
+}
+
+.answer{
+padding:12px;
+}
+
+.nav-btn{
+font-size:14px;
+padding:12px 10px;
+}
+
+.detail-jawaban{
+padding:10px;
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- =========================================================
+TOMBOL KEMBALI DAN DOWNLOAD
+========================================================= -->
+
+<div class="back-area">
+
+<a
+href="petualangan.html"
+class="back-btn"
+aria-label="Kembali ke halaman petualangan"
+
+>
+
+Kembali </a>
+
+<a
+href="soal.pdf"
+class="download-btn"
+download="soal.pdf"
+aria-label="Download Soal PDF"
+
+>
+
+Download Soal </a>
+
+</div>
+
+<header class="header">
+
+<span class="badge">
+🏫 UPT SDN 160 GRESIK
+</span>
+
+<h1>
+🧠 Kuis Seru Bilangan
+</h1>
+
+<p class="subtitle">
+Perbandingan & Urutan Bilangan sampai 10.000
+</p>
+
+</header>
+
+<section id="identitas" class="card">
+
+<div class="identity-content">
+
+<div class="identity-icon">
+🍲
+</div>
+
+<h2>
+🍽️ Yuk, Kenalkan Dirimu!
+</h2>
+
+<p class="identity-subtitle">
+Sebelum memulai petualangan kuliner matematika,
+isi identitasmu terlebih dahulu dengan benar.
+</p>
+
+<div class="form-grid">
+
+<div class="field">
+
+<label for="nama">
+👤 Nama Siswa
+</label>
+
+<div class="input-wrap">
+
+<input
+id="nama"
+placeholder="Tulis nama lengkap"
+autocomplete="name"
+
+>
+
+</div>
+
+</div>
+
+<div class="field">
+
+<label for="kelas">
+🏫 Kelas
+</label>
+
+<div class="input-wrap">
+
+<input
+id="kelas"
+placeholder="Contoh: 4"
+
+>
+
+</div>
+
+</div>
+
+<div class="field">
+
+<label for="absen">
+🔢 Nomor Absen
+</label>
+
+<div class="input-wrap">
+
+<input
+id="absen"
+type="number"
+min="1"
+placeholder="Masukkan nomor absen"
+
+>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+DUA MENU UTAMA
+====================================================== -->
+
+<div class="identity-action">
+
+<button
+class="btn primary"
+onclick="mulai()"
+
+>
+
+🍜 Mulai Petualangan </button>
+
+<a
+href="capaian.html"
+class="capaian-btn"
+aria-label="Menuju Jejak Capaian"
+
+>
+
+🌟 Jejak Capaian </a>
+
+</div>
+
+<div class="identity-note">
+
+🥢 Pastikan nama, kelas, dan nomor absen
+sudah benar sebelum melanjutkan.
+
+</div>
+
+<div class="food-decoration">
+
+🌾 Kuliner Nusantara • Belajar • Bermain • Berprestasi 🌾
+
+</div>
+
+</div>
+
+</section>
+
+<section id="kuis" class="card hidden">
+
+<div class="info">
+
+<span id="siswaInfo"></span>
+
+<span id="counter"></span>
+
+</div>
+
+<div class="progress-wrap">
+
+<div
+id="progress"
+class="progress"
+></div>
+
+</div>
+
+<div id="soalArea"></div>
+
+</section>
+
+<section
+id="hasil"
+class="card hidden"
+></section>
+
+</div>
+
+<div
+id="toast"
+class="toast hidden"
+></div>
+
+<script>
+
+const GOOGLE_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbwk4odfq7ABr__CDR00YD4uAMLmvK2iPjaLLlJrpyA6BnOwJ9gUkncLdCVCzE670CFy/exec";
+
+/* =========================================================
+BANK SOAL
+URUTAN TETAP 1 SAMPAI 10
+TIDAK DIACAK
+========================================================= */
+
+const soal = [
+
+/* =========================================================
+1. PILIHAN GANDA
+========================================================= */
+
+{
+type:"pg",
+
+q:"Siti memiliki 7.500 manik-manik, sedangkan Rani memiliki 7.050 manik-manik. Pernyataan yang tepat adalah …",
+
+a:[
+"Rani memiliki lebih banyak manik-manik dengan selisih 450",
+"Siti memiliki lebih banyak manik-manik dengan selisih 450",
+"Siti memiliki lebih banyak manik-manik dengan selisih 550",
+"Jumlah manik-manik Siti dan Rani sama"
+],
+
+k:1
+},
+
+/* =========================================================
+2. PILIHAN GANDA
+========================================================= */
+
+{
+type:"pg",
+
+q:"Bilangan yang paling kecil adalah …",
+
+a:[
+"8.765",
+"8.675",
+"8.756",
+"8.657"
+],
+
+k:3
+},
+
+/* =========================================================
+3. PILIHAN GANDA
+========================================================= */
+
+{
+type:"pg",
+
+q:"Hasil pengumpulan botol plastik adalah sebagai berikut: Kelas 4A = 3.750 botol, Kelas 4B = 3.570 botol, Kelas 4C = 3.705 botol. Urutan jumlah botol dari paling sedikit ke paling banyak adalah …",
+
+a:[
+"3.750, 3.705, 3.570",
+"3.570, 3.705, 3.750",
+"3.705, 3.570, 3.750",
+"3.570, 3.750, 3.705"
+],
+
+k:1
+},
+
+/* =========================================================
+4. PILIHAN GANDA
+========================================================= */
+
+{
+type:"pg",
+
+q:"Tiga toko menjual buku tulis dalam satu bulan: Toko A = 4.850 buku, Toko B = 4.580 buku, Toko C = 4.805 buku. Toko yang menjual buku paling banyak adalah …",
+
+a:[
+"Toko A",
+"Toko B",
+"Toko C",
+"Semua toko menjual dalam jumlah yang sama"
+],
+
+k:0
+},
+
+/* =========================================================
+5. PILIHAN GANDA
+========================================================= */
+
+{
+type:"pg",
+
+q:"Tanda yang tepat untuk membandingkan 7.250 … 7.205 adalah …",
+
+a:[
+"<",
+">",
+"=",
+"+"
+],
+
+k:1
+},
+
+/* =========================================================
+6. PILIHAN GANDA
+========================================================= */
+
+{
+type:"pg",
+
+q:"Perpustakaan sekolah memiliki 6.250 buku, sedangkan perpustakaan kelas memiliki 5.825 buku. Pernyataan yang tepat adalah …",
+
+a:[
+"Perpustakaan sekolah memiliki lebih sedikit buku karena 6.250 < 5.825",
+"Perpustakaan sekolah memiliki lebih banyak buku karena 6.250 > 5.825",
+"Kedua perpustakaan memiliki jumlah buku yang sama",
+"Perpustakaan kelas memiliki lebih banyak buku karena 5.825 > 6.250"
+],
+
+k:1
+},
+
+/* =========================================================
+7. PILIHAN GANDA
+========================================================= */
+
+{
+type:"pg",
+
+q:"Urutan bilangan dari yang terkecil ke terbesar adalah … 3.450, 3.405, 3.540, 3.504",
+
+a:[
+"3.405, 3.450, 3.504, 3.540",
+"3.450, 3.405, 3.540, 3.504",
+"3.540, 3.504, 3.450, 3.405",
+"3.405, 3.504, 3.450, 3.540"
+],
+
+k:0
+},
+
+/* =========================================================
+8. PILIHAN GANDA
+========================================================= */
+
+{
+type:"pg",
+
+q:"Bilangan yang lebih besar dari 4.567 adalah …",
+
+a:[
+"4.507",
+"4.657",
+"4.567",
+"4.506"
+],
+
+k:1
+},
+
+/* =========================================================
+9. MENJODOHKAN
+========================================================= */
+
+{
+type:"matching",
+
+q:"Jodohkan perbandingan bilangan pada Kolom A dengan jawaban yang tepat pada Kolom B!",
+
+pairs:[
+{
+text:"5.678 … 5.687",
+
+options:[
+"A. >",
+"B. <",
+"C. ="
+],
+
+answer:"B"
+},
+
+{
+text:"6.450 … 6.405",
+
+options:[
+"A. >",
+"B. <",
+"C. ="
+],
+
+answer:"A"
+},
+
+{
+text:"9.000 … 9.000",
+
+options:[
+"A. >",
+"B. <",
+"C. ="
+],
+
+answer:"C"
+}
+]
+},
+
+/* =========================================================
+10. MENJODOHKAN
+========================================================= */
+
+{
+type:"matching",
+
+q:"Jodohkan kelompok bilangan dengan urutan dari terkecil ke terbesar!",
+
+pairs:[
+{
+text:"2.500, 2.050, 2.005",
+
+options:[
+"A. 1.009, 1.090, 1.900",
+"B. 2.005, 2.050, 2.500",
+"C. 4.008, 4.080, 4.800"
+],
+
+answer:"B"
+},
+
+{
+text:"1.900, 1.090, 1.009",
+
+options:[
+"A. 1.009, 1.090, 1.900",
+"B. 2.005, 2.050, 2.500",
+"C. 4.008, 4.080, 4.800"
+],
+
+answer:"A"
+},
+
+{
+text:"4.800, 4.080, 4.008",
+
+options:[
+"A. 1.009, 1.090, 1.900",
+"B. 2.005, 2.050, 2.500",
+"C. 4.008, 4.080, 4.800"
+],
+
+answer:"C"
+}
+]
+}
+
+];
+
+/* =========================================================
+DATA SISWA
+========================================================= */
+
+let siswa={
+nama:"",
+kelas:"",
+absen:""
+};
+
+let index=0;
+
+let benar=0;
+
+let skorPoin=0;
+
+let jawabanDipilih=[];
+
+/* =========================================================
+ESCAPE HTML
+========================================================= */
+
+function escapeHTML(s){
+
+return String(s).replace(
+/[&<>"']/g,
+m=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m])
+);
+
+}
+
+/* =========================================================
+NORMALISASI JAWABAN
+========================================================= */
+
+function normalisasi(teks){
+
+return String(teks || "")
+.toLowerCase()
+.trim()
+.replace(/,/g," ")
+.replace(/\./g," ")
+.replace(/:/g," ")
+.replace(/;/g," ")
+.replace(/\s+/g," ");
+
+}
+
+/* =========================================================
+MENGUBAH ANGKA AGAR MUDAH DIBACA SISTEM
+========================================================= */
+
+function angkaBersih(teks){
+
+return String(teks || "")
+.replace(/\./g,"")
+.replace(/,/g,"")
+.replace(/\s+/g," ")
+.trim();
+
+}
+
+/* =========================================================
+PENILAIAN SOAL CERITA NOMOR 7
+========================================================= */
+
+function cekNomor7(jawaban){
+
+const j=normalisasi(jawaban);
+
+if(!j){
+return false;
+}
+
+const menyebutSekolah=
+j.includes("sekolah") ||
+j.includes("perpustakaan sekolah");
+
+const menyebutLebih=
+j.includes("lebih") ||
+j.includes("banyak") ||
+j.includes(">");
+
+const perbandinganBenar=
+j.includes("6250 > 5825") ||
+j.includes("6250>5825");
+
+return (
+(menyebutSekolah && menyebutLebih) ||
+(j.includes("sekolah lebih banyak")) ||
+perbandinganBenar
+);
+
+}
+
+/* =========================================================
+PENILAIAN SOAL CERITA NOMOR 8
+========================================================= */
+
+function cekNomor8(jawaban){
+
+const j=normalisasi(jawaban);
+
+if(!j){
+return false;
+}
+
+const menyebutSiti=
+j.includes("siti");
+
+const menyebutLebih=
+j.includes("lebih") ||
+j.includes("banyak");
+
+const menyebut450=
+j.includes("450");
+
+const angkaBenar=
+j.includes("7500") &&
+j.includes("7050");
+
+return (
+menyebutSiti &&
+menyebutLebih &&
+menyebut450
+) ||
+(
+menyebutSiti &&
+menyebutLebih &&
+angkaBenar
+);
+
+}
+
+/* =========================================================
+PENILAIAN SOAL CERITA NOMOR 9
+========================================================= */
+
+function cekNomor9(jawaban){
+
+const j=normalisasi(jawaban);
+
+const polaKelas=
+/4\s*b.*4\s*c.*4\s*a/i;
+
+const polaAngka=
+/3570.*3705.*3750/;
+
+return (
+polaKelas.test(j) ||
+polaAngka.test(angkaBersih(j))
+);
+
+}
+
+/* =========================================================
+PENILAIAN NOMOR 10 BAGIAN A
+========================================================= */
+
+function cekNomor10A(jawaban){
+
+const j=normalisasi(jawaban);
+
+if(!j){
+return false;
+}
+
+const tokoA=
+j.includes("toko a") ||
+j==="a" ||
+j.startsWith("a ");
+
+const angka=
+j.includes("4850");
+
+return (
+tokoA ||
+(j.includes("paling banyak") && angka)
+);
+
+}
+
+/* =========================================================
+PENILAIAN NOMOR 10 BAGIAN B
+========================================================= */
+
+function cekNomor10B(jawaban){
+
+const j=normalisasi(jawaban);
+
+if(!j){
+return false;
+}
+
+const polaAngka=
+/4580.*4805.*4850/;
+
+const polaToko=
+/toko\s*b.*toko\s*c.*toko\s*a/i;
+
+return (
+polaAngka.test(angkaBersih(j)) ||
+polaToko.test(j)
+);
+
+}
+
+/* =========================================================
+PENILAIAN SOAL CERITA
+========================================================= */
+
+function cekJawabanStory(soal,jawaban){
+
+if(soal.requiredMeaning==="school_more"){
+return cekNomor7(jawaban);
+}
+
+if(soal.requiredMeaning==="siti_more_450"){
+return cekNomor8(jawaban);
+}
+
+if(soal.requiredMeaning==="order_4b_4c_4a"){
+return cekNomor9(jawaban);
+}
+
+return false;
+
+}
+
+/* =========================================================
+MULAI KUIS
+========================================================= */
+
+function mulai(){
+
+siswa.nama=
+document.getElementById("nama").value.trim();
+
+siswa.kelas=
+document.getElementById("kelas").value.trim();
+
+siswa.absen=
+document.getElementById("absen").value.trim();
+
+if(
+!siswa.nama ||
+!siswa.kelas ||
+!siswa.absen
+){
+
+toast(
+"⚠️ Nama, kelas, dan nomor absen wajib diisi."
+);
+
+return;
+
+}
+
+index=0;
+
+benar=0;
+
+skorPoin=0;
+
+jawabanDipilih=[];
+
+document
+.getElementById("identitas")
+.classList.add("hidden");
+
+document
+.getElementById("hasil")
+.classList.add("hidden");
+
+document
+.getElementById("kuis")
+.classList.remove("hidden");
+
+renderSoal();
+
+}
+
+/* =========================================================
+TAMPILKAN SOAL
+========================================================= */
+
+function renderSoal(){
+
+const s=soal[index];
+
+document.getElementById(
+"siswaInfo"
+).innerHTML=
+`👤 ${escapeHTML(siswa.nama)}
+ |  
+Kelas ${escapeHTML(siswa.kelas)}
+ |  
+Absen ${escapeHTML(siswa.absen)}`;
+
+document.getElementById(
+"counter"
+).textContent=
+`Soal ${index+1} dari ${soal.length}`;
+
+document.getElementById(
+"progress"
+).style.width=
+((index)/soal.length*100)+"%";
+
+let konten="";
+
+/* =========================================================
+PILIHAN GANDA
+========================================================= */
+
+if(s.type==="pg"){
+
+konten=`
+
+<div class="question">
+
+${escapeHTML(s.q)}
+
+</div>
+
+<div class="answers">
+
+${s.a.map((a,i)=>`
+
+<label class="answer">
+
+<input
+type="radio"
+name="jawaban"
+value="${i}"
+${
+jawabanDipilih[index] &&
+jawabanDipilih[index].type==="pg" &&
+jawabanDipilih[index].value===i
+?"checked":""
+}
+>
+
+<span>
+<b>${String.fromCharCode(65+i)}.</b>
+${escapeHTML(a)}
+</span>
+
+</label>
+
+`).join("")}
+
+</div>
+
+`;
+
+}
+
+/* =========================================================
+MENJODOHKAN
+========================================================= */
+
+if(s.type==="matching"){
+
+konten=`
+
+<div class="question">
+
+<div class="question-content">
+
+${escapeHTML(s.q)}
+
+<table class="match-table">
+
+<thead>
+
+<tr>
+
+<th>Kolom A</th>
+
+<th>Kolom B</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${s.pairs.map((pair,i)=>`
+
+<tr>
+
+<td>
+${escapeHTML(pair.text)}
+</td>
+
+<td>
+
+<select
+class="match-select"
+data-match-index="${i}"
+>
+
+<option value="">
+-- Pilih --
+</option>
+
+${pair.options.map(option=>{
+
+const huruf=
+option.charAt(0);
+
+const selected=
+jawabanDipilih[index] &&
+jawabanDipilih[index].type==="matching" &&
+jawabanDipilih[index].values &&
+jawabanDipilih[index].values[i]===huruf
+?"selected":"";
+
+return `
+<option
+value="${huruf}"
+${selected}
+>
+${escapeHTML(option)}
+</option>
+`;
+
+}).join("")}
+
+</select>
+
+</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+/* =========================================================
+SOAL CERITA 7-9
+========================================================= */
+
+if(s.type==="story"){
+
+const oldValue=
+jawabanDipilih[index] &&
+jawabanDipilih[index].type==="story"
+?jawabanDipilih[index].value
+:"";
+
+konten=`
+
+<div class="question">
+
+<div class="question-content">
+
+${escapeHTML(s.q)}
+
+<input
+class="story-input"
+id="storyAnswer"
+type="text"
+value="${escapeHTML(oldValue)}"
+placeholder="Tulis jawabanmu di sini..."
+autocomplete="off"
+>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+/* =========================================================
+SOAL NOMOR 10
+BAGIAN A DAN B TERPISAH
+========================================================= */
+
+if(s.type==="story10"){
+
+const oldA=
+jawabanDipilih[index] &&
+jawabanDipilih[index].type==="story10"
+?jawabanDipilih[index].a
+:"";
+
+const oldB=
+jawabanDipilih[index] &&
+jawabanDipilih[index].type==="story10"
+?jawabanDipilih[index].b
+:"";
+
+konten=`
+
+<div class="question">
+
+<div class="question-content">
+
+${escapeHTML(s.q)}
+
+<div class="part-box">
+
+<div class="part-title">
+
+${escapeHTML(s.partA.label)}
+
+</div>
+
+<input
+class="story-input"
+id="story10a"
+type="text"
+value="${escapeHTML(oldA)}"
+placeholder="Tulis jawaban bagian a..."
+autocomplete="off"
+>
+
+</div>
+
+<div class="part-box">
+
+<div class="part-title">
+
+${escapeHTML(s.partB.label)}
+
+</div>
+
+<input
+class="story-input"
+id="story10b"
+type="text"
+value="${escapeHTML(oldB)}"
+placeholder="Tulis jawaban bagian b..."
+autocomplete="off"
+>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+/* =========================================================
+NAVIGASI
+========================================================= */
+
+konten+=`
+
+<div class="nav-row">
+
+<div class="nav-left">
+
+<button
+class="nav-btn previous"
+onclick="soalSebelumnya()"
+${index===0 ? "disabled" : ""}
+>
+⬅️ Sebelumnya
+</button>
+
+</div>
+
+<div class="nav-right">
+
+<button
+class="nav-btn next"
+onclick="nextSoal()"
+>
+${
+index===soal.length-1
+?"🏁 Selesai"
+:"➡️ Berikutnya"
+}
+</button>
+
+</div>
+
+</div>
+
+`;
+
+document.getElementById(
+"soalArea"
+).innerHTML=konten;
+
+}
+
+/* =========================================================
+SIMPAN JAWABAN
+========================================================= */
+
+function simpanJawaban(){
+
+const s=soal[index];
+
+/* =========================================================
+PILIHAN GANDA
+========================================================= */
+
+if(s.type==="pg"){
+
+const el=
+document.querySelector(
+'input[name="jawaban"]:checked'
+);
+
+if(!el){
+return false;
+}
+
+jawabanDipilih[index]={
+type:"pg",
+value:Number(el.value)
+};
+
+return true;
+
+}
+
+/* =========================================================
+MENJODOHKAN
+========================================================= */
+
+if(s.type==="matching"){
+
+const selects=
+document.querySelectorAll(
+".match-select"
+);
+
+let values=[];
+
+for(let i=0;i<selects.length;i++){
+
+if(!selects[i].value){
+
+return false;
+
+}
+
+values.push(
+selects[i].value
+);
+
+}
+
+jawabanDipilih[index]={
+type:"matching",
+values
+};
+
+return true;
+
+}
+
+/* =========================================================
+SOAL CERITA 7-9
+========================================================= */
+
+if(s.type==="story"){
+
+const el=
+document.getElementById(
+"storyAnswer"
+);
+
+if(!el){
+return false;
+}
+
+const value=
+el.value.trim();
+
+if(!value){
+
+return false;
+
+}
+
+jawabanDipilih[index]={
+type:"story",
+value
+};
+
+return true;
+
+}
+
+/* =========================================================
+SOAL 10
+A DAN B BOLEH DIISI SEBAGIAN
+========================================================= */
+
+if(s.type==="story10"){
+
+const a=
+document.getElementById(
+"story10a"
+);
+
+const b=
+document.getElementById(
+"story10b"
+);
+
+const valueA=
+a ? a.value.trim() : "";
+
+const valueB=
+b ? b.value.trim() : "";
+
+if(!valueA && !valueB){
+
+return false;
+
+}
+
+jawabanDipilih[index]={
+type:"story10",
+a:valueA,
+b:valueB
+};
+
+return true;
+
+}
+
+return false;
+
+}
+
+/* =========================================================
+SOAL SEBELUMNYA
+========================================================= */
+
+function soalSebelumnya(){
+
+if(index<=0){
+return;
+}
+
+simpanJawaban();
+
+index--;
+
+renderSoal();
+
+}
+
+/* =========================================================
+SOAL BERIKUTNYA
+========================================================= */
+
+function nextSoal(){
+
+const berhasil=
+simpanJawaban();
+
+if(!berhasil){
+
+toast(
+"⚠️ Jawablah soal terlebih dahulu."
+);
+
+return;
+
+}
+
+index++;
+
+if(index<soal.length){
+
+renderSoal();
+
+}else{
+
+hitungNilai();
+
+}
+
+}
+
+/* =========================================================
+HITUNG NILAI
+========================================================= */
+
+function hitungNilai(){
+
+skorPoin=0;
+
+benar=0;
+
+for(
+let i=0;
+i<soal.length;
+i++
+){
+
+const s=soal[i];
+
+const j=
+jawabanDipilih[i];
+
+if(s.type==="pg"){
+
+if(
+j &&
+j.type==="pg" &&
+j.value===s.k
+){
+
+skorPoin+=1;
+
+benar++;
+
+}
+
+}
+
+else if(s.type==="matching"){
+
+if(
+j &&
+j.type==="matching"
+){
+
+let benarPasangan=0;
+
+for(
+let p=0;
+p<s.pairs.length;
+p++
+){
+
+if(
+j.values[p]===
+s.pairs[p].answer
+){
+
+benarPasangan++;
+
+}
+
+}
+
+skorPoin+=
+benarPasangan /
+s.pairs.length;
+
+if(
+benarPasangan===
+s.pairs.length
+){
+
+benar++;
+
+}
+
+}
+
+}
+
+else if(s.type==="story"){
+
+if(
+j &&
+j.type==="story" &&
+cekJawabanStory(
+s,
+j.value
+)
+){
+
+skorPoin+=1;
+
+benar++;
+
+}
+
+}
+
+else if(s.type==="story10"){
+
+if(
+j &&
+j.type==="story10"
+){
+
+const benarA=
+cekNomor10A(j.a);
+
+const benarB=
+cekNomor10B(j.b);
+
+if(benarA){
+skorPoin+=0.5;
+}
+
+if(benarB){
+skorPoin+=0.5;
+}
+
+if(
+benarA &&
+benarB
+){
+
+benar++;
+
+}
+
+}
+
+}
+
+}
+
+const nilai=
+Math.round(
+skorPoin/10*100
+);
+
+const persen=
+Math.round(
+skorPoin/10*100
+);
+
+selesai(
+nilai,
+persen
+);
+
+}
+
+/* =========================================================
+PENGIRIMAN GOOGLE SHEETS
+========================================================= */
+
+function kirimKeGoogleSheets(data){
+
+if(
+!GOOGLE_SCRIPT_URL ||
+GOOGLE_SCRIPT_URL.includes("TEMPEL_URL")
+){
+
+return {
+ok:false,
+skipped:true
+};
+
+}
+
+try{
+
+const iframeName=
+"googleSheetsTarget";
+
+let iframe=
+document.getElementById(
+iframeName
+);
+
+if(!iframe){
+
+iframe=
+document.createElement("iframe");
+
+iframe.id=iframeName;
+iframe.name=iframeName;
+iframe.style.display="none";
+
+document.body.appendChild(
+iframe
+);
+
+}
+
+const form=
+document.createElement("form");
+
+form.method="POST";
+form.action=GOOGLE_SCRIPT_URL;
+form.target=iframeName;
+form.style.display="none";
+
+const fields={
+
+nama:data.nama,
+kelas:data.kelas,
+absen:data.absen,
+
+nilai:data.nilai,
+benar:data.benar,
+salah:data.total-data.benar,
+
+total:data.total,
+persen:data.persen,
+poin:data.poin,
+waktu:data.waktu
+
+};
+
+Object.keys(fields).forEach(
+function(key){
+
+const input=
+document.createElement("input");
+
+input.type="hidden";
+input.name=key;
+input.value=
+fields[key] ?? "";
+
+form.appendChild(input);
+
+}
+);
+
+document.body.appendChild(form);
+
+form.submit();
+
+setTimeout(
+function(){
+form.remove();
+},
+3000
+);
+
+return {
+ok:true
+};
+
+}catch(error){
+
+console.error(
+"Pengiriman Google Sheets gagal:",
+error
+);
+
+return {
+ok:false
+};
+
+}
+
+}
+
+/* =========================================================
+MEMBUAT DETAIL JAWABAN
+========================================================= */
+
+function buatDetailJawaban(){
+
+let html=`
+
+<div class="detail-header">
+
+<b>📊 Rincian Penilaian</b><br>
+
+Setiap nomor ditampilkan berdasarkan jawaban yang kamu kerjakan.
+Nomor 9 dan 10 dinilai berdasarkan jumlah pasangan yang benar.
+
+</div>
+
+`;
+
+for(
+let i=0;
+i<soal.length;
+i++
+){
+
+const s=soal[i];
+
+const j=jawabanDipilih[i];
+
+let benarSoal=false;
+
+let poinSoal=0;
+
+let jawabanSiswa="";
+
+let kunciJawaban="";
+
+/* =====================================================
+PILIHAN GANDA
+===================================================== */
+
+if(s.type==="pg"){
+
+benarSoal=
+j &&
+j.type==="pg" &&
+j.value===s.k;
+
+poinSoal=
+benarSoal ? 1 : 0;
+
+if(
+j &&
+j.type==="pg" &&
+s.a[j.value]!==undefined
+){
+
+jawabanSiswa=
+`${String.fromCharCode(65+j.value)}. ${s.a[j.value]}`;
+
+}else{
+
+jawabanSiswa="Belum dijawab";
+
+}
+
+kunciJawaban=
+`${String.fromCharCode(65+s.k)}. ${s.a[s.k]}`;
+
+}
+
+/* =====================================================
+MENJODOHKAN
+===================================================== */
+
+else if(s.type==="matching"){
+
+let jumlahBenar=0;
+
+let rincian=[];
+
+for(
+let p=0;
+p<s.pairs.length;
+p++
+){
+
+const jawaban=
+j &&
+j.type==="matching" &&
+j.values
+?j.values[p]
+:"";
+
+const benarPasangan=
+jawaban===
+s.pairs[p].answer;
+
+if(benarPasangan){
+jumlahBenar++;
+}
+
+const pilihanSiswa=
+jawaban
+?jawaban
+:"-";
+
+rincian.push(
+`Pasangan ${p+1}: ${pilihanSiswa} / Kunci ${s.pairs[p].answer}`
+);
+
+}
+
+poinSoal=
+jumlahBenar /
+s.pairs.length;
+
+benarSoal=
+jumlahBenar===
+s.pairs.length;
+
+jawabanSiswa=
+rincian.join("<br>");
+
+kunciJawaban=
+s.pairs
+.map(
+(pair,p)=>
+`Pasangan ${p+1}: ${pair.answer}`
+)
+.join("<br>");
+
+}
+
+/* =====================================================
+SOAL CERITA 7-9
+===================================================== */
+
+else if(s.type==="story"){
+
+jawabanSiswa=
+j &&
+j.type==="story"
+?j.value
+:"Belum dijawab";
+
+benarSoal=
+j &&
+j.type==="story" &&
+cekJawabanStory(
+s,
+j.value
+);
+
+poinSoal=
+benarSoal ? 1 : 0;
+
+if(s.requiredMeaning==="school_more"){
+
+kunciJawaban=
+"Perpustakaan sekolah lebih banyak. 6.250 > 5.825";
+
+}
+
+else if(s.requiredMeaning==="siti_more_450"){
+
+kunciJawaban=
+"Siti lebih banyak, dengan selisih 450 manik-manik.";
+
+}
+
+else if(s.requiredMeaning==="order_4b_4c_4a"){
+
+kunciJawaban=
+"4B, 4C, 4A atau 3.570, 3.705, 3.750";
+
+}
+
+}
+
+/* =====================================================
+SOAL 10
+===================================================== */
+
+else if(s.type==="story10"){
+
+const valueA=
+j &&
+j.type==="story10"
+?j.a
+:"";
+
+const valueB=
+j &&
+j.type==="story10"
+?j.b
+:"";
+
+const benarA=
+cekNomor10A(valueA);
+
+const benarB=
+cekNomor10B(valueB);
+
+poinSoal=
+(benarA ? 0.5 : 0) +
+(benarB ? 0.5 : 0);
+
+benarSoal=
+benarA &&
+benarB;
+
+jawabanSiswa=
+`a. ${valueA || "Belum dijawab"}
+<br>
+b. ${valueB || "Belum dijawab"}`;
+
+kunciJawaban=
+"a. Toko A / 4.850 buku<br>b. 4.580, 4.805, 4.850 atau Toko B, Toko C, Toko A";
+
+}
+
+const kelasStatus=
+benarSoal
+?"benar"
+:"salah";
+
+const statusText=
+benarSoal
+?"✅ BENAR"
+:"❌ SALAH";
+
+html+=`
+
+<div class="detail-item ${kelasStatus}">
+
+<div class="detail-title">
+
+<span>
+📝 Soal ${i+1}
+</span>
+
+<span class="detail-status ${kelasStatus}">
+${statusText}
+</span>
+
+</div>
+
+<div class="detail-row">
+
+<span class="detail-label">
+Jawaban:
+</span>
+
+<div class="detail-answer-box ${
+jawabanSiswa==="Belum dijawab"
+?"empty"
+:""
+}">
+
+${jawabanSiswa}
+
+</div>
+
+</div>
+
+<div class="detail-row">
+
+<span class="detail-label">
+Kunci / Jawaban yang benar:
+</span>
+
+<div class="detail-answer-box">
+
+${kunciJawaban}
+
+</div>
+
+</div>
+
+<div class="detail-poin">
+
+⭐ Nilai nomor ${i+1}: ${poinSoal} poin
+
+</div>
+
+</div>
+
+`;
+
+}
+
+html+=`
+
+<div class="detail-header" style="margin-top:12px;margin-bottom:0;">
+
+<b>🏆 Total Poin: ${Math.round(skorPoin*100)/100} dari 10 poin</b><br>
+
+<b>📈 Nilai Akhir: ${Math.round(skorPoin/10*100)}</b>
+
+</div>
+
+`;
+
+return html;
+
+}
+
+/* =========================================================
+   BUKA / TUTUP DETAIL JAWABAN
+========================================================= */
+
+function toggleDetailJawaban(){
+
+  const detail=
+    document.getElementById(
+      "detailJawaban"
+    );
+
+  const tombol=
+    document.getElementById(
+      "detailToggle"
+    );
+
+  if(!detail || !tombol){
+    return;
+  }
+
+  const sedangTampil=
+    detail.getAttribute("data-open")==="true";
+
+  if(sedangTampil){
+
+    detail.setAttribute(
+      "data-open",
+      "false"
+    );
+
+    detail.classList.add("hidden");
+
+    detail.style.setProperty(
+      "display",
+      "none",
+      "important"
+    );
+
+    tombol.innerHTML=
+      "📋 Lihat Detail Jawaban";
+
+    tombol.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+  }else{
+
+    detail.setAttribute(
+      "data-open",
+      "true"
+    );
+
+    detail.classList.remove("hidden");
+
+    detail.style.setProperty(
+      "display",
+      "block",
+      "important"
+    );
+
+    tombol.innerHTML=
+      "🔽 Tutup Detail Jawaban";
+
+    tombol.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+  }
+
+}
+
+/* =========================================================
+SELESAI
+========================================================= */
+
+function selesai(nilai,persen){
+
+const total=soal.length;
+
+const waktu=
+new Date().toLocaleString(
+"id-ID"
+);
+
+const hasilBaru={
+
+nama:siswa.nama,
+kelas:siswa.kelas,
+absen:siswa.absen,
+
+nilai,
+benar,
+total,
+persen,
+
+poin:
+Math.round(
+skorPoin*100
+)/100,
+
+waktu
+
+};
+
+document
+.getElementById("kuis")
+.classList.add("hidden");
+
+tampilkanHasil(
+hasilBaru
+);
+
+const kirim=
+kirimKeGoogleSheets(
+hasilBaru
+);
+
+if(
+kirim &&
+kirim.ok
+){
+
+toast(
+"✅ Hasil dikirim ke Google Sheets."
+);
+
+}
+
+}
+
+/* =========================================================
+HASIL
+========================================================= */
+
+function tampilkanHasil(data){
+
+let pesan=
+data.nilai>=90
+?"🏆 Luar biasa!"
+:data.nilai>=75
+?"🌟 Bagus sekali!"
+:data.nilai>=60
+?"💪 Terus berlatih!"
+:"📚 Jangan menyerah!";
+
+document.getElementById(
+"hasil"
+).innerHTML=`
+
+<div class="center">
+
+<h2>
+🎉 Kuis Selesai!
+</h2>
+
+<p>
+${pesan}
+</p>
+
+<div class="result-score">
+${data.nilai}
+</div>
+
+<div class="stats">
+
+<div class="stat">
+
+<b>
+${data.benar}/${data.total}
+</b>
+
+Jawaban Benar
+
+</div>
+
+<div class="stat">
+
+<b>
+${data.persen}%
+</b>
+
+Persentase
+
+</div>
+
+<div class="stat">
+
+<b>
+${data.poin}
+</b>
+
+Poin
+
+</div>
+
+</div>
+
+<p>
+
+<b>
+${escapeHTML(data.nama)}
+</b>
+
+• Kelas ${escapeHTML(data.kelas)}
+
+• Absen ${escapeHTML(data.absen)}
+
+</p>
+
+<p class="note">
+
+Nomor 9 dan 10 dinilai berdasarkan jumlah pasangan
+yang benar.
+
+</p>
+
+<!-- =====================================================
+     TOMBOL DETAIL JAWABAN
+====================================================== -->
+
+<button
+  id="detailToggle"
+  class="detail-toggle"
+  onclick="toggleDetailJawaban()"
+  type="button"
+  aria-expanded="false"
+>
+  📋 Lihat Detail Jawaban
+</button>
+
+<div
+  id="detailJawaban"
+  class="detail-jawaban hidden"
+  data-open="false"
+  style="display:none;"
+>
+
+  ${buatDetailJawaban()}
+
+</div>
+
+<div class="actions">
+
+<button
+class="btn primary"
+onclick="ulang()"
+>
+🔄 Kerjakan Lagi
+</button>
+
+<button
+class="btn green"
+onclick="window.location.href='capaian.html'"
+>
+🌟 Jejak Capaian
+</button>
+
+<button
+class="btn gray"
+onclick="window.print()"
+>
+🖨️ Cetak Hasil
+</button>
+
+</div>
+
+</div>
+
+`;
+
+document
+.getElementById("hasil")
+.classList.remove("hidden");
+
+}
+
+/* =========================================================
+ULANG
+========================================================= */
+
+function ulang(){
+
+document
+.getElementById("hasil")
+.classList.add("hidden");
+
+document
+.getElementById("identitas")
+.classList.remove("hidden");
+
+document.getElementById(
+"nama"
+).value="";
+
+document.getElementById(
+"kelas"
+).value="";
+
+document.getElementById(
+"absen"
+).value="";
+
+}
+
+/* =========================================================
+TOAST
+========================================================= */
+
+function toast(msg){
+
+const t=
+document.getElementById(
+"toast"
+);
+
+t.textContent=msg;
+
+t.classList.remove(
+"hidden"
+);
+
+clearTimeout(
+window.tt
+);
+
+window.tt=
+setTimeout(
+()=>
+t.classList.add(
+"hidden"
+),
+2400
+);
+
+}
+
+</script>
+
+</body>
+</html>

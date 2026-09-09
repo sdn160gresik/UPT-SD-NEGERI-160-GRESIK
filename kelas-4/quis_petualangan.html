@@ -1547,41 +1547,27 @@ k:1
 },
 
 /* =========================================================
-7. PILIHAN GANDA
+7. BENAR / SALAH
 ========================================================= */
 
 {
-type:"pg",
+type:"bs",
 
-q:"Urutan bilangan dari yang terkecil ke terbesar adalah … 3.450, 3.405, 3.540, 3.504",
+q:"Bilangan 4.250 lebih besar dari bilangan 4.520.",
 
-a:[
-"3.405, 3.450, 3.504, 3.540",
-"3.450, 3.405, 3.540, 3.504",
-"3.540, 3.504, 3.450, 3.405",
-"3.405, 3.504, 3.450, 3.540"
-],
-
-k:0
+k:"S"
 },
 
 /* =========================================================
-8. PILIHAN GANDA
+8. BENAR / SALAH
 ========================================================= */
 
 {
-type:"pg",
+type:"bs",
 
-q:"Bilangan yang lebih besar dari 4.567 adalah …",
+q:"Notasi perbandingan yang tepat untuk 7.810 dan 7.801 adalah 7.810 > 7.801.",
 
-a:[
-"4.507",
-"4.657",
-"4.567",
-"4.506"
-],
-
-k:1
+k:"B"
 },
 
 /* =========================================================
@@ -2047,6 +2033,76 @@ ${escapeHTML(a)}
 }
 
 /* =========================================================
+BENAR / SALAH
+========================================================= */
+
+if(s.type==="bs"){
+
+const oldValue=
+jawabanDipilih[index] &&
+jawabanDipilih[index].type==="bs"
+?jawabanDipilih[index].value
+:"";
+
+konten=`
+
+<div class="question">
+
+<div class="question-content">
+
+${escapeHTML(s.q)}
+
+</div>
+
+</div>
+
+<div class="answers">
+
+<label class="answer">
+
+<input
+type="radio"
+name="jawaban"
+value="B"
+${
+oldValue==="B"
+?"checked"
+:""
+}
+>
+
+<span>
+<b>B.</b> Benar
+</span>
+
+</label>
+
+<label class="answer">
+
+<input
+type="radio"
+name="jawaban"
+value="S"
+${
+oldValue==="S"
+?"checked"
+:""
+}
+>
+
+<span>
+<b>S.</b> Salah
+</span>
+
+</label>
+
+</div>
+
+`;
+
+}
+
+/* =========================================================
 MENJODOHKAN
 ========================================================= */
 
@@ -2326,6 +2382,30 @@ return true;
 }
 
 /* =========================================================
+BENAR / SALAH
+========================================================= */
+
+if(s.type==="bs"){
+
+const el=
+document.querySelector(
+'input[name="jawaban"]:checked'
+);
+
+if(!el){
+return false;
+}
+
+jawabanDipilih[index]={
+type:"bs",
+value:el.value
+};
+
+return true;
+
+}
+
+/* =========================================================
 MENJODOHKAN
 ========================================================= */
 
@@ -2514,6 +2594,22 @@ if(s.type==="pg"){
 if(
 j &&
 j.type==="pg" &&
+j.value===s.k
+){
+
+skorPoin+=1;
+
+benar++;
+
+}
+
+}
+
+else if(s.type==="bs"){
+
+if(
+j &&
+j.type==="bs" &&
 j.value===s.k
 ){
 
@@ -2822,6 +2918,44 @@ jawabanSiswa="Belum dijawab";
 
 kunciJawaban=
 `${String.fromCharCode(65+s.k)}. ${s.a[s.k]}`;
+
+}
+
+/* =====================================================
+BENAR / SALAH
+===================================================== */
+
+else if(s.type==="bs"){
+
+benarSoal=
+j &&
+j.type==="bs" &&
+j.value===s.k;
+
+poinSoal=
+benarSoal ? 1 : 0;
+
+if(
+j &&
+j.type==="bs"
+){
+
+jawabanSiswa=
+j.value==="B"
+?"B. Benar"
+:"S. Salah";
+
+}else{
+
+jawabanSiswa=
+"Belum dijawab";
+
+}
+
+kunciJawaban=
+s.k==="B"
+?"B. Benar"
+:"S. Salah";
 
 }
 

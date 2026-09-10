@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#5b2f1c" />
+  <title>Monopoli Nusantara — Game Edukasi</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">GAME EDUKASI BUDAYA INDONESIA</div>
+        <h1>Monopoli Nusantara</h1>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="fullscreenBtn" title="Layar penuh">⛶</button>
+        <button class="icon-btn" id="rulesBtn" title="Aturan">?</button>
+      </div>
+    </header>
+
+    <main class="game-layout">
+      <section class="board-panel">
+        <div class="board-frame" id="boardFrame">
+          <img src="assets/papan.jpeg" class="board-image" alt="Papan Monopoli Nusantara" draggable="false" />
+          <div id="ownershipLayer" class="ownership-layer" aria-hidden="true"></div>
+          <div id="tokensLayer" class="tokens-layer" aria-label="Posisi pemain"></div>
+          <div class="turn-badge" id="turnBadge">Siap bermain</div>
+        </div>
+        <div class="board-caption">
+          <span>🎲 2–6 pemain • 1 perangkat</span>
+          <span>💾 Tersimpan otomatis di browser</span>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <section class="panel turn-panel">
+          <div class="section-head">
+            <div>
+              <span class="mini-label">GILIRAN</span>
+              <h2 id="turnName">—</h2>
+            </div>
+            <div class="round-pill" id="roundPill">Ronde 1/20</div>
+          </div>
+
+          <div class="dice-row">
+            <div class="die" id="die1">⚀</div>
+            <div class="die" id="die2">⚀</div>
+            <div class="dice-total">
+              <span>Total</span>
+              <strong id="diceTotal">—</strong>
+            </div>
+          </div>
+
+          <div id="statusText" class="status-text">Mulai game untuk bermain.</div>
+
+          <div class="action-stack">
+            <button id="rollBtn" class="primary-btn" disabled>🎲 Kocok Dadu</button>
+            <div id="propertyActions" class="property-actions hidden">
+              <button id="buyBtn" class="success-btn">Beli</button>
+              <button id="skipBuyBtn" class="ghost-btn">Lewati</button>
+            </div>
+            <button id="endTurnBtn" class="secondary-btn hidden">Akhiri Giliran →</button>
+          </div>
+        </section>
+
+        <section class="panel players-panel">
+          <div class="section-head compact">
+            <h3>Pemain</h3>
+            <button id="endGameBtn" class="text-btn">Akhiri game</button>
+          </div>
+          <div id="playersList" class="players-list"></div>
+        </section>
+
+        <section class="panel activity-panel">
+          <div class="section-head compact">
+            <h3>Aktivitas</h3>
+            <span class="mini-label">TERBARU</span>
+          </div>
+          <div id="activityLog" class="activity-log"></div>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Setup -->
+  <div id="setupModal" class="modal show" role="dialog" aria-modal="true">
+    <div class="modal-card setup-card">
+      <div class="setup-hero">
+        <img src="assets/lembar-budaya.jpeg" alt="Lembar budaya Monopoli Nusantara" />
+        <div class="setup-overlay">
+          <span class="eyebrow light">JELAJAHI BUDAYA, BANGUN NEGERI!</span>
+          <h2>Siapkan pemain</h2>
+          <p>Versi web lokal untuk 2–6 orang. Bergantian pada satu laptop/tablet.</p>
+        </div>
+      </div>
+      <div class="setup-body">
+        <div class="setup-grid">
+          <div>
+            <label class="field-label">Nama pemain</label>
+            <div id="playerInputs" class="player-inputs"></div>
+            <button id="addPlayerBtn" class="ghost-btn wide">+ Tambah Pemain</button>
+          </div>
+          <div class="settings-col">
+            <label class="field-label" for="roundLimit">Durasi game</label>
+            <select id="roundLimit" class="select-input">
+              <option value="10">10 ronde — cepat</option>
+              <option value="15">15 ronde</option>
+              <option value="20" selected>20 ronde — rekomendasi</option>
+              <option value="30">30 ronde — panjang</option>
+            </select>
+
+            <div class="rule-summary">
+              <strong>Aturan utama</strong>
+              <ul>
+                <li>Lewati GO: +M200</li>
+                <li>Properti kosong bisa dibeli</li>
+                <li>Mendarat di properti lawan: bayar sewa</li>
+                <li>Dana Budaya: jawab kuis matematika</li>
+                <li>Keberuntungan: ambil kartu bonus</li>
+              </ul>
+            </div>
+
+            <button id="startBtn" class="primary-btn wide">Mulai Petualangan</button>
+            <button id="resumeBtn" class="secondary-btn wide hidden">Lanjutkan Game Tersimpan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card / Quiz modal -->
+  <div id="eventModal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-card event-card">
+      <button class="close-x" id="eventCloseBtn" aria-label="Tutup">×</button>
+      <div id="eventContent"></div>
+    </div>
+  </div>
+
+  <!-- Rules -->
+  <div id="rulesModal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-card rules-card">
+      <button class="close-x" id="rulesCloseBtn" aria-label="Tutup">×</button>
+      <span class="eyebrow">CARA BERMAIN</span>
+      <h2>Aturan Monopoli Nusantara</h2>
+      <div class="rules-columns">
+        <div>
+          <h4>Tujuan</h4>
+          <p>Kumpulkan kekayaan dari uang dan properti budaya. Setelah ronde terakhir, pemain dengan nilai total tertinggi menang.</p>
+          <h4>Properti</h4>
+          <p>Jika petak belum dimiliki, pemain boleh membeli sesuai harga pada papan. Jika sudah dimiliki lawan, sewa dibayar otomatis.</p>
+        </div>
+        <div>
+          <h4>Dana Budaya</h4>
+          <p>Jawaban benar: +M2.000. Jawaban salah: −M1.000. Beberapa jawaban benar memperoleh bonus +M1.000.</p>
+          <h4>Dadu kembar</h4>
+          <p>Jika kedua dadu sama, setelah aksi selesai pemain mendapat satu giliran tambahan.</p>
+        </div>
+      </div>
+      <button class="primary-btn wide" id="rulesOkBtn">Mengerti</button>
+    </div>
+  </div>
+
+  <!-- Game over -->
+  <div id="winnerModal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-card winner-card">
+      <div class="trophy">🏆</div>
+      <span class="eyebrow">HASIL AKHIR</span>
+      <h2 id="winnerTitle">Pemenang</h2>
+      <div id="rankingList" class="ranking-list"></div>
+      <button id="playAgainBtn" class="primary-btn wide">Main Lagi</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

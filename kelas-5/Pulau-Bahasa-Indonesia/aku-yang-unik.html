@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Latihan Soal</title>
+  <title>Latihan Soal Bahasa Indonesia Kelas 5</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="/_sdk/element_sdk.js"></script>
   <script src="/_sdk/data_sdk.js"></script>
@@ -180,7 +180,7 @@
       📝
      </div>
      <h1 id="game-title" class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-3">Latihan Soal</h1>
-     <p class="text-gray-600 text-sm mb-5 leading-relaxed">Susun huruf-huruf yang tersedia untuk membentuk jawaban yang benar PUISI! <span class="block mt-1 text-xs text-cyan-500 font-semibold">📜 Uji pengetahuanmu!</span></p>
+     <p class="text-gray-600 text-sm mb-5 leading-relaxed">Susun huruf-huruf yang tersedia untuk membentuk jawaban yang benar! <span class="block mt-1 text-xs text-cyan-500 font-semibold">📜 Uji pengetahuanmu!</span></p>
      <div class="bg-gradient-to-r from-blue-100 to-cyan-100 rounded-xl p-3 mb-5 text-left">
       <h3 class="font-bold text-blue-700 mb-1 text-sm">Cara Bermain:</h3>
       <ul class="text-xs text-gray-600 space-y-0.5">
@@ -201,7 +201,7 @@
     <div class="glass-card rounded-xl p-2 mb-2 shadow-xl">
      <div class="flex justify-between items-center flex-wrap gap-1 text-xs md:text-sm">
       <div class="flex items-center gap-2">
-       <span class="text-gray-700 font-semibold">Pilih Soal:</span> <button onclick="toggleQuestionSelector()" class="bg-blue-100 hover:bg-blue-200 px-2 py-1 rounded-lg text-blue-700 font-bold text-xs transition-all"> <span id="question-number">Soal 1/10</span> 📋 </button>
+       <span class="text-gray-700 font-semibold">Pilih Soal:</span> <button onclick="toggleQuestionSelector()" class="bg-blue-100 hover:bg-blue-200 px-2 py-1 rounded-lg text-blue-700 font-bold text-xs transition-all"> <span id="question-number">Soal 1/20</span> 📋 </button>
       </div>
       <div class="bg-gradient-to-r from-yellow-400 to-orange-500 px-2 py-1 rounded-lg text-white font-bold flex items-center gap-1 text-xs">
        <span>Skor:</span> <span id="score">0</span>
@@ -223,7 +223,7 @@
     <div class="glass-card rounded-xl p-3 mb-2 shadow-xl flex-grow flex flex-col">
      <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg p-2 mb-3">
       <h2 class="text-sm md:text-base font-bold text-gray-800 text-center" id="question-text">Pertanyaan akan muncul di sini...</h2>
-      <div class="flex justify-center"><img id="question-image" src="https://i.imgur.com/bhhL8Zp.jpeg" alt="Diagram sistem pernapasan" loading="lazy" style="max-width: 100%; max-height: 200px; margin-top: 8px; border-radius: 8px; display: none;" onerror="this.style.background='#e5e7eb'; this.style.display='block';">
+      <div class="flex justify-center"><img id="question-image" src="" alt="Gambar soal" loading="lazy" style="max-width: 100%; max-height: 200px; margin-top: 8px; border-radius: 8px; display: none;" onerror="this.style.background='#e5e7eb'; this.style.display='block';">
       </div>
      </div>
      <div class="mb-3">
@@ -322,96 +322,105 @@
   </div>
   <script>
     const defaultConfig = {
-      game_title: "Latihan Soal",
+      game_title: "Latihan Soal Bahasa Indonesia Kelas 5",
       start_button_text: "🚀 Mulai Bermain!"
     };
     
     let config = { ...defaultConfig };
     let allGameScores = [];
-    
     const questionBank = [
-     {
-  question: "Wiwin menulis sebuah puisi yang setiap awal barisnya dibentuk dari rangkaian huruf yang memberi makna atau pesan puisi. Puisi yang dibuat oleh Wiwin disebut ...",
-  answer: "akrostik"
-},
-{
-  question: "Berdasarkan kreasi di atas, Adit memiliki sifat ....",
-  image: "https://i.imgur.com/XAJFdte.png",
-  answer: "banyak ide"
-},
-{
-  question: "Wayan bersaudara dengan Made. Mereka memiliki beberapa persamaan. Salah satu persamaannya yaitu ....",
-  answer: "bentuk hidung"
-},
-{
-  question: "Wayan dan Made memang bersaudara. Namun, mereka berdua memiliki perbedaan. Berikut ini salah satu perbedaannya yaitu ....",
-  answer: "cita-cita"
-},
-{
-  question: "Made memiliki angan-angan menjadi seorang ... saat dia dewasa.",
-  answer: "penulis buku"
-},
-{
-  question: "Paragraf yang paling sesuai untuk mendeskripsikan gambar di atas ditunjukkan oleh nomor ....",
-  answer: "dua"
-},
-{
-  question: "Kalimat yang paling tepat untuk mendeskripsikan gambar di atas yaitu....",
-  answer: "anak laki-laki sedang menyiram tanaman"
-},
-{
-  question: "Aku tidak bergantung pada orang lain. Aku dalam keadaan dapat berdiri sendiri. Berdasarkan pernyataan tersebut, sifatku adalah ....",
-  answer: "mandiri"
-},
-{
-  question: "Miska adalah seorang siswi kelas lima sekolah dasar. Dia dikenal sebagai siswi yang jujur, sehingga banyak orang yang menyukai kepribadiannya tersebut. Kata jujur pada kalimat di atas memiliki makna ....",
-  answer: "lurus hati"
-},
-{
-  question: "Pak Ketut dikenal sebagai pelukis yang kreatif, karena beliau menghasilkan karya-karya yang sangat unik. Kata kreatif pada kalimat di atas memiliki makna ....",
-  answer: "memiliki daya cipta"
-},
-{
-  question: "Kata sifat yang tepat untuk mendeksripsikan kegiatan anak-anak pada gambar di atas yaitu ....",
-  answer: "rajin"
-},
-{
-  question: "Imbuhan dalam bentuk awalan pe- digunakan untuk menyatakan kata sifat. Hasil pembentukan kata setelah mendapat imbuhan pe- dari kata bohong yaitu ....",
-  answer: "pembohong"
-},
-{
-  question: "Kata dendam jika diberikan imbuhan pe- akan menjadi kata ....",
-  answer: "pendendam"
-},
-{
-  question: "Berdasarkan cerita di atas, sifat tokoh yang dapat kita teladani yaitu ...",
-  answer: "penolong"
-},
-{
-  question: "Berdasarkan cerita di atas, sifat tokoh yang sebaiknya kita hindari yaitu ....",
-  answer: "malas"
-},
-{
-  question: "Kata alim sinonimnya yaitu....",
-  answer: "soleh"
-},
-{
-  question: "Dita sering menyisihkan uang bekal yang diberikan oleh ibunya. Dia juga membeli barang-barang yang hanya diperlukan. Dita anak yang tidak ....",
-  answer: "boros"
-},
-{
-  question: "Ibuku selalu menyapa orang-orang yang berbelanja di warung dengan penuh senyuman. Beliau dikenal sebagai penjual yang ramah. Kata ramah antonimnya yaitu....",
-  answer: "kaku"
-},
-{
-  question: "Kalimat majemuk setara yang sejalan ditunjukkan oleh nomor...",
-  answer: "2"
-},
-{
-  question: "Nancy pandai berhitung. Nancy tidak pandai menyanyi. Kata penghubung yang tepat untuk melengkapi dua kalimat tunggal di atas, agar menjadi sebuah kalimat majemuk yaitu.....",
-  answer: "tetapi"
-},
+      {
+        question: "Wiwin menulis sebuah puisi yang setiap awal barisnya dibentuk dari rangkaian huruf yang memberi makna atau pesan puisi. Puisi yang dibuat oleh Wiwin disebut ...",
+        answer: "akrostik"
+      },
+      {
+        question: "Berdasarkan kreasi di atas, Adit memiliki sifat ....",
+        image: "https://i.imgur.com/XAJFdte.png",
+        answer: "banyak ide"
+      },
+      {
+        question: "Wayan bersaudara dengan Made. Mereka memiliki beberapa persamaan. Salah satu persamaannya yaitu ....",
+        image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSF8SPnt52b12GoY7xOdn_EavxJ6H1JZfmKq-MmHKALU-WcxNBd0X-GJqOLBwqwu05ils85sFEobUNdY7JXqpNIQYHdYmSXsP10Ydc4xKLweUOvAwISUdLNa3_i7XIUmZ7Zpb8aC06WhGdOHqDHGXo2xCR1en_aQkwyaa7yxyQZluG6pZ7zxmHGzv/s886/soal%20diagram%20venn%20bahasa%20indonesia%20kelas%205%20kumer.png",
+        answer: "bentuk hidung"
+      },
+      {
+        question: "Wayan dan Made memang bersaudara. Namun, mereka berdua memiliki perbedaan. Berikut ini salah satu perbedaannya yaitu ....",
+        image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSF8SPnt52b12GoY7xOdn_EavxJ6H1JZfmKq-MmHKALU-WcxNBd0X-GJqOLBwqwu05ils85sFEobUNdY7JXqpNIQYHdYmSXsP10Ydc4xKLweUOvAwISUdLNa3N_i7XIUmZ7Zpb8aC06WhGdOHqDHGXo2xCR1en_aQkwyaa7yxyQZluG6pZ7zxmHGzv/s886/soal%20diagram%20venn%20bahasa%20indonesia%20kelas%205%20kumer.png",
+        answer: "cita-cita"
+      },
+      {
+        question: "Made memiliki angan-angan menjadi seorang ... saat dia dewasa.",
+        image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSF8SPnt52b12GoY7xOdn_EavxJ6H1JZfmKq-MmHKALU-WcxNBd0X-GJqOLBwqwu05ils85sFEobUNdY7JXqpNIQYHdYmSXsP10Ydc4xKLweUOvAwISUdLNa3N_i7XIUmZ7Zpb8aC06WhGdOHqDHGXo2xCR1en_aQkwyaa7yxyQZluG6pZ7zxmHGzv/s886/soal%20diagram%20venn%20bahasa%20indonesia%20kelas%205%20kumer.png",
+        answer: "penulis buku"
+      },
+      {
+        question: "Paragraf yang paling sesuai untuk mendeskripsikan gambar di atas ditunjukkan oleh nomor ....",
+        image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhw6yscV4j0DkVAtkrPce5blNgdg1DfdqoM64U_BQHpfbBbL_FGrYsHBMICxwQDtQChXVslufSmUphyyKsjn3zGjXS6qctdx_NruwpFxQ00VCNdYcSMFTCAbELmEzwCPB5sWy86mAlpEPn-r74AxJ3VJzyk3--vJY3XSZefe-ktXtYd1GZFEy/s886/soal%20teks%20deskripsi%20bahasa%20indonesia%20kelas%205.png",
+        answer: "dua"
+      },
+      {
+        question: "Kalimat yang paling tepat untuk mendeskripsikan gambar di atas yaitu....",
+        image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikrW4IQK2gfmjrFSONKsfAQfQEaQ-77ax1GVBm5GHQHjC1g2eLhSB_-wXQsBzjJnWyMliPuUyqs3Rcselu5EFuN_M3RbZqSp9fYowMKM1v33pz3BOsdwReHQcU5QLepsqBX7c9PYiqxpXNiBn9bquEGSRxpDq7f9kpmNnJbjZTDZtcM1CHbkX8Pn5R/s886/deskripsi%20gambar.jpg",
+        answer: "anak laki-laki sedang menyiram tanaman"
+      },
+      {
+        question: "Aku tidak bergantung pada orang lain. Aku dalam keadaan dapat berdiri sendiri. Berdasarkan pernyataan tersebut, sifatku adalah ....",
+        answer: "mandiri"
+      },
+      {
+        question: "Miska adalah seorang siswi kelas lima sekolah dasar. Dia dikenal sebagai siswi yang jujur, sehingga banyak orang yang menyukai kepribadiannya tersebut. Kata jujur pada kalimat di atas memiliki makna ....",
+        answer: "lurus hati"
+      },
+      {
+        question: "Pak Ketut dikenal sebagai pelukis yang kreatif, karena beliau menghasilkan karya-karya yang sangat unik. Kata kreatif pada kalimat di atas memiliki makna ....",
+        answer: "memiliki daya cipta"
+      },
+      {
+        question: "Kata sifat yang tepat untuk mendeskripsikan kegiatan anak-anak pada gambar di atas yaitu ....",
+        image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhbRFaXUL34bnjyUPHs78T-h90FKVp9P2hL3O3delf2Wv5sGRXEvUcewM5alfmL0nLol6SfQW3GQ7Z1zg4aYKRyngKe4HKJ0vYP2HGfFoTNwS3rRqohG-y_ptdP45OjRs6VaW2pVkvq1Kl4J7Ku2Ebbr2VlB9TAgonkgEjXrazyf5ZG5mFfLVEqjNU7/s885/soal%20hots%20bahasa%20indonesia%20kelas%205%20bab%201%20kurikulum%20merdeka.jpg",
+        answer: "rajin"
+      },
+      {
+        question: "Imbuhan dalam bentuk awalan pe- digunakan untuk menyatakan kata sifat. Hasil pembentukan kata setelah mendapat imbuhan pe- dari kata bohong yaitu ....",
+        answer: "pembohong"
+      },
+      {
+        question: "Kata dendam jika diberikan imbuhan pe- akan menjadi kata ....",
+        answer: "pendendam"
+      },
+      {
+        question: "Berdasarkan cerita di atas, sifat tokoh yang dapat kita teladani yaitu ...",
+        answer: "penolong"
+      },
+      {
+        question: "Berdasarkan cerita di atas, sifat tokoh yang sebaiknya kita hindari yaitu ....",
+        answer: "malas"
+      },
+      {
+        question: "Kata alim sinonimnya yaitu....",
+        answer: "soleh"
+      },
+      {
+        question: "Dita sering menyisihkan uang bekal yang diberikan oleh ibunya. Dia juga membeli barang-barang yang hanya diperlukan. Dita anak yang tidak ....",
+        answer: "boros"
+      },
+      {
+        question: "Ibuku selalu menyapa orang-orang yang berbelanja di warung dengan penuh senyuman. Beliau dikenal sebagai penjual yang ramah. Kata ramah antonimnya yaitu....",
+        answer: "kaku"
+      },
+      {
+        question: "Kalimat majemuk setara yang sejalan ditunjukkan oleh nomor...
 
+1. Adit rajin belajar, sehingga ia memperoleh peringkat 1 di kelas.
+2. Gita suka bermain piano, sedangkan Chika suka bermain gitar.
+3. Nopita dapat segera menemukan kancing yang tercecer di jalan karena ia memiliki mata yang jeli.
+4. Kerajinan pot bunga dari barang bekas tersebut dibuat oleh Bayu dan Widi.",
+        answer: "2"
+      },
+      {
+        question: "Nancy pandai berhitung. Nancy tidak pandai menyanyi. Kata penghubung yang tepat untuk melengkapi dua kalimat tunggal di atas, agar menjadi sebuah kalimat majemuk yaitu.....",
+        answer: "tetapi"
+      }
     ];
     
     let currentQuestion = null;
@@ -541,7 +550,7 @@
   document.getElementById('question-text').innerHTML = 
     currentQuestion.question.replace(/\n/g, "<br>");
 
-      document.getElementById('question-number').textContent = `Soal ${currentQuestionIndex + 1}/10`;
+      document.getElementById('question-number').textContent = `Soal ${currentQuestionIndex + 1}/20`;
       
       const imgElement = document.getElementById('question-image');
       imgElement.style.display = 'none';
@@ -997,7 +1006,7 @@ function resetAnswer() {
         }
       }
       
-      if (reason === 'complete' && score >= 100) {
+      if (reason === 'complete' && score >= 200) {
         endEmoji.textContent = '🏆';
         endTitle.textContent = 'Sempurna!';
         endMessage.textContent = 'Kamu berhasil menyelesaikan kuis dengan baik!';

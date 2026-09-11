@@ -1,0 +1,2508 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#9b4d20">
+
+<title>Jejak Capaian | UPT SDN 160 GRESIK</title>
+
+<style>
+:root{
+    --primary:#9b4d20;
+    --primary-dark:#713517;
+    --secondary:#d96b26;
+    --orange:#e67e22;
+    --yellow:#f4b942;
+    --green:#2e8b57;
+    --green-dark:#246b45;
+
+    --ink:#4a2c20;
+    --muted:#806b61;
+
+    --cream:#fff8e8;
+    --card:#fffdf8;
+    --white:#ffffff;
+
+    --border:#ead7bc;
+    --gold:#d89b18;
+
+    --shadow:rgba(92,48,24,.16);
+
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    font-family:
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color:var(--ink);
+
+    background:
+        radial-gradient(
+            circle at 8% 18%,
+            rgba(244,185,66,.16) 0 75px,
+            transparent 76px
+        ),
+        radial-gradient(
+            circle at 94% 75%,
+            rgba(46,139,87,.09) 0 105px,
+            transparent 106px
+        ),
+        linear-gradient(
+            135deg,
+            #fff9ec 0%,
+            #fff2d8 48%,
+            #fffaf1 100%
+        );
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    width:min(1080px, calc(100% - 32px));
+    margin:auto;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    margin-top:22px;
+    margin-bottom:22px;
+
+    padding:34px 36px;
+
+    min-height:190px;
+
+    border-radius:0 0 28px 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8d421b,
+            #9b4d20 55%,
+            #a95a24
+        );
+
+    color:white;
+
+    position:relative;
+    overflow:hidden;
+
+    box-shadow:
+        0 18px 35px rgba(92,48,24,.17);
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    right:-35px;
+    bottom:-75px;
+
+    border-radius:50%;
+
+    background:rgba(244,185,66,.18);
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+
+    width:80px;
+    height:80px;
+
+    right:90px;
+    top:-35px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.07);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.school-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:7px 12px;
+
+    margin-bottom:14px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.2);
+
+    font-size:12px;
+    font-weight:700;
+}
+
+.hero h1{
+    font-size:clamp(32px,5vw,52px);
+    line-height:1.05;
+    font-weight:900;
+
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    margin-bottom:12px;
+}
+
+.hero h1 span{
+    font-size:.85em;
+}
+
+.hero p{
+    max-width:780px;
+
+    line-height:1.7;
+
+    font-size:14px;
+
+    color:rgba(255,255,255,.94);
+}
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:15px;
+
+    margin:18px 0;
+}
+
+.btn{
+    border:0;
+    cursor:pointer;
+
+    min-height:43px;
+
+    padding:11px 17px;
+
+    border-radius:13px;
+
+    font-size:13px;
+    font-weight:800;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn:active{
+    transform:translateY(0);
+}
+
+.btn-back{
+    color:var(--primary);
+
+    background:white;
+
+    border:1px solid var(--border);
+
+    box-shadow:
+        0 5px 15px rgba(92,48,24,.07);
+}
+
+.btn-refresh{
+    color:white;
+
+    background:var(--primary);
+
+    box-shadow:
+        0 7px 18px rgba(155,77,32,.22);
+}
+
+.btn-refresh:hover{
+    background:var(--primary-dark);
+}
+
+.btn-all{
+    width:100%;
+
+    margin-top:16px;
+
+    color:white;
+
+    background:var(--green);
+
+    box-shadow:
+        0 7px 18px rgba(46,139,87,.18);
+}
+
+.btn-all:hover{
+    background:var(--green-dark);
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+    min-height:43px;
+
+    display:flex;
+    align-items:center;
+
+    padding:11px 16px;
+
+    margin:10px 0 24px;
+
+    border-radius:13px;
+
+    font-size:13px;
+    font-weight:700;
+
+    border:1px solid transparent;
+}
+
+.status.loading{
+    color:#76551d;
+    background:#fff8df;
+    border-color:#efd98e;
+}
+
+.status.success{
+    color:#246b45;
+    background:#edf9f1;
+    border-color:#b8dfc5;
+}
+
+.status.error{
+    color:#a43e2d;
+    background:#fff0ed;
+    border-color:#efbdb4;
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section{
+    margin-top:24px;
+}
+
+.section-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin-bottom:12px;
+}
+
+.section-icon{
+    font-size:30px;
+    line-height:1;
+}
+
+.section-title h2{
+    font-size:23px;
+    line-height:1.1;
+
+    font-weight:900;
+}
+
+.section-title p{
+    margin-top:4px;
+
+    font-size:12px;
+    color:var(--muted);
+}
+
+/* =========================
+   TOP THREE
+========================= */
+
+.top-three{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:16px;
+}
+
+.champion{
+    min-height:190px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffef9,
+            #fff8e7
+        );
+
+    border:1px solid var(--border);
+
+    box-shadow:
+        0 13px 25px rgba(92,48,24,.10);
+
+    position:relative;
+    overflow:hidden;
+}
+
+.champion:nth-child(1){
+    border-color:#efb42b;
+}
+
+.champion::after{
+    content:"";
+
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    right:-50px;
+    bottom:-50px;
+
+    border-radius:50%;
+
+    background:rgba(244,185,66,.07);
+}
+
+.medal{
+    font-size:49px;
+
+    line-height:1;
+
+    margin-bottom:9px;
+
+    position:relative;
+    z-index:2;
+}
+
+.place{
+    font-size:11px;
+
+    font-weight:900;
+
+    letter-spacing:.8px;
+
+    color:#826e63;
+
+    margin-bottom:9px;
+}
+
+.student-name{
+    font-size:17px;
+
+    font-weight:900;
+
+    color:var(--primary);
+
+    margin-bottom:10px;
+
+    max-width:100%;
+
+    word-break:break-word;
+}
+
+.score{
+    font-size:20px;
+
+    font-weight:900;
+
+    color:var(--green-dark);
+}
+
+.student-meta{
+    margin-top:4px;
+
+    color:var(--muted);
+
+    font-size:11px;
+}
+
+
+/* =========================
+   PARA JUARA DINAMIS
+   ========================= */
+
+.top-three{
+    grid-template-columns:1fr;
+}
+
+.champion-group{
+    align-items:stretch;
+    justify-content:flex-start;
+    text-align:left;
+    padding:24px;
+}
+
+.champion-group .medal,
+.champion-group .place{
+    text-align:center;
+}
+
+.champion-group .place{
+    font-size:13px;
+    color:var(--primary);
+    margin-bottom:16px;
+}
+
+.champion-list{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.champion-student{
+    display:grid;
+    grid-template-columns:34px minmax(0,1fr) auto;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    border-radius:13px;
+    background:rgba(255,255,255,.72);
+    border:1px solid #f0dfc7;
+}
+
+.champion-student-number{
+    width:30px;
+    height:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:#fff0cf;
+    color:var(--primary);
+    font-size:11px;
+    font-weight:900;
+}
+
+.champion-student .student-name{
+    margin:0;
+    font-size:14px;
+}
+
+.champion-student .student-meta{
+    margin-top:2px;
+}
+
+.champion-student .score{
+    white-space:nowrap;
+    font-size:17px;
+}
+
+.champion-group[data-rank="1"]{
+    border-color:#efb42b;
+}
+
+.champion-group[data-rank="2"]{
+    border-color:#cfcfcf;
+}
+
+.champion-group[data-rank="3"]{
+    border-color:#e2b48a;
+}
+
+@media(max-width:560px){
+    .champion-group{
+        padding:18px 14px;
+    }
+
+    .champion-student{
+        grid-template-columns:30px minmax(0,1fr) auto;
+        gap:7px;
+        padding:9px;
+    }
+
+    .champion-student-number{
+        width:27px;
+        height:27px;
+        font-size:10px;
+    }
+
+    .champion-student .student-name{
+        font-size:12px;
+    }
+
+    .champion-student .student-meta{
+        font-size:9px;
+    }
+
+    .champion-student .score{
+        font-size:14px;
+    }
+}
+
+/* =========================
+   TABLE CARD
+========================= */
+
+.table-card{
+    background:rgba(255,253,248,.94);
+
+    border:1px solid var(--border);
+
+    border-radius:19px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 13px 28px rgba(92,48,24,.09);
+}
+
+.table-head{
+    min-height:54px;
+
+    padding:13px 18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    border-bottom:1px solid var(--border);
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff8e9,
+            #fffdf7
+        );
+}
+
+.table-title{
+    font-size:14px;
+    font-weight:900;
+}
+
+.student-count{
+    font-size:11px;
+    font-weight:800;
+
+    color:var(--muted);
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:650px;
+}
+
+thead{
+    background:#fff4dc;
+}
+
+th{
+    padding:12px 14px;
+
+    text-align:left;
+
+    font-size:10px;
+
+    letter-spacing:.5px;
+
+    color:#7b4a2e;
+
+    white-space:nowrap;
+
+    border-bottom:1px solid var(--border);
+}
+
+td{
+    padding:12px 14px;
+
+    font-size:13px;
+
+    border-bottom:1px solid #f0e5d4;
+
+    vertical-align:middle;
+}
+
+tbody tr{
+    transition:background .2s ease;
+}
+
+tbody tr:hover{
+    background:#fff9ed;
+}
+
+tbody tr:last-child td{
+    border-bottom:0;
+}
+
+.rank-number{
+    width:35px;
+    height:35px;
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#fff0cf;
+
+    color:var(--primary);
+
+    font-weight:900;
+
+    font-size:12px;
+}
+
+.rank-1{
+    background:#ffe39a;
+    color:#805500;
+}
+
+.rank-2{
+    background:#e7e7e7;
+    color:#5d5d5d;
+}
+
+.rank-3{
+    background:#f2c9a5;
+    color:#80461e;
+}
+
+.name-cell{
+    font-weight:800;
+    color:var(--ink);
+}
+
+.score-cell{
+    font-weight:900;
+    color:var(--green-dark);
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty-row{
+    text-align:center;
+
+    padding:30px !important;
+
+    color:var(--muted);
+}
+
+/* =========================
+   ALL DATA
+========================= */
+
+.all-data{
+    display:none;
+
+    margin-top:18px;
+
+    animation:fadeIn .25s ease;
+}
+
+.all-data.show{
+    display:block;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:40px;
+
+    padding:24px 10px 30px;
+
+    text-align:center;
+
+    font-size:12px;
+
+    color:var(--muted);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:800px){
+
+    .hero{
+        padding:27px 24px;
+    }
+
+    .top-three{
+        grid-template-columns:1fr;
+    }
+
+    .champion{
+        min-height:160px;
+    }
+}
+
+@media(max-width:560px){
+
+    .container{
+        width:min(100% - 20px,1080px);
+    }
+
+    .hero{
+        margin-top:10px;
+
+        border-radius:0 0 22px 22px;
+
+        padding:25px 20px;
+    }
+
+    .hero h1{
+        font-size:34px;
+
+        gap:9px;
+    }
+
+    .hero p{
+        font-size:13px;
+    }
+
+    .toolbar{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .btn{
+        width:100%;
+    }
+
+    .section-title h2{
+        font-size:20px;
+    }
+
+    .champion{
+        min-height:150px;
+    }
+}
+
+
+<style>
+/* =========================================================
+   TAMBAHAN
+   GRAFIK BATANG NILAI RATA-RATA CAPAIAN
+   KODE LAMA TIDAK DIUBAH
+========================================================= */
+
+.nilai-rata-dashboard{
+    margin-top:18px;
+    padding:24px;
+    border-radius:22px;
+    background:#fffdf8;
+    border:1px solid #ead7bc;
+    box-shadow:0 13px 28px rgba(92,48,24,.09);
+}
+
+.nilai-rata-title{
+    margin:0 0 4px;
+    text-align:center;
+    font-size:clamp(22px,3vw,30px);
+    line-height:1.2;
+    font-weight:900;
+    color:#4a2c20;
+}
+
+.nilai-rata-subtitle{
+    margin:0 0 22px;
+    text-align:center;
+    font-size:12px;
+    line-height:1.6;
+    color:#806b61;
+}
+
+.nilai-rata-chart{
+    position:relative;
+    display:grid;
+    grid-template-columns:52px minmax(0,1fr);
+    min-height:420px;
+}
+
+.nilai-rata-yaxis{
+    position:relative;
+    margin-bottom:92px;
+}
+
+.nilai-rata-yaxis span{
+    position:absolute;
+    right:10px;
+    transform:translateY(50%);
+    font-size:10px;
+    font-weight:800;
+    color:#806b61;
+}
+
+.nilai-rata-plot{
+    position:relative;
+    min-height:420px;
+    border-left:1px solid #ead7bc;
+    border-bottom:1px solid #cdbda9;
+    background:
+        repeating-linear-gradient(
+            to top,
+            rgba(128,107,97,.11) 0,
+            rgba(128,107,97,.11) 1px,
+            transparent 1px,
+            transparent 10%
+        );
+}
+
+.nilai-rata-grid-labels{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    display:none;
+}
+
+.nilai-rata-grid-labels span{
+    position:absolute;
+    left:8px;
+    font-size:9px;
+    color:#9a897e;
+    background:rgba(255,253,248,.82);
+    padding:1px 4px;
+    border-radius:4px;
+}
+
+.nilai-rata-bars{
+    position:absolute;
+    inset:18px 22px 0;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(80px,1fr));
+    align-items:end;
+    gap:clamp(18px,6vw,70px);
+}
+
+.nilai-rata-bar-wrap{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    align-items:center;
+    min-width:0;
+}
+
+.nilai-rata-bar-area{
+    width:100%;
+    height:calc(100% - 82px);
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+}
+
+.nilai-rata-bar{
+    position:relative;
+    width:min(115px,70%);
+    min-height:3px;
+    height:0;
+    border-radius:14px 14px 0 0;
+    box-shadow:0 8px 16px rgba(92,48,24,.13);
+    transition:height .8s cubic-bezier(.22,1,.36,1);
+}
+
+.nilai-rata-bar.excellent{
+    background:#2e8b57;
+}
+
+.nilai-rata-bar.good{
+    background:#f4b942;
+}
+
+.nilai-rata-bar.needing{
+    background:#d9534f;
+}
+
+
+.nilai-rata-count{
+    margin-top:8px;
+    font-size:12px;
+    font-weight:900;
+    color:#4a2c20;
+    text-align:center;
+}
+
+.nilai-rata-category{
+    width:100%;
+    min-height:66px;
+    margin-top:5px;
+    text-align:center;
+}
+
+.nilai-rata-category-name{
+    display:block;
+    font-size:12px;
+    line-height:1.3;
+    font-weight:900;
+    color:#4a2c20;
+}
+
+.nilai-rata-range{
+    display:block;
+    margin-top:4px;
+    font-size:11px;
+    font-weight:800;
+    color:#806b61;
+}
+
+.nilai-rata-legend{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px 22px;
+    margin-top:18px;
+    padding-top:14px;
+    border-top:1px solid #ead7bc;
+}
+
+.nilai-rata-legend-item{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:11px;
+    font-weight:800;
+    color:#806b61;
+}
+
+.nilai-rata-legend-dot{
+    width:11px;
+    height:11px;
+    border-radius:50%;
+}
+
+.nilai-rata-legend-dot.excellent{
+    background:#2e8b57;
+}
+
+.nilai-rata-legend-dot.good{
+    background:#f4b942;
+}
+
+.nilai-rata-legend-dot.needing{
+    background:#d9534f;
+}
+
+@media(max-width:560px){
+    .nilai-rata-dashboard{
+        padding:18px 12px;
+    }
+
+    .nilai-rata-chart{
+        grid-template-columns:38px minmax(0,1fr);
+        min-height:390px;
+    }
+
+    .nilai-rata-plot{
+        min-height:390px;
+    }
+
+    .nilai-rata-bars{
+        inset:18px 8px 0;
+        gap:8px;
+    }
+
+    .nilai-rata-bar{
+        width:min(82px,72%);
+        border-radius:10px 10px 0 0;
+    }
+
+
+
+    .nilai-rata-category-name{
+        font-size:10px;
+    }
+
+    .nilai-rata-range,
+    .nilai-rata-count{
+        font-size:9px;
+    }
+
+    .nilai-rata-yaxis span{
+        font-size:8px;
+        right:6px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <header class="hero">
+
+        <div class="hero-content">
+
+            <div class="school-badge">
+                🏫 UPT SDN 160 GRESIK
+            </div>
+
+            <h1>
+                <span>🌟</span>
+                Jejak Capaian
+            </h1>
+
+            <p>
+                Lihat perjalanan prestasi para penjelajah bilangan.
+                Siapa yang berhasil meraih nilai terbaik dan menjadi
+                juara dalam petualangan belajar hari ini?
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         TOOLBAR
+    ========================== -->
+
+    <div class="toolbar">
+
+        <button
+            class="btn btn-back"
+            onclick="kembaliKePetualangan()"
+        >
+            ← Kembali ke Petualangan
+        </button>
+
+
+        <button
+            class="btn btn-refresh"
+            onclick="loadData()"
+            id="refreshButton"
+        >
+            🔄 Refresh Data
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         STATUS
+    ========================== -->
+
+    <div
+        id="status"
+        class="status loading"
+    >
+        ⏳ Menghubungkan ke data capaian...
+    </div>
+
+
+    <!-- =========================
+         PARA JUARA
+    ========================== -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <div class="section-icon">
+                🏆
+            </div>
+
+            <div>
+                <h2>Para Juara</h2>
+
+                <p>
+                    Penjelajah dengan capaian nilai terbaik
+                </p>
+            </div>
+
+        </div>
+
+
+        <div
+            id="topThree"
+            class="top-three"
+        >
+            <div class="champion">
+                <div class="medal">🥇</div>
+                <div class="place">PERINGKAT 1</div>
+                <div class="student-name">Memuat data...</div>
+                <div class="score">-</div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         NILAI RATA-RATA CAPAIAN
+    ====================================================== -->
+
+<section class="section">
+    <div class="nilai-rata-dashboard">
+
+        <h2 class="nilai-rata-title">
+            Jejak Capaian Siswa
+        </h2>
+
+        <p class="nilai-rata-subtitle">
+            Jumlah siswa berdasarkan kategori capaian nilai
+        </p>
+
+        <div class="nilai-rata-chart">
+
+            <div class="nilai-rata-yaxis" aria-hidden="true">
+                <span style="bottom:0%;">0</span>
+                <span style="bottom:10%;">10</span>
+                <span style="bottom:20%;">20</span>
+                <span style="bottom:30%;">30</span>
+                <span style="bottom:40%;">40</span>
+                <span style="bottom:50%;">50</span>
+                <span style="bottom:60%;">60</span>
+                <span style="bottom:70%;">70</span>
+                <span style="bottom:80%;">80</span>
+                <span style="bottom:90%;">90</span>
+                <span style="bottom:100%;">100</span>
+            </div>
+
+            <div class="nilai-rata-plot">
+
+                <div class="nilai-rata-grid-labels" aria-hidden="true">
+                    <span style="bottom:0%;">0</span>
+                    <span style="bottom:10%;">10</span>
+                    <span style="bottom:20%;">20</span>
+                    <span style="bottom:30%;">30</span>
+                    <span style="bottom:40%;">40</span>
+                    <span style="bottom:50%;">50</span>
+                    <span style="bottom:60%;">60</span>
+                    <span style="bottom:70%;">70</span>
+                    <span style="bottom:80%;">80</span>
+                    <span style="bottom:90%;">90</span>
+                    <span style="bottom:100%;">100</span>
+                </div>
+
+                <div class="nilai-rata-bars">
+
+                    <div class="nilai-rata-bar-wrap">
+                        <div class="nilai-rata-bar-area">
+                            <div
+                                id="nilaiRataExcellentBar"
+                                class="nilai-rata-bar excellent"
+                                style="height:0%;"
+                                title="Sangat Baik"
+                            >
+                            </div>
+                        </div>
+
+                        <div
+                            id="nilaiRataExcellentCount"
+                            class="nilai-rata-count"
+                        >
+                            0 siswa
+                        </div>
+
+                        <div class="nilai-rata-category">
+                            <span class="nilai-rata-category-name">
+                                Sangat Baik
+                            </span>
+                            <span class="nilai-rata-range">
+                                80–100
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="nilai-rata-bar-wrap">
+                        <div class="nilai-rata-bar-area">
+                            <div
+                                id="nilaiRataGoodBar"
+                                class="nilai-rata-bar good"
+                                style="height:0%;"
+                                title="Cukup Baik"
+                            >
+                            </div>
+                        </div>
+
+                        <div
+                            id="nilaiRataGoodCount"
+                            class="nilai-rata-count"
+                        >
+                            0 siswa
+                        </div>
+
+                        <div class="nilai-rata-category">
+                            <span class="nilai-rata-category-name">
+                                Cukup Baik
+                            </span>
+                            <span class="nilai-rata-range">
+                                60–79
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="nilai-rata-bar-wrap">
+                        <div class="nilai-rata-bar-area">
+                            <div
+                                id="nilaiRataNeedingBar"
+                                class="nilai-rata-bar needing"
+                                style="height:0%;"
+                                title="Perlu Pendampingan"
+                            >
+                            </div>
+                        </div>
+
+                        <div
+                            id="nilaiRataNeedingCount"
+                            class="nilai-rata-count"
+                        >
+                            0 siswa
+                        </div>
+
+                        <div class="nilai-rata-category">
+                            <span class="nilai-rata-category-name">
+                                Perlu Pendampingan
+                            </span>
+                            <span class="nilai-rata-range">
+                                0–59
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="nilai-rata-legend">
+            <div class="nilai-rata-legend-item">
+                <span class="nilai-rata-legend-dot excellent"></span>
+                Sangat Baik — 80–100
+            </div>
+
+            <div class="nilai-rata-legend-item">
+                <span class="nilai-rata-legend-dot good"></span>
+                Cukup Baik — 60–79
+            </div>
+
+            <div class="nilai-rata-legend-item">
+                <span class="nilai-rata-legend-dot needing"></span>
+                Perlu Pendampingan — 0–59
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+    <!-- =========================
+         TOP 10
+    ========================== -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <div class="section-icon">
+                🌟
+            </div>
+
+            <div>
+                <h2>10 Nilai Terbaik</h2>
+
+                <p>
+                    Daftar capaian dengan nilai tertinggi
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-card">
+
+            <div class="table-head">
+
+                <div class="table-title">
+                    📊 Peringkat Capaian
+                </div>
+
+                <div
+                    id="studentCount"
+                    class="student-count"
+                >
+                    0 siswa
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                PERINGKAT
+                            </th>
+
+                            <th>
+                                NAMA SISWA
+                            </th>
+
+                            <th>
+                                NO. ABSEN
+                            </th>
+
+                            <th>
+                                KELAS
+                            </th>
+
+                            <th>
+                                NILAI
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="topTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="5"
+                                class="empty-row"
+                            >
+                                ⏳ Memuat data...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="btn btn-all"
+            id="allDataButton"
+            onclick="toggleAllData()"
+        >
+            👥 Tampilkan Semua Data
+        </button>
+
+
+        <!-- =========================
+             SEMUA DATA
+        ========================== -->
+
+        <div
+            id="allDataSection"
+            class="all-data"
+        >
+
+            <div class="table-card">
+
+                <div class="table-head">
+
+                    <div class="table-title">
+                        📋 Semua Data Capaian
+                    </div>
+
+                    <div
+                        id="allStudentCount"
+                        class="student-count"
+                    >
+                        0 siswa
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    PERINGKAT
+                                </th>
+
+                                <th>
+                                    NAMA SISWA
+                                </th>
+
+                                <th>
+                                    NO. ABSEN
+                                </th>
+
+                                <th>
+                                    KELAS
+                                </th>
+
+                                <th>
+                                    NILAI
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="allTableBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+        🌾 Kuliner Nusantara • Belajar • Bermain • Berprestasi 🌾
+        <br>
+        <strong>UPT SDN 160 GRESIK</strong>
+    </footer>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   KONFIGURASI GOOGLE APPS SCRIPT
+========================================================= */
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbwk4odfq7ABr__CDR00YD4uAMLmvK2iPjaLLlJrpyA6BnOwJ9gUkncLdCVCzE670CFy/exec";
+
+
+/* =========================================================
+   VARIABEL
+========================================================= */
+
+let semuaData = [];
+
+let semuaDataDitampilkan = false;
+
+
+/* =========================================================
+   KEMBALI KE PETUALANGAN
+========================================================= */
+
+function kembaliKePetualangan(){
+
+    window.location.href =
+        "petualangan.html";
+
+}
+
+
+/* =========================================================
+   LOAD DATA DENGAN JSONP
+   TIDAK MENGGUNAKAN FETCH
+========================================================= */
+
+function loadData(){
+
+    const status =
+        document.getElementById("status");
+
+    const refreshButton =
+        document.getElementById("refreshButton");
+
+
+    status.className =
+        "status loading";
+
+    status.innerHTML =
+        "📜 Membaca Peta Perjalanan...";
+
+
+    refreshButton.disabled = true;
+
+    refreshButton.innerHTML =
+        "⏳ Memuat...";
+
+
+    /*
+     * Nama callback dibuat unik.
+     */
+
+    const callbackName =
+        "terimaDataCapaian_" +
+        Date.now();
+
+
+    /*
+     * Fungsi callback global.
+     */
+
+    window[callbackName] =
+        function(result){
+
+            try{
+
+                if(
+                    !result ||
+                    result.ok !== true
+                ){
+
+                    throw new Error(
+                        result &&
+                        result.message
+                            ? result.message
+                            : "Data tidak valid."
+                    );
+
+                }
+
+
+                semuaData =
+                    Array.isArray(result.data)
+                        ? result.data
+                        : [];
+
+
+                /*
+                 * Bersihkan data kosong.
+                 */
+
+                semuaData =
+                    semuaData.filter(
+                        function(item){
+
+                            return (
+                                item &&
+                                String(
+                                    item.nama || ""
+                                ).trim() !== ""
+                            );
+
+                        }
+                    );
+
+
+                /*
+                 * Urutkan nilai tertinggi.
+                 */
+
+                semuaData.sort(
+                    function(a,b){
+
+                        return (
+                            Number(b.nilai || 0) -
+                            Number(a.nilai || 0)
+                        );
+
+                    }
+                );
+
+
+                /*
+                 * Tentukan peringkat.
+                 *
+                 * Contoh:
+                 * 40 = peringkat 1
+                 * 40 = peringkat 1
+                 * 33 = peringkat 3
+                 */
+
+                assignRanks(semuaData);
+
+
+                renderTopThree(
+                    semuaData
+                );
+
+
+                renderTable(
+                    semuaData.slice(0,10),
+                    "topTableBody"
+                );
+
+
+                document.getElementById(
+                    "studentCount"
+                ).textContent =
+                    semuaData.length +
+                    " siswa";
+
+
+                renderTable(
+                    semuaData,
+                    "allTableBody"
+                );
+
+
+                document.getElementById(
+                    "allStudentCount"
+                ).textContent =
+                    semuaData.length +
+                    " siswa";
+if(semuaData.length > 0){
+
+                    status.className =
+                        "status success";
+
+                    status.innerHTML =
+                        "🗺️ Peta perjalanan berhasil dibuka! " +
+                        semuaData.length +
+                        " capaian telah ditemukan..";
+
+                }else{
+
+                    status.className =
+                        "status loading";
+
+                    status.innerHTML =
+                        "⚠️ Belum ada data capaian yang dapat ditampilkan.";
+
+                }
+
+
+            }catch(error){
+
+                tampilkanError(
+                    error.message
+                );
+
+            }
+
+
+            /*
+             * Hapus script JSONP
+             */
+
+            hapusScriptJSONP(
+                script
+            );
+
+
+            /*
+             * Hapus callback.
+             */
+
+            try{
+                delete window[callbackName];
+            }catch(e){}
+
+
+            refreshButton.disabled =
+                false;
+
+            refreshButton.innerHTML =
+                "🔄 Refresh Data";
+
+        };
+
+
+    /*
+     * Buat elemen script.
+     */
+
+    const script =
+        document.createElement("script");
+
+
+    /*
+     * Tambahkan callback.
+     */
+
+    script.src =
+        API_URL +
+        "?action=ranking" +
+        "&callback=" +
+        encodeURIComponent(
+            callbackName
+        ) +
+        "&ts=" +
+        Date.now();
+
+
+    script.async = true;
+
+
+    /*
+     * Jika terjadi error jaringan.
+     */
+
+    script.onerror =
+        function(){
+
+            tampilkanError(
+                "Google Apps Script tidak dapat dihubungi."
+            );
+
+
+            try{
+                delete window[callbackName];
+            }catch(e){}
+
+
+            hapusScriptJSONP(
+                script
+            );
+
+
+            refreshButton.disabled =
+                false;
+
+            refreshButton.innerHTML =
+                "🔄 Refresh Data";
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/* =========================================================
+   HAPUS SCRIPT JSONP
+========================================================= */
+
+function hapusScriptJSONP(script){
+
+    if(
+        script &&
+        script.parentNode
+    ){
+
+        script.parentNode.removeChild(
+            script
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function tampilkanError(message){
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    status.className =
+        "status error";
+
+
+    status.innerHTML =
+        "⚠️ Data belum dapat dimuat. " +
+        escapeHTML(
+            message
+        );
+
+}
+
+
+/* =========================================================
+   ASSIGN RANK
+========================================================= */
+
+function assignRanks(data){
+
+    let previousScore = null;
+
+    let currentRank = 0;
+
+
+    data.forEach(
+        function(item,index){
+
+            const score =
+                Number(
+                    item.nilai || 0
+                );
+
+
+            if(
+                previousScore === null ||
+                score !== previousScore
+            ){
+
+                currentRank =
+                    index + 1;
+
+            }
+
+
+            item.rank =
+                currentRank;
+
+
+            previousScore =
+                score;
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   RENDER TOP THREE
+========================================================= */
+
+function renderTopThree(data){
+
+    const container =
+        document.getElementById(
+            "topThree"
+        );
+
+    const medals = {
+        1:"🥇",
+        2:"🥈",
+        3:"🥉"
+    };
+
+    const placeNames = {
+        1:"PERINGKAT 1",
+        2:"PERINGKAT 2",
+        3:"PERINGKAT 3"
+    };
+
+    if(!container){
+        return;
+    }
+
+    if(!Array.isArray(data) || !data.length){
+
+        container.innerHTML = `
+            <div class="champion">
+                <div class="medal">🥇</div>
+                <div class="place">PERINGKAT 1</div>
+                <div class="student-name">Belum tersedia</div>
+                <div class="score">-</div>
+            </div>
+        `;
+
+        return;
+    }
+
+    /*
+     * Ambil tiga PERINGKAT pertama, bukan tiga siswa pertama.
+     *
+     * Contoh:
+     * 12 siswa nilai 100  -> peringkat 1 (12 siswa)
+     * 3 siswa nilai 95    -> peringkat 2 (3 siswa)
+     * 2 siswa nilai 90    -> peringkat 3 (2 siswa)
+     *
+     * Karena sistem menggunakan competition ranking,
+     * peringkat dapat melompat setelah terjadi seri.
+     */
+    const tigaPeringkat = [];
+
+    data.forEach(function(item){
+
+        const rank = Number(item.rank);
+
+        if(
+            rank >= 1 &&
+            rank <= 3 &&
+            !tigaPeringkat.includes(rank)
+        ){
+            tigaPeringkat.push(rank);
+        }
+
+    });
+
+    container.innerHTML = "";
+
+    if(!tigaPeringkat.length){
+        return;
+    }
+
+    tigaPeringkat.forEach(function(rank){
+
+        const siswaPeringkat =
+            data.filter(function(item){
+                return Number(item.rank) === rank;
+            });
+
+        if(!siswaPeringkat.length){
+            return;
+        }
+
+        const card = document.createElement("div");
+        card.className = "champion champion-group";
+        card.setAttribute("data-rank", rank);
+
+        const daftarSiswa = siswaPeringkat.map(function(item,index){
+
+            return `
+                <div class="champion-student">
+                    <div class="champion-student-number">
+                        ${index + 1}
+                    </div>
+
+                    <div class="champion-student-info">
+                        <div class="student-name">
+                            ${escapeHTML(item.nama)}
+                        </div>
+
+                        <div class="student-meta">
+                            Absen ${escapeHTML(item.absen)}
+                            • Kelas ${escapeHTML(item.kelas)}
+                        </div>
+                    </div>
+
+                    <div class="score">
+                        ${formatScore(item.nilai)}
+                    </div>
+                </div>
+            `;
+
+        }).join("");
+
+        card.innerHTML = `
+            <div class="medal">
+                ${medals[rank] || "🏅"}
+            </div>
+
+            <div class="place">
+                ${placeNames[rank] || "PERINGKAT " + rank}
+                — ${siswaPeringkat.length} SISWA
+            </div>
+
+            <div class="champion-list">
+                ${daftarSiswa}
+            </div>
+        `;
+
+        container.appendChild(card);
+
+    });
+
+}
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderTable(
+    data,
+    bodyId
+){
+
+    const tbody =
+        document.getElementById(
+            bodyId
+        );
+
+
+    if(!tbody){
+        return;
+    }
+
+
+    if(!data.length){
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="5"
+                    class="empty-row"
+                >
+                    📭 Belum ada data capaian.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML = "";
+
+
+    data.forEach(
+        function(item){
+
+            let rankClass = "";
+
+
+            if(item.rank === 1){
+                rankClass = "rank-1";
+            }
+
+            else if(item.rank === 2){
+                rankClass = "rank-2";
+            }
+
+            else if(item.rank === 3){
+                rankClass = "rank-3";
+            }
+
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    <span
+                        class="rank-number ${rankClass}"
+                    >
+                        ${item.rank}
+                    </span>
+
+                </td>
+
+
+                <td
+                    class="name-cell"
+                >
+                    ${escapeHTML(
+                        item.nama
+                    )}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(
+                        item.absen
+                    )}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(
+                        item.kelas
+                    )}
+                </td>
+
+
+                <td
+                    class="score-cell"
+                >
+                    ${formatScore(
+                        item.nilai
+                    )}
+                </td>
+
+            `;
+
+
+            tbody.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FORMAT NILAI
+========================================================= */
+
+function formatScore(score){
+
+    const number =
+        Number(score);
+
+
+    if(
+        Number.isNaN(number)
+    ){
+
+        return "-";
+
+    }
+
+
+    return number
+        .toLocaleString(
+            "id-ID"
+        );
+
+}
+
+
+/* =========================================================
+   TOGGLE SEMUA DATA
+========================================================= */
+
+function toggleAllData(){
+
+    const section =
+        document.getElementById(
+            "allDataSection"
+        );
+
+
+    const button =
+        document.getElementById(
+            "allDataButton"
+        );
+
+
+    semuaDataDitampilkan =
+        !semuaDataDitampilkan;
+
+
+    if(
+        semuaDataDitampilkan
+    ){
+
+        section.classList.add(
+            "show"
+        );
+
+
+        button.innerHTML =
+            "🔽 Sembunyikan Semua Data";
+
+
+        setTimeout(
+            function(){
+
+                section.scrollIntoView({
+                    behavior:"smooth",
+                    block:"start"
+                });
+
+            },
+            100
+        );
+
+    }else{
+
+        section.classList.remove(
+            "show"
+        );
+
+
+        button.innerHTML =
+            "👥 Tampilkan Semua Data";
+
+    }
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   JALANKAN OTOMATIS
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadData();
+
+    }
+);
+
+</script>
+
+
+<script>
+/* =========================================================
+   TAMBAHAN
+   AKTUALISASI GRAFIK NILAI RATA-RATA CAPAIAN
+   HANYA JUMLAH SISWA YANG DITAMPILKAN
+   KODE LAMA TIDAK DIUBAH
+========================================================= */
+
+(function(){
+
+    let dataTerakhir = null;
+
+    function hitungKategori(data){
+
+        const hasil = {
+            excellent:{ count:0 },
+            good:{ count:0 },
+            needing:{ count:0 }
+        };
+
+        if(!Array.isArray(data)){
+            return hasil;
+        }
+
+        data.forEach(function(item){
+
+            const nilai = Number(
+                item &&
+                item.nilai
+            );
+
+            if(!Number.isFinite(nilai)){
+                return;
+            }
+
+            if(nilai >= 80){
+                hasil.excellent.count++;
+            }
+
+            else if(nilai >= 60){
+                hasil.good.count++;
+            }
+
+            else{
+                hasil.needing.count++;
+            }
+
+        });
+
+        return hasil;
+    }
+
+    function renderGrafikNilaiRata(){
+
+        if(
+            typeof semuaData === "undefined" ||
+            !Array.isArray(semuaData)
+        ){
+            return;
+        }
+
+        if(
+            dataTerakhir === semuaData &&
+            semuaData.length > 0
+        ){
+            return;
+        }
+
+        dataTerakhir = semuaData;
+
+        const hasil =
+            hitungKategori(semuaData);
+
+        const daftar = [
+            {
+                key:"excellent",
+                bar:"nilaiRataExcellentBar",
+                count:"nilaiRataExcellentCount"
+            },
+            {
+                key:"good",
+                bar:"nilaiRataGoodBar",
+                count:"nilaiRataGoodCount"
+            },
+            {
+                key:"needing",
+                bar:"nilaiRataNeedingBar",
+                count:"nilaiRataNeedingCount"
+            }
+        ];
+
+        daftar.forEach(function(item){
+
+            const data =
+                hasil[item.key];
+
+            const bar =
+                document.getElementById(
+                    item.bar
+                );
+
+            const count =
+                document.getElementById(
+                    item.count
+                );
+
+            if(!bar || !count){
+                return;
+            }
+
+            /*
+             * Sumbu vertikal 0–100 digunakan sebagai
+             * skala jumlah siswa.
+             * Tinggi batang menunjukkan jumlah siswa,
+             * bukan persentase dan bukan nilai rata-rata.
+             */
+            const tinggi =
+                Math.min(
+                    data.count,
+                    100
+                );
+
+            bar.style.height =
+                tinggi + "%";
+
+            count.textContent =
+                data.count +
+                " siswa";
+
+            if(data.count > 100){
+
+                bar.title =
+                    data.count +
+                    " siswa • grafik dibatasi pada sumbu 0–100";
+
+            }
+            else{
+
+                bar.title =
+                    data.count +
+                    " siswa";
+
+            }
+
+        });
+
+    }
+
+    /*
+     * Memantau data yang diisi oleh sistem lama.
+     * Tidak mengubah fungsi loadData(), callback JSONP,
+     * maupun fungsi renderCapaianChart() yang sudah ada.
+     */
+    setInterval(
+        renderGrafikNilaiRata,
+        250
+    );
+
+})();
+</script>
+
+
+
+</body>
+</html>

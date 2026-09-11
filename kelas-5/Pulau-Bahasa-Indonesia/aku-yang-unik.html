@@ -1,1123 +1,309 @@
-<!doctype html>
-<html lang="id" class="h-full">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Latihan Soal Bahasa Indonesia Kelas 5</title>
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="/_sdk/element_sdk.js"></script>
-  <script src="/_sdk/data_sdk.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
-  <style>
-    html, body {
-      height: 100%;
-      width: 100%;
-    }
-    
-    body {
-      box-sizing: border-box;
-      font-family: 'Nunito', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(-5deg); }
-      50% { transform: translateY(-20px) rotate(5deg); }
-    }
-    
-    @keyframes pop {
-      0% { transform: scale(0); opacity: 0; }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-10px); }
-      40%, 80% { transform: translateX(10px); }
-    }
-    
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    
-    @keyframes celebrate {
-      0% { transform: scale(1) rotate(0deg); }
-      25% { transform: scale(1.1) rotate(-5deg); }
-      50% { transform: scale(1.2) rotate(5deg); }
-      75% { transform: scale(1.1) rotate(-3deg); }
-      100% { transform: scale(1) rotate(0deg); }
-    }
-    
-    @keyframes confetti {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100px) rotate(720deg); opacity: 0; }
-    }
-    
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
-      50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.8); }
-    }
-    
-    @keyframes slideUp {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    
-    @keyframes spin-celebrate {
-      0% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.15) rotate(10deg); }
-      100% { transform: scale(1) rotate(0deg); }
-    }
-    
-    @keyframes pulse-celebrate {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-    
-    @keyframes falling-confetti {
-      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(80px) rotate(360deg); opacity: 0; }
-    }
-    
-    @keyframes retry-bounce {
-      0% { transform: scale(0.8) translateY(-20px); opacity: 0; }
-      50% { transform: scale(1.1) translateY(0); }
-      100% { transform: scale(1) translateY(0); opacity: 1; }
-    }
-    
-    @keyframes retry-shake {
-      0%, 100% { transform: translateX(0) scale(1); }
-      25% { transform: translateX(-10px) scale(1.05); }
-      50% { transform: translateX(10px) scale(1.05); }
-      75% { transform: translateX(-5px) scale(1.05); }
-    }
-    
-    .animate-retry-bounce { animation: retry-bounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
-    .animate-retry-shake { animation: retry-shake 0.8s ease-in-out; }
-    .animate-float { animation: float 3s ease-in-out infinite; }
-    .animate-pop { animation: pop 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
-    .animate-shake { animation: shake 0.5s ease-in-out; }
-    .animate-bounce-custom { animation: bounce 0.5s ease-in-out; }
-    .animate-celebrate { animation: celebrate 0.6s ease-in-out; }
-    .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
-    .animate-slide-up { animation: slideUp 0.5s ease-out forwards; }
-    .animate-spin-celebrate { animation: spin-celebrate 0.6s ease-in-out; }
-    .animate-pulse-celebrate { animation: pulse-celebrate 0.8s ease-in-out infinite; }
-    
-    .confetti-result {
-      position: absolute;
-      pointer-events: none;
-      animation: falling-confetti 1.2s ease-out forwards;
-    }
-    
-    .glass-card {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-    
-    .letter-btn {
-      transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-    
-    .letter-btn:hover:not(:disabled) {
-      transform: scale(1.1) translateY(-3px);
-    }
-    
-    .letter-btn:active:not(:disabled) {
-      transform: scale(0.95);
-    }
-    
-    .slot-box {
-      transition: all 0.3s ease;
-    }
-    
-    .slot-filled {
-      background: linear-gradient(135deg, #a855f7, #ec4899);
-      color: white;
-      transform: scale(1.05);
-    }
-    
-    .confetti-piece {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      animation: confetti 1s ease-out forwards;
-    }
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Soal Bahasa Indonesia Kelas 5</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#2563eb,#06b6d4,#14b8a6);min-height:100vh;color:#1f2937}
+.hidden{display:none!important}
+.screen{min-height:100vh;padding:18px;display:flex;align-items:center;justify-content:center}
+.card{width:min(900px,100%);background:rgba(255,255,255,.96);border-radius:24px;padding:24px;box-shadow:0 15px 45px rgba(0,0,0,.2)}
+h1,h2,p{margin-top:0}
+.start{text-align:center;max-width:560px}
+.emoji{font-size:60px}
+.title{color:#075985;font-size:30px;font-weight:800}
+.btn{border:0;border-radius:14px;padding:12px 20px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}
+.btn:hover{transform:translateY(-2px)}
+.primary{background:linear-gradient(90deg,#2563eb,#06b6d4);color:white}
+.secondary{background:#e5e7eb;color:#374151}
+.danger{background:#ef4444;color:white}
+.top{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:15px}
+.badge{padding:9px 14px;border-radius:12px;font-weight:700;background:#e0f2fe;color:#075985}
+.score{background:#fef3c7;color:#92400e}
+.hearts{font-size:24px}
+.progress{height:9px;background:#e5e7eb;border-radius:20px;overflow:hidden;margin-bottom:18px}
+.progress>div{height:100%;background:linear-gradient(90deg,#2563eb,#06b6d4);transition:.3s}
+.question{font-size:19px;line-height:1.6;font-weight:700;margin-bottom:15px}
+.question-image{display:block;max-width:100%;max-height:260px;margin:10px auto 18px;border-radius:12px;object-fit:contain}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option{border:2px solid #cbd5e1;background:white;border-radius:14px;padding:14px;text-align:left;font-size:16px;cursor:pointer;transition:.2s}
+.option:hover{border-color:#2563eb;background:#eff6ff}
+.option.selected{border-color:#2563eb;background:#dbeafe}
+.option.correct{border-color:#16a34a;background:#dcfce7}
+.option.wrong{border-color:#dc2626;background:#fee2e2}
+.option:disabled{cursor:default}
+.feedback{min-height:34px;text-align:center;font-weight:700;margin:14px 0}
+.footer-actions{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.selector{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:15px 0}
+.qnum{padding:10px;border:0;border-radius:10px;background:#e5e7eb;font-weight:700;cursor:pointer}
+.qnum.current{background:#2563eb;color:#fff}
+.qnum.done{background:#16a34a;color:#fff}
+.result{text-align:center}
+.final-score{font-size:56px;font-weight:900;color:#2563eb}
+.review{text-align:left;background:#f8fafc;border-radius:14px;padding:15px;margin-top:15px}
+.small{font-size:13px;color:#64748b}
+@media(max-width:650px){
+ .card{padding:17px;border-radius:18px}
+ .question{font-size:17px}
+ .options{grid-template-columns:1fr}
+ .selector{grid-template-columns:repeat(5,1fr)}
+ .btn{font-size:14px;padding:10px 14px}
+}
+</style>
+</head>
+<body>
 
-    @media (orientation: landscape) and (max-height: 600px) {
-      #start-screen { padding: 1rem !important; }
-      .glass-card { padding: 1.5rem !important; }
-      #game-title { font-size: 1.5rem !important; }
-      .glass-card p { font-size: 0.75rem !important; }
-      .glass-card h3 { font-size: 0.75rem !important; }
-      .glass-card ul li { font-size: 0.65rem !important; }
-      
-      #game-screen { padding: 0.5rem !important; }
-      #game-screen .glass-card { padding: 0.75rem !important; margin-bottom: 0.5rem !important; }
-      .slot-box { width: 1.25rem !important; height: 1.75rem !important; font-size: 0.875rem !important; }
-      .letter-btn { width: 1.75rem !important; height: 1.75rem !important; font-size: 0.75rem !important; }
-      
-      #question-text { font-size: 0.875rem !important; }
-      #answer-slots { gap: 0.25rem !important; margin-bottom: 0.5rem !important; }
-      
-      #end-screen .glass-card { padding: 1.5rem !important; }
-      #end-emoji { font-size: 3rem !important; margin-bottom: 1rem !important; }
-      #end-title { font-size: 1.25rem !important; }
-      #end-message { font-size: 0.875rem !important; }
-      #final-score { font-size: 2rem !important; }
-    }
-  </style>
- </head>
- <body class="h-full w-full overflow-auto bg-gradient-to-br from-blue-600 via-cyan-500 to-teal-400">
-  <div id="app" class="min-h-full w-full">
-   <div id="start-screen" class="min-h-full w-full flex flex-col items-center justify-center p-2">
-    <div class="glass-card rounded-2xl p-5 md:p-8 max-w-sm w-full text-center shadow-2xl animate-slide-up">
-     <div class="text-5xl md:text-6xl mb-4 animate-float">
-      📝
-     </div>
-     <h1 id="game-title" class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-3">Latihan Soal</h1>
-     <p class="text-gray-600 text-sm mb-5 leading-relaxed">Susun huruf-huruf yang tersedia untuk membentuk jawaban yang benar! <span class="block mt-1 text-xs text-cyan-500 font-semibold">📜 Uji pengetahuanmu!</span></p>
-     <div class="bg-gradient-to-r from-blue-100 to-cyan-100 rounded-xl p-3 mb-5 text-left">
-      <h3 class="font-bold text-blue-700 mb-1 text-sm">Cara Bermain:</h3>
-      <ul class="text-xs text-gray-600 space-y-0.5">
-       <li>👆 Klik huruf untuk menyusun jawaban</li>
-       <li>✅ Jawaban benar = +10 poin</li>
-       <li>❌ Huruf salah = -1 poin</li>
-       <li>❌ 3 kesalahan = 1 hati berkurang</li>
-       <li>❌ Nyawa habis = Game Over!</li>
-      </ul>
-     </div>
-     <div id="highscore-section" class="bg-gradient-to-r from-yellow-100 to-amber-100 rounded-xl p-3 mb-5 text-center">
-      <p class="text-xs text-amber-700 font-semibold">🏆 Skor Tertinggi</p>
-      <p id="best-score-display" class="text-2xl font-bold text-amber-600">-</p>
-     </div><button id="start-btn" onclick="startGame()" class="w-full py-3 px-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-pulse-glow">🚀 Mulai Bermain!</button>
-    </div>
-   </div>
-   <div id="game-screen" class="min-h-full w-full flex flex-col p-2 hidden relative">
-    <div class="glass-card rounded-xl p-2 mb-2 shadow-xl">
-     <div class="flex justify-between items-center flex-wrap gap-1 text-xs md:text-sm">
-      <div class="flex items-center gap-2">
-       <span class="text-gray-700 font-semibold">Pilih Soal:</span> <button onclick="toggleQuestionSelector()" class="bg-blue-100 hover:bg-blue-200 px-2 py-1 rounded-lg text-blue-700 font-bold text-xs transition-all"> <span id="question-number">Soal 1/20</span> 📋 </button>
-      </div>
-      <div class="bg-gradient-to-r from-yellow-400 to-orange-500 px-2 py-1 rounded-lg text-white font-bold flex items-center gap-1 text-xs">
-       <span>Skor:</span> <span id="score">0</span>
-      </div>
-     </div>
-     <div class="mt-1 flex justify-center gap-1">
-      <div id="mistake-hearts" class="flex gap-0.5">
-       <span class="text-lg">❤️</span> <span class="text-lg">❤️</span> <span class="text-lg">❤️</span>
-      </div>
-     </div>
-    </div>
-    <div id="question-selector-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 flex items-center justify-center p-2">
-     <div class="glass-card rounded-2xl p-4 max-w-sm w-full max-h-96 shadow-2xl overflow-auto">
-      <h2 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-4 sticky top-0">Pilih Soal</h2>
-      <div id="question-selector-list" class="grid grid-cols-4 gap-2">
-      </div><button onclick="toggleQuestionSelector()" class="w-full mt-4 py-2 px-4 bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold rounded-lg transition-all">Tutup</button>
-     </div>
-    </div>
-    <div class="glass-card rounded-xl p-3 mb-2 shadow-xl flex-grow flex flex-col">
-     <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg p-2 mb-3">
-      <h2 class="text-sm md:text-base font-bold text-gray-800 text-center" id="question-text">Pertanyaan akan muncul di sini...</h2>
-      <div class="flex justify-center"><img id="question-image" src="" alt="Gambar soal" loading="lazy" style="max-width: 100%; max-height: 200px; margin-top: 8px; border-radius: 8px; display: none;" onerror="this.style.background='#e5e7eb'; this.style.display='block';">
-      </div>
-     </div>
-     <div class="mb-3">
-      <p class="text-center text-gray-500 text-xs mb-2 font-semibold">📝 Jawaban:</p>
-      <div id="answer-slots" class="flex flex-wrap justify-center gap-1"></div>
-     </div>
-
-     <div id="feedback" class="text-center mb-2 h-8 flex items-center justify-center"></div>
-     <div class="mt-auto">
-      <p class="text-center text-gray-500 text-xs mb-2 font-semibold">Pilih Huruf (A-Z):</p>
-      <div id="letter-buttons" class="flex flex-wrap justify-center gap-1"></div>
-<div class="flex justify-center gap-3 mt-4">
-
-  <button 
-    onclick="checkAnswerManual()"
-    class="px-5 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl shadow-lg hover:scale-105 transition-all">
-    ✅ Cek
-  </button>
-
-  <button 
-    onclick="resetAnswer()"
-    class="px-5 py-2 bg-gradient-to-r from-red-500 to-pink-600 text-white font-bold rounded-xl shadow-lg hover:scale-105 transition-all">
-    🔄 Ulangi
-  </button>
-
-</div>
-     </div>
-    </div>
-    <div class="flex justify-center gap-4 mt-3">
-
-  <a 
-    href="puisi.html"
-    class="px-4 py-2 bg-white text-blue-600 font-bold rounded-xl shadow-lg hover:scale-105 transition-all">
-    📘 Materi
-  </a>
-
-  <a 
-    href="../pulau.html"
-    class="px-4 py-2 bg-white text-cyan-600 font-bold rounded-xl shadow-lg hover:scale-105 transition-all">
-    🔙 Kembali
-  </a>
-
-</div>
-    <div id="retry-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-     <div class="glass-card rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl animate-retry-bounce">
-      <div class="text-6xl mb-4 animate-retry-shake">
-       🔄
-      </div>
-      <h2 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-4">Ulangi!</h2>
-      <p class="text-gray-700 text-lg font-semibold mb-6">Jawaban belum tepat, coba lagi!</p>
-      <div class="flex gap-2">
-       <button onclick="closeRetryOverlay()" class="flex-1 py-3 px-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">✨ Lanjut</button>
-      </div>
-     </div>
-    </div>
-   </div>
-   <div id="result-screen" class="min-h-full w-full flex items-center justify-center p-2 hidden relative overflow-hidden">
-    <div id="result-confetti-container"></div>
-    <div class="glass-card rounded-2xl p-6 md:p-10 max-w-xs w-full text-center shadow-2xl animate-slide-up relative">
-     <div id="result-emoji" class="text-6xl md:text-7xl mb-2 animate-spin-celebrate">
-      ✅
-     </div>
-     <div class="space-y-3 mb-6">
-      <div class="bg-gradient-to-r from-green-100 to-emerald-100 rounded-xl p-3">
-       <p id="result-score" class="text-5xl md:text-6xl font-black text-green-600">+10</p>
-      </div>
-      <div class="bg-gradient-to-r from-yellow-100 to-amber-100 rounded-xl p-3">
-       <p class="text-xs text-gray-600 mb-1">Total Skor</p>
-       <p id="result-total-score" class="text-4xl font-black text-amber-600">10</p>
-      </div>
-      <div id="correct-answer-display" class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-3 hidden">
-       <p class="text-xs text-purple-700 mb-1 font-semibold">Jawaban Benar:</p>
-       <p id="correct-answer-text" class="text-lg font-black text-purple-700">JAWABAN</p>
-      </div>
-     </div><button id="result-next-btn" onclick="nextQuestion()" class="w-full py-3 px-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-pulse-celebrate">🚀 Soal Berikutnya</button>
-    </div>
-   </div>
-   <div id="end-screen" class="min-h-full w-full flex items-center justify-center p-2 hidden">
-    <div class="glass-card rounded-2xl p-6 md:p-8 max-w-sm w-full text-center shadow-2xl animate-slide-up relative overflow-hidden">
-     <div id="confetti-container"></div>
-     <div id="end-emoji" class="text-5xl md:text-6xl mb-4 animate-celebrate">
-      🎉
-     </div>
-     <h2 id="end-title" class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-3">Permainan Selesai!</h2>
-     <div class="bg-gradient-to-r from-blue-100 to-cyan-100 rounded-xl p-4 mb-4">
-      <p class="text-gray-600 text-base mb-1">Skor Akhir</p>
-      <p id="final-score" class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">0</p>
-     </div>
-     <p id="end-message" class="text-base text-gray-700 mb-4 font-semibold">Pesan evaluasi</p>
-     <div id="end-correct-answer-display" class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-3 mb-4 hidden">
-      <p class="text-xs text-purple-700 mb-1 font-semibold">Jawaban Terakhir yang Benar:</p>
-      <p id="end-correct-answer-text" class="text-base font-black text-purple-700">JAWABAN</p>
-     </div><button onclick="restartGame()" class="w-full py-3 px-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">🔄 Main Ulang</button>
-    </div>
-   </div>
+<section id="startScreen" class="screen">
+  <div class="card start">
+    <div class="emoji">📚</div>
+    <h1 class="title">Latihan Soal Bahasa Indonesia Kelas 5</h1>
+    <p>20 soal pilihan ganda. Bacalah soal dengan teliti, kemudian pilih jawaban A, B, C, atau D.</p>
+    <p class="small">Jawaban benar = +10 poin. Skor maksimal = 200.</p>
+    <button class="btn primary" onclick="startGame()">🚀 Mulai Mengerjakan</button>
   </div>
-  <script>
-    const defaultConfig = {
-      game_title: "Latihan Soal Bahasa Indonesia Kelas 5",
-      start_button_text: "🚀 Mulai Bermain!"
-    };
-    
-    let config = { ...defaultConfig };
-    let allGameScores = [];
-    const questionBank = [
-      {
-        question: "Wiwin menulis sebuah puisi yang setiap awal barisnya dibentuk dari rangkaian huruf yang memberi makna atau pesan puisi. Puisi yang dibuat oleh Wiwin disebut ...",
-        answer: "akrostik"
-      },
-      {
-        question: "Berdasarkan kreasi di atas, Adit memiliki sifat ....",
-        image: "https://i.imgur.com/XAJFdte.png",
-        answer: "banyak ide"
-      },
-      {
-        question: "Wayan bersaudara dengan Made. Mereka memiliki beberapa persamaan. Salah satu persamaannya yaitu ....",
-        image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSF8SPnt52b12GoY7xOdn_EavxJ6H1JZfmKq-MmHKALU-WcxNBd0X-GJqOLBwqwu05ils85sFEobUNdY7JXqpNIQYHdYmSXsP10Ydc4xKLweUOvAwISUdLNa3_i7XIUmZ7Zpb8aC06WhGdOHqDHGXo2xCR1en_aQkwyaa7yxyQZluG6pZ7zxmHGzv/s886/soal%20diagram%20venn%20bahasa%20indonesia%20kelas%205%20kumer.png",
-        answer: "bentuk hidung"
-      },
-      {
-        question: "Wayan dan Made memang bersaudara. Namun, mereka berdua memiliki perbedaan. Berikut ini salah satu perbedaannya yaitu ....",
-        image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSF8SPnt52b12GoY7xOdn_EavxJ6H1JZfmKq-MmHKALU-WcxNBd0X-GJqOLBwqwu05ils85sFEobUNdY7JXqpNIQYHdYmSXsP10Ydc4xKLweUOvAwISUdLNa3N_i7XIUmZ7Zpb8aC06WhGdOHqDHGXo2xCR1en_aQkwyaa7yxyQZluG6pZ7zxmHGzv/s886/soal%20diagram%20venn%20bahasa%20indonesia%20kelas%205%20kumer.png",
-        answer: "cita-cita"
-      },
-      {
-        question: "Made memiliki angan-angan menjadi seorang ... saat dia dewasa.",
-        image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSF8SPnt52b12GoY7xOdn_EavxJ6H1JZfmKq-MmHKALU-WcxNBd0X-GJqOLBwqwu05ils85sFEobUNdY7JXqpNIQYHdYmSXsP10Ydc4xKLweUOvAwISUdLNa3N_i7XIUmZ7Zpb8aC06WhGdOHqDHGXo2xCR1en_aQkwyaa7yxyQZluG6pZ7zxmHGzv/s886/soal%20diagram%20venn%20bahasa%20indonesia%20kelas%205%20kumer.png",
-        answer: "penulis buku"
-      },
-      {
-        question: "Paragraf yang paling sesuai untuk mendeskripsikan gambar di atas ditunjukkan oleh nomor ....",
-        image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhw6yscV4j0DkVAtkrPce5blNgdg1DfdqoM64U_BQHpfbBbL_FGrYsHBMICxwQDtQChXVslufSmUphyyKsjn3zGjXS6qctdx_NruwpFxQ00VCNdYcSMFTCAbELmEzwCPB5sWy86mAlpEPn-r74AxJ3VJzyk3--vJY3XSZefe-ktXtYd1GZFEy/s886/soal%20teks%20deskripsi%20bahasa%20indonesia%20kelas%205.png",
-        answer: "dua"
-      },
-      {
-        question: "Kalimat yang paling tepat untuk mendeskripsikan gambar di atas yaitu....",
-        image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikrW4IQK2gfmjrFSONKsfAQfQEaQ-77ax1GVBm5GHQHjC1g2eLhSB_-wXQsBzjJnWyMliPuUyqs3Rcselu5EFuN_M3RbZqSp9fYowMKM1v33pz3BOsdwReHQcU5QLepsqBX7c9PYiqxpXNiBn9bquEGSRxpDq7f9kpmNnJbjZTDZtcM1CHbkX8Pn5R/s886/deskripsi%20gambar.jpg",
-        answer: "anak laki-laki sedang menyiram tanaman"
-      },
-      {
-        question: "Aku tidak bergantung pada orang lain. Aku dalam keadaan dapat berdiri sendiri. Berdasarkan pernyataan tersebut, sifatku adalah ....",
-        answer: "mandiri"
-      },
-      {
-        question: "Miska adalah seorang siswi kelas lima sekolah dasar. Dia dikenal sebagai siswi yang jujur, sehingga banyak orang yang menyukai kepribadiannya tersebut. Kata jujur pada kalimat di atas memiliki makna ....",
-        answer: "lurus hati"
-      },
-      {
-        question: "Pak Ketut dikenal sebagai pelukis yang kreatif, karena beliau menghasilkan karya-karya yang sangat unik. Kata kreatif pada kalimat di atas memiliki makna ....",
-        answer: "memiliki daya cipta"
-      },
-      {
-        question: "Kata sifat yang tepat untuk mendeskripsikan kegiatan anak-anak pada gambar di atas yaitu ....",
-        image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhbRFaXUL34bnjyUPHs78T-h90FKVp9P2hL3O3delf2Wv5sGRXEvUcewM5alfmL0nLol6SfQW3GQ7Z1zg4aYKRyngKe4HKJ0vYP2HGfFoTNwS3rRqohG-y_ptdP45OjRs6VaW2pVkvq1Kl4J7Ku2Ebbr2VlB9TAgonkgEjXrazyf5ZG5mFfLVEqjNU7/s885/soal%20hots%20bahasa%20indonesia%20kelas%205%20bab%201%20kurikulum%20merdeka.jpg",
-        answer: "rajin"
-      },
-      {
-        question: "Imbuhan dalam bentuk awalan pe- digunakan untuk menyatakan kata sifat. Hasil pembentukan kata setelah mendapat imbuhan pe- dari kata bohong yaitu ....",
-        answer: "pembohong"
-      },
-      {
-        question: "Kata dendam jika diberikan imbuhan pe- akan menjadi kata ....",
-        answer: "pendendam"
-      },
-      {
-        question: "Berdasarkan cerita di atas, sifat tokoh yang dapat kita teladani yaitu ...",
-        answer: "penolong"
-      },
-      {
-        question: "Berdasarkan cerita di atas, sifat tokoh yang sebaiknya kita hindari yaitu ....",
-        answer: "malas"
-      },
-      {
-        question: "Kata alim sinonimnya yaitu....",
-        answer: "soleh"
-      },
-      {
-        question: "Dita sering menyisihkan uang bekal yang diberikan oleh ibunya. Dia juga membeli barang-barang yang hanya diperlukan. Dita anak yang tidak ....",
-        answer: "boros"
-      },
-      {
-        question: "Ibuku selalu menyapa orang-orang yang berbelanja di warung dengan penuh senyuman. Beliau dikenal sebagai penjual yang ramah. Kata ramah antonimnya yaitu....",
-        answer: "kaku"
-      },
-      {
-        question: "Kalimat majemuk setara yang sejalan ditunjukkan oleh nomor...
-         
+</section>
 
+<section id="gameScreen" class="screen hidden">
+  <div class="card">
+    <div class="top">
+      <button class="btn secondary" onclick="toggleSelector()">📋 Pilih Soal</button>
+      <div class="badge" id="number">Soal 1/20</div>
+      <div class="badge score">Skor: <span id="score">0</span></div>
+    </div>
+    <div class="hearts" id="hearts">❤️ ❤️ ❤️</div>
+    <div class="progress"><div id="progress"></div></div>
+
+    <div id="question" class="question"></div>
+    <img id="questionImage" class="question-image hidden" alt="Gambar soal">
+
+    <div id="options" class="options"></div>
+    <div id="feedback" class="feedback"></div>
+
+    <div class="footer-actions">
+      <button class="btn secondary" onclick="previousQuestion()">⬅ Sebelumnya</button>
+      <button class="btn primary" id="nextBtn" onclick="nextQuestion()">Berikutnya ➡</button>
+    </div>
+
+    <div id="selector" class="hidden">
+      <hr>
+      <h3>Pilih Nomor Soal</h3>
+      <div id="selectorGrid" class="selector"></div>
+    </div>
+  </div>
+</section>
+
+<section id="resultScreen" class="screen hidden">
+  <div class="card result">
+    <div class="emoji">🎉</div>
+    <h2>Latihan Selesai!</h2>
+    <p>Skor Akhir</p>
+    <div id="finalScore" class="final-score">0</div>
+    <p id="finalMessage"></p>
+    <div id="review" class="review"></div>
+    <button class="btn primary" onclick="restartGame()">🔄 Kerjakan Lagi</button>
+  </div>
+</section>
+
+<script>
+const questions = [
+{
+ q:"Wiwin menulis sebuah puisi yang setiap awal barisnya dibentuk dari rangkaian huruf yang memberi makna atau pesan puisi. Puisi yang dibuat oleh Wiwin disebut ...",
+ options:["A. pantun","B. gurindam","C. mantra","D. akrostik"], answer:3
+},
+{
+ q:"Berdasarkan kreasi di atas, Adit memiliki sifat ....",
+ image:"https://i.imgur.com/XAJFdte.png",
+ options:["A. mudah menyerah","B. banyak ide","C. pemarah","D. pendendam"], answer:1
+},
+{
+ q:"Wayan bersaudara dengan Made. Mereka memiliki beberapa persamaan. Salah satu persamaannya yaitu ....",
+ image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSF8SPnt52b12GoY7xOdn_EavxJ6H1JZfmKq-MmHKALU-WcxNBd0X-GJqOLBwqwu05ils85sFEobUNdY7JXqpNIQYHdYmSXsP10Ydc4xKLweUOvAwISUdLNa3N_i7XIUmZ7Zpb8aC06WhGdOHqDHGXo2xCR1en_aQkwyaa7yxyQZluG6pZ7zxmHGzv/s886/soal%20diagram%20venn%20bahasa%20indonesia%20kelas%205%20kumer.png",
+ options:["A. warna rambut","B. cita-cita","C. bentuk hidung","D. kegemaran"], answer:2
+},
+{
+ q:"Wayan dan Made memang bersaudara. Namun, mereka berdua memiliki perbedaan. Berikut ini salah satu perbedaannya yaitu ....",
+ image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSF8SPnt52b12GoY7xOdn_EavxJ6H1JZfmKq-MmHKALU-WcxNBd0X-GJqOLBwqwu05ils85sFEobUNdY7JXqpNIQYHdYmSXsP10Ydc4xKLweUOvAwISUdLNa3N_i7XIUmZ7Zpb8aC06WhGdOHqDHGXo2xCR1en_aQkwyaa7yxyQZluG6pZ7zxmHGzv/s886/soal%20diagram%20venn%20bahasa%20indonesia%20kelas%205%20kumer.png",
+ options:["A. bentuk wajah","B. cita-cita","C. bentuk hidung","D. warna kulit"], answer:1
+},
+{
+ q:"Made memiliki angan-angan menjadi seorang ... saat dia dewasa.",
+ image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSF8SPnt52b12GoY7xOdn_EavxJ6H1JZfmKq-MmHKALU-WcxNBd0X-GJqOLBwqwu05ils85sFEobUNdY7JXqpNIQYHdYmSXsP10Ydc4xKLweUOvAwISUdLNa3N_i7XIUmZ7Zpb8aC06WhGdOHqDHGXo2xCR1en_aQkwyaa7yxyQZluG6pZ7zxmHGzv/s886/soal%20diagram%20venn%20bahasa%20indonesia%20kelas%205%20kumer.png",
+ options:["A. dokter","B. penulis buku","C. guru","D. polisi"], answer:1
+},
+{
+ q:"Paragraf yang paling sesuai untuk mendeskripsikan gambar di atas ditunjukkan oleh nomor ....",
+ image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhw6yscV4j0DkVAtkrPce5blNgdg1DfdqoM64U_BQHpfbBbL_FGrYsHBMICxwQDtQChXVslufSmUphyyKsjn3zGjXS6qctdx_NruwpFxQ00VCNdYcSMFTCAbELmEzwCPB5sWy86mAlpEPn-r74AxJ3VJzyk3--vJY3XSZefe-ktXtYd1GZFEy/s886/soal%20teks%20deskripsi%20bahasa%20indonesia%20kelas%205.png",
+ options:["A. 1","B. 2","C. 3","D. 4"], answer:1
+},
+{
+ q:"Kalimat yang paling tepat untuk mendeskripsikan gambar di atas yaitu....",
+ image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikrW4IQK2gfmjrFSONKsfAQfQEaQ-77ax1GVBm5GHQHjC1g2eLhSB_-wXQsBzjJnWyMliPuUyqs3Rcselu5EFuN_M3RbZqSp9fYowMKM1v33pz3BOsdwReHQcU5QLepsqBX7c9PYiqxpXNiBn9bquEGSRxpDq7f9kpmNnJbjZTDZtcM1CHbkX8Pn5R/s886/deskripsi%20gambar.jpg",
+ options:["A. Anak perempuan sedang membaca buku.","B. Anak laki-laki sedang bermain bola.","C. Anak laki-laki sedang menyiram tanaman.","D. Anak perempuan sedang menyiram tanaman."], answer:2
+},
+{
+ q:"Aku tidak bergantung pada orang lain. Aku dalam keadaan dapat berdiri sendiri. Berdasarkan pernyataan tersebut, sifatku adalah ....",
+ options:["A. mandiri","B. boros","C. malas","D. sombong"], answer:0
+},
+{
+ q:"Miska adalah seorang siswi kelas lima sekolah dasar. Dia dikenal sebagai siswi yang jujur, sehingga banyak orang yang menyukai kepribadiannya tersebut. Kata jujur pada kalimat di atas memiliki makna ....",
+ options:["A. lurus hati","B. suka membantu","C. rendah hati","D. keras kepala"], answer:0
+},
+{
+ q:"Pak Ketut dikenal sebagai pelukis yang kreatif, karena beliau menghasilkan karya-karya yang sangat unik. Kata kreatif pada kalimat di atas memiliki makna ....",
+ options:["A. mudah marah","B. memiliki daya cipta","C. suka bekerja","D. pandai berbicara"], answer:1
+},
+{
+ q:"Kata sifat yang tepat untuk mendeskripsikan kegiatan anak-anak pada gambar di atas yaitu ....",
+ image:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhbRFaXUL34bnjyUPHs78T-h90FKVp9P2hL3O3delf2Wv5sGRXEvUcewM5alfmL0nLol6SfQW3GQ7Z1zg4aYKRyngKe4HKJ0vYP2HGfFoTNwS3rRqohG-y_ptdP45OjRs6VaW2pVkvq1Kl4J7Ku2Ebbr2VlB9TAgonkgEjXrazyf5ZG5mFfLVEqjNU7/s885/soal%20hots%20bahasa%20indonesia%20kelas%205%20bab%201%20kurikulum%20merdeka.jpg",
+ options:["A. rajin","B. malas","C. boros","D. sombong"], answer:0
+},
+{
+ q:"Imbuhan dalam bentuk awalan pe- digunakan untuk menyatakan kata sifat. Hasil pembentukan kata setelah mendapat imbuhan pe- dari kata bohong yaitu ....",
+ options:["A. pembohong","B. pembong","C. pebohong","D. pembohong"], answer:0
+},
+{
+ q:"Kata dendam jika diberikan imbuhan pe- akan menjadi kata ....",
+ options:["A. pedendam","B. pendendam","C. pendam","D. pendendaman"], answer:1
+},
+{
+ q:"Berdasarkan cerita di atas, sifat tokoh yang dapat kita teladani yaitu ...",
+ options:["A. penolong","B. malas","C. pendendam","D. pembohong"], answer:0
+},
+{
+ q:"Berdasarkan cerita di atas, sifat tokoh yang sebaiknya kita hindari yaitu ....",
+ options:["A. rajin","B. penolong","C. malas","D. jujur"], answer:2
+},
+{
+ q:"“Jadilah orang yang alim. Jika tidak mampu, maka jadilah penuntut ilmu. Jika tidak mampu jadi penuntut ilmu, jadilah pendengar ilmu“ kata Kepala Kantor Kemenag Kabupaten Kotabaru. Kata alim sinonimnya yaitu....",
+ options:["A. soleh","B. malas","C. bodoh","D. sombong"], answer:0
+},
+{
+ q:"Dita sering menyisihkan uang bekal yang diberikan oleh ibunya. Dia juga membeli barang-barang yang hanya diperlukan. Dita anak yang tidak ....",
+ options:["A. boros","B. rajin","C. hemat","D. jujur"], answer:0
+},
+{
+ q:"Ibuku selalu menyapa orang-orang yang berbelanja di warung dengan penuh senyuman. Beliau dikenal sebagai penjual yang ramah. Kata ramah antonimnya yaitu....",
+ options:["A. baik hati","B. sopan","C. kaku","D. murah hati"], answer:2
+},
+{
+ q:`Kalimat majemuk setara yang sejalan ditunjukkan oleh nomor...
 1. Adit rajin belajar, sehingga ia memperoleh peringkat 1 di kelas.
 2. Gita suka bermain piano, sedangkan Chika suka bermain gitar.
 3. Nopita dapat segera menemukan kancing yang tercecer di jalan karena ia memiliki mata yang jeli.
-4. Kerajinan pot bunga dari barang bekas tersebut dibuat oleh Bayu dan Widi.",
-        answer: "2"
-      },
-      {
-        question: "Nancy pandai berhitung. Nancy tidak pandai menyanyi. Kata penghubung yang tepat untuk melengkapi dua kalimat tunggal di atas, agar menjadi sebuah kalimat majemuk yaitu.....",
-        answer: "tetapi"
-      },
-    ];
-    
-    let currentQuestion = null;
-    let score = 0;
-    let mistakes = 0;
-    let answerSlots = [];
-    let usedLetters = [];
-    let lastClickedLetter = null;
-    let hearts = 3;
-    let usedQuestions = [];
-    let currentQuestionIndex = 0;
-    let questionsFailedCount = {};
-    let completedQuestions = new Set();
-    
-    const dataHandler = {
-      onDataChanged(data) {
-        allGameScores = data || [];
-        updateHighscoreDisplay();
-      }
-    };
-    
-    async function initializeDataSDK() {
-      if (window.dataSdk) {
-        const result = await window.dataSdk.init(dataHandler);
-        if (!result.isOk) {
-          console.error("Failed to initialize Data SDK");
-        }
-      }
-    }
-    
-    async function saveScore(finalScore) {
-      if (!window.dataSdk) return;
-      
-      const result = await window.dataSdk.create({
-        game_id: 'quiz_' + Date.now(),
-        score: finalScore,
-        date: new Date().toISOString()
-      });
-      
-      if (!result.isOk) {
-        console.error("Failed to save score");
-      }
-    }
-    
-    function updateHighscoreDisplay() {
-      const bestScore = allGameScores.length > 0 
-        ? Math.max(...allGameScores.map(s => s.score || 0))
-        : 0;
-      
-      const display = document.getElementById('best-score-display');
-      if (display) {
-        display.textContent = bestScore > 0 ? bestScore : '-';
-      }
-    }
-    
-    function showScreen(screenId) {
-      document.getElementById('start-screen').classList.add('hidden');
-      document.getElementById('game-screen').classList.add('hidden');
-      document.getElementById('result-screen').classList.add('hidden');
-      document.getElementById('end-screen').classList.add('hidden');
-      document.getElementById(screenId).classList.remove('hidden');
-    }
-    
-    function getRandomQuestions(count) {
-  return questionBank;
+4. Kerajinan pot bunga dari barang bekas tersebut dibuat oleh Bayu dan Widi.`,
+ options:["A. 1","B. 2","C. 3","D. 4"], answer:1
+},
+{
+ q:"Nancy pandai berhitung. Nancy tidak pandai menyanyi. Kata penghubung yang tepat untuk melengkapi dua kalimat tunggal di atas, agar menjadi sebuah kalimat majemuk yaitu.....",
+ options:["A. dan","B. karena","C. tetapi","D. sehingga"], answer:2
 }
-    
-    function startGame() {
-      score = 0;
-      mistakes = 0;
-      hearts = 3;
-      currentQuestionIndex = 0;
-      completedQuestions = new Set();
-      updateScore();
-      updateMistakes();
-      
-      usedQuestions = questionBank;
-      currentQuestion = usedQuestions[0];
-      
-      showScreen('game-screen');
-      setupQuestion();
-      updateQuestionSelector();
-    }
-    
-    function restartGame() {
-      startGame();
-    }
-    
-    function toggleQuestionSelector() {
-      const modal = document.getElementById('question-selector-modal');
-      modal.classList.toggle('hidden');
-    }
-    
-    function updateQuestionSelector() {
-      const list = document.getElementById('question-selector-list');
-      list.innerHTML = '';
-      
-      usedQuestions.forEach((q, index) => {
-        const btn = document.createElement('button');
-        btn.className = 'w-12 h-12 rounded-lg font-bold text-sm transition-all transform hover:scale-110';
-        
-        if (completedQuestions.has(index)) {
-          btn.className += ' bg-gradient-to-br from-green-400 to-green-600 text-white shadow-lg';
-          btn.textContent = '✓';
-        } else if (index === currentQuestionIndex) {
-          btn.className += ' bg-gradient-to-br from-blue-600 to-cyan-600 text-white shadow-lg ring-2 ring-white';
-          btn.textContent = index + 1;
-        } else {
-          btn.className += ' bg-gray-200 hover:bg-gray-300 text-gray-700 shadow';
-          btn.textContent = index + 1;
-        }
-        
-        btn.onclick = () => selectQuestion(index);
-        list.appendChild(btn);
-      });
-    }
-    
-    function selectQuestion(index) {
-      currentQuestionIndex = index;
-      currentQuestion = usedQuestions[index];
-      setupQuestion();
-      updateQuestionSelector();
-      toggleQuestionSelector();
-    }
-    
-          function setupQuestion() {
-  document.getElementById('question-text').innerHTML = 
-    currentQuestion.question.replace(/\n/g, "<br>");
+];
 
-      document.getElementById('question-number').textContent = `Soal ${currentQuestionIndex + 1}/20`;
-      
-      const imgElement = document.getElementById('question-image');
-      imgElement.style.display = 'none';
-      
-      const answer = currentQuestion.answer.toUpperCase();
+let current=0, score=0, selected=null;
+let answered=Array(questions.length).fill(false);
 
-let totalSlots = 10;
-
-if (answer.length > 10) {
-  totalSlots = answer.length + 3;
+function show(id){
+  ["startScreen","gameScreen","resultScreen"].forEach(x=>document.getElementById(x).classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
 }
-      
-      answerSlots = [];
-      usedLetters = [];
-      lastClickedLetter = null;
-      
-      const slotsContainer = document.getElementById('answer-slots');
-      slotsContainer.innerHTML = '';
-      
-      for (let i = 0; i < totalSlots; i++) {
-
-  const slot = document.createElement('div');
-
-  const expectedLetter =
-    i < answer.length ? answer[i] : '';
-
-  slot.className =
-    'slot-box w-6 h-8 md:w-8 md:h-10 bg-gray-100 border-2 border-blue-300 rounded-md flex items-center justify-center text-base md:text-lg font-bold text-blue-700 cursor-pointer hover:border-blue-500 transition-all';
-
-  slot.dataset.index = i;
-  slot.dataset.expectedLetter = expectedLetter;
-
-  slot.onclick = () => removeLetterFromSlot(i);
-
-  answerSlots.push({
-    element: slot,
-    letter: null,
-    expected: expectedLetter,
-    isSpace: expectedLetter === ' '
+function startGame(){
+  current=0; score=0; selected=null;
+  answered=Array(questions.length).fill(false);
+  document.getElementById("score").textContent=score;
+  show("gameScreen");
+  renderQuestion();
+}
+function renderQuestion(){
+  const q=questions[current];
+  document.getElementById("number").textContent=`Soal ${current+1}/${questions.length}`;
+  document.getElementById("question").innerHTML=q.q.replace(/\n/g,"<br>");
+  const img=document.getElementById("questionImage");
+  if(q.image){img.src=q.image;img.classList.remove("hidden");}
+  else{img.src="";img.classList.add("hidden");}
+  const options=document.getElementById("options");
+  options.innerHTML="";
+  selected=null;
+  q.options.forEach((text,i)=>{
+    const b=document.createElement("button");
+    b.className="option";
+    b.innerHTML=text;
+    b.onclick=()=>choose(i);
+    options.appendChild(b);
   });
-
-  slotsContainer.appendChild(slot);
+  document.getElementById("feedback").textContent="";
+  document.getElementById("nextBtn").textContent=current===questions.length-1?"🏁 Selesai":"Berikutnya ➡";
+  document.getElementById("progress").style.width=((current+1)/questions.length*100)+"%";
+  renderSelector();
 }
-      
-      const buttonsContainer = document.getElementById('letter-buttons');
-      buttonsContainer.innerHTML = '';
-      
-      const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-      const numbers = '0123456789'.split('');
-      const symbols = [' ', '.', ',', '-', '(', ')'];
-      const allCharacters = [...alphabet, ...numbers, ...symbols];
-      
-      allCharacters.forEach((char, index) => {
-        const btn = document.createElement('button');
-        btn.className = 'letter-btn w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-blue-500 to-cyan-500 text-white text-sm md:text-base font-bold rounded-lg shadow-lg hover:shadow-xl relative';
-        
-        if (char === ' ') {
-          btn.textContent = '␣';
-          btn.title = 'Space';
-        } else {
-          btn.textContent = char;
-        }
-        
-        btn.dataset.letter = char;
-        btn.dataset.usedCount = '0';
-        btn.onclick = () => selectLetter(btn);
-        
-        buttonsContainer.appendChild(btn);
-      });
-      
-      document.getElementById('feedback').innerHTML = '';
-    }
-    
-    function selectLetter(btn) {
-      const letter = btn.dataset.letter;
-      
-      const letterExistsInAnswer = answerSlots.some(slot => slot.expected === letter);
-      
-      if (!letterExistsInAnswer) {
-        mistakes++;
-        score = Math.max(0, score - 1);
-        
-        if (mistakes % 3 === 0) {
-          hearts--;
-        }
-        
-        updateScore();
-        updateMistakes();
-        
-        showFeedback('❌ Huruf salah! -1 poin', 'error');
-        
-        btn.classList.add('animate-shake');
-        setTimeout(() => btn.classList.remove('animate-shake'), 500);
-        
-        lastClickedLetter = letter;
-        
-        if (hearts <= 0) {
-          setTimeout(() => endGame('mistakes'), 1000);
-        }
-        return;
-      }
-      
-      const targetSlotIndex = answerSlots.findIndex(slot => 
-  !slot.isSpace &&
-  slot.expected === letter &&
-  slot.letter === null
-);
-      
-      if (targetSlotIndex === -1) {
-        return;
-      }
-      
-      const emptySlots = answerSlots.filter(s => s.letter === null).length;
-      
-      if (lastClickedLetter === letter && emptySlots > 1) {
-        btn.classList.add('animate-shake');
-        setTimeout(() => btn.classList.remove('animate-shake'), 500);
-        return;
-      }
-      
-      const slot = answerSlots[targetSlotIndex];
-      
-      slot.letter = letter;
-      slot.element.textContent = letter;
-      slot.element.classList.add('slot-filled', 'animate-pop');
-      
-      btn.classList.add('animate-bounce-custom');
-      setTimeout(() => btn.classList.remove('animate-bounce-custom'), 500);
-      
-      btn.dataset.usedCount = (parseInt(btn.dataset.usedCount) + 1).toString();
-      
-      usedLetters.push({ btn, slotIndex: targetSlotIndex, letter });
-      
-      lastClickedLetter = letter;
-      
-      updateButtonAppearance(btn, letter);
-      
-     const requiredSlotsFilled = answerSlots
-  .filter(s => !s.isSpace && s.expected !== '')
-  .every(s => s.letter !== null);
-
-// Tidak otomatis cek
-// Menunggu tombol ✅ Cek ditekan
-document.getElementById('mobile-keyboard').focus();
-    }
-    
-    function updateButtonAppearance(btn, letter) {
-      const totalNeeded = answerSlots.filter(slot => slot.expected === letter).length;
-      const totalFilled = answerSlots.filter(slot => slot.expected === letter && slot.letter === letter).length;
-      
-      if (totalFilled >= totalNeeded) {
-        btn.className = 'letter-btn w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-gray-400 to-gray-500 text-white text-sm md:text-base font-bold rounded-lg shadow-lg opacity-50 cursor-not-allowed';
-        btn.disabled = true;
-      } else {
-        btn.className = 'letter-btn w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-blue-500 to-cyan-500 text-white text-sm md:text-base font-bold rounded-lg shadow-lg hover:shadow-xl';
-        btn.disabled = false;
-      }
-    }
-    
-    function updateAllButtonAppearances() {
-      const buttonsContainer = document.getElementById('letter-buttons');
-      const buttons = buttonsContainer.querySelectorAll('button');
-      
-      buttons.forEach(btn => {
-        const letter = btn.dataset.letter;
-        updateButtonAppearance(btn, letter);
-      });
-    }
-    
-    function removeLetterFromSlot(slotIndex) {
-  const slot = answerSlots[slotIndex];
-
-  if (!slot.letter) return;
-
-  const usedIndex = usedLetters.findIndex(
-    u => u.slotIndex === slotIndex
-  );
-
-  if (usedIndex !== -1) {
-
-    const { btn } = usedLetters[usedIndex];
-
-    btn.dataset.usedCount =
-      (parseInt(btn.dataset.usedCount) - 1).toString();
-
-    usedLetters.splice(usedIndex, 1);
-
-  }
-
-  slot.letter = null;
-
-  slot.element.textContent = '';
-
-  slot.element.classList.remove('slot-filled');
-
-  lastClickedLetter = null;
-
-  for (let i = slotIndex + 1; i < answerSlots.length; i++) {
-
-    if (answerSlots[i].letter) {
-
-      answerSlots[slotIndex].letter =
-        answerSlots[i].letter;
-
-      answerSlots[slotIndex].element.textContent =
-        answerSlots[i].letter;
-
-      answerSlots[slotIndex].element.classList.add(
-        'slot-filled'
-      );
-
-      const usedRef =
-        usedLetters.find(u => u.slotIndex === i);
-
-      if (usedRef) {
-        usedRef.slotIndex = slotIndex;
-      }
-
-      answerSlots[i].letter = null;
-
-      answerSlots[i].element.textContent = '';
-
-      answerSlots[i].element.classList.remove(
-        'slot-filled'
-      );
-
-      slotIndex = i;
-
-    }
-
-  }
-
-  updateAllButtonAppearances();
+function choose(i){
+  if(answered[current])return;
+  selected=i;
+  document.querySelectorAll(".option").forEach((b,n)=>{
+    b.classList.toggle("selected",n===i);
+  });
+  checkAnswer();
 }
-    
-    function checkAnswer() {
-      const correctAnswer = currentQuestion.answer
-  .replace(/\s/g, '')
-  .toUpperCase();
-
-const userAnswer = answerSlots
-  .filter(s => !s.isSpace)
-  .map(s => s.letter || '')
-  .join('');
-      
-      if (userAnswer === correctAnswer) {
-        score += 10;
-        completedQuestions.add(currentQuestionIndex);
-        updateScore();
-        
-        showFeedback('🎉 Benar! +10 poin', 'success');
-        
-        answerSlots.forEach((slot, i) => {
-          setTimeout(() => {
-            slot.element.classList.add('animate-celebrate');
-          }, i * 50);
-        });
-        
-        setTimeout(() => {
-          saveScore(score);
-          showResultScreen();
-        }, 1500);
-      } else {
-        showRetryOverlay();
-      }
-    }
-    function checkAnswerManual() {
-
-  const requiredSlotsFilled = answerSlots
-    .filter(s => !s.isSpace && s.expected !== '')
-    .every(s => s.letter !== null);
-
-  // Jika jawaban belum lengkap
-  if (!requiredSlotsFilled) {
-
-    showFeedback('⚠️ Jawaban belum lengkap!', 'error');
-
+function checkAnswer(){
+  const q=questions[current];
+  const buttons=document.querySelectorAll(".option");
+  buttons.forEach(b=>b.disabled=true);
+  if(selected===q.answer){
+    score+=10;
+    document.getElementById("score").textContent=score;
+    buttons[selected].classList.add("correct");
+    document.getElementById("feedback").textContent="✅ Benar! +10 poin";
+    document.getElementById("feedback").style.color="#15803d";
+  }else{
+    buttons[selected].classList.add("wrong");
+    buttons[q.answer].classList.add("correct");
+    document.getElementById("feedback").textContent="❌ Belum tepat. Jawaban benar: "+q.options[q.answer];
+    document.getElementById("feedback").style.color="#b91c1c";
+  }
+  answered[current]=true;
+  renderSelector();
+}
+function nextQuestion(){
+  if(!answered[current]){
+    document.getElementById("feedback").textContent="⚠️ Pilih salah satu jawaban terlebih dahulu.";
+    document.getElementById("feedback").style.color="#b45309";
     return;
   }
-
-  // Jika lengkap → cek jawaban
-  checkAnswer();
-
+  if(current<questions.length-1){current++;renderQuestion();}
+  else{finishGame();}
 }
-
-function resetAnswer() {
-
-  answerSlots.forEach(slot => {
-
-    slot.letter = null;
-
-    slot.element.textContent = '';
-
-    slot.element.classList.remove('slot-filled');
-
-  });
-
-  usedLetters = [];
-
-  lastClickedLetter = null;
-
-  const buttons =
-    document.querySelectorAll('#letter-buttons button');
-
-  buttons.forEach(btn => {
-
-    btn.disabled = false;
-
-    btn.className =
-      'letter-btn w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-blue-500 to-cyan-500 text-white text-sm md:text-base font-bold rounded-lg shadow-lg hover:shadow-xl';
-
-    btn.dataset.usedCount = '0';
-
-  });
-
-  showFeedback('🔄 Jawaban diulang!', 'success');
-
+function previousQuestion(){
+  if(current>0){current--;renderQuestion();}
 }
-    function showRetryOverlay() {
-      const overlay = document.getElementById('retry-overlay');
-      overlay.classList.remove('hidden');
-      showFeedback('😅 Jawaban belum tepat!', 'error');
-    }
-    
-    function closeRetryOverlay() {
-      const overlay = document.getElementById('retry-overlay');
-      overlay.classList.add('hidden');
-      document.getElementById('feedback').innerHTML = '';
-    }
-    
-    function showResultScreen() {
-      document.getElementById('result-score').textContent = '+10';
-      document.getElementById('result-total-score').textContent = score;
-      
-      const correctAnswerDisplay = document.getElementById('correct-answer-display');
-      const correctAnswerText = document.getElementById('correct-answer-text');
-      correctAnswerText.textContent = currentQuestion.answer;
-      correctAnswerDisplay.classList.remove('hidden');
-      
-      showScreen('result-screen');
-      createResultConfetti();
-    }
-    
-    function createResultConfetti() {
-      const container = document.getElementById('result-confetti-container');
-      container.innerHTML = '';
-      
-      const emojis = ['🎉', '⭐', '✨', '🎊', '🌟', '👏', '🌟', '💫'];
-      const colors = ['#0284c7', '#06b6d4', '#14b8a6', '#10b981', '#3b82f6'];
-      
-      for (let i = 0; i < 20; i++) {
-        const piece = document.createElement('div');
-        piece.className = 'confetti-result';
-        piece.style.left = Math.random() * 100 + '%';
-        piece.style.top = '-10px';
-        piece.style.fontSize = Math.random() > 0.5 ? '1.5rem' : '1rem';
-        piece.style.animationDelay = Math.random() * 0.3 + 's';
-        
-        if (Math.random() > 0.3) {
-          piece.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        } else {
-          piece.style.width = '8px';
-          piece.style.height = '8px';
-          piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-          piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        }
-        
-        container.appendChild(piece);
-      }
-    }
-    
-    function nextQuestion() {
-      currentQuestionIndex++;
-      
-      if (currentQuestionIndex < usedQuestions.length) {
-        currentQuestion = usedQuestions[currentQuestionIndex];
-        document.getElementById('correct-answer-display').classList.add('hidden');
-        showScreen('game-screen');
-        setupQuestion();
-        updateQuestionSelector();
-      } else {
-        endGame('complete');
-      }
-    }
-    
-    function showFeedback(message, type) {
-      const feedback = document.getElementById('feedback');
-      const colorClass = type === 'success' ? 'text-green-600 bg-green-100' : 'text-red-600 bg-red-100';
-      
-      feedback.innerHTML = `
-        <div class="px-4 py-2 rounded-xl ${colorClass} font-bold animate-pop">
-          ${message}
-        </div>
-      `;
-    }
-    
-    function updateScore() {
-      document.getElementById('score').textContent = score;
-    }
-    
-    function updateMistakes() {
-      const heartsContainer = document.getElementById('mistake-hearts');
-      const hearts_display = [];
-      
-      for (let i = 0; i < 3; i++) {
-        let emoji = '❤️';
-        
-        const heartStartMistake = (2 - i) * 3 + 1;
-        const heartEndMistake = (2 - i + 1) * 3;
-        
-        if (mistakes >= heartStartMistake && mistakes <= heartEndMistake) {
-          const mistakesInThisHeart = mistakes - heartStartMistake + 1;
-          
-          if (mistakesInThisHeart === 1) {
-            emoji = '🧡';
-          } else if (mistakesInThisHeart === 2) {
-            emoji = '💛';
-          } else if (mistakesInThisHeart === 3) {
-            emoji = '💚';
-          }
-        } else if (mistakes > heartEndMistake) {
-          emoji = '🖤';
-        }
-        
-        hearts_display.push(emoji);
-      }
-      
-      heartsContainer.innerHTML = hearts_display.map(h => `<span class="text-lg">${h}</span>`).join('');
-    }
-    
-    function endGame(reason) {
-      const endEmoji = document.getElementById('end-emoji');
-      const endTitle = document.getElementById('end-title');
-      const endMessage = document.getElementById('end-message');
-      const finalScore = document.getElementById('final-score');
-      const endCorrectAnswerDisplay = document.getElementById('end-correct-answer-display');
-      const endCorrectAnswerText = document.getElementById('end-correct-answer-text');
-      
-      finalScore.textContent = score;
-      
-      if (completedQuestions.size > 0) {
-        let lastCorrectQuestion = null;
-        for (let i = currentQuestionIndex - 1; i >= 0; i--) {
-          if (completedQuestions.has(i)) {
-            lastCorrectQuestion = usedQuestions[i];
-            break;
-          }
-        }
-        
-        if (lastCorrectQuestion) {
-          endCorrectAnswerText.textContent = lastCorrectQuestion.answer;
-          endCorrectAnswerDisplay.classList.remove('hidden');
-        }
-      }
-      
-      if (reason === 'complete' && score >= 200) {
-        endEmoji.textContent = '🏆';
-        endTitle.textContent = 'Sempurna!';
-        endMessage.textContent = 'Kamu berhasil menyelesaikan kuis dengan baik!';
-        createConfetti();
-      } else if (reason === 'mistakes') {
-        endEmoji.textContent = '😢';
-        endTitle.textContent = 'Game Over!';
-        endMessage.textContent = 'Terlalu banyak kesalahan. Ayo coba lagi!';
-      } else if (score >= 50) {
-        endEmoji.textContent = '🎯';
-        endTitle.textContent = 'Bagus!';
-        endMessage.textContent = 'Usaha yang baik! Terus berlatih!';
-      } else {
-        endEmoji.textContent = '💪';
-        endTitle.textContent = 'Jangan Menyerah!';
-        endMessage.textContent = 'Terus berlatih untuk hasil yang lebih baik!';
-      }
-      
-      showScreen('end-screen');
-    }
-    
-    function createConfetti() {
-      const container = document.getElementById('confetti-container');
-      container.innerHTML = '';
-      
-      const colors = ['#0284c7', '#06b6d4', '#14b8a6', '#10b981', '#3b82f6'];
-      
-      for (let i = 0; i < 30; i++) {
-        const piece = document.createElement('div');
-        piece.className = 'confetti-piece';
-        piece.style.left = Math.random() * 100 + '%';
-        piece.style.top = Math.random() * 50 + '%';
-        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        piece.style.animationDelay = Math.random() * 0.5 + 's';
-        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-        container.appendChild(piece);
-      }
-    }
-    
-    function applyConfig(cfg) {
-      document.getElementById('game-title').textContent = cfg.game_title || defaultConfig.game_title;
-      document.getElementById('start-btn').textContent = cfg.start_button_text || defaultConfig.start_button_text;
-    }
-    
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange: async (cfg) => {
-          config = { ...defaultConfig, ...cfg };
-          applyConfig(config);
-        },
-        mapToCapabilities: (cfg) => ({
-          recolorables: [],
-          borderables: [],
-          fontEditable: undefined,
-          fontSizeable: undefined
-        }),
-        mapToEditPanelValues: (cfg) => new Map([
-          ["game_title", cfg.game_title || defaultConfig.game_title],
-          ["start_button_text", cfg.start_button_text || defaultConfig.start_button_text]
-        ])
-      });
-    }
-    document.addEventListener('keydown', function(event) {
-
-  let key = event.key.toUpperCase();
-
-  // Tombol spasi
-  if (event.key === ' ') {
-    key = ' ';
-  }
-
-  // Cari tombol sesuai huruf keyboard
-  const buttons = document.querySelectorAll('#letter-buttons button');
-
-  buttons.forEach(btn => {
-
-    const letter = btn.dataset.letter;
-
-    if (letter === key && !btn.disabled) {
-
-      selectLetter(btn);
-
-      btn.classList.add('animate-pop');
-
-      setTimeout(() => {
-        btn.classList.remove('animate-pop');
-      }, 300);
-
-    }
-
+function finishGame(){
+  show("resultScreen");
+  document.getElementById("finalScore").textContent=score+"/200";
+  let msg=score>=180?"🌟 Sangat baik!":"👍 Tetap semangat belajar dan berlatih!";
+  if(score<100)msg="💪 Jangan menyerah. Ayo belajar dan coba lagi!";
+  document.getElementById("finalMessage").textContent=msg;
+  const review=document.getElementById("review");
+  review.innerHTML="<b>Ringkasan:</b><br>"+questions.map((q,i)=>
+    `${i+1}. ${q.options[q.answer]}`
+  ).join("<br>");
+}
+function restartGame(){startGame();}
+function toggleSelector(){
+  document.getElementById("selector").classList.toggle("hidden");
+}
+function renderSelector(){
+  const grid=document.getElementById("selectorGrid");
+  grid.innerHTML="";
+  questions.forEach((q,i)=>{
+    const b=document.createElement("button");
+    b.className="qnum";
+    b.textContent=i+1;
+    if(i===current)b.classList.add("current");
+    if(answered[i])b.classList.add("done");
+    b.onclick=()=>{current=i;renderQuestion();document.getElementById("selector").classList.add("hidden");};
+    grid.appendChild(b);
   });
-
-  // Tombol Backspace
-  if (event.key === 'Backspace') {
-
-    for (let i = answerSlots.length - 1; i >= 0; i--) {
-
-      if (answerSlots[i].letter) {
-        removeLetterFromSlot(i);
-        break;
-      }
-
-    }
-
-  }
-
-});
-    applyConfig(config);
-    initializeDataSDK();
-  </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d1226e6f194f8d6',t:'MTc3MTYzNDAwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+}
+</script>
+</body>
 </html>

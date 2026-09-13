@@ -1,0 +1,1632 @@
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Petualangan Kelas 5</title>
+
+
+<!-- =====================================================
+     FONT
+===================================================== -->
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+
+/* =====================================================
+   HTML & BODY
+===================================================== */
+
+html,
+body{
+
+    margin:0;
+
+    padding:0;
+
+}
+
+
+body{
+
+    display:block;
+
+    min-height:100vh;
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    background:
+        url(
+            'https://i.imgur.com/clG3P3n.png'
+        )
+        no-repeat
+        center
+        center
+        fixed;
+
+    background-size:cover;
+
+    color:#fff;
+
+}
+
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+nav{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    padding:
+        1rem
+        2rem;
+
+    box-shadow:
+        0 4px 8px
+        rgba(0,0,0,.20);
+
+}
+
+
+.nav-right{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:.5rem;
+
+    flex-wrap:wrap;
+
+}
+
+
+nav a{
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .95
+        );
+
+    padding:
+        .5rem
+        1rem;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+    color:#0288d1;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:.4rem;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+nav a:hover{
+
+    transform:
+        translateY(-2px)
+        scale(1.04);
+
+    box-shadow:
+        0 6px 12px
+        rgba(0,0,0,.20);
+
+}
+
+
+/* =====================================================
+   INFORMASI SISWA
+===================================================== */
+
+.student-info{
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .95
+        );
+
+    color:#0288d1;
+
+    padding:
+        .5rem
+        1rem;
+
+    border-radius:8px;
+
+    font-size:.85rem;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:.3rem;
+
+    box-shadow:
+        0 3px 8px
+        rgba(0,0,0,.15);
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+.logout-btn{
+
+    background:#d32f2f;
+
+    color:#fff;
+
+    border:none;
+
+    padding:
+        .55rem
+        1rem;
+
+    border-radius:8px;
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+
+.logout-btn:hover{
+
+    background:#b71c1c;
+
+    transform:
+        scale(1.05);
+
+}
+
+
+/* =====================================================
+   JUDUL
+===================================================== */
+
+.title-section{
+
+    text-align:center;
+
+    margin:
+        30px
+        20px
+        10px;
+
+}
+
+
+.title-section h1{
+
+    font-size:2rem;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .88
+        );
+
+    display:inline-block;
+
+    padding:
+        .5rem
+        1.5rem;
+
+    border-radius:12px;
+
+    color:#0288d1;
+
+    text-shadow:
+        1px
+        1px
+        2px
+        rgba(
+            255,
+            255,
+            255,
+            .6
+        );
+
+}
+
+
+/* =====================================================
+   SAPAAN
+===================================================== */
+
+.welcome-student{
+
+    margin:
+        15px
+        auto
+        8px;
+
+    width:
+        fit-content;
+
+    max-width:90%;
+
+    padding:
+        10px
+        22px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .95
+        );
+
+    color:#7b1fa2;
+
+    border-radius:14px;
+
+    font-size:1.15rem;
+
+    font-weight:700;
+
+    box-shadow:
+        0 5px 12px
+        rgba(0,0,0,.20);
+
+    animation:
+        welcomePop
+        .6s
+        ease;
+
+}
+
+
+.welcome-message{
+
+    text-align:center;
+
+    color:#fff;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    margin:
+        8px
+        0
+        5px;
+
+    text-shadow:
+        1px
+        2px
+        3px
+        rgba(0,0,0,.50);
+
+}
+
+
+@keyframes welcomePop{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+            translateY(-15px)
+            scale(.95);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =====================================================
+   PENGUMUMAN
+===================================================== */
+
+.pengumuman-box{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-top:18px;
+
+}
+
+
+.pengumuman-btn{
+
+    background:
+        linear-gradient(
+            45deg,
+            #0288d1,
+            #7b1fa2
+        );
+
+    padding:
+        12px
+        28px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-size:1.2rem;
+
+    font-weight:bold;
+
+    color:#fff;
+
+    border:
+        3px
+        solid
+        #fff;
+
+    box-shadow:
+        0 6px 12px
+        rgba(0,0,0,.30);
+
+    transition:
+        all .3s ease;
+
+}
+
+
+.pengumuman-btn:hover{
+
+    transform:
+        scale(1.08);
+
+    background:
+        linear-gradient(
+            45deg,
+            #039be5,
+            #9c27b0
+        );
+
+}
+
+
+/* =====================================================
+   KOTAK AKTIVITAS SISWA
+===================================================== */
+
+#daftarSiswaAktif{
+
+    width:100%;
+
+    max-width:700px;
+
+    height:160px;
+
+    margin:
+        20px
+        auto;
+
+    padding:10px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .92
+        );
+
+    border-radius:16px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.20);
+
+    overflow:hidden;
+
+}
+
+
+/* =====================================================
+   JUMLAH SISWA ONLINE
+===================================================== */
+
+.jumlah-siswa-online{
+
+    position:relative;
+
+    z-index:2;
+
+    background:
+        linear-gradient(
+            45deg,
+            #0288d1,
+            #7b1fa2
+        );
+
+    color:#fff;
+
+    padding:
+        9px
+        14px;
+
+    border-radius:10px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+    text-align:center;
+
+    box-shadow:
+        0 3px 8px
+        rgba(0,0,0,.15);
+
+}
+
+
+/* =====================================================
+   PEMBUNGKUS DAFTAR SISWA
+===================================================== */
+
+.daftar-siswa-scroll{
+
+    height:88px;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    padding-right:4px;
+
+}
+
+
+/* =====================================================
+   ITEM SISWA
+===================================================== */
+
+.siswa-online-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:
+        rgba(
+            248,
+            251,
+            255,
+            .98
+        );
+
+    color:#333;
+
+    padding:
+        8px
+        10px;
+
+    margin-bottom:6px;
+
+    border-radius:10px;
+
+    border:
+        1px
+        solid
+        rgba(
+            2,
+            136,
+            209,
+            .12
+        );
+
+}
+
+
+/* =====================================================
+   STATUS ONLINE
+===================================================== */
+
+.status-online{
+
+    font-size:18px;
+
+    flex-shrink:0;
+
+}
+
+
+/* =====================================================
+   INFORMASI SISWA
+===================================================== */
+
+.siswa-info{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+/* =====================================================
+   NAMA SISWA
+===================================================== */
+
+.siswa-nama{
+
+    font-weight:700;
+
+    color:#0288d1;
+
+    font-size:.9rem;
+
+}
+
+
+/* =====================================================
+   STATUS AKTIVITAS
+===================================================== */
+
+.siswa-status{
+
+    font-size:.72rem;
+
+    color:#7b1fa2;
+
+    font-weight:600;
+
+    margin-top:1px;
+
+}
+
+
+/* =====================================================
+   HALAMAN
+===================================================== */
+
+.siswa-halaman{
+
+    font-size:.72rem;
+
+    color:#555;
+
+    margin-top:1px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+
+/* =====================================================
+   WAKTU
+===================================================== */
+
+.siswa-waktu{
+
+    font-size:.65rem;
+
+    color:#78909c;
+
+    margin-top:1px;
+
+}
+
+
+/* =====================================================
+   KOSONG
+===================================================== */
+
+.siswa-kosong{
+
+    background:#fff;
+
+    color:#555;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+.daftar-siswa-scroll::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+
+.daftar-siswa-scroll::-webkit-scrollbar-track{
+
+    background:#eef7fb;
+
+    border-radius:10px;
+
+}
+
+
+.daftar-siswa-scroll::-webkit-scrollbar-thumb{
+
+    background:#0288d1;
+
+    border-radius:10px;
+
+}
+
+
+.daftar-siswa-scroll::-webkit-scrollbar-thumb:hover{
+
+    background:#7b1fa2;
+
+}
+
+
+/* =====================================================
+   GRID PETUALANGAN
+===================================================== */
+
+.map-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(
+                220px,
+                1fr
+            )
+        );
+
+    gap:20px;
+
+    padding:30px;
+
+    max-width:1100px;
+
+    margin:auto;
+
+}
+
+
+/* =====================================================
+   KARTU PETUALANGAN
+===================================================== */
+
+.map-item{
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .90
+        );
+
+    border-radius:15px;
+
+    padding:20px;
+
+    text-align:center;
+
+    color:#0288d1;
+
+    box-shadow:
+        0 4px 10px
+        rgba(0,0,0,.20);
+
+    transition:
+        transform .3s ease;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    font-size:1.1rem;
+
+}
+
+
+.map-item:hover{
+
+    transform:
+        scale(1.05);
+
+    background-color:
+        #dff6ff;
+
+}
+
+
+.map-item .emoji{
+
+    font-size:2.5rem;
+
+    display:block;
+
+    margin-bottom:10px;
+
+}
+
+
+/* =====================================================
+   MENU TERSEMBUNYI
+===================================================== */
+
+.map-item.hide-menu{
+
+    display:none !important;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:768px){
+
+    nav{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+        padding:1rem;
+
+    }
+
+
+    .nav-right{
+
+        justify-content:center;
+
+    }
+
+
+    nav a,
+    .student-info,
+    .logout-btn{
+
+        font-size:.8rem;
+
+        padding:
+            .5rem
+            .7rem;
+
+    }
+
+
+    .title-section h1{
+
+        font-size:1.5rem;
+
+        padding:
+            .5rem
+            1rem;
+
+    }
+
+
+    .welcome-student{
+
+        font-size:1rem;
+
+        padding:
+            9px
+            15px;
+
+        text-align:center;
+
+    }
+
+
+    .welcome-message{
+
+        font-size:.9rem;
+
+        padding:
+            0
+            15px;
+
+    }
+
+
+    #daftarSiswaAktif{
+
+        width:
+            calc(100% - 30px);
+
+        height:150px;
+
+        margin:
+            15px
+            auto;
+
+    }
+
+
+    .daftar-siswa-scroll{
+
+        height:82px;
+
+    }
+
+
+    .map-grid{
+
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+
+        gap:12px;
+
+        padding:
+            20px
+            15px;
+
+    }
+
+
+    .map-item{
+
+        font-size:1rem;
+
+        padding:
+            15px
+            10px;
+
+    }
+
+
+    .map-item .emoji{
+
+        font-size:2rem;
+
+    }
+
+}
+
+
+@media(max-width:480px){
+
+    .map-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+/* =====================================================
+   GALERI
+===================================================== */
+
+.gallery-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(
+                200px,
+                1fr
+            )
+        );
+
+    gap:20px;
+
+    padding:30px;
+
+    max-width:900px;
+
+    margin:auto;
+
+}
+
+
+.gallery-item{
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .90
+        );
+
+    border-radius:15px;
+
+    padding:25px;
+
+    text-align:center;
+
+    color:#0288d1;
+
+    box-shadow:
+        0 4px 10px
+        rgba(0,0,0,.20);
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    font-size:1.1rem;
+
+}
+
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+audio{
+
+    display:none;
+
+}
+
+
+
+/* =====================================================
+   TATA LETAK HEADER PETUALANGAN
+   Judul di kiri — Siswa Online di kanan
+===================================================== */
+
+.hero-layout{
+    width:calc(100% - 60px);
+    max-width:1180px;
+    margin:26px auto 10px;
+    display:grid;
+    grid-template-columns:minmax(0, 1.15fr) minmax(340px, .85fr);
+    gap:28px;
+    align-items:center;
+}
+
+.hero-left{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:12px 10px;
+}
+
+.hero-left .title-section{
+    margin:0 0 12px;
+    text-align:center;
+}
+
+.hero-left .title-section h1{
+    margin:0;
+    font-size:clamp(1.7rem, 3vw, 2.35rem);
+    padding:.65rem 1.4rem;
+    line-height:1.25;
+}
+
+.hero-left .welcome-student{
+    margin:8px auto 6px;
+}
+
+.hero-left .welcome-message{
+    margin:5px 0 12px;
+}
+
+.hero-left .pengumuman-box{
+    margin-top:8px;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:900px){
+
+    .hero-layout{
+        grid-template-columns:1fr 1fr;
+        gap:18px;
+        width:calc(100% - 30px);
+    }
+
+    
+
+    .hero-left .title-section h1{
+        font-size:1.65rem;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .hero-layout{
+        grid-template-columns:1fr;
+        width:calc(100% - 30px);
+        gap:14px;
+        margin-top:18px;
+    }
+
+    .hero-left{
+        padding:5px 0;
+    }
+
+    .hero-left .title-section{
+        margin-bottom:8px;
+    }
+
+    .hero-left .title-section h1{
+        font-size:1.5rem;
+    }
+
+    
+
+}
+
+@media(max-width:480px){
+
+    .hero-layout{
+        width:calc(100% - 20px);
+    }
+
+    
+
+    
+
+    
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVIGASI
+===================================================== -->
+
+<nav>
+
+    <div class="nav-right">
+
+        <a href="../index.html">
+            🏠 Beranda
+        </a>
+
+
+        <a href="#">
+            📌 Program
+        </a>
+
+
+        <a href="galeri.html">
+            🖼️ Galeri
+        </a>
+
+
+        <a href="kelas.html">
+            🏫 Kelas
+        </a>
+
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     HEADER PETUALANGAN & SISWA ONLINE
+===================================================== -->
+
+<section class="hero-layout">
+
+    <!-- =================================================
+         SISI KIRI: JUDUL DAN SAPAAN
+    ================================================= -->
+
+    <div class="hero-left">
+
+        <div class="title-section">
+            <h1>
+                📖 Petualangan Belajar Kelas 5
+            </h1>
+        </div>
+
+        <div
+            id="welcomeStudent"
+            class="welcome-student"
+        >
+            👋 Selamat datang, Siswa!
+        </div>
+
+        <div class="welcome-message">
+            🌟 Yuk lanjutkan petualangan belajarmu hari ini!
+        </div>
+
+        <div class="pengumuman-box">
+            <a
+                href="../pdf-tofas/tofas.html"
+                class="pengumuman-btn"
+            >
+                📢 Pengumuman
+            </a>
+        </div>
+
+    </div>
+
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     PETA PETUALANGAN
+===================================================== -->
+
+<div class="map-grid">
+
+
+    <a
+        href="istanap-pancasila/Istana_Pancasila.html"
+        class="map-item"
+        data-halaman="Istana Pancasila"
+    >
+
+        <span class="emoji">
+            ⭐
+        </span>
+
+        Istana Pancasila
+
+    </a>
+
+
+    <a
+        href="Pulau-Bahasa-Indonesia/pulau.html"
+        class="map-item"
+        data-halaman="Pulau Bahasa Indonesia"
+    >
+
+        <span class="emoji">
+            📚
+        </span>
+
+        Pulau Bahasa Indonesia
+
+    </a>
+
+
+    <a
+        href="lembah/lembah.html"
+        class="map-item"
+        data-halaman="Lembah Matematika"
+    >
+
+        <span class="emoji">
+            ⛰️
+        </span>
+
+        Lembah Matematika
+
+    </a>
+
+
+    <a
+        href="hutan/hutan.html"
+        class="map-item"
+        data-halaman="Hutan IPAS"
+    >
+
+        <span class="emoji">
+            🌿
+        </span>
+
+        Hutan IPAS
+
+    </a>
+
+
+    <a
+        href="Gunung-Seni-Budaya/gunung.html"
+        class="map-item"
+        data-halaman="Gunung Seni Budaya"
+    >
+
+        <span class="emoji">
+            🎨
+        </span>
+
+        Gunung Seni Budaya
+
+    </a>
+
+
+    <a
+        href="Basa_Jawa/landing-page-bahasa-jawa.html"
+        class="map-item"
+        data-halaman="Desa Bahasa Jawa"
+    >
+
+        <span class="emoji">
+            🏡
+        </span>
+
+        Desa Bahasa Jawa
+
+    </a>
+
+
+    <!-- =================================================
+         KODING
+    ================================================= -->
+
+    <a
+        href="koding/index.html"
+        class="map-item hide-menu"
+        data-halaman="Koding"
+    >
+
+        <span class="emoji">
+            💻
+        </span>
+
+        KODING
+
+    </a>
+
+
+    <a
+        href="koding2/index.html"
+        class="map-item hide-menu"
+        data-halaman="Koding 2"
+    >
+
+        <span class="emoji">
+            💻
+        </span>
+
+        KODING-2
+
+    </a>
+
+
+    <a
+        href="koding/mode3/index.html"
+        class="map-item hide-menu"
+        data-halaman="Koding 3"
+    >
+
+        <span class="emoji">
+            💻
+        </span>
+
+        KODING-3
+
+    </a>
+
+
+    <a
+        href="koding/mode4/index.html"
+        class="map-item hide-menu"
+        data-halaman="Koding 4"
+    >
+
+        <span class="emoji">
+            💻
+        </span>
+
+        KODING-4
+
+    </a>
+
+
+    <a
+        href="koding/mode5/index.html"
+        class="map-item hide-menu"
+        data-halaman="Koding 5"
+    >
+
+        <span class="emoji">
+            💻
+        </span>
+
+        KODING-5
+
+    </a>
+
+
+    <!-- =================================================
+         TUGAS
+    ================================================= -->
+
+    <a
+        href="tugas/tugas.html"
+        class="map-item"
+        data-halaman="Tugas Kelas 5"
+    >
+
+        <span class="emoji">
+            🧠
+        </span>
+
+        Tugas
+
+    </a>
+
+
+    <!-- =================================================
+         UJI COBA
+    ================================================= -->
+
+    <a
+        href="lembah/uji_coba/soal-wisata1_cba.html"
+        class="map-item hide-menu"
+        data-halaman="Uji Coba"
+    >
+
+        <span class="emoji">
+            🧪
+        </span>
+
+        Uji Coba
+
+    </a>
+
+
+    <!-- =================================================
+         DASHBOARD GURU
+    ================================================= -->
+
+    <a
+        href="../dashboard_guru/dashboard-guru.html"
+        class="map-item hide-menu"
+        data-halaman="Dashboard Guru"
+    >
+
+        <span class="emoji">
+            👨‍🏫
+        </span>
+
+        Dashboard Guru
+
+    </a>
+
+</div>
+
+
+<!-- =====================================================
+     AUDIO KLIK
+===================================================== -->
+
+<audio
+    id="clickSound"
+    src="suara/button-press.mp3"
+    preload="auto"
+></audio>
+
+
+<script>
+/* =====================================================
+   IDENTITAS SISWA DARI HALAMAN IDENTITAS
+===================================================== */
+const identitasSiswa = JSON.parse(localStorage.getItem("petualanganSiswa") || "null");
+
+if(!identitasSiswa){
+    window.location.replace("identitas.html");
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+    const welcome = document.getElementById("welcomeStudent");
+    if(welcome && identitasSiswa){
+        welcome.textContent =
+            "👋 Selamat datang, " + identitasSiswa.nama +
+            " — Kelas " + identitasSiswa.kelas +
+            " • Absen " + identitasSiswa.absen;
+    }
+
+    // Tampilkan identitas di bagian navbar jika elemen tersedia.
+    const navRight = document.querySelector(".nav-right");
+    if(navRight && identitasSiswa){
+        const box = document.createElement("div");
+        box.className = "student-info";
+        box.textContent = "👤 " + identitasSiswa.nama + " | " +
+                          identitasSiswa.kelas + " | Absen " + identitasSiswa.absen;
+        navRight.prepend(box);
+    }
+});
+
+/* =====================================================
+   AUDIO KLIK
+===================================================== */
+
+const clickSound = document.getElementById("clickSound");
+
+document.querySelectorAll("a, button").forEach(function(button){
+    button.addEventListener("click", function(){
+        if(!clickSound) return;
+
+        clickSound.currentTime = 0;
+        clickSound.play().catch(function(){});
+    });
+});
+
+/* =====================================================
+   SISTEM IDENTITAS & PRESENSI
+===================================================== */
+const PETUALANGAN_API = "URL_WEB_APP_GOOGLE_APPS_SCRIPT";
+const siswa = JSON.parse(localStorage.getItem("petualanganSiswa") || "null");
+
+if (!siswa) {
+    window.location.replace("identitas.html");
+}
+
+function getSiswa() {
+    return JSON.parse(localStorage.getItem("petualanganSiswa") || "null");
+}
+
+async function kirimAktivitas(halaman, aktivitas="aktif") {
+    const s = getSiswa();
+    if (!s || !PETUALANGAN_API || PETUALANGAN_API === "URL_WEB_APP_GOOGLE_APPS_SCRIPT") return;
+    try {
+        await fetch(PETUALANGAN_API, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {"Content-Type":"text/plain;charset=utf-8"},
+            body: JSON.stringify({
+                action: "presence",
+                sessionId: s.sessionId,
+                nama: s.nama,
+                kelas: s.kelas,
+                absen: s.absen,
+                halaman: halaman,
+                aktivitas: aktivitas,
+                waktu: new Date().toISOString()
+            })
+        });
+    } catch(e) { console.warn("Presensi:", e); }
+}
+
+function simpanNilaiKuis(namaKuis, skor, totalSoal) {
+    const s = getSiswa();
+    if (!s || !PETUALANGAN_API || PETUALANGAN_API === "URL_WEB_APP_GOOGLE_APPS_SCRIPT") return;
+    const payload = {
+        action: "score",
+        sessionId: s.sessionId,
+        nama: s.nama,
+        kelas: s.kelas,
+        absen: s.absen,
+        kuis: namaKuis,
+        skor: Number(skor),
+        totalSoal: Number(totalSoal),
+        persentase: totalSoal ? Math.round(Number(skor) / Number(totalSoal) * 100) : 0,
+        waktu: new Date().toISOString()
+    };
+    fetch(PETUALANGAN_API, {
+        method:"POST", mode:"no-cors",
+        headers:{"Content-Type":"text/plain;charset=utf-8"},
+        body:JSON.stringify(payload)
+    }).catch(e => console.warn("Nilai:", e));
+}
+
+window.simpanNilaiKuis = simpanNilaiKuis;
+window.getSiswa = getSiswa;
+
+document.addEventListener("DOMContentLoaded", function(){
+    const s = getSiswa();
+    if (!s) return;
+
+    const welcome = document.getElementById("welcomeStudent");
+    if (welcome) {
+        welcome.textContent = "👋 Selamat datang, " + s.nama +
+            " — Kelas " + s.kelas + " • Absen " + s.absen;
+    }
+
+    const navRight = document.querySelector(".nav-right");
+    if (navRight && !document.getElementById("studentIdentityBox")) {
+        const box = document.createElement("div");
+        box.id = "studentIdentityBox";
+        box.className = "student-info";
+        box.textContent = "👤 " + s.nama + " | " + s.kelas + " | Absen " + s.absen;
+        navRight.prepend(box);
+    }
+
+    kirimAktivitas("Petualangan Kelas 5", "online");
+});
+
+/* Kirim heartbeat agar guru dapat melihat siswa yang masih aktif. */
+setInterval(() => kirimAktivitas("Petualangan Kelas 5", "online"), 60000);
+</script>

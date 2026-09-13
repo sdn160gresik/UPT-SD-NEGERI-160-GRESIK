@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Identitas Siswa - Petualangan Kelas 5</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;font-family:Poppins,sans-serif;color:#fff;background:linear-gradient(135deg,rgba(2,136,209,.88),rgba(123,31,162,.88)),url('https://i.imgur.com/clG3P3n.png') center/cover fixed}
+.card{width:min(520px,100%);padding:32px;border-radius:26px;background:rgba(255,255,255,.95);color:#263238;box-shadow:0 18px 45px rgba(0,0,0,.35);border:3px solid rgba(255,255,255,.8)}
+.logo{text-align:center;font-size:3rem}.title{text-align:center;color:#0288d1;font-size:1.8rem;font-weight:800}.sub{text-align:center;color:#7b1fa2;font-weight:600;margin:5px 0 22px}
+label{display:block;font-weight:700;color:#455a64;margin:13px 0 6px}
+input,select{width:100%;padding:13px 14px;border:2px solid #d7e8f2;border-radius:12px;font:inherit;outline:none;background:#fff}
+input:focus,select:focus{border-color:#0288d1;box-shadow:0 0 0 3px rgba(2,136,209,.12)}
+button{width:100%;margin-top:22px;padding:14px;border:0;border-radius:13px;background:linear-gradient(45deg,#0288d1,#7b1fa2);color:#fff;font:700 1.05rem Poppins;cursor:pointer;box-shadow:0 7px 15px rgba(0,0,0,.22)}
+button:disabled{opacity:.65;cursor:wait}.status{text-align:center;font-weight:700;margin-top:12px;min-height:22px}.note{text-align:center;color:#78909c;font-size:.78rem;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="card">
+<div class="logo">🧭</div>
+<div class="title">Petualangan Belajar Kelas 5</div>
+<div class="sub">Isi identitas untuk memulai</div>
+<form id="formIdentitas">
+<label>👤 Nama</label>
+<input id="nama" type="text" required placeholder="Nama lengkap">
+<label>🏫 Kelas</label>
+<select id="kelas" required>
+<option value="">Pilih kelas</option><option>5 A</option><option>5 B</option><option>5</option>
+</select>
+<label>🔢 Nomor Absen</label>
+<input id="absen" type="number" min="1" max="50" required placeholder="Nomor absen">
+<button id="btn" type="submit">🚀 Mulai Petualangan</button>
+</form>
+<div id="status" class="status"></div>
+<div class="note">Identitas digunakan untuk presensi dan pencatatan nilai kuis.</div>
+</div>
+<script>
+const API_URL="URL_WEB_APP_GOOGLE_APPS_SCRIPT";
+document.getElementById("formIdentitas").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const data={
+   action:"login",
+   sessionId: crypto.randomUUID ? crypto.randomUUID() : Date.now()+"-"+Math.random(),
+   nama:document.getElementById("nama").value.trim(),
+   kelas:document.getElementById("kelas").value,
+   absen:document.getElementById("absen").value,
+   waktu:new Date().toISOString()
+ };
+ localStorage.setItem("petualanganSiswa",JSON.stringify(data));
+ document.getElementById("btn").disabled=true;
+ document.getElementById("status").textContent="⏳ Menyimpan identitas...";
+ try{
+   if(API_URL!=="URL_WEB_APP_GOOGLE_APPS_SCRIPT"){
+     await fetch(API_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)});
+   }
+   document.getElementById("status").textContent="✅ Siap! Membuka petualangan...";
+ }catch(err){
+   document.getElementById("status").textContent="✅ Identitas tersimpan. Membuka petualangan...";
+ }
+ setTimeout(()=>location.href="Petualangan-Kelas-5.html",500);
+});
+</script>
+</body>
+</html>

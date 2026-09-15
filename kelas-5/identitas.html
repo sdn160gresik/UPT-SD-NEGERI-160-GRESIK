@@ -1,66 +1,1464 @@
+
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Identitas Siswa - Petualangan Kelas 5</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Identitas Siswa | Petualangan Kelas 5</title>
+
+
+<!-- =====================================================
+     FONT
+===================================================== -->
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;font-family:Poppins,sans-serif;color:#fff;background:linear-gradient(135deg,rgba(2,136,209,.88),rgba(123,31,162,.88)),url('https://i.imgur.com/clG3P3n.png') center/cover fixed}
-.card{width:min(520px,100%);padding:32px;border-radius:26px;background:rgba(255,255,255,.95);color:#263238;box-shadow:0 18px 45px rgba(0,0,0,.35);border:3px solid rgba(255,255,255,.8)}
-.logo{text-align:center;font-size:3rem}.title{text-align:center;color:#0288d1;font-size:1.8rem;font-weight:800}.sub{text-align:center;color:#7b1fa2;font-weight:600;margin:5px 0 22px}
-label{display:block;font-weight:700;color:#455a64;margin:13px 0 6px}
-input,select{width:100%;padding:13px 14px;border:2px solid #d7e8f2;border-radius:12px;font:inherit;outline:none;background:#fff}
-input:focus,select:focus{border-color:#0288d1;box-shadow:0 0 0 3px rgba(2,136,209,.12)}
-button{width:100%;margin-top:22px;padding:14px;border:0;border-radius:13px;background:linear-gradient(45deg,#0288d1,#7b1fa2);color:#fff;font:700 1.05rem Poppins;cursor:pointer;box-shadow:0 7px 15px rgba(0,0,0,.22)}
-button:disabled{opacity:.65;cursor:wait}.status{text-align:center;font-weight:700;margin-top:12px;min-height:22px}.note{text-align:center;color:#78909c;font-size:.78rem;margin-top:12px}
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+/* =====================================================
+   HTML & BODY
+===================================================== */
+
+html,
+body{
+
+    width:100%;
+
+    height:100%;
+
+    margin:0;
+
+    padding:0;
+
+}
+
+
+body{
+
+    min-height:100vh;
+
+    min-height:100dvh;
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    background:
+        url(
+            'https://i.imgur.com/clG3P3n.png'
+        )
+        no-repeat
+        center
+        center
+        fixed;
+
+    background-size:cover;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+
+    padding:10px;
+
+}
+
+
+/* =====================================================
+   KARTU IDENTITAS
+===================================================== */
+
+.identitas-card{
+
+    width:100%;
+
+    max-width:420px;
+
+    max-height:calc(100vh - 20px);
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .96
+        );
+
+    border-radius:20px;
+
+    padding:
+        18px
+        20px;
+
+    box-shadow:
+        0 10px 28px
+        rgba(0,0,0,.23);
+
+    animation:
+        muncul
+        .6s
+        ease;
+
+}
+
+
+/* =====================================================
+   ANIMASI
+===================================================== */
+
+@keyframes muncul{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(20px)
+            scale(.97);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+
+    text-align:center;
+
+    margin-bottom:13px;
+
+}
+
+
+.logo{
+
+    font-size:2.6rem;
+
+    line-height:1;
+
+    margin-bottom:4px;
+
+}
+
+
+.header h1{
+
+    color:#0288d1;
+
+    font-size:
+        clamp(
+            1.25rem,
+            4vw,
+            1.65rem
+        );
+
+    line-height:1.2;
+
+    font-weight:800;
+
+}
+
+
+.header h2{
+
+    color:#7b1fa2;
+
+    font-size:.82rem;
+
+    margin-top:3px;
+
+    line-height:1.2;
+
+}
+
+
+.header p{
+
+    color:#666;
+
+    font-size:.72rem;
+
+    margin-top:5px;
+
+    line-height:1.35;
+
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form-group{
+
+    margin-bottom:10px;
+
+}
+
+
+.form-group label{
+
+    display:block;
+
+    color:#333;
+
+    font-size:.78rem;
+
+    font-weight:700;
+
+    margin-bottom:4px;
+
+}
+
+
+.form-group input,
+.form-group select{
+
+    width:100%;
+
+    height:42px;
+
+    padding:
+        8px
+        11px;
+
+    border:
+        2px
+        solid
+        #d9eaf3;
+
+    border-radius:10px;
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    font-size:.84rem;
+
+    outline:none;
+
+    transition:
+        .25s;
+
+    background:#fff;
+
+    color:#333;
+
+}
+
+
+.form-group input::placeholder{
+
+    color:#9aa8b0;
+
+}
+
+
+.form-group input:focus,
+.form-group select:focus{
+
+    border-color:#0288d1;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            2,
+            136,
+            209,
+            .10
+        );
+
+}
+
+
+/* =====================================================
+   TOMBOL MASUK
+===================================================== */
+
+.btn-masuk{
+
+    width:100%;
+
+    height:44px;
+
+    border:none;
+
+    border-radius:11px;
+
+    padding:
+        8px
+        15px;
+
+    background:
+        linear-gradient(
+            45deg,
+            #0288d1,
+            #7b1fa2
+        );
+
+    color:#fff;
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    font-size:.9rem;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 5px 12px
+        rgba(0,0,0,.18);
+
+    transition:
+        .25s;
+
+}
+
+
+.btn-masuk:hover{
+
+    transform:
+        translateY(-2px)
+        scale(1.01);
+
+    box-shadow:
+        0 7px 15px
+        rgba(0,0,0,.22);
+
+}
+
+
+.btn-masuk:active{
+
+    transform:
+        scale(.98);
+
+}
+
+
+.btn-masuk:disabled{
+
+    opacity:.6;
+
+    cursor:
+        not-allowed;
+
+    transform:none;
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+#status{
+
+    text-align:center;
+
+    margin-top:7px;
+
+    min-height:19px;
+
+    color:#555;
+
+    font-size:.7rem;
+
+    font-weight:600;
+
+    line-height:1.3;
+
+}
+
+
+/* =====================================================
+   INFORMASI
+===================================================== */
+
+.info{
+
+    margin-top:9px;
+
+    padding:
+        8px
+        10px;
+
+    border-radius:9px;
+
+    background:#eef8ff;
+
+    color:#456;
+
+    text-align:center;
+
+    font-size:.62rem;
+
+    line-height:1.35;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE LAPTOP
+===================================================== */
+
+@media(
+    min-height:700px
+){
+
+    .identitas-card{
+
+        max-width:430px;
+
+        padding:
+            20px
+            22px;
+
+    }
+
+    .logo{
+
+        font-size:2.8rem;
+
+    }
+
+    .header{
+
+        margin-bottom:15px;
+
+    }
+
+    .form-group{
+
+        margin-bottom:11px;
+
+    }
+
+}
+
+
+/* =====================================================
+   LAYAR PENDEK
+   Supaya tidak muncul scroll
+===================================================== */
+
+@media(
+    max-height:650px
+){
+
+    body{
+
+        padding:6px;
+
+    }
+
+
+    .identitas-card{
+
+        max-width:400px;
+
+        padding:
+            12px
+            16px;
+
+        border-radius:17px;
+
+    }
+
+
+    .logo{
+
+        font-size:2rem;
+
+        margin-bottom:2px;
+
+    }
+
+
+    .header{
+
+        margin-bottom:8px;
+
+    }
+
+
+    .header h1{
+
+        font-size:1.25rem;
+
+    }
+
+
+    .header h2{
+
+        font-size:.72rem;
+
+    }
+
+
+    .header p{
+
+        font-size:.62rem;
+
+        margin-top:3px;
+
+    }
+
+
+    .form-group{
+
+        margin-bottom:7px;
+
+    }
+
+
+    .form-group label{
+
+        font-size:.7rem;
+
+        margin-bottom:3px;
+
+    }
+
+
+    .form-group input,
+    .form-group select{
+
+        height:36px;
+
+        padding:
+            5px
+            9px;
+
+        font-size:.76rem;
+
+        border-radius:8px;
+
+    }
+
+
+    .btn-masuk{
+
+        height:38px;
+
+        font-size:.78rem;
+
+        border-radius:9px;
+
+    }
+
+
+    #status{
+
+        margin-top:4px;
+
+        min-height:15px;
+
+        font-size:.62rem;
+
+    }
+
+
+    .info{
+
+        margin-top:5px;
+
+        padding:
+            6px
+            8px;
+
+        font-size:.55rem;
+
+    }
+
+}
+
+
+/* =====================================================
+   HP
+===================================================== */
+
+@media(max-width:480px){
+
+    body{
+
+        padding:7px;
+
+    }
+
+
+    .identitas-card{
+
+        max-width:350px;
+
+        padding:
+            14px
+            15px;
+
+        border-radius:17px;
+
+    }
+
+
+    .logo{
+
+        font-size:2.25rem;
+
+    }
+
+
+    .header{
+
+        margin-bottom:9px;
+
+    }
+
+
+    .header h1{
+
+        font-size:1.25rem;
+
+    }
+
+
+    .header h2{
+
+        font-size:.72rem;
+
+    }
+
+
+    .header p{
+
+        font-size:.62rem;
+
+        margin-top:4px;
+
+    }
+
+
+    .form-group{
+
+        margin-bottom:8px;
+
+    }
+
+
+    .form-group label{
+
+        font-size:.7rem;
+
+        margin-bottom:3px;
+
+    }
+
+
+    .form-group input,
+    .form-group select{
+
+        height:38px;
+
+        padding:
+            6px
+            9px;
+
+        font-size:.76rem;
+
+        border-radius:9px;
+
+    }
+
+
+    .btn-masuk{
+
+        height:40px;
+
+        font-size:.8rem;
+
+    }
+
+
+    #status{
+
+        font-size:.62rem;
+
+        min-height:16px;
+
+        margin-top:5px;
+
+    }
+
+
+    .info{
+
+        margin-top:6px;
+
+        padding:
+            7px
+            8px;
+
+        font-size:.57rem;
+
+    }
+
+}
+
+
+/* =====================================================
+   HP SANGAT PENDEK
+===================================================== */
+
+@media(
+    max-width:480px
+)
+and
+(
+    max-height:600px
+){
+
+    .identitas-card{
+
+        padding:
+            10px
+            13px;
+
+        border-radius:15px;
+
+    }
+
+
+    .logo{
+
+        font-size:1.9rem;
+
+    }
+
+
+    .header{
+
+        margin-bottom:6px;
+
+    }
+
+
+    .header h1{
+
+        font-size:1.1rem;
+
+    }
+
+
+    .header h2{
+
+        font-size:.65rem;
+
+    }
+
+
+    .header p{
+
+        font-size:.55rem;
+
+        margin-top:2px;
+
+    }
+
+
+    .form-group{
+
+        margin-bottom:5px;
+
+    }
+
+
+    .form-group label{
+
+        font-size:.63rem;
+
+    }
+
+
+    .form-group input,
+    .form-group select{
+
+        height:34px;
+
+        font-size:.7rem;
+
+        padding:
+            4px
+            8px;
+
+    }
+
+
+    .btn-masuk{
+
+        height:36px;
+
+        font-size:.72rem;
+
+    }
+
+
+    #status{
+
+        min-height:13px;
+
+        font-size:.55rem;
+
+    }
+
+
+    .info{
+
+        margin-top:4px;
+
+        padding:
+            5px
+            7px;
+
+        font-size:.5rem;
+
+    }
+
+}
+
+
+/* =====================================================
+   LANDSCAPE HP
+===================================================== */
+
+@media(
+    max-height:500px
+)
+and
+(
+    orientation:landscape
+){
+
+    body{
+
+        padding:5px;
+
+    }
+
+
+    .identitas-card{
+
+        max-width:430px;
+
+        padding:
+            8px
+            14px;
+
+        border-radius:14px;
+
+    }
+
+
+    .logo{
+
+        font-size:1.7rem;
+
+        margin-bottom:1px;
+
+    }
+
+
+    .header{
+
+        margin-bottom:5px;
+
+    }
+
+
+    .header h1{
+
+        font-size:1rem;
+
+    }
+
+
+    .header h2{
+
+        font-size:.6rem;
+
+    }
+
+
+    .header p{
+
+        display:none;
+
+    }
+
+
+    .form-group{
+
+        margin-bottom:4px;
+
+    }
+
+
+    .form-group label{
+
+        font-size:.58rem;
+
+        margin-bottom:2px;
+
+    }
+
+
+    .form-group input,
+    .form-group select{
+
+        height:30px;
+
+        font-size:.64rem;
+
+        padding:
+            3px
+            7px;
+
+    }
+
+
+    .btn-masuk{
+
+        height:32px;
+
+        font-size:.67rem;
+
+    }
+
+
+    #status{
+
+        min-height:10px;
+
+        font-size:.5rem;
+
+        margin-top:2px;
+
+    }
+
+
+    .info{
+
+        display:none;
+
+    }
+
+}
+
 </style>
+
 </head>
+
+
 <body>
-<div class="card">
-<div class="logo">🧭</div>
-<div class="title">Petualangan Belajar Kelas 5</div>
-<div class="sub">Isi identitas untuk memulai</div>
-<form id="formIdentitas">
-<label>👤 Nama</label>
-<input id="nama" type="text" required placeholder="Nama lengkap">
-<label>🏫 Kelas</label>
-<select id="kelas" required>
-<option value="">Pilih kelas</option><option>5 A</option><option>5 B</option><option>5</option>
-</select>
-<label>🔢 Nomor Absen</label>
-<input id="absen" type="number" min="1" max="50" required placeholder="Nomor absen">
-<button id="btn" type="submit">🚀 Mulai Petualangan</button>
-</form>
-<div id="status" class="status"></div>
-<div class="note">Identitas digunakan untuk presensi dan pencatatan nilai kuis.</div>
+
+
+<!-- =====================================================
+     KARTU IDENTITAS
+===================================================== -->
+
+<div class="identitas-card">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================= -->
+
+    <div class="header">
+
+
+        <div class="logo">
+            🧭
+        </div>
+
+
+        <h1>
+            Petualangan Kelas 5
+        </h1>
+
+
+        <h2>
+            UPT SDN 160 GRESIK
+        </h2>
+
+
+        <p>
+            Isi identitasmu sebelum memulai petualangan belajar.
+        </p>
+
+
+    </div>
+
+
+    <!-- =================================================
+         FORM IDENTITAS
+    ================================================= -->
+
+    <form id="formIdentitas">
+
+
+        <!-- =================================================
+             NAMA
+        ================================================= -->
+
+        <div class="form-group">
+
+
+            <label for="nama">
+                👤 Nama Lengkap
+            </label>
+
+
+            <input
+                type="text"
+                id="nama"
+                placeholder="Masukkan nama lengkap"
+                autocomplete="name"
+                required
+            >
+
+
+        </div>
+
+
+        <!-- =================================================
+             KELAS
+        ================================================= -->
+
+        <div class="form-group">
+
+
+            <label for="kelas">
+                🏫 Kelas
+            </label>
+
+
+            <!--
+                KELAS DIISI SECARA MANUAL.
+                Tidak lagi menggunakan pilihan dropdown.
+                Contoh pengisian:
+                5A
+                5B
+                5C
+                5
+            -->
+
+            <input
+                type="text"
+                id="kelas"
+                placeholder="Masukkan kelas, contoh: 5A"
+                autocomplete="off"
+                required
+            >
+
+
+        </div>
+
+
+        <!-- =================================================
+             NOMOR ABSEN
+        ================================================= -->
+
+        <div class="form-group">
+
+
+            <label for="absen">
+                🔢 Nomor Absen
+            </label>
+
+
+            <input
+                type="number"
+                id="absen"
+                min="1"
+                max="50"
+                placeholder="Masukkan nomor absen"
+                inputmode="numeric"
+                required
+            >
+
+
+        </div>
+
+
+        <!-- =================================================
+             TOMBOL
+        ================================================= -->
+
+        <button
+            type="submit"
+            class="btn-masuk"
+            id="btnMasuk"
+        >
+
+            🚀 Mulai Petualangan
+
+        </button>
+
+
+    </form>
+
+
+    <!-- =================================================
+         STATUS
+    ================================================= -->
+
+    <div id="status"></div>
+
+
+    <!-- =================================================
+         INFORMASI
+    ================================================= -->
+
+    <div class="info">
+
+        💡 Identitas digunakan untuk mencatat
+        kehadiran dan aktivitas siswa selama
+        menggunakan Petualangan Kelas 5.
+
+    </div>
+
+
 </div>
+
+
+
 <script>
-const API_URL="URL_WEB_APP_GOOGLE_APPS_SCRIPT";
-document.getElementById("formIdentitas").addEventListener("submit",async e=>{
- e.preventDefault();
- const data={
-   action:"login",
-   sessionId: crypto.randomUUID ? crypto.randomUUID() : Date.now()+"-"+Math.random(),
-   nama:document.getElementById("nama").value.trim(),
-   kelas:document.getElementById("kelas").value,
-   absen:document.getElementById("absen").value,
-   waktu:new Date().toISOString()
- };
- localStorage.setItem("petualanganSiswa",JSON.stringify(data));
- document.getElementById("btn").disabled=true;
- document.getElementById("status").textContent="⏳ Menyimpan identitas...";
- try{
-   if(API_URL!=="URL_WEB_APP_GOOGLE_APPS_SCRIPT"){
-     await fetch(API_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)});
-   }
-   document.getElementById("status").textContent="✅ Siap! Membuka petualangan...";
- }catch(err){
-   document.getElementById("status").textContent="✅ Identitas tersimpan. Membuka petualangan...";
- }
- setTimeout(()=>location.href="Petualangan-Kelas-5.html",500);
-});
+
+/* =====================================================
+   URL GOOGLE APPS SCRIPT
+===================================================== */
+
+const GOOGLE_SCRIPT_URL =
+    "GANTI_DENGAN_URL_WEB_APP_APPS_SCRIPT";
+
+
+/* =====================================================
+   ELEMENT FORM
+===================================================== */
+
+const form =
+    document.getElementById(
+        "formIdentitas"
+    );
+
+
+const statusBox =
+    document.getElementById(
+        "status"
+    );
+
+
+const btnMasuk =
+    document.getElementById(
+        "btnMasuk"
+    );
+
+
+/* =====================================================
+   SUBMIT FORM
+===================================================== */
+
+form.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        /* =============================================
+           AMBIL DATA
+        ============================================= */
+
+        const nama =
+            document
+            .getElementById("nama")
+            .value
+            .trim();
+
+
+        const kelas =
+            document
+            .getElementById("kelas")
+            .value
+            .trim();
+
+
+        const absen =
+            document
+            .getElementById("absen")
+            .value;
+
+
+        /* =============================================
+           VALIDASI
+        ============================================= */
+
+        if(
+            !nama ||
+            !kelas ||
+            !absen
+        ){
+
+            statusBox.textContent =
+                "⚠️ Lengkapi semua identitas.";
+
+            return;
+
+        }
+
+
+        /* =============================================
+           VALIDASI NOMOR ABSEN
+        ============================================= */
+
+        const nomorAbsen =
+            Number(absen);
+
+
+        if(
+            nomorAbsen < 1 ||
+            nomorAbsen > 50
+        ){
+
+            statusBox.textContent =
+                "⚠️ Nomor absen harus 1–50.";
+
+            return;
+
+        }
+
+
+        /* =============================================
+           TOMBOL PROSES
+        ============================================= */
+
+        btnMasuk.disabled =
+            true;
+
+
+        btnMasuk.textContent =
+            "⏳ Menyimpan...";
+
+
+        statusBox.textContent =
+            "🔄 Menyimpan identitas siswa...";
+
+
+        /* =============================================
+           SESSION ID
+        ============================================= */
+
+        const sessionId =
+
+            "S" +
+
+            Date.now() +
+
+            "_" +
+
+            Math.random()
+                .toString(36)
+                .substring(2,10);
+
+
+        /* =============================================
+           DATA YANG DIKIRIM
+        ============================================= */
+
+        const data = {
+
+            action:
+                "register",
+
+            nama:
+                nama,
+
+            kelas:
+                kelas,
+
+            absen:
+                nomorAbsen,
+
+            halaman:
+                "Petualangan Kelas 5",
+
+            sessionId:
+                sessionId
+
+        };
+
+
+        /* =============================================
+           KIRIM KE GOOGLE SHEETS
+        ============================================= */
+
+        try{
+
+
+            await fetch(
+
+                GOOGLE_SCRIPT_URL,
+
+                {
+
+                    method:
+                        "POST",
+
+                    mode:
+                        "no-cors",
+
+                    headers:{
+
+                        "Content-Type":
+                            "text/plain;charset=utf-8"
+
+                    },
+
+                    body:
+                        JSON.stringify(data)
+
+                }
+
+            );
+
+
+            /* =========================================
+               SIMPAN IDENTITAS
+            ========================================= */
+
+            localStorage.setItem(
+                "siswaNama",
+                nama
+            );
+
+
+            localStorage.setItem(
+                "siswaKelas",
+                kelas
+            );
+
+
+            localStorage.setItem(
+                "siswaAbsen",
+                nomorAbsen
+            );
+
+
+            localStorage.setItem(
+                "siswaSessionId",
+                sessionId
+            );
+
+
+            /* =========================================
+               STATUS BERHASIL
+            ========================================= */
+
+            statusBox.textContent =
+                "✅ Identitas tersimpan.";
+
+
+            btnMasuk.textContent =
+                "🚀 Membuka Petualangan...";
+
+
+            /* =========================================
+               PINDAH KE HALAMAN UTAMA
+            ========================================= */
+
+            setTimeout(
+
+                function(){
+
+                    window.location.href =
+                        "index.html";
+
+                },
+
+                600
+
+            );
+
+
+        }catch(error){
+
+
+            console.error(
+                "Kesalahan:",
+                error
+            );
+
+
+            statusBox.textContent =
+                "❌ Data belum dapat disimpan. Coba lagi.";
+
+
+            btnMasuk.disabled =
+                false;
+
+
+            btnMasuk.textContent =
+                "🚀 Mulai Petualangan";
+
+
+        }
+
+    }
+);
+
 </script>
+
+
 </body>
+
 </html>

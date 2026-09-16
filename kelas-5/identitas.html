@@ -744,9 +744,6 @@ input:hover{
 
 /* =========================================================
    KONFIGURASI GOOGLE APPS SCRIPT
-
-   GANTI URL DI BAWAH DENGAN URL WEB APP
-   GOOGLE APPS SCRIPT KHUSUS IDENTITAS SISWA.
 ========================================================= */
 
 const GOOGLE_SCRIPT_URL =
@@ -905,11 +902,12 @@ function ambilIdentitas(){
 
     if(
         !Number.isInteger(nomorAbsen) ||
-        nomorAbsen < 1
+        nomorAbsen < 1 ||
+        nomorAbsen > 100
     ){
 
         toast(
-            "⚠️ Nomor absen harus berupa angka yang benar."
+            "⚠️ Nomor absen harus berupa angka 1–100."
         );
 
         absenInput.focus();
@@ -941,20 +939,22 @@ function kirimKeGoogleSheets(data){
     return new Promise(
         function(resolve){
 
-            if(
-                !GOOGLE_SCRIPT_URL ||
-                GOOGLE_SCRIPT_URL.includes(
-                    "https://script.google.com/macros/s/AKfycbzZYIe9341yGnrAHxKQSsVfX1caKHn7Ess_BEu3k6plwY3GVeig7HjhgqaINouQRcyl/exec"
-                )
-            ){
+            /*
+             * Pastikan URL benar-benar tersedia.
+             */
+
+            if(!GOOGLE_SCRIPT_URL){
 
                 console.warn(
                     "URL Google Apps Script belum dipasang."
                 );
 
                 resolve({
+
                     ok:false,
-                    skipped:true
+
+                    skipped:false
+
                 });
 
                 return;
@@ -974,6 +974,11 @@ function kirimKeGoogleSheets(data){
                     );
 
 
+                /*
+                 * Buat iframe tersembunyi
+                 * sebagai target POST.
+                 */
+
                 if(!iframe){
 
                     iframe =
@@ -990,12 +995,22 @@ function kirimKeGoogleSheets(data){
                     iframe.style.display =
                         "none";
 
+                    iframe.setAttribute(
+                        "aria-hidden",
+                        "true"
+                    );
+
                     document.body.appendChild(
                         iframe
                     );
 
                 }
 
+
+                /*
+                 * Buat form POST
+                 * secara dinamis.
+                 */
 
                 const form =
                     document.createElement(
@@ -1016,13 +1031,19 @@ function kirimKeGoogleSheets(data){
                     "none";
 
 
+                /*
+                 * Data yang dikirim.
+                 */
+
                 const fields = {
 
                     nama:data.nama,
 
                     kelas:data.kelas,
 
-                    absen:data.absen,
+                    absen:String(
+                        data.absen
+                    ),
 
                     waktu:
                         new Date().toISOString(),
@@ -1032,6 +1053,11 @@ function kirimKeGoogleSheets(data){
 
                 };
 
+
+                /*
+                 * Masukkan seluruh data
+                 * ke dalam hidden input.
+                 */
 
                 Object.keys(fields).forEach(
                     function(key){
@@ -1058,18 +1084,35 @@ function kirimKeGoogleSheets(data){
                 );
 
 
+                /*
+                 * Masukkan form ke halaman.
+                 */
+
                 document.body.appendChild(
                     form
                 );
 
 
+                /*
+                 * Kirim POST.
+                 */
+
                 form.submit();
 
+
+                /*
+                 * Hapus form setelah
+                 * proses pengiriman.
+                 */
 
                 setTimeout(
                     function(){
 
-                        form.remove();
+                        if(form){
+
+                            form.remove();
+
+                        }
 
                     },
                     3000
@@ -1077,25 +1120,28 @@ function kirimKeGoogleSheets(data){
 
 
                 /*
-                 * Karena POST menuju iframe,
-                 * browser tidak memberikan
-                 * response Google Apps Script
-                 * secara langsung kepada halaman.
+                 * Karena POST diarahkan ke iframe,
+                 * browser tidak memberikan response
+                 * Apps Script secara langsung kepada
+                 * halaman utama.
                  *
-                 * Setelah form berhasil dikirim,
-                 * kita menganggap proses pengiriman
-                 * sudah dilakukan lalu melanjutkan.
+                 * Setelah request dikirim,
+                 * proses dianggap berhasil dikirim.
                  */
 
                 setTimeout(
                     function(){
 
                         resolve({
-                            ok:true
+
+                            ok:true,
+
+                            skipped:false
+
                         });
 
                     },
-                    700
+                    1000
                 );
 
 
@@ -1106,9 +1152,15 @@ function kirimKeGoogleSheets(data){
                     error
                 );
 
+
                 resolve({
+
                     ok:false,
+
+                    skipped:false,
+
                     error:error
+
                 });
 
             }
@@ -1136,8 +1188,14 @@ async function simpanDanLanjut(){
     }
 
 
+    /*
+     * Nonaktifkan tombol
+     * agar tidak terjadi pengiriman ganda.
+     */
+
     btnLanjut.disabled =
         true;
+
 
     loading.classList.add(
         "show"
@@ -1146,8 +1204,7 @@ async function simpanDanLanjut(){
 
     /*
      * Simpan identitas sementara
-     * di browser agar halaman tujuan
-     * dapat menggunakan data siswa.
+     * di browser.
      */
 
     try{
@@ -1167,16 +1224,21 @@ async function simpanDanLanjut(){
     }
 
 
+    /*
+     * Kirim data ke Google Sheets.
+     */
+
     const hasil =
         await kirimKeGoogleSheets(
             data
         );
 
 
-    if(
-        hasil.ok ||
-        hasil.skipped
-    ){
+    /*
+     * Hanya status OK yang dianggap berhasil.
+     */
+
+    if(hasil.ok){
 
         toast(
             "✅ Identitas tersimpan. Membuka Petualangan Kelas 5...",
@@ -1191,23 +1253,25 @@ async function simpanDanLanjut(){
                     HALAMAN_TUJUAN;
 
             },
-            700
+            1000
         );
 
 
     }else{
 
         /*
-         * Jika pengiriman benar-benar gagal,
-         * siswa tidak langsung dipindahkan.
+         * Jika pengiriman gagal,
+         * tetap berada di halaman identitas.
          */
 
         btnLanjut.disabled =
             false;
 
+
         loading.classList.remove(
             "show"
         );
+
 
         toast(
             "❌ Identitas belum berhasil dikirim. Silakan coba lagi."

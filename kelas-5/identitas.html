@@ -1,1464 +1,1279 @@
-
 <!DOCTYPE html>
+
 <html lang="id">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Identitas Siswa | Petualangan Kelas 5</title>
 
-
-<!-- =====================================================
-     FONT
-===================================================== -->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
->
-
-
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
+:root{
+    --primary:#9b4d20;
+    --primary-dark:#713517;
+    --secondary:#e67e22;
+    --accent:#f4b942;
+    --green:#2e8b57;
+    --red:#c0392b;
+    --ink:#4a2c20;
+    --muted:#806b61;
+    --card:#fffdf8;
+    --cream:#fff8e8;
+    --border:#ead7bc;
+    --shadow:rgba(92,48,24,.16);
+}
 
 *{
-    margin:0;
-    padding:0;
     box-sizing:border-box;
 }
 
-
-/* =====================================================
-   HTML & BODY
-===================================================== */
-
 html,
 body{
-
-    width:100%;
-
-    height:100%;
-
     margin:0;
-
-    padding:0;
-
+    min-height:100%;
 }
-
 
 body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    color:var(--ink);
 
+    background:
+        radial-gradient(
+            circle at 10% 15%,
+            rgba(255,255,255,.65) 0 3px,
+            transparent 4px
+        ),
+        radial-gradient(
+            circle at 90% 25%,
+            rgba(255,255,255,.5) 0 3px,
+            transparent 4px
+        ),
+        linear-gradient(
+            135deg,
+            #f7dfb5 0%,
+            #fff4d8 45%,
+            #f3d7ad 100%
+        );
+
+    background-size:auto,auto,cover;
     min-height:100vh;
 
-    min-height:100dvh;
-
-    font-family:
-        'Poppins',
-        sans-serif;
-
-    background:
-        url(
-            'https://i.imgur.com/clG3P3n.png'
-        )
-        no-repeat
-        center
-        center
-        fixed;
-
-    background-size:cover;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
+    padding:20px;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.18;
+
+    background-image:
+        radial-gradient(
+            #fff 1px,
+            transparent 1px
+        );
+
+    background-size:22px 22px;
+}
+
+.app{
+    width:100%;
+    max-width:540px;
+    margin:auto;
+    position:relative;
+    z-index:1;
+}
+
+/* =========================================================
+   KARTU IDENTITAS
+========================================================= */
+
+.identity-card{
+    position:relative;
     overflow:hidden;
 
-    padding:10px;
+    background:rgba(255,253,248,.98);
 
-}
-
-
-/* =====================================================
-   KARTU IDENTITAS
-===================================================== */
-
-.identitas-card{
-
-    width:100%;
-
-    max-width:420px;
-
-    max-height:calc(100vh - 20px);
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            .96
-        );
-
-    border-radius:20px;
-
-    padding:
-        18px
-        20px;
+    border:1px solid var(--border);
+    border-radius:30px;
 
     box-shadow:
-        0 10px 28px
-        rgba(0,0,0,.23);
-
-    animation:
-        muncul
-        .6s
-        ease;
-
+        0 25px 65px rgba(86,45,20,.22),
+        0 8px 20px rgba(86,45,20,.10);
 }
 
-
-/* =====================================================
-   ANIMASI
-===================================================== */
-
-@keyframes muncul{
-
-    from{
-
-        opacity:0;
-
-        transform:
-            translateY(20px)
-            scale(.97);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-    }
-
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-.header{
-
-    text-align:center;
-
-    margin-bottom:13px;
-
-}
-
-
-.logo{
-
-    font-size:2.6rem;
-
-    line-height:1;
-
-    margin-bottom:4px;
-
-}
-
-
-.header h1{
-
-    color:#0288d1;
-
-    font-size:
-        clamp(
-            1.25rem,
-            4vw,
-            1.65rem
-        );
-
-    line-height:1.2;
-
-    font-weight:800;
-
-}
-
-
-.header h2{
-
-    color:#7b1fa2;
-
-    font-size:.82rem;
-
-    margin-top:3px;
-
-    line-height:1.2;
-
-}
-
-
-.header p{
-
-    color:#666;
-
-    font-size:.72rem;
-
-    margin-top:5px;
-
-    line-height:1.35;
-
-}
-
-
-/* =====================================================
-   FORM
-===================================================== */
-
-.form-group{
-
-    margin-bottom:10px;
-
-}
-
-
-.form-group label{
+.identity-card::before{
+    content:"";
 
     display:block;
-
-    color:#333;
-
-    font-size:.78rem;
-
-    font-weight:700;
-
-    margin-bottom:4px;
-
-}
-
-
-.form-group input,
-.form-group select{
-
-    width:100%;
-
-    height:42px;
-
-    padding:
-        8px
-        11px;
-
-    border:
-        2px
-        solid
-        #d9eaf3;
-
-    border-radius:10px;
-
-    font-family:
-        'Poppins',
-        sans-serif;
-
-    font-size:.84rem;
-
-    outline:none;
-
-    transition:
-        .25s;
-
-    background:#fff;
-
-    color:#333;
-
-}
-
-
-.form-group input::placeholder{
-
-    color:#9aa8b0;
-
-}
-
-
-.form-group input:focus,
-.form-group select:focus{
-
-    border-color:#0288d1;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(
-            2,
-            136,
-            209,
-            .10
-        );
-
-}
-
-
-/* =====================================================
-   TOMBOL MASUK
-===================================================== */
-
-.btn-masuk{
-
-    width:100%;
-
-    height:44px;
-
-    border:none;
-
-    border-radius:11px;
-
-    padding:
-        8px
-        15px;
+    height:9px;
 
     background:
         linear-gradient(
-            45deg,
-            #0288d1,
-            #7b1fa2
+            90deg,
+            #9b4d20 0%,
+            #d96c27 35%,
+            #f4b942 70%,
+            #2e8b57 100%
+        );
+}
+
+.identity-card::after{
+    content:"🍜   🍢   🥟   🍚   🍡";
+
+    display:block;
+
+    text-align:center;
+
+    font-size:23px;
+    letter-spacing:4px;
+
+    padding-top:17px;
+}
+
+/* =========================================================
+   ISI IDENTITAS
+========================================================= */
+
+.identity-content{
+    padding:4px 34px 30px;
+}
+
+.school-badge{
+    display:table;
+
+    margin:2px auto 13px;
+
+    padding:7px 14px;
+
+    border-radius:99px;
+
+    background:#f9e6c5;
+    color:var(--primary-dark);
+
+    font-size:12px;
+    font-weight:900;
+
+    border:1px solid #eed2a5;
+}
+
+.identity-icon{
+    width:76px;
+    height:76px;
+
+    margin:0 auto 11px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff0c8,
+            #f7d994
         );
 
-    color:#fff;
+    border:4px solid #fff;
 
-    font-family:
-        'Poppins',
-        sans-serif;
+    box-shadow:
+        0 8px 20px rgba(140,78,27,.15),
+        inset 0 2px 4px rgba(255,255,255,.8);
 
-    font-size:.9rem;
+    font-size:39px;
+}
 
+h1{
+    margin:5px 0 7px;
+
+    text-align:center;
+
+    color:var(--primary-dark);
+
+    font-size:27px;
+    line-height:1.25;
+}
+
+.subtitle{
+    margin:0 auto 25px;
+
+    max-width:410px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:14px;
+    line-height:1.6;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:16px;
+}
+
+.field{
+    position:relative;
+}
+
+.field label{
+    display:block;
+
+    margin-bottom:7px;
+
+    color:#5c3929;
+
+    font-size:14px;
     font-weight:800;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+.input-icon{
+    position:absolute;
+
+    left:14px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    font-size:19px;
+
+    pointer-events:none;
+
+    z-index:2;
+}
+
+input{
+    width:100%;
+
+    padding:14px 15px 14px 46px;
+
+    border:2px solid #e7d5bb;
+    border-radius:15px;
+
+    font-size:16px;
+
+    outline:none;
+
+    background:#fffdfa;
+    color:var(--ink);
+
+    transition:.2s;
+
+    font-family:inherit;
+}
+
+input::placeholder{
+    color:#b29e90;
+}
+
+input:focus{
+    border-color:#d77b35;
+
+    background:#fff;
+
+    box-shadow:
+        0 0 0 4px rgba(230,126,34,.13),
+        0 5px 15px rgba(120,65,28,.08);
+}
+
+input:hover{
+    border-color:#d7ad7d;
+}
+
+/* =========================================================
+   TOMBOL
+========================================================= */
+
+.action-area{
+    margin-top:22px;
+}
+
+.btn{
+    border:0;
+    border-radius:16px;
+
+    padding:15px 20px;
+
+    font-weight:900;
+    font-size:16px;
 
     cursor:pointer;
 
-    box-shadow:
-        0 5px 12px
-        rgba(0,0,0,.18);
-
     transition:
-        .25s;
+        transform .2s,
+        box-shadow .2s,
+        opacity .2s;
 
+    font-family:inherit;
 }
 
+.btn-primary{
+    width:100%;
 
-.btn-masuk:hover{
+    color:#fff;
 
-    transform:
-        translateY(-2px)
-        scale(1.01);
+    background:
+        linear-gradient(
+            135deg,
+            #a95020,
+            #d96b26 55%,
+            #e58a35
+        );
 
     box-shadow:
-        0 7px 15px
-        rgba(0,0,0,.22);
-
+        0 8px 18px rgba(155,77,32,.25);
 }
 
+.btn-primary:hover{
+    transform:translateY(-2px);
 
-.btn-masuk:active{
+    box-shadow:
+        0 11px 23px rgba(155,77,32,.32);
+}
+
+.btn-primary:active{
+    transform:translateY(0);
+}
+
+.btn-primary:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+    transform:none;
+}
+
+/* =========================================================
+   INFORMASI
+========================================================= */
+
+.identity-note{
+    margin:19px auto 0;
+
+    padding:11px 14px;
+
+    border-radius:13px;
+
+    background:#fff5df;
+
+    border:1px dashed #e3c18f;
+
+    color:#80634f;
+
+    font-size:12px;
+
+    line-height:1.55;
+
+    text-align:center;
+}
+
+.food-decoration{
+    text-align:center;
+
+    margin-top:17px;
+
+    color:#967463;
+
+    font-size:12px;
+
+    letter-spacing:.3px;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading{
+    display:none;
+
+    margin-top:14px;
+
+    text-align:center;
+
+    color:var(--primary-dark);
+
+    font-size:13px;
+    font-weight:800;
+}
+
+.loading.show{
+    display:block;
+}
+
+.spinner{
+    display:inline-block;
+
+    width:15px;
+    height:15px;
+
+    margin-right:6px;
+
+    vertical-align:-3px;
+
+    border:2px solid #e7c8a0;
+    border-top-color:var(--primary);
+
+    border-radius:50%;
+
+    animation:spin .7s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+
+    left:50%;
+    bottom:25px;
 
     transform:
-        scale(.98);
+        translateX(-50%)
+        translateY(15px);
 
-}
+    width:min(92%,430px);
 
+    padding:13px 18px;
 
-.btn-masuk:disabled{
+    border-radius:14px;
 
-    opacity:.6;
-
-    cursor:
-        not-allowed;
-
-    transform:none;
-
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-#status{
+    background:#4a2c20;
+    color:#fff;
 
     text-align:center;
 
-    margin-top:7px;
+    font-size:13px;
+    font-weight:700;
 
-    min-height:19px;
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.20);
 
-    color:#555;
+    z-index:50;
 
-    font-size:.7rem;
+    opacity:0;
+    visibility:hidden;
 
-    font-weight:600;
-
-    line-height:1.3;
-
+    transition:.25s;
 }
 
+.toast.show{
+    opacity:1;
+    visibility:visible;
 
-/* =====================================================
-   INFORMASI
-===================================================== */
-
-.info{
-
-    margin-top:9px;
-
-    padding:
-        8px
-        10px;
-
-    border-radius:9px;
-
-    background:#eef8ff;
-
-    color:#456;
-
-    text-align:center;
-
-    font-size:.62rem;
-
-    line-height:1.35;
-
+    transform:
+        translateX(-50%)
+        translateY(0);
 }
 
-
-/* =====================================================
-   RESPONSIVE LAPTOP
-===================================================== */
-
-@media(
-    min-height:700px
-){
-
-    .identitas-card{
-
-        max-width:430px;
-
-        padding:
-            20px
-            22px;
-
-    }
-
-    .logo{
-
-        font-size:2.8rem;
-
-    }
-
-    .header{
-
-        margin-bottom:15px;
-
-    }
-
-    .form-group{
-
-        margin-bottom:11px;
-
-    }
-
+.toast.success{
+    background:#2e8b57;
 }
 
+.toast.error{
+    background:#c0392b;
+}
 
-/* =====================================================
-   LAYAR PENDEK
-   Supaya tidak muncul scroll
-===================================================== */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-@media(
-    max-height:650px
-){
+@media(max-width:600px){
 
     body{
-
-        padding:6px;
-
+        padding:15px;
     }
 
-
-    .identitas-card{
-
-        max-width:400px;
-
-        padding:
-            12px
-            16px;
-
-        border-radius:17px;
-
+    .identity-card{
+        border-radius:25px;
     }
 
-
-    .logo{
-
-        font-size:2rem;
-
-        margin-bottom:2px;
-
-    }
-
-
-    .header{
-
-        margin-bottom:8px;
-
-    }
-
-
-    .header h1{
-
-        font-size:1.25rem;
-
-    }
-
-
-    .header h2{
-
-        font-size:.72rem;
-
-    }
-
-
-    .header p{
-
-        font-size:.62rem;
-
-        margin-top:3px;
-
-    }
-
-
-    .form-group{
-
-        margin-bottom:7px;
-
-    }
-
-
-    .form-group label{
-
-        font-size:.7rem;
-
-        margin-bottom:3px;
-
-    }
-
-
-    .form-group input,
-    .form-group select{
-
-        height:36px;
-
-        padding:
-            5px
-            9px;
-
-        font-size:.76rem;
-
-        border-radius:8px;
-
-    }
-
-
-    .btn-masuk{
-
-        height:38px;
-
-        font-size:.78rem;
-
-        border-radius:9px;
-
-    }
-
-
-    #status{
-
-        margin-top:4px;
-
-        min-height:15px;
-
-        font-size:.62rem;
-
-    }
-
-
-    .info{
-
-        margin-top:5px;
-
-        padding:
-            6px
-            8px;
-
-        font-size:.55rem;
-
-    }
-
-}
-
-
-/* =====================================================
-   HP
-===================================================== */
-
-@media(max-width:480px){
-
-    body{
-
-        padding:7px;
-
-    }
-
-
-    .identitas-card{
-
-        max-width:350px;
-
-        padding:
-            14px
-            15px;
-
-        border-radius:17px;
-
-    }
-
-
-    .logo{
-
-        font-size:2.25rem;
-
-    }
-
-
-    .header{
-
-        margin-bottom:9px;
-
-    }
-
-
-    .header h1{
-
-        font-size:1.25rem;
-
-    }
-
-
-    .header h2{
-
-        font-size:.72rem;
-
-    }
-
-
-    .header p{
-
-        font-size:.62rem;
-
-        margin-top:4px;
-
-    }
-
-
-    .form-group{
-
-        margin-bottom:8px;
-
-    }
-
-
-    .form-group label{
-
-        font-size:.7rem;
-
-        margin-bottom:3px;
-
-    }
-
-
-    .form-group input,
-    .form-group select{
-
-        height:38px;
-
-        padding:
-            6px
-            9px;
-
-        font-size:.76rem;
-
-        border-radius:9px;
-
-    }
-
-
-    .btn-masuk{
-
-        height:40px;
-
-        font-size:.8rem;
-
-    }
-
-
-    #status{
-
-        font-size:.62rem;
-
-        min-height:16px;
-
-        margin-top:5px;
-
-    }
-
-
-    .info{
-
-        margin-top:6px;
-
-        padding:
-            7px
-            8px;
-
-        font-size:.57rem;
-
-    }
-
-}
-
-
-/* =====================================================
-   HP SANGAT PENDEK
-===================================================== */
-
-@media(
-    max-width:480px
-)
-and
-(
-    max-height:600px
-){
-
-    .identitas-card{
-
-        padding:
-            10px
-            13px;
-
-        border-radius:15px;
-
-    }
-
-
-    .logo{
-
-        font-size:1.9rem;
-
-    }
-
-
-    .header{
-
-        margin-bottom:6px;
-
-    }
-
-
-    .header h1{
-
-        font-size:1.1rem;
-
-    }
-
-
-    .header h2{
-
-        font-size:.65rem;
-
-    }
-
-
-    .header p{
-
-        font-size:.55rem;
-
-        margin-top:2px;
-
-    }
-
-
-    .form-group{
-
-        margin-bottom:5px;
-
-    }
-
-
-    .form-group label{
-
-        font-size:.63rem;
-
-    }
-
-
-    .form-group input,
-    .form-group select{
-
-        height:34px;
-
-        font-size:.7rem;
-
-        padding:
-            4px
-            8px;
-
-    }
-
-
-    .btn-masuk{
-
-        height:36px;
-
-        font-size:.72rem;
-
-    }
-
-
-    #status{
-
-        min-height:13px;
-
-        font-size:.55rem;
-
-    }
-
-
-    .info{
-
-        margin-top:4px;
-
-        padding:
-            5px
-            7px;
-
-        font-size:.5rem;
-
-    }
-
-}
-
-
-/* =====================================================
-   LANDSCAPE HP
-===================================================== */
-
-@media(
-    max-height:500px
-)
-and
-(
-    orientation:landscape
-){
-
-    body{
-
-        padding:5px;
-
-    }
-
-
-    .identitas-card{
-
-        max-width:430px;
-
-        padding:
-            8px
-            14px;
-
-        border-radius:14px;
-
-    }
-
-
-    .logo{
-
-        font-size:1.7rem;
-
-        margin-bottom:1px;
-
-    }
-
-
-    .header{
-
-        margin-bottom:5px;
-
-    }
-
-
-    .header h1{
-
-        font-size:1rem;
-
-    }
-
-
-    .header h2{
-
-        font-size:.6rem;
-
-    }
-
-
-    .header p{
-
-        display:none;
-
-    }
-
-
-    .form-group{
-
-        margin-bottom:4px;
-
-    }
-
-
-    .form-group label{
-
-        font-size:.58rem;
-
-        margin-bottom:2px;
-
-    }
-
-
-    .form-group input,
-    .form-group select{
-
-        height:30px;
-
-        font-size:.64rem;
-
+    .identity-content{
         padding:
             3px
-            7px;
-
+            22px
+            25px;
     }
 
-
-    .btn-masuk{
-
-        height:32px;
-
-        font-size:.67rem;
-
+    .identity-card::after{
+        font-size:20px;
+        letter-spacing:2px;
     }
 
-
-    #status{
-
-        min-height:10px;
-
-        font-size:.5rem;
-
-        margin-top:2px;
-
+    .identity-icon{
+        width:68px;
+        height:68px;
+        font-size:34px;
     }
 
-
-    .info{
-
-        display:none;
-
+    h1{
+        font-size:23px;
     }
 
+    .subtitle{
+        font-size:13px;
+        margin-bottom:21px;
+    }
+
+    input{
+        padding:
+            13px
+            14px
+            13px
+            44px;
+    }
+
+    .btn-primary{
+        padding:14px 17px;
+    }
 }
 
+@media(max-width:380px){
+
+    body{
+        padding:10px;
+    }
+
+    .identity-content{
+        padding:
+            2px
+            17px
+            21px;
+    }
+
+    .identity-card::after{
+        font-size:18px;
+        letter-spacing:1px;
+    }
+
+    .identity-icon{
+        width:62px;
+        height:62px;
+        font-size:31px;
+    }
+
+    h1{
+        font-size:21px;
+    }
+
+    .subtitle{
+        font-size:12px;
+    }
+
+    .field label{
+        font-size:13px;
+    }
+
+    input{
+        font-size:15px;
+    }
+
+    .btn-primary{
+        font-size:15px;
+    }
+}
 </style>
 
 </head>
 
-
 <body>
 
+<div class="app">
 
-<!-- =====================================================
-     KARTU IDENTITAS
-===================================================== -->
+```
+<section class="identity-card">
 
-<div class="identitas-card">
+    <div class="identity-content">
 
-
-    <!-- =================================================
-         HEADER
-    ================================================= -->
-
-    <div class="header">
-
-
-        <div class="logo">
-            🧭
+        <div class="school-badge">
+            🏫 UPT SDN 160 GRESIK
         </div>
 
+        <div class="identity-icon">
+            🧑‍🎓
+        </div>
 
         <h1>
-            Petualangan Kelas 5
+            🌟 Yuk, Kenalkan Dirimu!
         </h1>
 
-
-        <h2>
-            UPT SDN 160 GRESIK
-        </h2>
-
-
-        <p>
-            Isi identitasmu sebelum memulai petualangan belajar.
+        <p class="subtitle">
+            Sebelum memasuki Petualangan Kelas 5,
+            isi identitasmu terlebih dahulu dengan benar.
         </p>
 
+        <div class="form-grid">
 
-    </div>
+            <!-- NAMA -->
+            <div class="field">
 
+                <label for="nama">
+                    👤 Nama Siswa
+                </label>
 
-    <!-- =================================================
-         FORM IDENTITAS
-    ================================================= -->
+                <div class="input-wrap">
 
-    <form id="formIdentitas">
+                    <span class="input-icon">
+                        👤
+                    </span>
 
+                    <input
+                        id="nama"
+                        type="text"
+                        placeholder="Tulis nama lengkap"
+                        autocomplete="name"
+                        maxlength="100"
+                    >
 
-        <!-- =================================================
-             NAMA
-        ================================================= -->
+                </div>
 
-        <div class="form-group">
+            </div>
 
+            <!-- KELAS -->
+            <div class="field">
 
-            <label for="nama">
-                👤 Nama Lengkap
-            </label>
+                <label for="kelas">
+                    🏫 Kelas
+                </label>
 
+                <div class="input-wrap">
 
-            <input
-                type="text"
-                id="nama"
-                placeholder="Masukkan nama lengkap"
-                autocomplete="name"
-                required
-            >
+                    <span class="input-icon">
+                        🏫
+                    </span>
 
+                    <input
+                        id="kelas"
+                        type="text"
+                        placeholder="Contoh: V-A"
+                        maxlength="30"
+                    >
 
-        </div>
+                </div>
 
+            </div>
 
-        <!-- =================================================
-             KELAS
-        ================================================= -->
+            <!-- ABSEN -->
+            <div class="field">
 
-        <div class="form-group">
+                <label for="absen">
+                    🔢 Nomor Absen
+                </label>
 
+                <div class="input-wrap">
 
-            <label for="kelas">
-                🏫 Kelas
-            </label>
+                    <span class="input-icon">
+                        🔢
+                    </span>
 
+                    <input
+                        id="absen"
+                        type="number"
+                        min="1"
+                        max="100"
+                        placeholder="Masukkan nomor absen"
+                    >
 
-            <!--
-                KELAS DIISI SECARA MANUAL.
-                Tidak lagi menggunakan pilihan dropdown.
-                Contoh pengisian:
-                5A
-                5B
-                5C
-                5
-            -->
+                </div>
 
-            <input
-                type="text"
-                id="kelas"
-                placeholder="Masukkan kelas, contoh: 5A"
-                autocomplete="off"
-                required
-            >
-
-
-        </div>
-
-
-        <!-- =================================================
-             NOMOR ABSEN
-        ================================================= -->
-
-        <div class="form-group">
-
-
-            <label for="absen">
-                🔢 Nomor Absen
-            </label>
-
-
-            <input
-                type="number"
-                id="absen"
-                min="1"
-                max="50"
-                placeholder="Masukkan nomor absen"
-                inputmode="numeric"
-                required
-            >
-
+            </div>
 
         </div>
 
+        <div class="action-area">
 
-        <!-- =================================================
-             TOMBOL
-        ================================================= -->
+            <button
+                id="btnLanjut"
+                class="btn btn-primary"
+                type="button"
+                onclick="simpanDanLanjut()"
+            >
+                🚀 Simpan & Lanjutkan
+            </button>
 
-        <button
-            type="submit"
-            class="btn-masuk"
-            id="btnMasuk"
+        </div>
+
+        <div
+            id="loading"
+            class="loading"
         >
+            <span class="spinner"></span>
+            Menyimpan identitas...
+        </div>
 
-            🚀 Mulai Petualangan
+        <div class="identity-note">
+            📌 Pastikan nama, kelas, dan nomor absen
+            sudah benar sebelum melanjutkan.
+        </div>
 
-        </button>
-
-
-    </form>
-
-
-    <!-- =================================================
-         STATUS
-    ================================================= -->
-
-    <div id="status"></div>
-
-
-    <!-- =================================================
-         INFORMASI
-    ================================================= -->
-
-    <div class="info">
-
-        💡 Identitas digunakan untuk mencatat
-        kehadiran dan aktivitas siswa selama
-        menggunakan Petualangan Kelas 5.
+        <div class="food-decoration">
+            🌾 Belajar • Bermain • Menjelajah • Berprestasi 🌾
+        </div>
 
     </div>
 
+</section>
+```
 
 </div>
 
-
+<div
+    id="toast"
+    class="toast"
+></div>
 
 <script>
 
-/* =====================================================
-   URL GOOGLE APPS SCRIPT
-===================================================== */
+/* =========================================================
+   KONFIGURASI GOOGLE APPS SCRIPT
+
+   GANTI URL DI BAWAH DENGAN URL WEB APP
+   GOOGLE APPS SCRIPT KHUSUS IDENTITAS SISWA.
+========================================================= */
 
 const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbxi_BDhoKSfHFclwBVf1CTMels4aDBjatJzaOk2G-aTVHZvDURNWZbA7f1HGvwF5wdD/exec";
+    "TEMPEL_URL_WEB_APP_GOOGLE_APPS_SCRIPT_IDENTITAS_DI_SINI";
 
 
-/* =====================================================
-   ELEMENT FORM
-===================================================== */
+/* =========================================================
+   HALAMAN TUJUAN
+========================================================= */
 
-const form =
-    document.getElementById(
-        "formIdentitas"
-    );
+const HALAMAN_TUJUAN =
+    "Petualangan-Kelas-5.html";
 
 
-const statusBox =
-    document.getElementById(
-        "status"
-    );
+/* =========================================================
+   ELEMEN
+========================================================= */
+
+const namaInput =
+    document.getElementById("nama");
+
+const kelasInput =
+    document.getElementById("kelas");
+
+const absenInput =
+    document.getElementById("absen");
+
+const btnLanjut =
+    document.getElementById("btnLanjut");
+
+const loading =
+    document.getElementById("loading");
 
 
-const btnMasuk =
-    document.getElementById(
-        "btnMasuk"
-    );
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
 
+function escapeHTML(value){
 
-/* =====================================================
-   SUBMIT FORM
-===================================================== */
+    return String(value).replace(
+        /[&<>"']/g,
+        function(char){
 
-form.addEventListener(
-    "submit",
-    async function(event){
-
-        event.preventDefault();
-
-
-        /* =============================================
-           AMBIL DATA
-        ============================================= */
-
-        const nama =
-            document
-            .getElementById("nama")
-            .value
-            .trim();
-
-
-        const kelas =
-            document
-            .getElementById("kelas")
-            .value
-            .trim();
-
-
-        const absen =
-            document
-            .getElementById("absen")
-            .value;
-
-
-        /* =============================================
-           VALIDASI
-        ============================================= */
-
-        if(
-            !nama ||
-            !kelas ||
-            !absen
-        ){
-
-            statusBox.textContent =
-                "⚠️ Lengkapi semua identitas.";
-
-            return;
+            return {
+                "&":"&amp;",
+                "<":"&lt;",
+                ">":"&gt;",
+                '"':"&quot;",
+                "'":"&#039;"
+            }[char];
 
         }
+    );
+
+}
 
 
-        /* =============================================
-           VALIDASI NOMOR ABSEN
-        ============================================= */
+/* =========================================================
+   TOAST
+========================================================= */
 
-        const nomorAbsen =
-            Number(absen);
+function toast(
+    message,
+    type="error"
+){
 
+    const element =
+        document.getElementById("toast");
 
-        if(
-            nomorAbsen < 1 ||
-            nomorAbsen > 50
-        ){
+    element.textContent =
+        message;
 
-            statusBox.textContent =
-                "⚠️ Nomor absen harus 1–50.";
+    element.className =
+        "toast " +
+        type +
+        " show";
 
-            return;
+    clearTimeout(
+        window.toastTimer
+    );
 
-        }
+    window.toastTimer =
+        setTimeout(
+            function(){
 
+                element.classList.remove(
+                    "show"
+                );
 
-        /* =============================================
-           TOMBOL PROSES
-        ============================================= */
+            },
+            2800
+        );
 
-        btnMasuk.disabled =
-            true;
-
-
-        btnMasuk.textContent =
-            "⏳ Menyimpan...";
-
-
-        statusBox.textContent =
-            "🔄 Menyimpan identitas siswa...";
-
-
-        /* =============================================
-           SESSION ID
-        ============================================= */
-
-        const sessionId =
-
-            "S" +
-
-            Date.now() +
-
-            "_" +
-
-            Math.random()
-                .toString(36)
-                .substring(2,10);
+}
 
 
-        /* =============================================
-           DATA YANG DIKIRIM
-        ============================================= */
+/* =========================================================
+   VALIDASI IDENTITAS
+========================================================= */
 
-        const data = {
+function ambilIdentitas(){
 
-            action:
-                "register",
+    const nama =
+        namaInput.value.trim();
 
-            nama:
-                nama,
+    const kelas =
+        kelasInput.value.trim();
 
-            kelas:
-                kelas,
-
-            absen:
-                nomorAbsen,
-
-            halaman:
-                "Petualangan Kelas 5",
-
-            sessionId:
-                sessionId
-
-        };
+    const absen =
+        absenInput.value.trim();
 
 
-        /* =============================================
-           KIRIM KE GOOGLE SHEETS
-        ============================================= */
+    if(!nama){
 
-        try{
+        toast(
+            "⚠️ Nama siswa wajib diisi."
+        );
+
+        namaInput.focus();
+
+        return null;
+
+    }
 
 
-            await fetch(
+    if(!kelas){
 
-                GOOGLE_SCRIPT_URL,
+        toast(
+            "⚠️ Kelas wajib diisi."
+        );
 
-                {
+        kelasInput.focus();
 
-                    method:
-                        "POST",
+        return null;
 
-                    mode:
-                        "no-cors",
+    }
 
-                    headers:{
 
-                        "Content-Type":
-                            "text/plain;charset=utf-8"
+    if(!absen){
 
-                    },
+        toast(
+            "⚠️ Nomor absen wajib diisi."
+        );
 
-                    body:
-                        JSON.stringify(data)
+        absenInput.focus();
+
+        return null;
+
+    }
+
+
+    const nomorAbsen =
+        Number(absen);
+
+
+    if(
+        !Number.isInteger(nomorAbsen) ||
+        nomorAbsen < 1
+    ){
+
+        toast(
+            "⚠️ Nomor absen harus berupa angka yang benar."
+        );
+
+        absenInput.focus();
+
+        return null;
+
+    }
+
+
+    return {
+
+        nama:nama,
+
+        kelas:kelas,
+
+        absen:nomorAbsen
+
+    };
+
+}
+
+
+/* =========================================================
+   KIRIM KE GOOGLE SHEETS
+========================================================= */
+
+function kirimKeGoogleSheets(data){
+
+    return new Promise(
+        function(resolve){
+
+            if(
+                !GOOGLE_SCRIPT_URL ||
+                GOOGLE_SCRIPT_URL.includes(
+                    "TEMPEL_URL"
+                )
+            ){
+
+                console.warn(
+                    "URL Google Apps Script belum dipasang."
+                );
+
+                resolve({
+                    ok:false,
+                    skipped:true
+                });
+
+                return;
+
+            }
+
+
+            try{
+
+                const iframeName =
+                    "googleSheetsIdentityTarget";
+
+
+                let iframe =
+                    document.getElementById(
+                        iframeName
+                    );
+
+
+                if(!iframe){
+
+                    iframe =
+                        document.createElement(
+                            "iframe"
+                        );
+
+                    iframe.id =
+                        iframeName;
+
+                    iframe.name =
+                        iframeName;
+
+                    iframe.style.display =
+                        "none";
+
+                    document.body.appendChild(
+                        iframe
+                    );
 
                 }
 
-            );
+
+                const form =
+                    document.createElement(
+                        "form"
+                    );
 
 
-            /* =========================================
-               SIMPAN IDENTITAS
-            ========================================= */
+                form.method =
+                    "POST";
 
-            localStorage.setItem(
-                "siswaNama",
-                nama
-            );
+                form.action =
+                    GOOGLE_SCRIPT_URL;
 
+                form.target =
+                    iframeName;
 
-            localStorage.setItem(
-                "siswaKelas",
-                kelas
-            );
+                form.style.display =
+                    "none";
 
 
-            localStorage.setItem(
-                "siswaAbsen",
-                nomorAbsen
-            );
+                const fields = {
+
+                    nama:data.nama,
+
+                    kelas:data.kelas,
+
+                    absen:data.absen,
+
+                    waktu:
+                        new Date().toISOString(),
+
+                    sumber:
+                        "Identitas Siswa Petualangan Kelas 5"
+
+                };
 
 
-            localStorage.setItem(
-                "siswaSessionId",
-                sessionId
-            );
+                Object.keys(fields).forEach(
+                    function(key){
+
+                        const input =
+                            document.createElement(
+                                "input"
+                            );
+
+                        input.type =
+                            "hidden";
+
+                        input.name =
+                            key;
+
+                        input.value =
+                            fields[key] ?? "";
+
+                        form.appendChild(
+                            input
+                        );
+
+                    }
+                );
 
 
-            /* =========================================
-               STATUS BERHASIL
-            ========================================= */
-
-            statusBox.textContent =
-                "✅ Identitas tersimpan.";
+                document.body.appendChild(
+                    form
+                );
 
 
-            btnMasuk.textContent =
-                "🚀 Membuka Petualangan...";
+                form.submit();
 
 
-            /* =========================================
-               PINDAH KE HALAMAN UTAMA
-            ========================================= */
+                setTimeout(
+                    function(){
 
-            setTimeout(
+                        form.remove();
 
-                function(){
-
-                    window.location.href =
-                        "Petualangan-Kelas-5.html";
-
-                },
-
-                600
-
-            );
+                    },
+                    3000
+                );
 
 
-        }catch(error){
+                /*
+                 * Karena POST menuju iframe,
+                 * browser tidak memberikan
+                 * response Google Apps Script
+                 * secara langsung kepada halaman.
+                 *
+                 * Setelah form berhasil dikirim,
+                 * kita menganggap proses pengiriman
+                 * sudah dilakukan lalu melanjutkan.
+                 */
+
+                setTimeout(
+                    function(){
+
+                        resolve({
+                            ok:true
+                        });
+
+                    },
+                    700
+                );
 
 
-            console.error(
-                "Kesalahan:",
-                error
-            );
+            }catch(error){
 
+                console.error(
+                    "Pengiriman identitas gagal:",
+                    error
+                );
 
-            statusBox.textContent =
-                "❌ Data belum dapat disimpan. Coba lagi.";
+                resolve({
+                    ok:false,
+                    error:error
+                });
 
-
-            btnMasuk.disabled =
-                false;
-
-
-            btnMasuk.textContent =
-                "🚀 Mulai Petualangan";
-
+            }
 
         }
+    );
+
+}
+
+
+/* =========================================================
+   SIMPAN IDENTITAS DAN LANJUT
+========================================================= */
+
+async function simpanDanLanjut(){
+
+    const data =
+        ambilIdentitas();
+
+
+    if(!data){
+
+        return;
+
+    }
+
+
+    btnLanjut.disabled =
+        true;
+
+    loading.classList.add(
+        "show"
+    );
+
+
+    /*
+     * Simpan identitas sementara
+     * di browser agar halaman tujuan
+     * dapat menggunakan data siswa.
+     */
+
+    try{
+
+        sessionStorage.setItem(
+            "identitasPetualanganKelas5",
+            JSON.stringify(data)
+        );
+
+    }catch(error){
+
+        console.warn(
+            "SessionStorage tidak tersedia:",
+            error
+        );
+
+    }
+
+
+    const hasil =
+        await kirimKeGoogleSheets(
+            data
+        );
+
+
+    if(
+        hasil.ok ||
+        hasil.skipped
+    ){
+
+        toast(
+            "✅ Identitas tersimpan. Membuka Petualangan Kelas 5...",
+            "success"
+        );
+
+
+        setTimeout(
+            function(){
+
+                window.location.href =
+                    HALAMAN_TUJUAN;
+
+            },
+            700
+        );
+
+
+    }else{
+
+        /*
+         * Jika pengiriman benar-benar gagal,
+         * siswa tidak langsung dipindahkan.
+         */
+
+        btnLanjut.disabled =
+            false;
+
+        loading.classList.remove(
+            "show"
+        );
+
+        toast(
+            "❌ Identitas belum berhasil dikirim. Silakan coba lagi."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ENTER UNTUK LANJUT
+========================================================= */
+
+[
+    namaInput,
+    kelasInput,
+    absenInput
+].forEach(
+    function(input){
+
+        input.addEventListener(
+            "keydown",
+            function(event){
+
+                if(
+                    event.key ===
+                    "Enter"
+                ){
+
+                    event.preventDefault();
+
+                    simpanDanLanjut();
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   FOKUS AWAL
+========================================================= */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        setTimeout(
+            function(){
+
+                namaInput.focus();
+
+            },
+            300
+        );
 
     }
 );
 
 </script>
 
-
 </body>
-
 </html>

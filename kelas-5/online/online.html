@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0288d1">
+<title>Siswa Online | Kelas 5</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{min-height:100%;font-family:'Poppins',sans-serif}
+
+body{
+    min-height:100vh;
+    background:url('https://i.imgur.com/clG3P3n.png') center/cover fixed no-repeat;
+    color:#333;
+    padding-bottom:30px;
+}
+
+nav{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    padding:16px 2rem;
+    box-shadow:0 4px 8px rgba(0,0,0,.20);
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+nav a{
+    background:rgba(255,255,255,.95);
+    padding:8px 16px;
+    border-radius:8px;
+    text-decoration:none;
+    color:#0288d1;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    transition:.25s;
+}
+
+nav a:hover{
+    transform:translateY(-2px) scale(1.03);
+    box-shadow:0 6px 12px rgba(0,0,0,.20);
+}
+
+.container{
+    width:calc(100% - 30px);
+    max-width:1100px;
+    margin:30px auto;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.header h1{
+    display:inline-block;
+    background:rgba(255,255,255,.94);
+    color:#0288d1;
+    padding:10px 24px;
+    border-radius:14px;
+    font-size:clamp(1.5rem,4vw,2.2rem);
+    box-shadow:0 5px 15px rgba(0,0,0,.18);
+}
+
+.header p{
+    margin-top:10px;
+    color:#fff;
+    font-weight:600;
+    text-shadow:0 2px 4px rgba(0,0,0,.45);
+}
+
+.panel{
+    background:rgba(255,255,255,.95);
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 6px 18px rgba(0,0,0,.22);
+}
+
+.toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:16px;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#0277bd;
+    font-weight:700;
+}
+
+.dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:#20c997;
+    box-shadow:0 0 0 4px rgba(32,201,151,.15);
+}
+
+.refresh-btn{
+    border:0;
+    background:#0288d1;
+    color:#fff;
+    padding:9px 16px;
+    border-radius:9px;
+    font-family:inherit;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.refresh-btn:hover{background:#0277bd}
+
+.table-wrap{
+    width:100%;
+    overflow:auto;
+    border-radius:12px;
+    border:1px solid #e0eaf0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
+    background:#fff;
+}
+
+thead th{
+    background:linear-gradient(45deg,#0288d1,#7b1fa2);
+    color:#fff;
+    padding:12px 10px;
+    text-align:left;
+    white-space:nowrap;
+}
+
+tbody td{
+    padding:11px 10px;
+    border-bottom:1px solid #edf2f5;
+    color:#333;
+}
+
+tbody tr:hover{background:#f3fbff}
+
+.loading,.empty,.error{
+    text-align:center;
+    padding:28px 15px;
+    color:#607d8b;
+}
+
+.error{color:#c62828}
+
+.note{
+    margin-top:14px;
+    font-size:.78rem;
+    color:#78909c;
+    text-align:center;
+}
+
+@media(max-width:600px){
+    nav{padding:12px 10px}
+    .nav-right{justify-content:center;width:100%}
+    nav a{font-size:.78rem;padding:7px 10px}
+    .container{width:calc(100% - 20px);margin:20px auto}
+    .panel{padding:12px}
+    .toolbar{align-items:stretch}
+    .refresh-btn{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-right">
+        <a href="../index.html">🏠 Beranda</a>
+        <a href="kelas.html">🏫 Kelas</a>
+        <a href="online.html">🟢 Online</a>
+    </div>
+</nav>
+
+<main class="container">
+
+    <div class="header">
+        <h1>🟢 Siswa Online Kelas 5</h1>
+        <p>Daftar aktivitas siswa yang tercatat secara online</p>
+    </div>
+
+    <section class="panel">
+        <div class="toolbar">
+            <div class="status">
+                <span class="dot"></span>
+                <span id="statusText">Memuat data...</span>
+            </div>
+            <button class="refresh-btn" onclick="loadData()">🔄 Refresh Data</button>
+        </div>
+
+        <div class="table-wrap">
+            <div id="loading" class="loading">⏳ Mengambil data dari Google Sheet...</div>
+
+            <table id="dataTable" style="display:none">
+                <thead id="tableHead"></thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+
+            <div id="empty" class="empty" style="display:none">
+                Belum ada data siswa online.
+            </div>
+
+            <div id="error" class="error" style="display:none">
+                Data belum dapat dimuat. Pastikan Google Sheet sudah dipublikasikan ke web.
+            </div>
+        </div>
+
+        <div class="note">
+            Data ditampilkan dari Google Sheet dan dapat berubah mengikuti data sumber.
+        </div>
+    </section>
+
+</main>
+
+<script>
+const SHEET_ID = "10ybFj2J0iI_ttZMAT1A_bTCgcRQ2UhYxCNUQGx5G8PE";
+const GID = "440633232";
+
+/*
+ * Mengambil data menggunakan Google Visualization Query.
+ * Sheet harus dapat diakses/dipublikasikan agar halaman GitHub Pages
+ * dapat membaca datanya.
+ */
+const DATA_URL =
+    `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${GID}&tqx=out:json`;
+
+function cleanGoogleResponse(text){
+    const start = text.indexOf("{");
+    const end = text.lastIndexOf("}");
+    if(start === -1 || end === -1){
+        throw new Error("Format data Google Sheet tidak valid.");
+    }
+    return JSON.parse(text.substring(start, end + 1));
+}
+
+function escapeHTML(value){
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+function showOnly(id){
+    ["loading","dataTable","empty","error"].forEach(x=>{
+        const el=document.getElementById(x);
+        if(el) el.style.display="none";
+    });
+    const target=document.getElementById(id);
+    if(target) target.style.display=(id==="dataTable") ? "table" : "block";
+}
+
+async function loadData(){
+    showOnly("loading");
+    document.getElementById("statusText").textContent="Memuat data...";
+
+    try{
+        const response = await fetch(DATA_URL, {cache:"no-store"});
+        if(!response.ok) throw new Error("HTTP "+response.status);
+
+        const text = await response.text();
+        const data = cleanGoogleResponse(text);
+
+        const cols = data.table.cols || [];
+        const rows = data.table.rows || [];
+
+        if(!cols.length || !rows.length){
+            showOnly("empty");
+            document.getElementById("statusText").textContent="0 siswa online";
+            return;
+        }
+
+        const head = document.getElementById("tableHead");
+        const body = document.getElementById("tableBody");
+
+        head.innerHTML = "<tr>" +
+            cols.map(col => `<th>${escapeHTML(col.label || "")}</th>`).join("") +
+            "</tr>";
+
+        body.innerHTML = rows.map(row => {
+            const cells = row.c || [];
+            return "<tr>" + cols.map((_,i)=>{
+                const cell = cells[i];
+                const value = cell && cell.v !== undefined ? cell.v : "";
+                return `<td>${escapeHTML(value)}</td>`;
+            }).join("") + "</tr>";
+        }).join("");
+
+        showOnly("dataTable");
+        document.getElementById("statusText").textContent =
+            `${rows.length} data siswa`;
+    }
+    catch(error){
+        console.error(error);
+        showOnly("error");
+        document.getElementById("statusText").textContent="Gagal memuat data";
+    }
+}
+
+loadData();
+</script>
+
+</body>
+</html>

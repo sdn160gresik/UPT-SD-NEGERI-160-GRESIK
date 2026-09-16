@@ -81,7 +81,6 @@ body{
 }
 
 
-
 /* =====================================================
    NAVBAR
 ===================================================== */
@@ -295,171 +294,6 @@ nav a:hover{
             255,
             255,
             .6
-        );
-
-}
-
-
-/* =====================================================
-   SAPAAN
-===================================================== */
-
-.welcome-student{
-
-    margin:
-        15px
-        auto
-        8px;
-
-    width:
-        fit-content;
-
-    max-width:90%;
-
-    padding:
-        10px
-        22px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            .95
-        );
-
-    color:#7b1fa2;
-
-    border-radius:14px;
-
-    font-size:1.15rem;
-
-    font-weight:700;
-
-    box-shadow:
-        0 5px 12px
-        rgba(0,0,0,.20);
-
-    animation:
-        welcomePop
-        .6s
-        ease;
-
-}
-
-
-.welcome-message{
-
-    text-align:center;
-
-    color:#fff;
-
-    font-size:1rem;
-
-    font-weight:600;
-
-    margin:
-        8px
-        0
-        5px;
-
-    text-shadow:
-        1px
-        2px
-        3px
-        rgba(0,0,0,.50);
-
-}
-
-
-@keyframes welcomePop{
-
-    0%{
-
-        opacity:0;
-
-        transform:
-            translateY(-15px)
-            scale(.95);
-
-    }
-
-    100%{
-
-        opacity:1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-    }
-
-}
-
-
-/* =====================================================
-   PENGUMUMAN
-===================================================== */
-
-.pengumuman-box{
-
-    display:flex;
-
-    justify-content:center;
-
-    margin-top:18px;
-
-}
-
-
-.pengumuman-btn{
-
-    background:
-        linear-gradient(
-            45deg,
-            #0288d1,
-            #7b1fa2
-        );
-
-    padding:
-        12px
-        28px;
-
-    border-radius:12px;
-
-    text-decoration:none;
-
-    font-size:1.2rem;
-
-    font-weight:bold;
-
-    color:#fff;
-
-    border:
-        3px
-        solid
-        #fff;
-
-    box-shadow:
-        0 6px 12px
-        rgba(0,0,0,.30);
-
-    transition:
-        all .3s ease;
-
-}
-
-
-.pengumuman-btn:hover{
-
-    transform:
-        scale(1.08);
-
-    background:
-        linear-gradient(
-            45deg,
-            #039be5,
-            #9c27b0
         );
 
 }
@@ -896,30 +730,6 @@ nav a:hover{
     }
 
 
-    .welcome-student{
-
-        font-size:1rem;
-
-        padding:
-            9px
-            15px;
-
-        text-align:center;
-
-    }
-
-
-    .welcome-message{
-
-        font-size:.9rem;
-
-        padding:
-            0
-            15px;
-
-    }
-
-
     #daftarSiswaAktif{
 
         width:
@@ -1059,111 +869,160 @@ audio{
 }
 
 
-
 /* =====================================================
    TATA LETAK HEADER PETUALANGAN
-   Judul di kiri — Siswa Online di kanan
+   Judul berada di tengah
 ===================================================== */
 
 .hero-layout{
-    width:calc(100% - 60px);
+
+    width:
+        calc(100% - 60px);
+
     max-width:1180px;
-    margin:26px auto 10px;
+
+    margin:
+        26px
+        auto
+        10px;
+
     display:grid;
-    grid-template-columns:minmax(0, 1.15fr) minmax(340px, .85fr);
+
+    grid-template-columns:
+        1fr;
+
     gap:28px;
+
     align-items:center;
+
 }
+
 
 .hero-left{
+
     min-width:0;
+
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
+
     justify-content:center;
-    padding:12px 10px;
+
+    padding:
+        12px
+        10px;
+
 }
+
 
 .hero-left .title-section{
-    margin:0 0 12px;
+
+    margin:
+        0;
+
     text-align:center;
+
 }
+
 
 .hero-left .title-section h1{
+
     margin:0;
-    font-size:clamp(1.7rem, 3vw, 2.35rem);
-    padding:.65rem 1.4rem;
+
+    font-size:
+        clamp(
+            1.7rem,
+            3vw,
+            2.35rem
+        );
+
+    padding:
+        .65rem
+        1.4rem;
+
     line-height:1.25;
+
 }
 
-.hero-left .welcome-student{
-    margin:8px auto 6px;
-}
-
-.hero-left .welcome-message{
-    margin:5px 0 12px;
-}
-
-.hero-left .pengumuman-box{
-    margin-top:8px;
-}
 
 /* =====================================================
-   RESPONSIVE
+   RESPONSIVE HEADER
 ===================================================== */
 
 @media(max-width:900px){
 
     .hero-layout{
-        grid-template-columns:1fr 1fr;
+
+        grid-template-columns:1fr;
+
         gap:18px;
-        width:calc(100% - 30px);
+
+        width:
+            calc(100% - 30px);
+
     }
 
-    
 
     .hero-left .title-section h1{
+
         font-size:1.65rem;
+
     }
 
 }
+
 
 @media(max-width:768px){
 
     .hero-layout{
+
         grid-template-columns:1fr;
-        width:calc(100% - 30px);
+
+        width:
+            calc(100% - 30px);
+
         gap:14px;
+
         margin-top:18px;
+
     }
+
 
     .hero-left{
-        padding:5px 0;
+
+        padding:
+            5px
+            0;
+
     }
+
 
     .hero-left .title-section{
+
         margin-bottom:8px;
+
     }
+
 
     .hero-left .title-section h1{
+
         font-size:1.5rem;
+
     }
 
-    
-
 }
+
 
 @media(max-width:480px){
 
     .hero-layout{
-        width:calc(100% - 20px);
+
+        width:
+            calc(100% - 20px);
+
     }
-
-    
-
-    
-
-    
 
 }
 
@@ -1202,56 +1061,31 @@ audio{
             🏫 Kelas
         </a>
 
-
     </div>
 
 </nav>
 
 
 <!-- =====================================================
-     HEADER PETUALANGAN & SISWA ONLINE
+     HEADER PETUALANGAN
 ===================================================== -->
 
 <section class="hero-layout">
 
-    <!-- =================================================
-         SISI KIRI: JUDUL DAN SAPAAN
-    ================================================= -->
-
     <div class="hero-left">
 
         <div class="title-section">
+
             <h1>
                 📖 Petualangan Belajar Kelas 5
             </h1>
+
         </div>
-
-        <div
-            id="welcomeStudent"
-            class="welcome-student"
-        >
-            👋 Selamat datang, Siswa!
-        </div>
-
-        <div class="welcome-message">
-            🌟 Yuk lanjutkan petualangan belajarmu hari ini!
-        </div>
-
-        <div class="pengumuman-box">
-            <a
-                href="../pdf-tofas/tofas.html"
-                class="pengumuman-btn"
-            >
-                📢 Pengumuman
-            </a>
-        </div>
-
-    </div>
-
 
     </div>
 
 </section>
+
 
 <!-- =====================================================
      PETA PETUALANGAN
@@ -1259,6 +1093,10 @@ audio{
 
 <div class="map-grid">
 
+
+    <!-- =================================================
+         ISTANA PANCASILA
+    ================================================== -->
 
     <a
         href="istanap-pancasila/Istana_Pancasila.html"
@@ -1275,6 +1113,10 @@ audio{
     </a>
 
 
+    <!-- =================================================
+         PULAU BAHASA INDONESIA
+    ================================================== -->
+
     <a
         href="Pulau-Bahasa-Indonesia/pulau.html"
         class="map-item"
@@ -1289,6 +1131,10 @@ audio{
 
     </a>
 
+
+    <!-- =================================================
+         LEMBAH MATEMATIKA
+    ================================================== -->
 
     <a
         href="lembah/lembah.html"
@@ -1305,6 +1151,10 @@ audio{
     </a>
 
 
+    <!-- =================================================
+         HUTAN IPAS
+    ================================================== -->
+
     <a
         href="hutan/hutan.html"
         class="map-item"
@@ -1320,6 +1170,10 @@ audio{
     </a>
 
 
+    <!-- =================================================
+         GUNUNG SENI BUDAYA
+    ================================================== -->
+
     <a
         href="Gunung-Seni-Budaya/gunung.html"
         class="map-item"
@@ -1334,6 +1188,10 @@ audio{
 
     </a>
 
+
+    <!-- =================================================
+         DESA BAHASA JAWA
+    ================================================== -->
 
     <a
         href="Basa_Jawa/landing-page-bahasa-jawa.html"
@@ -1351,8 +1209,8 @@ audio{
 
 
     <!-- =================================================
-         KODING
-    ================================================= -->
+         KODING 1
+    ================================================== -->
 
     <a
         href="koding/index.html"
@@ -1369,6 +1227,10 @@ audio{
     </a>
 
 
+    <!-- =================================================
+         KODING 2
+    ================================================== -->
+
     <a
         href="koding2/index.html"
         class="map-item hide-menu"
@@ -1383,6 +1245,10 @@ audio{
 
     </a>
 
+
+    <!-- =================================================
+         KODING 3
+    ================================================== -->
 
     <a
         href="koding/mode3/index.html"
@@ -1399,6 +1265,10 @@ audio{
     </a>
 
 
+    <!-- =================================================
+         KODING 4
+    ================================================== -->
+
     <a
         href="koding/mode4/index.html"
         class="map-item hide-menu"
@@ -1413,6 +1283,10 @@ audio{
 
     </a>
 
+
+    <!-- =================================================
+         KODING 5
+    ================================================== -->
 
     <a
         href="koding/mode5/index.html"
@@ -1431,7 +1305,7 @@ audio{
 
     <!-- =================================================
          TUGAS
-    ================================================= -->
+    ================================================== -->
 
     <a
         href="tugas/tugas.html"
@@ -1450,7 +1324,7 @@ audio{
 
     <!-- =================================================
          UJI COBA
-    ================================================= -->
+    ================================================== -->
 
     <a
         href="lembah/uji_coba/soal-wisata1_cba.html"
@@ -1469,7 +1343,7 @@ audio{
 
     <!-- =================================================
          DASHBOARD GURU
-    ================================================= -->
+    ================================================== -->
 
     <a
         href="../dashboard_guru/dashboard-guru.html"
@@ -1500,24 +1374,48 @@ audio{
 
 
 <script>
+
 /* =====================================================
    AUDIO KLIK
 ===================================================== */
 
-const clickSound = document.getElementById("clickSound");
+const clickSound =
+    document.getElementById("clickSound");
 
-document.querySelectorAll("a, button").forEach(function(button){
-    button.addEventListener("click", function(){
-        if(!clickSound) return;
 
-        clickSound.currentTime = 0;
-        clickSound.play().catch(function(){});
+document
+    .querySelectorAll("a, button")
+    .forEach(function(button){
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                if(!clickSound) return;
+
+                clickSound.currentTime = 0;
+
+                clickSound
+                    .play()
+                    .catch(function(){});
+
+            }
+        );
+
     });
-});
+
 
 /* =====================================================
    MASUK TANPA LOGIN
    Halaman dapat langsung digunakan.
 ===================================================== */
-console.log("Petualangan Kelas 5 dibuka tanpa login.");
+
+console.log(
+    "Petualangan Kelas 5 dibuka tanpa login."
+);
+
 </script>
+
+</body>
+
+</html>

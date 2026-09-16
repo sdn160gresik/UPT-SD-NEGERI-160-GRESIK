@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 
 <html lang="id">
+
 <head>
 
+
+<!-- =====================================================
+     META
+====================================================== -->
 
 <meta charset="UTF-8">
 
@@ -16,16 +21,23 @@
     content="#0288d1"
 >
 
+<meta
+    name="description"
+    content="Sumatif Tengah Semester - Petualangan Kelas 5"
+>
+
 <title>STS | Petualangan Kelas 5</title>
 
+
 <!-- =====================================================
-     FONT
+     FONT GOOGLE
 ====================================================== -->
 
 <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
     rel="stylesheet"
 >
+
 
 <style>
 
@@ -53,6 +65,7 @@
     }
 
     body {
+
         min-height: 100vh;
 
         font-family:
@@ -69,6 +82,8 @@
         background-size: cover;
 
         color: #fff;
+
+        overflow-x: hidden;
     }
 
 
@@ -77,6 +92,9 @@
     ====================================================== */
 
     nav {
+
+        width: 100%;
+
         display: flex;
 
         justify-content: flex-end;
@@ -92,7 +110,13 @@
             rgba(0, 0, 0, .18);
     }
 
+
+    /* =====================================================
+       NAVBAR KANAN
+    ====================================================== */
+
     .nav-right {
+
         display: flex;
 
         align-items: center;
@@ -104,7 +128,13 @@
         flex-wrap: wrap;
     }
 
+
+    /* =====================================================
+       LINK NAVBAR
+    ====================================================== */
+
     nav a {
+
         background:
             rgba(
                 255,
@@ -131,6 +161,8 @@
 
         align-items: center;
 
+        justify-content: center;
+
         gap: .25rem;
 
         transition:
@@ -138,7 +170,13 @@
             box-shadow .2s ease;
     }
 
+
+    /* =====================================================
+       HOVER NAVBAR
+    ====================================================== */
+
     nav a:hover {
+
         transform:
             translateY(-1px);
 
@@ -153,6 +191,7 @@
     ====================================================== */
 
     .hero-layout {
+
         width:
             calc(100% - 20px);
 
@@ -170,11 +209,25 @@
         align-items: center;
     }
 
+
+    /* =====================================================
+       BAGIAN JUDUL
+    ====================================================== */
+
     .title-section {
+
         text-align: center;
+
+        width: 100%;
     }
 
+
+    /* =====================================================
+       JUDUL UTAMA
+    ====================================================== */
+
     .title-section h1 {
+
         font-size:
             clamp(
                 1.2rem,
@@ -211,6 +264,7 @@
     ====================================================== */
 
     .subtitle {
+
         margin-top: 7px;
 
         background:
@@ -246,6 +300,7 @@
     ====================================================== */
 
     .sts-container {
+
         width:
             calc(100% - 30px);
 
@@ -269,9 +324,14 @@
 
     /* =====================================================
        KARTU STS
+       
+       PENTING:
+       KARTU HANYA SEBAGAI TAMPILAN.
+       KARTU TIDAK MEMILIKI LINK.
     ====================================================== */
 
     .sts-card {
+
         min-width: 0;
 
         background:
@@ -292,8 +352,6 @@
 
         color: #0288d1;
 
-        text-decoration: none;
-
         box-shadow:
             0 4px 10px
             rgba(0, 0, 0, .18);
@@ -308,20 +366,39 @@
                 .85
             );
 
+        /*
+         * Tidak menggunakan cursor pointer.
+         * Kartu bukan tombol.
+         */
+
+        cursor: default;
+
         transition:
-            transform .2s ease,
             box-shadow .2s ease;
     }
 
+
+    /* =====================================================
+       HOVER KARTU
+       
+       Tidak ada efek naik/klik pada kartu.
+    ====================================================== */
+
     .sts-card:hover {
-        transform:
-            translateY(-3px);
 
         box-shadow:
-            0 7px 14px
-            rgba(0, 0, 0, .22);
+            0 4px 10px
+            rgba(0, 0, 0, .18);
 
-        background: #dff6ff;
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .94
+            );
+
+        transform: none;
     }
 
 
@@ -330,6 +407,7 @@
     ====================================================== */
 
     .sts-icon {
+
         width: 52px;
 
         height: 52px;
@@ -367,6 +445,7 @@
     ====================================================== */
 
     .sts-card h2 {
+
         font-size: 1rem;
 
         margin-bottom: 4px;
@@ -376,10 +455,11 @@
 
 
     /* =====================================================
-       KETERANGAN
+       KETERANGAN KARTU
     ====================================================== */
 
     .sts-card p {
+
         color: #555;
 
         font-size: .65rem;
@@ -391,10 +471,14 @@
 
 
     /* =====================================================
-       TOMBOL
+       TOMBOL MULAI
+       
+       INILAH SATU-SATUNYA BAGIAN STS
+       YANG MEMILIKI LINK.
     ====================================================== */
 
     .sts-button {
+
         display: inline-block;
 
         background:
@@ -419,6 +503,62 @@
         box-shadow:
             0 2px 5px
             rgba(0, 0, 0, .16);
+
+        pointer-events: auto;
+
+        cursor: pointer;
+
+        text-decoration: none;
+
+        transition:
+            transform .2s ease,
+            box-shadow .2s ease;
+    }
+
+
+    /* =====================================================
+       HOVER TOMBOL MULAI
+    ====================================================== */
+
+    .sts-button:hover {
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 4px 8px
+            rgba(0, 0, 0, .22);
+    }
+
+
+    /* =====================================================
+       SAAT TOMBOL DITEKAN
+    ====================================================== */
+
+    .sts-button:active {
+
+        transform:
+            translateY(0);
+    }
+
+
+    /* =====================================================
+       FOCUS TOMBOL
+    ====================================================== */
+
+    .sts-button:focus-visible {
+
+        outline:
+            3px
+            solid
+            rgba(
+                255,
+                255,
+                255,
+                .95
+            );
+
+        outline-offset: 3px;
     }
 
 
@@ -427,6 +567,7 @@
     ====================================================== */
 
     .back-container {
+
         display: flex;
 
         justify-content: center;
@@ -437,10 +578,18 @@
             20px;
     }
 
+
+    /* =====================================================
+       LINK KEMBALI
+    ====================================================== */
+
     .back-button {
+
         display: inline-flex;
 
         align-items: center;
+
+        justify-content: center;
 
         gap: 5px;
 
@@ -473,11 +622,18 @@
         transition: .2s;
     }
 
+
+    /* =====================================================
+       HOVER TOMBOL KEMBALI
+    ====================================================== */
+
     .back-button:hover {
+
         transform:
             translateY(-1px);
 
-        background: #dff6ff;
+        background:
+            #dff6ff;
     }
 
 
@@ -486,6 +642,7 @@
     ====================================================== */
 
     audio {
+
         display: none;
     }
 
@@ -496,13 +653,18 @@
 
     @media (max-width: 768px) {
 
+        /* NAVBAR */
+
         nav {
+
             padding:
                 .5rem
                 .7rem;
         }
 
+
         .nav-right {
+
             justify-content: center;
 
             width: 100%;
@@ -510,7 +672,9 @@
             gap: 4px;
         }
 
+
         nav a {
+
             font-size: .68rem;
 
             padding:
@@ -518,7 +682,11 @@
                 .5rem;
         }
 
+
+        /* HEADER */
+
         .hero-layout {
+
             width:
                 calc(100% - 16px);
 
@@ -528,7 +696,9 @@
                 6px;
         }
 
+
         .title-section h1 {
+
             font-size: 1.15rem;
 
             padding:
@@ -536,7 +706,9 @@
                 .75rem;
         }
 
+
         .subtitle {
+
             font-size: .62rem;
 
             padding:
@@ -550,6 +722,7 @@
         ================================================== */
 
         .sts-container {
+
             width:
                 calc(100% - 20px);
 
@@ -568,7 +741,9 @@
                 auto;
         }
 
+
         .sts-card {
+
             padding:
                 12px
                 6px;
@@ -576,7 +751,9 @@
             border-radius: 10px;
         }
 
+
         .sts-icon {
+
             width: 45px;
 
             height: 45px;
@@ -586,19 +763,25 @@
             margin-bottom: 6px;
         }
 
+
         .sts-card h2 {
+
             font-size: .9rem;
 
             margin-bottom: 3px;
         }
 
+
         .sts-card p {
+
             font-size: .58rem;
 
             margin-bottom: 7px;
         }
 
+
         .sts-button {
+
             padding:
                 5px
                 7px;
@@ -606,20 +789,25 @@
             font-size: .56rem;
         }
 
+
         .back-container {
+
             margin:
                 8px
                 auto
                 15px;
         }
 
+
         .back-button {
+
             font-size: .65rem;
 
             padding:
                 6px
                 10px;
         }
+
     }
 
 
@@ -629,11 +817,16 @@
 
     @media (max-width: 480px) {
 
+        /* NAVBAR */
+
         nav {
+
             padding: .4rem;
         }
 
+
         nav a {
+
             font-size: .6rem;
 
             padding:
@@ -641,7 +834,11 @@
                 .42rem;
         }
 
+
+        /* HEADER */
+
         .hero-layout {
+
             width:
                 calc(100% - 10px);
 
@@ -651,7 +848,9 @@
                 5px;
         }
 
+
         .title-section h1 {
+
             font-size: 1rem;
 
             padding:
@@ -661,7 +860,9 @@
             border-radius: 8px;
         }
 
+
         .subtitle {
+
             font-size: .55rem;
 
             margin-top: 5px;
@@ -677,6 +878,7 @@
         ================================================== */
 
         .sts-container {
+
             width:
                 calc(100% - 12px);
 
@@ -695,7 +897,9 @@
                 auto;
         }
 
+
         .sts-card {
+
             padding:
                 10px
                 4px;
@@ -705,7 +909,9 @@
             border-width: 1px;
         }
 
+
         .sts-icon {
+
             width: 40px;
 
             height: 40px;
@@ -715,13 +921,17 @@
             margin-bottom: 5px;
         }
 
+
         .sts-card h2 {
+
             font-size: .8rem;
 
             margin-bottom: 2px;
         }
 
+
         .sts-card p {
+
             font-size: .52rem;
 
             line-height: 1.25;
@@ -729,7 +939,9 @@
             margin-bottom: 6px;
         }
 
+
         .sts-button {
+
             padding:
                 4px
                 5px;
@@ -739,13 +951,16 @@
             border-radius: 6px;
         }
 
+
         .back-button {
+
             font-size: .58rem;
 
             padding:
                 5px
                 8px;
         }
+
     }
 
 
@@ -756,19 +971,24 @@
     @media (max-width: 360px) {
 
         .sts-container {
+
             width:
                 calc(100% - 8px);
 
             gap: 4px;
         }
 
+
         .sts-card {
+
             padding:
                 8px
                 3px;
         }
 
+
         .sts-icon {
+
             width: 36px;
 
             height: 36px;
@@ -776,21 +996,28 @@
             font-size: 1.1rem;
         }
 
+
         .sts-card h2 {
+
             font-size: .72rem;
         }
 
+
         .sts-card p {
+
             font-size: .46rem;
         }
 
+
         .sts-button {
+
             font-size: .44rem;
 
             padding:
                 4px
                 4px;
         }
+
     }
 
 </style>
@@ -809,15 +1036,26 @@
 
     <div class="nav-right">
 
-        <a href="../index.html">
+        <a
+            href="../index.html"
+            class="nav-button"
+        >
             🏠 Beranda
         </a>
 
-        <a href="kelas.html">
+
+        <a
+            href="kelas.html"
+            class="nav-button"
+        >
             🏫 Kelas
         </a>
 
-        <a href="Petualangan-Kelas-5.html">
+
+        <a
+            href="Petualangan-Kelas-5.html"
+            class="nav-button"
+        >
             🗺️ Petualangan
         </a>
 
@@ -837,6 +1075,7 @@
         <h1>
             📝 Sumatif Tengah Semester
         </h1>
+
 
         <div>
 
@@ -862,60 +1101,94 @@
          STS 1
     ================================================== -->
 
-    <a
-        href="sts1.html"
+    <div
         class="sts-card"
         data-halaman="STS 1"
     >
+
+        <!-- IKON -->
 
         <div class="sts-icon">
             📝
         </div>
 
+
+        <!-- JUDUL -->
+
         <h2>
             STS 1
         </h2>
+
+
+        <!-- KETERANGAN -->
 
         <p>
             Masuk ke halaman
             Sumatif Tengah Semester 1.
         </p>
 
-        <span class="sts-button">
-            🚀 Mulai STS 1
-        </span>
 
-    </a>
+        <!-- =================================================
+             HANYA TOMBOL INI YANG BISA DIKLIK
+        ================================================== -->
+
+        <a
+            href="sts1.html"
+            class="sts-button"
+            data-halaman="STS 1"
+            aria-label="Mulai STS 1"
+        >
+            🚀 Mulai STS 1
+        </a>
+
+    </div>
 
 
     <!-- =================================================
          STS 2
     ================================================== -->
 
-    <a
-        href="sts2.html"
+    <div
         class="sts-card"
         data-halaman="STS 2"
     >
+
+        <!-- IKON -->
 
         <div class="sts-icon">
             📚
         </div>
 
+
+        <!-- JUDUL -->
+
         <h2>
             STS 2
         </h2>
+
+
+        <!-- KETERANGAN -->
 
         <p>
             Masuk ke halaman
             Sumatif Tengah Semester 2.
         </p>
 
-        <span class="sts-button">
-            🚀 Mulai STS 2
-        </span>
 
-    </a>
+        <!-- =================================================
+             HANYA TOMBOL INI YANG BISA DIKLIK
+        ================================================== -->
+
+        <a
+            href="sts2.html"
+            class="sts-button"
+            data-halaman="STS 2"
+            aria-label="Mulai STS 2"
+        >
+            🚀 Mulai STS 2
+        </a>
+
+    </div>
 
 
 </div>
@@ -957,24 +1230,51 @@
     ====================================================== */
 
     const clickSound =
-        document.getElementById("clickSound");
+        document.getElementById(
+            "clickSound"
+        );
 
+
+    /* =====================================================
+       FUNGSI SUARA KLIK
+    ====================================================== */
+
+    function playClickSound() {
+
+        if (!clickSound) {
+            return;
+        }
+
+        clickSound.currentTime = 0;
+
+        clickSound
+            .play()
+            .catch(function () {
+                /*
+                 * Browser dapat memblokir audio
+                 * jika aturan autoplay terpenuhi.
+                 * Tidak menghentikan navigasi.
+                 */
+            });
+
+    }
+
+
+    /* =====================================================
+       SUARA UNTUK NAVIGASI
+    ====================================================== */
 
     document
-        .querySelectorAll("a, button")
-        .forEach(function(button) {
+        .querySelectorAll(
+            "nav a"
+        )
+        .forEach(function (button) {
 
             button.addEventListener(
                 "click",
-                function() {
+                function () {
 
-                    if (!clickSound) return;
-
-                    clickSound.currentTime = 0;
-
-                    clickSound
-                        .play()
-                        .catch(function() {});
+                    playClickSound();
 
                 }
             );
@@ -983,15 +1283,123 @@
 
 
     /* =====================================================
-       INFORMASI
+       SUARA UNTUK TOMBOL MULAI
+    ====================================================== */
+
+    document
+        .querySelectorAll(
+            ".sts-button"
+        )
+        .forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    playClickSound();
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       SUARA UNTUK TOMBOL KEMBALI
+    ====================================================== */
+
+    document
+        .querySelectorAll(
+            ".back-button"
+        )
+        .forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    playClickSound();
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       KEAMANAN KARTU STS
+       
+       Klik pada area kartu:
+       - Tidak membuka halaman
+       - Tidak melakukan navigasi
+       - Tidak memainkan suara
+       
+       Klik tombol:
+       - Tetap aktif
+       - Membuka sts1.html / sts2.html
+    ====================================================== */
+
+    document
+        .querySelectorAll(
+            ".sts-card"
+        )
+        .forEach(function (card) {
+
+            card.addEventListener(
+                "click",
+                function (event) {
+
+                    /*
+                     * Periksa apakah klik berasal
+                     * dari tombol Mulai.
+                     */
+
+                    const tombol =
+                        event.target.closest(
+                            ".sts-button"
+                        );
+
+
+                    /*
+                     * Jika bukan tombol Mulai,
+                     * hentikan aksi.
+                     */
+
+                    if (!tombol) {
+
+                        event.preventDefault();
+
+                        event.stopPropagation();
+
+                        return false;
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       INFORMASI CONSOLE
     ====================================================== */
 
     console.log(
-        "Halaman STS dibuka."
+        "Halaman STS | Petualangan Kelas 5 aktif."
+    );
+
+    console.log(
+        "Kartu STS tidak dapat diklik."
+    );
+
+    console.log(
+        "Hanya tombol Mulai STS yang aktif."
     );
 
 </script>
 
 
 </body>
+
 </html>

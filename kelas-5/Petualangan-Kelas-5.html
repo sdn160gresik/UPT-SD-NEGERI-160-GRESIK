@@ -511,7 +511,6 @@ nav a:hover{
 /* =====================================================
    KOMPONEN ONLINE
    TIDAK DITAMPILKAN
-   HEARTBEAT TETAP BERJALAN VIA JAVASCRIPT
 ===================================================== */
 
 #daftarSiswaAktif{
@@ -1203,17 +1202,15 @@ audio{
 <!-- =====================================================
      KOMPONEN ONLINE
      
-     TIDAK DITAMPILKAN.
+     TIDAK DITAMPILKAN
      
-     SISTEM HEARTBEAT DI JAVASCRIPT
-     TETAP BERJALAN.
+     HEARTBEAT TETAP AKTIF
 ===================================================== -->
 
 <section
     id="daftarSiswaAktif"
     aria-hidden="true"
 >
-
 </section>
 
 
@@ -1285,18 +1282,24 @@ const buttonSound =
 
 function playButtonSound(){
 
-    if(!buttonSound){
+    if(
+        !buttonSound
+    ){
 
         return;
 
     }
 
+
     try{
 
-        buttonSound.currentTime = 0;
+        buttonSound.currentTime =
+            0;
+
 
         const promise =
             buttonSound.play();
+
 
         if(
             promise !== undefined
@@ -1388,7 +1391,10 @@ function getStorageValue(keys){
 
             }catch(error){
 
-                // Storage tidak tersedia.
+                console.log(
+                    "Storage tidak dapat dibaca:",
+                    error
+                );
 
             }
 
@@ -1453,7 +1459,10 @@ function getStudentIdentity(){
         getUrlParameter([
             "nama",
             "namaSiswa",
-            "studentName"
+            "studentName",
+            "nama_siswa",
+            "student_name",
+            "identitasNama"
         ]) ||
         getStorageValue([
             "nama",
@@ -1469,7 +1478,9 @@ function getStudentIdentity(){
         getUrlParameter([
             "kelas",
             "kelasSiswa",
-            "studentClass"
+            "studentClass",
+            "kelas_siswa",
+            "student_class"
         ]) ||
         getStorageValue([
             "kelas",
@@ -1485,7 +1496,10 @@ function getStudentIdentity(){
             "absen",
             "nomorAbsen",
             "nomor_absen",
-            "noAbsen"
+            "noAbsen",
+            "no_absen",
+            "studentNumber",
+            "student_number"
         ]) ||
         getStorageValue([
             "absen",
@@ -1533,25 +1547,108 @@ function identityIsComplete(identity){
 
 
 /* =====================================================
-   HEARTBEAT
+   VARIABEL HEARTBEAT
 ===================================================== */
 
 let heartbeatTimer =
     null;
 
+
 let lastHeartbeat =
     0;
 
 
+let heartbeatRequestNumber =
+    0;
+
+
 /* =====================================================
-   KIRIM HEARTBEAT
+   MEMBUAT CALLBACK JSONP
 ===================================================== */
 
-async function sendHeartbeat(){
+function createHeartbeatCallbackName(){
+
+    heartbeatRequestNumber++;
+
+
+    return (
+
+        "heartbeatCallback_" +
+
+        Date.now() +
+
+        "_" +
+
+        heartbeatRequestNumber
+
+    );
+
+}
+
+
+/* =====================================================
+   MEMBERSIHKAN REQUEST JSONP
+===================================================== */
+
+function cleanupHeartbeat(
+    script,
+    callbackName
+){
+
+    try{
+
+        if(
+            script &&
+            script.parentNode
+        ){
+
+            script.parentNode.removeChild(
+                script
+            );
+
+        }
+
+    }catch(error){
+
+        console.log(
+            "Gagal menghapus script heartbeat:",
+            error
+        );
+
+    }
+
+
+    try{
+
+        delete window[
+            callbackName
+        ];
+
+    }catch(error){
+
+        window[
+            callbackName
+        ] =
+            undefined;
+
+    }
+
+}
+
+
+/* =====================================================
+   KIRIM HEARTBEAT JSONP
+===================================================== */
+
+function sendHeartbeat(){
 
     const identity =
         getStudentIdentity();
 
+
+    /* -------------------------------------------------
+       CEK IDENTITAS
+    ------------------------------------------------- */
 
     if(
         !identityIsComplete(
@@ -1560,13 +1657,24 @@ async function sendHeartbeat(){
     ){
 
         console.log(
-            "Heartbeat ditunda: identitas siswa belum lengkap."
+            "⚠️ Heartbeat ditunda: identitas siswa belum lengkap."
         );
+
+
+        console.log(
+            "Identitas yang ditemukan:",
+            identity
+        );
+
 
         return;
 
     }
 
+
+    /* -------------------------------------------------
+       BATAS PENGIRIMAN
+    ------------------------------------------------- */
 
     const now =
         Date.now();
@@ -1586,6 +1694,18 @@ async function sendHeartbeat(){
     lastHeartbeat =
         now;
 
+
+    /* -------------------------------------------------
+       CALLBACK
+    ------------------------------------------------- */
+
+    const callbackName =
+        createHeartbeatCallbackName();
+
+
+    /* -------------------------------------------------
+       PARAMETER
+    ------------------------------------------------- */
 
     const params =
         new URLSearchParams();
@@ -1627,73 +1747,215 @@ async function sendHeartbeat(){
     );
 
 
+    params.set(
+        "callback",
+        callbackName
+    );
+
+
+    params.set(
+        "t",
+        Date.now()
+    );
+
+
     const url =
         API_URL +
         "?" +
         params.toString();
 
 
-    try{
+    /* -------------------------------------------------
+       LOG
+    ------------------------------------------------- */
 
-        /*
-         * Menggunakan fetch GET.
-         * Apps Script sudah terbukti menerima
-         * request heartbeat dengan metode GET.
-         */
-
-        const response =
-            await fetch(
-                url,
-                {
-                    method:
-                        "GET",
-
-                    mode:
-                        "cors",
-
-                    cache:
-                        "no-store"
-                }
-            );
+    console.log(
+        "===================================="
+    );
 
 
-        if(
-            !response.ok
-        ){
-
-            throw new Error(
-                "HTTP " +
-                response.status
-            );
-
-        }
+    console.log(
+        "📡 Mengirim heartbeat siswa..."
+    );
 
 
-        /*
-         * Baca response sebagai text.
-         * Tidak wajib JSON agar heartbeat
-         * tetap dianggap berhasil meskipun
-         * browser memperlakukan redirect Apps Script.
-         */
-
-        const text =
-            await response.text();
+    console.log(
+        "Nama:",
+        identity.nama
+    );
 
 
-        console.log(
-            "Heartbeat berhasil dikirim:",
-            text
+    console.log(
+        "Kelas:",
+        identity.kelas
+    );
+
+
+    console.log(
+        "No Absen:",
+        identity.absen
+    );
+
+
+    console.log(
+        "Halaman:",
+        HALAMAN_UTAMA
+    );
+
+
+    console.log(
+        "Metode: JSONP"
+    );
+
+
+    console.log(
+        "URL heartbeat:",
+        url
+    );
+
+
+    /* -------------------------------------------------
+       BUAT SCRIPT
+    ------------------------------------------------- */
+
+    const script =
+        document.createElement(
+            "script"
         );
 
 
-    }catch(error){
+    script.src =
+        url;
 
-        console.log(
-            "Heartbeat gagal:",
-            error
+
+    script.async =
+        true;
+
+
+    script.id =
+        callbackName;
+
+
+    /* -------------------------------------------------
+       CALLBACK BERHASIL
+    ------------------------------------------------- */
+
+    window[
+        callbackName
+    ] =
+        function(data){
+
+            console.log(
+                "📥 Respons heartbeat diterima:",
+                data
+            );
+
+
+            if(
+                data &&
+                data.success
+            ){
+
+                console.log(
+                    "✅ SISWA BERHASIL TERCATAT ONLINE"
+                );
+
+
+                console.log(
+                    "Nama:",
+                    data.nama
+                );
+
+
+                console.log(
+                    "Kelas:",
+                    data.kelas
+                );
+
+
+                console.log(
+                    "No Absen:",
+                    data.nomorAbsen
+                );
+
+
+            }else{
+
+                console.log(
+                    "⚠️ Heartbeat mendapat respons tetapi tidak berhasil:",
+                    data
+                );
+
+            }
+
+
+            cleanupHeartbeat(
+                script,
+                callbackName
+            );
+
+        };
+
+
+    /* -------------------------------------------------
+       ERROR
+    ------------------------------------------------- */
+
+    script.onerror =
+        function(){
+
+            console.log(
+                "❌ Heartbeat JSONP gagal dimuat."
+            );
+
+
+            cleanupHeartbeat(
+                script,
+                callbackName
+            );
+
+        };
+
+
+    /* -------------------------------------------------
+       TIMEOUT
+    ------------------------------------------------- */
+
+    setTimeout(
+        function(){
+
+            if(
+                document.getElementById(
+                    callbackName
+                )
+            ){
+
+                console.log(
+                    "⚠️ Timeout heartbeat JSONP."
+                );
+
+
+                cleanupHeartbeat(
+                    script,
+                    callbackName
+                );
+
+            }
+
+        },
+        10000
+    );
+
+
+    /* -------------------------------------------------
+       KIRIM
+    ------------------------------------------------- */
+
+    document
+        .head
+        .appendChild(
+            script
         );
-
-    }
 
 }
 
@@ -1725,6 +1987,10 @@ function registerActivity(){
 
 }
 
+
+/* =====================================================
+   EVENT AKTIVITAS
+===================================================== */
 
 const activityEvents = [
 
@@ -1761,7 +2027,7 @@ activityEvents.forEach(
 
 
 /* =====================================================
-   TAB KEMBALI AKTIF
+   VISIBILITY CHANGE
 ===================================================== */
 
 document.addEventListener(
@@ -1775,7 +2041,14 @@ document.addEventListener(
             "visible"
         ){
 
-            lastHeartbeat = 0;
+            console.log(
+                "👀 Halaman kembali aktif."
+            );
+
+
+            lastHeartbeat =
+                0;
+
 
             sendHeartbeat();
 
@@ -1796,7 +2069,14 @@ window.addEventListener(
 
     function(){
 
-        lastHeartbeat = 0;
+        console.log(
+            "🔎 Window kembali fokus."
+        );
+
+
+        lastHeartbeat =
+            0;
+
 
         sendHeartbeat();
 
@@ -1822,15 +2102,20 @@ function startHeartbeat(){
     }
 
 
+    console.log(
+        "🚀 Memulai sistem heartbeat..."
+    );
+
+
     /*
-     * Kirim langsung saat halaman dibuka.
+     * Kirim langsung.
      */
 
     sendHeartbeat();
 
 
     /*
-     * Kirim ulang setiap 30 detik.
+     * Kirim setiap 30 detik.
      */
 
     heartbeatTimer =
@@ -1842,6 +2127,11 @@ function startHeartbeat(){
                     document.visibilityState ===
                     "visible"
                 ){
+
+                    console.log(
+                        "🔄 Heartbeat berkala..."
+                    );
+
 
                     sendHeartbeat();
 
@@ -1857,30 +2147,59 @@ function startHeartbeat(){
 
 
 /* =====================================================
-   MULAI SISTEM ONLINE
+   CEK IDENTITAS SAAT HALAMAN DIBUKA
+===================================================== */
+
+const identityAwal =
+    getStudentIdentity();
+
+
+console.log(
+    "===================================="
+);
+
+
+console.log(
+    "IDENTITAS SISWA"
+);
+
+
+console.log(
+    "Nama:",
+    identityAwal.nama || "(kosong)"
+);
+
+
+console.log(
+    "Kelas:",
+    identityAwal.kelas || "(kosong)"
+);
+
+
+console.log(
+    "No Absen:",
+    identityAwal.absen || "(kosong)"
+);
+
+
+console.log(
+    "===================================="
+);
+
+
+/* =====================================================
+   MULAI SISTEM HEARTBEAT
 ===================================================== */
 
 startHeartbeat();
 
 
 /* =====================================================
-   PENTING:
-   HALAMAN UTAMA TIDAK LAGI MEMANGGIL
-   ?action=online
-
-   Karena daftar siswa online hanya
-   diperlukan pada online/online.html.
-
-   Heartbeat tetap aktif.
-===================================================== */
-
-
-/* =====================================================
-   LOG
+   LOG AKHIR
 ===================================================== */
 
 console.log(
-    "Petualangan Kelas 5 dibuka."
+    "📖 Petualangan Kelas 5 dibuka."
 );
 
 
@@ -1891,12 +2210,12 @@ console.log(
 
 
 console.log(
-    "Heartbeat siswa aktif."
+    "💚 Sistem heartbeat JSONP aktif."
 );
 
 
 console.log(
-    "Daftar siswa online disembunyikan dari halaman utama."
+    "👥 Daftar siswa online disembunyikan dari halaman utama."
 );
 
 </script>

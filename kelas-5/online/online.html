@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="id">
 
 <head>
@@ -6,8 +7,9 @@
 <meta charset="UTF-8">
 
 <meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
 >
 
 <title>Siswa Online | UPT SDN 160 GRESIK</title>
@@ -56,6 +58,90 @@ body {
     0 auto;
 
 }
+
+
+/* =====================================================
+   TOMBOL KEMBALI
+===================================================== */
+
+.back-button {
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    7px;
+
+  margin-bottom:
+    20px;
+
+  padding:
+    9px 16px;
+
+  border-radius:
+    12px;
+
+  background:
+    #ffffff;
+
+  color:
+    #1e3a8a;
+
+  text-decoration:
+    none;
+
+  font-size:
+    13px;
+
+  font-weight:
+    700;
+
+  box-shadow:
+    0 5px 18px
+    rgba(30,64,175,.10);
+
+  border:
+    1px solid
+    #dbeafe;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+
+}
+
+.back-button:hover {
+
+  transform:
+    translateY(-2px);
+
+  background:
+    #eff6ff;
+
+  box-shadow:
+    0 8px 22px
+    rgba(30,64,175,.15);
+
+}
+
+.back-button:active {
+
+  transform:
+    translateY(0);
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
 
 .header {
 
@@ -432,71 +518,95 @@ body {
 
 </head>
 
-
 <body>
 
 <div class="container">
 
+  <!-- =================================================
+       TOMBOL KEMBALI
+       
+       File ini berada di folder:
+       kelas-5/online/online.html
+       
+       Tujuan:
+       kelas-5/Petualangan-Kelas-5.html
+  ================================================== -->
+
+<a
+href="../Petualangan-Kelas-5.html"
+class="back-button"
+title="Kembali ke Petualangan Kelas 5"
+
+>
+
+
+Kembali
+
+
+  </a>
 
   <div class="header">
 
-    <h1>
-      🟢 Siswa Sedang Online
-    </h1>
 
-    <p>
-      UPT SDN 160 GRESIK
-    </p>
+<h1>
+  🟢 Siswa Sedang Online
+</h1>
 
-    <div class="status">
+<p>
+  UPT SDN 160 GRESIK
+</p>
 
-      <span class="dot"></span>
+<div class="status">
 
-      <span>
-        <span id="jumlah">
-          0
-        </span>
-        siswa sedang online
-      </span>
+  <span class="dot"></span>
 
-    </div>
+  <span>
+    <span id="jumlah">
+      0
+    </span>
+    siswa sedang online
+  </span>
+
+</div>
+
 
   </div>
-
 
   <div class="card">
 
-    <div
-      id="loading"
-      class="loading"
-    >
-      ⏳ Memuat data siswa online...
-    </div>
+
+<div
+  id="loading"
+  class="loading"
+>
+  ⏳ Memuat data siswa online...
+</div>
 
 
-    <div
-      id="error"
-      style="display:none"
-    ></div>
+<div
+  id="error"
+  style="display:none"
+></div>
 
 
-    <div
-      id="studentList"
-      class="student-list"
-    ></div>
+<div
+  id="studentList"
+  class="student-list"
+></div>
+
 
   </div>
 
-
   <div class="footer">
 
-    Data diperbarui otomatis setiap
-    10 detik.
+
+Data diperbarui otomatis setiap
+10 detik.
+
 
   </div>
 
 </div>
-
 
 <script>
 
@@ -838,7 +948,7 @@ function tampilkanSiswa(
 
 /* =====================================================
    LOAD DATA
-   ===================================================== */
+===================================================== */
 
 function loadOnline() {
 
@@ -928,14 +1038,14 @@ function loadOnline() {
 
 /* =====================================================
    LOAD PERTAMA
-   ===================================================== */
+===================================================== */
 
 loadOnline();
 
 
 /* =====================================================
    REFRESH OTOMATIS
-   ===================================================== */
+===================================================== */
 
 setInterval(
   function() {
@@ -949,4 +1059,5 @@ setInterval(
 </script>
 
 </body>
+
 </html>

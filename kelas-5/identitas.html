@@ -1,2191 +1,1000 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
 <meta charset="UTF-8">
 
 <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
 >
 
 <meta
-    name="theme-color"
-    content="#9b4d20"
+  name="theme-color"
+  content="#f59e0b"
 >
 
-<title>Identitas Siswa | Petualangan Kelas 5</title>
+<title>Login Siswa | Petualangan Kelas 5</title>
 
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+>
 
 <style>
 
-/* =========================================================
-   ROOT
-========================================================= */
-
-:root{
-
-    --primary:#9b4d20;
-    --primary-dark:#713517;
-    --secondary:#e67e22;
-    --accent:#f4b942;
-
-    --green:#2e8b57;
-    --red:#c0392b;
-
-    --ink:#4a2c20;
-    --muted:#806b61;
-
-    --card:#fffdf8;
-    --cream:#fff8e8;
-
-    --border:#ead7bc;
-
-    --shadow:rgba(92,48,24,.16);
-
+* {
+  box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
 
-/* =========================================================
-   RESET
-========================================================= */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-*{
-    box-sizing:border-box;
+  padding: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff7ed,
+      #fef3c7,
+      #ffedd5
+    );
 }
 
-
-html,
-body{
-
-    margin:0;
-
-    min-height:100%;
-
+.container {
+  width: 100%;
+  max-width: 480px;
 }
 
+.card {
 
-/* =========================================================
-   BODY
-========================================================= */
+  background: rgba(255,255,255,.96);
 
-body{
+  border-radius: 30px;
 
-    font-family:
-        "Segoe UI",
-        Arial,
-        sans-serif;
+  padding: 32px 26px;
 
-    color:var(--ink);
+  box-shadow:
+    0 20px 50px rgba(120,53,15,.18);
 
-    background:
+  border:
+    3px solid rgba(245,158,11,.25);
 
-        radial-gradient(
-            circle at 10% 15%,
-            rgba(255,255,255,.65) 0 3px,
-            transparent 4px
-        ),
-
-        radial-gradient(
-            circle at 90% 25%,
-            rgba(255,255,255,.5) 0 3px,
-            transparent 4px
-        ),
-
-        linear-gradient(
-            135deg,
-            #f7dfb5 0%,
-            #fff4d8 45%,
-            #f3d7ad 100%
-        );
-
-    background-size:
-        auto,
-        auto,
-        cover;
-
-    min-height:100vh;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
+  animation:
+    muncul .5s ease;
 }
 
+@keyframes muncul {
 
-/* =========================================================
-   POLA BACKGROUND
-========================================================= */
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-body::before{
-
-    content:"";
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    opacity:.18;
-
-    background-image:
-
-        radial-gradient(
-            #fff 1px,
-            transparent 1px
-        );
-
-    background-size:22px 22px;
-
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+.badge {
 
-/* =========================================================
-   APP
-========================================================= */
+  display: inline-flex;
 
-.app{
+  align-items: center;
+  justify-content: center;
 
-    width:100%;
+  background: #fff7ed;
 
-    max-width:540px;
+  border:
+    2px solid #fed7aa;
 
-    margin:auto;
+  color: #9a3412;
 
-    position:relative;
+  padding:
+    8px 14px;
 
-    z-index:1;
+  border-radius: 999px;
 
+  font-weight: 700;
+
+  font-size: 13px;
+
+  margin-bottom: 16px;
 }
 
+h1 {
 
-/* =========================================================
-   KARTU IDENTITAS
-========================================================= */
+  margin:
+    0 0 8px;
 
-.identity-card{
+  color: #7c2d12;
 
-    position:relative;
+  font-size:
+    clamp(25px, 6vw, 34px);
 
-    overflow:hidden;
+  line-height: 1.2;
 
-    background:
-        rgba(255,253,248,.98);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:30px;
-
-    box-shadow:
-
-        0 25px 65px
-        rgba(86,45,20,.22),
-
-        0 8px 20px
-        rgba(86,45,20,.10);
-
+  font-weight: 800;
 }
 
+.subtitle {
 
-/* =========================================================
-   GARIS WARNA ATAS
-========================================================= */
+  margin:
+    0 0 25px;
 
-.identity-card::before{
+  color: #78716c;
 
-    content:"";
+  font-size: 14px;
 
-    display:block;
-
-    height:9px;
-
-    background:
-
-        linear-gradient(
-            90deg,
-            #9b4d20 0%,
-            #d96c27 35%,
-            #f4b942 70%,
-            #2e8b57 100%
-        );
-
+  line-height: 1.7;
 }
 
+.form-group {
 
-/* =========================================================
-   HIASAN MAKANAN
-========================================================= */
-
-.identity-card::after{
-
-    content:
-        "🍜   🍢   🥟   🍚   🍡";
-
-    display:block;
-
-    text-align:center;
-
-    font-size:23px;
-
-    letter-spacing:4px;
-
-    padding-top:17px;
-
+  margin-bottom: 17px;
 }
 
+label {
 
-/* =========================================================
-   ISI KARTU
-========================================================= */
+  display: block;
 
-.identity-content{
+  margin-bottom: 7px;
 
-    padding:
-        4px
-        34px
-        30px;
+  color: #44403c;
 
+  font-size: 14px;
+
+  font-weight: 700;
 }
 
+input {
 
-/* =========================================================
-   BADGE SEKOLAH
-========================================================= */
+  width: 100%;
 
-.school-badge{
+  padding:
+    14px 16px;
 
-    display:table;
+  border:
+    2px solid #e7e5e4;
 
-    margin:
-        2px auto 13px;
+  border-radius:
+    15px;
 
-    padding:
-        7px 14px;
+  outline: none;
 
-    border-radius:99px;
+  font-family:
+    inherit;
 
-    background:#f9e6c5;
+  font-size: 15px;
 
-    color:var(--primary-dark);
-
-    font-size:12px;
-
-    font-weight:900;
-
-    border:
-        1px solid #eed2a5;
-
+  transition:
+    .2s;
 }
 
+input:focus {
 
-/* =========================================================
-   ICON
-========================================================= */
+  border-color:
+    #f59e0b;
 
-.identity-icon{
-
-    width:76px;
-
-    height:76px;
-
-    margin:
-        0 auto 11px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-
-        linear-gradient(
-            145deg,
-            #fff0c8,
-            #f7d994
-        );
-
-    border:
-        4px solid #fff;
-
-    box-shadow:
-
-        0 8px 20px
-        rgba(140,78,27,.15),
-
-        inset 0 2px 4px
-        rgba(255,255,255,.8);
-
-    font-size:39px;
-
+  box-shadow:
+    0 0 0 4px
+    rgba(245,158,11,.12);
 }
 
+button {
 
-/* =========================================================
-   JUDUL
-========================================================= */
+  width: 100%;
 
-h1{
+  border: none;
 
-    margin:
-        5px 0 7px;
+  border-radius: 16px;
 
-    text-align:center;
+  padding:
+    15px 18px;
 
-    color:var(--primary-dark);
+  margin-top: 7px;
 
-    font-size:27px;
+  background:
+    linear-gradient(
+      135deg,
+      #f59e0b,
+      #ea580c
+    );
 
-    line-height:1.25;
+  color: white;
 
+  font-family:
+    inherit;
+
+  font-size: 16px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px
+    rgba(234,88,12,.25);
+
+  transition:
+    transform .2s,
+    box-shadow .2s;
 }
 
+button:hover {
 
-/* =========================================================
-   SUBTITLE
-========================================================= */
+  transform:
+    translateY(-2px);
 
-.subtitle{
-
-    margin:
-        0 auto 25px;
-
-    max-width:410px;
-
-    text-align:center;
-
-    color:var(--muted);
-
-    font-size:14px;
-
-    line-height:1.6;
-
+  box-shadow:
+    0 14px 30px
+    rgba(234,88,12,.32);
 }
 
+button:disabled {
 
-/* =========================================================
-   FORM
-========================================================= */
+  opacity: .65;
 
-.form-grid{
+  cursor:
+    not-allowed;
 
-    display:grid;
-
-    grid-template-columns:1fr;
-
-    gap:16px;
-
+  transform:
+    none;
 }
 
+.loading {
 
-.field{
+  display: none;
 
-    position:relative;
+  text-align: center;
 
+  margin-top: 18px;
+
+  color: #9a3412;
+
+  font-size: 13px;
+
+  font-weight: 600;
 }
 
+.info {
 
-.field label{
+  margin-top: 20px;
 
-    display:block;
+  padding:
+    13px 15px;
 
-    margin-bottom:7px;
+  background:
+    #fffbeb;
 
-    color:#5c3929;
+  border:
+    1px solid #fde68a;
 
-    font-size:14px;
+  border-radius:
+    14px;
 
-    font-weight:800;
+  color:
+    #92400e;
 
+  font-size: 12px;
+
+  line-height: 1.6;
+
+  text-align: center;
 }
 
+.toast {
 
-/* =========================================================
-   INPUT WRAP
-========================================================= */
+  position: fixed;
 
-.input-wrap{
+  left: 50%;
 
-    position:relative;
+  bottom: 25px;
 
+  transform:
+    translateX(-50%)
+    translateY(20px);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  background:
+    #292524;
+
+  color: white;
+
+  padding:
+    12px 18px;
+
+  border-radius:
+    12px;
+
+  font-size: 13px;
+
+  transition:
+    .3s;
+
+  z-index: 9999;
 }
 
+.toast.show {
 
-.input-icon{
+  opacity: 1;
 
-    position:absolute;
-
-    left:14px;
-
-    top:50%;
-
-    transform:
-        translateY(-50%);
-
-    font-size:19px;
-
-    pointer-events:none;
-
-    z-index:2;
-
+  transform:
+    translateX(-50%)
+    translateY(0);
 }
 
+.school {
 
-/* =========================================================
-   INPUT
-========================================================= */
+  margin-bottom: 8px;
 
-input{
+  font-size: 13px;
 
-    width:100%;
+  color: #a16207;
 
-    padding:
-        14px
-        15px
-        14px
-        46px;
-
-    border:
-        2px solid #e7d5bb;
-
-    border-radius:15px;
-
-    font-size:16px;
-
-    outline:none;
-
-    background:#fffdfa;
-
-    color:var(--ink);
-
-    transition:.2s;
-
-    font-family:inherit;
-
-}
-
-
-input::placeholder{
-
-    color:#b29e90;
-
-}
-
-
-input:focus{
-
-    border-color:#d77b35;
-
-    background:#fff;
-
-    box-shadow:
-
-        0 0 0 4px
-        rgba(230,126,34,.13),
-
-        0 5px 15px
-        rgba(120,65,28,.08);
-
-}
-
-
-input:hover{
-
-    border-color:#d7ad7d;
-
-}
-
-
-/* =========================================================
-   TOMBOL
-========================================================= */
-
-.action-area{
-
-    margin-top:22px;
-
-}
-
-
-.btn{
-
-    border:0;
-
-    border-radius:16px;
-
-    padding:
-        15px 20px;
-
-    font-weight:900;
-
-    font-size:16px;
-
-    cursor:pointer;
-
-    transition:
-
-        transform .2s,
-
-        box-shadow .2s,
-
-        opacity .2s;
-
-    font-family:inherit;
-
-}
-
-
-.btn-primary{
-
-    width:100%;
-
-    color:#fff;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            #a95020,
-            #d96b26 55%,
-            #e58a35
-        );
-
-    box-shadow:
-
-        0 8px 18px
-        rgba(155,77,32,.25);
-
-}
-
-
-.btn-primary:hover{
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-
-        0 11px 23px
-        rgba(155,77,32,.32);
-
-}
-
-
-.btn-primary:active{
-
-    transform:
-        translateY(0);
-
-}
-
-
-.btn-primary:disabled{
-
-    opacity:.55;
-
-    cursor:not-allowed;
-
-    transform:none;
-
-}
-
-
-/* =========================================================
-   INFORMASI
-========================================================= */
-
-.identity-note{
-
-    margin:
-        19px auto 0;
-
-    padding:
-        11px 14px;
-
-    border-radius:13px;
-
-    background:#fff5df;
-
-    border:
-        1px dashed #e3c18f;
-
-    color:#80634f;
-
-    font-size:12px;
-
-    line-height:1.55;
-
-    text-align:center;
-
-}
-
-
-.food-decoration{
-
-    text-align:center;
-
-    margin-top:17px;
-
-    color:#967463;
-
-    font-size:12px;
-
-    letter-spacing:.3px;
-
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-.loading{
-
-    display:none;
-
-    margin-top:14px;
-
-    text-align:center;
-
-    color:var(--primary-dark);
-
-    font-size:13px;
-
-    font-weight:800;
-
-}
-
-
-.loading.show{
-
-    display:block;
-
-}
-
-
-.spinner{
-
-    display:inline-block;
-
-    width:15px;
-
-    height:15px;
-
-    margin-right:6px;
-
-    vertical-align:-3px;
-
-    border:
-        2px solid #e7c8a0;
-
-    border-top-color:
-        var(--primary);
-
-    border-radius:50%;
-
-    animation:
-        spin .7s linear infinite;
-
-}
-
-
-@keyframes spin{
-
-    to{
-
-        transform:
-            rotate(360deg);
-
-    }
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-.toast{
-
-    position:fixed;
-
-    left:50%;
-
-    bottom:25px;
-
-    transform:
-
-        translateX(-50%)
-        translateY(15px);
-
-    width:
-        min(92%,430px);
-
-    padding:
-        13px 18px;
-
-    border-radius:14px;
-
-    background:#4a2c20;
-
-    color:#fff;
-
-    text-align:center;
-
-    font-size:13px;
-
-    font-weight:700;
-
-    box-shadow:
-
-        0 10px 25px
-        rgba(0,0,0,.20);
-
-    z-index:50;
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:.25s;
-
-}
-
-
-.toast.show{
-
-    opacity:1;
-
-    visibility:visible;
-
-    transform:
-
-        translateX(-50%)
-        translateY(0);
-
-}
-
-
-.toast.success{
-
-    background:#2e8b57;
-
-}
-
-
-.toast.error{
-
-    background:#c0392b;
-
-}
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:600px){
-
-    body{
-
-        padding:15px;
-
-    }
-
-
-    .identity-card{
-
-        border-radius:25px;
-
-    }
-
-
-    .identity-content{
-
-        padding:
-            3px
-            22px
-            25px;
-
-    }
-
-
-    .identity-card::after{
-
-        font-size:20px;
-
-        letter-spacing:2px;
-
-    }
-
-
-    .identity-icon{
-
-        width:68px;
-
-        height:68px;
-
-        font-size:34px;
-
-    }
-
-
-    h1{
-
-        font-size:23px;
-
-    }
-
-
-    .subtitle{
-
-        font-size:13px;
-
-        margin-bottom:21px;
-
-    }
-
-
-    input{
-
-        padding:
-            13px
-            14px
-            13px
-            44px;
-
-    }
-
-
-    .btn-primary{
-
-        padding:
-            14px 17px;
-
-    }
-
-}
-
-
-@media(max-width:380px){
-
-    body{
-
-        padding:10px;
-
-    }
-
-
-    .identity-content{
-
-        padding:
-            2px
-            17px
-            21px;
-
-    }
-
-
-    .identity-card::after{
-
-        font-size:18px;
-
-        letter-spacing:1px;
-
-    }
-
-
-    .identity-icon{
-
-        width:62px;
-
-        height:62px;
-
-        font-size:31px;
-
-    }
-
-
-    h1{
-
-        font-size:21px;
-
-    }
-
-
-    .subtitle{
-
-        font-size:12px;
-
-    }
-
-
-    .field label{
-
-        font-size:13px;
-
-    }
-
-
-    input{
-
-        font-size:15px;
-
-    }
-
-
-    .btn-primary{
-
-        font-size:15px;
-
-    }
-
+  font-weight: 800;
 }
 
 </style>
-
 </head>
 
 
 <body>
 
+<div class="container">
 
-<div class="app">
+  <div class="card">
 
-<section class="identity-card">
-
-
-<div class="identity-content">
-
-
-    <!-- =================================================
-         BADGE SEKOLAH
-    ================================================== -->
-
-    <div class="school-badge">
-
-        🏫 UPT SDN 160 GRESIK
-
+    <div class="badge">
+      🏫 UPT SDN 160 GRESIK
     </div>
 
-
-    <!-- =================================================
-         ICON
-    ================================================== -->
-
-    <div class="identity-icon">
-
-        🧑‍🎓
-
+    <div class="school">
+      SISTEM PETUALANGAN BELAJAR
     </div>
-
-
-    <!-- =================================================
-         JUDUL
-    ================================================== -->
 
     <h1>
-
-        🌟 Yuk, Kenalkan Dirimu!
-
+      🚀 Login Siswa
     </h1>
 
-
-    <!-- =================================================
-         SUBTITLE
-    ================================================== -->
-
     <p class="subtitle">
-
-        Sebelum memasuki Petualangan Kelas 5,
-        isi identitasmu terlebih dahulu dengan benar.
-
+      Masukkan identitasmu untuk masuk
+      ke Petualangan Kelas 5.
     </p>
 
 
-    <!-- =================================================
-         FORM
-    ================================================== -->
+    <div class="form-group">
 
-    <div class="form-grid">
+      <label for="nama">
+        👤 Nama Lengkap
+      </label>
 
-
-        <!-- NAMA -->
-
-        <div class="field">
-
-            <label for="nama">
-
-                👤 Nama Siswa
-
-            </label>
-
-
-            <div class="input-wrap">
-
-                <span class="input-icon">
-
-                    👤
-
-                </span>
-
-
-                <input
-                    id="nama"
-                    type="text"
-                    placeholder="Tulis nama lengkap"
-                    autocomplete="name"
-                    maxlength="100"
-                >
-
-            </div>
-
-        </div>
-
-
-        <!-- KELAS -->
-
-        <div class="field">
-
-            <label for="kelas">
-
-                🏫 Kelas
-
-            </label>
-
-
-            <div class="input-wrap">
-
-                <span class="input-icon">
-
-                    🏫
-
-                </span>
-
-
-                <input
-                    id="kelas"
-                    type="text"
-                    placeholder="Contoh: 5A"
-                    maxlength="30"
-                    autocomplete="off"
-                >
-
-            </div>
-
-        </div>
-
-
-        <!-- ABSEN -->
-
-        <div class="field">
-
-            <label for="absen">
-
-                🔢 Nomor Absen
-
-            </label>
-
-
-            <div class="input-wrap">
-
-                <span class="input-icon">
-
-                    🔢
-
-                </span>
-
-
-                <input
-                    id="absen"
-                    type="number"
-                    min="1"
-                    max="100"
-                    placeholder="Masukkan nomor absen"
-                    inputmode="numeric"
-                >
-
-            </div>
-
-        </div>
-
+      <input
+        id="nama"
+        type="text"
+        autocomplete="name"
+        placeholder="Masukkan nama lengkap"
+      >
 
     </div>
 
 
-    <!-- =================================================
-         TOMBOL
-    ================================================== -->
+    <div class="form-group">
 
-    <div class="action-area">
+      <label for="kelas">
+        🏫 Kelas
+      </label>
 
-        <button
-            id="btnLanjut"
-            class="btn btn-primary"
-            type="button"
-        >
-
-            🚀 Simpan & Lanjutkan
-
-        </button>
+      <input
+        id="kelas"
+        type="text"
+        autocomplete="off"
+        placeholder="Contoh: 5A"
+      >
 
     </div>
 
 
-    <!-- =================================================
-         LOADING
-    ================================================== -->
+    <div class="form-group">
+
+      <label for="absen">
+        🔢 Nomor Absen
+      </label>
+
+      <input
+        id="absen"
+        type="number"
+        min="1"
+        max="100"
+        autocomplete="off"
+        placeholder="Masukkan nomor absen"
+      >
+
+    </div>
+
+
+    <button
+      id="btnLanjut"
+      type="button"
+      onclick="simpanDanLanjut()"
+    >
+      🚀 Masuk & Mulai Petualangan
+    </button>
+
 
     <div
-        id="loading"
-        class="loading"
+      id="loading"
+      class="loading"
     >
-
-        <span class="spinner"></span>
-
-        Menyimpan identitas...
-
+      ⏳ Sedang masuk...
     </div>
 
 
-    <!-- =================================================
-         CATATAN
-    ================================================== -->
+    <div class="info">
 
-    <div class="identity-note">
+      🔐 Sesi login dapat aktif maksimal
+      <strong>24 jam</strong>.
 
-        📌 Pastikan nama, kelas, dan nomor absen
-        sudah benar sebelum melanjutkan.
+      <br>
 
-    </div>
-
-
-    <!-- =================================================
-         FOOTER DEKORASI
-    ================================================== -->
-
-    <div class="food-decoration">
-
-        🌾 Belajar • Bermain • Menjelajah • Berprestasi 🌾
+      Jika browser atau perangkat ditutup,
+      status online akan otomatis hilang.
 
     </div>
 
+  </div>
 
 </div>
 
-</section>
-
-</div>
-
-
-<!-- =====================================================
-     TOAST
-====================================================== -->
 
 <div
-    id="toast"
-    class="toast"
+  id="toast"
+  class="toast"
 ></div>
 
 
 <script>
 
-/* =========================================================
-   KONFIGURASI GOOGLE APPS SCRIPT
-========================================================= */
+/* =====================================================
+   KONFIGURASI API
+   ===================================================== */
 
-const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbzZYIe9341yGnrAHxKQSsVfX1caKHn7Ess_BEu3k6plwY3GVeig7HjhgqaINouQRcyl/exec";
-
-
-/* =========================================================
-   HALAMAN TUJUAN
-========================================================= */
-
-const HALAMAN_TUJUAN =
-    "Petualangan-Kelas-5.html";
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbw-SmLBX8bmBH98vNrWzQ5tS3GrMvujNARGqdE2PerDduIrPHHrGD4Kg5PSlLPyOXJ3/exec";
 
 
-/* =========================================================
-   NAMA KEY STORAGE
-========================================================= */
-
-const STORAGE_KEY =
-    "identitasPetualanganKelas5";
+const TARGET_PAGE =
+  "Petualangan-Kelas-5.html";
 
 
-/* =========================================================
-   ELEMEN
-========================================================= */
+/* =====================================================
+   CEK LOGIN LAMA
+   ===================================================== */
 
-const namaInput =
-    document.getElementById("nama");
+(function cekLoginLama() {
 
-const kelasInput =
-    document.getElementById("kelas");
+  try {
 
-const absenInput =
-    document.getElementById("absen");
+    const data =
+      JSON.parse(
+        localStorage.getItem(
+          "identitasPetualanganKelas5"
+        ) || "null"
+      );
 
-const btnLanjut =
-    document.getElementById("btnLanjut");
+    if (
+      data &&
+      data.sessionId
+    ) {
 
-const loading =
-    document.getElementById("loading");
+      /*
+       * Jika sudah login, langsung masuk.
+       */
+      window.location.href =
+        TARGET_PAGE;
 
+    }
 
-/* =========================================================
-   TOAST
-========================================================= */
+  } catch (error) {
 
-function toast(
-    message,
-    type = "error"
-){
-
-    const element =
-        document.getElementById("toast");
-
-
-    element.textContent =
-        message;
-
-
-    element.className =
-        "toast " +
-        type +
-        " show";
-
-
-    clearTimeout(
-        window.toastTimer
+    console.log(
+      "Tidak ada sesi login lama."
     );
+  }
+
+})();
 
 
-    window.toastTimer =
-        setTimeout(
-            function(){
+/* =====================================================
+   TOAST
+   ===================================================== */
 
-                element.classList.remove(
-                    "show"
-                );
+function showToast(message) {
 
-            },
-            2800
-        );
+  const toast =
+    document.getElementById("toast");
 
+  toast.textContent =
+    message;
+
+  toast.classList.add("show");
+
+  setTimeout(function() {
+
+    toast.classList.remove("show");
+
+  }, 2800);
 }
 
 
-/* =========================================================
-   AMBIL IDENTITAS DARI FORM
-========================================================= */
+/* =====================================================
+   GENERATE SESSION ID
+   ===================================================== */
 
-function ambilIdentitas(){
+function buatSessionIdLocal() {
 
-    const nama =
-        namaInput.value.trim();
+  if (
+    window.crypto &&
+    crypto.randomUUID
+  ) {
 
+    return (
+      "sess_" +
+      crypto.randomUUID()
+    );
+  }
 
-    const kelas =
-        kelasInput.value.trim();
-
-
-    const absen =
-        absenInput.value.trim();
-
-
-    /* -----------------------------------------------------
-       VALIDASI NAMA
-    ----------------------------------------------------- */
-
-    if(!nama){
-
-        toast(
-            "⚠️ Nama siswa wajib diisi."
-        );
-
-        namaInput.focus();
-
-        return null;
-
-    }
+  return (
+    "sess_" +
+    Date.now() +
+    "_" +
+    Math.random()
+      .toString(36)
+      .substring(2) +
+    "_" +
+    Math.random()
+      .toString(36)
+      .substring(2)
+  );
+}
 
 
-    /* -----------------------------------------------------
-       VALIDASI KELAS
-    ----------------------------------------------------- */
+/* =====================================================
+   JSONP
+   ===================================================== */
 
-    if(!kelas){
+function jsonp(
+  params,
+  callback
+) {
 
-        toast(
-            "⚠️ Kelas wajib diisi."
-        );
+  const callbackName =
+    "jsonpLogin_" +
+    Date.now() +
+    "_" +
+    Math.floor(
+      Math.random() * 100000
+    );
 
-        kelasInput.focus();
+  params.callback =
+    callbackName;
 
-        return null;
+  const query =
+    new URLSearchParams(params)
+      .toString();
 
-    }
+  const script =
+    document.createElement("script");
 
+  const timeout =
+    setTimeout(function() {
 
-    /* -----------------------------------------------------
-       VALIDASI ABSEN
-    ----------------------------------------------------- */
+      cleanup();
 
-    if(!absen){
+      callback(
+        new Error(
+          "Waktu koneksi habis."
+        )
+      );
 
-        toast(
-            "⚠️ Nomor absen wajib diisi."
-        );
-
-        absenInput.focus();
-
-        return null;
-
-    }
-
-
-    const nomorAbsen =
-        Number(absen);
-
-
-    /* -----------------------------------------------------
-       VALIDASI ANGKA ABSEN
-    ----------------------------------------------------- */
-
-    if(
-        !Number.isInteger(nomorAbsen) ||
-        nomorAbsen < 1 ||
-        nomorAbsen > 100
-    ){
-
-        toast(
-            "⚠️ Nomor absen harus berupa angka 1–100."
-        );
-
-        absenInput.focus();
-
-        return null;
-
-    }
+    }, 15000);
 
 
-    /* -----------------------------------------------------
-       DATA FINAL
-    ----------------------------------------------------- */
+  function cleanup() {
 
-    return {
+    clearTimeout(timeout);
 
-        nama:nama,
+    try {
+      delete window[
+        callbackName
+      ];
+    } catch (e) {}
 
-        kelas:kelas,
+    script.remove();
+  }
 
-        absen:nomorAbsen,
 
-        nomorAbsen:nomorAbsen
+  window[callbackName] =
+    function(data) {
+
+      cleanup();
+
+      callback(
+        null,
+        data
+      );
+    };
+
+
+  script.src =
+    API_URL +
+    "?" +
+    query;
+
+
+  script.onerror =
+    function() {
+
+      cleanup();
+
+      callback(
+        new Error(
+          "Tidak dapat terhubung ke server."
+        )
+      );
 
     };
 
+
+  document.body.appendChild(
+    script
+  );
 }
 
 
-/* =========================================================
-   SIMPAN IDENTITAS KE SESSION STORAGE
-========================================================= */
-
-function simpanSessionStorage(data){
-
-    try{
-
-        /* Data lengkap */
-
-        sessionStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(data)
-        );
-
-
-        /* Key terpisah */
-
-        sessionStorage.setItem(
-            "nama",
-            data.nama
-        );
-
-
-        sessionStorage.setItem(
-            "namaSiswa",
-            data.nama
-        );
-
-
-        sessionStorage.setItem(
-            "kelas",
-            data.kelas
-        );
-
-
-        sessionStorage.setItem(
-            "kelasSiswa",
-            data.kelas
-        );
-
-
-        sessionStorage.setItem(
-            "absen",
-            String(data.absen)
-        );
-
-
-        sessionStorage.setItem(
-            "nomorAbsen",
-            String(data.absen)
-        );
-
-
-        sessionStorage.setItem(
-            "nomor_absen",
-            String(data.absen)
-        );
-
-
-        console.log(
-            "✅ Identitas tersimpan di sessionStorage:",
-            data
-        );
-
-
-        return true;
-
-    }catch(error){
-
-        console.warn(
-            "⚠️ SessionStorage tidak tersedia:",
-            error
-        );
-
-
-        return false;
-
-    }
-
-}
-
-
-/* =========================================================
-   SIMPAN IDENTITAS KE LOCAL STORAGE
-========================================================= */
-
-function simpanLocalStorage(data){
-
-    try{
-
-        /* Data lengkap */
-
-        localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(data)
-        );
-
-
-        /* Key terpisah */
-
-        localStorage.setItem(
-            "nama",
-            data.nama
-        );
-
-
-        localStorage.setItem(
-            "namaSiswa",
-            data.nama
-        );
-
-
-        localStorage.setItem(
-            "kelas",
-            data.kelas
-        );
-
-
-        localStorage.setItem(
-            "kelasSiswa",
-            data.kelas
-        );
-
-
-        localStorage.setItem(
-            "absen",
-            String(data.absen)
-        );
-
-
-        localStorage.setItem(
-            "nomorAbsen",
-            String(data.absen)
-        );
-
-
-        localStorage.setItem(
-            "nomor_absen",
-            String(data.absen)
-        );
-
-
-        console.log(
-            "✅ Identitas tersimpan di localStorage:",
-            data
-        );
-
-
-        return true;
-
-    }catch(error){
-
-        console.warn(
-            "⚠️ LocalStorage tidak tersedia:",
-            error
-        );
-
-
-        return false;
-
-    }
-
-}
-
-
-/* =========================================================
-   KIRIM KE GOOGLE APPS SCRIPT
-========================================================= */
-
-function kirimKeGoogleSheets(data){
-
-    return new Promise(
-        function(resolve){
-
-            if(!GOOGLE_SCRIPT_URL){
-
-                console.warn(
-                    "URL Google Apps Script belum dipasang."
-                );
-
-
-                resolve({
-
-                    ok:false,
-
-                    skipped:false
-
-                });
-
-
-                return;
-
-            }
-
-
-            try{
-
-                /* -------------------------------------------------
-                   TARGET IFRAME
-                ------------------------------------------------- */
-
-                const iframeName =
-                    "googleSheetsIdentityTarget";
-
-
-                let iframe =
-                    document.getElementById(
-                        iframeName
-                    );
-
-
-                if(!iframe){
-
-                    iframe =
-                        document.createElement(
-                            "iframe"
-                        );
-
-
-                    iframe.id =
-                        iframeName;
-
-
-                    iframe.name =
-                        iframeName;
-
-
-                    iframe.style.display =
-                        "none";
-
-
-                    iframe.setAttribute(
-                        "aria-hidden",
-                        "true"
-                    );
-
-
-                    document.body.appendChild(
-                        iframe
-                    );
-
-                }
-
-
-                /* -------------------------------------------------
-                   FORM POST
-                ------------------------------------------------- */
-
-                const form =
-                    document.createElement(
-                        "form"
-                    );
-
-
-                form.method =
-                    "POST";
-
-
-                form.action =
-                    GOOGLE_SCRIPT_URL;
-
-
-                form.target =
-                    iframeName;
-
-
-                form.style.display =
-                    "none";
-
-
-                /* -------------------------------------------------
-                   DATA YANG DIKIRIM
-                ------------------------------------------------- */
-
-                const fields = {
-
-                    nama:data.nama,
-
-                    kelas:data.kelas,
-
-                    absen:String(
-                        data.absen
-                    ),
-
-                    nomorAbsen:String(
-                        data.absen
-                    ),
-
-                    waktu:
-                        new Date().toISOString(),
-
-                    sumber:
-                        "Identitas Siswa Petualangan Kelas 5"
-
-                };
-
-
-                /* -------------------------------------------------
-                   BUAT HIDDEN INPUT
-                ------------------------------------------------- */
-
-                Object.keys(fields).forEach(
-                    function(key){
-
-                        const input =
-                            document.createElement(
-                                "input"
-                            );
-
-
-                        input.type =
-                            "hidden";
-
-
-                        input.name =
-                            key;
-
-
-                        input.value =
-                            fields[key] ?? "";
-
-
-                        form.appendChild(
-                            input
-                        );
-
-                    }
-                );
-
-
-                /* -------------------------------------------------
-                   MASUKKAN FORM
-                ------------------------------------------------- */
-
-                document.body.appendChild(
-                    form
-                );
-
-
-                /* -------------------------------------------------
-                   SUBMIT
-                ------------------------------------------------- */
-
-                form.submit();
-
-
-                /* -------------------------------------------------
-                   HAPUS FORM
-                ------------------------------------------------- */
-
-                setTimeout(
-                    function(){
-
-                        if(form){
-
-                            form.remove();
-
-                        }
-
-                    },
-                    3000
-                );
-
-
-                /* -------------------------------------------------
-                   POST DIANGGAP TERKIRIM
-                ------------------------------------------------- */
-
-                setTimeout(
-                    function(){
-
-                        resolve({
-
-                            ok:true,
-
-                            skipped:false
-
-                        });
-
-                    },
-                    1000
-                );
-
-
-            }catch(error){
-
-                console.error(
-                    "❌ Pengiriman identitas gagal:",
-                    error
-                );
-
-
-                resolve({
-
-                    ok:false,
-
-                    skipped:false,
-
-                    error:error
-
-                });
-
-            }
-
-        }
+/* =====================================================
+   LOGIN
+   ===================================================== */
+
+function simpanDanLanjut() {
+
+  const nama =
+    document
+      .getElementById("nama")
+      .value
+      .trim();
+
+  const kelas =
+    document
+      .getElementById("kelas")
+      .value
+      .trim();
+
+  const nomorAbsen =
+    document
+      .getElementById("absen")
+      .value
+      .trim();
+
+
+  if (!nama) {
+
+    showToast(
+      "Nama lengkap belum diisi."
     );
 
-}
+    document
+      .getElementById("nama")
+      .focus();
+
+    return;
+  }
 
 
-/* =========================================================
-   BUAT URL PETUALANGAN DENGAN IDENTITAS
-========================================================= */
+  if (!kelas) {
 
-function buatURLPetualangan(data){
+    showToast(
+      "Kelas belum diisi."
+    );
 
-    const parameter =
-        new URLSearchParams();
+    document
+      .getElementById("kelas")
+      .focus();
+
+    return;
+  }
 
 
-    parameter.set(
+  if (!nomorAbsen) {
+
+    showToast(
+      "Nomor absen belum diisi."
+    );
+
+    document
+      .getElementById("absen")
+      .focus();
+
+    return;
+  }
+
+
+  const btn =
+    document
+      .getElementById("btnLanjut");
+
+  const loading =
+    document
+      .getElementById("loading");
+
+
+  btn.disabled =
+    true;
+
+  loading.style.display =
+    "block";
+
+
+  const sessionId =
+    buatSessionIdLocal();
+
+
+  const params = {
+
+    action: "login",
+
+    sessionId:
+
+      sessionId,
+
+    nama:
+
+      nama,
+
+    kelas:
+
+      kelas,
+
+    nomorAbsen:
+
+      nomorAbsen,
+
+    halaman:
+
+      "Petualangan Belajar Kelas 5",
+
+    sumber:
+
+      "Identitas Siswa Petualangan Kelas 5"
+
+  };
+
+
+  jsonp(
+    params,
+    function(error, result) {
+
+      if (error) {
+
+        console.error(
+          error
+        );
+
+        btn.disabled =
+          false;
+
+        loading.style.display =
+          "none";
+
+        showToast(
+          error.message ||
+          "Login gagal."
+        );
+
+        return;
+      }
+
+
+      if (
+        !result ||
+        !result.success
+      ) {
+
+        btn.disabled =
+          false;
+
+        loading.style.display =
+          "none";
+
+        showToast(
+          result?.message ||
+          "Login gagal."
+        );
+
+        return;
+      }
+
+
+      const session =
+        result.session;
+
+
+      /*
+       * Simpan identitas.
+       */
+      const data = {
+
+        nama:
+          session.nama,
+
+        kelas:
+          session.kelas,
+
+        nomorAbsen:
+          session.nomorAbsen,
+
+        absen:
+          session.nomorAbsen,
+
+        sessionId:
+          session.sessionId,
+
+        studentId:
+          session.studentId,
+
+        loginAt:
+          session.loginAt,
+
+        lastSeen:
+          session.lastSeen,
+
+        halaman:
+          session.halaman,
+
+        sumber:
+          session.sumber
+
+      };
+
+
+      /*
+       * localStorage:
+       * menjaga sesi selama browser masih
+       * menyimpan data login.
+       */
+      localStorage.setItem(
+        "identitasPetualanganKelas5",
+        JSON.stringify(data)
+      );
+
+
+      /*
+       * sessionStorage:
+       * agar halaman Petualangan juga
+       * langsung mendapatkan data.
+       */
+      sessionStorage.setItem(
+        "identitasPetualanganKelas5",
+        JSON.stringify(data)
+      );
+
+
+      /*
+       * Simpan key lama juga agar kompatibel
+       * dengan kode Petualangan sebelumnya.
+       */
+      localStorage.setItem(
         "nama",
-        data.nama
-    );
+        nama
+      );
 
+      localStorage.setItem(
+        "namaSiswa",
+        nama
+      );
 
-    parameter.set(
+      localStorage.setItem(
         "kelas",
-        data.kelas
-    );
+        kelas
+      );
 
+      localStorage.setItem(
+        "kelasSiswa",
+        kelas
+      );
 
-    parameter.set(
+      localStorage.setItem(
         "absen",
-        String(data.absen)
-    );
+        nomorAbsen
+      );
 
-
-    parameter.set(
+      localStorage.setItem(
         "nomorAbsen",
-        String(data.absen)
-    );
+        nomorAbsen
+      );
 
 
-    return (
-        HALAMAN_TUJUAN +
-        "?" +
-        parameter.toString()
-    );
+      sessionStorage.setItem(
+        "nama",
+        nama
+      );
 
+      sessionStorage.setItem(
+        "kelas",
+        kelas
+      );
+
+      sessionStorage.setItem(
+        "absen",
+        nomorAbsen
+      );
+
+      sessionStorage.setItem(
+        "nomorAbsen",
+        nomorAbsen
+      );
+
+
+      /*
+       * Redirect.
+       */
+      const url =
+        TARGET_PAGE +
+        "?nama=" +
+        encodeURIComponent(
+          nama
+        ) +
+        "&kelas=" +
+        encodeURIComponent(
+          kelas
+        ) +
+        "&absen=" +
+        encodeURIComponent(
+          nomorAbsen
+        ) +
+        "&nomorAbsen=" +
+        encodeURIComponent(
+          nomorAbsen
+        );
+
+
+      window.location.href =
+        url;
+
+    }
+  );
 }
 
 
-/* =========================================================
-   SIMPAN IDENTITAS DAN LANJUT
-========================================================= */
-
-async function simpanDanLanjut(){
-
-    /* -----------------------------------------------------
-       AMBIL DATA
-    ----------------------------------------------------- */
-
-    const data =
-        ambilIdentitas();
-
-
-    if(!data){
-
-        return;
-
-    }
-
-
-    /* -----------------------------------------------------
-       NONAKTIFKAN TOMBOL
-    ----------------------------------------------------- */
-
-    btnLanjut.disabled =
-        true;
-
-
-    loading.classList.add(
-        "show"
-    );
-
-
-    console.log(
-        "===================================="
-    );
-
-
-    console.log(
-        "IDENTITAS SISWA"
-    );
-
-
-    console.log(
-        "Nama:",
-        data.nama
-    );
-
-
-    console.log(
-        "Kelas:",
-        data.kelas
-    );
-
-
-    console.log(
-        "No Absen:",
-        data.absen
-    );
-
-
-    console.log(
-        "===================================="
-    );
-
-
-    /* -----------------------------------------------------
-       SIMPAN SESSION STORAGE
-    ----------------------------------------------------- */
-
-    const sessionBerhasil =
-        simpanSessionStorage(
-            data
-        );
-
-
-    /* -----------------------------------------------------
-       SIMPAN LOCAL STORAGE
-    ----------------------------------------------------- */
-
-    const localBerhasil =
-        simpanLocalStorage(
-            data
-        );
-
-
-    /* -----------------------------------------------------
-       PASTIKAN MINIMAL SATU STORAGE BERHASIL
-    ----------------------------------------------------- */
-
-    if(
-        !sessionBerhasil &&
-        !localBerhasil
-    ){
-
-        btnLanjut.disabled =
-            false;
-
-
-        loading.classList.remove(
-            "show"
-        );
-
-
-        toast(
-            "❌ Browser tidak dapat menyimpan identitas."
-        );
-
-
-        return;
-
-    }
-
-
-    /* -----------------------------------------------------
-       KIRIM KE GOOGLE SHEETS
-    ----------------------------------------------------- */
-
-    const hasil =
-        await kirimKeGoogleSheets(
-            data
-        );
-
-
-    /* -----------------------------------------------------
-       JIKA BERHASIL
-    ----------------------------------------------------- */
-
-    if(hasil.ok){
-
-        toast(
-            "✅ Identitas tersimpan. Membuka Petualangan Kelas 5...",
-            "success"
-        );
-
-
-        /* -------------------------------------------------
-           BUAT URL DENGAN IDENTITAS
-        ------------------------------------------------- */
-
-        const tujuan =
-            buatURLPetualangan(
-                data
-            );
-
-
-        console.log(
-            "🚀 Membuka:",
-            tujuan
-        );
-
-
-        /* -------------------------------------------------
-           PINDAH KE PETUALANGAN
-        ------------------------------------------------- */
-
-        setTimeout(
-            function(){
-
-                window.location.href =
-                    tujuan;
-
-            },
-            1000
-        );
-
-
-    }else{
-
-        /* -------------------------------------------------
-           GAGAL
-        ------------------------------------------------- */
-
-        btnLanjut.disabled =
-            false;
-
-
-        loading.classList.remove(
-            "show"
-        );
-
-
-        toast(
-            "❌ Identitas belum berhasil dikirim. Silakan coba lagi."
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   EVENT TOMBOL
-========================================================= */
-
-btnLanjut.addEventListener(
-    "click",
-    function(){
+/* =====================================================
+   ENTER = LOGIN
+   ===================================================== */
+
+document
+  .addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.key ===
+        "Enter"
+      ) {
 
         simpanDanLanjut();
 
-    }
-);
-
-
-/* =========================================================
-   ENTER UNTUK LANJUT
-========================================================= */
-
-[
-    namaInput,
-    kelasInput,
-    absenInput
-
-].forEach(
-    function(input){
-
-        input.addEventListener(
-            "keydown",
-            function(event){
-
-                if(
-                    event.key ===
-                    "Enter"
-                ){
-
-                    event.preventDefault();
-
-
-                    if(
-                        !btnLanjut.disabled
-                    ){
-
-                        simpanDanLanjut();
-
-                    }
-
-                }
-
-            }
-        );
+      }
 
     }
-);
-
-
-/* =========================================================
-   CEGAH PENGIRIMAN GANDA
-========================================================= */
-
-window.addEventListener(
-    "beforeunload",
-    function(){
-
-        if(
-            btnLanjut.disabled
-        ){
-
-            console.log(
-                "Halaman sedang berpindah..."
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   FOKUS AWAL
-========================================================= */
-
-window.addEventListener(
-    "load",
-    function(){
-
-        setTimeout(
-            function(){
-
-                namaInput.focus();
-
-            },
-            300
-        );
-
-    }
-);
-
-
-/* =========================================================
-   DEBUG IDENTITAS YANG TERSIMPAN
-========================================================= */
-
-window.addEventListener(
-    "load",
-    function(){
-
-        try{
-
-            const sessionData =
-                sessionStorage.getItem(
-                    STORAGE_KEY
-                );
-
-
-            const localData =
-                localStorage.getItem(
-                    STORAGE_KEY
-                );
-
-
-            console.log(
-                "📦 Session identitas:",
-                sessionData
-            );
-
-
-            console.log(
-                "📦 Local identitas:",
-                localData
-            );
-
-        }catch(error){
-
-            console.warn(
-                "Tidak dapat membaca storage:",
-                error
-            );
-
-        }
-
-    }
-);
+  );
 
 </script>
 

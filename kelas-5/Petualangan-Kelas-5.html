@@ -20,8 +20,9 @@
     content="Petualangan Belajar Kelas 5 UPT SDN 160 GRESIK"
 >
 
-<title>Petualangan Kelas 5 | UPT SDN 160 GRESIK</title>
-
+<title>
+    Petualangan Kelas 5 | UPT SDN 160 GRESIK
+</title>
 
 <!-- =====================================================
      FONT
@@ -40,13 +41,9 @@
 ===================================================== */
 
 *{
-
     margin:0;
-
     padding:0;
-
     box-sizing:border-box;
-
 }
 
 
@@ -56,11 +53,8 @@
 
 html,
 body{
-
     margin:0;
-
     padding:0;
-
 }
 
 
@@ -113,6 +107,10 @@ nav{
 }
 
 
+/* =====================================================
+   NAVBAR KANAN
+===================================================== */
+
 .nav-right{
 
     display:flex;
@@ -127,6 +125,10 @@ nav{
 
 }
 
+
+/* =====================================================
+   LINK NAVBAR
+===================================================== */
 
 nav a{
 
@@ -163,6 +165,10 @@ nav a{
 }
 
 
+/* =====================================================
+   HOVER NAVBAR
+===================================================== */
+
 nav a:hover{
 
     transform:
@@ -172,6 +178,139 @@ nav a:hover{
     box-shadow:
         0 6px 12px
         rgba(0,0,0,.20);
+
+}
+
+
+/* =====================================================
+   TOMBOL LOGOUT
+===================================================== */
+
+#btnLogoutSiswa{
+
+    border:none;
+
+    cursor:pointer;
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e53935,
+            #b71c1c
+        );
+
+    color:#fff;
+
+    font-weight:700;
+
+    padding:
+        .5rem
+        1rem;
+
+    border-radius:8px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:.4rem;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        opacity .3s ease;
+
+}
+
+
+#btnLogoutSiswa:hover{
+
+    transform:
+        translateY(-2px)
+        scale(1.04);
+
+    box-shadow:
+        0 6px 12px
+        rgba(0,0,0,.25);
+
+}
+
+
+#btnLogoutSiswa:disabled{
+
+    opacity:.6;
+
+    cursor:
+        not-allowed;
+
+    transform:none;
+
+}
+
+
+/* =====================================================
+   INFORMASI LOGIN SISWA
+===================================================== */
+
+#infoSiswaLogin{
+
+    position:
+        fixed;
+
+    left:15px;
+
+    bottom:15px;
+
+    z-index:999;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .95
+        );
+
+    color:#333;
+
+    padding:
+        8px
+        12px;
+
+    border-radius:10px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0,0,0,.18);
+
+    font-size:.72rem;
+
+    max-width:
+        260px;
+
+}
+
+
+/* =====================================================
+   STATUS ONLINE
+===================================================== */
+
+#statusOnline{
+
+    color:#2e7d32;
+
+    font-weight:700;
+
+}
+
+
+#statusOnline.offline{
+
+    color:#c62828;
 
 }
 
@@ -509,13 +648,261 @@ nav a:hover{
 
 
 /* =====================================================
-   KOMPONEN ONLINE
-   TIDAK DITAMPILKAN
+   BAGIAN SISWA ONLINE
+
+   Tetap tersembunyi sesuai desain sebelumnya.
 ===================================================== */
 
 #daftarSiswaAktif{
 
     display:none !important;
+
+    width:100%;
+
+    max-width:700px;
+
+    height:160px;
+
+    margin:
+        20px
+        auto;
+
+    padding:10px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .92
+        );
+
+    border-radius:16px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.20);
+
+    overflow:hidden;
+
+}
+
+
+/* =====================================================
+   JUMLAH SISWA ONLINE
+===================================================== */
+
+.jumlah-siswa-online{
+
+    position:relative;
+
+    z-index:2;
+
+    background:
+        linear-gradient(
+            45deg,
+            #0288d1,
+            #7b1fa2
+        );
+
+    color:#fff;
+
+    padding:
+        9px
+        14px;
+
+    border-radius:10px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+    text-align:center;
+
+    box-shadow:
+        0 3px 8px
+        rgba(0,0,0,.15);
+
+}
+
+
+/* =====================================================
+   PEMBUNGKUS DAFTAR SISWA
+===================================================== */
+
+.daftar-siswa-scroll{
+
+    height:88px;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    padding-right:4px;
+
+}
+
+
+/* =====================================================
+   ITEM SISWA
+===================================================== */
+
+.siswa-online-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:
+        rgba(
+            248,
+            251,
+            255,
+            .98
+        );
+
+    color:#333;
+
+    padding:
+        8px
+        10px;
+
+    margin-bottom:6px;
+
+    border-radius:10px;
+
+    border:
+        1px
+        solid
+        rgba(
+            2,
+            136,
+            209,
+            .12
+        );
+
+}
+
+
+.status-online{
+
+    font-size:18px;
+
+    flex-shrink:0;
+
+}
+
+
+.siswa-info{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+.siswa-nama{
+
+    font-weight:700;
+
+    color:#0288d1;
+
+    font-size:.9rem;
+
+}
+
+
+.siswa-status{
+
+    font-size:.72rem;
+
+    color:#7b1fa2;
+
+    font-weight:600;
+
+    margin-top:1px;
+
+}
+
+
+.siswa-halaman{
+
+    font-size:.72rem;
+
+    color:#555;
+
+    margin-top:1px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+
+.siswa-waktu{
+
+    font-size:.65rem;
+
+    color:#78909c;
+
+    margin-top:1px;
+
+}
+
+
+.siswa-kosong{
+
+    background:#fff;
+
+    color:#555;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+.daftar-siswa-scroll::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+
+.daftar-siswa-scroll::-webkit-scrollbar-track{
+
+    background:#eef7fb;
+
+    border-radius:10px;
+
+}
+
+
+.daftar-siswa-scroll::-webkit-scrollbar-thumb{
+
+    background:#0288d1;
+
+    border-radius:10px;
+
+}
+
+
+.daftar-siswa-scroll::-webkit-scrollbar-thumb:hover{
+
+    background:#7b1fa2;
 
 }
 
@@ -582,7 +969,7 @@ audio{
 
 
 /* =====================================================
-   RESPONSIVE
+   RESPONSIVE TABLET
 ===================================================== */
 
 @media(max-width:768px){
@@ -605,7 +992,8 @@ audio{
     }
 
 
-    nav a{
+    nav a,
+    #btnLogoutSiswa{
 
         font-size:.8rem;
 
@@ -662,7 +1050,21 @@ audio{
 
     #daftarSiswaAktif{
 
-        display:none !important;
+        width:
+            calc(100% - 30px);
+
+        height:150px;
+
+        margin:
+            15px
+            auto;
+
+    }
+
+
+    .daftar-siswa-scroll{
+
+        height:82px;
 
     }
 
@@ -710,8 +1112,24 @@ audio{
 
     }
 
+
+    #infoSiswaLogin{
+
+        left:10px;
+
+        bottom:10px;
+
+        max-width:
+            calc(100% - 20px);
+
+    }
+
 }
 
+
+/* =====================================================
+   RESPONSIVE HP
+===================================================== */
 
 @media(max-width:480px){
 
@@ -729,9 +1147,17 @@ audio{
     }
 
 
-    nav a{
+    nav a,
+    #btnLogoutSiswa{
 
         font-size:.75rem;
+
+    }
+
+
+    #infoSiswaLogin{
+
+        font-size:.65rem;
 
     }
 
@@ -753,33 +1179,105 @@ audio{
 
     <div class="nav-right">
 
-        <a href="../index.html">
+        <!-- BERANDA -->
+
+        <a
+            href="../index.html"
+            class="nav-link"
+        >
             🏠 Beranda
         </a>
 
 
-        <a href="#">
+        <!-- PROGRAM -->
+
+        <a
+            href="#"
+            class="nav-link"
+        >
             📌 Program
         </a>
 
 
-        <a href="galeri.html">
+        <!-- GALERI -->
+
+        <a
+            href="galeri.html"
+            class="nav-link"
+        >
             🖼️ Galeri
         </a>
 
 
-        <a href="kelas.html">
+        <!-- KELAS -->
+
+        <a
+            href="kelas.html"
+            class="nav-link"
+        >
             🏫 Kelas
         </a>
 
 
-        <a href="online/online.html">
+        <!-- ONLINE -->
+
+        <a
+            href="online/online.html"
+            class="nav-link"
+        >
             🟢 Online
         </a>
+
+
+        <!-- =================================================
+             TOMBOL LOGOUT
+        ================================================== -->
+
+        <button
+            type="button"
+            id="btnLogoutSiswa"
+            title="Keluar dari akun siswa"
+        >
+            🚪 Logout
+        </button>
 
     </div>
 
 </nav>
+
+
+<!-- =====================================================
+     INFORMASI LOGIN SISWA
+===================================================== -->
+
+<div id="infoSiswaLogin">
+
+    👤
+    <strong id="namaSiswaLogin">
+        Memuat...
+    </strong>
+
+    <br>
+
+    🏫 Kelas
+    <strong id="kelasSiswaLogin">
+        -
+    </strong>
+
+    <br>
+
+    🔢 Absen
+    <strong id="absenSiswaLogin">
+        -
+    </strong>
+
+    <br>
+
+    <span id="statusOnline">
+        🟢 Online
+    </span>
+
+</div>
 
 
 <!-- =====================================================
@@ -1200,17 +1698,36 @@ audio{
 
 
 <!-- =====================================================
-     KOMPONEN ONLINE
-     
-     TIDAK DITAMPILKAN
-     
-     HEARTBEAT TETAP AKTIF
+     DAFTAR SISWA ONLINE
+
+     Disembunyikan dari halaman utama.
+     Sistem tetap mengirim heartbeat.
 ===================================================== -->
 
-<section
-    id="daftarSiswaAktif"
-    aria-hidden="true"
->
+<section id="daftarSiswaAktif">
+
+    <div class="jumlah-siswa-online">
+
+        🟢 Siswa Sedang Online
+
+        <span id="jumlahOnline">
+            0 siswa
+        </span>
+
+    </div>
+
+
+    <div
+        class="daftar-siswa-scroll"
+        id="listSiswaOnline"
+    >
+
+        <div class="siswa-kosong">
+            Memuat data siswa yang sedang online...
+        </div>
+
+    </div>
+
 </section>
 
 
@@ -1221,15 +1738,23 @@ audio{
 <footer>
 
     <div class="footer-title">
+
         📚 Petualangan Belajar Kelas 5
+
     </div>
 
-    <p>
-        UPT SD NEGERI 160 GRESIK
-    </p>
 
     <p>
+
+        UPT SD NEGERI 160 GRESIK
+
+    </p>
+
+
+    <p>
+
         Belajar • Berpetualang • Berkarya
+
     </p>
 
 </footer>
@@ -1263,7 +1788,7 @@ const API_URL =
 
 
 /* =====================================================
-   IDENTITAS HALAMAN
+   NAMA HALAMAN
 ===================================================== */
 
 const HALAMAN_UTAMA =
@@ -1271,7 +1796,35 @@ const HALAMAN_UTAMA =
 
 
 /* =====================================================
-   AUDIO
+   INTERVAL HEARTBEAT
+
+   Setiap 20 detik.
+===================================================== */
+
+const HEARTBEAT_INTERVAL =
+    20000;
+
+
+/* =====================================================
+   BATAS SESI DI SISI CLIENT
+
+   24 jam.
+===================================================== */
+
+const SESSION_MAX_AGE =
+    24 * 60 * 60 * 1000;
+
+
+/* =====================================================
+   KUNCI LOCAL STORAGE
+===================================================== */
+
+const LOGIN_STORAGE_KEY =
+    "identitasPetualanganKelas5";
+
+
+/* =====================================================
+   ELEMEN
 ===================================================== */
 
 const buttonSound =
@@ -1280,11 +1833,63 @@ const buttonSound =
     );
 
 
+const btnLogout =
+    document.getElementById(
+        "btnLogoutSiswa"
+    );
+
+
+const namaSiswaLogin =
+    document.getElementById(
+        "namaSiswaLogin"
+    );
+
+
+const kelasSiswaLogin =
+    document.getElementById(
+        "kelasSiswaLogin"
+    );
+
+
+const absenSiswaLogin =
+    document.getElementById(
+        "absenSiswaLogin"
+    );
+
+
+const statusOnline =
+    document.getElementById(
+        "statusOnline"
+    );
+
+
+/* =====================================================
+   VARIABEL HEARTBEAT
+===================================================== */
+
+let heartbeatTimer =
+    null;
+
+
+let lastHeartbeat =
+    0;
+
+
+let sedangLogout =
+    false;
+
+
+let sedangRedirect =
+    false;
+
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
 function playButtonSound(){
 
-    if(
-        !buttonSound
-    ){
+    if(!buttonSound){
 
         return;
 
@@ -1295,7 +1900,6 @@ function playButtonSound(){
 
         buttonSound.currentTime =
             0;
-
 
         const promise =
             buttonSound.play();
@@ -1324,12 +1928,12 @@ function playButtonSound(){
 
 
 /* =====================================================
-   AUDIO MENU
+   AUDIO UNTUK MENU
 ===================================================== */
 
 document
     .querySelectorAll(
-        ".map-item, nav a"
+        ".map-item, .nav-link"
     )
     .forEach(
         function(element){
@@ -1348,10 +1952,10 @@ document
 
 
 /* =====================================================
-   MEMBACA STORAGE
+   BACA LOGIN DARI STORAGE
 ===================================================== */
 
-function getStorageValue(keys){
+function getLoginData(){
 
     const storages = [
 
@@ -1366,252 +1970,77 @@ function getStorageValue(keys){
         const storage of storages
     ){
 
-        for(
-            const key of keys
-        ){
+        try{
 
-            try{
-
-                const value =
-                    storage.getItem(
-                        key
-                    );
-
-
-                if(
-                    value !== null &&
-                    String(value).trim() !== ""
-                ){
-
-                    return String(
-                        value
-                    ).trim();
-
-                }
-
-            }catch(error){
-
-                console.log(
-                    "Storage tidak dapat dibaca:",
-                    error
+            const raw =
+                storage.getItem(
+                    LOGIN_STORAGE_KEY
                 );
+
+
+            if(
+                !raw
+            ){
+
+                continue;
 
             }
 
-        }
 
-    }
-
-
-    return "";
-
-}
+            const data =
+                JSON.parse(raw);
 
 
-/* =====================================================
-   MEMBACA PARAMETER URL
-===================================================== */
+            if(
+                data &&
+                typeof data === "object"
+            ){
 
-function getUrlParameter(names){
+                return data;
 
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
+            }
 
+        }catch(error){
 
-    for(
-        const name of names
-    ){
-
-        const value =
-            params.get(
-                name
+            console.log(
+                "Gagal membaca data login:",
+                error
             );
 
-
-        if(
-            value !== null &&
-            String(value).trim() !== ""
-        ){
-
-            return String(
-                value
-            ).trim();
-
         }
 
     }
 
 
-    return "";
+    return null;
 
 }
 
 
 /* =====================================================
-   IDENTITAS SISWA
+   SIMPAN LOGIN
 ===================================================== */
 
-function getStudentIdentity(){
+function saveLoginData(data){
 
-    const nama =
-        getUrlParameter([
-            "nama",
-            "namaSiswa",
-            "studentName",
-            "nama_siswa",
-            "student_name",
-            "identitasNama"
-        ]) ||
-        getStorageValue([
-            "nama",
-            "namaSiswa",
-            "nama_siswa",
-            "studentName",
-            "student_name",
-            "identitasNama"
-        ]);
+    if(!data){
 
+        return;
 
-    const kelas =
-        getUrlParameter([
-            "kelas",
-            "kelasSiswa",
-            "studentClass",
-            "kelas_siswa",
-            "student_class"
-        ]) ||
-        getStorageValue([
-            "kelas",
-            "kelasSiswa",
-            "kelas_siswa",
-            "studentClass",
-            "student_class"
-        ]);
+    }
 
-
-    const absen =
-        getUrlParameter([
-            "absen",
-            "nomorAbsen",
-            "nomor_absen",
-            "noAbsen",
-            "no_absen",
-            "studentNumber",
-            "student_number"
-        ]) ||
-        getStorageValue([
-            "absen",
-            "nomorAbsen",
-            "nomor_absen",
-            "noAbsen",
-            "no_absen",
-            "studentNumber",
-            "student_number"
-        ]);
-
-
-    return {
-
-        nama:
-            nama,
-
-        kelas:
-            kelas,
-
-        absen:
-            absen
-
-    };
-
-}
-
-
-/* =====================================================
-   VALIDASI IDENTITAS
-===================================================== */
-
-function identityIsComplete(identity){
-
-    return Boolean(
-
-        identity &&
-        identity.nama &&
-        identity.kelas &&
-        identity.absen
-
-    );
-
-}
-
-
-/* =====================================================
-   VARIABEL HEARTBEAT
-===================================================== */
-
-let heartbeatTimer =
-    null;
-
-
-let lastHeartbeat =
-    0;
-
-
-let heartbeatRequestNumber =
-    0;
-
-
-/* =====================================================
-   MEMBUAT CALLBACK JSONP
-===================================================== */
-
-function createHeartbeatCallbackName(){
-
-    heartbeatRequestNumber++;
-
-
-    return (
-
-        "heartbeatCallback_" +
-
-        Date.now() +
-
-        "_" +
-
-        heartbeatRequestNumber
-
-    );
-
-}
-
-
-/* =====================================================
-   MEMBERSIHKAN REQUEST JSONP
-===================================================== */
-
-function cleanupHeartbeat(
-    script,
-    callbackName
-){
 
     try{
 
-        if(
-            script &&
-            script.parentNode
-        ){
-
-            script.parentNode.removeChild(
-                script
-            );
-
-        }
+        localStorage.setItem(
+            LOGIN_STORAGE_KEY,
+            JSON.stringify(data)
+        );
 
     }catch(error){
 
         console.log(
-            "Gagal menghapus script heartbeat:",
+            "Gagal menyimpan localStorage:",
             error
         );
 
@@ -1620,16 +2049,17 @@ function cleanupHeartbeat(
 
     try{
 
-        delete window[
-            callbackName
-        ];
+        sessionStorage.setItem(
+            LOGIN_STORAGE_KEY,
+            JSON.stringify(data)
+        );
 
     }catch(error){
 
-        window[
-            callbackName
-        ] =
-            undefined;
+        console.log(
+            "Gagal menyimpan sessionStorage:",
+            error
+        );
 
     }
 
@@ -1637,53 +2067,668 @@ function cleanupHeartbeat(
 
 
 /* =====================================================
-   KIRIM HEARTBEAT JSONP
+   HAPUS LOGIN LOKAL
 ===================================================== */
 
-function sendHeartbeat(){
+function clearLoginData(){
 
-    const identity =
-        getStudentIdentity();
+    try{
+
+        localStorage.removeItem(
+            LOGIN_STORAGE_KEY
+        );
+
+    }catch(error){}
 
 
-    /* -------------------------------------------------
-       CEK IDENTITAS
-    ------------------------------------------------- */
+    try{
+
+        sessionStorage.removeItem(
+            LOGIN_STORAGE_KEY
+        );
+
+    }catch(error){}
+
+
+    /*
+       Hapus juga key lama agar tidak
+       menghidupkan identitas lama.
+    */
+
+    const oldKeys = [
+
+        "nama",
+
+        "namaSiswa",
+
+        "nama_siswa",
+
+        "kelas",
+
+        "kelasSiswa",
+
+        "kelas_siswa",
+
+        "absen",
+
+        "nomorAbsen",
+
+        "nomor_absen",
+
+        "noAbsen",
+
+        "studentName",
+
+        "studentClass",
+
+        "studentNumber"
+
+    ];
+
+
+    oldKeys.forEach(
+        function(key){
+
+            try{
+
+                localStorage.removeItem(
+                    key
+                );
+
+            }catch(error){}
+
+
+            try{
+
+                sessionStorage.removeItem(
+                    key
+                );
+
+            }catch(error){}
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   CEK DATA LOGIN LENGKAP
+===================================================== */
+
+function loginDataIsComplete(data){
+
+    return Boolean(
+
+        data &&
+
+        data.nama &&
+
+        data.kelas &&
+
+        data.sessionId
+
+    );
+
+}
+
+
+/* =====================================================
+   CEK SESI 24 JAM DI CLIENT
+===================================================== */
+
+function clientSessionExpired(data){
 
     if(
-        !identityIsComplete(
-            identity
+        !data ||
+        !data.loginAt
+    ){
+
+        return true;
+
+    }
+
+
+    const loginTime =
+        Number(
+            data.loginAt
+        );
+
+
+    if(
+        !Number.isFinite(
+            loginTime
         )
     ){
 
-        console.log(
-            "⚠️ Heartbeat ditunda: identitas siswa belum lengkap."
-        );
+        return true;
+
+    }
 
 
-        console.log(
-            "Identitas yang ditemukan:",
-            identity
-        );
+    return (
+        Date.now() -
+        loginTime
+    ) >= SESSION_MAX_AGE;
 
+}
+
+
+/* =====================================================
+   TAMPILKAN DATA SISWA
+===================================================== */
+
+function tampilkanDataSiswa(data){
+
+    if(!data){
 
         return;
 
     }
 
 
-    /* -------------------------------------------------
-       BATAS PENGIRIMAN
-    ------------------------------------------------- */
+    namaSiswaLogin.textContent =
+        data.nama ||
+        "-";
+
+
+    kelasSiswaLogin.textContent =
+        data.kelas ||
+        "-";
+
+
+    absenSiswaLogin.textContent =
+        data.nomorAbsen ||
+        data.absen ||
+        "-";
+
+}
+
+
+/* =====================================================
+   STATUS ONLINE
+===================================================== */
+
+function setStatusOnline(
+    online,
+    text
+){
+
+    if(
+        online
+    ){
+
+        statusOnline.textContent =
+            text ||
+            "🟢 Online";
+
+        statusOnline.classList.remove(
+            "offline"
+        );
+
+    }else{
+
+        statusOnline.textContent =
+            text ||
+            "🔴 Offline";
+
+        statusOnline.classList.add(
+            "offline"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   JSONP
+
+   Digunakan karena Apps Script dapat
+   melakukan redirect dan CORS fetch
+   sering bermasalah.
+===================================================== */
+
+function requestJSONP(
+    params,
+    timeout
+){
+
+    return new Promise(
+        function(resolve, reject){
+
+            const callbackName =
+                "petualanganCallback_" +
+                Date.now() +
+                "_" +
+                Math.random()
+                    .toString(36)
+                    .substring(2,8);
+
+
+            let selesai =
+                false;
+
+
+            const script =
+                document.createElement(
+                    "script"
+                );
+
+
+            const query =
+                new URLSearchParams(
+                    params
+                );
+
+
+            query.set(
+                "callback",
+                callbackName
+            );
+
+
+            query.set(
+                "t",
+                Date.now()
+            );
+
+
+            const timer =
+                setTimeout(
+                    function(){
+
+                        if(selesai){
+
+                            return;
+
+                        }
+
+
+                        selesai = true;
+
+
+                        cleanup();
+
+
+                        reject(
+                            new Error(
+                                "Request JSONP timeout"
+                            )
+                        );
+
+                    },
+                    timeout || 10000
+                );
+
+
+            function cleanup(){
+
+                clearTimeout(
+                    timer
+                );
+
+
+                try{
+
+                    delete window[
+                        callbackName
+                    ];
+
+                }catch(error){
+
+                    window[
+                        callbackName
+                    ] = undefined;
+
+                }
+
+
+                if(
+                    script.parentNode
+                ){
+
+                    script.parentNode.removeChild(
+                        script
+                    );
+
+                }
+
+            }
+
+
+            window[
+                callbackName
+            ] =
+                function(data){
+
+                    if(selesai){
+
+                        return;
+
+                    }
+
+
+                    selesai = true;
+
+
+                    cleanup();
+
+
+                    resolve(
+                        data
+                    );
+
+                };
+
+
+            script.onerror =
+                function(){
+
+                    if(selesai){
+
+                        return;
+
+                    }
+
+
+                    selesai = true;
+
+
+                    cleanup();
+
+
+                    reject(
+                        new Error(
+                            "JSONP gagal dimuat"
+                        )
+                    );
+
+                };
+
+
+            script.src =
+                API_URL +
+                "?" +
+                query.toString();
+
+
+            script.async =
+                true;
+
+
+            document
+                .head
+                .appendChild(
+                    script
+                );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   REDIRECT KE HALAMAN IDENTITAS
+===================================================== */
+
+function redirectKeIdentitas(
+    alasan
+){
+
+    if(
+        sedangRedirect
+    ){
+
+        return;
+
+    }
+
+
+    sedangRedirect =
+        true;
+
+
+    clearInterval(
+        heartbeatTimer
+    );
+
+
+    heartbeatTimer =
+        null;
+
+
+    clearLoginData();
+
+
+    let url =
+        "Identitas-Siswa.html";
+
+
+    if(alasan){
+
+        url +=
+            "?alasan=" +
+            encodeURIComponent(
+                alasan
+            );
+
+    }
+
+
+    window.location.replace(
+        url
+    );
+
+}
+
+
+/* =====================================================
+   CEK SESI KE SERVER
+===================================================== */
+
+async function checkSession(){
+
+    const loginData =
+        getLoginData();
+
+
+    if(
+        !loginDataIsComplete(
+            loginData
+        )
+    ){
+
+        redirectKeIdentitas(
+            "login"
+        );
+
+        return false;
+
+    }
+
+
+    /*
+       Pemeriksaan 24 jam
+       dilakukan lebih dahulu.
+    */
+
+    if(
+        clientSessionExpired(
+            loginData
+        )
+    ){
+
+        redirectKeIdentitas(
+            "expired"
+        );
+
+        return false;
+
+    }
+
+
+    try{
+
+        const result =
+            await requestJSONP(
+                {
+                    action:
+                        "checksession",
+
+                    sessionId:
+                        loginData.sessionId
+                },
+                10000
+            );
+
+
+        if(
+            !result ||
+            result.success !== true ||
+            result.loggedIn !== true
+        ){
+
+            redirectKeIdentitas(
+                "invalid"
+            );
+
+            return false;
+
+        }
+
+
+        /*
+           Server dapat mengembalikan
+           data sesi terbaru.
+        */
+
+        if(
+            result.session
+        ){
+
+            const updated =
+                Object.assign(
+                    {},
+                    loginData,
+                    result.session
+                );
+
+
+            saveLoginData(
+                updated
+            );
+
+
+            tampilkanDataSiswa(
+                updated
+            );
+
+        }
+
+
+        setStatusOnline(
+            true,
+            "🟢 Online"
+        );
+
+
+        return true;
+
+    }catch(error){
+
+        console.log(
+            "Cek sesi gagal:",
+            error
+        );
+
+
+        /*
+           Jangan langsung logout
+           hanya karena internet/API
+           sementara gagal.
+        */
+
+        setStatusOnline(
+            true,
+            "🟢 Online"
+        );
+
+
+        return true;
+
+    }
+
+}
+
+
+/* =====================================================
+   KIRIM HEARTBEAT
+===================================================== */
+
+async function sendHeartbeat(){
+
+    if(
+        sedangLogout ||
+        sedangRedirect
+    ){
+
+        return;
+
+    }
+
+
+    const loginData =
+        getLoginData();
+
+
+    if(
+        !loginDataIsComplete(
+            loginData
+        )
+    ){
+
+        redirectKeIdentitas(
+            "login"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Cek umur sesi lokal.
+    */
+
+    if(
+        clientSessionExpired(
+            loginData
+        )
+    ){
+
+        redirectKeIdentitas(
+            "expired"
+        );
+
+        return;
+
+    }
+
 
     const now =
         Date.now();
 
 
+    /*
+       Hindari request terlalu rapat.
+    */
+
     if(
         now -
-        lastHeartbeat <
-        5000
+        lastHeartbeat
+        < 5000
     ){
 
         return;
@@ -1695,266 +2740,189 @@ function sendHeartbeat(){
         now;
 
 
-    /* -------------------------------------------------
-       CALLBACK
-    ------------------------------------------------- */
-
-    const callbackName =
-        createHeartbeatCallbackName();
-
-
-    /* -------------------------------------------------
-       PARAMETER
-    ------------------------------------------------- */
-
-    const params =
-        new URLSearchParams();
-
-
-    params.set(
-        "action",
-        "heartbeat"
+    setStatusOnline(
+        true,
+        "🟢 Online"
     );
 
 
-    params.set(
-        "nama",
-        identity.nama
-    );
+    try{
+
+        const result =
+            await requestJSONP(
+                {
+                    action:
+                        "heartbeat",
+
+                    sessionId:
+                        loginData.sessionId,
+
+                    nama:
+                        loginData.nama,
+
+                    kelas:
+                        loginData.kelas,
+
+                    nomorAbsen:
+                        loginData.nomorAbsen ||
+                        loginData.absen ||
+                        "",
+
+                    halaman:
+                        HALAMAN_UTAMA,
+
+                    sumber:
+                        "Petualangan Kelas 5"
+                },
+                10000
+            );
 
 
-    params.set(
-        "kelas",
-        identity.kelas
-    );
+        if(
+            !result ||
+            result.success !== true
+        ){
+
+            const status =
+                String(
+                    result &&
+                    result.status
+                    || ""
+                ).toLowerCase();
 
 
-    params.set(
-        "nomorAbsen",
-        identity.absen
-    );
+            /*
+               Hanya status sesi invalid/
+               expired yang menyebabkan
+               logout otomatis.
+            */
+
+            if(
+                status === "expired" ||
+                status === "not_logged_in" ||
+                status === "invalid_session"
+            ){
+
+                redirectKeIdentitas(
+                    "expired"
+                );
+
+                return;
+
+            }
 
 
-    params.set(
-        "halaman",
-        HALAMAN_UTAMA
-    );
+            setStatusOnline(
+                true,
+                "🟢 Online"
+            );
+
+            return;
+
+        }
 
 
-    params.set(
-        "sumber",
-        "Identitas Siswa Petualangan Kelas 5"
-    );
+        /*
+           Simpan data sesi terbaru
+           dari server.
+        */
+
+        if(
+            result.session
+        ){
+
+            const updated =
+                Object.assign(
+                    {},
+                    loginData,
+                    result.session
+                );
 
 
-    params.set(
-        "callback",
-        callbackName
-    );
+            saveLoginData(
+                updated
+            );
 
 
-    params.set(
-        "t",
-        Date.now()
-    );
+            tampilkanDataSiswa(
+                updated
+            );
+
+        }
 
 
-    const url =
-        API_URL +
-        "?" +
-        params.toString();
-
-
-    /* -------------------------------------------------
-       LOG
-    ------------------------------------------------- */
-
-    console.log(
-        "===================================="
-    );
-
-
-    console.log(
-        "📡 Mengirim heartbeat siswa..."
-    );
-
-
-    console.log(
-        "Nama:",
-        identity.nama
-    );
-
-
-    console.log(
-        "Kelas:",
-        identity.kelas
-    );
-
-
-    console.log(
-        "No Absen:",
-        identity.absen
-    );
-
-
-    console.log(
-        "Halaman:",
-        HALAMAN_UTAMA
-    );
-
-
-    console.log(
-        "Metode: JSONP"
-    );
-
-
-    console.log(
-        "URL heartbeat:",
-        url
-    );
-
-
-    /* -------------------------------------------------
-       BUAT SCRIPT
-    ------------------------------------------------- */
-
-    const script =
-        document.createElement(
-            "script"
+        setStatusOnline(
+            true,
+            "🟢 Online"
         );
 
 
-    script.src =
-        url;
+        console.log(
+            "Heartbeat berhasil:",
+            new Date().toLocaleTimeString()
+        );
+
+    }catch(error){
+
+        console.log(
+            "Heartbeat gagal:",
+            error
+        );
 
 
-    script.async =
-        true;
+        /*
+           Jangan langsung logout jika
+           hanya koneksi internet yang
+           bermasalah.
+        */
+
+        setStatusOnline(
+            true,
+            "🟢 Online"
+        );
+
+    }
+
+}
 
 
-    script.id =
-        callbackName;
+/* =====================================================
+   HEARTBEAT BERKALA
+===================================================== */
+
+function startHeartbeat(){
+
+    if(
+        heartbeatTimer
+    ){
+
+        clearInterval(
+            heartbeatTimer
+        );
+
+    }
 
 
-    /* -------------------------------------------------
-       CALLBACK BERHASIL
-    ------------------------------------------------- */
+    /*
+       Kirim langsung ketika halaman
+       dibuka.
+    */
 
-    window[
-        callbackName
-    ] =
-        function(data){
-
-            console.log(
-                "📥 Respons heartbeat diterima:",
-                data
-            );
+    sendHeartbeat();
 
 
-            if(
-                data &&
-                data.success
-            ){
+    /*
+       Selanjutnya setiap 20 detik.
+    */
 
-                console.log(
-                    "✅ SISWA BERHASIL TERCATAT ONLINE"
-                );
+    heartbeatTimer =
+        setInterval(
+            function(){
 
+                sendHeartbeat();
 
-                console.log(
-                    "Nama:",
-                    data.nama
-                );
-
-
-                console.log(
-                    "Kelas:",
-                    data.kelas
-                );
-
-
-                console.log(
-                    "No Absen:",
-                    data.nomorAbsen
-                );
-
-
-            }else{
-
-                console.log(
-                    "⚠️ Heartbeat mendapat respons tetapi tidak berhasil:",
-                    data
-                );
-
-            }
-
-
-            cleanupHeartbeat(
-                script,
-                callbackName
-            );
-
-        };
-
-
-    /* -------------------------------------------------
-       ERROR
-    ------------------------------------------------- */
-
-    script.onerror =
-        function(){
-
-            console.log(
-                "❌ Heartbeat JSONP gagal dimuat."
-            );
-
-
-            cleanupHeartbeat(
-                script,
-                callbackName
-            );
-
-        };
-
-
-    /* -------------------------------------------------
-       TIMEOUT
-    ------------------------------------------------- */
-
-    setTimeout(
-        function(){
-
-            if(
-                document.getElementById(
-                    callbackName
-                )
-            ){
-
-                console.log(
-                    "⚠️ Timeout heartbeat JSONP."
-                );
-
-
-                cleanupHeartbeat(
-                    script,
-                    callbackName
-                );
-
-            }
-
-        },
-        10000
-    );
-
-
-    /* -------------------------------------------------
-       KIRIM
-    ------------------------------------------------- */
-
-    document
-        .head
-        .appendChild(
-            script
+            },
+            HEARTBEAT_INTERVAL
         );
 
 }
@@ -1964,18 +2932,18 @@ function sendHeartbeat(){
    AKTIVITAS SISWA
 ===================================================== */
 
-let activityDebounce =
+let activityTimer =
     null;
 
 
 function registerActivity(){
 
     clearTimeout(
-        activityDebounce
+        activityTimer
     );
 
 
-    activityDebounce =
+    activityTimer =
         setTimeout(
             function(){
 
@@ -2011,15 +2979,11 @@ activityEvents.forEach(
     function(eventName){
 
         document.addEventListener(
-
             eventName,
-
             registerActivity,
-
             {
                 passive:true
             }
-
         );
 
     }
@@ -2027,13 +2991,11 @@ activityEvents.forEach(
 
 
 /* =====================================================
-   VISIBILITY CHANGE
+   SAAT TAB KEMBALI AKTIF
 ===================================================== */
 
 document.addEventListener(
-
     "visibilitychange",
-
     function(){
 
         if(
@@ -2041,167 +3003,343 @@ document.addEventListener(
             "visible"
         ){
 
-            console.log(
-                "👀 Halaman kembali aktif."
-            );
-
-
-            lastHeartbeat =
-                0;
-
-
             sendHeartbeat();
 
         }
 
     }
-
 );
 
 
-/* =====================================================
-   WINDOW FOCUS
-===================================================== */
-
 window.addEventListener(
-
     "focus",
-
     function(){
-
-        console.log(
-            "🔎 Window kembali fokus."
-        );
-
-
-        lastHeartbeat =
-            0;
-
 
         sendHeartbeat();
 
     }
-
 );
 
 
 /* =====================================================
-   HEARTBEAT BERKALA
+   LOGOUT KE SERVER
 ===================================================== */
 
-function startHeartbeat(){
+async function logoutSiswa(){
 
     if(
-        heartbeatTimer
+        sedangLogout
     ){
 
-        clearInterval(
-            heartbeatTimer
+        return;
+
+    }
+
+
+    sedangLogout =
+        true;
+
+
+    btnLogout.disabled =
+        true;
+
+
+    btnLogout.textContent =
+        "⏳ Logout...";
+
+
+    clearInterval(
+        heartbeatTimer
+    );
+
+
+    heartbeatTimer =
+        null;
+
+
+    const loginData =
+        getLoginData();
+
+
+    /*
+       Jika sessionId tidak tersedia,
+       cukup hapus login lokal.
+    */
+
+    if(
+        !loginData ||
+        !loginData.sessionId
+    ){
+
+        clearLoginData();
+
+
+        window.location.replace(
+            "Identitas-Siswa.html?alasan=logout"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const result =
+            await requestJSONP(
+                {
+                    action:
+                        "logout",
+
+                    sessionId:
+                        loginData.sessionId,
+
+                    nama:
+                        loginData.nama,
+
+                    kelas:
+                        loginData.kelas
+                },
+                8000
+            );
+
+
+        console.log(
+            "Hasil logout:",
+            result
+        );
+
+    }catch(error){
+
+        /*
+           Walaupun request server
+           gagal, login lokal tetap
+           harus dihapus.
+        */
+
+        console.log(
+            "Logout server gagal:",
+            error
         );
 
     }
 
 
-    console.log(
-        "🚀 Memulai sistem heartbeat..."
+    /*
+       Hapus sesi lokal.
+    */
+
+    clearLoginData();
+
+
+    /*
+       Kembali ke halaman identitas.
+    */
+
+    window.location.replace(
+        "Identitas-Siswa.html?alasan=logout"
     );
 
-
-    /*
-     * Kirim langsung.
-     */
-
-    sendHeartbeat();
+}
 
 
-    /*
-     * Kirim setiap 30 detik.
-     */
+/* =====================================================
+   EVENT TOMBOL LOGOUT
+===================================================== */
 
-    heartbeatTimer =
-        setInterval(
+btnLogout.addEventListener(
+    "click",
+    function(){
 
-            function(){
-
-                if(
-                    document.visibilityState ===
-                    "visible"
-                ){
-
-                    console.log(
-                        "🔄 Heartbeat berkala..."
-                    );
+        playButtonSound();
 
 
-                    sendHeartbeat();
+        const yakin =
+            window.confirm(
+                "Apakah Anda yakin ingin logout?"
+            );
 
-                }
 
-            },
+        if(
+            !yakin
+        ){
 
-            30000
+            return;
 
+        }
+
+
+        logoutSiswa();
+
+    }
+);
+
+
+/* =====================================================
+   BLOK NAVIGASI JIKA BELUM LOGIN
+===================================================== */
+
+function protectNavigation(){
+
+    document
+        .querySelectorAll(
+            ".map-item"
+        )
+        .forEach(
+            function(item){
+
+                item.addEventListener(
+                    "click",
+                    function(event){
+
+                        const loginData =
+                            getLoginData();
+
+
+                        if(
+                            !loginDataIsComplete(
+                                loginData
+                            )
+                        ){
+
+                            event.preventDefault();
+
+
+                            redirectKeIdentitas(
+                                "login"
+                            );
+
+                            return;
+
+                        }
+
+
+                        /*
+                           Update halaman yang
+                           sedang dibuka.
+                        */
+
+                        sendHeartbeat();
+
+                    }
+                );
+
+            }
         );
 
 }
 
 
 /* =====================================================
-   CEK IDENTITAS SAAT HALAMAN DIBUKA
+   INISIALISASI
 ===================================================== */
 
-const identityAwal =
-    getStudentIdentity();
+async function initializePage(){
+
+    console.log(
+        "Memulai Petualangan Kelas 5..."
+    );
 
 
-console.log(
-    "===================================="
-);
+    const loginData =
+        getLoginData();
 
 
-console.log(
-    "IDENTITAS SISWA"
-);
+    /*
+       Tidak ada login.
+    */
+
+    if(
+        !loginDataIsComplete(
+            loginData
+        )
+    ){
+
+        redirectKeIdentitas(
+            "login"
+        );
+
+        return;
+
+    }
 
 
-console.log(
-    "Nama:",
-    identityAwal.nama || "(kosong)"
-);
+    /*
+       Tampilkan identitas sementara.
+    */
+
+    tampilkanDataSiswa(
+        loginData
+    );
 
 
-console.log(
-    "Kelas:",
-    identityAwal.kelas || "(kosong)"
-);
+    /*
+       Cek umur sesi.
+    */
+
+    if(
+        clientSessionExpired(
+            loginData
+        )
+    ){
+
+        redirectKeIdentitas(
+            "expired"
+        );
+
+        return;
+
+    }
 
 
-console.log(
-    "No Absen:",
-    identityAwal.absen || "(kosong)"
-);
+    /*
+       Cek sesi ke server.
+    */
+
+    const valid =
+        await checkSession();
 
 
-console.log(
-    "===================================="
-);
+    if(
+        !valid
+    ){
+
+        return;
+
+    }
+
+
+    /*
+       Mulai heartbeat.
+    */
+
+    startHeartbeat();
+
+
+    /*
+       Proteksi menu.
+    */
+
+    protectNavigation();
+
+
+    console.log(
+        "Petualangan Kelas 5 aktif."
+    );
+
+}
 
 
 /* =====================================================
-   MULAI SISTEM HEARTBEAT
+   JALANKAN SISTEM
 ===================================================== */
 
-startHeartbeat();
+initializePage();
 
 
 /* =====================================================
-   LOG AKHIR
+   LOG
 ===================================================== */
-
-console.log(
-    "📖 Petualangan Kelas 5 dibuka."
-);
-
 
 console.log(
     "Halaman:",
@@ -2210,12 +3348,17 @@ console.log(
 
 
 console.log(
-    "💚 Sistem heartbeat JSONP aktif."
+    "Heartbeat:",
+    HEARTBEAT_INTERVAL / 1000,
+    "detik"
 );
 
 
 console.log(
-    "👥 Daftar siswa online disembunyikan dari halaman utama."
+    "Maksimum sesi:",
+    SESSION_MAX_AGE /
+    (60 * 60 * 1000),
+    "jam"
 );
 
 </script>

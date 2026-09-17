@@ -3,2240 +3,951 @@
 
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-  <meta
-    name="theme-color"
-    content="#0288d1"
-  >
+<title>Siswa Online | UPT SDN 160 GRESIK</title>
 
-  <title>Siswa Online | Kelas 5</title>
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+>
 
+<style>
 
-  <!-- =====================================================
-       GOOGLE FONT
-  ====================================================== -->
+* {
+  box-sizing: border-box;
+}
 
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
+body {
 
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
+  margin: 0;
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
+  min-height: 100vh;
 
+  font-family:
+    Poppins,
+    sans-serif;
 
-  <!-- =====================================================
-       STYLE
-  ====================================================== -->
+  background:
+    linear-gradient(
+      135deg,
+      #eff6ff,
+      #dbeafe,
+      #f0f9ff
+    );
 
-  <style>
+  padding:
+    25px 15px;
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+}
 
+.container {
 
-    html {
-      scroll-behavior: smooth;
-    }
+  width: 100%;
 
+  max-width: 900px;
 
-    body {
+  margin:
+    0 auto;
 
-      font-family: "Poppins", sans-serif;
+}
 
-      min-height: 100vh;
+.header {
 
-      background:
-        linear-gradient(
-          rgba(0, 105, 170, 0.78),
-          rgba(255, 255, 255, 0.72)
-        ),
-        url("https://i.imgur.com/clG3P3n.png")
-        center center / cover fixed no-repeat;
+  text-align:
+    center;
 
-      color: #17324d;
+  margin-bottom:
+    25px;
 
-      padding-bottom: 40px;
+}
 
-    }
+.header h1 {
 
+  margin: 0;
 
-    /* =====================================================
-       NAVBAR
-    ====================================================== */
+  color:
+    #1e3a8a;
 
-    .navbar {
+  font-size:
+    clamp(
+      25px,
+      6vw,
+      38px
+    );
 
-      width: 100%;
+  font-weight:
+    800;
 
-      padding: 14px 5%;
+}
 
-      display: flex;
+.header p {
 
-      justify-content: space-between;
+  margin:
+    8px 0 0;
 
-      align-items: center;
+  color:
+    #64748b;
 
-      gap: 15px;
+  font-size:
+    14px;
 
-      background:
-        rgba(255, 255, 255, 0.94);
+}
 
-      backdrop-filter:
-        blur(12px);
+.status {
 
-      -webkit-backdrop-filter:
-        blur(12px);
+  display:
+    inline-flex;
 
-      box-shadow:
-        0 4px 18px
-        rgba(0, 0, 0, 0.12);
+  align-items:
+    center;
 
-      position: sticky;
+  gap: 8px;
 
-      top: 0;
+  margin-top:
+    15px;
 
-      z-index: 1000;
+  padding:
+    8px 14px;
 
-    }
+  border-radius:
+    999px;
 
+  background:
+    white;
 
-    .brand {
+  box-shadow:
+    0 5px 20px
+    rgba(0,0,0,.08);
 
-      color: #0288d1;
+  font-size:
+    13px;
 
-      font-size: 18px;
+  font-weight:
+    700;
 
-      font-weight: 800;
+}
 
-      text-decoration: none;
+.dot {
 
-      white-space: nowrap;
+  width:
+    10px;
 
-    }
+  height:
+    10px;
 
+  border-radius:
+    50%;
 
-    .nav-links {
+  background:
+    #22c55e;
 
-      display: flex;
+  animation:
+    kedip 1.5s infinite;
 
-      align-items: center;
+}
 
-      justify-content: center;
+@keyframes kedip {
 
-      gap: 8px;
+  0%,100% {
+    opacity: 1;
+  }
 
-      flex-wrap: wrap;
+  50% {
+    opacity: .35;
+  }
 
-    }
+}
 
+#jumlah {
 
-    .nav-links a {
+  color:
+    #16a34a;
 
-      display: inline-block;
+}
 
-      padding: 8px 12px;
+.card {
 
-      border-radius: 10px;
+  background:
+    rgba(255,255,255,.95);
 
-      color: #174866;
+  border-radius:
+    22px;
 
-      text-decoration: none;
+  padding:
+    20px;
 
-      font-size: 13px;
+  box-shadow:
+    0 15px 40px
+    rgba(30,64,175,.10);
 
-      font-weight: 600;
+}
 
-      transition:
-        0.2s ease;
+.student-list {
 
-    }
+  display:
+    grid;
 
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(
+        250px,
+        1fr
+      )
+    );
 
-    .nav-links a:hover {
+  gap:
+    15px;
 
-      background: #0288d1;
+}
 
-      color: white;
+.student {
 
-      transform:
-        translateY(-1px);
+  display:
+    flex;
 
-    }
+  align-items:
+    center;
 
+  gap:
+    13px;
 
-    .nav-links a.active {
+  padding:
+    15px;
 
-      background: #0288d1;
+  border:
+    2px solid
+    #e0f2fe;
 
-      color: white;
+  border-radius:
+    17px;
 
-    }
+  background:
+    #f8fdff;
 
+}
 
-    /* =====================================================
-       HERO
-    ====================================================== */
+.avatar {
 
-    .hero {
+  width:
+    48px;
 
-      text-align: center;
+  height:
+    48px;
 
-      padding:
-        55px 20px 32px;
+  min-width:
+    48px;
 
-    }
+  border-radius:
+    50%;
 
+  display:
+    flex;
 
-    .hero h1 {
+  align-items:
+    center;
 
-      color: white;
+  justify-content:
+    center;
 
-      font-size:
-        clamp(28px, 5vw, 46px);
+  background:
+    #dbeafe;
 
-      font-weight: 800;
+  font-size:
+    22px;
 
-      line-height: 1.2;
+}
 
-      text-shadow:
-        0 3px 8px
-        rgba(0, 0, 0, 0.35);
+.info {
 
-    }
+  min-width:
+    0;
 
+  flex:
+    1;
 
-    .hero p {
+}
 
-      margin-top: 12px;
+.name {
 
-      color: white;
+  color:
+    #1e293b;
 
-      font-size: 15px;
+  font-weight:
+    800;
 
-      line-height: 1.6;
+  font-size:
+    15px;
 
-      text-shadow:
-        0 2px 5px
-        rgba(0, 0, 0, 0.3);
+  white-space:
+    nowrap;
 
-    }
+  overflow:
+    hidden;
 
+  text-overflow:
+    ellipsis;
 
-    /* =====================================================
-       CONTAINER
-    ====================================================== */
+}
 
-    .container {
+.class {
 
-      width:
-        min(1100px, 92%);
+  margin-top:
+    3px;
 
-      margin:
-        0 auto;
+  color:
+    #64748b;
 
-    }
+  font-size:
+    12px;
 
+}
 
-    /* =====================================================
-       PANEL
-    ====================================================== */
+.online {
 
-    .panel {
+  display:
+    flex;
 
-      background:
-        rgba(255, 255, 255, 0.95);
+  align-items:
+    center;
 
-      border-radius: 22px;
+  gap:
+    5px;
 
-      padding: 25px;
+  margin-top:
+    4px;
 
-      box-shadow:
-        0 12px 35px
-        rgba(0, 0, 0, 0.18);
+  color:
+    #16a34a;
 
-      backdrop-filter:
-        blur(10px);
+  font-size:
+    11px;
 
-      -webkit-backdrop-filter:
-        blur(10px);
+  font-weight:
+    700;
 
-    }
+}
 
+.online::before {
 
-    /* =====================================================
-       TOP BAR
-    ====================================================== */
+  content:
+    "";
 
-    .top-bar {
+  width:
+    7px;
 
-      display: flex;
+  height:
+    7px;
 
-      justify-content: space-between;
+  background:
+    #22c55e;
 
-      align-items: center;
+  border-radius:
+    50%;
 
-      gap: 15px;
+}
 
-      margin-bottom: 20px;
+.empty {
 
-      flex-wrap: wrap;
+  text-align:
+    center;
 
-    }
+  padding:
+    45px 20px;
 
+  color:
+    #64748b;
 
-    .status {
+}
 
-      color: #0288d1;
+.empty-icon {
 
-      font-size: 16px;
+  font-size:
+    45px;
 
-      font-weight: 700;
+  margin-bottom:
+    10px;
 
-    }
+}
 
+.loading {
 
-    /* =====================================================
-       REFRESH BUTTON
-    ====================================================== */
+  text-align:
+    center;
 
-    .refresh-btn {
+  padding:
+    30px;
 
-      border: none;
+  color:
+    #64748b;
 
-      outline: none;
+}
 
-      background: #0288d1;
+.error {
 
-      color: white;
+  padding:
+    15px;
 
-      padding:
-        10px 18px;
+  border-radius:
+    13px;
 
-      border-radius: 12px;
+  background:
+    #fef2f2;
 
-      font-family: inherit;
+  border:
+    1px solid
+    #fecaca;
 
-      font-size: 13px;
+  color:
+    #b91c1c;
 
-      font-weight: 700;
+  font-size:
+    13px;
 
-      cursor: pointer;
+}
 
-      transition:
-        0.2s ease;
+.footer {
 
-      box-shadow:
-        0 4px 10px
-        rgba(2, 136, 209, 0.25);
+  text-align:
+    center;
 
-    }
+  margin-top:
+    20px;
 
+  color:
+    #94a3b8;
 
-    .refresh-btn:hover {
+  font-size:
+    11px;
 
-      background: #0277bd;
+}
 
-      transform:
-        translateY(-2px);
-
-    }
-
-
-    .refresh-btn:active {
-
-      transform:
-        scale(0.97);
-
-    }
-
-
-    .refresh-btn:disabled {
-
-      opacity: 0.65;
-
-      cursor:
-        not-allowed;
-
-      transform:
-        none;
-
-    }
-
-
-    /* =====================================================
-       ERROR
-    ====================================================== */
-
-    .error {
-
-      display: none;
-
-      margin-bottom: 20px;
-
-      padding: 18px;
-
-      border-radius: 14px;
-
-      background:
-        #fff3e0;
-
-      border:
-        1px solid #ffcc80;
-
-      color:
-        #e65100;
-
-      font-size: 13px;
-
-      line-height: 1.6;
-
-    }
-
-
-    .error.show {
-
-      display: block;
-
-    }
-
-
-    .error-title {
-
-      margin-bottom: 5px;
-
-      font-weight: 800;
-
-    }
-
-
-    .debug {
-
-      margin-top: 8px;
-
-      font-size: 11px;
-
-      opacity: 0.8;
-
-      word-break: break-word;
-
-    }
-
-
-    /* =====================================================
-       LOADING
-    ====================================================== */
-
-    .loading {
-
-      display: none;
-
-      padding:
-        35px 15px;
-
-      text-align: center;
-
-      color:
-        #607d8b;
-
-      font-size: 13px;
-
-    }
-
-
-    .loading.show {
-
-      display: block;
-
-    }
-
-
-    .spinner {
-
-      width: 32px;
-
-      height: 32px;
-
-      margin:
-        0 auto 12px;
-
-      border:
-        4px solid #d9edf7;
-
-      border-top-color:
-        #0288d1;
-
-      border-radius: 50%;
-
-      animation:
-        spin 0.8s linear infinite;
-
-    }
-
-
-    @keyframes spin {
-
-      to {
-
-        transform:
-          rotate(360deg);
-
-      }
-
-    }
-
-
-    /* =====================================================
-       EMPTY
-    ====================================================== */
-
-    .empty {
-
-      display: none;
-
-      padding:
-        40px 15px;
-
-      text-align: center;
-
-      color:
-        #78909c;
-
-      font-size: 13px;
-
-    }
-
-
-    .empty.show {
-
-      display: block;
-
-    }
-
-
-    .empty-icon {
-
-      margin-bottom: 10px;
-
-      font-size: 45px;
-
-    }
-
-
-    /* =====================================================
-       TABLE
-    ====================================================== */
-
-    .table-wrapper {
-
-      display: none;
-
-      width: 100%;
-
-      overflow-x: auto;
-
-      border-radius: 15px;
-
-      box-shadow:
-        0 2px 8px
-        rgba(0, 0, 0, 0.05);
-
-    }
-
-
-    table {
-
-      width: 100%;
-
-      min-width: 700px;
-
-      border-collapse: collapse;
-
-    }
-
-
-    thead {
-
-      background:
-        #0288d1;
-
-      color: white;
-
-    }
-
-
-    th {
-
-      padding:
-        13px 12px;
-
-      font-size: 13px;
-
-      font-weight: 700;
-
-      text-align: left;
-
-      white-space: nowrap;
-
-    }
-
-
-    td {
-
-      padding:
-        13px 12px;
-
-      font-size: 13px;
-
-      border-bottom:
-        1px solid #e3edf3;
-
-      vertical-align: middle;
-
-    }
-
-
-    tbody tr {
-
-      background: white;
-
-      transition:
-        0.2s ease;
-
-    }
-
-
-    tbody tr:hover {
-
-      background:
-        #f0f9ff;
-
-    }
-
-
-    tbody tr:last-child td {
-
-      border-bottom:
-        none;
-
-    }
-
-
-    /* =====================================================
-       ONLINE BADGE
-    ====================================================== */
-
-    .badge {
-
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 6px;
-
-      padding:
-        5px 10px;
-
-      border-radius: 20px;
-
-      font-size: 11px;
-
-      font-weight: 700;
-
-      white-space: nowrap;
-
-    }
-
-
-    .badge-online {
-
-      background:
-        #e8f5e9;
-
-      color:
-        #2e7d32;
-
-    }
-
-
-    .dot {
-
-      display: inline-block;
-
-      width: 8px;
-
-      height: 8px;
-
-      background:
-        #2e7d32;
-
-      border-radius: 50%;
-
-      animation:
-        pulse 1.5s infinite;
-
-    }
-
-
-    @keyframes pulse {
-
-      0% {
-
-        opacity: 1;
-
-        transform:
-          scale(1);
-
-      }
-
-      50% {
-
-        opacity: 0.45;
-
-        transform:
-          scale(0.8);
-
-      }
-
-      100% {
-
-        opacity: 1;
-
-        transform:
-          scale(1);
-
-      }
-
-    }
-
-
-    /* =====================================================
-       NOTE
-    ====================================================== */
-
-    .note {
-
-      margin-top: 18px;
-
-      padding: 15px;
-
-      border-radius: 14px;
-
-      background:
-        #e3f2fd;
-
-      color:
-        #1565c0;
-
-      font-size: 12px;
-
-      line-height: 1.7;
-
-    }
-
-
-    /* =====================================================
-       LAST UPDATE
-    ====================================================== */
-
-    .last-update {
-
-      margin-top: 15px;
-
-      text-align: right;
-
-      color:
-        #78909c;
-
-      font-size: 11px;
-
-    }
-
-
-    /* =====================================================
-       FOOTER
-    ====================================================== */
-
-    footer {
-
-      margin-top: 30px;
-
-      padding:
-        0 20px;
-
-      text-align: center;
-
-      color: white;
-
-      font-size: 12px;
-
-      text-shadow:
-        0 2px 5px
-        rgba(0, 0, 0, 0.3);
-
-    }
-
-
-    /* =====================================================
-       MOBILE
-    ====================================================== */
-
-    @media (
-      max-width: 700px
-    ) {
-
-      .navbar {
-
-        flex-direction:
-          column;
-
-        justify-content:
-          center;
-
-        padding:
-          13px 15px;
-
-      }
-
-
-      .brand {
-
-        font-size: 16px;
-
-      }
-
-
-      .nav-links {
-
-        width: 100%;
-
-      }
-
-
-      .nav-links a {
-
-        font-size: 12px;
-
-        padding:
-          7px 10px;
-
-      }
-
-
-      .hero {
-
-        padding:
-          38px 15px 25px;
-
-      }
-
-
-      .hero h1 {
-
-        font-size:
-          28px;
-
-      }
-
-
-      .hero p {
-
-        font-size:
-          13px;
-
-      }
-
-
-      .panel {
-
-        padding:
-          17px;
-
-        border-radius:
-          17px;
-
-      }
-
-
-      .top-bar {
-
-        align-items:
-          stretch;
-
-      }
-
-
-      .status {
-
-        font-size:
-          14px;
-
-      }
-
-
-      .refresh-btn {
-
-        width: 100%;
-
-      }
-
-
-      th,
-      td {
-
-        padding:
-          11px 9px;
-
-        font-size:
-          12px;
-
-      }
-
-    }
-
-  </style>
+</style>
 
 </head>
 
 
 <body>
 
-
-  <!-- =====================================================
-       NAVBAR
-  ====================================================== -->
-
-  <nav class="navbar">
+<div class="container">
 
 
-    <a
-      href="../index.html"
-      class="brand"
-    >
+  <div class="header">
+
+    <h1>
+      🟢 Siswa Sedang Online
+    </h1>
+
+    <p>
       UPT SDN 160 GRESIK
-    </a>
+    </p>
 
+    <div class="status">
 
-    <div class="nav-links">
+      <span class="dot"></span>
 
-
-      <a
-        href="../index.html"
-      >
-        Beranda
-      </a>
-
-
-      <a
-        href="../kelas.html"
-      >
-        Kelas
-      </a>
-
-
-      <a
-        href="online.html"
-        class="active"
-      >
-        🟢 Online
-      </a>
-
+      <span>
+        <span id="jumlah">
+          0
+        </span>
+        siswa sedang online
+      </span>
 
     </div>
 
+  </div>
 
-  </nav>
 
+  <div class="card">
 
+    <div
+      id="loading"
+      class="loading"
+    >
+      ⏳ Memuat data siswa online...
+    </div>
 
-  <!-- =====================================================
-       HERO
-  ====================================================== -->
 
-  <section class="hero">
+    <div
+      id="error"
+      style="display:none"
+    ></div>
 
 
-    <h1>
-      🟢 Siswa Online Kelas 5
-    </h1>
+    <div
+      id="studentList"
+      class="student-list"
+    ></div>
 
+  </div>
 
-    <p>
-      Daftar siswa yang sedang aktif di halaman pembelajaran
-    </p>
 
+  <div class="footer">
 
-  </section>
+    Data diperbarui otomatis setiap
+    10 detik.
 
+  </div>
 
+</div>
 
-  <!-- =====================================================
-       MAIN
-  ====================================================== -->
 
-  <main class="container">
+<script>
 
+/* =====================================================
+   API
+   ===================================================== */
 
-    <section class="panel">
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbw-SmLBX8bmBH98vNrWzQ5tS3GrMvujNARGqdE2PerDduIrPHHrGD4Kg5PSlLPyOXJ3/exec";
 
 
-      <!-- =================================================
-           TOP BAR
-      ================================================== -->
+/* =====================================================
+   ELEMENT
+   ===================================================== */
 
-      <div class="top-bar">
+const listElement =
+  document.getElementById(
+    "studentList"
+  );
 
+const loadingElement =
+  document.getElementById(
+    "loading"
+  );
 
-        <div
-          id="statusText"
-          class="status"
-        >
-          Memuat data siswa...
-        </div>
+const errorElement =
+  document.getElementById(
+    "error"
+  );
 
+const jumlahElement =
+  document.getElementById(
+    "jumlah"
+  );
 
-        <button
-          id="refreshBtn"
-          class="refresh-btn"
-          type="button"
-        >
-          🔄 Refresh
-        </button>
 
+/* =====================================================
+   JSONP
+   ===================================================== */
 
-      </div>
+function ambilOnline(
+  callback
+) {
 
+  const callbackName =
+    "onlineCallback_" +
+    Date.now() +
+    "_" +
+    Math.floor(
+      Math.random() * 100000
+    );
 
 
-      <!-- =================================================
-           ERROR
-      ================================================== -->
+  const script =
+    document.createElement(
+      "script"
+    );
 
-      <div
-        id="errorBox"
-        class="error"
-      >
 
-        <div class="error-title">
+  let selesai =
+    false;
 
-          ⚠️ Data siswa online belum dapat dimuat.
 
-        </div>
+  function cleanup() {
 
+    try {
 
-        <div>
+      delete window[
+        callbackName
+      ];
 
-          Pastikan koneksi ke Web App Apps Script
-          tersedia.
+    } catch (e) {}
 
-        </div>
 
+    script.remove();
 
-        <div
-          id="debugText"
-          class="debug"
-        ></div>
+  }
 
-      </div>
 
+  const timeout =
+    setTimeout(
+      function() {
 
+        if (selesai) {
+          return;
+        }
 
-      <!-- =================================================
-           LOADING
-      ================================================== -->
+        selesai = true;
 
-      <div
-        id="loading"
-        class="loading"
-      >
+        cleanup();
 
-        <div class="spinner"></div>
+        callback(
+          new Error(
+            "Timeout mengambil data."
+          )
+        );
 
-        Memuat data siswa online...
+      },
+      15000
+    );
 
-      </div>
 
+  window[
+    callbackName
+  ] = function(data) {
 
+    if (selesai) {
+      return;
+    }
 
-      <!-- =================================================
-           EMPTY
-      ================================================== -->
+    selesai = true;
 
-      <div
-        id="empty"
-        class="empty"
-      >
+    clearTimeout(
+      timeout
+    );
 
-        <div class="empty-icon">
-          💤
-        </div>
+    cleanup();
 
+    callback(
+      null,
+      data
+    );
 
-        <div>
-          Belum ada siswa yang sedang online.
-        </div>
+  };
 
-      </div>
 
+  script.onerror =
+    function() {
 
+      if (selesai) {
+        return;
+      }
 
-      <!-- =================================================
-           TABLE
-      ================================================== -->
+      selesai = true;
 
-      <div
-        id="tableWrapper"
-        class="table-wrapper"
-      >
-
-        <table>
-
-
-          <thead>
-
-            <tr>
-
-              <th>
-                No
-              </th>
-
-              <th>
-                Nama
-              </th>
-
-              <th>
-                Kelas
-              </th>
-
-              <th>
-                No. Absen
-              </th>
-
-              <th>
-                Halaman Aktif
-              </th>
-
-              <th>
-                Status
-              </th>
-
-            </tr>
-
-          </thead>
-
-
-          <tbody
-            id="studentTableBody"
-          ></tbody>
-
-
-        </table>
-
-      </div>
-
-
-
-      <!-- =================================================
-           NOTE
-     
-      <div class="note">
-
-        ℹ️ Data diperbarui otomatis setiap
-        <strong>15 detik</strong>.
-
-        Siswa akan dianggap offline apabila tidak
-        mengirim heartbeat dalam batas waktu yang
-        ditentukan oleh sistem.
-
-      </div>
-
-================================================== -->
-
-      <!-- =================================================
-           LAST UPDATE
-      ================================================== -->
-
-      <div
-        id="lastUpdate"
-        class="last-update"
-      >
-        Belum ada pembaruan.
-      </div>
-
-
-    </section>
-
-
-  </main>
-
-
-
-  <!-- =====================================================
-       FOOTER
-  ====================================================== -->
-
-  <footer>
-
-    UPT SDN 160 GRESIK © 2026
-
-  </footer>
-
-
-
-  <!-- =====================================================
-       JAVASCRIPT
-       JSONP - TANPA FETCH
-  ====================================================== -->
-
-  <script>
-
-
-    /* =====================================================
-       KONFIGURASI API
-    ===================================================== */
-
-    const API_URL =
-      "https://script.google.com/macros/s/AKfycbw-SmLBX8bmBH98vNrWzQ5tS3GrMvujNARGqdE2PerdDuIrPHHrGD4Kg5PSlLPyOXJ3/exec";
-
-
-    /*
-     * Refresh otomatis 15 detik
-     */
-
-    const REFRESH_INTERVAL =
-      15000;
-
-
-    /*
-     * Timeout JSONP
-     */
-
-    const REQUEST_TIMEOUT =
-      10000;
-
-
-
-    /* =====================================================
-       ELEMENT HTML
-    ===================================================== */
-
-    const statusText =
-      document.getElementById(
-        "statusText"
+      clearTimeout(
+        timeout
       );
 
+      cleanup();
 
-    const refreshBtn =
-      document.getElementById(
-        "refreshBtn"
-      );
-
-
-    const loading =
-      document.getElementById(
-        "loading"
-      );
-
-
-    const empty =
-      document.getElementById(
-        "empty"
-      );
-
-
-    const errorBox =
-      document.getElementById(
-        "errorBox"
-      );
-
-
-    const debugText =
-      document.getElementById(
-        "debugText"
-      );
-
-
-    const tableWrapper =
-      document.getElementById(
-        "tableWrapper"
-      );
-
-
-    const studentTableBody =
-      document.getElementById(
-        "studentTableBody"
-      );
-
-
-    const lastUpdate =
-      document.getElementById(
-        "lastUpdate"
-      );
-
-
-
-    /* =====================================================
-       VARIABEL JSONP
-    ===================================================== */
-
-    let activeScript =
-      null;
-
-
-    let activeCallbackName =
-      null;
-
-
-    let activeTimeout =
-      null;
-
-
-    let requestNumber =
-      0;
-
-
-
-    /* =====================================================
-       LOAD DATA
-    ===================================================== */
-
-    function loadData() {
-
-
-      console.log(
-        "===================================="
-      );
-
-
-      console.log(
-        "Memulai permintaan data online..."
-      );
-
-
-      console.log(
-        "Waktu:",
-        new Date().toLocaleTimeString(
-          "id-ID"
+      callback(
+        new Error(
+          "Gagal menghubungi server."
         )
       );
 
+    };
+
+
+  const url =
+    API_URL +
+    "?action=online" +
+    "&callback=" +
+    encodeURIComponent(
+      callbackName
+    ) +
+    "&t=" +
+    Date.now();
+
+
+  console.log(
+    "Memanggil API:",
+    url
+  );
+
+
+  script.src =
+    url;
 
-      setLoading(true);
 
+  document.body.appendChild(
+    script
+  );
+}
 
-      hideError();
+
+/* =====================================================
+   ESCAPE HTML
+   ===================================================== */
 
+function escapeHTML(
+  value
+) {
 
+  return String(
+    value ?? ""
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
-      /*
-       * Bersihkan request sebelumnya
-       */
+}
 
-      cleanupJSONP();
 
+/* =====================================================
+   RENDER SISWA
+   ===================================================== */
 
+function tampilkanSiswa(
+  students
+) {
 
-      /*
-       * Nomor request
-       */
+  /*
+   * PENTING:
+   *
+   * Selalu kosongkan seluruh daftar
+   * kemudian render seluruh data dari server.
+   *
+   * Dengan cara ini siswa lama tidak hilang
+   * hanya karena siswa baru login.
+   */
+  listElement.innerHTML =
+    "";
 
-      requestNumber++;
 
+  jumlahElement.textContent =
+    students.length;
 
 
-      /*
-       * Nama callback unik
-       */
+  if (
+    !students.length
+  ) {
 
-      const callbackName =
-        "onlineCallback_" +
-        Date.now() +
-        "_" +
-        requestNumber;
+    listElement.innerHTML = `
 
+      <div
+        class="empty"
+        style="grid-column:1/-1"
+      >
 
+        <div class="empty-icon">
+          👨‍🎓
+        </div>
 
-      activeCallbackName =
-        callbackName;
+        <strong>
+          Belum ada siswa online
+        </strong>
 
+        <div>
+          Siswa yang sedang membuka
+          Petualangan Kelas 5 akan muncul di sini.
+        </div>
 
+      </div>
 
-      /*
-       * Buat fungsi callback
-       */
+    `;
 
-      window[callbackName] =
-        function(data) {
+    return;
+  }
 
 
-          console.log(
-            "Respons JSONP diterima:",
-            data
-          );
+  students.forEach(
+    function(siswa) {
 
+      const nama =
+        escapeHTML(
+          siswa.nama
+        );
 
 
-          /*
-           * Batalkan timeout
-           */
+      const kelas =
+        escapeHTML(
+          siswa.kelas
+        );
 
-          if (
-            activeTimeout
-          ) {
 
-            clearTimeout(
-              activeTimeout
-            );
+      const absen =
+        escapeHTML(
+          siswa.nomorAbsen
+        );
 
-            activeTimeout =
-              null;
 
-          }
-
-
-
-          try {
-
-
-            /*
-             * Pastikan data ada
-             */
-
-            if (!data) {
-
-              throw new Error(
-                "Respons dari Apps Script kosong."
-              );
-
-            }
-
-
-
-            /*
-             * Pastikan status berhasil
-             */
-
-            if (
-              data.success !== true &&
-              data.status !== "success"
-            ) {
-
-              throw new Error(
-                data.message ||
-                "Apps Script mengembalikan status gagal."
-              );
-
-            }
-
-
-
-            /*
-             * Ambil students
-             */
-
-            const students =
-              Array.isArray(
-                data.students
-              )
-                ? data.students
-                : [];
-
-
-
-            /*
-             * Tampilkan siswa
-             */
-
-            renderStudents(
-              students
-            );
-
-
-
-            /*
-             * Update waktu
-
-             */
-
-            updateLastUpdate();
-
-
-
-          } catch (error) {
-
-
-            console.error(
-              "Kesalahan memproses data:",
-              error
-            );
-
-
-            showError(
-              error.message
-            );
-
-
-            statusText.textContent =
-              "Gagal memproses data";
-
-
-          } finally {
-
-
-            setLoading(false);
-
-
-            cleanupJSONP();
-
-
-          }
-
-
-        };
-
-
-
-      /*
-       * URL JSONP
-       */
-
-      const url =
-        API_URL +
-        "?action=online" +
-        "&callback=" +
-        encodeURIComponent(
-          callbackName
-        ) +
-        "&t=" +
-        Date.now();
-
-
-
-      console.log(
-        "Memanggil API JSONP:"
-      );
-
-
-      console.log(
-        url
-      );
-
-
-
-      /*
-       * Buat elemen script
-       */
-
-      const script =
+      const item =
         document.createElement(
-          "script"
+          "div"
         );
 
 
-      activeScript =
-        script;
+      item.className =
+        "student";
 
 
+      item.innerHTML = `
 
-      script.src =
-        url;
+        <div class="avatar">
+          👨‍🎓
+        </div>
 
+        <div class="info">
 
-      script.async =
-        true;
+          <div class="name">
+            ${nama}
+          </div>
 
-
-
-      /*
-       * Jika script gagal
-       */
-
-      script.onerror =
-        function() {
-
-
-          console.error(
-            "JSONP gagal dimuat."
-          );
-
-
-          showError(
-            "Web App Apps Script tidak dapat diakses."
-          );
-
-
-          statusText.textContent =
-            "Gagal terhubung ke server";
-
-
-          setLoading(false);
-
-
-          cleanupJSONP();
-
-
-        };
-
-
-
-      /*
-       * Timeout
-       */
-
-      activeTimeout =
-        setTimeout(
-          function() {
-
-
-            /*
-             * Jika callback masih ada,
-             * berarti respons belum masuk.
-             */
-
-            if (
-              window[
-                callbackName
-              ]
-            ) {
-
-
-              console.error(
-                "JSONP timeout."
-              );
-
-
-              showError(
-                "Server tidak memberikan respons dalam waktu 10 detik."
-              );
-
-
-              statusText.textContent =
-                "Server tidak merespons";
-
-
-              setLoading(false);
-
-
-              cleanupJSONP();
-
-
+          <div class="class">
+            Kelas ${kelas}
+            ${
+              absen
+                ? " • Absen " + absen
+                : ""
             }
+          </div>
+
+          <div class="online">
+            ONLINE
+          </div>
+
+        </div>
+
+      `;
 
 
-          },
-          REQUEST_TIMEOUT
-        );
-
-
-
-      /*
-       * Masukkan script ke halaman
-       */
-
-      document.body.appendChild(
-        script
+      listElement.appendChild(
+        item
       );
 
     }
+  );
+
+}
 
 
+/* =====================================================
+   LOAD DATA
+   ===================================================== */
 
-    /* =====================================================
-       CLEANUP JSONP
-    ===================================================== */
+function loadOnline() {
 
-    function cleanupJSONP() {
+  ambilOnline(
+    function(error, result) {
 
-
-      /*
-       * Hapus timeout
-       */
-
-      if (
-        activeTimeout
-      ) {
-
-        clearTimeout(
-          activeTimeout
-        );
-
-        activeTimeout =
-          null;
-
-      }
+      loadingElement.style.display =
+        "none";
 
 
+      if (error) {
 
-      /*
-       * Hapus script
-       */
-
-      if (
-        activeScript
-      ) {
-
-        try {
-
-          activeScript.remove();
-
-        } catch (error) {
-
-          console.warn(
-            "Gagal menghapus script:",
-            error
-          );
-
-        }
-
-
-        activeScript =
-          null;
-
-      }
-
-
-
-      /*
-       * Hapus callback
-
-       */
-
-      if (
-        activeCallbackName &&
-        window[
-          activeCallbackName
-        ]
-      ) {
-
-        try {
-
-          delete window[
-            activeCallbackName
-          ];
-
-        } catch (error) {
-
-          console.warn(
-            "Gagal menghapus callback:",
-            error
-          );
-
-        }
-
-      }
-
-
-      activeCallbackName =
-        null;
-
-    }
-
-
-
-    /* =====================================================
-       RENDER STUDENTS
-    ===================================================== */
-
-    function renderStudents(
-      students
-    ) {
-
-
-      /*
-       * Bersihkan tabel
-       */
-
-      studentTableBody.innerHTML =
-        "";
-
-
-
-      /*
-       * Tidak ada siswa
-       */
-
-      if (
-        !students ||
-        students.length === 0
-      ) {
-
-
-        tableWrapper.style.display =
-          "none";
-
-
-        empty.classList.add(
-          "show"
+        console.error(
+          error
         );
 
 
-        statusText.textContent =
-          "🟢 Tidak ada siswa online";
+        errorElement.style.display =
+          "block";
+
+
+        errorElement.className =
+          "error";
+
+
+        errorElement.textContent =
+          "Gagal mengambil data siswa online. Mencoba lagi otomatis...";
 
 
         return;
-
       }
 
+
+      errorElement.style.display =
+        "none";
+
+
+      console.log(
+        "Respons online:",
+        result
+      );
+
+
+      if (
+        !result ||
+        !result.success
+      ) {
+
+        errorElement.style.display =
+          "block";
+
+
+        errorElement.className =
+          "error";
+
+
+        errorElement.textContent =
+          result?.message ||
+          "Data online tidak dapat dibaca.";
+
+
+        return;
+      }
 
 
       /*
-       * Ada siswa
+       * Selalu gunakan seluruh array
+       * dari server.
        */
-
-      empty.classList.remove(
-        "show"
-      );
-
-
-      tableWrapper.style.display =
-        "block";
-
-
-      statusText.textContent =
-        "🟢 " +
-        students.length +
-        " siswa sedang online";
-
-
-
-      /*
-       * Buat baris
-       */
-
-      students.forEach(
-        function(
-          student,
-          index
-        ) {
-
-
-          const row =
-            document.createElement(
-              "tr"
-            );
-
-
-
-          /*
-           * Data siswa
-           */
-
-          const nama =
-            student.nama ||
-            "-";
-
-
-          const kelas =
-            student.kelas ||
-            "-";
-
-
-          const nomorAbsen =
-            student.nomorAbsen ||
-            student.absen ||
-            "-";
-
-
-          const halaman =
-            student.halaman ||
-            "-";
-
-
-          const status =
-            student.status ||
-            "Online";
-
-
-
-          /*
-           * Nomor
-           */
-
-          const cellNo =
-            document.createElement(
-              "td"
-            );
-
-
-          cellNo.textContent =
-            index + 1;
-
-
-
-          /*
-           * Nama
-           */
-
-          const cellNama =
-            document.createElement(
-              "td"
-            );
-
-
-          const namaStrong =
-            document.createElement(
-              "strong"
-            );
-
-
-          namaStrong.textContent =
-            nama;
-
-
-          cellNama.appendChild(
-            namaStrong
-          );
-
-
-
-          /*
-           * Kelas
-           */
-
-          const cellKelas =
-            document.createElement(
-              "td"
-            );
-
-
-          cellKelas.textContent =
-            kelas;
-
-
-
-          /*
-           * Absen
-           */
-
-          const cellAbsen =
-            document.createElement(
-              "td"
-            );
-
-
-          cellAbsen.textContent =
-            nomorAbsen;
-
-
-
-          /*
-           * Halaman
-           */
-
-          const cellHalaman =
-            document.createElement(
-              "td"
-            );
-
-
-          cellHalaman.textContent =
-            halaman;
-
-
-
-          /*
-           * Status
-           */
-
-          const cellStatus =
-            document.createElement(
-              "td"
-            );
-
-
-          const badge =
-            document.createElement(
-              "span"
-            );
-
-
-          badge.className =
-            "badge badge-online";
-
-
-          const dot =
-            document.createElement(
-              "span"
-            );
-
-
-          dot.className =
-            "dot";
-
-
-          badge.appendChild(
-            dot
-          );
-
-
-          const statusTextNode =
-            document.createTextNode(
-              " " + status
-            );
-
-
-          badge.appendChild(
-            statusTextNode
-          );
-
-
-          cellStatus.appendChild(
-            badge
-          );
-
-
-
-          /*
-           * Masukkan semua cell
-           */
-
-          row.appendChild(
-            cellNo
-          );
-
-
-          row.appendChild(
-            cellNama
-          );
-
-
-          row.appendChild(
-            cellKelas
-          );
-
-
-          row.appendChild(
-            cellAbsen
-          );
-
-
-          row.appendChild(
-            cellHalaman
-          );
-
-
-          row.appendChild(
-            cellStatus
-          );
-
-
-
-          /*
-           * Masukkan baris
-           */
-
-          studentTableBody.appendChild(
-            row
-          );
-
-        }
+      const students =
+        Array.isArray(
+          result.students
+        )
+          ? result.students
+          : [];
+
+
+      tampilkanSiswa(
+        students
       );
 
     }
+  );
 
+}
 
 
-    /* =====================================================
-       LOADING
-    ===================================================== */
+/* =====================================================
+   LOAD PERTAMA
+   ===================================================== */
 
-    function setLoading(
-      show
-    ) {
+loadOnline();
 
 
-      if (show) {
+/* =====================================================
+   REFRESH OTOMATIS
+   ===================================================== */
 
+setInterval(
+  function() {
 
-        loading.classList.add(
-          "show"
-        );
+    loadOnline();
 
+  },
+  10000
+);
 
-        refreshBtn.disabled =
-          true;
-
-
-      } else {
-
-
-        loading.classList.remove(
-          "show"
-        );
-
-
-        refreshBtn.disabled =
-          false;
-
-
-      }
-
-    }
-
-
-
-    /* =====================================================
-       ERROR
-    ===================================================== */
-
-    function showError(
-      message
-    ) {
-
-
-      errorBox.classList.add(
-        "show"
-      );
-
-
-      debugText.textContent =
-        "Detail: " +
-        message;
-
-    }
-
-
-
-    function hideError() {
-
-
-      errorBox.classList.remove(
-        "show"
-      );
-
-
-      debugText.textContent =
-        "";
-
-    }
-
-
-
-    /* =====================================================
-       UPDATE WAKTU
-    ===================================================== */
-
-    function updateLastUpdate() {
-
-
-      const now =
-        new Date();
-
-
-
-      lastUpdate.textContent =
-        "Terakhir diperbarui: " +
-        now.toLocaleTimeString(
-          "id-ID",
-          {
-            hour:
-              "2-digit",
-
-            minute:
-              "2-digit",
-
-            second:
-              "2-digit"
-          }
-        );
-
-    }
-
-
-
-    /* =====================================================
-       REFRESH BUTTON
-    ===================================================== */
-
-    refreshBtn.addEventListener(
-      "click",
-      function() {
-
-        loadData();
-
-      }
-    );
-
-
-
-    /* =====================================================
-       LOAD PERTAMA
-    ===================================================== */
-
-    loadData();
-
-
-
-    /* =====================================================
-       AUTO REFRESH 15 DETIK
-    ===================================================== */
-
-    setInterval(
-      function() {
-
-
-        /*
-         * Hanya refresh ketika tab aktif
-         */
-
-        if (
-          document.visibilityState ===
-          "visible"
-        ) {
-
-          loadData();
-
-        }
-
-      },
-      REFRESH_INTERVAL
-    );
-
-
-
-    /* =====================================================
-       KETIKA TAB KEMBALI AKTIF
-    ===================================================== */
-
-    document.addEventListener(
-      "visibilitychange",
-      function() {
-
-
-        if (
-          document.visibilityState ===
-          "visible"
-        ) {
-
-          loadData();
-
-        }
-
-      }
-    );
-
-
-  </script>
-
+</script>
 
 </body>
-
 </html>

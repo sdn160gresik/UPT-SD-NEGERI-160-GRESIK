@@ -2664,10 +2664,14 @@ async function checkSession(){
 
 
 /* =====================================================
-   KIRIM HEARTBEAT
+   KIRIM HEARTBEAT - DEBUG
 ===================================================== */
 
 async function sendHeartbeat(){
+
+    /* -------------------------------------------------
+       Jangan kirim heartbeat ketika logout/redirect
+    ------------------------------------------------- */
 
     if(
         sedangLogout ||
@@ -2679,15 +2683,28 @@ async function sendHeartbeat(){
     }
 
 
+    /* -------------------------------------------------
+       Ambil data login
+    ------------------------------------------------- */
+
     const loginData =
         getLoginData();
 
+
+    /* -------------------------------------------------
+       Pastikan data login lengkap
+    ------------------------------------------------- */
 
     if(
         !loginDataIsComplete(
             loginData
         )
     ){
+
+        console.warn(
+            "Heartbeat dihentikan: data login tidak lengkap.",
+            loginData
+        );
 
         redirectKeIdentitas(
             "login"
@@ -2698,15 +2715,19 @@ async function sendHeartbeat(){
     }
 
 
-    /*
-       Cek umur sesi lokal.
-    */
+    /* -------------------------------------------------
+       Cek umur sesi lokal maksimal 24 jam
+    ------------------------------------------------- */
 
     if(
         clientSessionExpired(
             loginData
         )
     ){
+
+        console.warn(
+            "Heartbeat dihentikan: sesi lokal sudah expired."
+        );
 
         redirectKeIdentitas(
             "expired"
@@ -2717,13 +2738,17 @@ async function sendHeartbeat(){
     }
 
 
+    /* -------------------------------------------------
+       Waktu sekarang
+    ------------------------------------------------- */
+
     const now =
         Date.now();
 
 
-    /*
-       Hindari request terlalu rapat.
-    */
+    /* -------------------------------------------------
+       Hindari heartbeat terlalu rapat
+    ------------------------------------------------- */
 
     if(
         now -
@@ -2740,11 +2765,64 @@ async function sendHeartbeat(){
         now;
 
 
+    /* -------------------------------------------------
+       Tampilkan status online
+    ------------------------------------------------- */
+
     setStatusOnline(
         true,
         "🟢 Online"
     );
 
+
+    /* =================================================
+       DEBUG - DATA SEBELUM DIKIRIM
+    ================================================= */
+
+    console.log(
+        "========================================"
+    );
+
+    console.log(
+        "📡 MENGIRIM HEARTBEAT"
+    );
+
+    console.log(
+        "🕐 Waktu:",
+        new Date().toLocaleTimeString()
+    );
+
+    console.log(
+        "🆔 Session ID:",
+        loginData.sessionId
+    );
+
+    console.log(
+        "👤 Nama:",
+        loginData.nama
+    );
+
+    console.log(
+        "🏫 Kelas:",
+        loginData.kelas
+    );
+
+    console.log(
+        "🔢 Absen:",
+        loginData.nomorAbsen ||
+        loginData.absen ||
+        "-"
+    );
+
+    console.log(
+        "📄 Halaman:",
+        HALAMAN_UTAMA
+    );
+
+
+    /* =================================================
+       KIRIM REQUEST KE SERVER
+    ================================================= */
 
     try{
 
@@ -2778,6 +2856,98 @@ async function sendHeartbeat(){
             );
 
 
+        /* =================================================
+           DEBUG - RESPONS SERVER
+        ================================================= */
+
+        console.log(
+            "📥 RESPONS SERVER HEARTBEAT:",
+            result
+        );
+
+        console.log(
+            "✅ Success:",
+            result &&
+            result.success
+        );
+
+        console.log(
+            "📊 Status:",
+            result &&
+            result.status
+        );
+
+        console.log(
+            "📝 Message:",
+            result &&
+            result.message
+        );
+
+
+        /* =================================================
+           DEBUG - DATA SESSION DARI SERVER
+        ================================================= */
+
+        if(
+            result &&
+            result.session
+        ){
+
+            console.log(
+                "----------------------------------------"
+            );
+
+            console.log(
+                "🆔 Session ID SERVER:",
+                result.session.sessionId
+            );
+
+            console.log(
+                "👤 Nama SERVER:",
+                result.session.nama
+            );
+
+            console.log(
+                "🏫 Kelas SERVER:",
+                result.session.kelas
+            );
+
+            console.log(
+                "🔢 Absen SERVER:",
+                result.session.nomorAbsen
+            );
+
+            console.log(
+                "📄 Halaman SERVER:",
+                result.session.halaman
+            );
+
+            console.log(
+                "🕐 Login At SERVER:",
+                result.session.loginAt
+            );
+
+            console.log(
+                "🕐 Last Seen SERVER:",
+                result.session.lastSeen
+            );
+
+            console.log(
+                "🟢 Status SERVER:",
+                result.session.status
+            );
+
+            console.log(
+                "----------------------------------------"
+            );
+
+        }
+
+
+        /* =================================================
+           CEK RESPONS SERVER
+        ================================================= */
+
         if(
             !result ||
             result.success !== true
@@ -2787,21 +2957,44 @@ async function sendHeartbeat(){
                 String(
                     result &&
                     result.status
-                    || ""
+                    ||
+                    ""
                 ).toLowerCase();
 
 
-            /*
-               Hanya status sesi invalid/
-               expired yang menyebabkan
-               logout otomatis.
-            */
+            console.error(
+                "❌ HEARTBEAT TIDAK BERHASIL"
+            );
+
+            console.error(
+                "Status:",
+                status
+            );
+
+            console.error(
+                "Respons:",
+                result
+            );
+
+            console.error(
+                "Session ID yang dikirim:",
+                loginData.sessionId
+            );
+
+
+            /* ---------------------------------------------
+               Jika session benar-benar sudah tidak ada
+            --------------------------------------------- */
 
             if(
                 status === "expired" ||
                 status === "not_logged_in" ||
                 status === "invalid_session"
             ){
+
+                console.error(
+                    "🚨 SESSION TIDAK VALID / EXPIRED"
+                );
 
                 redirectKeIdentitas(
                     "expired"
@@ -2812,9 +3005,17 @@ async function sendHeartbeat(){
             }
 
 
+            /* ---------------------------------------------
+               Error lain tidak langsung logout
+            --------------------------------------------- */
+
             setStatusOnline(
                 true,
                 "🟢 Online"
+            );
+
+            console.log(
+                "========================================"
             );
 
             return;
@@ -2822,10 +3023,9 @@ async function sendHeartbeat(){
         }
 
 
-        /*
-           Simpan data sesi terbaru
-           dari server.
-        */
+        /* =================================================
+           SIMPAN DATA SESSION TERBARU DARI SERVER
+        ================================================= */
 
         if(
             result.session
@@ -2839,10 +3039,55 @@ async function sendHeartbeat(){
                 );
 
 
+            /* ---------------------------------------------
+               Periksa Session ID
+            --------------------------------------------- */
+
+            console.log(
+                "🔍 SESSION ID SEBELUM:",
+                loginData.sessionId
+            );
+
+            console.log(
+                "🔍 SESSION ID SESUDAH:",
+                updated.sessionId
+            );
+
+
+            /* ---------------------------------------------
+               Periksa apakah Session ID berubah
+            --------------------------------------------- */
+
+            if(
+                loginData.sessionId !==
+                updated.sessionId
+            ){
+
+                console.warn(
+                    "⚠️ PERINGATAN: SESSION ID BERUBAH!"
+                );
+
+            }else{
+
+                console.log(
+                    "✅ Session ID tetap sama."
+                );
+
+            }
+
+
+            /* ---------------------------------------------
+               Simpan session terbaru
+            --------------------------------------------- */
+
             saveLoginData(
                 updated
             );
 
+
+            /* ---------------------------------------------
+               Perbarui tampilan identitas
+            --------------------------------------------- */
 
             tampilkanDataSiswa(
                 updated
@@ -2851,34 +3096,64 @@ async function sendHeartbeat(){
         }
 
 
+        /* =================================================
+           SET STATUS ONLINE
+        ================================================= */
+
         setStatusOnline(
             true,
             "🟢 Online"
         );
 
 
+        /* =================================================
+           LOG HEARTBEAT BERHASIL
+        ================================================= */
+
         console.log(
-            "Heartbeat berhasil:",
+            "🟢 HEARTBEAT BERHASIL:",
             new Date().toLocaleTimeString()
         );
 
+        console.log(
+            "========================================"
+        );
+
+
     }catch(error){
 
-        console.log(
-            "Heartbeat gagal:",
+        /* =================================================
+           ERROR REQUEST / INTERNET / JSONP
+        ================================================= */
+
+        console.error(
+            "❌ HEARTBEAT GAGAL:"
+        );
+
+        console.error(
             error
         );
 
 
-        /*
-           Jangan langsung logout jika
-           hanya koneksi internet yang
-           bermasalah.
-        */
+        console.error(
+            "Session ID saat error:",
+            loginData.sessionId
+        );
+
+
+        /* -------------------------------------------------
+           Jangan langsung logout hanya karena
+           koneksi/API sementara bermasalah
+        ------------------------------------------------- */
 
         setStatusOnline(
             true,
             "🟢 Online"
+        );
+
+
+        console.log(
+            "========================================"
         );
 
     }

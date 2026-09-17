@@ -509,305 +509,14 @@ nav a:hover{
 
 
 /* =====================================================
-   BAGIAN SISWA ONLINE
-   TETAP AKTIF
-   TIDAK DITAMPILKAN DI HALAMAN
+   KOMPONEN ONLINE
+   TIDAK DITAMPILKAN
+   HEARTBEAT TETAP BERJALAN VIA JAVASCRIPT
 ===================================================== */
 
 #daftarSiswaAktif{
 
-    width:100%;
-
-    max-width:700px;
-
-    height:160px;
-
-    margin:
-        20px
-        auto;
-
-    padding:10px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            .92
-        );
-
-    border-radius:16px;
-
-    box-shadow:
-        0 5px 15px
-        rgba(0,0,0,.20);
-
-    overflow:hidden;
-
-    /*
-       Tetap aktif untuk sistem,
-       tetapi tidak terlihat oleh pengguna.
-    */
-
     display:none !important;
-
-}
-
-
-/* =====================================================
-   JUMLAH SISWA ONLINE
-   TETAP AKTIF
-===================================================== */
-
-.jumlah-siswa-online{
-
-    position:relative;
-
-    z-index:2;
-
-    background:
-        linear-gradient(
-            45deg,
-            #0288d1,
-            #7b1fa2
-        );
-
-    color:#fff;
-
-    padding:
-        9px
-        14px;
-
-    border-radius:10px;
-
-    font-weight:700;
-
-    margin-bottom:8px;
-
-    text-align:center;
-
-    box-shadow:
-        0 3px 8px
-        rgba(0,0,0,.15);
-
-}
-
-
-/* =====================================================
-   PEMBUNGKUS DAFTAR SISWA
-   TETAP AKTIF
-===================================================== */
-
-.daftar-siswa-scroll{
-
-    height:88px;
-
-    overflow-y:auto;
-
-    overflow-x:hidden;
-
-    padding-right:4px;
-
-}
-
-
-/* =====================================================
-   ITEM SISWA
-   TETAP AKTIF
-===================================================== */
-
-.siswa-online-item{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    background:
-        rgba(
-            248,
-            251,
-            255,
-            .98
-        );
-
-    color:#333;
-
-    padding:
-        8px
-        10px;
-
-    margin-bottom:6px;
-
-    border-radius:10px;
-
-    border:
-        1px
-        solid
-        rgba(
-            2,
-            136,
-            209,
-            .12
-        );
-
-}
-
-
-/* =====================================================
-   STATUS ONLINE
-   TETAP AKTIF
-===================================================== */
-
-.status-online{
-
-    font-size:18px;
-
-    flex-shrink:0;
-
-}
-
-
-/* =====================================================
-   INFORMASI SISWA
-   TETAP AKTIF
-===================================================== */
-
-.siswa-info{
-
-    flex:1;
-
-    min-width:0;
-
-}
-
-
-/* =====================================================
-   NAMA SISWA
-   TETAP AKTIF
-===================================================== */
-
-.siswa-nama{
-
-    font-weight:700;
-
-    color:#0288d1;
-
-    font-size:.9rem;
-
-}
-
-
-/* =====================================================
-   STATUS AKTIVITAS
-   TETAP AKTIF
-===================================================== */
-
-.siswa-status{
-
-    font-size:.72rem;
-
-    color:#7b1fa2;
-
-    font-weight:600;
-
-    margin-top:1px;
-
-}
-
-
-/* =====================================================
-   HALAMAN
-   TETAP AKTIF
-===================================================== */
-
-.siswa-halaman{
-
-    font-size:.72rem;
-
-    color:#555;
-
-    margin-top:1px;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-}
-
-
-/* =====================================================
-   WAKTU
-   TETAP AKTIF
-===================================================== */
-
-.siswa-waktu{
-
-    font-size:.65rem;
-
-    color:#78909c;
-
-    margin-top:1px;
-
-}
-
-
-/* =====================================================
-   KOSONG
-   TETAP AKTIF
-===================================================== */
-
-.siswa-kosong{
-
-    background:#fff;
-
-    color:#555;
-
-    padding:12px;
-
-    border-radius:10px;
-
-    text-align:center;
-
-}
-
-
-/* =====================================================
-   SCROLLBAR
-   TETAP AKTIF
-===================================================== */
-
-.daftar-siswa-scroll::-webkit-scrollbar{
-
-    width:6px;
-
-}
-
-
-.daftar-siswa-scroll::-webkit-scrollbar-track{
-
-    background:#eef7fb;
-
-    border-radius:10px;
-
-}
-
-
-.daftar-siswa-scroll::-webkit-scrollbar-thumb{
-
-    background:#0288d1;
-
-    border-radius:10px;
-
-}
-
-
-.daftar-siswa-scroll::-webkit-scrollbar-thumb:hover{
-
-    background:#7b1fa2;
 
 }
 
@@ -952,30 +661,9 @@ audio{
     }
 
 
-    /*
-       Komponen online tetap aktif
-       tetapi tetap tidak ditampilkan.
-    */
-
     #daftarSiswaAktif{
 
         display:none !important;
-
-        width:
-            calc(100% - 30px);
-
-        height:150px;
-
-        margin:
-            15px
-            auto;
-
-    }
-
-
-    .daftar-siswa-scroll{
-
-        height:82px;
 
     }
 
@@ -1513,35 +1201,18 @@ audio{
 
 
 <!-- =====================================================
-     DAFTAR SISWA ONLINE
+     KOMPONEN ONLINE
      
-     KOMPONEN TETAP ADA DAN TETAP AKTIF.
-     HANYA TIDAK DITAMPILKAN PADA HALAMAN.
+     TIDAK DITAMPILKAN.
+     
+     SISTEM HEARTBEAT DI JAVASCRIPT
+     TETAP BERJALAN.
 ===================================================== -->
 
-<section id="daftarSiswaAktif">
-
-    <div class="jumlah-siswa-online">
-
-        🟢 Siswa Sedang Online
-
-        <span id="jumlahOnline">
-            0 siswa
-        </span>
-
-    </div>
-
-
-    <div
-        class="daftar-siswa-scroll"
-        id="listSiswaOnline"
-    >
-
-        <div class="siswa-kosong">
-            Memuat data siswa yang sedang online...
-        </div>
-
-    </div>
+<section
+    id="daftarSiswaAktif"
+    aria-hidden="true"
+>
 
 </section>
 
@@ -1587,8 +1258,7 @@ audio{
 <script>
 
 /* =====================================================
-   KONFIGURASI API ONLINE SISWA
-   TETAP AKTIF
+   KONFIGURASI API
 ===================================================== */
 
 const API_URL =
@@ -1597,7 +1267,6 @@ const API_URL =
 
 /* =====================================================
    IDENTITAS HALAMAN
-   TETAP AKTIF
 ===================================================== */
 
 const HALAMAN_UTAMA =
@@ -1605,7 +1274,7 @@ const HALAMAN_UTAMA =
 
 
 /* =====================================================
-   AUDIO TOMBOL
+   AUDIO
 ===================================================== */
 
 const buttonSound =
@@ -1622,14 +1291,12 @@ function playButtonSound(){
 
     }
 
-
     try{
 
         buttonSound.currentTime = 0;
 
         const promise =
             buttonSound.play();
-
 
         if(
             promise !== undefined
@@ -1654,7 +1321,7 @@ function playButtonSound(){
 
 
 /* =====================================================
-   AUDIO SAAT MEMBUKA MENU
+   AUDIO MENU
 ===================================================== */
 
 document
@@ -1678,8 +1345,7 @@ document
 
 
 /* =====================================================
-   MEMBACA IDENTITAS SISWA
-   TETAP AKTIF
+   MEMBACA STORAGE
 ===================================================== */
 
 function getStorageValue(keys){
@@ -1722,7 +1388,7 @@ function getStorageValue(keys){
 
             }catch(error){
 
-                // Abaikan storage yang tidak tersedia.
+                // Storage tidak tersedia.
 
             }
 
@@ -1735,6 +1401,10 @@ function getStorageValue(keys){
 
 }
 
+
+/* =====================================================
+   MEMBACA PARAMETER URL
+===================================================== */
 
 function getUrlParameter(names){
 
@@ -1772,6 +1442,10 @@ function getUrlParameter(names){
 
 }
 
+
+/* =====================================================
+   IDENTITAS SISWA
+===================================================== */
 
 function getStudentIdentity(){
 
@@ -1826,11 +1500,14 @@ function getStudentIdentity(){
 
     return {
 
-        nama: nama,
+        nama:
+            nama,
 
-        kelas: kelas,
+        kelas:
+            kelas,
 
-        absen: absen
+        absen:
+            absen
 
     };
 
@@ -1838,17 +1515,16 @@ function getStudentIdentity(){
 
 
 /* =====================================================
-   CEK IDENTITAS
+   VALIDASI IDENTITAS
 ===================================================== */
 
 function identityIsComplete(identity){
 
     return Boolean(
 
+        identity &&
         identity.nama &&
-
         identity.kelas &&
-
         identity.absen
 
     );
@@ -1857,14 +1533,19 @@ function identityIsComplete(identity){
 
 
 /* =====================================================
-   KIRIM HEARTBEAT SISWA
-   TETAP AKTIF
+   HEARTBEAT
 ===================================================== */
 
-let heartbeatTimer = null;
+let heartbeatTimer =
+    null;
 
-let lastHeartbeat = 0;
+let lastHeartbeat =
+    0;
 
+
+/* =====================================================
+   KIRIM HEARTBEAT
+===================================================== */
 
 async function sendHeartbeat(){
 
@@ -1879,23 +1560,7 @@ async function sendHeartbeat(){
     ){
 
         console.log(
-            "Identitas siswa belum tersedia."
-        );
-
-        return;
-
-    }
-
-
-    if(
-        !API_URL ||
-        API_URL.indexOf(
-            "GANTI_DENGAN"
-        ) !== -1
-    ){
-
-        console.log(
-            "API_URL belum diatur."
+            "Heartbeat ditunda: identitas siswa belum lengkap."
         );
 
         return;
@@ -1908,7 +1573,9 @@ async function sendHeartbeat(){
 
 
     if(
-        now - lastHeartbeat < 5000
+        now -
+        lastHeartbeat <
+        5000
     ){
 
         return;
@@ -1921,52 +1588,101 @@ async function sendHeartbeat(){
 
 
     const params =
-        new URLSearchParams({
+        new URLSearchParams();
 
-            action:
-                "heartbeat",
 
-            nama:
-                identity.nama,
+    params.set(
+        "action",
+        "heartbeat"
+    );
 
-            kelas:
-                identity.kelas,
 
-            nomorAbsen:
-                identity.absen,
+    params.set(
+        "nama",
+        identity.nama
+    );
 
-            halaman:
-                HALAMAN_UTAMA,
 
-            sumber:
-                "Identitas Siswa Petualangan Kelas 5"
+    params.set(
+        "kelas",
+        identity.kelas
+    );
 
-        });
+
+    params.set(
+        "nomorAbsen",
+        identity.absen
+    );
+
+
+    params.set(
+        "halaman",
+        HALAMAN_UTAMA
+    );
+
+
+    params.set(
+        "sumber",
+        "Identitas Siswa Petualangan Kelas 5"
+    );
+
+
+    const url =
+        API_URL +
+        "?" +
+        params.toString();
 
 
     try{
 
-        await fetch(
+        /*
+         * Menggunakan fetch GET.
+         * Apps Script sudah terbukti menerima
+         * request heartbeat dengan metode GET.
+         */
 
-            API_URL +
-            "?" +
-            params.toString(),
+        const response =
+            await fetch(
+                url,
+                {
+                    method:
+                        "GET",
 
-            {
+                    mode:
+                        "cors",
 
-                method:"GET",
+                    cache:
+                        "no-store"
+                }
+            );
 
-                mode:"cors",
 
-                cache:"no-store"
+        if(
+            !response.ok
+        ){
 
-            }
+            throw new Error(
+                "HTTP " +
+                response.status
+            );
 
-        );
+        }
+
+
+        /*
+         * Baca response sebagai text.
+         * Tidak wajib JSON agar heartbeat
+         * tetap dianggap berhasil meskipun
+         * browser memperlakukan redirect Apps Script.
+         */
+
+        const text =
+            await response.text();
 
 
         console.log(
-            "Heartbeat siswa berhasil dikirim."
+            "Heartbeat berhasil dikirim:",
+            text
         );
 
 
@@ -1984,10 +1700,10 @@ async function sendHeartbeat(){
 
 /* =====================================================
    AKTIVITAS SISWA
-   TETAP AKTIF
 ===================================================== */
 
-let activityDebounce = null;
+let activityDebounce =
+    null;
 
 
 function registerActivity(){
@@ -2035,9 +1751,7 @@ activityEvents.forEach(
             registerActivity,
 
             {
-
                 passive:true
-
             }
 
         );
@@ -2047,7 +1761,7 @@ activityEvents.forEach(
 
 
 /* =====================================================
-   SAAT TAB AKTIF KEMBALI
+   TAB KEMBALI AKTIF
 ===================================================== */
 
 document.addEventListener(
@@ -2061,7 +1775,9 @@ document.addEventListener(
             "visible"
         ){
 
-            registerActivity();
+            lastHeartbeat = 0;
+
+            sendHeartbeat();
 
         }
 
@@ -2070,13 +1786,19 @@ document.addEventListener(
 );
 
 
+/* =====================================================
+   WINDOW FOCUS
+===================================================== */
+
 window.addEventListener(
 
     "focus",
 
     function(){
 
-        registerActivity();
+        lastHeartbeat = 0;
+
+        sendHeartbeat();
 
     }
 
@@ -2085,7 +1807,6 @@ window.addEventListener(
 
 /* =====================================================
    HEARTBEAT BERKALA
-   TETAP AKTIF
 ===================================================== */
 
 function startHeartbeat(){
@@ -2101,8 +1822,16 @@ function startHeartbeat(){
     }
 
 
+    /*
+     * Kirim langsung saat halaman dibuka.
+     */
+
     sendHeartbeat();
 
+
+    /*
+     * Kirim ulang setiap 30 detik.
+     */
 
     heartbeatTimer =
         setInterval(
@@ -2128,328 +1857,22 @@ function startHeartbeat(){
 
 
 /* =====================================================
-   MULAI TRACKING
-   TETAP AKTIF
+   MULAI SISTEM ONLINE
 ===================================================== */
 
 startHeartbeat();
 
 
 /* =====================================================
-   DAFTAR SISWA ONLINE
-   TETAP AKTIF
+   PENTING:
+   HALAMAN UTAMA TIDAK LAGI MEMANGGIL
+   ?action=online
+
+   Karena daftar siswa online hanya
+   diperlukan pada online/online.html.
+
+   Heartbeat tetap aktif.
 ===================================================== */
-
-const listSiswaOnline =
-    document.getElementById(
-        "listSiswaOnline"
-    );
-
-
-const jumlahOnline =
-    document.getElementById(
-        "jumlahOnline"
-    );
-
-
-function escapeHtml(value){
-
-    return String(value)
-
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
-
-}
-
-
-/* =====================================================
-   RENDER SISWA ONLINE
-   TETAP AKTIF
-===================================================== */
-
-function renderSiswaOnline(data){
-
-    if(
-        !listSiswaOnline ||
-        !jumlahOnline
-    ){
-
-        return;
-
-    }
-
-
-    if(
-        !data ||
-        !Array.isArray(
-            data.students
-        ) ||
-        data.students.length === 0
-    ){
-
-        jumlahOnline.textContent =
-            "0 siswa";
-
-
-        listSiswaOnline.innerHTML = `
-
-            <div class="siswa-kosong">
-
-                Belum ada siswa yang sedang online.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    const students =
-        data.students;
-
-
-    jumlahOnline.textContent =
-        students.length +
-        " siswa";
-
-
-    listSiswaOnline.innerHTML =
-
-        students
-
-            .map(
-
-                function(student){
-
-                    const nama =
-                        escapeHtml(
-                            student.nama ||
-                            "-"
-                        );
-
-
-                    const kelas =
-                        escapeHtml(
-                            student.kelas ||
-                            "-"
-                        );
-
-
-                    const halaman =
-                        escapeHtml(
-                            student.halaman ||
-                            "Belajar"
-                        );
-
-
-                    return `
-
-                        <div
-                            class="siswa-online-item"
-                        >
-
-                            <div
-                                class="status-online"
-                            >
-                                🟢
-                            </div>
-
-
-                            <div
-                                class="siswa-info"
-                            >
-
-                                <div
-                                    class="siswa-nama"
-                                >
-                                    ${nama}
-                                </div>
-
-
-                                <div
-                                    class="siswa-status"
-                                >
-                                    Kelas ${kelas}
-                                </div>
-
-
-                                <div
-                                    class="siswa-halaman"
-                                >
-                                    📖 ${halaman}
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    `;
-
-                }
-
-            )
-
-            .join("");
-
-}
-
-
-/* =====================================================
-   MEMUAT SISWA ONLINE
-   TETAP AKTIF
-===================================================== */
-
-async function loadOnlineStudents(){
-
-    if(
-        !API_URL ||
-        API_URL.indexOf(
-            "GANTI_DENGAN"
-        ) !== -1
-    ){
-
-        if(
-            listSiswaOnline
-        ){
-
-            listSiswaOnline.innerHTML = `
-
-                <div class="siswa-kosong">
-
-                    Sistem online siswa belum terhubung.
-
-                </div>
-
-            `;
-
-        }
-
-        return;
-
-    }
-
-
-    try{
-
-        const response =
-            await fetch(
-
-                API_URL +
-                "?action=online&t=" +
-                Date.now(),
-
-                {
-
-                    method:"GET",
-
-                    mode:"cors",
-
-                    cache:"no-store"
-
-                }
-
-            );
-
-
-        if(
-            !response.ok
-        ){
-
-            throw new Error(
-
-                "HTTP " +
-                response.status
-
-            );
-
-        }
-
-
-        const data =
-            await response.json();
-
-
-        renderSiswaOnline(
-            data
-        );
-
-
-    }catch(error){
-
-        console.log(
-
-            "Gagal mengambil siswa online:",
-
-            error
-
-        );
-
-
-        if(
-            listSiswaOnline
-        ){
-
-            listSiswaOnline.innerHTML = `
-
-                <div class="siswa-kosong">
-
-                    Data siswa online belum dapat dimuat.
-
-                </div>
-
-            `;
-
-        }
-
-    }
-
-}
-
-
-/* =====================================================
-   MUAT SISWA ONLINE
-   TETAP AKTIF
-===================================================== */
-
-loadOnlineStudents();
-
-
-/* =====================================================
-   PERBARUI DAFTAR SETIAP 15 DETIK
-   TETAP AKTIF
-===================================================== */
-
-setInterval(
-
-    loadOnlineStudents,
-
-    15000
-
-);
 
 
 /* =====================================================
@@ -2467,13 +1890,13 @@ console.log(
 );
 
 
-/* =====================================================
-   LOG SISTEM ONLINE
-   TETAP AKTIF
-===================================================== */
+console.log(
+    "Heartbeat siswa aktif."
+);
+
 
 console.log(
-    "Sistem siswa online tetap aktif."
+    "Daftar siswa online disembunyikan dari halaman utama."
 );
 
 </script>

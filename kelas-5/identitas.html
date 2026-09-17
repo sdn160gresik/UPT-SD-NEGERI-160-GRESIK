@@ -1,53 +1,97 @@
 <!DOCTYPE html>
-
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="theme-color"
+    content="#9b4d20"
+>
 
 <title>Identitas Siswa | Petualangan Kelas 5</title>
 
+
 <style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
 :root{
+
     --primary:#9b4d20;
     --primary-dark:#713517;
     --secondary:#e67e22;
     --accent:#f4b942;
+
     --green:#2e8b57;
     --red:#c0392b;
+
     --ink:#4a2c20;
     --muted:#806b61;
+
     --card:#fffdf8;
     --cream:#fff8e8;
+
     --border:#ead7bc;
+
     --shadow:rgba(92,48,24,.16);
+
 }
+
+
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
     box-sizing:border-box;
 }
 
+
 html,
 body{
+
     margin:0;
+
     min-height:100%;
+
 }
 
+
+/* =========================================================
+   BODY
+========================================================= */
+
 body{
-    font-family:"Segoe UI",Arial,sans-serif;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
     color:var(--ink);
 
     background:
+
         radial-gradient(
             circle at 10% 15%,
             rgba(255,255,255,.65) 0 3px,
             transparent 4px
         ),
+
         radial-gradient(
             circle at 90% 25%,
             rgba(255,255,255,.5) 0 3px,
             transparent 4px
         ),
+
         linear-gradient(
             135deg,
             #f7dfb5 0%,
@@ -55,65 +99,114 @@ body{
             #f3d7ad 100%
         );
 
-    background-size:auto,auto,cover;
+    background-size:
+        auto,
+        auto,
+        cover;
+
     min-height:100vh;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     padding:20px;
+
 }
 
+
+/* =========================================================
+   POLA BACKGROUND
+========================================================= */
+
 body::before{
+
     content:"";
+
     position:fixed;
+
     inset:0;
+
     pointer-events:none;
+
     opacity:.18;
 
     background-image:
+
         radial-gradient(
             #fff 1px,
             transparent 1px
         );
 
     background-size:22px 22px;
+
 }
 
+
+/* =========================================================
+   APP
+========================================================= */
+
 .app{
+
     width:100%;
+
     max-width:540px;
+
     margin:auto;
+
     position:relative;
+
     z-index:1;
+
 }
+
 
 /* =========================================================
    KARTU IDENTITAS
 ========================================================= */
 
 .identity-card{
+
     position:relative;
+
     overflow:hidden;
 
-    background:rgba(255,253,248,.98);
+    background:
+        rgba(255,253,248,.98);
 
-    border:1px solid var(--border);
+    border:
+        1px solid var(--border);
+
     border-radius:30px;
 
     box-shadow:
-        0 25px 65px rgba(86,45,20,.22),
-        0 8px 20px rgba(86,45,20,.10);
+
+        0 25px 65px
+        rgba(86,45,20,.22),
+
+        0 8px 20px
+        rgba(86,45,20,.10);
+
 }
 
+
+/* =========================================================
+   GARIS WARNA ATAS
+========================================================= */
+
 .identity-card::before{
+
     content:"";
 
     display:block;
+
     height:9px;
 
     background:
+
         linear-gradient(
             90deg,
             #9b4d20 0%,
@@ -121,88 +214,149 @@ body::before{
             #f4b942 70%,
             #2e8b57 100%
         );
+
 }
 
+
+/* =========================================================
+   HIASAN MAKANAN
+========================================================= */
+
 .identity-card::after{
-    content:"🍜   🍢   🥟   🍚   🍡";
+
+    content:
+        "🍜   🍢   🥟   🍚   🍡";
 
     display:block;
 
     text-align:center;
 
     font-size:23px;
+
     letter-spacing:4px;
 
     padding-top:17px;
+
 }
 
+
 /* =========================================================
-   ISI IDENTITAS
+   ISI KARTU
 ========================================================= */
 
 .identity-content{
-    padding:4px 34px 30px;
+
+    padding:
+        4px
+        34px
+        30px;
+
 }
 
+
+/* =========================================================
+   BADGE SEKOLAH
+========================================================= */
+
 .school-badge{
+
     display:table;
 
-    margin:2px auto 13px;
+    margin:
+        2px auto 13px;
 
-    padding:7px 14px;
+    padding:
+        7px 14px;
 
     border-radius:99px;
 
     background:#f9e6c5;
+
     color:var(--primary-dark);
 
     font-size:12px;
+
     font-weight:900;
 
-    border:1px solid #eed2a5;
+    border:
+        1px solid #eed2a5;
+
 }
 
+
+/* =========================================================
+   ICON
+========================================================= */
+
 .identity-icon{
+
     width:76px;
+
     height:76px;
 
-    margin:0 auto 11px;
+    margin:
+        0 auto 11px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     border-radius:50%;
 
     background:
+
         linear-gradient(
             145deg,
             #fff0c8,
             #f7d994
         );
 
-    border:4px solid #fff;
+    border:
+        4px solid #fff;
 
     box-shadow:
-        0 8px 20px rgba(140,78,27,.15),
-        inset 0 2px 4px rgba(255,255,255,.8);
+
+        0 8px 20px
+        rgba(140,78,27,.15),
+
+        inset 0 2px 4px
+        rgba(255,255,255,.8);
 
     font-size:39px;
+
 }
 
+
+/* =========================================================
+   JUDUL
+========================================================= */
+
 h1{
-    margin:5px 0 7px;
+
+    margin:
+        5px 0 7px;
 
     text-align:center;
 
     color:var(--primary-dark);
 
     font-size:27px;
+
     line-height:1.25;
+
 }
 
+
+/* =========================================================
+   SUBTITLE
+========================================================= */
+
 .subtitle{
-    margin:0 auto 25px;
+
+    margin:
+        0 auto 25px;
 
     max-width:410px;
 
@@ -211,24 +365,36 @@ h1{
     color:var(--muted);
 
     font-size:14px;
+
     line-height:1.6;
+
 }
+
 
 /* =========================================================
    FORM
 ========================================================= */
 
 .form-grid{
+
     display:grid;
+
     grid-template-columns:1fr;
+
     gap:16px;
+
 }
+
 
 .field{
+
     position:relative;
+
 }
 
+
 .field label{
+
     display:block;
 
     margin-bottom:7px;
@@ -236,34 +402,60 @@ h1{
     color:#5c3929;
 
     font-size:14px;
+
     font-weight:800;
+
 }
+
+
+/* =========================================================
+   INPUT WRAP
+========================================================= */
 
 .input-wrap{
+
     position:relative;
+
 }
 
+
 .input-icon{
+
     position:absolute;
 
     left:14px;
+
     top:50%;
 
-    transform:translateY(-50%);
+    transform:
+        translateY(-50%);
 
     font-size:19px;
 
     pointer-events:none;
 
     z-index:2;
+
 }
 
+
+/* =========================================================
+   INPUT
+========================================================= */
+
 input{
+
     width:100%;
 
-    padding:14px 15px 14px 46px;
+    padding:
+        14px
+        15px
+        14px
+        46px;
 
-    border:2px solid #e7d5bb;
+    border:
+        2px solid #e7d5bb;
+
     border-radius:15px;
 
     font-size:16px;
@@ -271,64 +463,94 @@ input{
     outline:none;
 
     background:#fffdfa;
+
     color:var(--ink);
 
     transition:.2s;
 
     font-family:inherit;
+
 }
+
 
 input::placeholder{
+
     color:#b29e90;
+
 }
 
+
 input:focus{
+
     border-color:#d77b35;
 
     background:#fff;
 
     box-shadow:
-        0 0 0 4px rgba(230,126,34,.13),
-        0 5px 15px rgba(120,65,28,.08);
+
+        0 0 0 4px
+        rgba(230,126,34,.13),
+
+        0 5px 15px
+        rgba(120,65,28,.08);
+
 }
 
+
 input:hover{
+
     border-color:#d7ad7d;
+
 }
+
 
 /* =========================================================
    TOMBOL
 ========================================================= */
 
 .action-area{
+
     margin-top:22px;
+
 }
 
+
 .btn{
+
     border:0;
+
     border-radius:16px;
 
-    padding:15px 20px;
+    padding:
+        15px 20px;
 
     font-weight:900;
+
     font-size:16px;
 
     cursor:pointer;
 
     transition:
+
         transform .2s,
+
         box-shadow .2s,
+
         opacity .2s;
 
     font-family:inherit;
+
 }
 
+
 .btn-primary{
+
     width:100%;
 
     color:#fff;
 
     background:
+
         linear-gradient(
             135deg,
             #a95020,
@@ -337,40 +559,63 @@ input:hover{
         );
 
     box-shadow:
-        0 8px 18px rgba(155,77,32,.25);
+
+        0 8px 18px
+        rgba(155,77,32,.25);
+
 }
+
 
 .btn-primary:hover{
-    transform:translateY(-2px);
+
+    transform:
+        translateY(-2px);
 
     box-shadow:
-        0 11px 23px rgba(155,77,32,.32);
+
+        0 11px 23px
+        rgba(155,77,32,.32);
+
 }
+
 
 .btn-primary:active{
-    transform:translateY(0);
+
+    transform:
+        translateY(0);
+
 }
 
+
 .btn-primary:disabled{
+
     opacity:.55;
+
     cursor:not-allowed;
+
     transform:none;
+
 }
+
 
 /* =========================================================
    INFORMASI
 ========================================================= */
 
 .identity-note{
-    margin:19px auto 0;
 
-    padding:11px 14px;
+    margin:
+        19px auto 0;
+
+    padding:
+        11px 14px;
 
     border-radius:13px;
 
     background:#fff5df;
 
-    border:1px dashed #e3c18f;
+    border:
+        1px dashed #e3c18f;
 
     color:#80634f;
 
@@ -379,9 +624,12 @@ input:hover{
     line-height:1.55;
 
     text-align:center;
+
 }
 
+
 .food-decoration{
+
     text-align:center;
 
     margin-top:17px;
@@ -391,13 +639,16 @@ input:hover{
     font-size:12px;
 
     letter-spacing:.3px;
+
 }
+
 
 /* =========================================================
    LOADING
 ========================================================= */
 
 .loading{
+
     display:none;
 
     margin-top:14px;
@@ -407,92 +658,135 @@ input:hover{
     color:var(--primary-dark);
 
     font-size:13px;
+
     font-weight:800;
+
 }
+
 
 .loading.show{
+
     display:block;
+
 }
 
+
 .spinner{
+
     display:inline-block;
 
     width:15px;
+
     height:15px;
 
     margin-right:6px;
 
     vertical-align:-3px;
 
-    border:2px solid #e7c8a0;
-    border-top-color:var(--primary);
+    border:
+        2px solid #e7c8a0;
+
+    border-top-color:
+        var(--primary);
 
     border-radius:50%;
 
-    animation:spin .7s linear infinite;
+    animation:
+        spin .7s linear infinite;
+
 }
 
+
 @keyframes spin{
+
     to{
-        transform:rotate(360deg);
+
+        transform:
+            rotate(360deg);
+
     }
+
 }
+
 
 /* =========================================================
    TOAST
 ========================================================= */
 
 .toast{
+
     position:fixed;
 
     left:50%;
+
     bottom:25px;
 
     transform:
+
         translateX(-50%)
         translateY(15px);
 
-    width:min(92%,430px);
+    width:
+        min(92%,430px);
 
-    padding:13px 18px;
+    padding:
+        13px 18px;
 
     border-radius:14px;
 
     background:#4a2c20;
+
     color:#fff;
 
     text-align:center;
 
     font-size:13px;
+
     font-weight:700;
 
     box-shadow:
-        0 10px 25px rgba(0,0,0,.20);
+
+        0 10px 25px
+        rgba(0,0,0,.20);
 
     z-index:50;
 
     opacity:0;
+
     visibility:hidden;
 
     transition:.25s;
+
 }
 
+
 .toast.show{
+
     opacity:1;
+
     visibility:visible;
 
     transform:
+
         translateX(-50%)
         translateY(0);
+
 }
+
 
 .toast.success{
+
     background:#2e8b57;
+
 }
 
+
 .toast.error{
+
     background:#c0392b;
+
 }
+
 
 /* =========================================================
    RESPONSIVE
@@ -501,244 +795,406 @@ input:hover{
 @media(max-width:600px){
 
     body{
+
         padding:15px;
+
     }
+
 
     .identity-card{
+
         border-radius:25px;
+
     }
 
+
     .identity-content{
+
         padding:
             3px
             22px
             25px;
+
     }
+
 
     .identity-card::after{
+
         font-size:20px;
+
         letter-spacing:2px;
+
     }
+
 
     .identity-icon{
+
         width:68px;
+
         height:68px;
+
         font-size:34px;
+
     }
+
 
     h1{
+
         font-size:23px;
+
     }
+
 
     .subtitle{
+
         font-size:13px;
+
         margin-bottom:21px;
+
     }
 
+
     input{
+
         padding:
             13px
             14px
             13px
             44px;
+
     }
 
+
     .btn-primary{
-        padding:14px 17px;
+
+        padding:
+            14px 17px;
+
     }
+
 }
+
 
 @media(max-width:380px){
 
     body{
+
         padding:10px;
+
     }
 
+
     .identity-content{
+
         padding:
             2px
             17px
             21px;
+
     }
+
 
     .identity-card::after{
+
         font-size:18px;
+
         letter-spacing:1px;
+
     }
+
 
     .identity-icon{
+
         width:62px;
+
         height:62px;
+
         font-size:31px;
+
     }
+
 
     h1{
+
         font-size:21px;
+
     }
+
 
     .subtitle{
+
         font-size:12px;
+
     }
+
 
     .field label{
+
         font-size:13px;
+
     }
+
 
     input{
+
         font-size:15px;
+
     }
 
+
     .btn-primary{
+
         font-size:15px;
+
     }
+
 }
+
 </style>
 
 </head>
 
+
 <body>
+
 
 <div class="app">
 
 <section class="identity-card">
 
-    <div class="identity-content">
 
-        <div class="school-badge">
-            🏫 UPT SDN 160 GRESIK
-        </div>
+<div class="identity-content">
 
-        <div class="identity-icon">
-            🧑‍🎓
-        </div>
 
-        <h1>
-            🌟 Yuk, Kenalkan Dirimu!
-        </h1>
+    <!-- =================================================
+         BADGE SEKOLAH
+    ================================================== -->
 
-        <p class="subtitle">
-            Sebelum memasuki Petualangan Kelas 5,
-            isi identitasmu terlebih dahulu dengan benar.
-        </p>
+    <div class="school-badge">
 
-        <div class="form-grid">
-
-            <!-- NAMA -->
-            <div class="field">
-
-                <label for="nama">
-                    👤 Nama Siswa
-                </label>
-
-                <div class="input-wrap">
-
-                    <span class="input-icon">
-                        👤
-                    </span>
-
-                    <input
-                        id="nama"
-                        type="text"
-                        placeholder="Tulis nama lengkap"
-                        autocomplete="name"
-                        maxlength="100"
-                    >
-
-                </div>
-
-            </div>
-
-            <!-- KELAS -->
-            <div class="field">
-
-                <label for="kelas">
-                    🏫 Kelas
-                </label>
-
-                <div class="input-wrap">
-
-                    <span class="input-icon">
-                        🏫
-                    </span>
-
-                    <input
-                        id="kelas"
-                        type="text"
-                        placeholder="Contoh: V-A"
-                        maxlength="30"
-                    >
-
-                </div>
-
-            </div>
-
-            <!-- ABSEN -->
-            <div class="field">
-
-                <label for="absen">
-                    🔢 Nomor Absen
-                </label>
-
-                <div class="input-wrap">
-
-                    <span class="input-icon">
-                        🔢
-                    </span>
-
-                    <input
-                        id="absen"
-                        type="number"
-                        min="1"
-                        max="100"
-                        placeholder="Masukkan nomor absen"
-                    >
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="action-area">
-
-            <button
-                id="btnLanjut"
-                class="btn btn-primary"
-                type="button"
-                onclick="simpanDanLanjut()"
-            >
-                🚀 Simpan & Lanjutkan
-            </button>
-
-        </div>
-
-        <div
-            id="loading"
-            class="loading"
-        >
-            <span class="spinner"></span>
-            Menyimpan identitas...
-        </div>
-
-        <div class="identity-note">
-            📌 Pastikan nama, kelas, dan nomor absen
-            sudah benar sebelum melanjutkan.
-        </div>
-
-        <div class="food-decoration">
-            🌾 Belajar • Bermain • Menjelajah • Berprestasi 🌾
-        </div>
+        🏫 UPT SDN 160 GRESIK
 
     </div>
+
+
+    <!-- =================================================
+         ICON
+    ================================================== -->
+
+    <div class="identity-icon">
+
+        🧑‍🎓
+
+    </div>
+
+
+    <!-- =================================================
+         JUDUL
+    ================================================== -->
+
+    <h1>
+
+        🌟 Yuk, Kenalkan Dirimu!
+
+    </h1>
+
+
+    <!-- =================================================
+         SUBTITLE
+    ================================================== -->
+
+    <p class="subtitle">
+
+        Sebelum memasuki Petualangan Kelas 5,
+        isi identitasmu terlebih dahulu dengan benar.
+
+    </p>
+
+
+    <!-- =================================================
+         FORM
+    ================================================== -->
+
+    <div class="form-grid">
+
+
+        <!-- NAMA -->
+
+        <div class="field">
+
+            <label for="nama">
+
+                👤 Nama Siswa
+
+            </label>
+
+
+            <div class="input-wrap">
+
+                <span class="input-icon">
+
+                    👤
+
+                </span>
+
+
+                <input
+                    id="nama"
+                    type="text"
+                    placeholder="Tulis nama lengkap"
+                    autocomplete="name"
+                    maxlength="100"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- KELAS -->
+
+        <div class="field">
+
+            <label for="kelas">
+
+                🏫 Kelas
+
+            </label>
+
+
+            <div class="input-wrap">
+
+                <span class="input-icon">
+
+                    🏫
+
+                </span>
+
+
+                <input
+                    id="kelas"
+                    type="text"
+                    placeholder="Contoh: 5A"
+                    maxlength="30"
+                    autocomplete="off"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- ABSEN -->
+
+        <div class="field">
+
+            <label for="absen">
+
+                🔢 Nomor Absen
+
+            </label>
+
+
+            <div class="input-wrap">
+
+                <span class="input-icon">
+
+                    🔢
+
+                </span>
+
+
+                <input
+                    id="absen"
+                    type="number"
+                    min="1"
+                    max="100"
+                    placeholder="Masukkan nomor absen"
+                    inputmode="numeric"
+                >
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         TOMBOL
+    ================================================== -->
+
+    <div class="action-area">
+
+        <button
+            id="btnLanjut"
+            class="btn btn-primary"
+            type="button"
+        >
+
+            🚀 Simpan & Lanjutkan
+
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+         LOADING
+    ================================================== -->
+
+    <div
+        id="loading"
+        class="loading"
+    >
+
+        <span class="spinner"></span>
+
+        Menyimpan identitas...
+
+    </div>
+
+
+    <!-- =================================================
+         CATATAN
+    ================================================== -->
+
+    <div class="identity-note">
+
+        📌 Pastikan nama, kelas, dan nomor absen
+        sudah benar sebelum melanjutkan.
+
+    </div>
+
+
+    <!-- =================================================
+         FOOTER DEKORASI
+    ================================================== -->
+
+    <div class="food-decoration">
+
+        🌾 Belajar • Bermain • Menjelajah • Berprestasi 🌾
+
+    </div>
+
+
+</div>
 
 </section>
 
 </div>
 
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
 <div
     id="toast"
     class="toast"
 ></div>
+
 
 <script>
 
@@ -756,6 +1212,14 @@ const GOOGLE_SCRIPT_URL =
 
 const HALAMAN_TUJUAN =
     "Petualangan-Kelas-5.html";
+
+
+/* =========================================================
+   NAMA KEY STORAGE
+========================================================= */
+
+const STORAGE_KEY =
+    "identitasPetualanganKelas5";
 
 
 /* =========================================================
@@ -779,52 +1243,32 @@ const loading =
 
 
 /* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(value){
-
-    return String(value).replace(
-        /[&<>"']/g,
-        function(char){
-
-            return {
-                "&":"&amp;",
-                "<":"&lt;",
-                ">":"&gt;",
-                '"':"&quot;",
-                "'":"&#039;"
-            }[char];
-
-        }
-    );
-
-}
-
-
-/* =========================================================
    TOAST
 ========================================================= */
 
 function toast(
     message,
-    type="error"
+    type = "error"
 ){
 
     const element =
         document.getElementById("toast");
 
+
     element.textContent =
         message;
+
 
     element.className =
         "toast " +
         type +
         " show";
 
+
     clearTimeout(
         window.toastTimer
     );
+
 
     window.toastTimer =
         setTimeout(
@@ -842,7 +1286,7 @@ function toast(
 
 
 /* =========================================================
-   VALIDASI IDENTITAS
+   AMBIL IDENTITAS DARI FORM
 ========================================================= */
 
 function ambilIdentitas(){
@@ -850,12 +1294,18 @@ function ambilIdentitas(){
     const nama =
         namaInput.value.trim();
 
+
     const kelas =
         kelasInput.value.trim();
+
 
     const absen =
         absenInput.value.trim();
 
+
+    /* -----------------------------------------------------
+       VALIDASI NAMA
+    ----------------------------------------------------- */
 
     if(!nama){
 
@@ -870,6 +1320,10 @@ function ambilIdentitas(){
     }
 
 
+    /* -----------------------------------------------------
+       VALIDASI KELAS
+    ----------------------------------------------------- */
+
     if(!kelas){
 
         toast(
@@ -882,6 +1336,10 @@ function ambilIdentitas(){
 
     }
 
+
+    /* -----------------------------------------------------
+       VALIDASI ABSEN
+    ----------------------------------------------------- */
 
     if(!absen){
 
@@ -900,6 +1358,10 @@ function ambilIdentitas(){
         Number(absen);
 
 
+    /* -----------------------------------------------------
+       VALIDASI ANGKA ABSEN
+    ----------------------------------------------------- */
+
     if(
         !Number.isInteger(nomorAbsen) ||
         nomorAbsen < 1 ||
@@ -917,13 +1379,19 @@ function ambilIdentitas(){
     }
 
 
+    /* -----------------------------------------------------
+       DATA FINAL
+    ----------------------------------------------------- */
+
     return {
 
         nama:nama,
 
         kelas:kelas,
 
-        absen:nomorAbsen
+        absen:nomorAbsen,
+
+        nomorAbsen:nomorAbsen
 
     };
 
@@ -931,7 +1399,173 @@ function ambilIdentitas(){
 
 
 /* =========================================================
-   KIRIM KE GOOGLE SHEETS
+   SIMPAN IDENTITAS KE SESSION STORAGE
+========================================================= */
+
+function simpanSessionStorage(data){
+
+    try{
+
+        /* Data lengkap */
+
+        sessionStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(data)
+        );
+
+
+        /* Key terpisah */
+
+        sessionStorage.setItem(
+            "nama",
+            data.nama
+        );
+
+
+        sessionStorage.setItem(
+            "namaSiswa",
+            data.nama
+        );
+
+
+        sessionStorage.setItem(
+            "kelas",
+            data.kelas
+        );
+
+
+        sessionStorage.setItem(
+            "kelasSiswa",
+            data.kelas
+        );
+
+
+        sessionStorage.setItem(
+            "absen",
+            String(data.absen)
+        );
+
+
+        sessionStorage.setItem(
+            "nomorAbsen",
+            String(data.absen)
+        );
+
+
+        sessionStorage.setItem(
+            "nomor_absen",
+            String(data.absen)
+        );
+
+
+        console.log(
+            "✅ Identitas tersimpan di sessionStorage:",
+            data
+        );
+
+
+        return true;
+
+    }catch(error){
+
+        console.warn(
+            "⚠️ SessionStorage tidak tersedia:",
+            error
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   SIMPAN IDENTITAS KE LOCAL STORAGE
+========================================================= */
+
+function simpanLocalStorage(data){
+
+    try{
+
+        /* Data lengkap */
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(data)
+        );
+
+
+        /* Key terpisah */
+
+        localStorage.setItem(
+            "nama",
+            data.nama
+        );
+
+
+        localStorage.setItem(
+            "namaSiswa",
+            data.nama
+        );
+
+
+        localStorage.setItem(
+            "kelas",
+            data.kelas
+        );
+
+
+        localStorage.setItem(
+            "kelasSiswa",
+            data.kelas
+        );
+
+
+        localStorage.setItem(
+            "absen",
+            String(data.absen)
+        );
+
+
+        localStorage.setItem(
+            "nomorAbsen",
+            String(data.absen)
+        );
+
+
+        localStorage.setItem(
+            "nomor_absen",
+            String(data.absen)
+        );
+
+
+        console.log(
+            "✅ Identitas tersimpan di localStorage:",
+            data
+        );
+
+
+        return true;
+
+    }catch(error){
+
+        console.warn(
+            "⚠️ LocalStorage tidak tersedia:",
+            error
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   KIRIM KE GOOGLE APPS SCRIPT
 ========================================================= */
 
 function kirimKeGoogleSheets(data){
@@ -939,15 +1573,12 @@ function kirimKeGoogleSheets(data){
     return new Promise(
         function(resolve){
 
-            /*
-             * Pastikan URL benar-benar tersedia.
-             */
-
             if(!GOOGLE_SCRIPT_URL){
 
                 console.warn(
                     "URL Google Apps Script belum dipasang."
                 );
+
 
                 resolve({
 
@@ -957,12 +1588,17 @@ function kirimKeGoogleSheets(data){
 
                 });
 
+
                 return;
 
             }
 
 
             try{
+
+                /* -------------------------------------------------
+                   TARGET IFRAME
+                ------------------------------------------------- */
 
                 const iframeName =
                     "googleSheetsIdentityTarget";
@@ -974,11 +1610,6 @@ function kirimKeGoogleSheets(data){
                     );
 
 
-                /*
-                 * Buat iframe tersembunyi
-                 * sebagai target POST.
-                 */
-
                 if(!iframe){
 
                     iframe =
@@ -986,19 +1617,24 @@ function kirimKeGoogleSheets(data){
                             "iframe"
                         );
 
+
                     iframe.id =
                         iframeName;
+
 
                     iframe.name =
                         iframeName;
 
+
                     iframe.style.display =
                         "none";
+
 
                     iframe.setAttribute(
                         "aria-hidden",
                         "true"
                     );
+
 
                     document.body.appendChild(
                         iframe
@@ -1007,10 +1643,9 @@ function kirimKeGoogleSheets(data){
                 }
 
 
-                /*
-                 * Buat form POST
-                 * secara dinamis.
-                 */
+                /* -------------------------------------------------
+                   FORM POST
+                ------------------------------------------------- */
 
                 const form =
                     document.createElement(
@@ -1021,19 +1656,22 @@ function kirimKeGoogleSheets(data){
                 form.method =
                     "POST";
 
+
                 form.action =
                     GOOGLE_SCRIPT_URL;
 
+
                 form.target =
                     iframeName;
+
 
                 form.style.display =
                     "none";
 
 
-                /*
-                 * Data yang dikirim.
-                 */
+                /* -------------------------------------------------
+                   DATA YANG DIKIRIM
+                ------------------------------------------------- */
 
                 const fields = {
 
@@ -1042,6 +1680,10 @@ function kirimKeGoogleSheets(data){
                     kelas:data.kelas,
 
                     absen:String(
+                        data.absen
+                    ),
+
+                    nomorAbsen:String(
                         data.absen
                     ),
 
@@ -1054,10 +1696,9 @@ function kirimKeGoogleSheets(data){
                 };
 
 
-                /*
-                 * Masukkan seluruh data
-                 * ke dalam hidden input.
-                 */
+                /* -------------------------------------------------
+                   BUAT HIDDEN INPUT
+                ------------------------------------------------- */
 
                 Object.keys(fields).forEach(
                     function(key){
@@ -1067,14 +1708,18 @@ function kirimKeGoogleSheets(data){
                                 "input"
                             );
 
+
                         input.type =
                             "hidden";
+
 
                         input.name =
                             key;
 
+
                         input.value =
                             fields[key] ?? "";
+
 
                         form.appendChild(
                             input
@@ -1084,26 +1729,25 @@ function kirimKeGoogleSheets(data){
                 );
 
 
-                /*
-                 * Masukkan form ke halaman.
-                 */
+                /* -------------------------------------------------
+                   MASUKKAN FORM
+                ------------------------------------------------- */
 
                 document.body.appendChild(
                     form
                 );
 
 
-                /*
-                 * Kirim POST.
-                 */
+                /* -------------------------------------------------
+                   SUBMIT
+                ------------------------------------------------- */
 
                 form.submit();
 
 
-                /*
-                 * Hapus form setelah
-                 * proses pengiriman.
-                 */
+                /* -------------------------------------------------
+                   HAPUS FORM
+                ------------------------------------------------- */
 
                 setTimeout(
                     function(){
@@ -1119,15 +1763,9 @@ function kirimKeGoogleSheets(data){
                 );
 
 
-                /*
-                 * Karena POST diarahkan ke iframe,
-                 * browser tidak memberikan response
-                 * Apps Script secara langsung kepada
-                 * halaman utama.
-                 *
-                 * Setelah request dikirim,
-                 * proses dianggap berhasil dikirim.
-                 */
+                /* -------------------------------------------------
+                   POST DIANGGAP TERKIRIM
+                ------------------------------------------------- */
 
                 setTimeout(
                     function(){
@@ -1148,7 +1786,7 @@ function kirimKeGoogleSheets(data){
             }catch(error){
 
                 console.error(
-                    "Pengiriman identitas gagal:",
+                    "❌ Pengiriman identitas gagal:",
                     error
                 );
 
@@ -1172,10 +1810,57 @@ function kirimKeGoogleSheets(data){
 
 
 /* =========================================================
+   BUAT URL PETUALANGAN DENGAN IDENTITAS
+========================================================= */
+
+function buatURLPetualangan(data){
+
+    const parameter =
+        new URLSearchParams();
+
+
+    parameter.set(
+        "nama",
+        data.nama
+    );
+
+
+    parameter.set(
+        "kelas",
+        data.kelas
+    );
+
+
+    parameter.set(
+        "absen",
+        String(data.absen)
+    );
+
+
+    parameter.set(
+        "nomorAbsen",
+        String(data.absen)
+    );
+
+
+    return (
+        HALAMAN_TUJUAN +
+        "?" +
+        parameter.toString()
+    );
+
+}
+
+
+/* =========================================================
    SIMPAN IDENTITAS DAN LANJUT
 ========================================================= */
 
 async function simpanDanLanjut(){
+
+    /* -----------------------------------------------------
+       AMBIL DATA
+    ----------------------------------------------------- */
 
     const data =
         ambilIdentitas();
@@ -1188,10 +1873,9 @@ async function simpanDanLanjut(){
     }
 
 
-    /*
-     * Nonaktifkan tombol
-     * agar tidak terjadi pengiriman ganda.
-     */
+    /* -----------------------------------------------------
+       NONAKTIFKAN TOMBOL
+    ----------------------------------------------------- */
 
     btnLanjut.disabled =
         true;
@@ -1202,31 +1886,90 @@ async function simpanDanLanjut(){
     );
 
 
-    /*
-     * Simpan identitas sementara
-     * di browser.
-     */
+    console.log(
+        "===================================="
+    );
 
-    try{
 
-        sessionStorage.setItem(
-            "identitasPetualanganKelas5",
-            JSON.stringify(data)
+    console.log(
+        "IDENTITAS SISWA"
+    );
+
+
+    console.log(
+        "Nama:",
+        data.nama
+    );
+
+
+    console.log(
+        "Kelas:",
+        data.kelas
+    );
+
+
+    console.log(
+        "No Absen:",
+        data.absen
+    );
+
+
+    console.log(
+        "===================================="
+    );
+
+
+    /* -----------------------------------------------------
+       SIMPAN SESSION STORAGE
+    ----------------------------------------------------- */
+
+    const sessionBerhasil =
+        simpanSessionStorage(
+            data
         );
 
-    }catch(error){
 
-        console.warn(
-            "SessionStorage tidak tersedia:",
-            error
+    /* -----------------------------------------------------
+       SIMPAN LOCAL STORAGE
+    ----------------------------------------------------- */
+
+    const localBerhasil =
+        simpanLocalStorage(
+            data
         );
+
+
+    /* -----------------------------------------------------
+       PASTIKAN MINIMAL SATU STORAGE BERHASIL
+    ----------------------------------------------------- */
+
+    if(
+        !sessionBerhasil &&
+        !localBerhasil
+    ){
+
+        btnLanjut.disabled =
+            false;
+
+
+        loading.classList.remove(
+            "show"
+        );
+
+
+        toast(
+            "❌ Browser tidak dapat menyimpan identitas."
+        );
+
+
+        return;
 
     }
 
 
-    /*
-     * Kirim data ke Google Sheets.
-     */
+    /* -----------------------------------------------------
+       KIRIM KE GOOGLE SHEETS
+    ----------------------------------------------------- */
 
     const hasil =
         await kirimKeGoogleSheets(
@@ -1234,9 +1977,9 @@ async function simpanDanLanjut(){
         );
 
 
-    /*
-     * Hanya status OK yang dianggap berhasil.
-     */
+    /* -----------------------------------------------------
+       JIKA BERHASIL
+    ----------------------------------------------------- */
 
     if(hasil.ok){
 
@@ -1246,11 +1989,31 @@ async function simpanDanLanjut(){
         );
 
 
+        /* -------------------------------------------------
+           BUAT URL DENGAN IDENTITAS
+        ------------------------------------------------- */
+
+        const tujuan =
+            buatURLPetualangan(
+                data
+            );
+
+
+        console.log(
+            "🚀 Membuka:",
+            tujuan
+        );
+
+
+        /* -------------------------------------------------
+           PINDAH KE PETUALANGAN
+        ------------------------------------------------- */
+
         setTimeout(
             function(){
 
                 window.location.href =
-                    HALAMAN_TUJUAN;
+                    tujuan;
 
             },
             1000
@@ -1259,10 +2022,9 @@ async function simpanDanLanjut(){
 
     }else{
 
-        /*
-         * Jika pengiriman gagal,
-         * tetap berada di halaman identitas.
-         */
+        /* -------------------------------------------------
+           GAGAL
+        ------------------------------------------------- */
 
         btnLanjut.disabled =
             false;
@@ -1283,6 +2045,20 @@ async function simpanDanLanjut(){
 
 
 /* =========================================================
+   EVENT TOMBOL
+========================================================= */
+
+btnLanjut.addEventListener(
+    "click",
+    function(){
+
+        simpanDanLanjut();
+
+    }
+);
+
+
+/* =========================================================
    ENTER UNTUK LANJUT
 ========================================================= */
 
@@ -1290,6 +2066,7 @@ async function simpanDanLanjut(){
     namaInput,
     kelasInput,
     absenInput
+
 ].forEach(
     function(input){
 
@@ -1304,12 +2081,41 @@ async function simpanDanLanjut(){
 
                     event.preventDefault();
 
-                    simpanDanLanjut();
+
+                    if(
+                        !btnLanjut.disabled
+                    ){
+
+                        simpanDanLanjut();
+
+                    }
 
                 }
 
             }
         );
+
+    }
+);
+
+
+/* =========================================================
+   CEGAH PENGIRIMAN GANDA
+========================================================= */
+
+window.addEventListener(
+    "beforeunload",
+    function(){
+
+        if(
+            btnLanjut.disabled
+        ){
+
+            console.log(
+                "Halaman sedang berpindah..."
+            );
+
+        }
 
     }
 );
@@ -1331,6 +2137,52 @@ window.addEventListener(
             },
             300
         );
+
+    }
+);
+
+
+/* =========================================================
+   DEBUG IDENTITAS YANG TERSIMPAN
+========================================================= */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        try{
+
+            const sessionData =
+                sessionStorage.getItem(
+                    STORAGE_KEY
+                );
+
+
+            const localData =
+                localStorage.getItem(
+                    STORAGE_KEY
+                );
+
+
+            console.log(
+                "📦 Session identitas:",
+                sessionData
+            );
+
+
+            console.log(
+                "📦 Local identitas:",
+                localData
+            );
+
+        }catch(error){
+
+            console.warn(
+                "Tidak dapat membaca storage:",
+                error
+            );
+
+        }
 
     }
 );

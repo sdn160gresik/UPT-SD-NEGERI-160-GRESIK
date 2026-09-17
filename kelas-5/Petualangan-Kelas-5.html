@@ -2,1946 +2,2481 @@
 <html lang="id">
 
 <head>
-  <meta charset="UTF-8">
 
-  <meta
+<meta charset="UTF-8">
+
+<meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
-  >
+>
 
-  <meta
+<meta
     name="theme-color"
     content="#0288d1"
-  >
+>
 
-  <meta
+<meta
     name="description"
     content="Petualangan Belajar Kelas 5 UPT SDN 160 GRESIK"
-  >
+>
 
-  <title>Petualangan Kelas 5 | UPT SDN 160 GRESIK</title>
+<title>Petualangan Kelas 5 | UPT SDN 160 GRESIK</title>
 
-  <!-- =========================================================
-       FONT
-  ========================================================== -->
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
 
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
+<!-- =====================================================
+     FONT
+===================================================== -->
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap"
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
     rel="stylesheet"
-  >
+>
 
-  <!-- =========================================================
-       STYLE
-  ========================================================== -->
-  <style>
 
-    /* =======================================================
-       RESET
-    ======================================================== */
+<style>
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+/* =====================================================
+   RESET
+===================================================== */
 
-    html {
-      scroll-behavior: smooth;
-    }
+*{
 
-    body {
-      min-height: 100vh;
-      font-family: "Baloo 2", cursive;
-      background:
-        linear-gradient(
-          180deg,
-          #e0f7fa 0%,
-          #f8fdff 45%,
-          #e8f5e9 100%
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+
+/* =====================================================
+   HTML & BODY
+===================================================== */
+
+html,
+body{
+
+    margin:0;
+
+    padding:0;
+
+}
+
+
+body{
+
+    display:block;
+
+    min-height:100vh;
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    background:
+        url(
+            'https://i.imgur.com/clG3P3n.png'
+        )
+        no-repeat
+        center
+        center
+        fixed;
+
+    background-size:cover;
+
+    color:#fff;
+
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+nav{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    padding:
+        1rem
+        2rem;
+
+    box-shadow:
+        0 4px 8px
+        rgba(0,0,0,.20);
+
+}
+
+
+.nav-right{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:.5rem;
+
+    flex-wrap:wrap;
+
+}
+
+
+nav a{
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .95
         );
-      color: #263238;
-      overflow-x: hidden;
+
+    padding:
+        .5rem
+        1rem;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+    color:#0288d1;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:.4rem;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+nav a:hover{
+
+    transform:
+        translateY(-2px)
+        scale(1.04);
+
+    box-shadow:
+        0 6px 12px
+        rgba(0,0,0,.20);
+
+}
+
+
+/* =====================================================
+   JUDUL
+===================================================== */
+
+.title-section{
+
+    text-align:center;
+
+    margin:
+        30px
+        20px
+        10px;
+
+}
+
+
+.title-section h1{
+
+    font-size:
+        clamp(
+            1.7rem,
+            4vw,
+            2.35rem
+        );
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .88
+        );
+
+    display:inline-block;
+
+    padding:
+        .65rem
+        1.4rem;
+
+    border-radius:12px;
+
+    color:#0288d1;
+
+    text-shadow:
+        1px
+        1px
+        2px
+        rgba(
+            255,
+            255,
+            255,
+            .6
+        );
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.15);
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero-layout{
+
+    width:
+        calc(100% - 60px);
+
+    max-width:1180px;
+
+    margin:
+        26px
+        auto
+        10px;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr;
+
+    gap:28px;
+
+    align-items:center;
+
+}
+
+
+.hero-left{
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:
+        12px
+        10px;
+
+}
+
+
+.hero-left .title-section{
+
+    margin:0;
+
+    text-align:center;
+
+}
+
+
+.hero-left .title-section h1{
+
+    margin:0;
+
+}
+
+
+/* =====================================================
+   SUB JUDUL
+===================================================== */
+
+.hero-subtitle{
+
+    margin-top:12px;
+
+    display:inline-block;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .88
+        );
+
+    color:#555;
+
+    padding:
+        7px
+        16px;
+
+    border-radius:10px;
+
+    font-size:.85rem;
+
+    font-weight:600;
+
+    box-shadow:
+        0 4px 10px
+        rgba(0,0,0,.12);
+
+}
+
+
+/* =====================================================
+   GRID PETUALANGAN
+===================================================== */
+
+.map-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(
+                220px,
+                1fr
+            )
+        );
+
+    gap:20px;
+
+    padding:
+        30px;
+
+    max-width:1100px;
+
+    margin:auto;
+
+}
+
+
+/* =====================================================
+   KARTU PETUALANGAN
+===================================================== */
+
+.map-item{
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .90
+        );
+
+    border-radius:15px;
+
+    padding:20px;
+
+    text-align:center;
+
+    color:#0288d1;
+
+    box-shadow:
+        0 4px 10px
+        rgba(0,0,0,.20);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    font-size:1.1rem;
+
+    min-height:145px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+.map-item:hover{
+
+    transform:
+        scale(1.05);
+
+    background-color:
+        #dff6ff;
+
+    box-shadow:
+        0 7px 16px
+        rgba(0,0,0,.22);
+
+}
+
+
+.map-item .emoji{
+
+    font-size:2.5rem;
+
+    display:block;
+
+    margin-bottom:10px;
+
+}
+
+
+/* =====================================================
+   DESKRIPSI KARTU
+===================================================== */
+
+.map-description{
+
+    display:block;
+
+    margin-top:6px;
+
+    color:#78909c;
+
+    font-size:.72rem;
+
+    font-weight:500;
+
+    line-height:1.4;
+
+}
+
+
+/* =====================================================
+   TOMBOL MULAI
+===================================================== */
+
+.map-button{
+
+    display:inline-block;
+
+    margin-top:10px;
+
+    padding:
+        5px
+        12px;
+
+    border-radius:20px;
+
+    background:#0288d1;
+
+    color:#fff;
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+}
+
+
+.map-item:hover .map-button{
+
+    background:#7b1fa2;
+
+}
+
+
+/* =====================================================
+   MENU TERSEMBUNYI
+===================================================== */
+
+.map-item.hide-menu{
+
+    display:none !important;
+
+}
+
+
+/* =====================================================
+   BAGIAN SISWA ONLINE
+   TETAP AKTIF
+   TIDAK DITAMPILKAN DI HALAMAN
+===================================================== */
+
+#daftarSiswaAktif{
+
+    width:100%;
+
+    max-width:700px;
+
+    height:160px;
+
+    margin:
+        20px
+        auto;
+
+    padding:10px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .92
+        );
+
+    border-radius:16px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.20);
+
+    overflow:hidden;
+
+    /*
+       Tetap aktif untuk sistem,
+       tetapi tidak terlihat oleh pengguna.
+    */
+
+    display:none !important;
+
+}
+
+
+/* =====================================================
+   JUMLAH SISWA ONLINE
+   TETAP AKTIF
+===================================================== */
+
+.jumlah-siswa-online{
+
+    position:relative;
+
+    z-index:2;
+
+    background:
+        linear-gradient(
+            45deg,
+            #0288d1,
+            #7b1fa2
+        );
+
+    color:#fff;
+
+    padding:
+        9px
+        14px;
+
+    border-radius:10px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+    text-align:center;
+
+    box-shadow:
+        0 3px 8px
+        rgba(0,0,0,.15);
+
+}
+
+
+/* =====================================================
+   PEMBUNGKUS DAFTAR SISWA
+   TETAP AKTIF
+===================================================== */
+
+.daftar-siswa-scroll{
+
+    height:88px;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    padding-right:4px;
+
+}
+
+
+/* =====================================================
+   ITEM SISWA
+   TETAP AKTIF
+===================================================== */
+
+.siswa-online-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:
+        rgba(
+            248,
+            251,
+            255,
+            .98
+        );
+
+    color:#333;
+
+    padding:
+        8px
+        10px;
+
+    margin-bottom:6px;
+
+    border-radius:10px;
+
+    border:
+        1px
+        solid
+        rgba(
+            2,
+            136,
+            209,
+            .12
+        );
+
+}
+
+
+/* =====================================================
+   STATUS ONLINE
+   TETAP AKTIF
+===================================================== */
+
+.status-online{
+
+    font-size:18px;
+
+    flex-shrink:0;
+
+}
+
+
+/* =====================================================
+   INFORMASI SISWA
+   TETAP AKTIF
+===================================================== */
+
+.siswa-info{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+/* =====================================================
+   NAMA SISWA
+   TETAP AKTIF
+===================================================== */
+
+.siswa-nama{
+
+    font-weight:700;
+
+    color:#0288d1;
+
+    font-size:.9rem;
+
+}
+
+
+/* =====================================================
+   STATUS AKTIVITAS
+   TETAP AKTIF
+===================================================== */
+
+.siswa-status{
+
+    font-size:.72rem;
+
+    color:#7b1fa2;
+
+    font-weight:600;
+
+    margin-top:1px;
+
+}
+
+
+/* =====================================================
+   HALAMAN
+   TETAP AKTIF
+===================================================== */
+
+.siswa-halaman{
+
+    font-size:.72rem;
+
+    color:#555;
+
+    margin-top:1px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+
+/* =====================================================
+   WAKTU
+   TETAP AKTIF
+===================================================== */
+
+.siswa-waktu{
+
+    font-size:.65rem;
+
+    color:#78909c;
+
+    margin-top:1px;
+
+}
+
+
+/* =====================================================
+   KOSONG
+   TETAP AKTIF
+===================================================== */
+
+.siswa-kosong{
+
+    background:#fff;
+
+    color:#555;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+}
+
+
+/* =====================================================
+   SCROLLBAR
+   TETAP AKTIF
+===================================================== */
+
+.daftar-siswa-scroll::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+
+.daftar-siswa-scroll::-webkit-scrollbar-track{
+
+    background:#eef7fb;
+
+    border-radius:10px;
+
+}
+
+
+.daftar-siswa-scroll::-webkit-scrollbar-thumb{
+
+    background:#0288d1;
+
+    border-radius:10px;
+
+}
+
+
+.daftar-siswa-scroll::-webkit-scrollbar-thumb:hover{
+
+    background:#7b1fa2;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    margin-top:25px;
+
+    padding:
+        20px;
+
+    text-align:center;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .85
+        );
+
+    color:#78909c;
+
+    box-shadow:
+        0 -3px 10px
+        rgba(0,0,0,.10);
+
+}
+
+
+.footer-title{
+
+    color:#0288d1;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+}
+
+
+footer p{
+
+    margin-top:3px;
+
+    font-size:.75rem;
+
+}
+
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+audio{
+
+    display:none;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:768px){
+
+    nav{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+        padding:1rem;
+
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
+
+    .nav-right{
+
+        justify-content:center;
+
     }
 
-    button {
-      font-family: inherit;
+
+    nav a{
+
+        font-size:.8rem;
+
+        padding:
+            .5rem
+            .7rem;
+
     }
 
-    /* =======================================================
-       BACKGROUND
-    ======================================================== */
 
-    .background-decoration {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
+    .hero-layout{
+
+        width:
+            calc(100% - 30px);
+
+        gap:14px;
+
+        margin-top:18px;
+
     }
 
-    .cloud {
-      position: absolute;
-      background: rgba(255,255,255,0.85);
-      border-radius: 999px;
-      filter: blur(1px);
+
+    .hero-left{
+
+        padding:
+            5px
+            0;
+
     }
 
-    .cloud::before,
-    .cloud::after {
-      content: "";
-      position: absolute;
-      background: inherit;
-      border-radius: 50%;
+
+    .hero-left .title-section{
+
+        margin-bottom:8px;
+
     }
 
-    .cloud-1 {
-      width: 180px;
-      height: 55px;
-      top: 90px;
-      left: -30px;
+
+    .hero-left .title-section h1{
+
+        font-size:1.5rem;
+
     }
 
-    .cloud-1::before {
-      width: 75px;
-      height: 75px;
-      left: 30px;
-      bottom: 15px;
+
+    .hero-subtitle{
+
+        font-size:.72rem;
+
+        text-align:center;
+
     }
 
-    .cloud-1::after {
-      width: 90px;
-      height: 90px;
-      left: 80px;
-      bottom: 10px;
+
+    /*
+       Komponen online tetap aktif
+       tetapi tetap tidak ditampilkan.
+    */
+
+    #daftarSiswaAktif{
+
+        display:none !important;
+
+        width:
+            calc(100% - 30px);
+
+        height:150px;
+
+        margin:
+            15px
+            auto;
+
     }
 
-    .cloud-2 {
-      width: 220px;
-      height: 60px;
-      top: 180px;
-      right: -50px;
+
+    .daftar-siswa-scroll{
+
+        height:82px;
+
     }
 
-    .cloud-2::before {
-      width: 85px;
-      height: 85px;
-      left: 35px;
-      bottom: 15px;
-    }
 
-    .cloud-2::after {
-      width: 105px;
-      height: 105px;
-      right: 30px;
-      bottom: 5px;
-    }
+    .map-grid{
 
-    .sun {
-      position: absolute;
-      width: 90px;
-      height: 90px;
-      right: 7%;
-      top: 45px;
-      border-radius: 50%;
-      background: #ffd54f;
-      box-shadow:
-        0 0 0 12px rgba(255,213,79,0.18),
-        0 0 45px rgba(255,193,7,0.3);
-    }
-
-    /* =======================================================
-       HEADER
-    ======================================================== */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,0.94);
-      backdrop-filter: blur(12px);
-      border-bottom: 2px solid rgba(2,136,209,0.12);
-      box-shadow: 0 5px 18px rgba(0,0,0,0.08);
-    }
-
-    .navbar {
-      width: min(1180px, 94%);
-      margin: auto;
-      min-height: 70px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: #0277bd;
-      white-space: nowrap;
-    }
-
-    .brand-icon {
-      width: 45px;
-      height: 45px;
-      border-radius: 14px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: linear-gradient(
-        135deg,
-        #03a9f4,
-        #0288d1
-      );
-
-      color: white;
-      font-size: 1.45rem;
-
-      box-shadow:
-        0 5px 12px rgba(2,136,209,0.25);
-    }
-
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 8px;
-      list-style: none;
-    }
-
-    .nav-menu a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      min-height: 42px;
-      padding: 8px 15px;
-
-      border-radius: 12px;
-
-      font-size: 0.98rem;
-      font-weight: 700;
-
-      color: #455a64;
-
-      transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .nav-menu a:hover {
-      background: #e1f5fe;
-      color: #0277bd;
-      transform: translateY(-2px);
-    }
-
-    .nav-menu a.active {
-      background: #0288d1;
-      color: white;
-      box-shadow: 0 4px 10px rgba(2,136,209,0.2);
-    }
-
-    /* =======================================================
-       HERO
-    ======================================================== */
-
-    .hero {
-      position: relative;
-      z-index: 1;
-
-      width: min(1100px, 92%);
-      margin: 45px auto 30px;
-
-      text-align: center;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-
-      padding: 8px 18px;
-      margin-bottom: 15px;
-
-      border-radius: 999px;
-
-      background: white;
-      color: #0277bd;
-
-      font-size: 0.95rem;
-      font-weight: 700;
-
-      box-shadow:
-        0 6px 20px rgba(0,0,0,0.08);
-    }
-
-    .hero h1 {
-      font-size: clamp(2.2rem, 6vw, 4.3rem);
-      line-height: 1.05;
-      color: #0277bd;
-      font-weight: 800;
-
-      text-shadow:
-        0 3px 0 white,
-        0 6px 15px rgba(2,136,209,0.18);
-    }
-
-    .hero h2 {
-      margin-top: 10px;
-
-      font-size: clamp(1.05rem, 3vw, 1.5rem);
-      color: #546e7a;
-      font-weight: 600;
-    }
-
-    .hero-school {
-      margin-top: 7px;
-
-      font-size: 1rem;
-      font-weight: 700;
-      color: #00897b;
-      letter-spacing: 0.4px;
-    }
-
-    /* =======================================================
-       MAP / PETUALANGAN
-    ======================================================== */
-
-    .adventure-wrapper {
-      position: relative;
-      z-index: 1;
-
-      width: min(1180px, 94%);
-      margin: 30px auto 70px;
-    }
-
-    .map-title {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .map-title h3 {
-      font-size: clamp(1.5rem, 4vw, 2rem);
-      color: #37474f;
-      font-weight: 800;
-    }
-
-    .map-title p {
-      margin-top: 5px;
-      color: #78909c;
-      font-size: 1rem;
-    }
-
-    .adventure-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-      gap: 22px;
-    }
-
-    /* =======================================================
-       KARTU PETUALANGAN
-    ======================================================== */
-
-    .adventure-card {
-      position: relative;
-
-      min-height: 205px;
-      padding: 25px;
-
-      border-radius: 28px;
-
-      background: rgba(255,255,255,0.94);
-
-      border: 2px solid rgba(255,255,255,0.9);
-
-      box-shadow:
-        0 10px 28px rgba(0,0,0,0.09);
-
-      overflow: hidden;
-
-      transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-    }
-
-    .adventure-card:hover {
-      transform: translateY(-7px);
-      box-shadow:
-        0 18px 35px rgba(0,0,0,0.13);
-    }
-
-    .adventure-card::after {
-      content: "";
-
-      position: absolute;
-
-      width: 100px;
-      height: 100px;
-
-      right: -30px;
-      bottom: -30px;
-
-      border-radius: 50%;
-
-      background: rgba(3,169,244,0.08);
-    }
-
-    .card-icon {
-      width: 70px;
-      height: 70px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 22px;
-
-      background: #e1f5fe;
-
-      font-size: 2.25rem;
-
-      margin-bottom: 15px;
-    }
-
-    .adventure-card h4 {
-      font-size: 1.35rem;
-      line-height: 1.15;
-
-      color: #263238;
-      font-weight: 800;
-    }
-
-    .adventure-card p {
-      margin-top: 7px;
-
-      color: #78909c;
-      font-size: 0.98rem;
-      line-height: 1.4;
-    }
-
-    .card-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      margin-top: 16px;
-      padding: 8px 15px;
-
-      border-radius: 999px;
-
-      background: #0288d1;
-      color: white;
-
-      font-size: 0.9rem;
-      font-weight: 700;
-
-      transition: 0.2s ease;
-    }
-
-    .adventure-card:hover .card-button {
-      background: #01579b;
-    }
-
-    /* =======================================================
-       WARNA KARTU
-    ======================================================== */
-
-    .card-pancasila .card-icon {
-      background: #fff3e0;
-    }
-
-    .card-bahasa .card-icon {
-      background: #fce4ec;
-    }
-
-    .card-matematika .card-icon {
-      background: #e8eaf6;
-    }
-
-    .card-ipas .card-icon {
-      background: #e8f5e9;
-    }
-
-    .card-seni .card-icon {
-      background: #fff8e1;
-    }
-
-    .card-jawa .card-icon {
-      background: #f3e5f5;
-    }
-
-    .card-tugas .card-icon {
-      background: #e0f2f1;
-    }
-
-    .card-sts .card-icon {
-      background: #ede7f6;
-    }
-
-    /* =======================================================
-       BAGIAN SISWA AKTIF
-    ======================================================== */
-
-    #daftarSiswaAktif {
-      width: min(900px, 94%);
-      margin: 0 auto 55px;
-
-      position: relative;
-      z-index: 2;
-    }
-
-    .online-panel {
-      background: rgba(255,255,255,0.96);
-
-      border-radius: 25px;
-
-      padding: 25px;
-
-      box-shadow:
-        0 10px 28px rgba(0,0,0,0.08);
-
-      border: 1px solid rgba(2,136,209,0.1);
-    }
-
-    .online-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-
-      margin-bottom: 18px;
-    }
-
-    .online-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #37474f;
-    }
-
-    .online-dot {
-      width: 13px;
-      height: 13px;
-
-      border-radius: 50%;
-
-      background: #43a047;
-
-      box-shadow:
-        0 0 0 5px rgba(67,160,71,0.12);
-    }
-
-    .online-count {
-      padding: 5px 12px;
-
-      border-radius: 999px;
-
-      background: #e8f5e9;
-      color: #2e7d32;
-
-      font-size: 0.85rem;
-      font-weight: 800;
-    }
-
-    .online-list {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-      gap: 10px;
-    }
-
-    .online-empty {
-      padding: 20px;
-
-      text-align: center;
-
-      color: #90a4ae;
-      background: #f8fafb;
-
-      border-radius: 15px;
-
-      font-size: 0.95rem;
-    }
-
-    .online-student {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-
-      padding: 12px 15px;
-
-      background: #f7fbfc;
-
-      border-radius: 15px;
-
-      border: 1px solid #e7f0f2;
-    }
-
-    .student-avatar {
-      width: 42px;
-      height: 42px;
-
-      flex-shrink: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-
-      background: #e1f5fe;
-
-      font-size: 1.25rem;
-    }
-
-    .student-info {
-      min-width: 0;
-    }
-
-    .student-name {
-      font-weight: 800;
-      color: #37474f;
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .student-class {
-      color: #90a4ae;
-      font-size: 0.82rem;
-    }
-
-    /* =======================================================
-       FOOTER
-    ======================================================== */
-
-    footer {
-      position: relative;
-      z-index: 1;
-
-      padding: 30px 20px 35px;
-
-      text-align: center;
-
-      background: rgba(255,255,255,0.82);
-
-      border-top:
-        1px solid rgba(0,0,0,0.05);
-    }
-
-    footer .footer-title {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: #0277bd;
-    }
-
-    footer p {
-      margin-top: 5px;
-      color: #78909c;
-      font-size: 0.9rem;
-    }
-
-    /* =======================================================
-       RESPONSIVE TABLET
-    ======================================================== */
-
-    @media (max-width: 900px) {
-
-      .navbar {
-        flex-direction: column;
-        padding: 12px 0;
-      }
-
-      .nav-menu {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      .adventure-grid {
         grid-template-columns:
-          repeat(2, minmax(0, 1fr));
-      }
+            repeat(
+                2,
+                1fr
+            );
 
-      .online-list {
-        grid-template-columns: 1fr;
-      }
+        gap:12px;
+
+        padding:
+            20px
+            15px;
+
     }
 
-    /* =======================================================
-       RESPONSIVE HP
-    ======================================================== */
 
-    @media (max-width: 600px) {
+    .map-item{
 
-      .navbar {
-        min-height: auto;
-      }
+        font-size:1rem;
 
-      .brand {
-        font-size: 1.05rem;
-      }
+        padding:
+            15px
+            10px;
 
-      .brand-icon {
-        width: 40px;
-        height: 40px;
-      }
+        min-height:135px;
 
-      .nav-menu {
-        gap: 4px;
-      }
-
-      .nav-menu a {
-        min-height: 38px;
-        padding: 6px 10px;
-        font-size: 0.88rem;
-      }
-
-      .hero {
-        margin-top: 30px;
-      }
-
-      .adventure-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .adventure-card {
-        min-height: 190px;
-      }
-
-      .sun {
-        width: 65px;
-        height: 65px;
-      }
-
-      .online-panel {
-        padding: 18px;
-      }
-
-      .online-header {
-        align-items: flex-start;
-      }
     }
 
-  </style>
+
+    .map-item .emoji{
+
+        font-size:2rem;
+
+    }
+
+
+    .map-description{
+
+        font-size:.65rem;
+
+    }
+
+}
+
+
+@media(max-width:480px){
+
+    .map-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .nav-right{
+
+        gap:6px;
+
+    }
+
+
+    nav a{
+
+        font-size:.75rem;
+
+    }
+
+}
+
+</style>
+
 </head>
 
 
 <body>
 
-  <!-- =========================================================
-       BACKGROUND
-  ========================================================== -->
 
-  <div class="background-decoration">
+<!-- =====================================================
+     NAVIGASI
+===================================================== -->
 
-    <div class="sun"></div>
+<nav>
 
-    <div class="cloud cloud-1"></div>
+    <div class="nav-right">
 
-    <div class="cloud cloud-2"></div>
-
-  </div>
-
-
-  <!-- =========================================================
-       HEADER / NAVBAR
-  ========================================================== -->
-
-  <header>
-
-    <nav class="navbar">
-
-      <a
-        href="../index.html"
-        class="brand"
-      >
-
-        <span class="brand-icon">
-          📚
-        </span>
-
-        <span>
-          UPT SDN 160 GRESIK
-        </span>
-
-      </a>
-
-
-      <ul class="nav-menu">
-
-        <li>
-          <a href="../index.html">
+        <a href="../index.html">
             🏠 Beranda
-          </a>
-        </li>
+        </a>
 
-        <li>
-          <a href="#">
-            🎯 Program
-          </a>
-        </li>
 
-        <li>
-          <a href="galeri.html">
+        <a href="#">
+            📌 Program
+        </a>
+
+
+        <a href="galeri.html">
             🖼️ Galeri
-          </a>
-        </li>
+        </a>
 
-        <li>
-          <a href="kelas.html">
-            📚 Kelas
-          </a>
-        </li>
 
-        <li>
-          <a
-            href="online/online.html"
-            class="active"
-          >
+        <a href="kelas.html">
+            🏫 Kelas
+        </a>
+
+
+        <a href="online/online.html">
             🟢 Online
-          </a>
-        </li>
-
-      </ul>
-
-    </nav>
-
-  </header>
-
-
-  <!-- =========================================================
-       HERO
-  ========================================================== -->
-
-  <main>
-
-    <section class="hero">
-
-      <div class="hero-badge">
-        🌟 Ayo Belajar Sambil Berpetualang!
-      </div>
-
-      <h1>
-        📖 Petualangan Belajar Kelas 5
-      </h1>
-
-      <h2>
-        Jelajahi setiap tempat, pelajari setiap ilmu,
-        dan selesaikan setiap tantangan!
-      </h2>
-
-      <div class="hero-school">
-        UPT SD NEGERI 160 GRESIK
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
-         PETA PETUALANGAN
-    ======================================================== -->
-
-    <section class="adventure-wrapper">
-
-      <div class="map-title">
-
-        <h3>
-          🗺️ Peta Petualangan Kelas 5
-        </h3>
-
-        <p>
-          Pilih tujuan petualanganmu dan mulai belajar.
-        </p>
-
-      </div>
-
-
-      <div class="adventure-grid">
-
-
-        <!-- ===================================================
-             ISTANA PANCASILA
-        ==================================================== -->
-
-        <a
-          href="istanap-pancasila/Istana_Pancasila.html"
-          class="adventure-card card-pancasila"
-          data-halaman="Istana Pancasila"
-        >
-
-          <div class="card-icon">
-            🏛️
-          </div>
-
-          <h4>
-            Istana Pancasila
-          </h4>
-
-          <p>
-            Mari mengenal Pancasila,
-            sejarah, nilai-nilai,
-            dan kehidupan berbangsa.
-          </p>
-
-          <span class="card-button">
-            🚀 Mulai Petualangan
-          </span>
-
         </a>
 
+    </div>
 
-        <!-- ===================================================
-             PULAU BAHASA INDONESIA
-        ==================================================== -->
-
-        <a
-          href="Pulau-Bahasa-Indonesia/pulau.html"
-          class="adventure-card card-bahasa"
-          data-halaman="Pulau Bahasa Indonesia"
-        >
-
-          <div class="card-icon">
-            📖
-          </div>
-
-          <h4>
-            Pulau Bahasa Indonesia
-          </h4>
-
-          <p>
-            Jelajahi dunia membaca,
-            menulis, puisi, cerita,
-            dan Bahasa Indonesia.
-          </p>
-
-          <span class="card-button">
-            🚀 Mulai Petualangan
-          </span>
-
-        </a>
+</nav>
 
 
-        <!-- ===================================================
-             LEMBAH MATEMATIKA
-        ==================================================== -->
+<!-- =====================================================
+     HEADER PETUALANGAN
+===================================================== -->
 
-        <a
-          href="lembah/lembah.html"
-          class="adventure-card card-matematika"
-          data-halaman="Lembah Matematika"
-        >
+<section class="hero-layout">
 
-          <div class="card-icon">
-            🧮
-          </div>
+    <div class="hero-left">
 
-          <h4>
-            Lembah Matematika
-          </h4>
+        <div class="title-section">
 
-          <p>
-            Asah kemampuan berhitung,
-            logika, operasi bilangan,
-            dan pemecahan masalah.
-          </p>
+            <h1>
+                📖 Petualangan Belajar Kelas 5
+            </h1>
 
-          <span class="card-button">
-            🚀 Mulai Petualangan
-          </span>
-
-        </a>
+        </div>
 
 
-        <!-- ===================================================
-             HUTAN IPAS
-        ==================================================== -->
+        <div class="hero-subtitle">
 
-        <a
-          href="hutan/hutan.html"
-          class="adventure-card card-ipas"
-          data-halaman="Hutan IPAS"
-        >
+            🌟 Jelajahi setiap tempat,
+            pelajari setiap ilmu,
+            dan selesaikan setiap tantangan!
 
-          <div class="card-icon">
-            🌳
-          </div>
+        </div>
 
-          <h4>
-            Hutan IPAS
-          </h4>
+    </div>
 
-          <p>
-            Temukan berbagai pengetahuan
-            tentang makhluk hidup,
-            lingkungan, dan alam.
-          </p>
-
-          <span class="card-button">
-            🚀 Mulai Petualangan
-          </span>
-
-        </a>
+</section>
 
 
-        <!-- ===================================================
-             GUNUNG SENI BUDAYA
-        ==================================================== -->
+<!-- =====================================================
+     PETA PETUALANGAN
+===================================================== -->
 
-        <a
-          href="Gunung-Seni-Budaya/gunung.html"
-          class="adventure-card card-seni"
-          data-halaman="Gunung Seni Budaya"
-        >
+<div class="map-grid">
 
-          <div class="card-icon">
+
+    <!-- =================================================
+         ISTANA PANCASILA
+    ================================================== -->
+
+    <a
+        href="istanap-pancasila/Istana_Pancasila.html"
+        class="map-item"
+        data-halaman="Istana Pancasila"
+    >
+
+        <span class="emoji">
+            ⭐
+        </span>
+
+        Istana Pancasila
+
+        <span class="map-description">
+            Mengenal Pancasila dan kehidupan berbangsa.
+        </span>
+
+        <span class="map-button">
+            🚀 Mulai
+        </span>
+
+    </a>
+
+
+    <!-- =================================================
+         PULAU BAHASA INDONESIA
+    ================================================== -->
+
+    <a
+        href="Pulau-Bahasa-Indonesia/pulau.html"
+        class="map-item"
+        data-halaman="Pulau Bahasa Indonesia"
+    >
+
+        <span class="emoji">
+            📚
+        </span>
+
+        Pulau Bahasa Indonesia
+
+        <span class="map-description">
+            Membaca, menulis, puisi, dan cerita.
+        </span>
+
+        <span class="map-button">
+            🚀 Mulai
+        </span>
+
+    </a>
+
+
+    <!-- =================================================
+         LEMBAH MATEMATIKA
+    ================================================== -->
+
+    <a
+        href="lembah/lembah.html"
+        class="map-item"
+        data-halaman="Lembah Matematika"
+    >
+
+        <span class="emoji">
+            ⛰️
+        </span>
+
+        Lembah Matematika
+
+        <span class="map-description">
+            Berhitung, logika, dan pemecahan masalah.
+        </span>
+
+        <span class="map-button">
+            🚀 Mulai
+        </span>
+
+    </a>
+
+
+    <!-- =================================================
+         HUTAN IPAS
+    ================================================== -->
+
+    <a
+        href="hutan/hutan.html"
+        class="map-item"
+        data-halaman="Hutan IPAS"
+    >
+
+        <span class="emoji">
+            🌿
+        </span>
+
+        Hutan IPAS
+
+        <span class="map-description">
+            Menjelajahi makhluk hidup dan lingkungan.
+        </span>
+
+        <span class="map-button">
+            🚀 Mulai
+        </span>
+
+    </a>
+
+
+    <!-- =================================================
+         GUNUNG SENI BUDAYA
+    ================================================== -->
+
+    <a
+        href="Gunung-Seni-Budaya/gunung.html"
+        class="map-item"
+        data-halaman="Gunung Seni Budaya"
+    >
+
+        <span class="emoji">
             🎨
-          </div>
+        </span>
 
-          <h4>
-            Gunung Seni Budaya
-          </h4>
+        Gunung Seni Budaya
 
-          <p>
-            Berkreasi melalui seni rupa,
-            budaya, musik,
-            dan berbagai karya.
-          </p>
+        <span class="map-description">
+            Berkarya melalui seni dan budaya.
+        </span>
 
-          <span class="card-button">
-            🚀 Mulai Petualangan
-          </span>
+        <span class="map-button">
+            🚀 Mulai
+        </span>
 
-        </a>
+    </a>
 
 
-        <!-- ===================================================
-             DESA BAHASA JAWA
-        ==================================================== -->
+    <!-- =================================================
+         DESA BAHASA JAWA
+    ================================================== -->
 
-        <a
-          href="Basa_Jawa/landing-page-bahasa-jawa.html"
-          class="adventure-card card-jawa"
-          data-halaman="Desa Bahasa Jawa"
-        >
+    <a
+        href="Basa_Jawa/landing-page-bahasa-jawa.html"
+        class="map-item"
+        data-halaman="Desa Bahasa Jawa"
+    >
 
-          <div class="card-icon">
+        <span class="emoji">
             🏡
-          </div>
+        </span>
 
-          <h4>
-            Desa Bahasa Jawa
-          </h4>
+        Desa Bahasa Jawa
 
-          <p>
-            Sinau Basa Jawa,
-            tembang dolanan,
-            unggah-ungguh, lan budaya.
-          </p>
+        <span class="map-description">
+            Sinau Basa Jawa lan budaya.
+        </span>
 
-          <span class="card-button">
-            🚀 Mulai Petualangan
-          </span>
+        <span class="map-button">
+            🚀 Mulai
+        </span>
 
-        </a>
+    </a>
 
 
-        <!-- ===================================================
-             TUGAS
-        ==================================================== -->
+    <!-- =================================================
+         KODING 1
+    ================================================== -->
 
-        <a
-          href="tugas/tugas.html"
-          class="adventure-card card-tugas"
-          data-halaman="Tugas"
-        >
+    <a
+        href="koding/index.html"
+        class="map-item hide-menu"
+        data-halaman="Koding"
+    >
 
-          <div class="card-icon">
-            📝
-          </div>
+        <span class="emoji">
+            💻
+        </span>
 
-          <h4>
-            Tugas
-          </h4>
+        KODING
 
-          <p>
-            Kerjakan berbagai tugas
-            dan aktivitas pembelajaran
-            yang diberikan.
-          </p>
+        <span class="map-button">
+            🚀 Mulai
+        </span>
 
-          <span class="card-button">
+    </a>
+
+
+    <!-- =================================================
+         KODING 2
+    ================================================== -->
+
+    <a
+        href="koding2/index.html"
+        class="map-item hide-menu"
+        data-halaman="Koding 2"
+    >
+
+        <span class="emoji">
+            💻
+        </span>
+
+        KODING-2
+
+        <span class="map-button">
+            🚀 Mulai
+        </span>
+
+    </a>
+
+
+    <!-- =================================================
+         KODING 3
+    ================================================== -->
+
+    <a
+        href="koding/mode3/index.html"
+        class="map-item hide-menu"
+        data-halaman="Koding 3"
+    >
+
+        <span class="emoji">
+            💻
+        </span>
+
+        KODING-3
+
+        <span class="map-button">
+            🚀 Mulai
+        </span>
+
+    </a>
+
+
+    <!-- =================================================
+         KODING 4
+    ================================================== -->
+
+    <a
+        href="koding/mode4/index.html"
+        class="map-item hide-menu"
+        data-halaman="Koding 4"
+    >
+
+        <span class="emoji">
+            💻
+        </span>
+
+        KODING-4
+
+        <span class="map-button">
+            🚀 Mulai
+        </span>
+
+    </a>
+
+
+    <!-- =================================================
+         KODING 5
+    ================================================== -->
+
+    <a
+        href="koding/mode5/index.html"
+        class="map-item hide-menu"
+        data-halaman="Koding 5"
+    >
+
+        <span class="emoji">
+            💻
+        </span>
+
+        KODING-5
+
+        <span class="map-button">
+            🚀 Mulai
+        </span>
+
+    </a>
+
+
+    <!-- =================================================
+         TUGAS
+    ================================================== -->
+
+    <a
+        href="tugas/tugas.html"
+        class="map-item"
+        data-halaman="Tugas Kelas 5"
+    >
+
+        <span class="emoji">
+            🧠
+        </span>
+
+        Tugas
+
+        <span class="map-description">
+            Kerjakan berbagai tugas pembelajaran.
+        </span>
+
+        <span class="map-button">
             🚀 Buka Tugas
-          </span>
+        </span>
 
-        </a>
+    </a>
 
 
-        <!-- ===================================================
-             STS
-        ==================================================== -->
+    <!-- =================================================
+         STS
+    ================================================== -->
 
-        <a
-          href="sts/sts.html"
-          class="adventure-card card-sts"
-          data-halaman="STS"
-        >
+    <a
+        href="sts/sts.html"
+        class="map-item"
+        data-halaman="STS"
+    >
 
-          <div class="card-icon">
-            🏆
-          </div>
+        <span class="emoji">
+            📝
+        </span>
 
-          <h4>
-            STS
-          </h4>
+        STS
 
-          <p>
-            Kerjakan Sumatif Tengah Semester
-            dengan semangat dan teliti.
-          </p>
+        <span class="map-description">
+            Kerjakan Sumatif Tengah Semester.
+        </span>
 
-          <span class="card-button">
+        <span class="map-button">
             🚀 Mulai STS
-          </span>
+        </span>
 
-        </a>
-
-
-      </div>
-
-    </section>
+    </a>
 
 
-    <!-- =======================================================
-         DAFTAR SISWA AKTIF
-    ======================================================== -->
+    <!-- =================================================
+         UJI COBA
+    ================================================== -->
 
-    <section id="daftarSiswaAktif">
+    <a
+        href="lembah/uji_coba/soal-wisata1_cba.html"
+        class="map-item hide-menu"
+        data-halaman="Uji Coba"
+    >
 
-      <div class="online-panel">
+        <span class="emoji">
+            🧪
+        </span>
 
-        <div class="online-header">
+        Uji Coba
 
-          <div class="online-title">
+        <span class="map-button">
+            🚀 Mulai
+        </span>
 
-            <span class="online-dot"></span>
+    </a>
 
-            <span>
-              Siswa Sedang Online
-            </span>
 
-          </div>
+    <!-- =================================================
+         DASHBOARD GURU
+    ================================================== -->
 
-          <div
-            class="online-count"
-            id="jumlahOnline"
-          >
+    <a
+        href="../dashboard_guru/dashboard-guru.html"
+        class="map-item hide-menu"
+        data-halaman="Dashboard Guru"
+    >
+
+        <span class="emoji">
+            👨‍🏫
+        </span>
+
+        Dashboard Guru
+
+        <span class="map-button">
+            🚀 Buka
+        </span>
+
+    </a>
+
+
+</div>
+
+
+<!-- =====================================================
+     DAFTAR SISWA ONLINE
+     
+     KOMPONEN TETAP ADA DAN TETAP AKTIF.
+     HANYA TIDAK DITAMPILKAN PADA HALAMAN.
+===================================================== -->
+
+<section id="daftarSiswaAktif">
+
+    <div class="jumlah-siswa-online">
+
+        🟢 Siswa Sedang Online
+
+        <span id="jumlahOnline">
             0 siswa
-          </div>
+        </span>
 
-        </div>
+    </div>
 
 
-        <div
-          class="online-list"
-          id="listSiswaOnline"
-        >
+    <div
+        class="daftar-siswa-scroll"
+        id="listSiswaOnline"
+    >
 
-          <div class="online-empty">
+        <div class="siswa-kosong">
             Memuat data siswa yang sedang online...
-          </div>
-
         </div>
 
-      </div>
+    </div>
 
-    </section>
-
-  </main>
+</section>
 
 
-  <!-- =========================================================
-       FOOTER
-  ========================================================== -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
-  <footer>
+<footer>
 
     <div class="footer-title">
-      📚 Petualangan Belajar Kelas 5
+        📚 Petualangan Belajar Kelas 5
     </div>
 
     <p>
-      UPT SD NEGERI 160 GRESIK
+        UPT SD NEGERI 160 GRESIK
     </p>
 
     <p>
-      Belajar • Berpetualang • Berkarya
+        Belajar • Berpetualang • Berkarya
     </p>
 
-  </footer>
+</footer>
 
 
-  <!-- =========================================================
-       AUDIO
-  ========================================================== -->
+<!-- =====================================================
+     AUDIO KLIK
+===================================================== -->
 
-  <audio
+<audio
     id="buttonSound"
     preload="auto"
-  >
+>
 
     <source
-      src="suara/button-press.mp3"
-      type="audio/mpeg"
+        src="suara/button-press.mp3"
+        type="audio/mpeg"
     >
 
-  </audio>
+</audio>
 
 
-  <!-- =========================================================
-       JAVASCRIPT PETUALANGAN
-  ========================================================== -->
+<script>
 
-  <script>
+/* =====================================================
+   KONFIGURASI API ONLINE SISWA
+   TETAP AKTIF
+===================================================== */
 
-    /* =======================================================
-       KONFIGURASI API ONLINE SISWA
-
-       GANTI URL DI BAWAH DENGAN URL WEB APP APPS SCRIPT
-       CONTOH:
-       https://script.google.com/macros/s/XXXXXXXX/exec
-    ======================================================== */
-
-    const API_URL =
-      "https://script.google.com/macros/s/AKfycbw-SmLBX8bmBH98vNrWzQ5tS3GrMvujNARGqdE2PerdDuIrPHHrGD4Kg5PSlLPyOXJ3/exec";
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbw-SmLBX8bmBH98vNrWzQ5tS3GrMvujNARGqdE2PerdDuIrPHHrGD4Kg5PSlLPyOXJ3/exec";
 
 
-    /* =======================================================
-       IDENTITAS HALAMAN
-    ======================================================== */
+/* =====================================================
+   IDENTITAS HALAMAN
+   TETAP AKTIF
+===================================================== */
 
-    const HALAMAN_UTAMA =
-      "Petualangan Belajar Kelas 5";
-
-
-    /* =======================================================
-       AUDIO TOMBOL
-    ======================================================== */
-
-    const buttonSound =
-      document.getElementById("buttonSound");
+const HALAMAN_UTAMA =
+    "Petualangan Belajar Kelas 5";
 
 
-    function playButtonSound() {
+/* =====================================================
+   AUDIO TOMBOL
+===================================================== */
 
-      if (!buttonSound) {
+const buttonSound =
+    document.getElementById(
+        "buttonSound"
+    );
+
+
+function playButtonSound(){
+
+    if(!buttonSound){
+
         return;
-      }
 
-      try {
+    }
+
+
+    try{
 
         buttonSound.currentTime = 0;
 
         const promise =
-          buttonSound.play();
+            buttonSound.play();
 
-        if (promise !== undefined) {
 
-          promise.catch(() => {
-            // Browser dapat memblokir autoplay/audio.
-          });
+        if(
+            promise !== undefined
+        ){
+
+            promise.catch(
+                function(){}
+            );
 
         }
 
-      } catch (error) {
+    }catch(error){
 
         console.log(
-          "Audio tidak dapat diputar:",
-          error
+            "Audio tidak dapat diputar:",
+            error
         );
-
-      }
 
     }
 
-
-    /* =======================================================
-       AUDIO SAAT MEMBUKA MENU
-    ======================================================== */
-
-    document
-      .querySelectorAll(".adventure-card, .nav-menu a")
-      .forEach(function(element) {
-
-        element.addEventListener(
-          "click",
-          function() {
-
-            playButtonSound();
-
-          }
-        );
-
-      });
+}
 
 
-    /* =======================================================
-       MEMBACA IDENTITAS SISWA
-    ======================================================== */
+/* =====================================================
+   AUDIO SAAT MEMBUKA MENU
+===================================================== */
 
-    function getStorageValue(keys) {
+document
+    .querySelectorAll(
+        ".map-item, nav a"
+    )
+    .forEach(
+        function(element){
 
-      const storages = [
+            element.addEventListener(
+                "click",
+                function(){
+
+                    playButtonSound();
+
+                }
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   MEMBACA IDENTITAS SISWA
+   TETAP AKTIF
+===================================================== */
+
+function getStorageValue(keys){
+
+    const storages = [
+
         window.localStorage,
+
         window.sessionStorage
-      ];
-
-      for (const storage of storages) {
-
-        for (const key of keys) {
-
-          try {
-
-            const value =
-              storage.getItem(key);
-
-            if (
-              value !== null &&
-              String(value).trim() !== ""
-            ) {
-
-              return String(value).trim();
-
-            }
-
-          } catch (error) {
-            // Abaikan storage yang tidak tersedia.
-          }
-
-        }
-
-      }
-
-      return "";
-
-    }
-
-
-    function getUrlParameter(names) {
-
-      const params =
-        new URLSearchParams(
-          window.location.search
-        );
-
-      for (const name of names) {
-
-        const value =
-          params.get(name);
-
-        if (
-          value !== null &&
-          String(value).trim() !== ""
-        ) {
-
-          return String(value).trim();
-
-        }
-
-      }
-
-      return "";
-
-    }
-
-
-    function getStudentIdentity() {
-
-      const nama =
-        getUrlParameter([
-          "nama",
-          "namaSiswa",
-          "studentName"
-        ]) ||
-        getStorageValue([
-          "nama",
-          "namaSiswa",
-          "nama_siswa",
-          "studentName",
-          "student_name",
-          "identitasNama"
-        ]);
-
-
-      const kelas =
-        getUrlParameter([
-          "kelas",
-          "kelasSiswa",
-          "studentClass"
-        ]) ||
-        getStorageValue([
-          "kelas",
-          "kelasSiswa",
-          "kelas_siswa",
-          "studentClass",
-          "student_class"
-        ]);
-
-
-      const absen =
-        getUrlParameter([
-          "absen",
-          "nomorAbsen",
-          "nomor_absen",
-          "noAbsen"
-        ]) ||
-        getStorageValue([
-          "absen",
-          "nomorAbsen",
-          "nomor_absen",
-          "noAbsen",
-          "no_absen",
-          "studentNumber",
-          "student_number"
-        ]);
-
-
-      return {
-        nama: nama,
-        kelas: kelas,
-        absen: absen
-      };
-
-    }
-
-
-    /* =======================================================
-       CEK IDENTITAS
-    ======================================================== */
-
-    function identityIsComplete(identity) {
-
-      return Boolean(
-        identity.nama &&
-        identity.kelas &&
-        identity.absen
-      );
-
-    }
-
-
-    /* =======================================================
-       KIRIM HEARTBEAT SISWA
-    ======================================================== */
-
-    let heartbeatTimer = null;
-
-    let lastHeartbeat = 0;
-
-
-    async function sendHeartbeat() {
-
-      const identity =
-        getStudentIdentity();
-
-
-      if (
-        !identityIsComplete(identity)
-      ) {
-
-        console.log(
-          "Identitas siswa belum tersedia."
-        );
-
-        return;
-
-      }
-
-
-      if (
-        !API_URL ||
-        API_URL.indexOf("GANTI_DENGAN") !== -1
-      ) {
-
-        console.log(
-          "API_URL belum diatur."
-        );
-
-        return;
-
-      }
-
-
-      const now =
-        Date.now();
-
-
-      /*
-       * Hindari pengiriman terlalu cepat.
-       */
-
-      if (
-        now - lastHeartbeat < 5000
-      ) {
-
-        return;
-
-      }
-
-
-      lastHeartbeat = now;
-
-
-      const params =
-        new URLSearchParams({
-
-          action: "heartbeat",
-
-          nama: identity.nama,
-
-          kelas: identity.kelas,
-
-          nomorAbsen: identity.absen,
-
-          halaman: HALAMAN_UTAMA,
-
-          sumber:
-            "Identitas Siswa Petualangan Kelas 5"
-
-        });
-
-
-      try {
-
-        await fetch(
-          API_URL +
-          "?" +
-          params.toString(),
-          {
-            method: "GET",
-            mode: "cors",
-            cache: "no-store"
-          }
-        );
-
-
-        console.log(
-          "Heartbeat siswa berhasil dikirim."
-        );
-
-      } catch (error) {
-
-        console.log(
-          "Heartbeat gagal:",
-          error
-        );
-
-      }
-
-    }
-
-
-    /* =======================================================
-       AKTIVITAS SISWA
-    ======================================================== */
-
-    let activityDebounce = null;
-
-
-    function registerActivity() {
-
-      clearTimeout(
-        activityDebounce
-      );
-
-
-      activityDebounce =
-        setTimeout(
-          function() {
-
-            sendHeartbeat();
-
-          },
-          300
-        );
-
-    }
-
-
-    const activityEvents = [
-
-      "click",
-      "keydown",
-      "scroll",
-      "touchstart",
-      "pointerdown"
 
     ];
 
 
-    activityEvents.forEach(
-      function(eventName) {
+    for(
+        const storage of storages
+    ){
 
-        document.addEventListener(
-          eventName,
-          registerActivity,
-          {
-            passive: true
-          }
-        );
+        for(
+            const key of keys
+        ){
 
-      }
-    );
+            try{
 
-
-    /* =======================================================
-       SAAT TAB AKTIF KEMBALI
-    ======================================================== */
-
-    document.addEventListener(
-      "visibilitychange",
-      function() {
-
-        if (
-          document.visibilityState === "visible"
-        ) {
-
-          registerActivity();
-
-        }
-
-      }
-    );
+                const value =
+                    storage.getItem(
+                        key
+                    );
 
 
-    window.addEventListener(
-      "focus",
-      function() {
+                if(
+                    value !== null &&
+                    String(value).trim() !== ""
+                ){
 
-        registerActivity();
+                    return String(
+                        value
+                    ).trim();
 
-      }
-    );
+                }
 
+            }catch(error){
 
-    /* =======================================================
-       HEARTBEAT BERKALA
-    ======================================================== */
-
-    function startHeartbeat() {
-
-      if (heartbeatTimer) {
-
-        clearInterval(
-          heartbeatTimer
-        );
-
-      }
-
-
-      /*
-       * Kirim pertama kali.
-       */
-
-      sendHeartbeat();
-
-
-      /*
-       * Kirim setiap 30 detik.
-       */
-
-      heartbeatTimer =
-        setInterval(
-          function() {
-
-            if (
-              document.visibilityState ===
-              "visible"
-            ) {
-
-              sendHeartbeat();
+                // Abaikan storage yang tidak tersedia.
 
             }
 
-          },
-          30000
+        }
+
+    }
+
+
+    return "";
+
+}
+
+
+function getUrlParameter(names){
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    for(
+        const name of names
+    ){
+
+        const value =
+            params.get(
+                name
+            );
+
+
+        if(
+            value !== null &&
+            String(value).trim() !== ""
+        ){
+
+            return String(
+                value
+            ).trim();
+
+        }
+
+    }
+
+
+    return "";
+
+}
+
+
+function getStudentIdentity(){
+
+    const nama =
+        getUrlParameter([
+            "nama",
+            "namaSiswa",
+            "studentName"
+        ]) ||
+        getStorageValue([
+            "nama",
+            "namaSiswa",
+            "nama_siswa",
+            "studentName",
+            "student_name",
+            "identitasNama"
+        ]);
+
+
+    const kelas =
+        getUrlParameter([
+            "kelas",
+            "kelasSiswa",
+            "studentClass"
+        ]) ||
+        getStorageValue([
+            "kelas",
+            "kelasSiswa",
+            "kelas_siswa",
+            "studentClass",
+            "student_class"
+        ]);
+
+
+    const absen =
+        getUrlParameter([
+            "absen",
+            "nomorAbsen",
+            "nomor_absen",
+            "noAbsen"
+        ]) ||
+        getStorageValue([
+            "absen",
+            "nomorAbsen",
+            "nomor_absen",
+            "noAbsen",
+            "no_absen",
+            "studentNumber",
+            "student_number"
+        ]);
+
+
+    return {
+
+        nama: nama,
+
+        kelas: kelas,
+
+        absen: absen
+
+    };
+
+}
+
+
+/* =====================================================
+   CEK IDENTITAS
+===================================================== */
+
+function identityIsComplete(identity){
+
+    return Boolean(
+
+        identity.nama &&
+
+        identity.kelas &&
+
+        identity.absen
+
+    );
+
+}
+
+
+/* =====================================================
+   KIRIM HEARTBEAT SISWA
+   TETAP AKTIF
+===================================================== */
+
+let heartbeatTimer = null;
+
+let lastHeartbeat = 0;
+
+
+async function sendHeartbeat(){
+
+    const identity =
+        getStudentIdentity();
+
+
+    if(
+        !identityIsComplete(
+            identity
+        )
+    ){
+
+        console.log(
+            "Identitas siswa belum tersedia."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !API_URL ||
+        API_URL.indexOf(
+            "GANTI_DENGAN"
+        ) !== -1
+    ){
+
+        console.log(
+            "API_URL belum diatur."
+        );
+
+        return;
+
+    }
+
+
+    const now =
+        Date.now();
+
+
+    if(
+        now - lastHeartbeat < 5000
+    ){
+
+        return;
+
+    }
+
+
+    lastHeartbeat =
+        now;
+
+
+    const params =
+        new URLSearchParams({
+
+            action:
+                "heartbeat",
+
+            nama:
+                identity.nama,
+
+            kelas:
+                identity.kelas,
+
+            nomorAbsen:
+                identity.absen,
+
+            halaman:
+                HALAMAN_UTAMA,
+
+            sumber:
+                "Identitas Siswa Petualangan Kelas 5"
+
+        });
+
+
+    try{
+
+        await fetch(
+
+            API_URL +
+            "?" +
+            params.toString(),
+
+            {
+
+                method:"GET",
+
+                mode:"cors",
+
+                cache:"no-store"
+
+            }
+
+        );
+
+
+        console.log(
+            "Heartbeat siswa berhasil dikirim."
+        );
+
+
+    }catch(error){
+
+        console.log(
+            "Heartbeat gagal:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   AKTIVITAS SISWA
+   TETAP AKTIF
+===================================================== */
+
+let activityDebounce = null;
+
+
+function registerActivity(){
+
+    clearTimeout(
+        activityDebounce
+    );
+
+
+    activityDebounce =
+        setTimeout(
+            function(){
+
+                sendHeartbeat();
+
+            },
+            300
+        );
+
+}
+
+
+const activityEvents = [
+
+    "click",
+
+    "keydown",
+
+    "scroll",
+
+    "touchstart",
+
+    "pointerdown"
+
+];
+
+
+activityEvents.forEach(
+    function(eventName){
+
+        document.addEventListener(
+
+            eventName,
+
+            registerActivity,
+
+            {
+
+                passive:true
+
+            }
+
+        );
+
+    }
+);
+
+
+/* =====================================================
+   SAAT TAB AKTIF KEMBALI
+===================================================== */
+
+document.addEventListener(
+
+    "visibilitychange",
+
+    function(){
+
+        if(
+            document.visibilityState ===
+            "visible"
+        ){
+
+            registerActivity();
+
+        }
+
+    }
+
+);
+
+
+window.addEventListener(
+
+    "focus",
+
+    function(){
+
+        registerActivity();
+
+    }
+
+);
+
+
+/* =====================================================
+   HEARTBEAT BERKALA
+   TETAP AKTIF
+===================================================== */
+
+function startHeartbeat(){
+
+    if(
+        heartbeatTimer
+    ){
+
+        clearInterval(
+            heartbeatTimer
         );
 
     }
 
 
-    /* =======================================================
-       MULAI TRACKING
-    ======================================================== */
-
-    startHeartbeat();
+    sendHeartbeat();
 
 
-    /* =======================================================
-       DAFTAR SISWA ONLINE
-    ======================================================== */
+    heartbeatTimer =
+        setInterval(
 
-    const listSiswaOnline =
-      document.getElementById(
+            function(){
+
+                if(
+                    document.visibilityState ===
+                    "visible"
+                ){
+
+                    sendHeartbeat();
+
+                }
+
+            },
+
+            30000
+
+        );
+
+}
+
+
+/* =====================================================
+   MULAI TRACKING
+   TETAP AKTIF
+===================================================== */
+
+startHeartbeat();
+
+
+/* =====================================================
+   DAFTAR SISWA ONLINE
+   TETAP AKTIF
+===================================================== */
+
+const listSiswaOnline =
+    document.getElementById(
         "listSiswaOnline"
-      );
+    );
 
 
-    const jumlahOnline =
-      document.getElementById(
+const jumlahOnline =
+    document.getElementById(
         "jumlahOnline"
-      );
+    );
 
 
-    function escapeHtml(value) {
+function escapeHtml(value){
 
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+    return String(value)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   RENDER SISWA ONLINE
+   TETAP AKTIF
+===================================================== */
+
+function renderSiswaOnline(data){
+
+    if(
+        !listSiswaOnline ||
+        !jumlahOnline
+    ){
+
+        return;
 
     }
 
 
-    function renderSiswaOnline(data) {
-
-      if (
-        !listSiswaOnline ||
-        !jumlahOnline
-      ) {
-
-        return;
-
-      }
-
-
-      if (
+    if(
         !data ||
-        !Array.isArray(data.students) ||
+        !Array.isArray(
+            data.students
+        ) ||
         data.students.length === 0
-      ) {
+    ){
 
         jumlahOnline.textContent =
-          "0 siswa";
+            "0 siswa";
 
 
         listSiswaOnline.innerHTML = `
-          <div class="online-empty">
-            Belum ada siswa yang sedang online.
-          </div>
+
+            <div class="siswa-kosong">
+
+                Belum ada siswa yang sedang online.
+
+            </div>
+
         `;
 
         return;
 
-      }
-
-
-      const students =
-        data.students;
-
-
-      jumlahOnline.textContent =
-        students.length +
-        (
-          students.length === 1
-            ? " siswa"
-            : " siswa"
-        );
-
-
-      listSiswaOnline.innerHTML =
-        students
-          .map(function(student) {
-
-            const nama =
-              escapeHtml(
-                student.nama || "-"
-              );
-
-            const kelas =
-              escapeHtml(
-                student.kelas || "-"
-              );
-
-            const halaman =
-              escapeHtml(
-                student.halaman || "Belajar"
-              );
-
-
-            return `
-
-              <div class="online-student">
-
-                <div class="student-avatar">
-                  👨‍🎓
-                </div>
-
-                <div class="student-info">
-
-                  <div class="student-name">
-                    ${nama}
-                  </div>
-
-                  <div class="student-class">
-                    Kelas ${kelas}
-                    • ${halaman}
-                  </div>
-
-                </div>
-
-              </div>
-
-            `;
-
-          })
-          .join("");
-
     }
 
 
-    async function loadOnlineStudents() {
+    const students =
+        data.students;
 
-      if (
+
+    jumlahOnline.textContent =
+        students.length +
+        " siswa";
+
+
+    listSiswaOnline.innerHTML =
+
+        students
+
+            .map(
+
+                function(student){
+
+                    const nama =
+                        escapeHtml(
+                            student.nama ||
+                            "-"
+                        );
+
+
+                    const kelas =
+                        escapeHtml(
+                            student.kelas ||
+                            "-"
+                        );
+
+
+                    const halaman =
+                        escapeHtml(
+                            student.halaman ||
+                            "Belajar"
+                        );
+
+
+                    return `
+
+                        <div
+                            class="siswa-online-item"
+                        >
+
+                            <div
+                                class="status-online"
+                            >
+                                🟢
+                            </div>
+
+
+                            <div
+                                class="siswa-info"
+                            >
+
+                                <div
+                                    class="siswa-nama"
+                                >
+                                    ${nama}
+                                </div>
+
+
+                                <div
+                                    class="siswa-status"
+                                >
+                                    Kelas ${kelas}
+                                </div>
+
+
+                                <div
+                                    class="siswa-halaman"
+                                >
+                                    📖 ${halaman}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+            )
+
+            .join("");
+
+}
+
+
+/* =====================================================
+   MEMUAT SISWA ONLINE
+   TETAP AKTIF
+===================================================== */
+
+async function loadOnlineStudents(){
+
+    if(
         !API_URL ||
-        API_URL.indexOf("GANTI_DENGAN") !== -1
-      ) {
+        API_URL.indexOf(
+            "GANTI_DENGAN"
+        ) !== -1
+    ){
 
-        if (listSiswaOnline) {
+        if(
+            listSiswaOnline
+        ){
 
-          listSiswaOnline.innerHTML = `
-            <div class="online-empty">
-              Sistem online siswa belum terhubung.
-            </div>
-          `;
+            listSiswaOnline.innerHTML = `
+
+                <div class="siswa-kosong">
+
+                    Sistem online siswa belum terhubung.
+
+                </div>
+
+            `;
 
         }
 
         return;
 
-      }
+    }
 
 
-      try {
+    try{
 
         const response =
-          await fetch(
-            API_URL +
-            "?action=online&t=" +
-            Date.now(),
-            {
-              method: "GET",
-              mode: "cors",
-              cache: "no-store"
-            }
-          );
+            await fetch(
+
+                API_URL +
+                "?action=online&t=" +
+                Date.now(),
+
+                {
+
+                    method:"GET",
+
+                    mode:"cors",
+
+                    cache:"no-store"
+
+                }
+
+            );
 
 
-        if (!response.ok) {
+        if(
+            !response.ok
+        ){
 
-          throw new Error(
-            "HTTP " +
-            response.status
-          );
+            throw new Error(
+
+                "HTTP " +
+                response.status
+
+            );
 
         }
 
 
         const data =
-          await response.json();
+            await response.json();
 
 
         renderSiswaOnline(
-          data
+            data
         );
 
 
-      } catch (error) {
+    }catch(error){
 
         console.log(
-          "Gagal mengambil siswa online:",
-          error
+
+            "Gagal mengambil siswa online:",
+
+            error
+
         );
 
 
-        if (listSiswaOnline) {
+        if(
+            listSiswaOnline
+        ){
 
-          listSiswaOnline.innerHTML = `
-            <div class="online-empty">
-              Data siswa online belum dapat dimuat.
-            </div>
-          `;
+            listSiswaOnline.innerHTML = `
+
+                <div class="siswa-kosong">
+
+                    Data siswa online belum dapat dimuat.
+
+                </div>
+
+            `;
 
         }
 
-      }
-
     }
 
-
-    /* =======================================================
-       MUAT SISWA ONLINE
-    ======================================================== */
-
-    loadOnlineStudents();
+}
 
 
-    /*
-     * Perbarui daftar setiap 15 detik.
-     */
+/* =====================================================
+   MUAT SISWA ONLINE
+   TETAP AKTIF
+===================================================== */
 
-    setInterval(
-      loadOnlineStudents,
-      15000
-    );
+loadOnlineStudents();
 
 
-    /* =======================================================
-       LOG
-    ======================================================== */
+/* =====================================================
+   PERBARUI DAFTAR SETIAP 15 DETIK
+   TETAP AKTIF
+===================================================== */
 
-    console.log(
-      "Petualangan Kelas 5 dibuka."
-    );
+setInterval(
 
-    console.log(
-      "Halaman:",
-      HALAMAN_UTAMA
-    );
+    loadOnlineStudents,
 
-  </script>
+    15000
+
+);
+
+
+/* =====================================================
+   LOG
+===================================================== */
+
+console.log(
+    "Petualangan Kelas 5 dibuka."
+);
+
+
+console.log(
+    "Halaman:",
+    HALAMAN_UTAMA
+);
+
+
+/* =====================================================
+   LOG SISTEM ONLINE
+   TETAP AKTIF
+===================================================== */
+
+console.log(
+    "Sistem siswa online tetap aktif."
+);
+
+</script>
 
 
 </body>

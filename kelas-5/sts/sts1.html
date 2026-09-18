@@ -1,309 +1,860 @@
 <!DOCTYPE html>
+
 <html lang="id">
 
 <head>
 
-    <!-- =====================================================
-         META
-    ====================================================== -->
 
-    <meta charset="UTF-8">
+<!-- =====================================================
+     META
+====================================================== -->
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta charset="UTF-8">
 
-    <meta
-        name="theme-color"
-        content="#0288d1"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <meta
-        name="description"
-        content="STS 1 - Petualangan Kelas 5"
-    >
+<meta
+    name="theme-color"
+    content="#0288d1"
+>
 
-    <title>STS 1 | Petualangan Kelas 5</title>
+<meta
+    name="description"
+    content="STS 1 - Petualangan Kelas 5"
+>
 
-
-    <!-- =====================================================
-         FONT GOOGLE
-    ====================================================== -->
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
+<title>STS 1 | Petualangan Kelas 5</title>
 
 
-    <style>
+<!-- =====================================================
+     FONT GOOGLE
+====================================================== -->
 
-        /* =====================================================
-           RESET
-        ====================================================== */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
 
 
-        /* =====================================================
-           HTML & BODY
-        ====================================================== */
+<style>
 
-        html,
-        body {
-            width: 100%;
-            min-height: 100%;
-            margin: 0;
-            padding: 0;
-        }
+    /* =====================================================
+       RESET
+    ====================================================== */
 
-
-        body {
-
-            min-height: 100vh;
-
-            font-family:
-                'Poppins',
-                sans-serif;
-
-            background:
-                url('https://i.imgur.com/clG3P3n.png')
-                no-repeat
-                center
-                center
-                fixed;
-
-            background-size: cover;
-
-            color: #fff;
-
-            overflow-x: hidden;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
 
-        /* =====================================================
-           NAVBAR
-        ====================================================== */
+    /* =====================================================
+       HTML & BODY
+    ====================================================== */
+
+    html,
+    body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    body {
+
+        min-height: 100vh;
+
+        font-family:
+            'Poppins',
+            sans-serif;
+
+        background:
+            url('https://i.imgur.com/clG3P3n.png')
+            no-repeat
+            center
+            center
+            fixed;
+
+        background-size: cover;
+
+        color: #fff;
+
+        overflow-x: hidden;
+    }
+
+
+    /* =====================================================
+       NAVBAR
+    ====================================================== */
+
+    nav {
+
+        width: 100%;
+
+        display: flex;
+
+        justify-content: flex-end;
+
+        align-items: center;
+
+        padding:
+            .65rem
+            1rem;
+
+        box-shadow:
+            0 3px 7px
+            rgba(0, 0, 0, .18);
+    }
+
+
+    /* =====================================================
+       NAVBAR KANAN
+    ====================================================== */
+
+    .nav-right {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: flex-end;
+
+        gap: .35rem;
+
+        flex-wrap: wrap;
+    }
+
+
+    /* =====================================================
+       LINK NAVBAR
+    ====================================================== */
+
+    nav a {
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .95
+            );
+
+        padding:
+            .4rem
+            .7rem;
+
+        border-radius: 7px;
+
+        text-decoration: none;
+
+        color: #0288d1;
+
+        font-weight: 700;
+
+        font-size: .75rem;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: .25rem;
+
+        transition:
+            transform .2s ease,
+            box-shadow .2s ease;
+    }
+
+
+    nav a:hover {
+
+        transform:
+            translateY(-1px);
+
+        box-shadow:
+            0 4px 8px
+            rgba(0, 0, 0, .18);
+    }
+
+
+    /* =====================================================
+       HEADER
+    ====================================================== */
+
+    .hero-layout {
+
+        width:
+            calc(100% - 20px);
+
+        max-width: 800px;
+
+        margin:
+            18px
+            auto
+            8px;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+    }
+
+
+    /* =====================================================
+       BAGIAN JUDUL
+    ====================================================== */
+
+    .title-section {
+
+        text-align: center;
+
+        width: 100%;
+    }
+
+
+    /* =====================================================
+       JUDUL UTAMA
+    ====================================================== */
+
+    .title-section h1 {
+
+        font-size:
+            clamp(
+                1.2rem,
+                3vw,
+                1.8rem
+            );
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .93
+            );
+
+        display: inline-block;
+
+        padding:
+            .45rem
+            1rem;
+
+        border-radius: 10px;
+
+        color: #0288d1;
+
+        box-shadow:
+            0 3px 9px
+            rgba(0, 0, 0, .18);
+    }
+
+
+    /* =====================================================
+       SUBJUDUL
+    ====================================================== */
+
+    .subtitle {
+
+        margin-top: 7px;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .90
+            );
+
+        color: #555;
+
+        display: inline-block;
+
+        padding:
+            .3rem
+            .7rem;
+
+        border-radius: 7px;
+
+        font-size: .68rem;
+
+        font-weight: 600;
+
+        box-shadow:
+            0 2px 6px
+            rgba(0, 0, 0, .12);
+    }
+
+
+    /* =====================================================
+       PEMBUNGKUS MENU
+    ====================================================== */
+
+    .menu-container {
+
+        width:
+            calc(100% - 30px);
+
+        max-width: 700px;
+
+        margin:
+            18px
+            auto;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap: 12px;
+    }
+
+
+    /* =====================================================
+       KARTU MENU
+
+       PENTING:
+       Kartu bukan <a>.
+       Kartu hanya sebagai tampilan.
+       Tidak dapat diklik.
+    ====================================================== */
+
+    .menu-card {
+
+        min-width: 0;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .94
+            );
+
+        border-radius: 12px;
+
+        padding:
+            16px
+            10px;
+
+        text-align: center;
+
+        color: #0288d1;
+
+        box-shadow:
+            0 4px 10px
+            rgba(0, 0, 0, .18);
+
+        border:
+            2px
+            solid
+            rgba(
+                255,
+                255,
+                255,
+                .85
+            );
+
+        cursor: default;
+
+        user-select: none;
+    }
+
+
+    /* =====================================================
+       KARTU TIDAK BERUBAH SAAT DISENTUH / HOVER
+    ====================================================== */
+
+    .menu-card:hover {
+
+        transform: none;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .94
+            );
+
+        box-shadow:
+            0 4px 10px
+            rgba(0, 0, 0, .18);
+    }
+
+
+    /* =====================================================
+       IKON MENU
+    ====================================================== */
+
+    .menu-icon {
+
+        width: 55px;
+
+        height: 55px;
+
+        margin:
+            0
+            auto
+            8px;
+
+        border-radius: 50%;
+
+        background:
+            linear-gradient(
+                135deg,
+                #0288d1,
+                #7b1fa2
+            );
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        font-size: 1.7rem;
+
+        box-shadow:
+            0 3px 7px
+            rgba(0, 0, 0, .18);
+
+        pointer-events: none;
+    }
+
+
+    /* =====================================================
+       JUDUL MENU
+    ====================================================== */
+
+    .menu-card h2 {
+
+        font-size: 1rem;
+
+        margin-bottom: 4px;
+
+        color: #0288d1;
+
+        pointer-events: none;
+    }
+
+
+    /* =====================================================
+       KETERANGAN MENU
+    ====================================================== */
+
+    .menu-card p {
+
+        color: #555;
+
+        font-size: .65rem;
+
+        line-height: 1.35;
+
+        margin-bottom: 9px;
+
+        pointer-events: none;
+    }
+
+
+    /* =====================================================
+       TOMBOL MULAI
+
+       HANYA BAGIAN INI YANG AKTIF / BISA DIKLIK
+    ====================================================== */
+
+    .menu-button {
+
+        display: inline-block;
+
+        background:
+            linear-gradient(
+                45deg,
+                #0288d1,
+                #7b1fa2
+            );
+
+        color: #fff;
+
+        padding:
+            5px
+            9px;
+
+        border-radius: 7px;
+
+        font-weight: 700;
+
+        font-size: .62rem;
+
+        box-shadow:
+            0 2px 5px
+            rgba(0, 0, 0, .16);
+
+        cursor: pointer;
+
+        text-decoration: none;
+
+        transition:
+            transform .2s ease,
+            box-shadow .2s ease;
+    }
+
+
+    /* =====================================================
+       HOVER TOMBOL MULAI
+    ====================================================== */
+
+    .menu-button:hover {
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 4px 8px
+            rgba(0, 0, 0, .22);
+    }
+
+
+    /* =====================================================
+       SAAT TOMBOL DITEKAN
+    ====================================================== */
+
+    .menu-button:active {
+
+        transform:
+            translateY(0);
+    }
+
+
+    /* =====================================================
+       FOCUS TOMBOL
+    ====================================================== */
+
+    .menu-button:focus-visible {
+
+        outline:
+            3px
+            solid
+            rgba(
+                255,
+                255,
+                255,
+                .95
+            );
+
+        outline-offset: 3px;
+    }
+
+
+    /* =====================================================
+       TOMBOL KEMBALI
+    ====================================================== */
+
+    .back-container {
+
+        display: flex;
+
+        justify-content: center;
+
+        margin:
+            10px
+            auto
+            20px;
+    }
+
+
+    .back-button {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 5px;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .95
+            );
+
+        color: #0288d1;
+
+        text-decoration: none;
+
+        padding:
+            6px
+            12px;
+
+        border-radius: 7px;
+
+        font-weight: 700;
+
+        font-size: .7rem;
+
+        box-shadow:
+            0 3px 7px
+            rgba(0, 0, 0, .15);
+
+        transition:
+            transform .2s ease,
+            background-color .2s ease;
+    }
+
+
+    .back-button:hover {
+
+        transform:
+            translateY(-1px);
+
+        background:
+            #dff6ff;
+    }
+
+
+    /* =====================================================
+       AUDIO
+    ====================================================== */
+
+    audio {
+
+        display: none;
+    }
+
+
+    /* =====================================================
+       TABLET
+    ====================================================== */
+
+    @media (max-width: 768px) {
 
         nav {
 
-            width: 100%;
-
-            display: flex;
-
-            justify-content: flex-end;
-
-            align-items: center;
-
             padding:
-                .65rem
-                1rem;
-
-            box-shadow:
-                0 3px 7px
-                rgba(0, 0, 0, .18);
+                .5rem
+                .7rem;
         }
 
-
-        /* =====================================================
-           NAVBAR KANAN
-        ====================================================== */
 
         .nav-right {
 
-            display: flex;
+            justify-content: center;
 
-            align-items: center;
+            width: 100%;
 
-            justify-content: flex-end;
-
-            gap: .35rem;
-
-            flex-wrap: wrap;
+            gap: 4px;
         }
 
-
-        /* =====================================================
-           LINK NAVBAR
-        ====================================================== */
 
         nav a {
 
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .95
-                );
+            font-size: .68rem;
 
             padding:
-                .4rem
-                .7rem;
-
-            border-radius: 7px;
-
-            text-decoration: none;
-
-            color: #0288d1;
-
-            font-weight: 700;
-
-            font-size: .75rem;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: .25rem;
-
-            transition:
-                transform .2s ease,
-                box-shadow .2s ease;
+                .35rem
+                .5rem;
         }
 
-
-        nav a:hover {
-
-            transform:
-                translateY(-1px);
-
-            box-shadow:
-                0 4px 8px
-                rgba(0, 0, 0, .18);
-        }
-
-
-        /* =====================================================
-           HEADER
-        ====================================================== */
 
         .hero-layout {
 
             width:
-                calc(100% - 20px);
-
-            max-width: 800px;
+                calc(100% - 16px);
 
             margin:
-                18px
+                14px
                 auto
-                8px;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
+                6px;
         }
 
-
-        /* =====================================================
-           BAGIAN JUDUL
-        ====================================================== */
-
-        .title-section {
-
-            text-align: center;
-
-            width: 100%;
-        }
-
-
-        /* =====================================================
-           JUDUL UTAMA
-        ====================================================== */
 
         .title-section h1 {
 
-            font-size:
-                clamp(
-                    1.2rem,
-                    3vw,
-                    1.8rem
-                );
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .93
-                );
-
-            display: inline-block;
+            font-size: 1.15rem;
 
             padding:
-                .45rem
-                1rem;
-
-            border-radius: 10px;
-
-            color: #0288d1;
-
-            box-shadow:
-                0 3px 9px
-                rgba(0, 0, 0, .18);
+                .4rem
+                .75rem;
         }
 
-
-        /* =====================================================
-           SUBJUDUL
-        ====================================================== */
 
         .subtitle {
 
-            margin-top: 7px;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .90
-                );
-
-            color: #555;
-
-            display: inline-block;
+            font-size: .62rem;
 
             padding:
-                .3rem
-                .7rem;
-
-            border-radius: 7px;
-
-            font-size: .68rem;
-
-            font-weight: 600;
-
-            box-shadow:
-                0 2px 6px
-                rgba(0, 0, 0, .12);
+                .25rem
+                .55rem;
         }
 
-
-        /* =====================================================
-           PEMBUNGKUS MENU
-        ====================================================== */
 
         .menu-container {
 
             width:
-                calc(100% - 30px);
+                calc(100% - 20px);
 
-            max-width: 700px;
+            max-width: 600px;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap: 8px;
 
             margin:
-                18px
+                14px
                 auto;
+        }
+
+
+        .menu-card {
+
+            padding:
+                12px
+                6px;
+
+            border-radius: 10px;
+        }
+
+
+        .menu-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            font-size: 1.4rem;
+
+            margin-bottom: 6px;
+        }
+
+
+        .menu-card h2 {
+
+            font-size: .9rem;
+
+            margin-bottom: 3px;
+        }
+
+
+        .menu-card p {
+
+            font-size: .58rem;
+
+            margin-bottom: 7px;
+        }
+
+
+        .menu-button {
+
+            padding:
+                5px
+                7px;
+
+            font-size: .56rem;
+        }
+
+
+        .back-container {
+
+            margin:
+                8px
+                auto
+                15px;
+        }
+
+
+        .back-button {
+
+            font-size: .65rem;
+
+            padding:
+                6px
+                10px;
+        }
+    }
+
+
+    /* =====================================================
+       HP KECIL
+    ====================================================== */
+
+    @media (max-width: 480px) {
+
+        nav {
+
+            padding: .4rem;
+        }
+
+
+        nav a {
+
+            font-size: .6rem;
+
+            padding:
+                .3rem
+                .42rem;
+        }
+
+
+        .hero-layout {
+
+            width:
+                calc(100% - 10px);
+
+            margin:
+                12px
+                auto
+                5px;
+        }
+
+
+        .title-section h1 {
+
+            font-size: 1rem;
+
+            padding:
+                .35rem
+                .6rem;
+
+            border-radius: 8px;
+        }
+
+
+        .subtitle {
+
+            font-size: .55rem;
+
+            margin-top: 5px;
+
+            padding:
+                .22rem
+                .45rem;
+        }
+
+
+        /* =================================================
+           MENU TETAP 2 KOLOM
+        ================================================== */
+
+        .menu-container {
+
+            width:
+                calc(100% - 12px);
 
             display: grid;
 
@@ -313,1083 +864,573 @@
                     minmax(0, 1fr)
                 );
 
-            gap: 12px;
+            gap: 6px;
+
+            margin:
+                12px
+                auto;
         }
 
-
-        /* =====================================================
-           KARTU MENU
-
-           PENTING:
-           Kartu bukan <a>.
-           Kartu hanya sebagai tampilan.
-           Tidak dapat diklik.
-        ====================================================== */
 
         .menu-card {
 
-            min-width: 0;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .94
-                );
-
-            border-radius: 12px;
-
             padding:
-                16px
-                10px;
+                10px
+                4px;
 
-            text-align: center;
+            border-radius: 9px;
 
-            color: #0288d1;
-
-            box-shadow:
-                0 4px 10px
-                rgba(0, 0, 0, .18);
-
-            border:
-                2px
-                solid
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .85
-                );
-
-            cursor: default;
-
-            user-select: none;
+            border-width: 1px;
         }
 
-
-        /* =====================================================
-           KARTU TIDAK BERUBAH SAAT DISENTUH / HOVER
-        ====================================================== */
-
-        .menu-card:hover {
-
-            transform: none;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .94
-                );
-
-            box-shadow:
-                0 4px 10px
-                rgba(0, 0, 0, .18);
-        }
-
-
-        /* =====================================================
-           IKON MENU
-        ====================================================== */
 
         .menu-icon {
 
-            width: 55px;
+            width: 40px;
 
-            height: 55px;
+            height: 40px;
 
-            margin:
-                0
-                auto
-                8px;
+            font-size: 1.25rem;
 
-            border-radius: 50%;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #0288d1,
-                    #7b1fa2
-                );
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            font-size: 1.7rem;
-
-            box-shadow:
-                0 3px 7px
-                rgba(0, 0, 0, .18);
-
-            pointer-events: none;
+            margin-bottom: 5px;
         }
 
-
-        /* =====================================================
-           JUDUL MENU
-        ====================================================== */
 
         .menu-card h2 {
 
-            font-size: 1rem;
+            font-size: .8rem;
 
-            margin-bottom: 4px;
-
-            color: #0288d1;
-
-            pointer-events: none;
+            margin-bottom: 2px;
         }
 
-
-        /* =====================================================
-           KETERANGAN MENU
-        ====================================================== */
 
         .menu-card p {
 
-            color: #555;
+            font-size: .52rem;
 
-            font-size: .65rem;
+            line-height: 1.25;
 
-            line-height: 1.35;
-
-            margin-bottom: 9px;
-
-            pointer-events: none;
+            margin-bottom: 6px;
         }
 
-
-        /* =====================================================
-           TOMBOL MULAI
-
-           HANYA BAGIAN INI YANG AKTIF / BISA DIKLIK
-        ====================================================== */
 
         .menu-button {
 
-            display: inline-block;
-
-            background:
-                linear-gradient(
-                    45deg,
-                    #0288d1,
-                    #7b1fa2
-                );
-
-            color: #fff;
-
             padding:
-                5px
-                9px;
+                4px
+                5px;
 
-            border-radius: 7px;
+            font-size: .5rem;
 
-            font-weight: 700;
-
-            font-size: .62rem;
-
-            box-shadow:
-                0 2px 5px
-                rgba(0, 0, 0, .16);
-
-            cursor: pointer;
-
-            text-decoration: none;
-
-            transition:
-                transform .2s ease,
-                box-shadow .2s ease;
-        }
-
-
-        /* =====================================================
-           HOVER TOMBOL MULAI
-        ====================================================== */
-
-        .menu-button:hover {
-
-            transform:
-                translateY(-2px);
-
-            box-shadow:
-                0 4px 8px
-                rgba(0, 0, 0, .22);
-        }
-
-
-        /* =====================================================
-           SAAT TOMBOL DITEKAN
-        ====================================================== */
-
-        .menu-button:active {
-
-            transform:
-                translateY(0);
-        }
-
-
-        /* =====================================================
-           FOCUS TOMBOL
-        ====================================================== */
-
-        .menu-button:focus-visible {
-
-            outline:
-                3px
-                solid
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .95
-                );
-
-            outline-offset: 3px;
-        }
-
-
-        /* =====================================================
-           TOMBOL KEMBALI
-        ====================================================== */
-
-        .back-container {
-
-            display: flex;
-
-            justify-content: center;
-
-            margin:
-                10px
-                auto
-                20px;
+            border-radius: 6px;
         }
 
 
         .back-button {
 
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 5px;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .95
-                );
-
-            color: #0288d1;
-
-            text-decoration: none;
+            font-size: .58rem;
 
             padding:
-                6px
-                12px;
+                5px
+                8px;
+        }
+    }
 
-            border-radius: 7px;
 
-            font-weight: 700;
+    /* =====================================================
+       HP SANGAT KECIL
+    ====================================================== */
 
-            font-size: .7rem;
+    @media (max-width: 360px) {
 
-            box-shadow:
-                0 3px 7px
-                rgba(0, 0, 0, .15);
+        .menu-container {
 
-            transition:
-                transform .2s ease,
-                background-color .2s ease;
+            width:
+                calc(100% - 8px);
+
+            gap: 4px;
         }
 
 
-        .back-button:hover {
+        .menu-card {
 
-            transform:
-                translateY(-1px);
-
-            background:
-                #dff6ff;
+            padding:
+                8px
+                3px;
         }
 
 
-        /* =====================================================
-           AUDIO
-        ====================================================== */
+        .menu-icon {
 
-        audio {
+            width: 36px;
 
-            display: none;
+            height: 36px;
+
+            font-size: 1.1rem;
         }
 
 
-        /* =====================================================
-           TABLET
-        ====================================================== */
+        .menu-card h2 {
 
-        @media (max-width: 768px) {
-
-            nav {
-
-                padding:
-                    .5rem
-                    .7rem;
-            }
-
-
-            .nav-right {
-
-                justify-content: center;
-
-                width: 100%;
-
-                gap: 4px;
-            }
-
-
-            nav a {
-
-                font-size: .68rem;
-
-                padding:
-                    .35rem
-                    .5rem;
-            }
-
-
-            .hero-layout {
-
-                width:
-                    calc(100% - 16px);
-
-                margin:
-                    14px
-                    auto
-                    6px;
-            }
-
-
-            .title-section h1 {
-
-                font-size: 1.15rem;
-
-                padding:
-                    .4rem
-                    .75rem;
-            }
-
-
-            .subtitle {
-
-                font-size: .62rem;
-
-                padding:
-                    .25rem
-                    .55rem;
-            }
-
-
-            .menu-container {
-
-                width:
-                    calc(100% - 20px);
-
-                max-width: 600px;
-
-                grid-template-columns:
-                    repeat(
-                        2,
-                        minmax(0, 1fr)
-                    );
-
-                gap: 8px;
-
-                margin:
-                    14px
-                    auto;
-            }
-
-
-            .menu-card {
-
-                padding:
-                    12px
-                    6px;
-
-                border-radius: 10px;
-            }
-
-
-            .menu-icon {
-
-                width: 45px;
-
-                height: 45px;
-
-                font-size: 1.4rem;
-
-                margin-bottom: 6px;
-            }
-
-
-            .menu-card h2 {
-
-                font-size: .9rem;
-
-                margin-bottom: 3px;
-            }
-
-
-            .menu-card p {
-
-                font-size: .58rem;
-
-                margin-bottom: 7px;
-            }
-
-
-            .menu-button {
-
-                padding:
-                    5px
-                    7px;
-
-                font-size: .56rem;
-            }
-
-
-            .back-container {
-
-                margin:
-                    8px
-                    auto
-                    15px;
-            }
-
-
-            .back-button {
-
-                font-size: .65rem;
-
-                padding:
-                    6px
-                    10px;
-            }
+            font-size: .72rem;
         }
 
 
-        /* =====================================================
-           HP KECIL
-        ====================================================== */
+        .menu-card p {
 
-        @media (max-width: 480px) {
-
-            nav {
-
-                padding: .4rem;
-            }
-
-
-            nav a {
-
-                font-size: .6rem;
-
-                padding:
-                    .3rem
-                    .42rem;
-            }
-
-
-            .hero-layout {
-
-                width:
-                    calc(100% - 10px);
-
-                margin:
-                    12px
-                    auto
-                    5px;
-            }
-
-
-            .title-section h1 {
-
-                font-size: 1rem;
-
-                padding:
-                    .35rem
-                    .6rem;
-
-                border-radius: 8px;
-            }
-
-
-            .subtitle {
-
-                font-size: .55rem;
-
-                margin-top: 5px;
-
-                padding:
-                    .22rem
-                    .45rem;
-            }
-
-
-            /* =================================================
-               MENU TETAP 2 KOLOM
-            ================================================== */
-
-            .menu-container {
-
-                width:
-                    calc(100% - 12px);
-
-                display: grid;
-
-                grid-template-columns:
-                    repeat(
-                        2,
-                        minmax(0, 1fr)
-                    );
-
-                gap: 6px;
-
-                margin:
-                    12px
-                    auto;
-            }
-
-
-            .menu-card {
-
-                padding:
-                    10px
-                    4px;
-
-                border-radius: 9px;
-
-                border-width: 1px;
-            }
-
-
-            .menu-icon {
-
-                width: 40px;
-
-                height: 40px;
-
-                font-size: 1.25rem;
-
-                margin-bottom: 5px;
-            }
-
-
-            .menu-card h2 {
-
-                font-size: .8rem;
-
-                margin-bottom: 2px;
-            }
-
-
-            .menu-card p {
-
-                font-size: .52rem;
-
-                line-height: 1.25;
-
-                margin-bottom: 6px;
-            }
-
-
-            .menu-button {
-
-                padding:
-                    4px
-                    5px;
-
-                font-size: .5rem;
-
-                border-radius: 6px;
-            }
-
-
-            .back-button {
-
-                font-size: .58rem;
-
-                padding:
-                    5px
-                    8px;
-            }
+            font-size: .46rem;
         }
 
 
-        /* =====================================================
-           HP SANGAT KECIL
-        ====================================================== */
+        .menu-button {
 
-        @media (max-width: 360px) {
+            font-size: .44rem;
 
-            .menu-container {
-
-                width:
-                    calc(100% - 8px);
-
-                gap: 4px;
-            }
-
-
-            .menu-card {
-
-                padding:
-                    8px
-                    3px;
-            }
-
-
-            .menu-icon {
-
-                width: 36px;
-
-                height: 36px;
-
-                font-size: 1.1rem;
-            }
-
-
-            .menu-card h2 {
-
-                font-size: .72rem;
-            }
-
-
-            .menu-card p {
-
-                font-size: .46rem;
-            }
-
-
-            .menu-button {
-
-                font-size: .44rem;
-
-                padding:
-                    4px;
-            }
+            padding:
+                4px;
         }
+    }
 
-    </style>
+</style>
+
 
 </head>
-
 
 <body>
 
 
-    <!-- =====================================================
-         NAVIGASI
-    ====================================================== -->
+<!-- =====================================================
+     NAVIGASI
+====================================================== -->
 
-    <nav>
+<nav>
 
-        <div class="nav-right">
+    <div class="nav-right">
 
-            <a
-                href="../index.html"
-            >
-                🏠 Beranda
-            </a>
-
-
-            <a
-                href="kelas.html"
-            >
-                🏫 Kelas
-            </a>
-
-
-            <a
-                href="Petualangan-Kelas-5.html"
-            >
-                🗺️ Petualangan
-            </a>
-
-        </div>
-
-    </nav>
-
-
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
-
-    <section class="hero-layout">
-
-        <div class="title-section">
-
-            <h1>
-                📝 STS 1
-            </h1>
-
-
-            <div>
-
-                <span class="subtitle">
-                    Pilih mata pelajaran untuk memulai
-                </span>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         MENU STS 1
-         
-         CATATAN:
-         .menu-card sekarang menggunakan <div>,
-         BUKAN <a>.
-
-         Jadi seluruh kotak TIDAK dapat diklik.
-
-         Hanya .menu-button yang menggunakan <a>
-         sehingga hanya tombol "🚀 Mulai" yang aktif.
-    ====================================================== -->
-
-    <div class="menu-container">
-
-
-        <!-- =================================================
-             PANCASILA
-        ================================================== -->
-
-        <div
-            class="menu-card"
-            data-halaman="STS Pancasila"
+        <a
+            href="../index.html"
         >
-
-            <div class="menu-icon">
-                ⭐
-            </div>
+            🏠 Beranda
+        </a>
 
 
-            <h2>
-                Pancasila
-            </h2>
-
-
-            <p>
-                Sumatif Tengah Semester
-                Pancasila.
-            </p>
-
-
-            <a
-                href="pancasila/pancasila.html"
-                class="menu-button"
-                data-halaman="STS Pancasila"
-                aria-label="Mulai STS Pancasila"
-            >
-                🚀 Mulai
-            </a>
-
-        </div>
-
-
-        <!-- =================================================
-             BAHASA INDONESIA
-        ================================================== -->
-
-        <div
-            class="menu-card"
-            data-halaman="STS Bahasa Indonesia"
+        <a
+            href="kelas.html"
         >
-
-            <div class="menu-icon">
-                📚
-            </div>
+            🏫 Kelas
+        </a>
 
 
-            <h2>
-                Bahasa Indonesia
-            </h2>
-
-
-            <p>
-                Sumatif Tengah Semester
-                Bahasa Indonesia.
-            </p>
-
-
-            <a
-                href="bahasa_indonesia/bahasa_indonesia.html"
-                class="menu-button"
-                data-halaman="STS Bahasa Indonesia"
-                aria-label="Mulai STS Bahasa Indonesia"
-            >
-                🚀 Mulai
-            </a>
-
-        </div>
-
-
-        <!-- =================================================
-             MATEMATIKA
-        ================================================== -->
-
-        <div
-            class="menu-card"
-            data-halaman="STS Matematika"
+        <a
+            href="Petualangan-Kelas-5.html"
         >
-
-            <div class="menu-icon">
-                🔢
-            </div>
-
-
-            <h2>
-                Matematika
-            </h2>
-
-
-            <p>
-                Sumatif Tengah Semester
-                Matematika.
-            </p>
-
-
-            <a
-                href="https://sdn160gresik.github.io/UPT-SD-NEGERI-160-GRESIK/kelas-5/sts/matematika/matematika.html"
-                class="menu-button"
-                data-halaman="STS Matematika"
-                aria-label="Mulai STS Matematika"
-            >
-                🚀 Mulai
-            </a>
-
-        </div>
-
-
-        <!-- =================================================
-             IPAS
-        ================================================== -->
-
-        <div
-            class="menu-card"
-            data-halaman="STS IPAS"
-        >
-
-            <div class="menu-icon">
-                🌿
-            </div>
-
-
-            <h2>
-                IPAS
-            </h2>
-
-
-            <p>
-                Sumatif Tengah Semester
-                IPAS.
-            </p>
-
-
-            <a
-                href="ipas/ipas.html"
-                class="menu-button"
-                data-halaman="STS IPAS"
-                aria-label="Mulai STS IPAS"
-            >
-                🚀 Mulai
-            </a>
-
-        </div>
-
+            🗺️ Petualangan
+        </a>
 
     </div>
 
+</nav>
 
-    <!-- =====================================================
-         TOMBOL KEMBALI
-    ====================================================== -->
 
-    <div class="back-container">
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<section class="hero-layout">
+
+    <div class="title-section">
+
+        <h1>
+            📝 STS 1
+        </h1>
+
+
+        <div>
+
+            <span class="subtitle">
+                Pilih mata pelajaran untuk memulai
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MENU STS 1
+     
+     CATATAN:
+     .menu-card sekarang menggunakan <div>,
+     BUKAN <a>.
+
+     Jadi seluruh kotak TIDAK dapat diklik.
+
+     Hanya .menu-button yang menggunakan <a>
+     sehingga hanya tombol "🚀 Mulai" yang aktif.
+====================================================== -->
+
+<div class="menu-container">
+
+
+    <!-- =================================================
+         PANCASILA
+    ================================================== -->
+
+    <div
+        class="menu-card"
+        data-halaman="STS Pancasila"
+    >
+
+        <div class="menu-icon">
+            ⭐
+        </div>
+
+
+        <h2>
+            Pancasila
+        </h2>
+
+
+        <p>
+            Sumatif Tengah Semester
+            Pancasila.
+        </p>
+
 
         <a
-            href="sts.html"
-            class="back-button"
+            href="pancasila/pancasila.html"
+            class="menu-button"
+            data-halaman="STS Pancasila"
+            aria-label="Mulai STS Pancasila"
         >
-            ← Kembali ke STS
+            🚀 Mulai
         </a>
 
     </div>
 
 
-    <!-- =====================================================
-         AUDIO KLIK
-   
-    <audio
-        id="clickSound"
-        src="suara/button-press.mp3"
-        preload="auto"
-    ></audio>
+    <!-- =================================================
+         BAHASA INDONESIA
+    ================================================== -->
 
- ====================================================== -->
+    <div
+        class="menu-card"
+        data-halaman="STS Bahasa Indonesia"
+    >
 
-    <script>
-
-        /* =====================================================
-           AUDIO KLIK
-        ====================================================== */
-
-        const clickSound =
-            document.getElementById(
-                "clickSound"
-            );
+        <div class="menu-icon">
+            📚
+        </div>
 
 
-        /* =====================================================
-           FUNGSI MEMUTAR SUARA KLIK
-        ====================================================== */
-
-        function playClickSound() {
-
-            if (!clickSound) {
-                return;
-            }
+        <h2>
+            Bahasa Indonesia
+        </h2>
 
 
-            clickSound.currentTime = 0;
+        <p>
+            Sumatif Tengah Semester
+            Bahasa Indonesia.
+        </p>
 
 
-            clickSound
-                .play()
-                .catch(function () {
+        <a
+            href="bahasa_indonesia/bahasa_indonesia.html"
+            class="menu-button"
+            data-halaman="STS Bahasa Indonesia"
+            aria-label="Mulai STS Bahasa Indonesia"
+        >
+            🚀 Mulai
+        </a>
 
-                    /*
-                     * Beberapa browser dapat
-                     * memblokir audio tertentu.
-                     */
+    </div>
 
-                });
+
+    <!-- =================================================
+         MATEMATIKA
+    ================================================== -->
+
+    <div
+        class="menu-card"
+        data-halaman="STS Matematika"
+    >
+
+        <div class="menu-icon">
+            🔢
+        </div>
+
+
+        <h2>
+            Matematika
+        </h2>
+
+
+        <p>
+            Sumatif Tengah Semester
+            Matematika.
+        </p>
+
+
+        <a
+            href="https://sdn160gresik.github.io/UPT-SD-NEGERI-160-GRESIK/kelas-5/sts/matematika/matematika.html"
+            class="menu-button"
+            data-halaman="STS Matematika"
+            aria-label="Mulai STS Matematika"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         IPAS
+    ================================================== -->
+
+    <div
+        class="menu-card"
+        data-halaman="STS IPAS"
+    >
+
+        <div class="menu-icon">
+            🌿
+        </div>
+
+
+        <h2>
+            IPAS
+        </h2>
+
+
+        <p>
+            Sumatif Tengah Semester
+            IPAS.
+        </p>
+
+
+        <a
+            href="ipas/ipas.html"
+            class="menu-button"
+            data-halaman="STS IPAS"
+            aria-label="Mulai STS IPAS"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         SENI
+    ================================================== -->
+
+    <div
+        class="menu-card"
+        data-halaman="STS Seni"
+    >
+
+        <div class="menu-icon">
+            🎨
+        </div>
+
+
+        <h2>
+            Seni
+        </h2>
+
+
+        <p>
+            Sumatif Tengah Semester
+            Seni.
+        </p>
+
+
+        <a
+            href="seni/seni.html"
+            class="menu-button"
+            data-halaman="STS Seni"
+            aria-label="Mulai STS Seni"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     TOMBOL KEMBALI
+====================================================== -->
+
+<div class="back-container">
+
+    <a
+        href="sts.html"
+        class="back-button"
+    >
+        ← Kembali ke STS
+    </a>
+
+</div>
+
+
+<!-- =====================================================
+     AUDIO KLIK
+
+<audio
+    id="clickSound"
+    src="suara/button-press.mp3"
+    preload="auto"
+></audio>
+
+
+====================================================== -->
+
+
+<script>
+
+    /* =====================================================
+       AUDIO KLIK
+    ====================================================== */
+
+    const clickSound =
+        document.getElementById(
+            "clickSound"
+        );
+
+
+    /* =====================================================
+       FUNGSI MEMUTAR SUARA KLIK
+    ====================================================== */
+
+    function playClickSound() {
+
+        if (!clickSound) {
+            return;
         }
 
 
-        /* =====================================================
-           SUARA NAVIGASI
-        ====================================================== */
+        clickSound.currentTime = 0;
 
-        document
-            .querySelectorAll(
-                "nav a"
-            )
-            .forEach(function (button) {
 
-                button.addEventListener(
-                    "click",
-                    function () {
+        clickSound
+            .play()
+            .catch(function () {
 
-                        playClickSound();
-
-                    }
-                );
+                /*
+                 * Beberapa browser dapat
+                 * memblokir audio tertentu.
+                 */
 
             });
+    }
 
 
-        /* =====================================================
-           SUARA TOMBOL MULAI
-        ====================================================== */
+    /* =====================================================
+       SUARA NAVIGASI
+    ====================================================== */
 
-        document
-            .querySelectorAll(
-                ".menu-button"
-            )
-            .forEach(function (button) {
+    document
+        .querySelectorAll(
+            "nav a"
+        )
+        .forEach(function (button) {
 
-                button.addEventListener(
-                    "click",
-                    function () {
+            button.addEventListener(
+                "click",
+                function () {
 
-                        playClickSound();
+                    playClickSound();
 
-                    }
-                );
+                }
+            );
 
-            });
-
-
-        /* =====================================================
-           SUARA TOMBOL KEMBALI
-        ====================================================== */
-
-        document
-            .querySelectorAll(
-                ".back-button"
-            )
-            .forEach(function (button) {
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        playClickSound();
-
-                    }
-                );
-
-            });
+        });
 
 
-        /* =====================================================
-           KARTU MENU TIDAK MEMILIKI EVENT CLICK
+    /* =====================================================
+       SUARA TOMBOL MULAI
+    ====================================================== */
 
-           Tidak ada:
-           - href pada kartu
-           - onclick pada kartu
-           - event listener pada kartu
+    document
+        .querySelectorAll(
+            ".menu-button"
+        )
+        .forEach(function (button) {
 
-           Dengan demikian seluruh area kotak menu
-           hanya berfungsi sebagai tampilan.
+            button.addEventListener(
+                "click",
+                function () {
 
-           Yang aktif hanya:
-           1. Tombol 🚀 Mulai
-           2. Navigasi atas
-           3. Tombol ← Kembali ke STS
-        ====================================================== */
+                    playClickSound();
+
+                }
+            );
+
+        });
 
 
-        /* =====================================================
-           INFORMASI
-        ====================================================== */
+    /* =====================================================
+       SUARA TOMBOL KEMBALI
+    ====================================================== */
 
-        console.log(
-            "Halaman STS 1 aktif."
-        );
+    document
+        .querySelectorAll(
+            ".back-button"
+        )
+        .forEach(function (button) {
 
-        console.log(
-            "Kotak menu tidak dapat diklik."
-        );
+            button.addEventListener(
+                "click",
+                function () {
 
-        console.log(
-            "Hanya tombol Mulai yang aktif."
-        );
+                    playClickSound();
 
-    </script>
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       KARTU MENU TIDAK MEMILIKI EVENT CLICK
+
+       Tidak ada:
+       - href pada kartu
+       - onclick pada kartu
+       - event listener pada kartu
+
+       Dengan demikian seluruh area kotak menu
+       hanya berfungsi sebagai tampilan.
+
+       Yang aktif hanya:
+       1. Tombol 🚀 Mulai
+       2. Navigasi atas
+       3. Tombol ← Kembali ke STS
+    ====================================================== */
+
+
+    /* =====================================================
+       INFORMASI
+    ====================================================== */
+
+    console.log(
+        "Halaman STS 1 aktif."
+    );
+
+    console.log(
+        "Kotak menu tidak dapat diklik."
+    );
+
+    console.log(
+        "Hanya tombol Mulai yang aktif."
+    );
+
+</script>
 
 
 </body>

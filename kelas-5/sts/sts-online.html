@@ -1,0 +1,2403 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+
+
+<!-- =====================================================
+     META
+====================================================== -->
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="theme-color"
+    content="#0288d1"
+>
+
+<meta
+    name="description"
+    content="Sumatif Tengah Semester - Petualangan Kelas 5"
+>
+
+<title>STS | Petualangan Kelas 5</title>
+
+
+<!-- =====================================================
+     FONT GOOGLE
+====================================================== -->
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+
+<style>
+
+    /* =====================================================
+       RESET
+    ====================================================== */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+    /* =====================================================
+       HTML & BODY
+    ====================================================== */
+
+    html,
+    body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+
+        min-height: 100vh;
+
+        font-family:
+            'Poppins',
+            sans-serif;
+
+        background:
+            url('https://i.imgur.com/clG3P3n.png')
+            no-repeat
+            center
+            center
+            fixed;
+
+        background-size: cover;
+
+        color: #fff;
+
+        overflow-x: hidden;
+    }
+
+
+    /* =====================================================
+       NAVBAR
+    ====================================================== */
+
+    nav {
+
+        width: 100%;
+
+        display: flex;
+
+        justify-content: flex-end;
+
+        align-items: center;
+
+        padding:
+            .65rem
+            1rem;
+
+        box-shadow:
+            0 3px 7px
+            rgba(0, 0, 0, .18);
+    }
+
+
+    /* =====================================================
+       NAVBAR KANAN
+    ====================================================== */
+
+    .nav-right {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: flex-end;
+
+        gap: .35rem;
+
+        flex-wrap: wrap;
+    }
+
+
+    /* =====================================================
+       LINK NAVBAR
+    ====================================================== */
+
+    nav a {
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .95
+            );
+
+        padding:
+            .4rem
+            .7rem;
+
+        border-radius: 7px;
+
+        text-decoration: none;
+
+        color: #0288d1;
+
+        font-weight: 700;
+
+        font-size: .75rem;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: .25rem;
+
+        transition:
+            transform .2s ease,
+            box-shadow .2s ease;
+    }
+
+
+    /* =====================================================
+       HOVER NAVBAR
+    ====================================================== */
+
+    nav a:hover {
+
+        transform:
+            translateY(-1px);
+
+        box-shadow:
+            0 4px 8px
+            rgba(0, 0, 0, .18);
+    }
+
+
+    /* =====================================================
+       HEADER
+    ====================================================== */
+
+    .hero-layout {
+
+        width:
+            calc(100% - 20px);
+
+        max-width: 800px;
+
+        margin:
+            18px
+            auto
+            8px;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+    }
+
+
+    /* =====================================================
+       BAGIAN JUDUL
+    ====================================================== */
+
+    .title-section {
+
+        text-align: center;
+
+        width: 100%;
+    }
+
+
+    /* =====================================================
+       JUDUL UTAMA
+    ====================================================== */
+
+    .title-section h1 {
+
+        font-size:
+            clamp(
+                1.2rem,
+                3vw,
+                1.8rem
+            );
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .93
+            );
+
+        display: inline-block;
+
+        padding:
+            .45rem
+            1rem;
+
+        border-radius: 10px;
+
+        color: #0288d1;
+
+        box-shadow:
+            0 3px 9px
+            rgba(0, 0, 0, .18);
+    }
+
+
+    /* =====================================================
+       SUBJUDUL
+    ====================================================== */
+
+    .subtitle {
+
+        margin-top: 7px;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .90
+            );
+
+        color: #555;
+
+        display: inline-block;
+
+        padding:
+            .3rem
+            .7rem;
+
+        border-radius: 7px;
+
+        font-size: .68rem;
+
+        font-weight: 600;
+
+        box-shadow:
+            0 2px 6px
+            rgba(0, 0, 0, .12);
+    }
+
+
+    /* =====================================================
+       PEMBUNGKUS MENU STS
+    ====================================================== */
+
+    .sts-container {
+
+        width:
+            calc(100% - 30px);
+
+        max-width: 650px;
+
+        margin:
+            18px
+            auto;
+
+        display: grid;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr);
+
+        gap: 12px;
+
+        align-items: stretch;
+    }
+
+
+    /* =====================================================
+       KARTU STS
+       
+       PENTING:
+       KARTU HANYA SEBAGAI TAMPILAN.
+       KARTU TIDAK MEMILIKI LINK.
+    ====================================================== */
+
+    .sts-card {
+
+        min-width: 0;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .94
+            );
+
+        border-radius: 12px;
+
+        padding:
+            16px
+            8px;
+
+        text-align: center;
+
+        color: #0288d1;
+
+        box-shadow:
+            0 4px 10px
+            rgba(0, 0, 0, .18);
+
+        border:
+            2px
+            solid
+            rgba(
+                255,
+                255,
+                255,
+                .85
+            );
+
+        /*
+         * Tidak menggunakan cursor pointer.
+         * Kartu bukan tombol.
+         */
+
+        cursor: default;
+
+        transition:
+            box-shadow .2s ease;
+    }
+
+
+    /* =====================================================
+       HOVER KARTU
+       
+       Tidak ada efek naik/klik pada kartu.
+    ====================================================== */
+
+    .sts-card:hover {
+
+        box-shadow:
+            0 4px 10px
+            rgba(0, 0, 0, .18);
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .94
+            );
+
+        transform: none;
+    }
+
+
+    /* =====================================================
+       IKON STS
+    ====================================================== */
+
+    .sts-icon {
+
+        width: 52px;
+
+        height: 52px;
+
+        margin:
+            0
+            auto
+            8px;
+
+        border-radius: 50%;
+
+        background:
+            linear-gradient(
+                135deg,
+                #0288d1,
+                #7b1fa2
+            );
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        font-size: 1.6rem;
+
+        box-shadow:
+            0 3px 7px
+            rgba(0, 0, 0, .18);
+    }
+
+
+    /* =====================================================
+       JUDUL KARTU
+    ====================================================== */
+
+    .sts-card h2 {
+
+        font-size: 1rem;
+
+        margin-bottom: 4px;
+
+        color: #0288d1;
+    }
+
+
+    /* =====================================================
+       KETERANGAN KARTU
+    ====================================================== */
+
+    .sts-card p {
+
+        color: #555;
+
+        font-size: .65rem;
+
+        line-height: 1.35;
+
+        margin-bottom: 9px;
+    }
+
+
+    /* =====================================================
+       TOMBOL MULAI
+       
+       INILAH SATU-SATUNYA BAGIAN STS
+       YANG MEMILIKI LINK.
+    ====================================================== */
+
+    .sts-button {
+
+        display: inline-block;
+
+        background:
+            linear-gradient(
+                45deg,
+                #0288d1,
+                #7b1fa2
+            );
+
+        color: #fff;
+
+        padding:
+            5px
+            9px;
+
+        border-radius: 7px;
+
+        font-weight: 700;
+
+        font-size: .62rem;
+
+        box-shadow:
+            0 2px 5px
+            rgba(0, 0, 0, .16);
+
+        pointer-events: auto;
+
+        cursor: pointer;
+
+        text-decoration: none;
+
+        transition:
+            transform .2s ease,
+            box-shadow .2s ease;
+    }
+
+
+    /* =====================================================
+       HOVER TOMBOL MULAI
+    ====================================================== */
+
+    .sts-button:hover {
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 4px 8px
+            rgba(0, 0, 0, .22);
+    }
+
+
+    /* =====================================================
+       SAAT TOMBOL DITEKAN
+    ====================================================== */
+
+    .sts-button:active {
+
+        transform:
+            translateY(0);
+    }
+
+
+    /* =====================================================
+       FOCUS TOMBOL
+    ====================================================== */
+
+    .sts-button:focus-visible {
+
+        outline:
+            3px
+            solid
+            rgba(
+                255,
+                255,
+                255,
+                .95
+            );
+
+        outline-offset: 3px;
+    }
+
+
+    /* =====================================================
+       TOMBOL KEMBALI
+    ====================================================== */
+
+    .back-container {
+
+        display: flex;
+
+        justify-content: center;
+
+        margin:
+            10px
+            auto
+            20px;
+    }
+
+
+    /* =====================================================
+       LINK KEMBALI
+    ====================================================== */
+
+    .back-button {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 5px;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .95
+            );
+
+        color: #0288d1;
+
+        text-decoration: none;
+
+        padding:
+            6px
+            12px;
+
+        border-radius: 7px;
+
+        font-weight: 700;
+
+        font-size: .7rem;
+
+        box-shadow:
+            0 3px 7px
+            rgba(0, 0, 0, .15);
+
+        transition: .2s;
+    }
+
+
+    /* =====================================================
+       HOVER TOMBOL KEMBALI
+    ====================================================== */
+
+    .back-button:hover {
+
+        transform:
+            translateY(-1px);
+
+        background:
+            #dff6ff;
+    }
+
+
+    /* =====================================================
+       AUDIO
+    ====================================================== */
+
+    audio {
+
+        display: none;
+    }
+
+
+    /* =====================================================
+       TABLET
+    ====================================================== */
+
+    @media (max-width: 768px) {
+
+        /* NAVBAR */
+
+        nav {
+
+            padding:
+                .5rem
+                .7rem;
+        }
+
+
+        .nav-right {
+
+            justify-content: center;
+
+            width: 100%;
+
+            gap: 4px;
+        }
+
+
+        nav a {
+
+            font-size: .68rem;
+
+            padding:
+                .35rem
+                .5rem;
+        }
+
+
+        /* HEADER */
+
+        .hero-layout {
+
+            width:
+                calc(100% - 16px);
+
+            margin:
+                14px
+                auto
+                6px;
+        }
+
+
+        .title-section h1 {
+
+            font-size: 1.15rem;
+
+            padding:
+                .4rem
+                .75rem;
+        }
+
+
+        .subtitle {
+
+            font-size: .62rem;
+
+            padding:
+                .25rem
+                .55rem;
+        }
+
+
+        /* =================================================
+           DUA KARTU TETAP SATU BARIS
+        ================================================== */
+
+        .sts-container {
+
+            width:
+                calc(100% - 20px);
+
+            max-width: 600px;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap: 8px;
+
+            margin:
+                14px
+                auto;
+        }
+
+
+        .sts-card {
+
+            padding:
+                12px
+                6px;
+
+            border-radius: 10px;
+        }
+
+
+        .sts-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            font-size: 1.4rem;
+
+            margin-bottom: 6px;
+        }
+
+
+        .sts-card h2 {
+
+            font-size: .9rem;
+
+            margin-bottom: 3px;
+        }
+
+
+        .sts-card p {
+
+            font-size: .58rem;
+
+            margin-bottom: 7px;
+        }
+
+
+        .sts-button {
+
+            padding:
+                5px
+                7px;
+
+            font-size: .56rem;
+        }
+
+
+        .back-container {
+
+            margin:
+                8px
+                auto
+                15px;
+        }
+
+
+        .back-button {
+
+            font-size: .65rem;
+
+            padding:
+                6px
+                10px;
+        }
+
+    }
+
+
+    /* =====================================================
+       HP KECIL
+    ====================================================== */
+
+    @media (max-width: 480px) {
+
+        /* NAVBAR */
+
+        nav {
+
+            padding: .4rem;
+        }
+
+
+        nav a {
+
+            font-size: .6rem;
+
+            padding:
+                .3rem
+                .42rem;
+        }
+
+
+        /* HEADER */
+
+        .hero-layout {
+
+            width:
+                calc(100% - 10px);
+
+            margin:
+                12px
+                auto
+                5px;
+        }
+
+
+        .title-section h1 {
+
+            font-size: 1rem;
+
+            padding:
+                .35rem
+                .6rem;
+
+            border-radius: 8px;
+        }
+
+
+        .subtitle {
+
+            font-size: .55rem;
+
+            margin-top: 5px;
+
+            padding:
+                .22rem
+                .45rem;
+        }
+
+
+        /* =================================================
+           STS 1 DAN STS 2 TETAP KIRI - KANAN
+        ================================================== */
+
+        .sts-container {
+
+            width:
+                calc(100% - 12px);
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap: 6px;
+
+            margin:
+                12px
+                auto;
+        }
+
+
+        .sts-card {
+
+            padding:
+                10px
+                4px;
+
+            border-radius: 9px;
+
+            border-width: 1px;
+        }
+
+
+        .sts-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            font-size: 1.25rem;
+
+            margin-bottom: 5px;
+        }
+
+
+        .sts-card h2 {
+
+            font-size: .8rem;
+
+            margin-bottom: 2px;
+        }
+
+
+        .sts-card p {
+
+            font-size: .52rem;
+
+            line-height: 1.25;
+
+            margin-bottom: 6px;
+        }
+
+
+        .sts-button {
+
+            padding:
+                4px
+                5px;
+
+            font-size: .5rem;
+
+            border-radius: 6px;
+        }
+
+
+        .back-button {
+
+            font-size: .58rem;
+
+            padding:
+                5px
+                8px;
+        }
+
+    }
+
+
+    /* =====================================================
+       HP SANGAT KECIL
+    ====================================================== */
+
+    @media (max-width: 360px) {
+
+        .sts-container {
+
+            width:
+                calc(100% - 8px);
+
+            gap: 4px;
+        }
+
+
+        .sts-card {
+
+            padding:
+                8px
+                3px;
+        }
+
+
+        .sts-icon {
+
+            width: 36px;
+
+            height: 36px;
+
+            font-size: 1.1rem;
+        }
+
+
+        .sts-card h2 {
+
+            font-size: .72rem;
+        }
+
+
+        .sts-card p {
+
+            font-size: .46rem;
+        }
+
+
+        .sts-button {
+
+            font-size: .44rem;
+
+            padding:
+                4px
+                4px;
+        }
+
+    }
+
+</style>
+
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     NAVIGASI
+====================================================== -->
+
+<nav>
+
+    <div class="nav-right">
+
+        <a
+            href="../index.html"
+            class="nav-button"
+        >
+            🏠 Beranda
+        </a>
+
+
+        <a
+            href="../kelas.html"
+            class="nav-button"
+        >
+            🏫 Kelas
+        </a>
+
+
+        <a
+            href="Petualangan-Kelas-5.html"
+            class="nav-button"
+        >
+            🗺️ Petualangan
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     HEADER STS
+====================================================== -->
+
+<section class="hero-layout">
+
+    <div class="title-section">
+
+        <h1>
+            📝 Sumatif Tengah Semester
+        </h1>
+
+
+        <div>
+
+            <span class="subtitle">
+                Pilih menu STS untuk memulai petualangan
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MENU STS
+====================================================== -->
+
+<div class="sts-container">
+
+
+    <!-- =================================================
+         STS 1
+    ================================================== -->
+
+    <div
+        class="sts-card"
+        data-halaman="STS 1"
+    >
+
+        <!-- IKON -->
+
+        <div class="sts-icon">
+            📝
+        </div>
+
+
+        <!-- JUDUL -->
+
+        <h2>
+            STS 1
+        </h2>
+
+
+        <!-- KETERANGAN -->
+
+        <p>
+            Masuk ke halaman
+            Sumatif Tengah Semester 1.
+        </p>
+
+
+        <!-- =================================================
+             HANYA TOMBOL INI YANG BISA DIKLIK
+        ================================================== -->
+
+        <a
+            href="sts1.html"
+            class="sts-button"
+            data-halaman="STS 1"
+            aria-label="Mulai STS 1"
+        >
+            🚀 Mulai STS 1
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         STS 2
+    ================================================== -->
+
+    <div
+        class="sts-card"
+        data-halaman="STS 2"
+    >
+
+        <!-- IKON -->
+
+        <div class="sts-icon">
+            📚
+        </div>
+
+
+        <!-- JUDUL -->
+
+        <h2>
+            STS 2
+        </h2>
+
+
+        <!-- KETERANGAN -->
+
+        <p>
+            Masuk ke halaman
+            Sumatif Tengah Semester 2.
+        </p>
+
+
+        <!-- =================================================
+             HANYA TOMBOL INI YANG BISA DIKLIK
+        ================================================== -->
+
+        <a
+            href="sts2.html"
+            class="sts-button"
+            data-halaman="STS 2"
+            aria-label="Mulai STS 2"
+        >
+            🚀 Mulai STS 2
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     TOMBOL KEMBALI
+====================================================== -->
+
+<div class="back-container">
+
+    <a
+        href="../Petualangan-Kelas-5.html"
+        class="back-button"
+    >
+
+        ← Kembali ke Petualangan
+
+    </a>
+
+</div>
+
+
+<!-- =====================================================
+     AUDIO KLIK
+====================================================== -->
+
+<audio
+    id="clickSound"
+    src="suara/button-press.mp3"
+    preload="auto"
+></audio>
+
+
+<script>
+
+    /* =====================================================
+       AUDIO KLIK
+    ====================================================== */
+
+    const clickSound =
+        document.getElementById(
+            "clickSound"
+        );
+
+
+    /* =====================================================
+       FUNGSI SUARA KLIK
+    ====================================================== */
+
+    function playClickSound() {
+
+        if (!clickSound) {
+            return;
+        }
+
+        clickSound.currentTime = 0;
+
+        clickSound
+            .play()
+            .catch(function () {
+                /*
+                 * Browser dapat memblokir audio
+                 * jika aturan autoplay terpenuhi.
+                 * Tidak menghentikan navigasi.
+                 */
+            });
+
+    }
+
+
+    /* =====================================================
+       SUARA UNTUK NAVIGASI
+    ====================================================== */
+
+    document
+        .querySelectorAll(
+            "nav a"
+        )
+        .forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    playClickSound();
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       SUARA UNTUK TOMBOL MULAI
+    ====================================================== */
+
+    document
+        .querySelectorAll(
+            ".sts-button"
+        )
+        .forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    playClickSound();
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       SUARA UNTUK TOMBOL KEMBALI
+    ====================================================== */
+
+    document
+        .querySelectorAll(
+            ".back-button"
+        )
+        .forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    playClickSound();
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       KEAMANAN KARTU STS
+       
+       Klik pada area kartu:
+       - Tidak membuka halaman
+       - Tidak melakukan navigasi
+       - Tidak memainkan suara
+       
+       Klik tombol:
+       - Tetap aktif
+       - Membuka sts1.html / sts2.html
+    ====================================================== */
+
+    document
+        .querySelectorAll(
+            ".sts-card"
+        )
+        .forEach(function (card) {
+
+            card.addEventListener(
+                "click",
+                function (event) {
+
+                    /*
+                     * Periksa apakah klik berasal
+                     * dari tombol Mulai.
+                     */
+
+                    const tombol =
+                        event.target.closest(
+                            ".sts-button"
+                        );
+
+
+                    /*
+                     * Jika bukan tombol Mulai,
+                     * hentikan aksi.
+                     */
+
+                    if (!tombol) {
+
+                        event.preventDefault();
+
+                        event.stopPropagation();
+
+                        return false;
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       INFORMASI CONSOLE
+    ====================================================== */
+
+    console.log(
+        "Halaman STS | Petualangan Kelas 5 aktif."
+    );
+
+    console.log(
+        "Kartu STS tidak dapat diklik."
+    );
+
+    console.log(
+        "Hanya tombol Mulai STS yang aktif."
+    );
+
+
+/* =====================================================
+   SISTEM ONLINE SISWA - MENGIKUTI PETUALANGAN KELAS 5
+   Halaman ini tetap mengirim heartbeat ke server sehingga
+   siswa dapat terdeteksi sedang online pada halaman STS.
+===================================================== */
+
+const STS_API_URL =
+    "https://script.google.com/macros/s/AKfycbw-SmLBX8bmBH98vNrWzQ5tS3GrMvujNARGqdE2PerdDuIrPHHrGD4Kg5PSlLPyOXJ3/exec";
+
+const STS_HALAMAN_UTAMA =
+    "STS";
+
+const STS_HEARTBEAT_INTERVAL =
+    20000;
+
+const STS_SESSION_MAX_AGE =
+    24 * 60 * 60 * 1000;
+
+const STS_LOGIN_STORAGE_KEY =
+    "identitasPetualanganKelas5";
+
+let stsHeartbeatTimer =
+    null;
+
+let stsLastHeartbeat =
+    0;
+
+let stsSedangRedirect =
+    false;
+
+
+/* =====================================================
+   BACA DATA LOGIN
+===================================================== */
+
+function stsGetLoginData(){
+
+    const storages = [
+        window.localStorage,
+        window.sessionStorage
+    ];
+
+    for(
+        const storage of storages
+    ){
+
+        try{
+
+            const raw =
+                storage.getItem(
+                    STS_LOGIN_STORAGE_KEY
+                );
+
+            if(!raw){
+                continue;
+            }
+
+            const data =
+                JSON.parse(raw);
+
+            if(
+                data &&
+                typeof data === "object"
+            ){
+
+                return data;
+
+            }
+
+        }catch(error){
+
+            console.log(
+                "STS: gagal membaca data login:",
+                error
+            );
+
+        }
+
+    }
+
+    return null;
+
+}
+
+
+/* =====================================================
+   SIMPAN DATA LOGIN
+===================================================== */
+
+function stsSaveLoginData(data){
+
+    if(!data){
+        return;
+    }
+
+    try{
+
+        localStorage.setItem(
+            STS_LOGIN_STORAGE_KEY,
+            JSON.stringify(data)
+        );
+
+    }catch(error){
+
+        console.log(
+            "STS: gagal menyimpan localStorage:",
+            error
+        );
+
+    }
+
+    try{
+
+        sessionStorage.setItem(
+            STS_LOGIN_STORAGE_KEY,
+            JSON.stringify(data)
+        );
+
+    }catch(error){
+
+        console.log(
+            "STS: gagal menyimpan sessionStorage:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   HAPUS DATA LOGIN
+===================================================== */
+
+function stsClearLoginData(){
+
+    try{
+
+        localStorage.removeItem(
+            STS_LOGIN_STORAGE_KEY
+        );
+
+    }catch(error){}
+
+    try{
+
+        sessionStorage.removeItem(
+            STS_LOGIN_STORAGE_KEY
+        );
+
+    }catch(error){}
+
+}
+
+
+/* =====================================================
+   CEK DATA LOGIN LENGKAP
+===================================================== */
+
+function stsLoginDataIsComplete(data){
+
+    return Boolean(
+        data &&
+        data.nama &&
+        data.kelas &&
+        data.sessionId
+    );
+
+}
+
+
+/* =====================================================
+   CEK SESI MAKSIMAL 24 JAM
+===================================================== */
+
+function stsClientSessionExpired(data){
+
+    if(
+        !data ||
+        !data.loginAt
+    ){
+
+        return true;
+
+    }
+
+    const loginTime =
+        Number(
+            data.loginAt
+        );
+
+    if(
+        !Number.isFinite(
+            loginTime
+        )
+    ){
+
+        return true;
+
+    }
+
+    return (
+        Date.now() -
+        loginTime
+    ) >= STS_SESSION_MAX_AGE;
+
+}
+
+
+/* =====================================================
+   JSONP
+   Mengikuti metode Petualangan Kelas 5 agar Apps Script
+   tetap dapat menerima request walaupun ada redirect/CORS.
+===================================================== */
+
+function stsRequestJSONP(
+    params,
+    timeout
+){
+
+    return new Promise(
+        function(resolve, reject){
+
+            const callbackName =
+                "stsOnlineCallback_" +
+                Date.now() +
+                "_" +
+                Math.random()
+                    .toString(36)
+                    .substring(2, 8);
+
+            let selesai =
+                false;
+
+            const script =
+                document.createElement(
+                    "script"
+                );
+
+            const query =
+                new URLSearchParams(
+                    params
+                );
+
+            query.set(
+                "callback",
+                callbackName
+            );
+
+            query.set(
+                "t",
+                Date.now()
+            );
+
+
+            const timer =
+                setTimeout(
+                    function(){
+
+                        if(selesai){
+                            return;
+                        }
+
+                        selesai =
+                            true;
+
+                        cleanup();
+
+                        reject(
+                            new Error(
+                                "Request JSONP timeout"
+                            )
+                        );
+
+                    },
+                    timeout || 10000
+                );
+
+
+            function cleanup(){
+
+                clearTimeout(
+                    timer
+                );
+
+                try{
+
+                    delete window[
+                        callbackName
+                    ];
+
+                }catch(error){
+
+                    window[
+                        callbackName
+                    ] = undefined;
+
+                }
+
+                if(
+                    script.parentNode
+                ){
+
+                    script.parentNode.removeChild(
+                        script
+                    );
+
+                }
+
+            }
+
+
+            window[
+                callbackName
+            ] =
+                function(data){
+
+                    if(selesai){
+                        return;
+                    }
+
+                    selesai =
+                        true;
+
+                    cleanup();
+
+                    resolve(
+                        data
+                    );
+
+                };
+
+
+            script.onerror =
+                function(){
+
+                    if(selesai){
+                        return;
+                    }
+
+                    selesai =
+                        true;
+
+                    cleanup();
+
+                    reject(
+                        new Error(
+                            "JSONP gagal dimuat"
+                        )
+                    );
+
+                };
+
+
+            script.src =
+                STS_API_URL +
+                "?" +
+                query.toString();
+
+            script.async =
+                true;
+
+            document
+                .head
+                .appendChild(
+                    script
+                );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   REDIRECT KE IDENTITAS
+   Karena sts.html berada di folder /sts/,
+   identitas.html berada satu tingkat di atas.
+===================================================== */
+
+function stsRedirectKeIdentitas(
+    alasan
+){
+
+    if(stsSedangRedirect){
+        return;
+    }
+
+    stsSedangRedirect =
+        true;
+
+    clearInterval(
+        stsHeartbeatTimer
+    );
+
+    stsHeartbeatTimer =
+        null;
+
+    stsClearLoginData();
+
+    let url =
+        "../identitas.html";
+
+    if(alasan){
+
+        url +=
+            "?alasan=" +
+            encodeURIComponent(
+                alasan
+            );
+
+    }
+
+    window.location.replace(
+        url
+    );
+
+}
+
+
+/* =====================================================
+   CEK SESI KE SERVER
+===================================================== */
+
+async function stsCheckSession(){
+
+    const loginData =
+        stsGetLoginData();
+
+    if(
+        !stsLoginDataIsComplete(
+            loginData
+        )
+    ){
+
+        stsRedirectKeIdentitas(
+            "login"
+        );
+
+        return false;
+
+    }
+
+
+    if(
+        stsClientSessionExpired(
+            loginData
+        )
+    ){
+
+        stsRedirectKeIdentitas(
+            "expired"
+        );
+
+        return false;
+
+    }
+
+
+    try{
+
+        const result =
+            await stsRequestJSONP(
+                {
+                    action:
+                        "checksession",
+
+                    sessionId:
+                        loginData.sessionId
+                },
+                10000
+            );
+
+
+        if(
+            !result ||
+            result.success !== true ||
+            result.loggedIn !== true
+        ){
+
+            stsRedirectKeIdentitas(
+                "invalid"
+            );
+
+            return false;
+
+        }
+
+
+        if(
+            result.session
+        ){
+
+            const updated =
+                Object.assign(
+                    {},
+                    loginData,
+                    result.session
+                );
+
+            stsSaveLoginData(
+                updated
+            );
+
+        }
+
+        return true;
+
+    }catch(error){
+
+        /*
+           Sama seperti Petualangan Kelas 5:
+           kegagalan sementara API tidak langsung
+           mengeluarkan siswa dari halaman.
+        */
+
+        console.log(
+            "STS: cek sesi sementara gagal:",
+            error
+        );
+
+        return true;
+
+    }
+
+}
+
+
+/* =====================================================
+   KIRIM HEARTBEAT STS
+===================================================== */
+
+async function stsSendHeartbeat(){
+
+    if(stsSedangRedirect){
+        return;
+    }
+
+
+    const loginData =
+        stsGetLoginData();
+
+
+    if(
+        !stsLoginDataIsComplete(
+            loginData
+        )
+    ){
+
+        console.warn(
+            "STS: heartbeat dihentikan karena data login tidak lengkap."
+        );
+
+        stsRedirectKeIdentitas(
+            "login"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        stsClientSessionExpired(
+            loginData
+        )
+    ){
+
+        console.warn(
+            "STS: sesi lokal sudah expired."
+        );
+
+        stsRedirectKeIdentitas(
+            "expired"
+        );
+
+        return;
+
+    }
+
+
+    const now =
+        Date.now();
+
+
+    if(
+        now -
+        stsLastHeartbeat
+        < 5000
+    ){
+
+        return;
+
+    }
+
+
+    stsLastHeartbeat =
+        now;
+
+
+    console.log(
+        "========================================"
+    );
+
+    console.log(
+        "📡 STS MENGIRIM HEARTBEAT"
+    );
+
+    console.log(
+        "👤 Nama:",
+        loginData.nama
+    );
+
+    console.log(
+        "🏫 Kelas:",
+        loginData.kelas
+    );
+
+    console.log(
+        "🔢 Absen:",
+        loginData.nomorAbsen ||
+        loginData.absen ||
+        "-"
+    );
+
+    console.log(
+        "📄 Halaman:",
+        STS_HALAMAN_UTAMA
+    );
+
+
+    try{
+
+        const result =
+            await stsRequestJSONP(
+                {
+                    action:
+                        "heartbeat",
+
+                    sessionId:
+                        loginData.sessionId,
+
+                    nama:
+                        loginData.nama,
+
+                    kelas:
+                        loginData.kelas,
+
+                    nomorAbsen:
+                        loginData.nomorAbsen ||
+                        loginData.absen ||
+                        "",
+
+                    halaman:
+                        STS_HALAMAN_UTAMA,
+
+                    sumber:
+                        "Petualangan Kelas 5"
+                },
+                10000
+            );
+
+
+        console.log(
+            "📥 RESPONS SERVER STS:",
+            result
+        );
+
+
+        if(
+            !result ||
+            result.success !== true
+        ){
+
+            const status =
+                String(
+                    result &&
+                    result.status ||
+                    ""
+                ).toLowerCase();
+
+
+            console.warn(
+                "STS: heartbeat tidak berhasil.",
+                result
+            );
+
+
+            if(
+                status === "expired" ||
+                status === "not_logged_in" ||
+                status === "invalid_session"
+            ){
+
+                stsRedirectKeIdentitas(
+                    "expired"
+                );
+
+                return;
+
+            }
+
+
+            /*
+               Error sementara tidak langsung
+               menghapus sesi lokal.
+            */
+
+            return;
+
+        }
+
+
+        if(
+            result.session
+        ){
+
+            const updated =
+                Object.assign(
+                    {},
+                    loginData,
+                    result.session
+                );
+
+            stsSaveLoginData(
+                updated
+            );
+
+        }
+
+
+        console.log(
+            "🟢 STS ONLINE:",
+            new Date().toLocaleTimeString()
+        );
+
+        console.log(
+            "========================================"
+        );
+
+
+    }catch(error){
+
+        /*
+           Internet/API sementara gagal tidak
+           langsung membuat siswa dianggap logout.
+           Heartbeat berikutnya akan mencoba lagi.
+        */
+
+        console.warn(
+            "STS: heartbeat gagal sementara:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   HEARTBEAT BERKALA
+===================================================== */
+
+function stsStartHeartbeat(){
+
+    if(
+        stsHeartbeatTimer
+    ){
+
+        clearInterval(
+            stsHeartbeatTimer
+        );
+
+    }
+
+
+    /*
+       Kirim langsung ketika sts.html dibuka.
+    */
+
+    stsSendHeartbeat();
+
+
+    /*
+       Selanjutnya setiap 20 detik.
+    */
+
+    stsHeartbeatTimer =
+        setInterval(
+            function(){
+
+                stsSendHeartbeat();
+
+            },
+            STS_HEARTBEAT_INTERVAL
+        );
+
+}
+
+
+/* =====================================================
+   AKTIVITAS SISWA
+===================================================== */
+
+let stsActivityTimer =
+    null;
+
+
+function stsRegisterActivity(){
+
+    clearTimeout(
+        stsActivityTimer
+    );
+
+
+    stsActivityTimer =
+        setTimeout(
+            function(){
+
+                stsSendHeartbeat();
+
+            },
+            300
+        );
+
+}
+
+
+/* =====================================================
+   EVENT AKTIVITAS
+===================================================== */
+
+const stsActivityEvents = [
+    "click",
+    "keydown",
+    "scroll",
+    "touchstart",
+    "pointerdown"
+];
+
+
+stsActivityEvents.forEach(
+    function(eventName){
+
+        document.addEventListener(
+            eventName,
+            stsRegisterActivity,
+            {
+                passive: true
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+   TAB KEMBALI AKTIF
+===================================================== */
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(
+            document.visibilityState ===
+            "visible"
+        ){
+
+            stsSendHeartbeat();
+
+        }
+
+    }
+);
+
+
+window.addEventListener(
+    "focus",
+    function(){
+
+        stsSendHeartbeat();
+
+    }
+);
+
+
+/* =====================================================
+   SAAT HALAMAN AKAN DITINGGALKAN
+   Tidak mengirim logout agar perpindahan halaman
+   tetap mengikuti sistem heartbeat antarhalaman.
+===================================================== */
+
+window.addEventListener(
+    "pagehide",
+    function(){
+
+        clearInterval(
+            stsHeartbeatTimer
+        );
+
+        stsHeartbeatTimer =
+            null;
+
+    }
+);
+
+
+/* =====================================================
+   INISIALISASI SISTEM ONLINE STS
+===================================================== */
+
+async function stsInitializeOnline(){
+
+    console.log(
+        "🚀 Sistem online STS dimulai."
+    );
+
+    const loginData =
+        stsGetLoginData();
+
+
+    if(
+        !stsLoginDataIsComplete(
+            loginData
+        )
+    ){
+
+        stsRedirectKeIdentitas(
+            "login"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        stsClientSessionExpired(
+            loginData
+        )
+    ){
+
+        stsRedirectKeIdentitas(
+            "expired"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Periksa sesi ke server terlebih dahulu.
+    */
+
+    const valid =
+        await stsCheckSession();
+
+
+    if(!valid){
+        return;
+    }
+
+
+    /*
+       Setelah sesi valid, langsung tandai
+       siswa sedang berada di halaman STS.
+    */
+
+    stsStartHeartbeat();
+
+
+    console.log(
+        "🟢 STS aktif dan sedang dibaca online oleh server."
+    );
+
+    console.log(
+        "📄 Halaman online:",
+        STS_HALAMAN_UTAMA
+    );
+
+    console.log(
+        "⏱️ Heartbeat:",
+        STS_HEARTBEAT_INTERVAL / 1000,
+        "detik"
+    );
+
+}
+
+
+/* =====================================================
+   JALANKAN
+===================================================== */
+
+stsInitializeOnline();
+
+</script>
+
+
+</body>
+
+</html>

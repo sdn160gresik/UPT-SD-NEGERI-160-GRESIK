@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+
+
+<!-- =====================================================
+     META
+====================================================== -->
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="theme-color"
+    content="#0288d1"
+>
+
+<meta
+    name="description"
+    content="Latihan STS Seni - Petualangan Kelas 5"
+>
+
+<title>Latihan STS Seni | Petualangan Kelas 5</title>
+
+
+<!-- =====================================================
+     GOOGLE FONT
+====================================================== -->
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+
+<!-- =====================================================
+     STYLE
+====================================================== -->
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+
+    body {
+        min-height: 100vh;
+
+        font-family: "Poppins", sans-serif;
+
+        background-image:
+            linear-gradient(
+                rgba(255, 255, 255, 0.78),
+                rgba(255, 255, 255, 0.78)
+            ),
+            url("https://i.imgur.com/clG3P3n.png");
+
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+
+        color: #263238;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    /* =====================================================
+       NAVBAR
+    ====================================================== */
+
+    .navbar {
+        width: 100%;
+
+        background:
+            linear-gradient(
+                135deg,
+                #0288d1,
+                #1565c0
+            );
+
+        color: white;
+
+        padding: 12px 20px;
+
+        box-shadow:
+            0 4px 15px rgba(0, 0, 0, 0.18);
+
+        position: sticky;
+        top: 0;
+
+        z-index: 1000;
+    }
+
+
+    .nav-container {
+        max-width: 1100px;
+
+        margin: auto;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 15px;
+    }
+
+
+    .nav-brand {
+        font-size: 16px;
+
+        font-weight: 800;
+
+        white-space: nowrap;
+    }
+
+
+    .nav-links {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 8px;
+
+        flex-wrap: wrap;
+    }
+
+
+    .nav-links a {
+        color: white;
+
+        text-decoration: none;
+
+        font-size: 12px;
+
+        font-weight: 600;
+
+        padding: 7px 12px;
+
+        border-radius: 20px;
+
+        background:
+            rgba(255, 255, 255, 0.15);
+
+        transition: 0.2s ease;
+    }
+
+
+    .nav-links a:hover {
+        background:
+            rgba(255, 255, 255, 0.28);
+
+        transform: translateY(-1px);
+    }
+
+
+    /* =====================================================
+       MAIN
+    ====================================================== */
+
+    main {
+        width: 100%;
+
+        flex: 1;
+
+        padding: 35px 18px 45px;
+    }
+
+
+    .container {
+        width: 100%;
+
+        max-width: 900px;
+
+        margin: auto;
+    }
+
+
+    /* =====================================================
+       HEADER
+    ====================================================== */
+
+    .hero {
+        text-align: center;
+
+        margin-bottom: 28px;
+    }
+
+
+    .hero-badge {
+        display: inline-block;
+
+        background:
+            linear-gradient(
+                135deg,
+                #7b1fa2,
+                #9c27b0
+            );
+
+        color: white;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        padding: 7px 16px;
+
+        border-radius: 30px;
+
+        box-shadow:
+            0 5px 15px rgba(123, 31, 162, 0.25);
+
+        margin-bottom: 12px;
+    }
+
+
+    .hero h1 {
+        font-size: clamp(26px, 5vw, 40px);
+
+        line-height: 1.2;
+
+        color: #1565c0;
+
+        font-weight: 800;
+
+        margin-bottom: 8px;
+
+        text-shadow:
+            0 2px 4px rgba(0, 0, 0, 0.08);
+    }
+
+
+    .hero p {
+        font-size: 14px;
+
+        color: #546e7a;
+
+        font-weight: 500;
+    }
+
+
+    /* =====================================================
+       MENU LATIHAN
+    ====================================================== */
+
+    .menu-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 16px;
+
+        width: 100%;
+    }
+
+
+    .menu-card {
+        background:
+            rgba(255, 255, 255, 0.94);
+
+        border:
+            3px solid #0288d1;
+
+        border-radius: 20px;
+
+        padding: 18px;
+
+        min-height: 150px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+
+        text-align: center;
+
+        box-shadow:
+            0 8px 20px rgba(0, 0, 0, 0.12);
+
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+
+    .menu-card:hover {
+        transform:
+            translateY(-5px);
+
+        box-shadow:
+            0 13px 28px rgba(0, 0, 0, 0.18);
+    }
+
+
+    .menu-icon {
+        font-size: 38px;
+
+        line-height: 1;
+
+        margin-bottom: 9px;
+    }
+
+
+    .menu-title {
+        color: #263238;
+
+        font-size: 17px;
+
+        font-weight: 800;
+
+        margin-bottom: 10px;
+    }
+
+
+    .menu-button {
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        min-width: 125px;
+
+        padding: 9px 16px;
+
+        border-radius: 25px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #0288d1,
+                #1565c0
+            );
+
+        color: white;
+
+        text-decoration: none;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        box-shadow:
+            0 4px 10px rgba(21, 101, 192, 0.25);
+
+        transition: 0.2s ease;
+
+        cursor: pointer;
+    }
+
+
+    .menu-button:hover {
+        transform:
+            scale(1.04);
+
+        box-shadow:
+            0 6px 14px rgba(21, 101, 192, 0.35);
+    }
+
+
+    .menu-button:active {
+        transform:
+            scale(0.97);
+    }
+
+
+    /* =====================================================
+       WARNA KARTU
+    ====================================================== */
+
+    .card-1 {
+        border-color: #0288d1;
+    }
+
+    .card-2 {
+        border-color: #7b1fa2;
+    }
+
+    .card-3 {
+        border-color: #00897b;
+    }
+
+    .card-4 {
+        border-color: #ef6c00;
+    }
+
+    .card-5 {
+        border-color: #c62828;
+    }
+
+    .card-6 {
+        border-color: #6a1b9a;
+    }
+
+    .card-7 {
+        border-color: #2e7d32;
+    }
+
+    .card-8 {
+        border-color: #ad1457;
+    }
+
+    .card-9 {
+        border-color: #0277bd;
+    }
+
+    .card-10 {
+        border-color: #ef6c00;
+    }
+
+
+    /* =====================================================
+       TOMBOL KEMBALI
+    ====================================================== */
+
+    .back-area {
+        text-align: center;
+
+        margin-top: 28px;
+    }
+
+
+    .back-button {
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 11px 22px;
+
+        border-radius: 30px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #7b1fa2,
+                #512da8
+            );
+
+        color: white;
+
+        text-decoration: none;
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        box-shadow:
+            0 5px 14px rgba(81, 45, 168, 0.25);
+
+        transition: 0.2s ease;
+    }
+
+
+    .back-button:hover {
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 8px 18px rgba(81, 45, 168, 0.35);
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ====================================================== */
+
+    footer {
+        width: 100%;
+
+        text-align: center;
+
+        padding: 16px 15px;
+
+        background:
+            rgba(21, 101, 192, 0.95);
+
+        color: white;
+
+        font-size: 11px;
+
+        font-weight: 500;
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ====================================================== */
+
+    @media (max-width: 600px) {
+
+        .navbar {
+            padding: 10px 12px;
+        }
+
+
+        .nav-container {
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+
+        .nav-brand {
+            font-size: 14px;
+        }
+
+
+        .nav-links {
+            width: 100%;
+        }
+
+
+        .nav-links a {
+            font-size: 10px;
+
+            padding: 6px 9px;
+        }
+
+
+        main {
+            padding:
+                25px 12px 35px;
+        }
+
+
+        .hero {
+            margin-bottom: 20px;
+        }
+
+
+        .hero h1 {
+            font-size: 25px;
+        }
+
+
+        .hero p {
+            font-size: 12px;
+        }
+
+
+        .menu-grid {
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 10px;
+        }
+
+
+        .menu-card {
+            min-height: 135px;
+
+            padding: 12px;
+
+            border-radius: 16px;
+        }
+
+
+        .menu-icon {
+            font-size: 30px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .menu-title {
+            font-size: 13px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .menu-button {
+            min-width: 95px;
+
+            padding: 7px 10px;
+
+            font-size: 10px;
+        }
+
+
+        .back-button {
+            font-size: 11px;
+
+            padding: 9px 18px;
+        }
+
+    }
+
+
+    @media (max-width: 360px) {
+
+        .menu-grid {
+            gap: 8px;
+        }
+
+
+        .menu-card {
+            min-height: 125px;
+
+            padding: 9px;
+        }
+
+
+        .menu-icon {
+            font-size: 26px;
+        }
+
+
+        .menu-title {
+            font-size: 12px;
+        }
+
+
+        .menu-button {
+            min-width: 88px;
+
+            font-size: 9px;
+
+            padding: 6px 8px;
+        }
+
+    }
+
+</style>
+
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+====================================================== -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <div class="nav-brand">
+            🏫 UPT SDN 160 GRESIK
+        </div>
+
+
+        <div class="nav-links">
+
+            <a
+                href="../../index.html"
+                onclick="playClick()"
+            >
+                🏠 Beranda
+            </a>
+
+            <a
+                href="../../kelas.html"
+                onclick="playClick()"
+            >
+                🏫 Kelas
+            </a>
+
+            <a
+                href="../../Petualangan-Kelas-5.html"
+                onclick="playClick()"
+            >
+                🗺️ Petualangan
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main>
+
+    <div class="container">
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="hero">
+
+            <div class="hero-badge">
+                🎨 STS 1 • SENI
+            </div>
+
+
+            <h1>
+                🎨 Latihan STS Seni
+            </h1>
+
+
+            <p>
+                Pilih latihan untuk memulai
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             MENU LATIHAN
+        ================================================== -->
+
+        <section class="menu-grid">
+
+
+            <!-- LATIHAN 1 -->
+
+            <div class="menu-card card-1">
+
+                <div class="menu-icon">
+                    1️⃣
+                </div>
+
+                <div class="menu-title">
+                    Latihan 1
+                </div>
+
+                <a
+                    class="menu-button"
+                    href="sts/seni/laithan1.html"
+                    onclick="playClick()"
+                >
+                    🚀 Mulai Latihan
+                </a>
+
+            </div>
+
+
+            <!-- LATIHAN 2 -->
+
+            <div class="menu-card card-2">
+
+                <div class="menu-icon">
+                    2️⃣
+                </div>
+
+                <div class="menu-title">
+                    Latihan 2
+                </div>
+
+                <a
+                    class="menu-button"
+                    href="sts/seni/laithan2.html"
+                    onclick="playClick()"
+                >
+                    🚀 Mulai Latihan
+                </a>
+
+            </div>
+
+
+            <!-- LATIHAN 3 -->
+
+            <div class="menu-card card-3">
+
+                <div class="menu-icon">
+                    3️⃣
+                </div>
+
+                <div class="menu-title">
+                    Latihan 3
+                </div>
+
+                <a
+                    class="menu-button"
+                    href="sts/seni/laithan3.html"
+                    onclick="playClick()"
+                >
+                    🚀 Mulai Latihan
+                </a>
+
+            </div>
+
+
+            <!-- LATIHAN 4 -->
+
+            <div class="menu-card card-4">
+
+                <div class="menu-icon">
+                    4️⃣
+                </div>
+
+                <div class="menu-title">
+                    Latihan 4
+                </div>
+
+                <a
+                    class="menu-button"
+                    href="sts/seni/laithan4.html"
+                    onclick="playClick()"
+                >
+                    🚀 Mulai Latihan
+                </a>
+
+            </div>
+
+
+            <!-- LATIHAN 5 -->
+
+            <div class="menu-card card-5">
+
+                <div class="menu-icon">
+                    5️⃣
+                </div>
+
+                <div class="menu-title">
+                    Latihan 5
+                </div>
+
+                <a
+                    class="menu-button"
+                    href="sts/seni/laithan5.html"
+                    onclick="playClick()"
+                >
+                    🚀 Mulai Latihan
+                </a>
+
+            </div>
+
+
+            <!-- LATIHAN 6 -->
+
+            <div class="menu-card card-6">
+
+                <div class="menu-icon">
+                    6️⃣
+                </div>
+
+                <div class="menu-title">
+                    Latihan 6
+                </div>
+
+                <a
+                    class="menu-button"
+                    href="sts/seni/laithan6.html"
+                    onclick="playClick()"
+                >
+                    🚀 Mulai Latihan
+                </a>
+
+            </div>
+
+
+            <!-- LATIHAN 7 -->
+
+            <div class="menu-card card-7">
+
+                <div class="menu-icon">
+                    7️⃣
+                </div>
+
+                <div class="menu-title">
+                    Latihan 7
+                </div>
+
+                <a
+                    class="menu-button"
+                    href="sts/seni/laithan7.html"
+                    onclick="playClick()"
+                >
+                    🚀 Mulai Latihan
+                </a>
+
+            </div>
+
+
+            <!-- LATIHAN 8 -->
+
+            <div class="menu-card card-8">
+
+                <div class="menu-icon">
+                    8️⃣
+                </div>
+
+                <div class="menu-title">
+                    Latihan 8
+                </div>
+
+                <a
+                    class="menu-button"
+                    href="sts/seni/laithan8.html"
+                    onclick="playClick()"
+                >
+                    🚀 Mulai Latihan
+                </a>
+
+            </div>
+
+
+            <!-- LATIHAN 9 -->
+
+            <div class="menu-card card-9">
+
+                <div class="menu-icon">
+                    9️⃣
+                </div>
+
+                <div class="menu-title">
+                    Latihan 9
+                </div>
+
+                <a
+                    class="menu-button"
+                    href="sts/seni/laithan9.html"
+                    onclick="playClick()"
+                >
+                    🚀 Mulai Latihan
+                </a>
+
+            </div>
+
+
+            <!-- LATIHAN 10 -->
+
+            <div class="menu-card card-10">
+
+                <div class="menu-icon">
+                    🔟
+                </div>
+
+                <div class="menu-title">
+                    Latihan 10
+                </div>
+
+                <a
+                    class="menu-button"
+                    href="sts/seni/laithan10.html"
+                    onclick="playClick()"
+                >
+                    🚀 Mulai Latihan
+                </a>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             TOMBOL KEMBALI
+        ================================================== -->
+
+        <div class="back-area">
+
+            <a
+                href="../../sts1.html"
+                class="back-button"
+                onclick="playClick()"
+            >
+                ← Kembali ke STS 1
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    © 2026 UPT SDN 160 GRESIK • Petualangan Kelas 5
+
+</footer>
+
+
+<!-- =====================================================
+     AUDIO
+====================================================== -->
+
+<audio
+    id="clickSound"
+    preload="auto"
+>
+
+    <source
+        src="../../suara/button-press.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+    function playClick() {
+
+        const audio =
+            document.getElementById("clickSound");
+
+        if (!audio) return;
+
+        audio.currentTime = 0;
+
+        audio.play().catch(() => {});
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

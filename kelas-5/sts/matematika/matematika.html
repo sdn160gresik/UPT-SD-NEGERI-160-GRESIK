@@ -1,0 +1,1485 @@
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="theme-color"
+    content="#0288d1"
+>
+
+<meta
+    name="description"
+    content="Latihan STS Matematika - Petualangan Kelas 5"
+>
+
+<title>Latihan STS Matematika | Petualangan Kelas 5</title>
+
+
+<!-- =====================================================
+     FONT GOOGLE
+===================================================== -->
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   HTML & BODY
+===================================================== */
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    background:
+        url('https://i.imgur.com/clG3P3n.png')
+        no-repeat
+        center
+        center
+        fixed;
+
+    background-size: cover;
+
+    color: #fff;
+
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+nav {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    padding:
+        .65rem
+        1rem;
+
+    box-shadow:
+        0 3px 7px
+        rgba(0, 0, 0, .18);
+}
+
+
+/* =====================================================
+   NAVBAR KANAN
+===================================================== */
+
+.nav-right {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: .35rem;
+
+    flex-wrap: wrap;
+}
+
+
+/* =====================================================
+   LINK NAVBAR
+===================================================== */
+
+nav a {
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .95
+        );
+
+    padding:
+        .4rem
+        .7rem;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    color: #0288d1;
+
+    font-weight: 700;
+
+    font-size: .75rem;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: .25rem;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+nav a:hover {
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 4px 8px
+        rgba(0, 0, 0, .18);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.hero-layout {
+
+    width:
+        calc(100% - 20px);
+
+    max-width: 800px;
+
+    margin:
+        18px
+        auto
+        8px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* =====================================================
+   BAGIAN JUDUL
+===================================================== */
+
+.title-section {
+
+    text-align: center;
+
+    width: 100%;
+}
+
+
+/* =====================================================
+   JUDUL UTAMA
+===================================================== */
+
+.title-section h1 {
+
+    font-size:
+        clamp(
+            1.2rem,
+            3vw,
+            1.8rem
+        );
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .93
+        );
+
+    display: inline-block;
+
+    padding:
+        .45rem
+        1rem;
+
+    border-radius: 10px;
+
+    color: #0288d1;
+
+    box-shadow:
+        0 3px 9px
+        rgba(0, 0, 0, .18);
+}
+
+
+/* =====================================================
+   SUBJUDUL
+===================================================== */
+
+.subtitle {
+
+    margin-top: 7px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .90
+        );
+
+    color: #555;
+
+    display: inline-block;
+
+    padding:
+        .3rem
+        .7rem;
+
+    border-radius: 7px;
+
+    font-size: .68rem;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 2px 6px
+        rgba(0, 0, 0, .12);
+}
+
+
+/* =====================================================
+   PEMBUNGKUS MENU
+===================================================== */
+
+.menu-container {
+
+    width:
+        calc(100% - 30px);
+
+    max-width: 700px;
+
+    margin:
+        18px
+        auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 12px;
+}
+
+
+/* =====================================================
+   KARTU MENU
+===================================================== */
+
+.menu-card {
+
+    min-width: 0;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .94
+        );
+
+    border-radius: 12px;
+
+    padding:
+        16px
+        10px;
+
+    text-align: center;
+
+    color: #0288d1;
+
+    box-shadow:
+        0 4px 10px
+        rgba(0, 0, 0, .18);
+
+    border:
+        2px
+        solid
+        rgba(
+            255,
+            255,
+            255,
+            .85
+        );
+
+    cursor: default;
+
+    user-select: none;
+}
+
+
+/* =====================================================
+   KARTU TIDAK BERUBAH SAAT HOVER
+===================================================== */
+
+.menu-card:hover {
+
+    transform: none;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .94
+        );
+
+    box-shadow:
+        0 4px 10px
+        rgba(0, 0, 0, .18);
+}
+
+
+/* =====================================================
+   IKON MENU
+===================================================== */
+
+.menu-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    margin:
+        0
+        auto
+        8px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0288d1,
+            #7b1fa2
+        );
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 1.7rem;
+
+    box-shadow:
+        0 3px 7px
+        rgba(0, 0, 0, .18);
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   JUDUL MENU
+===================================================== */
+
+.menu-card h2 {
+
+    font-size: 1rem;
+
+    margin-bottom: 4px;
+
+    color: #0288d1;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   KETERANGAN MENU
+===================================================== */
+
+.menu-card p {
+
+    color: #555;
+
+    font-size: .65rem;
+
+    line-height: 1.35;
+
+    margin-bottom: 9px;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   TOMBOL MULAI
+===================================================== */
+
+.menu-button {
+
+    display: inline-block;
+
+    background:
+        linear-gradient(
+            45deg,
+            #0288d1,
+            #7b1fa2
+        );
+
+    color: #fff;
+
+    padding:
+        5px
+        9px;
+
+    border-radius: 7px;
+
+    font-weight: 700;
+
+    font-size: .62rem;
+
+    box-shadow:
+        0 2px 5px
+        rgba(0, 0, 0, .16);
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.menu-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 4px 8px
+        rgba(0, 0, 0, .22);
+}
+
+
+.menu-button:active {
+
+    transform:
+        translateY(0);
+}
+
+
+.menu-button:focus-visible {
+
+    outline:
+        3px
+        solid
+        rgba(
+            255,
+            255,
+            255,
+            .95
+        );
+
+    outline-offset: 3px;
+}
+
+
+/* =====================================================
+   TOMBOL KEMBALI
+===================================================== */
+
+.back-container {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin:
+        10px
+        auto
+        20px;
+}
+
+
+.back-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .95
+        );
+
+    color: #0288d1;
+
+    text-decoration: none;
+
+    padding:
+        6px
+        12px;
+
+    border-radius: 7px;
+
+    font-weight: 700;
+
+    font-size: .7rem;
+
+    box-shadow:
+        0 3px 7px
+        rgba(0, 0, 0, .15);
+
+    transition:
+        transform .2s ease,
+        background-color .2s ease;
+}
+
+
+.back-button:hover {
+
+    transform:
+        translateY(-1px);
+
+    background:
+        #dff6ff;
+}
+
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+audio {
+    display: none;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 768px) {
+
+    nav {
+
+        padding:
+            .5rem
+            .7rem;
+    }
+
+
+    .nav-right {
+
+        justify-content: center;
+
+        width: 100%;
+
+        gap: 4px;
+    }
+
+
+    nav a {
+
+        font-size: .68rem;
+
+        padding:
+            .35rem
+            .5rem;
+    }
+
+
+    .hero-layout {
+
+        width:
+            calc(100% - 16px);
+
+        margin:
+            14px
+            auto
+            6px;
+    }
+
+
+    .title-section h1 {
+
+        font-size: 1.15rem;
+
+        padding:
+            .4rem
+            .75rem;
+    }
+
+
+    .subtitle {
+
+        font-size: .62rem;
+
+        padding:
+            .25rem
+            .55rem;
+    }
+
+
+    .menu-container {
+
+        width:
+            calc(100% - 20px);
+
+        max-width: 600px;
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap: 8px;
+
+        margin:
+            14px
+            auto;
+    }
+
+
+    .menu-card {
+
+        padding:
+            12px
+            6px;
+
+        border-radius: 10px;
+    }
+
+
+    .menu-icon {
+
+        width: 45px;
+
+        height: 45px;
+
+        font-size: 1.4rem;
+
+        margin-bottom: 6px;
+    }
+
+
+    .menu-card h2 {
+
+        font-size: .9rem;
+
+        margin-bottom: 3px;
+    }
+
+
+    .menu-card p {
+
+        font-size: .58rem;
+
+        margin-bottom: 7px;
+    }
+
+
+    .menu-button {
+
+        padding:
+            5px
+            7px;
+
+        font-size: .56rem;
+    }
+
+
+    .back-container {
+
+        margin:
+            8px
+            auto
+            15px;
+    }
+
+
+    .back-button {
+
+        font-size: .65rem;
+
+        padding:
+            6px
+            10px;
+    }
+
+}
+
+
+/* =====================================================
+   HP KECIL
+===================================================== */
+
+@media (max-width: 480px) {
+
+    nav {
+
+        padding: .4rem;
+    }
+
+
+    nav a {
+
+        font-size: .6rem;
+
+        padding:
+            .3rem
+            .42rem;
+    }
+
+
+    .hero-layout {
+
+        width:
+            calc(100% - 10px);
+
+        margin:
+            12px
+            auto
+            5px;
+    }
+
+
+    .title-section h1 {
+
+        font-size: 1rem;
+
+        padding:
+            .35rem
+            .6rem;
+
+        border-radius: 8px;
+    }
+
+
+    .subtitle {
+
+        font-size: .55rem;
+
+        margin-top: 5px;
+
+        padding:
+            .22rem
+            .45rem;
+    }
+
+
+    /* =================================================
+       MENU TETAP 2 KOLOM
+    ================================================== */
+
+    .menu-container {
+
+        width:
+            calc(100% - 12px);
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap: 6px;
+
+        margin:
+            12px
+            auto;
+    }
+
+
+    .menu-card {
+
+        padding:
+            10px
+            4px;
+
+        border-radius: 9px;
+
+        border-width: 1px;
+    }
+
+
+    .menu-icon {
+
+        width: 40px;
+
+        height: 40px;
+
+        font-size: 1.25rem;
+
+        margin-bottom: 5px;
+    }
+
+
+    .menu-card h2 {
+
+        font-size: .8rem;
+
+        margin-bottom: 2px;
+    }
+
+
+    .menu-card p {
+
+        font-size: .52rem;
+
+        line-height: 1.25;
+
+        margin-bottom: 6px;
+    }
+
+
+    .menu-button {
+
+        padding:
+            4px
+            5px;
+
+        font-size: .5rem;
+
+        border-radius: 6px;
+    }
+
+
+    .back-button {
+
+        font-size: .58rem;
+
+        padding:
+            5px
+            8px;
+    }
+
+}
+
+
+/* =====================================================
+   HP SANGAT KECIL
+===================================================== */
+
+@media (max-width: 360px) {
+
+    .menu-container {
+
+        width:
+            calc(100% - 8px);
+
+        gap: 4px;
+    }
+
+
+    .menu-card {
+
+        padding:
+            8px
+            3px;
+    }
+
+
+    .menu-icon {
+
+        width: 36px;
+
+        height: 36px;
+
+        font-size: 1.1rem;
+    }
+
+
+    .menu-card h2 {
+
+        font-size: .72rem;
+    }
+
+
+    .menu-card p {
+
+        font-size: .46rem;
+    }
+
+
+    .menu-button {
+
+        font-size: .44rem;
+
+        padding: 4px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVIGASI
+===================================================== -->
+
+<nav>
+
+    <div class="nav-right">
+
+        <a
+            href="../../index.html"
+        >
+            🏠 Beranda
+        </a>
+
+
+        <a
+            href="../../kelas.html"
+        >
+            🏫 Kelas
+        </a>
+
+
+        <a
+            href="../../Petualangan-Kelas-5.html"
+        >
+            🗺️ Petualangan
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<section class="hero-layout">
+
+    <div class="title-section">
+
+        <h1>
+            🔢 Latihan STS Matematika
+        </h1>
+
+        <div>
+
+            <span class="subtitle">
+                Pilih latihan untuk memulai
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MENU LATIHAN STS MATEMATIKA
+===================================================== -->
+
+<div class="menu-container">
+
+
+    <!-- =================================================
+         LATIHAN 1
+    ================================================== -->
+
+    <div class="menu-card">
+
+        <div class="menu-icon">
+            1️⃣
+        </div>
+
+        <h2>
+            Latihan 1
+        </h2>
+
+        <p>
+            Latihan STS Matematika bagian 1.
+        </p>
+
+        <a
+            href="sts/matematika/latihan1.html"
+            class="menu-button"
+            aria-label="Mulai Latihan 1"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         LATIHAN 2
+    ================================================== -->
+
+    <div class="menu-card">
+
+        <div class="menu-icon">
+            2️⃣
+        </div>
+
+        <h2>
+            Latihan 2
+        </h2>
+
+        <p>
+            Latihan STS Matematika bagian 2.
+        </p>
+
+        <a
+            href="sts/matematika/latihan2.html"
+            class="menu-button"
+            aria-label="Mulai Latihan 2"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         LATIHAN 3
+    ================================================== -->
+
+    <div class="menu-card">
+
+        <div class="menu-icon">
+            3️⃣
+        </div>
+
+        <h2>
+            Latihan 3
+        </h2>
+
+        <p>
+            Latihan STS Matematika bagian 3.
+        </p>
+
+        <a
+            href="sts/matematika/latihan3.html"
+            class="menu-button"
+            aria-label="Mulai Latihan 3"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         LATIHAN 4
+    ================================================== -->
+
+    <div class="menu-card">
+
+        <div class="menu-icon">
+            4️⃣
+        </div>
+
+        <h2>
+            Latihan 4
+        </h2>
+
+        <p>
+            Latihan STS Matematika bagian 4.
+        </p>
+
+        <a
+            href="sts/matematika/latihan4.html"
+            class="menu-button"
+            aria-label="Mulai Latihan 4"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         LATIHAN 5
+    ================================================== -->
+
+    <div class="menu-card">
+
+        <div class="menu-icon">
+            5️⃣
+        </div>
+
+        <h2>
+            Latihan 5
+        </h2>
+
+        <p>
+            Latihan STS Matematika bagian 5.
+        </p>
+
+        <a
+            href="sts/matematika/latihan5.html"
+            class="menu-button"
+            aria-label="Mulai Latihan 5"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         LATIHAN 6
+    ================================================== -->
+
+    <div class="menu-card">
+
+        <div class="menu-icon">
+            6️⃣
+        </div>
+
+        <h2>
+            Latihan 6
+        </h2>
+
+        <p>
+            Latihan STS Matematika bagian 6.
+        </p>
+
+        <a
+            href="sts/matematika/latihan6.html"
+            class="menu-button"
+            aria-label="Mulai Latihan 6"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         LATIHAN 7
+    ================================================== -->
+
+    <div class="menu-card">
+
+        <div class="menu-icon">
+            7️⃣
+        </div>
+
+        <h2>
+            Latihan 7
+        </h2>
+
+        <p>
+            Latihan STS Matematika bagian 7.
+        </p>
+
+        <a
+            href="sts/matematika/latihan7.html"
+            class="menu-button"
+            aria-label="Mulai Latihan 7"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         LATIHAN 8
+    ================================================== -->
+
+    <div class="menu-card">
+
+        <div class="menu-icon">
+            8️⃣
+        </div>
+
+        <h2>
+            Latihan 8
+        </h2>
+
+        <p>
+            Latihan STS Matematika bagian 8.
+        </p>
+
+        <a
+            href="sts/matematika/latihan8.html"
+            class="menu-button"
+            aria-label="Mulai Latihan 8"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         LATIHAN 9
+    ================================================== -->
+
+    <div class="menu-card">
+
+        <div class="menu-icon">
+            9️⃣
+        </div>
+
+        <h2>
+            Latihan 9
+        </h2>
+
+        <p>
+            Latihan STS Matematika bagian 9.
+        </p>
+
+        <a
+            href="sts/matematika/latihan9.html"
+            class="menu-button"
+            aria-label="Mulai Latihan 9"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         LATIHAN 10
+    ================================================== -->
+
+    <div class="menu-card">
+
+        <div class="menu-icon">
+            🔟
+        </div>
+
+        <h2>
+            Latihan 10
+        </h2>
+
+        <p>
+            Latihan STS Matematika bagian 10.
+        </p>
+
+        <a
+            href="sts/matematika/latihan10.html"
+            class="menu-button"
+            aria-label="Mulai Latihan 10"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     TOMBOL KEMBALI
+===================================================== -->
+
+<div class="back-container">
+
+    <a
+        href="../../sts1.html"
+        class="back-button"
+    >
+        ← Kembali ke STS 1
+    </a>
+
+</div>
+
+
+<!-- =====================================================
+     AUDIO KLIK
+===================================================== -->
+
+<audio
+    id="clickSound"
+    src="../../suara/button-press.mp3"
+    preload="auto"
+></audio>
+
+
+<script>
+
+/* =====================================================
+   AUDIO KLIK
+===================================================== */
+
+const clickSound =
+    document.getElementById(
+        "clickSound"
+    );
+
+
+/* =====================================================
+   FUNGSI MEMUTAR SUARA KLIK
+===================================================== */
+
+function playClickSound() {
+
+    if (!clickSound) {
+        return;
+    }
+
+    clickSound.currentTime = 0;
+
+    clickSound
+        .play()
+        .catch(function () {
+
+            /*
+             * Beberapa browser dapat
+             * memblokir audio tertentu.
+             */
+
+        });
+
+}
+
+
+/* =====================================================
+   SUARA NAVIGASI
+===================================================== */
+
+document
+    .querySelectorAll(
+        "nav a"
+    )
+    .forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                playClickSound();
+
+            }
+        );
+
+    });
+
+
+/* =====================================================
+   SUARA TOMBOL LATIHAN
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".menu-button"
+    )
+    .forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                playClickSound();
+
+            }
+        );
+
+    });
+
+
+/* =====================================================
+   SUARA TOMBOL KEMBALI
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".back-button"
+    )
+    .forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                playClickSound();
+
+            }
+        );
+
+    });
+
+
+/* =====================================================
+   INFORMASI
+===================================================== */
+
+console.log(
+    "Halaman Latihan STS Matematika aktif."
+);
+
+console.log(
+    "Tersedia Latihan 1 sampai Latihan 10."
+);
+
+</script>
+
+
+</body>
+
+</html>

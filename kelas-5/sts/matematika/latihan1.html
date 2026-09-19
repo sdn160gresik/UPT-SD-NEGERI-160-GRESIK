@@ -17,11 +17,11 @@
 
 <meta
     name="description"
-    content="Latihan STS 1 Matematika Kelas 5 - Bilangan dan Uang"
+    content="Soal Latihan 1 STS 1 Matematika Kelas 5"
 >
 
 <title>
-    Kuis Matematika Kelas 5 - Bilangan dan Uang
+    Soal Latihan 1 STS 1 Matematika Kelas 5
 </title>
 
 
@@ -1129,6 +1129,68 @@ button:focus-visible {
 
 
 /* =====================================================
+   STATUS PENYIMPANAN NILAI
+===================================================== */
+
+.status-penyimpanan-nilai {
+
+    margin:
+        10px
+        auto
+        4px;
+
+    padding:
+        7px
+        10px;
+
+    border-radius:
+        7px;
+
+    background:
+        #d4edda;
+
+    color:
+        #155724;
+
+    font-size:
+        .65rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.5;
+
+}
+
+
+.status-penyimpanan-nilai.status-nilai-gagal {
+
+    background:
+        #fff3cd;
+
+    color:
+        #856404;
+
+}
+
+
+.status-penyimpanan-nilai button {
+
+    margin-top:
+        6px;
+
+    font-size:
+        .58rem;
+
+    padding:
+        5px
+        9px;
+
+}
+
+
+/* =====================================================
    WARNING OVERLAY
 ===================================================== */
 
@@ -1807,6 +1869,95 @@ audio {
 
 }
 
+
+/* =====================================================
+   SISTEM ONLINE SISWA
+===================================================== */
+
+.online-loading {
+
+    width:
+        calc(100% - 20px);
+
+    max-width:
+        600px;
+
+    margin:
+        0
+        auto
+        12px;
+
+    padding:
+        10px
+        14px;
+
+    border-radius:
+        8px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .94
+        );
+
+    color:
+        #0288d1;
+
+    text-align:
+        center;
+
+    font-size:
+        .68rem;
+
+    font-weight:
+        700;
+
+    box-shadow:
+        0 3px 8px
+        rgba(
+            0,
+            0,
+            0,
+            .12
+        );
+}
+
+.status-online {
+
+    display:
+        inline-block;
+
+    margin-left:
+        8px;
+
+    padding:
+        2px
+        6px;
+
+    border-radius:
+        5px;
+
+    background:
+        #d4edda;
+
+    color:
+        #155724;
+
+    font-weight:
+        700;
+}
+
+.status-online.offline {
+
+    background:
+        #f8d7da;
+
+    color:
+        #721c24;
+}
+
 </style>
 
 </head>
@@ -1853,7 +2004,7 @@ audio {
 
     <h1 class="judul-kuis">
 
-        🧮 Latihan Soal STS 1 Matematika
+        🧮 Soal Latihan 1 STS 1 Matematika Kelas 5
 
     </h1>
 
@@ -1864,14 +2015,16 @@ audio {
 
     <div class="deskripsi">
 
-        📚 Bilangan Cacah, Nilai Tempat,
-        Operasi Hitung, dan Uang
-
+        📚 Matematika
         <br>
 
         <b>
             20 Soal Pilihan Ganda
         </b>
+
+        <br>
+
+        Pilihlah satu jawaban yang paling tepat!
 
     </div>
 
@@ -1880,68 +2033,15 @@ audio {
          FORM DATA SISWA
     ================================================== -->
 
-    <div id="formData">
+    <!-- =================================================
+         STATUS SISTEM ONLINE SISWA
+    ================================================== -->
 
-
-        <p>
-
-            Silakan isi identitas
-            sebelum mulai kuis.
-
-        </p>
-
-
-        <label>
-
-            Nama:
-
-        </label>
-
-
-        <input
-            type="text"
-            id="nama"
-            placeholder="Masukkan nama"
-        >
-
-
-        <label>
-
-            Kelas:
-
-        </label>
-
-
-        <input
-            type="text"
-            id="kelas"
-            placeholder="Contoh: V-A"
-        >
-
-
-        <label>
-
-            No. Absen:
-
-        </label>
-
-
-        <input
-            type="text"
-            id="absen"
-            placeholder="Masukkan nomor absen"
-        >
-
-
-        <button
-            onclick="mulaiKuis()"
-        >
-
-            🚀 Mulai Kuis
-
-        </button>
-
-
+    <div
+        id="onlineLoading"
+        class="online-loading"
+    >
+        🔐 Memeriksa identitas dan sesi siswa...
     </div>
 
 
@@ -1960,7 +2060,22 @@ audio {
         <div
             id="infoSiswa"
             class="info-siswa"
-        ></div>
+        >
+            👤 Nama:
+            <b id="namaSiswaLogin">-</b>
+            |
+            🏫 Kelas:
+            <b id="kelasSiswaLogin">-</b>
+            |
+            🔢 Absen:
+            <b id="absenSiswaLogin">-</b>
+            <span
+                id="statusOnline"
+                class="status-online"
+            >
+                🟡 Memeriksa...
+            </span>
+        </div>
 
 
         <!-- SOAL -->
@@ -2026,14 +2141,15 @@ audio {
 
 
 /* =========================================================
-   BANK SOAL MATEMATIKA KELAS 5
-   20 SOAL PILIHAN GANDA
+   BANK SOAL PENDIDIKAN PANCASILA KELAS 5
+   SOAL LATIHAN 1 STS 1
+   25 SOAL PILIHAN GANDA
 ========================================================= */
 
 let soal = [
 
     {
-        q: "Perhatikan bilangan berikut!<br><br><b>572.846</b><br><br>Angka <b>7</b> pada bilangan tersebut menempati tempat ....",
+        q: "Perhatikan bilangan berikut! <b>572.846</b><br><br>Angka <b>7</b> pada bilangan tersebut menempati tempat ....",
         a: [
             "satuan",
             "ribuan",
@@ -2042,7 +2158,6 @@ let soal = [
         ],
         k: 2
     },
-
 
     {
         q: "Rani memiliki uang <b>Rp75.000,00</b>. Ia membeli sebuah buku seharga <b>Rp28.500,00</b>.<br><br>Berapa sisa uang Rani?",
@@ -2055,7 +2170,6 @@ let soal = [
         k: 1
     },
 
-
     {
         q: "Budi membeli 2 buku dengan harga <b>Rp8.500,00</b> per buku dan 1 tempat pensil seharga <b>Rp15.000,00</b>.<br><br>Jumlah uang yang harus dibayar Budi adalah ....",
         a: [
@@ -2066,7 +2180,6 @@ let soal = [
         ],
         k: 2
     },
-
 
     {
         q: "Siti membeli tas seharga <b>Rp42.500,00</b> dan tempat minum seharga <b>Rp17.500,00</b>. Ia membayar dengan uang <b>Rp100.000,00</b>.<br><br>Uang kembalian Siti adalah ....",
@@ -2079,7 +2192,6 @@ let soal = [
         k: 2
     },
 
-
     {
         q: "Ayah memberikan uang <b>Rp150.000,00</b> kepada Dika. Dika membeli sepatu seharga <b>Rp95.000,00</b> dan kaus kaki seharga <b>Rp18.000,00</b>.<br><br>Sisa uang Dika adalah ....",
         a: [
@@ -2090,7 +2202,6 @@ let soal = [
         ],
         k: 2
     },
-
 
     {
         q: "Perhatikan bilangan <b>684.275</b>.<br><br>Angka <b>8</b> pada bilangan tersebut menempati tempat ....",
@@ -2103,7 +2214,6 @@ let soal = [
         k: 1
     },
 
-
     {
         q: "Lina memiliki uang <b>Rp100.000,00</b>. Ia membeli 3 pensil dengan harga <b>Rp4.000,00</b> per pensil dan 2 buku dengan harga <b>Rp12.500,00</b> per buku.<br><br>Berapa uang kembalian Lina?",
         a: [
@@ -2114,7 +2224,6 @@ let soal = [
         ],
         k: 1
     },
-
 
     {
         q: "Andi mempunyai uang <b>Rp200.000,00</b>. Ia membeli sepatu seharga <b>Rp125.000,00</b> dan topi seharga <b>Rp35.000,00</b>.<br><br>Berapakah uang Andi yang tersisa?",
@@ -2127,18 +2236,16 @@ let soal = [
         k: 2
     },
 
-
     {
-        q: "Perhatikan bilangan berikut!<br><br><b>905.317</b><br><br>Nilai angka <b>5</b> pada bilangan tersebut adalah ....",
+        q: "Perhatikan bilangan berikut! <b>905.317</b><br><br>Nilai angka <b>5</b> pada bilangan tersebut adalah ....",
         a: [
             "500",
             "5.000",
             "50.000",
             "500.000"
         ],
-        k: 1
+        k: 2
     },
-
 
     {
         q: "Perhatikan bilangan berikut!<br><br><b>245.678, 198.765, 356.789, 276.543</b><br><br>Urutan bilangan dari yang terkecil ke terbesar adalah ....",
@@ -2151,7 +2258,6 @@ let soal = [
         k: 0
     },
 
-
     {
         q: "Hasil dari <b>48.000 ÷ 6</b> adalah ....",
         a: [
@@ -2162,7 +2268,6 @@ let soal = [
         ],
         k: 2
     },
-
 
     {
         q: "Perhatikan bilangan <b>426.815</b>.<br><br>Angka <b>6</b> menempati tempat ....",
@@ -2175,7 +2280,6 @@ let soal = [
         k: 2
     },
 
-
     {
         q: "Riko memiliki uang <b>Rp100.000,00</b>. Ia membeli buku seharga <b>Rp27.500,00</b> dan alat tulis seharga <b>Rp12.500,00</b>.<br><br>Berapa uang kembalian Riko?",
         a: [
@@ -2186,7 +2290,6 @@ let soal = [
         ],
         k: 2
     },
-
 
     {
         q: "Bentuk panjang dari bilangan <b>583.214</b> adalah ....",
@@ -2199,7 +2302,6 @@ let soal = [
         k: 0
     },
 
-
     {
         q: "Sebuah toko memiliki <b>125 kotak pensil</b>. Setiap kotak berisi <b>24 pensil</b>.<br><br>Jumlah seluruh pensil adalah ....",
         a: [
@@ -2210,7 +2312,6 @@ let soal = [
         ],
         k: 1
     },
-
 
     {
         q: "Urutkan bilangan berikut dari yang terkecil ke terbesar!<br><br><b>425.678, 245.876, 524.678, 254.786</b>",
@@ -2223,7 +2324,6 @@ let soal = [
         k: 0
     },
 
-
     {
         q: "Perhatikan bilangan berikut!<br><br><b>675.432, 567.324, 756.234, 657.423</b><br><br>Urutan dari yang terbesar ke terkecil adalah ....",
         a: [
@@ -2234,7 +2334,6 @@ let soal = [
         ],
         k: 0
     },
-
 
     {
         q: "Ibu pergi ke pasar membawa uang <b>Rp200.000,00</b>.<br><br>Ibu membeli:<br>• 2 kg beras @ Rp16.000,00<br>• 1 kg gula Rp18.000,00<br>• minyak goreng Rp22.000,00<br>• telur Rp30.000,00<br><br>Uang kembalian Ibu adalah ....",
@@ -2247,7 +2346,6 @@ let soal = [
         k: 2
     },
 
-
     {
         q: "Sebuah sekolah membeli <b>24 kotak pensil</b>. Setiap kotak berisi <b>125 pensil</b>. Semua pensil dibagikan sama rata kepada <b>15 kelas</b>.<br><br>Berapa pensil yang diterima setiap kelas?",
         a: [
@@ -2258,7 +2356,6 @@ let soal = [
         ],
         k: 2
     },
-
 
     {
         q: "Sebuah koperasi sekolah memiliki <b>18 dus buku</b>. Setiap dus berisi <b>250 buku</b>. Semua buku dibagikan sama rata kepada <b>30 kelas</b>.<br><br>Berapa buku yang diterima setiap kelas?",
@@ -2272,7 +2369,6 @@ let soal = [
     }
 
 ];
-
 
 /* =========================================================
    VARIABEL
@@ -2290,72 +2386,59 @@ let benar = 0;
 
 
 /* =========================================================
-   MULAI KUIS
+   MULAI KUIS DARI SESSION ONLINE
 ========================================================= */
 
-function mulaiKuis() {
-
-    dataNama =
-        document
-            .getElementById("nama")
-            .value
-            .trim();
-
-
-    dataKelas =
-        document
-            .getElementById("kelas")
-            .value
-            .trim();
-
-
-    dataAbsen =
-        document
-            .getElementById("absen")
-            .value
-            .trim();
-
+function mulaiKuisDariSession(data) {
 
     if (
-        !dataNama ||
-        !dataKelas ||
-        !dataAbsen
+        !data ||
+        !data.nama ||
+        !data.kelas ||
+        !data.sessionId
     ) {
 
-        mainkanSuaraPeringatan();
-
-
-        tampilkanPeringatan(
-
-            "⚠️ Ups! Data belum lengkap.<br><br>" +
-
-            "Isi dulu Nama, Kelas, dan Absen ya " +
-
-            "biar kamu bisa mulai mengerjakan kuis! 🚀"
-
-        );
-
-
         return;
+
     }
 
 
-    mainkanSuaraNext();
+    dataNama =
+        data.nama || "";
 
 
-    document
-        .getElementById("infoSiswa")
-        .innerHTML =
-
-        `👤 Nama: <b>${dataNama}</b> |
-         🏫 Kelas: <b>${dataKelas}</b> |
-         🔢 Absen: <b>${dataAbsen}</b>`;
+    dataKelas =
+        data.kelas || "";
 
 
-    document
-        .getElementById("formData")
-        .classList
-        .add("hidden");
+    dataAbsen =
+        data.nomorAbsen ||
+        data.absen ||
+        "";
+
+
+    indeks = 0;
+
+    benar = 0;
+
+    matematikaNilaiSudahDikirim = false;
+
+    matematikaPengirimanNilaiSedangBerjalan = false;
+
+
+    const loading =
+        document.getElementById(
+            "onlineLoading"
+        );
+
+
+    if (loading) {
+
+        loading.classList.add(
+            "hidden"
+        );
+
+    }
 
 
     document
@@ -2379,7 +2462,6 @@ function mulaiKuis() {
     tampilkanSoal();
 
 }
-
 
 /* =========================================================
    ACAK SOAL
@@ -2511,7 +2593,15 @@ function tampilkanSoal() {
             );
 
 
-        kirimDataKeGoogleSheet(
+        /* =====================================================
+           SIMPAN HASIL KE SERVER / DATABASE YANG SAMA
+
+           Nilai tidak lagi dikirim ke Google Form.
+           Data dikirim ke API sesi yang sama melalui
+           action "submitScore".
+        ===================================================== */
+
+        simpanNilaiKeServer(
 
             dataNama,
 
@@ -2519,7 +2609,11 @@ function tampilkanSoal() {
 
             dataAbsen,
 
-            nilai
+            nilai,
+
+            benar,
+
+            soal.length
 
         );
 
@@ -2580,6 +2674,13 @@ function tampilkanSoal() {
                         ${nilai}
                     </div>
 
+                </div>
+
+                <div
+                    id="statusPenyimpananNilai"
+                    class="status-penyimpanan-nilai"
+                >
+                    🟡 Menyimpan nilai ke server...
                 </div>
 
                 <br>
@@ -2643,12 +2744,6 @@ function tampilkanSoal() {
                             value="${i}"
                             onclick="mainkanSuaraKlik()"
                         />
-
-                        <b>
-                            ${String.fromCharCode(
-                                65 + i
-                            )}.
-                        </b>
 
                         ${j}
 
@@ -2783,80 +2878,461 @@ function tutupPeringatan() {
 
 
 /* =========================================================
-   KIRIM NILAI KE GOOGLE FORM
+   SIMPAN NILAI KE SERVER / DATABASE
+
+   Google Form DIHAPUS.
+
+   Nilai dikirim ke endpoint API yang sama dengan
+   sistem session/heartbeat siswa.
+
+   PENTING:
+   Endpoint Apps Script yang digunakan harus mengenali
+   action = "submitScore" dan menulis payload ke
+   database/Google Sheet yang digunakan oleh sistem server.
 ========================================================= */
 
-function kirimDataKeGoogleSheet(
+const MATEMATIKA_SCORE_ACTION =
+    "submitScore";
+
+
+let matematikaNilaiSudahDikirim =
+    false;
+
+
+let matematikaPengirimanNilaiSedangBerjalan =
+    false;
+
+
+/* =========================================================
+   FUNGSI SIMPAN NILAI
+========================================================= */
+
+async function simpanNilaiKeServer(
 
     nama,
     kelas,
     absen,
-    nilai
+    nilai,
+    jumlahBenar,
+    totalSoal
 
-) {
+){
 
-    const formURL =
+    /* -------------------------------------------------
+       Jangan menyimpan dua kali pada satu pengerjaan.
+    ------------------------------------------------- */
 
-        "https://docs.google.com/forms/u/0/d/e/1FAIpQLScrdR_ejx4jr5oHz-BQ9ZU-X6dfgnl7n3atNwxvJxeJluXKjQ/formResponse";
+    if(
+        matematikaNilaiSudahDikirim ||
+        matematikaPengirimanNilaiSedangBerjalan
+    ){
+
+        return {
+            success: true,
+            duplicate: true
+        };
+
+    }
 
 
-    const formData =
-        new FormData();
+    matematikaPengirimanNilaiSedangBerjalan =
+        true;
 
 
-    formData.append(
+    const loginData =
+        matematikaGetLoginData();
 
-        "entry.1114641071",
 
-        nama
+    const sessionId =
+        loginData &&
+        loginData.sessionId
+            ? loginData.sessionId
+            : "";
 
+
+    const nilaiAman =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                Number(nilai) || 0
+            )
+        );
+
+
+    const benarAman =
+        Math.max(
+            0,
+            Number(jumlahBenar) || 0
+        );
+
+
+    const totalAman =
+        Math.max(
+            0,
+            Number(totalSoal) || 0
+        );
+
+
+    const persentase =
+        totalAman > 0
+            ? Number(
+                (
+                    benarAman /
+                    totalAman *
+                    100
+                ).toFixed(2)
+            )
+            : nilaiAman;
+
+
+    const payload = {
+
+        action:
+            MATEMATIKA_SCORE_ACTION,
+
+        sessionId:
+            sessionId,
+
+        nama:
+            nama ||
+            (loginData && loginData.nama) ||
+            "",
+
+        kelas:
+            kelas ||
+            (loginData && loginData.kelas) ||
+            "",
+
+        nomorAbsen:
+            absen ||
+            (loginData && (
+                loginData.nomorAbsen ||
+                loginData.absen
+            )) ||
+            "",
+
+        absen:
+            absen ||
+            (loginData && (
+                loginData.absen ||
+                loginData.nomorAbsen
+            )) ||
+            "",
+
+        namaKuis:
+            "Soal Latihan 1 STS 1 Matematika Kelas 5",
+
+        quizName:
+            "Soal Latihan 1 STS 1 Matematika Kelas 5",
+
+        nilai:
+            nilaiAman,
+
+        skor:
+            nilaiAman,
+
+        score:
+            nilaiAman,
+
+        benar:
+            benarAman,
+
+        jumlahBenar:
+            benarAman,
+
+        totalSoal:
+            totalAman,
+
+        jumlahSoal:
+            totalAman,
+
+        persentase:
+            persentase,
+
+        percentage:
+            persentase,
+
+        halaman:
+            PANCASILA_HALAMAN_UTAMA,
+
+        sumber:
+            "Petualangan Kelas 5",
+
+        waktu:
+            new Date().toISOString(),
+
+        timestamp:
+            Date.now(),
+
+        jenis:
+            "hasil_kuis"
+
+    };
+
+
+    console.log(
+        "========================================"
     );
 
 
-    formData.append(
-
-        "entry.687539915",
-
-        kelas
-
+    console.log(
+        "📤 MENGIRIM NILAI KE SERVER"
     );
 
 
-    formData.append(
-
-        "entry.1445858210",
-
-        absen
-
+    console.log(
+        "🆔 Session ID:",
+        payload.sessionId
     );
 
 
-    formData.append(
-
-        "entry.175130881",
-
-        nilai
-
+    console.log(
+        "👤 Nama:",
+        payload.nama
     );
 
 
-    fetch(
+    console.log(
+        "🏫 Kelas:",
+        payload.kelas
+    );
 
-        formURL,
 
-        {
+    console.log(
+        "🔢 Absen:",
+        payload.nomorAbsen
+    );
 
-            method:
-                "POST",
 
-            body:
-                formData,
+    console.log(
+        "📝 Kuis:",
+        payload.namaKuis
+    );
 
-            mode:
-                "no-cors"
+
+    console.log(
+        "🎯 Nilai:",
+        payload.nilai
+    );
+
+
+    console.log(
+        "✅ Benar:",
+        payload.benar,
+        "/",
+        payload.totalSoal
+    );
+
+
+    try{
+
+        const result =
+            await matematikaRequestJSONP(
+                payload,
+                15000
+            );
+
+
+        console.log(
+            "📥 RESPONS SERVER NILAI:",
+            result
+        );
+
+
+        if(
+            result &&
+            result.success === true
+        ){
+
+            matematikaNilaiSudahDikirim =
+                true;
+
+
+            console.log(
+                "✅ NILAI BERHASIL DISIMPAN DI SERVER / DATABASE"
+            );
+
+
+            matematikaTampilkanStatusPenyimpananNilai(
+                true,
+                result.message ||
+                "Nilai berhasil tersimpan di server."
+            );
+
+
+            return result;
 
         }
 
+
+        const message =
+            result &&
+            result.message
+                ? result.message
+                : "Server belum mengonfirmasi penyimpanan nilai.";
+
+
+        console.warn(
+            "⚠️ NILAI BELUM DIKONFIRMASI SERVER:",
+            result
+        );
+
+
+        matematikaTampilkanStatusPenyimpananNilai(
+            false,
+            message
+        );
+
+
+        return result || {
+            success: false,
+            message: message
+        };
+
+    }catch(error){
+
+        console.error(
+            "❌ GAGAL MENGIRIM NILAI KE SERVER:",
+            error
+        );
+
+
+        matematikaTampilkanStatusPenyimpananNilai(
+            false,
+            "Nilai belum tersimpan. Periksa koneksi lalu coba lagi."
+        );
+
+
+        return {
+            success: false,
+            error: String(error)
+        };
+
+    }finally{
+
+        matematikaPengirimanNilaiSedangBerjalan =
+            false;
+
+    }
+
+}
+
+
+/* =========================================================
+   STATUS PENYIMPANAN NILAI DI HALAMAN HASIL
+========================================================= */
+
+function matematikaTampilkanStatusPenyimpananNilai(
+    berhasil,
+    pesan
+){
+
+    const element =
+        document.getElementById(
+            "statusPenyimpananNilai"
+        );
+
+
+    if(
+        !element
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        berhasil
+    ){
+
+        element.innerHTML =
+            "🟢 " +
+            (
+                pesan ||
+                "Nilai tersimpan di server."
+            );
+
+    }else{
+
+        element.innerHTML =
+            "🟠 " +
+            (
+                pesan ||
+                "Nilai belum tersimpan di server."
+            ) +
+            `<br><button type="button" onclick="kirimUlangNilaiKeServer()">🔁 Kirim Lagi</button>`;
+
+    }
+
+
+    element.classList.toggle(
+        "status-nilai-gagal",
+        !berhasil
+    );
+
+}
+
+
+/* =========================================================
+   COBA KIRIM ULANG NILAI
+========================================================= */
+
+async function kirimUlangNilaiKeServer(){
+
+    if(
+        matematikaNilaiSudahDikirim
+    ){
+
+        matematikaTampilkanStatusPenyimpananNilai(
+            true,
+            "Nilai sudah tersimpan di server."
+        );
+
+        return;
+
+    }
+
+
+    const loginData =
+        matematikaGetLoginData();
+
+
+    if(
+        !matematikaLoginDataIsComplete(
+            loginData
+        )
+    ){
+
+        matematikaRedirectKeIdentitas(
+            "login"
+        );
+
+        return;
+
+    }
+
+
+    const nilai =
+        Math.round(
+            (
+                benar /
+                soal.length
+            ) *
+            100
+        );
+
+
+    await simpanNilaiKeServer(
+        loginData.nama || dataNama,
+        loginData.kelas || dataKelas,
+        loginData.nomorAbsen ||
+            loginData.absen ||
+            dataAbsen,
+        nilai,
+        benar,
+        soal.length
     );
 
 }
@@ -2876,34 +3352,51 @@ function ulangiKuis() {
     benar = 0;
 
 
-    document
-        .getElementById("formData")
-        .classList
-        .remove("hidden");
+    const loginData =
+        matematikaGetLoginData();
+
+
+    if (
+        !matematikaLoginDataIsComplete(
+            loginData
+        )
+    ) {
+
+        matematikaRedirectKeIdentitas(
+            "login"
+        );
+
+        return;
+
+    }
 
 
     document
         .getElementById("areaKuis")
         .classList
-        .add("hidden");
+        .remove("hidden");
 
 
-    document
-        .getElementById("nama")
-        .value = "";
+    const loading =
+        document.getElementById(
+            "onlineLoading"
+        );
 
 
-    document
-        .getElementById("kelas")
-        .value = "";
+    if (loading) {
+
+        loading.classList.add(
+            "hidden"
+        );
+
+    }
 
 
-    document
-        .getElementById("absen")
-        .value = "";
+    mulaiKuisDariSession(
+        loginData
+    );
 
 }
-
 
 /* =========================================================
    KELUAR
@@ -2912,7 +3405,7 @@ function ulangiKuis() {
 function keluarKuis() {
 
     window.location.href =
-        "🕵Petualangan-Seru.html";
+        "matematika-online.html";
 
 }
 
@@ -3042,63 +3535,1950 @@ function mainkanSuaraKetik() {
 }
 
 
-/* =========================================================
-   SUARA KETIKA MENGETIK IDENTITAS
-========================================================= */
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    () => {
-
-
-        [
-
-            "nama",
-
-            "kelas",
-
-            "absen"
-
-        ].forEach(
+/* =====================================================
+   SISTEM ONLINE SISWA - Pancasila
+     
+   Mengikuti sistem online pada halaman
+   STS utama dan Petualangan Kelas 5.
+     
+   Fungsi:
+   - Membaca identitas siswa
+   - Memeriksa sessionId
+   - Cek sesi server
+   - Batas sesi client 24 jam
+   - Heartbeat setiap 20 detik
+   - Heartbeat saat aktivitas
+   - Heartbeat saat tab aktif kembali
+   - Status online
+   - Proteksi navigasi
+===================================================== */
 
 
-            id => {
+/* =====================================================
+   KONFIGURASI API
+===================================================== */
 
-
-                const el =
-
-                    document
-                        .getElementById(
-                            id
-                        );
-
-
-                if (el) {
-
-                    el.addEventListener(
-
-                        "input",
-
-                        mainkanSuaraKetik
-
-                    );
-
-                }
-
-
-            }
-
-        );
-
-    }
-
-);
-
-</script>
-
-
-</body>
-
-</html>
+const PANCASILA_API_URL =
+    "https://script.google.com/macros/s/AKfycbw-SmLBX8bmBH98vNrWzQ5tS3GrMvujNARGqdE2PerdDuIrPHHrGD4Kg5PSlLPyOXJ3/exec";  
+  
+  
+/* =====================================================  
+   NAMA HALAMAN  
+       
+   Siswa akan tercatat sedang berada  
+   pada halaman Pancasila.  
+===================================================== */  
+  
+const PANCASILA_HALAMAN_UTAMA =  
+    "STS 1 - Pancasila";  
+  
+  
+/* =====================================================  
+   INTERVAL HEARTBEAT  
+       
+   Setiap 20 detik.  
+===================================================== */  
+  
+const PANCASILA_HEARTBEAT_INTERVAL =  
+    20000;  
+  
+  
+/* =====================================================  
+   BATAS SESI CLIENT  
+       
+   Maksimal 24 jam.  
+===================================================== */  
+  
+const PANCASILA_SESSION_MAX_AGE =  
+    24 * 60 * 60 * 1000;  
+  
+  
+/* =====================================================  
+   KUNCI STORAGE  
+       
+   Sama dengan Petualangan Kelas 5  
+   dan STS utama.  
+===================================================== */  
+  
+const PANCASILA_LOGIN_STORAGE_KEY =  
+    "identitasPetualanganKelas5";  
+  
+  
+/* =====================================================  
+   VARIABEL HEARTBEAT  
+===================================================== */  
+  
+let matematikaHeartbeatTimer =  
+    null;  
+  
+  
+let matematikaLastHeartbeat =  
+    0;  
+  
+  
+let matematikaActivityTimer =  
+    null;  
+  
+  
+let matematikaSedangLogout =  
+    false;  
+  
+  
+let matematikaSedangRedirect =  
+    false;  
+  
+  
+/* =====================================================  
+   BACA DATA LOGIN  
+===================================================== */  
+  
+function matematikaGetLoginData(){  
+  
+    const storages = [  
+  
+        window.localStorage,  
+  
+        window.sessionStorage  
+  
+    ];  
+  
+  
+    for(  
+        const storage  
+        of storages  
+    ){  
+  
+        try{  
+  
+            const raw =  
+                storage.getItem(  
+                    PANCASILA_LOGIN_STORAGE_KEY  
+                );  
+  
+  
+            if(  
+                !raw  
+            ){  
+  
+                continue;  
+  
+            }  
+  
+  
+            const data =  
+                JSON.parse(  
+                    raw  
+                );  
+  
+  
+            if(  
+                data &&  
+                typeof data === "object"  
+            ){  
+  
+                return data;  
+  
+            }  
+  
+        }catch(error){  
+  
+            console.log(  
+                "Pancasila: gagal membaca data login:",  
+                error  
+            );  
+  
+        }  
+  
+    }  
+  
+  
+    return null;  
+  
+}  
+  
+  
+/* =====================================================  
+   SIMPAN DATA LOGIN  
+===================================================== */  
+  
+function matematikaSaveLoginData(  
+    data  
+){  
+  
+    if(  
+        !data  
+    ){  
+  
+        return;  
+  
+    }  
+  
+  
+    try{  
+  
+        localStorage.setItem(  
+            PANCASILA_LOGIN_STORAGE_KEY,  
+            JSON.stringify(data)  
+        );  
+  
+    }catch(error){  
+  
+        console.log(  
+            "Pancasila: gagal menyimpan localStorage:",  
+            error  
+        );  
+  
+    }  
+  
+  
+    try{  
+  
+        sessionStorage.setItem(  
+            PANCASILA_LOGIN_STORAGE_KEY,  
+            JSON.stringify(data)  
+        );  
+  
+    }catch(error){  
+  
+        console.log(  
+            "Pancasila: gagal menyimpan sessionStorage:",  
+            error  
+        );  
+  
+    }  
+  
+}  
+  
+  
+/* =====================================================  
+   HAPUS DATA LOGIN  
+===================================================== */  
+  
+function matematikaClearLoginData(){  
+  
+    try{  
+  
+        localStorage.removeItem(  
+            PANCASILA_LOGIN_STORAGE_KEY  
+        );  
+  
+    }catch(error){}  
+  
+  
+    try{  
+  
+        sessionStorage.removeItem(  
+            PANCASILA_LOGIN_STORAGE_KEY  
+        );  
+  
+    }catch(error){}  
+  
+}  
+  
+  
+/* =====================================================  
+   CEK DATA LOGIN LENGKAP  
+===================================================== */  
+  
+function matematikaLoginDataIsComplete(  
+    data  
+){  
+  
+    return Boolean(  
+  
+        data &&  
+  
+        data.nama &&  
+  
+        data.kelas &&  
+  
+        data.sessionId  
+  
+    );  
+  
+}  
+  
+  
+/* =====================================================  
+   CEK SESI CLIENT 24 JAM  
+===================================================== */  
+  
+function matematikaClientSessionExpired(  
+    data  
+){  
+  
+    if(  
+        !data ||  
+        !data.loginAt  
+    ){  
+  
+        return true;  
+  
+    }  
+  
+  
+    const loginTime =  
+        Number(  
+            data.loginAt  
+        );  
+  
+  
+    if(  
+        !Number.isFinite(  
+            loginTime  
+        )  
+    ){  
+  
+        return true;  
+  
+    }  
+  
+  
+    return (  
+  
+        Date.now() -  
+        loginTime  
+  
+    ) >=  
+        PANCASILA_SESSION_MAX_AGE;  
+  
+}  
+  
+  
+/* =====================================================  
+   TAMPILKAN DATA SISWA  
+===================================================== */  
+  
+function matematikaTampilkanDataSiswa(  
+    data  
+){  
+  
+    if(  
+        !data  
+    ){  
+  
+        return;  
+  
+    }  
+  
+  
+    const namaElement =  
+        document.getElementById(  
+            "namaSiswaLogin"  
+        );  
+  
+  
+    const kelasElement =  
+        document.getElementById(  
+            "kelasSiswaLogin"  
+        );  
+  
+  
+    const absenElement =  
+        document.getElementById(  
+            "absenSiswaLogin"  
+        );  
+  
+  
+    if(  
+        namaElement  
+    ){  
+  
+        namaElement.textContent =  
+            data.nama ||  
+            "-";  
+  
+    }  
+  
+  
+    if(  
+        kelasElement  
+    ){  
+  
+        kelasElement.textContent =  
+            data.kelas ||  
+            "-";  
+  
+    }  
+  
+  
+    if(  
+        absenElement  
+    ){  
+  
+        absenElement.textContent =  
+            data.nomorAbsen ||  
+            data.absen ||  
+            "-";  
+  
+    }  
+  
+}  
+  
+  
+/* =====================================================  
+   STATUS ONLINE  
+===================================================== */  
+  
+function matematikaSetStatusOnline(  
+    online,  
+    text  
+){  
+  
+    const statusElement =  
+        document.getElementById(  
+            "statusOnline"  
+        );  
+  
+  
+    if(  
+        !statusElement  
+    ){  
+  
+        return;  
+  
+    }  
+  
+  
+    if(  
+        online  
+    ){  
+  
+        statusElement.textContent =  
+            text ||  
+            "🟢 Online";  
+  
+  
+        statusElement.classList.remove(  
+            "offline"  
+        );  
+  
+    }else{  
+  
+        statusElement.textContent =  
+            text ||  
+            "🔴 Offline";  
+  
+  
+        statusElement.classList.add(  
+            "offline"  
+        );  
+  
+    }  
+  
+}  
+  
+  
+/* =====================================================  
+   JSONP REQUEST  
+===================================================== */  
+  
+function matematikaRequestJSONP(  
+    params,  
+    timeout  
+){  
+  
+    return new Promise(  
+        function(resolve, reject){  
+  
+            const callbackName =  
+                "matematikaOnlineCallback_" +  
+                Date.now() +  
+                "_" +  
+                Math.random()  
+                    .toString(36)  
+                    .substring(2,8);  
+  
+  
+            let selesai =  
+                false;  
+  
+  
+            const script =  
+                document.createElement(  
+                    "script"  
+                );  
+  
+  
+            const query =  
+                new URLSearchParams(  
+                    params  
+                );  
+  
+  
+            query.set(  
+                "callback",  
+                callbackName  
+            );  
+  
+  
+            query.set(  
+                "t",  
+                Date.now()  
+            );  
+  
+  
+            const timer =  
+                setTimeout(  
+                    function(){  
+  
+                        if(  
+                            selesai  
+                        ){  
+  
+                            return;  
+  
+                        }  
+  
+  
+                        selesai =  
+                            true;  
+  
+  
+                        cleanup();  
+  
+  
+                        reject(  
+                            new Error(  
+                                "Request JSONP timeout"  
+                            )  
+                        );  
+  
+                    },  
+                    timeout || 10000  
+                );  
+  
+  
+            function cleanup(){  
+  
+                clearTimeout(  
+                    timer  
+                );  
+  
+  
+                try{  
+  
+                    delete window[  
+                        callbackName  
+                    ];  
+  
+                }catch(error){  
+  
+                    window[  
+                        callbackName  
+                    ] =  
+                        undefined;  
+  
+                }  
+  
+  
+                if(  
+                    script.parentNode  
+                ){  
+  
+                    script.parentNode.removeChild(  
+                        script  
+                    );  
+  
+                }  
+  
+            }  
+  
+  
+            window[  
+                callbackName  
+            ] =  
+                function(data){  
+  
+                    if(  
+                        selesai  
+                    ){  
+  
+                        return;  
+  
+                    }  
+  
+  
+                    selesai =  
+                        true;  
+  
+  
+                    cleanup();  
+  
+  
+                    resolve(  
+                        data  
+                    );  
+  
+                };  
+  
+  
+            script.onerror =  
+                function(){  
+  
+                    if(  
+                        selesai  
+                    ){  
+  
+                        return;  
+  
+                    }  
+  
+  
+                    selesai =  
+                        true;  
+  
+  
+                    cleanup();  
+  
+  
+                    reject(  
+                        new Error(  
+                            "JSONP gagal dimuat"  
+                        )  
+                    );  
+  
+                };  
+  
+  
+            script.src =  
+                PANCASILA_API_URL +  
+                "?" +  
+                query.toString();  
+  
+  
+            script.async =  
+                true;  
+  
+  
+            document  
+                .head  
+                .appendChild(  
+                    script  
+                );  
+  
+        }  
+    );  
+  
+}  
+  
+  
+/* =====================================================  
+   REDIRECT KE HALAMAN IDENTITAS  
+       
+   Karena matematika.html berada di:  
+       
+   /kelas-5/sts/matematika.html  
+       
+   maka identitas.html berada di:  
+       
+   /kelas-5/identitas.html  
+===================================================== */  
+  
+function matematikaRedirectKeIdentitas(  
+    alasan  
+){  
+  
+    if(  
+        matematikaSedangRedirect  
+    ){  
+  
+        return;  
+  
+    }  
+  
+  
+    matematikaSedangRedirect =  
+        true;  
+  
+  
+    clearInterval(  
+        matematikaHeartbeatTimer  
+    );  
+  
+  
+    matematikaHeartbeatTimer =  
+        null;  
+  
+  
+    matematikaClearLoginData();  
+  
+  
+    let url =  
+        "../../identitas.html";  
+  
+  
+    if(  
+        alasan  
+    ){  
+  
+        url +=  
+            "?alasan=" +  
+            encodeURIComponent(  
+                alasan  
+            );  
+  
+    }  
+  
+  
+    window.location.replace(  
+        url  
+    );  
+  
+}  
+  
+  
+/* =====================================================  
+   CEK SESI KE SERVER  
+===================================================== */  
+  
+async function matematikaCheckSession(){  
+  
+    const loginData =  
+        matematikaGetLoginData();  
+  
+  
+    /* -------------------------------------------------  
+       Tidak ada data login  
+    ------------------------------------------------- */  
+  
+    if(  
+        !matematikaLoginDataIsComplete(  
+            loginData  
+        )  
+    ){  
+  
+        matematikaRedirectKeIdentitas(  
+            "login"  
+        );  
+  
+        return false;  
+  
+    }  
+  
+  
+    /* -------------------------------------------------  
+       Cek masa sesi 24 jam  
+    ------------------------------------------------- */  
+  
+    if(  
+        matematikaClientSessionExpired(  
+            loginData  
+        )  
+    ){  
+  
+        matematikaRedirectKeIdentitas(  
+            "expired"  
+        );  
+  
+        return false;  
+  
+    }  
+  
+  
+    try{  
+  
+        const result =  
+            await matematikaRequestJSONP(  
+                {  
+  
+                    action:  
+                        "checksession",  
+  
+                    sessionId:  
+                        loginData.sessionId  
+  
+                },  
+                10000  
+            );  
+  
+  
+        console.log(  
+            "Pancasila - hasil checksession:",  
+            result  
+        );  
+  
+  
+        /* -------------------------------------------------  
+           Session tidak valid  
+        ------------------------------------------------- */  
+  
+        if(  
+            !result ||  
+            result.success !== true ||  
+            result.loggedIn !== true  
+        ){  
+  
+            matematikaRedirectKeIdentitas(  
+                "invalid"  
+            );  
+  
+            return false;  
+  
+        }  
+  
+  
+        /* -------------------------------------------------  
+           Jika server memberikan session terbaru  
+        ------------------------------------------------- */  
+  
+        if(  
+            result.session  
+        ){  
+  
+            const updated =  
+                Object.assign(  
+                    {},  
+                    loginData,  
+                    result.session  
+                );  
+  
+  
+            matematikaSaveLoginData(  
+                updated  
+            );  
+  
+  
+            matematikaTampilkanDataSiswa(  
+                updated  
+            );  
+  
+        }  
+  
+  
+        matematikaSetStatusOnline(  
+            true,  
+            "🟢 Online"  
+        );  
+  
+  
+        return true;  
+  
+    }catch(error){  
+  
+        /*  
+           Sama seperti halaman STS utama:  
+           error jaringan sementara tidak  
+           langsung mengeluarkan siswa.  
+        */  
+  
+        console.warn(  
+            "Pancasila: cek sesi sementara gagal:",  
+            error  
+        );  
+  
+  
+        matematikaSetStatusOnline(  
+            true,  
+            "🟢 Online"  
+        );  
+  
+  
+        return true;  
+  
+    }  
+  
+}  
+  
+  
+/* =====================================================  
+   KIRIM HEARTBEAT  
+===================================================== */  
+  
+async function matematikaSendHeartbeat(){  
+  
+    /* -------------------------------------------------  
+       Jangan kirim ketika redirect  
+       atau proses logout.  
+    ------------------------------------------------- */  
+  
+    if(  
+        matematikaSedangRedirect ||  
+        matematikaSedangLogout  
+    ){  
+  
+        return;  
+  
+    }  
+  
+  
+    /* -------------------------------------------------  
+       Ambil data login  
+    ------------------------------------------------- */  
+  
+    const loginData =  
+        matematikaGetLoginData();  
+  
+  
+    /* -------------------------------------------------  
+       Pastikan login lengkap  
+    ------------------------------------------------- */  
+  
+    if(  
+        !matematikaLoginDataIsComplete(  
+            loginData  
+        )  
+    ){  
+  
+        console.warn(  
+            "Pancasila: heartbeat dihentikan karena data login tidak lengkap."  
+        );  
+  
+  
+        matematikaRedirectKeIdentitas(  
+            "login"  
+        );  
+  
+  
+        return;  
+  
+    }  
+  
+  
+    /* -------------------------------------------------  
+       Cek sesi 24 jam  
+    ------------------------------------------------- */  
+  
+    if(  
+        matematikaClientSessionExpired(  
+            loginData  
+        )  
+    ){  
+  
+        console.warn(  
+            "Pancasila: sesi lokal sudah expired."  
+        );  
+  
+  
+        matematikaRedirectKeIdentitas(  
+            "expired"  
+        );  
+  
+  
+        return;  
+  
+    }  
+  
+  
+    /* -------------------------------------------------  
+       Hindari heartbeat terlalu rapat  
+         
+       Minimal 5 detik antar request.  
+    ------------------------------------------------- */  
+  
+    const now =  
+        Date.now();  
+  
+  
+    if(  
+        now -  
+        matematikaLastHeartbeat  
+        < 5000  
+    ){  
+  
+        return;  
+  
+    }  
+  
+  
+    matematikaLastHeartbeat =  
+        now;  
+  
+  
+    /* -------------------------------------------------  
+       Tampilkan status online  
+    ------------------------------------------------- */  
+  
+    matematikaSetStatusOnline(  
+        true,  
+        "🟢 Online"  
+    );  
+  
+  
+    /* =================================================  
+       DEBUG  
+    ================================================= */  
+  
+    console.log(  
+        "========================================"  
+    );  
+  
+  
+    console.log(  
+        "📡 Pancasila MENGIRIM HEARTBEAT"  
+    );  
+  
+  
+    console.log(  
+        "🕐 Waktu:",  
+        new Date()  
+            .toLocaleTimeString()  
+    );  
+  
+  
+    console.log(  
+        "🆔 Session ID:",  
+        loginData.sessionId  
+    );  
+  
+  
+    console.log(  
+        "👤 Nama:",  
+        loginData.nama  
+    );  
+  
+  
+    console.log(  
+        "🏫 Kelas:",  
+        loginData.kelas  
+    );  
+  
+  
+    console.log(  
+        "🔢 Absen:",  
+        loginData.nomorAbsen ||  
+        loginData.absen ||  
+        "-"  
+    );  
+  
+  
+    console.log(  
+        "📄 Halaman:",  
+        PANCASILA_HALAMAN_UTAMA  
+    );  
+  
+  
+    /* =================================================  
+       REQUEST HEARTBEAT  
+    ================================================= */  
+  
+    try{  
+  
+        const result =  
+            await matematikaRequestJSONP(  
+                {  
+  
+                    action:  
+                        "heartbeat",  
+  
+                    sessionId:  
+                        loginData.sessionId,  
+  
+                    nama:  
+                        loginData.nama,  
+  
+                    kelas:  
+                        loginData.kelas,  
+  
+                    nomorAbsen:  
+                        loginData.nomorAbsen ||  
+                        loginData.absen ||  
+                        "",  
+  
+                    halaman:  
+                        PANCASILA_HALAMAN_UTAMA,  
+  
+                    sumber:  
+                        "Petualangan Kelas 5"  
+  
+                },  
+                10000  
+            );  
+  
+  
+        /* =================================================  
+           DEBUG RESPONS  
+        ================================================= */  
+  
+        console.log(  
+            "📥 RESPONS SERVER Pancasila:",  
+            result  
+        );  
+  
+  
+        console.log(  
+            "✅ Success:",  
+            result &&  
+            result.success  
+        );  
+  
+  
+        console.log(  
+            "📊 Status:",  
+            result &&  
+            result.status  
+        );  
+  
+  
+        console.log(  
+            "📝 Message:",  
+            result &&  
+            result.message  
+        );  
+  
+  
+        /* =================================================  
+           CEK SESSION DARI SERVER  
+        ================================================= */  
+  
+        if(  
+            result &&  
+            result.session  
+        ){  
+  
+            console.log(  
+                "----------------------------------------"  
+            );  
+  
+  
+            console.log(  
+                "🆔 Session ID SERVER:",  
+                result.session.sessionId  
+            );  
+  
+  
+            console.log(  
+                "👤 Nama SERVER:",  
+                result.session.nama  
+            );  
+  
+  
+            console.log(  
+                "🏫 Kelas SERVER:",  
+                result.session.kelas  
+            );  
+  
+  
+            console.log(  
+                "🔢 Absen SERVER:",  
+                result.session.nomorAbsen  
+            );  
+  
+  
+            console.log(  
+                "📄 Halaman SERVER:",  
+                result.session.halaman  
+            );  
+  
+  
+            console.log(  
+                "🕐 Login At SERVER:",  
+                result.session.loginAt  
+            );  
+  
+  
+            console.log(  
+                "🕐 Last Seen SERVER:",  
+                result.session.lastSeen  
+            );  
+  
+  
+            console.log(  
+                "🟢 Status SERVER:",  
+                result.session.status  
+            );  
+  
+  
+            console.log(  
+                "----------------------------------------"  
+            );  
+  
+        }  
+  
+  
+        /* =================================================  
+           CEK HASIL HEARTBEAT  
+        ================================================= */  
+  
+        if(  
+            !result ||  
+            result.success !== true  
+        ){  
+  
+            const status =  
+                String(  
+                    result &&  
+                    result.status  
+                    ||  
+                    ""  
+                ).toLowerCase();  
+  
+  
+            console.warn(  
+                "Pancasila: heartbeat tidak berhasil.",  
+                result  
+            );  
+  
+  
+            /* ---------------------------------------------  
+               Session benar-benar invalid  
+            --------------------------------------------- */  
+  
+            if(  
+  
+                status ===  
+                    "expired"  
+  
+                ||  
+  
+                status ===  
+                    "not_logged_in"  
+  
+                ||  
+  
+                status ===  
+                    "invalid_session"  
+  
+            ){  
+  
+                console.error(  
+                    "🚨 Pancasila: SESSION TIDAK VALID / EXPIRED"  
+                );  
+  
+  
+                matematikaRedirectKeIdentitas(  
+                    "expired"  
+                );  
+  
+  
+                return;  
+  
+            }  
+  
+  
+            /*  
+               Error lain tidak langsung  
+               menghapus sesi.  
+            */  
+  
+            matematikaSetStatusOnline(  
+                true,  
+                "🟢 Online"  
+            );  
+  
+  
+            return;  
+  
+        }  
+  
+  
+        /* =================================================  
+           SIMPAN DATA SESSION TERBARU  
+        ================================================= */  
+  
+        if(  
+            result.session  
+        ){  
+  
+            const updated =  
+                Object.assign(  
+                    {},  
+                    loginData,  
+                    result.session  
+                );  
+  
+  
+            console.log(  
+                "🔍 SESSION ID SEBELUM:",  
+                loginData.sessionId  
+            );  
+  
+  
+            console.log(  
+                "🔍 SESSION ID SESUDAH:",  
+                updated.sessionId  
+            );  
+  
+  
+            if(  
+                loginData.sessionId !==  
+                updated.sessionId  
+            ){  
+  
+                console.warn(  
+                    "⚠️ PERINGATAN: SESSION ID BERUBAH!"  
+                );  
+  
+            }else{  
+  
+                console.log(  
+                    "✅ Session ID tetap sama."  
+                );  
+  
+            }  
+  
+  
+            matematikaSaveLoginData(  
+                updated  
+            );  
+  
+  
+            matematikaTampilkanDataSiswa(  
+                updated  
+            );  
+  
+        }  
+  
+  
+        /* =================================================  
+           STATUS ONLINE  
+        ================================================= */  
+  
+        matematikaSetStatusOnline(  
+            true,  
+            "🟢 Online"  
+        );  
+  
+  
+        /* =================================================  
+           LOG BERHASIL  
+        ================================================= */  
+  
+        console.log(  
+            "🟢 Pancasila ONLINE:",  
+            new Date()  
+                .toLocaleTimeString()  
+        );  
+  
+  
+        console.log(  
+            "========================================"  
+        );  
+  
+  
+    }catch(error){  
+  
+        /*  
+           Internet/API sementara gagal.  
+           Jangan logout.  
+        */  
+  
+        console.warn(  
+            "Pancasila: heartbeat gagal sementara:",  
+            error  
+        );  
+  
+  
+        matematikaSetStatusOnline(  
+            true,  
+            "🟢 Online"  
+        );  
+  
+  
+        console.log(  
+            "Heartbeat berikutnya akan mencoba kembali."  
+        );  
+  
+  
+        console.log(  
+            "========================================"  
+        );  
+  
+    }  
+  
+}  
+  
+  
+/* =====================================================  
+   HEARTBEAT BERKALA  
+===================================================== */  
+  
+function matematikaStartHeartbeat(){  
+  
+    if(  
+        matematikaHeartbeatTimer  
+    ){  
+  
+        clearInterval(  
+            matematikaHeartbeatTimer  
+        );  
+  
+    }  
+  
+  
+    /*  
+       Kirim heartbeat langsung.  
+    */  
+  
+    matematikaSendHeartbeat();  
+  
+  
+    /*  
+       Selanjutnya setiap 20 detik.  
+    */  
+  
+    matematikaHeartbeatTimer =  
+        setInterval(  
+            function(){  
+  
+                matematikaSendHeartbeat();  
+  
+            },  
+            PANCASILA_HEARTBEAT_INTERVAL  
+        );  
+  
+}  
+  
+  
+/* =====================================================  
+   AKTIVITAS SISWA  
+===================================================== */  
+  
+function matematikaRegisterActivity(){  
+  
+    clearTimeout(  
+        matematikaActivityTimer  
+    );  
+  
+  
+    matematikaActivityTimer =  
+        setTimeout(  
+            function(){  
+  
+                matematikaSendHeartbeat();  
+  
+            },  
+            300  
+        );  
+  
+}  
+  
+  
+/* =====================================================  
+   EVENT AKTIVITAS SISWA  
+===================================================== */  
+  
+const matematikaActivityEvents = [  
+  
+    "click",  
+  
+    "keydown",  
+  
+    "scroll",  
+  
+    "touchstart",  
+  
+    "pointerdown"  
+  
+];  
+  
+  
+matematikaActivityEvents.forEach(  
+    function(eventName){  
+  
+        document.addEventListener(  
+            eventName,  
+            matematikaRegisterActivity,  
+            {  
+                passive:  
+                    true  
+            }  
+        );  
+  
+    }  
+);  
+  
+  
+/* =====================================================  
+   TAB KEMBALI AKTIF  
+===================================================== */  
+  
+document.addEventListener(  
+    "visibilitychange",  
+    function(){  
+  
+        if(  
+            document.visibilityState ===  
+            "visible"  
+        ){  
+  
+            matematikaSendHeartbeat();  
+  
+        }  
+  
+    }  
+);  
+  
+  
+/* =====================================================  
+   WINDOW KEMBALI AKTIF  
+===================================================== */  
+  
+window.addEventListener(  
+    "focus",  
+    function(){  
+  
+        matematikaSendHeartbeat();  
+  
+    }  
+);  
+  
+  
+/* =====================================================  
+   SAAT HALAMAN DITINGGALKAN  
+       
+   Tidak mengirim logout.  
+       
+   Tujuannya agar perpindahan:  
+       
+   STS utama  
+       ↓  
+   Pancasila  
+       ↓  
+   Mata pelajaran  
+       
+   tetap menggunakan session yang sama.  
+===================================================== */  
+  
+window.addEventListener(  
+    "pagehide",  
+    function(){  
+  
+        clearInterval(  
+            matematikaHeartbeatTimer  
+        );  
+  
+  
+        matematikaHeartbeatTimer =  
+            null;  
+  
+    }  
+);  
+  
+  
+/* =====================================================  
+   PROTEKSI NAVIGASI  
+       
+   Menu tetap hanya dapat dibuka  
+   jika siswa mempunyai session valid.  
+===================================================== */  
+  
+function matematikaProtectNavigation(){  
+  
+    /* =================================================  
+       TOMBOL MATA PELAJARAN  
+    ================================================= */  
+  
+    document  
+        .querySelectorAll(  
+            ".menu-button"  
+        )  
+        .forEach(  
+            function(button){  
+  
+                button.addEventListener(  
+                    "click",  
+                    function(event){  
+  
+                        const loginData =  
+                            matematikaGetLoginData();  
+  
+  
+                        /* ---------------------------------  
+                           Belum login  
+                        --------------------------------- */  
+  
+                        if(  
+                            !matematikaLoginDataIsComplete(  
+                                loginData  
+                            )  
+                        ){  
+  
+                            event.preventDefault();  
+  
+  
+                            matematikaRedirectKeIdentitas(  
+                                "login"  
+                            );  
+  
+  
+                            return;  
+  
+                        }  
+  
+  
+                        /* ---------------------------------  
+                           Session lokal expired  
+                        --------------------------------- */  
+  
+                        if(  
+                            matematikaClientSessionExpired(  
+                                loginData  
+                            )  
+                        ){  
+  
+                            event.preventDefault();  
+  
+  
+                            matematikaRedirectKeIdentitas(  
+                                "expired"  
+                            );  
+  
+  
+                            return;  
+  
+                        }  
+  
+  
+                        /*  
+                           Kirim heartbeat sebelum  
+                           siswa berpindah halaman.  
+                        */  
+  
+                        matematikaSendHeartbeat();  
+  
+                    }  
+                );  
+  
+            }  
+        );  
+  
+  
+    /* =================================================  
+       NAVBAR  
+    ================================================= */  
+  
+    document  
+        .querySelectorAll(  
+            ".nav a, nav a"  
+        )  
+        .forEach(  
+            function(link){  
+  
+                link.addEventListener(  
+                    "click",  
+                    function(event){  
+  
+                        const loginData =  
+                            matematikaGetLoginData();  
+  
+  
+                        if(  
+                            !matematikaLoginDataIsComplete(  
+                                loginData  
+                            )  
+                        ){  
+  
+                            event.preventDefault();  
+  
+  
+                            matematikaRedirectKeIdentitas(  
+                                "login"  
+                            );  
+  
+  
+                            return;  
+  
+                        }  
+  
+  
+                        if(  
+                            matematikaClientSessionExpired(  
+                                loginData  
+                            )  
+                        ){  
+  
+                            event.preventDefault();  
+  
+  
+                            matematikaRedirectKeIdentitas(  
+                                "expired"  
+                            );  
+  
+  
+                            return;  
+  
+                        }  
+  
+  
+                        matematikaSendHeartbeat();  
+  
+                    }  
+                );  
+  
+            }  
+        );  
+  
+  
+    /* =================================================  
+       TOMBOL KEMBALI  
+    ================================================= */  
+  
+    const backButton =  
+        document.querySelector(  
+            ".back-button"  
+        );  
+  
+  
+    if(  
+        backButton  
+    ){  
+  
+        backButton.addEventListener(  
+            "click",  
+            function(event){  
+  
+                const loginData =  
+                    matematikaGetLoginData();  
+  
+  
+                if(  
+                    !matematikaLoginDataIsComplete(  
+                        loginData  
+                    )  
+                ){  
+  
+                    event.preventDefault();  
+  
+  
+                    matematikaRedirectKeIdentitas(  
+                        "login"  
+                    );  
+  
+  
+                    return;  
+  
+                }  
+  
+  
+                if(  
+                    matematikaClientSessionExpired(  
+                        loginData  
+                    )  
+                ){  
+  
+                    event.preventDefault();  
+  
+  
+                    matematikaRedirectKeIdentitas(  
+                        "expired"  
+                    );  
+  
+  
+                    return;  
+  
+                }  
+  
+  
+                matematikaSendHeartbeat();  
+  
+            }  
+        );  
+  
+    }  
+  
+}  
+  
+  
+/* =====================================================  
+   INISIALISASI SISTEM ONLINE Pancasila  
+===================================================== */  
+  
+async function matematikaInitializeOnline(){  
+  
+    console.log(  
+        "🚀 Sistem online Pancasila dimulai."  
+    );  
+  
+  
+    /* -------------------------------------------------  
+       Ambil data login  
+    ------------------------------------------------- */  
+  
+    const loginData =  
+        matematikaGetLoginData();  
+  
+  
+    /* -------------------------------------------------  
+       Pastikan siswa sudah login  
+    ------------------------------------------------- */  
+  
+    if(  
+        !matematikaLoginDataIsComplete(  
+            loginData  
+        )  
+    ){  
+  
+        matematikaRedirectKeIdentitas(  
+            "login"  
+        );  
+  
+  
+        return;  
+  
+    }  
+  
+  
+    /* -------------------------------------------------  
+       Tampilkan data siswa  
+       sebelum server selesai diperiksa.  
+    ------------------------------------------------- */  
+  
+    matematikaTampilkanDataSiswa(  
+        loginData  
+    );  
+  
+  
+    /* -------------------------------------------------  
+       Cek masa sesi lokal  
+    ------------------------------------------------- */  
+  
+    if(  
+        matematikaClientSessionExpired(  
+            loginData  
+        )  
+    ){  
+  
+        matematikaRedirectKeIdentitas(  
+            "expired"  
+        );  
+  
+  
+        return;  
+  
+    }  
+  
+  
+    /* -------------------------------------------------  
+       Periksa session ke server  
+    ------------------------------------------------- */  
+  
+    const valid =  
+        await matematikaCheckSession();  
+  
+  
+    if(  
+        !valid  
+    ){  
+  
+        return;  
+  
+    }  
+  
+  
+    const sessionAktif =  
+        matematikaGetLoginData();  
+ 
+ 
+    if(  
+        !matematikaLoginDataIsComplete(  
+            sessionAktif  
+        )  
+    ){  
+ 
+        matematikaRedirectKeIdentitas(  
+            "login"  
+        );  
+ 
+        return;  
+ 
+    }  
+ 
+ 
+    mulaiKuisDariSession(  
+        sessionAktif  
+    );  
+ 
+ 
+    /* -------------------------------------------------  
+       Mulai heartbeat  
+    ------------------------------------------------- */  
+  
+    matematikaStartHeartbeat();  
+  
+  
+    /* -------------------------------------------------  
+       Proteksi navigasi  
+    ------------------------------------------------- */  
+  
+    matematikaProtectNavigation();  
+  
+  
+    /* -------------------------------------------------  
+       Console  
+    ------------------------------------------------- */  
+  
+    console.log(  
+        "🟢 Pancasila aktif dan sedang dibaca online oleh server."  
+    );  
+  
+  
+    console.log(  
+        "📄 Halaman online:",  
+        PANCASILA_HALAMAN_UTAMA  
+    );  
+  
+  
+    console.log(  
+        "⏱️ Heartbeat:",  
+        PANCASILA_HEARTBEAT_INTERVAL /  
+        1000,  
+        "detik"  
+    );  
+  
+  
+    console.log(  
+        "⏳ Maksimum sesi:",  
+        PANCASILA_SESSION_MAX_AGE /  
+        (60 * 60 * 1000),  
+        "jam"  
+    );  
+  
+}  
+  
+  
+/* =====================================================  
+   JALANKAN SISTEM ONLINE  
+===================================================== */  
+  
+matematikaInitializeOnline();  
+  
+  
+/* =====================================================  
+   LOG INFORMASI  
+===================================================== */  
+  
+console.log(  
+    "========================================"  
+);  
+  
+  
+console.log(  
+    "📚 Pancasila | Petualangan Kelas 5"  
+);  
+  
+  
+console.log(  
+    "📡 Sistem online siswa aktif"  
+);  
+  
+  
+console.log(  
+    "⏱️ Heartbeat setiap 20 detik"  
+);  
+  
+  
+console.log(  
+    "⏳ Sesi client maksimal 24 jam"  
+);  
+  
+  
+console.log(  
+    "🔑 Storage:",  
+    PANCASILA_LOGIN_STORAGE_KEY  
+);  
+  
+  
+console.log(  
+    "========================================"  
+);  
+  
+  
+  
+ 
+</script> 
+ 
+ 
+</body> 
+ 
+</html> 

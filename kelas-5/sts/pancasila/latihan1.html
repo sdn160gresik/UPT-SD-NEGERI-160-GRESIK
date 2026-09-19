@@ -1129,6 +1129,68 @@ button:focus-visible {
 
 
 /* =====================================================
+   STATUS PENYIMPANAN NILAI
+===================================================== */
+
+.status-penyimpanan-nilai {
+
+    margin:
+        10px
+        auto
+        4px;
+
+    padding:
+        7px
+        10px;
+
+    border-radius:
+        7px;
+
+    background:
+        #d4edda;
+
+    color:
+        #155724;
+
+    font-size:
+        .65rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.5;
+
+}
+
+
+.status-penyimpanan-nilai.status-nilai-gagal {
+
+    background:
+        #fff3cd;
+
+    color:
+        #856404;
+
+}
+
+
+.status-penyimpanan-nilai button {
+
+    margin-top:
+        6px;
+
+    font-size:
+        .58rem;
+
+    padding:
+        5px
+        9px;
+
+}
+
+
+/* =====================================================
    WARNING OVERLAY
 ===================================================== */
 
@@ -1807,6 +1869,95 @@ audio {
 
 }
 
+
+/* =====================================================
+   SISTEM ONLINE SISWA
+===================================================== */
+
+.online-loading {
+
+    width:
+        calc(100% - 20px);
+
+    max-width:
+        600px;
+
+    margin:
+        0
+        auto
+        12px;
+
+    padding:
+        10px
+        14px;
+
+    border-radius:
+        8px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .94
+        );
+
+    color:
+        #0288d1;
+
+    text-align:
+        center;
+
+    font-size:
+        .68rem;
+
+    font-weight:
+        700;
+
+    box-shadow:
+        0 3px 8px
+        rgba(
+            0,
+            0,
+            0,
+            .12
+        );
+}
+
+.status-online {
+
+    display:
+        inline-block;
+
+    margin-left:
+        8px;
+
+    padding:
+        2px
+        6px;
+
+    border-radius:
+        5px;
+
+    background:
+        #d4edda;
+
+    color:
+        #155724;
+
+    font-weight:
+        700;
+}
+
+.status-online.offline {
+
+    background:
+        #f8d7da;
+
+    color:
+        #721c24;
+}
+
 </style>
 
 </head>
@@ -1821,7 +1972,7 @@ audio {
 
 <div class="nav">
 
-    <a href="pancasila.html">
+    <a href="pancasila-online.html">
 
         ◀️ Kembali
 
@@ -1882,68 +2033,15 @@ audio {
          FORM DATA SISWA
     ================================================== -->
 
-    <div id="formData">
+    <!-- =================================================
+         STATUS SISTEM ONLINE SISWA
+    ================================================== -->
 
-
-        <p>
-
-            Silakan isi identitas
-            sebelum mulai kuis.
-
-        </p>
-
-
-        <label>
-
-            Nama:
-
-        </label>
-
-
-        <input
-            type="text"
-            id="nama"
-            placeholder="Masukkan nama"
-        >
-
-
-        <label>
-
-            Kelas:
-
-        </label>
-
-
-        <input
-            type="text"
-            id="kelas"
-            placeholder="Contoh: V-A"
-        >
-
-
-        <label>
-
-            No. Absen:
-
-        </label>
-
-
-        <input
-            type="text"
-            id="absen"
-            placeholder="Masukkan nomor absen"
-        >
-
-
-        <button
-            onclick="mulaiKuis()"
-        >
-
-            🚀 Mulai Kuis
-
-        </button>
-
-
+    <div
+        id="onlineLoading"
+        class="online-loading"
+    >
+        🔐 Memeriksa identitas dan sesi siswa...
     </div>
 
 
@@ -1962,7 +2060,22 @@ audio {
         <div
             id="infoSiswa"
             class="info-siswa"
-        ></div>
+        >
+            👤 Nama:
+            <b id="namaSiswaLogin">-</b>
+            |
+            🏫 Kelas:
+            <b id="kelasSiswaLogin">-</b>
+            |
+            🔢 Absen:
+            <b id="absenSiswaLogin">-</b>
+            <span
+                id="statusOnline"
+                class="status-online"
+            >
+                🟡 Memeriksa...
+            </span>
+        </div>
 
 
         <!-- SOAL -->
@@ -2353,72 +2466,59 @@ let benar = 0;
 
 
 /* =========================================================
-   MULAI KUIS
+   MULAI KUIS DARI SESSION ONLINE
 ========================================================= */
 
-function mulaiKuis() {
-
-    dataNama =
-        document
-            .getElementById("nama")
-            .value
-            .trim();
-
-
-    dataKelas =
-        document
-            .getElementById("kelas")
-            .value
-            .trim();
-
-
-    dataAbsen =
-        document
-            .getElementById("absen")
-            .value
-            .trim();
-
+function mulaiKuisDariSession(data) {
 
     if (
-        !dataNama ||
-        !dataKelas ||
-        !dataAbsen
+        !data ||
+        !data.nama ||
+        !data.kelas ||
+        !data.sessionId
     ) {
 
-        mainkanSuaraPeringatan();
-
-
-        tampilkanPeringatan(
-
-            "⚠️ Ups! Data belum lengkap.<br><br>" +
-
-            "Isi dulu Nama, Kelas, dan Absen ya " +
-
-            "biar kamu bisa mulai mengerjakan kuis! 🚀"
-
-        );
-
-
         return;
+
     }
 
 
-    mainkanSuaraNext();
+    dataNama =
+        data.nama || "";
 
 
-    document
-        .getElementById("infoSiswa")
-        .innerHTML =
-
-        `👤 Nama: <b>${dataNama}</b> |
-         🏫 Kelas: <b>${dataKelas}</b> |
-         🔢 Absen: <b>${dataAbsen}</b>`;
+    dataKelas =
+        data.kelas || "";
 
 
-    document
-        .getElementById("formData")
-        .classList
-        .add("hidden");
+    dataAbsen =
+        data.nomorAbsen ||
+        data.absen ||
+        "";
+
+
+    indeks = 0;
+
+    benar = 0;
+
+    pancasilaNilaiSudahDikirim = false;
+
+    pancasilaPengirimanNilaiSedangBerjalan = false;
+
+
+    const loading =
+        document.getElementById(
+            "onlineLoading"
+        );
+
+
+    if (loading) {
+
+        loading.classList.add(
+            "hidden"
+        );
+
+    }
 
 
     document
@@ -2442,7 +2542,6 @@ function mulaiKuis() {
     tampilkanSoal();
 
 }
-
 
 /* =========================================================
    ACAK SOAL
@@ -2574,7 +2673,15 @@ function tampilkanSoal() {
             );
 
 
-        kirimDataKeGoogleSheet(
+        /* =====================================================
+           SIMPAN HASIL KE SERVER / DATABASE YANG SAMA
+
+           Nilai tidak lagi dikirim ke Google Form.
+           Data dikirim ke API sesi yang sama melalui
+           action "submitScore".
+        ===================================================== */
+
+        simpanNilaiKeServer(
 
             dataNama,
 
@@ -2582,7 +2689,11 @@ function tampilkanSoal() {
 
             dataAbsen,
 
-            nilai
+            nilai,
+
+            benar,
+
+            soal.length
 
         );
 
@@ -2643,6 +2754,13 @@ function tampilkanSoal() {
                         ${nilai}
                     </div>
 
+                </div>
+
+                <div
+                    id="statusPenyimpananNilai"
+                    class="status-penyimpanan-nilai"
+                >
+                    🟡 Menyimpan nilai ke server...
                 </div>
 
                 <br>
@@ -2846,81 +2964,461 @@ function tutupPeringatan() {
 
 
 /* =========================================================
-   KIRIM NILAI KE GOOGLE FORM
-   URL DAN ENTRY ID DIPERTAHANKAN
+   SIMPAN NILAI KE SERVER / DATABASE
+
+   Google Form DIHAPUS.
+
+   Nilai dikirim ke endpoint API yang sama dengan
+   sistem session/heartbeat siswa.
+
+   PENTING:
+   Endpoint Apps Script yang digunakan harus mengenali
+   action = "submitScore" dan menulis payload ke
+   database/Google Sheet yang digunakan oleh sistem server.
 ========================================================= */
 
-function kirimDataKeGoogleSheet(
+const PANCASILA_SCORE_ACTION =
+    "submitScore";
+
+
+let pancasilaNilaiSudahDikirim =
+    false;
+
+
+let pancasilaPengirimanNilaiSedangBerjalan =
+    false;
+
+
+/* =========================================================
+   FUNGSI SIMPAN NILAI
+========================================================= */
+
+async function simpanNilaiKeServer(
 
     nama,
     kelas,
     absen,
-    nilai
+    nilai,
+    jumlahBenar,
+    totalSoal
 
-) {
+){
 
-    const formURL =
+    /* -------------------------------------------------
+       Jangan menyimpan dua kali pada satu pengerjaan.
+    ------------------------------------------------- */
 
-        "https://docs.google.com/forms/u/0/d/e/1FAIpQLScrdR_ejx4jr5oHz-BQ9ZU-X6dfgnl7n3atNwxvJxeJluXKjQ/formResponse";
+    if(
+        pancasilaNilaiSudahDikirim ||
+        pancasilaPengirimanNilaiSedangBerjalan
+    ){
+
+        return {
+            success: true,
+            duplicate: true
+        };
+
+    }
 
 
-    const formData =
-        new FormData();
+    pancasilaPengirimanNilaiSedangBerjalan =
+        true;
 
 
-    formData.append(
+    const loginData =
+        pancasilaGetLoginData();
 
-        "entry.1114641071",
 
-        nama
+    const sessionId =
+        loginData &&
+        loginData.sessionId
+            ? loginData.sessionId
+            : "";
 
+
+    const nilaiAman =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                Number(nilai) || 0
+            )
+        );
+
+
+    const benarAman =
+        Math.max(
+            0,
+            Number(jumlahBenar) || 0
+        );
+
+
+    const totalAman =
+        Math.max(
+            0,
+            Number(totalSoal) || 0
+        );
+
+
+    const persentase =
+        totalAman > 0
+            ? Number(
+                (
+                    benarAman /
+                    totalAman *
+                    100
+                ).toFixed(2)
+            )
+            : nilaiAman;
+
+
+    const payload = {
+
+        action:
+            PANCASILA_SCORE_ACTION,
+
+        sessionId:
+            sessionId,
+
+        nama:
+            nama ||
+            (loginData && loginData.nama) ||
+            "",
+
+        kelas:
+            kelas ||
+            (loginData && loginData.kelas) ||
+            "",
+
+        nomorAbsen:
+            absen ||
+            (loginData && (
+                loginData.nomorAbsen ||
+                loginData.absen
+            )) ||
+            "",
+
+        absen:
+            absen ||
+            (loginData && (
+                loginData.absen ||
+                loginData.nomorAbsen
+            )) ||
+            "",
+
+        namaKuis:
+            "Soal Latihan 1 STS 1 Pancasila Kelas 5",
+
+        quizName:
+            "Soal Latihan 1 STS 1 Pancasila Kelas 5",
+
+        nilai:
+            nilaiAman,
+
+        skor:
+            nilaiAman,
+
+        score:
+            nilaiAman,
+
+        benar:
+            benarAman,
+
+        jumlahBenar:
+            benarAman,
+
+        totalSoal:
+            totalAman,
+
+        jumlahSoal:
+            totalAman,
+
+        persentase:
+            persentase,
+
+        percentage:
+            persentase,
+
+        halaman:
+            PANCASILA_HALAMAN_UTAMA,
+
+        sumber:
+            "Petualangan Kelas 5",
+
+        waktu:
+            new Date().toISOString(),
+
+        timestamp:
+            Date.now(),
+
+        jenis:
+            "hasil_kuis"
+
+    };
+
+
+    console.log(
+        "========================================"
     );
 
 
-    formData.append(
-
-        "entry.687539915",
-
-        kelas
-
+    console.log(
+        "📤 MENGIRIM NILAI KE SERVER"
     );
 
 
-    formData.append(
-
-        "entry.1445858210",
-
-        absen
-
+    console.log(
+        "🆔 Session ID:",
+        payload.sessionId
     );
 
 
-    formData.append(
-
-        "entry.175130881",
-
-        nilai
-
+    console.log(
+        "👤 Nama:",
+        payload.nama
     );
 
 
-    fetch(
+    console.log(
+        "🏫 Kelas:",
+        payload.kelas
+    );
 
-        formURL,
 
-        {
+    console.log(
+        "🔢 Absen:",
+        payload.nomorAbsen
+    );
 
-            method:
-                "POST",
 
-            body:
-                formData,
+    console.log(
+        "📝 Kuis:",
+        payload.namaKuis
+    );
 
-            mode:
-                "no-cors"
+
+    console.log(
+        "🎯 Nilai:",
+        payload.nilai
+    );
+
+
+    console.log(
+        "✅ Benar:",
+        payload.benar,
+        "/",
+        payload.totalSoal
+    );
+
+
+    try{
+
+        const result =
+            await pancasilaRequestJSONP(
+                payload,
+                15000
+            );
+
+
+        console.log(
+            "📥 RESPONS SERVER NILAI:",
+            result
+        );
+
+
+        if(
+            result &&
+            result.success === true
+        ){
+
+            pancasilaNilaiSudahDikirim =
+                true;
+
+
+            console.log(
+                "✅ NILAI BERHASIL DISIMPAN DI SERVER / DATABASE"
+            );
+
+
+            pancasilaTampilkanStatusPenyimpananNilai(
+                true,
+                result.message ||
+                "Nilai berhasil tersimpan di server."
+            );
+
+
+            return result;
 
         }
 
+
+        const message =
+            result &&
+            result.message
+                ? result.message
+                : "Server belum mengonfirmasi penyimpanan nilai.";
+
+
+        console.warn(
+            "⚠️ NILAI BELUM DIKONFIRMASI SERVER:",
+            result
+        );
+
+
+        pancasilaTampilkanStatusPenyimpananNilai(
+            false,
+            message
+        );
+
+
+        return result || {
+            success: false,
+            message: message
+        };
+
+    }catch(error){
+
+        console.error(
+            "❌ GAGAL MENGIRIM NILAI KE SERVER:",
+            error
+        );
+
+
+        pancasilaTampilkanStatusPenyimpananNilai(
+            false,
+            "Nilai belum tersimpan. Periksa koneksi lalu coba lagi."
+        );
+
+
+        return {
+            success: false,
+            error: String(error)
+        };
+
+    }finally{
+
+        pancasilaPengirimanNilaiSedangBerjalan =
+            false;
+
+    }
+
+}
+
+
+/* =========================================================
+   STATUS PENYIMPANAN NILAI DI HALAMAN HASIL
+========================================================= */
+
+function pancasilaTampilkanStatusPenyimpananNilai(
+    berhasil,
+    pesan
+){
+
+    const element =
+        document.getElementById(
+            "statusPenyimpananNilai"
+        );
+
+
+    if(
+        !element
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        berhasil
+    ){
+
+        element.innerHTML =
+            "🟢 " +
+            (
+                pesan ||
+                "Nilai tersimpan di server."
+            );
+
+    }else{
+
+        element.innerHTML =
+            "🟠 " +
+            (
+                pesan ||
+                "Nilai belum tersimpan di server."
+            ) +
+            `<br><button type="button" onclick="kirimUlangNilaiKeServer()">🔁 Kirim Lagi</button>`;
+
+    }
+
+
+    element.classList.toggle(
+        "status-nilai-gagal",
+        !berhasil
+    );
+
+}
+
+
+/* =========================================================
+   COBA KIRIM ULANG NILAI
+========================================================= */
+
+async function kirimUlangNilaiKeServer(){
+
+    if(
+        pancasilaNilaiSudahDikirim
+    ){
+
+        pancasilaTampilkanStatusPenyimpananNilai(
+            true,
+            "Nilai sudah tersimpan di server."
+        );
+
+        return;
+
+    }
+
+
+    const loginData =
+        pancasilaGetLoginData();
+
+
+    if(
+        !pancasilaLoginDataIsComplete(
+            loginData
+        )
+    ){
+
+        pancasilaRedirectKeIdentitas(
+            "login"
+        );
+
+        return;
+
+    }
+
+
+    const nilai =
+        Math.round(
+            (
+                benar /
+                soal.length
+            ) *
+            100
+        );
+
+
+    await simpanNilaiKeServer(
+        loginData.nama || dataNama,
+        loginData.kelas || dataKelas,
+        loginData.nomorAbsen ||
+            loginData.absen ||
+            dataAbsen,
+        nilai,
+        benar,
+        soal.length
     );
 
 }
@@ -2940,34 +3438,51 @@ function ulangiKuis() {
     benar = 0;
 
 
-    document
-        .getElementById("formData")
-        .classList
-        .remove("hidden");
+    const loginData =
+        pancasilaGetLoginData();
+
+
+    if (
+        !pancasilaLoginDataIsComplete(
+            loginData
+        )
+    ) {
+
+        pancasilaRedirectKeIdentitas(
+            "login"
+        );
+
+        return;
+
+    }
 
 
     document
         .getElementById("areaKuis")
         .classList
-        .add("hidden");
+        .remove("hidden");
 
 
-    document
-        .getElementById("nama")
-        .value = "";
+    const loading =
+        document.getElementById(
+            "onlineLoading"
+        );
 
 
-    document
-        .getElementById("kelas")
-        .value = "";
+    if (loading) {
+
+        loading.classList.add(
+            "hidden"
+        );
+
+    }
 
 
-    document
-        .getElementById("absen")
-        .value = "";
+    mulaiKuisDariSession(
+        loginData
+    );
 
 }
-
 
 /* =========================================================
    KELUAR
@@ -2976,7 +3491,7 @@ function ulangiKuis() {
 function keluarKuis() {
 
     window.location.href =
-        "🕵Petualangan-Seru.html";
+        "pancasila-online.html";
 
 }
 
@@ -3106,60 +3621,1946 @@ function mainkanSuaraKetik() {
 }
 
 
-/* =========================================================
-   SUARA KETIKA MENGETIK IDENTITAS
-========================================================= */
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    () => {
-
-
-        [
-
-            "nama",
-
-            "kelas",
-
-            "absen"
-
-        ].forEach(
+/* =====================================================
+   SISTEM ONLINE SISWA - Pancasila
+     
+   Mengikuti sistem online pada halaman
+   STS utama dan Petualangan Kelas 5.
+     
+   Fungsi:
+   - Membaca identitas siswa
+   - Memeriksa sessionId
+   - Cek sesi server
+   - Batas sesi client 24 jam
+   - Heartbeat setiap 20 detik
+   - Heartbeat saat aktivitas
+   - Heartbeat saat tab aktif kembali
+   - Status online
+   - Proteksi navigasi
+===================================================== */
 
 
-            id => {
+/* =====================================================
+   KONFIGURASI API
+===================================================== */
+
+const PANCASILA_API_URL =
+    "https://script.google.com/macros/s/AKfycbw-SmLBX8bmBH98vNrWzQ5tS3GrMvujNARGqdE2PerdDuIrPHHrGD4Kg5PSlLPyOXJ3/exec"; 
+ 
+ 
+/* ===================================================== 
+   NAMA HALAMAN 
+      
+   Siswa akan tercatat sedang berada 
+   pada halaman Pancasila. 
+===================================================== */ 
+ 
+const PANCASILA_HALAMAN_UTAMA = 
+    "STS 1 - Pancasila"; 
+ 
+ 
+/* ===================================================== 
+   INTERVAL HEARTBEAT 
+      
+   Setiap 20 detik. 
+===================================================== */ 
+ 
+const PANCASILA_HEARTBEAT_INTERVAL = 
+    20000; 
+ 
+ 
+/* ===================================================== 
+   BATAS SESI CLIENT 
+      
+   Maksimal 24 jam. 
+===================================================== */ 
+ 
+const PANCASILA_SESSION_MAX_AGE = 
+    24 * 60 * 60 * 1000; 
+ 
+ 
+/* ===================================================== 
+   KUNCI STORAGE 
+      
+   Sama dengan Petualangan Kelas 5 
+   dan STS utama. 
+===================================================== */ 
+ 
+const PANCASILA_LOGIN_STORAGE_KEY = 
+    "identitasPetualanganKelas5"; 
+ 
+ 
+/* ===================================================== 
+   VARIABEL HEARTBEAT 
+===================================================== */ 
+ 
+let pancasilaHeartbeatTimer = 
+    null; 
+ 
+ 
+let pancasilaLastHeartbeat = 
+    0; 
+ 
+ 
+let pancasilaActivityTimer = 
+    null; 
+ 
+ 
+let pancasilaSedangLogout = 
+    false; 
+ 
+ 
+let pancasilaSedangRedirect = 
+    false; 
+ 
+ 
+/* ===================================================== 
+   BACA DATA LOGIN 
+===================================================== */ 
+ 
+function pancasilaGetLoginData(){ 
+ 
+    const storages = [ 
+ 
+        window.localStorage, 
+ 
+        window.sessionStorage 
+ 
+    ]; 
+ 
+ 
+    for( 
+        const storage 
+        of storages 
+    ){ 
+ 
+        try{ 
+ 
+            const raw = 
+                storage.getItem( 
+                    PANCASILA_LOGIN_STORAGE_KEY 
+                ); 
+ 
+ 
+            if( 
+                !raw 
+            ){ 
+ 
+                continue; 
+ 
+            } 
+ 
+ 
+            const data = 
+                JSON.parse( 
+                    raw 
+                ); 
+ 
+ 
+            if( 
+                data && 
+                typeof data === "object" 
+            ){ 
+ 
+                return data; 
+ 
+            } 
+ 
+        }catch(error){ 
+ 
+            console.log( 
+                "Pancasila: gagal membaca data login:", 
+                error 
+            ); 
+ 
+        } 
+ 
+    } 
+ 
+ 
+    return null; 
+ 
+} 
+ 
+ 
+/* ===================================================== 
+   SIMPAN DATA LOGIN 
+===================================================== */ 
+ 
+function pancasilaSaveLoginData( 
+    data 
+){ 
+ 
+    if( 
+        !data 
+    ){ 
+ 
+        return; 
+ 
+    } 
+ 
+ 
+    try{ 
+ 
+        localStorage.setItem( 
+            PANCASILA_LOGIN_STORAGE_KEY, 
+            JSON.stringify(data) 
+        ); 
+ 
+    }catch(error){ 
+ 
+        console.log( 
+            "Pancasila: gagal menyimpan localStorage:", 
+            error 
+        ); 
+ 
+    } 
+ 
+ 
+    try{ 
+ 
+        sessionStorage.setItem( 
+            PANCASILA_LOGIN_STORAGE_KEY, 
+            JSON.stringify(data) 
+        ); 
+ 
+    }catch(error){ 
+ 
+        console.log( 
+            "Pancasila: gagal menyimpan sessionStorage:", 
+            error 
+        ); 
+ 
+    } 
+ 
+} 
+ 
+ 
+/* ===================================================== 
+   HAPUS DATA LOGIN 
+===================================================== */ 
+ 
+function pancasilaClearLoginData(){ 
+ 
+    try{ 
+ 
+        localStorage.removeItem( 
+            PANCASILA_LOGIN_STORAGE_KEY 
+        ); 
+ 
+    }catch(error){} 
+ 
+ 
+    try{ 
+ 
+        sessionStorage.removeItem( 
+            PANCASILA_LOGIN_STORAGE_KEY 
+        ); 
+ 
+    }catch(error){} 
+ 
+} 
+ 
+ 
+/* ===================================================== 
+   CEK DATA LOGIN LENGKAP 
+===================================================== */ 
+ 
+function pancasilaLoginDataIsComplete( 
+    data 
+){ 
+ 
+    return Boolean( 
+ 
+        data && 
+ 
+        data.nama && 
+ 
+        data.kelas && 
+ 
+        data.sessionId 
+ 
+    ); 
+ 
+} 
+ 
+ 
+/* ===================================================== 
+   CEK SESI CLIENT 24 JAM 
+===================================================== */ 
+ 
+function pancasilaClientSessionExpired( 
+    data 
+){ 
+ 
+    if( 
+        !data || 
+        !data.loginAt 
+    ){ 
+ 
+        return true; 
+ 
+    } 
+ 
+ 
+    const loginTime = 
+        Number( 
+            data.loginAt 
+        ); 
+ 
+ 
+    if( 
+        !Number.isFinite( 
+            loginTime 
+        ) 
+    ){ 
+ 
+        return true; 
+ 
+    } 
+ 
+ 
+    return ( 
+ 
+        Date.now() - 
+        loginTime 
+ 
+    ) >= 
+        PANCASILA_SESSION_MAX_AGE; 
+ 
+} 
+ 
+ 
+/* ===================================================== 
+   TAMPILKAN DATA SISWA 
+===================================================== */ 
+ 
+function pancasilaTampilkanDataSiswa( 
+    data 
+){ 
+ 
+    if( 
+        !data 
+    ){ 
+ 
+        return; 
+ 
+    } 
+ 
+ 
+    const namaElement = 
+        document.getElementById( 
+            "namaSiswaLogin" 
+        ); 
+ 
+ 
+    const kelasElement = 
+        document.getElementById( 
+            "kelasSiswaLogin" 
+        ); 
+ 
+ 
+    const absenElement = 
+        document.getElementById( 
+            "absenSiswaLogin" 
+        ); 
+ 
+ 
+    if( 
+        namaElement 
+    ){ 
+ 
+        namaElement.textContent = 
+            data.nama || 
+            "-"; 
+ 
+    } 
+ 
+ 
+    if( 
+        kelasElement 
+    ){ 
+ 
+        kelasElement.textContent = 
+            data.kelas || 
+            "-"; 
+ 
+    } 
+ 
+ 
+    if( 
+        absenElement 
+    ){ 
+ 
+        absenElement.textContent = 
+            data.nomorAbsen || 
+            data.absen || 
+            "-"; 
+ 
+    } 
+ 
+} 
+ 
+ 
+/* ===================================================== 
+   STATUS ONLINE 
+===================================================== */ 
+ 
+function pancasilaSetStatusOnline( 
+    online, 
+    text 
+){ 
+ 
+    const statusElement = 
+        document.getElementById( 
+            "statusOnline" 
+        ); 
+ 
+ 
+    if( 
+        !statusElement 
+    ){ 
+ 
+        return; 
+ 
+    } 
+ 
+ 
+    if( 
+        online 
+    ){ 
+ 
+        statusElement.textContent = 
+            text || 
+            "🟢 Online"; 
+ 
+ 
+        statusElement.classList.remove( 
+            "offline" 
+        ); 
+ 
+    }else{ 
+ 
+        statusElement.textContent = 
+            text || 
+            "🔴 Offline"; 
+ 
+ 
+        statusElement.classList.add( 
+            "offline" 
+        ); 
+ 
+    } 
+ 
+} 
+ 
+ 
+/* ===================================================== 
+   JSONP REQUEST 
+===================================================== */ 
+ 
+function pancasilaRequestJSONP( 
+    params, 
+    timeout 
+){ 
+ 
+    return new Promise( 
+        function(resolve, reject){ 
+ 
+            const callbackName = 
+                "pancasilaOnlineCallback_" + 
+                Date.now() + 
+                "_" + 
+                Math.random() 
+                    .toString(36) 
+                    .substring(2,8); 
+ 
+ 
+            let selesai = 
+                false; 
+ 
+ 
+            const script = 
+                document.createElement( 
+                    "script" 
+                ); 
+ 
+ 
+            const query = 
+                new URLSearchParams( 
+                    params 
+                ); 
+ 
+ 
+            query.set( 
+                "callback", 
+                callbackName 
+            ); 
+ 
+ 
+            query.set( 
+                "t", 
+                Date.now() 
+            ); 
+ 
+ 
+            const timer = 
+                setTimeout( 
+                    function(){ 
+ 
+                        if( 
+                            selesai 
+                        ){ 
+ 
+                            return; 
+ 
+                        } 
+ 
+ 
+                        selesai = 
+                            true; 
+ 
+ 
+                        cleanup(); 
+ 
+ 
+                        reject( 
+                            new Error( 
+                                "Request JSONP timeout" 
+                            ) 
+                        ); 
+ 
+                    }, 
+                    timeout || 10000 
+                ); 
+ 
+ 
+            function cleanup(){ 
+ 
+                clearTimeout( 
+                    timer 
+                ); 
+ 
+ 
+                try{ 
+ 
+                    delete window[ 
+                        callbackName 
+                    ]; 
+ 
+                }catch(error){ 
+ 
+                    window[ 
+                        callbackName 
+                    ] = 
+                        undefined; 
+ 
+                } 
+ 
+ 
+                if( 
+                    script.parentNode 
+                ){ 
+ 
+                    script.parentNode.removeChild( 
+                        script 
+                    ); 
+ 
+                } 
+ 
+            } 
+ 
+ 
+            window[ 
+                callbackName 
+            ] = 
+                function(data){ 
+ 
+                    if( 
+                        selesai 
+                    ){ 
+ 
+                        return; 
+ 
+                    } 
+ 
+ 
+                    selesai = 
+                        true; 
+ 
+ 
+                    cleanup(); 
+ 
+ 
+                    resolve( 
+                        data 
+                    ); 
+ 
+                }; 
+ 
+ 
+            script.onerror = 
+                function(){ 
+ 
+                    if( 
+                        selesai 
+                    ){ 
+ 
+                        return; 
+ 
+                    } 
+ 
+ 
+                    selesai = 
+                        true; 
+ 
+ 
+                    cleanup(); 
+ 
+ 
+                    reject( 
+                        new Error( 
+                            "JSONP gagal dimuat" 
+                        ) 
+                    ); 
+ 
+                }; 
+ 
+ 
+            script.src = 
+                PANCASILA_API_URL + 
+                "?" + 
+                query.toString(); 
+ 
+ 
+            script.async = 
+                true; 
+ 
+ 
+            document 
+                .head 
+                .appendChild( 
+                    script 
+                ); 
+ 
+        } 
+    ); 
+ 
+} 
+ 
+ 
+/* ===================================================== 
+   REDIRECT KE HALAMAN IDENTITAS 
+      
+   Karena pancasila.html berada di: 
+      
+   /kelas-5/sts/pancasila.html 
+      
+   maka identitas.html berada di: 
+      
+   /kelas-5/identitas.html 
+===================================================== */ 
+ 
+function pancasilaRedirectKeIdentitas( 
+    alasan 
+){ 
+ 
+    if( 
+        pancasilaSedangRedirect 
+    ){ 
+ 
+        return; 
+ 
+    } 
+ 
+ 
+    pancasilaSedangRedirect = 
+        true; 
+ 
+ 
+    clearInterval( 
+        pancasilaHeartbeatTimer 
+    ); 
+ 
+ 
+    pancasilaHeartbeatTimer = 
+        null; 
+ 
+ 
+    pancasilaClearLoginData(); 
+ 
+ 
+    let url = 
+        "../../identitas.html"; 
+ 
+ 
+    if( 
+        alasan 
+    ){ 
+ 
+        url += 
+            "?alasan=" + 
+            encodeURIComponent( 
+                alasan 
+            ); 
+ 
+    } 
+ 
+ 
+    window.location.replace( 
+        url 
+    ); 
+ 
+} 
+ 
+ 
+/* ===================================================== 
+   CEK SESI KE SERVER 
+===================================================== */ 
+ 
+async function pancasilaCheckSession(){ 
+ 
+    const loginData = 
+        pancasilaGetLoginData(); 
+ 
+ 
+    /* ------------------------------------------------- 
+       Tidak ada data login 
+    ------------------------------------------------- */ 
+ 
+    if( 
+        !pancasilaLoginDataIsComplete( 
+            loginData 
+        ) 
+    ){ 
+ 
+        pancasilaRedirectKeIdentitas( 
+            "login" 
+        ); 
+ 
+        return false; 
+ 
+    } 
+ 
+ 
+    /* ------------------------------------------------- 
+       Cek masa sesi 24 jam 
+    ------------------------------------------------- */ 
+ 
+    if( 
+        pancasilaClientSessionExpired( 
+            loginData 
+        ) 
+    ){ 
+ 
+        pancasilaRedirectKeIdentitas( 
+            "expired" 
+        ); 
+ 
+        return false; 
+ 
+    } 
+ 
+ 
+    try{ 
+ 
+        const result = 
+            await pancasilaRequestJSONP( 
+                { 
+ 
+                    action: 
+                        "checksession", 
+ 
+                    sessionId: 
+                        loginData.sessionId 
+ 
+                }, 
+                10000 
+            ); 
+ 
+ 
+        console.log( 
+            "Pancasila - hasil checksession:", 
+            result 
+        ); 
+ 
+ 
+        /* ------------------------------------------------- 
+           Session tidak valid 
+        ------------------------------------------------- */ 
+ 
+        if( 
+            !result || 
+            result.success !== true || 
+            result.loggedIn !== true 
+        ){ 
+ 
+            pancasilaRedirectKeIdentitas( 
+                "invalid" 
+            ); 
+ 
+            return false; 
+ 
+        } 
+ 
+ 
+        /* ------------------------------------------------- 
+           Jika server memberikan session terbaru 
+        ------------------------------------------------- */ 
+ 
+        if( 
+            result.session 
+        ){ 
+ 
+            const updated = 
+                Object.assign( 
+                    {}, 
+                    loginData, 
+                    result.session 
+                ); 
+ 
+ 
+            pancasilaSaveLoginData( 
+                updated 
+            ); 
+ 
+ 
+            pancasilaTampilkanDataSiswa( 
+                updated 
+            ); 
+ 
+        } 
+ 
+ 
+        pancasilaSetStatusOnline( 
+            true, 
+            "🟢 Online" 
+        ); 
+ 
+ 
+        return true; 
+ 
+    }catch(error){ 
+ 
+        /* 
+           Sama seperti halaman STS utama: 
+           error jaringan sementara tidak 
+           langsung mengeluarkan siswa. 
+        */ 
+ 
+        console.warn( 
+            "Pancasila: cek sesi sementara gagal:", 
+            error 
+        ); 
+ 
+ 
+        pancasilaSetStatusOnline( 
+            true, 
+            "🟢 Online" 
+        ); 
+ 
+ 
+        return true; 
+ 
+    } 
+ 
+} 
+ 
+ 
+/* ===================================================== 
+   KIRIM HEARTBEAT 
+===================================================== */ 
+ 
+async function pancasilaSendHeartbeat(){ 
+ 
+    /* ------------------------------------------------- 
+       Jangan kirim ketika redirect 
+       atau proses logout. 
+    ------------------------------------------------- */ 
+ 
+    if( 
+        pancasilaSedangRedirect || 
+        pancasilaSedangLogout 
+    ){ 
+ 
+        return; 
+ 
+    } 
+ 
+ 
+    /* ------------------------------------------------- 
+       Ambil data login 
+    ------------------------------------------------- */ 
+ 
+    const loginData = 
+        pancasilaGetLoginData(); 
+ 
+ 
+    /* ------------------------------------------------- 
+       Pastikan login lengkap 
+    ------------------------------------------------- */ 
+ 
+    if( 
+        !pancasilaLoginDataIsComplete( 
+            loginData 
+        ) 
+    ){ 
+ 
+        console.warn( 
+            "Pancasila: heartbeat dihentikan karena data login tidak lengkap." 
+        ); 
+ 
+ 
+        pancasilaRedirectKeIdentitas( 
+            "login" 
+        ); 
+ 
+ 
+        return; 
+ 
+    } 
+ 
+ 
+    /* ------------------------------------------------- 
+       Cek sesi 24 jam 
+    ------------------------------------------------- */ 
+ 
+    if( 
+        pancasilaClientSessionExpired( 
+            loginData 
+        ) 
+    ){ 
+ 
+        console.warn( 
+            "Pancasila: sesi lokal sudah expired." 
+        ); 
+ 
+ 
+        pancasilaRedirectKeIdentitas( 
+            "expired" 
+        ); 
+ 
+ 
+        return; 
+ 
+    } 
+ 
+ 
+    /* ------------------------------------------------- 
+       Hindari heartbeat terlalu rapat 
+        
+       Minimal 5 detik antar request. 
+    ------------------------------------------------- */ 
+ 
+    const now = 
+        Date.now(); 
+ 
+ 
+    if( 
+        now - 
+        pancasilaLastHeartbeat 
+        < 5000 
+    ){ 
+ 
+        return; 
+ 
+    } 
+ 
+ 
+    pancasilaLastHeartbeat = 
+        now; 
+ 
+ 
+    /* ------------------------------------------------- 
+       Tampilkan status online 
+    ------------------------------------------------- */ 
+ 
+    pancasilaSetStatusOnline( 
+        true, 
+        "🟢 Online" 
+    ); 
+ 
+ 
+    /* ================================================= 
+       DEBUG 
+    ================================================= */ 
+ 
+    console.log( 
+        "========================================" 
+    ); 
+ 
+ 
+    console.log( 
+        "📡 Pancasila MENGIRIM HEARTBEAT" 
+    ); 
+ 
+ 
+    console.log( 
+        "🕐 Waktu:", 
+        new Date() 
+            .toLocaleTimeString() 
+    ); 
+ 
+ 
+    console.log( 
+        "🆔 Session ID:", 
+        loginData.sessionId 
+    ); 
+ 
+ 
+    console.log( 
+        "👤 Nama:", 
+        loginData.nama 
+    ); 
+ 
+ 
+    console.log( 
+        "🏫 Kelas:", 
+        loginData.kelas 
+    ); 
+ 
+ 
+    console.log( 
+        "🔢 Absen:", 
+        loginData.nomorAbsen || 
+        loginData.absen || 
+        "-" 
+    ); 
+ 
+ 
+    console.log( 
+        "📄 Halaman:", 
+        PANCASILA_HALAMAN_UTAMA 
+    ); 
+ 
+ 
+    /* ================================================= 
+       REQUEST HEARTBEAT 
+    ================================================= */ 
+ 
+    try{ 
+ 
+        const result = 
+            await pancasilaRequestJSONP( 
+                { 
+ 
+                    action: 
+                        "heartbeat", 
+ 
+                    sessionId: 
+                        loginData.sessionId, 
+ 
+                    nama: 
+                        loginData.nama, 
+ 
+                    kelas: 
+                        loginData.kelas, 
+ 
+                    nomorAbsen: 
+                        loginData.nomorAbsen || 
+                        loginData.absen || 
+                        "", 
+ 
+                    halaman: 
+                        PANCASILA_HALAMAN_UTAMA, 
+ 
+                    sumber: 
+                        "Petualangan Kelas 5" 
+ 
+                }, 
+                10000 
+            ); 
+ 
+ 
+        /* ================================================= 
+           DEBUG RESPONS 
+        ================================================= */ 
+ 
+        console.log( 
+            "📥 RESPONS SERVER Pancasila:", 
+            result 
+        ); 
+ 
+ 
+        console.log( 
+            "✅ Success:", 
+            result && 
+            result.success 
+        ); 
+ 
+ 
+        console.log( 
+            "📊 Status:", 
+            result && 
+            result.status 
+        ); 
+ 
+ 
+        console.log( 
+            "📝 Message:", 
+            result && 
+            result.message 
+        ); 
+ 
+ 
+        /* ================================================= 
+           CEK SESSION DARI SERVER 
+        ================================================= */ 
+ 
+        if( 
+            result && 
+            result.session 
+        ){ 
+ 
+            console.log( 
+                "----------------------------------------" 
+            ); 
+ 
+ 
+            console.log( 
+                "🆔 Session ID SERVER:", 
+                result.session.sessionId 
+            ); 
+ 
+ 
+            console.log( 
+                "👤 Nama SERVER:", 
+                result.session.nama 
+            ); 
+ 
+ 
+            console.log( 
+                "🏫 Kelas SERVER:", 
+                result.session.kelas 
+            ); 
+ 
+ 
+            console.log( 
+                "🔢 Absen SERVER:", 
+                result.session.nomorAbsen 
+            ); 
+ 
+ 
+            console.log( 
+                "📄 Halaman SERVER:", 
+                result.session.halaman 
+            ); 
+ 
+ 
+            console.log( 
+                "🕐 Login At SERVER:", 
+                result.session.loginAt 
+            ); 
+ 
+ 
+            console.log( 
+                "🕐 Last Seen SERVER:", 
+                result.session.lastSeen 
+            ); 
+ 
+ 
+            console.log( 
+                "🟢 Status SERVER:", 
+                result.session.status 
+            ); 
+ 
+ 
+            console.log( 
+                "----------------------------------------" 
+            ); 
+ 
+        } 
+ 
+ 
+        /* ================================================= 
+           CEK HASIL HEARTBEAT 
+        ================================================= */ 
+ 
+        if( 
+            !result || 
+            result.success !== true 
+        ){ 
+ 
+            const status = 
+                String( 
+                    result && 
+                    result.status 
+                    || 
+                    "" 
+                ).toLowerCase(); 
+ 
+ 
+            console.warn( 
+                "Pancasila: heartbeat tidak berhasil.", 
+                result 
+            ); 
+ 
+ 
+            /* --------------------------------------------- 
+               Session benar-benar invalid 
+            --------------------------------------------- */ 
+ 
+            if( 
+ 
+                status === 
+                    "expired" 
+ 
+                || 
+ 
+                status === 
+                    "not_logged_in" 
+ 
+                || 
+ 
+                status === 
+                    "invalid_session" 
+ 
+            ){ 
+ 
+                console.error( 
+                    "🚨 Pancasila: SESSION TIDAK VALID / EXPIRED" 
+                ); 
+ 
+ 
+                pancasilaRedirectKeIdentitas( 
+                    "expired" 
+                ); 
+ 
+ 
+                return; 
+ 
+            } 
+ 
+ 
+            /* 
+               Error lain tidak langsung 
+               menghapus sesi. 
+            */ 
+ 
+            pancasilaSetStatusOnline( 
+                true, 
+                "🟢 Online" 
+            ); 
+ 
+ 
+            return; 
+ 
+        } 
+ 
+ 
+        /* ================================================= 
+           SIMPAN DATA SESSION TERBARU 
+        ================================================= */ 
+ 
+        if( 
+            result.session 
+        ){ 
+ 
+            const updated = 
+                Object.assign( 
+                    {}, 
+                    loginData, 
+                    result.session 
+                ); 
+ 
+ 
+            console.log( 
+                "🔍 SESSION ID SEBELUM:", 
+                loginData.sessionId 
+            ); 
+ 
+ 
+            console.log( 
+                "🔍 SESSION ID SESUDAH:", 
+                updated.sessionId 
+            ); 
+ 
+ 
+            if( 
+                loginData.sessionId !== 
+                updated.sessionId 
+            ){ 
+ 
+                console.warn( 
+                    "⚠️ PERINGATAN: SESSION ID BERUBAH!" 
+                ); 
+ 
+            }else{ 
+ 
+                console.log( 
+                    "✅ Session ID tetap sama." 
+                ); 
+ 
+            } 
+ 
+ 
+            pancasilaSaveLoginData( 
+                updated 
+            ); 
+ 
+ 
+            pancasilaTampilkanDataSiswa( 
+                updated 
+            ); 
+ 
+        } 
+ 
+ 
+        /* ================================================= 
+           STATUS ONLINE 
+        ================================================= */ 
+ 
+        pancasilaSetStatusOnline( 
+            true, 
+            "🟢 Online" 
+        ); 
+ 
+ 
+        /* ================================================= 
+           LOG BERHASIL 
+        ================================================= */ 
+ 
+        console.log( 
+            "🟢 Pancasila ONLINE:", 
+            new Date() 
+                .toLocaleTimeString() 
+        ); 
+ 
+ 
+        console.log( 
+            "========================================" 
+        ); 
+ 
+ 
+    }catch(error){ 
+ 
+        /* 
+           Internet/API sementara gagal. 
+           Jangan logout. 
+        */ 
+ 
+        console.warn( 
+            "Pancasila: heartbeat gagal sementara:", 
+            error 
+        ); 
+ 
+ 
+        pancasilaSetStatusOnline( 
+            true, 
+            "🟢 Online" 
+        ); 
+ 
+ 
+        console.log( 
+            "Heartbeat berikutnya akan mencoba kembali." 
+        ); 
+ 
+ 
+        console.log( 
+            "========================================" 
+        ); 
+ 
+    } 
+ 
+} 
+ 
+ 
+/* ===================================================== 
+   HEARTBEAT BERKALA 
+===================================================== */ 
+ 
+function pancasilaStartHeartbeat(){ 
+ 
+    if( 
+        pancasilaHeartbeatTimer 
+    ){ 
+ 
+        clearInterval( 
+            pancasilaHeartbeatTimer 
+        ); 
+ 
+    } 
+ 
+ 
+    /* 
+       Kirim heartbeat langsung. 
+    */ 
+ 
+    pancasilaSendHeartbeat(); 
+ 
+ 
+    /* 
+       Selanjutnya setiap 20 detik. 
+    */ 
+ 
+    pancasilaHeartbeatTimer = 
+        setInterval( 
+            function(){ 
+ 
+                pancasilaSendHeartbeat(); 
+ 
+            }, 
+            PANCASILA_HEARTBEAT_INTERVAL 
+        ); 
+ 
+} 
+ 
+ 
+/* ===================================================== 
+   AKTIVITAS SISWA 
+===================================================== */ 
+ 
+function pancasilaRegisterActivity(){ 
+ 
+    clearTimeout( 
+        pancasilaActivityTimer 
+    ); 
+ 
+ 
+    pancasilaActivityTimer = 
+        setTimeout( 
+            function(){ 
+ 
+                pancasilaSendHeartbeat(); 
+ 
+            }, 
+            300 
+        ); 
+ 
+} 
+ 
+ 
+/* ===================================================== 
+   EVENT AKTIVITAS SISWA 
+===================================================== */ 
+ 
+const pancasilaActivityEvents = [ 
+ 
+    "click", 
+ 
+    "keydown", 
+ 
+    "scroll", 
+ 
+    "touchstart", 
+ 
+    "pointerdown" 
+ 
+]; 
+ 
+ 
+pancasilaActivityEvents.forEach( 
+    function(eventName){ 
+ 
+        document.addEventListener( 
+            eventName, 
+            pancasilaRegisterActivity, 
+            { 
+                passive: 
+                    true 
+            } 
+        ); 
+ 
+    } 
+); 
+ 
+ 
+/* ===================================================== 
+   TAB KEMBALI AKTIF 
+===================================================== */ 
+ 
+document.addEventListener( 
+    "visibilitychange", 
+    function(){ 
+ 
+        if( 
+            document.visibilityState === 
+            "visible" 
+        ){ 
+ 
+            pancasilaSendHeartbeat(); 
+ 
+        } 
+ 
+    } 
+); 
+ 
+ 
+/* ===================================================== 
+   WINDOW KEMBALI AKTIF 
+===================================================== */ 
+ 
+window.addEventListener( 
+    "focus", 
+    function(){ 
+ 
+        pancasilaSendHeartbeat(); 
+ 
+    } 
+); 
+ 
+ 
+/* ===================================================== 
+   SAAT HALAMAN DITINGGALKAN 
+      
+   Tidak mengirim logout. 
+      
+   Tujuannya agar perpindahan: 
+      
+   STS utama 
+       ↓ 
+   Pancasila 
+       ↓ 
+   Mata pelajaran 
+      
+   tetap menggunakan session yang sama. 
+===================================================== */ 
+ 
+window.addEventListener( 
+    "pagehide", 
+    function(){ 
+ 
+        clearInterval( 
+            pancasilaHeartbeatTimer 
+        ); 
+ 
+ 
+        pancasilaHeartbeatTimer = 
+            null; 
+ 
+    } 
+); 
+ 
+ 
+/* ===================================================== 
+   PROTEKSI NAVIGASI 
+      
+   Menu tetap hanya dapat dibuka 
+   jika siswa mempunyai session valid. 
+===================================================== */ 
+ 
+function pancasilaProtectNavigation(){ 
+ 
+    /* ================================================= 
+       TOMBOL MATA PELAJARAN 
+    ================================================= */ 
+ 
+    document 
+        .querySelectorAll( 
+            ".menu-button" 
+        ) 
+        .forEach( 
+            function(button){ 
+ 
+                button.addEventListener( 
+                    "click", 
+                    function(event){ 
+ 
+                        const loginData = 
+                            pancasilaGetLoginData(); 
+ 
+ 
+                        /* --------------------------------- 
+                           Belum login 
+                        --------------------------------- */ 
+ 
+                        if( 
+                            !pancasilaLoginDataIsComplete( 
+                                loginData 
+                            ) 
+                        ){ 
+ 
+                            event.preventDefault(); 
+ 
+ 
+                            pancasilaRedirectKeIdentitas( 
+                                "login" 
+                            ); 
+ 
+ 
+                            return; 
+ 
+                        } 
+ 
+ 
+                        /* --------------------------------- 
+                           Session lokal expired 
+                        --------------------------------- */ 
+ 
+                        if( 
+                            pancasilaClientSessionExpired( 
+                                loginData 
+                            ) 
+                        ){ 
+ 
+                            event.preventDefault(); 
+ 
+ 
+                            pancasilaRedirectKeIdentitas( 
+                                "expired" 
+                            ); 
+ 
+ 
+                            return; 
+ 
+                        } 
+ 
+ 
+                        /* 
+                           Kirim heartbeat sebelum 
+                           siswa berpindah halaman. 
+                        */ 
+ 
+                        pancasilaSendHeartbeat(); 
+ 
+                    } 
+                ); 
+ 
+            } 
+        ); 
+ 
+ 
+    /* ================================================= 
+       NAVBAR 
+    ================================================= */ 
+ 
+    document 
+        .querySelectorAll( 
+            ".nav a, nav a" 
+        ) 
+        .forEach( 
+            function(link){ 
+ 
+                link.addEventListener( 
+                    "click", 
+                    function(event){ 
+ 
+                        const loginData = 
+                            pancasilaGetLoginData(); 
+ 
+ 
+                        if( 
+                            !pancasilaLoginDataIsComplete( 
+                                loginData 
+                            ) 
+                        ){ 
+ 
+                            event.preventDefault(); 
+ 
+ 
+                            pancasilaRedirectKeIdentitas( 
+                                "login" 
+                            ); 
+ 
+ 
+                            return; 
+ 
+                        } 
+ 
+ 
+                        if( 
+                            pancasilaClientSessionExpired( 
+                                loginData 
+                            ) 
+                        ){ 
+ 
+                            event.preventDefault(); 
+ 
+ 
+                            pancasilaRedirectKeIdentitas( 
+                                "expired" 
+                            ); 
+ 
+ 
+                            return; 
+ 
+                        } 
+ 
+ 
+                        pancasilaSendHeartbeat(); 
+ 
+                    } 
+                ); 
+ 
+            } 
+        ); 
+ 
+ 
+    /* ================================================= 
+       TOMBOL KEMBALI 
+    ================================================= */ 
+ 
+    const backButton = 
+        document.querySelector( 
+            ".back-button" 
+        ); 
+ 
+ 
+    if( 
+        backButton 
+    ){ 
+ 
+        backButton.addEventListener( 
+            "click", 
+            function(event){ 
+ 
+                const loginData = 
+                    pancasilaGetLoginData(); 
+ 
+ 
+                if( 
+                    !pancasilaLoginDataIsComplete( 
+                        loginData 
+                    ) 
+                ){ 
+ 
+                    event.preventDefault(); 
+ 
+ 
+                    pancasilaRedirectKeIdentitas( 
+                        "login" 
+                    ); 
+ 
+ 
+                    return; 
+ 
+                } 
+ 
+ 
+                if( 
+                    pancasilaClientSessionExpired( 
+                        loginData 
+                    ) 
+                ){ 
+ 
+                    event.preventDefault(); 
+ 
+ 
+                    pancasilaRedirectKeIdentitas( 
+                        "expired" 
+                    ); 
+ 
+ 
+                    return; 
+ 
+                } 
+ 
+ 
+                pancasilaSendHeartbeat(); 
+ 
+            } 
+        ); 
+ 
+    } 
+ 
+} 
+ 
+ 
+/* ===================================================== 
+   INISIALISASI SISTEM ONLINE Pancasila 
+===================================================== */ 
+ 
+async function pancasilaInitializeOnline(){ 
+ 
+    console.log( 
+        "🚀 Sistem online Pancasila dimulai." 
+    ); 
+ 
+ 
+    /* ------------------------------------------------- 
+       Ambil data login 
+    ------------------------------------------------- */ 
+ 
+    const loginData = 
+        pancasilaGetLoginData(); 
+ 
+ 
+    /* ------------------------------------------------- 
+       Pastikan siswa sudah login 
+    ------------------------------------------------- */ 
+ 
+    if( 
+        !pancasilaLoginDataIsComplete( 
+            loginData 
+        ) 
+    ){ 
+ 
+        pancasilaRedirectKeIdentitas( 
+            "login" 
+        ); 
+ 
+ 
+        return; 
+ 
+    } 
+ 
+ 
+    /* ------------------------------------------------- 
+       Tampilkan data siswa 
+       sebelum server selesai diperiksa. 
+    ------------------------------------------------- */ 
+ 
+    pancasilaTampilkanDataSiswa( 
+        loginData 
+    ); 
+ 
+ 
+    /* ------------------------------------------------- 
+       Cek masa sesi lokal 
+    ------------------------------------------------- */ 
+ 
+    if( 
+        pancasilaClientSessionExpired( 
+            loginData 
+        ) 
+    ){ 
+ 
+        pancasilaRedirectKeIdentitas( 
+            "expired" 
+        ); 
+ 
+ 
+        return; 
+ 
+    } 
+ 
+ 
+    /* ------------------------------------------------- 
+       Periksa session ke server 
+    ------------------------------------------------- */ 
+ 
+    const valid = 
+        await pancasilaCheckSession(); 
+ 
+ 
+    if( 
+        !valid 
+    ){ 
+ 
+        return; 
+ 
+    } 
+ 
+ 
+    const sessionAktif = 
+        pancasilaGetLoginData(); 
 
 
-                const el =
+    if( 
+        !pancasilaLoginDataIsComplete( 
+            sessionAktif 
+        ) 
+    ){ 
 
-                    document
-                        .getElementById(
-                            id
-                        );
+        pancasilaRedirectKeIdentitas( 
+            "login" 
+        ); 
 
+        return; 
 
-                if (el) {
-
-                    el.addEventListener(
-
-                        "input",
-
-                        mainkanSuaraKetik
-
-                    );
-
-                }
+    } 
 
 
-            }
+    mulaiKuisDariSession( 
+        sessionAktif 
+    ); 
 
-        );
 
-    }
-
-);
-
+    /* ------------------------------------------------- 
+       Mulai heartbeat 
+    ------------------------------------------------- */ 
+ 
+    pancasilaStartHeartbeat(); 
+ 
+ 
+    /* ------------------------------------------------- 
+       Proteksi navigasi 
+    ------------------------------------------------- */ 
+ 
+    pancasilaProtectNavigation(); 
+ 
+ 
+    /* ------------------------------------------------- 
+       Console 
+    ------------------------------------------------- */ 
+ 
+    console.log( 
+        "🟢 Pancasila aktif dan sedang dibaca online oleh server." 
+    ); 
+ 
+ 
+    console.log( 
+        "📄 Halaman online:", 
+        PANCASILA_HALAMAN_UTAMA 
+    ); 
+ 
+ 
+    console.log( 
+        "⏱️ Heartbeat:", 
+        PANCASILA_HEARTBEAT_INTERVAL / 
+        1000, 
+        "detik" 
+    ); 
+ 
+ 
+    console.log( 
+        "⏳ Maksimum sesi:", 
+        PANCASILA_SESSION_MAX_AGE / 
+        (60 * 60 * 1000), 
+        "jam" 
+    ); 
+ 
+} 
+ 
+ 
+/* ===================================================== 
+   JALANKAN SISTEM ONLINE 
+===================================================== */ 
+ 
+pancasilaInitializeOnline(); 
+ 
+ 
+/* ===================================================== 
+   LOG INFORMASI 
+===================================================== */ 
+ 
+console.log( 
+    "========================================" 
+); 
+ 
+ 
+console.log( 
+    "📚 Pancasila | Petualangan Kelas 5" 
+); 
+ 
+ 
+console.log( 
+    "📡 Sistem online siswa aktif" 
+); 
+ 
+ 
+console.log( 
+    "⏱️ Heartbeat setiap 20 detik" 
+); 
+ 
+ 
+console.log( 
+    "⏳ Sesi client maksimal 24 jam" 
+); 
+ 
+ 
+console.log( 
+    "🔑 Storage:", 
+    PANCASILA_LOGIN_STORAGE_KEY 
+); 
+ 
+ 
+console.log( 
+    "========================================" 
+); 
+ 
+ 
+ 
 
 </script>
 

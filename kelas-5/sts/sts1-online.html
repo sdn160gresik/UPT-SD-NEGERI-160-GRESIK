@@ -1,0 +1,3556 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+
+
+<!-- =====================================================
+     META
+====================================================== -->
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="theme-color"
+    content="#0288d1"
+>
+
+<meta
+    name="description"
+    content="Sumatif Tengah Semester 1 - Petualangan Kelas 5"
+>
+
+<title>STS 1 | Petualangan Kelas 5</title>
+
+
+<!-- =====================================================
+     FONT GOOGLE
+====================================================== -->
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+
+<style>
+
+    /* =====================================================
+       RESET
+    ====================================================== */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+    /* =====================================================
+       HTML & BODY
+    ====================================================== */
+
+    html,
+    body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+
+        min-height: 100vh;
+
+        font-family:
+            'Poppins',
+            sans-serif;
+
+        background:
+            url('https://i.imgur.com/clG3P3n.png')
+            no-repeat
+            center
+            center
+            fixed;
+
+        background-size: cover;
+
+        color: #fff;
+
+        overflow-x: hidden;
+    }
+
+
+    /* =====================================================
+       NAVBAR
+    ====================================================== */
+
+    nav {
+
+        width: 100%;
+
+        display: flex;
+
+        justify-content: flex-end;
+
+        align-items: center;
+
+        padding:
+            .65rem
+            1rem;
+
+        box-shadow:
+            0 3px 7px
+            rgba(0, 0, 0, .18);
+    }
+
+
+    /* =====================================================
+       NAVBAR KANAN
+    ====================================================== */
+
+    .nav-right {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: flex-end;
+
+        gap: .35rem;
+
+        flex-wrap: wrap;
+    }
+
+
+    /* =====================================================
+       LINK NAVBAR
+    ====================================================== */
+
+    nav a {
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .95
+            );
+
+        padding:
+            .4rem
+            .7rem;
+
+        border-radius: 7px;
+
+        text-decoration: none;
+
+        color: #0288d1;
+
+        font-weight: 700;
+
+        font-size: .75rem;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: .25rem;
+
+        transition:
+            transform .2s ease,
+            box-shadow .2s ease;
+    }
+
+
+    /* =====================================================
+       HOVER NAVBAR
+    ====================================================== */
+
+    nav a:hover {
+
+        transform:
+            translateY(-1px);
+
+        box-shadow:
+            0 4px 8px
+            rgba(0, 0, 0, .18);
+    }
+
+
+    /* =====================================================
+       HEADER
+    ====================================================== */
+
+    .hero-layout {
+
+        width:
+            calc(100% - 20px);
+
+        max-width: 800px;
+
+        margin:
+            18px
+            auto
+            8px;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+    }
+
+
+    /* =====================================================
+       BAGIAN JUDUL
+    ====================================================== */
+
+    .title-section {
+
+        text-align: center;
+
+        width: 100%;
+    }
+
+
+    /* =====================================================
+       JUDUL UTAMA
+    ====================================================== */
+
+    .title-section h1 {
+
+        font-size:
+            clamp(
+                1.2rem,
+                3vw,
+                1.8rem
+            );
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .93
+            );
+
+        display: inline-block;
+
+        padding:
+            .45rem
+            1rem;
+
+        border-radius: 10px;
+
+        color: #0288d1;
+
+        box-shadow:
+            0 3px 9px
+            rgba(0, 0, 0, .18);
+    }
+
+
+    /* =====================================================
+       SUBJUDUL
+    ====================================================== */
+
+    .subtitle {
+
+        margin-top: 7px;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .90
+            );
+
+        color: #555;
+
+        display: inline-block;
+
+        padding:
+            .3rem
+            .7rem;
+
+        border-radius: 7px;
+
+        font-size: .68rem;
+
+        font-weight: 600;
+
+        box-shadow:
+            0 2px 6px
+            rgba(0, 0, 0, .12);
+    }
+
+
+    /* =====================================================
+       PEMBUNGKUS MENU STS 1
+    ====================================================== */
+
+    .sts1-container {
+
+        width:
+            calc(100% - 30px);
+
+        max-width: 650px;
+
+        margin:
+            18px
+            auto;
+
+        display: grid;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr);
+
+        gap: 12px;
+
+        align-items: stretch;
+    }
+
+
+    /* =====================================================
+       KARTU MENU
+       
+       PENTING:
+       KARTU HANYA SEBAGAI TAMPILAN.
+       KARTU TIDAK MEMILIKI LINK.
+    ====================================================== */
+
+    .menu-card {
+
+        min-width: 0;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .94
+            );
+
+        border-radius: 12px;
+
+        padding:
+            16px
+            8px;
+
+        text-align: center;
+
+        color: #0288d1;
+
+        box-shadow:
+            0 4px 10px
+            rgba(0, 0, 0, .18);
+
+        border:
+            2px
+            solid
+            rgba(
+                255,
+                255,
+                255,
+                .85
+            );
+
+        /*
+         * Kartu bukan tombol.
+         */
+
+        cursor: default;
+
+        transition:
+            box-shadow .2s ease;
+    }
+
+
+    /* =====================================================
+       HOVER KARTU
+       
+       Tidak ada efek klik pada kartu.
+    ====================================================== */
+
+    .menu-card:hover {
+
+        box-shadow:
+            0 4px 10px
+            rgba(0, 0, 0, .18);
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .94
+            );
+
+        transform: none;
+    }
+
+
+    /* =====================================================
+       IKON MENU
+    ====================================================== */
+
+    .menu-icon {
+
+        width: 52px;
+
+        height: 52px;
+
+        margin:
+            0
+            auto
+            8px;
+
+        border-radius: 50%;
+
+        background:
+            linear-gradient(
+                135deg,
+                #0288d1,
+                #7b1fa2
+            );
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        font-size: 1.6rem;
+
+        box-shadow:
+            0 3px 7px
+            rgba(0, 0, 0, .18);
+    }
+
+
+    /* =====================================================
+       JUDUL MENU
+    ====================================================== */
+
+    .menu-card h2 {
+
+        font-size: 1rem;
+
+        margin-bottom: 4px;
+
+        color: #0288d1;
+    }
+
+
+    /* =====================================================
+       KETERANGAN MENU
+    ====================================================== */
+
+    .menu-card p {
+
+        color: #555;
+
+        font-size: .65rem;
+
+        line-height: 1.35;
+
+        margin-bottom: 9px;
+    }
+
+
+    /* =====================================================
+       TOMBOL MULAI
+       
+       HANYA TOMBOL INI YANG DAPAT DIKLIK.
+    ====================================================== */
+
+    .menu-button {
+
+        display: inline-block;
+
+        background:
+            linear-gradient(
+                45deg,
+                #0288d1,
+                #7b1fa2
+            );
+
+        color: #fff;
+
+        padding:
+            5px
+            9px;
+
+        border-radius: 7px;
+
+        font-weight: 700;
+
+        font-size: .62rem;
+
+        box-shadow:
+            0 2px 5px
+            rgba(0, 0, 0, .16);
+
+        pointer-events: auto;
+
+        cursor: pointer;
+
+        text-decoration: none;
+
+        transition:
+            transform .2s ease,
+            box-shadow .2s ease;
+    }
+
+
+    /* =====================================================
+       HOVER TOMBOL MULAI
+    ====================================================== */
+
+    .menu-button:hover {
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 4px 8px
+            rgba(0, 0, 0, .22);
+    }
+
+
+    /* =====================================================
+       SAAT TOMBOL DITEKAN
+    ====================================================== */
+
+    .menu-button:active {
+
+        transform:
+            translateY(0);
+    }
+
+
+    /* =====================================================
+       FOCUS TOMBOL
+    ====================================================== */
+
+    .menu-button:focus-visible {
+
+        outline:
+            3px
+            solid
+            rgba(
+                255,
+                255,
+                255,
+                .95
+            );
+
+        outline-offset: 3px;
+    }
+
+
+    /* =====================================================
+       TOMBOL KEMBALI
+    ====================================================== */
+
+    .back-container {
+
+        display: flex;
+
+        justify-content: center;
+
+        margin:
+            10px
+            auto
+            20px;
+    }
+
+
+    /* =====================================================
+       LINK KEMBALI
+    ====================================================== */
+
+    .back-button {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 5px;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .95
+            );
+
+        color: #0288d1;
+
+        text-decoration: none;
+
+        padding:
+            6px
+            12px;
+
+        border-radius: 7px;
+
+        font-weight: 700;
+
+        font-size: .7rem;
+
+        box-shadow:
+            0 3px 7px
+            rgba(0, 0, 0, .15);
+
+        transition: .2s;
+    }
+
+
+    /* =====================================================
+       HOVER TOMBOL KEMBALI
+    ====================================================== */
+
+    .back-button:hover {
+
+        transform:
+            translateY(-1px);
+
+        background:
+            #dff6ff;
+    }
+
+
+    /* =====================================================
+       INFORMASI LOGIN SISWA
+       
+       Sama seperti halaman Petualangan Kelas 5.
+    ====================================================== */
+
+    #infoSiswaLogin {
+
+        position:
+            fixed;
+
+        left: 15px;
+
+        bottom: 15px;
+
+        z-index: 9999;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .95
+            );
+
+        color: #333;
+
+        padding:
+            8px
+            12px;
+
+        border-radius: 10px;
+
+        box-shadow:
+            0 4px 12px
+            rgba(0,0,0,.18);
+
+        font-size: .72rem;
+
+        max-width:
+            260px;
+
+        line-height: 1.7;
+    }
+
+
+    /* =====================================================
+       STATUS ONLINE
+    ====================================================== */
+
+    #statusOnline {
+
+        color:
+            #2e7d32;
+
+        font-weight:
+            700;
+    }
+
+
+    /* =====================================================
+       STATUS OFFLINE
+    ====================================================== */
+
+    #statusOnline.offline {
+
+        color:
+            #c62828;
+    }
+
+
+    /* =====================================================
+       AUDIO
+    ====================================================== */
+
+    audio {
+
+        display: none;
+    }
+
+
+    /* =====================================================
+       TABLET
+    ====================================================== */
+
+    @media (max-width: 768px) {
+
+        /* NAVBAR */
+
+        nav {
+
+            padding:
+                .5rem
+                .7rem;
+        }
+
+
+        .nav-right {
+
+            justify-content: center;
+
+            width: 100%;
+
+            gap: 4px;
+        }
+
+
+        nav a {
+
+            font-size: .68rem;
+
+            padding:
+                .35rem
+                .5rem;
+        }
+
+
+        /* HEADER */
+
+        .hero-layout {
+
+            width:
+                calc(100% - 16px);
+
+            margin:
+                14px
+                auto
+                6px;
+        }
+
+
+        .title-section h1 {
+
+            font-size: 1.15rem;
+
+            padding:
+                .4rem
+                .75rem;
+        }
+
+
+        .subtitle {
+
+            font-size: .62rem;
+
+            padding:
+                .25rem
+                .55rem;
+        }
+
+
+        /* =================================================
+           DUA KARTU TETAP SATU BARIS
+        ================================================== */
+
+        .sts1-container {
+
+            width:
+                calc(100% - 20px);
+
+            max-width: 600px;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap: 8px;
+
+            margin:
+                14px
+                auto;
+        }
+
+
+        .menu-card {
+
+            padding:
+                12px
+                6px;
+
+            border-radius: 10px;
+        }
+
+
+        .menu-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            font-size: 1.4rem;
+
+            margin-bottom: 6px;
+        }
+
+
+        .menu-card h2 {
+
+            font-size: .9rem;
+
+            margin-bottom: 3px;
+        }
+
+
+        .menu-card p {
+
+            font-size: .58rem;
+
+            margin-bottom: 7px;
+        }
+
+
+        .menu-button {
+
+            padding:
+                5px
+                7px;
+
+            font-size: .56rem;
+        }
+
+
+        .back-container {
+
+            margin:
+                8px
+                auto
+                15px;
+        }
+
+
+        .back-button {
+
+            font-size: .65rem;
+
+            padding:
+                6px
+                10px;
+        }
+
+
+        #infoSiswaLogin {
+
+            left: 10px;
+
+            bottom: 10px;
+
+            max-width:
+                calc(100% - 20px);
+        }
+
+    }
+
+
+    /* =====================================================
+       HP KECIL
+    ====================================================== */
+
+    @media (max-width: 480px) {
+
+        /* NAVBAR */
+
+        nav {
+
+            padding: .4rem;
+        }
+
+
+        nav a {
+
+            font-size: .6rem;
+
+            padding:
+                .3rem
+                .42rem;
+        }
+
+
+        /* HEADER */
+
+        .hero-layout {
+
+            width:
+                calc(100% - 10px);
+
+            margin:
+                12px
+                auto
+                5px;
+        }
+
+
+        .title-section h1 {
+
+            font-size: 1rem;
+
+            padding:
+                .35rem
+                .6rem;
+
+            border-radius: 8px;
+        }
+
+
+        .subtitle {
+
+            font-size: .55rem;
+
+            margin-top: 5px;
+
+            padding:
+                .22rem
+                .45rem;
+        }
+
+
+        /* =================================================
+           SEMUA MENU TETAP KIRI - KANAN
+        ================================================== */
+
+        .sts1-container {
+
+            width:
+                calc(100% - 12px);
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+
+            gap: 6px;
+
+            margin:
+                12px
+                auto;
+        }
+
+
+        .menu-card {
+
+            padding:
+                10px
+                4px;
+
+            border-radius: 9px;
+
+            border-width: 1px;
+        }
+
+
+        .menu-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            font-size: 1.25rem;
+
+            margin-bottom: 5px;
+        }
+
+
+        .menu-card h2 {
+
+            font-size: .8rem;
+
+            margin-bottom: 2px;
+        }
+
+
+        .menu-card p {
+
+            font-size: .52rem;
+
+            line-height: 1.25;
+
+            margin-bottom: 6px;
+        }
+
+
+        .menu-button {
+
+            padding:
+                4px
+                5px;
+
+            font-size: .5rem;
+
+            border-radius: 6px;
+        }
+
+
+        .back-button {
+
+            font-size: .58rem;
+
+            padding:
+                5px
+                8px;
+        }
+
+
+        #infoSiswaLogin {
+
+            font-size:
+                .65rem;
+        }
+
+    }
+
+
+    /* =====================================================
+       HP SANGAT KECIL
+    ====================================================== */
+
+    @media (max-width: 360px) {
+
+        .sts1-container {
+
+            width:
+                calc(100% - 8px);
+
+            gap: 4px;
+        }
+
+
+        .menu-card {
+
+            padding:
+                8px
+                3px;
+        }
+
+
+        .menu-icon {
+
+            width: 36px;
+
+            height: 36px;
+
+            font-size: 1.1rem;
+        }
+
+
+        .menu-card h2 {
+
+            font-size: .72rem;
+        }
+
+
+        .menu-card p {
+
+            font-size: .46rem;
+        }
+
+
+        .menu-button {
+
+            font-size: .44rem;
+
+            padding:
+                4px
+                4px;
+        }
+
+    }
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVIGASI
+====================================================== -->
+
+<nav>
+
+    <div class="nav-right">
+
+        <a
+            href="../../index.html"
+            class="nav-button"
+        >
+            🏠 Beranda
+        </a>
+
+
+        <a
+            href="../kelas.html"
+            class="nav-button"
+        >
+            🏫 Kelas
+        </a>
+
+
+        <a
+            href="../Petualangan-Kelas-5.html"
+            class="nav-button"
+        >
+            🗺️ Petualangan
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     INFORMASI LOGIN SISWA
+     
+     Sistem online akan mengisi:
+     - Nama
+     - Kelas
+     - Nomor Absen
+     - Status Online
+====================================================== -->
+
+<div id="infoSiswaLogin">
+
+    👤
+    <strong id="namaSiswaLogin">
+        Memuat...
+    </strong>
+
+    <br>
+
+    🏫 Kelas
+    <strong id="kelasSiswaLogin">
+        -
+    </strong>
+
+    <br>
+
+    🔢 Absen
+    <strong id="absenSiswaLogin">
+        -
+    </strong>
+
+    <br>
+
+    <span id="statusOnline">
+        🟢 Online
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     HEADER STS 1
+====================================================== -->
+
+<section class="hero-layout">
+
+    <div class="title-section">
+
+        <h1>
+            📝 STS 1
+        </h1>
+
+
+        <div>
+
+            <span class="subtitle">
+                Pilih mata pelajaran untuk memulai
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MENU STS 1
+====================================================== -->
+
+<div class="sts1-container">
+
+
+    <!-- =================================================
+         PANCASILA
+    ================================================== -->
+
+    <div
+        class="menu-card"
+        data-halaman="STS 1 - Pancasila"
+    >
+
+        <div class="menu-icon">
+            ⭐
+        </div>
+
+
+        <h2>
+            Pancasila
+        </h2>
+
+
+        <p>
+            Pelajari dan kerjakan
+            soal Pendidikan Pancasila.
+        </p>
+
+
+        <a
+            href="pancasila/pancasila.html"
+            class="menu-button"
+            data-halaman="STS 1 - Pancasila"
+            aria-label="Mulai STS 1 Pancasila"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         BAHASA INDONESIA
+    ================================================== -->
+
+    <div
+        class="menu-card"
+        data-halaman="STS 1 - Bahasa Indonesia"
+    >
+
+        <div class="menu-icon">
+            📚
+        </div>
+
+
+        <h2>
+            Bahasa Indonesia
+        </h2>
+
+
+        <p>
+            Membaca, memahami,
+            dan menjawab soal Bahasa Indonesia.
+        </p>
+
+
+        <a
+            href="bahasa_indonesia/bahasa_indonesia.html"
+            class="menu-button"
+            data-halaman="STS 1 - Bahasa Indonesia"
+            aria-label="Mulai STS 1 Bahasa Indonesia"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         MATEMATIKA
+    ================================================== -->
+
+    <div
+        class="menu-card"
+        data-halaman="STS 1 - Matematika"
+    >
+
+        <div class="menu-icon">
+            🧮
+        </div>
+
+
+        <h2>
+            Matematika
+        </h2>
+
+
+        <p>
+            Berlatih bilangan,
+            perhitungan, dan pemecahan masalah.
+        </p>
+
+
+        <a
+            href="https://sdn160gresik.github.io/UPT-SD-NEGERI-160-GRESIK/kelas-5/sts/matematika/matematika.html"
+            class="menu-button"
+            data-halaman="STS 1 - Matematika"
+            aria-label="Mulai STS 1 Matematika"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         IPAS
+    ================================================== -->
+
+    <div
+        class="menu-card"
+        data-halaman="STS 1 - IPAS"
+    >
+
+        <div class="menu-icon">
+            🌿
+        </div>
+
+
+        <h2>
+            IPAS
+        </h2>
+
+
+        <p>
+            Menjelajahi ilmu pengetahuan
+            dan lingkungan sekitar.
+        </p>
+
+
+        <a
+            href="ipas/ipas.html"
+            class="menu-button"
+            data-halaman="STS 1 - IPAS"
+            aria-label="Mulai STS 1 IPAS"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         SENI
+    ================================================== -->
+
+    <div
+        class="menu-card"
+        data-halaman="STS 1 - Seni"
+    >
+
+        <div class="menu-icon">
+            🎨
+        </div>
+
+
+        <h2>
+            Seni
+        </h2>
+
+
+        <p>
+            Berkarya, mengenal seni,
+            dan menjawab soal seni budaya.
+        </p>
+
+
+        <a
+            href="seni/seni.html"
+            class="menu-button"
+            data-halaman="STS 1 - Seni"
+            aria-label="Mulai STS 1 Seni"
+        >
+            🚀 Mulai
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     TOMBOL KEMBALI
+====================================================== -->
+
+<div class="back-container">
+
+    <a
+        href="sts-online.html"
+        class="back-button"
+    >
+
+        ← Kembali ke STS
+
+    </a>
+
+</div>
+
+
+<!-- =====================================================
+     AUDIO KLIK
+====================================================== -->
+
+<audio
+    id="clickSound"
+    src="suara/button-press.mp3"
+    preload="auto"
+></audio>
+
+
+<script>
+
+/* =====================================================
+   AUDIO KLIK
+===================================================== */
+
+const clickSound =
+    document.getElementById(
+        "clickSound"
+    );
+
+
+/* =====================================================
+   FUNGSI SUARA KLIK
+===================================================== */
+
+function playClickSound(){
+
+    if(!clickSound){
+
+        return;
+
+    }
+
+
+    try{
+
+        clickSound.currentTime =
+            0;
+
+        const promise =
+            clickSound.play();
+
+
+        if(
+            promise !== undefined
+        ){
+
+            promise.catch(
+                function(){}
+            );
+
+        }
+
+    }catch(error){
+
+        console.log(
+            "Audio tidak dapat diputar:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SUARA UNTUK NAVIGASI
+===================================================== */
+
+document
+    .querySelectorAll(
+        "nav a"
+    )
+    .forEach(
+        function(button){
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    playClickSound();
+
+                }
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   SUARA UNTUK TOMBOL MULAI
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".menu-button"
+    )
+    .forEach(
+        function(button){
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    playClickSound();
+
+                }
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   SUARA UNTUK TOMBOL KEMBALI
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".back-button"
+    )
+    .forEach(
+        function(button){
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    playClickSound();
+
+                }
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   KEAMANAN KARTU MENU
+     
+   Klik pada area kartu:
+   - Tidak membuka halaman
+   - Tidak melakukan navigasi
+   - Tidak memainkan suara
+     
+   Klik tombol Mulai:
+   - Tetap aktif
+   - Membuka halaman tujuan
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".menu-card"
+    )
+    .forEach(
+        function(card){
+
+            card.addEventListener(
+                "click",
+                function(event){
+
+                    const tombol =
+                        event.target.closest(
+                            ".menu-button"
+                        );
+
+
+                    if(!tombol){
+
+                        event.preventDefault();
+
+                        event.stopPropagation();
+
+                        return false;
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   INFORMASI CONSOLE
+===================================================== */
+
+console.log(
+    "Halaman STS 1 | Petualangan Kelas 5 aktif."
+);
+
+console.log(
+    "Kartu mata pelajaran tidak dapat diklik."
+);
+
+console.log(
+    "Hanya tombol Mulai yang aktif."
+);
+
+
+/* =====================================================
+   SISTEM ONLINE SISWA - STS 1
+     
+   Mengikuti sistem online pada halaman
+   STS utama dan Petualangan Kelas 5.
+     
+   Fungsi:
+   - Membaca identitas siswa
+   - Memeriksa sessionId
+   - Cek sesi server
+   - Batas sesi client 24 jam
+   - Heartbeat setiap 20 detik
+   - Heartbeat saat aktivitas
+   - Heartbeat saat tab aktif kembali
+   - Status online
+   - Proteksi navigasi
+===================================================== */
+
+
+/* =====================================================
+   KONFIGURASI API
+===================================================== */
+
+const STS1_API_URL =
+    "https://script.google.com/macros/s/AKfycbw-SmLBX8bmBH98vNrWzQ5tS3GrMvujNARGqdE2PerdDuIrPHHrGD4Kg5PSlLPyOXJ3/exec";
+
+
+/* =====================================================
+   NAMA HALAMAN
+     
+   Siswa akan tercatat sedang berada
+   pada halaman STS 1.
+===================================================== */
+
+const STS1_HALAMAN_UTAMA =
+    "STS 1";
+
+
+/* =====================================================
+   INTERVAL HEARTBEAT
+     
+   Setiap 20 detik.
+===================================================== */
+
+const STS1_HEARTBEAT_INTERVAL =
+    20000;
+
+
+/* =====================================================
+   BATAS SESI CLIENT
+     
+   Maksimal 24 jam.
+===================================================== */
+
+const STS1_SESSION_MAX_AGE =
+    24 * 60 * 60 * 1000;
+
+
+/* =====================================================
+   KUNCI STORAGE
+     
+   Sama dengan Petualangan Kelas 5
+   dan STS utama.
+===================================================== */
+
+const STS1_LOGIN_STORAGE_KEY =
+    "identitasPetualanganKelas5";
+
+
+/* =====================================================
+   VARIABEL HEARTBEAT
+===================================================== */
+
+let sts1HeartbeatTimer =
+    null;
+
+
+let sts1LastHeartbeat =
+    0;
+
+
+let sts1ActivityTimer =
+    null;
+
+
+let sts1SedangLogout =
+    false;
+
+
+let sts1SedangRedirect =
+    false;
+
+
+/* =====================================================
+   BACA DATA LOGIN
+===================================================== */
+
+function sts1GetLoginData(){
+
+    const storages = [
+
+        window.localStorage,
+
+        window.sessionStorage
+
+    ];
+
+
+    for(
+        const storage
+        of storages
+    ){
+
+        try{
+
+            const raw =
+                storage.getItem(
+                    STS1_LOGIN_STORAGE_KEY
+                );
+
+
+            if(
+                !raw
+            ){
+
+                continue;
+
+            }
+
+
+            const data =
+                JSON.parse(
+                    raw
+                );
+
+
+            if(
+                data &&
+                typeof data === "object"
+            ){
+
+                return data;
+
+            }
+
+        }catch(error){
+
+            console.log(
+                "STS 1: gagal membaca data login:",
+                error
+            );
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =====================================================
+   SIMPAN DATA LOGIN
+===================================================== */
+
+function sts1SaveLoginData(
+    data
+){
+
+    if(
+        !data
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        localStorage.setItem(
+            STS1_LOGIN_STORAGE_KEY,
+            JSON.stringify(data)
+        );
+
+    }catch(error){
+
+        console.log(
+            "STS 1: gagal menyimpan localStorage:",
+            error
+        );
+
+    }
+
+
+    try{
+
+        sessionStorage.setItem(
+            STS1_LOGIN_STORAGE_KEY,
+            JSON.stringify(data)
+        );
+
+    }catch(error){
+
+        console.log(
+            "STS 1: gagal menyimpan sessionStorage:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   HAPUS DATA LOGIN
+===================================================== */
+
+function sts1ClearLoginData(){
+
+    try{
+
+        localStorage.removeItem(
+            STS1_LOGIN_STORAGE_KEY
+        );
+
+    }catch(error){}
+
+
+    try{
+
+        sessionStorage.removeItem(
+            STS1_LOGIN_STORAGE_KEY
+        );
+
+    }catch(error){}
+
+}
+
+
+/* =====================================================
+   CEK DATA LOGIN LENGKAP
+===================================================== */
+
+function sts1LoginDataIsComplete(
+    data
+){
+
+    return Boolean(
+
+        data &&
+
+        data.nama &&
+
+        data.kelas &&
+
+        data.sessionId
+
+    );
+
+}
+
+
+/* =====================================================
+   CEK SESI CLIENT 24 JAM
+===================================================== */
+
+function sts1ClientSessionExpired(
+    data
+){
+
+    if(
+        !data ||
+        !data.loginAt
+    ){
+
+        return true;
+
+    }
+
+
+    const loginTime =
+        Number(
+            data.loginAt
+        );
+
+
+    if(
+        !Number.isFinite(
+            loginTime
+        )
+    ){
+
+        return true;
+
+    }
+
+
+    return (
+
+        Date.now() -
+        loginTime
+
+    ) >=
+        STS1_SESSION_MAX_AGE;
+
+}
+
+
+/* =====================================================
+   TAMPILKAN DATA SISWA
+===================================================== */
+
+function sts1TampilkanDataSiswa(
+    data
+){
+
+    if(
+        !data
+    ){
+
+        return;
+
+    }
+
+
+    const namaElement =
+        document.getElementById(
+            "namaSiswaLogin"
+        );
+
+
+    const kelasElement =
+        document.getElementById(
+            "kelasSiswaLogin"
+        );
+
+
+    const absenElement =
+        document.getElementById(
+            "absenSiswaLogin"
+        );
+
+
+    if(
+        namaElement
+    ){
+
+        namaElement.textContent =
+            data.nama ||
+            "-";
+
+    }
+
+
+    if(
+        kelasElement
+    ){
+
+        kelasElement.textContent =
+            data.kelas ||
+            "-";
+
+    }
+
+
+    if(
+        absenElement
+    ){
+
+        absenElement.textContent =
+            data.nomorAbsen ||
+            data.absen ||
+            "-";
+
+    }
+
+}
+
+
+/* =====================================================
+   STATUS ONLINE
+===================================================== */
+
+function sts1SetStatusOnline(
+    online,
+    text
+){
+
+    const statusElement =
+        document.getElementById(
+            "statusOnline"
+        );
+
+
+    if(
+        !statusElement
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        online
+    ){
+
+        statusElement.textContent =
+            text ||
+            "🟢 Online";
+
+
+        statusElement.classList.remove(
+            "offline"
+        );
+
+    }else{
+
+        statusElement.textContent =
+            text ||
+            "🔴 Offline";
+
+
+        statusElement.classList.add(
+            "offline"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   JSONP REQUEST
+===================================================== */
+
+function sts1RequestJSONP(
+    params,
+    timeout
+){
+
+    return new Promise(
+        function(resolve, reject){
+
+            const callbackName =
+                "sts1OnlineCallback_" +
+                Date.now() +
+                "_" +
+                Math.random()
+                    .toString(36)
+                    .substring(2,8);
+
+
+            let selesai =
+                false;
+
+
+            const script =
+                document.createElement(
+                    "script"
+                );
+
+
+            const query =
+                new URLSearchParams(
+                    params
+                );
+
+
+            query.set(
+                "callback",
+                callbackName
+            );
+
+
+            query.set(
+                "t",
+                Date.now()
+            );
+
+
+            const timer =
+                setTimeout(
+                    function(){
+
+                        if(
+                            selesai
+                        ){
+
+                            return;
+
+                        }
+
+
+                        selesai =
+                            true;
+
+
+                        cleanup();
+
+
+                        reject(
+                            new Error(
+                                "Request JSONP timeout"
+                            )
+                        );
+
+                    },
+                    timeout || 10000
+                );
+
+
+            function cleanup(){
+
+                clearTimeout(
+                    timer
+                );
+
+
+                try{
+
+                    delete window[
+                        callbackName
+                    ];
+
+                }catch(error){
+
+                    window[
+                        callbackName
+                    ] =
+                        undefined;
+
+                }
+
+
+                if(
+                    script.parentNode
+                ){
+
+                    script.parentNode.removeChild(
+                        script
+                    );
+
+                }
+
+            }
+
+
+            window[
+                callbackName
+            ] =
+                function(data){
+
+                    if(
+                        selesai
+                    ){
+
+                        return;
+
+                    }
+
+
+                    selesai =
+                        true;
+
+
+                    cleanup();
+
+
+                    resolve(
+                        data
+                    );
+
+                };
+
+
+            script.onerror =
+                function(){
+
+                    if(
+                        selesai
+                    ){
+
+                        return;
+
+                    }
+
+
+                    selesai =
+                        true;
+
+
+                    cleanup();
+
+
+                    reject(
+                        new Error(
+                            "JSONP gagal dimuat"
+                        )
+                    );
+
+                };
+
+
+            script.src =
+                STS1_API_URL +
+                "?" +
+                query.toString();
+
+
+            script.async =
+                true;
+
+
+            document
+                .head
+                .appendChild(
+                    script
+                );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   REDIRECT KE HALAMAN IDENTITAS
+     
+   Karena sts1.html berada di:
+     
+   /kelas-5/sts/sts1.html
+     
+   maka identitas.html berada di:
+     
+   /kelas-5/identitas.html
+===================================================== */
+
+function sts1RedirectKeIdentitas(
+    alasan
+){
+
+    if(
+        sts1SedangRedirect
+    ){
+
+        return;
+
+    }
+
+
+    sts1SedangRedirect =
+        true;
+
+
+    clearInterval(
+        sts1HeartbeatTimer
+    );
+
+
+    sts1HeartbeatTimer =
+        null;
+
+
+    sts1ClearLoginData();
+
+
+    let url =
+        "../identitas.html";
+
+
+    if(
+        alasan
+    ){
+
+        url +=
+            "?alasan=" +
+            encodeURIComponent(
+                alasan
+            );
+
+    }
+
+
+    window.location.replace(
+        url
+    );
+
+}
+
+
+/* =====================================================
+   CEK SESI KE SERVER
+===================================================== */
+
+async function sts1CheckSession(){
+
+    const loginData =
+        sts1GetLoginData();
+
+
+    /* -------------------------------------------------
+       Tidak ada data login
+    ------------------------------------------------- */
+
+    if(
+        !sts1LoginDataIsComplete(
+            loginData
+        )
+    ){
+
+        sts1RedirectKeIdentitas(
+            "login"
+        );
+
+        return false;
+
+    }
+
+
+    /* -------------------------------------------------
+       Cek masa sesi 24 jam
+    ------------------------------------------------- */
+
+    if(
+        sts1ClientSessionExpired(
+            loginData
+        )
+    ){
+
+        sts1RedirectKeIdentitas(
+            "expired"
+        );
+
+        return false;
+
+    }
+
+
+    try{
+
+        const result =
+            await sts1RequestJSONP(
+                {
+
+                    action:
+                        "checksession",
+
+                    sessionId:
+                        loginData.sessionId
+
+                },
+                10000
+            );
+
+
+        console.log(
+            "STS 1 - hasil checksession:",
+            result
+        );
+
+
+        /* -------------------------------------------------
+           Session tidak valid
+        ------------------------------------------------- */
+
+        if(
+            !result ||
+            result.success !== true ||
+            result.loggedIn !== true
+        ){
+
+            sts1RedirectKeIdentitas(
+                "invalid"
+            );
+
+            return false;
+
+        }
+
+
+        /* -------------------------------------------------
+           Jika server memberikan session terbaru
+        ------------------------------------------------- */
+
+        if(
+            result.session
+        ){
+
+            const updated =
+                Object.assign(
+                    {},
+                    loginData,
+                    result.session
+                );
+
+
+            sts1SaveLoginData(
+                updated
+            );
+
+
+            sts1TampilkanDataSiswa(
+                updated
+            );
+
+        }
+
+
+        sts1SetStatusOnline(
+            true,
+            "🟢 Online"
+        );
+
+
+        return true;
+
+    }catch(error){
+
+        /*
+           Sama seperti halaman STS utama:
+           error jaringan sementara tidak
+           langsung mengeluarkan siswa.
+        */
+
+        console.warn(
+            "STS 1: cek sesi sementara gagal:",
+            error
+        );
+
+
+        sts1SetStatusOnline(
+            true,
+            "🟢 Online"
+        );
+
+
+        return true;
+
+    }
+
+}
+
+
+/* =====================================================
+   KIRIM HEARTBEAT
+===================================================== */
+
+async function sts1SendHeartbeat(){
+
+    /* -------------------------------------------------
+       Jangan kirim ketika redirect
+       atau proses logout.
+    ------------------------------------------------- */
+
+    if(
+        sts1SedangRedirect ||
+        sts1SedangLogout
+    ){
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------
+       Ambil data login
+    ------------------------------------------------- */
+
+    const loginData =
+        sts1GetLoginData();
+
+
+    /* -------------------------------------------------
+       Pastikan login lengkap
+    ------------------------------------------------- */
+
+    if(
+        !sts1LoginDataIsComplete(
+            loginData
+        )
+    ){
+
+        console.warn(
+            "STS 1: heartbeat dihentikan karena data login tidak lengkap."
+        );
+
+
+        sts1RedirectKeIdentitas(
+            "login"
+        );
+
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------
+       Cek sesi 24 jam
+    ------------------------------------------------- */
+
+    if(
+        sts1ClientSessionExpired(
+            loginData
+        )
+    ){
+
+        console.warn(
+            "STS 1: sesi lokal sudah expired."
+        );
+
+
+        sts1RedirectKeIdentitas(
+            "expired"
+        );
+
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------
+       Hindari heartbeat terlalu rapat
+       
+       Minimal 5 detik antar request.
+    ------------------------------------------------- */
+
+    const now =
+        Date.now();
+
+
+    if(
+        now -
+        sts1LastHeartbeat
+        < 5000
+    ){
+
+        return;
+
+    }
+
+
+    sts1LastHeartbeat =
+        now;
+
+
+    /* -------------------------------------------------
+       Tampilkan status online
+    ------------------------------------------------- */
+
+    sts1SetStatusOnline(
+        true,
+        "🟢 Online"
+    );
+
+
+    /* =================================================
+       DEBUG
+    ================================================= */
+
+    console.log(
+        "========================================"
+    );
+
+
+    console.log(
+        "📡 STS 1 MENGIRIM HEARTBEAT"
+    );
+
+
+    console.log(
+        "🕐 Waktu:",
+        new Date()
+            .toLocaleTimeString()
+    );
+
+
+    console.log(
+        "🆔 Session ID:",
+        loginData.sessionId
+    );
+
+
+    console.log(
+        "👤 Nama:",
+        loginData.nama
+    );
+
+
+    console.log(
+        "🏫 Kelas:",
+        loginData.kelas
+    );
+
+
+    console.log(
+        "🔢 Absen:",
+        loginData.nomorAbsen ||
+        loginData.absen ||
+        "-"
+    );
+
+
+    console.log(
+        "📄 Halaman:",
+        STS1_HALAMAN_UTAMA
+    );
+
+
+    /* =================================================
+       REQUEST HEARTBEAT
+    ================================================= */
+
+    try{
+
+        const result =
+            await sts1RequestJSONP(
+                {
+
+                    action:
+                        "heartbeat",
+
+                    sessionId:
+                        loginData.sessionId,
+
+                    nama:
+                        loginData.nama,
+
+                    kelas:
+                        loginData.kelas,
+
+                    nomorAbsen:
+                        loginData.nomorAbsen ||
+                        loginData.absen ||
+                        "",
+
+                    halaman:
+                        STS1_HALAMAN_UTAMA,
+
+                    sumber:
+                        "Petualangan Kelas 5"
+
+                },
+                10000
+            );
+
+
+        /* =================================================
+           DEBUG RESPONS
+        ================================================= */
+
+        console.log(
+            "📥 RESPONS SERVER STS 1:",
+            result
+        );
+
+
+        console.log(
+            "✅ Success:",
+            result &&
+            result.success
+        );
+
+
+        console.log(
+            "📊 Status:",
+            result &&
+            result.status
+        );
+
+
+        console.log(
+            "📝 Message:",
+            result &&
+            result.message
+        );
+
+
+        /* =================================================
+           CEK SESSION DARI SERVER
+        ================================================= */
+
+        if(
+            result &&
+            result.session
+        ){
+
+            console.log(
+                "----------------------------------------"
+            );
+
+
+            console.log(
+                "🆔 Session ID SERVER:",
+                result.session.sessionId
+            );
+
+
+            console.log(
+                "👤 Nama SERVER:",
+                result.session.nama
+            );
+
+
+            console.log(
+                "🏫 Kelas SERVER:",
+                result.session.kelas
+            );
+
+
+            console.log(
+                "🔢 Absen SERVER:",
+                result.session.nomorAbsen
+            );
+
+
+            console.log(
+                "📄 Halaman SERVER:",
+                result.session.halaman
+            );
+
+
+            console.log(
+                "🕐 Login At SERVER:",
+                result.session.loginAt
+            );
+
+
+            console.log(
+                "🕐 Last Seen SERVER:",
+                result.session.lastSeen
+            );
+
+
+            console.log(
+                "🟢 Status SERVER:",
+                result.session.status
+            );
+
+
+            console.log(
+                "----------------------------------------"
+            );
+
+        }
+
+
+        /* =================================================
+           CEK HASIL HEARTBEAT
+        ================================================= */
+
+        if(
+            !result ||
+            result.success !== true
+        ){
+
+            const status =
+                String(
+                    result &&
+                    result.status
+                    ||
+                    ""
+                ).toLowerCase();
+
+
+            console.warn(
+                "STS 1: heartbeat tidak berhasil.",
+                result
+            );
+
+
+            /* ---------------------------------------------
+               Session benar-benar invalid
+            --------------------------------------------- */
+
+            if(
+
+                status ===
+                    "expired"
+
+                ||
+
+                status ===
+                    "not_logged_in"
+
+                ||
+
+                status ===
+                    "invalid_session"
+
+            ){
+
+                console.error(
+                    "🚨 STS 1: SESSION TIDAK VALID / EXPIRED"
+                );
+
+
+                sts1RedirectKeIdentitas(
+                    "expired"
+                );
+
+
+                return;
+
+            }
+
+
+            /*
+               Error lain tidak langsung
+               menghapus sesi.
+            */
+
+            sts1SetStatusOnline(
+                true,
+                "🟢 Online"
+            );
+
+
+            return;
+
+        }
+
+
+        /* =================================================
+           SIMPAN DATA SESSION TERBARU
+        ================================================= */
+
+        if(
+            result.session
+        ){
+
+            const updated =
+                Object.assign(
+                    {},
+                    loginData,
+                    result.session
+                );
+
+
+            console.log(
+                "🔍 SESSION ID SEBELUM:",
+                loginData.sessionId
+            );
+
+
+            console.log(
+                "🔍 SESSION ID SESUDAH:",
+                updated.sessionId
+            );
+
+
+            if(
+                loginData.sessionId !==
+                updated.sessionId
+            ){
+
+                console.warn(
+                    "⚠️ PERINGATAN: SESSION ID BERUBAH!"
+                );
+
+            }else{
+
+                console.log(
+                    "✅ Session ID tetap sama."
+                );
+
+            }
+
+
+            sts1SaveLoginData(
+                updated
+            );
+
+
+            sts1TampilkanDataSiswa(
+                updated
+            );
+
+        }
+
+
+        /* =================================================
+           STATUS ONLINE
+        ================================================= */
+
+        sts1SetStatusOnline(
+            true,
+            "🟢 Online"
+        );
+
+
+        /* =================================================
+           LOG BERHASIL
+        ================================================= */
+
+        console.log(
+            "🟢 STS 1 ONLINE:",
+            new Date()
+                .toLocaleTimeString()
+        );
+
+
+        console.log(
+            "========================================"
+        );
+
+
+    }catch(error){
+
+        /*
+           Internet/API sementara gagal.
+           Jangan logout.
+        */
+
+        console.warn(
+            "STS 1: heartbeat gagal sementara:",
+            error
+        );
+
+
+        sts1SetStatusOnline(
+            true,
+            "🟢 Online"
+        );
+
+
+        console.log(
+            "Heartbeat berikutnya akan mencoba kembali."
+        );
+
+
+        console.log(
+            "========================================"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   HEARTBEAT BERKALA
+===================================================== */
+
+function sts1StartHeartbeat(){
+
+    if(
+        sts1HeartbeatTimer
+    ){
+
+        clearInterval(
+            sts1HeartbeatTimer
+        );
+
+    }
+
+
+    /*
+       Kirim heartbeat langsung.
+    */
+
+    sts1SendHeartbeat();
+
+
+    /*
+       Selanjutnya setiap 20 detik.
+    */
+
+    sts1HeartbeatTimer =
+        setInterval(
+            function(){
+
+                sts1SendHeartbeat();
+
+            },
+            STS1_HEARTBEAT_INTERVAL
+        );
+
+}
+
+
+/* =====================================================
+   AKTIVITAS SISWA
+===================================================== */
+
+function sts1RegisterActivity(){
+
+    clearTimeout(
+        sts1ActivityTimer
+    );
+
+
+    sts1ActivityTimer =
+        setTimeout(
+            function(){
+
+                sts1SendHeartbeat();
+
+            },
+            300
+        );
+
+}
+
+
+/* =====================================================
+   EVENT AKTIVITAS SISWA
+===================================================== */
+
+const sts1ActivityEvents = [
+
+    "click",
+
+    "keydown",
+
+    "scroll",
+
+    "touchstart",
+
+    "pointerdown"
+
+];
+
+
+sts1ActivityEvents.forEach(
+    function(eventName){
+
+        document.addEventListener(
+            eventName,
+            sts1RegisterActivity,
+            {
+                passive:
+                    true
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+   TAB KEMBALI AKTIF
+===================================================== */
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(
+            document.visibilityState ===
+            "visible"
+        ){
+
+            sts1SendHeartbeat();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   WINDOW KEMBALI AKTIF
+===================================================== */
+
+window.addEventListener(
+    "focus",
+    function(){
+
+        sts1SendHeartbeat();
+
+    }
+);
+
+
+/* =====================================================
+   SAAT HALAMAN DITINGGALKAN
+     
+   Tidak mengirim logout.
+     
+   Tujuannya agar perpindahan:
+     
+   STS utama
+       ↓
+   STS 1
+       ↓
+   Mata pelajaran
+     
+   tetap menggunakan session yang sama.
+===================================================== */
+
+window.addEventListener(
+    "pagehide",
+    function(){
+
+        clearInterval(
+            sts1HeartbeatTimer
+        );
+
+
+        sts1HeartbeatTimer =
+            null;
+
+    }
+);
+
+
+/* =====================================================
+   PROTEKSI NAVIGASI
+     
+   Menu tetap hanya dapat dibuka
+   jika siswa mempunyai session valid.
+===================================================== */
+
+function sts1ProtectNavigation(){
+
+    /* =================================================
+       TOMBOL MATA PELAJARAN
+    ================================================= */
+
+    document
+        .querySelectorAll(
+            ".menu-button"
+        )
+        .forEach(
+            function(button){
+
+                button.addEventListener(
+                    "click",
+                    function(event){
+
+                        const loginData =
+                            sts1GetLoginData();
+
+
+                        /* ---------------------------------
+                           Belum login
+                        --------------------------------- */
+
+                        if(
+                            !sts1LoginDataIsComplete(
+                                loginData
+                            )
+                        ){
+
+                            event.preventDefault();
+
+
+                            sts1RedirectKeIdentitas(
+                                "login"
+                            );
+
+
+                            return;
+
+                        }
+
+
+                        /* ---------------------------------
+                           Session lokal expired
+                        --------------------------------- */
+
+                        if(
+                            sts1ClientSessionExpired(
+                                loginData
+                            )
+                        ){
+
+                            event.preventDefault();
+
+
+                            sts1RedirectKeIdentitas(
+                                "expired"
+                            );
+
+
+                            return;
+
+                        }
+
+
+                        /*
+                           Kirim heartbeat sebelum
+                           siswa berpindah halaman.
+                        */
+
+                        sts1SendHeartbeat();
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =================================================
+       NAVBAR
+    ================================================= */
+
+    document
+        .querySelectorAll(
+            "nav a"
+        )
+        .forEach(
+            function(link){
+
+                link.addEventListener(
+                    "click",
+                    function(event){
+
+                        const loginData =
+                            sts1GetLoginData();
+
+
+                        if(
+                            !sts1LoginDataIsComplete(
+                                loginData
+                            )
+                        ){
+
+                            event.preventDefault();
+
+
+                            sts1RedirectKeIdentitas(
+                                "login"
+                            );
+
+
+                            return;
+
+                        }
+
+
+                        if(
+                            sts1ClientSessionExpired(
+                                loginData
+                            )
+                        ){
+
+                            event.preventDefault();
+
+
+                            sts1RedirectKeIdentitas(
+                                "expired"
+                            );
+
+
+                            return;
+
+                        }
+
+
+                        sts1SendHeartbeat();
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =================================================
+       TOMBOL KEMBALI
+    ================================================= */
+
+    const backButton =
+        document.querySelector(
+            ".back-button"
+        );
+
+
+    if(
+        backButton
+    ){
+
+        backButton.addEventListener(
+            "click",
+            function(event){
+
+                const loginData =
+                    sts1GetLoginData();
+
+
+                if(
+                    !sts1LoginDataIsComplete(
+                        loginData
+                    )
+                ){
+
+                    event.preventDefault();
+
+
+                    sts1RedirectKeIdentitas(
+                        "login"
+                    );
+
+
+                    return;
+
+                }
+
+
+                if(
+                    sts1ClientSessionExpired(
+                        loginData
+                    )
+                ){
+
+                    event.preventDefault();
+
+
+                    sts1RedirectKeIdentitas(
+                        "expired"
+                    );
+
+
+                    return;
+
+                }
+
+
+                sts1SendHeartbeat();
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   INISIALISASI SISTEM ONLINE STS 1
+===================================================== */
+
+async function sts1InitializeOnline(){
+
+    console.log(
+        "🚀 Sistem online STS 1 dimulai."
+    );
+
+
+    /* -------------------------------------------------
+       Ambil data login
+    ------------------------------------------------- */
+
+    const loginData =
+        sts1GetLoginData();
+
+
+    /* -------------------------------------------------
+       Pastikan siswa sudah login
+    ------------------------------------------------- */
+
+    if(
+        !sts1LoginDataIsComplete(
+            loginData
+        )
+    ){
+
+        sts1RedirectKeIdentitas(
+            "login"
+        );
+
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------
+       Tampilkan data siswa
+       sebelum server selesai diperiksa.
+    ------------------------------------------------- */
+
+    sts1TampilkanDataSiswa(
+        loginData
+    );
+
+
+    /* -------------------------------------------------
+       Cek masa sesi lokal
+    ------------------------------------------------- */
+
+    if(
+        sts1ClientSessionExpired(
+            loginData
+        )
+    ){
+
+        sts1RedirectKeIdentitas(
+            "expired"
+        );
+
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------
+       Periksa session ke server
+    ------------------------------------------------- */
+
+    const valid =
+        await sts1CheckSession();
+
+
+    if(
+        !valid
+    ){
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------
+       Mulai heartbeat
+    ------------------------------------------------- */
+
+    sts1StartHeartbeat();
+
+
+    /* -------------------------------------------------
+       Proteksi navigasi
+    ------------------------------------------------- */
+
+    sts1ProtectNavigation();
+
+
+    /* -------------------------------------------------
+       Console
+    ------------------------------------------------- */
+
+    console.log(
+        "🟢 STS 1 aktif dan sedang dibaca online oleh server."
+    );
+
+
+    console.log(
+        "📄 Halaman online:",
+        STS1_HALAMAN_UTAMA
+    );
+
+
+    console.log(
+        "⏱️ Heartbeat:",
+        STS1_HEARTBEAT_INTERVAL /
+        1000,
+        "detik"
+    );
+
+
+    console.log(
+        "⏳ Maksimum sesi:",
+        STS1_SESSION_MAX_AGE /
+        (60 * 60 * 1000),
+        "jam"
+    );
+
+}
+
+
+/* =====================================================
+   JALANKAN SISTEM ONLINE
+===================================================== */
+
+sts1InitializeOnline();
+
+
+/* =====================================================
+   LOG INFORMASI
+===================================================== */
+
+console.log(
+    "========================================"
+);
+
+
+console.log(
+    "📚 STS 1 | Petualangan Kelas 5"
+);
+
+
+console.log(
+    "📡 Sistem online siswa aktif"
+);
+
+
+console.log(
+    "⏱️ Heartbeat setiap 20 detik"
+);
+
+
+console.log(
+    "⏳ Sesi client maksimal 24 jam"
+);
+
+
+console.log(
+    "🔑 Storage:",
+    STS1_LOGIN_STORAGE_KEY
+);
+
+
+console.log(
+    "========================================"
+);
+
+</script>
+
+
+</body>
+
+</html>

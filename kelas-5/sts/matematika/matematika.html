@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 
@@ -600,15 +599,8 @@ nav a:hover {
 }
 
 
-
 /* =====================================================
    INFORMASI LOGIN SISWA
-
-   Sistem online akan mengisi:
-   - Nama
-   - Kelas
-   - Nomor Absen
-   - Status Online
 ===================================================== */
 
 #infoSiswaLogin {
@@ -1049,7 +1041,6 @@ audio {
 </head>
 
 
-
 <body>
 
 
@@ -1091,7 +1082,6 @@ audio {
     </span>
 
 </div>
-
 
 
 <!-- =====================================================
@@ -1153,7 +1143,7 @@ audio {
 
 
 <!-- =====================================================
-     MENU LATIHAN STS Matematika
+     MENU LATIHAN STS MATEMATIKA
 ===================================================== -->
 
 <div class="menu-container">
@@ -1598,16 +1588,14 @@ console.log(
 </script>
 
 
-
-
 <script>
 
 /* =====================================================
-   SISTEM ONLINE SISWA - Matematika
-     
+   SISTEM ONLINE SISWA - MATEMATIKA
+
    Mengikuti sistem online pada halaman
    STS utama dan Petualangan Kelas 5.
-     
+
    Fungsi:
    - Membaca identitas siswa
    - Memeriksa sessionId
@@ -1631,43 +1619,43 @@ const MATEMATIKA_API_URL =
 
 /* =====================================================
    NAMA HALAMAN
-     
+
    Siswa akan tercatat sedang berada
    pada halaman Matematika.
 ===================================================== */
 
-const Matematika_HALAMAN_UTAMA =
+const MATEMATIKA_HALAMAN_UTAMA =
     "STS 1 - Matematika";
 
 
 /* =====================================================
    INTERVAL HEARTBEAT
-     
+
    Setiap 20 detik.
 ===================================================== */
 
-const Matematika_HEARTBEAT_INTERVAL =
+const MATEMATIKA_HEARTBEAT_INTERVAL =
     20000;
 
 
 /* =====================================================
    BATAS SESI CLIENT
-     
+
    Maksimal 24 jam.
 ===================================================== */
 
-const Matematika_SESSION_MAX_AGE =
+const MATEMATIKA_SESSION_MAX_AGE =
     24 * 60 * 60 * 1000;
 
 
 /* =====================================================
    KUNCI STORAGE
-     
+
    Sama dengan Petualangan Kelas 5
    dan STS utama.
 ===================================================== */
 
-const Matematika_LOGIN_STORAGE_KEY =
+const MATEMATIKA_LOGIN_STORAGE_KEY =
     "identitasPetualanganKelas5";
 
 
@@ -1675,23 +1663,23 @@ const Matematika_LOGIN_STORAGE_KEY =
    VARIABEL HEARTBEAT
 ===================================================== */
 
-let MatematikaHeartbeatTimer =
+let matematikaHeartbeatTimer =
     null;
 
 
-let MatematikaLastHeartbeat =
+let matematikaLastHeartbeat =
     0;
 
 
-let MatematikaActivityTimer =
+let matematikaActivityTimer =
     null;
 
 
-let MatematikaSedangLogout =
+let matematikaSedangLogout =
     false;
 
 
-let MatematikaSedangRedirect =
+let matematikaSedangRedirect =
     false;
 
 
@@ -1699,7 +1687,7 @@ let MatematikaSedangRedirect =
    BACA DATA LOGIN
 ===================================================== */
 
-function MatematikaGetLoginData(){
+function matematikaGetLoginData(){
 
     const storages = [
 
@@ -1719,7 +1707,7 @@ function MatematikaGetLoginData(){
 
             const raw =
                 storage.getItem(
-                    Matematika_LOGIN_STORAGE_KEY
+                    MATEMATIKA_LOGIN_STORAGE_KEY
                 );
 
 
@@ -1768,7 +1756,7 @@ function MatematikaGetLoginData(){
    SIMPAN DATA LOGIN
 ===================================================== */
 
-function MatematikaSaveLoginData(
+function matematikaSaveLoginData(
     data
 ){
 
@@ -1784,7 +1772,7 @@ function MatematikaSaveLoginData(
     try{
 
         localStorage.setItem(
-            Matematika_LOGIN_STORAGE_KEY,
+            MATEMATIKA_LOGIN_STORAGE_KEY,
             JSON.stringify(data)
         );
 
@@ -1801,7 +1789,7 @@ function MatematikaSaveLoginData(
     try{
 
         sessionStorage.setItem(
-            Matematika_LOGIN_STORAGE_KEY,
+            MATEMATIKA_LOGIN_STORAGE_KEY,
             JSON.stringify(data)
         );
 
@@ -1821,12 +1809,12 @@ function MatematikaSaveLoginData(
    HAPUS DATA LOGIN
 ===================================================== */
 
-function MatematikaClearLoginData(){
+function matematikaClearLoginData(){
 
     try{
 
         localStorage.removeItem(
-            Matematika_LOGIN_STORAGE_KEY
+            MATEMATIKA_LOGIN_STORAGE_KEY
         );
 
     }catch(error){}
@@ -1835,7 +1823,7 @@ function MatematikaClearLoginData(){
     try{
 
         sessionStorage.removeItem(
-            Matematika_LOGIN_STORAGE_KEY
+            MATEMATIKA_LOGIN_STORAGE_KEY
         );
 
     }catch(error){}
@@ -1847,7 +1835,7 @@ function MatematikaClearLoginData(){
    CEK DATA LOGIN LENGKAP
 ===================================================== */
 
-function MatematikaLoginDataIsComplete(
+function matematikaLoginDataIsComplete(
     data
 ){
 
@@ -1870,7 +1858,7 @@ function MatematikaLoginDataIsComplete(
    CEK SESI CLIENT 24 JAM
 ===================================================== */
 
-function MatematikaClientSessionExpired(
+function matematikaClientSessionExpired(
     data
 ){
 
@@ -1907,7 +1895,7 @@ function MatematikaClientSessionExpired(
         loginTime
 
     ) >=
-        Matematika_SESSION_MAX_AGE;
+        MATEMATIKA_SESSION_MAX_AGE;
 
 }
 
@@ -1916,7 +1904,7 @@ function MatematikaClientSessionExpired(
    TAMPILKAN DATA SISWA
 ===================================================== */
 
-function MatematikaTampilkanDataSiswa(
+function matematikaTampilkanDataSiswa(
     data
 ){
 
@@ -1987,7 +1975,7 @@ function MatematikaTampilkanDataSiswa(
    STATUS ONLINE
 ===================================================== */
 
-function MatematikaSetStatusOnline(
+function matematikaSetStatusOnline(
     online,
     text
 ){
@@ -2040,7 +2028,7 @@ function MatematikaSetStatusOnline(
    JSONP REQUEST
 ===================================================== */
 
-function MatematikaRequestJSONP(
+function matematikaRequestJSONP(
     params,
     timeout
 ){
@@ -2049,7 +2037,7 @@ function MatematikaRequestJSONP(
         function(resolve, reject){
 
             const callbackName =
-                "MatematikaOnlineCallback_" +
+                "matematikaOnlineCallback_" +
                 Date.now() +
                 "_" +
                 Math.random()
@@ -2209,7 +2197,7 @@ function MatematikaRequestJSONP(
 
 
             script.src =
-                Matematika_API_URL +
+                MATEMATIKA_API_URL +
                 "?" +
                 query.toString();
 
@@ -2232,22 +2220,22 @@ function MatematikaRequestJSONP(
 
 /* =====================================================
    REDIRECT KE HALAMAN IDENTITAS
-     
-   Karena Matematika.html berada di:
-     
-   /kelas-5/sts/Matematika.html
-     
+
+   Karena matematika.html berada di:
+
+   /kelas-5/sts/matematika.html
+
    maka identitas.html berada di:
-     
+
    /kelas-5/identitas.html
 ===================================================== */
 
-function MatematikaRedirectKeIdentitas(
+function matematikaRedirectKeIdentitas(
     alasan
 ){
 
     if(
-        MatematikaSedangRedirect
+        matematikaSedangRedirect
     ){
 
         return;
@@ -2255,20 +2243,20 @@ function MatematikaRedirectKeIdentitas(
     }
 
 
-    MatematikaSedangRedirect =
+    matematikaSedangRedirect =
         true;
 
 
     clearInterval(
-        MatematikaHeartbeatTimer
+        matematikaHeartbeatTimer
     );
 
 
-    MatematikaHeartbeatTimer =
+    matematikaHeartbeatTimer =
         null;
 
 
-    MatematikaClearLoginData();
+    matematikaClearLoginData();
 
 
     let url =
@@ -2299,10 +2287,10 @@ function MatematikaRedirectKeIdentitas(
    CEK SESI KE SERVER
 ===================================================== */
 
-async function MatematikaCheckSession(){
+async function matematikaCheckSession(){
 
     const loginData =
-        MatematikaGetLoginData();
+        matematikaGetLoginData();
 
 
     /* -------------------------------------------------
@@ -2310,12 +2298,12 @@ async function MatematikaCheckSession(){
     ------------------------------------------------- */
 
     if(
-        !MatematikaLoginDataIsComplete(
+        !matematikaLoginDataIsComplete(
             loginData
         )
     ){
 
-        MatematikaRedirectKeIdentitas(
+        matematikaRedirectKeIdentitas(
             "login"
         );
 
@@ -2329,12 +2317,12 @@ async function MatematikaCheckSession(){
     ------------------------------------------------- */
 
     if(
-        MatematikaClientSessionExpired(
+        matematikaClientSessionExpired(
             loginData
         )
     ){
 
-        MatematikaRedirectKeIdentitas(
+        matematikaRedirectKeIdentitas(
             "expired"
         );
 
@@ -2346,7 +2334,7 @@ async function MatematikaCheckSession(){
     try{
 
         const result =
-            await MatematikaRequestJSONP(
+            await matematikaRequestJSONP(
                 {
 
                     action:
@@ -2376,7 +2364,7 @@ async function MatematikaCheckSession(){
             result.loggedIn !== true
         ){
 
-            MatematikaRedirectKeIdentitas(
+            matematikaRedirectKeIdentitas(
                 "invalid"
             );
 
@@ -2401,19 +2389,19 @@ async function MatematikaCheckSession(){
                 );
 
 
-            MatematikaSaveLoginData(
+            matematikaSaveLoginData(
                 updated
             );
 
 
-            MatematikaTampilkanDataSiswa(
+            matematikaTampilkanDataSiswa(
                 updated
             );
 
         }
 
 
-        MatematikaSetStatusOnline(
+        matematikaSetStatusOnline(
             true,
             "🟢 Online"
         );
@@ -2424,8 +2412,7 @@ async function MatematikaCheckSession(){
     }catch(error){
 
         /*
-           Sama seperti halaman STS utama:
-           error jaringan sementara tidak
+           Error jaringan sementara tidak
            langsung mengeluarkan siswa.
         */
 
@@ -2435,7 +2422,7 @@ async function MatematikaCheckSession(){
         );
 
 
-        MatematikaSetStatusOnline(
+        matematikaSetStatusOnline(
             true,
             "🟢 Online"
         );
@@ -2452,7 +2439,7 @@ async function MatematikaCheckSession(){
    KIRIM HEARTBEAT
 ===================================================== */
 
-async function MatematikaSendHeartbeat(){
+async function matematikaSendHeartbeat(){
 
     /* -------------------------------------------------
        Jangan kirim ketika redirect
@@ -2460,8 +2447,8 @@ async function MatematikaSendHeartbeat(){
     ------------------------------------------------- */
 
     if(
-        MatematikaSedangRedirect ||
-        MatematikaSedangLogout
+        matematikaSedangRedirect ||
+        matematikaSedangLogout
     ){
 
         return;
@@ -2474,7 +2461,7 @@ async function MatematikaSendHeartbeat(){
     ------------------------------------------------- */
 
     const loginData =
-        MatematikaGetLoginData();
+        matematikaGetLoginData();
 
 
     /* -------------------------------------------------
@@ -2482,7 +2469,7 @@ async function MatematikaSendHeartbeat(){
     ------------------------------------------------- */
 
     if(
-        !MatematikaLoginDataIsComplete(
+        !matematikaLoginDataIsComplete(
             loginData
         )
     ){
@@ -2492,7 +2479,7 @@ async function MatematikaSendHeartbeat(){
         );
 
 
-        MatematikaRedirectKeIdentitas(
+        matematikaRedirectKeIdentitas(
             "login"
         );
 
@@ -2507,7 +2494,7 @@ async function MatematikaSendHeartbeat(){
     ------------------------------------------------- */
 
     if(
-        MatematikaClientSessionExpired(
+        matematikaClientSessionExpired(
             loginData
         )
     ){
@@ -2517,7 +2504,7 @@ async function MatematikaSendHeartbeat(){
         );
 
 
-        MatematikaRedirectKeIdentitas(
+        matematikaRedirectKeIdentitas(
             "expired"
         );
 
@@ -2529,7 +2516,7 @@ async function MatematikaSendHeartbeat(){
 
     /* -------------------------------------------------
        Hindari heartbeat terlalu rapat
-       
+
        Minimal 5 detik antar request.
     ------------------------------------------------- */
 
@@ -2539,7 +2526,7 @@ async function MatematikaSendHeartbeat(){
 
     if(
         now -
-        MatematikaLastHeartbeat
+        matematikaLastHeartbeat
         < 5000
     ){
 
@@ -2548,7 +2535,7 @@ async function MatematikaSendHeartbeat(){
     }
 
 
-    MatematikaLastHeartbeat =
+    matematikaLastHeartbeat =
         now;
 
 
@@ -2556,7 +2543,7 @@ async function MatematikaSendHeartbeat(){
        Tampilkan status online
     ------------------------------------------------- */
 
-    MatematikaSetStatusOnline(
+    matematikaSetStatusOnline(
         true,
         "🟢 Online"
     );
@@ -2611,7 +2598,7 @@ async function MatematikaSendHeartbeat(){
 
     console.log(
         "📄 Halaman:",
-        Matematika_HALAMAN_UTAMA
+        MATEMATIKA_HALAMAN_UTAMA
     );
 
 
@@ -2622,7 +2609,7 @@ async function MatematikaSendHeartbeat(){
     try{
 
         const result =
-            await MatematikaRequestJSONP(
+            await matematikaRequestJSONP(
                 {
 
                     action:
@@ -2643,7 +2630,7 @@ async function MatematikaSendHeartbeat(){
                         "",
 
                     halaman:
-                        Matematika_HALAMAN_UTAMA,
+                        MATEMATIKA_HALAMAN_UTAMA,
 
                     sumber:
                         "Petualangan Kelas 5"
@@ -2699,7 +2686,7 @@ async function MatematikaSendHeartbeat(){
 
 
             console.log(
-                "🆔 Session ID SERVER:",
+                "🆔 SESSION ID SERVER:",
                 result.session.sessionId
             );
 
@@ -2803,7 +2790,7 @@ async function MatematikaSendHeartbeat(){
                 );
 
 
-                MatematikaRedirectKeIdentitas(
+                matematikaRedirectKeIdentitas(
                     "expired"
                 );
 
@@ -2818,7 +2805,7 @@ async function MatematikaSendHeartbeat(){
                menghapus sesi.
             */
 
-            MatematikaSetStatusOnline(
+            matematikaSetStatusOnline(
                 true,
                 "🟢 Online"
             );
@@ -2875,12 +2862,12 @@ async function MatematikaSendHeartbeat(){
             }
 
 
-            MatematikaSaveLoginData(
+            matematikaSaveLoginData(
                 updated
             );
 
 
-            MatematikaTampilkanDataSiswa(
+            matematikaTampilkanDataSiswa(
                 updated
             );
 
@@ -2891,7 +2878,7 @@ async function MatematikaSendHeartbeat(){
            STATUS ONLINE
         ================================================= */
 
-        MatematikaSetStatusOnline(
+        matematikaSetStatusOnline(
             true,
             "🟢 Online"
         );
@@ -2926,7 +2913,7 @@ async function MatematikaSendHeartbeat(){
         );
 
 
-        MatematikaSetStatusOnline(
+        matematikaSetStatusOnline(
             true,
             "🟢 Online"
         );
@@ -2950,14 +2937,14 @@ async function MatematikaSendHeartbeat(){
    HEARTBEAT BERKALA
 ===================================================== */
 
-function MatematikaStartHeartbeat(){
+function matematikaStartHeartbeat(){
 
     if(
-        MatematikaHeartbeatTimer
+        matematikaHeartbeatTimer
     ){
 
         clearInterval(
-            MatematikaHeartbeatTimer
+            matematikaHeartbeatTimer
         );
 
     }
@@ -2967,21 +2954,21 @@ function MatematikaStartHeartbeat(){
        Kirim heartbeat langsung.
     */
 
-    MatematikaSendHeartbeat();
+    matematikaSendHeartbeat();
 
 
     /*
        Selanjutnya setiap 20 detik.
     */
 
-    MatematikaHeartbeatTimer =
+    matematikaHeartbeatTimer =
         setInterval(
             function(){
 
-                MatematikaSendHeartbeat();
+                matematikaSendHeartbeat();
 
             },
-            Matematika_HEARTBEAT_INTERVAL
+            MATEMATIKA_HEARTBEAT_INTERVAL
         );
 
 }
@@ -2991,18 +2978,18 @@ function MatematikaStartHeartbeat(){
    AKTIVITAS SISWA
 ===================================================== */
 
-function MatematikaRegisterActivity(){
+function matematikaRegisterActivity(){
 
     clearTimeout(
-        MatematikaActivityTimer
+        matematikaActivityTimer
     );
 
 
-    MatematikaActivityTimer =
+    matematikaActivityTimer =
         setTimeout(
             function(){
 
-                MatematikaSendHeartbeat();
+                matematikaSendHeartbeat();
 
             },
             300
@@ -3015,7 +3002,7 @@ function MatematikaRegisterActivity(){
    EVENT AKTIVITAS SISWA
 ===================================================== */
 
-const MatematikaActivityEvents = [
+const matematikaActivityEvents = [
 
     "click",
 
@@ -3030,12 +3017,12 @@ const MatematikaActivityEvents = [
 ];
 
 
-MatematikaActivityEvents.forEach(
+matematikaActivityEvents.forEach(
     function(eventName){
 
         document.addEventListener(
             eventName,
-            MatematikaRegisterActivity,
+            matematikaRegisterActivity,
             {
                 passive:
                     true
@@ -3059,7 +3046,7 @@ document.addEventListener(
             "visible"
         ){
 
-            MatematikaSendHeartbeat();
+            matematikaSendHeartbeat();
 
         }
 
@@ -3075,7 +3062,7 @@ window.addEventListener(
     "focus",
     function(){
 
-        MatematikaSendHeartbeat();
+        matematikaSendHeartbeat();
 
     }
 );
@@ -3083,17 +3070,17 @@ window.addEventListener(
 
 /* =====================================================
    SAAT HALAMAN DITINGGALKAN
-     
+
    Tidak mengirim logout.
-     
+
    Tujuannya agar perpindahan:
-     
+
    STS utama
        ↓
    Matematika
        ↓
    Mata pelajaran
-     
+
    tetap menggunakan session yang sama.
 ===================================================== */
 
@@ -3102,11 +3089,11 @@ window.addEventListener(
     function(){
 
         clearInterval(
-            MatematikaHeartbeatTimer
+            matematikaHeartbeatTimer
         );
 
 
-        MatematikaHeartbeatTimer =
+        matematikaHeartbeatTimer =
             null;
 
     }
@@ -3115,15 +3102,15 @@ window.addEventListener(
 
 /* =====================================================
    PROTEKSI NAVIGASI
-     
+
    Menu tetap hanya dapat dibuka
    jika siswa mempunyai session valid.
 ===================================================== */
 
-function MatematikaProtectNavigation(){
+function matematikaProtectNavigation(){
 
     /* =================================================
-       TOMBOL MATA PELAJARAN
+       TOMBOL LATIHAN
     ================================================= */
 
     document
@@ -3138,7 +3125,7 @@ function MatematikaProtectNavigation(){
                     function(event){
 
                         const loginData =
-                            MatematikaGetLoginData();
+                            matematikaGetLoginData();
 
 
                         /* ---------------------------------
@@ -3146,7 +3133,7 @@ function MatematikaProtectNavigation(){
                         --------------------------------- */
 
                         if(
-                            !MatematikaLoginDataIsComplete(
+                            !matematikaLoginDataIsComplete(
                                 loginData
                             )
                         ){
@@ -3154,7 +3141,7 @@ function MatematikaProtectNavigation(){
                             event.preventDefault();
 
 
-                            MatematikaRedirectKeIdentitas(
+                            matematikaRedirectKeIdentitas(
                                 "login"
                             );
 
@@ -3169,7 +3156,7 @@ function MatematikaProtectNavigation(){
                         --------------------------------- */
 
                         if(
-                            MatematikaClientSessionExpired(
+                            matematikaClientSessionExpired(
                                 loginData
                             )
                         ){
@@ -3177,7 +3164,7 @@ function MatematikaProtectNavigation(){
                             event.preventDefault();
 
 
-                            MatematikaRedirectKeIdentitas(
+                            matematikaRedirectKeIdentitas(
                                 "expired"
                             );
 
@@ -3192,7 +3179,7 @@ function MatematikaProtectNavigation(){
                            siswa berpindah halaman.
                         */
 
-                        MatematikaSendHeartbeat();
+                        matematikaSendHeartbeat();
 
                     }
                 );
@@ -3217,11 +3204,11 @@ function MatematikaProtectNavigation(){
                     function(event){
 
                         const loginData =
-                            MatematikaGetLoginData();
+                            matematikaGetLoginData();
 
 
                         if(
-                            !MatematikaLoginDataIsComplete(
+                            !matematikaLoginDataIsComplete(
                                 loginData
                             )
                         ){
@@ -3229,7 +3216,7 @@ function MatematikaProtectNavigation(){
                             event.preventDefault();
 
 
-                            MatematikaRedirectKeIdentitas(
+                            matematikaRedirectKeIdentitas(
                                 "login"
                             );
 
@@ -3240,7 +3227,7 @@ function MatematikaProtectNavigation(){
 
 
                         if(
-                            MatematikaClientSessionExpired(
+                            matematikaClientSessionExpired(
                                 loginData
                             )
                         ){
@@ -3248,7 +3235,7 @@ function MatematikaProtectNavigation(){
                             event.preventDefault();
 
 
-                            MatematikaRedirectKeIdentitas(
+                            matematikaRedirectKeIdentitas(
                                 "expired"
                             );
 
@@ -3258,7 +3245,7 @@ function MatematikaProtectNavigation(){
                         }
 
 
-                        MatematikaSendHeartbeat();
+                        matematikaSendHeartbeat();
 
                     }
                 );
@@ -3286,11 +3273,11 @@ function MatematikaProtectNavigation(){
             function(event){
 
                 const loginData =
-                    MatematikaGetLoginData();
+                    matematikaGetLoginData();
 
 
                 if(
-                    !MatematikaLoginDataIsComplete(
+                    !matematikaLoginDataIsComplete(
                         loginData
                     )
                 ){
@@ -3298,7 +3285,7 @@ function MatematikaProtectNavigation(){
                     event.preventDefault();
 
 
-                    MatematikaRedirectKeIdentitas(
+                    matematikaRedirectKeIdentitas(
                         "login"
                     );
 
@@ -3309,7 +3296,7 @@ function MatematikaProtectNavigation(){
 
 
                 if(
-                    MatematikaClientSessionExpired(
+                    matematikaClientSessionExpired(
                         loginData
                     )
                 ){
@@ -3317,7 +3304,7 @@ function MatematikaProtectNavigation(){
                     event.preventDefault();
 
 
-                    MatematikaRedirectKeIdentitas(
+                    matematikaRedirectKeIdentitas(
                         "expired"
                     );
 
@@ -3327,7 +3314,7 @@ function MatematikaProtectNavigation(){
                 }
 
 
-                MatematikaSendHeartbeat();
+                matematikaSendHeartbeat();
 
             }
         );
@@ -3338,10 +3325,10 @@ function MatematikaProtectNavigation(){
 
 
 /* =====================================================
-   INISIALISASI SISTEM ONLINE Matematika
+   INISIALISASI SISTEM ONLINE MATEMATIKA
 ===================================================== */
 
-async function MatematikaInitializeOnline(){
+async function matematikaInitializeOnline(){
 
     console.log(
         "🚀 Sistem online Matematika dimulai."
@@ -3353,7 +3340,7 @@ async function MatematikaInitializeOnline(){
     ------------------------------------------------- */
 
     const loginData =
-        MatematikaGetLoginData();
+        matematikaGetLoginData();
 
 
     /* -------------------------------------------------
@@ -3361,12 +3348,12 @@ async function MatematikaInitializeOnline(){
     ------------------------------------------------- */
 
     if(
-        !MatematikaLoginDataIsComplete(
+        !matematikaLoginDataIsComplete(
             loginData
         )
     ){
 
-        MatematikaRedirectKeIdentitas(
+        matematikaRedirectKeIdentitas(
             "login"
         );
 
@@ -3381,7 +3368,7 @@ async function MatematikaInitializeOnline(){
        sebelum server selesai diperiksa.
     ------------------------------------------------- */
 
-    MatematikaTampilkanDataSiswa(
+    matematikaTampilkanDataSiswa(
         loginData
     );
 
@@ -3391,12 +3378,12 @@ async function MatematikaInitializeOnline(){
     ------------------------------------------------- */
 
     if(
-        MatematikaClientSessionExpired(
+        matematikaClientSessionExpired(
             loginData
         )
     ){
 
-        MatematikaRedirectKeIdentitas(
+        matematikaRedirectKeIdentitas(
             "expired"
         );
 
@@ -3411,7 +3398,7 @@ async function MatematikaInitializeOnline(){
     ------------------------------------------------- */
 
     const valid =
-        await MatematikaCheckSession();
+        await matematikaCheckSession();
 
 
     if(
@@ -3427,14 +3414,14 @@ async function MatematikaInitializeOnline(){
        Mulai heartbeat
     ------------------------------------------------- */
 
-    MatematikaStartHeartbeat();
+    matematikaStartHeartbeat();
 
 
     /* -------------------------------------------------
        Proteksi navigasi
     ------------------------------------------------- */
 
-    MatematikaProtectNavigation();
+    matematikaProtectNavigation();
 
 
     /* -------------------------------------------------
@@ -3448,13 +3435,13 @@ async function MatematikaInitializeOnline(){
 
     console.log(
         "📄 Halaman online:",
-        Matematika_HALAMAN_UTAMA
+        MATEMATIKA_HALAMAN_UTAMA
     );
 
 
     console.log(
         "⏱️ Heartbeat:",
-        Matematika_HEARTBEAT_INTERVAL /
+        MATEMATIKA_HEARTBEAT_INTERVAL /
         1000,
         "detik"
     );
@@ -3462,9 +3449,15 @@ async function MatematikaInitializeOnline(){
 
     console.log(
         "⏳ Maksimum sesi:",
-        Matematika_SESSION_MAX_AGE /
+        MATEMATIKA_SESSION_MAX_AGE /
         (60 * 60 * 1000),
         "jam"
+    );
+
+
+    console.log(
+        "🔑 Storage:",
+        MATEMATIKA_LOGIN_STORAGE_KEY
     );
 
 }
@@ -3474,7 +3467,7 @@ async function MatematikaInitializeOnline(){
    JALANKAN SISTEM ONLINE
 ===================================================== */
 
-MatematikaInitializeOnline();
+matematikaInitializeOnline();
 
 
 /* =====================================================
@@ -3508,7 +3501,7 @@ console.log(
 
 console.log(
     "🔑 Storage:",
-    Matematika_LOGIN_STORAGE_KEY
+    MATEMATIKA_LOGIN_STORAGE_KEY
 );
 
 
@@ -3516,9 +3509,8 @@ console.log(
     "========================================"
 );
 
-
-
 </script>
+
 
 </body>
 

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="id">
 
 <head>
@@ -6,24 +7,26 @@
 <meta charset="UTF-8">
 
 <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
 >
 
 <meta
-    name="theme-color"
-    content="#0288d1"
+name="theme-color"
+content="#0288d1"
+
 >
 
 <meta
-    name="description"
-    content="Soal Latihan 3 STS 1 Pendidikan Pancasila Kelas 5"
+name="description"
+content="Soal Latihan 3 STS 1 Pendidikan Pancasila Kelas 5"
+
 >
 
 <title>
     Soal Latihan 3 STS 1 Pancasila Kelas 5
 </title>
-
 
 <!-- =====================================================
      FONT GOOGLE
@@ -33,7 +36,6 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
     rel="stylesheet"
 >
-
 
 <style>
 
@@ -1129,6 +1131,68 @@ button:focus-visible {
 
 
 /* =====================================================
+   STATUS PENYIMPANAN NILAI
+===================================================== */
+
+.status-penyimpanan-nilai {
+
+    margin:
+        10px
+        auto
+        4px;
+
+    padding:
+        7px
+        10px;
+
+    border-radius:
+        7px;
+
+    background:
+        #d4edda;
+
+    color:
+        #155724;
+
+    font-size:
+        .65rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.5;
+
+}
+
+
+.status-penyimpanan-nilai.status-nilai-gagal {
+
+    background:
+        #fff3cd;
+
+    color:
+        #856404;
+
+}
+
+
+.status-penyimpanan-nilai button {
+
+    margin-top:
+        6px;
+
+    font-size:
+        .58rem;
+
+    padding:
+        5px
+        9px;
+
+}
+
+
+/* =====================================================
    WARNING OVERLAY
 ===================================================== */
 
@@ -1807,13 +1871,100 @@ audio {
 
 }
 
+
+/* =====================================================
+   SISTEM ONLINE SISWA
+===================================================== */
+
+.online-loading {
+
+    width:
+        calc(100% - 20px);
+
+    max-width:
+        600px;
+
+    margin:
+        0
+        auto
+        12px;
+
+    padding:
+        10px
+        14px;
+
+    border-radius:
+        8px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .94
+        );
+
+    color:
+        #0288d1;
+
+    text-align:
+        center;
+
+    font-size:
+        .68rem;
+
+    font-weight:
+        700;
+
+    box-shadow:
+        0 3px 8px
+        rgba(
+            0,
+            0,
+            0,
+            .12
+        );
+}
+
+.status-online {
+
+    display:
+        inline-block;
+
+    margin-left:
+        8px;
+
+    padding:
+        2px
+        6px;
+
+    border-radius:
+        5px;
+
+    background:
+        #d4edda;
+
+    color:
+        #155724;
+
+    font-weight:
+        700;
+}
+
+.status-online.offline {
+
+    background:
+        #f8d7da;
+
+    color:
+        #721c24;
+}
+
 </style>
 
 </head>
 
-
 <body>
-
 
 <!-- =====================================================
      NAVIGASI
@@ -1821,24 +1972,25 @@ audio {
 
 <div class="nav">
 
-    <a href="pancasila.html">
+```
+<a href="pancasila.html">
 
-        ◀️ Kembali
+    ◀️ Kembali
 
-    </a>
+</a>
 
 
-    <a
-        href="latihan3.docx"
-        download
-    >
+<a
+    href="latihan3.docx"
+    download
+>
 
-        📥 Download
+    📥 Download
 
-    </a>
+</a>
+```
 
 </div>
-
 
 <!-- =====================================================
      CONTAINER UTAMA
@@ -1846,133 +1998,92 @@ audio {
 
 <div class="container">
 
+```
+<!-- =================================================
+     JUDUL
+================================================== -->
 
-    <!-- =================================================
-         JUDUL
-    ================================================== -->
+<h1 class="judul-kuis">
 
-    <h1 class="judul-kuis">
+    🇮🇩 Soal Latihan 3 STS 1 Pancasila Kelas 5
 
-        🏛️ Soal Latihan 3 STS 1 Pancasila Kelas 5
-
-    </h1>
-
-
-    <!-- =================================================
-         DESKRIPSI
-    ================================================== -->
-
-    <div class="deskripsi">
-
-        📚 Lahirnya Pancasila, Nilai Pancasila,
-        Musyawarah, Gotong Royong, dan Tokoh Perumus Pancasila
-
-        <br>
-
-        <b>
-            25 Soal Pilihan Ganda
-        </b>
-
-    </div>
+</h1>
 
 
-    <!-- =================================================
-         FORM DATA SISWA
-    ================================================== -->
+<!-- =================================================
+     DESKRIPSI
+================================================== -->
 
-    <div id="formData">
+<div class="deskripsi">
 
+    📚 Pendidikan Pancasila
+    <br>
 
-        <p>
+    <b>
+        25 Soal Pilihan Ganda
+    </b>
 
-            Silakan isi identitas
-            sebelum mulai kuis.
+    <br>
 
-        </p>
-
-
-        <label>
-
-            Nama:
-
-        </label>
-
-
-        <input
-            type="text"
-            id="nama"
-            placeholder="Masukkan nama"
-        >
-
-
-        <label>
-
-            Kelas:
-
-        </label>
-
-
-        <input
-            type="text"
-            id="kelas"
-            placeholder="Contoh: V-A"
-        >
-
-
-        <label>
-
-            No. Absen:
-
-        </label>
-
-
-        <input
-            type="text"
-            id="absen"
-            placeholder="Masukkan nomor absen"
-        >
-
-
-        <button
-            onclick="mulaiKuis()"
-        >
-
-            🚀 Mulai Kuis
-
-        </button>
-
-
-    </div>
-
-
-    <!-- =================================================
-         AREA KUIS
-    ================================================== -->
-
-    <div
-        id="areaKuis"
-        class="hidden"
-    >
-
-
-        <!-- INFORMASI SISWA -->
-
-        <div
-            id="infoSiswa"
-            class="info-siswa"
-        ></div>
-
-
-        <!-- SOAL -->
-
-        <div id="quiz"></div>
-
-
-    </div>
-
+    Pilihlah satu jawaban yang paling tepat!
 
 </div>
 
+
+<!-- =================================================
+     STATUS SISTEM ONLINE SISWA
+================================================== -->
+
+<div
+    id="onlineLoading"
+    class="online-loading"
+>
+    🔐 Memeriksa identitas dan sesi siswa...
+</div>
+
+
+<!-- =================================================
+     AREA KUIS
+================================================== -->
+
+<div
+    id="areaKuis"
+    class="hidden"
+>
+
+
+    <!-- INFORMASI SISWA -->
+
+    <div
+        id="infoSiswa"
+        class="info-siswa"
+    >
+        👤 Nama:
+        <b id="namaSiswaLogin">-</b>
+        |
+        🏫 Kelas:
+        <b id="kelasSiswaLogin">-</b>
+        |
+        🔢 Absen:
+        <b id="absenSiswaLogin">-</b>
+        <span
+            id="statusOnline"
+            class="status-online"
+        >
+            🟡 Memeriksa...
+        </span>
+    </div>
+
+
+    <!-- SOAL -->
+
+    <div id="quiz"></div>
+
+
+</div>
+```
+
+</div>
 
 <!-- =====================================================
      AREA PERINGATAN
@@ -1982,47 +2093,52 @@ audio {
     id="peringatanArea"
 ></div>
 
-
 <!-- =====================================================
      SUARA
 ===================================================== -->
 
 <audio
-    id="suaraKetik"
-    src="../../suara/typing.mp3"
-    preload="auto"
-></audio>
+id="suaraKetik"
+src="../../suara/typing.mp3"
+preload="auto"
 
-
-<audio
-    id="suaraKlik"
-    src="../../suara/mouse-clicks.mp3"
-    preload="auto"
-></audio>
-
+> </audio>
 
 <audio
-    id="suaraPeringatan"
-    src="../../suara/tada-234709.mp3"
-    preload="auto"
-></audio>
+id="suaraKlik"
+src="../../suara/mouse-clicks.mp3"
+preload="auto"
 
-
-<audio
-    id="suaraNext"
-    src="../../suara/next.mp3"
-    preload="auto"
-></audio>
-
+> </audio>
 
 <audio
-    id="suaraUlangi"
-    src="../../suara/ulangi.mp3"
-    preload="auto"
-></audio>
+id="suaraPeringatan"
+src="../../suara/tada-234709.mp3"
+preload="auto"
 
+> </audio>
+
+<audio
+id="suaraNext"
+src="../../suara/next.mp3"
+preload="auto"
+
+> </audio>
+
+<audio
+id="suaraUlangi"
+src="../../suara/ulangi.mp3"
+preload="auto"
+
+> </audio>
 
 <script>
+/* =========================================================
+   LATIHAN 3
+   Sistem online, session, heartbeat, proteksi halaman,
+   dan penyimpanan nilai menggunakan sistem yang sama
+   dengan Latihan 1 dan Latihan 2.
+========================================================= */
 
 
 /* =========================================================
@@ -2034,405 +2150,306 @@ audio {
 let soal = [
 
     {
-        q:
-            "Sebelum Indonesia merdeka, para tokoh bangsa membahas dasar negara yang akan digunakan setelah Indonesia merdeka. Salah satu badan yang berperan dalam pembahasan tersebut adalah BPUPKI.<br><br>Tujuan utama pembahasan dasar negara dalam sidang BPUPKI adalah ....",
-
+        q: "Sebelum Indonesia merdeka, para tokoh bangsa membahas dasar negara yang akan digunakan setelah Indonesia merdeka. Salah satu badan yang berperan dalam pembahasan tersebut adalah BPUPKI.<br><br>Tujuan utama pembahasan dasar negara dalam sidang BPUPKI adalah ....",
         a: [
             "menentukan lagu kebangsaan Indonesia",
             "menentukan dasar negara Indonesia",
             "memilih presiden pertama Indonesia",
             "menentukan ibu kota negara Indonesia"
         ],
-
         k: 1
     },
 
-
     {
-        q:
-            "Para perumus Pancasila memiliki sikap mau mendengarkan pendapat orang lain dan menghargai perbedaan pendapat.<br><br>Contoh sikap tersebut dalam kehidupan bermasyarakat adalah ....",
-
+        q: "Para perumus Pancasila memiliki sikap mau mendengarkan pendapat orang lain dan menghargai perbedaan pendapat.<br><br>Contoh sikap tersebut dalam kehidupan bermasyarakat adalah ....",
         a: [
             "memaksakan pendapat kepada tetangga",
             "meninggalkan rapat karena pendapat tidak diterima",
             "mendengarkan pendapat orang lain dalam musyawarah",
             "hanya menerima pendapat dari orang yang disukai"
         ],
-
         k: 2
     },
 
-
     {
-        q:
-            "Rani melihat temannya terjatuh saat bermain di halaman sekolah. Rani segera membantu temannya berdiri dan membawanya ke UKS.<br><br>Perilaku Rani mencerminkan penerapan nilai Pancasila, terutama sila ....",
-
+        q: "Rani melihat temannya terjatuh saat bermain di halaman sekolah. Rani segera membantu temannya berdiri dan membawanya ke UKS.<br><br>Perilaku Rani mencerminkan penerapan nilai Pancasila, terutama sila ....",
         a: [
             "pertama",
             "kedua",
             "keempat",
             "kelima"
         ],
-
         k: 1
     },
 
-
     {
-        q:
-            "Di lingkungan sekolah, halaman kelas terlihat kotor setelah kegiatan sekolah. Beberapa siswa kemudian bekerja sama membersihkan halaman tersebut.<br><br>Sikap yang sebaiknya dilakukan agar kegiatan tersebut sesuai dengan nilai Pancasila adalah ....",
-
+        q: "Di lingkungan sekolah, halaman kelas terlihat kotor setelah kegiatan sekolah. Beberapa siswa kemudian bekerja sama membersihkan halaman tersebut.<br><br>Sikap yang sebaiknya dilakukan agar kegiatan tersebut sesuai dengan nilai Pancasila adalah ....",
         a: [
             "membiarkan teman yang bekerja",
             "memilih pekerjaan yang paling mudah saja",
             "menunggu guru menyuruh terlebih dahulu",
             "bekerja sama sesuai kemampuan masing-masing"
         ],
-
         k: 3
     },
 
-
     {
-        q:
-            "Perhatikan pernyataan berikut!<br><br>" +
-            "1. Indonesia memiliki cita-cita menjadi negara yang merdeka.<br>" +
-            "2. Para tokoh bangsa ingin menentukan dasar bagi negara Indonesia.<br>" +
-            "3. Bangsa Indonesia memiliki keberagaman suku, agama, dan budaya.<br>" +
-            "4. Para tokoh bangsa ingin menghapus semua kebudayaan daerah.<br><br>" +
-            "Pernyataan yang tepat sebagai faktor yang melatarbelakangi lahirnya Pancasila adalah ....",
-
+        q: "Perhatikan pernyataan berikut!<br><br>" +
+           "1. Indonesia memiliki cita-cita menjadi negara yang merdeka.<br>" +
+           "2. Para tokoh bangsa ingin menentukan dasar bagi negara Indonesia.<br>" +
+           "3. Bangsa Indonesia memiliki keberagaman suku, agama, dan budaya.<br>" +
+           "4. Para tokoh bangsa ingin menghapus semua kebudayaan daerah.<br><br>" +
+           "Pernyataan yang tepat sebagai faktor yang melatarbelakangi lahirnya Pancasila adalah ....",
         a: [
             "1, 2, dan 3",
             "1 dan 4",
             "2 dan 4",
             "3 dan 4"
         ],
-
         k: 0
     },
 
-
     {
-        q:
-            "Dalam suatu rapat warga, terdapat beberapa pendapat yang berbeda mengenai kegiatan kebersihan lingkungan. Sikap yang tepat untuk meneladani para perumus Pancasila adalah ....",
-
+        q: "Dalam suatu rapat warga, terdapat beberapa pendapat yang berbeda mengenai kegiatan kebersihan lingkungan. Sikap yang tepat untuk meneladani para perumus Pancasila adalah ....",
         a: [
             "mengikuti pendapat sendiri tanpa mendengarkan orang lain",
             "meninggalkan rapat sebelum keputusan dibuat",
             "mendengarkan semua pendapat dan mencari kesepakatan bersama",
             "meminta ketua rapat menerima pendapat pribadi"
         ],
-
         k: 2
     },
 
-
     {
-        q:
-            "Perhatikan perilaku berikut!<br><br>" +
-            "1. Mengikuti kerja bakti di lingkungan rumah.<br>" +
-            "2. Berteman tanpa membeda-bedakan suku.<br>" +
-            "3. Memaksakan agama kepada orang lain.<br>" +
-            "4. Menjaga persatuan saat bermain bersama.<br><br>" +
-            "Perilaku yang sesuai dengan sila ketiga Pancasila adalah ....",
-
+        q: "Perhatikan perilaku berikut!<br><br>" +
+           "1. Mengikuti kerja bakti di lingkungan rumah.<br>" +
+           "2. Berteman tanpa membeda-bedakan suku.<br>" +
+           "3. Memaksakan agama kepada orang lain.<br>" +
+           "4. Menjaga persatuan saat bermain bersama.<br><br>" +
+           "Perilaku yang sesuai dengan sila ketiga Pancasila adalah ....",
         a: [
             "1 dan 3",
             "2 dan 4",
             "1 dan 4 saja",
             "2 dan 3"
         ],
-
         k: 1
     },
 
-
     {
-        q:
-            "Kelas V akan menentukan tujuan kegiatan kunjungan belajar. Ada beberapa usulan dari siswa.<br><br>Tindakan yang sesuai dengan sila keempat Pancasila adalah ....",
-
+        q: "Kelas V akan menentukan tujuan kegiatan kunjungan belajar. Ada beberapa usulan dari siswa.<br><br>Tindakan yang sesuai dengan sila keempat Pancasila adalah ....",
         a: [
             "ketua kelas langsung menentukan tujuan tanpa berdiskusi",
             "siswa yang paling banyak teman harus menentukan pilihan",
             "semua siswa berdiskusi dan menghargai pendapat yang disampaikan",
             "siswa mengikuti pendapat teman yang paling pintar saja"
         ],
-
         k: 2
     },
 
-
     {
-        q:
-            "Perhatikan perilaku dan dampak berikut!<br><br>" +
-            "<b>1. Menghargai teman yang berbeda agama</b> → Hubungan antarteman menjadi harmonis.<br>" +
-            "<b>2. Memaksakan pendapat</b> → Menimbulkan perselisihan.<br>" +
-            "<b>3. Saling membantu</b> → Pekerjaan menjadi lebih ringan.<br><br>" +
-            "Pasangan perilaku dan dampak yang tepat adalah ....",
-
+        q: "Perhatikan perilaku dan dampak berikut!<br><br>" +
+           "1. Menghargai teman yang berbeda agama → Hubungan antarteman menjadi harmonis.<br>" +
+           "2. Memaksakan pendapat → Menimbulkan perselisihan.<br>" +
+           "3. Saling membantu → Pekerjaan menjadi lebih ringan.<br><br>" +
+           "Pasangan perilaku dan dampak yang tepat adalah ....",
         a: [
             "1-a, 2-b, dan 3-c",
             "1-b, 2-c, dan 3-a",
             "1-c, 2-a, dan 3-b",
             "1-a, 2-c, dan 3-b"
         ],
-
         k: 0
     },
 
-
     {
-        q:
-            "Pancasila disebut sebagai pandangan hidup bangsa karena ....",
-
+        q: "Pancasila disebut sebagai pandangan hidup bangsa karena ....",
         a: [
             "Pancasila hanya digunakan ketika upacara",
             "Pancasila menjadi pedoman bangsa dalam menjalani kehidupan",
             "Pancasila hanya mengatur kehidupan para pejabat",
             "Pancasila hanya berlaku di lingkungan sekolah"
         ],
-
         k: 1
     },
 
-
     {
-        q:
-            "Masyarakat Indonesia memiliki berbagai tradisi gotong royong yang dilakukan secara turun-temurun. Salah satu contoh tradisi gotong royong masyarakat Bali adalah <b>ngayah</b>.<br><br>Makna kegiatan tersebut berkaitan dengan ....",
-
+        q: "Masyarakat Indonesia memiliki berbagai tradisi gotong royong yang dilakukan secara turun-temurun. Salah satu contoh tradisi gotong royong masyarakat Bali adalah ngayah.<br><br>Makna kegiatan tersebut berkaitan dengan ....",
         a: [
             "bekerja sendiri untuk mendapatkan keuntungan",
             "kegiatan membantu secara sukarela untuk kepentingan bersama",
             "persaingan untuk mendapatkan penghargaan",
             "kegiatan perdagangan antardaerah"
         ],
-
         k: 1
     },
 
-
     {
-        q:
-            "Tokoh ini menyampaikan pidato pada tanggal 1 Juni 1945 yang berisi gagasan mengenai dasar negara Indonesia. Dalam pidatonya, ia memperkenalkan istilah <b>Pancasila</b>.<br><br>Tokoh yang dimaksud adalah ....",
-
+        q: "Tokoh ini menyampaikan pidato pada tanggal 1 Juni 1945 yang berisi gagasan mengenai dasar negara Indonesia. Dalam pidatonya, ia memperkenalkan istilah Pancasila.<br><br>Tokoh yang dimaksud adalah ....",
         a: [
             "Mohammad Hatta",
             "Soepomo",
             "Ir. Soekarno",
             "Ahmad Soebardjo"
         ],
-
         k: 2
     },
 
-
     {
-        q:
-            "Perhatikan pasangan berikut!<br><br>" +
-            "1. Ir. Soekarno<br>" +
-            "2. Dr. Soepomo<br>" +
-            "3. Mohammad Yamin<br><br>" +
-            "a. Menyampaikan gagasan tentang dasar negara dalam sidang BPUPKI<br>" +
-            "b. Menyampaikan gagasan tentang persatuan, kekeluargaan, dan negara integralistik<br>" +
-            "c. Mengusulkan rumusan dasar negara dalam sidang BPUPKI<br><br>" +
-            "Pasangan yang tepat adalah ....",
-
+        q: "Perhatikan pasangan berikut!<br><br>" +
+           "1. Ir. Soekarno<br>" +
+           "2. Dr. Soepomo<br>" +
+           "3. Mohammad Yamin<br><br>" +
+           "a. Menyampaikan gagasan tentang dasar negara dalam sidang BPUPKI<br>" +
+           "b. Menyampaikan gagasan tentang persatuan, kekeluargaan, dan negara integralistik<br>" +
+           "c. Mengusulkan rumusan dasar negara dalam sidang BPUPKI<br><br>" +
+           "Pasangan yang tepat adalah ....",
         a: [
             "1-b, 2-c, 3-a",
             "1-a, 2-b, 3-c",
             "1-c, 2-a, 3-b",
             "1-b, 2-a, 3-c"
         ],
-
         k: 1
     },
 
-
     {
-        q:
-            "Perhatikan contoh perilaku berikut!<br><br>" +
-            "1. Menghormati teman yang sedang beribadah.<br>" +
-            "2. Membantu teman yang mengalami kesulitan.<br>" +
-            "3. Mengutamakan musyawarah ketika mengambil keputusan.<br><br>" +
-            "Urutan sila yang sesuai dengan ketiga perilaku tersebut adalah ....",
-
+        q: "Perhatikan contoh perilaku berikut!<br><br>" +
+           "1. Menghormati teman yang sedang beribadah.<br>" +
+           "2. Membantu teman yang mengalami kesulitan.<br>" +
+           "3. Mengutamakan musyawarah ketika mengambil keputusan.<br><br>" +
+           "Urutan sila yang sesuai dengan ketiga perilaku tersebut adalah ....",
         a: [
             "sila ke-2, sila ke-1, sila ke-4",
             "sila ke-1, sila ke-2, sila ke-4",
             "sila ke-1, sila ke-3, sila ke-5",
             "sila ke-4, sila ke-2, sila ke-1"
         ],
-
         k: 1
     },
 
-
     {
-        q:
-            "Perhatikan pernyataan berikut!<br><br>" +
-            "1. Pancasila sebagai dasar negara.<br>" +
-            "2. Pancasila sebagai pandangan hidup bangsa.<br>" +
-            "3. Pancasila sebagai sumber nilai dalam kehidupan bangsa.<br><br>" +
-            "Ketiga pernyataan tersebut menunjukkan bahwa Pancasila ....",
-
+        q: "Perhatikan pernyataan berikut!<br><br>" +
+           "1. Pancasila sebagai dasar negara.<br>" +
+           "2. Pancasila sebagai pandangan hidup bangsa.<br>" +
+           "3. Pancasila sebagai sumber nilai dalam kehidupan bangsa.<br><br>" +
+           "Ketiga pernyataan tersebut menunjukkan bahwa Pancasila ....",
         a: [
             "hanya digunakan dalam kehidupan pemerintahan",
             "memiliki kedudukan dan fungsi penting bagi bangsa Indonesia",
             "hanya digunakan dalam kegiatan sekolah",
             "hanya menjadi simbol negara Indonesia"
         ],
-
         k: 1
     },
 
-
     {
-        q:
-            "Dalam musyawarah kelas, terdapat beberapa tahapan yang harus dilakukan.<br><br>Sikap yang tepat dalam musyawarah adalah ....",
-
+        q: "Dalam musyawarah kelas, terdapat beberapa tahapan yang harus dilakukan.<br><br>Sikap yang tepat dalam musyawarah adalah ....",
         a: [
             "menyampaikan pendapat dengan sopan, mendengarkan orang lain, dan menerima keputusan bersama",
             "berbicara terus-menerus agar pendapat diterima",
             "meninggalkan musyawarah ketika pendapat tidak diterima",
             "memaksa peserta lain mengikuti keputusan pribadi"
         ],
-
         k: 0
     },
 
-
     {
-        q:
-            "Tokoh yang dikenal sebagai salah satu tokoh yang menyampaikan gagasan mengenai dasar negara dalam sidang BPUPKI adalah ....",
-
+        q: "Tokoh yang dikenal sebagai salah satu tokoh yang menyampaikan gagasan mengenai dasar negara dalam sidang BPUPKI adalah ....",
         a: [
             "Ki Hajar Dewantara",
             "Ir. Soekarno",
             "Jenderal Sudirman",
             "Cut Nyak Dien"
         ],
-
         k: 1
     },
 
-
     {
-        q:
-            "Pancasila menjadi dasar negara Indonesia. Artinya, Pancasila digunakan sebagai ....",
-
+        q: "Pancasila menjadi dasar negara Indonesia. Artinya, Pancasila digunakan sebagai ....",
         a: [
             "pedoman dasar dalam penyelenggaraan kehidupan bernegara",
             "aturan khusus untuk kegiatan olahraga",
             "pedoman untuk menentukan jenis pekerjaan masyarakat",
             "aturan yang hanya berlaku bagi pelajar"
         ],
-
         k: 0
     },
 
-
     {
-        q:
-            "Doni memiliki teman yang berasal dari daerah berbeda. Meskipun memiliki bahasa daerah dan kebiasaan yang berbeda, Doni tetap berteman dan bekerja sama dengannya.<br><br>Perilaku Doni menunjukkan penerapan sila ....",
-
+        q: "Doni memiliki teman yang berasal dari daerah berbeda. Meskipun memiliki bahasa daerah dan kebiasaan yang berbeda, Doni tetap berteman dan bekerja sama dengannya.<br><br>Perilaku Doni menunjukkan penerapan sila ....",
         a: [
             "pertama",
             "kedua",
             "ketiga",
             "kelima"
         ],
-
         k: 2
     },
 
-
     {
-        q:
-            "Di beberapa daerah Indonesia terdapat tradisi gotong royong yang dilakukan untuk membantu masyarakat dalam menyelesaikan pekerjaan bersama.<br><br>Nilai utama yang dapat diteladani dari tradisi tersebut adalah ....",
-
+        q: "Di beberapa daerah Indonesia terdapat tradisi gotong royong yang dilakukan untuk membantu masyarakat dalam menyelesaikan pekerjaan bersama.<br><br>Nilai utama yang dapat diteladani dari tradisi tersebut adalah ....",
         a: [
             "persaingan",
             "individualisme",
             "mementingkan diri sendiri",
             "kerja sama dan kepedulian terhadap sesama"
         ],
-
         k: 3
     },
 
-
     {
-        q:
-            "Dalam diskusi kelas, Andi dan Budi memiliki pendapat yang berbeda. Andi ingin kegiatan dilakukan pada hari Jumat, sedangkan Budi memilih hari Sabtu.<br><br>Cara yang paling sesuai dengan nilai Pancasila untuk menyelesaikan masalah tersebut adalah ....",
-
+        q: "Dalam diskusi kelas, Andi dan Budi memiliki pendapat yang berbeda. Andi ingin kegiatan dilakukan pada hari Jumat, sedangkan Budi memilih hari Sabtu.<br><br>Cara yang paling sesuai dengan nilai Pancasila untuk menyelesaikan masalah tersebut adalah ....",
         a: [
             "memilih pendapat Andi karena ia berbicara lebih dahulu",
             "memilih pendapat Budi karena ia berbicara paling keras",
             "melakukan musyawarah dan mencari keputusan yang dapat diterima bersama",
             "meminta guru memilih salah satu pendapat tanpa berdiskusi"
         ],
-
         k: 2
     },
 
-
     {
-        q:
-            "Di sebuah lingkungan, warga melakukan kerja bakti. Sebelum kegiatan dimulai, warga berdoa, saling membantu, menjaga persatuan, bermusyawarah membagi tugas, dan membagi pekerjaan secara adil.<br><br>Kegiatan tersebut menunjukkan bahwa ....",
-
+        q: "Di sebuah lingkungan, warga melakukan kerja bakti. Sebelum kegiatan dimulai, warga berdoa, saling membantu, menjaga persatuan, bermusyawarah membagi tugas, dan membagi pekerjaan secara adil.<br><br>Kegiatan tersebut menunjukkan bahwa ....",
         a: [
             "setiap sila Pancasila dapat diterapkan secara terpisah tanpa hubungan",
             "hanya sila ketiga yang dapat diterapkan dalam kerja bakti",
             "nilai-nilai dalam Pancasila saling berhubungan dan menjadi satu kesatuan",
             "sila kelima lebih penting daripada sila lainnya"
         ],
-
         k: 2
     },
 
-
     {
-        q:
-            "🧹 <b>Ilustrasi gambar:</b> beberapa siswa bekerja sama membersihkan lingkungan sekolah.<br><br>Nilai Pancasila yang paling tepat untuk diterapkan dalam kegiatan tersebut adalah ....",
-
+        q: "🧹 Ilustrasi gambar: beberapa siswa bekerja sama membersihkan lingkungan sekolah.<br><br>Nilai Pancasila yang paling tepat untuk diterapkan dalam kegiatan tersebut adalah ....",
         a: [
             "kerja sama, kepedulian, dan tanggung jawab terhadap lingkungan",
             "persaingan agar menjadi siswa yang paling cepat",
             "bekerja sendiri agar hasil pekerjaan lebih baik",
             "membiarkan pekerjaan dilakukan oleh siswa tertentu saja"
         ],
-
         k: 0
     },
 
-
     {
-        q:
-            "Di lingkungan sekolah terdapat banyak sampah berserakan. Beberapa siswa hanya menyalahkan petugas kebersihan tanpa berusaha mengatasi masalah tersebut.<br><br>Tindakan yang paling sesuai dengan nilai-nilai Pancasila adalah ....",
-
+        q: "Di lingkungan sekolah terdapat banyak sampah berserakan. Beberapa siswa hanya menyalahkan petugas kebersihan tanpa berusaha mengatasi masalah tersebut.<br><br>Tindakan yang paling sesuai dengan nilai-nilai Pancasila adalah ....",
         a: [
             "membiarkan sampah sampai petugas membersihkannya",
             "menyalahkan siswa yang membuang sampah",
             "membersihkan bersama, menyediakan tempat sampah, dan membiasakan membuang sampah pada tempatnya",
             "meminta guru menghukum semua siswa"
         ],
-
         k: 2
     },
 
-
     {
-        q:
-            "Di sebuah kampung terjadi perselisihan karena sebagian warga ingin menggunakan lapangan untuk kegiatan olahraga, sedangkan warga lainnya ingin menggunakannya untuk kegiatan seni.<br><br>Tindakan yang paling sesuai dengan nilai-nilai Pancasila adalah ....",
-
+        q: "Di sebuah kampung terjadi perselisihan karena sebagian warga ingin menggunakan lapangan untuk kegiatan olahraga, sedangkan warga lainnya ingin menggunakannya untuk kegiatan seni.<br><br>Tindakan yang paling sesuai dengan nilai-nilai Pancasila adalah ....",
         a: [
             "memberikan lapangan kepada kelompok yang jumlah anggotanya lebih banyak",
             "membiarkan kedua kelompok menggunakan lapangan secara bersamaan tanpa aturan",
             "memilih kelompok yang lebih dahulu mengajukan permintaan",
             "melakukan musyawarah untuk menentukan jadwal penggunaan lapangan secara adil dan menghargai kepentingan semua warga"
         ],
-
         k: 3
     }
 
@@ -2455,72 +2472,59 @@ let benar = 0;
 
 
 /* =========================================================
-   MULAI KUIS
+   MULAI KUIS DARI SESSION ONLINE
 ========================================================= */
 
-function mulaiKuis() {
-
-    dataNama =
-        document
-            .getElementById("nama")
-            .value
-            .trim();
-
-
-    dataKelas =
-        document
-            .getElementById("kelas")
-            .value
-            .trim();
-
-
-    dataAbsen =
-        document
-            .getElementById("absen")
-            .value
-            .trim();
-
+function mulaiKuisDariSession(data) {
 
     if (
-        !dataNama ||
-        !dataKelas ||
-        !dataAbsen
+        !data ||
+        !data.nama ||
+        !data.kelas ||
+        !data.sessionId
     ) {
 
-        mainkanSuaraPeringatan();
-
-
-        tampilkanPeringatan(
-
-            "⚠️ Ups! Data belum lengkap.<br><br>" +
-
-            "Isi dulu Nama, Kelas, dan Absen ya " +
-
-            "biar kamu bisa mulai mengerjakan kuis! 🚀"
-
-        );
-
-
         return;
+
     }
 
 
-    mainkanSuaraNext();
+    dataNama =
+        data.nama || "";
 
 
-    document
-        .getElementById("infoSiswa")
-        .innerHTML =
-
-        `👤 Nama: <b>${dataNama}</b> |
-         🏫 Kelas: <b>${dataKelas}</b> |
-         🔢 Absen: <b>${dataAbsen}</b>`;
+    dataKelas =
+        data.kelas || "";
 
 
-    document
-        .getElementById("formData")
-        .classList
-        .add("hidden");
+    dataAbsen =
+        data.nomorAbsen ||
+        data.absen ||
+        "";
+
+
+    indeks = 0;
+
+    benar = 0;
+
+    pancasilaNilaiSudahDikirim = false;
+
+    pancasilaPengirimanNilaiSedangBerjalan = false;
+
+
+    const loading =
+        document.getElementById(
+            "onlineLoading"
+        );
+
+
+    if (loading) {
+
+        loading.classList.add(
+            "hidden"
+        );
+
+    }
 
 
     document
@@ -2676,7 +2680,11 @@ function tampilkanSoal() {
             );
 
 
-        kirimDataKeGoogleSheet(
+        /* =====================================================
+           SIMPAN HASIL KE SERVER / DATABASE YANG SAMA
+        ===================================================== */
+
+        simpanNilaiKeServer(
 
             dataNama,
 
@@ -2684,7 +2692,11 @@ function tampilkanSoal() {
 
             dataAbsen,
 
-            nilai
+            nilai,
+
+            benar,
+
+            soal.length
 
         );
 
@@ -2745,6 +2757,13 @@ function tampilkanSoal() {
                         ${nilai}
                     </div>
 
+                </div>
+
+                <div
+                    id="statusPenyimpananNilai"
+                    class="status-penyimpanan-nilai"
+                >
+                    🟡 Menyimpan nilai ke server...
                 </div>
 
                 <br>
@@ -2808,12 +2827,6 @@ function tampilkanSoal() {
                             value="${i}"
                             onclick="mainkanSuaraKlik()"
                         />
-
-                        <b>
-                            ${String.fromCharCode(
-                                65 + i
-                            )}.
-                        </b>
 
                         ${j}
 
@@ -2948,80 +2961,447 @@ function tutupPeringatan() {
 
 
 /* =========================================================
-   KIRIM NILAI KE GOOGLE FORM
+   SIMPAN NILAI KE SERVER / DATABASE
 ========================================================= */
 
-function kirimDataKeGoogleSheet(
+const PANCASILA_SCORE_ACTION =
+    "submitScore";
+
+
+let pancasilaNilaiSudahDikirim =
+    false;
+
+
+let pancasilaPengirimanNilaiSedangBerjalan =
+    false;
+
+
+/* =========================================================
+   FUNGSI SIMPAN NILAI
+========================================================= */
+
+async function simpanNilaiKeServer(
 
     nama,
     kelas,
     absen,
-    nilai
+    nilai,
+    jumlahBenar,
+    totalSoal
 
-) {
+){
 
-    const formURL =
+    if(
+        pancasilaNilaiSudahDikirim ||
+        pancasilaPengirimanNilaiSedangBerjalan
+    ){
 
-        "https://docs.google.com/forms/u/0/d/e/1FAIpQLScrdR_ejx4jr5oHz-BQ9ZU-X6dfgnl7n3atNwxvJxeJluXKjQ/formResponse";
+        return {
+            success: true,
+            duplicate: true
+        };
+
+    }
 
 
-    const formData =
-        new FormData();
+    pancasilaPengirimanNilaiSedangBerjalan =
+        true;
 
 
-    formData.append(
+    const loginData =
+        pancasilaGetLoginData();
 
-        "entry.1114641071",
 
-        nama
+    const sessionId =
+        loginData &&
+        loginData.sessionId
+            ? loginData.sessionId
+            : "";
 
+
+    const nilaiAman =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                Number(nilai) || 0
+            )
+        );
+
+
+    const benarAman =
+        Math.max(
+            0,
+            Number(jumlahBenar) || 0
+        );
+
+
+    const totalAman =
+        Math.max(
+            0,
+            Number(totalSoal) || 0
+        );
+
+
+    const persentase =
+        totalAman > 0
+            ? Number(
+                (
+                    benarAman /
+                    totalAman *
+                    100
+                ).toFixed(2)
+            )
+            : nilaiAman;
+
+
+    const payload = {
+
+        action:
+            PANCASILA_SCORE_ACTION,
+
+        sessionId:
+            sessionId,
+
+        nama:
+            nama ||
+            (loginData && loginData.nama) ||
+            "",
+
+        kelas:
+            kelas ||
+            (loginData && loginData.kelas) ||
+            "",
+
+        nomorAbsen:
+            absen ||
+            (loginData && (
+                loginData.nomorAbsen ||
+                loginData.absen
+            )) ||
+            "",
+
+        absen:
+            absen ||
+            (loginData && (
+                loginData.absen ||
+                loginData.nomorAbsen
+            )) ||
+            "",
+
+        namaKuis:
+            "Soal Latihan 3 STS 1 Pancasila Kelas 5",
+
+        quizName:
+            "Soal Latihan 3 STS 1 Pancasila Kelas 5",
+
+        nilai:
+            nilaiAman,
+
+        skor:
+            nilaiAman,
+
+        score:
+            nilaiAman,
+
+        benar:
+            benarAman,
+
+        jumlahBenar:
+            benarAman,
+
+        totalSoal:
+            totalAman,
+
+        jumlahSoal:
+            totalAman,
+
+        persentase:
+            persentase,
+
+        percentage:
+            persentase,
+
+        halaman:
+            PANCASILA_HALAMAN_UTAMA,
+
+        sumber:
+            "Petualangan Kelas 5",
+
+        waktu:
+            new Date().toISOString(),
+
+        timestamp:
+            Date.now(),
+
+        jenis:
+            "hasil_kuis"
+
+    };
+
+
+    console.log(
+        "========================================"
     );
 
 
-    formData.append(
-
-        "entry.687539915",
-
-        kelas
-
+    console.log(
+        "📤 MENGIRIM NILAI KE SERVER"
     );
 
 
-    formData.append(
-
-        "entry.1445858210",
-
-        absen
-
+    console.log(
+        "🆔 Session ID:",
+        payload.sessionId
     );
 
 
-    formData.append(
-
-        "entry.175130881",
-
-        nilai
-
+    console.log(
+        "👤 Nama:",
+        payload.nama
     );
 
 
-    fetch(
+    console.log(
+        "🏫 Kelas:",
+        payload.kelas
+    );
 
-        formURL,
 
-        {
+    console.log(
+        "🔢 Absen:",
+        payload.nomorAbsen
+    );
 
-            method:
-                "POST",
 
-            body:
-                formData,
+    console.log(
+        "📝 Kuis:",
+        payload.namaKuis
+    );
 
-            mode:
-                "no-cors"
+
+    console.log(
+        "🎯 Nilai:",
+        payload.nilai
+    );
+
+
+    console.log(
+        "✅ Benar:",
+        payload.benar,
+        "/",
+        payload.totalSoal
+    );
+
+
+    try{
+
+        const result =
+            await pancasilaRequestJSONP(
+                payload,
+                15000
+            );
+
+
+        console.log(
+            "📥 RESPONS SERVER NILAI:",
+            result
+        );
+
+
+        if(
+            result &&
+            result.success === true
+        ){
+
+            pancasilaNilaiSudahDikirim =
+                true;
+
+
+            console.log(
+                "✅ NILAI BERHASIL DISIMPAN DI SERVER / DATABASE"
+            );
+
+
+            pancasilaTampilkanStatusPenyimpananNilai(
+                true,
+                result.message ||
+                "Nilai berhasil tersimpan di server."
+            );
+
+
+            return result;
 
         }
 
+
+        const message =
+            result &&
+            result.message
+                ? result.message
+                : "Server belum mengonfirmasi penyimpanan nilai.";
+
+
+        console.warn(
+            "⚠️ NILAI BELUM DIKONFIRMASI SERVER:",
+            result
+        );
+
+
+        pancasilaTampilkanStatusPenyimpananNilai(
+            false,
+            message
+        );
+
+
+        return result || {
+            success: false,
+            message: message
+        };
+
+    }catch(error){
+
+        console.error(
+            "❌ GAGAL MENGIRIM NILAI KE SERVER:",
+            error
+        );
+
+
+        pancasilaTampilkanStatusPenyimpananNilai(
+            false,
+            "Nilai belum tersimpan. Periksa koneksi lalu coba lagi."
+        );
+
+
+        return {
+            success: false,
+            error: String(error)
+        };
+
+    }finally{
+
+        pancasilaPengirimanNilaiSedangBerjalan =
+            false;
+
+    }
+
+}
+
+
+/* =========================================================
+   STATUS PENYIMPANAN NILAI DI HALAMAN HASIL
+========================================================= */
+
+function pancasilaTampilkanStatusPenyimpananNilai(
+    berhasil,
+    pesan
+){
+
+    const element =
+        document.getElementById(
+            "statusPenyimpananNilai"
+        );
+
+
+    if(
+        !element
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        berhasil
+    ){
+
+        element.innerHTML =
+            "🟢 " +
+            (
+                pesan ||
+                "Nilai tersimpan di server."
+            );
+
+    }else{
+
+        element.innerHTML =
+            "🟠 " +
+            (
+                pesan ||
+                "Nilai belum tersimpan di server."
+            ) +
+            `<br><button type="button" onclick="kirimUlangNilaiKeServer()">🔁 Kirim Lagi</button>`;
+
+    }
+
+
+    element.classList.toggle(
+        "status-nilai-gagal",
+        !berhasil
+    );
+
+}
+
+
+/* =========================================================
+   COBA KIRIM ULANG NILAI
+========================================================= */
+
+async function kirimUlangNilaiKeServer(){
+
+    if(
+        pancasilaNilaiSudahDikirim
+    ){
+
+        pancasilaTampilkanStatusPenyimpananNilai(
+            true,
+            "Nilai sudah tersimpan di server."
+        );
+
+        return;
+
+    }
+
+
+    const loginData =
+        pancasilaGetLoginData();
+
+
+    if(
+        !pancasilaLoginDataIsComplete(
+            loginData
+        )
+    ){
+
+        pancasilaRedirectKeIdentitas(
+            "login"
+        );
+
+        return;
+
+    }
+
+
+    const nilai =
+        Math.round(
+            (
+                benar /
+                soal.length
+            ) *
+            100
+        );
+
+
+    await simpanNilaiKeServer(
+        loginData.nama || dataNama,
+        loginData.kelas || dataKelas,
+        loginData.nomorAbsen ||
+            loginData.absen ||
+            dataAbsen,
+        nilai,
+        benar,
+        soal.length
     );
 
 }
@@ -3041,31 +3421,49 @@ function ulangiKuis() {
     benar = 0;
 
 
-    document
-        .getElementById("formData")
-        .classList
-        .remove("hidden");
+    const loginData =
+        pancasilaGetLoginData();
+
+
+    if (
+        !pancasilaLoginDataIsComplete(
+            loginData
+        )
+    ) {
+
+        pancasilaRedirectKeIdentitas(
+            "login"
+        );
+
+        return;
+
+    }
 
 
     document
         .getElementById("areaKuis")
         .classList
-        .add("hidden");
+        .remove("hidden");
 
 
-    document
-        .getElementById("nama")
-        .value = "";
+    const loading =
+        document.getElementById(
+            "onlineLoading"
+        );
 
 
-    document
-        .getElementById("kelas")
-        .value = "";
+    if (loading) {
+
+        loading.classList.add(
+            "hidden"
+        );
+
+    }
 
 
-    document
-        .getElementById("absen")
-        .value = "";
+    mulaiKuisDariSession(
+        loginData
+    );
 
 }
 
@@ -3077,7 +3475,7 @@ function ulangiKuis() {
 function keluarKuis() {
 
     window.location.href =
-        "🕵Petualangan-Seru.html";
+        "pancasila-online.html";
 
 }
 
@@ -3207,64 +3605,1748 @@ function mainkanSuaraKetik() {
 }
 
 
-/* =========================================================
-   SUARA KETIKA MENGETIK IDENTITAS
-========================================================= */
+/* =====================================================
+   SISTEM ONLINE SISWA - Pancasila
 
-document.addEventListener(
+   Mengikuti sistem online pada halaman
+   STS utama dan Petualangan Kelas 5.
 
-    "DOMContentLoaded",
-
-    () => {
-
-
-        [
-
-            "nama",
-
-            "kelas",
-
-            "absen"
-
-        ].forEach(
+   Fungsi:
+   - Membaca identitas siswa
+   - Memeriksa sessionId
+   - Cek sesi server
+   - Batas sesi client 24 jam
+   - Heartbeat setiap 20 detik
+   - Heartbeat saat aktivitas
+   - Heartbeat saat tab aktif kembali
+   - Status online
+   - Proteksi navigasi
+===================================================== */
 
 
-            id => {
+/* =====================================================
+   KONFIGURASI API
+===================================================== */
+
+const PANCASILA_API_URL =
+    "https://script.google.com/macros/s/AKfycbw-SmLBX8bmBH98vNrWzQ5tS3GrMvujNARGqdE2PerdDuIrPHHrGD4Kg5PSlLPyOXJ3/exec";
 
 
-                const el =
+/* =====================================================
+   NAMA HALAMAN
+===================================================== */
 
-                    document
-                        .getElementById(
-                            id
+const PANCASILA_HALAMAN_UTAMA =
+    "STS 1 - Pancasila | Latihan 3";
+
+
+/* =====================================================
+   INTERVAL HEARTBEAT
+===================================================== */
+
+const PANCASILA_HEARTBEAT_INTERVAL =
+    20000;
+
+
+/* =====================================================
+   BATAS SESI CLIENT
+===================================================== */
+
+const PANCASILA_SESSION_MAX_AGE =
+    24 * 60 * 60 * 1000;
+
+
+/* =====================================================
+   KUNCI STORAGE
+===================================================== */
+
+const PANCASILA_LOGIN_STORAGE_KEY =
+    "identitasPetualanganKelas5";
+
+
+/* =====================================================
+   VARIABEL HEARTBEAT
+===================================================== */
+
+let pancasilaHeartbeatTimer =
+    null;
+
+
+let pancasilaLastHeartbeat =
+    0;
+
+
+let pancasilaActivityTimer =
+    null;
+
+
+let pancasilaSedangLogout =
+    false;
+
+
+let pancasilaSedangRedirect =
+    false;
+
+
+/* =====================================================
+   BACA DATA LOGIN
+===================================================== */
+
+function pancasilaGetLoginData(){
+
+    const storages = [
+
+        window.localStorage,
+
+        window.sessionStorage
+
+    ];
+
+
+    for(
+        const storage
+        of storages
+    ){
+
+        try{
+
+            const raw =
+                storage.getItem(
+                    PANCASILA_LOGIN_STORAGE_KEY
+                );
+
+
+            if(
+                !raw
+            ){
+
+                continue;
+
+            }
+
+
+            const data =
+                JSON.parse(
+                    raw
+                );
+
+
+            if(
+                data &&
+                typeof data === "object"
+            ){
+
+                return data;
+
+            }
+
+        }catch(error){
+
+            console.log(
+                "Pancasila: gagal membaca data login:",
+                error
+            );
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =====================================================
+   SIMPAN DATA LOGIN
+===================================================== */
+
+function pancasilaSaveLoginData(
+    data
+){
+
+    if(
+        !data
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        localStorage.setItem(
+            PANCASILA_LOGIN_STORAGE_KEY,
+            JSON.stringify(data)
+        );
+
+    }catch(error){
+
+        console.log(
+            "Pancasila: gagal menyimpan localStorage:",
+            error
+        );
+
+    }
+
+
+    try{
+
+        sessionStorage.setItem(
+            PANCASILA_LOGIN_STORAGE_KEY,
+            JSON.stringify(data)
+        );
+
+    }catch(error){
+
+        console.log(
+            "Pancasila: gagal menyimpan sessionStorage:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   HAPUS DATA LOGIN
+===================================================== */
+
+function pancasilaClearLoginData(){
+
+    try{
+
+        localStorage.removeItem(
+            PANCASILA_LOGIN_STORAGE_KEY
+        );
+
+    }catch(error){}
+
+
+    try{
+
+        sessionStorage.removeItem(
+            PANCASILA_LOGIN_STORAGE_KEY
+        );
+
+    }catch(error){}
+
+}
+
+
+/* =====================================================
+   CEK DATA LOGIN LENGKAP
+===================================================== */
+
+function pancasilaLoginDataIsComplete(
+    data
+){
+
+    return Boolean(
+
+        data &&
+        data.nama &&
+        data.kelas &&
+        data.sessionId
+
+    );
+
+}
+
+
+/* =====================================================
+   CEK SESI CLIENT 24 JAM
+===================================================== */
+
+function pancasilaClientSessionExpired(
+    data
+){
+
+    if(
+        !data ||
+        !data.loginAt
+    ){
+
+        return true;
+
+    }
+
+
+    const loginTime =
+        Number(
+            data.loginAt
+        );
+
+
+    if(
+        !Number.isFinite(
+            loginTime
+        )
+    ){
+
+        return true;
+
+    }
+
+
+    return (
+
+        Date.now() -
+        loginTime
+
+    ) >=
+        PANCASILA_SESSION_MAX_AGE;
+
+}
+
+
+/* =====================================================
+   TAMPILKAN DATA SISWA
+===================================================== */
+
+function pancasilaTampilkanDataSiswa(
+    data
+){
+
+    if(
+        !data
+    ){
+
+        return;
+
+    }
+
+
+    const namaElement =
+        document.getElementById(
+            "namaSiswaLogin"
+        );
+
+
+    const kelasElement =
+        document.getElementById(
+            "kelasSiswaLogin"
+        );
+
+
+    const absenElement =
+        document.getElementById(
+            "absenSiswaLogin"
+        );
+
+
+    if(
+        namaElement
+    ){
+
+        namaElement.textContent =
+            data.nama ||
+            "-";
+
+    }
+
+
+    if(
+        kelasElement
+    ){
+
+        kelasElement.textContent =
+            data.kelas ||
+            "-";
+
+    }
+
+
+    if(
+        absenElement
+    ){
+
+        absenElement.textContent =
+            data.nomorAbsen ||
+            data.absen ||
+            "-";
+
+    }
+
+}
+
+
+/* =====================================================
+   STATUS ONLINE
+===================================================== */
+
+function pancasilaSetStatusOnline(
+    online,
+    text
+){
+
+    const statusElement =
+        document.getElementById(
+            "statusOnline"
+        );
+
+
+    if(
+        !statusElement
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        online
+    ){
+
+        statusElement.textContent =
+            text ||
+            "🟢 Online";
+
+
+        statusElement.classList.remove(
+            "offline"
+        );
+
+    }else{
+
+        statusElement.textContent =
+            text ||
+            "🔴 Offline";
+
+
+        statusElement.classList.add(
+            "offline"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   JSONP REQUEST
+===================================================== */
+
+function pancasilaRequestJSONP(
+    params,
+    timeout
+){
+
+    return new Promise(
+        function(resolve, reject){
+
+            const callbackName =
+                "pancasilaOnlineCallback_" +
+                Date.now() +
+                "_" +
+                Math.random()
+                    .toString(36)
+                    .substring(2,8);
+
+
+            let selesai =
+                false;
+
+
+            const script =
+                document.createElement(
+                    "script"
+                );
+
+
+            const query =
+                new URLSearchParams(
+                    params
+                );
+
+
+            query.set(
+                "callback",
+                callbackName
+            );
+
+
+            query.set(
+                "t",
+                Date.now()
+            );
+
+
+            const timer =
+                setTimeout(
+                    function(){
+
+                        if(
+                            selesai
+                        ){
+
+                            return;
+
+                        }
+
+
+                        selesai =
+                            true;
+
+
+                        cleanup();
+
+
+                        reject(
+                            new Error(
+                                "Request JSONP timeout"
+                            )
                         );
 
+                    },
+                    timeout || 10000
+                );
 
-                if (el) {
 
-                    el.addEventListener(
+            function cleanup(){
 
-                        "input",
+                clearTimeout(
+                    timer
+                );
 
-                        mainkanSuaraKetik
 
-                    );
+                try{
+
+                    delete window[
+                        callbackName
+                    ];
+
+                }catch(error){
+
+                    window[
+                        callbackName
+                    ] =
+                        undefined;
 
                 }
 
 
+                if(
+                    script.parentNode
+                ){
+
+                    script.parentNode.removeChild(
+                        script
+                    );
+
+                }
+
             }
 
-        );
 
+            window[
+                callbackName
+            ] =
+                function(data){
+
+                    if(
+                        selesai
+                    ){
+
+                        return;
+
+                    }
+
+
+                    selesai =
+                        true;
+
+
+                    cleanup();
+
+
+                    resolve(
+                        data
+                    );
+
+                };
+
+
+            script.onerror =
+                function(){
+
+                    if(
+                        selesai
+                    ){
+
+                        return;
+
+                    }
+
+
+                    selesai =
+                        true;
+
+
+                    cleanup();
+
+
+                    reject(
+                        new Error(
+                            "JSONP gagal dimuat"
+                        )
+                    );
+
+                };
+
+
+            script.src =
+                PANCASILA_API_URL +
+                "?" +
+                query.toString();
+
+
+            script.async =
+                true;
+
+
+            document
+                .head
+                .appendChild(
+                    script
+                );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   REDIRECT KE HALAMAN IDENTITAS
+===================================================== */
+
+function pancasilaRedirectKeIdentitas(
+    alasan
+){
+
+    if(
+        pancasilaSedangRedirect
+    ){
+
+        return;
 
     }
 
+
+    pancasilaSedangRedirect =
+        true;
+
+
+    clearInterval(
+        pancasilaHeartbeatTimer
+    );
+
+
+    pancasilaHeartbeatTimer =
+        null;
+
+
+    pancasilaClearLoginData();
+
+
+    let url =
+        "../../identitas.html";
+
+
+    if(
+        alasan
+    ){
+
+        url +=
+            "?alasan=" +
+            encodeURIComponent(
+                alasan
+            );
+
+    }
+
+
+    window.location.replace(
+        url
+    );
+
+}
+
+
+/* =====================================================
+   CEK SESI KE SERVER
+===================================================== */
+
+async function pancasilaCheckSession(){
+
+    const loginData =
+        pancasilaGetLoginData();
+
+
+    if(
+        !pancasilaLoginDataIsComplete(
+            loginData
+        )
+    ){
+
+        pancasilaRedirectKeIdentitas(
+            "login"
+        );
+
+        return false;
+
+    }
+
+
+    if(
+        pancasilaClientSessionExpired(
+            loginData
+        )
+    ){
+
+        pancasilaRedirectKeIdentitas(
+            "expired"
+        );
+
+        return false;
+
+    }
+
+
+    try{
+
+        const result =
+            await pancasilaRequestJSONP(
+                {
+
+                    action:
+                        "checksession",
+
+                    sessionId:
+                        loginData.sessionId
+
+                },
+                10000
+            );
+
+
+        console.log(
+            "Pancasila - hasil checksession:",
+            result
+        );
+
+
+        if(
+            !result ||
+            result.success !== true ||
+            result.loggedIn !== true
+        ){
+
+            pancasilaRedirectKeIdentitas(
+                "invalid"
+            );
+
+            return false;
+
+        }
+
+
+        if(
+            result.session
+        ){
+
+            const updated =
+                Object.assign(
+                    {},
+                    loginData,
+                    result.session
+                );
+
+
+            pancasilaSaveLoginData(
+                updated
+            );
+
+
+            pancasilaTampilkanDataSiswa(
+                updated
+            );
+
+        }
+
+
+        pancasilaSetStatusOnline(
+            true,
+            "🟢 Online"
+        );
+
+
+        return true;
+
+    }catch(error){
+
+        console.warn(
+            "Pancasila: cek sesi sementara gagal:",
+            error
+        );
+
+
+        pancasilaSetStatusOnline(
+            true,
+            "🟢 Online"
+        );
+
+
+        return true;
+
+    }
+
+}
+
+
+/* =====================================================
+   KIRIM HEARTBEAT
+===================================================== */
+
+async function pancasilaSendHeartbeat(){
+
+    if(
+        pancasilaSedangRedirect ||
+        pancasilaSedangLogout
+    ){
+
+        return;
+
+    }
+
+
+    const loginData =
+        pancasilaGetLoginData();
+
+
+    if(
+        !pancasilaLoginDataIsComplete(
+            loginData
+        )
+    ){
+
+        console.warn(
+            "Pancasila: heartbeat dihentikan karena data login tidak lengkap."
+        );
+
+
+        pancasilaRedirectKeIdentitas(
+            "login"
+        );
+
+
+        return;
+
+    }
+
+
+    if(
+        pancasilaClientSessionExpired(
+            loginData
+        )
+    ){
+
+        console.warn(
+            "Pancasila: sesi lokal sudah expired."
+        );
+
+
+        pancasilaRedirectKeIdentitas(
+            "expired"
+        );
+
+
+        return;
+
+    }
+
+
+    const now =
+        Date.now();
+
+
+    if(
+        now -
+        pancasilaLastHeartbeat
+        < 5000
+    ){
+
+        return;
+
+    }
+
+
+    pancasilaLastHeartbeat =
+        now;
+
+
+    pancasilaSetStatusOnline(
+        true,
+        "🟢 Online"
+    );
+
+
+    console.log(
+        "========================================"
+    );
+
+
+    console.log(
+        "📡 Pancasila MENGIRIM HEARTBEAT"
+    );
+
+
+    console.log(
+        "🕐 Waktu:",
+        new Date()
+            .toLocaleTimeString()
+    );
+
+
+    console.log(
+        "🆔 Session ID:",
+        loginData.sessionId
+    );
+
+
+    console.log(
+        "👤 Nama:",
+        loginData.nama
+    );
+
+
+    console.log(
+        "🏫 Kelas:",
+        loginData.kelas
+    );
+
+
+    console.log(
+        "🔢 Absen:",
+        loginData.nomorAbsen ||
+        loginData.absen ||
+        "-"
+    );
+
+
+    console.log(
+        "📄 Halaman:",
+        PANCASILA_HALAMAN_UTAMA
+    );
+
+
+    try{
+
+        const result =
+            await pancasilaRequestJSONP(
+                {
+
+                    action:
+                        "heartbeat",
+
+                    sessionId:
+                        loginData.sessionId,
+
+                    nama:
+                        loginData.nama,
+
+                    kelas:
+                        loginData.kelas,
+
+                    nomorAbsen:
+                        loginData.nomorAbsen ||
+                        loginData.absen ||
+                        "",
+
+                    halaman:
+                        PANCASILA_HALAMAN_UTAMA,
+
+                    sumber:
+                        "Petualangan Kelas 5"
+
+                },
+                10000
+            );
+
+
+        console.log(
+            "📥 RESPONS SERVER Pancasila:",
+            result
+        );
+
+
+        console.log(
+            "✅ Success:",
+            result &&
+            result.success
+        );
+
+
+        console.log(
+            "📊 Status:",
+            result &&
+            result.status
+        );
+
+
+        console.log(
+            "📝 Message:",
+            result &&
+            result.message
+        );
+
+
+        if(
+            result &&
+            result.session
+        ){
+
+            console.log(
+                "----------------------------------------"
+            );
+
+
+            console.log(
+                "🆔 Session ID SERVER:",
+                result.session.sessionId
+            );
+
+
+            console.log(
+                "👤 Nama SERVER:",
+                result.session.nama
+            );
+
+
+            console.log(
+                "🏫 Kelas SERVER:",
+                result.session.kelas
+            );
+
+
+            console.log(
+                "🔢 Absen SERVER:",
+                result.session.nomorAbsen
+            );
+
+
+            console.log(
+                "📄 Halaman SERVER:",
+                result.session.halaman
+            );
+
+
+            console.log(
+                "🕐 Login At SERVER:",
+                result.session.loginAt
+            );
+
+
+            console.log(
+                "🕐 Last Seen SERVER:",
+                result.session.lastSeen
+            );
+
+
+            console.log(
+                "🟢 Status SERVER:",
+                result.session.status
+            );
+
+
+            console.log(
+                "----------------------------------------"
+            );
+
+        }
+
+
+        if(
+            !result ||
+            result.success !== true
+        ){
+
+            const status =
+                String(
+                    result &&
+                    result.status
+                    ||
+                    ""
+                ).toLowerCase();
+
+
+            console.warn(
+                "Pancasila: heartbeat tidak berhasil.",
+                result
+            );
+
+
+            if(
+
+                status ===
+                    "expired"
+
+                ||
+
+                status ===
+                    "not_logged_in"
+
+                ||
+
+                status ===
+                    "invalid_session"
+
+            ){
+
+                console.error(
+                    "🚨 Pancasila: SESSION TIDAK VALID / EXPIRED"
+                );
+
+
+                pancasilaRedirectKeIdentitas(
+                    "expired"
+                );
+
+
+                return;
+
+            }
+
+
+            pancasilaSetStatusOnline(
+                true,
+                "🟢 Online"
+            );
+
+
+            return;
+
+        }
+
+
+        if(
+            result.session
+        ){
+
+            const updated =
+                Object.assign(
+                    {},
+                    loginData,
+                    result.session
+                );
+
+
+            console.log(
+                "🔍 SESSION ID SEBELUM:",
+                loginData.sessionId
+            );
+
+
+            console.log(
+                "🔍 SESSION ID SESUDAH:",
+                updated.sessionId
+            );
+
+
+            if(
+                loginData.sessionId !==
+                updated.sessionId
+            ){
+
+                console.warn(
+                    "⚠️ PERINGATAN: SESSION ID BERUBAH!"
+                );
+
+            }else{
+
+                console.log(
+                    "✅ Session ID tetap sama."
+                );
+
+            }
+
+
+            pancasilaSaveLoginData(
+                updated
+            );
+
+
+            pancasilaTampilkanDataSiswa(
+                updated
+            );
+
+        }
+
+
+        pancasilaSetStatusOnline(
+            true,
+            "🟢 Online"
+        );
+
+
+        console.log(
+            "🟢 Pancasila ONLINE:",
+            new Date()
+                .toLocaleTimeString()
+        );
+
+
+        console.log(
+            "========================================"
+        );
+
+
+    }catch(error){
+
+        console.warn(
+            "Pancasila: heartbeat gagal sementara:",
+            error
+        );
+
+
+        pancasilaSetStatusOnline(
+            true,
+            "🟢 Online"
+        );
+
+
+        console.log(
+            "Heartbeat berikutnya akan mencoba kembali."
+        );
+
+
+        console.log(
+            "========================================"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   HEARTBEAT BERKALA
+===================================================== */
+
+function pancasilaStartHeartbeat(){
+
+    if(
+        pancasilaHeartbeatTimer
+    ){
+
+        clearInterval(
+            pancasilaHeartbeatTimer
+        );
+
+    }
+
+
+    pancasilaSendHeartbeat();
+
+
+    pancasilaHeartbeatTimer =
+        setInterval(
+            function(){
+
+                pancasilaSendHeartbeat();
+
+            },
+            PANCASILA_HEARTBEAT_INTERVAL
+        );
+
+}
+
+
+/* =====================================================
+   AKTIVITAS SISWA
+===================================================== */
+
+function pancasilaRegisterActivity(){
+
+    clearTimeout(
+        pancasilaActivityTimer
+    );
+
+
+    pancasilaActivityTimer =
+        setTimeout(
+            function(){
+
+                pancasilaSendHeartbeat();
+
+            },
+            300
+        );
+
+}
+
+
+/* =====================================================
+   EVENT AKTIVITAS SISWA
+===================================================== */
+
+const pancasilaActivityEvents = [
+
+    "click",
+
+    "keydown",
+
+    "scroll",
+
+    "touchstart",
+
+    "pointerdown"
+
+];
+
+
+pancasilaActivityEvents.forEach(
+    function(eventName){
+
+        document.addEventListener(
+            eventName,
+            pancasilaRegisterActivity,
+            {
+                passive:
+                    true
+            }
+        );
+
+    }
 );
 
 
-</script>
+/* =====================================================
+   TAB KEMBALI AKTIF
+===================================================== */
 
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(
+            document.visibilityState ===
+            "visible"
+        ){
+
+            pancasilaSendHeartbeat();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   WINDOW KEMBALI AKTIF
+===================================================== */
+
+window.addEventListener(
+    "focus",
+    function(){
+
+        pancasilaSendHeartbeat();
+
+    }
+);
+
+
+/* =====================================================
+   SAAT HALAMAN DITINGGALKAN
+===================================================== */
+
+window.addEventListener(
+    "pagehide",
+    function(){
+
+        clearInterval(
+            pancasilaHeartbeatTimer
+        );
+
+
+        pancasilaHeartbeatTimer =
+            null;
+
+    }
+);
+
+
+/* =====================================================
+   PROTEKSI NAVIGASI
+===================================================== */
+
+function pancasilaProtectNavigation(){
+
+    document
+        .querySelectorAll(
+            ".menu-button"
+        )
+        .forEach(
+            function(button){
+
+                button.addEventListener(
+                    "click",
+                    function(event){
+
+                        const loginData =
+                            pancasilaGetLoginData();
+
+
+                        if(
+                            !pancasilaLoginDataIsComplete(
+                                loginData
+                            )
+                        ){
+
+                            event.preventDefault();
+
+
+                            pancasilaRedirectKeIdentitas(
+                                "login"
+                            );
+
+
+                            return;
+
+                        }
+
+
+                        if(
+                            pancasilaClientSessionExpired(
+                                loginData
+                            )
+                        ){
+
+                            event.preventDefault();
+
+
+                            pancasilaRedirectKeIdentitas(
+                                "expired"
+                            );
+
+
+                            return;
+
+                        }
+
+
+                        pancasilaSendHeartbeat();
+
+                    }
+                );
+
+            }
+        );
+
+
+    document
+        .querySelectorAll(
+            ".nav a, nav a"
+        )
+        .forEach(
+            function(link){
+
+                link.addEventListener(
+                    "click",
+                    function(event){
+
+                        const loginData =
+                            pancasilaGetLoginData();
+
+
+                        if(
+                            !pancasilaLoginDataIsComplete(
+                                loginData
+                            )
+                        ){
+
+                            event.preventDefault();
+
+
+                            pancasilaRedirectKeIdentitas(
+                                "login"
+                            );
+
+
+                            return;
+
+                        }
+
+
+                        if(
+                            pancasilaClientSessionExpired(
+                                loginData
+                            )
+                        ){
+
+                            event.preventDefault();
+
+
+                            pancasilaRedirectKeIdentitas(
+                                "expired"
+                            );
+
+
+                            return;
+
+                        }
+
+
+                        pancasilaSendHeartbeat();
+
+                    }
+                );
+
+            }
+        );
+
+
+    const backButton =
+        document.querySelector(
+            ".back-button"
+        );
+
+
+    if(
+        backButton
+    ){
+
+        backButton.addEventListener(
+            "click",
+            function(event){
+
+                const loginData =
+                    pancasilaGetLoginData();
+
+
+                if(
+                    !pancasilaLoginDataIsComplete(
+                        loginData
+                    )
+                ){
+
+                    event.preventDefault();
+
+
+                    pancasilaRedirectKeIdentitas(
+                        "login"
+                    );
+
+
+                    return;
+
+                }
+
+
+                if(
+                    pancasilaClientSessionExpired(
+                        loginData
+                    )
+                ){
+
+                    event.preventDefault();
+
+
+                    pancasilaRedirectKeIdentitas(
+                        "expired"
+                    );
+
+
+                    return;
+
+                }
+
+
+                pancasilaSendHeartbeat();
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   INISIALISASI SISTEM ONLINE Pancasila
+===================================================== */
+
+async function pancasilaInitializeOnline(){
+
+    console.log(
+        "🚀 Sistem online Pancasila dimulai."
+    );
+
+
+    const loginData =
+        pancasilaGetLoginData();
+
+
+    if(
+        !pancasilaLoginDataIsComplete(
+            loginData
+        )
+    ){
+
+        pancasilaRedirectKeIdentitas(
+            "login"
+        );
+
+
+        return;
+
+    }
+
+
+    pancasilaTampilkanDataSiswa(
+        loginData
+    );
+
+
+    if(
+        pancasilaClientSessionExpired(
+            loginData
+        )
+    ){
+
+        pancasilaRedirectKeIdentitas(
+            "expired"
+        );
+
+
+        return;
+
+    }
+
+
+    const valid =
+        await pancasilaCheckSession();
+
+
+    if(
+        !valid
+    ){
+
+        return;
+
+    }
+
+
+    const sessionAktif =
+        pancasilaGetLoginData();
+
+
+    if(
+        !pancasilaLoginDataIsComplete(
+            sessionAktif
+        )
+    ){
+
+        pancasilaRedirectKeIdentitas(
+            "login"
+        );
+
+        return;
+
+    }
+
+
+    mulaiKuisDariSession(
+        sessionAktif
+    );
+
+
+    pancasilaStartHeartbeat();
+
+
+    pancasilaProtectNavigation();
+
+
+    console.log(
+        "🟢 Pancasila Latihan 3 aktif dan sedang dibaca online oleh server."
+    );
+
+
+    console.log(
+        "📄 Halaman online:",
+        PANCASILA_HALAMAN_UTAMA
+    );
+
+
+    console.log(
+        "⏱️ Heartbeat:",
+        PANCASILA_HEARTBEAT_INTERVAL /
+        1000,
+        "detik"
+    );
+
+
+    console.log(
+        "⏳ Maksimum sesi:",
+        PANCASILA_SESSION_MAX_AGE /
+        (60 * 60 * 1000),
+        "jam"
+    );
+
+}
+
+
+/* =====================================================
+   JALANKAN SISTEM ONLINE
+===================================================== */
+
+pancasilaInitializeOnline();
+
+
+/* =====================================================
+   LOG INFORMASI
+===================================================== */
+
+console.log(
+    "========================================"
+);
+
+
+console.log(
+    "📚 Pancasila Latihan 3 | Petualangan Kelas 5"
+);
+
+
+console.log(
+    "📡 Sistem online siswa aktif"
+);
+
+
+console.log(
+    "⏱️ Heartbeat setiap 20 detik"
+);
+
+
+console.log(
+    "⏳ Sesi client maksimal 24 jam"
+);
+
+
+console.log(
+    "🔑 Storage:",
+    PANCASILA_LOGIN_STORAGE_KEY
+);
+
+
+console.log(
+    "========================================"
+);
+
+</script>
 
 </body>
 

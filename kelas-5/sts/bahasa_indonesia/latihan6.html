@@ -2009,7 +2009,7 @@ audio {
 
     <h1 class="judul-kuis">
 
-        🔬 Soal Latihan 6 UTS 1 Bahasa Indonesia Kelas 5
+        📚 Soal Latihan 6 UTS 1 Bahasa Indonesia Kelas 5
 
     </h1>
 
@@ -2194,7 +2194,7 @@ let soal = [
     },
 
     {
-        q: "Perhatikan kalimat berikut!<br><br>A. “Usulmu sama sekali tidak berguna.”\nB. “Saya tidak setuju dan tidak mau mendengarkan penjelasanmu.”\nC. “Menurut saya, usulan itu dapat dipertimbangkan kembali agar hasilnya lebih baik.”\nD. “Pendapat saya pasti lebih benar daripada pendapatmu.”<br><br>Kalimat yang paling santun untuk menyampaikan pendapat adalah ....",
+        q: "Perhatikan kalimat berikut!<br><br>A. “Usulmu sama sekali tidak berguna.”<br>B. “Saya tidak setuju dan tidak mau mendengarkan penjelasanmu.”<br>C. “Menurut saya, usulan itu dapat dipertimbangkan kembali agar hasilnya lebih baik.”<br>D. “Pendapat saya pasti lebih benar daripada pendapatmu.”<br><br>Kalimat yang paling santun untuk menyampaikan pendapat adalah ....",
         a: [
             "A",
             "B",
@@ -2397,7 +2397,7 @@ let soal = [
             "“Saya setuju karena tempat sampah terpilah dapat membantu siswa membuang sampah sesuai jenisnya.”",
             "“Semua siswa pasti setuju dengan saya.”",
             "“Kalau ada yang tidak setuju, berarti mereka tidak peduli kebersihan.”",
-            "“Tempat sampah itu harus dipasang sekarang juga tanpa berdiskusi.”"
+            "“Tempat sampah itu harus dbahasaIndonesiaang sekarang juga tanpa berdiskusi.”"
         ],
         k: 0
     },
@@ -2435,7 +2435,7 @@ let soal = [
         k: 2
     }
 
-];
+]
 
 
 /* =========================================================
@@ -2489,10 +2489,10 @@ function mulaiKuisDariSession(data) {
 
     benar = 0;
 
-    ipasNilaiSudahDikirim =
+    bahasaIndonesiaNilaiSudahDikirim =
         false;
 
-    ipasPengirimanNilaiSedangBerjalan =
+    bahasaIndonesiaPengirimanNilaiSedangBerjalan =
         false;
 
 
@@ -3069,15 +3069,15 @@ function tutupPeringatan() {
    sistem server yang sama.
 ========================================================= */
 
-const IPAS_SCORE_ACTION =
+const BAHASA_INDONESIA_SCORE_ACTION =
     "submitScore";
 
 
-let ipasNilaiSudahDikirim =
+let bahasaIndonesiaNilaiSudahDikirim =
     false;
 
 
-let ipasPengirimanNilaiSedangBerjalan =
+let bahasaIndonesiaPengirimanNilaiSedangBerjalan =
     false;
 
 
@@ -3101,8 +3101,8 @@ async function simpanNilaiKeServer(
     ----------------------------------------------------- */
 
     if (
-        ipasNilaiSudahDikirim ||
-        ipasPengirimanNilaiSedangBerjalan
+        bahasaIndonesiaNilaiSudahDikirim ||
+        bahasaIndonesiaPengirimanNilaiSedangBerjalan
     ) {
 
         return {
@@ -3118,12 +3118,12 @@ async function simpanNilaiKeServer(
     }
 
 
-    ipasPengirimanNilaiSedangBerjalan =
+    bahasaIndonesiaPengirimanNilaiSedangBerjalan =
         true;
 
 
     const loginData =
-        ipasGetLoginData();
+        bahasaIndonesiaGetLoginData();
 
 
     const sessionId =
@@ -3172,7 +3172,7 @@ async function simpanNilaiKeServer(
     const payload = {
 
         action:
-            IPAS_SCORE_ACTION,
+            BAHASA_INDONESIA_SCORE_ACTION,
 
         sessionId:
             sessionId,
@@ -3249,7 +3249,7 @@ async function simpanNilaiKeServer(
             persentase,
 
         halaman:
-            IPAS_HALAMAN_UTAMA,
+            BAHASA_INDONESIA_HALAMAN_UTAMA,
 
         sumber:
             "Petualangan Kelas 5",
@@ -3272,7 +3272,7 @@ async function simpanNilaiKeServer(
 
 
     console.log(
-        "📤 MENGIRIM NILAI IPAS KE SERVER"
+        "📤 MENGIRIM NILAI BAHASA_INDONESIA KE SERVER"
     );
 
 
@@ -3323,14 +3323,14 @@ async function simpanNilaiKeServer(
     try {
 
         const result =
-            await ipasRequestJSONP(
+            await bahasaIndonesiaRequestJSONP(
                 payload,
                 15000
             );
 
 
         console.log(
-            "📥 RESPONS SERVER NILAI IPAS:",
+            "📥 RESPONS SERVER NILAI BAHASA_INDONESIA:",
             result
         );
 
@@ -3340,19 +3340,19 @@ async function simpanNilaiKeServer(
             result.success === true
         ) {
 
-            ipasNilaiSudahDikirim =
+            bahasaIndonesiaNilaiSudahDikirim =
                 true;
 
 
             console.log(
-                "✅ NILAI IPAS BERHASIL DISIMPAN DI SERVER / DATABASE"
+                "✅ NILAI BAHASA_INDONESIA BERHASIL DISIMPAN DI SERVER / DATABASE"
             );
 
 
-            ipasTampilkanStatusPenyimpananNilai(
+            bahasaIndonesiaTampilkanStatusPenyimpananNilai(
                 true,
                 result.message ||
-                "Nilai IPAS berhasil tersimpan di server."
+                "Nilai BAHASA_INDONESIA berhasil tersimpan di server."
             );
 
 
@@ -3365,16 +3365,16 @@ async function simpanNilaiKeServer(
             result &&
             result.message
                 ? result.message
-                : "Server belum mengonfirmasi penyimpanan nilai IPAS.";
+                : "Server belum mengonfirmasi penyimpanan nilai BAHASA_INDONESIA.";
 
 
         console.warn(
-            "⚠️ NILAI IPAS BELUM DIKONFIRMASI SERVER:",
+            "⚠️ NILAI BAHASA_INDONESIA BELUM DIKONFIRMASI SERVER:",
             result
         );
 
 
-        ipasTampilkanStatusPenyimpananNilai(
+        bahasaIndonesiaTampilkanStatusPenyimpananNilai(
             false,
             message
         );
@@ -3394,12 +3394,12 @@ async function simpanNilaiKeServer(
     } catch (error) {
 
         console.error(
-            "❌ GAGAL MENGIRIM NILAI IPAS KE SERVER:",
+            "❌ GAGAL MENGIRIM NILAI BAHASA_INDONESIA KE SERVER:",
             error
         );
 
 
-        ipasTampilkanStatusPenyimpananNilai(
+        bahasaIndonesiaTampilkanStatusPenyimpananNilai(
             false,
             "Nilai belum tersimpan. Periksa koneksi lalu coba lagi."
         );
@@ -3418,7 +3418,7 @@ async function simpanNilaiKeServer(
 
     } finally {
 
-        ipasPengirimanNilaiSedangBerjalan =
+        bahasaIndonesiaPengirimanNilaiSedangBerjalan =
             false;
 
     }
@@ -3430,7 +3430,7 @@ async function simpanNilaiKeServer(
    STATUS PENYIMPANAN NILAI DI HALAMAN HASIL
 ========================================================= */
 
-function ipasTampilkanStatusPenyimpananNilai(
+function bahasaIndonesiaTampilkanStatusPenyimpananNilai(
     berhasil,
     pesan
 ) {
@@ -3454,7 +3454,7 @@ function ipasTampilkanStatusPenyimpananNilai(
             "🟢 " +
             (
                 pesan ||
-                "Nilai IPAS tersimpan di server."
+                "Nilai BAHASA_INDONESIA tersimpan di server."
             );
 
 
@@ -3464,7 +3464,7 @@ function ipasTampilkanStatusPenyimpananNilai(
             "🟠 " +
             (
                 pesan ||
-                "Nilai IPAS belum tersimpan di server."
+                "Nilai BAHASA_INDONESIA belum tersimpan di server."
             ) +
 
             `<br>
@@ -3493,12 +3493,12 @@ function ipasTampilkanStatusPenyimpananNilai(
 async function kirimUlangNilaiKeServer() {
 
     if (
-        ipasNilaiSudahDikirim
+        bahasaIndonesiaNilaiSudahDikirim
     ) {
 
-        ipasTampilkanStatusPenyimpananNilai(
+        bahasaIndonesiaTampilkanStatusPenyimpananNilai(
             true,
-            "Nilai IPAS sudah tersimpan di server."
+            "Nilai BAHASA_INDONESIA sudah tersimpan di server."
         );
 
         return;
@@ -3507,16 +3507,16 @@ async function kirimUlangNilaiKeServer() {
 
 
     const loginData =
-        ipasGetLoginData();
+        bahasaIndonesiaGetLoginData();
 
 
     if (
-        !ipasLoginDataIsComplete(
+        !bahasaIndonesiaLoginDataIsComplete(
             loginData
         )
     ) {
 
-        ipasRedirectKeIdentitas(
+        bahasaIndonesiaRedirectKeIdentitas(
             "login"
         );
 
@@ -3582,16 +3582,16 @@ function ulangiKuis() {
 
 
     const loginData =
-        ipasGetLoginData();
+        bahasaIndonesiaGetLoginData();
 
 
     if (
-        !ipasLoginDataIsComplete(
+        !bahasaIndonesiaLoginDataIsComplete(
             loginData
         )
     ) {
 
-        ipasRedirectKeIdentitas(
+        bahasaIndonesiaRedirectKeIdentitas(
             "login"
         );
 
@@ -3644,7 +3644,7 @@ function ulangiKuis() {
 function keluarKuis() {
 
     window.location.href =
-        "ipas-online.html";
+        "bahasaIndonesia-online.html";
 
 }
 
@@ -3805,7 +3805,7 @@ function mainkanSuaraKetik() {
 
 
 /* =====================================================
-   SISTEM ONLINE SISWA - IPAS
+   SISTEM ONLINE SISWA - BAHASA_INDONESIA
 
    Mengikuti sistem online pada halaman
    STS utama dan Petualangan Kelas 5.
@@ -3827,7 +3827,7 @@ function mainkanSuaraKetik() {
    KONFIGURASI API
 ===================================================== */
 
-const IPAS_API_URL =
+const BAHASA_INDONESIA_API_URL =
     "https://script.google.com/macros/s/AKfycbw-SmLBX8bmBH98vNrWzQ5tS3GrMvujNARGqdE2PerdDuIrPHHrGD4Kg5PSlLPyOXJ3/exec";
 
 
@@ -3835,10 +3835,10 @@ const IPAS_API_URL =
    NAMA HALAMAN
 
    Siswa akan tercatat sedang berada
-   pada halaman IPAS.
+   pada halaman BAHASA_INDONESIA.
 ===================================================== */
 
-const IPAS_HALAMAN_UTAMA =
+const BAHASA_INDONESIA_HALAMAN_UTAMA =
     "Soal Latihan 6 UTS 1 Bahasa Indonesia Kelas 5";
 
 
@@ -3848,7 +3848,7 @@ const IPAS_HALAMAN_UTAMA =
    Setiap 20 detik.
 ===================================================== */
 
-const IPAS_HEARTBEAT_INTERVAL =
+const BAHASA_INDONESIA_HEARTBEAT_INTERVAL =
     20000;
 
 
@@ -3858,7 +3858,7 @@ const IPAS_HEARTBEAT_INTERVAL =
    Maksimal 24 jam.
 ===================================================== */
 
-const IPAS_SESSION_MAX_AGE =
+const BAHASA_INDONESIA_SESSION_MAX_AGE =
     24 * 60 * 60 * 1000;
 
 
@@ -3871,7 +3871,7 @@ const IPAS_SESSION_MAX_AGE =
    JANGAN DIUBAH agar session tetap terbaca.
 ===================================================== */
 
-const IPAS_LOGIN_STORAGE_KEY =
+const BAHASA_INDONESIA_LOGIN_STORAGE_KEY =
     "identitasPetualanganKelas5";
 
 
@@ -3879,23 +3879,23 @@ const IPAS_LOGIN_STORAGE_KEY =
    VARIABEL HEARTBEAT
 ===================================================== */
 
-let ipasHeartbeatTimer =
+let bahasaIndonesiaHeartbeatTimer =
     null;
 
 
-let ipasLastHeartbeat =
+let bahasaIndonesiaLastHeartbeat =
     0;
 
 
-let ipasActivityTimer =
+let bahasaIndonesiaActivityTimer =
     null;
 
 
-let ipasSedangLogout =
+let bahasaIndonesiaSedangLogout =
     false;
 
 
-let ipasSedangRedirect =
+let bahasaIndonesiaSedangRedirect =
     false;
 
 
@@ -3903,7 +3903,7 @@ let ipasSedangRedirect =
    BACA DATA LOGIN
 ===================================================== */
 
-function ipasGetLoginData() {
+function bahasaIndonesiaGetLoginData() {
 
     const storages = [
 
@@ -3923,7 +3923,7 @@ function ipasGetLoginData() {
 
             const raw =
                 storage.getItem(
-                    IPAS_LOGIN_STORAGE_KEY
+                    BAHASA_INDONESIA_LOGIN_STORAGE_KEY
                 );
 
 
@@ -3953,7 +3953,7 @@ function ipasGetLoginData() {
         } catch (error) {
 
             console.log(
-                "IPAS: gagal membaca data login:",
+                "BAHASA_INDONESIA: gagal membaca data login:",
                 error
             );
 
@@ -3971,7 +3971,7 @@ function ipasGetLoginData() {
    SIMPAN DATA LOGIN
 ===================================================== */
 
-function ipasSaveLoginData(
+function bahasaIndonesiaSaveLoginData(
     data
 ) {
 
@@ -3985,14 +3985,14 @@ function ipasSaveLoginData(
     try {
 
         localStorage.setItem(
-            IPAS_LOGIN_STORAGE_KEY,
+            BAHASA_INDONESIA_LOGIN_STORAGE_KEY,
             JSON.stringify(data)
         );
 
     } catch (error) {
 
         console.log(
-            "IPAS: gagal menyimpan localStorage:",
+            "BAHASA_INDONESIA: gagal menyimpan localStorage:",
             error
         );
 
@@ -4002,14 +4002,14 @@ function ipasSaveLoginData(
     try {
 
         sessionStorage.setItem(
-            IPAS_LOGIN_STORAGE_KEY,
+            BAHASA_INDONESIA_LOGIN_STORAGE_KEY,
             JSON.stringify(data)
         );
 
     } catch (error) {
 
         console.log(
-            "IPAS: gagal menyimpan sessionStorage:",
+            "BAHASA_INDONESIA: gagal menyimpan sessionStorage:",
             error
         );
 
@@ -4022,12 +4022,12 @@ function ipasSaveLoginData(
    HAPUS DATA LOGIN
 ===================================================== */
 
-function ipasClearLoginData() {
+function bahasaIndonesiaClearLoginData() {
 
     try {
 
         localStorage.removeItem(
-            IPAS_LOGIN_STORAGE_KEY
+            BAHASA_INDONESIA_LOGIN_STORAGE_KEY
         );
 
     } catch (error) {}
@@ -4036,7 +4036,7 @@ function ipasClearLoginData() {
     try {
 
         sessionStorage.removeItem(
-            IPAS_LOGIN_STORAGE_KEY
+            BAHASA_INDONESIA_LOGIN_STORAGE_KEY
         );
 
     } catch (error) {}
@@ -4048,7 +4048,7 @@ function ipasClearLoginData() {
    CEK DATA LOGIN LENGKAP
 ===================================================== */
 
-function ipasLoginDataIsComplete(
+function bahasaIndonesiaLoginDataIsComplete(
     data
 ) {
 
@@ -4071,7 +4071,7 @@ function ipasLoginDataIsComplete(
    CEK SESI CLIENT 24 JAM
 ===================================================== */
 
-function ipasClientSessionExpired(
+function bahasaIndonesiaClientSessionExpired(
     data
 ) {
 
@@ -4108,7 +4108,7 @@ function ipasClientSessionExpired(
         loginTime
 
     ) >=
-        IPAS_SESSION_MAX_AGE;
+        BAHASA_INDONESIA_SESSION_MAX_AGE;
 
 }
 
@@ -4117,7 +4117,7 @@ function ipasClientSessionExpired(
    TAMPILKAN DATA SISWA
 ===================================================== */
 
-function ipasTampilkanDataSiswa(
+function bahasaIndonesiaTampilkanDataSiswa(
     data
 ) {
 
@@ -4180,7 +4180,7 @@ function ipasTampilkanDataSiswa(
    STATUS ONLINE
 ===================================================== */
 
-function ipasSetStatusOnline(
+function bahasaIndonesiaSetStatusOnline(
     online,
     text
 ) {
@@ -4230,7 +4230,7 @@ function ipasSetStatusOnline(
    JSONP REQUEST
 ===================================================== */
 
-function ipasRequestJSONP(
+function bahasaIndonesiaRequestJSONP(
     params,
     timeout
 ) {
@@ -4239,7 +4239,7 @@ function ipasRequestJSONP(
         function(resolve, reject) {
 
             const callbackName =
-                "ipasOnlineCallback_" +
+                "bahasaIndonesiaOnlineCallback_" +
                 Date.now() +
                 "_" +
                 Math.random()
@@ -4400,7 +4400,7 @@ function ipasRequestJSONP(
 
 
             script.src =
-                IPAS_API_URL +
+                BAHASA_INDONESIA_API_URL +
                 "?" +
                 query.toString();
 
@@ -4433,12 +4433,12 @@ function ipasRequestJSONP(
    /kelas-5/identitas.html
 ===================================================== */
 
-function ipasRedirectKeIdentitas(
+function bahasaIndonesiaRedirectKeIdentitas(
     alasan
 ) {
 
     if (
-        ipasSedangRedirect
+        bahasaIndonesiaSedangRedirect
     ) {
 
         return;
@@ -4446,20 +4446,20 @@ function ipasRedirectKeIdentitas(
     }
 
 
-    ipasSedangRedirect =
+    bahasaIndonesiaSedangRedirect =
         true;
 
 
     clearInterval(
-        ipasHeartbeatTimer
+        bahasaIndonesiaHeartbeatTimer
     );
 
 
-    ipasHeartbeatTimer =
+    bahasaIndonesiaHeartbeatTimer =
         null;
 
 
-    ipasClearLoginData();
+    bahasaIndonesiaClearLoginData();
 
 
     let url =
@@ -4488,10 +4488,10 @@ function ipasRedirectKeIdentitas(
    CEK SESI KE SERVER
 ===================================================== */
 
-async function ipasCheckSession() {
+async function bahasaIndonesiaCheckSession() {
 
     const loginData =
-        ipasGetLoginData();
+        bahasaIndonesiaGetLoginData();
 
 
     /* -------------------------------------------------
@@ -4499,12 +4499,12 @@ async function ipasCheckSession() {
     ------------------------------------------------- */
 
     if (
-        !ipasLoginDataIsComplete(
+        !bahasaIndonesiaLoginDataIsComplete(
             loginData
         )
     ) {
 
-        ipasRedirectKeIdentitas(
+        bahasaIndonesiaRedirectKeIdentitas(
             "login"
         );
 
@@ -4518,12 +4518,12 @@ async function ipasCheckSession() {
     ------------------------------------------------- */
 
     if (
-        ipasClientSessionExpired(
+        bahasaIndonesiaClientSessionExpired(
             loginData
         )
     ) {
 
-        ipasRedirectKeIdentitas(
+        bahasaIndonesiaRedirectKeIdentitas(
             "expired"
         );
 
@@ -4535,7 +4535,7 @@ async function ipasCheckSession() {
     try {
 
         const result =
-            await ipasRequestJSONP(
+            await bahasaIndonesiaRequestJSONP(
                 {
 
                     action:
@@ -4550,7 +4550,7 @@ async function ipasCheckSession() {
 
 
         console.log(
-            "IPAS - hasil checksession:",
+            "BAHASA_INDONESIA - hasil checksession:",
             result
         );
 
@@ -4565,7 +4565,7 @@ async function ipasCheckSession() {
             result.loggedIn !== true
         ) {
 
-            ipasRedirectKeIdentitas(
+            bahasaIndonesiaRedirectKeIdentitas(
                 "invalid"
             );
 
@@ -4590,19 +4590,19 @@ async function ipasCheckSession() {
                 );
 
 
-            ipasSaveLoginData(
+            bahasaIndonesiaSaveLoginData(
                 updated
             );
 
 
-            ipasTampilkanDataSiswa(
+            bahasaIndonesiaTampilkanDataSiswa(
                 updated
             );
 
         }
 
 
-        ipasSetStatusOnline(
+        bahasaIndonesiaSetStatusOnline(
             true,
             "🟢 Online"
         );
@@ -4619,12 +4619,12 @@ async function ipasCheckSession() {
         */
 
         console.warn(
-            "IPAS: cek sesi sementara gagal:",
+            "BAHASA_INDONESIA: cek sesi sementara gagal:",
             error
         );
 
 
-        ipasSetStatusOnline(
+        bahasaIndonesiaSetStatusOnline(
             true,
             "🟢 Online"
         );
@@ -4641,7 +4641,7 @@ async function ipasCheckSession() {
    KIRIM HEARTBEAT
 ===================================================== */
 
-async function ipasSendHeartbeat() {
+async function bahasaIndonesiaSendHeartbeat() {
 
     /* -------------------------------------------------
        Jangan kirim ketika redirect
@@ -4649,8 +4649,8 @@ async function ipasSendHeartbeat() {
     ------------------------------------------------- */
 
     if (
-        ipasSedangRedirect ||
-        ipasSedangLogout
+        bahasaIndonesiaSedangRedirect ||
+        bahasaIndonesiaSedangLogout
     ) {
 
         return;
@@ -4663,7 +4663,7 @@ async function ipasSendHeartbeat() {
     ------------------------------------------------- */
 
     const loginData =
-        ipasGetLoginData();
+        bahasaIndonesiaGetLoginData();
 
 
     /* -------------------------------------------------
@@ -4671,17 +4671,17 @@ async function ipasSendHeartbeat() {
     ------------------------------------------------- */
 
     if (
-        !ipasLoginDataIsComplete(
+        !bahasaIndonesiaLoginDataIsComplete(
             loginData
         )
     ) {
 
         console.warn(
-            "IPAS: heartbeat dihentikan karena data login tidak lengkap."
+            "BAHASA_INDONESIA: heartbeat dihentikan karena data login tidak lengkap."
         );
 
 
-        ipasRedirectKeIdentitas(
+        bahasaIndonesiaRedirectKeIdentitas(
             "login"
         );
 
@@ -4696,17 +4696,17 @@ async function ipasSendHeartbeat() {
     ------------------------------------------------- */
 
     if (
-        ipasClientSessionExpired(
+        bahasaIndonesiaClientSessionExpired(
             loginData
         )
     ) {
 
         console.warn(
-            "IPAS: sesi lokal sudah expired."
+            "BAHASA_INDONESIA: sesi lokal sudah expired."
         );
 
 
-        ipasRedirectKeIdentitas(
+        bahasaIndonesiaRedirectKeIdentitas(
             "expired"
         );
 
@@ -4728,7 +4728,7 @@ async function ipasSendHeartbeat() {
 
     if (
         now -
-        ipasLastHeartbeat
+        bahasaIndonesiaLastHeartbeat
         < 5000
     ) {
 
@@ -4737,7 +4737,7 @@ async function ipasSendHeartbeat() {
     }
 
 
-    ipasLastHeartbeat =
+    bahasaIndonesiaLastHeartbeat =
         now;
 
 
@@ -4745,7 +4745,7 @@ async function ipasSendHeartbeat() {
        Tampilkan status online
     ------------------------------------------------- */
 
-    ipasSetStatusOnline(
+    bahasaIndonesiaSetStatusOnline(
         true,
         "🟢 Online"
     );
@@ -4761,7 +4761,7 @@ async function ipasSendHeartbeat() {
 
 
     console.log(
-        "📡 IPAS MENGIRIM HEARTBEAT"
+        "📡 BAHASA_INDONESIA MENGIRIM HEARTBEAT"
     );
 
 
@@ -4800,7 +4800,7 @@ async function ipasSendHeartbeat() {
 
     console.log(
         "📄 Halaman:",
-        IPAS_HALAMAN_UTAMA
+        BAHASA_INDONESIA_HALAMAN_UTAMA
     );
 
 
@@ -4811,7 +4811,7 @@ async function ipasSendHeartbeat() {
     try {
 
         const result =
-            await ipasRequestJSONP(
+            await bahasaIndonesiaRequestJSONP(
                 {
 
                     action:
@@ -4832,7 +4832,7 @@ async function ipasSendHeartbeat() {
                         "",
 
                     halaman:
-                        IPAS_HALAMAN_UTAMA,
+                        BAHASA_INDONESIA_HALAMAN_UTAMA,
 
                     sumber:
                         "Petualangan Kelas 5"
@@ -4847,7 +4847,7 @@ async function ipasSendHeartbeat() {
         ================================================= */
 
         console.log(
-            "📥 RESPONS SERVER IPAS:",
+            "📥 RESPONS SERVER BAHASA_INDONESIA:",
             result
         );
 
@@ -4962,7 +4962,7 @@ async function ipasSendHeartbeat() {
 
 
             console.warn(
-                "IPAS: heartbeat tidak berhasil.",
+                "BAHASA_INDONESIA: heartbeat tidak berhasil.",
                 result
             );
 
@@ -4989,11 +4989,11 @@ async function ipasSendHeartbeat() {
             ) {
 
                 console.error(
-                    "🚨 IPAS: SESSION TIDAK VALID / EXPIRED"
+                    "🚨 BAHASA_INDONESIA: SESSION TIDAK VALID / EXPIRED"
                 );
 
 
-                ipasRedirectKeIdentitas(
+                bahasaIndonesiaRedirectKeIdentitas(
                     "expired"
                 );
 
@@ -5008,7 +5008,7 @@ async function ipasSendHeartbeat() {
                menghapus sesi.
             */
 
-            ipasSetStatusOnline(
+            bahasaIndonesiaSetStatusOnline(
                 true,
                 "🟢 Online"
             );
@@ -5065,12 +5065,12 @@ async function ipasSendHeartbeat() {
             }
 
 
-            ipasSaveLoginData(
+            bahasaIndonesiaSaveLoginData(
                 updated
             );
 
 
-            ipasTampilkanDataSiswa(
+            bahasaIndonesiaTampilkanDataSiswa(
                 updated
             );
 
@@ -5081,7 +5081,7 @@ async function ipasSendHeartbeat() {
            STATUS ONLINE
         ================================================= */
 
-        ipasSetStatusOnline(
+        bahasaIndonesiaSetStatusOnline(
             true,
             "🟢 Online"
         );
@@ -5092,7 +5092,7 @@ async function ipasSendHeartbeat() {
         ================================================= */
 
         console.log(
-            "🟢 IPAS ONLINE:",
+            "🟢 BAHASA_INDONESIA ONLINE:",
             new Date()
                 .toLocaleTimeString()
         );
@@ -5111,12 +5111,12 @@ async function ipasSendHeartbeat() {
         */
 
         console.warn(
-            "IPAS: heartbeat gagal sementara:",
+            "BAHASA_INDONESIA: heartbeat gagal sementara:",
             error
         );
 
 
-        ipasSetStatusOnline(
+        bahasaIndonesiaSetStatusOnline(
             true,
             "🟢 Online"
         );
@@ -5140,14 +5140,14 @@ async function ipasSendHeartbeat() {
    HEARTBEAT BERKALA
 ===================================================== */
 
-function ipasStartHeartbeat() {
+function bahasaIndonesiaStartHeartbeat() {
 
     if (
-        ipasHeartbeatTimer
+        bahasaIndonesiaHeartbeatTimer
     ) {
 
         clearInterval(
-            ipasHeartbeatTimer
+            bahasaIndonesiaHeartbeatTimer
         );
 
     }
@@ -5158,7 +5158,7 @@ function ipasStartHeartbeat() {
        agar heartbeat pertama langsung dikirim.
     */
 
-    ipasLastHeartbeat =
+    bahasaIndonesiaLastHeartbeat =
         0;
 
 
@@ -5166,21 +5166,21 @@ function ipasStartHeartbeat() {
        Kirim heartbeat langsung.
     */
 
-    ipasSendHeartbeat();
+    bahasaIndonesiaSendHeartbeat();
 
 
     /*
        Selanjutnya setiap 20 detik.
     */
 
-    ipasHeartbeatTimer =
+    bahasaIndonesiaHeartbeatTimer =
         setInterval(
             function() {
 
-                ipasSendHeartbeat();
+                bahasaIndonesiaSendHeartbeat();
 
             },
-            IPAS_HEARTBEAT_INTERVAL
+            BAHASA_INDONESIA_HEARTBEAT_INTERVAL
         );
 
 }
@@ -5190,18 +5190,18 @@ function ipasStartHeartbeat() {
    AKTIVITAS SISWA
 ===================================================== */
 
-function ipasRegisterActivity() {
+function bahasaIndonesiaRegisterActivity() {
 
     clearTimeout(
-        ipasActivityTimer
+        bahasaIndonesiaActivityTimer
     );
 
 
-    ipasActivityTimer =
+    bahasaIndonesiaActivityTimer =
         setTimeout(
             function() {
 
-                ipasSendHeartbeat();
+                bahasaIndonesiaSendHeartbeat();
 
             },
             300
@@ -5214,7 +5214,7 @@ function ipasRegisterActivity() {
    EVENT AKTIVITAS SISWA
 ===================================================== */
 
-const ipasActivityEvents = [
+const bahasaIndonesiaActivityEvents = [
 
     "click",
 
@@ -5229,12 +5229,12 @@ const ipasActivityEvents = [
 ];
 
 
-ipasActivityEvents.forEach(
+bahasaIndonesiaActivityEvents.forEach(
     function(eventName) {
 
         document.addEventListener(
             eventName,
-            ipasRegisterActivity,
+            bahasaIndonesiaRegisterActivity,
             {
                 passive:
                     true
@@ -5258,7 +5258,7 @@ document.addEventListener(
             "visible"
         ) {
 
-            ipasSendHeartbeat();
+            bahasaIndonesiaSendHeartbeat();
 
         }
 
@@ -5274,7 +5274,7 @@ window.addEventListener(
     "focus",
     function() {
 
-        ipasSendHeartbeat();
+        bahasaIndonesiaSendHeartbeat();
 
     }
 );
@@ -5289,7 +5289,7 @@ window.addEventListener(
 
    STS utama
        ↓
-   IPAS
+   BAHASA_INDONESIA
        ↓
    Mata pelajaran
 
@@ -5301,20 +5301,20 @@ window.addEventListener(
     function() {
 
         clearInterval(
-            ipasHeartbeatTimer
+            bahasaIndonesiaHeartbeatTimer
         );
 
 
-        ipasHeartbeatTimer =
+        bahasaIndonesiaHeartbeatTimer =
             null;
 
 
         clearTimeout(
-            ipasActivityTimer
+            bahasaIndonesiaActivityTimer
         );
 
 
-        ipasActivityTimer =
+        bahasaIndonesiaActivityTimer =
             null;
 
     }
@@ -5328,7 +5328,7 @@ window.addEventListener(
    jika siswa mempunyai session valid.
 ===================================================== */
 
-function ipasProtectNavigation() {
+function bahasaIndonesiaProtectNavigation() {
 
     /* =================================================
        TOMBOL MATA PELAJARAN
@@ -5346,7 +5346,7 @@ function ipasProtectNavigation() {
                     function(event) {
 
                         const loginData =
-                            ipasGetLoginData();
+                            bahasaIndonesiaGetLoginData();
 
 
                         /* ---------------------------------
@@ -5354,7 +5354,7 @@ function ipasProtectNavigation() {
                         --------------------------------- */
 
                         if (
-                            !ipasLoginDataIsComplete(
+                            !bahasaIndonesiaLoginDataIsComplete(
                                 loginData
                             )
                         ) {
@@ -5362,7 +5362,7 @@ function ipasProtectNavigation() {
                             event.preventDefault();
 
 
-                            ipasRedirectKeIdentitas(
+                            bahasaIndonesiaRedirectKeIdentitas(
                                 "login"
                             );
 
@@ -5377,7 +5377,7 @@ function ipasProtectNavigation() {
                         --------------------------------- */
 
                         if (
-                            ipasClientSessionExpired(
+                            bahasaIndonesiaClientSessionExpired(
                                 loginData
                             )
                         ) {
@@ -5385,7 +5385,7 @@ function ipasProtectNavigation() {
                             event.preventDefault();
 
 
-                            ipasRedirectKeIdentitas(
+                            bahasaIndonesiaRedirectKeIdentitas(
                                 "expired"
                             );
 
@@ -5400,7 +5400,7 @@ function ipasProtectNavigation() {
                            siswa berpindah halaman.
                         */
 
-                        ipasSendHeartbeat();
+                        bahasaIndonesiaSendHeartbeat();
 
                     }
                 );
@@ -5425,11 +5425,11 @@ function ipasProtectNavigation() {
                     function(event) {
 
                         const loginData =
-                            ipasGetLoginData();
+                            bahasaIndonesiaGetLoginData();
 
 
                         if (
-                            !ipasLoginDataIsComplete(
+                            !bahasaIndonesiaLoginDataIsComplete(
                                 loginData
                             )
                         ) {
@@ -5437,7 +5437,7 @@ function ipasProtectNavigation() {
                             event.preventDefault();
 
 
-                            ipasRedirectKeIdentitas(
+                            bahasaIndonesiaRedirectKeIdentitas(
                                 "login"
                             );
 
@@ -5448,7 +5448,7 @@ function ipasProtectNavigation() {
 
 
                         if (
-                            ipasClientSessionExpired(
+                            bahasaIndonesiaClientSessionExpired(
                                 loginData
                             )
                         ) {
@@ -5456,7 +5456,7 @@ function ipasProtectNavigation() {
                             event.preventDefault();
 
 
-                            ipasRedirectKeIdentitas(
+                            bahasaIndonesiaRedirectKeIdentitas(
                                 "expired"
                             );
 
@@ -5466,7 +5466,7 @@ function ipasProtectNavigation() {
                         }
 
 
-                        ipasSendHeartbeat();
+                        bahasaIndonesiaSendHeartbeat();
 
                     }
                 );
@@ -5492,11 +5492,11 @@ function ipasProtectNavigation() {
             function(event) {
 
                 const loginData =
-                    ipasGetLoginData();
+                    bahasaIndonesiaGetLoginData();
 
 
                 if (
-                    !ipasLoginDataIsComplete(
+                    !bahasaIndonesiaLoginDataIsComplete(
                         loginData
                     )
                 ) {
@@ -5504,7 +5504,7 @@ function ipasProtectNavigation() {
                     event.preventDefault();
 
 
-                    ipasRedirectKeIdentitas(
+                    bahasaIndonesiaRedirectKeIdentitas(
                         "login"
                     );
 
@@ -5515,7 +5515,7 @@ function ipasProtectNavigation() {
 
 
                 if (
-                    ipasClientSessionExpired(
+                    bahasaIndonesiaClientSessionExpired(
                         loginData
                     )
                 ) {
@@ -5523,7 +5523,7 @@ function ipasProtectNavigation() {
                     event.preventDefault();
 
 
-                    ipasRedirectKeIdentitas(
+                    bahasaIndonesiaRedirectKeIdentitas(
                         "expired"
                     );
 
@@ -5533,7 +5533,7 @@ function ipasProtectNavigation() {
                 }
 
 
-                ipasSendHeartbeat();
+                bahasaIndonesiaSendHeartbeat();
 
             }
         );
@@ -5544,13 +5544,13 @@ function ipasProtectNavigation() {
 
 
 /* =====================================================
-   INISIALISASI SISTEM ONLINE IPAS
+   INISIALISASI SISTEM ONLINE BAHASA_INDONESIA
 ===================================================== */
 
-async function ipasInitializeOnline() {
+async function bahasaIndonesiaInitializeOnline() {
 
     console.log(
-        "🚀 Sistem online IPAS dimulai."
+        "🚀 Sistem online BAHASA_INDONESIA dimulai."
     );
 
 
@@ -5559,7 +5559,7 @@ async function ipasInitializeOnline() {
     ------------------------------------------------- */
 
     const loginData =
-        ipasGetLoginData();
+        bahasaIndonesiaGetLoginData();
 
 
     /* -------------------------------------------------
@@ -5567,12 +5567,12 @@ async function ipasInitializeOnline() {
     ------------------------------------------------- */
 
     if (
-        !ipasLoginDataIsComplete(
+        !bahasaIndonesiaLoginDataIsComplete(
             loginData
         )
     ) {
 
-        ipasRedirectKeIdentitas(
+        bahasaIndonesiaRedirectKeIdentitas(
             "login"
         );
 
@@ -5587,7 +5587,7 @@ async function ipasInitializeOnline() {
        sebelum server selesai diperiksa.
     ------------------------------------------------- */
 
-    ipasTampilkanDataSiswa(
+    bahasaIndonesiaTampilkanDataSiswa(
         loginData
     );
 
@@ -5597,12 +5597,12 @@ async function ipasInitializeOnline() {
     ------------------------------------------------- */
 
     if (
-        ipasClientSessionExpired(
+        bahasaIndonesiaClientSessionExpired(
             loginData
         )
     ) {
 
-        ipasRedirectKeIdentitas(
+        bahasaIndonesiaRedirectKeIdentitas(
             "expired"
         );
 
@@ -5617,7 +5617,7 @@ async function ipasInitializeOnline() {
     ------------------------------------------------- */
 
     const valid =
-        await ipasCheckSession();
+        await bahasaIndonesiaCheckSession();
 
 
     if (!valid) {
@@ -5628,16 +5628,16 @@ async function ipasInitializeOnline() {
 
 
     const sessionAktif =
-        ipasGetLoginData();
+        bahasaIndonesiaGetLoginData();
 
 
     if (
-        !ipasLoginDataIsComplete(
+        !bahasaIndonesiaLoginDataIsComplete(
             sessionAktif
         )
     ) {
 
-        ipasRedirectKeIdentitas(
+        bahasaIndonesiaRedirectKeIdentitas(
             "login"
         );
 
@@ -5659,14 +5659,14 @@ async function ipasInitializeOnline() {
        Mulai heartbeat
     ------------------------------------------------- */
 
-    ipasStartHeartbeat();
+    bahasaIndonesiaStartHeartbeat();
 
 
     /* -------------------------------------------------
        Proteksi navigasi
     ------------------------------------------------- */
 
-    ipasProtectNavigation();
+    bahasaIndonesiaProtectNavigation();
 
 
     /* -------------------------------------------------
@@ -5674,19 +5674,19 @@ async function ipasInitializeOnline() {
     ------------------------------------------------- */
 
     console.log(
-        "🟢 IPAS aktif dan sedang dibaca online oleh server."
+        "🟢 BAHASA_INDONESIA aktif dan sedang dibaca online oleh server."
     );
 
 
     console.log(
         "📄 Halaman online:",
-        IPAS_HALAMAN_UTAMA
+        BAHASA_INDONESIA_HALAMAN_UTAMA
     );
 
 
     console.log(
         "⏱️ Heartbeat:",
-        IPAS_HEARTBEAT_INTERVAL /
+        BAHASA_INDONESIA_HEARTBEAT_INTERVAL /
         1000,
         "detik"
     );
@@ -5694,7 +5694,7 @@ async function ipasInitializeOnline() {
 
     console.log(
         "⏳ Maksimum sesi:",
-        IPAS_SESSION_MAX_AGE /
+        BAHASA_INDONESIA_SESSION_MAX_AGE /
         (60 * 60 * 1000),
         "jam"
     );
@@ -5706,7 +5706,7 @@ async function ipasInitializeOnline() {
    JALANKAN SISTEM ONLINE
 ===================================================== */
 
-ipasInitializeOnline();
+bahasaIndonesiaInitializeOnline();
 
 
 /* =====================================================
@@ -5719,7 +5719,7 @@ console.log(
 
 
 console.log(
-    "🔬 IPAS | Petualangan Kelas 5"
+    "🔬 BAHASA_INDONESIA | Petualangan Kelas 5"
 );
 
 
@@ -5740,19 +5740,19 @@ console.log(
 
 console.log(
     "🔑 Storage:",
-    IPAS_LOGIN_STORAGE_KEY
+    BAHASA_INDONESIA_LOGIN_STORAGE_KEY
 );
 
 
 console.log(
     "🌐 API:",
-    IPAS_API_URL
+    BAHASA_INDONESIA_API_URL
 );
 
 
 console.log(
     "📄 Halaman:",
-    IPAS_HALAMAN_UTAMA
+    BAHASA_INDONESIA_HALAMAN_UTAMA
 );
 
 

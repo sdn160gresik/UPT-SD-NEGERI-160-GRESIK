@@ -1,0 +1,573 @@
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#0288d1">
+    <meta name="description"
+        content="Informasi latihan belajar kelas 5 - UPT SDN 160 Gresik">
+
+    <title>Masih dalam Persiapan | Petualangan Belajar Kelas 5</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Nunito", sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,.30) 0 30px, transparent 31px),
+                radial-gradient(circle at 85% 15%, rgba(255,255,255,.25) 0 45px, transparent 46px),
+                linear-gradient(135deg, #0288d1, #00acc1, #26c6da);
+            
+            position: relative;
+        }
+
+        /* =========================
+           BACKGROUND ANIMATION
+        ========================== */
+
+        .bubble {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(255,255,255,.15);
+            animation: floatBubble linear infinite;
+            pointer-events: none;
+        }
+
+        .bubble:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 5%;
+            bottom: -100px;
+            animation-duration: 12s;
+        }
+
+        .bubble:nth-child(2) {
+            width: 45px;
+            height: 45px;
+            left: 25%;
+            bottom: -60px;
+            animation-duration: 9s;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(3) {
+            width: 110px;
+            height: 110px;
+            left: 70%;
+            bottom: -130px;
+            animation-duration: 15s;
+            animation-delay: 1s;
+        }
+
+        .bubble:nth-child(4) {
+            width: 55px;
+            height: 55px;
+            left: 90%;
+            bottom: -70px;
+            animation-duration: 10s;
+            animation-delay: 4s;
+        }
+
+        @keyframes floatBubble {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: .8;
+            }
+
+            80% {
+                opacity: .5;
+            }
+
+            100% {
+                transform: translateY(-115vh) scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           DECORATION
+        ========================== */
+
+        .star {
+            position: fixed;
+            font-size: 28px;
+            animation: twinkle 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .star.one {
+            top: 12%;
+            left: 8%;
+        }
+
+        .star.two {
+            top: 18%;
+            right: 10%;
+            animation-delay: .5s;
+        }
+
+        .star.three {
+            bottom: 12%;
+            left: 12%;
+            animation-delay: 1s;
+        }
+
+        .star.four {
+            bottom: 15%;
+            right: 12%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                transform: scale(.8) rotate(0deg);
+                opacity: .5;
+            }
+
+            50% {
+                transform: scale(1.25) rotate(20deg);
+                opacity: 1;
+            }
+        }
+
+        /* =========================
+           MAIN CARD
+        ========================== */
+
+        .container {
+            width: min(92%, 700px);
+            position: relative;
+            z-index: 5;
+
+            background: rgba(255,255,255,.96);
+            border-radius: 32px;
+
+            padding: 35px 32px 30px;
+
+            text-align: center;
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,.22);
+
+            animation: cardEnter .8s ease-out;
+        }
+
+        @keyframes cardEnter {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(.92);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* =========================
+           ICON
+        ========================== */
+
+        .main-icon {
+            width: 105px;
+            height: 105px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 60px;
+
+            background:
+                linear-gradient(135deg, #fff8e1, #ffe082);
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 10px 25px rgba(255,179,0,.25);
+
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0) rotate(-2deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(2deg);
+            }
+        }
+
+        /* =========================
+           TEXT
+        ========================== */
+
+        h1 {
+            color: #0277bd;
+            font-size: clamp(26px, 5vw, 38px);
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #555;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.6;
+            margin-bottom: 22px;
+        }
+
+        .highlight {
+            color: #f57c00;
+        }
+
+        /* =========================
+           MESSAGE BOX
+        ========================== */
+
+        .message {
+            background: linear-gradient(
+                135deg,
+                #e1f5fe,
+                #e0f7fa
+            );
+
+            border-radius: 22px;
+            padding: 22px;
+
+            margin: 18px 0;
+
+            border: 2px solid rgba(3,169,244,.15);
+        }
+
+        .message-title {
+            font-size: 21px;
+            font-weight: 900;
+            color: #0277bd;
+            margin-bottom: 9px;
+        }
+
+        .message p {
+            color: #455a64;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           INFO ITEMS
+        ========================== */
+
+        .info-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+
+            margin: 22px 0;
+        }
+
+        .info-item {
+            background: #fff;
+            border-radius: 18px;
+            padding: 16px 10px;
+
+            box-shadow: 0 5px 16px rgba(0,0,0,.08);
+
+            transition: .3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0,0,0,.13);
+        }
+
+        .info-icon {
+            font-size: 30px;
+            margin-bottom: 7px;
+        }
+
+        .info-item strong {
+            display: block;
+            color: #37474f;
+            font-size: 14px;
+        }
+
+        /* =========================
+           MOTIVATION
+        ========================== */
+
+        .motivation {
+            margin-top: 20px;
+            padding: 18px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(135deg, #fff3e0, #fff8e1);
+
+            border: 2px dashed #ffb300;
+        }
+
+        .motivation p {
+            color: #e65100;
+            font-size: 17px;
+            font-weight: 800;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           BUTTON
+        ========================== */
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            margin-top: 24px;
+
+            padding: 14px 30px;
+
+            border: none;
+            border-radius: 50px;
+
+            background:
+                linear-gradient(135deg, #0288d1, #0277bd);
+
+            color: white;
+
+            font-family: inherit;
+            font-size: 17px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 20px rgba(2,119,189,.3);
+
+            transition: .3s ease;
+        }
+
+        .btn-back:hover {
+            transform: translateY(-3px) scale(1.03);
+
+            box-shadow:
+                0 12px 28px rgba(2,119,189,.4);
+        }
+
+        .btn-back:active {
+            transform: scale(.96);
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        .footer {
+            margin-top: 20px;
+            color: #78909c;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            .container {
+                padding: 28px 18px 24px;
+                border-radius: 25px;
+            }
+
+            .main-icon {
+                width: 85px;
+                height: 85px;
+                font-size: 48px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+
+            .info-list {
+                grid-template-columns: 1fr;
+                gap: 9px;
+            }
+
+            .info-item {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                text-align: left;
+                padding: 12px 15px;
+            }
+
+            .info-icon {
+                margin: 0;
+            }
+
+            .message {
+                padding: 18px 15px;
+            }
+
+            .message p {
+                font-size: 15px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Background bubbles -->
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+    <!-- Decorative stars -->
+    <div class="star one">✨</div>
+    <div class="star two">⭐</div>
+    <div class="star three">🌟</div>
+    <div class="star four">✨</div>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="container">
+
+        <div class="main-icon">
+            🚀
+        </div>
+
+        <h1>
+            Sedang Dipersiapkan!
+        </h1>
+
+        <div class="subtitle">
+            Wah, petualangan baru sedang
+            <span class="highlight">disiapkan untukmu!</span> 🎨📚
+        </div>
+
+
+        <div class="message">
+
+            <div class="message-title">
+                🛠️ Tunggu Sebentar, Pejuang Hebat!
+            </div>
+
+            <p>
+                Latihan ini masih dalam proses persiapan agar
+                bisa menjadi pengalaman belajar yang
+                <strong>seru, menarik, dan menyenangkan.</strong>
+                😊
+            </p>
+
+        </div>
+
+
+        <div class="info-list">
+
+            <div class="info-item">
+                <div class="info-icon">📚</div>
+                <strong>Materi Sedang Disiapkan</strong>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">🎯</div>
+                <strong>Latihan Menarik Segera Hadir</strong>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">🚀</div>
+                <strong>Petualangan Terus Berlanjut</strong>
+            </div>
+
+        </div>
+
+
+        <div class="motivation">
+
+            <p>
+                💪 Jangan berhenti belajar!
+                <br>
+                🌟 Pilih latihan yang sudah tersedia
+                dan lanjutkan petualanganmu!
+            </p>
+
+        </div>
+
+
+        <button
+            class="btn-back"
+            onclick="kembaliKeMenu()"
+        >
+            ↩️ Kembali ke Menu
+        </button>
+
+
+        <div class="footer">
+            🏫 UPT SDN 160 GRESIK
+            <br>
+            🌈 Belajar • Bermain • Berkarya • Berprestasi
+        </div>
+
+    </main>
+
+
+    <script>
+
+        function kembaliKeMenu() {
+
+            /*
+             * Kembali ke halaman/menu sebelumnya.
+             * Jika halaman ini dibuka dari menu utama,
+             * tombol akan kembali ke halaman tersebut.
+             */
+
+            if (document.referrer) {
+                history.back();
+            } else {
+                window.location.href = "index.html";
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
+

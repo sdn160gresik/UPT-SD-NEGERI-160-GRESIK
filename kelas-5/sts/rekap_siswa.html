@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="theme-color"
+    content="#0288d1"
+>
+
+<title>Rekap Siswa | UPT SDN 160 GRESIK</title>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background:
+        linear-gradient(
+            135deg,
+            #e3f2fd 0%,
+            #f3e5f5 50%,
+            #e8f5e9 100%
+        );
+    color: #263238;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+    background:
+        linear-gradient(
+            135deg,
+            #0288d1,
+            #1565c0,
+            #7b1fa2
+        );
+    color: white;
+    padding: 25px 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.15);
+}
+
+.header-inner {
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(255,255,255,.18);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.header p {
+    margin-top: 3px;
+    font-size: 13px;
+    opacity: .9;
+}
+
+.refresh-button {
+    border: none;
+    background: white;
+    color: #1565c0;
+    padding: 11px 18px;
+    border-radius: 12px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.refresh-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,.18);
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+    max-width: 1500px;
+    margin: 30px auto;
+    padding: 0 20px 40px;
+}
+
+
+/* =========================================================
+   STAT CARD
+========================================================= */
+
+.stats {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(180px, 1fr));
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: rgba(255,255,255,.94);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(38,50,56,.09);
+    border: 1px solid rgba(255,255,255,.8);
+}
+
+.stat-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stat-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.icon-blue {
+    background: #e1f5fe;
+}
+
+.icon-green {
+    background: #e8f5e9;
+}
+
+.icon-purple {
+    background: #f3e5f5;
+}
+
+.icon-orange {
+    background: #fff3e0;
+}
+
+.stat-label {
+    margin-top: 13px;
+    color: #78909c;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.stat-value {
+    margin-top: 3px;
+    font-size: 26px;
+    font-weight: 800;
+    color: #263238;
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.filter-card {
+    background: rgba(255,255,255,.95);
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 7px 25px rgba(38,50,56,.08);
+}
+
+.filter-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.filters {
+    display: grid;
+    grid-template-columns:
+        1fr 180px 180px auto;
+    gap: 12px;
+}
+
+input,
+select {
+    width: 100%;
+    height: 44px;
+    border: 1px solid #cfd8dc;
+    border-radius: 11px;
+    padding: 0 14px;
+    font-family: inherit;
+    outline: none;
+    background: white;
+}
+
+input:focus,
+select:focus {
+    border-color: #0288d1;
+    box-shadow: 0 0 0 3px rgba(2,136,209,.12);
+}
+
+.reset-button {
+    height: 44px;
+    border: none;
+    border-radius: 11px;
+    padding: 0 18px;
+    background: #eceff1;
+    color: #455a64;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-card {
+    background: rgba(255,255,255,.96);
+    border-radius: 18px;
+    box-shadow: 0 7px 25px rgba(38,50,56,.1);
+    overflow: hidden;
+}
+
+.table-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.table-title {
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.table-info {
+    color: #78909c;
+    font-size: 12px;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 1450px;
+    border-collapse: collapse;
+}
+
+thead {
+    background:
+        linear-gradient(
+            135deg,
+            #0288d1,
+            #1565c0
+        );
+    color: white;
+}
+
+th {
+    padding: 13px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    text-align: center;
+}
+
+td {
+    padding: 13px 12px;
+    font-size: 12px;
+    border-bottom: 1px solid #eceff1;
+    vertical-align: middle;
+}
+
+tbody tr {
+    transition: .15s;
+}
+
+tbody tr:hover {
+    background: #f5fbff;
+}
+
+.center {
+    text-align: center;
+}
+
+.student-name {
+    font-weight: 700;
+    color: #263238;
+}
+
+.class-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #e3f2fd;
+    color: #1565c0;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 11px;
+}
+
+.score {
+    display: inline-block;
+    min-width: 45px;
+    padding: 5px 8px;
+    border-radius: 8px;
+    font-weight: 800;
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.access-badge {
+    display: inline-block;
+    min-width: 30px;
+    padding: 5px 8px;
+    border-radius: 8px;
+    background: #fff3e0;
+    color: #ef6c00;
+    font-weight: 800;
+}
+
+.completed {
+    color: #2e7d32;
+    font-weight: 700;
+}
+
+.not-completed {
+    color: #ef6c00;
+    font-weight: 700;
+}
+
+.quiz-list {
+    max-width: 230px;
+    line-height: 1.7;
+}
+
+.failed-list {
+    max-width: 230px;
+    color: #d84315;
+    line-height: 1.7;
+}
+
+.empty {
+    text-align: center;
+    padding: 50px 20px;
+    color: #90a4ae;
+}
+
+.empty-icon {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading {
+    text-align: center;
+    padding: 55px 20px;
+    color: #78909c;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e3f2fd;
+    border-top-color: #0288d1;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error-box {
+    margin: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    background: #ffebee;
+    color: #c62828;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #78909c;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .filters {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .header {
+        padding: 18px;
+    }
+
+    .header-inner {
+        align-items: flex-start;
+    }
+
+    .header h1 {
+        font-size: 18px;
+    }
+
+    .header p {
+        font-size: 11px;
+    }
+
+    .header-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 23px;
+    }
+
+    .refresh-button {
+        padding: 9px 12px;
+        font-size: 11px;
+    }
+
+    .container {
+        margin-top: 20px;
+        padding: 0 12px 30px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .stat-value {
+        font-size: 21px;
+    }
+
+    .filters {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <div class="header-title">
+
+            <div class="header-icon">
+                📊
+            </div>
+
+            <div>
+
+                <h1>
+                    Rekap Siswa
+                </h1>
+
+                <p>
+                    UPT SD NEGERI 160 GRESIK
+                </p>
+
+            </div>
+
+        </div>
+
+        <button
+            class="refresh-button"
+            onclick="muatData()"
+        >
+            🔄 Muat Ulang
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="container">
+
+
+    <!-- =================================================
+         STATISTIK
+    ================================================== -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div>
+                    <div class="stat-label">
+                        TOTAL SISWA
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="totalSiswa"
+                    >
+                        0
+                    </div>
+                </div>
+
+                <div class="stat-icon icon-blue">
+                    👨‍🎓
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div>
+                    <div class="stat-label">
+                        TOTAL KUIS SELESAI
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="totalSelesai"
+                    >
+                        0
+                    </div>
+                </div>
+
+                <div class="stat-icon icon-green">
+                    ✅
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div>
+                    <div class="stat-label">
+                        TOTAL BELUM SELESAI
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="totalBelum"
+                    >
+                        0
+                    </div>
+                </div>
+
+                <div class="stat-icon icon-orange">
+                    ⏳
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div>
+                    <div class="stat-label">
+                        TOTAL AKSES
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="totalAkses"
+                    >
+                        0
+                    </div>
+                </div>
+
+                <div class="stat-icon icon-purple">
+                    👁️
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         FILTER
+    ================================================== -->
+
+    <section class="filter-card">
+
+        <div class="filter-title">
+            🔎 Cari dan Filter Siswa
+        </div>
+
+        <div class="filters">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Cari nama siswa..."
+                oninput="filterData()"
+            >
+
+            <select
+                id="filterKelas"
+                onchange="filterData()"
+            >
+                <option value="">
+                    Semua Kelas
+                </option>
+            </select>
+
+            <select
+                id="filterStatus"
+                onchange="filterData()"
+            >
+
+                <option value="">
+                    Semua Status
+                </option>
+
+                <option value="selesai">
+                    Sudah Selesai
+                </option>
+
+                <option value="belum">
+                    Belum Selesai
+                </option>
+
+            </select>
+
+            <button
+                class="reset-button"
+                onclick="resetFilter()"
+            >
+                Reset
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         TABLE
+    ================================================== -->
+
+    <section class="table-card">
+
+        <div class="table-header">
+
+            <div>
+
+                <div class="table-title">
+                    📋 Data Rekap Siswa
+                </div>
+
+                <div
+                    class="table-info"
+                    id="tableInfo"
+                >
+                    Memuat data...
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <div
+                id="loading"
+                class="loading"
+            >
+
+                <div class="spinner"></div>
+
+                <div>
+                    Mengambil data rekap siswa...
+                </div>
+
+            </div>
+
+
+            <table
+                id="rekapTable"
+                style="display:none;"
+            >
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            No
+                        </th>
+
+                        <th>
+                            Nama
+                        </th>
+
+                        <th>
+                            Kelas
+                        </th>
+
+                        <th>
+                            No Absen
+                        </th>
+
+                        <th>
+                            Jumlah Kuis
+                        </th>
+
+                        <th>
+                            Kuis Selesai
+                        </th>
+
+                        <th>
+                            Kuis Belum Selesai
+                        </th>
+
+                        <th>
+                            Rata-rata
+                        </th>
+
+                        <th>
+                            Nilai Tertinggi
+                        </th>
+
+                        <th>
+                            Nilai Terendah
+                        </th>
+
+                        <th>
+                            Halaman Kuis yang Dikerjakan
+                        </th>
+
+                        <th>
+                            Kuis Belum Berhasil Mengirim Nilai
+                        </th>
+
+                        <th>
+                            Jumlah Akses
+                        </th>
+
+                        <th>
+                            Pengerjaan Terakhir
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tableBody"></tbody>
+
+            </table>
+
+
+            <div
+                id="empty"
+                class="empty"
+                style="display:none;"
+            >
+
+                <div class="empty-icon">
+                    📭
+                </div>
+
+                <div>
+                    Tidak ada data siswa.
+                </div>
+
+            </div>
+
+
+            <div
+                id="error"
+                class="error-box"
+                style="display:none;"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <div class="footer">
+
+        UPT SD NEGERI 160 GRESIK
+        <br>
+        Sistem Rekap Pembelajaran Kelas 5
+
+    </div>
+
+</main>
+
+
+<script>
+
+/* =========================================================
+   KONFIGURASI
+========================================================= */
+
+/*
+   GANTI BAGIAN INI DENGAN URL WEB APP APPS SCRIPT
+*/
+
+const URL_APPS_SCRIPT =
+    "URL_APPS_SCRIPT_ANDA";
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+let semuaData = [];
+let dataTampil = [];
+
+
+/* =========================================================
+   MUAT DATA
+========================================================= */
+
+async function muatData() {
+
+    tampilkanLoading();
+
+    try {
+
+        const url =
+            URL_APPS_SCRIPT +
+            "?action=rekap";
+
+        const response =
+            await fetch(url, {
+                method: "GET",
+                cache: "no-store"
+            });
+
+        if (!response.ok) {
+            throw new Error(
+                "Gagal menghubungi server."
+            );
+        }
+
+        const result =
+            await response.json();
+
+        console.log(
+            "Data rekap:",
+            result
+        );
+
+
+        if (
+            result.status !== "success"
+        ) {
+
+            throw new Error(
+                result.message ||
+                "Data rekap tidak berhasil diambil."
+            );
+
+        }
+
+
+        semuaData =
+            Array.isArray(result.data)
+                ? result.data
+                : [];
+
+
+        dataTampil =
+            [...semuaData];
+
+
+        isiFilterKelas();
+
+        tampilkanStatistik();
+
+        tampilkanTabel();
+
+
+    } catch (error) {
+
+        console.error(
+            "Gagal memuat rekap:",
+            error
+        );
+
+        tampilkanError(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+function tampilkanLoading() {
+
+    document
+        .getElementById("loading")
+        .style.display = "block";
+
+    document
+        .getElementById("rekapTable")
+        .style.display = "none";
+
+    document
+        .getElementById("empty")
+        .style.display = "none";
+
+    document
+        .getElementById("error")
+        .style.display = "none";
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function tampilkanError(message) {
+
+    document
+        .getElementById("loading")
+        .style.display = "none";
+
+    document
+        .getElementById("rekapTable")
+        .style.display = "none";
+
+    document
+        .getElementById("error")
+        .style.display = "block";
+
+    document
+        .getElementById("error")
+        .innerHTML =
+        "⚠️ <strong>Gagal memuat data.</strong><br>" +
+        escapeHTML(message) +
+        "<br><br>" +
+        "Pastikan URL Apps Script sudah benar dan Web App dapat diakses.";
+
+}
+
+
+/* =========================================================
+   FILTER KELAS
+========================================================= */
+
+function isiFilterKelas() {
+
+    const select =
+        document.getElementById(
+            "filterKelas"
+        );
+
+    const kelasSet =
+        new Set();
+
+
+    semuaData.forEach(
+        siswa => {
+
+            if (
+                siswa.kelas !== undefined &&
+                siswa.kelas !== null &&
+                String(siswa.kelas).trim() !== ""
+            ) {
+
+                kelasSet.add(
+                    String(siswa.kelas)
+                );
+
+            }
+
+        }
+    );
+
+
+    const kelas =
+        [...kelasSet].sort(
+            (a, b) =>
+                a.localeCompare(
+                    b,
+                    "id",
+                    {
+                        numeric: true
+                    }
+                )
+        );
+
+
+    select.innerHTML =
+        `<option value="">
+            Semua Kelas
+        </option>`;
+
+
+    kelas.forEach(
+        namaKelas => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                namaKelas;
+
+            option.textContent =
+                "Kelas " +
+                namaKelas;
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   STATISTIK
+========================================================= */
+
+function tampilkanStatistik() {
+
+    let totalSelesai = 0;
+    let totalBelum = 0;
+    let totalAkses = 0;
+
+
+    semuaData.forEach(
+        siswa => {
+
+            totalSelesai +=
+                angka(
+                    siswa["kuis selesai"]
+                );
+
+            totalBelum +=
+                angka(
+                    siswa["kuis belum selesai"]
+                );
+
+            totalAkses +=
+                angka(
+                    siswa["jumlah akses"]
+                );
+
+        }
+    );
+
+
+    document
+        .getElementById(
+            "totalSiswa"
+        )
+        .textContent =
+        semuaData.length;
+
+
+    document
+        .getElementById(
+            "totalSelesai"
+        )
+        .textContent =
+        totalSelesai;
+
+
+    document
+        .getElementById(
+            "totalBelum"
+        )
+        .textContent =
+        totalBelum;
+
+
+    document
+        .getElementById(
+            "totalAkses"
+        )
+        .textContent =
+        totalAkses;
+
+}
+
+
+/* =========================================================
+   FILTER DATA
+========================================================= */
+
+function filterData() {
+
+    const keyword =
+        document
+            .getElementById("search")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const kelas =
+        document
+            .getElementById("filterKelas")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const status =
+        document
+            .getElementById("filterStatus")
+            .value;
+
+
+    dataTampil =
+        semuaData.filter(
+            siswa => {
+
+                const nama =
+                    String(
+                        siswa.nama || ""
+                    ).toLowerCase();
+
+
+                const kelasSiswa =
+                    String(
+                        siswa.kelas || ""
+                    ).toLowerCase();
+
+
+                const cocokNama =
+                    !keyword ||
+                    nama.includes(
+                        keyword
+                    );
+
+
+                const cocokKelas =
+                    !kelas ||
+                    kelasSiswa === kelas;
+
+
+                let cocokStatus =
+                    true;
+
+
+                if (
+                    status === "selesai"
+                ) {
+
+                    cocokStatus =
+                        angka(
+                            siswa["kuis selesai"]
+                        ) > 0;
+
+                }
+
+
+                if (
+                    status === "belum"
+                ) {
+
+                    cocokStatus =
+                        angka(
+                            siswa[
+                                "kuis belum selesai"
+                            ]
+                        ) > 0;
+
+                }
+
+
+                return (
+                    cocokNama &&
+                    cocokKelas &&
+                    cocokStatus
+                );
+
+            }
+        );
+
+
+    tampilkanTabel();
+
+}
+
+
+/* =========================================================
+   RESET FILTER
+========================================================= */
+
+function resetFilter() {
+
+    document
+        .getElementById("search")
+        .value = "";
+
+    document
+        .getElementById("filterKelas")
+        .value = "";
+
+    document
+        .getElementById("filterStatus")
+        .value = "";
+
+
+    dataTampil =
+        [...semuaData];
+
+
+    tampilkanTabel();
+
+}
+
+
+/* =========================================================
+   TAMPILKAN TABEL
+========================================================= */
+
+function tampilkanTabel() {
+
+    const tbody =
+        document.getElementById(
+            "tableBody"
+        );
+
+
+    const table =
+        document.getElementById(
+            "rekapTable"
+        );
+
+
+    const empty =
+        document.getElementById(
+            "empty"
+        );
+
+
+    const loading =
+        document.getElementById(
+            "loading"
+        );
+
+
+    const error =
+        document.getElementById(
+            "error"
+        );
+
+
+    loading.style.display =
+        "none";
+
+    error.style.display =
+        "none";
+
+
+    tbody.innerHTML = "";
+
+
+    if (
+        dataTampil.length === 0
+    ) {
+
+        table.style.display =
+            "none";
+
+        empty.style.display =
+            "block";
+
+        document
+            .getElementById(
+                "tableInfo"
+            )
+            .textContent =
+            "Tidak ada data yang sesuai.";
+
+        return;
+
+    }
+
+
+    table.style.display =
+        "table";
+
+    empty.style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "tableInfo"
+        )
+        .textContent =
+        "Menampilkan " +
+        dataTampil.length +
+        " dari " +
+        semuaData.length +
+        " siswa";
+
+
+    dataTampil.forEach(
+        (siswa, index) => {
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            tr.innerHTML = `
+
+                <td class="center">
+                    ${index + 1}
+                </td>
+
+                <td>
+                    <div class="student-name">
+                        ${escapeHTML(
+                            siswa.nama || "-"
+                        )}
+                    </div>
+                </td>
+
+                <td class="center">
+                    <span class="class-badge">
+                        ${escapeHTML(
+                            siswa.kelas || "-"
+                        )}
+                    </span>
+                </td>
+
+                <td class="center">
+                    ${escapeHTML(
+                        siswa["no absen"] ?? "-"
+                    )}
+                </td>
+
+                <td class="center">
+                    ${angka(
+                        siswa["jumlah kuis"]
+                    )}
+                </td>
+
+                <td class="center">
+                    <span class="completed">
+                        ${angka(
+                            siswa["kuis selesai"]
+                        )}
+                    </span>
+                </td>
+
+                <td class="center">
+                    <span class="not-completed">
+                        ${angka(
+                            siswa[
+                                "kuis belum selesai"
+                            ]
+                        )}
+                    </span>
+                </td>
+
+                <td class="center">
+                    <span class="score">
+                        ${formatNilai(
+                            siswa["rata-rata"]
+                        )}
+                    </span>
+                </td>
+
+                <td class="center">
+                    ${formatNilai(
+                        siswa["nilai tertinggi"]
+                    )}
+                </td>
+
+                <td class="center">
+                    ${formatNilai(
+                        siswa["nilai terendah"]
+                    )}
+                </td>
+
+                <td>
+                    <div class="quiz-list">
+                        ${formatDaftar(
+                            siswa[
+                                "halaman kuis yang dikerjakan"
+                            ]
+                        )}
+                    </div>
+                </td>
+
+                <td>
+                    <div class="failed-list">
+                        ${formatDaftar(
+                            siswa[
+                                "kuis belum berhasil mengirim nilai"
+                            ]
+                        )}
+                    </div>
+                </td>
+
+                <td class="center">
+                    <span class="access-badge">
+                        ${angka(
+                            siswa["jumlah akses"]
+                        )}
+                    </span>
+                </td>
+
+                <td class="center">
+                    ${formatTanggal(
+                        siswa[
+                            "pengerjaan terakhir"
+                        ]
+                    )}
+                </td>
+
+            `;
+
+
+            tbody.appendChild(
+                tr
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FORMAT ANGKA
+========================================================= */
+
+function angka(value) {
+
+    const n =
+        Number(value);
+
+    return Number.isFinite(n)
+        ? n
+        : 0;
+
+}
+
+
+/* =========================================================
+   FORMAT NILAI
+========================================================= */
+
+function formatNilai(value) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        value === "" ||
+        value === "-"
+    ) {
+
+        return "-";
+
+    }
+
+
+    const n =
+        Number(value);
+
+
+    if (
+        !Number.isFinite(n)
+    ) {
+
+        return escapeHTML(
+            String(value)
+        );
+
+    }
+
+
+    return Number.isInteger(n)
+        ? n
+        : n.toFixed(2);
+
+}
+
+
+/* =========================================================
+   FORMAT DAFTAR KUIS
+========================================================= */
+
+function formatDaftar(value) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        String(value).trim() === ""
+    ) {
+
+        return "-";
+
+    }
+
+
+    const text =
+        String(value)
+            .trim();
+
+
+    /*
+       Jika data menggunakan koma,
+       tampilkan sebagai daftar.
+    */
+
+    const items =
+        text
+            .split(",")
+            .map(
+                item =>
+                    item.trim()
+            )
+            .filter(Boolean);
+
+
+    if (
+        items.length === 0
+    ) {
+
+        return "-";
+
+    }
+
+
+    return items
+        .map(
+            item =>
+                "• " +
+                escapeHTML(item)
+        )
+        .join("<br>");
+
+}
+
+
+/* =========================================================
+   FORMAT TANGGAL
+========================================================= */
+
+function formatTanggal(value) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        String(value).trim() === ""
+    ) {
+
+        return "-";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return escapeHTML(
+            String(value)
+        );
+
+    }
+
+
+    return date.toLocaleDateString(
+        "id-ID",
+        {
+            day: "numeric",
+            month: "numeric",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   MULAI
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        muatData();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

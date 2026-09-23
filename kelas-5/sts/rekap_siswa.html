@@ -424,9 +424,11 @@ tbody tr:hover {
 }
 
 @keyframes spin {
+
     to {
         transform: rotate(360deg);
     }
+
 }
 
 
@@ -593,6 +595,7 @@ tbody tr:hover {
             <div class="stat-top">
 
                 <div>
+
                     <div class="stat-label">
                         TOTAL SISWA
                     </div>
@@ -603,6 +606,7 @@ tbody tr:hover {
                     >
                         0
                     </div>
+
                 </div>
 
                 <div class="stat-icon icon-blue">
@@ -619,6 +623,7 @@ tbody tr:hover {
             <div class="stat-top">
 
                 <div>
+
                     <div class="stat-label">
                         TOTAL KUIS SELESAI
                     </div>
@@ -629,6 +634,7 @@ tbody tr:hover {
                     >
                         0
                     </div>
+
                 </div>
 
                 <div class="stat-icon icon-green">
@@ -645,6 +651,7 @@ tbody tr:hover {
             <div class="stat-top">
 
                 <div>
+
                     <div class="stat-label">
                         TOTAL BELUM SELESAI
                     </div>
@@ -655,6 +662,7 @@ tbody tr:hover {
                     >
                         0
                     </div>
+
                 </div>
 
                 <div class="stat-icon icon-orange">
@@ -671,6 +679,7 @@ tbody tr:hover {
             <div class="stat-top">
 
                 <div>
+
                     <div class="stat-label">
                         TOTAL AKSES
                     </div>
@@ -681,6 +690,7 @@ tbody tr:hover {
                     >
                         0
                     </div>
+
                 </div>
 
                 <div class="stat-icon icon-purple">
@@ -717,10 +727,13 @@ tbody tr:hover {
                 id="filterKelas"
                 onchange="filterData()"
             >
+
                 <option value="">
                     Semua Kelas
                 </option>
+
             </select>
+
 
             <select
                 id="filterStatus"
@@ -740,6 +753,7 @@ tbody tr:hover {
                 </option>
 
             </select>
+
 
             <button
                 class="reset-button"
@@ -900,7 +914,9 @@ tbody tr:hover {
     <div class="footer">
 
         UPT SD NEGERI 160 GRESIK
+
         <br>
+
         Sistem Rekap Pembelajaran Kelas 5
 
     </div>
@@ -915,7 +931,7 @@ tbody tr:hover {
 ========================================================= */
 
 /*
-   GANTI BAGIAN INI DENGAN URL WEB APP APPS SCRIPT
+   URL WEB APP APPS SCRIPT
 */
 
 const URL_APPS_SCRIPT =
@@ -927,6 +943,7 @@ const URL_APPS_SCRIPT =
 ========================================================= */
 
 let semuaData = [];
+
 let dataTampil = [];
 
 
@@ -944,29 +961,63 @@ async function muatData() {
             URL_APPS_SCRIPT +
             "?action=rekap";
 
+
+        console.log(
+            "Mengambil data dari:",
+            url
+        );
+
+
         const response =
-            await fetch(url, {
-                method: "GET",
-                cache: "no-store"
-            });
+            await fetch(
+                url,
+                {
+                    method: "GET",
+                    cache: "no-store"
+                }
+            );
+
+
+        console.log(
+            "HTTP Status:",
+            response.status
+        );
+
 
         if (!response.ok) {
+
             throw new Error(
-                "Gagal menghubungi server."
+                "Gagal menghubungi server. HTTP " +
+                response.status
             );
+
         }
+
 
         const result =
             await response.json();
 
+
         console.log(
-            "Data rekap:",
+            "Response Apps Script:",
             result
         );
 
 
+        /* =================================================
+           PENTING:
+           Code.gs mengirim:
+           {
+               success: true,
+               data: [...]
+           }
+
+           Jadi yang diperiksa adalah
+           result.success, BUKAN result.status.
+        ================================================== */
+
         if (
-            result.status !== "success"
+            result.success !== true
         ) {
 
             throw new Error(
@@ -977,8 +1028,14 @@ async function muatData() {
         }
 
 
+        /* =================================================
+           DATA REKAP
+        ================================================== */
+
         semuaData =
-            Array.isArray(result.data)
+            Array.isArray(
+                result.data
+            )
                 ? result.data
                 : [];
 
@@ -987,22 +1044,35 @@ async function muatData() {
             [...semuaData];
 
 
+        console.log(
+            "Jumlah siswa:",
+            semuaData.length
+        );
+
+
+        /* =================================================
+           TAMPILKAN DATA
+        ================================================== */
+
         isiFilterKelas();
 
         tampilkanStatistik();
 
         tampilkanTabel();
 
+    }
 
-    } catch (error) {
+    catch (error) {
 
         console.error(
             "Gagal memuat rekap:",
             error
         );
 
+
         tampilkanError(
-            error.message
+            error.message ||
+            "Terjadi kesalahan saat mengambil data."
         );
 
     }
@@ -1018,19 +1088,26 @@ function tampilkanLoading() {
 
     document
         .getElementById("loading")
-        .style.display = "block";
+        .style.display =
+        "block";
+
 
     document
         .getElementById("rekapTable")
-        .style.display = "none";
+        .style.display =
+        "none";
+
 
     document
         .getElementById("empty")
-        .style.display = "none";
+        .style.display =
+        "none";
+
 
     document
         .getElementById("error")
-        .style.display = "none";
+        .style.display =
+        "none";
 
 }
 
@@ -1039,25 +1116,42 @@ function tampilkanLoading() {
    ERROR
 ========================================================= */
 
-function tampilkanError(message) {
+function tampilkanError(
+    message
+) {
 
     document
         .getElementById("loading")
-        .style.display = "none";
+        .style.display =
+        "none";
+
 
     document
         .getElementById("rekapTable")
-        .style.display = "none";
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("empty")
+        .style.display =
+        "none";
+
 
     document
         .getElementById("error")
-        .style.display = "block";
+        .style.display =
+        "block";
+
 
     document
         .getElementById("error")
         .innerHTML =
         "⚠️ <strong>Gagal memuat data.</strong><br>" +
-        escapeHTML(message) +
+        escapeHTML(
+            message ||
+            "Terjadi kesalahan."
+        ) +
         "<br><br>" +
         "Pastikan URL Apps Script sudah benar dan Web App dapat diakses.";
 
@@ -1075,6 +1169,7 @@ function isiFilterKelas() {
             "filterKelas"
         );
 
+
     const kelasSet =
         new Set();
 
@@ -1085,11 +1180,15 @@ function isiFilterKelas() {
             if (
                 siswa.kelas !== undefined &&
                 siswa.kelas !== null &&
-                String(siswa.kelas).trim() !== ""
+                String(
+                    siswa.kelas
+                ).trim() !== ""
             ) {
 
                 kelasSet.add(
-                    String(siswa.kelas)
+                    String(
+                        siswa.kelas
+                    )
                 );
 
             }
@@ -1125,12 +1224,15 @@ function isiFilterKelas() {
                     "option"
                 );
 
+
             option.value =
                 namaKelas;
+
 
             option.textContent =
                 "Kelas " +
                 namaKelas;
+
 
             select.appendChild(
                 option
@@ -1149,7 +1251,9 @@ function isiFilterKelas() {
 function tampilkanStatistik() {
 
     let totalSelesai = 0;
+
     let totalBelum = 0;
+
     let totalAkses = 0;
 
 
@@ -1158,17 +1262,25 @@ function tampilkanStatistik() {
 
             totalSelesai +=
                 angka(
-                    siswa["kuis selesai"]
+                    siswa[
+                        "kuis selesai"
+                    ]
                 );
+
 
             totalBelum +=
                 angka(
-                    siswa["kuis belum selesai"]
+                    siswa[
+                        "kuis belum selesai"
+                    ]
                 );
+
 
             totalAkses +=
                 angka(
-                    siswa["jumlah akses"]
+                    siswa[
+                        "jumlah akses"
+                    ]
                 );
 
         }
@@ -1217,7 +1329,9 @@ function filterData() {
 
     const keyword =
         document
-            .getElementById("search")
+            .getElementById(
+                "search"
+            )
             .value
             .trim()
             .toLowerCase();
@@ -1225,7 +1339,9 @@ function filterData() {
 
     const kelas =
         document
-            .getElementById("filterKelas")
+            .getElementById(
+                "filterKelas"
+            )
             .value
             .trim()
             .toLowerCase();
@@ -1233,7 +1349,9 @@ function filterData() {
 
     const status =
         document
-            .getElementById("filterStatus")
+            .getElementById(
+                "filterStatus"
+            )
             .value;
 
 
@@ -1243,14 +1361,18 @@ function filterData() {
 
                 const nama =
                     String(
-                        siswa.nama || ""
-                    ).toLowerCase();
+                        siswa.nama ||
+                        ""
+                    )
+                    .toLowerCase();
 
 
                 const kelasSiswa =
                     String(
-                        siswa.kelas || ""
-                    ).toLowerCase();
+                        siswa.kelas ||
+                        ""
+                    )
+                    .toLowerCase();
 
 
                 const cocokNama =
@@ -1262,7 +1384,8 @@ function filterData() {
 
                 const cocokKelas =
                     !kelas ||
-                    kelasSiswa === kelas;
+                    kelasSiswa ===
+                    kelas;
 
 
                 let cocokStatus =
@@ -1270,19 +1393,23 @@ function filterData() {
 
 
                 if (
-                    status === "selesai"
+                    status ===
+                    "selesai"
                 ) {
 
                     cocokStatus =
                         angka(
-                            siswa["kuis selesai"]
+                            siswa[
+                                "kuis selesai"
+                            ]
                         ) > 0;
 
                 }
 
 
                 if (
-                    status === "belum"
+                    status ===
+                    "belum"
                 ) {
 
                     cocokStatus =
@@ -1317,15 +1444,23 @@ function filterData() {
 function resetFilter() {
 
     document
-        .getElementById("search")
+        .getElementById(
+            "search"
+        )
         .value = "";
 
-    document
-        .getElementById("filterKelas")
-        .value = "";
 
     document
-        .getElementById("filterStatus")
+        .getElementById(
+            "filterKelas"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "filterStatus"
+        )
         .value = "";
 
 
@@ -1377,11 +1512,13 @@ function tampilkanTabel() {
     loading.style.display =
         "none";
 
+
     error.style.display =
         "none";
 
 
-    tbody.innerHTML = "";
+    tbody.innerHTML =
+        "";
 
 
     if (
@@ -1391,8 +1528,10 @@ function tampilkanTabel() {
         table.style.display =
             "none";
 
+
         empty.style.display =
             "block";
+
 
         document
             .getElementById(
@@ -1401,6 +1540,7 @@ function tampilkanTabel() {
             .textContent =
             "Tidak ada data yang sesuai.";
 
+
         return;
 
     }
@@ -1408,6 +1548,7 @@ function tampilkanTabel() {
 
     table.style.display =
         "table";
+
 
     empty.style.display =
         "none";
@@ -1443,7 +1584,8 @@ function tampilkanTabel() {
                 <td>
                     <div class="student-name">
                         ${escapeHTML(
-                            siswa.nama || "-"
+                            siswa.nama ||
+                            "-"
                         )}
                     </div>
                 </td>
@@ -1451,27 +1593,35 @@ function tampilkanTabel() {
                 <td class="center">
                     <span class="class-badge">
                         ${escapeHTML(
-                            siswa.kelas || "-"
+                            siswa.kelas ||
+                            "-"
                         )}
                     </span>
                 </td>
 
                 <td class="center">
                     ${escapeHTML(
-                        siswa["no absen"] ?? "-"
+                        siswa[
+                            "no absen"
+                        ] ??
+                        "-"
                     )}
                 </td>
 
                 <td class="center">
                     ${angka(
-                        siswa["jumlah kuis"]
+                        siswa[
+                            "jumlah kuis"
+                        ]
                     )}
                 </td>
 
                 <td class="center">
                     <span class="completed">
                         ${angka(
-                            siswa["kuis selesai"]
+                            siswa[
+                                "kuis selesai"
+                            ]
                         )}
                     </span>
                 </td>
@@ -1489,20 +1639,26 @@ function tampilkanTabel() {
                 <td class="center">
                     <span class="score">
                         ${formatNilai(
-                            siswa["rata-rata"]
+                            siswa[
+                                "rata-rata"
+                            ]
                         )}
                     </span>
                 </td>
 
                 <td class="center">
                     ${formatNilai(
-                        siswa["nilai tertinggi"]
+                        siswa[
+                            "nilai tertinggi"
+                        ]
                     )}
                 </td>
 
                 <td class="center">
                     ${formatNilai(
-                        siswa["nilai terendah"]
+                        siswa[
+                            "nilai terendah"
+                        ]
                     )}
                 </td>
 
@@ -1529,7 +1685,9 @@ function tampilkanTabel() {
                 <td class="center">
                     <span class="access-badge">
                         ${angka(
-                            siswa["jumlah akses"]
+                            siswa[
+                                "jumlah akses"
+                            ]
                         )}
                     </span>
                 </td>
@@ -1559,10 +1717,13 @@ function tampilkanTabel() {
    FORMAT ANGKA
 ========================================================= */
 
-function angka(value) {
+function angka(
+    value
+) {
 
     const n =
         Number(value);
+
 
     return Number.isFinite(n)
         ? n
@@ -1575,7 +1736,9 @@ function angka(value) {
    FORMAT NILAI
 ========================================================= */
 
-function formatNilai(value) {
+function formatNilai(
+    value
+) {
 
     if (
         value === null ||
@@ -1615,7 +1778,9 @@ function formatNilai(value) {
    FORMAT DAFTAR KUIS
 ========================================================= */
 
-function formatDaftar(value) {
+function formatDaftar(
+    value
+) {
 
     if (
         value === null ||
@@ -1634,13 +1799,13 @@ function formatDaftar(value) {
 
 
     /*
-       Jika data menggunakan koma,
-       tampilkan sebagai daftar.
+       Data dari Code.gs menggunakan
+       pemisah " | ".
     */
 
     const items =
         text
-            .split(",")
+            .split(/\s*\|\s*|\s*,\s*/)
             .map(
                 item =>
                     item.trim()
@@ -1672,7 +1837,9 @@ function formatDaftar(value) {
    FORMAT TANGGAL
 ========================================================= */
 
-function formatTanggal(value) {
+function formatTanggal(
+    value
+) {
 
     if (
         value === null ||
@@ -1685,7 +1852,10 @@ function formatTanggal(value) {
 
     }
 
-    const date = new Date(value);
+
+    const date =
+        new Date(value);
+
 
     if (
         Number.isNaN(
@@ -1698,6 +1868,7 @@ function formatTanggal(value) {
         );
 
     }
+
 
     return date.toLocaleString(
         "id-ID",
@@ -1717,7 +1888,9 @@ function formatTanggal(value) {
    ESCAPE HTML
 ========================================================= */
 
-function escapeHTML(value) {
+function escapeHTML(
+    value
+) {
 
     return String(value)
         .replace(

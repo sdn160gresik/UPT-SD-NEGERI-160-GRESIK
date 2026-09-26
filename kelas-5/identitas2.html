@@ -1,0 +1,1934 @@
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+  name="theme-color"
+  content="#f59e0b"
+>
+
+<title>Login Siswa | Petualangan Kelas 5</title>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+
+  margin: 0;
+
+  min-height: 100vh;
+
+  font-family:
+    "Poppins",
+    sans-serif;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff7ed,
+      #fef3c7,
+      #ffedd5
+    );
+
+}
+
+.container {
+
+  width: 100%;
+
+  max-width: 480px;
+
+}
+
+.card {
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .96
+    );
+
+  border-radius: 30px;
+
+  padding:
+    32px 26px;
+
+  box-shadow:
+    0 20px 50px
+    rgba(
+      120,
+      53,
+      15,
+      .18
+    );
+
+  border:
+    3px solid
+    rgba(
+      245,
+      158,
+      11,
+      .25
+    );
+
+  animation:
+    muncul .5s ease;
+
+}
+
+@keyframes muncul {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      translateY(20px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      translateY(0);
+
+  }
+
+}
+
+.badge {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background:
+    #fff7ed;
+
+  border:
+    2px solid
+    #fed7aa;
+
+  color:
+    #9a3412;
+
+  padding:
+    8px 14px;
+
+  border-radius:
+    999px;
+
+  font-weight:
+    700;
+
+  font-size:
+    13px;
+
+  margin-bottom:
+    16px;
+
+}
+
+h1 {
+
+  margin:
+    0 0 8px;
+
+  color:
+    #7c2d12;
+
+  font-size:
+    clamp(
+      25px,
+      6vw,
+      34px
+    );
+
+  line-height:
+    1.2;
+
+  font-weight:
+    800;
+
+}
+
+.subtitle {
+
+  margin:
+    0 0 25px;
+
+  color:
+    #78716c;
+
+  font-size:
+    14px;
+
+  line-height:
+    1.7;
+
+}
+
+.form-group {
+
+  margin-bottom:
+    17px;
+
+}
+
+label {
+
+  display:
+    block;
+
+  margin-bottom:
+    7px;
+
+  color:
+    #44403c;
+
+  font-size:
+    14px;
+
+  font-weight:
+    700;
+
+}
+
+input {
+
+  width:
+    100%;
+
+  padding:
+    14px 16px;
+
+  border:
+    2px solid
+    #e7e5e4;
+
+  border-radius:
+    15px;
+
+  outline:
+    none;
+
+  font-family:
+    inherit;
+
+  font-size:
+    15px;
+
+  transition:
+    .2s;
+
+}
+
+input:focus {
+
+  border-color:
+    #f59e0b;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(
+      245,
+      158,
+      11,
+      .12
+    );
+
+}
+
+button {
+
+  width:
+    100%;
+
+  border:
+    none;
+
+  border-radius:
+    16px;
+
+  padding:
+    15px 18px;
+
+  margin-top:
+    7px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f59e0b,
+      #ea580c
+    );
+
+  color:
+    white;
+
+  font-family:
+    inherit;
+
+  font-size:
+    16px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+
+  box-shadow:
+    0 10px 25px
+    rgba(
+      234,
+      88,
+      12,
+      .25
+    );
+
+  transition:
+    transform .2s,
+    box-shadow .2s;
+
+}
+
+button:hover {
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 14px 30px
+    rgba(
+      234,
+      88,
+      12,
+      .32
+    );
+
+}
+
+button:disabled {
+
+  opacity:
+    .65;
+
+  cursor:
+    not-allowed;
+
+  transform:
+    none;
+
+}
+
+
+/* =====================================================
+   LOADING
+   ===================================================== */
+
+.loading {
+
+  display:
+    none;
+
+  text-align:
+    center;
+
+  margin-top:
+    18px;
+
+  color:
+    #9a3412;
+
+  font-size:
+    13px;
+
+  font-weight:
+    600;
+
+}
+
+
+/* =====================================================
+   INFORMASI
+   ===================================================== */
+
+.info {
+
+  margin-top:
+    20px;
+
+  padding:
+    13px 15px;
+
+  background:
+    #fffbeb;
+
+  border:
+    1px solid
+    #fde68a;
+
+  border-radius:
+    14px;
+
+  color:
+    #92400e;
+
+  font-size:
+    12px;
+
+  line-height:
+    1.6;
+
+  text-align:
+    center;
+
+}
+
+.school {
+
+  margin-bottom:
+    8px;
+
+  font-size:
+    13px;
+
+  color:
+    #a16207;
+
+  font-weight:
+    800;
+
+}
+
+
+/* =====================================================
+   MODAL PERINGATAN
+   ===================================================== */
+
+.modal-overlay {
+
+  position:
+    fixed;
+
+  inset:
+    0;
+
+  background:
+    rgba(
+      28,
+      25,
+      23,
+      .60
+    );
+
+  display:
+    none;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    20px;
+
+  z-index:
+    99999;
+
+  backdrop-filter:
+    blur(4px);
+
+}
+
+.modal-overlay.show {
+
+  display:
+    flex;
+
+}
+
+.modal-box {
+
+  width:
+    100%;
+
+  max-width:
+    410px;
+
+  background:
+    white;
+
+  border-radius:
+    26px;
+
+  padding:
+    30px 25px 25px;
+
+  text-align:
+    center;
+
+  box-shadow:
+    0 25px 70px
+    rgba(
+      0,
+      0,
+      0,
+      .28
+    );
+
+  animation:
+    modalMuncul .3s ease;
+
+}
+
+@keyframes modalMuncul {
+
+  from {
+
+    opacity:
+      0;
+
+    transform:
+      scale(.90)
+      translateY(15px);
+
+  }
+
+  to {
+
+    opacity:
+      1;
+
+    transform:
+      scale(1)
+      translateY(0);
+
+  }
+
+}
+
+.warning-icon {
+
+  width:
+    76px;
+
+  height:
+    76px;
+
+  margin:
+    0 auto 18px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border-radius:
+    50%;
+
+  background:
+    #fef3c7;
+
+  border:
+    4px solid
+    #fde68a;
+
+  font-size:
+    38px;
+
+}
+
+.modal-box h2 {
+
+  margin:
+    0 0 10px;
+
+  color:
+    #7c2d12;
+
+  font-size:
+    22px;
+
+  font-weight:
+    800;
+
+}
+
+.modal-box p {
+
+  margin:
+    0 auto 22px;
+
+  max-width:
+    340px;
+
+  color:
+    #57534e;
+
+  font-size:
+    14px;
+
+  line-height:
+    1.7;
+
+}
+
+.modal-note {
+
+  margin-bottom:
+    20px;
+
+  padding:
+    11px 13px;
+
+  background:
+    #fff7ed;
+
+  border:
+    1px solid
+    #fed7aa;
+
+  border-radius:
+    12px;
+
+  color:
+    #9a3412;
+
+  font-size:
+    12px;
+
+  line-height:
+    1.6;
+
+}
+
+.btn-coba-lagi {
+
+  width:
+    100%;
+
+  margin:
+    0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f59e0b,
+      #ea580c
+    );
+
+  box-shadow:
+    0 8px 20px
+    rgba(
+      234,
+      88,
+      12,
+      .22
+    );
+
+}
+
+.btn-coba-lagi:hover {
+
+  transform:
+    translateY(-2px);
+
+}
+
+
+/* =====================================================
+   STATUS CHECK
+   ===================================================== */
+
+.status-check {
+
+  display:
+    none;
+
+  margin-top:
+    15px;
+
+  color:
+    #92400e;
+
+  font-size:
+    12px;
+
+  font-weight:
+    600;
+
+}
+
+.status-check.show {
+
+  display:
+    block;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+  <div class="card">
+
+    <div class="badge">
+      🏫 UPT SDN 160 GRESIK
+    </div>
+
+
+    <div class="school">
+      SISTEM PETUALANGAN BELAJAR
+    </div>
+
+
+    <h1>
+      🚀 Login Siswa
+    </h1>
+
+
+    <p class="subtitle">
+
+      Masukkan identitasmu untuk masuk
+      ke Petualangan Kelas 5.
+
+    </p>
+
+
+    <!-- NAMA -->
+
+    <div class="form-group">
+
+      <label for="nama">
+        👤 Nama Lengkap
+      </label>
+
+      <input
+        id="nama"
+        type="text"
+        autocomplete="name"
+        placeholder="Masukkan nama lengkap"
+      >
+
+    </div>
+
+
+    <!-- KELAS -->
+
+    <div class="form-group">
+
+      <label for="kelas">
+        🏫 Kelas
+      </label>
+
+      <input
+        id="kelas"
+        type="text"
+        autocomplete="off"
+        placeholder="Contoh: 5A"
+      >
+
+    </div>
+
+
+    <!-- NOMOR ABSEN -->
+
+    <div class="form-group">
+
+      <label for="absen">
+        🔢 Nomor Absen
+      </label>
+
+      <input
+        id="absen"
+        type="number"
+        min="1"
+        max="100"
+        autocomplete="off"
+        placeholder="Masukkan nomor absen"
+      >
+
+    </div>
+
+
+    <!-- TOMBOL -->
+
+    <button
+      id="btnLanjut"
+      type="button"
+      onclick="simpanDanLanjut()"
+    >
+
+      🚀 Masuk & Mulai Petualangan
+
+    </button>
+
+
+    <!-- LOADING -->
+
+    <div
+      id="loading"
+      class="loading"
+    >
+
+      ⏳ Sedang memeriksa perangkat...
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div
+      id="statusCheck"
+      class="status-check"
+    >
+
+      🔄 Menghubungkan ke server...
+
+    </div>
+
+
+    <!-- INFORMASI -->
+
+    <div class="info">
+
+      🔐 Sesi login dapat aktif maksimal
+      <strong>24 jam</strong>.
+
+      <br>
+
+      Jika browser atau perangkat ditutup,
+      status online akan otomatis hilang.
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MODAL PERANGKAT BELUM SIGN IN
+     ===================================================== -->
+
+<div
+  id="modalBelumSignIn"
+  class="modal-overlay"
+>
+
+  <div class="modal-box">
+
+    <div class="warning-icon">
+      🔐
+    </div>
+
+    <h2>
+      Perangkat Belum Sign In
+    </h2>
+
+    <p>
+
+      Perangkat atau akun Google pada perangkat
+      ini belum sign in.
+
+      <br>
+
+      Silakan <strong>sign in terlebih dahulu</strong>,
+      kemudian coba masuk kembali.
+
+    </p>
+
+    <div class="modal-note">
+
+      💡 Setelah berhasil sign in,
+      tekan tombol <strong>“Coba Lagi”</strong>
+      untuk melanjutkan.
+
+    </div>
+
+    <button
+      type="button"
+      class="btn-coba-lagi"
+      onclick="cobaLagi()"
+    >
+
+      🔄 Coba Lagi
+
+    </button>
+
+  </div>
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   KONFIGURASI
+   ===================================================== */
+
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbw-SmLBX8bmBH98vNrWzQ5tS3GrMvujNARGqdE2PerdDuIrPHHrGD4Kg5PSlLPyOXJ3/exec";
+
+
+const TARGET_PAGE =
+  "Petualangan-Kelas-5.html";
+
+
+const STORAGE_KEY =
+  "identitasPetualanganKelas5";
+
+
+
+/* =====================================================
+   MODAL BELUM SIGN IN
+   ===================================================== */
+
+function tampilkanPeringatanSignIn() {
+
+  const modal =
+    document.getElementById(
+      "modalBelumSignIn"
+    );
+
+  if (modal) {
+
+    modal.classList.add(
+      "show"
+    );
+
+  }
+
+}
+
+
+
+/* =====================================================
+   TUTUP MODAL
+   ===================================================== */
+
+function tutupPeringatanSignIn() {
+
+  const modal =
+    document.getElementById(
+      "modalBelumSignIn"
+    );
+
+  if (modal) {
+
+    modal.classList.remove(
+      "show"
+    );
+
+  }
+
+}
+
+
+
+/* =====================================================
+   COBA LAGI
+   ===================================================== */
+
+function cobaLagi() {
+
+  tutupPeringatanSignIn();
+
+  /*
+   * Jalankan kembali login jika data
+   * sudah diisi.
+   */
+  simpanDanLanjut();
+
+}
+
+
+
+/* =====================================================
+   LOADING
+   ===================================================== */
+
+function setLoading(
+  aktif
+) {
+
+  const btn =
+    document.getElementById(
+      "btnLanjut"
+    );
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+  if (aktif) {
+
+    btn.disabled =
+      true;
+
+    loading.style.display =
+      "block";
+
+  } else {
+
+    btn.disabled =
+      false;
+
+    loading.style.display =
+      "none";
+
+  }
+
+}
+
+
+
+/* =====================================================
+   GENERATE SESSION ID LOCAL
+   ===================================================== */
+
+function buatSessionIdLocal() {
+
+  if (
+
+    window.crypto &&
+
+    typeof window.crypto.randomUUID ===
+      "function"
+
+  ) {
+
+    return (
+
+      "sess_" +
+
+      window.crypto.randomUUID()
+
+    );
+
+  }
+
+
+  return (
+
+    "sess_" +
+
+    Date.now() +
+
+    "_" +
+
+    Math.random()
+      .toString(36)
+      .substring(2) +
+
+    "_" +
+
+    Math.random()
+      .toString(36)
+      .substring(2)
+
+  );
+
+}
+
+
+
+/* =====================================================
+   JSONP
+   ===================================================== */
+
+function jsonp(
+  params,
+  callback
+) {
+
+  const callbackName =
+
+    "jsonpLogin_" +
+
+    Date.now() +
+
+    "_" +
+
+    Math.floor(
+      Math.random() * 100000
+    );
+
+
+  params.callback =
+    callbackName;
+
+
+  const query =
+
+    new URLSearchParams(
+      params
+    ).toString();
+
+
+  const script =
+    document.createElement(
+      "script"
+    );
+
+
+  let selesai =
+    false;
+
+
+  const timeout =
+
+    setTimeout(
+      function() {
+
+        if (selesai) {
+          return;
+        }
+
+        selesai = true;
+
+        cleanup();
+
+        callback(
+          new Error(
+            "Waktu koneksi ke server habis."
+          )
+        );
+
+      },
+      15000
+    );
+
+
+  function cleanup() {
+
+    clearTimeout(
+      timeout
+    );
+
+
+    try {
+
+      delete window[
+        callbackName
+      ];
+
+    } catch (e) {}
+
+
+    if (
+      script &&
+      script.parentNode
+    ) {
+
+      script.parentNode.removeChild(
+        script
+      );
+
+    }
+
+  }
+
+
+  window[callbackName] =
+    function(data) {
+
+      if (selesai) {
+        return;
+      }
+
+      selesai = true;
+
+      cleanup();
+
+      callback(
+        null,
+        data
+      );
+
+    };
+
+
+  script.src =
+    API_URL +
+    "?" +
+    query;
+
+
+  /*
+   * PENTING:
+   *
+   * Berdasarkan sistem Anda,
+   * kondisi script.onerror pada perangkat
+   * yang belum sign in digunakan sebagai
+   * indikator perangkat belum memiliki
+   * akses/sign-in Google.
+   */
+
+  script.onerror =
+    function() {
+
+      if (selesai) {
+        return;
+      }
+
+      selesai = true;
+
+      cleanup();
+
+      callback(
+        new Error(
+          "Perangkat Anda belum sign in."
+        )
+      );
+
+    };
+
+
+  document.body.appendChild(
+    script
+  );
+
+}
+
+
+
+/* =====================================================
+   SIMPAN DATA SESSION
+   ===================================================== */
+
+function simpanDataSession(
+  session
+) {
+
+  const data = {
+
+    nama:
+      session.nama || "",
+
+    kelas:
+      session.kelas || "",
+
+    nomorAbsen:
+      session.nomorAbsen || "",
+
+    absen:
+      session.nomorAbsen || "",
+
+    sessionId:
+      session.sessionId || "",
+
+    studentId:
+      session.studentId || "",
+
+    loginAt:
+      session.loginAt || Date.now(),
+
+    lastSeen:
+      session.lastSeen || Date.now(),
+
+    halaman:
+      session.halaman ||
+      "Petualangan Belajar Kelas 5",
+
+    sumber:
+      session.sumber ||
+      "Identitas Siswa Petualangan Kelas 5"
+
+  };
+
+
+  localStorage.setItem(
+
+    STORAGE_KEY,
+
+    JSON.stringify(
+      data
+    )
+
+  );
+
+
+  sessionStorage.setItem(
+
+    STORAGE_KEY,
+
+    JSON.stringify(
+      data
+    )
+
+  );
+
+
+  localStorage.setItem(
+    "nama",
+    data.nama
+  );
+
+  localStorage.setItem(
+    "namaSiswa",
+    data.nama
+  );
+
+  localStorage.setItem(
+    "kelas",
+    data.kelas
+  );
+
+  localStorage.setItem(
+    "kelasSiswa",
+    data.kelas
+  );
+
+  localStorage.setItem(
+    "absen",
+    data.nomorAbsen
+  );
+
+  localStorage.setItem(
+    "nomorAbsen",
+    data.nomorAbsen
+  );
+
+
+  sessionStorage.setItem(
+    "nama",
+    data.nama
+  );
+
+  sessionStorage.setItem(
+    "kelas",
+    data.kelas
+  );
+
+  sessionStorage.setItem(
+    "absen",
+    data.nomorAbsen
+  );
+
+  sessionStorage.setItem(
+    "nomorAbsen",
+    data.nomorAbsen
+  );
+
+
+  return data;
+
+}
+
+
+
+/* =====================================================
+   HAPUS SESSION LOKAL
+   ===================================================== */
+
+function hapusSessionLokal() {
+
+  localStorage.removeItem(
+    STORAGE_KEY
+  );
+
+  sessionStorage.removeItem(
+    STORAGE_KEY
+  );
+
+}
+
+
+
+/* =====================================================
+   AMBIL SESSION LOKAL
+   ===================================================== */
+
+function ambilSessionLokal() {
+
+  try {
+
+    let raw =
+      localStorage.getItem(
+        STORAGE_KEY
+      );
+
+
+    if (!raw) {
+
+      raw =
+        sessionStorage.getItem(
+          STORAGE_KEY
+        );
+
+    }
+
+
+    if (!raw) {
+
+      return null;
+
+    }
+
+
+    const data =
+      JSON.parse(
+        raw
+      );
+
+
+    if (
+      !data ||
+      !data.sessionId
+    ) {
+
+      return null;
+
+    }
+
+
+    return data;
+
+  } catch (error) {
+
+    console.log(
+      "Session lokal tidak valid."
+    );
+
+    return null;
+
+  }
+
+}
+
+
+
+/* =====================================================
+   CEK SESSION LAMA
+   ===================================================== */
+
+function cekLoginLama() {
+
+  const data =
+    ambilSessionLokal();
+
+
+  if (!data) {
+
+    return;
+
+  }
+
+
+  const loginAt =
+    Number(
+      data.loginAt || 0
+    );
+
+
+  if (
+
+    !loginAt ||
+
+    Date.now() - loginAt
+      >= 24 * 60 * 60 * 1000
+
+  ) {
+
+    hapusSessionLokal();
+
+    return;
+
+  }
+
+
+  const params = {
+
+    action:
+      "checksession",
+
+    sessionId:
+      data.sessionId
+
+  };
+
+
+  jsonp(
+    params,
+    function(error, result) {
+
+      if (error) {
+
+        console.log(
+          "Pengecekan session gagal:",
+          error
+        );
+
+        return;
+
+      }
+
+
+      if (
+
+        result &&
+
+        result.success &&
+
+        result.loggedIn &&
+
+        result.session
+
+      ) {
+
+        simpanDataSession(
+          result.session
+        );
+
+
+        window.location.replace(
+          TARGET_PAGE
+        );
+
+
+        return;
+
+      }
+
+
+      hapusSessionLokal();
+
+    }
+  );
+
+}
+
+
+
+/* =====================================================
+   LOGIN SISWA
+   ===================================================== */
+
+function simpanDanLanjut() {
+
+  const nama =
+    document
+      .getElementById(
+        "nama"
+      )
+      .value
+      .trim();
+
+
+  const kelas =
+    document
+      .getElementById(
+        "kelas"
+      )
+      .value
+      .trim();
+
+
+  const nomorAbsen =
+    document
+      .getElementById(
+        "absen"
+      )
+      .value
+      .trim();
+
+
+  if (!nama) {
+
+    alert(
+      "Nama lengkap belum diisi."
+    );
+
+    document
+      .getElementById(
+        "nama"
+      )
+      .focus();
+
+    return;
+
+  }
+
+
+  if (!kelas) {
+
+    alert(
+      "Kelas belum diisi."
+    );
+
+    document
+      .getElementById(
+        "kelas"
+      )
+      .focus();
+
+    return;
+
+  }
+
+
+  if (!nomorAbsen) {
+
+    alert(
+      "Nomor absen belum diisi."
+    );
+
+    document
+      .getElementById(
+        "absen"
+      )
+      .focus();
+
+    return;
+
+  }
+
+
+  const nomor =
+    Number(
+      nomorAbsen
+    );
+
+
+  if (
+
+    !Number.isInteger(
+      nomor
+    ) ||
+
+    nomor < 1 ||
+
+    nomor > 100
+
+  ) {
+
+    alert(
+      "Nomor absen harus antara 1 sampai 100."
+    );
+
+    document
+      .getElementById(
+        "absen"
+      )
+      .focus();
+
+    return;
+
+  }
+
+
+  /*
+   * Tutup peringatan lama jika masih terbuka.
+   */
+  tutupPeringatanSignIn();
+
+
+  setLoading(
+    true
+  );
+
+
+  const sessionId =
+    buatSessionIdLocal();
+
+
+  const params = {
+
+    action:
+      "login",
+
+    sessionId:
+      sessionId,
+
+    nama:
+      nama,
+
+    kelas:
+      kelas,
+
+    nomorAbsen:
+      nomorAbsen,
+
+    halaman:
+      "Petualangan Belajar Kelas 5",
+
+    sumber:
+      "Identitas Siswa Petualangan Kelas 5"
+
+  };
+
+
+  jsonp(
+    params,
+    function(error, result) {
+
+      /*
+       * PERANGKAT BELUM SIGN IN
+       */
+
+      if (error) {
+
+        console.error(
+          "LOGIN ERROR:",
+          error
+        );
+
+
+        setLoading(
+          false
+        );
+
+
+        if (
+          error.message ===
+          "Perangkat Anda belum sign in."
+        ) {
+
+          tampilkanPeringatanSignIn();
+
+          return;
+
+        }
+
+
+        /*
+         * Error lainnya.
+         */
+
+        alert(
+          error.message ||
+          "Login gagal. Silakan coba lagi."
+        );
+
+        return;
+
+      }
+
+
+      /*
+       * SERVER MENOLAK LOGIN
+       */
+
+      if (
+
+        !result ||
+
+        !result.success ||
+
+        !result.session
+
+      ) {
+
+        setLoading(
+          false
+        );
+
+
+        /*
+         * Jika server mengirim pesan
+         * tentang perangkat belum sign in,
+         * tampilkan modal khusus.
+         */
+
+        const pesan =
+          String(
+            result?.message || ""
+          ).toLowerCase();
+
+
+        if (
+
+          pesan.includes(
+            "belum sign in"
+          ) ||
+
+          pesan.includes(
+            "belum signin"
+          ) ||
+
+          pesan.includes(
+            "not signed"
+          )
+
+        ) {
+
+          tampilkanPeringatanSignIn();
+
+          return;
+
+        }
+
+
+        alert(
+
+          result?.message ||
+
+          "Login gagal. Silakan coba lagi."
+
+        );
+
+        return;
+
+      }
+
+
+      /*
+       * AMBIL SESSION SERVER
+       */
+
+      const session =
+        result.session;
+
+
+      if (
+        !session.sessionId
+      ) {
+
+        setLoading(
+          false
+        );
+
+
+        alert(
+          "Server tidak mengembalikan Session ID."
+        );
+
+        return;
+
+      }
+
+
+      /*
+       * SIMPAN SESSION
+       */
+
+      simpanDataSession(
+        session
+      );
+
+
+      /*
+       * MASUK KE PETUALANGAN
+       */
+
+      window.location.replace(
+        TARGET_PAGE
+      );
+
+    }
+  );
+
+}
+
+
+
+/* =====================================================
+   ENTER = LOGIN
+   ===================================================== */
+
+document.addEventListener(
+
+  "keydown",
+
+  function(event) {
+
+    if (
+      event.key === "Enter"
+    ) {
+
+      /*
+       * Jangan menjalankan login dua kali
+       * ketika modal sedang terbuka.
+       */
+
+      const modal =
+        document.getElementById(
+          "modalBelumSignIn"
+        );
+
+
+      if (
+        modal &&
+        modal.classList.contains(
+          "show"
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      event.preventDefault();
+
+      simpanDanLanjut();
+
+    }
+
+  }
+
+);
+
+
+
+/* =====================================================
+   JALANKAN CEK SESSION LAMA
+   ===================================================== */
+
+cekLoginLama();
+
+</script>
+
+
+</body>
+
+</html>
+

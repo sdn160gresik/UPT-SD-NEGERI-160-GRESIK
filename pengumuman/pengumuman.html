@@ -1,33 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Pengumuman - UPT SDN 160 GRESIK</title>
-
-
-    <!-- =====================================================
-         GOOGLE FONT
-    ====================================================== -->
 
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
         rel="stylesheet">
 
-
-    <!-- =====================================================
-         CSS
-    ====================================================== -->
-
     <style>
-
-        /* =====================================================
-           RESET
-        ====================================================== */
 
         * {
             margin: 0;
@@ -36,19 +22,9 @@
             font-family: 'Poppins', sans-serif;
         }
 
-
-        /* =====================================================
-           HTML
-        ====================================================== */
-
         html {
             scroll-behavior: smooth;
         }
-
-
-        /* =====================================================
-           BODY
-        ====================================================== */
 
         body {
             background: #f4f7fb;
@@ -56,21 +32,11 @@
             min-height: 100vh;
         }
 
-
-        /* =====================================================
-           CONTAINER UTAMA
-        ====================================================== */
-
         .pengumuman {
             width: 100%;
             max-width: 1100px;
             margin: 0 auto;
         }
-
-
-        /* =====================================================
-           JUDUL
-        ====================================================== */
 
         .judul {
             text-align: center;
@@ -80,11 +46,6 @@
             margin-bottom: 10px;
         }
 
-
-        /* =====================================================
-           SUBJUDUL
-        ====================================================== */
-
         .subjudul {
             text-align: center;
             color: #666;
@@ -93,19 +54,16 @@
             line-height: 1.6;
         }
 
-
         /* =====================================================
-           MENU GRID
+           GRID MENU
         ====================================================== */
 
         .menu {
             display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(300px, 1fr));
-
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 25px;
+            align-items: stretch;
         }
-
 
         /* =====================================================
            CARD
@@ -113,9 +71,7 @@
 
         .card {
             background: #ffffff;
-
             border-radius: 18px;
-
             padding: 30px;
 
             box-shadow:
@@ -126,22 +82,15 @@
                 box-shadow 0.3s ease;
 
             text-align: center;
-
             position: relative;
-
             overflow: hidden;
 
             display: flex;
-
             flex-direction: column;
-
             align-items: center;
+
+            min-width: 0;
         }
-
-
-        /* =====================================================
-           EFEK CARD HOVER
-        ====================================================== */
 
         .card:hover {
             transform: translateY(-6px);
@@ -150,21 +99,14 @@
                 0 18px 35px rgba(0, 0, 0, 0.13);
         }
 
-
-        /* =====================================================
-           GARIS ATAS CARD
-        ====================================================== */
-
         .card::before {
             content: "";
 
             position: absolute;
-
             top: 0;
             left: 0;
 
             width: 100%;
-
             height: 5px;
 
             background:
@@ -175,55 +117,26 @@
                 );
         }
 
-
-        /* =====================================================
-           ICON CARD
-        ====================================================== */
-
         .icon {
             font-size: 60px;
-
             margin-bottom: 15px;
-
             line-height: 1;
         }
 
-
-        /* =====================================================
-           JUDUL CARD
-        ====================================================== */
-
         .card h3 {
             color: #0d47a1;
-
             margin-bottom: 10px;
-
             font-size: 21px;
-
             font-weight: 700;
         }
 
-
-        /* =====================================================
-           DESKRIPSI CARD
-        ====================================================== */
-
         .card p {
             color: #555;
-
             line-height: 1.7;
-
             margin-bottom: 20px;
-
             font-size: 14px;
-
             max-width: 420px;
         }
-
-
-        /* =====================================================
-           BUTTON UTAMA
-        ====================================================== */
 
         .btn {
             display: inline-block;
@@ -238,9 +151,7 @@
                 );
 
             color: #ffffff;
-
             text-decoration: none;
-
             border-radius: 35px;
 
             font-weight: 600;
@@ -251,18 +162,11 @@
                 background 0.3s ease;
 
             border: none;
-
             cursor: pointer;
-
             font-size: 14px;
 
             margin-top: auto;
         }
-
-
-        /* =====================================================
-           BUTTON HOVER
-        ====================================================== */
 
         .btn:hover {
             transform: scale(1.05);
@@ -276,52 +180,74 @@
                 );
         }
 
-
-        /* =====================================================
-           BUTTON ACTIVE
-        ====================================================== */
-
         .btn:active {
             transform: scale(0.98);
         }
 
+        /* =====================================================
+           MENU UJI COBA - KHUSUS ADMIN
+        ====================================================== */
+
+        .card.admin-card::before {
+            background:
+                linear-gradient(
+                    135deg,
+                    #d32f2f,
+                    #ef5350
+                );
+        }
+
+        .card.admin-card .icon {
+            filter: grayscale(10%);
+        }
+
+        .card.admin-card h3 {
+            color: #b71c1c;
+        }
+
+        .card.admin-card .btn {
+            background:
+                linear-gradient(
+                    135deg,
+                    #d32f2f,
+                    #ef5350
+                );
+        }
+
+        .card.admin-card .btn:hover {
+            box-shadow:
+                0 8px 20px rgba(
+                    211,
+                    47,
+                    47,
+                    0.30
+                );
+        }
 
         /* =====================================================
-           AREA TOMBOL KEMBALI
+           TOMBOL KEMBALI
         ====================================================== */
 
         .area-kembali {
             width: 100%;
 
             display: flex;
-
             justify-content: center;
-
             align-items: center;
 
             margin-top: 35px;
-
             padding-top: 5px;
-
             padding-bottom: 10px;
         }
-
-
-        /* =====================================================
-           TOMBOL KEMBALI
-        ====================================================== */
 
         .btn-kembali {
             display: inline-flex;
 
             align-items: center;
-
             justify-content: center;
-
             gap: 10px;
 
             min-width: 210px;
-
             padding: 14px 28px;
 
             background:
@@ -332,13 +258,10 @@
                 );
 
             color: #ffffff;
-
             text-decoration: none;
 
             border-radius: 35px;
-
             font-weight: 600;
-
             font-size: 14px;
 
             box-shadow:
@@ -349,14 +272,8 @@
                     0.20
                 );
 
-            transition:
-                all 0.3s ease;
+            transition: all 0.3s ease;
         }
-
-
-        /* =====================================================
-           HOVER TOMBOL KEMBALI
-        ====================================================== */
 
         .btn-kembali:hover {
             transform: translateY(-3px);
@@ -377,37 +294,23 @@
                 );
         }
 
-
-        /* =====================================================
-           ACTIVE TOMBOL KEMBALI
-        ====================================================== */
-
         .btn-kembali:active {
             transform: scale(0.97);
         }
 
-
         /* =====================================================
-           MODAL LOGIN DATA SISWA
+           MODAL LOGIN
         ====================================================== */
 
         .modal {
             display: none;
 
             position: fixed;
-
             inset: 0;
 
-            background:
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.55
-                );
+            background: rgba(0, 0, 0, 0.55);
 
             justify-content: center;
-
             align-items: center;
 
             z-index: 9999;
@@ -415,14 +318,8 @@
             padding: 20px;
         }
 
-
-        /* =====================================================
-           MODAL BOX
-        ====================================================== */
-
         .modal-box {
             width: 400px;
-
             max-width: 92%;
 
             background: #ffffff;
@@ -441,45 +338,28 @@
                     0.25
                 );
 
-            animation:
-                muncul 0.25s ease;
+            animation: muncul 0.25s ease;
         }
-
-
-        /* =====================================================
-           ANIMASI MODAL
-        ====================================================== */
 
         @keyframes muncul {
 
             from {
-                transform:
-                    translateY(-30px);
-
+                transform: translateY(-30px);
                 opacity: 0;
             }
 
             to {
-                transform:
-                    translateY(0);
-
+                transform: translateY(0);
                 opacity: 1;
             }
 
         }
 
-
-        /* =====================================================
-           ICON LOCK
-        ====================================================== */
-
         .lock-icon {
             width: 80px;
-
             height: 80px;
 
             margin: auto;
-
             margin-bottom: 20px;
 
             border-radius: 50%;
@@ -494,55 +374,31 @@
             color: #ffffff;
 
             display: flex;
-
             align-items: center;
-
             justify-content: center;
 
             font-size: 40px;
         }
 
-
-        /* =====================================================
-           JUDUL MODAL
-        ====================================================== */
-
         .modal-box h2 {
             color: #0d47a1;
-
             margin-bottom: 8px;
-
             font-size: 23px;
         }
 
-
-        /* =====================================================
-           DESKRIPSI MODAL
-        ====================================================== */
-
         .modal-box p {
             color: #666;
-
             margin-bottom: 22px;
-
             line-height: 1.6;
-
             font-size: 14px;
         }
-
-
-        /* =====================================================
-           INPUT PASSWORD
-        ====================================================== */
 
         .modal-box input {
             width: 100%;
 
             padding: 14px 15px;
 
-            border:
-                2px solid #ddd;
-
+            border: 2px solid #ddd;
             border-radius: 10px;
 
             outline: none;
@@ -551,11 +407,6 @@
 
             transition: 0.25s;
         }
-
-
-        /* =====================================================
-           INPUT FOCUS
-        ====================================================== */
 
         .modal-box input:focus {
             border-color: #1976d2;
@@ -570,23 +421,11 @@
                 );
         }
 
-
-        /* =====================================================
-           TOMBOL MODAL
-        ====================================================== */
-
         .modal-button {
             display: flex;
-
             gap: 12px;
-
             margin-top: 22px;
         }
-
-
-        /* =====================================================
-           BUTTON MODAL
-        ====================================================== */
 
         .modal-button button {
             flex: 1;
@@ -594,76 +433,43 @@
             padding: 14px;
 
             border: none;
-
             border-radius: 10px;
 
             cursor: pointer;
 
             font-size: 15px;
-
             font-weight: 600;
 
             transition: 0.3s;
         }
 
-
-        /* =====================================================
-           BUTTON LOGIN
-        ====================================================== */
-
         .btn-login {
             background: #1976d2;
-
             color: #ffffff;
         }
-
-
-        /* =====================================================
-           HOVER BUTTON LOGIN
-        ====================================================== */
 
         .btn-login:hover {
             background: #1565c0;
         }
 
-
-        /* =====================================================
-           BUTTON BATAL
-        ====================================================== */
-
         .btn-batal {
             background: #ececec;
-
             color: #333;
         }
-
-
-        /* =====================================================
-           HOVER BUTTON BATAL
-        ====================================================== */
 
         .btn-batal:hover {
             background: #dcdcdc;
         }
 
-
-        /* =====================================================
-           PESAN ERROR
-        ====================================================== */
-
         #pesanError {
             margin-top: 15px;
-
             color: #d32f2f;
-
             font-size: 14px;
-
             min-height: 20px;
         }
 
-
         /* =====================================================
-           RESPONSIVE TABLET
+           TABLET
         ====================================================== */
 
         @media (max-width: 768px) {
@@ -672,47 +478,37 @@
                 padding: 15px;
             }
 
-
             .judul {
                 font-size: 28px;
             }
 
-
             .subjudul {
                 font-size: 14px;
-
                 margin-bottom: 25px;
             }
 
-
             .menu {
                 grid-template-columns: 1fr;
-
                 gap: 18px;
             }
-
 
             .card {
                 padding: 25px 20px;
             }
 
-
             .area-kembali {
                 margin-top: 25px;
             }
 
-
             .btn-kembali {
                 width: 100%;
-
                 max-width: 320px;
             }
 
         }
 
-
         /* =====================================================
-           RESPONSIVE HP KECIL
+           HP KECIL
         ====================================================== */
 
         @media (max-width: 480px) {
@@ -721,62 +517,45 @@
                 padding: 10px;
             }
 
-
             .judul {
                 font-size: 24px;
             }
-
 
             .subjudul {
                 font-size: 13px;
             }
 
-
             .icon {
                 font-size: 52px;
             }
-
 
             .card h3 {
                 font-size: 19px;
             }
 
-
             .card p {
                 font-size: 13px;
             }
 
-
             .btn {
-                padding:
-                    12px 22px;
-
+                padding: 12px 22px;
                 font-size: 13px;
             }
 
-
             .btn-kembali {
-                padding:
-                    12px 22px;
-
+                padding: 12px 22px;
                 font-size: 13px;
-
                 min-width: 0;
-
                 width: 100%;
             }
 
-
             .modal-box {
-                padding:
-                    25px 20px;
+                padding: 25px 20px;
             }
-
 
             .modal-button {
                 flex-direction: column;
             }
-
 
             .modal-button button {
                 width: 100%;
@@ -791,541 +570,422 @@
 
 <body>
 
+<section class="pengumuman">
 
     <!-- =====================================================
-         BAGIAN UTAMA
+         JUDUL
     ====================================================== -->
 
-    <section class="pengumuman">
+    <h1 class="judul">
+        📢 Pengumuman
+    </h1>
+
+    <p class="subjudul">
+        Silakan pilih menu sesuai kebutuhan Anda.
+    </p>
+
+
+    <!-- =====================================================
+         SEMUA MENU BERADA DI DALAM SATU GRID
+    ====================================================== -->
+
+    <div class="menu">
 
 
         <!-- =================================================
-             JUDUL HALAMAN
+             MENU 1
         ================================================== -->
 
-        <h1 class="judul">
-            📢 Pengumuman
-        </h1>
+        <div class="card">
 
-
-        <!-- =================================================
-             SUBJUDUL
-        ================================================== -->
-
-        <p class="subjudul">
-            Silakan pilih menu sesuai kebutuhan Anda.
-        </p>
-
-
-        <!-- =================================================
-             GRID MENU
-        ================================================== -->
-
-        <div class="menu">
-
-
-            <!-- =================================================
-                 MENU 1
-                 EKSTRAKURIKULER
-            ================================================== -->
-
-            <div class="card">
-
-                <div class="icon">
-                    📝
-                </div>
-
-                <h3>
-                    Ekstrakurikuler
-                </h3>
-
-                <p>
-                    Pendaftaran peserta didik untuk mengikuti
-                    Ekstrakurikuler.
-                </p>
-
-                <a
-                    href="https://docs.google.com/forms/d/e/1FAIpQLScP0zw373XI43C3hljD2xWxhbqA7dAzZWlTNs4KovG_rzEWuA/alreadyresponded"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn">
-
-                    📝 Isi Formulir
-
-                </a>
-
+            <div class="icon">
+                📝
             </div>
 
+            <h3>
+                Ekstrakurikuler
+            </h3>
 
-            <!-- =================================================
-                 MENU 2
-                 DATA CKG SD
-            ================================================== -->
-
-            <div class="card">
-
-                <div class="icon">
-                    📋
-                </div>
-
-                <h3>
-                    Data CKG SD
-                </h3>
-
-                <p>
-                    Kepada Bapak/Ibu Wali Murid dimohon
-                    mengisi Data CKG SD dengan lengkap
-                    dan benar.
-                </p>
-
-                <a
-                    href="https://forms.gle/MU9N8y8ZMX4VcqkG6"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn">
-
-                    📄 Isi Data CKG SD
-
-                </a>
-
-            </div>
-
-
-            <!-- =================================================
-                 MENU 3
-                 DATA SISWA
-            ================================================== -->
-
-            <div class="card">
-
-                <div class="icon">
-                    🎓
-                </div>
-
-                <h3>
-                    Data Siswa
-                </h3>
-
-                <p>
-                    Silakan mengisi atau memperbarui data
-                    siswa dengan lengkap dan benar sesuai
-                    identitas peserta didik.
-                </p>
-
-                <a
-                    href="#"
-                    class="btn"
-                    onclick="bukaLogin(); return false;">
-
-                    👨‍🎓 Data Siswa
-
-                </a>
-
-            </div>
-
-
-            <!-- =================================================
-                 MENU 5
-                 GAME MONOPOLI NUSANTARA
-            ================================================== -->
-
-            <div class="card">
-
-                <div class="icon">
-                    🎮
-                </div>
-
-                <h3>
-                    Game Monopoli Nusantara
-                </h3>
-
-                <p>
-                    Ayo bermain sambil belajar melalui Game Monopoli
-                    Nusantara yang menyenangkan dan interaktif.
-                </p>
-
-                <a
-                    href="../kelas-4/monopoli_nusantara_web/index.html"
-                    class="btn">
-
-                    🎮 Main Game
-
-                </a>
-
-            </div>
-
-
-            <!-- =================================================
-                 MENU 4
-                 PENGELOLAAN SAMPAH
-            ================================================== -->
-
-            <div class="card">
-
-                <div class="icon">
-                    ♻️
-                </div>
-
-                <h3>
-                    Pengelolaan Sampah
-                </h3>
-
-                <p>
-                    Mari belajar mengelola sampah dengan
-                    baik dan benar. Kenali jenis sampah,
-                    pilah sampah organik dan anorganik,
-                    serta belajar menjaga lingkungan.
-                </p>
-
-                <a
-                    href="../sampah/open.html"
-                    class="btn">
-
-                    ♻️ Kelola Sampah
-
-                </a>
-
-            </div>
-
-
-        </div>
-<!-- =================================================
-                 MENU 5
-                 UJI COBA
-            ================================================== -->
-
-            <div class="card">
-
-                <div class="icon">
-                    ⛔
-                </div>
-
-                <h3>
-                    Uji Coba
-                </h3>
-
-                <p>
-                    khusus untuk admin saja
-                </p>
-
-                <a
-                    href="../test/test.html"
-                    class="btn">
-
-                    ⛔ husus admin
-
-                </a>
-
-            </div>
-
-
-        </div>
-
-        <!-- =================================================
-             TOMBOL KEMBALI KE INDEX.HTML
-        ================================================== -->
-
-        <div class="area-kembali">
+            <p>
+                Pendaftaran peserta didik untuk mengikuti
+                Ekstrakurikuler.
+            </p>
 
             <a
-                href="../index.html"
-                class="btn-kembali">
+                href="https://docs.google.com/forms/d/e/1FAIpQLScP0zw373XI43C3hljD2xWxhbqA7dAzZWlTNs4KovG_rzEWuA/alreadyresponded"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn">
 
-              Kembali
+                📝 Isi Formulir
 
             </a>
 
         </div>
 
 
-    </section>
+        <!-- =================================================
+             MENU 2
+        ================================================== -->
 
+        <div class="card">
 
-    <!-- =====================================================
-         MODAL LOGIN DATA SISWA
-    ====================================================== -->
+            <div class="icon">
+                📋
+            </div>
 
-    <div
-        id="loginModal"
-        class="modal">
+            <h3>
+                Data CKG SD
+            </h3>
+
+            <p>
+                Kepada Bapak/Ibu Wali Murid dimohon
+                mengisi Data CKG SD dengan lengkap
+                dan benar.
+            </p>
+
+            <a
+                href="https://forms.gle/MU9N8y8ZMX4VcqkG6"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn">
+
+                📄 Isi Data CKG SD
+
+            </a>
+
+        </div>
 
 
         <!-- =================================================
-             MODAL BOX
+             MENU 3
         ================================================== -->
 
-        <div class="modal-box">
+        <div class="card">
 
-
-            <!-- =================================================
-                 ICON LOCK
-            ================================================== -->
-
-            <div class="lock-icon">
-                🔒
+            <div class="icon">
+                🎓
             </div>
 
-
-            <!-- =================================================
-                 JUDUL LOGIN
-            ================================================== -->
-
-            <h2>
-                Login Data Siswa
-            </h2>
-
-
-            <!-- =================================================
-                 DESKRIPSI LOGIN
-            ================================================== -->
+            <h3>
+                Data Siswa
+            </h3>
 
             <p>
-                Masukkan password untuk membuka halaman
-                Data Siswa.
+                Silakan mengisi atau memperbarui data
+                siswa dengan lengkap dan benar sesuai
+                identitas peserta didik.
             </p>
 
+            <a
+                href="#"
+                class="btn"
+                onclick="bukaLogin(); return false;">
 
-            <!-- =================================================
-                 INPUT PASSWORD
-            ================================================== -->
+                👨‍🎓 Data Siswa
 
-            <input
-                type="password"
-                id="passwordInput"
-                placeholder="Masukkan password"
-                autocomplete="off">
-
-
-            <!-- =================================================
-                 TOMBOL LOGIN
-            ================================================== -->
-
-            <div class="modal-button">
-
-
-                <!-- BUTTON MASUK -->
-
-                <button
-                    type="button"
-                    class="btn-login"
-                    onclick="cekPassword()">
-
-                    Masuk
-
-                </button>
-
-
-                <!-- BUTTON BATAL -->
-
-                <button
-                    type="button"
-                    class="btn-batal"
-                    onclick="tutupLogin()">
-
-                    Batal
-
-                </button>
-
-
-            </div>
-
-
-            <!-- =================================================
-                 PESAN ERROR
-            ================================================== -->
-
-            <div id="pesanError"></div>
-
+            </a>
 
         </div>
+
+
+        <!-- =================================================
+             MENU 4
+             GAME MONOPOLI NUSANTARA
+        ================================================== -->
+
+        <div class="card">
+
+            <div class="icon">
+                🎮
+            </div>
+
+            <h3>
+                Game Monopoli Nusantara
+            </h3>
+
+            <p>
+                Ayo bermain sambil belajar melalui Game Monopoli
+                Nusantara yang menyenangkan dan interaktif.
+            </p>
+
+            <a
+                href="../kelas-4/monopoli_nusantara_web/index.html"
+                class="btn">
+
+                🎮 Main Game
+
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             MENU 5
+             PENGELOLAAN SAMPAH
+        ================================================== -->
+
+        <div class="card">
+
+            <div class="icon">
+                ♻️
+            </div>
+
+            <h3>
+                Pengelolaan Sampah
+            </h3>
+
+            <p>
+                Mari belajar mengelola sampah dengan
+                baik dan benar. Kenali jenis sampah,
+                pilah sampah organik dan anorganik,
+                serta belajar menjaga lingkungan.
+            </p>
+
+            <a
+                href="../sampah/open.html"
+                class="btn">
+
+                ♻️ Kelola Sampah
+
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             MENU 6
+             UJI COBA / ADMIN
+        ================================================== -->
+
+        <div class="card admin-card">
+
+            <div class="icon">
+                ⛔
+            </div>
+
+            <h3>
+                Uji Coba
+            </h3>
+
+            <p>
+                Khusus untuk admin saja.
+            </p>
+
+            <a
+                href="../test/test.html"
+                class="btn">
+
+                ⛔ Khusus Admin
+
+            </a>
+
+        </div>
+
 
     </div>
 
 
     <!-- =====================================================
-         JAVASCRIPT
+         TOMBOL KEMBALI
     ====================================================== -->
 
-    <script>
+    <div class="area-kembali">
+
+        <a
+            href="../index.html"
+            class="btn-kembali">
+
+            ↩️ Kembali
+
+        </a>
+
+    </div>
 
 
-        /* =====================================================
-           PASSWORD DATA SISWA
-        ====================================================== */
-
-        const passwordBenar = "sdn160123*";
+</section>
 
 
-        /* =====================================================
-           FUNGSI MEMBUKA MODAL LOGIN
-        ====================================================== */
+<!-- =====================================================
+     MODAL LOGIN DATA SISWA
+====================================================== -->
 
-        function bukaLogin() {
+<div
+    id="loginModal"
+    class="modal">
 
-            // Menampilkan modal
+    <div class="modal-box">
 
-            document.getElementById(
-                "loginModal"
-            ).style.display = "flex";
+        <div class="lock-icon">
+            🔒
+        </div>
 
+        <h2>
+            Login Data Siswa
+        </h2>
 
-            // Mengosongkan input password
+        <p>
+            Masukkan password untuk membuka halaman
+            Data Siswa.
+        </p>
 
-            document.getElementById(
-                "passwordInput"
-            ).value = "";
+        <input
+            type="password"
+            id="passwordInput"
+            placeholder="Masukkan password"
+            autocomplete="off">
 
+        <div class="modal-button">
 
-            // Menghapus pesan error
+            <button
+                type="button"
+                class="btn-login"
+                onclick="cekPassword()">
 
-            document.getElementById(
-                "pesanError"
-            ).innerHTML = "";
+                Masuk
 
+            </button>
 
-            // Memberikan fokus ke input password
+            <button
+                type="button"
+                class="btn-batal"
+                onclick="tutupLogin()">
 
-            setTimeout(function () {
+                Batal
 
-                document.getElementById(
-                    "passwordInput"
-                ).focus();
+            </button>
 
-            }, 100);
+        </div>
 
-        }
+        <div id="pesanError"></div>
 
+    </div>
 
-        /* =====================================================
-           FUNGSI MENUTUP MODAL LOGIN
-        ====================================================== */
-
-        function tutupLogin() {
-
-            document.getElementById(
-                "loginModal"
-            ).style.display = "none";
-
-        }
-
-
-        /* =====================================================
-           FUNGSI CEK PASSWORD
-        ====================================================== */
-
-        function cekPassword() {
-
-            // Mengambil nilai password
-
-            let password =
-                document.getElementById(
-                    "passwordInput"
-                ).value;
+</div>
 
 
-            // Membandingkan password
+<script>
 
-            if (password === passwordBenar) {
+    /* =====================================================
+       PASSWORD DATA SISWA
+    ====================================================== */
 
-
-                // Tutup modal
-
-                tutupLogin();
-
-
-                // Membuka halaman Data Siswa
-
-                window.open(
-                    "../data_siswa/data_siswa1.html",
-                    "_blank"
-                );
+    const passwordBenar = "sdn160123*";
 
 
-            } else {
+    /* =====================================================
+       BUKA LOGIN
+    ====================================================== */
+
+    function bukaLogin() {
+
+        document.getElementById("loginModal").style.display = "flex";
+
+        document.getElementById("passwordInput").value = "";
+
+        document.getElementById("pesanError").innerHTML = "";
+
+        setTimeout(function () {
+
+            document.getElementById("passwordInput").focus();
+
+        }, 100);
+
+    }
 
 
-                // Menampilkan pesan kesalahan
+    /* =====================================================
+       TUTUP LOGIN
+    ====================================================== */
 
-                document.getElementById(
-                    "pesanError"
-                ).innerHTML =
-                    "❌ Password yang Anda masukkan salah.";
+    function tutupLogin() {
 
+        document.getElementById("loginModal").style.display = "none";
 
-                // Memilih teks password
-
-                document.getElementById(
-                    "passwordInput"
-                ).select();
-
-            }
-
-        }
+    }
 
 
-        /* =====================================================
-           ENTER UNTUK LOGIN
-        ====================================================== */
+    /* =====================================================
+       CEK PASSWORD
+    ====================================================== */
 
-        document
-            .getElementById("passwordInput")
-            .addEventListener(
-                "keydown",
-                function (e) {
+    function cekPassword() {
 
-                    if (e.key === "Enter") {
+        let password =
+            document.getElementById("passwordInput").value;
 
-                        cekPassword();
+        if (password === passwordBenar) {
 
-                    }
+            tutupLogin();
 
-                }
+            window.open(
+                "../data_siswa/data_siswa1.html",
+                "_blank"
             );
 
+        } else {
 
-        /* =====================================================
-           KLIK DI LUAR MODAL
-           UNTUK MENUTUP MODAL
-        ====================================================== */
+            document.getElementById("pesanError").innerHTML =
+                "❌ Password yang Anda masukkan salah.";
 
-        window.onclick = function (e) {
+            document.getElementById("passwordInput").select();
 
-            const modal =
-                document.getElementById(
-                    "loginModal"
-                );
+        }
+
+    }
 
 
-            if (e.target === modal) {
+    /* =====================================================
+       ENTER UNTUK LOGIN
+    ====================================================== */
 
-                tutupLogin();
-
-            }
-
-        };
-
-
-        /* =====================================================
-           TOMBOL ESC UNTUK MENUTUP MODAL
-        ====================================================== */
-
-        document.addEventListener(
+    document
+        .getElementById("passwordInput")
+        .addEventListener(
             "keydown",
             function (e) {
 
-                if (e.key === "Escape") {
-
-                    tutupLogin();
-
+                if (e.key === "Enter") {
+                    cekPassword();
                 }
 
             }
         );
 
 
-    </script>
+    /* =====================================================
+       KLIK DI LUAR MODAL
+    ====================================================== */
 
+    window.onclick = function (e) {
+
+        const modal =
+            document.getElementById("loginModal");
+
+        if (e.target === modal) {
+            tutupLogin();
+        }
+
+    };
+
+
+    /* =====================================================
+       ESC UNTUK MENUTUP MODAL
+    ====================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (e) {
+
+            if (e.key === "Escape") {
+                tutupLogin();
+            }
+
+        }
+    );
+
+</script>
 
 </body>
-
 </html>
+

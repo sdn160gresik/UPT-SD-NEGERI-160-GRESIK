@@ -104,9 +104,9 @@
       <h1 class="text-xs sm:text-sm font-bold text-blue-700 leading-tight">Latihan UTS 1 Bhs Indonesia — Kelas 5</h1>
     </div>
     <div class="flex items-center gap-2">
-      <button id="btnToggleAudio" onclick="toggleAudio()" class="text-xs bg-blue-100 hover:bg-blue-200 text-blue-800 font-semibold px-2.5 py-1.5 rounded-lg flex items-center gap-1 transition" title="Toggle Narator Suara">
+      <button id="btnToggleAudio" onclick="toggleAudio()" class="text-xs bg-blue-100 hover:bg-blue-200 text-blue-800 font-semibold px-2.5 py-1.5 rounded-lg flex items-center gap-1 transition" title="Toggle Narator Suara Siswa SD">
         <i id="audioIcon" class="fa-solid fa-volume-high"></i>
-        <span class="hidden sm:inline" id="audioLabel">Narator ON</span>
+        <span class="hidden sm:inline" id="audioLabel">Suara Sahabat ON</span>
       </button>
       <button id="btnBukaDashboard" onclick="bukaModalLoginDashboard()" class="text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold px-3 py-1.5 rounded-lg tactile-btn flex items-center gap-1.5 shadow-sm">
         <i class="fa-solid fa-chalkboard-user"></i>
@@ -133,7 +133,7 @@
           <input type="text" id="inputKelas" placeholder="Contoh: 5A / 5B" value="5" class="w-full p-2.5 text-xs sm:text-sm rounded-xl border-2 border-blue-200 focus:border-blue-600 focus:outline-none transition">
         </div>
         <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1"><i class="fa-solid fa-list-ol text-blue-600 mr-1"></i> No. Absen</label>
+          <label class="block text-xs font-bold text-gray-700 mb-1"><i class="fa-solid fa-list-ol text-blue-600 mr-1"></i> No. Absen <span class="text-red-500">*</span></label>
           <input type="text" id="inputAbsen" placeholder="Contoh: 18" class="w-full p-2.5 text-xs sm:text-sm rounded-xl border-2 border-blue-200 focus:border-blue-600 focus:outline-none transition">
         </div>
       </div>
@@ -232,6 +232,35 @@
       <p id="feedbackDesc" class="text-xs text-gray-600 mb-5 leading-relaxed">Pilihanmu tepat sekali sesuai teks bacaan.</p>
       <button id="btnLanjutSoal" onclick="tutupFeedbackDanLanjut()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs tactile-btn shadow">
         Lanjut ke Soal Berikutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal Peringatan Identitas Ceria & Inspiratif (Pengganti alert) -->
+  <div id="modalPeringatanIdentitas" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="theme-panel w-full max-w-sm p-6 text-center pop-anim border-4 border-amber-400 shadow-2xl relative bg-white/95">
+      <!-- Ornamen Emoji Ceria Melayang -->
+      <div class="relative w-16 h-16 mx-auto mb-3">
+        <div class="w-16 h-16 bg-gradient-to-tr from-amber-400 to-yellow-300 text-white rounded-2xl flex items-center justify-center text-3xl shadow-md transform -rotate-3 hover:rotate-0 transition">
+          <i class="fa-solid fa-rocket animate-pulse"></i>
+        </div>
+        <span class="absolute -top-2 -right-2 text-2xl">✨</span>
+      </div>
+
+      <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 text-[11px] font-extrabold rounded-full mb-2 uppercase tracking-wide">
+        🌟 Langkah Pertama Juara
+      </span>
+
+      <h3 class="text-xl font-black fun-font text-gray-800 mb-2 leading-snug">
+        Yuk, Tuliskan Namamu Dulu! 🎒
+      </h3>
+      
+      <p class="text-xs text-gray-600 mb-5 leading-relaxed font-medium">
+        Setiap petualang hebat selalu bangga dengan identitasnya. Masukkan <strong class="text-blue-600">Nama Lengkap</strong>, <strong class="text-indigo-600">Kelas</strong>, dan <strong class="text-emerald-600">Nomor Absenmu</strong> agar lembar prestasimu bersinar cemerlang di papan bintang guru! Kamu pasti hebat hari ini! 💪🌈
+      </p>
+
+      <button onclick="tutupPeringatanIdentitas()" class="w-full py-3 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:to-orange-600 text-white font-extrabold rounded-xl text-xs sm:text-sm tactile-btn shadow-lg flex items-center justify-center gap-2">
+        <i class="fa-solid fa-pencil"></i> Siap, Aku Isi Sekarang!
       </button>
     </div>
   </div>
@@ -347,8 +376,11 @@
       <h3 class="text-lg font-bold text-gray-800 mb-1">Akses Khusus Guru</h3>
       <p class="text-xs text-gray-500 mb-3">Masukkan PIN Keamanan untuk membuka lembar rekapitulasi nilai.</p>
       
-      <input type="password" id="inputPinDashboard" maxlength="8" placeholder="Masukkan PIN" class="w-full p-2.5 text-center text-lg tracking-widest font-bold border-2 border-blue-200 rounded-xl focus:border-blue-600 focus:outline-none mb-2">
+      <input type="password" id="inputPinDashboard" maxlength="8" placeholder="Masukkan PIN" class="w-full p-2.5 text-center text-lg tracking-widest font-bold border-2 border-blue-200 rounded-xl focus:border-blue-600 focus:outline-none mb-1">
       
+      <!-- Pesan Galat PIN (Pengganti alert) -->
+      <p id="pinErrorMsg" class="hidden text-[11px] font-bold text-rose-600 mb-2">PIN salah! Silakan coba lagi.</p>
+
       <!-- Hint PIN kecil -->
       <p class="text-[10px] text-gray-400 mb-4">Petunjuk: PIN default adalah <strong class="text-blue-600 font-bold">1234</strong></p>
 
@@ -657,26 +689,62 @@
     let isNaratorAktif = true; // Default ON untuk kelas 5 SD Fase C
     let intervalAutoRefresh = null;
     let riwayatDataCache = [];
+    let suaraAnakSDAktif = null;
 
-    function toggleAudio() {
-      isNaratorAktif = !isNaratorAktif;
-      document.getElementById('audioLabel').textContent = isNaratorAktif ? "Narator ON" : "Narator OFF";
-      document.getElementById('audioIcon').className = isNaratorAktif ? "fa-solid fa-volume-high" : "fa-solid fa-volume-xmark";
-      if (!isNaratorAktif && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
+    function muatDaftarSuara() {
+      if (!('speechSynthesis' in window)) return;
+      const daftarSuara = window.speechSynthesis.getVoices();
+      // Cari suara berbahasa Indonesia
+      const suaraID = daftarSuara.filter(v => v.lang === 'id-ID' || v.lang.startsWith('id'));
+      if (suaraID.length > 0) {
+        // Prioritaskan vokal yang lembut/feminin agar saat di-pitch tinggi terdengar alami seperti anak-anak
+        const vokalMuda = suaraID.find(v => /female|gadis|wanita|putri|siti|natural/i.test(v.name));
+        suaraAnakSDAktif = vokalMuda || suaraID[0];
       }
     }
 
-    // Narator HANYA membacakan teks pertanyaan, tidak pernah membacakan opsi jawaban
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = muatDaftarSuara;
+      muatDaftarSuara();
+    }
+
+    function toggleAudio() {
+      isNaratorAktif = !isNaratorAktif;
+      document.getElementById('audioLabel').textContent = isNaratorAktif ? "Suara Sahabat ON" : "Suara Sahabat OFF";
+      document.getElementById('audioIcon').className = isNaratorAktif ? "fa-solid fa-volume-high" : "fa-solid fa-volume-xmark";
+      hentikanNarator();
+    }
+
+    // Fungsi khusus untuk menghentikan seluruh aktivitas narator suara seketika
+    function hentikanNarator() {
+      if ('speechSynthesis' in window) {
+        try {
+          window.speechSynthesis.cancel();
+        } catch (err) {}
+      }
+    }
+
+    // Narator membacakan teks soal dengan modulasi suara anak-anak siswa SD
     function speak(teks, lang = 'id-ID') {
       if (!isNaratorAktif || !('speechSynthesis' in window)) return;
       try {
-        window.speechSynthesis.cancel();
+        hentikanNarator();
         // Bersihkan tag HTML dari teks soal sebelum disuarakan
         const cleanText = teks.replace(/<\/?[^>]+(>|$)/g, " ").replace(/\s+/g, " ").trim();
         const utter = new SpeechSynthesisUtterance(cleanText);
         utter.lang = lang;
-        utter.rate = 0.95;
+
+        if (!suaraAnakSDAktif) muatDaftarSuara();
+        if (suaraAnakSDAktif) {
+          utter.voice = suaraAnakSDAktif;
+        }
+
+        // Modulasi nada & tempo untuk karakter siswa SD:
+        // Pitch 1.42 menaikkan oktaf suara menjadi frekuensi ceria anak-anak
+        // Rate 1.02 memberi kesan antusias dan tidak kaku
+        utter.pitch = 1.42;
+        utter.rate = 1.02;
+
         window.speechSynthesis.speak(utter);
       } catch (err) {
         console.warn("Speech error:", err);
@@ -739,13 +807,32 @@
       document.getElementById('antiCheatOverlay').classList.add('hidden');
     }
 
+    function tampilkanPeringatanIdentitas() {
+      mainkanSFX('alarm');
+      document.getElementById('modalPeringatanIdentitas').classList.remove('hidden');
+    }
+
+    function tutupPeringatanIdentitas() {
+      document.getElementById('modalPeringatanIdentitas').classList.add('hidden');
+      const nama = document.getElementById('inputNama').value.trim();
+      const kelas = document.getElementById('inputKelas').value.trim();
+      const absen = document.getElementById('inputAbsen').value.trim();
+      if (!nama) {
+        document.getElementById('inputNama').focus();
+      } else if (!kelas) {
+        document.getElementById('inputKelas').focus();
+      } else {
+        document.getElementById('inputAbsen').focus();
+      }
+    }
+
     function mulaiKuisSekarang() {
       const nama = document.getElementById('inputNama').value.trim();
       const kelas = document.getElementById('inputKelas').value.trim();
       const absen = document.getElementById('inputAbsen').value.trim();
 
-      if (!nama || !kelas) {
-        alert("Silakan isi Nama Lengkap dan Kelas terlebih dahulu!");
+      if (!nama || !kelas || !absen) {
+        tampilkanPeringatanIdentitas();
         return;
       }
 
@@ -832,6 +919,9 @@
     }
 
     function pilihJawaban(pilihanIdx) {
+      // Hentikan suara narator soal sebelumnya seketika saat murid menekan pilihan jawaban
+      hentikanNarator();
+
       const s = daftarSoalAktif[indeksSoal];
       const isBenar = (pilihanIdx === s.k);
 
@@ -855,12 +945,16 @@
     }
 
     function tutupFeedbackDanLanjut() {
+      // Pastikan narator berhenti sebelum beralih ke soal berikutnya
+      hentikanNarator();
       document.getElementById('feedbackOverlay').classList.add('hidden');
       indeksSoal++;
       tampilkanSoalAktif();
     }
 
     function akhiriSesiKuis() {
+      // Narator berhenti total saat kuis selesai
+      hentikanNarator();
       statusKuisBerjalan = false;
       document.getElementById('game-screen').classList.add('hidden');
       document.getElementById('game-screen').classList.remove('flex');
@@ -884,6 +978,25 @@
         document.getElementById('resultIcon').textContent = "💪";
         document.getElementById('finalFeedbackText').textContent = "Tetap semangat belajar ya! Pelajari kembali materi dan coba latihan lagi.";
       }
+
+      // Masukkan langsung ke cache lokal browser agar segera tampak di Dashboard Guru
+      const localRecord = {
+        waktu: new Date().toLocaleString('id-ID'),
+        nama: dataSiswa.nama,
+        kelas: dataSiswa.kelas,
+        absen: dataSiswa.absen,
+        nilai: nilai,
+        benar: skorBenar,
+        totalSoal: total,
+        persentase: nilai + "%",
+        keluarTab: jumlahKeluarTab
+      };
+      riwayatDataCache.unshift(localRecord);
+      try {
+        let listSimpan = JSON.parse(localStorage.getItem('rekapNilaiSiswaCache') || "[]");
+        listSimpan.unshift(localRecord);
+        localStorage.setItem('rekapNilaiSiswaCache', JSON.stringify(listSimpan));
+      } catch (e) {}
 
       // Kirim hasil langsung ke Google Sheets melalui Apps Script
       const payload = {
@@ -917,31 +1030,35 @@
           })
           .simpanNilai(payload);
       } else {
-        // Fallback info mode lokal / preview tanpa GAS
         setTimeout(() => {
           document.getElementById('gasStatusPill').className = "w-full p-2.5 rounded-xl text-xs font-semibold mb-4 bg-blue-100 text-blue-800 flex items-center justify-center gap-2";
-          document.getElementById('gasStatusPill').innerHTML = `ℹ️ Simulasi Selesai (Mode Preview Deployment)`;
+          document.getElementById('gasStatusPill').innerHTML = `ℹ️ Data tersimpan di memori lokal (Mode Preview Deployment)`;
         }, 1000);
       }
     }
 
     function ulangiKuisBaru() {
+      hentikanNarator();
       document.getElementById('result-screen').classList.add('hidden');
       mulaiKuisSekarang();
     }
 
     function lokasiStartUlang() {
+      hentikanNarator();
       document.getElementById('result-screen').classList.add('hidden');
       document.getElementById('start-screen').classList.remove('hidden');
       document.getElementById('btnBukaDashboard').classList.remove('hidden');
     }
 
     function kembaliKeBahasaIndonesia() {
+      hentikanNarator();
       window.location.href = "bahasa_indonesia.html";
     }
 
     function bukaModalLoginDashboard() {
       document.getElementById('inputPinDashboard').value = "";
+      const msg = document.getElementById('pinErrorMsg');
+      if (msg) msg.classList.add('hidden');
       document.getElementById('modalPinDashboard').classList.remove('hidden');
     }
 
@@ -951,7 +1068,9 @@
 
     function verifikasiPinDashboard() {
       const pin = document.getElementById('inputPinDashboard').value.trim();
+      const msg = document.getElementById('pinErrorMsg');
       if (pin === PIN_DASHBOARD_GURU) {
+        if (msg) msg.classList.add('hidden');
         document.getElementById('modalPinDashboard').classList.add('hidden');
         document.getElementById('modalDashboardGuru').classList.remove('hidden');
         muatDataRekapLive();
@@ -961,7 +1080,10 @@
           intervalAutoRefresh = setInterval(muatDataRekapLive, 20000);
         }
       } else {
-        alert("PIN Keamanan salah! Silakan coba lagi.");
+        if (msg) {
+          msg.textContent = "PIN Keamanan salah! Silakan periksa kembali.";
+          msg.classList.remove('hidden');
+        }
       }
     }
 
@@ -983,6 +1105,7 @@
             if (icon) icon.classList.remove('fa-spin');
             if (res && res.success) {
               riwayatDataCache = res.data || [];
+              try { localStorage.setItem('rekapNilaiSiswaCache', JSON.stringify(riwayatDataCache)); } catch(e){}
               renderTabelRekap(riwayatDataCache);
             } else {
               const pesanError = (res && res.message) ? res.message : "Gagal memuat data dari Spreadsheet.";
@@ -1001,11 +1124,22 @@
           .withFailureHandler(function(err) {
             if (icon) icon.classList.remove('fa-spin');
             console.error("Gagal sinkron rekap:", err);
+            
+            // Fallback: coba muat dari cache lokal jika GAS gagal sesaat
+            let lokalData = [];
+            try { lokalData = JSON.parse(localStorage.getItem('rekapNilaiSiswaCache') || "[]"); } catch(e){}
+            if (lokalData && lokalData.length > 0) {
+              riwayatDataCache = lokalData;
+              renderTabelRekap(riwayatDataCache);
+              return;
+            }
+
             const pesanError = err && err.message ? err.message : String(err);
             document.getElementById('bodyTabelRekap').innerHTML = `
               <tr>
                 <td colspan="8" class="p-6 text-center text-rose-600 font-medium">
-                  <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> Kesalahan koneksi GAS: ${pesanError}<br>
+                  <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> Masalah koneksi: ${pesanError}<br>
+                  <p class="text-[11px] text-gray-500 mt-1">Pastikan skrip telah diotorisasi dan dibuat di dalam Google Sheet terkait.</p>
                   <button onclick="muatDataRekapLive()" class="mt-2.5 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold">
                     <i class="fa-solid fa-arrows-rotate mr-1"></i> Coba Segarkan Lagi
                   </button>
@@ -1016,8 +1150,12 @@
           .ambilRekapData();
       } else {
         if (icon) icon.classList.remove('fa-spin');
-        // Data simulasi saat diuji di luar lingkungan GAS
-        if (riwayatDataCache.length === 0) {
+        // Ambil data cache lokal browser jika dijalankan dalam mode preview
+        let lokalData = [];
+        try { lokalData = JSON.parse(localStorage.getItem('rekapNilaiSiswaCache') || "[]"); } catch(e){}
+        if (lokalData && lokalData.length > 0) {
+          riwayatDataCache = lokalData;
+        } else if (riwayatDataCache.length === 0) {
           riwayatDataCache = [
             { waktu: "2026-09-28 08:30:12", nama: "Ahmad Fauzan", kelas: "5A", absen: "01", nilai: 92, benar: 23, totalSoal: 25, keluarTab: 0 },
             { waktu: "2026-09-28 08:32:45", nama: "Siti Nurhaliza", kelas: "5A", absen: "14", nilai: 84, benar: 21, totalSoal: 25, keluarTab: 1 },
@@ -1087,7 +1225,10 @@
     }
 
     function eksporExcel() {
-      if (!riwayatDataCache.length) return alert("Belum ada data untuk diekspor!");
+      if (!riwayatDataCache.length) {
+        document.getElementById('bodyTabelRekap').innerHTML = `<tr><td colspan="8" class="p-4 text-center text-amber-600 font-semibold">⚠️ Tidak ada data untuk diekspor ke Excel.</td></tr>`;
+        return;
+      }
       const dataRows = riwayatDataCache.map((item, idx) => ({
         "No": idx + 1,
         "Waktu": item.waktu,
@@ -1106,7 +1247,10 @@
     }
 
     function eksporPDF() {
-      if (!riwayatDataCache.length) return alert("Belum ada data untuk diekspor!");
+      if (!riwayatDataCache.length) {
+        document.getElementById('bodyTabelRekap').innerHTML = `<tr><td colspan="8" class="p-4 text-center text-amber-600 font-semibold">⚠️ Tidak ada data untuk diekspor ke PDF.</td></tr>`;
+        return;
+      }
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF('landscape');
       doc.text("Rekapitulasi Nilai Latihan UTS 1 Bahasa Indonesia - Kelas 5", 14, 15);
@@ -1136,7 +1280,10 @@
     }
 
     function eksporWord() {
-      if (!riwayatDataCache.length) return alert("Belum ada data untuk diekspor!");
+      if (!riwayatDataCache.length) {
+        document.getElementById('bodyTabelRekap').innerHTML = `<tr><td colspan="8" class="p-4 text-center text-amber-600 font-semibold">⚠️ Tidak ada data untuk diekspor ke Word.</td></tr>`;
+        return;
+      }
       let tableHtml = `
         <table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse;width:100%;font-family:Arial,sans-serif;">
           <tr style="background-color:#0288d1;color:#ffffff;">

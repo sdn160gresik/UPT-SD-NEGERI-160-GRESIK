@@ -57,16 +57,63 @@
       z-index: 10;
     }
 
+    .header-left {
+      min-width: 0;
+    }
+
     .title {
       font-size: 16px;
       font-weight: 700;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .page-info {
       color: #aaa;
       font-size: 14px;
       white-space: nowrap;
+    }
+
+    /* ==============================
+       FULLSCREEN BUTTON
+    ============================== */
+
+    .fullscreen-btn {
+      width: 38px;
+      height: 38px;
+
+      border: 1px solid #444;
+      border-radius: 7px;
+
+      background: #282828;
+      color: #fff;
+
+      font-size: 19px;
+
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      transition:
+        background 0.2s ease,
+        transform 0.15s ease;
+    }
+
+    .fullscreen-btn:hover {
+      background: #3a3a3a;
+    }
+
+    .fullscreen-btn:active {
+      transform: scale(0.94);
     }
 
     /* ==============================
@@ -299,10 +346,21 @@
 
       .title {
         font-size: 13px;
+        max-width: 180px;
+      }
+
+      .header-right {
+        gap: 6px;
       }
 
       .page-info {
         font-size: 11px;
+      }
+
+      .fullscreen-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 17px;
       }
 
       .nav-btn {
@@ -330,6 +388,22 @@
         font-size: 11px;
       }
     }
+
+    /* ==============================
+       MODE FULL SCREEN
+    ============================== */
+
+    :fullscreen {
+      background: #000;
+    }
+
+    :fullscreen header {
+      height: 50px;
+    }
+
+    :fullscreen footer {
+      padding: 8px 15px;
+    }
   </style>
 </head>
 
@@ -337,13 +411,34 @@
 
   <!-- HEADER -->
   <header>
-    <div class="title">
-      📖 DIMANA INDONESIA BERADA?
+
+    <div class="header-left">
+      <div class="title">
+        📖 DIMANA INDONESIA BERADA?
+      </div>
     </div>
 
-    <div class="page-info" id="pageInfo">
-      Memuat...
+    <div class="header-right">
+
+      <div
+        class="page-info"
+        id="pageInfo"
+      >
+        Memuat...
+      </div>
+
+      <!-- TOMBOL FULL SCREEN -->
+      <button
+        class="fullscreen-btn"
+        id="fullscreenBtn"
+        aria-label="Layar penuh"
+        title="Layar penuh"
+      >
+        ⛶
+      </button>
+
     </div>
+
   </header>
 
   <!-- VIEWER -->
@@ -367,7 +462,7 @@
       draggable="false"
     />
 
-    <!-- PREV -->
+    <!-- PREVIOUS -->
     <button
       class="nav-btn nav-prev"
       id="btnOverlayPrev"
@@ -446,7 +541,6 @@ const BRANCH = "main";
    ========================================================== */
 
 let pages = [];
-
 let currentIndex = 0;
 
 
@@ -484,11 +578,12 @@ const btnOverlayNext =
 const viewerArea =
   document.getElementById("viewerArea");
 
+const fullscreenBtn =
+  document.getElementById("fullscreenBtn");
+
 
 /* ==========================================================
-   FUNGSI ENCODE PATH GITHUB
-
-   Sangat penting karena nama folder memiliki tanda "?"
+   ENCODE PATH GITHUB
    ========================================================== */
 
 function encodeGitHubPath(path) {
@@ -516,8 +611,6 @@ async function loadComicPages() {
 
   comicDisplay.style.display = "none";
 
-
-  /* PATH SUDAH DI-ENCODE */
 
   const encodedFolderPath =
     encodeGitHubPath(FOLDER_PATH);
@@ -577,10 +670,6 @@ async function loadComicPages() {
       await response.json();
 
 
-    /* ======================================================
-       EKSTENSI GAMBAR
-       ====================================================== */
-
     const validExtensions = [
       ".jpg",
       ".jpeg",
@@ -609,7 +698,6 @@ async function loadComicPages() {
       .map(file => ({
 
         name: file.name,
-
         url: file.download_url
 
       }))
@@ -628,14 +716,9 @@ async function loadComicPages() {
       );
 
 
-    /* ======================================================
-       TIDAK ADA GAMBAR
-       ====================================================== */
-
     if (pages.length === 0) {
 
       pageInfo.textContent = "0 / 0";
-
       footerInfo.textContent = "0 / 0";
 
       statusMsg.innerHTML = `
@@ -645,18 +728,12 @@ async function loadComicPages() {
       `;
 
       return;
-
     }
 
-
-    /* ======================================================
-       TAMPILKAN GAMBAR
-       ====================================================== */
 
     statusMsg.style.display = "none";
 
     comicDisplay.style.display = "block";
-
 
     renderPage(0);
 
@@ -664,7 +741,6 @@ async function loadComicPages() {
   } catch (error) {
 
     console.error(error);
-
 
     statusMsg.innerHTML = `
       <strong style="color:#ff7777;">
@@ -680,7 +756,7 @@ async function loadComicPages() {
 
 
 /* ==========================================================
-   TAMPILKAN HALAMAN
+   RENDER PAGE
    ========================================================== */
 
 function renderPage(index) {
@@ -696,17 +772,9 @@ function renderPage(index) {
   currentIndex = index;
 
 
-  /* ======================================================
-     LOAD IMAGE
-     ====================================================== */
-
   comicDisplay.src =
     pages[currentIndex].url;
 
-
-  /* ======================================================
-     NOMOR HALAMAN
-     ====================================================== */
 
   pageInfo.textContent =
     `Halaman ${currentIndex + 1} dari ${pages.length}`;
@@ -716,10 +784,6 @@ function renderPage(index) {
     `${currentIndex + 1} / ${pages.length}`;
 
 
-  /* ======================================================
-     PROGRESS
-     ====================================================== */
-
   const progress =
     ((currentIndex + 1) / pages.length) * 100;
 
@@ -727,10 +791,6 @@ function renderPage(index) {
   progressBar.style.width =
     `${progress}%`;
 
-
-  /* ======================================================
-     BUTTON STATUS
-     ====================================================== */
 
   const isFirst =
     currentIndex === 0;
@@ -740,17 +800,13 @@ function renderPage(index) {
 
 
   btnPrev.disabled = isFirst;
-
   btnNext.disabled = isLast;
 
   btnOverlayPrev.disabled = isFirst;
-
   btnOverlayNext.disabled = isLast;
 
 
-  /* ======================================================
-     PRELOAD HALAMAN BERIKUTNYA
-     ====================================================== */
+  /* Preload halaman berikutnya */
 
   if (!isLast) {
 
@@ -766,7 +822,7 @@ function renderPage(index) {
 
 
 /* ==========================================================
-   NEXT
+   NEXT / PREVIOUS
    ========================================================== */
 
 function nextPage() {
@@ -785,10 +841,6 @@ function nextPage() {
 }
 
 
-/* ==========================================================
-   PREVIOUS
-   ========================================================== */
-
 function prevPage() {
 
   if (currentIndex > 0) {
@@ -803,7 +855,7 @@ function prevPage() {
 
 
 /* ==========================================================
-   BUTTON
+   BUTTON NAVIGASI
    ========================================================== */
 
 btnNext.addEventListener(
@@ -839,9 +891,7 @@ window.addEventListener(
       e.key === "ArrowRight" ||
       e.key === "PageDown"
     ) {
-
       nextPage();
-
     }
 
 
@@ -849,25 +899,25 @@ window.addEventListener(
       e.key === "ArrowLeft" ||
       e.key === "PageUp"
     ) {
-
       prevPage();
-
     }
 
 
     if (e.key === "Home") {
-
       renderPage(0);
-
     }
 
 
     if (e.key === "End") {
+      renderPage(pages.length - 1);
+    }
 
-      renderPage(
-        pages.length - 1
-      );
 
+    /* Tombol F11 alternatif */
+
+    if (e.key === "F11") {
+      e.preventDefault();
+      toggleFullscreen();
     }
 
   }
@@ -879,10 +929,7 @@ window.addEventListener(
    ========================================================== */
 
 let touchStartX = 0;
-let touchEndX = 0;
-
 let touchStartY = 0;
-let touchEndY = 0;
 
 
 viewerArea.addEventListener(
@@ -912,10 +959,10 @@ viewerArea.addEventListener(
     const touch =
       e.changedTouches[0];
 
-    touchEndX =
+    const touchEndX =
       touch.screenX;
 
-    touchEndY =
+    const touchEndY =
       touch.screenY;
 
 
@@ -926,8 +973,6 @@ viewerArea.addEventListener(
       touchEndY - touchStartY;
 
 
-    /* Hanya horizontal swipe */
-
     if (
       Math.abs(differenceX) > 50 &&
       Math.abs(differenceX) >
@@ -935,13 +980,9 @@ viewerArea.addEventListener(
     ) {
 
       if (differenceX < 0) {
-
         nextPage();
-
       } else {
-
         prevPage();
-
       }
 
     }
@@ -992,7 +1033,84 @@ comicDisplay.addEventListener(
 
 
 /* ==========================================================
-   MULAI
+   FULL SCREEN
+   ========================================================== */
+
+async function toggleFullscreen() {
+
+  try {
+
+    if (!document.fullscreenElement) {
+
+      await document.documentElement.requestFullscreen();
+
+    } else {
+
+      await document.exitFullscreen();
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Fullscreen tidak tersedia:",
+      error
+    );
+
+  }
+
+}
+
+
+/* ==========================================================
+   UPDATE ICON FULL SCREEN
+   ========================================================== */
+
+function updateFullscreenButton() {
+
+  if (document.fullscreenElement) {
+
+    fullscreenBtn.textContent = "✕";
+
+    fullscreenBtn.title =
+      "Keluar dari layar penuh";
+
+    fullscreenBtn.setAttribute(
+      "aria-label",
+      "Keluar dari layar penuh"
+    );
+
+  } else {
+
+    fullscreenBtn.textContent = "⛶";
+
+    fullscreenBtn.title =
+      "Layar penuh";
+
+    fullscreenBtn.setAttribute(
+      "aria-label",
+      "Layar penuh"
+    );
+
+  }
+
+}
+
+
+fullscreenBtn.addEventListener(
+  "click",
+  toggleFullscreen
+);
+
+
+document.addEventListener(
+  "fullscreenchange",
+  updateFullscreenButton
+);
+
+
+/* ==========================================================
+   START
    ========================================================== */
 
 loadComicPages();

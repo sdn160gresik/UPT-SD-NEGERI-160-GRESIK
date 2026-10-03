@@ -1,0 +1,1003 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>DIMANA INDONESIA BERADA? - Comic Reader</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ==============================
+       HEADER
+    ============================== */
+
+    header {
+      height: 56px;
+      flex-shrink: 0;
+
+      padding: 0 18px;
+
+      background: #171717;
+      border-bottom: 1px solid #303030;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      z-index: 10;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .page-info {
+      color: #aaa;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    /* ==============================
+       VIEWER
+    ============================== */
+
+    .viewer-area {
+      position: relative;
+
+      flex: 1;
+
+      min-height: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: #000;
+
+      overflow: hidden;
+
+      touch-action: pan-y;
+    }
+
+    .comic-img {
+      display: none;
+
+      max-width: 100%;
+      max-height: 100%;
+
+      width: auto;
+      height: auto;
+
+      object-fit: contain;
+
+      user-select: none;
+      -webkit-user-drag: none;
+
+      transition: opacity 0.2s ease;
+    }
+
+    /* ==============================
+       STATUS
+    ============================== */
+
+    .status-msg {
+      position: absolute;
+
+      left: 50%;
+      top: 50%;
+
+      transform: translate(-50%, -50%);
+
+      width: 90%;
+
+      text-align: center;
+
+      color: #aaa;
+
+      font-size: 15px;
+
+      line-height: 1.6;
+    }
+
+    .loading-circle {
+      width: 36px;
+      height: 36px;
+
+      margin: 0 auto 14px;
+
+      border: 3px solid #333;
+      border-top-color: #fff;
+
+      border-radius: 50%;
+
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ==============================
+       NAVIGASI SAMPING
+    ============================== */
+
+    .nav-btn {
+      position: absolute;
+
+      top: 0;
+      bottom: 0;
+
+      width: 15%;
+
+      max-width: 120px;
+
+      border: none;
+
+      background: transparent;
+
+      color: rgba(255,255,255,0.25);
+
+      font-size: 34px;
+
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      transition:
+        background 0.2s ease,
+        color 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+
+    .nav-btn:disabled {
+      display: none;
+    }
+
+    .nav-prev {
+      left: 0;
+    }
+
+    .nav-next {
+      right: 0;
+    }
+
+    /* ==============================
+       FOOTER
+    ============================== */
+
+    footer {
+      flex-shrink: 0;
+
+      background: #171717;
+
+      border-top: 1px solid #303030;
+
+      padding: 10px 15px;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 3px;
+
+      background: #333;
+
+      border-radius: 10px;
+
+      overflow: hidden;
+
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+
+      background: #fff;
+
+      transition: width 0.25s ease;
+    }
+
+    .footer-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 12px;
+    }
+
+    .action-btn {
+      background: #282828;
+
+      color: #fff;
+
+      border: 1px solid #444;
+
+      padding: 9px 18px;
+
+      border-radius: 6px;
+
+      font-size: 13px;
+
+      cursor: pointer;
+
+      min-width: 120px;
+
+      transition:
+        background 0.2s ease,
+        opacity 0.2s ease;
+    }
+
+    .action-btn:hover:not(:disabled) {
+      background: #3a3a3a;
+    }
+
+    .action-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .counter {
+      min-width: 75px;
+
+      text-align: center;
+
+      color: #aaa;
+
+      font-size: 13px;
+    }
+
+    /* ==============================
+       MOBILE
+    ============================== */
+
+    @media (max-width: 600px) {
+
+      header {
+        height: 50px;
+        padding: 0 10px;
+      }
+
+      .title {
+        font-size: 13px;
+      }
+
+      .page-info {
+        font-size: 11px;
+      }
+
+      .nav-btn {
+        width: 13%;
+        font-size: 25px;
+      }
+
+      footer {
+        padding: 8px;
+      }
+
+      .footer-controls {
+        gap: 6px;
+      }
+
+      .action-btn {
+        min-width: 0;
+        flex: 1;
+        padding: 9px 8px;
+        font-size: 12px;
+      }
+
+      .counter {
+        min-width: 50px;
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="title">
+      📖 DIMANA INDONESIA BERADA?
+    </div>
+
+    <div class="page-info" id="pageInfo">
+      Memuat...
+    </div>
+  </header>
+
+  <!-- VIEWER -->
+  <main
+    class="viewer-area"
+    id="viewerArea"
+  >
+
+    <div
+      id="statusMsg"
+      class="status-msg"
+    >
+      <div class="loading-circle"></div>
+      Memuat daftar halaman komik...
+    </div>
+
+    <img
+      id="comicDisplay"
+      class="comic-img"
+      alt="Halaman Komik"
+      draggable="false"
+    />
+
+    <!-- PREV -->
+    <button
+      class="nav-btn nav-prev"
+      id="btnOverlayPrev"
+      aria-label="Halaman sebelumnya"
+    >
+      ❮
+    </button>
+
+    <!-- NEXT -->
+    <button
+      class="nav-btn nav-next"
+      id="btnOverlayNext"
+      aria-label="Halaman berikutnya"
+    >
+      ❯
+    </button>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="progress-container">
+      <div
+        class="progress-bar"
+        id="progressBar"
+      ></div>
+    </div>
+
+    <div class="footer-controls">
+
+      <button
+        class="action-btn"
+        id="btnPrev"
+      >
+        ❮ Sebelumnya
+      </button>
+
+      <div
+        class="counter"
+        id="footerInfo"
+      >
+        0 / 0
+      </div>
+
+      <button
+        class="action-btn"
+        id="btnNext"
+      >
+        Berikutnya ❯
+      </button>
+
+    </div>
+
+  </footer>
+
+
+<script>
+
+/* ==========================================================
+   KONFIGURASI SUMBER KOMIK
+   ========================================================== */
+
+const GITHUB_USERNAME = "sdn160gresik";
+
+const GITHUB_REPO = "komik";
+
+const FOLDER_PATH =
+  "ipas/DIMANA_INDONESIA_BERADA?";
+
+const BRANCH = "main";
+
+
+/* ==========================================================
+   VARIABEL
+   ========================================================== */
+
+let pages = [];
+
+let currentIndex = 0;
+
+
+/* ==========================================================
+   ELEMENT
+   ========================================================== */
+
+const pageInfo =
+  document.getElementById("pageInfo");
+
+const footerInfo =
+  document.getElementById("footerInfo");
+
+const comicDisplay =
+  document.getElementById("comicDisplay");
+
+const statusMsg =
+  document.getElementById("statusMsg");
+
+const progressBar =
+  document.getElementById("progressBar");
+
+const btnPrev =
+  document.getElementById("btnPrev");
+
+const btnNext =
+  document.getElementById("btnNext");
+
+const btnOverlayPrev =
+  document.getElementById("btnOverlayPrev");
+
+const btnOverlayNext =
+  document.getElementById("btnOverlayNext");
+
+const viewerArea =
+  document.getElementById("viewerArea");
+
+
+/* ==========================================================
+   FUNGSI ENCODE PATH GITHUB
+
+   Sangat penting karena nama folder memiliki tanda "?"
+   ========================================================== */
+
+function encodeGitHubPath(path) {
+
+  return path
+    .split("/")
+    .map(part => encodeURIComponent(part))
+    .join("/");
+
+}
+
+
+/* ==========================================================
+   LOAD KOMIK
+   ========================================================== */
+
+async function loadComicPages() {
+
+  statusMsg.style.display = "block";
+
+  statusMsg.innerHTML = `
+    <div class="loading-circle"></div>
+    Memuat daftar halaman komik...
+  `;
+
+  comicDisplay.style.display = "none";
+
+
+  /* PATH SUDAH DI-ENCODE */
+
+  const encodedFolderPath =
+    encodeGitHubPath(FOLDER_PATH);
+
+
+  const apiUrl =
+    `https://api.github.com/repos/` +
+    `${GITHUB_USERNAME}/` +
+    `${GITHUB_REPO}/` +
+    `contents/${encodedFolderPath}` +
+    `?ref=${encodeURIComponent(BRANCH)}`;
+
+
+  try {
+
+    const response =
+      await fetch(apiUrl, {
+        headers: {
+          "Accept":
+            "application/vnd.github+json"
+        },
+
+        cache: "no-store"
+      });
+
+
+    if (!response.ok) {
+
+      if (response.status === 404) {
+
+        throw new Error(
+          "Folder komik tidak ditemukan. " +
+          "Periksa nama folder GitHub."
+        );
+
+      }
+
+
+      if (response.status === 403) {
+
+        throw new Error(
+          "GitHub API sedang membatasi permintaan. " +
+          "Silakan coba beberapa saat lagi."
+        );
+
+      }
+
+
+      throw new Error(
+        `Gagal mengambil data GitHub: HTTP ${response.status}`
+      );
+
+    }
+
+
+    const files =
+      await response.json();
+
+
+    /* ======================================================
+       EKSTENSI GAMBAR
+       ====================================================== */
+
+    const validExtensions = [
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".webp",
+      ".gif"
+    ];
+
+
+    pages =
+      files
+
+      .filter(file =>
+
+        file.type === "file" &&
+
+        validExtensions.some(
+          ext =>
+            file.name
+              .toLowerCase()
+              .endsWith(ext)
+        )
+
+      )
+
+      .map(file => ({
+
+        name: file.name,
+
+        url: file.download_url
+
+      }))
+
+      .sort((a, b) =>
+
+        a.name.localeCompare(
+          b.name,
+          undefined,
+          {
+            numeric: true,
+            sensitivity: "base"
+          }
+        )
+
+      );
+
+
+    /* ======================================================
+       TIDAK ADA GAMBAR
+       ====================================================== */
+
+    if (pages.length === 0) {
+
+      pageInfo.textContent = "0 / 0";
+
+      footerInfo.textContent = "0 / 0";
+
+      statusMsg.innerHTML = `
+        Tidak ditemukan gambar komik
+        di folder:<br><br>
+        <strong>${FOLDER_PATH}</strong>
+      `;
+
+      return;
+
+    }
+
+
+    /* ======================================================
+       TAMPILKAN GAMBAR
+       ====================================================== */
+
+    statusMsg.style.display = "none";
+
+    comicDisplay.style.display = "block";
+
+
+    renderPage(0);
+
+
+  } catch (error) {
+
+    console.error(error);
+
+
+    statusMsg.innerHTML = `
+      <strong style="color:#ff7777;">
+        Gagal memuat komik
+      </strong>
+      <br><br>
+      ${error.message}
+    `;
+
+  }
+
+}
+
+
+/* ==========================================================
+   TAMPILKAN HALAMAN
+   ========================================================== */
+
+function renderPage(index) {
+
+  if (
+    index < 0 ||
+    index >= pages.length
+  ) {
+    return;
+  }
+
+
+  currentIndex = index;
+
+
+  /* ======================================================
+     LOAD IMAGE
+     ====================================================== */
+
+  comicDisplay.src =
+    pages[currentIndex].url;
+
+
+  /* ======================================================
+     NOMOR HALAMAN
+     ====================================================== */
+
+  pageInfo.textContent =
+    `Halaman ${currentIndex + 1} dari ${pages.length}`;
+
+
+  footerInfo.textContent =
+    `${currentIndex + 1} / ${pages.length}`;
+
+
+  /* ======================================================
+     PROGRESS
+     ====================================================== */
+
+  const progress =
+    ((currentIndex + 1) / pages.length) * 100;
+
+
+  progressBar.style.width =
+    `${progress}%`;
+
+
+  /* ======================================================
+     BUTTON STATUS
+     ====================================================== */
+
+  const isFirst =
+    currentIndex === 0;
+
+  const isLast =
+    currentIndex === pages.length - 1;
+
+
+  btnPrev.disabled = isFirst;
+
+  btnNext.disabled = isLast;
+
+  btnOverlayPrev.disabled = isFirst;
+
+  btnOverlayNext.disabled = isLast;
+
+
+  /* ======================================================
+     PRELOAD HALAMAN BERIKUTNYA
+     ====================================================== */
+
+  if (!isLast) {
+
+    const preloadNext =
+      new Image();
+
+    preloadNext.src =
+      pages[currentIndex + 1].url;
+
+  }
+
+}
+
+
+/* ==========================================================
+   NEXT
+   ========================================================== */
+
+function nextPage() {
+
+  if (
+    currentIndex <
+    pages.length - 1
+  ) {
+
+    renderPage(
+      currentIndex + 1
+    );
+
+  }
+
+}
+
+
+/* ==========================================================
+   PREVIOUS
+   ========================================================== */
+
+function prevPage() {
+
+  if (currentIndex > 0) {
+
+    renderPage(
+      currentIndex - 1
+    );
+
+  }
+
+}
+
+
+/* ==========================================================
+   BUTTON
+   ========================================================== */
+
+btnNext.addEventListener(
+  "click",
+  nextPage
+);
+
+btnPrev.addEventListener(
+  "click",
+  prevPage
+);
+
+btnOverlayNext.addEventListener(
+  "click",
+  nextPage
+);
+
+btnOverlayPrev.addEventListener(
+  "click",
+  prevPage
+);
+
+
+/* ==========================================================
+   KEYBOARD
+   ========================================================== */
+
+window.addEventListener(
+  "keydown",
+  function(e) {
+
+    if (
+      e.key === "ArrowRight" ||
+      e.key === "PageDown"
+    ) {
+
+      nextPage();
+
+    }
+
+
+    if (
+      e.key === "ArrowLeft" ||
+      e.key === "PageUp"
+    ) {
+
+      prevPage();
+
+    }
+
+
+    if (e.key === "Home") {
+
+      renderPage(0);
+
+    }
+
+
+    if (e.key === "End") {
+
+      renderPage(
+        pages.length - 1
+      );
+
+    }
+
+  }
+);
+
+
+/* ==========================================================
+   SWIPE HP
+   ========================================================== */
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+let touchStartY = 0;
+let touchEndY = 0;
+
+
+viewerArea.addEventListener(
+  "touchstart",
+  function(e) {
+
+    const touch =
+      e.changedTouches[0];
+
+    touchStartX =
+      touch.screenX;
+
+    touchStartY =
+      touch.screenY;
+
+  },
+  {
+    passive: true
+  }
+);
+
+
+viewerArea.addEventListener(
+  "touchend",
+  function(e) {
+
+    const touch =
+      e.changedTouches[0];
+
+    touchEndX =
+      touch.screenX;
+
+    touchEndY =
+      touch.screenY;
+
+
+    const differenceX =
+      touchEndX - touchStartX;
+
+    const differenceY =
+      touchEndY - touchStartY;
+
+
+    /* Hanya horizontal swipe */
+
+    if (
+      Math.abs(differenceX) > 50 &&
+      Math.abs(differenceX) >
+      Math.abs(differenceY)
+    ) {
+
+      if (differenceX < 0) {
+
+        nextPage();
+
+      } else {
+
+        prevPage();
+
+      }
+
+    }
+
+  },
+  {
+    passive: true
+  }
+);
+
+
+/* ==========================================================
+   IMAGE ERROR
+   ========================================================== */
+
+comicDisplay.addEventListener(
+  "error",
+  function() {
+
+    statusMsg.style.display =
+      "block";
+
+    statusMsg.innerHTML = `
+      <strong style="color:#ff7777;">
+        Gambar gagal dimuat
+      </strong>
+      <br><br>
+      Periksa file gambar di repository komik.
+    `;
+
+  }
+);
+
+
+/* ==========================================================
+   IMAGE LOADED
+   ========================================================== */
+
+comicDisplay.addEventListener(
+  "load",
+  function() {
+
+    statusMsg.style.display =
+      "none";
+
+  }
+);
+
+
+/* ==========================================================
+   MULAI
+   ========================================================== */
+
+loadComicPages();
+
+</script>
+
+</body>
+</html>

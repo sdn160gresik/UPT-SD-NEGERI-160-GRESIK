@@ -1,2146 +1,1377 @@
+```html
 <!DOCTYPE html>
-
 <html lang="id">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Literasi | Petualangan Kelas 5</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            color: #263238;
+
+            background:
+                linear-gradient(
+                    rgba(225, 245, 254, .90),
+                    rgba(255, 248, 225, .95)
+                ),
+                url("https://i.imgur.com/clG3P3n.png")
+                center / cover fixed;
+
+            min-height: 100vh;
+        }
+
+        /* ================================
+           HEADER
+        ================================= */
+
+        header {
+            padding: 30px 20px 25px;
+            text-align: center;
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0288d1,
+                    #26c6da,
+                    #66bb6a
+                );
+
+            box-shadow:
+                0 5px 18px rgba(0, 0, 0, .18);
+        }
+
+        .header-icon {
+            font-size: 54px;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: clamp(25px, 5vw, 38px);
+            font-weight: 800;
+        }
+
+        header p {
+            margin: 8px auto 0;
+            max-width: 700px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* ================================
+           NAVBAR
+        ================================= */
 
-<meta charset="UTF-8">
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
+            padding: 15px;
 
->
+            background: rgba(255, 255, 255, .96);
 
-<title>
-    Literasi | Petualangan Kelas 5
-</title>
+            box-shadow:
+                0 3px 12px rgba(0, 0, 0, .10);
 
-<!-- =====================================================
-     GOOGLE FONT
-===================================================== -->
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-<link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
->
+        nav a {
+            text-decoration: none;
+            color: #37474f;
 
-<style>
+            background: #f5f5f5;
 
-/* =====================================================
-   RESET
-===================================================== */
+            padding: 9px 15px;
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+            border-radius: 25px;
 
+            font-size: 13px;
+            font-weight: 700;
 
-/* =====================================================
-   BODY
-===================================================== */
+            transition: .25s;
+        }
 
-body {
+        nav a:hover {
+            color: white;
+            background: #0288d1;
 
-    font-family:
-        "Poppins",
-        sans-serif;
+            transform: translateY(-2px);
+        }
 
-    min-height:
-        100vh;
+        nav a.active {
+            color: white;
+            background: #0288d1;
+        }
 
-    background:
+        /* ================================
+           CONTAINER
+        ================================= */
 
-        linear-gradient(
-            rgba(225,245,254,.90),
-            rgba(255,248,225,.95)
-        ),
+        .container {
+            width: min(1100px, 94%);
+            margin: 28px auto 40px;
+        }
 
-        url(
-            "https://i.imgur.com/clG3P3n.png"
-        )
+        /* ================================
+           INFO
+        ================================= */
 
-        center /
-        cover
-        fixed;
+        .info-box {
+            display: flex;
+            align-items: center;
+            gap: 18px;
 
-    color:
-        #263238;
-}
+            padding: 20px;
 
+            margin-bottom: 25px;
 
-/* =====================================================
-   HEADER
-===================================================== */
+            border-radius: 20px;
 
-header {
+            background:
+                linear-gradient(
+                    135deg,
+                    #fffde7,
+                    #e1f5fe
+                );
 
-    position:
-        relative;
+            border: 2px solid rgba(2, 136, 209, .15);
 
-    overflow:
-        hidden;
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, .08);
+        }
 
-    padding:
-        30px 20px 35px;
+        .info-icon {
+            min-width: 60px;
+            height: 60px;
 
-    text-align:
-        center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    background:
+            border-radius: 50%;
 
-        linear-gradient(
-            135deg,
-            #0288d1,
-            #26c6da,
-            #66bb6a
-        );
+            background: #ffca28;
 
-    color:
-        white;
+            font-size: 30px;
 
-    box-shadow:
-        0 5px 18px rgba(0,0,0,.18);
-}
+            box-shadow:
+                0 5px 12px rgba(0, 0, 0, .15);
+        }
 
+        .info-box h2 {
+            margin: 0 0 5px;
 
-header::before {
+            font-size: 19px;
+            color: #1565c0;
+        }
 
-    content:
-        "☁️";
+        .info-box p {
+            margin: 0;
 
-    position:
-        absolute;
+            font-size: 13px;
+            line-height: 1.6;
+        }
 
-    left:
-        6%;
+        /* ================================
+           COLLECTION HEADER
+        ================================= */
 
-    top:
-        15px;
+        .collection-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-    font-size:
-        42px;
+            gap: 10px;
 
-    opacity:
-        .8;
-}
+            margin-bottom: 18px;
+        }
 
+        .collection-header h2 {
+            margin: 0;
 
-header::after {
+            color: #1565c0;
 
-    content:
-        "☁️";
+            font-size: clamp(20px, 4vw, 27px);
+        }
 
-    position:
-        absolute;
+        .count-badge {
+            padding: 6px 12px;
 
-    right:
-        8%;
+            border-radius: 20px;
 
-    bottom:
-        15px;
+            background: #0288d1;
+            color: white;
 
-    font-size:
-        48px;
+            font-size: 12px;
+            font-weight: 700;
 
-    opacity:
-        .8;
-}
+            white-space: nowrap;
+        }
 
+        /* ================================
+           GRID
+        ================================= */
 
-/* =====================================================
-   LOGO
-===================================================== */
+        .comic-grid {
+            display: grid;
 
-.logo {
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
 
-    font-size:
-        52px;
+            gap: 22px;
+        }
 
-    margin-bottom:
-        5px;
+        .comic-card {
+            position: relative;
 
-    filter:
-        drop-shadow(
-            0 4px 2px rgba(0,0,0,.2)
-        );
-}
+            background: white;
 
+            border-radius: 22px;
 
-/* =====================================================
-   BADGE
-===================================================== */
+            padding: 14px;
 
-.badge {
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, .12);
 
-    display:
-        inline-block;
+            transition:
+                transform .25s,
+                box-shadow .25s;
 
-    background:
-        rgba(255,255,255,.2);
+            overflow: hidden;
+        }
 
-    border:
-        2px solid rgba(255,255,255,.8);
+        .comic-card:hover {
+            transform: translateY(-6px) rotate(.3deg);
 
-    border-radius:
-        30px;
+            box-shadow:
+                0 15px 32px rgba(0, 0, 0, .18);
+        }
 
-    padding:
-        6px 18px;
+        /* ================================
+           NUMBER
+        ================================= */
 
-    font-size:
-        13px;
+        .comic-number {
+            position: absolute;
 
-    font-weight:
-        700;
+            top: 10px;
+            left: 10px;
 
-    letter-spacing:
-        1px;
+            width: 42px;
+            height: 42px;
 
-    margin-bottom:
-        10px;
-}
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
+            border-radius: 50%;
 
-header h1 {
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffb300,
+                    #ff7043
+                );
 
-    font-size:
-        clamp(
-            25px,
-            5vw,
-            42px
-        );
+            color: white;
 
-    font-weight:
-        800;
+            font-size: 18px;
+            font-weight: 800;
 
-    text-shadow:
-        0 3px 4px rgba(0,0,0,.2);
-}
+            border: 3px solid white;
 
+            box-shadow:
+                0 4px 10px rgba(0, 0, 0, .20);
 
-header p {
+            z-index: 2;
+        }
 
-    margin-top:
-        8px;
+        /* ================================
+           THUMBNAIL
+        ================================= */
 
-    font-size:
-        15px;
-}
+        .thumbnail-link {
+            display: block;
 
+            position: relative;
 
-/* =====================================================
-   NAVBAR
-===================================================== */
+            text-decoration: none;
 
-.navbar {
+            overflow: hidden;
 
-    display:
-        flex;
+            border-radius: 16px;
+        }
 
-    justify-content:
-        center;
+        .thumbnail-link img {
+            display: block;
 
-    align-items:
-        center;
+            width: 100%;
 
-    gap:
-        12px;
+            aspect-ratio: 4 / 3;
 
-    flex-wrap:
-        wrap;
+            object-fit: cover;
 
-    padding:
-        15px;
+            background: #eceff1;
 
-    background:
-        rgba(255,255,255,.95);
+            transition:
+                transform .35s;
+        }
 
-    box-shadow:
-        0 3px 12px rgba(0,0,0,.1);
-}
+        .comic-card:hover
+        .thumbnail-link img {
+            transform: scale(1.04);
+        }
 
+        /* ================================
+           BACA BUTTON
+        ================================= */
 
-.navbar a {
+        .baca-label {
+            position: absolute;
 
-    text-decoration:
-        none;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
 
-    color:
-        #0277bd;
+            display: flex;
 
-    font-weight:
-        700;
+            justify-content: center;
+            align-items: center;
 
-    background:
-        #e1f5fe;
+            padding: 11px;
 
-    padding:
-        9px 17px;
+            border-radius: 14px;
 
-    border-radius:
-        25px;
+            background:
+                rgba(2, 136, 209, .94);
 
-    transition:
-        .25s;
-}
+            color: white;
 
+            font-size: 14px;
+            font-weight: 700;
 
-.navbar a:hover {
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, .20);
 
-    background:
-        #0288d1;
+            transition: .25s;
+        }
 
-    color:
-        white;
+        .thumbnail-link:hover
+        .baca-label {
+            background: #00695c;
 
-    transform:
-        translateY(-2px);
-}
+            transform: translateY(-2px);
+        }
 
+        /* ================================
+           LOADING
+        ================================= */
 
-/* =====================================================
-   CONTAINER
-===================================================== */
+        .loading {
+            text-align: center;
 
-.container {
+            padding: 45px 20px;
 
-    width:
-        min(
-            1100px,
-            94%
-        );
+            color: #1565c0;
 
-    margin:
-        25px auto 50px;
-}
+            font-weight: 600;
 
+            background: rgba(255,255,255,.85);
 
-/* =====================================================
-   INFO BOX
-===================================================== */
+            border-radius: 20px;
+        }
 
-.info-box {
+        .loading-icon {
+            display: block;
 
-    background:
-        white;
+            font-size: 42px;
 
-    border-radius:
-        22px;
+            margin-bottom: 10px;
 
-    padding:
-        22px;
+            animation:
+                bounce 1.2s infinite;
+        }
 
-    text-align:
-        center;
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
 
-    box-shadow:
-        0 8px 22px rgba(0,0,0,.1);
+            50% {
+                transform: translateY(-8px);
+            }
+        }
 
-    margin-bottom:
-        25px;
+        /* ================================
+           ERROR
+        ================================= */
 
-    border:
-        3px solid #81d4fa;
-}
+        .error-box {
+            display: none;
 
+            padding: 25px;
 
-.info-icon {
+            margin-bottom: 25px;
 
-    font-size:
-        42px;
+            text-align: center;
 
-    margin-bottom:
-        5px;
-}
+            border-radius: 20px;
 
+            background: #ffebee;
 
-.info-box h2 {
+            border: 2px solid #ef5350;
 
-    color:
-        #0277bd;
+            color: #b71c1c;
+        }
 
-    font-size:
-        22px;
-}
+        .error-box strong {
+            display: block;
 
+            font-size: 18px;
 
-.info-box p {
+            margin-bottom: 8px;
+        }
 
-    margin-top:
-        5px;
+        .error-message {
+            margin: 0 0 16px;
 
-    color:
-        #546e7a;
-}
+            font-size: 13px;
 
+            line-height: 1.6;
+        }
 
-/* =====================================================
-   JUDUL KOLEKSI
-===================================================== */
+        .retry-button {
+            border: none;
 
-.collection-title {
+            cursor: pointer;
 
-    display:
-        flex;
+            padding: 10px 18px;
 
-    justify-content:
-        space-between;
+            border-radius: 25px;
 
-    align-items:
-        center;
+            background: #ef5350;
 
-    gap:
-        15px;
+            color: white;
 
-    flex-wrap:
-        wrap;
+            font-family: inherit;
 
-    margin-bottom:
-        18px;
-}
+            font-size: 13px;
+            font-weight: 700;
 
+            transition: .2s;
+        }
 
-.collection-title h2 {
+        .retry-button:hover {
+            background: #c62828;
 
-    color:
-        #37474f;
+            transform: translateY(-2px);
+        }
 
-    font-size:
-        24px;
-}
+        /* ================================
+           PAGINATION
+        ================================= */
 
+        .pagination {
+            display: flex;
 
-.total {
+            justify-content: center;
+            align-items: center;
 
-    background:
-        #ffca28;
+            flex-wrap: wrap;
 
-    color:
-        #5d4037;
+            gap: 8px;
 
-    padding:
-        7px 15px;
+            margin-top: 28px;
+        }
 
-    border-radius:
-        20px;
+        .page-button {
+            min-width: 40px;
+            height: 40px;
 
-    font-weight:
-        700;
+            border: none;
 
-    font-size:
-        14px;
-}
+            border-radius: 12px;
 
+            background: white;
 
-/* =====================================================
-   LOADING
-===================================================== */
+            color: #1565c0;
 
-.loading {
+            font-family: inherit;
 
-    text-align:
-        center;
+            font-weight: 700;
 
-    background:
-        white;
+            cursor: pointer;
 
-    padding:
-        40px 20px;
+            box-shadow:
+                0 4px 10px rgba(0,0,0,.10);
 
-    border-radius:
-        20px;
+            transition: .2s;
+        }
 
-    box-shadow:
-        0 5px 15px rgba(0,0,0,.08);
-}
+        .page-button:hover {
+            background: #e1f5fe;
+        }
 
+        .page-button.active {
+            background: #0288d1;
+            color: white;
+        }
 
-.loading-icon {
+        .page-button:disabled {
+            opacity: .45;
+            cursor: not-allowed;
+        }
 
-    font-size:
-        45px;
+        /* ================================
+           FOOTER
+        ================================= */
 
-    animation:
-        jalan 1s infinite alternate;
-}
+        footer {
+            margin-top: 45px;
 
+            padding: 25px 15px;
 
-@keyframes jalan {
+            text-align: center;
 
-    from {
-        transform:
-            translateX(-8px);
-    }
+            color: white;
 
-    to {
-        transform:
-            translateX(8px);
-    }
+            background:
+                linear-gradient(
+                    135deg,
+                    #1565c0,
+                    #00897b
+                );
+        }
 
-}
+        footer strong {
+            display: block;
 
+            font-size: 16px;
 
-/* =====================================================
-   GRID KOMIK
-===================================================== */
+            margin-bottom: 5px;
+        }
 
-.comic-grid {
+        footer p {
+            margin: 4px 0;
 
-    display:
-        grid;
+            font-size: 12px;
+        }
 
-    grid-template-columns:
-        repeat(
-            2,
-            1fr
-        );
+        /* ================================
+           MOBILE
+        ================================= */
 
-    gap:
-        24px;
-}
+        @media (max-width: 650px) {
 
+            header {
+                padding: 25px 15px 22px;
+            }
 
-/* =====================================================
-   CARD
-===================================================== */
+            .header-icon {
+                font-size: 44px;
+            }
 
-.comic-card {
+            nav {
+                padding: 10px;
 
-    position:
-        relative;
+                gap: 6px;
+            }
 
-    background:
-        white;
+            nav a {
+                padding: 8px 11px;
 
-    border-radius:
-        22px;
+                font-size: 11px;
+            }
 
-    overflow:
-        hidden;
+            .container {
+                width: 92%;
 
-    border:
-        3px solid white;
+                margin-top: 20px;
+            }
 
-    box-shadow:
-        0 8px 22px rgba(0,0,0,.12);
+            .info-box {
+                align-items: flex-start;
 
-    transition:
-        .3s ease;
-}
+                padding: 15px;
 
+                gap: 12px;
+            }
 
-.comic-card:hover {
+            .info-icon {
+                min-width: 48px;
+                height: 48px;
 
-    transform:
-        translateY(-7px);
+                font-size: 24px;
+            }
 
-    box-shadow:
-        0 14px 28px rgba(0,0,0,.18);
-}
+            .info-box h2 {
+                font-size: 16px;
+            }
 
+            .info-box p {
+                font-size: 11px;
+            }
 
-/* =====================================================
-   NOMOR
-===================================================== */
+            .comic-grid {
+                grid-template-columns: 1fr;
 
-.comic-number {
+                gap: 18px;
+            }
 
-    position:
-        absolute;
+            .comic-card {
+                padding: 11px;
+            }
 
-    top:
-        12px;
+            .comic-number {
+                width: 38px;
+                height: 38px;
 
-    left:
-        12px;
+                font-size: 16px;
+            }
 
-    z-index:
-        10;
+            .baca-label {
+                font-size: 13px;
 
-    width:
-        45px;
+                padding: 10px;
+            }
+        }
 
-    height:
-        45px;
+        /* ================================
+           LANDSCAPE HP
+        ================================= */
 
-    display:
-        flex;
+        @media (max-width: 900px)
+        and (orientation: landscape) {
 
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    background:
-        #ffca28;
-
-    color:
-        #5d4037;
-
-    border-radius:
-        50%;
-
-    font-size:
-        17px;
-
-    font-weight:
-        800;
-
-    box-shadow:
-        0 3px 8px rgba(0,0,0,.25);
-}
-
-
-/* =====================================================
-   THUMBNAIL
-===================================================== */
-
-.thumbnail-link {
-
-    position:
-        relative;
-
-    display:
-        block;
-
-    width:
-        100%;
-
-    aspect-ratio:
-        16 / 9;
-
-    background:
-        #eceff1;
-
-    overflow:
-        hidden;
-
-    text-decoration:
-        none;
-}
-
-
-.thumbnail-link img {
-
-    width:
-        100%;
-
-    height:
-        100%;
-
-    display:
-        block;
-
-    object-fit:
-        cover;
-
-    transition:
-        transform .35s ease;
-}
-
-
-.comic-card:hover
-.thumbnail-link img {
-
-    transform:
-        scale(1.06);
-}
-
-
-/* =====================================================
-   BACA
-===================================================== */
-
-.baca-label {
-
-    position:
-        absolute;
-
-    right:
-        12px;
-
-    bottom:
-        12px;
-
-    background:
-        #0288d1;
-
-    color:
-        white;
-
-    padding:
-        8px 14px;
-
-    border-radius:
-        20px;
-
-    font-size:
-        12px;
-
-    font-weight:
-        700;
-
-    box-shadow:
-        0 3px 8px rgba(0,0,0,.25);
-
-    transition:
-        .25s;
-}
-
-
-.thumbnail-link:hover
-.baca-label {
-
-    background:
-        #01579b;
-
-    transform:
-        scale(1.05);
-}
-
-
-/* =====================================================
-   PAGINATION
-===================================================== */
-
-.pagination {
-
-    display:
-        flex;
-
-    justify-content:
-        center;
-
-    align-items:
-        center;
-
-    gap:
-        8px;
-
-    flex-wrap:
-        wrap;
-
-    margin-top:
-        30px;
-}
-
-
-.pagination button {
-
-    border:
-        none;
-
-    min-width:
-        42px;
-
-    height:
-        42px;
-
-    padding:
-        0 14px;
-
-    border-radius:
-        20px;
-
-    background:
-        white;
-
-    color:
-        #0277bd;
-
-    font-family:
-        inherit;
-
-    font-weight:
-        700;
-
-    cursor:
-        pointer;
-
-    box-shadow:
-        0 4px 10px rgba(0,0,0,.1);
-
-    transition:
-        .25s;
-}
-
-
-.pagination button:hover:not(:disabled) {
-
-    background:
-        #0288d1;
-
-    color:
-        white;
-
-    transform:
-        translateY(-2px);
-}
-
-
-.pagination button.active {
-
-    background:
-        #0288d1;
-
-    color:
-        white;
-}
-
-
-.pagination button:disabled {
-
-    opacity:
-        .4;
-
-    cursor:
-        not-allowed;
-}
-
-
-/* =====================================================
-   ERROR
-===================================================== */
-
-.error-box {
-
-    display:
-        none;
-
-    background:
-        #ffebee;
-
-    color:
-        #c62828;
-
-    border:
-        2px solid #ef9a9a;
-
-    border-radius:
-        18px;
-
-    padding:
-        22px;
-
-    text-align:
-        center;
-
-    margin-bottom:
-        20px;
-}
-
-
-.error-box button {
-
-    margin-top:
-        12px;
-
-    border:
-        none;
-
-    background:
-        #c62828;
-
-    color:
-        white;
-
-    padding:
-        10px 20px;
-
-    border-radius:
-        20px;
-
-    font-family:
-        inherit;
-
-    font-weight:
-        700;
-
-    cursor:
-        pointer;
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-footer {
-
-    text-align:
-        center;
-
-    background:
-        rgba(38,50,56,.95);
-
-    color:
-        white;
-
-    padding:
-        22px 15px;
-
-    font-size:
-        13px;
-}
-
-
-footer strong {
-
-    color:
-        #81d4fa;
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width:700px) {
-
-    header {
-
-        padding:
-            25px 15px 30px;
-    }
-
-
-    .logo {
-
-        font-size:
-            42px;
-    }
-
-
-    .comic-grid {
-
-        grid-template-columns:
-            1fr;
-
-        gap:
-            18px;
-    }
-
-
-    .container {
-
-        width:
-            94%;
-
-        margin-top:
-            18px;
-    }
-
-
-    .collection-title h2 {
-
-        font-size:
-            20px;
-    }
-
-
-    .navbar {
-
-        gap:
-            7px;
-    }
-
-
-    .navbar a {
-
-        padding:
-            8px 13px;
-
-        font-size:
-            13px;
-    }
-
-}
-
-
-/* =====================================================
-   LANDSCAPE HP
-===================================================== */
-
-@media
-(max-width:900px)
-and
-(orientation:landscape) {
-
-    .comic-grid {
-
-        grid-template-columns:
-            repeat(
-                2,
-                1fr
-            );
-
-        gap:
-            15px;
-    }
-
-}
-
-
-/* =====================================================
-   HP SANGAT KECIL
-===================================================== */
-
-@media (max-width:400px) {
-
-    .baca-label {
-
-        padding:
-            7px 10px;
-
-        font-size:
-            11px;
-    }
-
-
-    .comic-number {
-
-        width:
-            40px;
-
-        height:
-            40px;
-
-        font-size:
-            15px;
-    }
-
-
-    .info-box {
-
-        padding:
-            18px 14px;
-    }
-
-}
-
-</style>
-
+            .comic-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+    <!-- =================================
+         HEADER
+    ================================== -->
 
-<header>
+    <header>
 
-```
-<div class="logo">
-    🧭
-</div>
+        <div class="header-icon">
+            🧭
+        </div>
 
+        <h1>
+            📖 PETUALANGAN LITERASI
+        </h1>
 
-<div class="badge">
-    📖 PETUALANGAN LITERASI
-</div>
+        <p>
+            Jelajah Dunia Komik
+        </p>
 
+        <p>
+            Temukan cerita menarik dan mulailah petualangan membaca!
+        </p>
 
-<h1>
-    Jelajah Dunia Komik
-</h1>
+    </header>
 
 
-<p>
-    Temukan cerita menarik dan mulailah petualangan membaca!
-</p>
-```
+    <!-- =================================
+         NAVIGATION
+    ================================== -->
 
-</header>
+    <nav>
 
-<!-- =====================================================
-     NAVIGASI
-===================================================== -->
+        <a href="../Petualangan-Kelas-5.html">
+            🏠 Beranda
+        </a>
 
-<nav class="navbar">
+        <a href="../kelas.html">
+            🎒 Kelas
+        </a>
 
-```
-<a href="../Petualangan-Kelas-5.html">
-    🏠 Beranda
-</a>
+        <a href="literasi.html" class="active">
+            📚 Literasi
+        </a>
 
+    </nav>
 
-<a href="../kelas.html">
-    🎒 Kelas
-</a>
 
+    <!-- =================================
+         MAIN
+    ================================== -->
 
-<a href="literasi.html">
-    📚 Literasi
-</a>
-```
+    <main class="container">
 
-</nav>
+        <section class="info-box">
 
-<!-- =====================================================
-     KONTEN
-===================================================== -->
+            <div class="info-icon">
+                🗺️
+            </div>
 
-<main class="container">
+            <div>
 
-```
-<section class="info-box">
+                <h2>
+                    Siap Memulai Petualangan?
+                </h2>
 
-    <div class="info-icon">
-        🗺️
-    </div>
-
-
-    <h2>
-        Siap Memulai Petualangan?
-    </h2>
-
-
-    <p>
-        Pilih salah satu komik untuk mulai membaca.
-        Setiap komik adalah perjalanan baru!
-    </p>
-
-</section>
-
-
-<!-- =================================================
-     ERROR
-================================================== -->
-
-<div
-    class="error-box"
-    id="errorBox"
->
-
-    <strong>
-        ⚠️ Komik belum dapat dimuat.
-    </strong>
-
-
-    <br>
-
-
-    <span id="errorText">
-        Periksa koneksi internet kemudian coba lagi.
-    </span>
-
-
-    <br>
-
-
-    <button
-        type="button"
-        onclick="loadComics()"
-    >
-        🔄 Coba Lagi
-    </button>
-
-</div>
-
-
-<!-- =================================================
-     KOLEKSI
-================================================== -->
-
-<div class="collection-title">
-
-    <h2>
-        📚 Koleksi Komik
-    </h2>
-
-
-    <div
-        class="total"
-        id="totalComic"
-    >
-        0 Komik
-    </div>
-
-</div>
-
-
-<!-- =================================================
-     LOADING
-================================================== -->
-
-<div
-    id="loading"
-    class="loading"
->
-
-    <div class="loading-icon">
-        🧭
-    </div>
-
-
-    <p>
-        Sedang mencari petualangan...
-    </p>
-
-</div>
-
-
-<!-- =================================================
-     GRID
-================================================== -->
-
-<section
-    id="comicGrid"
-    class="comic-grid"
-    style="display:none;"
->
-</section>
-
-
-<!-- =================================================
-     PAGINATION
-================================================== -->
-
-<div
-    id="pagination"
-    class="pagination"
->
-</div>
-```
-
-</main>
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-```
-<div>
-
-    🌟
-
-    <strong>
-        Petualangan Literasi Kelas 5
-    </strong>
-
-</div>
-
-
-<div style="margin-top:6px;">
-
-    UPT SDN 160 GRESIK
-
-</div>
-
-
-<div style="margin-top:8px;">
-
-    Disusun oleh Guru TIK UPT SD NEGERI 160 GRESIK
-
-</div>
-```
-
-</footer>
-
-<script>
-
-/* =====================================================
-   KONFIGURASI
-===================================================== */
-
-const GITHUB_USER =
-    "sdn160gresik";
-
-
-const GITHUB_REPO =
-    "komik";
-
-
-const GITHUB_BRANCH =
-    "main";
-
-
-const COMIC_FOLDER =
-    "ipas";
-
-
-const ITEMS_PER_PAGE =
-    4;
-
-
-/*
- * jsDelivr Data API
- *
- * Tidak menggunakan GitHub API.
- */
-
-const DATA_API =
-
-    "https://data.jsdelivr.com/v1/packages/gh/" +
-
-    GITHUB_USER +
-
-    "/" +
-
-    GITHUB_REPO +
-
-    "@" +
-
-    GITHUB_BRANCH +
-
-    "?structure=flat";
-
-
-/* =====================================================
-   DATA
-===================================================== */
-
-let comics = [];
-
-let currentPage = 1;
-
-
-/* =====================================================
-   ELEMENT
-===================================================== */
-
-const comicGrid =
-    document.getElementById(
-        "comicGrid"
-    );
-
-
-const pagination =
-    document.getElementById(
-        "pagination"
-    );
-
-
-const loading =
-    document.getElementById(
-        "loading"
-    );
-
-
-const errorBox =
-    document.getElementById(
-        "errorBox"
-    );
-
-
-const errorText =
-    document.getElementById(
-        "errorText"
-    );
-
-
-const totalComic =
-    document.getElementById(
-        "totalComic"
-    );
-
-
-/* =====================================================
-   LOAD KOMIK
-===================================================== */
-
-async function loadComics() {
-
-    loading.style.display =
-        "block";
-
-
-    comicGrid.style.display =
-        "none";
-
-
-    pagination.innerHTML =
-        "";
-
-
-    errorBox.style.display =
-        "none";
-
-
-    totalComic.textContent =
-        "Memuat...";
-
-
-    try {
-
-
-        /* ===============================================
-           REQUEST KE JSDELIVR
-        =============================================== */
-
-        const response =
-            await fetch(
-                DATA_API,
-                {
-                    cache:
-                        "no-store"
-                }
-            );
-
-
-        if (
-            !response.ok
-        ) {
-
-            throw new Error(
-                "Server daftar komik mengembalikan HTTP " +
-                response.status
-            );
-
-        }
-
-
-        const data =
-            await response.json();
-
-
-        /*
-         * jsDelivr dapat mengembalikan
-         * struktur berbeda sesuai versi API.
-         */
-
-        let files = [];
-
-
-        if (
-            Array.isArray(
-                data.files
-            )
-        ) {
-
-            files =
-                data.files;
-
-        }
-
-
-        /*
-         * =================================================
-         * AMBIL PATH FILE
-         * =================================================
-         */
-
-        const allPaths =
-            [];
-
-
-        files.forEach(
-            item => {
-
-                if (
-                    typeof item ===
-                    "string"
-                ) {
-
-                    allPaths.push(
-                        item
-                    );
-
-                }
-
-                else if (
-                    item &&
-                    typeof item.name ===
-                    "string"
-                ) {
-
-                    allPaths.push(
-                        item.name
-                    );
-
-                }
-
-            }
-        );
-
-
-        /*
-         * =================================================
-         * CARI:
-         *
-         * ipas/NAMA_KOMIK/halaman-00.jpg
-         * =================================================
-         */
-
-        const thumbnailPaths =
-            allPaths.filter(
-                path => {
-
-                    if (
-                        typeof path !==
-                        "string"
-                    ) {
-
-                        return false;
-
-                    }
-
-
-                    /*
-                     * Harus berada di ipas/
-                     */
-
-                    if (
-                        !path.startsWith(
-                            COMIC_FOLDER +
-                            "/"
-                        )
-                    ) {
-
-                        return false;
-
-                    }
-
-
-                    /*
-                     * Pecah path
-                     */
-
-                    const parts =
-                        path.split("/");
-
-
-                    /*
-                     * Minimal:
-                     *
-                     * ipas
-                     * folder
-                     * halaman-00.jpg
-                     */
-
-                    if (
-                        parts.length <
-                        3
-                    ) {
-
-                        return false;
-
-                    }
-
-
-                    /*
-                     * File harus halaman-00.jpg
-                     */
-
-                    const fileName =
-                        parts[
-                            parts.length - 1
-                        ];
-
-
-                    return (
-
-                        fileName
-                            .toLowerCase()
-
-                        ===
-
-                        "halaman-00.jpg"
-
-                    );
-
-                }
-            );
-
-
-        /*
-         * =================================================
-         * BUAT DATA KOMIK
-         * =================================================
-         */
-
-        comics =
-            thumbnailPaths.map(
-                path => {
-
-                    const parts =
-                        path.split("/");
-
-
-                    /*
-                     * Nama folder
-                     */
-
-                    const folderName =
-                        parts[
-                            parts.length - 2
-                        ];
-
-
-                    /*
-                     * URL thumbnail
-                     *
-                     * cdn.jsdelivr.net/gh/
-                     */
-
-                    const encodedPath =
-                        parts
-                            .map(
-                                part =>
-                                    encodeURIComponent(
-                                        part
-                                    )
-                            )
-                            .join("/");
-
-
-                    const thumbnail =
-
-                        "https://cdn.jsdelivr.net/gh/" +
-
-                        GITHUB_USER +
-
-                        "/" +
-
-                        GITHUB_REPO +
-
-                        "@" +
-
-                        GITHUB_BRANCH +
-
-                        "/" +
-
-                        encodedPath;
-
-
-                    return {
-
-                        folder:
-                            folderName,
-
-                        path:
-                            path,
-
-                        thumbnail:
-                            thumbnail
-
-                    };
-
-                }
-            );
-
-
-        /*
-         * =================================================
-         * URUTKAN
-         * =================================================
-         */
-
-        comics.sort(
-            (a,b) =>
-
-                a.folder.localeCompare(
-                    b.folder,
-                    "id",
-                    {
-                        numeric:
-                            true,
-
-                        sensitivity:
-                            "base"
-                    }
-                )
-        );
-
-
-        /*
-         * =================================================
-         * HILANGKAN DUPLIKAT
-         * =================================================
-         */
-
-        const unique =
-            [];
-
-
-        const used =
-            new Set();
-
-
-        comics.forEach(
-            comic => {
-
-                if (
-                    !used.has(
-                        comic.path
-                    )
-                ) {
-
-                    used.add(
-                        comic.path
-                    );
-
-                    unique.push(
-                        comic
-                    );
-
-                }
-
-            }
-        );
-
-
-        comics =
-            unique;
-
-
-        /*
-         * =================================================
-         * HASIL
-         * =================================================
-         */
-
-        totalComic.textContent =
-
-            comics.length +
-
-            " Komik";
-
-
-        currentPage =
-            1;
-
-
-        loading.style.display =
-            "none";
-
-
-        comicGrid.style.display =
-            "grid";
-
-
-        renderPage();
-
-
-    }
-
-    catch (error) {
-
-
-        console.error(
-            "Literasi Error:",
-            error
-        );
-
-
-        loading.style.display =
-            "none";
-
-
-        comicGrid.style.display =
-            "none";
-
-
-        totalComic.textContent =
-            "0 Komik";
-
-
-        errorBox.style.display =
-            "block";
-
-
-        errorText.textContent =
-
-            error.message ||
-
-            "Daftar komik tidak dapat dimuat.";
-
-    }
-
-}
-
-
-/* =====================================================
-   RENDER PAGE
-===================================================== */
-
-function renderPage() {
-
-    comicGrid.innerHTML =
-        "";
-
-
-    pagination.innerHTML =
-        "";
-
-
-    /*
-     * Tidak ada komik
-     */
-
-    if (
-        comics.length ===
-        0
-    ) {
-
-        comicGrid.innerHTML = `
-
-            <div style="
-                grid-column:1/-1;
-                background:white;
-                border-radius:20px;
-                padding:40px 25px;
-                text-align:center;
-                box-shadow:
-                    0 8px 20px
-                    rgba(0,0,0,.10);
-            ">
-
-                <div style="
-                    font-size:50px;
-                ">
-                    📭
-                </div>
-
-                <h3 style="
-                    margin-top:10px;
-                    color:#0277bd;
-                ">
-                    Belum ada komik
-                </h3>
-
-                <p style="
-                    margin-top:8px;
-                    color:#78909c;
-                ">
-                    Pastikan setiap folder di
-                    <strong>komik/ipas/</strong>
-                    memiliki file
-                    <strong>halaman-00.jpg</strong>.
+                <p>
+                    Pilih salah satu komik untuk mulai membaca.
+                    Setiap komik adalah perjalanan baru!
                 </p>
 
             </div>
 
-        `;
-
-        return;
-
-    }
+        </section>
 
 
-    /*
-     * =================================================
-     * DATA HALAMAN
-     * =================================================
-     */
+        <!-- ERROR -->
 
-    const start =
+        <section
+            id="errorBox"
+            class="error-box"
+        >
 
-        (
-            currentPage -
-            1
-        )
+            <strong>
+                ⚠️ Komik belum dapat dimuat.
+            </strong>
 
-        *
+            <p
+                id="errorMessage"
+                class="error-message"
+            >
+                Daftar komik belum dapat dibaca.
+            </p>
 
-        ITEMS_PER_PAGE;
+            <button
+                id="retryButton"
+                class="retry-button"
+                type="button"
+            >
+                🔄 Coba Lagi
+            </button>
 
-
-    const end =
-
-        start +
-
-        ITEMS_PER_PAGE;
-
-
-    const pageComics =
-        comics.slice(
-            start,
-            end
-        );
+        </section>
 
 
-    /*
-     * =================================================
-     * CARD
-     * =================================================
-     */
+        <!-- COLLECTION -->
 
-    pageComics.forEach(
-        (comic,index) => {
+        <section>
+
+            <div class="collection-header">
+
+                <h2>
+                    📚 Koleksi Komik
+                </h2>
+
+                <span
+                    id="countBadge"
+                    class="count-badge"
+                >
+                    0 Komik
+                </span>
+
+            </div>
 
 
-            const comicNumber =
+            <!-- LOADING -->
 
+            <div
+                id="loading"
+                class="loading"
+            >
+
+                <span class="loading-icon">
+                    🧭
+                </span>
+
+                Sedang mencari petualangan...
+
+            </div>
+
+
+            <!-- GRID -->
+
+            <div
+                id="comicGrid"
+                class="comic-grid"
+            ></div>
+
+
+            <!-- PAGINATION -->
+
+            <div
+                id="pagination"
+                class="pagination"
+            ></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =================================
+         FOOTER
+    ================================== -->
+
+    <footer>
+
+        <strong>
+            🌟 Petualangan Literasi Kelas 5
+        </strong>
+
+        <p>
+            UPT SDN 160 GRESIK
+        </p>
+
+        <p>
+            Disusun oleh Guru TIK UPT SD NEGERI 160 GRESIK
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        /* =================================
+           KONFIGURASI
+        ================================= */
+
+        const GITHUB_USER =
+            "sdn160gresik";
+
+        const GITHUB_REPO =
+            "komik";
+
+        const GITHUB_BRANCH =
+            "main";
+
+        const COMIC_FOLDER =
+            "ipas";
+
+        const ITEMS_PER_PAGE =
+            4;
+
+
+        /*
+         * File JSON kecil yang dibuat
+         * secara otomatis oleh GitHub Actions.
+         */
+        const DATA_URL =
+            "https://raw.githubusercontent.com/" +
+            GITHUB_USER +
+            "/" +
+            GITHUB_REPO +
+            "/" +
+            GITHUB_BRANCH +
+            "/komik.json";
+
+
+        /*
+         * CDN untuk gambar.
+         *
+         * Tidak menggunakan GitHub API.
+         */
+        const CDN_BASE =
+            "https://cdn.jsdelivr.net/gh/" +
+            GITHUB_USER +
+            "/" +
+            GITHUB_REPO +
+            "@" +
+            GITHUB_BRANCH +
+            "/";
+
+
+        /* =================================
+           ELEMENT
+        ================================= */
+
+        const loading =
+            document.getElementById("loading");
+
+        const comicGrid =
+            document.getElementById("comicGrid");
+
+        const pagination =
+            document.getElementById("pagination");
+
+        const countBadge =
+            document.getElementById("countBadge");
+
+        const errorBox =
+            document.getElementById("errorBox");
+
+        const errorMessage =
+            document.getElementById("errorMessage");
+
+        const retryButton =
+            document.getElementById("retryButton");
+
+
+        /* =================================
+           DATA
+        ================================= */
+
+        let comics = [];
+
+        let currentPage = 1;
+
+
+        /* =================================
+           ENCODE PATH
+        ================================= */
+
+        function encodePath(path) {
+
+            return path
+                .split("/")
+                .map(part =>
+                    encodeURIComponent(part)
+                )
+                .join("/");
+
+        }
+
+
+        /* =================================
+           LOAD DATA
+        ================================= */
+
+        async function loadComics() {
+
+            loading.style.display =
+                "block";
+
+            comicGrid.innerHTML = "";
+
+            pagination.innerHTML = "";
+
+            errorBox.style.display =
+                "none";
+
+            try {
+
+                /*
+                 * Cache-busting ringan.
+                 *
+                 * Tujuannya agar browser tidak
+                 * terus menggunakan JSON lama.
+                 */
+                const url =
+                    DATA_URL +
+                    "?t=" +
+                    Date.now();
+
+
+                const response =
+                    await fetch(url, {
+                        cache: "no-store"
+                    });
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Server daftar komik mengembalikan HTTP " +
+                        response.status
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !data ||
+                    !Array.isArray(data.komik)
+                ) {
+
+                    throw new Error(
+                        "Format komik.json tidak sesuai."
+                    );
+
+                }
+
+
+                /*
+                 * Ambil hanya file yang berada
+                 * di folder ipas.
+                 */
+                comics =
+                    data.komik
+                    .filter(item => {
+
+                        return (
+                            item &&
+                            typeof item.path === "string" &&
+                            item.path.startsWith(
+                                COMIC_FOLDER + "/"
+                            ) &&
+                            item.path
+                                .toLowerCase()
+                                .endsWith(
+                                    "/halaman-00.jpg"
+                                )
+                        );
+
+                    })
+                    .sort((a, b) =>
+                        a.folder.localeCompare(
+                            b.folder,
+                            "id"
+                        )
+                    );
+
+
+                countBadge.textContent =
+                    comics.length +
+                    " Komik";
+
+
+                loading.style.display =
+                    "none";
+
+
+                if (comics.length === 0) {
+
+                    throw new Error(
+                        "Belum ditemukan halaman-00.jpg di folder ipas."
+                    );
+
+                }
+
+
+                currentPage = 1;
+
+                renderPage();
+
+            } catch (error) {
+
+                console.error(
+                    "Gagal memuat komik:",
+                    error
+                );
+
+                loading.style.display =
+                    "none";
+
+                errorBox.style.display =
+                    "block";
+
+                errorMessage.textContent =
+                    error.message ||
+                    "Daftar komik tidak dapat dimuat.";
+
+            }
+
+        }
+
+
+        /* =================================
+           RENDER PAGE
+        ================================= */
+
+        function renderPage() {
+
+            comicGrid.innerHTML = "";
+
+            pagination.innerHTML = "";
+
+
+            const start =
+                (currentPage - 1) *
+                ITEMS_PER_PAGE;
+
+
+            const end =
                 start +
-
-                index +
-
-                1;
+                ITEMS_PER_PAGE;
 
 
-            /*
-             * Tujuan membaca
-             */
-
-            const readerUrl =
-
-                "literasi-" +
-
-                comicNumber +
-
-                ".html";
+            const pageItems =
+                comics.slice(start, end);
 
 
-            const card =
+            pageItems.forEach(
+                (comic, index) => {
 
-                document.createElement(
-                    "article"
+                    const comicNumber =
+                        start + index + 1;
+
+
+                    const readerUrl =
+                        "literasi-" +
+                        comicNumber +
+                        ".html";
+
+
+                    const imageUrl =
+                        CDN_BASE +
+                        encodePath(
+                            comic.path
+                        );
+
+
+                    const card =
+                        document.createElement(
+                            "article"
+                        );
+
+                    card.className =
+                        "comic-card";
+
+
+                    card.innerHTML = `
+
+                        <div class="comic-number">
+                            ${comicNumber}
+                        </div>
+
+                        <a
+                            class="thumbnail-link"
+                            href="${readerUrl}"
+                            title="Baca Komik"
+                        >
+
+                            <img
+                                src="${imageUrl}"
+                                alt="Thumbnail Komik ${comicNumber}"
+                                loading="lazy"
+                            >
+
+                            <span class="baca-label">
+                                📖 Baca Komik
+                            </span>
+
+                        </a>
+
+                    `;
+
+
+                    comicGrid.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+
+            renderPagination();
+
+        }
+
+
+        /* =================================
+           PAGINATION
+        ================================= */
+
+        function renderPagination() {
+
+            const totalPages =
+                Math.ceil(
+                    comics.length /
+                    ITEMS_PER_PAGE
                 );
 
 
-            card.className =
-                "comic-card";
+            if (totalPages <= 1) {
 
-
-            card.innerHTML = `
-
-                <div class="comic-number">
-                    ${comicNumber}
-                </div>
-
-
-                <a
-                    class="thumbnail-link"
-                    href="${readerUrl}"
-                    title="Baca Komik"
-                >
-
-                    <img
-                        src="${comic.thumbnail}"
-                        alt="Thumbnail Komik ${comicNumber}"
-                        loading="lazy"
-                    >
-
-
-                    <span class="baca-label">
-                        📖 Baca Komik
-                    </span>
-
-                </a>
-
-            `;
-
-
-            comicGrid.appendChild(
-                card
-            );
-
-        }
-    );
-
-
-    renderPagination();
-
-}
-
-
-/* =====================================================
-   PAGINATION
-===================================================== */
-
-function renderPagination() {
-
-    const totalPages =
-
-        Math.ceil(
-
-            comics.length /
-
-            ITEMS_PER_PAGE
-
-        );
-
-
-    if (
-        totalPages <=
-        1
-    ) {
-
-        return;
-
-    }
-
-
-    /*
-     * SEBELUMNYA
-     */
-
-    const prev =
-        document.createElement(
-            "button"
-        );
-
-
-    prev.textContent =
-        "‹ Sebelumnya";
-
-
-    prev.disabled =
-        currentPage ===
-        1;
-
-
-    prev.onclick =
-        function() {
-
-            if (
-                currentPage >
-                1
-            ) {
-
-                currentPage--;
-
-                renderPage();
-
-                window.scrollTo({
-
-                    top:
-                        0,
-
-                    behavior:
-                        "smooth"
-
-                });
+                return;
 
             }
 
-        };
 
+            /*
+             * Tombol sebelumnya
+             */
 
-    pagination.appendChild(
-        prev
-    );
+            const previous =
+                document.createElement(
+                    "button"
+                );
 
+            previous.className =
+                "page-button";
 
-    /*
-     * NOMOR
-     */
+            previous.textContent =
+                "‹";
 
-    for (
-        let page = 1;
-        page <= totalPages;
-        page++
-    ) {
+            previous.title =
+                "Halaman sebelumnya";
 
-        const button =
-            document.createElement(
-                "button"
+            previous.disabled =
+                currentPage === 1;
+
+            previous.onclick =
+                () => {
+
+                    if (
+                        currentPage > 1
+                    ) {
+
+                        currentPage--;
+
+                        renderPage();
+
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth"
+                        });
+
+                    }
+
+                };
+
+            pagination.appendChild(
+                previous
             );
 
 
-        button.textContent =
-            page;
+            /*
+             * Nomor halaman
+             */
 
+            for (
+                let page = 1;
+                page <= totalPages;
+                page++
+            ) {
 
-        if (
-            page ===
-            currentPage
-        ) {
+                const button =
+                    document.createElement(
+                        "button"
+                    );
 
-            button.classList.add(
-                "active"
-            );
+                button.className =
+                    "page-button" +
+                    (
+                        page === currentPage
+                            ? " active"
+                            : ""
+                    );
 
-        }
-
-
-        button.onclick =
-            function() {
-
-                currentPage =
+                button.textContent =
                     page;
 
-                renderPage();
+                button.onclick =
+                    () => {
 
-                window.scrollTo({
+                        currentPage =
+                            page;
 
-                    top:
-                        0,
+                        renderPage();
 
-                    behavior:
-                        "smooth"
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth"
+                        });
 
-                });
+                    };
 
-            };
-
-
-        pagination.appendChild(
-            button
-        );
-
-    }
-
-
-    /*
-     * BERIKUTNYA
-     */
-
-    const next =
-        document.createElement(
-            "button"
-        );
-
-
-    next.textContent =
-        "Berikutnya ›";
-
-
-    next.disabled =
-        currentPage ===
-        totalPages;
-
-
-    next.onclick =
-        function() {
-
-            if (
-                currentPage <
-                totalPages
-            ) {
-
-                currentPage++;
-
-                renderPage();
-
-                window.scrollTo({
-
-                    top:
-                        0,
-
-                    behavior:
-                        "smooth"
-
-                });
+                pagination.appendChild(
+                    button
+                );
 
             }
 
-        };
+
+            /*
+             * Tombol berikutnya
+             */
+
+            const next =
+                document.createElement(
+                    "button"
+                );
+
+            next.className =
+                "page-button";
+
+            next.textContent =
+                "›";
+
+            next.title =
+                "Halaman berikutnya";
+
+            next.disabled =
+                currentPage === totalPages;
+
+            next.onclick =
+                () => {
+
+                    if (
+                        currentPage <
+                        totalPages
+                    ) {
+
+                        currentPage++;
+
+                        renderPage();
+
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth"
+                        });
+
+                    }
+
+                };
+
+            pagination.appendChild(
+                next
+            );
+
+        }
 
 
-    pagination.appendChild(
-        next
-    );
+        /* =================================
+           RETRY
+        ================================= */
 
-}
+        retryButton.addEventListener(
+            "click",
+            loadComics
+        );
 
 
-/* =====================================================
-   MULAI
-===================================================== */
+        /* =================================
+           START
+        ================================= */
 
-loadComics();
+        loadComics();
 
-</script>
+    </script>
 
 </body>
-
 </html>
+```

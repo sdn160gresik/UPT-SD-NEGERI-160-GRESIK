@@ -1,11 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>Literasi | Petualangan Kelas 5</title>
 
@@ -349,6 +350,50 @@
         }
 
         /* ================================
+           NAMA KOMIK
+        ================================= */
+
+        .comic-info {
+            padding: 12px 4px 3px;
+
+            text-align: center;
+        }
+
+        .comic-name {
+            margin: 0;
+
+            color: #1565c0;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            line-height: 1.35;
+
+            word-break: break-word;
+        }
+
+        .comic-mapel {
+            display: inline-block;
+
+            margin-top: 6px;
+
+            padding: 4px 10px;
+
+            border-radius: 20px;
+
+            background: #e1f5fe;
+
+            color: #0277bd;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+        }
+
+        /* ================================
            BACA BUTTON
         ================================= */
 
@@ -660,6 +705,10 @@
 
                 padding: 10px;
             }
+
+            .comic-name {
+                font-size: 14px;
+            }
         }
 
         /* ================================
@@ -727,7 +776,7 @@
 
     <!-- =================================
          MAIN
-    ================================== -->
+    ================================= -->
 
     <main class="container">
 
@@ -874,16 +923,17 @@
         const GITHUB_BRANCH =
             "main";
 
-        const COMIC_FOLDER =
-            "ipas";
 
+        /*
+         * JUMLAH KOMIK PER HALAMAN
+         */
         const ITEMS_PER_PAGE =
             4;
 
 
         /*
-         * File JSON kecil yang dibuat
-         * secara otomatis oleh GitHub Actions.
+         * File JSON dibuat otomatis
+         * oleh GitHub Actions.
          */
         const DATA_URL =
             "https://raw.githubusercontent.com/" +
@@ -896,9 +946,7 @@
 
 
         /*
-         * CDN untuk gambar.
-         *
-         * Tidak menggunakan GitHub API.
+         * CDN UNTUK GAMBAR
          */
         const CDN_BASE =
             "https://cdn.jsdelivr.net/gh/" +
@@ -977,13 +1025,15 @@
             errorBox.style.display =
                 "none";
 
+
             try {
 
                 /*
-                 * Cache-busting ringan.
+                 * Cache busting.
                  *
-                 * Tujuannya agar browser tidak
-                 * terus menggunakan JSON lama.
+                 * JSON selalu diminta ulang
+                 * agar perubahan dari GitHub
+                 * dapat segera terbaca.
                  */
                 const url =
                     DATA_URL +
@@ -992,9 +1042,12 @@
 
 
                 const response =
-                    await fetch(url, {
-                        cache: "no-store"
-                    });
+                    await fetch(
+                        url,
+                        {
+                            cache: "no-store"
+                        }
+                    );
 
 
                 if (!response.ok) {
@@ -1011,6 +1064,9 @@
                     await response.json();
 
 
+                /*
+                 * Pastikan format JSON benar.
+                 */
                 if (
                     !data ||
                     !Array.isArray(data.komik)
@@ -1024,9 +1080,32 @@
 
 
                 /*
-                 * Ambil hanya file yang berada
-                 * di folder ipas.
+                 * =================================================
+                 * PERBAIKAN UTAMA
+                 * =================================================
+                 *
+                 * SEBELUMNYA:
+                 *
+                 * hanya folder ipas
+                 *
+                 * item.path.startsWith("ipas/")
+                 *
+                 *
+                 * SEKARANG:
+                 *
+                 * membaca SEMUA komik dari komik.json.
+                 *
+                 * Jadi:
+                 *
+                 * ipas/...
+                 * mtk/...
+                 * matematika/...
+                 * bahasa-indonesia/...
+                 * dan folder lainnya
+                 *
+                 * semuanya dapat ditampilkan.
                  */
+
                 comics =
                     data.komik
                     .filter(item => {
@@ -1034,9 +1113,6 @@
                         return (
                             item &&
                             typeof item.path === "string" &&
-                            item.path.startsWith(
-                                COMIC_FOLDER + "/"
-                            ) &&
                             item.path
                                 .toLowerCase()
                                 .endsWith(
@@ -1045,13 +1121,47 @@
                         );
 
                     })
-                    .sort((a, b) =>
-                        a.folder.localeCompare(
-                            b.folder,
-                            "id"
-                        )
-                    );
+                    .sort((a, b) => {
 
+                        const mapelA =
+                            String(
+                                a.mapel || ""
+                            ).toLowerCase();
+
+                        const mapelB =
+                            String(
+                                b.mapel || ""
+                            ).toLowerCase();
+
+
+                        const folderA =
+                            String(
+                                a.folder || ""
+                            ).toLowerCase();
+
+                        const folderB =
+                            String(
+                                b.folder || ""
+                            ).toLowerCase();
+
+
+                        return (
+                            mapelA.localeCompare(
+                                mapelB,
+                                "id"
+                            ) ||
+                            folderA.localeCompare(
+                                folderB,
+                                "id"
+                            )
+                        );
+
+                    });
+
+
+                /*
+                 * Tampilkan jumlah komik.
+                 */
 
                 countBadge.textContent =
                     comics.length +
@@ -1062,18 +1172,32 @@
                     "none";
 
 
+                /*
+                 * Tidak ada komik.
+                 */
+
                 if (comics.length === 0) {
 
                     throw new Error(
-                        "Belum ditemukan halaman-00.jpg di folder ipas."
+                        "Belum ditemukan halaman-00.jpg pada komik.json."
                     );
 
                 }
 
 
+                /*
+                 * Mulai dari halaman 1.
+                 */
+
                 currentPage = 1;
 
+
+                /*
+                 * Tampilkan halaman.
+                 */
+
                 renderPage();
+
 
             } catch (error) {
 
@@ -1082,11 +1206,14 @@
                     error
                 );
 
+
                 loading.style.display =
                     "none";
 
+
                 errorBox.style.display =
                     "block";
+
 
                 errorMessage.textContent =
                     error.message ||
@@ -1119,21 +1246,47 @@
 
 
             const pageItems =
-                comics.slice(start, end);
+                comics.slice(
+                    start,
+                    end
+                );
 
 
             pageItems.forEach(
                 (comic, index) => {
 
+                    /*
+                     * Nomor komik.
+                     */
                     const comicNumber =
-                        start + index + 1;
+                        start +
+                        index +
+                        1;
 
+
+                    /*
+                     * =================================================
+                     * LINK PEMBACA
+                     * =================================================
+                     *
+                     * Tetap menggunakan sistem:
+                     *
+                     * literasi-1.html
+                     * literasi-2.html
+                     * literasi-3.html
+                     *
+                     * sesuai nomor komik.
+                     */
 
                     const readerUrl =
                         "literasi-" +
                         comicNumber +
                         ".html";
 
+
+                    /*
+                     * URL gambar.
+                     */
 
                     const imageUrl =
                         CDN_BASE +
@@ -1142,14 +1295,49 @@
                         );
 
 
+                    /*
+                     * Nama komik.
+                     */
+
+                    const comicName =
+                        comic.nama ||
+                        (
+                            comic.folder
+                                ? comic.folder
+                                    .split("/")
+                                    .pop()
+                                : "Komik"
+                        );
+
+
+                    /*
+                     * Nama mapel.
+                     */
+
+                    const comicMapel =
+                        comic.mapel ||
+                        "Literasi";
+
+
+                    /*
+                     * Buat kartu.
+                     */
+
                     const card =
                         document.createElement(
                             "article"
                         );
 
+
                     card.className =
                         "comic-card";
 
+
+                    /*
+                     * =================================================
+                     * HTML KARTU
+                     * =================================================
+                     */
 
                     card.innerHTML = `
 
@@ -1157,23 +1345,39 @@
                             ${comicNumber}
                         </div>
 
+
                         <a
                             class="thumbnail-link"
                             href="${readerUrl}"
-                            title="Baca Komik"
+                            title="Baca ${escapeHtml(comicName)}"
                         >
 
                             <img
                                 src="${imageUrl}"
-                                alt="Thumbnail Komik ${comicNumber}"
+                                alt="Thumbnail ${escapeHtml(comicName)}"
                                 loading="lazy"
+                                onerror="handleImageError(this)"
                             >
+
 
                             <span class="baca-label">
                                 📖 Baca Komik
                             </span>
 
                         </a>
+
+
+                        <div class="comic-info">
+
+                            <h3 class="comic-name">
+                                ${escapeHtml(comicName)}
+                            </h3>
+
+                            <span class="comic-mapel">
+                                📚 ${escapeHtml(comicMapel)}
+                            </span>
+
+                        </div>
 
                     `;
 
@@ -1192,6 +1396,57 @@
 
 
         /* =================================
+           ESCAPE HTML
+        ================================= */
+
+        function escapeHtml(value) {
+
+            return String(value)
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =================================
+           IMAGE ERROR
+        ================================= */
+
+        function handleImageError(image) {
+
+            image.onerror = null;
+
+            image.style.objectFit =
+                "contain";
+
+            image.style.padding =
+                "30px";
+
+            image.alt =
+                "Gambar komik tidak ditemukan";
+
+        }
+
+
+        /* =================================
            PAGINATION
         ================================= */
 
@@ -1204,6 +1459,11 @@
                 );
 
 
+            /*
+             * Jika hanya satu halaman,
+             * pagination tidak perlu ditampilkan.
+             */
+
             if (totalPages <= 1) {
 
                 return;
@@ -1212,7 +1472,9 @@
 
 
             /*
-             * Tombol sebelumnya
+             * =================================
+             * TOMBOL SEBELUMNYA
+             * =================================
              */
 
             const previous =
@@ -1220,17 +1482,22 @@
                     "button"
                 );
 
+
             previous.className =
                 "page-button";
+
 
             previous.textContent =
                 "‹";
 
+
             previous.title =
                 "Halaman sebelumnya";
 
+
             previous.disabled =
                 currentPage === 1;
+
 
             previous.onclick =
                 () => {
@@ -1252,13 +1519,16 @@
 
                 };
 
+
             pagination.appendChild(
                 previous
             );
 
 
             /*
-             * Nomor halaman
+             * =================================
+             * NOMOR HALAMAN
+             * =================================
              */
 
             for (
@@ -1272,6 +1542,7 @@
                         "button"
                     );
 
+
                 button.className =
                     "page-button" +
                     (
@@ -1280,8 +1551,15 @@
                             : ""
                     );
 
+
                 button.textContent =
                     page;
+
+
+                button.title =
+                    "Buka halaman " +
+                    page;
+
 
                 button.onclick =
                     () => {
@@ -1289,7 +1567,9 @@
                         currentPage =
                             page;
 
+
                         renderPage();
+
 
                         window.scrollTo({
                             top: 0,
@@ -1297,6 +1577,7 @@
                         });
 
                     };
+
 
                 pagination.appendChild(
                     button
@@ -1306,7 +1587,9 @@
 
 
             /*
-             * Tombol berikutnya
+             * =================================
+             * TOMBOL BERIKUTNYA
+             * =================================
              */
 
             const next =
@@ -1314,17 +1597,22 @@
                     "button"
                 );
 
+
             next.className =
                 "page-button";
+
 
             next.textContent =
                 "›";
 
+
             next.title =
                 "Halaman berikutnya";
 
+
             next.disabled =
                 currentPage === totalPages;
+
 
             next.onclick =
                 () => {
@@ -1346,6 +1634,7 @@
                     }
 
                 };
+
 
             pagination.appendChild(
                 next
@@ -1374,4 +1663,3 @@
 
 </body>
 </html>
-

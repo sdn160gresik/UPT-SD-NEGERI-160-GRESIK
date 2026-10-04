@@ -560,6 +560,38 @@
 
 
     /* =====================================================
+       PILIH HALAMAN
+    ===================================================== */
+
+    .page-select {
+      min-width: 105px;
+      max-width: 150px;
+      padding: 9px 10px;
+      border: 1px solid #444;
+      border-radius: 7px;
+      background: #292929;
+      color: #fff;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .page-select:focus {
+      outline: 2px solid #aaa;
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .page-select {
+        min-width: 82px;
+        max-width: 105px;
+        flex: 1;
+        padding: 9px 5px;
+        font-size: 11px;
+      }
+    }
+
+    /* =====================================================
        TOMBOL KELUAR FULLSCREEN HP
     ===================================================== */
 
@@ -1058,6 +1090,16 @@
       </div>
 
 
+      <select
+        class="page-select"
+        id="pageSelect"
+        aria-label="Pilih halaman komik"
+        title="Pilih halaman komik"
+        disabled
+      >
+        <option value="">Pilih halaman</option>
+      </select>
+
       <button
         type="button"
         class="action-btn"
@@ -1173,6 +1215,11 @@
     const btnNext =
       document.getElementById(
         "btnNext"
+      );
+
+    const pageSelect =
+      document.getElementById(
+        "pageSelect"
       );
 
 
@@ -1565,6 +1612,22 @@
 
 
         /* ===============================================
+           ISI PILIHAN HALAMAN
+        =============================================== */
+
+        pageSelect.innerHTML = "";
+
+        pages.forEach((page, index) => {
+          const option = document.createElement("option");
+          option.value = String(index);
+          option.textContent = `Halaman ${index}`;
+          pageSelect.appendChild(option);
+        });
+
+        pageSelect.disabled = false;
+
+
+        /* ===============================================
            TAMPILKAN
         =============================================== */
 
@@ -1645,11 +1708,14 @@
       =============================================== */
 
       pageInfo.textContent =
-        `Halaman ${currentIndex + 1} dari ${pages.length}`;
+        `Halaman ${currentIndex} dari ${pages.length - 1}`;
 
 
       footerInfo.textContent =
-        `${currentIndex + 1} / ${pages.length}`;
+        `${currentIndex} / ${pages.length - 1}`;
+
+      pageSelect.value =
+        String(currentIndex);
 
 
       /* ===============================================
@@ -1848,6 +1914,17 @@
     btnNext.addEventListener(
       "click",
       nextPage
+    );
+
+    pageSelect.addEventListener(
+      "change",
+      () => {
+        const selectedIndex = Number(pageSelect.value);
+
+        if (Number.isInteger(selectedIndex)) {
+          renderPage(selectedIndex);
+        }
+      }
     );
 
 

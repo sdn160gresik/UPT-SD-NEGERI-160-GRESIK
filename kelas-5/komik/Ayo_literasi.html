@@ -1207,12 +1207,19 @@
         ================================= */
 
 
-        const CDN_BASE =
-            "https://cdn.jsdelivr.net/gh/" +
+        /* =================================
+           SUMBER GAMBAR THUMBNAIL
+           =================================
+           Thumbnail diambil langsung dari
+           path yang ada di komik.json.
+        ================================= */
+
+        const RAW_BASE =
+            "https://raw.githubusercontent.com/" +
             GITHUB_USER +
             "/" +
             GITHUB_REPO +
-            "@" +
+            "/" +
             GITHUB_BRANCH +
             "/";
 
@@ -1577,11 +1584,20 @@
                      * URL thumbnail.
                      */
 
+                    /*
+                     * Thumbnail mengikuti path PERSIS
+                     * yang diberikan oleh komik.json.
+                     *
+                     * Cache busting mencegah browser
+                     * menampilkan thumbnail lama.
+                     */
                     const imageUrl =
-                        CDN_BASE +
+                        RAW_BASE +
                         encodePath(
                             comic.path
-                        );
+                        ) +
+                        "?t=" +
+                        Date.now();
 
 
                     /*

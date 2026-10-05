@@ -1425,14 +1425,8 @@
                     .sort(
                         (a, b) => {
 
-                            return String(
-                                a.folder || ""
-                            ).localeCompare(
-                                String(
-                                    b.folder || ""
-                                ),
-                                "id"
-                            );
+                            return Number(a.urutan || 0) -
+                                   Number(b.urutan || 0);
 
                         }
                     );
@@ -1442,8 +1436,10 @@
                  * Jumlah komik.
                  */
 
+                const totalKomik = comics.length;
+
                 countBadge.textContent =
-                    comics.length +
+                    totalKomik +
                     " Komik";
 
 
@@ -1569,9 +1565,12 @@
                      */
 
                     const readerUrl =
-                        "literasi-" +
-                        comicNumber +
-                        ".html";
+                        comic.reader ||
+                        (
+                            "literasi-" +
+                            comicNumber +
+                            ".html"
+                        );
 
 
                     /*

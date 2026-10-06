@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -174,21 +174,28 @@
 
 <body>
 
+  <!-- =========================================================
+       NAVIGASI
+       ========================================================= -->
+
   <nav>
 
     <div class="nav-logo">
 
+      <!-- Logo Gresik -->
       <img
         src="https://i.imgur.com/sxm7RR1.png"
         alt="Logo Gresik"
       >
 
+      <!-- Logo Tut Wuri -->
       <img
         src="https://i.imgur.com/tGA5UBc.png"
         alt="Logo Tut Wuri"
         style="height: 62px;"
       >
 
+      <!-- Logo Sekolah -->
       <img
         src="https://i.imgur.com/oWB8vKW.png"
         alt="Logo Sekolah"
@@ -196,16 +203,21 @@
 
     </div>
 
+
+    <!-- Menu Navigasi -->
     <div class="nav-menu">
 
+      <!-- Beranda -->
       <a href="../index.html">
         🏠 Beranda
       </a>
 
+      <!-- Pengumuman -->
       <a href="pengumuman/pengumuman.html">
         📌 Pengumuman
       </a>
 
+      <!-- Download -->
       <a href="sts/download.html">
         📥 Download
       </a>
@@ -215,16 +227,29 @@
   </nav>
 
 
+  <!-- =========================================================
+       KONTEN PILIH KELAS
+       ========================================================= -->
+
   <div class="container">
 
+    <!-- Subjudul -->
     <div class="subjudul">
       📚 Siap Belajar Hari Ini? Pilih Kelasmu! 🌟
     </div>
 
 
+    <!-- =======================================================
+         DAFTAR KELAS
+         ======================================================= -->
+
     <div class="kelas-baris">
 
-      <!-- KELAS 1 -->
+
+      <!-- =====================================================
+           KELAS 1
+           ===================================================== -->
+
       <a
         href="../kelas-1/kelas1.html"
         class="button-kelas kelas1"
@@ -234,7 +259,10 @@
       </a>
 
 
-      <!-- KELAS 2 -->
+      <!-- =====================================================
+           KELAS 2
+           ===================================================== -->
+
       <a
         href="../kelas-2/kelas2.html"
         class="button-kelas kelas2"
@@ -244,7 +272,10 @@
       </a>
 
 
-      <!-- KELAS 3 -->
+      <!-- =====================================================
+           KELAS 3
+           ===================================================== -->
+
       <a
         href="../kelas-3/kelas3.html"
         class="button-kelas kelas3"
@@ -254,7 +285,10 @@
       </a>
 
 
-      <!-- KELAS 4 -->
+      <!-- =====================================================
+           KELAS 4
+           ===================================================== -->
+
       <a
         href="../kelas-4/halaman-depan.html"
         class="button-kelas kelas4"
@@ -264,17 +298,41 @@
       </a>
 
 
-      <!-- KELAS 5 -->
+      <!-- =====================================================
+           KELAS 5
+           
+           PERUBAHAN:
+           Sebelumnya:
+           ../kelas-5/identitas.html
+
+           Sekarang:
+           ../kelas-5/Petualangan-Kelas-5.html
+
+           Dengan demikian:
+           Kelas.html
+                ↓
+           klik tombol 5
+                ↓
+           Petualangan-Kelas-5.html
+           
+           TANPA LOGIN
+           TANPA IDENTITAS
+           TANPA identitas.html
+           ===================================================== -->
+
       <a
-  href="../kelas-5/Petualangan-Kelas-5.html"
-  class="button-kelas kelas5"
-  title="Kelas 5"
->
-  5
-</a>
+        href="../kelas-5/Petualangan-Kelas-5.html"
+        class="button-kelas kelas5"
+        title="Kelas 5"
+      >
+        5
+      </a>
 
 
-      <!-- KELAS 6 -->
+      <!-- =====================================================
+           KELAS 6
+           ===================================================== -->
+
       <a
         href="../kelas-6/kelas6.html"
         class="button-kelas kelas6"
@@ -283,26 +341,47 @@
         6
       </a>
 
+
     </div>
 
   </div>
 
 
+  <!-- =========================================================
+       JAVASCRIPT
+       SUARA KETIKA LINK DIKLIK
+       ========================================================= -->
+
   <script>
 
-    // Suara ketika tombol/link diklik
+    // ==========================================================
+    // MEMBUAT AUDIO KLIK
+    // ==========================================================
+
     const clickSound = new Audio('../suara/blub.mp3');
+
+
+    // ==========================================================
+    // FUNGSI MEMUTAR SUARA KLIK
+    // ==========================================================
 
     function playClickSound() {
 
+      // Mengembalikan audio ke awal
       clickSound.currentTime = 0;
 
+      // Memutar suara
+      // catch digunakan agar tidak muncul error
+      // apabila browser memblokir audio
       clickSound.play().catch(() => {});
 
     }
 
 
-    // Event klik untuk semua link
+    // ==========================================================
+    // MEMBERIKAN SUARA KLIK PADA SEMUA LINK
+    // ==========================================================
+
     document.querySelectorAll('a').forEach(link => {
 
       link.addEventListener('click', function() {
@@ -317,4 +396,4 @@
 
 </body>
 </html>
-
+```

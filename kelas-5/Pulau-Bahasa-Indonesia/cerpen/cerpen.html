@@ -237,6 +237,16 @@ tr:nth-child(even) td{background:#fffdfa}
   .meeting-content,.part{display:block!important;box-shadow:none}
   body{background:white}
 }
+
+/* Accordion khusus unsur cerita pendek */
+.cerpen-unsur-list{display:grid;gap:9px;margin:14px 0 20px}
+.cerpen-unsur-btn{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;border:1px solid #fed7aa;border-left:6px solid #f97316;border-radius:13px;padding:14px 16px;background:linear-gradient(135deg,#fff7ed,#fff);color:#7c2d12;text-align:left;font:inherit;font-weight:700;cursor:pointer;transition:background .2s,transform .2s}
+.cerpen-unsur-btn:hover{background:#ffedd5;transform:translateY(-1px)}
+.cerpen-unsur-btn.active{background:#ffedd5;border-color:#fb923c}
+.cerpen-unsur-btn span{font-size:22px;line-height:1}
+.cerpen-unsur-detail{padding:15px 17px;margin-top:-4px;margin-bottom:4px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;animation:fadeIn .22s ease}
+.cerpen-unsur-detail[hidden]{display:none}
+
 </style>
 </head>
 
@@ -848,18 +858,25 @@ tr:nth-child(even) td{background:#fffdfa}
     </ol>
 
     <h4>🧩 Unsur-Unsur Cerita Pendek</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Unsur</th><th>Pengertian</th><th>Contoh/Keterangan</th></tr></thead>
-        <tbody>
-          <tr><td>Tema</td><td>Ide pokok atau inti cerita.</td><td>Persahabatan, kejujuran, disiplin, tolong-menolong.</td></tr>
-          <tr><td>Tokoh</td><td>Pelaku dalam cerita.</td><td>Tokoh utama dan tokoh tambahan.</td></tr>
-          <tr><td>Penokohan</td><td>Sifat atau watak tokoh.</td><td>Baik hati, rajin, pemalas, jujur, sombong.</td></tr>
-          <tr><td>Latar</td><td>Tempat, waktu, dan suasana.</td><td>Sekolah, pagi hari, gembira.</td></tr>
-          <tr><td>Alur</td><td>Jalannya cerita.</td><td>Awal, tengah, akhir.</td></tr>
-          <tr><td>Amanat</td><td>Pesan yang ingin disampaikan penulis.</td><td>Pesan atau pelajaran dari cerita.</td></tr>
-        </tbody>
-      </table>
+    <p>Klik salah satu unsur untuk melihat pengertian dan contohnya. Saat unsur lain dipilih, bagian sebelumnya akan tertutup.</p>
+    <div class="cerpen-unsur-list" aria-label="Pilih unsur cerita pendek">
+      <button type="button" class="cerpen-unsur-btn" aria-expanded="false" aria-controls="unsurTema" onclick="toggleCerpenUnsur('unsurTema',this)">🎯 Tema <span>＋</span></button>
+      <div class="cerpen-unsur-detail" id="unsurTema" hidden><strong>Pengertian:</strong> Ide pokok atau inti cerita.<br><strong>Contoh:</strong> Persahabatan, kejujuran, disiplin, tolong-menolong.</div>
+
+      <button type="button" class="cerpen-unsur-btn" aria-expanded="false" aria-controls="unsurTokoh" onclick="toggleCerpenUnsur('unsurTokoh',this)">🧑 Tokoh <span>＋</span></button>
+      <div class="cerpen-unsur-detail" id="unsurTokoh" hidden><strong>Pengertian:</strong> Pelaku dalam cerita.<br><strong>Contoh/Keterangan:</strong> Tokoh utama dan tokoh tambahan.</div>
+
+      <button type="button" class="cerpen-unsur-btn" aria-expanded="false" aria-controls="unsurPenokohan" onclick="toggleCerpenUnsur('unsurPenokohan',this)">💛 Penokohan <span>＋</span></button>
+      <div class="cerpen-unsur-detail" id="unsurPenokohan" hidden><strong>Pengertian:</strong> Sifat atau watak tokoh.<br><strong>Contoh:</strong> Baik hati, rajin, pemalas, jujur, sombong.</div>
+
+      <button type="button" class="cerpen-unsur-btn" aria-expanded="false" aria-controls="unsurLatar" onclick="toggleCerpenUnsur('unsurLatar',this)">🏡 Latar <span>＋</span></button>
+      <div class="cerpen-unsur-detail" id="unsurLatar" hidden><strong>Pengertian:</strong> Tempat, waktu, dan suasana.<br><strong>Contoh:</strong> Sekolah, pagi hari, gembira.</div>
+
+      <button type="button" class="cerpen-unsur-btn" aria-expanded="false" aria-controls="unsurAlur" onclick="toggleCerpenUnsur('unsurAlur',this)">🛤️ Alur <span>＋</span></button>
+      <div class="cerpen-unsur-detail" id="unsurAlur" hidden><strong>Pengertian:</strong> Jalannya cerita.<br><strong>Contoh:</strong> Awal, tengah, akhir.</div>
+
+      <button type="button" class="cerpen-unsur-btn" aria-expanded="false" aria-controls="unsurAmanat" onclick="toggleCerpenUnsur('unsurAmanat',this)">💡 Amanat <span>＋</span></button>
+      <div class="cerpen-unsur-detail" id="unsurAmanat" hidden><strong>Pengertian:</strong> Pesan yang ingin disampaikan penulis.<br><strong>Contoh/Keterangan:</strong> Pesan atau pelajaran dari cerita.</div>
     </div>
 
     <h4>🏗️ Struktur Cerita Pendek</h4>
@@ -1412,6 +1429,27 @@ function checkChoice(button,isCorrect){
   parent.querySelectorAll(".choice").forEach(btn=>btn.classList.remove("correct","wrong"));
   if(isCorrect){button.classList.add("correct");playCorrect();}
   else{button.classList.add("wrong");playWrong();}
+}
+
+
+function toggleCerpenUnsur(id, button){
+  const detail=document.getElementById(id);
+  const wasOpen=detail && !detail.hidden;
+  document.querySelectorAll(".cerpen-unsur-detail").forEach(el=>el.hidden=true);
+  document.querySelectorAll(".cerpen-unsur-btn").forEach(btn=>{
+    btn.classList.remove("active");
+    btn.setAttribute("aria-expanded","false");
+    const mark=btn.querySelector("span");
+    if(mark)mark.textContent="＋";
+  });
+  if(detail && !wasOpen){
+    detail.hidden=false;
+    button.classList.add("active");
+    button.setAttribute("aria-expanded","true");
+    const mark=button.querySelector("span");
+    if(mark)mark.textContent="－";
+  }
+  if(typeof playClick==="function")playClick();
 }
 
 function buildQuiz(number){

@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bahasa Indonesia Kelas 5 — Imbuhan dan Cerita Pendek</title>
+
+<style>
+:root{
+  --primary:#e85d04;
+  --primary2:#f48c06;
+  --blue:#2563eb;
+  --green:#16a34a;
+  --yellow:#f59e0b;
+  --red:#ef4444;
+  --pink:#db2777;
+  --cyan:#0891b2;
+  --purple:#7c3aed;
+  --dark:#1e293b;
+  --text:#334155;
+  --muted:#64748b;
+  --white:#fff;
+  --bg:#fffaf3;
+  --card:#fff;
+  --border:#eadfd2;
+  --shadow:0 10px 30px rgba(120,70,20,.10);
+  --radius:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Trebuchet MS",Arial,sans-serif;
+  background:
+    radial-gradient(circle at 10% 10%,rgba(251,146,60,.15),transparent 25%),
+    radial-gradient(circle at 90% 20%,rgba(96,165,250,.12),transparent 25%),
+    linear-gradient(135deg,#fffaf3,#f5f9ff);
+  color:var(--text);
+  line-height:1.7;
+  min-height:100vh;
+}
+.header{
+  background:linear-gradient(135deg,#e85d04,#f48c06,#2563eb);
+  color:white;padding:28px 20px 35px;position:relative;overflow:hidden
+}
+.header:before,.header:after{
+  content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.12)
+}
+.header:before{width:230px;height:230px;right:-60px;top:-90px}
+.header:after{width:160px;height:160px;left:-60px;bottom:-90px}
+.header-inner{max-width:1200px;margin:auto;position:relative;z-index:2}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.25);padding:7px 14px;border-radius:999px;
+  font-size:14px;margin-bottom:12px
+}
+.header h1{font-size:clamp(28px,5vw,48px);line-height:1.15;margin-bottom:10px}
+.header p{max-width:820px;font-size:17px;opacity:.95}
+.container{max-width:1200px;margin:auto;padding:20px}
+.progress-card{
+  background:white;border-radius:18px;box-shadow:var(--shadow);padding:16px 20px;
+  margin-top:-20px;position:relative;z-index:5
+}
+.progress-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:9px;font-weight:bold}
+.progress-track{height:12px;background:#eee7df;border-radius:999px;overflow:hidden}
+.progress-fill{
+  width:0%;height:100%;background:linear-gradient(90deg,#16a34a,#f59e0b,#e85d04);
+  border-radius:999px;transition:.4s
+}
+.welcome{
+  margin-top:24px;background:white;border-radius:var(--radius);padding:25px;box-shadow:var(--shadow)
+}
+.welcome h2{color:var(--primary);margin-bottom:10px}
+.welcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:18px}
+.info-box{padding:18px;border-radius:17px;background:#fffaf5;border:1px solid var(--border)}
+.info-box .icon{font-size:32px;display:block;margin-bottom:5px}
+.section-title{margin:32px 0 15px;color:var(--dark);font-size:26px}
+.meeting-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.meeting-card{
+  background:white;border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);
+  border:2px solid transparent;cursor:pointer;transition:.25s;position:relative;overflow:hidden
+}
+.meeting-card:hover{transform:translateY(-4px);border-color:#fdba74}
+.meeting-card.active{border-color:var(--primary)}
+.meeting-number{
+  width:48px;height:48px;border-radius:15px;display:flex;justify-content:center;
+  align-items:center;background:#fff1e6;font-size:25px;margin-bottom:12px
+}
+.meeting-card h3{font-size:21px;color:var(--dark);margin-bottom:5px}
+.meeting-card p{color:var(--muted);font-size:14px}
+.card-arrow{position:absolute;right:20px;top:22px;font-size:24px}
+#contentArea{margin-top:25px}
+.meeting-content{display:none;animation:fadeIn .3s ease}
+.meeting-content.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.content-header{
+  color:white;padding:28px;border-radius:24px;margin-bottom:18px;
+  background:linear-gradient(135deg,#e85d04,#f48c06);box-shadow:var(--shadow)
+}
+.content-header h2{font-size:30px;margin-bottom:5px}
+.content-header p{opacity:.95}
+.submenu{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+.submenu button{
+  border:none;background:white;padding:15px;border-radius:16px;text-align:left;font-weight:bold;
+  color:var(--dark);box-shadow:0 5px 18px rgba(30,41,59,.07);
+  border:1px solid var(--border);cursor:pointer;transition:.2s
+}
+.submenu button:hover{transform:translateY(-2px);border-color:#fdba74}
+.submenu button.active{background:#fff1e6;border-color:#fb923c;color:#c2410c}
+.part{
+  display:none;background:white;border-radius:22px;padding:24px;box-shadow:var(--shadow);margin-bottom:20px
+}
+.part.active{display:block;animation:fadeIn .3s ease}
+.part h3{color:var(--primary);font-size:24px;margin-bottom:14px}
+.part h4{color:var(--dark);margin:18px 0 8px}
+.part p{margin-bottom:12px}
+.part ul,.part ol{padding-left:25px;margin-bottom:15px}
+.part li{margin-bottom:6px}
+.callout{padding:17px 19px;border-radius:16px;margin:15px 0;border-left:6px solid var(--primary);background:#fff1e6}
+.callout.green{background:#ecfdf5;border-color:#16a34a}
+.callout.yellow{background:#fffbeb;border-color:#f59e0b}
+.callout.pink{background:#fdf2f8;border-color:#db2777}
+.callout.blue{background:#eff6ff;border-color:#2563eb}
+.callout.purple{background:#f5f3ff;border-color:#7c3aed}
+.mission{
+  border-radius:20px;padding:20px;margin:15px 0;background:linear-gradient(135deg,#fff7ed,#fffbeb);
+  border:2px dashed #f59e0b
+}
+.mission-title{font-weight:bold;font-size:19px;color:#b45309;margin-bottom:8px}
+.table-wrap{overflow-x:auto;margin:15px 0}
+table{width:100%;border-collapse:collapse;min-width:550px}
+th,td{padding:11px 13px;border:1px solid var(--border);text-align:left}
+th{background:#fff1e6;color:#9a3412}
+tr:nth-child(even) td{background:#fffdfa}
+.game-box{background:#f8fafc;padding:20px;border-radius:18px;border:1px solid var(--border);margin:15px 0}
+.challenge-toggle{
+  width:100%;
+  border:none;
+  background:linear-gradient(135deg,#fff1e6,#fffbeb);
+  color:#9a3412;
+  padding:14px 16px;
+  border-radius:14px;
+  text-align:left;
+  font-family:inherit;
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
+  transition:.2s;
+}
+.challenge-toggle:hover{
+  transform:translateY(-2px);
+  background:#ffedd5;
+}
+.challenge-text{
+  display:none;
+  margin-top:12px;
+  padding:14px 16px;
+  border-left:5px solid #f59e0b;
+  border-radius:12px;
+  background:#fff;
+  animation:fadeIn .25s ease;
+}
+.analysis-task{
+  margin-top:14px;
+  padding:14px 16px;
+  border-radius:12px;
+  background:#fff7ed;
+  border:1px dashed #f59e0b;
+}
+.analysis-task strong{display:block;margin-bottom:8px;color:#9a3412}
+.analysis-task ol{margin:8px 0 0 20px;padding:0}
+.analysis-task li{margin:7px 0}
+.challenge-key-toggle{width:100%;margin-top:12px;border:none;background:#dcfce7;color:#166534;padding:12px 15px;border-radius:12px;font-family:inherit;font-weight:bold;cursor:pointer;text-align:left}.challenge-key-toggle:hover{background:#bbf7d0}.challenge-key{display:none;margin-top:10px;padding:14px 16px;border-left:5px solid #16a34a;border-radius:12px;background:#f0fdf4}.challenge-key.show{display:block}.challenge-key li{margin:7px 0}
+.challenge-text.show{display:block}
+
+.choice-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.choice{border:none;padding:10px 16px;border-radius:999px;cursor:pointer;font-weight:bold;background:#e2e8f0}
+.choice:hover{transform:scale(1.03)}
+.choice.correct{background:#bbf7d0;color:#166534}
+.choice.wrong{background:#fecaca;color:#991b1b}
+.reflection{background:linear-gradient(135deg,#ecfeff,#eff6ff);border-radius:18px;padding:20px;margin-top:15px}
+.reflection textarea{
+  width:100%;min-height:80px;margin-top:8px;padding:12px;border:1px solid var(--border);
+  border-radius:12px;resize:vertical;font-family:inherit
+}
+.quiz-intro{padding:20px;border-radius:18px;background:linear-gradient(135deg,#fff1e6,#fff7ed);margin-bottom:20px}
+.question{background:white;border:1px solid var(--border);border-radius:17px;padding:18px;margin-bottom:15px}
+.question-number{
+  display:inline-flex;width:32px;height:32px;justify-content:center;align-items:center;
+  border-radius:50%;background:#fff1e6;color:#c2410c;font-weight:bold;margin-right:8px
+}
+.answer-input{
+  width:100%;margin-top:10px;padding:11px 13px;border:2px solid #e2e8f0;border-radius:12px;
+  outline:none;font-family:inherit
+}
+.answer-input:focus{border-color:#fb923c}
+.quiz-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.btn{
+  border:none;padding:12px 18px;border-radius:12px;cursor:pointer;font-family:inherit;
+  font-weight:bold;transition:.2s
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:#e85d04;color:white}
+.btn-green{background:#16a34a;color:white}
+.btn-orange{background:#f59e0b;color:white}
+.btn-gray{background:#e2e8f0;color:#334155}
+.result{
+  display:none;margin-top:20px;padding:22px;border-radius:20px;text-align:center;background:#f8fafc
+}
+.result.show{display:block}
+.score{font-size:48px;font-weight:bold;color:#e85d04}
+.answer-feedback{margin-top:8px;font-size:13px}
+.correct-answer{color:#15803d}
+.wrong-answer{color:#b91c1c}
+.key-box{
+  display:none;background:#f0fdf4;border:1px solid #bbf7d0;padding:18px;border-radius:16px;margin-top:15px
+}
+.key-box.show{display:block}
+.key-box ol{margin-bottom:0}
+.footer{text-align:center;padding:35px 20px;margin-top:30px;color:#64748b}
+.footer strong{color:#e85d04}
+.home-btn{
+  position:fixed;right:20px;bottom:20px;width:52px;height:52px;border:none;border-radius:50%;
+  background:#e85d04;color:white;font-size:22px;cursor:pointer;
+  box-shadow:0 8px 25px rgba(232,93,4,.35);z-index:50
+}
+@media(max-width:760px){
+  .container{padding:12px}.header{padding:22px 15px 30px}.header h1{font-size:29px}
+  .header p{font-size:14px}.welcome-grid{grid-template-columns:1fr}
+  .meeting-grid{grid-template-columns:1fr}.submenu{grid-template-columns:1fr}
+  .content-header{padding:20px}.content-header h2{font-size:24px}
+  .part{padding:18px}.progress-card{margin-top:-15px}
+}
+@media print{
+  .header{background:white!important;color:black}
+  .meeting-grid,.progress-card,.submenu,.home-btn,.quiz-actions{display:none!important}
+  .meeting-content,.part{display:block!important;box-shadow:none}
+  body{background:white}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header" id="top">
+  <div class="header-inner">
+    <div class="badge">📚 Bahasa Indonesia • Kelas 5 SD</div>
+    <h1>✏️ Imbuhan dan Cerita Pendek</h1>
+    <p>
+      Belajar imbuhan <b>me-</b>, <b>-kan</b>, <b>-lah</b>, serta memahami
+      cerita pendek melalui misi, permainan, diskusi, latihan, dan refleksi.
+    </p>
+  </div>
+</header>
+
+<main class="container">
+
+<section class="progress-card">
+  <div class="progress-top">
+    <span>🌟 Progress Belajar</span>
+    <span id="progressText">0%</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+</section>
+
+<section class="welcome">
+  <h2>👋 Selamat Datang, Penjelajah Bahasa!</h2>
+  <p>
+    Dalam pembelajaran ini kamu akan mempelajari fungsi dan makna imbuhan
+    <b>me-</b>, <b>-kan</b>, dan <b>-lah</b>, kemudian mengenal cerita pendek,
+    unsur-unsurnya, strukturnya, serta berlatih memahami isi cerita.
+  </p>
+
+  <div class="welcome-grid">
+    <div class="info-box">
+      <span class="icon">🔤</span>
+      <strong>Kenali Imbuhan</strong>
+      <p>Temukan cara imbuhan membentuk kata dan mengubah makna.</p>
+    </div>
+    <div class="info-box">
+      <span class="icon">📖</span>
+      <strong>Jelajahi Cerpen</strong>
+      <p>Pahami tema, tokoh, penokohan, latar, alur, dan amanat.</p>
+    </div>
+    <div class="info-box">
+      <span class="icon">✍️</span>
+      <strong>Berlatih</strong>
+      <p>Kerjakan latihan dan refleksikan hasil belajarmu.</p>
+    </div>
+  </div>
+</section>
+
+<h2 class="section-title">🗺️ Pilih Misi Pembelajaran</h2>
+
+<section class="meeting-grid">
+  <article class="meeting-card active" onclick="openMeeting(1)" id="meetingCard1">
+    <div class="meeting-number">🔤</div>
+    <h3>Pertemuan 1</h3>
+    <p>Petualangan Imbuhan me- — makna, contoh, dan perubahan bentuk.</p>
+    <span class="card-arrow">→</span>
+  </article>
+
+  <article class="meeting-card" onclick="openMeeting(2)" id="meetingCard2">
+    <div class="meeting-number">✏️</div>
+    <h3>Pertemuan 2</h3>
+    <p>Misi -kan dan -lah — mengenal fungsi dan makna perintah.</p>
+    <span class="card-arrow">→</span>
+  </article>
+
+  <article class="meeting-card" onclick="openMeeting(3)" id="meetingCard3">
+    <div class="meeting-number">📖</div>
+    <h3>Pertemuan 3</h3>
+    <p>Detektif Cerpen — pengertian, ciri, unsur, struktur, dan langkah membuat cerpen.</p>
+    <span class="card-arrow">→</span>
+  </article>
+
+  <article class="meeting-card" onclick="openMeeting(4)" id="meetingCard4">
+    <div class="meeting-number">🌱</div>
+    <h3>Pertemuan 4</h3>
+    <p>Membaca dan memahami cerita — Pensil Baru Rani dan Semangat Gotong Royong di Desa Bima.</p>
+    <span class="card-arrow">→</span>
+  </article>
+</section>
+
+<div id="contentArea">
+
+<!-- PERTEMUAN 1 -->
+<section class="meeting-content active" id="meeting1">
+  <div class="content-header">
+    <div class="badge">🔤 MISI 1</div>
+    <h2>Petualangan Imbuhan me-</h2>
+    <p>Mengenal makna, contoh, dan penyesuaian imbuhan me-. Alokasi waktu: 2 × 35 menit.</p>
+  </div>
+
+  <div class="submenu">
+    <button onclick="openPart(1,1)">🎯 Tujuan Pembelajaran</button>
+    <button onclick="openPart(1,2)">👋 Pembukaan</button>
+    <button onclick="openPart(1,3)">🔎 Misi Imbuhan me-</button>
+    <button onclick="openPart(1,4)">📝 Latihan 15 Soal</button>
+    <button onclick="openPart(1,5)">💭 Refleksi</button>
+  </div>
+
+  <div class="part" id="part1-1">
+    <h3>🎯 Tujuan Pembelajaran</h3>
+    <p>Setelah mengikuti pembelajaran ini, kamu dapat:</p>
+    <ol>
+      <li>Menjelaskan pengertian imbuhan me-.</li>
+      <li>Menyebutkan makna imbuhan me-.</li>
+      <li>Menentukan kata dasar dari kata berimbuhan me-.</li>
+      <li>Menjelaskan penyesuaian imbuhan me- pada kata dasar.</li>
+      <li>Memberikan contoh kata berimbuhan me-.</li>
+    </ol>
+  </div>
+
+  <div class="part" id="part1-2">
+    <h3>👋 Pembukaan</h3>
+    <div class="callout blue">
+      <strong>🌟 Sapaan Penjelajah Bahasa</strong>
+      <p>Guru menyapa: <b>"Selamat pagi, Penjelajah Bahasa!"</b></p>
+    </div>
+
+    <h4>💬 Apersepsi</h4>
+    <p>Perhatikan kata berikut: <b>membaca, menulis, menari, melukis, memasak, mencuci.</b></p>
+    <p>Apa persamaan kata-kata tersebut? Perhatikan awalan yang digunakan!</p>
+
+    <div class="mission">
+      <div class="mission-title">🎮 Permainan — Temukan Kata Berimbuhan</div>
+      <p>Pilih kata yang menggunakan imbuhan <b>me-</b>.</p>
+      <div class="choice-row">
+        <button class="choice" onclick="checkChoice(this,true)">📖 membaca</button>
+        <button class="choice" onclick="checkChoice(this,false)">📖 buku</button>
+        <button class="choice" onclick="checkChoice(this,true)">✍️ menulis</button>
+        <button class="choice" onclick="checkChoice(this,false)">✏️ pensil</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="part" id="part1-3">
+    <h3>🔎 Misi Pembelajaran — Imbuhan me-</h3>
+
+    <div class="callout green">
+      <strong>📖 Ingat!</strong>
+      <p><b>Imbuhan me- adalah awalan yang membentuk kata dasar menjadi kata kerja.</b></p>
+    </div>
+
+    <h4>1. Melakukan suatu pekerjaan</h4>
+    <p>Contoh: <b>membaca, menulis, menari, melukis, memasak, mencuci.</b></p>
+
+    <h4>2. Membentuk atau menjadikan sesuatu</h4>
+    <p>Contoh: <b>membeku, mendidih, mengecil.</b></p>
+
+    <h4>3. Mengerjakan sesuatu dengan alat</h4>
+    <p>Contoh: <b>menggunting, mencangkul, memblender.</b></p>
+
+    <div class="callout yellow">
+      <strong>🔤 Penyesuaian imbuhan me-</strong>
+      <ol>
+        <li>Imbuhan <b>me-</b> menjadi <b>mem</b> jika kata dasar dimulai dengan huruf <b>p</b>.</li>
+        <li>Imbuhan <b>me-</b> menjadi <b>meng</b> jika kata dasar dimulai dengan huruf <b>k, g</b>.</li>
+        <li>Imbuhan <b>me-</b> menjadi <b>men</b> jika kata dasar dimulai dengan huruf <b>c</b>.</li>
+        <li>Imbuhan <b>me-</b> tidak berubah jika kata dasar dimulai dengan huruf <b>m</b>.</li>
+        <li>Imbuhan <b>me-</b> mengubah kata dasar dengan awalan <b>t</b> menjadi <b>n</b>.</li>
+      </ol>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Kata Berimbuhan</th><th>Kata Dasar</th><th>Makna</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Menempel</td><td>tempel</td><td>Melakukan suatu pekerjaan</td></tr>
+          <tr><td>Membaca</td><td>baca</td><td>Melakukan suatu pekerjaan</td></tr>
+          <tr><td>Menggunting</td><td>gunting</td><td>Mengerjakan sesuatu dengan alat</td></tr>
+          <tr><td>Mengecil</td><td>kecil</td><td>Membentuk atau menjadikan sesuatu</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mission">
+      <div class="mission-title">🗣️ Tantangan Berbicara</div>
+      <p>Daftarlah <b>5 kata berimbuhan me-</b> dan tuliskan kata dasar serta maknanya.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No.</th><th>Kata Berimbuhan me-</th><th>Kata Dasar</th><th>Makna</th></tr></thead>
+          <tbody>
+            <tr><td>1.</td><td>Menempel</td><td>tempel</td><td>Melakukan suatu pekerjaan</td></tr>
+            <tr><td>2.</td><td>...</td><td>...</td><td>...</td></tr>
+            <tr><td>3.</td><td>...</td><td>...</td><td>...</td></tr>
+            <tr><td>4.</td><td>...</td><td>...</td><td>...</td></tr>
+            <tr><td>5.</td><td>...</td><td>...</td><td>...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-title">🔗 Pasangkan Fungsi dan Contohnya</div>
+      <p>Pasangkan fungsi imbuhan dengan contoh yang sesuai:</p>
+      <ol>
+        <li>Melakukan suatu pekerjaan.</li>
+        <li>Membentuk atau menjadikan sesuatu.</li>
+        <li>Mengerjakan sesuatu dengan alat.</li>
+      </ol>
+      <p><b>Contoh:</b> menyetrika, menyapu, mencair, mencukur, meminum, mengirim.</p>
+    </div>
+
+    <div class="mission">
+      <div class="mission-title">🔎 Tantangan Bahasa — Imbuhan me-</div>
+      <p>Klik setiap tantangan untuk membuka cerita. Bacalah dengan teliti, lalu temukan sendiri 5 kata berimbuhan me-, kata dasar, dan maknanya.</p>
+
+      <div class="game-box">
+        <button class="challenge-toggle" onclick="toggleChallenge('meChallenge1')">
+          🔍 Tantangan 1 — Menemukan Kata Kerja
+        </button>
+        <div class="challenge-text" id="meChallenge1">
+          <p>Setiap pagi, Sari membantu ibu di rumah. Ia membaca buku sebelum berangkat sekolah. Setelah itu, Sari menyapu lantai dan mencuci gelas yang telah digunakan. Di dapur, ibu sedang memasak sarapan untuk keluarga. Sebelum pergi, Sari menulis pesan kecil untuk ibu.</p>
+          <div class="analysis-task">
+            <strong>🕵️ Tugas Analisis — Temukan 5 imbuhan</strong>
+            <ol>
+              <li>Temukan 5 kata yang mendapat imbuhan me- dalam paragraf.</li>
+              <li>Tuliskan kata yang kamu temukan.</li>
+              <li>Tuliskan kata dasarnya.</li>
+              <li>Jelaskan makna imbuhan me- pada setiap kata.</li>
+              <li>Buat satu kalimat baru menggunakan salah satu kata tersebut.</li>
+            </ol>
+          </div>
+          <button class="challenge-key-toggle" onclick="toggleChallengeKey('meKey1')">🔑 Lihat Kunci Jawaban Tantangan 1</button>
+          <div class="challenge-key" id="meKey1">
+            <ol>
+              <li>membaca → baca → melakukan suatu pekerjaan.</li>
+              <li>menyapu → sapu → melakukan suatu pekerjaan.</li>
+              <li>mencuci → cuci → melakukan suatu pekerjaan.</li>
+              <li>memasak → masak → melakukan suatu pekerjaan.</li>
+              <li>menulis → tulis → melakukan suatu pekerjaan.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-box">
+        <button class="challenge-toggle" onclick="toggleChallenge('meChallenge2')">
+          ✏️ Tantangan 2 — Perubahan Bentuk me-
+        </button>
+        <div class="challenge-text" id="meChallenge2">
+          <p>Di kelas, guru meminta siswa melakukan beberapa kegiatan. Raka menempel gambar di buku tugas. Nina membawa kertas untuk membuat karya. Dimas menggunting pola dengan hati-hati. Setelah selesai, mereka mengecat gambar dan merapikan meja bersama. Guru memuji mereka karena bekerja dengan tertib.</p>
+          <div class="analysis-task">
+            <strong>🕵️ Tugas Analisis — Temukan 5 imbuhan</strong>
+            <ol>
+              <li>Temukan 5 kata berimbuhan me- dalam paragraf.</li>
+              <li>Tuliskan kata dasarnya.</li>
+              <li>Perhatikan perubahan bentuk me- pada setiap kata.</li>
+              <li>Tentukan huruf awal kata dasar.</li>
+              <li>Jelaskan makna kata berimbuhan tersebut sesuai kalimat.</li>
+            </ol>
+          </div>
+          <button class="challenge-key-toggle" onclick="toggleChallengeKey('meKey2')">🔑 Lihat Kunci Jawaban Tantangan 2</button>
+          <div class="challenge-key" id="meKey2">
+            <ol>
+              <li>menempel → tempel → melakukan suatu pekerjaan; t berubah menjadi n.</li>
+              <li>membawa → bawa → melakukan suatu pekerjaan.</li>
+              <li>menggunting → gunting → mengerjakan sesuatu dengan alat.</li>
+              <li>mengecat → cat → melakukan suatu pekerjaan; bentuk me- menjadi men-.</li>
+              <li>merapikan → rapi → melakukan suatu pekerjaan.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-box">
+        <button class="challenge-toggle" onclick="toggleChallenge('meChallenge3')">
+          💡 Tantangan 3 — Temukan Makna Imbuhan me-
+        </button>
+        <div class="challenge-text" id="meChallenge3">
+          <p>Pagi itu, para siswa melakukan kegiatan di halaman sekolah. Mereka menyiram tanaman agar tetap segar. Beberapa siswa mencangkul tanah untuk menanam bunga. Ada juga yang menggunting daun kering dengan alat. Setelah hujan turun, air di halaman mulai menggenang dan kemudian mengering. Semua siswa bekerja sama menjaga kebersihan sekolah.</p>
+          <div class="analysis-task">
+            <strong>🕵️ Tugas Analisis — Temukan 5 imbuhan</strong>
+            <ol>
+              <li>Temukan 5 kata berimbuhan me- dalam paragraf.</li>
+              <li>Tuliskan kata berimbuhan dan kata dasarnya.</li>
+              <li>Tentukan apakah maknanya melakukan pekerjaan, membentuk/menjadikan sesuatu, atau menggunakan alat.</li>
+              <li>Jelaskan alasanmu berdasarkan kalimat.</li>
+              <li>Buat satu contoh kata berimbuhan me- lain dengan makna yang sama.</li>
+            </ol>
+          </div>
+          <button class="challenge-key-toggle" onclick="toggleChallengeKey('meKey3')">🔑 Lihat Kunci Jawaban Tantangan 3</button>
+          <div class="challenge-key" id="meKey3">
+            <ol>
+              <li>menyiram → siram → melakukan suatu pekerjaan.</li>
+              <li>mencangkul → cangkul → mengerjakan sesuatu dengan alat.</li>
+              <li>menanam → tanam → melakukan suatu pekerjaan; t berubah menjadi n.</li>
+              <li>menggunting → gunting → mengerjakan sesuatu dengan alat.</li>
+              <li>mengering → kering → membentuk atau menjadikan sesuatu dalam keadaan kering.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="part" id="part1-4">
+    <h3>📝 Latihan Isian — 15 Soal</h3>
+    <div class="quiz-intro">
+      <strong>🎯 Petunjuk:</strong>
+      <p>Isilah jawaban dengan kata yang paling tepat. Setelah selesai, klik <b>Periksa Jawaban</b>.</p>
+    </div>
+    <div id="quiz1"></div>
+    <div class="quiz-actions">
+      <button class="btn btn-primary" onclick="checkQuiz(1)">✅ Periksa Jawaban</button>
+      <button class="btn btn-gray" onclick="resetQuiz(1)">🔄 Ulangi</button>
+      <button class="btn btn-orange" onclick="toggleKey(1)">🔑 Kunci Jawaban</button>
+    </div>
+    <div class="result" id="result1"></div>
+    <div class="key-box" id="key1"></div>
+  </div>
+
+  <div class="part" id="part1-5">
+    <h3>💭 Refleksi Penjelajah Bahasa</h3>
+    <div class="reflection">
+      <p><strong>Hari ini saya mengetahui bahwa imbuhan me-...</strong></p>
+      <textarea placeholder="Tuliskan jawabanmu..."></textarea>
+      <p><strong>Contoh kata berimbuhan me- yang saya ingat adalah...</strong></p>
+      <textarea placeholder="Tuliskan jawabanmu..."></textarea>
+      <p><strong>Bagian yang masih ingin saya pelajari adalah...</strong></p>
+      <textarea placeholder="Tuliskan jawabanmu..."></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- PERTEMUAN 2 -->
+<section class="meeting-content" id="meeting2">
+  <div class="content-header">
+    <div class="badge">✏️ MISI 2</div>
+    <h2>Misi Imbuhan -kan dan -lah</h2>
+    <p>Mengenal fungsi akhiran -kan dan -lah. Alokasi waktu: 2 × 35 menit.</p>
+  </div>
+
+  <div class="submenu">
+    <button onclick="openPart(2,1)">🎯 Tujuan Pembelajaran</button>
+    <button onclick="openPart(2,2)">👋 Pembukaan</button>
+    <button onclick="openPart(2,3)">✏️ Misi -kan dan -lah</button>
+    <button onclick="openPart(2,4)">📝 Latihan 15 Soal</button>
+    <button onclick="openPart(2,5)">💭 Refleksi</button>
+  </div>
+
+  <div class="part" id="part2-1">
+    <h3>🎯 Tujuan Pembelajaran</h3>
+    <ol>
+      <li>Menjelaskan pengertian imbuhan -kan.</li>
+      <li>Menjelaskan makna kata kerja berimbuhan -kan.</li>
+      <li>Menjelaskan pengertian imbuhan -lah.</li>
+      <li>Menjelaskan makna kata kerja berimbuhan -lah.</li>
+      <li>Memberikan contoh kata berimbuhan -kan dan -lah.</li>
+    </ol>
+  </div>
+
+  <div class="part" id="part2-2">
+    <h3>👋 Pembukaan</h3>
+    <div class="callout blue">
+      <strong>🎯 Tantangan Kata Perintah</strong>
+      <p>Perhatikan kata: <b>ambilkan, dengarkan, pindahkan, tuangkan, buatlah, gambarlah.</b></p>
+      <p>Apa persamaan kata-kata tersebut? Kata-kata tersebut menyatakan <b>perintah</b>.</p>
+    </div>
+    <div class="mission">
+      <div class="mission-title">🎮 Pilih Kata yang Tepat</div>
+      <p>Pilih kata yang termasuk kata kerja berakhiran <b>-kan</b> atau <b>-lah</b>.</p>
+      <div class="choice-row">
+        <button class="choice" onclick="checkChoice(this,true)">ambilkan</button>
+        <button class="choice" onclick="checkChoice(this,false)">ambil</button>
+        <button class="choice" onclick="checkChoice(this,true)">buatlah</button>
+        <button class="choice" onclick="checkChoice(this,false)">gambar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="part" id="part2-3">
+    <h3>✏️ Misi Pembelajaran — Imbuhan -kan dan -lah</h3>
+
+    <div class="callout green">
+      <h4>1. Imbuhan -kan</h4>
+      <p><b>Imbuhan -kan adalah akhiran yang mengubah kata dasar menjadi kata kerja. Kata kerja yang terbentuk menyatakan makna perintah.</b></p>
+      <p>Contoh: <b>ambilkan, dengarkan, pindahkan, tuangkan.</b></p>
+    </div>
+
+    <div class="callout pink">
+      <h4>2. Imbuhan -lah</h4>
+      <p><b>Imbuhan -lah adalah akhiran yang mengubah kata dasar menjadi kata kerja. Kata kerja yang terbentuk menekankan kata dasarnya dan menyatakan perintah.</b></p>
+      <p>Contoh: <b>buatlah, gambarlah.</b></p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Imbuhan</th><th>Contoh</th><th>Makna</th></tr></thead>
+        <tbody>
+          <tr><td>-kan</td><td>ambilkan</td><td>Perintah</td></tr>
+          <tr><td>-kan</td><td>dengarkan</td><td>Perintah</td></tr>
+          <tr><td>-kan</td><td>pindahkan</td><td>Perintah</td></tr>
+          <tr><td>-lah</td><td>buatlah</td><td>Menekankan kata dasar dan menyatakan perintah</td></tr>
+          <tr><td>-lah</td><td>gambarlah</td><td>Menekankan kata dasar dan menyatakan perintah</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mission">
+      <div class="mission-title">🔎 Tantangan Bahasa</div>
+
+      <p>
+        Klik setiap tantangan untuk membuka petunjuk singkatnya.
+      </p>
+
+      <div class="game-box">
+        <button class="challenge-toggle" onclick="toggleChallenge('challenge1')">
+          🔍 Tantangan 1 — Imbuhan -lah
+        </button>
+
+        <div class="challenge-text" id="challenge1">
+          <p>
+            Pagi itu, Rani membantu ibu menyiapkan meja makan. Ibu berkata, “Susunlah piring-piring itu dengan rapi.” Setelah itu ibu berkata, “Letakkanlah gelas di sebelah piring.” Rani kemudian mendengar pesan ibu, “Rapikanlah meja setelah makan.” Ibu juga berkata, “Bersihkanlah meja jika ada sisa makanan.” Sebelum meninggalkan meja, Rani berkata, “Lakukanlah semuanya dengan hati-hati.”
+          </p>
+          <div class="analysis-task">
+            <strong>🕵️ Tugas Analisis — Temukan 5 imbuhan</strong>
+            <ol>
+              <li>Temukan 5 kata yang mendapat imbuhan <b>-lah</b> dalam paragraf.</li>
+              <li>Tuliskan kata yang kamu temukan.</li>
+              <li>Tuliskan kata dasarnya.</li>
+              <li>Jelaskan makna atau fungsi imbuhan <b>-lah</b> pada setiap kata.</li>
+              <li>Tuliskan satu kalimat baru menggunakan salah satu kata tersebut.</li>
+            </ol>
+          </div>
+          <button class="challenge-key-toggle" onclick="toggleChallengeKey('keyChallenge1')">🔑 Lihat Kunci Jawaban Tantangan 1</button>
+          <div class="challenge-key" id="keyChallenge1">
+            <ol>
+              <li><b>Susunlah</b> → susun + -lah → menegaskan perintah untuk menyusun.</li>
+              <li><b>Letakkanlah</b> → letak + -lah → menegaskan perintah untuk meletakkan.</li>
+              <li><b>Rapikanlah</b> → rapi + -lah → menegaskan perintah untuk merapikan.</li>
+              <li><b>Bersihkanlah</b> → bersih + -lah → menegaskan perintah untuk membersihkan.</li>
+              <li><b>Lakukanlah</b> → laku + -lah → menegaskan perintah untuk melakukan.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-box">
+        <button class="challenge-toggle" onclick="toggleChallenge('challenge2')">
+          ✏️ Tantangan 2 — Imbuhan -kan
+        </button>
+
+        <div class="challenge-text" id="challenge2">
+          <p>
+            Saat belajar di kelas, Dito lupa membawa penghapus. Ia berkata kepada Sinta, “Tolong ambilkan penghapus di meja guru.” Sinta kemudian berkata, “Bawakan buku tugasmu ke depan.” Setelah itu, guru meminta Dito, “Kumpulkan buku-buku kalian di meja.” Dito mendengar teman berkata, “Dengarkan penjelasan guru dengan baik.” Sebelum pelajaran dimulai, guru berkata, “Siapkan alat tulis kalian.”
+          </p>
+          <div class="analysis-task">
+            <strong>🕵️ Tugas Analisis — Temukan 5 imbuhan</strong>
+            <ol>
+              <li>Temukan 5 kata yang mendapat imbuhan <b>-kan</b> dalam paragraf.</li>
+              <li>Tuliskan kata yang kamu temukan.</li>
+              <li>Tuliskan kata dasarnya.</li>
+              <li>Jelaskan makna atau fungsi imbuhan <b>-kan</b> pada setiap kata.</li>
+              <li>Buat satu kalimat perintah menggunakan salah satu kata berimbuhan <b>-kan</b>.</li>
+            </ol>
+          </div>
+          <button class="challenge-key-toggle" onclick="toggleChallengeKey('keyChallenge2')">🔑 Lihat Kunci Jawaban Tantangan 2</button>
+          <div class="challenge-key" id="keyChallenge2">
+            <ol>
+              <li><b>Ambilkan</b> → ambil + -kan → meminta seseorang mengambilkan sesuatu.</li>
+              <li><b>Bawakan</b> → bawa + -kan → meminta seseorang membawakan sesuatu.</li>
+              <li><b>Kumpulkan</b> → kumpul + -kan → memerintahkan untuk mengumpulkan.</li>
+              <li><b>Dengarkan</b> → dengar + -kan → memerintahkan untuk mendengarkan.</li>
+              <li><b>Siapkan</b> → siap + -kan → memerintahkan untuk menyiapkan sesuatu.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-box">
+        <button class="challenge-toggle" onclick="toggleChallenge('challenge3')">
+          💡 Tantangan 3 — Temukan Maknanya
+        </button>
+
+        <div class="challenge-text" id="challenge3">
+          <p>
+            Setelah kegiatan membaca, guru meminta siswa bekerja dalam kelompok. Guru berkata, “Bacalah cerita dengan teliti, kemudian tuliskan kata-kata penting yang kalian temukan.” Beni mulai membaca dan temannya berkata, “Gambarlah bagian cerita yang paling menarik.” Setelah selesai, guru meminta mereka, “Ceritakan kembali isi bacaan dengan bahasa kalian sendiri.” Sebelum presentasi, guru berpesan, “Perhatikanlah penjelasan teman-temanmu.”
+          </p>
+          <div class="analysis-task">
+            <strong>🕵️ Tugas Analisis — Temukan 5 imbuhan</strong>
+            <ol>
+              <li>Temukan 5 kata berimbuhan dalam paragraf.</li>
+              <li>Tuliskan kata berimbuhan yang kamu temukan.</li>
+              <li>Tuliskan kata dasarnya.</li>
+              <li>Tentukan apakah kata tersebut menggunakan imbuhan <b>-lah</b> atau <b>-kan</b>.</li>
+              <li>Jelaskan makna atau fungsi imbuhan tersebut sesuai dengan kalimatnya.</li>
+            </ol>
+          </div>
+          <button class="challenge-key-toggle" onclick="toggleChallengeKey('keyChallenge3')">🔑 Lihat Kunci Jawaban Tantangan 3</button>
+          <div class="challenge-key" id="keyChallenge3">
+            <ol>
+              <li><b>Bacalah</b> → baca + -lah → menegaskan perintah untuk membaca.</li>
+              <li><b>Tuliskan</b> → tulis + -kan → memerintahkan untuk menuliskan.</li>
+              <li><b>Gambarlah</b> → gambar + -lah → menegaskan perintah untuk menggambar.</li>
+              <li><b>Ceritakan</b> → cerita + -kan → memerintahkan untuk menceritakan.</li>
+              <li><b>Perhatikanlah</b> → perhati + -kan + -lah → menegaskan perintah untuk memperhatikan.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="part" id="part2-4">
+    <h3>📝 Latihan Isian — 15 Soal</h3>
+    <div class="quiz-intro">
+      <strong>🎯 Petunjuk:</strong>
+      <p>Isilah jawaban dengan kata yang paling tepat.</p>
+    </div>
+    <div id="quiz2"></div>
+    <div class="quiz-actions">
+      <button class="btn btn-primary" onclick="checkQuiz(2)">✅ Periksa Jawaban</button>
+      <button class="btn btn-gray" onclick="resetQuiz(2)">🔄 Ulangi</button>
+      <button class="btn btn-orange" onclick="toggleKey(2)">🔑 Kunci Jawaban</button>
+    </div>
+    <div class="result" id="result2"></div>
+    <div class="key-box" id="key2"></div>
+  </div>
+
+  <div class="part" id="part2-5">
+    <h3>💭 Refleksi</h3>
+    <div class="reflection">
+      <p><strong>Imbuhan -kan digunakan untuk...</strong></p>
+      <textarea></textarea>
+      <p><strong>Imbuhan -lah digunakan untuk...</strong></p>
+      <textarea></textarea>
+      <p><strong>Contoh kata yang saya sukai adalah...</strong></p>
+      <textarea></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- PERTEMUAN 3 -->
+<section class="meeting-content" id="meeting3">
+  <div class="content-header">
+    <div class="badge">📖 MISI 3</div>
+    <h2>Detektif Cerita Pendek</h2>
+    <p>Mengenal pengertian, ciri, unsur, struktur, dan langkah membuat cerpen. Alokasi waktu: 2 × 35 menit.</p>
+  </div>
+
+  <div class="submenu">
+    <button onclick="openPart(3,1)">🎯 Tujuan Pembelajaran</button>
+    <button onclick="openPart(3,2)">👋 Pembukaan</button>
+    <button onclick="openPart(3,3)">🔎 Jelajah Cerpen</button>
+    <button onclick="openPart(3,4)">📝 Latihan 15 Soal</button>
+    <button onclick="openPart(3,5)">💭 Refleksi</button>
+  </div>
+
+  <div class="part" id="part3-1">
+    <h3>🎯 Tujuan Pembelajaran</h3>
+    <ol>
+      <li>Menjelaskan pengertian cerita pendek.</li>
+      <li>Menyebutkan ciri-ciri cerita pendek.</li>
+      <li>Mengenali unsur-unsur cerita pendek.</li>
+      <li>Menjelaskan struktur cerita pendek.</li>
+      <li>Menjelaskan langkah-langkah membuat cerita pendek.</li>
+    </ol>
+  </div>
+
+  <div class="part" id="part3-2">
+    <h3>👋 Pembukaan</h3>
+    <div class="callout blue">
+      <strong>📖 Apa Itu Cerpen?</strong>
+      <p>
+        Cerita Pendek atau <b>cerpen</b> adalah jenis karya sastra prosa fiksi
+        yang menceritakan satu peristiwa pokok secara ringkas, padat, dan fokus
+        pada satu tokoh utama.
+      </p>
+    </div>
+    <div class="mission">
+      <div class="mission-title">🎮 Tebak Unsur Cerita</div>
+      <p>Jika cerita menceritakan "Rani pergi ke sekolah pada pagi hari", apa saja yang dapat ditemukan?</p>
+      <div class="choice-row">
+        <button class="choice" onclick="checkChoice(this,true)">Tokoh</button>
+        <button class="choice" onclick="checkChoice(this,true)">Latar</button>
+        <button class="choice" onclick="checkChoice(this,false)">Harga barang</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="part" id="part3-3">
+    <h3>🔎 Misi Pembelajaran — Jelajah Cerpen</h3>
+
+    <div class="callout green">
+      <strong>📚 Pengertian</strong>
+      <p>
+        Cerpen adalah karya sastra prosa fiksi yang menceritakan satu peristiwa
+        pokok secara ringkas, padat, dan fokus pada satu tokoh utama.
+        Umumnya cerpen terdiri dari kurang dari <b>10.000 kata</b>, dapat
+        diselesaikan dalam sekali duduk, serta memberikan kesan mendalam.
+      </p>
+    </div>
+
+    <h4>⭐ Ciri-Ciri Cerita Pendek</h4>
+    <ol>
+      <li>Ceritanya singkat dan tidak terlalu panjang.</li>
+      <li>Memiliki sedikit tokoh.</li>
+      <li>Hanya menceritakan satu masalah utama.</li>
+      <li>Alur cerita sederhana dan mudah dipahami.</li>
+      <li>Memiliki pesan atau amanat.</li>
+    </ol>
+
+    <h4>🧩 Unsur-Unsur Cerita Pendek</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Unsur</th><th>Pengertian</th><th>Contoh/Keterangan</th></tr></thead>
+        <tbody>
+          <tr><td>Tema</td><td>Ide pokok atau inti cerita.</td><td>Persahabatan, kejujuran, disiplin, tolong-menolong.</td></tr>
+          <tr><td>Tokoh</td><td>Pelaku dalam cerita.</td><td>Tokoh utama dan tokoh tambahan.</td></tr>
+          <tr><td>Penokohan</td><td>Sifat atau watak tokoh.</td><td>Baik hati, rajin, pemalas, jujur, sombong.</td></tr>
+          <tr><td>Latar</td><td>Tempat, waktu, dan suasana.</td><td>Sekolah, pagi hari, gembira.</td></tr>
+          <tr><td>Alur</td><td>Jalannya cerita.</td><td>Awal, tengah, akhir.</td></tr>
+          <tr><td>Amanat</td><td>Pesan yang ingin disampaikan penulis.</td><td>Pesan atau pelajaran dari cerita.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>🏗️ Struktur Cerita Pendek</h4>
+    <div class="callout purple">
+      <ol>
+        <li><b>Orientasi:</b> bagian pengenalan tokoh, tempat, dan waktu.</li>
+        <li><b>Komplikasi:</b> bagian munculnya masalah.</li>
+        <li><b>Resolusi:</b> bagian penyelesaian masalah.</li>
+      </ol>
+    </div>
+
+    <h4>✍️ Langkah-Langkah Membuat Cerita Pendek</h4>
+    <ol>
+      <li>Menentukan tema.</li>
+      <li>Menentukan tokoh.</li>
+      <li>Menentukan latar.</li>
+      <li>Membuat alur cerita.</li>
+      <li>Menulis cerita dengan bahasa yang jelas.</li>
+      <li>Menentukan amanat.</li>
+    </ol>
+
+    <div class="mission">
+      <div class="mission-title">🔎 Tantangan Cerpen — Detektif Unsur Cerita</div>
+      <p>Klik setiap tantangan untuk membuka cerita. Bacalah dengan teliti, lalu temukan sendiri unsur-unsur cerita yang diminta. Jangan mencari jawaban sebelum mencoba menganalisis teks.</p>
+
+      <div class="game-box">
+        <button class="challenge-toggle" onclick="toggleChallenge('cerpenChallenge1')">
+          🔍 Tantangan 1 — Temukan Tokoh dan Penokohan
+        </button>
+        <div class="challenge-text" id="cerpenChallenge1">
+          <p>Pagi itu, Raka datang lebih awal ke sekolah. Ia melihat halaman kelas masih penuh dengan daun kering. Raka mengambil sapu dan mulai membersihkannya tanpa menunggu perintah guru. Ketika Dimas datang, ia melihat Raka bekerja sendirian lalu ikut membantu. Raka tersenyum dan berkata bahwa pekerjaan akan lebih cepat selesai jika mereka bekerja bersama. Setelah halaman bersih, Raka mengajak Dimas merapikan alat kebersihan sebelum masuk kelas.</p>
+          <div class="analysis-task">
+            <strong>🕵️ Tugas Analisis — Temukan 5 informasi</strong>
+            <ol>
+              <li>Temukan nama tokoh dalam paragraf.</li>
+              <li>Tentukan tokoh yang paling banyak berperan.</li>
+              <li>Temukan sifat tokoh utama berdasarkan tindakan atau perkataannya.</li>
+              <li>Tuliskan bukti dari cerita yang menunjukkan sifat tersebut.</li>
+              <li>Jelaskan penokohan tokoh utama dengan kalimatmu sendiri.</li>
+            </ol>
+          </div>
+          <button class="challenge-key-toggle" onclick="toggleChallengeKey('keyCerpenChallenge1')">🔑 Lihat Kunci Jawaban Tantangan 1</button>
+          <div class="challenge-key" id="keyCerpenChallenge1">
+            <ol>
+              <li>Tokoh: Raka dan Dimas.</li>
+              <li>Tokoh yang paling banyak berperan: Raka.</li>
+              <li>Sifat Raka: rajin, peduli, dan suka bekerja sama.</li>
+              <li>Bukti: Raka datang lebih awal, membersihkan halaman tanpa menunggu perintah, dan mengajak Dimas bekerja bersama.</li>
+              <li>Penokohan Raka dapat dijelaskan sebagai anak yang rajin, peduli terhadap lingkungan, dan senang bekerja sama.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-box">
+        <button class="challenge-toggle" onclick="toggleChallenge('cerpenChallenge2')">
+          ✏️ Tantangan 2 — Temukan Latar dan Alur
+        </button>
+        <div class="challenge-text" id="cerpenChallenge2">
+          <p>Suatu sore, Lani duduk di perpustakaan sekolah untuk membaca buku cerita. Awalnya ia membaca dengan tenang di dekat jendela. Tiba-tiba listrik padam sehingga ruangan menjadi gelap. Lani merasa khawatir karena bukunya belum selesai dibaca. Beberapa menit kemudian listrik menyala kembali dan petugas perpustakaan menyalakan lampu. Lani melanjutkan membaca sampai selesai sebelum pulang ke rumah.</p>
+          <div class="analysis-task">
+            <strong>🕵️ Tugas Analisis — Temukan 5 informasi</strong>
+            <ol>
+              <li>Temukan latar tempat dalam paragraf.</li>
+              <li>Temukan latar waktu dalam paragraf.</li>
+              <li>Temukan suasana yang terjadi ketika listrik padam.</li>
+              <li>Urutkan tiga peristiwa penting dari awal, tengah, hingga akhir.</li>
+              <li>Jelaskan jenis alur yang tampak berdasarkan urutan peristiwa tersebut.</li>
+            </ol>
+          </div>
+          <button class="challenge-key-toggle" onclick="toggleChallengeKey('keyCerpenChallenge2')">🔑 Lihat Kunci Jawaban Tantangan 2</button>
+          <div class="challenge-key" id="keyCerpenChallenge2">
+            <ol>
+              <li>Latar tempat: perpustakaan sekolah.</li>
+              <li>Latar waktu: sore hari.</li>
+              <li>Suasana: gelap dan Lani merasa khawatir.</li>
+              <li>Urutan: Lani membaca → listrik padam dan ruangan gelap → listrik menyala kembali dan Lani melanjutkan membaca.</li>
+              <li>Alur: alur sederhana/maju karena peristiwa diceritakan berurutan dari awal sampai akhir.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-box">
+        <button class="challenge-toggle" onclick="toggleChallenge('cerpenChallenge3')">
+          💡 Tantangan 3 — Temukan Tema dan Amanat
+        </button>
+        <div class="challenge-text" id="cerpenChallenge3">
+          <p>Setiap hari, Sari membawa bekal dari rumah. Suatu hari, ia melihat Nia duduk sendiri saat waktu makan karena lupa membawa bekal. Sari kemudian membagi sebagian makanannya kepada Nia. Nia mengucapkan terima kasih dan berjanji akan lebih teliti menyiapkan perlengkapan sekolah. Sejak saat itu, mereka sering saling membantu ketika ada teman yang membutuhkan.</p>
+          <div class="analysis-task">
+            <strong>🕵️ Tugas Analisis — Temukan 5 informasi</strong>
+            <ol>
+              <li>Tentukan tema utama cerita.</li>
+              <li>Temukan tokoh-tokoh yang terlibat dalam cerita.</li>
+              <li>Temukan masalah yang dialami salah satu tokoh.</li>
+              <li>Jelaskan tindakan yang menyelesaikan masalah tersebut.</li>
+              <li>Tuliskan amanat atau pesan yang dapat dipelajari dari cerita.</li>
+            </ol>
+          </div>
+          <button class="challenge-key-toggle" onclick="toggleChallengeKey('keyCerpenChallenge3')">🔑 Lihat Kunci Jawaban Tantangan 3</button>
+          <div class="challenge-key" id="keyCerpenChallenge3">
+            <ol>
+              <li>Tema: tolong-menolong atau kepedulian terhadap teman.</li>
+              <li>Tokoh: Sari dan Nia.</li>
+              <li>Masalah: Nia lupa membawa bekal.</li>
+              <li>Penyelesaian: Sari membagi sebagian makanannya kepada Nia.</li>
+              <li>Amanat: kita sebaiknya peduli, suka menolong, dan mau berbagi kepada teman yang membutuhkan.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-title">🗣️ Kegiatan Bersama</div>
+      <ol>
+        <li>Carilah cerita pendek pada buku <b>Kumpulan Cerpen</b> di perpustakaan!</li>
+        <li>Pilihlah salah satu cerita yang menurut kelompokmu paling menarik!</li>
+        <li>Mintalah salah satu anggota kelompok membacakannya dengan jelas!</li>
+        <li>Berdiskusilah dengan teman sekelompok untuk mengerjakan kegiatan berikut:
+          <ul>
+            <li>Sebutkan nama-nama tokoh cerita beserta wataknya!</li>
+            <li>Jelaskan latar tempat, waktu, dan suasana dalam cerita tersebut!</li>
+            <li>Tulislah secara singkat isi ceritanya!</li>
+          </ul>
+        </li>
+        <li>Buatlah tanggapan terhadap isi cerita pendek tersebut secara tertulis!</li>
+        <li>Jika sudah selesai, bacakan atau laporkan pekerjaanmu di depan kelas melalui perwakilan kelompok!</li>
+        <li>Sesudah dibaca, kumpulkan laporanmu kepada guru untuk dinilai.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="part" id="part3-4">
+    <h3>📝 Latihan Isian — 15 Soal</h3>
+    <div class="quiz-intro"><strong>🎯 Petunjuk:</strong><p>Isilah jawaban dengan kata yang paling tepat.</p></div>
+    <div id="quiz3"></div>
+    <div class="quiz-actions">
+      <button class="btn btn-primary" onclick="checkQuiz(3)">✅ Periksa Jawaban</button>
+      <button class="btn btn-gray" onclick="resetQuiz(3)">🔄 Ulangi</button>
+      <button class="btn btn-orange" onclick="toggleKey(3)">🔑 Kunci Jawaban</button>
+    </div>
+    <div class="result" id="result3"></div>
+    <div class="key-box" id="key3"></div>
+  </div>
+
+  <div class="part" id="part3-5">
+    <h3>💭 Refleksi Detektif Cerpen</h3>
+    <div class="reflection">
+      <p><strong>Unsur cerpen yang paling mudah saya pahami adalah...</strong></p>
+      <textarea></textarea>
+      <p><strong>Struktur cerpen terdiri atas...</strong></p>
+      <textarea></textarea>
+      <p><strong>Jika membuat cerpen, tema yang ingin saya pilih adalah...</strong></p>
+      <textarea></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- PERTEMUAN 4 -->
+<section class="meeting-content" id="meeting4">
+  <div class="content-header">
+    <div class="badge">🌱 MISI 4</div>
+    <h2>Membaca dan Memahami Cerita</h2>
+    <p>Menganalisis cerita "Pensil Baru Rani" dan "Semangat Gotong Royong di Desa Bima". Alokasi waktu: 2 × 35 menit.</p>
+  </div>
+
+  <div class="submenu">
+    <button onclick="openPart(4,1)">🎯 Tujuan Pembelajaran</button>
+    <button onclick="openPart(4,2)">📖 Pensil Baru Rani</button>
+    <button onclick="openPart(4,3)">🌱 Semangat Gotong Royong</button>
+    <button onclick="openPart(4,4)">📝 Latihan 15 Soal</button>
+    <button onclick="openPart(4,5)">💭 Refleksi</button>
+  </div>
+
+  <div class="part" id="part4-1">
+    <h3>🎯 Tujuan Pembelajaran</h3>
+    <ol>
+      <li>Membaca dan memahami isi cerita pendek.</li>
+      <li>Menentukan tema, tokoh, latar, dan amanat cerita.</li>
+      <li>Menemukan masalah dan penyelesaian dalam cerita.</li>
+      <li>Menjelaskan pesan yang terdapat dalam cerita.</li>
+      <li>Memberikan tanggapan terhadap isi cerita.</li>
+    </ol>
+  </div>
+
+  <div class="part" id="part4-2">
+    <h3>📖 Cerita Pendek — Pensil Baru Rani</h3>
+    <div class="callout blue">
+      <p>
+        Pada hari Senin pagi, Rani pergi ke sekolah dengan gembira. Ia membawa
+        pensil baru hadiah dari ibunya. Saat pelajaran dimulai, pensil Rani
+        jatuh ke lantai. Tiba-tiba pensil itu hilang. Rani merasa sedih dan
+        mencari ke bawah meja. Ternyata, pensil itu terbawa tas Mila tanpa
+        sengaja. Mila segera meminta maaf dan mengembalikannya kepada Rani.
+        Rani memaafkan Mila. Mereka pun kembali belajar bersama dengan senang.
+      </p>
+    </div>
+
+    <h4>🔎 Analisis Cerita</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Unsur</th><th>Jawaban</th></tr></thead>
+        <tbody>
+          <tr><td>Tema</td><td>Persahabatan</td></tr>
+          <tr><td>Tokoh</td><td>Rani dan Mila</td></tr>
+          <tr><td>Latar</td><td>Sekolah, pagi hari</td></tr>
+          <tr><td>Amanat</td><td>Kita harus jujur dan mau meminta maaf.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mission">
+      <div class="mission-title">💬 Tantangan Diskusi</div>
+      <ol>
+        <li>Apa masalah yang dialami Rani?</li>
+        <li>Mengapa pensil Rani terbawa tas Mila?</li>
+        <li>Apa yang dilakukan Mila?</li>
+        <li>Mengapa Rani memaafkan Mila?</li>
+        <li>Apa pesan yang dapat dipelajari?</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="part" id="part4-3">
+    <h3>🌱 Semangat Gotong Royong di Desa Bima</h3>
+
+    <div class="callout green">
+      <p>
+        Pada suatu sore yang mendung di sebuah desa kecil hiduplah seorang anak
+        bernama Bima. Ia dikenal sebagai anak yang rajin membantu orang tuanya.
+        Sepulang sekolah, Bima selalu membantu ibunya menyiram tanaman dan
+        memberi makan ayam di halaman belakang rumah. Meskipun lelah, ia tetap
+        melakukannya dengan senang hati.
+      </p>
+      <p>
+        Suatu hari, hujan turun sangat deras sejak pagi. Jalanan desa menjadi
+        licin dan sungai di dekat rumah warga mulai meluap. Banyak warga
+        khawatir air sungai akan masuk ke rumah mereka. Kepala desa lalu
+        mengajak warga bekerja sama membuat tanggul darurat dari karung pasir.
+      </p>
+      <p>
+        Bima yang melihat para warga bekerja tanpa henti merasa ingin membantu.
+        Ia bersama beberapa temannya membawa karung-karung kecil berisi pasir
+        untuk diberikan kepada orang dewasa. Walaupun tubuh mereka kecil,
+        bantuan itu sangat berarti. Para warga pun memuji semangat anak-anak
+        yang ikut peduli terhadap desa mereka.
+      </p>
+      <p>
+        Menjelang malam, tanggul darurat akhirnya selesai dibuat. Air sungai
+        memang naik cukup tinggi, tetapi tanggul itu berhasil menahan air agar
+        tidak masuk ke rumah warga. Semua orang merasa lega dan bersyukur
+        karena mereka mau bekerja sama menghadapi masalah bersama.
+      </p>
+      <p>
+        Keesokan harinya, kepala desa mengumpulkan warga di balai desa. Ia
+        mengucapkan terima kasih kepada seluruh warga, termasuk anak-anak yang
+        telah membantu.
+      </p>
+      <p>
+        Bima merasa bangga karena ia belajar bahwa kerja sama dan kepedulian
+        dapat membuat pekerjaan berat menjadi lebih ringan.
+      </p>
+    </div>
+
+    <h4>🧩 Unsur yang Dapat Ditemukan</h4>
+    <ul>
+      <li><b>Tokoh:</b> Bima, warga, kepala desa, teman-teman Bima.</li>
+      <li><b>Tempat:</b> desa, rumah, halaman belakang rumah, balai desa.</li>
+      <li><b>Waktu:</b> sore, pagi, menjelang malam, dan keesokan harinya.</li>
+      <li><b>Masalah:</b> hujan deras menyebabkan sungai mulai meluap.</li>
+      <li><b>Penyelesaian:</b> warga bekerja sama membuat tanggul darurat.</li>
+      <li><b>Amanat:</b> kerja sama dan kepedulian dapat membuat pekerjaan berat menjadi lebih ringan.</li>
+    </ul>
+
+    <div class="mission">
+      <div class="mission-title">🤝 Simak Kembali — Benar atau Salah?</div>
+      <p>Tentukan benar atau salah pernyataan berikut.</p>
+      <div class="game-box"><b>1.</b> Bima adalah anak yang malas membantu orang tuanya.
+        <div class="choice-row"><button class="choice" onclick="checkChoice(this,false)">BENAR</button><button class="choice" onclick="checkChoice(this,true)">SALAH</button></div>
+      </div>
+      <div class="game-box"><b>2.</b> Sepulang sekolah, Bima membantu ibunya menyiram tanaman.
+        <div class="choice-row"><button class="choice" onclick="checkChoice(this,true)">BENAR</button><button class="choice" onclick="checkChoice(this,false)">SALAH</button></div>
+      </div>
+      <div class="game-box"><b>3.</b> Hujan deras menyebabkan sungai di dekat desa meluap.
+        <div class="choice-row"><button class="choice" onclick="checkChoice(this,true)">BENAR</button><button class="choice" onclick="checkChoice(this,false)">SALAH</button></div>
+      </div>
+      <div class="game-box"><b>4.</b> Bima dan teman-temannya membantu membawa karung pasir.
+        <div class="choice-row"><button class="choice" onclick="checkChoice(this,true)">BENAR</button><button class="choice" onclick="checkChoice(this,false)">SALAH</button></div>
+      </div>
+      <div class="game-box"><b>5.</b> Kepala desa mengucapkan terima kasih kepada warga dan anak-anak.
+        <div class="choice-row"><button class="choice" onclick="checkChoice(this,true)">BENAR</button><button class="choice" onclick="checkChoice(this,false)">SALAH</button></div>
+      </div>
+    </div>
+    <div class="mission">
+      <div class="mission-title">🔎 Tantangan Membaca dan Memahami Cerita</div>
+      <p>Klik setiap tantangan untuk membuka cerita. Bacalah dengan teliti, lalu analisis tokoh, latar, masalah, penyelesaian, tema, dan amanat. Kunci jawaban dapat dibuka setelah kamu selesai mengerjakan.</p>
+
+      <div class="game-box">
+        <button class="challenge-toggle" onclick="toggleChallenge('readChallenge1')">
+          🔍 Tantangan 1 — Detektif Pensil Rani
+        </button>
+        <div class="challenge-text" id="readChallenge1">
+          <p>
+            Pada hari Senin pagi, Rani pergi ke sekolah dengan gembira karena membawa pensil baru hadiah dari ibunya. Saat pelajaran dimulai, pensil itu jatuh ke lantai dan kemudian tidak terlihat. Rani mencari di bawah meja dengan hati-hati. Ternyata, pensil tersebut masuk ke dalam tas Mila tanpa sengaja. Mila menyadari kesalahannya, meminta maaf, lalu mengembalikan pensil itu kepada Rani. Rani menerima permintaan maaf Mila dan mereka kembali belajar bersama dengan senang.
+          </p>
+          <div class="analysis-task">
+            <strong>🕵️ Tugas Analisis — Temukan 5 Unsur Cerita</strong>
+            <ol>
+              <li>Siapa tokoh utama dan tokoh lainnya dalam cerita?</li>
+              <li>Bagaimana sifat Rani dan Mila? Tuliskan bukti dari cerita.</li>
+              <li>Di mana dan kapan peristiwa dalam cerita terjadi?</li>
+              <li>Apa masalah yang dialami Rani dan bagaimana masalah tersebut diselesaikan?</li>
+              <li>Apa tema dan amanat yang dapat kamu temukan?</li>
+            </ol>
+          </div>
+          <button class="challenge-key-toggle" onclick="toggleChallengeKey('keyReadChallenge1')">🔑 Lihat Kunci Jawaban Tantangan 1</button>
+          <div class="challenge-key" id="keyReadChallenge1">
+            <ol>
+              <li>Tokoh: Rani dan Mila; tokoh utama adalah Rani.</li>
+              <li>Rani gembira, hati-hati, dan mau memaafkan. Mila bertanggung jawab dan mau meminta maaf.</li>
+              <li>Latar tempat: sekolah. Latar waktu: Senin pagi.</li>
+              <li>Masalah: pensil Rani hilang/terbawa tas Mila. Penyelesaian: Mila meminta maaf dan mengembalikan pensil.</li>
+              <li>Tema: persahabatan. Amanat: kita harus jujur, berani meminta maaf, dan mau memaafkan.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-box">
+        <button class="challenge-toggle" onclick="toggleChallenge('readChallenge2')">
+          ✏️ Tantangan 2 — Detektif Gotong Royong
+        </button>
+        <div class="challenge-text" id="readChallenge2">
+          <p>
+            Bima adalah anak yang rajin membantu orang tuanya. Suatu hari hujan turun sangat deras sehingga sungai di dekat rumah warga mulai meluap. Kepala desa mengajak warga membuat tanggul darurat dari karung pasir. Bima dan beberapa temannya ikut membantu membawa karung-karung kecil berisi pasir. Menjelang malam, tanggul selesai dan berhasil menahan air agar tidak masuk ke rumah warga. Keesokan harinya, kepala desa mengucapkan terima kasih kepada semua orang yang telah membantu. Bima merasa bangga karena belajar bahwa kerja sama dan kepedulian dapat membuat pekerjaan berat menjadi lebih ringan.
+          </p>
+          <div class="analysis-task">
+            <strong>🕵️ Tugas Analisis — Temukan 5 Unsur Cerita</strong>
+            <ol>
+              <li>Siapa saja tokoh yang terdapat dalam cerita?</li>
+              <li>Bagaimana sifat Bima? Tuliskan bukti dari cerita.</li>
+              <li>Sebutkan latar tempat dan waktu yang terdapat dalam cerita.</li>
+              <li>Apa masalah yang terjadi dan apa penyelesaiannya?</li>
+              <li>Apa tema dan amanat cerita tersebut?</li>
+            </ol>
+          </div>
+          <button class="challenge-key-toggle" onclick="toggleChallengeKey('keyReadChallenge2')">🔑 Lihat Kunci Jawaban Tantangan 2</button>
+          <div class="challenge-key" id="keyReadChallenge2">
+            <ol>
+              <li>Tokoh: Bima, warga, kepala desa, dan teman-teman Bima.</li>
+              <li>Bima rajin, peduli, dan suka membantu. Buktinya ia membantu orang tua dan ikut membawa karung pasir.</li>
+              <li>Latar tempat: desa, rumah warga, sungai, dan balai desa. Latar waktu: sore, pagi, menjelang malam, dan keesokan harinya.</li>
+              <li>Masalah: sungai meluap karena hujan deras. Penyelesaian: warga bekerja sama membuat tanggul darurat.</li>
+              <li>Tema: gotong royong dan kepedulian. Amanat: kerja sama dan kepedulian membuat pekerjaan berat menjadi lebih ringan.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-box">
+        <button class="challenge-toggle" onclick="toggleChallenge('readChallenge3')">
+          💡 Tantangan 3 — Bandingkan Dua Cerita
+        </button>
+        <div class="challenge-text" id="readChallenge3">
+          <p>
+            Rani dan Bima sama-sama menghadapi keadaan yang membutuhkan sikap baik. Rani belajar tentang kejujuran, meminta maaf, dan memaafkan ketika pensilnya terbawa tas Mila. Sementara itu, Bima belajar tentang kepedulian dan gotong royong ketika hujan deras membuat sungai meluap. Kedua cerita tersebut menunjukkan bahwa masalah dapat diselesaikan dengan sikap positif dan tindakan yang baik. Walaupun masalahnya berbeda, kedua tokoh sama-sama memperoleh pelajaran yang dapat diterapkan dalam kehidupan sehari-hari.
+          </p>
+          <div class="analysis-task">
+            <strong>🕵️ Tugas Analisis — Bandingkan Isi Cerita</strong>
+            <ol>
+              <li>Siapa tokoh utama dari masing-masing cerita?</li>
+              <li>Apa masalah utama dalam cerita Rani dan cerita Bima?</li>
+              <li>Apa persamaan sikap baik yang ditunjukkan kedua cerita?</li>
+              <li>Apa perbedaan tema atau pesan dari kedua cerita?</li>
+              <li>Tuliskan pelajaran yang dapat kamu terapkan dalam kehidupan sehari-hari.</li>
+            </ol>
+          </div>
+          <button class="challenge-key-toggle" onclick="toggleChallengeKey('keyReadChallenge3')">🔑 Lihat Kunci Jawaban Tantangan 3</button>
+          <div class="challenge-key" id="keyReadChallenge3">
+            <ol>
+              <li>Tokoh utama: Rani dalam cerita Pensil Baru Rani dan Bima dalam cerita Semangat Gotong Royong di Desa Bima.</li>
+              <li>Masalah Rani: pensilnya hilang/terbawa tas Mila. Masalah Bima: sungai meluap karena hujan deras.</li>
+              <li>Keduanya menunjukkan kepedulian, tanggung jawab, dan kemauan melakukan tindakan yang baik.</li>
+              <li>Cerita Rani menekankan kejujuran, meminta maaf, dan memaafkan. Cerita Bima menekankan gotong royong dan kepedulian terhadap lingkungan serta warga.</li>
+              <li>Contoh: berkata jujur, mau meminta maaf dan memaafkan, membantu orang lain, serta bekerja sama saat menghadapi masalah.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="part" id="part4-4">
+    <h3>📝 Latihan Isian — 15 Soal</h3>
+    <div class="quiz-intro"><strong>🎯 Petunjuk:</strong><p>Isilah jawaban berdasarkan cerita dan materi yang telah dipelajari.</p></div>
+    <div id="quiz4"></div>
+    <div class="quiz-actions">
+      <button class="btn btn-primary" onclick="checkQuiz(4)">✅ Periksa Jawaban</button>
+      <button class="btn btn-gray" onclick="resetQuiz(4)">🔄 Ulangi</button>
+      <button class="btn btn-orange" onclick="toggleKey(4)">🔑 Kunci Jawaban</button>
+    </div>
+    <div class="result" id="result4"></div>
+    <div class="key-box" id="key4"></div>
+  </div>
+
+  <div class="part" id="part4-5">
+    <h3>💭 Refleksi Pembaca Cilik</h3>
+    <div class="reflection">
+      <p><strong>Pelajaran yang saya dapat dari cerita Pensil Baru Rani adalah...</strong></p>
+      <textarea></textarea>
+      <p><strong>Pelajaran yang saya dapat dari cerita Semangat Gotong Royong di Desa Bima adalah...</strong></p>
+      <textarea></textarea>
+      <p><strong>Setelah belajar cerita pendek, saya akan...</strong></p>
+      <textarea></textarea>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer class="footer">
+  <p>📚 Bahasa Indonesia Kelas 5 Semester Ganjil</p>
+  <p><strong>Imbuhan me-, -kan, -lah dan Cerita Pendek</strong></p>
+  <p>Belajar • Membaca • Berdiskusi • Berlatih • Berefleksi</p>
+</footer>
+
+</main>
+
+<button class="home-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Kembali ke atas">🏠</button>
+
+<script>
+const quizData = {
+  1:[
+    {q:"Imbuhan me- adalah __________ yang membentuk kata dasar menjadi kata kerja.",a:["awalan"]},
+    {q:"Salah satu makna imbuhan me- adalah melakukan suatu __________.",a:["pekerjaan"]},
+    {q:"Contoh kata berimbuhan me- yang berarti melakukan suatu pekerjaan adalah __________.",a:["membaca","menulis","menari","melukis","memasak","mencuci"]},
+    {q:"Membeku, mendidih, dan mengecil merupakan contoh makna me- yaitu membentuk atau __________ sesuatu.",a:["menjadikan"]},
+    {q:"Menggunting, mencangkul, dan memblender berarti mengerjakan sesuatu dengan __________.",a:["alat"]},
+    {q:"Imbuhan me- menjadi mem jika kata dasar dimulai dengan huruf __________.",a:["p"]},
+    {q:"Imbuhan me- menjadi meng jika kata dasar dimulai dengan huruf k atau __________.",a:["g"]},
+    {q:"Imbuhan me- menjadi men jika kata dasar dimulai dengan huruf __________.",a:["c"]},
+    {q:"Imbuhan me- tidak berubah jika kata dasar dimulai dengan huruf __________.",a:["m"]},
+    {q:"Kata dasar dari 'menempel' adalah __________.",a:["tempel"]},
+    {q:"Kata 'menggunting' menunjukkan pekerjaan yang dilakukan dengan __________.",a:["alat"]},
+    {q:"Kata 'menulis' berasal dari kata dasar __________.",a:["tulis"]},
+    {q:"Kata 'mencuci' berasal dari kata dasar __________.",a:["cuci"]},
+    {q:"Kata 'memasak' berasal dari kata dasar __________.",a:["masak"]},
+    {q:"Imbuhan me- mengubah kata dasar dengan awalan t menjadi __________.",a:["n"]}
+  ],
+  2:[
+    {q:"Imbuhan -kan adalah __________ yang mengubah kata dasar menjadi kata kerja.",a:["akhiran"]},
+    {q:"Kata kerja yang terbentuk dengan imbuhan -kan menyatakan makna __________.",a:["perintah"]},
+    {q:"Salah satu contoh kata berimbuhan -kan adalah __________.",a:["ambilkan","dengarkan","pindahkan","tuangkan"]},
+    {q:"Kata 'ambilkan' berasal dari kata dasar __________.",a:["ambil"]},
+    {q:"Kata 'dengarkan' berasal dari kata dasar __________.",a:["dengar"]},
+    {q:"Kata 'pindahkan' berasal dari kata dasar __________.",a:["pindah"]},
+    {q:"Kata 'tuangkan' berasal dari kata dasar __________.",a:["tuang"]},
+    {q:"Imbuhan -lah adalah __________ yang mengubah kata dasar menjadi kata kerja.",a:["akhiran"]},
+    {q:"Imbuhan -lah menekankan kata __________ dan menyatakan perintah.",a:["dasarnya","dasar"]},
+    {q:"Contoh kata berimbuhan -lah adalah __________.",a:["buatlah","gambarlah"]},
+    {q:"Kata 'buatlah' berasal dari kata dasar __________.",a:["buat"]},
+    {q:"Kata 'gambarlah' berasal dari kata dasar __________.",a:["gambar"]},
+    {q:"'Dengarkan!' termasuk kata kerja yang menggunakan imbuhan __________.",a:["-kan","kan"]},
+    {q:"'Buatlah!' termasuk kata kerja yang menggunakan imbuhan __________.",a:["-lah","lah"]},
+    {q:"Imbuhan -kan dan -lah sama-sama dapat membentuk kata kerja yang menyatakan __________.",a:["perintah"]}
+  ],
+  3:[
+    {q:"Cerita Pendek sering disingkat __________.",a:["cerpen"]},
+    {q:"Cerpen merupakan karya sastra prosa __________.",a:["fiksi"]},
+    {q:"Cerpen menceritakan satu peristiwa pokok secara ringkas, padat, dan fokus pada satu __________ utama.",a:["tokoh"]},
+    {q:"Umumnya cerpen terdiri dari kurang dari __________ kata.",a:["10000","10.000"]},
+    {q:"Salah satu ciri cerpen adalah memiliki sedikit __________.",a:["tokoh"]},
+    {q:"Ide pokok atau inti cerita disebut __________.",a:["tema"]},
+    {q:"Pelaku dalam cerita disebut __________.",a:["tokoh"]},
+    {q:"Sifat atau watak tokoh disebut __________.",a:["penokohan"]},
+    {q:"Tempat, waktu, dan suasana dalam cerita disebut __________.",a:["latar"]},
+    {q:"Jalannya cerita disebut __________.",a:["alur"]},
+    {q:"Pesan yang ingin disampaikan penulis disebut __________.",a:["amanat"]},
+    {q:"Bagian pengenalan tokoh, tempat, dan waktu disebut __________.",a:["orientasi"]},
+    {q:"Bagian munculnya masalah disebut __________.",a:["komplikasi"]},
+    {q:"Bagian penyelesaian masalah disebut __________.",a:["resolusi"]},
+    {q:"Langkah pertama membuat cerpen adalah menentukan __________.",a:["tema"]}
+  ],
+  4:[
+    {q:"Tokoh utama dalam cerita 'Pensil Baru Rani' adalah __________ dan Mila.",a:["Rani"]},
+    {q:"Rani pergi ke sekolah pada hari __________ pagi.",a:["senin"]},
+    {q:"Rani membawa pensil baru hadiah dari __________.",a:["ibunya","ibu"]},
+    {q:"Pensil Rani jatuh ke __________.",a:["lantai"]},
+    {q:"Pensil Rani terbawa tas __________ tanpa sengaja.",a:["Mila"]},
+    {q:"Mila segera meminta __________ dan mengembalikan pensil Rani.",a:["maaf"]},
+    {q:"Tema cerita 'Pensil Baru Rani' adalah __________.",a:["persahabatan"]},
+    {q:"Amanat cerita 'Pensil Baru Rani' adalah kita harus jujur dan mau __________.",a:["meminta maaf"]},
+    {q:"Tokoh anak dalam cerita 'Semangat Gotong Royong di Desa Bima' bernama __________.",a:["Bima"]},
+    {q:"Hujan deras menyebabkan sungai di dekat rumah warga mulai __________.",a:["meluap"]},
+    {q:"Kepala desa mengajak warga membuat tanggul darurat dari karung __________.",a:["pasir"]},
+    {q:"Bima dan beberapa temannya membawa karung-karung kecil berisi __________.",a:["pasir"]},
+    {q:"Tanggul darurat berhasil menahan air agar tidak masuk ke __________ warga.",a:["rumah"]},
+    {q:"Kepala desa mengumpulkan warga di __________ desa.",a:["balai"]},
+    {q:"Bima belajar bahwa kerja sama dan kepedulian dapat membuat pekerjaan berat menjadi lebih __________.",a:["ringan"]}
+  ]
+};
+
+let completed={1:false,2:false,3:false,4:false};
+
+function openMeeting(number){
+  document.querySelectorAll(".meeting-content").forEach(el=>el.classList.remove("active"));
+  document.querySelectorAll(".meeting-card").forEach(el=>el.classList.remove("active"));
+  const meeting=document.getElementById("meeting"+number);
+  const card=document.getElementById("meetingCard"+number);
+  if(meeting)meeting.classList.add("active");
+  if(card)card.classList.add("active");
+  window.scrollTo({top:document.getElementById("contentArea").offsetTop-15,behavior:"smooth"});
+  localStorage.setItem("bahasa-last-meeting",number);
+  playClick();
+}
+
+function openPart(meeting,part){
+  const section=document.getElementById("meeting"+meeting);
+  if(!section)return;
+  section.querySelectorAll(".part").forEach(el=>el.classList.remove("active"));
+  section.querySelectorAll(".submenu button").forEach(el=>el.classList.remove("active"));
+  const selected=document.getElementById("part"+meeting+"-"+part);
+  if(selected)selected.classList.add("active");
+  const buttons=section.querySelectorAll(".submenu button");
+  if(buttons[part-1])buttons[part-1].classList.add("active");
+  playClick();
+  selected?.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function toggleChallenge(id){
+  const box = document.getElementById(id);
+  if(!box) return;
+
+  box.classList.toggle("show");
+  playClick();
+}
+
+
+function toggleChallengeKey(id){
+  const box=document.getElementById(id);
+  if(!box) return;
+  box.classList.toggle("show");
+  playClick();
+}
+
+function checkChoice(button,isCorrect){
+  const parent=button.parentElement;
+  parent.querySelectorAll(".choice").forEach(btn=>btn.classList.remove("correct","wrong"));
+  if(isCorrect){button.classList.add("correct");playCorrect();}
+  else{button.classList.add("wrong");playWrong();}
+}
+
+function buildQuiz(number){
+  const container=document.getElementById("quiz"+number);
+  if(!container)return;
+  container.innerHTML="";
+  quizData[number].forEach((item,index)=>{
+    const div=document.createElement("div");
+    div.className="question";
+    div.innerHTML=`
+      <div><span class="question-number">${index+1}</span><strong>${item.q}</strong></div>
+      <input class="answer-input" id="q${number}-${index}" type="text" autocomplete="off" placeholder="Ketik jawabanmu di sini...">
+      <div class="answer-feedback" id="feedback${number}-${index}"></div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function normalize(text){
+  return text.toLowerCase().trim().replace(/[.,!?;:]/g,"").replace(/\s+/g," ");
+}
+
+function checkQuiz(number){
+  const data=quizData[number];
+  let correct=0;
+  data.forEach((item,index)=>{
+    const input=document.getElementById(`q${number}-${index}`);
+    const feedback=document.getElementById(`feedback${number}-${index}`);
+    const user=normalize(input.value);
+    const accepted=item.a.map(normalize);
+    if(accepted.includes(user)){
+      correct++;
+      feedback.innerHTML="✅ Benar!";
+      feedback.className="answer-feedback correct-answer";
+      input.style.borderColor="#22c55e";
+    }else{
+      feedback.innerHTML="❌ Belum tepat.";
+      feedback.className="answer-feedback wrong-answer";
+      input.style.borderColor="#ef4444";
+    }
+  });
+
+  const percentage=Math.round((correct/data.length)*100);
+  const result=document.getElementById("result"+number);
+  let message="";
+  if(percentage===100)message="🏆 Luar biasa! Semua jawaban benar!";
+  else if(percentage>=80)message="🌟 Hebat! Pemahamanmu sangat baik.";
+  else if(percentage>=60)message="👍 Bagus! Mari pelajari lagi bagian yang belum tepat.";
+  else message="💪 Tetap semangat! Baca kembali materi lalu coba lagi.";
+
+  result.innerHTML=`
+    <div>🎯 HASIL LATIHAN</div>
+    <div class="score">${percentage}</div>
+    <strong>${correct} dari ${data.length} jawaban benar</strong>
+    <p>${message}</p>
+  `;
+  result.classList.add("show");
+  completed[number]=true;
+  saveProgress();
+  updateProgress();
+  if(percentage===100)playSuccess();else playClick();
+}
+
+function resetQuiz(number){
+  quizData[number].forEach((item,index)=>{
+    const input=document.getElementById(`q${number}-${index}`);
+    const feedback=document.getElementById(`feedback${number}-${index}`);
+    if(input){input.value="";input.style.borderColor="#e2e8f0";}
+    if(feedback)feedback.innerHTML="";
+  });
+  const result=document.getElementById("result"+number);
+  if(result)result.classList.remove("show");
+  playClick();
+}
+
+function toggleKey(number){
+  const key=document.getElementById("key"+number);
+  if(key.classList.contains("show")){key.classList.remove("show");return;}
+  const data=quizData[number];
+  let html="<strong>🔑 Kunci Jawaban</strong><ol>";
+  data.forEach(item=>html+=`<li>${item.a.join(" / ")}</li>`);
+  html+="</ol>";
+  key.innerHTML=html;
+  key.classList.add("show");
+  playClick();
+}
+
+function updateProgress(){
+  const total=Object.keys(completed).length;
+  const done=Object.values(completed).filter(Boolean).length;
+  const percent=Math.round((done/total)*100);
+  document.getElementById("progressFill").style.width=percent+"%";
+  document.getElementById("progressText").textContent=percent+"%";
+}
+
+function saveProgress(){
+  localStorage.setItem("bahasa-indonesia-progress",JSON.stringify(completed));
+}
+
+function loadProgress(){
+  try{
+    const saved=JSON.parse(localStorage.getItem("bahasa-indonesia-progress"));
+    if(saved)completed={...completed,...saved};
+  }catch(error){console.log(error);}
+}
+
+let audioContext=null;
+function getAudioContext(){
+  if(!audioContext){
+    const AudioCtx=window.AudioContext||window.webkitAudioContext;
+    if(AudioCtx)audioContext=new AudioCtx();
+  }
+  return audioContext;
+}
+function beep(frequency,duration,type="sine"){
+  const ctx=getAudioContext();
+  if(!ctx)return;
+  const oscillator=ctx.createOscillator();
+  const gain=ctx.createGain();
+  oscillator.type=type;
+  oscillator.frequency.value=frequency;
+  gain.gain.setValueAtTime(.001,ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.08,ctx.currentTime+.01);
+  gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+duration);
+  oscillator.connect(gain);gain.connect(ctx.destination);
+  oscillator.start();oscillator.stop(ctx.currentTime+duration);
+}
+function playClick(){beep(650,.06)}
+function playCorrect(){beep(700,.08);setTimeout(()=>beep(900,.1),80)}
+function playWrong(){beep(220,.12,"square")}
+function playSuccess(){beep(523,.1);setTimeout(()=>beep(659,.1),120);setTimeout(()=>beep(784,.18),240)}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  loadProgress();
+  buildQuiz(1);buildQuiz(2);buildQuiz(3);buildQuiz(4);
+  updateProgress();
+  openPart(1,1);
+});
+</script>
+
+</body>
+</html>

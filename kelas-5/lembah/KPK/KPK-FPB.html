@@ -1,166 +1,281 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Petualangan Seru Dunia KPK & FPB</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      height: 100%;
-      width: 100%;
-      overflow-x: hidden;
-      background: url('https://i.imgur.com/IWnniCm.jpeg') no-repeat center center fixed;
-      background-size: cover;
-      color: #333;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-    }
-
-    .nav-left img {
-      height: 45px;
-      margin-right: 0.5rem;
-    }
-
-    .nav-right {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .nav-right a {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      text-decoration: none;
-      color: #0288d1;
-      font-weight: bold;
-      font-size: 0.9rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .nav-right a:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .title-section {
-      text-align: center;
-      margin: 20px 15px 10px;
-    }
-
-    .title-section h1 {
-      font-size: 2rem;
-      background: rgba(255,255,255,0.85);
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      border-radius: 12px;
-      color: #0288d1;
-      text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
-    }
-
-    .title-section p {
-      background: rgba(255,255,255,0.8);
-      color: #0288d1;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      max-width: 90%;
-      margin: 10px auto;
-      font-size: 1rem;
-    }
-
-    .map-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .map-item {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      padding: 15px;
-      text-align: center;
-      color: #0288d1;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-
-    .map-item:hover {
-      transform: scale(1.05);
-      background-color: #dff6ff;
-    }
-
-    .map-item .emoji {
-      font-size: 2rem;
-      display: block;
-      margin-bottom: 8px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Petualangan FPB & KPK</title>
+<style>
+:root{--navy:#17324d;--blue:#276ef1;--mint:#dff8ed;--yellow:#fff2bd;--pink:#ffe1e8;--paper:#fff;--ink:#233044;--muted:#64748b;--line:#dce5ef;--green:#16845b;--red:#c62828}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(135deg,#e7f7ff,#f1fff5 55%,#fff8df);color:var(--ink);min-height:100vh}
+header{padding:22px 16px;text-align:center;background:linear-gradient(110deg,#17324d,#276ef1);color:white}header h1{margin:0;font-size:clamp(1.5rem,4vw,2.25rem)}header p{margin:8px 0 0;opacity:.92}
+main{max-width:1100px;margin:22px auto;padding:0 14px 40px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 24px #18324d12;margin-bottom:16px}
+h2{margin:0 0 14px;color:var(--navy)}.sub{color:var(--muted);font-size:.94rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+label{display:block;font-weight:700;margin:8px 0 5px}input,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;background:white}
+button{border:0;border-radius:11px;padding:12px 17px;font:inherit;font-weight:750;cursor:pointer;background:var(--blue);color:white}button.secondary{background:#e8eef8;color:var(--navy)}button.danger{background:var(--red)}button:disabled{opacity:.45;cursor:not-allowed}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px}
+.hidden{display:none!important}.pill{display:inline-block;padding:5px 10px;border-radius:999px;background:var(--mint);color:#086345;font-size:.85rem;font-weight:750}.notice{padding:12px 14px;border-radius:12px;background:var(--yellow);margin:12px 0}.warning{background:var(--pink);color:#8a1231;border:1px solid #ffc2d1}.success{background:var(--mint);color:#086345}
+.question-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.number-pair{display:flex;gap:12px;margin:18px 0}.number-box{flex:1;text-align:center;padding:18px;border-radius:14px;background:#edf4ff}.number-box strong{display:block;font-size:2.2rem;color:var(--blue)}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}.answers label{margin:0;border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;gap:9px;align-items:center;cursor:pointer}.answers input{width:auto}
+.progress{height:10px;border-radius:99px;background:#e7edf5;overflow:hidden;margin:14px 0}.progress div{height:100%;width:0;background:linear-gradient(90deg,#20b486,#276ef1);transition:width .2s}
+table{border-collapse:collapse;width:100%;font-size:.9rem}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f2f6fb;position:sticky;top:0}.table-wrap{overflow:auto;max-height:480px;border:1px solid var(--line);border-radius:12px}
+.small{font-size:.84rem;color:var(--muted)}.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}.stat{padding:14px;border-radius:12px;background:#f3f7fb}.stat strong{display:block;font-size:1.55rem;color:var(--navy)}.topline{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+@media(max-width:560px){.card{padding:15px}.answers{grid-template-columns:1fr}.number-box strong{font-size:1.8rem}th,td{padding:8px}}
+</style>
 </head>
 <body>
+<header><h1>🔢 Petualangan FPB & KPK</h1><p>Belajar Matematika dengan bilangan genap dua angka</p></header>
+<main>
+<section id="setup" class="card">
+<h2>🌟 Siap Memulai?</h2>
+<p class="sub">Isi identitas dengan benar. Kerjakan dengan teliti dan tetap berada di halaman pembelajaran selama kuis berlangsung.</p>
+<div class="grid">
+<div><label for="studentName">Nama siswa</label><input id="studentName" maxlength="80" placeholder="Nama lengkap"></div>
+<div><label for="studentClass">Kelas</label><select id="studentClass"><option value="">Pilih kelas</option><option value="5">Kelas 5</option><option value="5A">Kelas 5A</option><option value="5B">Kelas 5B</option></select></div>
+<div><label for="studentNumber">Nomor absen</label><input id="studentNumber" type="number" min="1" max="60" placeholder="Contoh: 12"></div>
+</div>
+<div class="notice hidden">📌 Setiap soal menggunakan dua bilangan genap antara 10 dan 98. Pilih FPB atau KPK sesuai perintah soal.</div>
+<div class="grid">
+<div>
+<label for="questionType">Pilihan materi soal</label>
+<select id="questionType">
+<option value="CAMPURAN" selected>FPB dan KPK (campuran)</option>
+<option value="FPB">FPB saja</option>
+<option value="KPK">KPK saja</option>
+</select>
+</div>
+<div>
+<label for="questionCount">Jumlah soal yang akan dikerjakan</label>
+<select id="questionCount">
+<option value="1">1 soal</option><option value="2">2 soal</option><option value="3">3 soal</option><option value="4">4 soal</option><option value="5">5 soal</option><option value="6">6 soal</option><option value="7">7 soal</option><option value="8">8 soal</option><option value="9">9 soal</option><option value="10" selected>10 soal</option>
+</select>
+</div>
+</div>
+<div class="actions"><button id="startBtn">Mulai Belajar 🚀</button><button class="secondary" id="showTeacherBtn">Dashboard Guru</button></div>
+<p class="small hidden">Catatan: peringatan mendeteksi saat tab berpindah/halaman tidak terlihat atau jendela kehilangan fokus. Ini bukan alat pengawasan perangkat secara menyeluruh.</p>
+</section>
 
-  <!-- Navigasi -->
-  <nav>
-    <div class="nav-left">
-      <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik">
-      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 50px;">
-      <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah">
-    </div>
-    <div class="nav-right">
-      <a href="../../index.html">🏠 Beranda</a>
-      <a href="../lembah.html">◀️ Kembali</a>
-      <a href="#">🖼️ Galeri</a>
-      <a href="kelas.html">🏫 Kelas</a>
-    </div>
-  </nav>
+<section id="quiz" class="card hidden">
+<div class="question-top"><span class="pill" id="studentBadge">Siswa</span><span class="pill" id="qCounter">Soal 1/10</span></div>
+<div class="progress"><div id="progressBar"></div></div>
+<h2 id="questionTitle">Tentukan FPB</h2>
+<p id="questionPrompt">Pilih jawaban yang benar.</p>
+<div class="number-pair"><div class="number-box"><span>Bilangan A</span><strong id="numA">24</strong></div><div class="number-box"><span>Bilangan B</span><strong id="numB">36</strong></div></div>
+<div id="answerOptions" class="answers"></div>
+<div id="feedback" class="notice hidden" role="status"></div>
+<div class="actions"><button id="submitAnswer">Periksa Jawaban</button><button id="nextQuestion" class="hidden">Soal Berikutnya ➜</button><button id="backToMenu" class="secondary">← Kembali ke Menu Pilihan</button></div>
+<p class="small">Jika perlu berpikir, silakan gunakan kertas coretan. Jangan menutup halaman sebelum selesai.</p>
+</section>
 
-  <!-- Judul Halaman -->
-  <div class="title-section">
-    <h1>Petualangan Dunia kpK & FPB</h1>
-    <p>Selamat datang di Dunia kpK & FPB 🌟 Mari jelajahi petualangan seru bersama!</p>
-  </div>
+<section id="result" class="card hidden">
+<h2>🏆 Hasil Belajarmu</h2><div id="resultSummary"></div>
+<div class="actions"><button id="backHome" class="secondary">Kembali ke Awal</button></div>
+</section>
 
-  <!-- Menu Interaktif -->
-  <div class="map-grid">
-    <a href="dunia-faktor.html" class="map-item"><span class="emoji">🏰</span>Dunia kpK & FPB</a>
-    <a href="kelipatan.html" class="map-item"><span class="emoji">🔎</span>Kelipatan</a>
-    <a href="#minat-bakat" class="map-item"><span class="emoji">⚔️</span>Duel Angka Terbesar & Terkecil</a>
-    <a href="#wirausaha" class="map-item"><span class="emoji">🧩</span>Bongkar-Pasang Jadi Bilangan Baru</a>
-    <a href="#dunia-bersama" class="map-item"><span class="emoji">🎮</span>Arena Hitung Super</a>
-  
-  </div>
+<section id="teacher" class="card hidden">
+<div class="topline"><div><h2>👩‍🏫 Dashboard Guru</h2><p class="sub">Pantau pengerjaan, nilai, dan catatan perpindahan halaman.</p></div><button class="secondary" id="closeTeacher">Tutup</button></div>
+<div id="teacherLogin">
+<label for="teacherPin">PIN guru</label><input id="teacherPin" type="password" inputmode="numeric" placeholder="Masukkan PIN guru">
+<p class="small">PIN awal: <b>1605</b>. Ganti PIN pada konfigurasi di file HTML sebelum dibagikan.</p>
+<div class="actions"><button id="teacherLoginBtn">Masuk Dashboard</button></div>
+</div>
+<div id="teacherPanel" class="hidden">
+<div class="notice">Dashboard mengambil data dari Google Sheets secara berkala. Pastikan URL Apps Script telah dipasang dan deployment diberi akses yang sesuai.</div>
+<div class="stat-grid">
+<div class="stat"><span class="small">Sesi tercatat</span><strong id="statSessions">0</strong></div>
+<div class="stat"><span class="small">Sedang mengerjakan</span><strong id="statActive">0</strong></div>
+<div class="stat"><span class="small">Selesai</span><strong id="statDone">0</strong></div>
+<div class="stat"><span class="small">Peringatan</span><strong id="statWarnings">0</strong></div>
+</div>
+<div class="actions"><button id="refreshData">Muat Ulang Data</button><button class="secondary" id="exportCsv">Unduh CSV</button></div>
+<h3>Aktivitas siswa</h3><div class="table-wrap"><table><thead><tr><th>Waktu update</th><th>Nama / Kelas / Absen</th><th>Status</th><th>Progres</th><th>Nilai</th><th>Peringatan</th></tr></thead><tbody id="activityRows"><tr><td colspan="6">Belum ada data.</td></tr></tbody></table></div>
+<h3>Log peringatan halaman</h3><div class="table-wrap"><table><thead><tr><th>Waktu</th><th>Nama siswa</th><th>Jenis kejadian</th><th>Detail</th></tr></thead><tbody id="warningRows"><tr><td colspan="4">Belum ada peringatan.</td></tr></tbody></table></div>
+<p class="small">Gunakan data untuk pendampingan belajar, bukan sebagai satu-satunya dasar penilaian. Status aktif diperbarui saat siswa berinteraksi dengan halaman.</p>
+</div>
+</section>
+<footer class="small" style="text-align:center;padding:12px">Pembelajaran interaktif • FPB = Faktor Persekutuan Terbesar • KPK = Kelipatan Persekutuan Terkecil</footer>
+</main>
+<script>
+/* KONFIGURASI: tempel URL Web App dari Google Apps Script setelah deployment. */
+const APPS_SCRIPT_URL = "TEMPEL_URL_WEB_APP_APPS_SCRIPT_DI_SINI";
+const TEACHER_PIN = "1605";
+let TOTAL_QUESTIONS = 10;
+const POLL_INTERVAL_MS = 12000;
 
-  <!-- Suara klik interaktif -->
-  <audio id="clickSound" src="suara/button-press.mp3" preload="auto"></audio>
-  <script>
-    const clickSound = document.getElementById("clickSound");
-    const allButtons = document.querySelectorAll("a, .map-item");
-    allButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        clickSound.currentTime = 0;
-        clickSound.play();
-      });
-    });
-  </script>
+const $ = id => document.getElementById(id);
+let questions=[], current=0, score=0, answered=false, sessionId="", student={}, warningCount=0, startedAt=null, lastWarningAt=0, teacherTimer=null, dashboardData={sessions:[],warnings:[]}, selectedQuestionType="CAMPURAN";
 
+function gcd(a,b){while(b){[a,b]=[b,a%b]}return a}
+function lcm(a,b){return a/gcd(a,b)*b}
+function evenTwoDigit(){return 10+2*Math.floor(Math.random()*45)}
+function questionKey(q){
+ const pair=[Number(q.a),Number(q.b)].sort((x,y)=>x-y);
+ return `${q.type}:${pair[0]}:${pair[1]}`;
+}
+function historyStorageKey(){
+ // Riwayat dipisahkan per siswa agar soal siswa lain tidak menghabiskan kumpulan soal milik siswa ini.
+ const identity=student ? `${student.name}|${student.studentClass}|${student.absen}` : "guest";
+ return "fpbkpk_seen_questions_v1:"+identity.toLowerCase();
+}
+function readQuestionHistory(){
+ try{return new Set(JSON.parse(localStorage.getItem(historyStorageKey())||"[]"))}
+ catch(e){return new Set()}
+}
+function saveQuestionHistory(history){
+ try{localStorage.setItem(historyStorageKey(),JSON.stringify([...history]))}
+ catch(e){console.warn("Riwayat soal tidak dapat disimpan di browser ini.",e)}
+}
+function makeQuestions(){
+ // Buat seluruh kombinasi pasangan bilangan genap dua angka, lalu acak dan singkirkan soal yang pernah tampil.
+ const seen=readQuestionHistory(), pool=[];
+ for(let a=10;a<=98;a+=2){
+  for(let b=a+2;b<=98;b+=2){
+   const types = selectedQuestionType === "CAMPURAN" ? ["FPB","KPK"] : [selectedQuestionType];
+   for(const type of types){
+    const q={a,b,type,answer:type==="FPB"?gcd(a,b):lcm(a,b)};
+    q.key=questionKey(q);
+    if(!seen.has(q.key)) pool.push(q);
+   }
+  }
+ }
+ for(let i=pool.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];
+ }
+ const selected=pool.slice(0,Math.min(TOTAL_QUESTIONS,pool.length));
+ return selected.map(q=>{
+  const choices=new Set([q.answer]);
+  while(choices.size<4){
+   let v;
+   if(Math.random()<.5) v=q.type==="FPB"?Math.max(2,q.answer+2*(Math.floor(Math.random()*9)-4)):Math.max(2,q.answer+2*(Math.floor(Math.random()*13)-6));
+   else v=q.type==="FPB"?gcd(q.a,evenTwoDigit()):lcm(q.a,evenTwoDigit());
+   if(v>0 && v!==q.answer) choices.add(v);
+  }
+  return {...q,choices:[...choices].sort(()=>Math.random()-.5)};
+ });
+}
+function endpointReady(){return APPS_SCRIPT_URL.startsWith("https://script.google.com/") && !APPS_SCRIPT_URL.includes("TEMPEL_URL")}
+function postData(payload){
+ if(!endpointReady()) return;
+ const body=new URLSearchParams({payload:JSON.stringify(payload)});
+ fetch(APPS_SCRIPT_URL,{method:"POST",mode:"no-cors",body}).catch(()=>{});
+}
+function stamp(){return new Date().toISOString()}
+function sendUpdate(status){
+ if(!student.name) return;
+ postData({action:"updateSession",sessionId,updatedAt:stamp(),startedAt:startedAt?startedAt.toISOString():"",name:student.name,studentClass:student.studentClass,absen:student.absen,status,progress:Math.min(current+(answered?1:0),TOTAL_QUESTIONS),total:TOTAL_QUESTIONS,score:score,warningCount,question:Math.min(current+1,TOTAL_QUESTIONS),lastEvent:status});
+}
+function logWarning(kind,detail){
+ const now=Date.now(); if(now-lastWarningAt<1800)return; lastWarningAt=now;
+ if(!student.name || $("quiz").classList.contains("hidden"))return;
+ warningCount++;
+ postData({action:"logWarning",sessionId,at:stamp(),name:student.name,studentClass:student.studentClass,absen:student.absen,kind,detail,question:current+1});
+ sendUpdate("Peringatan halaman");
+ $("feedback").className="notice warning";
+ $("feedback").textContent="⚠️ Perhatian: halaman pembelajaran terdeteksi tidak aktif/ditinggalkan. Silakan kembali fokus mengerjakan. Kejadian ini dicatat untuk guru.";
+ $("feedback").classList.remove("hidden");
+}
+document.addEventListener("visibilitychange",()=>{if(document.hidden)logWarning("TAB_HIDDEN","Tab berpindah atau halaman tidak terlihat");else if(student.name && !$("quiz").classList.contains("hidden"))sendUpdate("Kembali ke halaman")});
+window.addEventListener("blur",()=>logWarning("WINDOW_BLUR","Jendela browser kehilangan fokus"));
+window.addEventListener("focus",()=>{if(student.name && !$("quiz").classList.contains("hidden"))sendUpdate("Kembali fokus")});
+window.addEventListener("beforeunload",()=>{if(student.name && !$("quiz").classList.contains("hidden"))postData({action:"logWarning",sessionId,at:stamp(),name:student.name,studentClass:student.studentClass,absen:student.absen,kind:"PAGE_EXIT",detail:"Halaman ditutup atau dimuat ulang saat sesi belum selesai",question:current+1})});
+
+$("startBtn").addEventListener("click",()=>{
+ const name=$("studentName").value.trim(), studentClass=$("studentClass").value, absen=Number($("studentNumber").value);
+ if(!name||!studentClass||!Number.isInteger(absen)||absen<1||absen>60){alert("Lengkapi nama, kelas, dan nomor absen (1–60).");return}
+ student={name,studentClass,absen};TOTAL_QUESTIONS=Number($("questionCount").value)||10;selectedQuestionType=$("questionType").value||"CAMPURAN";sessionId="S"+Date.now()+"-"+Math.random().toString(36).slice(2,8);startedAt=new Date();warningCount=0;current=0;score=0;questions=makeQuestions();
+ if(questions.length===0){alert("Semua kombinasi soal untuk identitas ini sudah pernah muncul di perangkat ini. Tidak ada soal baru yang tersisa.");return}
+ if(questions.length<TOTAL_QUESTIONS){TOTAL_QUESTIONS=questions.length;alert(`Riwayat soal hampir habis. Sesi ini berisi ${TOTAL_QUESTIONS} soal baru yang belum pernah muncul.`)}
+ $("setup").classList.add("hidden");$("result").classList.add("hidden");$("quiz").classList.remove("hidden");
+ $("studentBadge").textContent=`${name} • Kelas ${studentClass} • Absen ${absen} • ${selectedQuestionType==="CAMPURAN"?"FPB & KPK":selectedQuestionType}`;
+ showQuestion();sendUpdate("Sedang mengerjakan");
+ if(!endpointReady()) alert("Pengaturan Google Sheets belum dipasang. Kuis tetap dapat digunakan, tetapi data lintas perangkat belum tersimpan. Tempel URL Web App di APPS_SCRIPT_URL.");
+});
+function showQuestion(){
+ answered=false;const q=questions[current];
+ // Tandai soal sebagai pernah muncul saat soal benar-benar ditampilkan, termasuk jika siswa keluar sebelum menjawab.
+ const history=readQuestionHistory();history.add(q.key||questionKey(q));saveQuestionHistory(history);
+ $("qCounter").textContent=`Soal ${current+1}/${TOTAL_QUESTIONS}`;$("progressBar").style.width=(current/TOTAL_QUESTIONS*100)+"%";
+ $("questionTitle").textContent=`Tentukan ${q.type}`;
+ $("questionPrompt").textContent=q.type==="FPB"?"Berapakah Faktor Persekutuan Terbesar (FPB) dari kedua bilangan berikut?":"Berapakah Kelipatan Persekutuan Terkecil (KPK) dari kedua bilangan berikut?";
+ $("numA").textContent=q.a;$("numB").textContent=q.b;$("feedback").classList.add("hidden");
+ $("answerOptions").innerHTML="";
+ q.choices.forEach((v,i)=>{const lab=document.createElement("label");lab.innerHTML=`<input type="radio" name="answer" value="${v}"><span><b>${String.fromCharCode(65+i)}.</b> ${v}</span>`;$("answerOptions").appendChild(lab)});
+ $("submitAnswer").classList.remove("hidden");$("nextQuestion").classList.add("hidden");sendUpdate("Sedang mengerjakan");
+}
+$("submitAnswer").addEventListener("click",()=>{
+ if(answered)return;const picked=document.querySelector('input[name="answer"]:checked');
+ if(!picked){alert("Pilih salah satu jawaban terlebih dahulu.");return}
+ answered=true;const q=questions[current], correct=Number(picked.value)===q.answer;
+ if(correct)score++;
+ document.querySelectorAll('input[name="answer"]').forEach(x=>x.disabled=true);
+ $("feedback").className="notice "+(correct?"success":"warning");
+ $("feedback").textContent=correct?`✅ Benar! ${q.type} dari ${q.a} dan ${q.b} adalah ${q.answer}.`:`Belum tepat. Jawaban yang benar adalah ${q.answer}.`;
+ $("feedback").classList.remove("hidden");$("submitAnswer").classList.add("hidden");
+ $("nextQuestion").classList.remove("hidden");$("nextQuestion").textContent=current===TOTAL_QUESTIONS-1?"Lihat Hasil 🏆":"Soal Berikutnya ➜";
+ $("progressBar").style.width=((current+1)/TOTAL_QUESTIONS*100)+"%";sendUpdate("Sedang mengerjakan");
+});
+$("nextQuestion").addEventListener("click",()=>{
+ if(current<TOTAL_QUESTIONS-1){current++;showQuestion()}else finishQuiz();
+});
+$("backToMenu").addEventListener("click",()=>{
+ // Kembali ke form menu tanpa menghapus riwayat soal yang sudah ditampilkan.
+ const confirmed = window.confirm("Kembali ke menu pilihan soal? Soal yang sudah ditampilkan tetap tercatat dan tidak akan dipilih lagi.");
+ if (!confirmed) return;
+ if (student && student.name) sendUpdate("Kembali ke menu");
+ $("quiz").classList.add("hidden");
+ $("result").classList.add("hidden");
+ $("setup").classList.remove("hidden");
+ $("setup").scrollIntoView({behavior:"smooth", block:"start"});
+ // Aktifkan kembali kontrol menu dan arahkan fokus ke pilihan jenis soal.
+ $("questionType").disabled = false;
+ $("questionCount").disabled = false;
+ $("questionType").focus({preventScroll:true});
+});
+function finishQuiz(){
+ const finalScore=Math.round(score/TOTAL_QUESTIONS*100);
+ $("quiz").classList.add("hidden");$("result").classList.remove("hidden");
+ $("resultSummary").innerHTML=`<div class="stat-grid"><div class="stat"><span class="small">Nama</span><strong style="font-size:1.1rem">${escapeHtml(student.name)}</strong></div><div class="stat"><span class="small">Jawaban benar</span><strong>${score}/${TOTAL_QUESTIONS}</strong></div><div class="stat"><span class="small">Nilai</span><strong>${finalScore}</strong></div><div class="stat"><span class="small">Peringatan halaman</span><strong>${warningCount}</strong></div></div><div class="notice ${finalScore>=80?'success':''}">${finalScore>=80?'Hebat! Terus pertahankan ketelitianmu.':'Terus berlatih. Pelajari kembali perbedaan FPB dan KPK, lalu coba lagi.'}</div>`;
+ postData({action:"finishSession",sessionId,updatedAt:stamp(),finishedAt:stamp(),name:student.name,studentClass:student.studentClass,absen:student.absen,status:"Selesai",progress:TOTAL_QUESTIONS,total:TOTAL_QUESTIONS,score:finalScore,correct:score,warningCount});
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+$("backHome").addEventListener("click",()=>{$("result").classList.add("hidden");$("setup").classList.remove("hidden");student={};});
+$("showTeacherBtn").addEventListener("click",()=>{$("teacher").classList.remove("hidden");$("teacher").scrollIntoView({behavior:"smooth"});});
+$("closeTeacher").addEventListener("click",()=>{$("teacher").classList.add("hidden");});
+$("teacherLoginBtn").addEventListener("click",()=>{
+ if($("teacherPin").value!==TEACHER_PIN){alert("PIN guru tidak sesuai.");return}
+ $("teacherLogin").classList.add("hidden");$("teacherPanel").classList.remove("hidden");loadDashboard();
+ if(teacherTimer)clearInterval(teacherTimer);teacherTimer=setInterval(loadDashboard,POLL_INTERVAL_MS);
+});
+function jsonp(url,callbackName){
+ return new Promise((resolve,reject)=>{
+  const cb="jsonp_"+Date.now()+"_"+Math.random().toString(36).slice(2);
+  const script=document.createElement("script");let timer=setTimeout(()=>{cleanup();reject(new Error("Waktu habis saat mengambil data"));},12000);
+  function cleanup(){clearTimeout(timer);delete window[cb];script.remove()}
+  window[cb]=data=>{cleanup();resolve(data)};
+  script.onerror=()=>{cleanup();reject(new Error("Gagal mengambil data"))};
+  script.src=url+(url.includes("?")?"&":"?")+"action=getDashboard&callback="+cb+"&pin="+encodeURIComponent(callbackName);
+  document.body.appendChild(script);
+ });
+}
+async function loadDashboard(){
+ if(!endpointReady()){alertOnce("URL Google Apps Script belum dipasang pada APPS_SCRIPT_URL.");return}
+ try{
+  const d=await jsonp(APPS_SCRIPT_URL,TEACHER_PIN);if(!d.ok)throw new Error(d.error||"Tidak dapat membaca data");
+  dashboardData=d;renderDashboard();
+ }catch(e){console.error(e);$("activityRows").innerHTML=`<tr><td colspan="6">Gagal memuat data. Periksa URL deployment, izin akses, dan PIN pada Code.gs. (${escapeHtml(e.message)})</td></tr>`}
+}
+let configAlertShown=false;function alertOnce(msg){if(!configAlertShown){alert(msg);configAlertShown=true}}
+function renderDashboard(){
+ const sessions=dashboardData.sessions||[],warnings=dashboardData.warnings||[];
+ $("statSessions").textContent=sessions.length;$("statActive").textContent=sessions.filter(s=>s.status==="Sedang mengerjakan"||s.status==="Kembali ke halaman"||s.status==="Kembali fokus").length;
+ $("statDone").textContent=sessions.filter(s=>s.status==="Selesai").length;$("statWarnings").textContent=warnings.length;
+ $("activityRows").innerHTML=sessions.length?sessions.slice().reverse().map(s=>`<tr><td>${escapeHtml(s.updatedAt||"")}</td><td><b>${escapeHtml(s.name||"")}</b><br>Kelas ${escapeHtml(s.studentClass||"")} • Absen ${escapeHtml(s.absen||"")}</td><td>${escapeHtml(s.status||"")}</td><td>${escapeHtml(s.progress||0)}/${escapeHtml(s.total||10)}</td><td>${s.score===undefined?"—":escapeHtml(s.score)}</td><td>${escapeHtml(s.warningCount||0)}</td></tr>`).join(""):'<tr><td colspan="6">Belum ada data.</td></tr>';
+ $("warningRows").innerHTML=warnings.length?warnings.slice().reverse().map(w=>`<tr><td>${escapeHtml(w.at||"")}</td><td>${escapeHtml(w.name||"")}</td><td>${escapeHtml(w.kind||"")}</td><td>${escapeHtml(w.detail||"")}</td></tr>`).join(""):'<tr><td colspan="4">Belum ada peringatan.</td></tr>';
+}
+$("refreshData").addEventListener("click",loadDashboard);
+$("exportCsv").addEventListener("click",()=>{
+ const rows=[["Waktu update","Nama","Kelas","Absen","Status","Progres","Total","Nilai","Jumlah peringatan"],...(dashboardData.sessions||[]).map(s=>[s.updatedAt,s.name,s.studentClass,s.absen,s.status,s.progress,s.total,s.score,s.warningCount])];
+ const csv=rows.map(r=>r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}));a.download="rekap-aktivitas-fpb-kpk.csv";a.click();URL.revokeObjectURL(a.href);
+});
+</script>
 </body>
-
 </html>
-
-
-

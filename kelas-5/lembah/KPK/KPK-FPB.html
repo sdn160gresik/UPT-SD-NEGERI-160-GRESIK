@@ -120,6 +120,7 @@ footer{color:#64708d}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 
+
 </style>
 </head>
 <body>
@@ -127,7 +128,7 @@ footer{color:#64708d}
 <h1>🔢 Petualangan FPB & KPK</h1>
 <p>Belajar Matematika dengan bilangan genap dua angka</p>
 <a class="back-to-valley" href="../lembah.html" aria-label="Kembali ke halaman Lembah">
-  <span aria-hidden="true">🌈</span> Kembali
+  <span aria-hidden="true">🌈</span> ← Kembali ke Lembah Belajar
 </a>
 </header>
 <main>
@@ -375,4 +376,14 @@ function renderDashboard(){
  $("statSessions").textContent=sessions.length;$("statActive").textContent=sessions.filter(s=>s.status==="Sedang mengerjakan"||s.status==="Kembali ke halaman"||s.status==="Kembali fokus").length;
  $("statDone").textContent=sessions.filter(s=>s.status==="Selesai").length;$("statWarnings").textContent=warnings.length;
  $("activityRows").innerHTML=sessions.length?sessions.slice().reverse().map(s=>`<tr><td>${escapeHtml(s.updatedAt||"")}</td><td><b>${escapeHtml(s.name||"")}</b><br>Kelas ${escapeHtml(s.studentClass||"")} • Absen ${escapeHtml(s.absen||"")}</td><td>${escapeHtml(s.status||"")}</td><td>${escapeHtml(s.progress||0)}/${escapeHtml(s.total||10)}</td><td>${s.score===undefined?"—":escapeHtml(s.score)}</td><td>${escapeHtml(s.warningCount||0)}</td></tr>`).join(""):'<tr><td colspan="6">Belum ada data.</td></tr>';
- 
+ $("warningRows").innerHTML=warnings.length?warnings.slice().reverse().map(w=>`<tr><td>${escapeHtml(w.at||"")}</td><td>${escapeHtml(w.name||"")}</td><td>${escapeHtml(w.kind||"")}</td><td>${escapeHtml(w.detail||"")}</td></tr>`).join(""):'<tr><td colspan="4">Belum ada peringatan.</td></tr>';
+}
+$("refreshData").addEventListener("click",loadDashboard);
+$("exportCsv").addEventListener("click",()=>{
+ const rows=[["Waktu update","Nama","Kelas","Absen","Status","Progres","Total","Nilai","Jumlah peringatan"],...(dashboardData.sessions||[]).map(s=>[s.updatedAt,s.name,s.studentClass,s.absen,s.status,s.progress,s.total,s.score,s.warningCount])];
+ const csv=rows.map(r=>r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}));a.download="rekap-aktivitas-fpb-kpk.csv";a.click();URL.revokeObjectURL(a.href);
+});
+</script>
+</body>
+</html>

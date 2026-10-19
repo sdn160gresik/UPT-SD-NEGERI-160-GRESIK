@@ -101,6 +101,15 @@ th{background:#eef1ff;color:#303875;position:sticky;top:0}
 tbody tr:nth-child(even){background:#fafbff}
 .table-wrap{overflow:auto;max-height:480px;border:1px solid var(--line);border-radius:14px}
 .small{font-size:.85rem;color:var(--muted);line-height:1.55}
+
+.explanation{display:grid;grid-template-columns:1fr;gap:12px;margin-top:14px;white-space:normal}
+.explanation-step{display:block;width:100%;box-sizing:border-box;padding:14px 16px;border:1px solid #dce4ff;border-left:5px solid #6868e8;border-radius:14px;background:#fff;line-height:1.65;overflow-wrap:anywhere}
+.explanation-step:nth-child(2){border-left-color:#18a77b;background:#f5fffb}
+.explanation-step:nth-child(3){border-left-color:#f0a02e;background:#fffaf1}
+.explanation-step h4{margin:0 0 8px;color:#303875;font-size:1rem}
+.explanation-line{display:block;margin:5px 0}
+.explanation-result{margin-top:10px;padding:10px 12px;border-radius:10px;background:#e8fff3;color:#176b4a;font-weight:800}
+
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
 .stat{padding:16px;border-radius:17px;background:linear-gradient(145deg,#f1f2ff,#f0fbff);border:1px solid #e3e8ff}
 .stat strong{display:block;font-size:1.65rem;color:var(--navy);overflow-wrap:anywhere}
@@ -120,6 +129,42 @@ footer{color:#64708d}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 
+
+
+/* Dialog pesan: selalu berada di tengah layar, ramah, dan responsif */
+.message-overlay{
+ position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;
+ padding:18px;background:rgba(28,35,84,.58);backdrop-filter:blur(5px);
+}
+.message-overlay.hidden{display:none!important}
+.message-card{
+ position:relative;width:min(100%,470px);max-height:min(88vh,760px);overflow:auto;
+ padding:25px 22px 20px;border:3px solid #fff;border-radius:26px;
+ background:linear-gradient(145deg,#fff 0%,#f7fbff 55%,#fff8e9 100%);
+ box-shadow:0 0 0 4px #8c8cff66,0 22px 70px #11194755;text-align:center;
+ animation:messagePop .22s ease-out;
+}
+.message-card::before,.message-card::after{content:"✦";position:absolute;color:#ffbf47;font-size:26px;pointer-events:none}
+.message-card::before{top:9px;left:14px}.message-card::after{right:14px;bottom:8px}
+.message-icon{
+ width:66px;height:66px;margin:0 auto 12px;border-radius:22px;display:flex;
+ align-items:center;justify-content:center;font-size:34px;
+ background:linear-gradient(145deg,#e8e9ff,#dffaff);box-shadow:inset 0 0 0 2px #fff,0 5px 14px #5661b522;
+}
+.message-card[data-kind="success"] .message-icon{background:linear-gradient(145deg,#d9ffec,#baf5d9)}
+.message-card[data-kind="warning"] .message-icon{background:linear-gradient(145deg,#fff0c2,#ffd9e3)}
+.message-card[data-kind="error"] .message-icon{background:linear-gradient(145deg,#ffe0e8,#ffd0d9)}
+.message-card h2{margin:0 0 10px;color:#343985;font-size:clamp(1.2rem,4vw,1.55rem)}
+.message-card p{margin:0;color:#38425f;line-height:1.7;white-space:pre-line;overflow-wrap:anywhere}
+.message-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:20px}
+.message-actions button{min-width:125px}
+.message-actions .message-cancel{background:linear-gradient(135deg,#edf0ff,#dff6ff);color:#303875;box-shadow:0 4px 0 #c4cbed}
+.message-card[data-kind="warning"]{border-color:#ffdf9c;box-shadow:0 0 0 4px #ffc85755,0 22px 70px #11194755}
+.message-card[data-kind="error"]{border-color:#ffb8c8;box-shadow:0 0 0 4px #f0527255,0 22px 70px #11194755}
+.message-card[data-kind="success"]{border-color:#a8efcf;box-shadow:0 0 0 4px #39c99555,0 22px 70px #11194755}
+@keyframes messagePop{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:560px){.message-card{padding:24px 17px 18px;border-radius:22px}.message-icon{width:58px;height:58px;font-size:30px}}
+@media(prefers-reduced-motion:reduce){.message-card{animation:none}}
 
 </style>
 </head>
@@ -201,6 +246,16 @@ footer{color:#64708d}
 </section>
 <footer class="small" style="text-align:center;padding:12px">Pembelajaran interaktif • FPB = Faktor Persekutuan Terbesar • KPK = Kelipatan Persekutuan Terkecil</footer>
 </main>
+
+<div id="appMessageOverlay" class="message-overlay hidden" role="presentation">
+ <section id="appMessageCard" class="message-card" data-kind="info" role="dialog" aria-modal="true" aria-labelledby="appMessageTitle" aria-describedby="appMessageText">
+  <div id="appMessageIcon" class="message-icon" aria-hidden="true">💡</div>
+  <h2 id="appMessageTitle">Pesan untukmu</h2>
+  <p id="appMessageText"></p>
+  <div id="appMessageActions" class="message-actions"></div>
+ </section>
+</div>
+
 <script>
 /* KONFIGURASI: tempel URL Web App dari Google Apps Script setelah deployment. */
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxNK6XjFbUJsdlpp8_zI-IUKBy69O03WuaJ8YSyEHlrGp_hoy-yrIaH0NmR__t8VL5h/exec";
@@ -209,10 +264,102 @@ let TOTAL_QUESTIONS = 10;
 const POLL_INTERVAL_MS = 12000;
 
 const $ = id => document.getElementById(id);
+
+const MESSAGE_STYLES={
+ info:{icon:"💡",title:"Yuk, perhatikan sebentar!"},
+ success:{icon:"🎉",title:"Hebat sekali!"},
+ warning:{icon:"🌟",title:"Sebentar, ya!"},
+ error:{icon:"🧩",title:"Ayo kita periksa lagi!"},
+ confirm:{icon:"🤔",title:"Pastikan pilihanmu, ya!"}
+};
+let messageResolve=null;
+function showAppMessage(message,kind="info",title=null){
+ const overlay=$("appMessageOverlay"),card=$("appMessageCard"),style=MESSAGE_STYLES[kind]||MESSAGE_STYLES.info;
+ if(messageResolve){messageResolve(false);messageResolve=null}
+ card.dataset.kind=kind;
+ $("appMessageIcon").textContent=style.icon;
+ $("appMessageTitle").textContent=title||style.title;
+ $("appMessageText").textContent=String(message);
+ const actions=$("appMessageActions");actions.innerHTML="";
+ const ok=document.createElement("button");ok.type="button";ok.textContent="Siap, mengerti! ✨";
+ ok.addEventListener("click",()=>closeAppMessage(true),{once:true});
+ actions.appendChild(ok);
+ overlay.classList.remove("hidden");
+ document.body.style.overflow="hidden";
+ ok.focus();
+ return new Promise(resolve=>{messageResolve=resolve});
+}
+function showAppConfirm(message,title="Yakin ingin kembali?"){
+ const overlay=$("appMessageOverlay"),card=$("appMessageCard");
+ if(messageResolve){messageResolve(false);messageResolve=null}
+ card.dataset.kind="confirm";
+ $("appMessageIcon").textContent=MESSAGE_STYLES.confirm.icon;
+ $("appMessageTitle").textContent=title;
+ $("appMessageText").textContent=String(message);
+ const actions=$("appMessageActions");actions.innerHTML="";
+ const yes=document.createElement("button");yes.type="button";yes.textContent="Ya, lanjutkan";
+ const no=document.createElement("button");no.type="button";no.className="message-cancel";no.textContent="Tetap di sini";
+ yes.addEventListener("click",()=>closeAppMessage(true),{once:true});
+ no.addEventListener("click",()=>closeAppMessage(false),{once:true});
+ actions.append(yes,no);
+ overlay.classList.remove("hidden");
+ document.body.style.overflow="hidden";
+ no.focus();
+ return new Promise(resolve=>{messageResolve=resolve});
+}
+function closeAppMessage(value=false){
+ $("appMessageOverlay").classList.add("hidden");
+ document.body.style.overflow="";
+ const resolve=messageResolve;messageResolve=null;
+ if(resolve)resolve(value);
+}
+$("appMessageOverlay").addEventListener("click",e=>{if(e.target===$("appMessageOverlay") && $("appMessageCard").dataset.kind!=="confirm")closeAppMessage(false)});
+document.addEventListener("keydown",e=>{if(e.key==="Escape" && !$("appMessageOverlay").classList.contains("hidden"))closeAppMessage(false)});
+
 let questions=[], current=0, score=0, answered=false, sessionId="", student={}, warningCount=0, startedAt=null, lastWarningAt=0, teacherTimer=null, dashboardData={sessions:[],warnings:[]}, selectedQuestionType="CAMPURAN";
 
 function gcd(a,b){while(b){[a,b]=[b,a%b]}return a}
 function lcm(a,b){return a/gcd(a,b)*b}
+function primeFactors(n){
+  n=Number(n); const factors=[];
+  for(let p=2;p*p<=n;p++){while(n%p===0){factors.push(p);n/=p;}}
+  if(n>1) factors.push(n);
+  return factors;
+}
+function factorText(n){return primeFactors(n).join(" × ")}
+// Untuk soal KPK, semua faktor prima penyusun kedua bilangan harus kurang dari 20.
+function kpkUsesPrimeFactorsBelow20(a,b){
+  return lcm(a,b)<=500 && [...primeFactors(a),...primeFactors(b)].every(p=>p<20);
+}
+function kpkPrimeFactorPreference(a,b){
+  // Utamakan semua faktor prima di bawah 10; faktor prima 11, 13, 17, 19 hanya pilihan tambahan.
+  return [...primeFactors(a),...primeFactors(b)].every(p=>p<10)?0:1;
+}
+function primeFactorExplanation(q){
+  const fa=primeFactors(q.a), fb=primeFactors(q.b);
+  const factorsA = `${q.a} = ${factorText(q.a)}`;
+  const factorsB = `${q.b} = ${factorText(q.b)}`;
+  const step1 = `<div class="explanation-step"><h4>🧩 LANGKAH 1 — Uraikan menjadi faktor prima</h4><span class="explanation-line">${factorsA}</span><span class="explanation-line">${factorsB}</span></div>`;
+
+  if(q.type==="FPB"){
+    const remaining=[...fb], common=[];
+    for(const p of fa){const i=remaining.indexOf(p);if(i!==-1){common.push(p);remaining.splice(i,1);}}
+    const commonText = common.length ? common.join(" × ") : "Tidak ada faktor prima yang sama";
+    const productText = common.length ? `${common.join(" × ")} = ${q.answer}` : `${q.answer}`;
+    const step2 = `<div class="explanation-step"><h4>🔎 LANGKAH 2 — Cari faktor prima yang sama</h4><span class="explanation-line">Ambil faktor prima yang sama sesuai jumlah kemunculan paling sedikit.</span><span class="explanation-line"><b>Faktor prima yang sama:</b> ${commonText}</span></div>`;
+    const step3 = `<div class="explanation-step"><h4>✖️ LANGKAH 3 — Kalikan faktor yang sama</h4><span class="explanation-line">FPB = ${productText}</span><div class="explanation-result">🌟 Jadi, FPB dari ${q.a} dan ${q.b} adalah ${q.answer}.</div></div>`;
+    return `<div class="explanation">${step1}${step2}${step3}</div>`;
+  }
+
+  const counts=new Map();
+  for(const p of fa) counts.set(p,(counts.get(p)||0)+1);
+  for(const p of fb) counts.set(p,Math.max(counts.get(p)||0,fb.filter(x=>x===p).length));
+  const parts=[...counts.entries()].sort((x,y)=>x[0]-y[0]).map(([p,c])=>c===1?String(p):`${p}<sup>${c}</sup>`);
+  const factorized = parts.join(" × ");
+  const step2 = `<div class="explanation-step"><h4>🔎 LANGKAH 2 — Pilih faktor prima dengan pangkat terbesar</h4><span class="explanation-line">Untuk setiap faktor prima, gunakan pangkat yang paling besar dari kedua bilangan.</span><span class="explanation-line"><b>Faktor yang dipilih:</b> ${factorized}</span></div>`;
+  const step3 = `<div class="explanation-step"><h4>✖️ LANGKAH 3 — Kalikan faktor-faktor terpilih</h4><span class="explanation-line">KPK = ${factorized} = ${q.answer}</span><div class="explanation-result">🌟 Jadi, KPK dari ${q.a} dan ${q.b} adalah ${q.answer}.</div></div>`;
+  return `<div class="explanation">${step1}${step2}${step3}</div>`;
+}
 function evenTwoDigit(){return 10+2*Math.floor(Math.random()*45)}
 function questionKey(q){
  const pair=[Number(q.a),Number(q.b)].sort((x,y)=>x-y);
@@ -232,32 +379,113 @@ function saveQuestionHistory(history){
  catch(e){console.warn("Riwayat soal tidak dapat disimpan di browser ini.",e)}
 }
 function makeQuestions(){
- // Buat seluruh kombinasi pasangan bilangan genap dua angka, lalu acak dan singkirkan soal yang pernah tampil.
- const seen=readQuestionHistory(), pool=[];
- for(let a=10;a<=98;a+=2){
-  for(let b=a+2;b<=98;b+=2){
-   const types = selectedQuestionType === "CAMPURAN" ? ["FPB","KPK"] : [selectedQuestionType];
-   for(const type of types){
-    const q={a,b,type,answer:type==="FPB"?gcd(a,b):lcm(a,b)};
+  // Variasikan hasil: utamakan FPB/KPK yang memiliki 2–3 faktor prima
+  // (dihitung dengan pengulangan pangkat), tetapi tetap sisipkan hasil satu faktor prima.
+  // Batas soal KPK tetap <=500 dan faktor prima penyusun bilangan <20.
+  const seen=readQuestionHistory();
+  const groups={
+    FPB:{multi:[],single:[],other:[]},
+    KPK:{multi:[],single:[],other:[]}
+  };
+
+  function shuffle(arr){
+    for(let i=arr.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];
+    }
+    return arr;
+  }
+  function factorCount(n){return primeFactors(n).length;}
+  function addQuestion(a,b,type){
+    if(type==="KPK" && !kpkUsesPrimeFactorsBelow20(a,b)) return;
+    const answer=type==="FPB"?gcd(a,b):lcm(a,b);
+    if(type==="KPK" && answer>500) return;
+    const q={a,b,type,answer};
     q.key=questionKey(q);
-    if(!seen.has(q.key)) pool.push(q);
-   }
+    if(seen.has(q.key)) return;
+    const count=factorCount(answer);
+    // multi: 2–3 faktor prima; single: hanya 1 faktor prima; other: variasi tambahan.
+    const bucket=(count>=2 && count<=3)?"multi":(count===1?"single":"other");
+    groups[type][bucket].push(q);
   }
- }
- for(let i=pool.length-1;i>0;i--){
-  const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];
- }
- const selected=pool.slice(0,Math.min(TOTAL_QUESTIONS,pool.length));
- return selected.map(q=>{
-  const choices=new Set([q.answer]);
-  while(choices.size<4){
-   let v;
-   if(Math.random()<.5) v=q.type==="FPB"?Math.max(2,q.answer+2*(Math.floor(Math.random()*9)-4)):Math.max(2,q.answer+2*(Math.floor(Math.random()*13)-6));
-   else v=q.type==="FPB"?gcd(q.a,evenTwoDigit()):lcm(q.a,evenTwoDigit());
-   if(v>0 && v!==q.answer) choices.add(v);
+
+  for(let a=10;a<=98;a+=2){
+    for(let b=a+2;b<=98;b+=2){
+      if(selectedQuestionType==="FPB" || selectedQuestionType==="CAMPURAN") addQuestion(a,b,"FPB");
+      if(selectedQuestionType==="KPK" || selectedQuestionType==="CAMPURAN") addQuestion(a,b,"KPK");
+    }
   }
-  return {...q,choices:[...choices].sort(()=>Math.random()-.5)};
- });
+
+  Object.values(groups).forEach(g=>{
+    shuffle(g.multi); shuffle(g.single); shuffle(g.other);
+  });
+
+  const selected=[];
+  const total=Math.min(TOTAL_QUESTIONS,
+    Object.values(groups).reduce((sum,g)=>sum+g.multi.length+g.single.length+g.other.length,0));
+
+  // Rasio target: sekitar 70% hasil dengan 2–3 faktor prima, 20% satu faktor prima,
+  // dan 10% hasil lain. Pada mode campuran, selang-selingkan FPB dan KPK bila memungkinkan.
+  const quotas=[
+    {bucket:"multi",count:Math.ceil(total*.7)},
+    {bucket:"single",count:Math.floor(total*.2)},
+    {bucket:"other",count:0}
+  ];
+  quotas[2].count=total-quotas[0].count-quotas[1].count;
+
+  function takeFromType(type,bucket){
+    const arr=groups[type][bucket];
+    return arr.length?arr.pop():null;
+  }
+  function takeBucket(bucket){
+    const types=selectedQuestionType==="CAMPURAN"?["FPB","KPK"]:[selectedQuestionType];
+    shuffle(types);
+    for(const type of types){
+      const q=takeFromType(type,bucket);
+      if(q) return q;
+    }
+    // Jika kategori target kosong, ambil dari kategori lain agar jumlah soal tetap terpenuhi.
+    const fallbackBuckets=["multi","single","other"].filter(x=>x!==bucket);
+    for(const fb of fallbackBuckets){
+      shuffle(types);
+      for(const type of types){
+        const q=takeFromType(type,fb);
+        if(q) return q;
+      }
+    }
+    return null;
+  }
+
+  for(const quota of quotas){
+    for(let i=0;i<quota.count && selected.length<total;i++){
+      const q=takeBucket(quota.bucket);
+      if(q) selected.push(q);
+    }
+  }
+  while(selected.length<total){
+    const q=takeBucket("multi")||takeBucket("single")||takeBucket("other");
+    if(!q) break;
+    selected.push(q);
+  }
+  shuffle(selected);
+
+  return selected.map(q=>{
+    const choices=new Set([q.answer]);
+    let attempts=0;
+    while(choices.size<4 && attempts<300){
+      attempts++;
+      let v;
+      if(Math.random()<.5) v=q.type==="FPB"
+        ?Math.max(2,q.answer+2*(Math.floor(Math.random()*9)-4))
+        :Math.max(2,q.answer+2*(Math.floor(Math.random()*13)-6));
+      else v=q.type==="FPB"?gcd(q.a,evenTwoDigit()):lcm(q.a,evenTwoDigit());
+      if(q.type==="KPK" && v>500) continue;
+      if(v>0 && v!==q.answer) choices.add(v);
+    }
+    for(let v=2;choices.size<4 && v<=500;v+=2){
+      if(v!==q.answer) choices.add(v);
+    }
+    return {...q,choices:[...choices].sort(()=>Math.random()-.5)};
+  });
 }
 function endpointReady(){return APPS_SCRIPT_URL.startsWith("https://script.google.com/") && !APPS_SCRIPT_URL.includes("TEMPEL_URL")}
 function postData(payload){
@@ -287,14 +515,14 @@ window.addEventListener("beforeunload",()=>{if(student.name && !$("quiz").classL
 
 $("startBtn").addEventListener("click",()=>{
  const name=$("studentName").value.trim(), studentClass=$("studentClass").value, absen=Number($("studentNumber").value);
- if(!name||!studentClass||!Number.isInteger(absen)||absen<1||absen>60){alert("Lengkapi nama, kelas, dan nomor absen (1–60).");return}
+ if(!name||!studentClass||!Number.isInteger(absen)||absen<1||absen>60){showAppMessage("Agar petualangan belajarmu tercatat dengan benar, yuk lengkapi nama, pilih kelas, dan isi nomor absen dari 1 sampai 60.","warning","Identitas belum lengkap");return}
  student={name,studentClass,absen};TOTAL_QUESTIONS=Number($("questionCount").value)||10;selectedQuestionType=$("questionType").value||"CAMPURAN";sessionId="S"+Date.now()+"-"+Math.random().toString(36).slice(2,8);startedAt=new Date();warningCount=0;current=0;score=0;questions=makeQuestions();
- if(questions.length===0){alert("Semua kombinasi soal untuk identitas ini sudah pernah muncul di perangkat ini. Tidak ada soal baru yang tersisa.");return}
- if(questions.length<TOTAL_QUESTIONS){TOTAL_QUESTIONS=questions.length;alert(`Riwayat soal hampir habis. Sesi ini berisi ${TOTAL_QUESTIONS} soal baru yang belum pernah muncul.`)}
+ if(questions.length===0){showAppMessage("Wah, kamu sudah menjelajahi semua kombinasi soal yang tersedia di perangkat ini! Coba hubungi guru untuk mengatur ulang riwayat latihan sebelum memulai petualangan berikutnya.","warning","Semua soal sudah dijelajahi!");return}
+ if(questions.length<TOTAL_QUESTIONS){TOTAL_QUESTIONS=questions.length;showAppMessage(`Pilihan soal barumu tinggal ${TOTAL_QUESTIONS}. Tidak masalah—kerjakan dengan semangat dan teliti, ya!`,"info","Petualangan baru siap dimulai!")}
  $("setup").classList.add("hidden");$("result").classList.add("hidden");$("quiz").classList.remove("hidden");
  $("studentBadge").textContent=`${name} • Kelas ${studentClass} • Absen ${absen} • ${selectedQuestionType==="CAMPURAN"?"FPB & KPK":selectedQuestionType}`;
  showQuestion();sendUpdate("Sedang mengerjakan");
- if(!endpointReady()) alert("Pengaturan Google Sheets belum dipasang. Kuis tetap dapat digunakan, tetapi data lintas perangkat belum tersimpan. Tempel URL Web App di APPS_SCRIPT_URL.");
+ if(!endpointReady()) showAppMessage("Kuis tetap bisa dimainkan! Namun, pengiriman nilai ke Google Sheets belum aktif sehingga hasil belum tersimpan bersama lintas perangkat. Guru dapat memasang URL Web App pada pengaturan aplikasi.","warning","Kuis siap, sinkronisasi belum aktif");
 });
 function showQuestion(){
  answered=false;const q=questions[current];
@@ -310,12 +538,13 @@ function showQuestion(){
 }
 $("submitAnswer").addEventListener("click",()=>{
  if(answered)return;const picked=document.querySelector('input[name="answer"]:checked');
- if(!picked){alert("Pilih salah satu jawaban terlebih dahulu.");return}
+ if(!picked){showAppMessage("Pilih satu jawaban yang menurutmu paling tepat, ya. Baca soalnya pelan-pelan—kamu pasti bisa!","warning","Pilih jawaban dulu, yuk!");return}
  answered=true;const q=questions[current], correct=Number(picked.value)===q.answer;
  if(correct)score++;
  document.querySelectorAll('input[name="answer"]').forEach(x=>x.disabled=true);
  $("feedback").className="notice "+(correct?"success":"warning");
- $("feedback").textContent=correct?`✅ Benar! ${q.type} dari ${q.a} dan ${q.b} adalah ${q.answer}.`:`Belum tepat. Jawaban yang benar adalah ${q.answer}.`;
+ $("feedback").innerHTML=`<div><b>${correct?`✅ Benar! ${q.type} dari ${q.a} dan ${q.b} adalah ${q.answer}.`:`Belum tepat. Jawaban yang benar adalah ${q.answer}.`}</b></div><div style="margin-top:12px"><b>🧩 Cara menyelesaikan dengan faktorisasi prima:</b></div>${primeFactorExplanation(q)}`;
+ $("feedback").style.whiteSpace="normal";
  $("feedback").classList.remove("hidden");$("submitAnswer").classList.add("hidden");
  $("nextQuestion").classList.remove("hidden");$("nextQuestion").textContent=current===TOTAL_QUESTIONS-1?"Lihat Hasil 🏆":"Soal Berikutnya ➜";
  $("progressBar").style.width=((current+1)/TOTAL_QUESTIONS*100)+"%";sendUpdate("Sedang mengerjakan");
@@ -323,10 +552,10 @@ $("submitAnswer").addEventListener("click",()=>{
 $("nextQuestion").addEventListener("click",()=>{
  if(current<TOTAL_QUESTIONS-1){current++;showQuestion()}else finishQuiz();
 });
-$("backToMenu").addEventListener("click",()=>{
- // Kembali ke form menu tanpa menghapus riwayat soal yang sudah ditampilkan.
- const confirmed = window.confirm("Kembali ke menu pilihan soal? Soal yang sudah ditampilkan tetap tercatat dan tidak akan dipilih lagi.");
- if (!confirmed) return;
+$("backToMenu").addEventListener("click",async()=>{
+  // Kembali ke form menu tanpa menghapus riwayat soal yang sudah ditampilkan.
+  const confirmed = await showAppConfirm("Kamu akan kembali ke menu pilihan. Soal yang sudah tampil tetap tercatat agar tidak dipilih lagi pada sesi berikutnya.","Kembali ke menu pilihan?");
+  if (!confirmed) return;
  if (student && student.name) sendUpdate("Kembali ke menu");
  $("quiz").classList.add("hidden");
  $("result").classList.add("hidden");
@@ -348,7 +577,7 @@ $("backHome").addEventListener("click",()=>{$("result").classList.add("hidden");
 $("showTeacherBtn").addEventListener("click",()=>{$("teacher").classList.remove("hidden");$("teacher").scrollIntoView({behavior:"smooth"});});
 $("closeTeacher").addEventListener("click",()=>{$("teacher").classList.add("hidden");});
 $("teacherLoginBtn").addEventListener("click",()=>{
- if($("teacherPin").value!==TEACHER_PIN){alert("PIN guru tidak sesuai.");return}
+ if($("teacherPin").value!==TEACHER_PIN){showAppMessage("PIN yang dimasukkan belum cocok. Coba periksa kembali angka PIN, lalu masuk lagi. Semangat, Bapak/Ibu Guru!","error","PIN belum sesuai");return}
  $("teacherLogin").classList.add("hidden");$("teacherPanel").classList.remove("hidden");loadDashboard();
  if(teacherTimer)clearInterval(teacherTimer);teacherTimer=setInterval(loadDashboard,POLL_INTERVAL_MS);
 });
@@ -364,13 +593,13 @@ function jsonp(url,callbackName){
  });
 }
 async function loadDashboard(){
- if(!endpointReady()){alertOnce("URL Google Apps Script belum dipasang pada APPS_SCRIPT_URL.");return}
+ if(!endpointReady()){showAppMessage("Dashboard belum dapat terhubung karena URL Google Apps Script belum dipasang. Periksa pengaturan APPS_SCRIPT_URL, lalu coba muat ulang data.","warning","Koneksi dashboard belum siap");return}
  try{
   const d=await jsonp(APPS_SCRIPT_URL,TEACHER_PIN);if(!d.ok)throw new Error(d.error||"Tidak dapat membaca data");
   dashboardData=d;renderDashboard();
  }catch(e){console.error(e);$("activityRows").innerHTML=`<tr><td colspan="6">Gagal memuat data. Periksa URL deployment, izin akses, dan PIN pada Code.gs. (${escapeHtml(e.message)})</td></tr>`}
 }
-let configAlertShown=false;function alertOnce(msg){if(!configAlertShown){alert(msg);configAlertShown=true}}
+let configAlertShown=false;function alertOnce(msg){if(!configAlertShown){showAppMessage(msg,"warning","Pengaturan perlu diperiksa");configAlertShown=true}}
 function renderDashboard(){
  const sessions=dashboardData.sessions||[],warnings=dashboardData.warnings||[];
  $("statSessions").textContent=sessions.length;$("statActive").textContent=sessions.filter(s=>s.status==="Sedang mengerjakan"||s.status==="Kembali ke halaman"||s.status==="Kembali fokus").length;

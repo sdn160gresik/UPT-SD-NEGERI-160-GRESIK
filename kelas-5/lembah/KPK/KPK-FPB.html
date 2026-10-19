@@ -239,7 +239,7 @@ footer{color:#64708d}
 <div class="stat"><span class="small">Peringatan</span><strong id="statWarnings">0</strong></div>
 </div>
 <div class="actions"><button id="refreshData">Muat Ulang Data</button><button class="secondary" id="exportCsv">Unduh CSV</button></div>
-<h3>Aktivitas siswa</h3><div class="table-wrap"><table><thead><tr><th>Waktu update</th><th>Nama / Kelas / Absen</th><th>Status</th><th>Progres</th><th>Nilai</th><th>Peringatan</th></tr></thead><tbody id="activityRows"><tr><td colspan="6">Belum ada data.</td></tr></tbody></table></div>
+<h3>Aktivitas siswa</h3><div class="table-wrap"><table><thead><tr><th>Waktu update</th><th>Nama / Kelas / Absen</th><th>Status</th><th>Materi pilihan</th><th>Materi yang dikerjakan</th><th>Progres</th><th>Nilai</th><th>Peringatan</th></tr></thead><tbody id="activityRows"><tr><td colspan="8">Belum ada data.</td></tr></tbody></table></div>
 <h3>Log peringatan halaman</h3><div class="table-wrap"><table><thead><tr><th>Waktu</th><th>Nama siswa</th><th>Jenis kejadian</th><th>Detail</th></tr></thead><tbody id="warningRows"><tr><td colspan="4">Belum ada peringatan.</td></tr></tbody></table></div>
 <p class="small">Gunakan data untuk pendampingan belajar, bukan sebagai satu-satunya dasar penilaian. Status aktif diperbarui saat siswa berinteraksi dengan halaman.</p>
 </div>
@@ -494,15 +494,26 @@ function postData(payload){
  fetch(APPS_SCRIPT_URL,{method:"POST",mode:"no-cors",body}).catch(()=>{});
 }
 function stamp(){return new Date().toISOString()}
+function materialLabel(type){
+ if(type==="FPB") return "FPB saja";
+ if(type==="KPK") return "KPK saja";
+ if(type==="CAMPURAN") return "FPB dan KPK (campuran)";
+ return type||"Belum diketahui";
+}
+function activeQuestionMaterial(){
+ const q=questions[current];
+ return q&&q.type ? q.type : (selectedQuestionType||"");
+}
 function sendUpdate(status){
  if(!student.name) return;
- postData({action:"updateSession",sessionId,updatedAt:stamp(),startedAt:startedAt?startedAt.toISOString():"",name:student.name,studentClass:student.studentClass,absen:student.absen,status,progress:Math.min(current+(answered?1:0),TOTAL_QUESTIONS),total:TOTAL_QUESTIONS,score:score,warningCount,question:Math.min(current+1,TOTAL_QUESTIONS),lastEvent:status});
+ const activeQ=questions[current]||null;
+ postData({action:"updateSession",sessionId,updatedAt:stamp(),startedAt:startedAt?startedAt.toISOString():"",name:student.name,studentClass:student.studentClass,absen:student.absen,status,progress:Math.min(current+(answered?1:0),TOTAL_QUESTIONS),total:TOTAL_QUESTIONS,score:score,warningCount,question:Math.min(current+1,TOTAL_QUESTIONS),materiPilihan:materialLabel(selectedQuestionType),materiPilihanKode:selectedQuestionType,materiAktif:activeQ?activeQ.type:(selectedQuestionType==="CAMPURAN"?"FPB dan KPK":""),nomorSoalAktif:Math.min(current+1,TOTAL_QUESTIONS),bilanganA:activeQ?activeQ.a:"",bilanganB:activeQ?activeQ.b:"",lastEvent:status});
 }
 function logWarning(kind,detail){
  const now=Date.now(); if(now-lastWarningAt<1800)return; lastWarningAt=now;
  if(!student.name || $("quiz").classList.contains("hidden"))return;
  warningCount++;
- postData({action:"logWarning",sessionId,at:stamp(),name:student.name,studentClass:student.studentClass,absen:student.absen,kind,detail,question:current+1});
+ postData({action:"logWarning",sessionId,at:stamp(),name:student.name,studentClass:student.studentClass,absen:student.absen,kind,detail,question:current+1,materiPilihan:materialLabel(selectedQuestionType),materiPilihanKode:selectedQuestionType,materiAktif:activeQuestionMaterial()});
  sendUpdate("Peringatan halaman");
  $("feedback").className="notice warning";
  $("feedback").textContent="⚠️ Perhatian: halaman pembelajaran terdeteksi tidak aktif/ditinggalkan. Silakan kembali fokus mengerjakan. Kejadian ini dicatat untuk guru.";
@@ -511,7 +522,7 @@ function logWarning(kind,detail){
 document.addEventListener("visibilitychange",()=>{if(document.hidden)logWarning("TAB_HIDDEN","Tab berpindah atau halaman tidak terlihat");else if(student.name && !$("quiz").classList.contains("hidden"))sendUpdate("Kembali ke halaman")});
 window.addEventListener("blur",()=>logWarning("WINDOW_BLUR","Jendela browser kehilangan fokus"));
 window.addEventListener("focus",()=>{if(student.name && !$("quiz").classList.contains("hidden"))sendUpdate("Kembali fokus")});
-window.addEventListener("beforeunload",()=>{if(student.name && !$("quiz").classList.contains("hidden"))postData({action:"logWarning",sessionId,at:stamp(),name:student.name,studentClass:student.studentClass,absen:student.absen,kind:"PAGE_EXIT",detail:"Halaman ditutup atau dimuat ulang saat sesi belum selesai",question:current+1})});
+window.addEventListener("beforeunload",()=>{if(student.name && !$("quiz").classList.contains("hidden"))postData({action:"logWarning",sessionId,at:stamp(),name:student.name,studentClass:student.studentClass,absen:student.absen,kind:"PAGE_EXIT",detail:"Halaman ditutup atau dimuat ulang saat sesi belum selesai",question:current+1,materiPilihan:materialLabel(selectedQuestionType),materiPilihanKode:selectedQuestionType,materiAktif:activeQuestionMaterial()})});
 
 $("startBtn").addEventListener("click",()=>{
  const name=$("studentName").value.trim(), studentClass=$("studentClass").value, absen=Number($("studentNumber").value);
@@ -570,7 +581,7 @@ function finishQuiz(){
  const finalScore=Math.round(score/TOTAL_QUESTIONS*100);
  $("quiz").classList.add("hidden");$("result").classList.remove("hidden");
  $("resultSummary").innerHTML=`<div class="stat-grid"><div class="stat"><span class="small">Nama</span><strong style="font-size:1.1rem">${escapeHtml(student.name)}</strong></div><div class="stat"><span class="small">Jawaban benar</span><strong>${score}/${TOTAL_QUESTIONS}</strong></div><div class="stat"><span class="small">Nilai</span><strong>${finalScore}</strong></div><div class="stat"><span class="small">Peringatan halaman</span><strong>${warningCount}</strong></div></div><div class="notice ${finalScore>=80?'success':''}">${finalScore>=80?'Hebat! Terus pertahankan ketelitianmu.':'Terus berlatih. Pelajari kembali perbedaan FPB dan KPK, lalu coba lagi.'}</div>`;
- postData({action:"finishSession",sessionId,updatedAt:stamp(),finishedAt:stamp(),name:student.name,studentClass:student.studentClass,absen:student.absen,status:"Selesai",progress:TOTAL_QUESTIONS,total:TOTAL_QUESTIONS,score:finalScore,correct:score,warningCount});
+ postData({action:"finishSession",sessionId,updatedAt:stamp(),finishedAt:stamp(),name:student.name,studentClass:student.studentClass,absen:student.absen,status:"Selesai",progress:TOTAL_QUESTIONS,total:TOTAL_QUESTIONS,score:finalScore,correct:score,warningCount,materiPilihan:materialLabel(selectedQuestionType),materiPilihanKode:selectedQuestionType,materiAktif:"Selesai: "+materialLabel(selectedQuestionType),nomorSoalAktif:TOTAL_QUESTIONS});
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 $("backHome").addEventListener("click",()=>{$("result").classList.add("hidden");$("setup").classList.remove("hidden");student={};});
@@ -597,19 +608,26 @@ async function loadDashboard(){
  try{
   const d=await jsonp(APPS_SCRIPT_URL,TEACHER_PIN);if(!d.ok)throw new Error(d.error||"Tidak dapat membaca data");
   dashboardData=d;renderDashboard();
- }catch(e){console.error(e);$("activityRows").innerHTML=`<tr><td colspan="6">Gagal memuat data. Periksa URL deployment, izin akses, dan PIN pada Code.gs. (${escapeHtml(e.message)})</td></tr>`}
+ }catch(e){console.error(e);$("activityRows").innerHTML=`<tr><td colspan="8">Gagal memuat data. Periksa URL deployment, izin akses, dan PIN pada Code.gs. (${escapeHtml(e.message)})</td></tr>`}
 }
 let configAlertShown=false;function alertOnce(msg){if(!configAlertShown){showAppMessage(msg,"warning","Pengaturan perlu diperiksa");configAlertShown=true}}
 function renderDashboard(){
  const sessions=dashboardData.sessions||[],warnings=dashboardData.warnings||[];
  $("statSessions").textContent=sessions.length;$("statActive").textContent=sessions.filter(s=>s.status==="Sedang mengerjakan"||s.status==="Kembali ke halaman"||s.status==="Kembali fokus").length;
  $("statDone").textContent=sessions.filter(s=>s.status==="Selesai").length;$("statWarnings").textContent=warnings.length;
- $("activityRows").innerHTML=sessions.length?sessions.slice().reverse().map(s=>`<tr><td>${escapeHtml(s.updatedAt||"")}</td><td><b>${escapeHtml(s.name||"")}</b><br>Kelas ${escapeHtml(s.studentClass||"")} • Absen ${escapeHtml(s.absen||"")}</td><td>${escapeHtml(s.status||"")}</td><td>${escapeHtml(s.progress||0)}/${escapeHtml(s.total||10)}</td><td>${s.score===undefined?"—":escapeHtml(s.score)}</td><td>${escapeHtml(s.warningCount||0)}</td></tr>`).join(""):'<tr><td colspan="6">Belum ada data.</td></tr>';
+ $("activityRows").innerHTML=sessions.length?sessions.slice().reverse().map(s=>{
+  const chosen=s.materiPilihan||s.materiPilihanKode||s.jenisMateri||s.questionType||"—";
+  const active=s.materiAktif||s.jenisSoalAktif||s.activeQuestionType||s.questionTypeAktif||"—";
+  const qNo=s.nomorSoalAktif||s.question||"";
+  const a=s.bilanganA!==undefined&&s.bilanganA!==""?` (${escapeHtml(s.bilanganA)} dan ${escapeHtml(s.bilanganB)})`:"";
+  const activeText=(active==="—"?"—":escapeHtml(active))+ (qNo?` • Soal ${escapeHtml(qNo)}`:"")+a;
+  return `<tr><td>${escapeHtml(s.updatedAt||"")}</td><td><b>${escapeHtml(s.name||"")}</b><br>Kelas ${escapeHtml(s.studentClass||"")} • Absen ${escapeHtml(s.absen||"")}</td><td>${escapeHtml(s.status||"")}</td><td>${escapeHtml(chosen)}</td><td>${activeText}</td><td>${escapeHtml(s.progress||0)}/${escapeHtml(s.total||10)}</td><td>${s.score===undefined?"—":escapeHtml(s.score)}</td><td>${escapeHtml(s.warningCount||0)}</td></tr>`;
+ }).join(""):'<tr><td colspan="8">Belum ada data.</td></tr>';
  $("warningRows").innerHTML=warnings.length?warnings.slice().reverse().map(w=>`<tr><td>${escapeHtml(w.at||"")}</td><td>${escapeHtml(w.name||"")}</td><td>${escapeHtml(w.kind||"")}</td><td>${escapeHtml(w.detail||"")}</td></tr>`).join(""):'<tr><td colspan="4">Belum ada peringatan.</td></tr>';
 }
 $("refreshData").addEventListener("click",loadDashboard);
 $("exportCsv").addEventListener("click",()=>{
- const rows=[["Waktu update","Nama","Kelas","Absen","Status","Progres","Total","Nilai","Jumlah peringatan"],...(dashboardData.sessions||[]).map(s=>[s.updatedAt,s.name,s.studentClass,s.absen,s.status,s.progress,s.total,s.score,s.warningCount])];
+ const rows=[["Waktu update","Nama","Kelas","Absen","Status","Materi pilihan","Materi yang dikerjakan","Nomor soal aktif","Bilangan A","Bilangan B","Progres","Total","Nilai","Jumlah peringatan"],...(dashboardData.sessions||[]).map(s=>[s.updatedAt,s.name,s.studentClass,s.absen,s.status,s.materiPilihan||s.materiPilihanKode||s.jenisMateri||s.questionType,s.materiAktif||s.jenisSoalAktif||s.activeQuestionType||s.questionTypeAktif,s.nomorSoalAktif||s.question,s.bilanganA,s.bilanganB,s.progress,s.total,s.score,s.warningCount])];
  const csv=rows.map(r=>r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");
  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}));a.download="rekap-aktivitas-fpb-kpk.csv";a.click();URL.revokeObjectURL(a.href);
 });

@@ -8,6 +8,12 @@
 :root{--navy:#17324d;--blue:#276ef1;--mint:#dff8ed;--yellow:#fff2bd;--pink:#ffe1e8;--paper:#fff;--ink:#233044;--muted:#64748b;--line:#dce5ef;--green:#16845b;--red:#c62828}
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(135deg,#e7f7ff,#f1fff5 55%,#fff8df);color:var(--ink);min-height:100vh}
 header{padding:22px 16px;text-align:center;background:linear-gradient(110deg,#17324d,#276ef1);color:white}header h1{margin:0;font-size:clamp(1.5rem,4vw,2.25rem)}header p{margin:8px 0 0;opacity:.92}
+.back-to-valley{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:16px;padding:11px 18px;border:2px solid rgba(255,255,255,.72);border-radius:999px;background:linear-gradient(135deg,#fff2bd,#dff8ed);color:#17324d;text-decoration:none;font-weight:800;box-shadow:0 5px 0 rgba(8,35,68,.22);transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.back-to-valley:hover{transform:translateY(-2px);box-shadow:0 7px 0 rgba(8,35,68,.22);filter:brightness(1.04)}
+.back-to-valley:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(8,35,68,.22)}
+.back-to-valley:focus-visible{outline:3px solid #fff;outline-offset:4px}
+@media(max-width:560px){.back-to-valley{padding:10px 15px;font-size:.95rem}}
+
 main{max-width:1100px;margin:22px auto;padding:0 14px 40px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 24px #18324d12;margin-bottom:16px}
 h2{margin:0 0 14px;color:var(--navy)}.sub{color:var(--muted);font-size:.94rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
 label{display:block;font-weight:700;margin:8px 0 5px}input,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;background:white}
@@ -22,7 +28,13 @@ table{border-collapse:collapse;width:100%;font-size:.9rem}th,td{text-align:left;
 </style>
 </head>
 <body>
-<header><h1>🔢 Petualangan FPB & KPK</h1><p>Belajar Matematika dengan bilangan genap dua angka</p></header>
+<header>
+<h1>🔢 Petualangan FPB & KPK</h1>
+<p>Belajar Matematika dengan bilangan genap dua angka</p>
+<a class="back-to-valley" href="../lembah.html" aria-label="Kembali ke halaman Lembah">
+  <span aria-hidden="true">🌈</span> ← Kembali ke Lembah Belajar
+</a>
+</header>
 <main>
 <section id="setup" class="card">
 <h2>🌟 Siap Memulai?</h2>
@@ -268,14 +280,4 @@ function renderDashboard(){
  $("statSessions").textContent=sessions.length;$("statActive").textContent=sessions.filter(s=>s.status==="Sedang mengerjakan"||s.status==="Kembali ke halaman"||s.status==="Kembali fokus").length;
  $("statDone").textContent=sessions.filter(s=>s.status==="Selesai").length;$("statWarnings").textContent=warnings.length;
  $("activityRows").innerHTML=sessions.length?sessions.slice().reverse().map(s=>`<tr><td>${escapeHtml(s.updatedAt||"")}</td><td><b>${escapeHtml(s.name||"")}</b><br>Kelas ${escapeHtml(s.studentClass||"")} • Absen ${escapeHtml(s.absen||"")}</td><td>${escapeHtml(s.status||"")}</td><td>${escapeHtml(s.progress||0)}/${escapeHtml(s.total||10)}</td><td>${s.score===undefined?"—":escapeHtml(s.score)}</td><td>${escapeHtml(s.warningCount||0)}</td></tr>`).join(""):'<tr><td colspan="6">Belum ada data.</td></tr>';
- $("warningRows").innerHTML=warnings.length?warnings.slice().reverse().map(w=>`<tr><td>${escapeHtml(w.at||"")}</td><td>${escapeHtml(w.name||"")}</td><td>${escapeHtml(w.kind||"")}</td><td>${escapeHtml(w.detail||"")}</td></tr>`).join(""):'<tr><td colspan="4">Belum ada peringatan.</td></tr>';
-}
-$("refreshData").addEventListener("click",loadDashboard);
-$("exportCsv").addEventListener("click",()=>{
- const rows=[["Waktu update","Nama","Kelas","Absen","Status","Progres","Total","Nilai","Jumlah peringatan"],...(dashboardData.sessions||[]).map(s=>[s.updatedAt,s.name,s.studentClass,s.absen,s.status,s.progress,s.total,s.score,s.warningCount])];
- const csv=rows.map(r=>r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");
- const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}));a.download="rekap-aktivitas-fpb-kpk.csv";a.click();URL.revokeObjectURL(a.href);
-});
-</script>
-</body>
-</html>
+ 

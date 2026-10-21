@@ -1156,11 +1156,12 @@
 
 
     /*
-     * Folder Literasi 4
+     * Folder komik sesuai tautan GitHub yang diberikan:
+     * https://github.com/sdn160gresik/komik/tree/main/mtk/bab2
      */
 
     const FOLDER_PATH =
-      FOLDER_PATH = "mtk/bab2";
+      "mtk/bab2";
 
 
     const BRANCH =
@@ -1414,12 +1415,28 @@
 
 
       showLoading(
-        "Memuat halaman komik..."
+        "Memuat gambar pertama..."
       );
 
-
-      comicDisplay.style.display =
-        "none";
+      /*
+       * Tampilkan halaman-00.jpg langsung, tanpa menunggu
+       * GitHub API menyelesaikan daftar seluruh gambar.
+       */
+      pages = [{
+        name: HALAMAN_PERTAMA,
+        url: getImageURL(HALAMAN_PERTAMA)
+      }];
+      currentIndex = 0;
+      comicDisplay.loading = "eager";
+      comicDisplay.decoding = "async";
+      comicDisplay.style.display = "block";
+      comicDisplay.onload = () => {
+        statusMsg.style.display = "none";
+      };
+      comicDisplay.onerror = () => {
+        showLoading("Gambar pertama belum berhasil dimuat. Sedang mencoba mengambil daftar halaman...");
+      };
+      comicDisplay.src = pages[0].url;
 
 
       /*
@@ -1470,7 +1487,7 @@
                   "application/vnd.github+json"
               },
 
-              cache: "no-store"
+              cache: "default"
             }
           );
 
@@ -1868,28 +1885,10 @@
       }
 
 
-      /* =================================================
-         PRELOAD HALAMAN SEBELUMNYA
-      ================================================= */
-
-      if (
-
-        !isFirst &&
-
-        pages[currentIndex - 1]
-
-      ) {
-
-        const preloadPrev =
-          new Image();
-
-
-        preloadPrev.src =
-          pages[
-            currentIndex - 1
-          ].url;
-
-      }
+      /*
+       * Tidak melakukan preload halaman sebelumnya.
+       * Ini mengurangi unduhan gambar yang tidak diperlukan.
+       */
 
     }
 

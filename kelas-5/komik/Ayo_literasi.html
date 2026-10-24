@@ -903,6 +903,61 @@
         }
 
 
+
+
+        /* ================================
+           PEMBACA KOMIK DINAMIS
+        ================================= */
+        .reader-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(10, 18, 28, .97);
+            color: #fff;
+            padding: 14px;
+            overflow: auto;
+        }
+        .reader-overlay.open { display: flex; flex-direction: column; }
+        .reader-topbar {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 12px; width: min(1100px, 100%); margin: 0 auto 12px;
+        }
+        .reader-heading { font-size: 15px; font-weight: 700; }
+        .reader-actions { display: flex; gap: 8px; }
+        .reader-btn, .reader-select {
+            border: 0; border-radius: 10px; padding: 10px 13px;
+            font: inherit; font-weight: 700; cursor: pointer;
+        }
+        .reader-btn { color: #fff; background: #0288d1; }
+        .reader-btn:disabled { opacity: .4; cursor: not-allowed; }
+        .reader-select { max-width: 180px; background: #fff; color: #263238; }
+        .reader-stage {
+            flex: 1; display: flex; align-items: center; justify-content: center;
+            gap: 12px; width: min(1200px, 100%); margin: 0 auto; min-height: 0;
+        }
+        .reader-image-wrap {
+            flex: 1; min-width: 0; display: flex; align-items: center;
+            justify-content: center; min-height: 200px;
+        }
+        .reader-image {
+            display: block; max-width: 100%; max-height: calc(100vh - 150px);
+            object-fit: contain; border-radius: 8px; background: #18212b;
+        }
+        .reader-status { text-align: center; padding: 10px; color: #dbeafe; font-size: 13px; }
+        .reader-message { text-align: center; margin: auto; max-width: 600px; line-height: 1.7; }
+        .reader-progress { width: min(1100px, 100%); height: 5px; margin: 10px auto 0; background: #344454; border-radius: 10px; overflow: hidden; }
+        .reader-progress-fill { height: 100%; width: 0; background: #ffca28; transition: width .2s; }
+        @media (max-width: 650px) {
+            .reader-overlay { padding: 8px; }
+            .reader-topbar { align-items: flex-start; }
+            .reader-heading { font-size: 12px; }
+            .reader-btn { padding: 9px 10px; }
+            .reader-select { max-width: 120px; padding: 8px; }
+            .reader-stage { gap: 5px; }
+            .reader-image { max-height: calc(100vh - 155px); }
+        }
+
         /* ================================
            LANDSCAPE HP
         ================================= */
@@ -1135,6 +1190,32 @@
 
 
 
+
+
+    <!-- PEMBACA KOMIK: SATU PEMBACA UNTUK SEMUA FOLDER -->
+    <section id="readerOverlay" class="reader-overlay" aria-label="Pembaca komik" aria-modal="true" role="dialog">
+        <div class="reader-topbar">
+            <div>
+                <div class="reader-heading">📖 Petualangan Literasi</div>
+                <div id="readerStatus" class="reader-status" style="padding:4px 0;text-align:left">Memuat halaman...</div>
+            </div>
+            <div class="reader-actions">
+                <select id="readerPageSelect" class="reader-select" aria-label="Pilih halaman"></select>
+                <button id="readerClose" class="reader-btn" type="button" aria-label="Tutup pembaca">✕ Tutup</button>
+            </div>
+        </div>
+        <div class="reader-stage">
+            <button id="readerPrev" class="reader-btn" type="button" aria-label="Halaman sebelumnya">❮</button>
+            <div id="readerImageWrap" class="reader-image-wrap">
+                <div id="readerMessage" class="reader-message">Memuat komik...</div>
+            </div>
+            <button id="readerNext" class="reader-btn" type="button" aria-label="Halaman berikutnya">❯</button>
+        </div>
+        <div id="readerFooter" class="reader-status">Halaman 0 dari 0</div>
+        <div class="reader-progress"><div id="readerProgressFill" class="reader-progress-fill"></div></div>
+    </section>
+
+
     <!-- =================================
          FOOTER
     ================================== -->
@@ -1281,7 +1362,141 @@
         let comics = [];
 
 
+
         let currentPage = 1;
+
+        /* =================================
+           PEMBACA KOMIK OTOMATIS
+           Semua materi memakai overlay ini.
+        ================================= */
+        const readerOverlay = document.getElementById("readerOverlay");
+        const readerStatus = document.getElementById("readerStatus");
+        const readerFooter = document.getElementById("readerFooter");
+        const readerImageWrap = document.getElementById("readerImageWrap");
+        const readerMessage = document.getElementById("readerMessage");
+        const readerPageSelect = document.getElementById("readerPageSelect");
+        const readerPrev = document.getElementById("readerPrev");
+        const readerNext = document.getElementById("readerNext");
+        const readerProgressFill = document.getElementById("readerProgressFill");
+        let activeComic = null;
+        let readerPages = [];
+        let readerIndex = 0;
+
+        function getFolderPath(comic) {
+            if (comic && typeof comic.folder === "string" && comic.folder) return comic.folder;
+            if (comic && typeof comic.path === "string") return comic.path.slice(0, comic.path.lastIndexOf("/"));
+            return "";
+        }
+
+        function closeReader() {
+            readerOverlay.classList.remove("open");
+            document.body.style.overflow = "";
+            const url = new URL(window.location.href);
+            if (url.searchParams.has("baca")) {
+                url.searchParams.delete("baca");
+                history.replaceState({}, "", url.pathname + url.search + url.hash);
+            }
+        }
+
+        function setReaderMessage(message) {
+            readerImageWrap.innerHTML = "";
+            const box = document.createElement("div");
+            box.className = "reader-message";
+            box.textContent = message;
+            readerImageWrap.appendChild(box);
+        }
+
+        function showReaderPage(index) {
+            if (!readerPages.length) return;
+            readerIndex = Math.max(0, Math.min(index, readerPages.length - 1));
+            const page = readerPages[readerIndex];
+            const pagePath = typeof page === "string" ? page : page.path;
+            if (!pagePath) {
+                setReaderMessage("Alamat gambar halaman ini belum tersedia di komik.json.");
+                return;
+            }
+            const img = document.createElement("img");
+            img.className = "reader-image";
+            img.alt = `Halaman ${readerIndex + 1}`;
+            img.loading = "eager";
+            img.src = RAW_BASE + encodePath(pagePath) + "?t=" + Date.now();
+            img.onerror = () => setReaderMessage("Gambar tidak dapat dimuat. Periksa nama file dan folder di repositori GitHub.");
+            readerImageWrap.innerHTML = "";
+            readerImageWrap.appendChild(img);
+            readerStatus.textContent = activeComic && activeComic.nama ? activeComic.nama : "Petualangan membaca";
+            readerFooter.textContent = `Halaman ${readerIndex + 1} dari ${readerPages.length}`;
+            readerPageSelect.value = String(readerIndex);
+            readerPrev.disabled = readerIndex === 0;
+            readerNext.disabled = readerIndex === readerPages.length - 1;
+            readerProgressFill.style.width = `${((readerIndex + 1) / readerPages.length) * 100}%`;
+        }
+
+        async function openReader(folderPath) {
+            const cleanFolder = String(folderPath || "").trim();
+            if (!cleanFolder) return;
+            readerOverlay.classList.add("open");
+            document.body.style.overflow = "hidden";
+            readerPages = [];
+            readerIndex = 0;
+            readerPageSelect.innerHTML = "";
+            readerStatus.textContent = "Memuat komik...";
+            readerFooter.textContent = "";
+            readerPrev.disabled = true;
+            readerNext.disabled = true;
+            readerProgressFill.style.width = "0%";
+            setReaderMessage("Sedang memuat halaman komik...");
+
+            try {
+                const response = await fetch(DATA_URL + "?t=" + Date.now(), { cache: "no-store" });
+                if (!response.ok) throw new Error("Daftar komik tidak dapat dibaca (HTTP " + response.status + ").");
+                const data = await response.json();
+                activeComic = (data.komik || []).find(item => getFolderPath(item) === cleanFolder);
+                if (!activeComic) throw new Error("Materi tidak ditemukan di komik.json. Jalankan ulang GitHub Actions untuk memperbarui daftar komik.");
+
+                // Format utama dari generator baru: pages: [{file, path}, ...].
+                if (Array.isArray(activeComic.pages)) {
+                    readerPages = activeComic.pages.filter(page => typeof page === "string" || (page && typeof page.path === "string"));
+                }
+                if (!readerPages.length) {
+                    throw new Error("Data halaman untuk folder ini belum tersedia. Perbarui generate_komik.py agar menyertakan daftar pages, lalu jalankan GitHub Actions.");
+                }
+
+                readerPageSelect.innerHTML = "";
+                readerPages.forEach((page, index) => {
+                    const option = document.createElement("option");
+                    option.value = String(index);
+                    const pageName = typeof page === "string" ? page.split("/").pop() : (page.file || page.path.split("/").pop());
+                    option.textContent = `Halaman ${index + 1} — ${pageName}`;
+                    readerPageSelect.appendChild(option);
+                });
+                showReaderPage(0);
+                const url = new URL(window.location.href);
+                url.searchParams.set("baca", cleanFolder);
+                history.replaceState({}, "", url.pathname + url.search + url.hash);
+            } catch (error) {
+                readerStatus.textContent = "Komik belum dapat dibuka";
+                setReaderMessage(error.message || "Terjadi kesalahan saat memuat komik.");
+            }
+        }
+
+        readerPrev.addEventListener("click", () => showReaderPage(readerIndex - 1));
+        readerNext.addEventListener("click", () => showReaderPage(readerIndex + 1));
+        readerPageSelect.addEventListener("change", () => showReaderPage(Number(readerPageSelect.value)));
+        document.getElementById("readerClose").addEventListener("click", closeReader);
+        readerOverlay.addEventListener("click", event => { if (event.target === readerOverlay) closeReader(); });
+        document.addEventListener("keydown", event => {
+            if (!readerOverlay.classList.contains("open")) return;
+            if (event.key === "Escape") closeReader();
+            if (event.key === "ArrowLeft") showReaderPage(readerIndex - 1);
+            if (event.key === "ArrowRight") showReaderPage(readerIndex + 1);
+        });
+        comicGrid.addEventListener("click", event => {
+            const link = event.target.closest("a.thumbnail-link");
+            if (!link) return;
+            event.preventDefault();
+            openReader(decodeURIComponent(link.dataset.folder || ""));
+        });
+
 
 
 
@@ -1571,13 +1786,8 @@
                      * Halaman pembaca.
                      */
 
-                    const readerUrl =
-                        comic.reader ||
-                        (
-                            "literasi-" +
-                            comicNumber +
-                            ".html"
-                        );
+                    const folderPath = getFolderPath(comic);
+                    const readerUrl = "#baca";
 
 
                     /*
@@ -1642,6 +1852,7 @@
                         <a
                             class="thumbnail-link"
                             href="${readerUrl}"
+                            data-folder="${encodeURIComponent(folderPath)}"
                             title="Baca Komik"
                         >
 
@@ -1948,7 +2159,10 @@
         ================================= */
 
 
-        loadComics();
+        loadComics().then(() => {
+            const folderFromUrl = new URLSearchParams(window.location.search).get("baca");
+            if (folderFromUrl) openReader(folderFromUrl);
+        });
 
 
     </script>

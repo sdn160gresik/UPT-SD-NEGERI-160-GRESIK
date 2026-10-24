@@ -1621,37 +1621,74 @@
                  * yang dijadikan thumbnail.
                  */
 
-                comics =
-                    data.komik
+                // Normalisasi format komik.json lama maupun baru.
+                // Menerima path relatif, thumbnail_path, thumbnail,
+                // atau folder + file. Nama folder boleh mengandung spasi/
+                // tanda baca, termasuk tanda tanya.
+                function getThumbnailPath(item) {
+                    if (!item || typeof item !== "object") return "";
 
-                    .filter(
-                        item => {
+                    let candidates = [
+                        item.path,
+                        item.thumbnail_path,
+                        item.thumbnail,
+                        item.thumbnail_url,
+                        item.image
+                    ].filter(value => typeof value === "string" && value.trim());
 
-                            return (
-                                item &&
+                    let path = candidates.find(value =>
+                        /halaman-00\.(jpg|jpeg|png|webp|gif)(?:[?#].*)?$/i.test(value.trim())
+                    ) || "";
 
-                                typeof
-                                    item.path ===
-                                    "string" &&
-
-                                item.path
-                                    .toLowerCase()
-                                    .endsWith(
-                                        "/halaman-00.jpg"
-                                    )
-                            );
-
+                    // Jika JSON hanya memiliki folder dan nama file.
+                    if (!path && typeof item.folder === "string" && item.folder.trim()) {
+                        const fileName = (typeof item.file === "string" && item.file.trim())
+                            ? item.file.trim()
+                            : "halaman-00.jpg";
+                        if (/^halaman-00\.(jpg|jpeg|png|webp|gif)$/i.test(fileName)) {
+                            path = item.folder.replace(/\\/g, "/").replace(/^\/+|\/+$/g, "") + "/" + fileName;
                         }
-                    )
+                    }
 
-                    .sort(
-                        (a, b) => {
+                    if (!path) return "";
+                    path = path.trim().replace(/\\/g, "/");
 
-                            return Number(a.urutan || 0) -
-                                   Number(b.urutan || 0);
-
+                    // Jika kandidat berupa URL penuh, ambil path repositori setelah /main/.
+                    if (/^https?:\/\//i.test(path)) {
+                        try {
+                            const parsed = new URL(path);
+                            const marker = "/" + GITHUB_REPO + "/" + GITHUB_BRANCH + "/";
+                            const markerIndex = parsed.pathname.indexOf(marker);
+                            if (markerIndex >= 0) {
+                                path = parsed.pathname.slice(markerIndex + marker.length);
+                                path = path.split("/").map(part => {
+                                    try { return decodeURIComponent(part); } catch (_) { return part; }
+                                }).join("/");
+                            } else {
+                                path = parsed.pathname.replace(/^\/+/, "");
+                            }
+                        } catch (_) {
+                            return "";
                         }
-                    );
+                    } else {
+                        path = path.replace(/^\/+/, "");
+                    }
+
+                    return /(?:^|\/)halaman-00\.(jpg|jpeg|png|webp|gif)$/i.test(path) ? path : "";
+                }
+
+                comics = data.komik
+                    .map(item => {
+                        const thumbnailPath = getThumbnailPath(item);
+                        return thumbnailPath ? { ...item, path: thumbnailPath } : null;
+                    })
+                    .filter(Boolean)
+                    .sort((a, b) => {
+                        const orderA = Number(a.urutan || 9999);
+                        const orderB = Number(b.urutan || 9999);
+                        if (orderA !== orderB) return orderA - orderB;
+                        return String(a.folder || a.path || "").localeCompare(String(b.folder || b.path || ""));
+                    });
 
 
                 /*

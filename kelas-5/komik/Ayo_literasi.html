@@ -912,19 +912,57 @@
             display: none;
             position: fixed;
             inset: 0;
-            z-index: 1000;
-            background: rgba(10, 18, 28, .97);
+            width: 100%;
+            height: 100%;
+            height: 100dvh;
+            z-index: 10000;
+            background: #0a121c;
             color: #fff;
-            padding: 14px;
-            overflow: auto;
+            padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right))
+                     max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+            overflow: hidden;
+            overscroll-behavior: contain;
+            box-sizing: border-box;
         }
         .reader-overlay.open { display: flex; flex-direction: column; }
+        .reader-overlay.reader-fallback-fullscreen {
+            position: fixed !important;
+            inset: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            height: 100dvh !important;
+            padding: 2px !important;
+            z-index: 2147483647 !important;
+            background: #0a121c !important;
+        }
+        .reader-overlay:fullscreen {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            max-width: none;
+            max-height: none;
+            margin: 0;
+            border: 0;
+            padding: max(4px, env(safe-area-inset-top)) max(4px, env(safe-area-inset-right))
+                     max(4px, env(safe-area-inset-bottom)) max(4px, env(safe-area-inset-left));
+            background: #0a121c;
+        }
+        .reader-overlay:fullscreen .reader-stage,
+        .reader-overlay:fullscreen .reader-image-wrap { min-height: 0; }
+        .reader-overlay:fullscreen .reader-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            border-radius: 0;
+        }
         .reader-topbar {
             display: flex; align-items: center; justify-content: space-between;
-            gap: 12px; width: min(1100px, 100%); margin: 0 auto 12px;
+            gap: 8px; width: 100%; max-width: 1200px; margin: 0 auto 6px;
+            flex: 0 0 auto;
         }
         .reader-heading { font-size: 15px; font-weight: 700; }
-        .reader-actions { display: flex; gap: 8px; }
+        .reader-actions { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
         .reader-btn, .reader-select {
             border: 0; border-radius: 10px; padding: 10px 13px;
             font: inherit; font-weight: 700; cursor: pointer;
@@ -933,29 +971,46 @@
         .reader-btn:disabled { opacity: .4; cursor: not-allowed; }
         .reader-select { max-width: 180px; background: #fff; color: #263238; }
         .reader-stage {
-            flex: 1; display: flex; align-items: center; justify-content: center;
-            gap: 12px; width: min(1200px, 100%); margin: 0 auto; min-height: 0;
+            flex: 1 1 auto; display: flex; align-items: center; justify-content: center;
+            gap: 8px; width: 100%; max-width: 1400px; margin: 0 auto; min-height: 0;
+            overflow: hidden;
         }
         .reader-image-wrap {
-            flex: 1; min-width: 0; display: flex; align-items: center;
-            justify-content: center; min-height: 200px;
+            flex: 1 1 auto; min-width: 0; min-height: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
         }
         .reader-image {
-            display: block; max-width: 100%; max-height: calc(100vh - 150px);
-            object-fit: contain; border-radius: 8px; background: #18212b;
+            display: block; width: auto; height: auto; max-width: 100%;
+            max-height: 100%; object-fit: contain; border-radius: 4px;
+            background: #18212b;
         }
         .reader-status { text-align: center; padding: 10px; color: #dbeafe; font-size: 13px; }
         .reader-message { text-align: center; margin: auto; max-width: 600px; line-height: 1.7; }
-        .reader-progress { width: min(1100px, 100%); height: 5px; margin: 10px auto 0; background: #344454; border-radius: 10px; overflow: hidden; }
+        .reader-progress { width: 100%; max-width: 1200px; height: 4px; flex: 0 0 4px; margin: 4px auto 0; background: #344454; border-radius: 10px; overflow: hidden; }
         .reader-progress-fill { height: 100%; width: 0; background: #ffca28; transition: width .2s; }
         @media (max-width: 650px) {
-            .reader-overlay { padding: 8px; }
-            .reader-topbar { align-items: flex-start; }
-            .reader-heading { font-size: 12px; }
-            .reader-btn { padding: 9px 10px; }
-            .reader-select { max-width: 120px; padding: 8px; }
-            .reader-stage { gap: 5px; }
-            .reader-image { max-height: calc(100vh - 155px); }
+            .reader-overlay { padding: 4px; }
+            .reader-overlay:fullscreen { padding: 2px; }
+            .reader-topbar { align-items: center; gap: 4px; margin-bottom: 2px; }
+            .reader-heading { font-size: 10px; line-height: 1.2; }
+            .reader-status { font-size: 10px; padding: 3px; }
+            .reader-actions { gap: 4px; }
+            .reader-btn { padding: 8px 7px; border-radius: 8px; font-size: 11px; }
+            .reader-select { max-width: 94px; padding: 7px 4px; font-size: 10px; }
+            .reader-stage { gap: 3px; }
+            .reader-stage > .reader-btn { flex: 0 0 auto; min-width: 32px; }
+            .reader-image { max-width: 100%; max-height: 100%; border-radius: 0; }
+            #readerFooter { padding: 3px; font-size: 10px; }
+            .reader-progress { margin-top: 2px; }
+        }
+        @media (max-width: 650px) and (orientation: landscape) {
+            .reader-topbar { margin-bottom: 0; }
+            .reader-heading { display: none; }
+            .reader-status { max-width: 35vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .reader-btn { padding: 5px 7px; }
+            .reader-select { padding: 4px; }
+            #readerFooter { display: none; }
+            .reader-progress { display: none; }
         }
 
         /* ================================
@@ -1393,7 +1448,7 @@
             if (document.fullscreenElement === readerOverlay && document.exitFullscreen) {
                 document.exitFullscreen().catch(() => {});
             }
-            readerOverlay.classList.remove("open");
+            readerOverlay.classList.remove("open", "reader-fallback-fullscreen");
             document.body.style.overflow = "";
             const url = new URL(window.location.href);
             if (url.searchParams.has("baca")) {
@@ -1423,7 +1478,7 @@
             img.className = "reader-image";
             img.alt = `Halaman ${readerIndex + 1}`;
             img.loading = "eager";
-            img.src = RAW_BASE + encodePath(pagePath) + "?t=" + Date.now();
+            img.src = RAW_BASE + encodePath(pagePath);
             img.onerror = () => setReaderMessage("Gambar tidak dapat dimuat. Periksa nama file dan folder di repositori GitHub.");
             readerImageWrap.innerHTML = "";
             readerImageWrap.appendChild(img);
@@ -1451,10 +1506,15 @@
             setReaderMessage("Sedang memuat halaman komik...");
 
             try {
-                const response = await fetch(DATA_URL + "?t=" + Date.now(), { cache: "no-store" });
-                if (!response.ok) throw new Error("Daftar komik tidak dapat dibaca (HTTP " + response.status + ").");
-                const data = await response.json();
-                activeComic = (data.komik || []).find(item => getFolderPath(item) === cleanFolder);
+                // Gunakan data yang sudah dimuat pada halaman koleksi agar pembaca
+                // terbuka lebih cepat. Ambil JSON ulang hanya jika data halaman belum ada.
+                activeComic = comics.find(item => getFolderPath(item) === cleanFolder) || null;
+                if (!activeComic || !Array.isArray(activeComic.pages) || !activeComic.pages.length) {
+                    const response = await fetch(DATA_URL, { cache: "force-cache" });
+                    if (!response.ok) throw new Error("Daftar komik tidak dapat dibaca (HTTP " + response.status + ").");
+                    const data = await response.json();
+                    activeComic = (data.komik || []).find(item => getFolderPath(item) === cleanFolder) || activeComic;
+                }
                 if (!activeComic) throw new Error("Materi tidak ditemukan di komik.json. Jalankan ulang GitHub Actions untuk memperbarui daftar komik.");
 
                 // Format utama dari generator baru: pages: [{file, path}, ...].
@@ -1496,7 +1556,7 @@
         const readerFullscreen = document.getElementById("readerFullscreen");
 
         function updateFullscreenButton() {
-            const isFullscreen = document.fullscreenElement === readerOverlay;
+            const isFullscreen = document.fullscreenElement === readerOverlay || readerOverlay.classList.contains("reader-fallback-fullscreen");
             readerFullscreen.textContent = isFullscreen ? "⤢ Keluar Full Screen" : "⛶ Full Screen";
             readerFullscreen.setAttribute(
                 "aria-label",
@@ -1508,14 +1568,18 @@
         readerFullscreen.addEventListener("click", async () => {
             try {
                 if (document.fullscreenElement === readerOverlay) {
-                    await document.exitFullscreen();
+                    if (document.exitFullscreen) await document.exitFullscreen();
+                } else if (readerOverlay.classList.contains("reader-fallback-fullscreen")) {
+                    readerOverlay.classList.remove("reader-fallback-fullscreen");
                 } else if (readerOverlay.requestFullscreen) {
                     await readerOverlay.requestFullscreen();
                 } else {
-                    readerStatus.textContent = "Browser ini belum mendukung fitur layar penuh.";
+                    // Fallback: manfaatkan seluruh area viewport bila Fullscreen API tidak tersedia.
+                    readerOverlay.classList.add("reader-fallback-fullscreen");
                 }
             } catch (error) {
-                readerStatus.textContent = "Layar penuh tidak dapat diaktifkan. Coba gunakan tombol layar penuh pada browser.";
+                // Sebagian browser HP membatasi Fullscreen API; overlay tetap diperluas.
+                readerOverlay.classList.add("reader-fallback-fullscreen");
             }
             updateFullscreenButton();
         });

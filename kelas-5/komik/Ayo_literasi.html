@@ -1201,6 +1201,7 @@
             </div>
             <div class="reader-actions">
                 <select id="readerPageSelect" class="reader-select" aria-label="Pilih halaman"></select>
+                <button id="readerFullscreen" class="reader-btn" type="button" aria-label="Tampilkan layar penuh" title="Tampilkan layar penuh">⛶ Full Screen</button>
                 <button id="readerClose" class="reader-btn" type="button" aria-label="Tutup pembaca">✕ Tutup</button>
             </div>
         </div>
@@ -1389,6 +1390,9 @@
         }
 
         function closeReader() {
+            if (document.fullscreenElement === readerOverlay && document.exitFullscreen) {
+                document.exitFullscreen().catch(() => {});
+            }
             readerOverlay.classList.remove("open");
             document.body.style.overflow = "";
             const url = new URL(window.location.href);
@@ -1483,6 +1487,41 @@
         readerNext.addEventListener("click", () => showReaderPage(readerIndex + 1));
         readerPageSelect.addEventListener("change", () => showReaderPage(Number(readerPageSelect.value)));
         document.getElementById("readerClose").addEventListener("click", closeReader);
+
+        /* =================================
+           FULL SCREEN PEMBACA KOMIK
+           Tombol berganti antara layar penuh
+           dan tampilan normal.
+        ================================= */
+        const readerFullscreen = document.getElementById("readerFullscreen");
+
+        function updateFullscreenButton() {
+            const isFullscreen = document.fullscreenElement === readerOverlay;
+            readerFullscreen.textContent = isFullscreen ? "⤢ Keluar Full Screen" : "⛶ Full Screen";
+            readerFullscreen.setAttribute(
+                "aria-label",
+                isFullscreen ? "Keluar dari layar penuh" : "Tampilkan layar penuh"
+            );
+            readerFullscreen.title = isFullscreen ? "Keluar dari layar penuh" : "Tampilkan layar penuh";
+        }
+
+        readerFullscreen.addEventListener("click", async () => {
+            try {
+                if (document.fullscreenElement === readerOverlay) {
+                    await document.exitFullscreen();
+                } else if (readerOverlay.requestFullscreen) {
+                    await readerOverlay.requestFullscreen();
+                } else {
+                    readerStatus.textContent = "Browser ini belum mendukung fitur layar penuh.";
+                }
+            } catch (error) {
+                readerStatus.textContent = "Layar penuh tidak dapat diaktifkan. Coba gunakan tombol layar penuh pada browser.";
+            }
+            updateFullscreenButton();
+        });
+
+        document.addEventListener("fullscreenchange", updateFullscreenButton);
+
         readerOverlay.addEventListener("click", event => { if (event.target === readerOverlay) closeReader(); });
         document.addEventListener("keydown", event => {
             if (!readerOverlay.classList.contains("open")) return;

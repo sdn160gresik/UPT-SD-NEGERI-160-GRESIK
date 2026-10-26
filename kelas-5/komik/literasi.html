@@ -2,2005 +2,2423 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  >
-
-  <meta name="theme-color" content="#000000">
-
-  <meta
-    name="mobile-web-app-capable"
-    content="yes"
-  >
-
-  <meta
-    name="apple-mobile-web-app-capable"
-    content="yes"
-  >
-
-  <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent"
-  >
-
-  <title>DIMANA INDONESIA BERADA? - Comic Reader</title>
-
-  <style>
-    /* =====================================================
-       RESET
-    ===================================================== */
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      user-select: none;
-      -webkit-user-select: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #000;
-    }
-
-    body {
-      color: #fff;
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
-      display: flex;
-      flex-direction: column;
-    }
-
-    button {
-      font-family: inherit;
-    }
-
-    /* =====================================================
-       HEADER
-    ===================================================== */
-
-    header {
-      width: 100%;
-      height: 56px;
-
-      flex-shrink: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding:
-        0 16px;
-
-      background: #171717;
-
-      border-bottom: 1px solid #303030;
-
-      z-index: 20;
-    }
-
-    .header-left {
-      min-width: 0;
-      flex: 1;
-    }
-
-    .title {
-      font-size: 16px;
-      font-weight: 700;
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-
-      gap: 8px;
-      margin-left: 10px;
-    }
-
-    .page-info {
-      color: #aaa;
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    /* =====================================================
-       FULLSCREEN BUTTON
-    ===================================================== */
-
-    .fullscreen-btn {
-      width: 38px;
-      height: 38px;
-
-      border: 1px solid #444;
-      border-radius: 8px;
-
-      background: #292929;
-      color: #fff;
-
-      cursor: pointer;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 20px;
-
-      transition:
-        background .2s ease,
-        transform .15s ease;
-    }
-
-    .fullscreen-btn:hover {
-      background: #3b3b3b;
-    }
-
-    .fullscreen-btn:active {
-      transform: scale(.94);
-    }
-
-    /* =====================================================
-       VIEWER
-    ===================================================== */
-
-    .viewer-area {
-      position: relative;
-
-      flex: 1;
-
-      min-height: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: #000;
-
-      overflow: hidden;
-
-      touch-action: pan-y;
-    }
-
-    .comic-img {
-      display: none;
-
-      max-width: 100%;
-      max-height: 100%;
-
-      width: auto;
-      height: auto;
-
-      object-fit: contain;
-
-      user-select: none;
-      -webkit-user-drag: none;
-
-      background: #000;
-    }
-
-    /* =====================================================
-       STATUS
-    ===================================================== */
-
-    .status-msg {
-      position: absolute;
-
-      left: 50%;
-      top: 50%;
-
-      transform: translate(-50%, -50%);
-
-      width: min(90%, 500px);
-
-      text-align: center;
-
-      color: #aaa;
-
-      font-size: 14px;
-
-      line-height: 1.6;
-
-      z-index: 4;
-    }
-
-    .loading-circle {
-      width: 38px;
-      height: 38px;
-
-      margin: 0 auto 15px;
-
-      border:
-        3px solid #333;
-
-      border-top-color: #fff;
-
-      border-radius: 50%;
-
-      animation:
-        spin .8s linear infinite;
-    }
-
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .error-title {
-      color: #ff7979;
-      font-weight: 700;
-      font-size: 16px;
-    }
-
-    /* =====================================================
-       NAVIGATION SAMPING
-    ===================================================== */
-
-    .nav-btn {
-      position: absolute;
-
-      top: 0;
-      bottom: 0;
-
-      width: 15%;
-      max-width: 120px;
-
-      border: none;
-
-      background: transparent;
-
-      color:
-        rgba(255, 255, 255, .28);
-
-      font-size: 32px;
-
-      cursor: pointer;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      z-index: 5;
-
-      transition:
-        background .2s ease,
-        color .2s ease;
-    }
-
-    .nav-btn:hover {
-      background:
-        rgba(255, 255, 255, .07);
-
-      color: #fff;
-    }
-
-    .nav-btn:active {
-      background:
-        rgba(255, 255, 255, .12);
-    }
-
-    .nav-btn:disabled {
-      display: none;
-    }
-
-    .nav-prev {
-      left: 0;
-    }
-
-    .nav-next {
-      right: 0;
-    }
-
-    /* =====================================================
-       FOOTER
-    ===================================================== */
-
-    footer {
-      width: 100%;
-
-      flex-shrink: 0;
-
-      background: #171717;
-
-      border-top: 1px solid #303030;
-
-      padding: 10px 15px;
-
-      z-index: 20;
-    }
-
-    .progress-container {
-      width: 100%;
-      height: 3px;
-
-      background: #333;
-
-      border-radius: 10px;
-
-      overflow: hidden;
-
-      margin-bottom: 10px;
-    }
-
-    .progress-bar {
-      width: 0%;
-      height: 100%;
-
-      background: #fff;
-
-      transition:
-        width .25s ease;
-    }
-
-    .footer-controls {
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      gap: 10px;
-    }
-
-    .action-btn {
-      min-width: 120px;
-
-      padding: 9px 18px;
-
-      border:
-        1px solid #444;
-
-      border-radius: 7px;
-
-      background: #292929;
-
-      color: #fff;
-
-      font-size: 13px;
-      font-weight: 600;
-
-      cursor: pointer;
-
-      transition:
-        background .2s ease,
-        opacity .2s ease;
-    }
-
-    .action-btn:hover:not(:disabled) {
-      background: #3a3a3a;
-    }
-
-    .action-btn:active:not(:disabled) {
-      transform: scale(.98);
-    }
-
-    .action-btn:disabled {
-      opacity: .35;
-      cursor: not-allowed;
-    }
-
-    .counter {
-      min-width: 65px;
-
-      text-align: center;
-
-      color: #aaa;
-
-      font-size: 13px;
-    }
-
-    /* =====================================================
-       TOMBOL KELUAR FULLSCREEN HP
-    ===================================================== */
-
-    .mobile-exit-btn {
-      position: fixed;
-
-      top:
-        max(12px, env(safe-area-inset-top));
-
-      right:
-        max(12px, env(safe-area-inset-right));
-
-      width: 42px;
-      height: 42px;
-
-      border: 1px solid
-        rgba(255, 255, 255, .25);
-
-      border-radius: 50%;
-
-      background:
-        rgba(0, 0, 0, .55);
-
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-
-      color: #fff;
-
-      font-size: 19px;
-
-      display: none;
-
-      align-items: center;
-      justify-content: center;
-
-      cursor: pointer;
-
-      z-index: 9999;
-
-      box-shadow:
-        0 4px 15px rgba(0,0,0,.35);
-    }
-
-    /* =====================================================
-       MODE MOBILE FULLSCREEN
-    ===================================================== */
-
-    body.mobile-fullscreen {
-      width: 100vw;
-      height: 100dvh;
-
-      background: #000;
-
-      overflow: hidden;
-    }
-
-    body.mobile-fullscreen header {
-      display: none;
-    }
-
-    body.mobile-fullscreen footer {
-      display: none;
-    }
-
-    body.mobile-fullscreen .viewer-area {
-      position: fixed;
-
-      inset: 0;
-
-      width: 100vw;
-      height: 100dvh;
-
-      min-height: 100dvh;
-
-      background: #000;
-
-      padding:
-        env(safe-area-inset-top)
-        env(safe-area-inset-right)
-        env(safe-area-inset-bottom)
-        env(safe-area-inset-left);
-    }
-
-    body.mobile-fullscreen .comic-img {
-      max-width: 100vw;
-      max-height: 100dvh;
-
-      width: auto;
-      height: auto;
-
-      object-fit: contain;
-    }
-
-    body.mobile-fullscreen .mobile-exit-btn {
-      display: flex;
-    }
-
-    body.mobile-fullscreen .nav-btn {
-      width: 20%;
-
-      max-width: 100px;
-
-      font-size: 30px;
-
-      color:
-        rgba(255,255,255,.22);
-    }
-
-    /* =====================================================
-       DESKTOP FULLSCREEN
-    ===================================================== */
-
-    :fullscreen {
-      background: #000;
-    }
-
-    body:fullscreen {
-      width: 100vw;
-      height: 100vh;
-    }
-
-    body:fullscreen .viewer-area {
-      background: #000;
-    }
-
-    /* =====================================================
-       MOBILE
-    ===================================================== */
-
-    @media (max-width: 768px) {
-
-      header {
-        height: 50px;
-
-        padding:
-          0 10px;
-      }
-
-      .title {
-        font-size: 13px;
-      }
-
-      .header-right {
-        gap: 5px;
-      }
-
-      .page-info {
-        font-size: 11px;
-      }
-
-      .fullscreen-btn {
-        width: 34px;
-        height: 34px;
-
-        font-size: 18px;
-
-        border-radius: 7px;
-      }
-
-      .nav-btn {
-        width: 13%;
-
-        max-width: 70px;
-
-        font-size: 25px;
-      }
-
-      footer {
-        padding:
-          8px;
-      }
-
-      .footer-controls {
-        gap: 6px;
-      }
-
-      .action-btn {
-        min-width: 0;
-
-        flex: 1;
-
-        padding:
-          9px 7px;
-
-        font-size: 12px;
-      }
-
-      .counter {
-        min-width: 48px;
-
-        font-size: 11px;
-      }
-    }
-
-    /* =====================================================
-       LANDSCAPE HP
-    ===================================================== */
-
-    @media (
-      max-width: 900px
-    ) and (
-      orientation: landscape
-    ) {
-
-      header {
-        height: 42px;
-      }
-
-      .title {
-        font-size: 12px;
-      }
-
-      .fullscreen-btn {
-        width: 31px;
-        height: 31px;
-
-        font-size: 16px;
-      }
-
-      footer {
-        padding: 5px 10px;
-      }
-
-      .progress-container {
-        margin-bottom: 5px;
-      }
-
-      .action-btn {
-        padding: 6px 10px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0288d1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Literasi | Petualangan Kelas 5</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            color: #263238;
+            background:
+                linear-gradient(rgba(225,245,254,.90),rgba(255,248,225,.95)),
+                url("https://i.imgur.com/clG3P3n.png") center/cover fixed;
+            min-height: 100vh;
+        }
+
+        body.reader-open {
+            overflow: hidden;
+        }
+
+        header {
+            padding: 30px 20px 25px;
+            text-align: center;
+            color: white;
+            background: linear-gradient(135deg,#0288d1,#26c6da,#66bb6a);
+            box-shadow: 0 5px 18px rgba(0,0,0,.18);
+        }
+
+        .header-icon {
+            font-size: 54px;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: clamp(25px,5vw,38px);
+            font-weight: 800;
+        }
+
+        header p {
+            margin: 8px auto 0;
+            max-width: 700px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,.96);
+            box-shadow: 0 3px 12px rgba(0,0,0,.10);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #37474f;
+            background: #f5f5f5;
+            padding: 9px 15px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: .25s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: white;
+            background: #0288d1;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+        }
+
+        .container {
+            width: min(1100px,94%);
+            margin: 28px auto 40px;
+        }
+
+        .info-box {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            background: linear-gradient(135deg,#fffde7,#e1f5fe);
+            border: 2px solid rgba(2,136,209,.15);
+            box-shadow: 0 8px 25px rgba(0,0,0,.08);
+        }
+
+        .info-icon {
+            min-width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #ffca28;
+            font-size: 30px;
+            box-shadow: 0 5px 12px rgba(0,0,0,.15);
+        }
+
+        .info-box h2 {
+            margin: 0 0 5px;
+            font-size: 19px;
+            color: #1565c0;
+        }
+
+        .info-box p {
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .collection-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .collection-header h2 {
+            margin: 0;
+            color: #1565c0;
+            font-size: clamp(20px,4vw,27px);
+        }
+
+        .count-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #0288d1;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .comic-grid {
+            display: grid;
+            grid-template-columns: repeat(2,minmax(0,1fr));
+            gap: 22px;
+        }
+
+        .comic-card {
+            position: relative;
+            background: white;
+            border-radius: 22px;
+            padding: 14px;
+            box-shadow: 0 8px 25px rgba(0,0,0,.12);
+            transition: transform .25s,box-shadow .25s;
+            overflow: hidden;
+        }
+
+        .comic-card:hover {
+            transform: translateY(-6px) rotate(.3deg);
+            box-shadow: 0 15px 32px rgba(0,0,0,.18);
+        }
+
+        .comic-number {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg,#ffb300,#ff7043);
+            color: white;
+            font-size: 18px;
+            font-weight: 800;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,.20);
+            z-index: 2;
+        }
+
+        .thumbnail-link {
+            display: block;
+            position: relative;
+            text-decoration: none;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .thumbnail-link img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            background: #eceff1;
+            transition: transform .35s;
+        }
+
+        .comic-card:hover .thumbnail-link img {
+            transform: scale(1.04);
+        }
+
+        .baca-label {
+            position: absolute;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 11px;
+            border-radius: 14px;
+            background: rgba(2,136,209,.94);
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(0,0,0,.20);
+            transition: .25s;
+        }
+
+        .thumbnail-link:hover .baca-label {
+            background: #00695c;
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 45px 20px;
+            color: #1565c0;
+            font-weight: 600;
+            background: rgba(255,255,255,.85);
+            border-radius: 20px;
+        }
+
+        .loading-icon {
+            display: block;
+            font-size: 42px;
+            margin-bottom: 10px;
+            animation: bounce 1.2s infinite;
+        }
+
+        @keyframes bounce {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .error-box {
+            display: none;
+            padding: 25px;
+            margin-bottom: 25px;
+            text-align: center;
+            border-radius: 20px;
+            background: #ffebee;
+            border: 2px solid #ef5350;
+            color: #b71c1c;
+        }
+
+        .error-box strong {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .error-message {
+            margin: 0 0 16px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .retry-button {
+            border: none;
+            cursor: pointer;
+            padding: 10px 18px;
+            border-radius: 25px;
+            background: #ef5350;
+            color: white;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .retry-button:hover {
+            background: #c62828;
+            transform: translateY(-2px);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 28px;
+        }
+
+        .page-button {
+            min-width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 12px;
+            background: white;
+            color: #1565c0;
+            font-family: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,.10);
+            transition: .2s;
+        }
+
+        .page-button:hover {
+            background: #e1f5fe;
+        }
+
+        .page-button.active {
+            background: #0288d1;
+            color: white;
+        }
+
+        .page-button:disabled {
+            opacity: .45;
+            cursor: not-allowed;
+        }
+
+        footer {
+            margin-top: 45px;
+            padding: 25px 15px;
+            text-align: center;
+            color: white;
+            background: linear-gradient(135deg,#1565c0,#00897b);
+        }
+
+        footer strong {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        footer p {
+            margin: 4px 0;
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           PEMBACA KOMIK RESPONSIF
+           Mendukung layar HP, tablet, dan komputer.
+           ===================================================== */
+
+        .reader-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            z-index: 2147483640;
+            background: #080d14;
+            color: #fff;
+            padding: 5px;
+            overflow: hidden;
+            overscroll-behavior: none;
+            box-sizing: border-box;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .reader-overlay.open {
+            display: flex;
+        }
+
+        .reader-overlay.reader-fallback-fullscreen {
+            position: fixed !important;
+            inset: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            height: 100dvh !important;
+            max-width: none !important;
+            max-height: none !important;
+            margin: 0 !important;
+            padding: 2px !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            z-index: 2147483647 !important;
+            background: #080d14 !important;
+        }
+
+        .reader-overlay:fullscreen {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            max-width: none;
+            max-height: none;
+            margin: 0;
+            padding: 3px;
+            border: 0;
+            border-radius: 0;
+            background: #080d14;
+        }
+
+        .reader-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto 4px;
+            flex: 0 0 auto;
+            min-width: 0;
+        }
+
+        .reader-heading {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .reader-status {
+            text-align: center;
+            padding: 5px;
+            color: #dbeafe;
+            font-size: 12px;
+        }
+
+        .reader-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 5px;
+            flex-shrink: 0;
+            flex-wrap: nowrap;
+        }
+
+        .reader-btn,
+        .reader-select {
+            border: 0;
+            border-radius: 8px;
+            min-height: 36px;
+            padding: 8px 11px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .reader-btn {
+            color: #fff;
+            background: #0288d1;
+            white-space: nowrap;
+        }
+
+        .reader-btn:active {
+            background: #00695c;
+            transform: scale(.97);
+        }
+
+        .reader-btn:disabled {
+            opacity: .35;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .reader-select {
+            max-width: 180px;
+            min-width: 0;
+            background: #fff;
+            color: #263238;
+        }
+
+        /* Tombol zoom */
+
+        .zoom-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .zoom-btn {
+            min-width: 34px;
+            min-height: 34px;
+            padding: 5px;
+            border: 1px solid #607d8b;
+            border-radius: 8px;
+            color: #fff;
+            background: #263746;
+            font-family: inherit;
+            font-size: 18px;
+            line-height: 1;
+            font-weight: 700;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+
+        .zoom-btn:active {
+            background: #00695c;
+        }
+
+        .zoom-value {
+            min-width: 43px;
+            text-align: center;
+            color: #ffca28;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .reader-stage {
+            flex: 1 1 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 1800px;
+            margin: 0 auto;
+            min-height: 0;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        /*
+         * touch-action:none pada area gambar memungkinkan
+         * JavaScript mengatur pinch-to-zoom dan pan dua jari.
+         * Scroll halaman di belakang pembaca tetap dinonaktifkan.
+         */
+
+        .reader-image-wrap {
+            flex: 1 1 0;
+            min-width: 0;
+            min-height: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            touch-action: none;
+            overscroll-behavior: contain;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            background: #080d14;
+        }
+
+        .reader-image {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            object-position: center;
+            border-radius: 2px;
+            background: #080d14;
+            transform-origin: center center;
+            will-change: transform;
+            -webkit-user-drag: none;
+            -webkit-user-select: none;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .reader-message {
+            text-align: center;
+            margin: auto;
+            padding: 20px;
+            max-width: 600px;
+            line-height: 1.7;
+            color: #dbeafe;
+            font-size: 13px;
+        }
+
+        #readerFooter {
+            flex: 0 0 auto;
+        }
+
+        .reader-progress {
+            width: 100%;
+            max-width: 1600px;
+            height: 3px;
+            flex: 0 0 3px;
+            margin: 3px auto 0;
+            background: #344454;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .reader-progress-fill {
+            height: 100%;
+            width: 0;
+            background: #ffca28;
+            transition: width .12s linear;
+        }
+
+        /* Tampilan HP portrait */
+
+        @media(max-width:650px) {
+            .reader-overlay {
+                padding: 3px;
+            }
+
+            .reader-overlay:fullscreen {
+                padding: 2px;
+            }
+
+            .reader-overlay.reader-fallback-fullscreen {
+                padding: 1px !important;
+            }
+
+            .reader-topbar {
+                gap: 3px;
+                margin-bottom: 2px;
+            }
+
+            .reader-heading {
+                font-size: 10px;
+                line-height: 1.2;
+            }
+
+            .reader-status {
+                font-size: 10px;
+                padding: 3px 0;
+            }
+
+            .reader-actions {
+                gap: 3px;
+            }
+
+            .reader-btn,
+            .reader-select {
+                min-height: 32px;
+                padding: 6px;
+                border-radius: 7px;
+                font-size: 10px;
+            }
+
+            .reader-select {
+                max-width: 85px;
+                width: 85px;
+            }
+
+            .zoom-controls {
+                gap: 2px;
+            }
+
+            .zoom-btn {
+                min-width: 28px;
+                min-height: 30px;
+                padding: 4px;
+                font-size: 16px;
+                border-radius: 6px;
+            }
+
+            .zoom-value {
+                min-width: 34px;
+                font-size: 9px;
+            }
+
+            .reader-stage {
+                gap: 2px;
+            }
+
+            .reader-stage > .reader-btn {
+                flex: 0 0 29px;
+                width: 29px;
+                min-width: 29px;
+                padding: 4px 0;
+                font-size: 12px;
+            }
+
+            .reader-image-wrap {
+                width: 100%;
+                height: 100%;
+                min-height: 0;
+            }
+
+            .reader-image {
+                max-width: 100%;
+                max-height: 100%;
+                border-radius: 0;
+            }
+
+            #readerFooter {
+                padding: 3px;
+                font-size: 10px;
+            }
+
+            .reader-progress {
+                margin-top: 2px;
+            }
+        }
+
+        /* Tampilan HP landscape */
+
+        @media(max-width:900px) and (orientation:landscape) {
+            .reader-overlay,
+            .reader-overlay:fullscreen {
+                padding: 2px;
+            }
+
+            .reader-topbar {
+                margin-bottom: 1px;
+                gap: 3px;
+            }
+
+            .reader-heading {
+                display: none;
+            }
+
+            .reader-status {
+                max-width: 18vw;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: 9px;
+                padding: 1px 0;
+            }
+
+            .reader-actions {
+                gap: 3px;
+            }
+
+            .reader-btn,
+            .reader-select {
+                min-height: 27px;
+                padding: 4px 6px;
+                font-size: 10px;
+                border-radius: 6px;
+            }
+
+            .reader-select {
+                width: 85px;
+                max-width: 85px;
+            }
+
+            .zoom-btn {
+                min-width: 27px;
+                min-height: 26px;
+                padding: 3px;
+                font-size: 15px;
+            }
+
+            .zoom-value {
+                min-width: 32px;
+                font-size: 9px;
+            }
+
+            .reader-stage {
+                gap: 2px;
+            }
+
+            .reader-stage > .reader-btn {
+                flex-basis: 27px;
+                width: 27px;
+                min-width: 27px;
+                padding: 3px 0;
+            }
+
+            .reader-image-wrap {
+                min-height: 0;
+                min-width: 0;
+            }
+
+            .reader-image {
+                max-width: 100%;
+                max-height: 100%;
+                border-radius: 0;
+            }
+
+            #readerFooter,
+            .reader-progress {
+                display: none;
+            }
+        }
+
+        @media(max-width:650px) {
+            header {
+                padding: 25px 15px 22px;
+            }
+
+            .header-icon {
+                font-size: 44px;
+            }
+
+            nav {
+                padding: 10px;
+                gap: 6px;
+            }
+
+            nav a {
+                padding: 8px 11px;
+                font-size: 11px;
+            }
+
+            .container {
+                width: 92%;
+                margin-top: 20px;
+            }
+
+            .info-box {
+                align-items: flex-start;
+                padding: 15px;
+                gap: 12px;
+            }
+
+            .info-icon {
+                min-width: 48px;
+                height: 48px;
+                font-size: 24px;
+            }
+
+            .info-box h2 {
+                font-size: 16px;
+            }
+
+            .info-box p {
+                font-size: 11px;
+            }
+
+            .comic-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .comic-card {
+                padding: 11px;
+            }
+
+            .comic-number {
+                width: 38px;
+                height: 38px;
+                font-size: 16px;
+            }
+
+            .baca-label {
+                font-size: 13px;
+                padding: 10px;
+            }
+        }
+
+        @media(max-width:900px) and (orientation:landscape) {
+            .comic-grid {
+                grid-template-columns: repeat(2,minmax(0,1fr));
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <header>
+        <div class="header-icon">🧭</div>
+        <h1>📖 PETUALANGAN LITERASI</h1>
+        <p>Jelajah Dunia Komik</p>
+        <p>Temukan cerita menarik dan mulailah petualangan membaca!</p>
+    </header>
 
-  <!-- =====================================================
-       HEADER
-  ====================================================== -->
+    <nav>
+        <a href="../../index.html">🏠 Beranda</a>
+        <a href="../kelas.html">🎒 Kelas</a>
+        <a href="literasi.html" class="active">📚 Literasi</a>
+    </nav>
 
-  <header>
+    <main class="container">
+        <section class="info-box">
+            <div class="info-icon">🗺️</div>
+            <div>
+                <h2>Siap Memulai Petualangan?</h2>
+                <p>
+                    Pilih salah satu komik untuk mulai membaca.
+                    Setiap komik adalah perjalanan baru!
+                </p>
+            </div>
+        </section>
 
-    <div class="header-left">
+        <section id="errorBox" class="error-box">
+            <strong>⚠️ Komik belum dapat dimuat.</strong>
+            <p id="errorMessage" class="error-message">
+                Daftar komik belum dapat dibaca.
+            </p>
+            <button id="retryButton" class="retry-button" type="button">
+                🔄 Coba Lagi
+            </button>
+        </section>
 
-      <div class="title">
-        📖 DIMANA INDONESIA BERADA?
-      </div>
+        <section>
+            <div class="collection-header">
+                <h2>📚 Koleksi Komik</h2>
+                <span id="countBadge" class="count-badge">0 Komik</span>
+            </div>
 
-    </div>
+            <div id="loading" class="loading">
+                <span class="loading-icon">🧭</span>
+                Sedang mencari petualangan...
+            </div>
 
+            <div id="comicGrid" class="comic-grid"></div>
+            <div id="pagination" class="pagination"></div>
+        </section>
+    </main>
 
-    <div class="header-right">
-
-      <div
-        class="page-info"
-        id="pageInfo"
-      >
-        Memuat...
-      </div>
-
-
-      <button
-        type="button"
-        class="fullscreen-btn"
-        id="fullscreenBtn"
-        title="Layar penuh"
-        aria-label="Layar penuh"
-      >
-        ⛶
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <!-- =====================================================
-       VIEWER
-  ====================================================== -->
-
-  <main
-    class="viewer-area"
-    id="viewerArea"
-  >
-
-    <div
-      class="status-msg"
-      id="statusMsg"
+    <!-- PEMBACA KOMIK -->
+    <section
+        id="readerOverlay"
+        class="reader-overlay"
+        aria-label="Pembaca komik"
+        aria-modal="true"
+        role="dialog"
     >
-      <div class="loading-circle"></div>
-
-      Memuat daftar halaman komik...
-    </div>
-
-
-    <img
-      id="comicDisplay"
-      class="comic-img"
-      alt="Halaman komik"
-      draggable="false"
-    >
-
-
-    <!-- PREVIOUS -->
-
-    <button
-      type="button"
-      class="nav-btn nav-prev"
-      id="btnOverlayPrev"
-      aria-label="Halaman sebelumnya"
-      title="Halaman sebelumnya"
-    >
-      ❮
-    </button>
-
-
-    <!-- NEXT -->
-
-    <button
-      type="button"
-      class="nav-btn nav-next"
-      id="btnOverlayNext"
-      aria-label="Halaman berikutnya"
-      title="Halaman berikutnya"
-    >
-      ❯
-    </button>
-
-  </main>
-
-
-  <!-- =====================================================
-       FOOTER
-  ====================================================== -->
-
-  <footer>
-
-    <div class="progress-container">
-
-      <div
-        class="progress-bar"
-        id="progressBar"
-      ></div>
-
-    </div>
-
-
-    <div class="footer-controls">
-
-      <button
-        type="button"
-        class="action-btn"
-        id="btnPrev"
-      >
-        ❮ Sebelumnya
-      </button>
-
-
-      <div
-        class="counter"
-        id="footerInfo"
-      >
-        0 / 0
-      </div>
-
-
-      <button
-        type="button"
-        class="action-btn"
-        id="btnNext"
-      >
-        Berikutnya ❯
-      </button>
-
-    </div>
-
-  </footer>
-
-
-  <!-- =====================================================
-       TOMBOL KELUAR FULLSCREEN HP
-  ====================================================== -->
-
-  <button
-    type="button"
-    id="mobileExitBtn"
-    class="mobile-exit-btn"
-    aria-label="Keluar dari layar penuh"
-    title="Keluar dari layar penuh"
-  >
-    ✕
-  </button>
-
-
-  <script>
-
-    /* =====================================================
-       KONFIGURASI GITHUB
-    ===================================================== */
-
-    const GITHUB_USERNAME =
-      "sdn160gresik";
-
-    const GITHUB_REPO =
-      "komik";
-
-    const FOLDER_PATH =
-      "ipas/DIMANA_INDONESIA_BERADA?";
-
-    const BRANCH =
-      "main";
-
-
-    /* =====================================================
-       DATA
-    ===================================================== */
-
-    let pages = [];
-
-    let currentIndex = 0;
-
-    let isLoading = false;
-
-
-    /* =====================================================
-       ELEMENT
-    ===================================================== */
-
-    const pageInfo =
-      document.getElementById(
-        "pageInfo"
-      );
-
-    const footerInfo =
-      document.getElementById(
-        "footerInfo"
-      );
-
-    const comicDisplay =
-      document.getElementById(
-        "comicDisplay"
-      );
-
-    const statusMsg =
-      document.getElementById(
-        "statusMsg"
-      );
-
-    const progressBar =
-      document.getElementById(
-        "progressBar"
-      );
-
-    const btnPrev =
-      document.getElementById(
-        "btnPrev"
-      );
-
-    const btnNext =
-      document.getElementById(
-        "btnNext"
-      );
-
-    const btnOverlayPrev =
-      document.getElementById(
-        "btnOverlayPrev"
-      );
-
-    const btnOverlayNext =
-      document.getElementById(
-        "btnOverlayNext"
-      );
-
-    const viewerArea =
-      document.getElementById(
-        "viewerArea"
-      );
-
-    const fullscreenBtn =
-      document.getElementById(
-        "fullscreenBtn"
-      );
-
-    const mobileExitBtn =
-      document.getElementById(
-        "mobileExitBtn"
-      );
-
-
-    /* =====================================================
-       ENCODE PATH GITHUB
-       
-       Penting karena folder memiliki tanda "?"
-    ===================================================== */
-
-    function encodeGitHubPath(path) {
-
-      return path
-        .split("/")
-        .map(
-          part =>
-            encodeURIComponent(part)
-        )
-        .join("/");
-
-    }
-
-
-    /* =====================================================
-       STATUS LOADING
-    ===================================================== */
-
-    function showLoading(message) {
-
-      statusMsg.innerHTML = `
-
-        <div class="loading-circle"></div>
-
-        ${message}
-
-      `;
-
-      statusMsg.style.display =
-        "block";
-
-    }
-
-
-    /* =====================================================
-       ERROR
-    ===================================================== */
-
-    function showError(
-      title,
-      message
-    ) {
-
-      statusMsg.innerHTML = `
-
-        <div class="error-title">
-          ${title}
+        <div class="reader-topbar">
+            <div style="min-width:0">
+                <div class="reader-heading">📖 Petualangan Literasi</div>
+                <div
+                    id="readerStatus"
+                    class="reader-status"
+                    style="padding:4px 0;text-align:left"
+                >
+                    Memuat halaman...
+                </div>
+            </div>
+
+            <div class="reader-actions">
+                <select
+                    id="readerPageSelect"
+                    class="reader-select"
+                    aria-label="Pilih halaman"
+                ></select>
+
+                <!-- KONTROL ZOOM MANUAL -->
+                <div class="zoom-controls" aria-label="Kontrol zoom gambar">
+                    <button
+                        id="zoomOut"
+                        class="zoom-btn"
+                        type="button"
+                        aria-label="Perkecil gambar"
+                        title="Perkecil"
+                    >−</button>
+
+                    <button
+                        id="zoomReset"
+                        class="zoom-value"
+                        type="button"
+                        aria-label="Kembalikan zoom ke 100 persen"
+                        title="Kembalikan ukuran normal"
+                    >100%</button>
+
+                    <button
+                        id="zoomIn"
+                        class="zoom-btn"
+                        type="button"
+                        aria-label="Perbesar gambar"
+                        title="Perbesar"
+                    >+</button>
+                </div>
+
+                <button
+                    id="readerFullscreen"
+                    class="reader-btn"
+                    type="button"
+                    aria-label="Tampilkan layar penuh"
+                    title="Tampilkan layar penuh"
+                >⛶ Full Screen</button>
+
+                <button
+                    id="readerClose"
+                    class="reader-btn"
+                    type="button"
+                    aria-label="Tutup pembaca"
+                >✕ Tutup</button>
+            </div>
         </div>
 
-        <br>
+        <div class="reader-stage">
+            <button
+                id="readerPrev"
+                class="reader-btn"
+                type="button"
+                aria-label="Halaman sebelumnya"
+                title="Halaman sebelumnya"
+            >❮</button>
 
-        ${message}
+            <div id="readerImageWrap" class="reader-image-wrap">
+                <div id="readerMessage" class="reader-message">
+                    Memuat komik...
+                </div>
+            </div>
 
-      `;
+            <button
+                id="readerNext"
+                class="reader-btn"
+                type="button"
+                aria-label="Halaman berikutnya"
+                title="Halaman berikutnya"
+            >❯</button>
+        </div>
 
-      statusMsg.style.display =
-        "block";
+        <div id="readerFooter" class="reader-status">
+            Halaman 0 dari 0
+        </div>
 
-    }
+        <div class="reader-progress">
+            <div id="readerProgressFill" class="reader-progress-fill"></div>
+        </div>
+    </section>
 
+    <footer>
+        <strong>🌟 Petualangan Literasi Kelas 5</strong>
+        <p>UPT SDN 160 GRESIK</p>
+        <p>Disusun oleh Guru TIK UPT SD NEGERI 160 GRESIK</p>
+    </footer>
 
-    /* =====================================================
-       LOAD DAFTAR GAMBAR
-    ===================================================== */
+    <script>
+        "use strict";
 
-    async function loadComicPages() {
+        /* =====================================================
+           KONFIGURASI
+           ===================================================== */
 
-      if (isLoading) {
-        return;
-      }
+        const GITHUB_USER = "sdn160gresik";
+        const GITHUB_REPO = "komik";
+        const GITHUB_BRANCH = "main";
+        const ITEMS_PER_PAGE = 4;
 
-      isLoading = true;
+        const DATA_URL =
+            `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${GITHUB_BRANCH}/komik.json`;
 
+        const RAW_BASE =
+            `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${GITHUB_BRANCH}/`;
 
-      showLoading(
-        "Memuat daftar halaman komik..."
-      );
+        /* =====================================================
+           ELEMENT HALAMAN
+           ===================================================== */
 
+        const loading = document.getElementById("loading");
+        const comicGrid = document.getElementById("comicGrid");
+        const pagination = document.getElementById("pagination");
+        const countBadge = document.getElementById("countBadge");
+        const errorBox = document.getElementById("errorBox");
+        const errorMessage = document.getElementById("errorMessage");
+        const retryButton = document.getElementById("retryButton");
 
-      comicDisplay.style.display =
-        "none";
+        /* =====================================================
+           ELEMENT PEMBACA
+           ===================================================== */
 
+        const readerOverlay = document.getElementById("readerOverlay");
+        const readerStatus = document.getElementById("readerStatus");
+        const readerFooter = document.getElementById("readerFooter");
+        const readerImageWrap = document.getElementById("readerImageWrap");
+        const readerPageSelect = document.getElementById("readerPageSelect");
+        const readerPrev = document.getElementById("readerPrev");
+        const readerNext = document.getElementById("readerNext");
+        const readerProgressFill = document.getElementById("readerProgressFill");
+        const readerFullscreen = document.getElementById("readerFullscreen");
+        const readerClose = document.getElementById("readerClose");
 
-      /*
-       * Encode setiap bagian path.
-       *
-       * Contoh:
-       *
-       * DIMANA_INDONESIA_BERADA?
-       *
-       * menjadi:
-       *
-       * DIMANA_INDONESIA_BERADA%3F
-       */
+        const zoomInButton = document.getElementById("zoomIn");
+        const zoomOutButton = document.getElementById("zoomOut");
+        const zoomResetButton = document.getElementById("zoomReset");
 
-      const encodedFolderPath =
-        encodeGitHubPath(
-          FOLDER_PATH
-        );
+        /* =====================================================
+           STATUS PEMBACA
+           ===================================================== */
 
+        let comics = [];
+        let currentPage = 1;
+        let activeComic = null;
+        let readerPages = [];
+        let readerIndex = 0;
+        let loadRequestId = 0;
+        let openingRequestId = 0;
+        let lastFocusedElement = null;
 
-      const apiUrl =
-        "https://api.github.com/repos/" +
-        encodeURIComponent(
-          GITHUB_USERNAME
-        ) +
-        "/" +
-        encodeURIComponent(
-          GITHUB_REPO
-        ) +
-        "/contents/" +
-        encodedFolderPath +
-        "?ref=" +
-        encodeURIComponent(
-          BRANCH
-        );
+        /* =====================================================
+           KONFIGURASI ZOOM
+           ===================================================== */
 
+        const MIN_ZOOM = 1;
+        const MAX_ZOOM = 5;
+        const ZOOM_STEP = 0.25;
 
-      try {
+        let zoomScale = 1;
+        let zoomX = 0;
+        let zoomY = 0;
 
-        const response =
-          await fetch(
-            apiUrl,
-            {
-              method: "GET",
+        let baseImageWidth = 0;
+        let baseImageHeight = 0;
 
-              headers: {
-                "Accept":
-                  "application/vnd.github+json"
-              },
+        let activePointers = new Map();
+        let gestureMode = "";
+        let gestureStartDistance = 0;
+        let gestureStartScale = 1;
+        let gestureStartMidX = 0;
+        let gestureStartMidY = 0;
+        let gestureStartX = 0;
+        let gestureStartY = 0;
+        let gestureStartZoomX = 0;
+        let gestureStartZoomY = 0;
+        let gestureMoved = false;
 
-              cache: "no-store"
-            }
-          );
+        /* =====================================================
+           UTILITAS PATH
+           ===================================================== */
 
-
-        /* ===============================================
-           ERROR RESPONSE
-        =============================================== */
-
-        if (!response.ok) {
-
-          if (
-            response.status === 404
-          ) {
-
-            throw new Error(
-              "Folder komik tidak ditemukan. " +
-              "Periksa nama repository, branch, " +
-              "atau folder GitHub."
-            );
-
-          }
-
-
-          if (
-            response.status === 403
-          ) {
-
-            throw new Error(
-              "Permintaan ke GitHub API sedang dibatasi. " +
-              "Coba buka kembali beberapa saat lagi."
-            );
-
-          }
-
-
-          throw new Error(
-            "GitHub API mengembalikan HTTP " +
-            response.status
-          );
-
-        }
-
-
-        /* ===============================================
-           DATA FILE
-        =============================================== */
-
-        const files =
-          await response.json();
-
-
-        if (
-          !Array.isArray(files)
-        ) {
-
-          throw new Error(
-            "Data dari folder GitHub tidak valid."
-          );
-
-        }
-
-
-        /* ===============================================
-           EKSTENSI GAMBAR
-        =============================================== */
-
-        const validExtensions = [
-
-          ".jpg",
-          ".jpeg",
-          ".png",
-          ".webp",
-          ".gif"
-
-        ];
-
-
-        pages = files
-
-          .filter(
-            file =>
-
-              file.type === "file" &&
-
-              validExtensions.some(
-                ext =>
-
-                  file.name
-                    .toLowerCase()
-                    .endsWith(ext)
-              )
-
-          )
-
-          .map(
-            file => ({
-
-              name:
-                file.name,
-
-              url:
-                file.download_url
-
-            })
-          )
-
-          .sort(
-            (a, b) =>
-
-              a.name.localeCompare(
-                b.name,
-                undefined,
-                {
-                  numeric: true,
-                  sensitivity: "base"
+        function encodePath(path) {
+            return String(path).split("/").map(part => {
+                try {
+                    return encodeURIComponent(decodeURIComponent(part));
+                } catch (_) {
+                    return encodeURIComponent(part);
                 }
-              )
-
-          );
-
-
-        /* ===============================================
-           TIDAK ADA GAMBAR
-        =============================================== */
-
-        if (
-          pages.length === 0
-        ) {
-
-          pageInfo.textContent =
-            "0 / 0";
-
-          footerInfo.textContent =
-            "0 / 0";
-
-
-          showError(
-            "Gambar komik tidak ditemukan",
-            `
-              Tidak ada file gambar di folder:
-              <br><br>
-              <strong>
-                ${FOLDER_PATH}
-              </strong>
-            `
-          );
-
-
-          return;
-
+            }).join("/");
         }
 
-
-        /* ===============================================
-           TAMPILKAN
-        =============================================== */
-
-        statusMsg.style.display =
-          "none";
-
-        comicDisplay.style.display =
-          "block";
-
-
-        renderPage(0);
-
-
-      } catch (error) {
-
-        console.error(
-          "Comic Reader:",
-          error
-        );
-
-
-        showError(
-          "Gagal memuat komik",
-          error.message
-        );
-
-      } finally {
-
-        isLoading =
-          false;
-
-      }
-
-    }
-
-
-    /* =====================================================
-       RENDER HALAMAN
-    ===================================================== */
-
-    function renderPage(index) {
-
-      if (
-        index < 0 ||
-        index >= pages.length
-      ) {
-        return;
-      }
-
-
-      currentIndex =
-        index;
-
-
-      /* ===============================================
-         GAMBAR
-      =============================================== */
-
-      comicDisplay.src =
-        pages[currentIndex].url;
-
-
-      /* ===============================================
-         NOMOR HALAMAN
-      =============================================== */
-
-      pageInfo.textContent =
-        `Halaman ${currentIndex + 1} dari ${pages.length}`;
-
-
-      footerInfo.textContent =
-        `${currentIndex + 1} / ${pages.length}`;
-
-
-      /* ===============================================
-         PROGRESS
-      =============================================== */
-
-      const progress =
-        (
-          (currentIndex + 1)
-          /
-          pages.length
-        ) * 100;
-
-
-      progressBar.style.width =
-        `${progress}%`;
-
-
-      /* ===============================================
-         BUTTON
-      =============================================== */
-
-      const isFirst =
-        currentIndex === 0;
-
-      const isLast =
-        currentIndex ===
-        pages.length - 1;
-
-
-      btnPrev.disabled =
-        isFirst;
-
-      btnOverlayPrev.disabled =
-        isFirst;
-
-      btnNext.disabled =
-        isLast;
-
-      btnOverlayNext.disabled =
-        isLast;
-
-
-      /* ===============================================
-         SIMPAN HALAMAN TERAKHIR
-      =============================================== */
-
-      localStorage.setItem(
-        getStorageKey(),
-        String(currentIndex)
-      );
-
-
-      /* ===============================================
-         PRELOAD HALAMAN BERIKUT
-      =============================================== */
-
-      if (
-        !isLast &&
-        pages[currentIndex + 1]
-      ) {
-
-        const preloadNext =
-          new Image();
-
-        preloadNext.src =
-          pages[
-            currentIndex + 1
-          ].url;
-
-      }
-
-
-      /* ===============================================
-         PRELOAD HALAMAN SEBELUMNYA
-      =============================================== */
-
-      if (
-        !isFirst &&
-        pages[currentIndex - 1]
-      ) {
-
-        const preloadPrev =
-          new Image();
-
-        preloadPrev.src =
-          pages[
-            currentIndex - 1
-          ].url;
-
-      }
-
-    }
-
-
-    /* =====================================================
-       LOCAL STORAGE KEY
-    ===================================================== */
-
-    function getStorageKey() {
-
-      return (
-        "comic_reader_" +
-        GITHUB_USERNAME +
-        "_" +
-        GITHUB_REPO +
-        "_" +
-        FOLDER_PATH
-      );
-
-    }
-
-
-    /* =====================================================
-       NEXT
-    ===================================================== */
-
-    function nextPage() {
-
-      if (
-        currentIndex <
-        pages.length - 1
-      ) {
-
-        renderPage(
-          currentIndex + 1
-        );
-
-      }
-
-    }
-
-
-    /* =====================================================
-       PREVIOUS
-    ===================================================== */
-
-    function prevPage() {
-
-      if (
-        currentIndex > 0
-      ) {
-
-        renderPage(
-          currentIndex - 1
-        );
-
-      }
-
-    }
-
-
-    /* =====================================================
-       BUTTON NAVIGATION
-    ===================================================== */
-
-    btnNext.addEventListener(
-      "click",
-      nextPage
-    );
-
-    btnPrev.addEventListener(
-      "click",
-      prevPage
-    );
-
-    btnOverlayNext.addEventListener(
-      "click",
-      nextPage
-    );
-
-    btnOverlayPrev.addEventListener(
-      "click",
-      prevPage
-    );
-
-
-    /* =====================================================
-       KEYBOARD
-    ===================================================== */
-
-    window.addEventListener(
-      "keydown",
-      event => {
-
-        switch (
-          event.key
-        ) {
-
-          case "ArrowRight":
-
-          case "PageDown":
-
-            event.preventDefault();
-
-            nextPage();
-
-            break;
-
-
-          case "ArrowLeft":
-
-          case "PageUp":
-
-            event.preventDefault();
-
-            prevPage();
-
-            break;
-
-
-          case "Home":
-
-            event.preventDefault();
-
-            renderPage(0);
-
-            break;
-
-
-          case "End":
-
-            event.preventDefault();
-
-            renderPage(
-              pages.length - 1
+        function getFolderPath(comic) {
+            if (
+                comic &&
+                typeof comic.folder === "string" &&
+                comic.folder.trim()
+            ) {
+                return comic.folder
+                    .replace(/\\/g, "/")
+                    .replace(/^\/+|\/+$/g, "");
+            }
+
+            if (comic && typeof comic.path === "string") {
+                const clean = comic.path.replace(/\\/g, "/");
+                return clean.slice(0, clean.lastIndexOf("/"));
+            }
+
+            return "";
+        }
+
+        function getPagePath(page) {
+            return typeof page === "string"
+                ? page
+                : page && typeof page.path === "string"
+                    ? page.path
+                    : "";
+        }
+
+        /* =====================================================
+           PESAN PEMBACA
+           ===================================================== */
+
+        function setReaderMessage(message) {
+            resetZoom();
+
+            readerImageWrap.innerHTML = "";
+
+            const box = document.createElement("div");
+            box.className = "reader-message";
+            box.textContent = message;
+
+            readerImageWrap.appendChild(box);
+        }
+
+        /* =====================================================
+           FULL SCREEN
+           ===================================================== */
+
+        function isReaderFullscreen() {
+            return document.fullscreenElement === readerOverlay ||
+                readerOverlay.classList.contains("reader-fallback-fullscreen");
+        }
+
+        function updateFullscreenButton() {
+            const fullscreen = isReaderFullscreen();
+
+            readerFullscreen.textContent =
+                fullscreen ? "⤢ Keluar" : "⛶ Full Screen";
+
+            readerFullscreen.setAttribute(
+                "aria-label",
+                fullscreen
+                    ? "Keluar dari layar penuh"
+                    : "Tampilkan layar penuh"
             );
 
-            break;
-
-
-          case "F11":
-
-            event.preventDefault();
-
-            toggleFullscreen();
-
-            break;
-
+            readerFullscreen.title =
+                fullscreen
+                    ? "Keluar dari layar penuh"
+                    : "Tampilkan layar penuh";
         }
 
-      }
-    );
+        async function enterReaderFullscreen() {
+            if (!readerOverlay.classList.contains("open")) return;
 
+            try {
+                if (readerOverlay.requestFullscreen) {
+                    await readerOverlay.requestFullscreen();
 
-    /* =====================================================
-       SWIPE HP
-    ===================================================== */
+                    readerOverlay.classList.remove(
+                        "reader-fallback-fullscreen"
+                    );
+                } else {
+                    readerOverlay.classList.add(
+                        "reader-fallback-fullscreen"
+                    );
+                }
+            } catch (_) {
+                readerOverlay.classList.add(
+                    "reader-fallback-fullscreen"
+                );
+            }
 
-    let touchStartX = 0;
-
-    let touchStartY = 0;
-
-
-    viewerArea.addEventListener(
-      "touchstart",
-      event => {
-
-        const touch =
-          event.changedTouches[0];
-
-
-        touchStartX =
-          touch.screenX;
-
-        touchStartY =
-          touch.screenY;
-
-      },
-      {
-        passive: true
-      }
-    );
-
-
-    viewerArea.addEventListener(
-      "touchend",
-      event => {
-
-        const touch =
-          event.changedTouches[0];
-
-
-        const touchEndX =
-          touch.screenX;
-
-        const touchEndY =
-          touch.screenY;
-
-
-        const differenceX =
-          touchEndX -
-          touchStartX;
-
-
-        const differenceY =
-          touchEndY -
-          touchStartY;
-
-
-        /*
-         * Hanya anggap sebagai swipe
-         * jika gerak horizontal lebih dominan.
-         */
-
-        if (
-
-          Math.abs(differenceX) > 50 &&
-
-          Math.abs(differenceX) >
-          Math.abs(differenceY)
-
-        ) {
-
-          if (
-            differenceX < 0
-          ) {
-
-            nextPage();
-
-          } else {
-
-            prevPage();
-
-          }
-
+            updateFullscreenButton();
         }
 
-      },
-      {
-        passive: true
-      }
-    );
+        async function exitReaderFullscreen() {
+            try {
+                if (
+                    document.fullscreenElement === readerOverlay &&
+                    document.exitFullscreen
+                ) {
+                    await document.exitFullscreen();
+                }
+            } catch (_) {}
 
+            readerOverlay.classList.remove(
+                "reader-fallback-fullscreen"
+            );
 
-    /* =====================================================
-       IMAGE LOAD
-    ===================================================== */
+            updateFullscreenButton();
+        }
 
-    comicDisplay.addEventListener(
-      "load",
-      () => {
+        readerFullscreen.addEventListener("click", async () => {
+            if (isReaderFullscreen()) {
+                await exitReaderFullscreen();
+            } else {
+                await enterReaderFullscreen();
+            }
+        });
 
-        statusMsg.style.display =
-          "none";
+        document.addEventListener("fullscreenchange", () => {
+            if (
+                !document.fullscreenElement &&
+                readerOverlay.classList.contains("open")
+            ) {
+                readerOverlay.classList.remove(
+                    "reader-fallback-fullscreen"
+                );
+            }
 
-        comicDisplay.style.display =
-          "block";
+            updateFullscreenButton();
+        });
 
-      }
-    );
+        window.addEventListener("resize", () => {
+            if (!readerOverlay.classList.contains("open")) return;
 
+            requestAnimationFrame(() => {
+                const image = readerImageWrap.querySelector(".reader-image");
 
-    /* =====================================================
-       IMAGE ERROR
-    ===================================================== */
+                if (image) {
+                    measureBaseImage();
+                    applyZoomTransform();
+                }
+            });
+        });
 
-    comicDisplay.addEventListener(
-      "error",
-      () => {
+        window.addEventListener("orientationchange", () => {
+            requestAnimationFrame(() => {
+                measureBaseImage();
+                applyZoomTransform();
+                updateFullscreenButton();
+            });
+        });
 
-        showError(
-          "Gambar gagal dimuat",
-          `
-            File gambar tidak dapat dibuka.
-            <br><br>
-            Periksa file gambar pada repository:
-            <br>
-            <strong>
-              sdn160gresik/komik
-            </strong>
-          `
-        );
+        /* =====================================================
+           ZOOM: UKURAN DASAR GAMBAR
+           ===================================================== */
 
-      }
-    );
+        function getReaderImage() {
+            return readerImageWrap.querySelector(".reader-image");
+        }
 
+        function measureBaseImage() {
+            const image = getReaderImage();
 
-    /* =====================================================
-       DETEKSI MOBILE
-    ===================================================== */
+            if (!image || !image.complete || !image.naturalWidth) {
+                return;
+            }
 
-    function isMobileDevice() {
+            /*
+             * Ukuran gambar dasar adalah ukuran setelah browser
+             * menyesuaikan gambar dengan area pembaca.
+             */
 
-      return window.matchMedia(
-        "(max-width: 768px)"
-      ).matches;
+            const wrapRect = readerImageWrap.getBoundingClientRect();
 
-    }
+            const naturalRatio =
+                image.naturalWidth / image.naturalHeight;
 
-
-    /* =====================================================
-       FULLSCREEN
-    ===================================================== */
-
-    async function toggleFullscreen() {
-
-      /*
-       * HP
-       *
-       * Aktifkan mode baca penuh:
-       * header + footer disembunyikan.
-       */
-
-      if (
-        isMobileDevice()
-      ) {
-
-        const isMobileMode =
-          document.body.classList.contains(
-            "mobile-fullscreen"
-          );
-
-
-        if (
-          !isMobileMode
-        ) {
-
-          document.body.classList.add(
-            "mobile-fullscreen"
-          );
-
-
-          /*
-           * Coba gunakan Fullscreen API.
-           * Jika browser HP tidak mendukung,
-           * mode baca penuh tetap aktif.
-           */
-
-          try {
+            const availableWidth = wrapRect.width;
+            const availableHeight = wrapRect.height;
 
             if (
-              !document.fullscreenElement &&
-              document.documentElement.requestFullscreen
+                availableWidth <= 0 ||
+                availableHeight <= 0 ||
+                naturalRatio <= 0
             ) {
-
-              await document.documentElement
-                .requestFullscreen();
-
+                return;
             }
 
-          } catch (error) {
+            if (naturalRatio > availableWidth / availableHeight) {
+                baseImageWidth = availableWidth;
+                baseImageHeight = availableWidth / naturalRatio;
+            } else {
+                baseImageHeight = availableHeight;
+                baseImageWidth = availableHeight * naturalRatio;
+            }
 
-            console.log(
-              "Fullscreen API tidak tersedia:",
-              error
-            );
+            image.style.width = `${baseImageWidth}px`;
+            image.style.height = `${baseImageHeight}px`;
+            image.style.maxWidth = "none";
+            image.style.maxHeight = "none";
 
-          }
-
-
-        } else {
-
-          await exitMobileFullscreen();
-
+            applyZoomTransform();
         }
 
+        /* =====================================================
+           ZOOM: POSISI GAMBAR
+           ===================================================== */
 
-        updateFullscreenButton();
+        function clampZoomPosition() {
+            const rect = readerImageWrap.getBoundingClientRect();
 
-        return;
+            const scaledWidth = baseImageWidth * zoomScale;
+            const scaledHeight = baseImageHeight * zoomScale;
 
-      }
+            const maxX = Math.max(0, (scaledWidth - rect.width) / 2);
+            const maxY = Math.max(0, (scaledHeight - rect.height) / 2);
 
+            zoomX = Math.max(-maxX, Math.min(maxX, zoomX));
+            zoomY = Math.max(-maxY, Math.min(maxY, zoomY));
 
-      /*
-       * DESKTOP / LAPTOP
-       */
-
-      try {
-
-        if (
-          !document.fullscreenElement
-        ) {
-
-          if (
-            document.documentElement.requestFullscreen
-          ) {
-
-            await document.documentElement
-              .requestFullscreen();
-
-          }
-
-        } else {
-
-          if (
-            document.exitFullscreen
-          ) {
-
-            await document.exitFullscreen();
-
-          }
-
+            if (zoomScale <= 1) {
+                zoomX = 0;
+                zoomY = 0;
+            }
         }
 
-      } catch (error) {
+        function applyZoomTransform() {
+            const image = getReaderImage();
 
-        console.error(
-          "Fullscreen gagal:",
-          error
-        );
+            if (!image) {
+                zoomResetButton.textContent = "100%";
+                zoomInButton.disabled = true;
+                zoomOutButton.disabled = true;
+                return;
+            }
 
-      }
+            clampZoomPosition();
 
+            image.style.transform =
+                `translate3d(${zoomX}px, ${zoomY}px, 0) scale(${zoomScale})`;
 
-      updateFullscreenButton();
+            zoomResetButton.textContent =
+                `${Math.round(zoomScale * 100)}%`;
 
-    }
-
-
-    /* =====================================================
-       KELUAR FULLSCREEN HP
-    ===================================================== */
-
-    async function exitMobileFullscreen() {
-
-      document.body.classList.remove(
-        "mobile-fullscreen"
-      );
-
-
-      try {
-
-        if (
-          document.fullscreenElement &&
-          document.exitFullscreen
-        ) {
-
-          await document.exitFullscreen();
-
+            zoomInButton.disabled = zoomScale >= MAX_ZOOM;
+            zoomOutButton.disabled = zoomScale <= MIN_ZOOM;
         }
 
-      } catch (error) {
+        function resetZoom() {
+            zoomScale = 1;
+            zoomX = 0;
+            zoomY = 0;
 
-        console.log(
-          "Gagal keluar fullscreen:",
-          error
-        );
+            baseImageWidth = 0;
+            baseImageHeight = 0;
 
-      }
+            activePointers.clear();
+            gestureMode = "";
+            gestureMoved = false;
 
-
-      updateFullscreenButton();
-
-    }
-
-
-    /* =====================================================
-       TOMBOL X
-    ===================================================== */
-
-    mobileExitBtn.addEventListener(
-      "click",
-      () => {
-
-        exitMobileFullscreen();
-
-      }
-    );
-
-
-    /* =====================================================
-       UPDATE TOMBOL FULLSCREEN
-    ===================================================== */
-
-    function updateFullscreenButton() {
-
-      const mobileMode =
-        document.body.classList.contains(
-          "mobile-fullscreen"
-        );
-
-
-      const browserMode =
-        !!document.fullscreenElement;
-
-
-      if (
-        mobileMode ||
-        browserMode
-      ) {
-
-        fullscreenBtn.textContent =
-          "✕";
-
-        fullscreenBtn.title =
-          "Keluar dari layar penuh";
-
-        fullscreenBtn.setAttribute(
-          "aria-label",
-          "Keluar dari layar penuh"
-        );
-
-      } else {
-
-        fullscreenBtn.textContent =
-          "⛶";
-
-        fullscreenBtn.title =
-          "Layar penuh";
-
-        fullscreenBtn.setAttribute(
-          "aria-label",
-          "Layar penuh"
-        );
-
-      }
-
-    }
-
-
-    /* =====================================================
-       BUTTON FULLSCREEN
-    ===================================================== */
-
-    fullscreenBtn.addEventListener(
-      "click",
-      () => {
-
-        toggleFullscreen();
-
-      }
-    );
-
-
-    /* =====================================================
-       FULLSCREEN CHANGE
-    ===================================================== */
-
-    document.addEventListener(
-      "fullscreenchange",
-      () => {
+            zoomResetButton.textContent = "100%";
+            zoomInButton.disabled = true;
+            zoomOutButton.disabled = true;
+        }
 
         /*
-         * Jangan langsung menghapus
-         * mobile-fullscreen jika browser
-         * keluar dari fullscreen API.
-         *
-         * Mode baca penuh tetap dipertahankan
-         * sampai tombol X ditekan.
+         * Mengubah zoom dengan tetap mempertahankan titik
+         * yang sedang diperhatikan pengguna.
          */
 
-        updateFullscreenButton();
+        function setZoom(newScale, centerX, centerY) {
+            const image = getReaderImage();
 
-      }
-    );
+            if (!image) return;
 
+            if (!baseImageWidth || !baseImageHeight) {
+                measureBaseImage();
+            }
 
-    /* =====================================================
-       LOAD HALAMAN TERAKHIR
-    ===================================================== */
+            const oldScale = zoomScale;
 
-    function getSavedPage() {
+            newScale = Math.max(
+                MIN_ZOOM,
+                Math.min(MAX_ZOOM, newScale)
+            );
 
-      const saved =
-        localStorage.getItem(
-          getStorageKey()
-        );
+            if (Math.abs(newScale - oldScale) < 0.001) return;
 
+            const rect = readerImageWrap.getBoundingClientRect();
 
-      if (
-        saved === null
-      ) {
+            const pointX = centerX !== undefined
+                ? centerX - rect.left - rect.width / 2
+                : 0;
 
-        return 0;
+            const pointY = centerY !== undefined
+                ? centerY - rect.top - rect.height / 2
+                : 0;
 
-      }
+            /*
+             * Posisi titik pada gambar sebelum pembesaran.
+             * Rumus ini membuat zoom terpusat pada lokasi sentuhan.
+             */
 
+            const imagePointX = (pointX - zoomX) / oldScale;
+            const imagePointY = (pointY - zoomY) / oldScale;
 
-      const number =
-        Number(saved);
+            zoomScale = newScale;
 
+            zoomX = pointX - imagePointX * newScale;
+            zoomY = pointY - imagePointY * newScale;
 
-      if (
-        !Number.isInteger(number) ||
-        number < 0
-      ) {
-
-        return 0;
-
-      }
-
-
-      return number;
-
-    }
-
-
-    /* =====================================================
-       LOAD KOMIK
-    ===================================================== */
-
-    async function startComic() {
-
-      await loadComicPages();
-
-
-      /*
-       * Setelah pages tersedia,
-       * buka halaman terakhir yang pernah dibaca.
-       */
-
-      if (
-        pages.length > 0
-      ) {
-
-        const savedPage =
-          getSavedPage();
-
-
-        const safePage =
-          Math.min(
-            savedPage,
-            pages.length - 1
-          );
-
-
-        if (
-          safePage !== 0
-        ) {
-
-          renderPage(
-            safePage
-          );
-
+            applyZoomTransform();
         }
 
-      }
+        function zoomByStep(direction) {
+            const nextScale = zoomScale + direction * ZOOM_STEP;
 
-    }
+            const rect = readerImageWrap.getBoundingClientRect();
 
+            setZoom(
+                nextScale,
+                rect.left + rect.width / 2,
+                rect.top + rect.height / 2
+            );
+        }
 
-    /* =====================================================
-       START
-    ===================================================== */
+        zoomInButton.addEventListener("click", () => {
+            zoomByStep(1);
+        });
 
-    startComic();
+        zoomOutButton.addEventListener("click", () => {
+            zoomByStep(-1);
+        });
 
-  </script>
+        zoomResetButton.addEventListener("click", () => {
+            zoomScale = 1;
+            zoomX = 0;
+            zoomY = 0;
+            applyZoomTransform();
+        });
 
+        /* =====================================================
+           ZOOM MANUAL DENGAN DUA JARI
+           PINCH-TO-ZOOM DAN GESER GAMBAR
+           ===================================================== */
+
+        function getPointerDistance(a, b) {
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        function getPointerMidpoint(a, b) {
+            return {
+                x: (a.x + b.x) / 2,
+                y: (a.y + b.y) / 2
+            };
+        }
+
+        readerImageWrap.addEventListener("pointerdown", event => {
+            if (!getReaderImage()) return;
+
+            if (event.pointerType === "mouse" && event.button !== 0) {
+                return;
+            }
+
+            activePointers.set(event.pointerId, {
+                x: event.clientX,
+                y: event.clientY,
+                startX: event.clientX,
+                startY: event.clientY
+            });
+
+            try {
+                readerImageWrap.setPointerCapture(event.pointerId);
+            } catch (_) {}
+
+            if (activePointers.size === 2) {
+                const points = Array.from(activePointers.values());
+                const midpoint = getPointerMidpoint(points[0], points[1]);
+
+                gestureMode = "pinch";
+                gestureMoved = false;
+
+                gestureStartDistance = getPointerDistance(
+                    points[0],
+                    points[1]
+                );
+
+                gestureStartScale = zoomScale;
+
+                gestureStartMidX = midpoint.x;
+                gestureStartMidY = midpoint.y;
+
+                gestureStartZoomX = zoomX;
+                gestureStartZoomY = zoomY;
+
+            } else if (activePointers.size === 1) {
+                gestureMode = zoomScale > 1 ? "pan" : "swipe";
+
+                const point = Array.from(activePointers.values())[0];
+
+                gestureStartX = point.x;
+                gestureStartY = point.y;
+
+                gestureStartZoomX = zoomX;
+                gestureStartZoomY = zoomY;
+
+                gestureMoved = false;
+            }
+        });
+
+        readerImageWrap.addEventListener("pointermove", event => {
+            if (!activePointers.has(event.pointerId)) return;
+
+            activePointers.set(event.pointerId, {
+                ...activePointers.get(event.pointerId),
+                x: event.clientX,
+                y: event.clientY
+            });
+
+            if (activePointers.size >= 2 && gestureMode === "pinch") {
+                const points = Array.from(activePointers.values()).slice(0, 2);
+
+                const distance = getPointerDistance(
+                    points[0],
+                    points[1]
+                );
+
+                const midpoint = getPointerMidpoint(
+                    points[0],
+                    points[1]
+                );
+
+                if (gestureStartDistance <= 0) return;
+
+                const nextScale =
+                    gestureStartScale *
+                    (distance / gestureStartDistance);
+
+                /*
+                 * Ikuti perubahan jarak dua jari.
+                 * Posisi tengah dua jari juga boleh berpindah.
+                 */
+
+                zoomScale = Math.max(
+                    MIN_ZOOM,
+                    Math.min(MAX_ZOOM, nextScale)
+                );
+
+                zoomX =
+                    gestureStartZoomX +
+                    (midpoint.x - gestureStartMidX);
+
+                zoomY =
+                    gestureStartZoomY +
+                    (midpoint.y - gestureStartMidY);
+
+                gestureMoved = true;
+                applyZoomTransform();
+
+                event.preventDefault();
+                return;
+            }
+
+            if (activePointers.size !== 1) return;
+
+            const point = activePointers.get(event.pointerId);
+            const deltaX = point.x - gestureStartX;
+            const deltaY = point.y - gestureStartY;
+
+            if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+                gestureMoved = true;
+            }
+
+            if (zoomScale > 1 || gestureMode === "pan") {
+                gestureMode = "pan";
+
+                zoomX = gestureStartZoomX + deltaX;
+                zoomY = gestureStartZoomY + deltaY;
+
+                applyZoomTransform();
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        function finishPointer(event) {
+            const wasPinch = gestureMode === "pinch";
+
+            activePointers.delete(event.pointerId);
+
+            if (activePointers.size === 1 && wasPinch) {
+                const point = Array.from(activePointers.values())[0];
+
+                gestureMode = zoomScale > 1 ? "pan" : "swipe";
+
+                gestureStartX = point.x;
+                gestureStartY = point.y;
+
+                gestureStartZoomX = zoomX;
+                gestureStartZoomY = zoomY;
+
+                gestureMoved = true;
+                return;
+            }
+
+            if (activePointers.size === 0) {
+                /*
+                 * Swipe halaman hanya dilakukan ketika gambar
+                 * tidak diperbesar. Ketika zoom > 100%, geseran
+                 * digunakan untuk menggeser gambar.
+                 */
+
+                if (
+                    !gestureMoved &&
+                    gestureMode === "swipe" &&
+                    zoomScale <= 1
+                ) {
+                    gestureMode = "";
+                    return;
+                }
+
+                if (
+                    gestureMode === "swipe" &&
+                    zoomScale <= 1 &&
+                    readerOverlay.classList.contains("open")
+                ) {
+                    const deltaX = event.clientX - gestureStartX;
+                    const deltaY = event.clientY - gestureStartY;
+
+                    if (
+                        Math.abs(deltaX) >= 55 &&
+                        Math.abs(deltaX) > Math.abs(deltaY) * 1.3
+                    ) {
+                        showReaderPage(
+                            deltaX < 0
+                                ? readerIndex + 1
+                                : readerIndex - 1
+                        );
+                    }
+                }
+
+                gestureMode = "";
+                gestureMoved = false;
+            }
+        }
+
+        readerImageWrap.addEventListener("pointerup", finishPointer);
+        readerImageWrap.addEventListener("pointercancel", finishPointer);
+
+        readerImageWrap.addEventListener("lostpointercapture", event => {
+            activePointers.delete(event.pointerId);
+
+            if (activePointers.size === 0) {
+                gestureMode = "";
+                gestureMoved = false;
+            }
+        });
+
+        /*
+         * Zoom memakai roda mouse pada komputer.
+         * Tekan Ctrl sambil menggulir untuk memperbesar gambar.
+         */
+
+        readerImageWrap.addEventListener("wheel", event => {
+            if (!event.ctrlKey || !getReaderImage()) return;
+
+            event.preventDefault();
+
+            setZoom(
+                zoomScale + (event.deltaY < 0 ? ZOOM_STEP : -ZOOM_STEP),
+                event.clientX,
+                event.clientY
+            );
+        }, { passive: false });
+
+        /* =====================================================
+           PRELOAD HALAMAN
+           ===================================================== */
+
+        function preloadReaderPage(index) {
+            if (index < 0 || index >= readerPages.length) return;
+
+            const pagePath = getPagePath(readerPages[index]);
+
+            if (!pagePath) return;
+
+            const image = new Image();
+            image.decoding = "async";
+            image.src = RAW_BASE + encodePath(pagePath);
+        }
+
+        /* =====================================================
+           MENAMPILKAN HALAMAN KOMIK
+           ===================================================== */
+
+        function showReaderPage(index) {
+            if (!readerPages.length) return;
+
+            readerIndex = Math.max(
+                0,
+                Math.min(index, readerPages.length - 1)
+            );
+
+            const pagePath = getPagePath(readerPages[readerIndex]);
+
+            if (!pagePath) {
+                setReaderMessage(
+                    "Alamat gambar halaman ini belum tersedia di komik.json."
+                );
+                return;
+            }
+
+            resetZoom();
+
+            const img = document.createElement("img");
+
+            img.className = "reader-image";
+            img.alt = `Halaman ${readerIndex + 1}`;
+            img.decoding = "async";
+            img.draggable = false;
+            img.fetchPriority = "high";
+
+            img.onload = () => {
+                requestAnimationFrame(() => {
+                    measureBaseImage();
+                    applyZoomTransform();
+                });
+            };
+
+            img.onerror = () => {
+                if (readerOverlay.classList.contains("open")) {
+                    setReaderMessage(
+                        "Gambar tidak dapat dimuat. Periksa nama file dan folder di repositori GitHub."
+                    );
+                }
+            };
+
+            img.src = RAW_BASE + encodePath(pagePath);
+
+            readerImageWrap.innerHTML = "";
+            readerImageWrap.appendChild(img);
+
+            readerStatus.textContent =
+                activeComic && activeComic.nama
+                    ? activeComic.nama
+                    : "Petualangan membaca";
+
+            readerFooter.textContent =
+                `Halaman ${readerIndex + 1} dari ${readerPages.length}`;
+
+            readerPageSelect.value = String(readerIndex);
+
+            readerPrev.disabled = readerIndex === 0;
+            readerNext.disabled =
+                readerIndex === readerPages.length - 1;
+
+            readerProgressFill.style.width =
+                `${((readerIndex + 1) / readerPages.length) * 100}%`;
+
+            zoomInButton.disabled = false;
+            zoomOutButton.disabled = true;
+            zoomResetButton.textContent = "100%";
+
+            preloadReaderPage(readerIndex + 1);
+            preloadReaderPage(readerIndex - 1);
+        }
+
+        /* =====================================================
+           MEMBUKA PEMBACA
+           ===================================================== */
+
+        async function openReader(folderPath) {
+            const cleanFolder = String(folderPath || "")
+                .trim()
+                .replace(/\\/g, "/")
+                .replace(/^\/+|\/+$/g, "");
+
+            if (!cleanFolder) return;
+
+            const requestId = ++openingRequestId;
+
+            lastFocusedElement = document.activeElement;
+
+            activeComic = null;
+            readerPages = [];
+            readerIndex = 0;
+
+            resetZoom();
+
+            readerPageSelect.innerHTML = "";
+            readerStatus.textContent = "Memuat komik...";
+            readerFooter.textContent = "";
+
+            readerPrev.disabled = true;
+            readerNext.disabled = true;
+
+            readerProgressFill.style.width = "0%";
+
+            setReaderMessage("Sedang memuat halaman komik...");
+
+            readerOverlay.classList.add("open");
+            document.body.classList.add("reader-open");
+
+            updateFullscreenButton();
+
+            try {
+                activeComic = comics.find(
+                    item => getFolderPath(item) === cleanFolder
+                ) || null;
+
+                if (
+                    !activeComic ||
+                    !Array.isArray(activeComic.pages) ||
+                    !activeComic.pages.length
+                ) {
+                    const response = await fetch(DATA_URL, {
+                        cache: "default"
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(
+                            `Daftar komik tidak dapat dibaca (HTTP ${response.status}).`
+                        );
+                    }
+
+                    const data = await response.json();
+
+                    const found = (data.komik || []).find(
+                        item => getFolderPath(item) === cleanFolder
+                    );
+
+                    if (found) activeComic = found;
+                }
+
+                if (requestId !== openingRequestId) return;
+
+                if (!activeComic) {
+                    throw new Error(
+                        "Materi tidak ditemukan di komik.json. Jalankan ulang GitHub Actions untuk memperbarui daftar komik."
+                    );
+                }
+
+                if (Array.isArray(activeComic.pages)) {
+                    readerPages = activeComic.pages.filter(page =>
+                        typeof page === "string" ||
+                        (page && typeof page.path === "string")
+                    );
+                }
+
+                if (!readerPages.length) {
+                    throw new Error(
+                        "Data halaman untuk folder ini belum tersedia. Pastikan komik.json menyertakan daftar pages."
+                    );
+                }
+
+                readerPageSelect.innerHTML = "";
+
+                readerPages.forEach((page, index) => {
+                    const option = document.createElement("option");
+
+                    option.value = String(index);
+
+                    const pageName = typeof page === "string"
+                        ? page.split("/").pop()
+                        : (page.file || page.path.split("/").pop());
+
+                    option.textContent =
+                        `Halaman ${index + 1} — ${pageName}`;
+
+                    readerPageSelect.appendChild(option);
+                });
+
+                showReaderPage(0);
+
+                const url = new URL(window.location.href);
+
+                url.searchParams.set("baca", cleanFolder);
+
+                history.replaceState(
+                    {},
+                    "",
+                    url.pathname + url.search + url.hash
+                );
+
+            } catch (error) {
+                if (requestId !== openingRequestId) return;
+
+                readerStatus.textContent = "Komik belum dapat dibuka";
+
+                setReaderMessage(
+                    error.message ||
+                    "Terjadi kesalahan saat memuat komik."
+                );
+            }
+        }
+
+        /* =====================================================
+           MENUTUP PEMBACA
+           ===================================================== */
+
+        async function closeReader() {
+            ++openingRequestId;
+
+            if (
+                document.fullscreenElement === readerOverlay &&
+                document.exitFullscreen
+            ) {
+                try {
+                    await document.exitFullscreen();
+                } catch (_) {}
+            }
+
+            readerOverlay.classList.remove(
+                "open",
+                "reader-fallback-fullscreen"
+            );
+
+            document.body.classList.remove("reader-open");
+
+            resetZoom();
+
+            const url = new URL(window.location.href);
+
+            if (url.searchParams.has("baca")) {
+                url.searchParams.delete("baca");
+
+                history.replaceState(
+                    {},
+                    "",
+                    url.pathname + url.search + url.hash
+                );
+            }
+
+            updateFullscreenButton();
+
+            if (
+                lastFocusedElement &&
+                typeof lastFocusedElement.focus === "function"
+            ) {
+                lastFocusedElement.focus({ preventScroll: true });
+            }
+        }
+
+        readerPrev.addEventListener("click", () => {
+            showReaderPage(readerIndex - 1);
+        });
+
+        readerNext.addEventListener("click", () => {
+            showReaderPage(readerIndex + 1);
+        });
+
+        readerPageSelect.addEventListener("change", () => {
+            showReaderPage(Number(readerPageSelect.value));
+        });
+
+        readerClose.addEventListener("click", closeReader);
+
+        readerOverlay.addEventListener("click", event => {
+            if (event.target === readerOverlay) {
+                closeReader();
+            }
+        });
+
+        /* =====================================================
+           KEYBOARD
+           ===================================================== */
+
+        document.addEventListener("keydown", event => {
+            if (!readerOverlay.classList.contains("open")) return;
+
+            if (
+                event.key === "Escape" &&
+                !document.fullscreenElement
+            ) {
+                closeReader();
+            } else if (event.key === "ArrowLeft") {
+                event.preventDefault();
+
+                if (zoomScale <= 1) {
+                    showReaderPage(readerIndex - 1);
+                } else {
+                    zoomX += 40;
+                    applyZoomTransform();
+                }
+            } else if (event.key === "ArrowRight") {
+                event.preventDefault();
+
+                if (zoomScale <= 1) {
+                    showReaderPage(readerIndex + 1);
+                } else {
+                    zoomX -= 40;
+                    applyZoomTransform();
+                }
+            } else if (event.key === "+" || event.key === "=") {
+                event.preventDefault();
+                zoomByStep(1);
+            } else if (event.key === "-") {
+                event.preventDefault();
+                zoomByStep(-1);
+            } else if (event.key === "0") {
+                zoomScale = 1;
+                zoomX = 0;
+                zoomY = 0;
+                applyZoomTransform();
+            }
+        });
+
+        /* =====================================================
+           KLIK THUMBNAIL KOMIK
+           ===================================================== */
+
+        comicGrid.addEventListener("click", event => {
+            const link = event.target.closest("a.thumbnail-link");
+
+            if (!link) return;
+
+            event.preventDefault();
+
+            let folder = link.dataset.folder || "";
+
+            try {
+                folder = decodeURIComponent(folder);
+            } catch (_) {}
+
+            openReader(folder);
+        });
+
+        /* =====================================================
+           NORMALISASI PATH THUMBNAIL JSON
+           ===================================================== */
+
+        function getThumbnailPath(item) {
+            if (!item || typeof item !== "object") return "";
+
+            const candidates = [
+                item.path,
+                item.thumbnail_path,
+                item.thumbnail,
+                item.thumbnail_url,
+                item.image
+            ].filter(value =>
+                typeof value === "string" && value.trim()
+            );
+
+            let path = candidates.find(value =>
+                /halaman-00\.(jpg|jpeg|png|webp|gif)(?:[?#].*)?$/i
+                    .test(value.trim())
+            ) || "";
+
+            if (
+                !path &&
+                typeof item.folder === "string" &&
+                item.folder.trim()
+            ) {
+                const fileName =
+                    typeof item.file === "string" && item.file.trim()
+                        ? item.file.trim()
+                        : "halaman-00.jpg";
+
+                if (
+                    /^halaman-00\.(jpg|jpeg|png|webp|gif)$/i
+                        .test(fileName)
+                ) {
+                    path =
+                        item.folder.replace(/\\/g, "/")
+                            .replace(/^\/+|\/+$/g, "") +
+                        "/" + fileName;
+                }
+            }
+
+            if (!path) return "";
+
+            path = path.trim().replace(/\\/g, "/");
+
+            if (/^https?:\/\//i.test(path)) {
+                try {
+                    const parsed = new URL(path);
+
+                    const marker =
+                        `/${GITHUB_REPO}/${GITHUB_BRANCH}/`;
+
+                    const markerIndex =
+                        parsed.pathname.indexOf(marker);
+
+                    if (markerIndex >= 0) {
+                        path = parsed.pathname.slice(
+                            markerIndex + marker.length
+                        );
+
+                        path = path.split("/").map(part => {
+                            try {
+                                return decodeURIComponent(part);
+                            } catch (_) {
+                                return part;
+                            }
+                        }).join("/");
+                    } else {
+                        path = parsed.pathname.replace(/^\/+/, "");
+                    }
+                } catch (_) {
+                    return "";
+                }
+            } else {
+                path = path.replace(/^\/+/, "");
+            }
+
+            return /(?:^|\/)halaman-00\.(jpg|jpeg|png|webp|gif)$/i
+                .test(path) ? path : "";
+        }
+
+        /* =====================================================
+           MEMUAT DATA KOMIK OTOMATIS
+           ===================================================== */
+
+        async function loadComics() {
+            const requestId = ++loadRequestId;
+
+            loading.style.display = "block";
+            comicGrid.innerHTML = "";
+            pagination.innerHTML = "";
+            errorBox.style.display = "none";
+
+            try {
+                const response = await fetch(
+                    `${DATA_URL}?t=${Date.now()}`,
+                    { cache: "no-store" }
+                );
+
+                if (!response.ok) {
+                    throw new Error(
+                        `Server daftar komik mengembalikan HTTP ${response.status}.`
+                    );
+                }
+
+                const data = await response.json();
+
+                if (!data || !Array.isArray(data.komik)) {
+                    throw new Error("Format komik.json tidak sesuai.");
+                }
+
+                const loadedComics = data.komik
+                    .map(item => {
+                        const thumbnailPath = getThumbnailPath(item);
+
+                        return thumbnailPath
+                            ? { ...item, path: thumbnailPath }
+                            : null;
+                    })
+                    .filter(Boolean)
+                    .sort((a, b) => {
+                        const orderA = Number(a.urutan || 9999);
+                        const orderB = Number(b.urutan || 9999);
+
+                        if (orderA !== orderB) {
+                            return orderA - orderB;
+                        }
+
+                        return String(a.folder || a.path || "")
+                            .localeCompare(String(b.folder || b.path || ""));
+                    });
+
+                if (requestId !== loadRequestId) return;
+
+                comics = loadedComics;
+
+                countBadge.textContent = `${comics.length} Komik`;
+
+                loading.style.display = "none";
+
+                if (!comics.length) {
+                    throw new Error(
+                        "Belum ditemukan halaman-00.jpg pada komik.json."
+                    );
+                }
+
+                currentPage = 1;
+                renderPage();
+
+            } catch (error) {
+                if (requestId !== loadRequestId) return;
+
+                console.error("Gagal memuat komik:", error);
+
+                loading.style.display = "none";
+                errorBox.style.display = "block";
+
+                errorMessage.textContent =
+                    error.message || "Daftar komik tidak dapat dimuat.";
+
+                countBadge.textContent = `${comics.length} Komik`;
+            }
+        }
+
+        /* =====================================================
+           PENANGANAN GAMBAR THUMBNAIL
+           ===================================================== */
+
+        function handleImageError(image) {
+            image.onerror = null;
+            image.style.objectFit = "contain";
+            image.style.padding = "30px";
+            image.alt = "Gambar komik tidak ditemukan";
+        }
+
+        /* =====================================================
+           MENAMPILKAN KOLEKSI KOMIK
+           ===================================================== */
+
+        function renderPage() {
+            comicGrid.innerHTML = "";
+            pagination.innerHTML = "";
+
+            const start = (currentPage - 1) * ITEMS_PER_PAGE;
+
+            const pageItems = comics.slice(
+                start,
+                start + ITEMS_PER_PAGE
+            );
+
+            pageItems.forEach((comic, index) => {
+                const comicNumber = start + index + 1;
+                const folderPath = getFolderPath(comic);
+
+                const imageUrl =
+                    RAW_BASE +
+                    encodePath(comic.path) +
+                    "?t=" + Date.now();
+
+                const card = document.createElement("article");
+                card.className = "comic-card";
+
+                const number = document.createElement("div");
+                number.className = "comic-number";
+                number.textContent = String(comicNumber);
+
+                const link = document.createElement("a");
+
+                link.className = "thumbnail-link";
+                link.href = "#baca";
+                link.dataset.folder = encodeURIComponent(folderPath);
+                link.title = "Baca Komik";
+
+                const image = document.createElement("img");
+
+                image.src = imageUrl;
+                image.alt = `Thumbnail Komik ${comicNumber}`;
+                image.loading = "lazy";
+                image.onerror = () => handleImageError(image);
+
+                const label = document.createElement("span");
+
+                label.className = "baca-label";
+                label.textContent = "📖 Baca Komik";
+
+                link.append(image, label);
+                card.append(number, link);
+
+                comicGrid.appendChild(card);
+            });
+
+            renderPagination();
+        }
+
+        /* =====================================================
+           PAGINATION
+           ===================================================== */
+
+        function renderPagination() {
+            const totalPages =
+                Math.ceil(comics.length / ITEMS_PER_PAGE);
+
+            if (totalPages <= 1) return;
+
+            const createButton = (
+                label,
+                title,
+                disabled,
+                onClick,
+                active = false
+            ) => {
+                const button = document.createElement("button");
+
+                button.type = "button";
+
+                button.className =
+                    "page-button" + (active ? " active" : "");
+
+                button.textContent = label;
+                button.title = title;
+                button.disabled = disabled;
+
+                button.addEventListener("click", onClick);
+
+                return button;
+            };
+
+            pagination.appendChild(
+                createButton(
+                    "‹",
+                    "Halaman sebelumnya",
+                    currentPage === 1,
+                    () => {
+                        if (currentPage > 1) {
+                            currentPage--;
+                            renderPage();
+
+                            window.scrollTo({
+                                top: 0,
+                                behavior: "smooth"
+                            });
+                        }
+                    }
+                )
+            );
+
+            for (let page = 1; page <= totalPages; page++) {
+                pagination.appendChild(
+                    createButton(
+                        String(page),
+                        `Buka halaman ${page}`,
+                        false,
+                        () => {
+                            currentPage = page;
+                            renderPage();
+
+                            window.scrollTo({
+                                top: 0,
+                                behavior: "smooth"
+                            });
+                        },
+                        page === currentPage
+                    )
+                );
+            }
+
+            pagination.appendChild(
+                createButton(
+                    "›",
+                    "Halaman berikutnya",
+                    currentPage === totalPages,
+                    () => {
+                        if (currentPage < totalPages) {
+                            currentPage++;
+                            renderPage();
+
+                            window.scrollTo({
+                                top: 0,
+                                behavior: "smooth"
+                            });
+                        }
+                    }
+                )
+            );
+        }
+
+        /* =====================================================
+           COBA LAGI DAN PEMBUKAAN DARI URL
+           ===================================================== */
+
+        retryButton.addEventListener("click", loadComics);
+
+        loadComics().then(() => {
+            const folderFromUrl =
+                new URLSearchParams(window.location.search).get("baca");
+
+            if (folderFromUrl) {
+                openReader(folderFromUrl);
+            }
+        });
+    </script>
 </body>
-
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Petualangan Matematika | Faktorisasi Prima, KPK & FPB</title>
+  <style>
+    :root {
+      --navy: #18345b;
+      --blue: #2676d9;
+      --purple: #7654d8;
+      --yellow: #ffd45c;
+      --green: #25b981;
+      --ink: #24324a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 15%, #fff5b8 0 7%, transparent 7.5%),
+        radial-gradient(circle at 88% 18%, #c8f5e7 0 8%, transparent 8.5%),
+        linear-gradient(135deg, #dff3ff, #f4eaff 52%, #fff3d8);
+      overflow-x: hidden;
+    }
+    .page {
+      width: min(1080px, 92%);
+      margin: auto;
+      padding: 26px 0 32px;
+    }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .brand {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 10px 16px; border-radius: 30px;
+      color: #fff; background: var(--navy); font-weight: 800;
+      letter-spacing: .3px; box-shadow: 0 5px 0 #102643;
+    }
+    .back {
+      display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none; color: var(--navy); font-weight: 800;
+      background: #fff; padding: 11px 17px; border-radius: 30px;
+      box-shadow: 0 5px 15px #29466b20; transition: .2s;
+    }
+    .back:hover { transform: translateY(-3px); background: #fff8dc; }
+    header { text-align: center; padding: 48px 12px 28px; }
+    .eyebrow {
+      display: inline-block; padding: 8px 16px; border-radius: 30px;
+      background: #fff; color: #7654d8; font-size: .9rem; font-weight: 900;
+      box-shadow: 0 5px 15px #29466b15;
+    }
+    h1 {
+      margin: 17px 0 10px; color: var(--navy);
+      font-size: clamp(2.15rem, 5vw, 3.8rem); line-height: 1.08;
+      letter-spacing: -1.5px;
+    }
+    h1 span { color: var(--purple); }
+    .subtitle { max-width: 650px; margin: 0 auto; color: #52647e; font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.6; }
+    .sparkles { font-size: 1.6rem; letter-spacing: 12px; margin-top: 20px; }
+    .choose { text-align: center; margin: 14px 0 22px; }
+    .choose h2 { margin: 0 0 7px; color: var(--navy); font-size: clamp(1.35rem, 3vw, 1.8rem); }
+    .choose p { margin: 0; color: #687992; }
+    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 850px; margin: 25px auto 0; }
+    .card {
+      position: relative; overflow: hidden; display: flex; flex-direction: column;
+      align-items: center; text-align: center; min-height: 330px;
+      padding: 30px 25px 27px; border-radius: 28px; color: white;
+      text-decoration: none; box-shadow: 0 12px 0 #18345b18, 0 18px 35px #29466b20;
+      transition: transform .22s, box-shadow .22s;
+    }
+    .card:hover { transform: translateY(-8px) scale(1.015); box-shadow: 0 17px 0 #18345b18, 0 25px 40px #29466b25; }
+    .card:focus-visible, .back:focus-visible { outline: 4px solid var(--yellow); outline-offset: 4px; }
+    .prime { background: linear-gradient(145deg, #3289ed, #225ac5); }
+    .kpk { background: linear-gradient(145deg, #9270ed, #6245c7); }
+    .card::before, .card::after { content: ""; position: absolute; border-radius: 50%; background: #ffffff18; }
+    .card::before { width: 180px; height: 180px; top: -75px; right: -55px; }
+    .card::after { width: 110px; height: 110px; bottom: -55px; left: -30px; }
+    .icon {
+      width: 104px; height: 104px; display: grid; place-items: center;
+      border-radius: 28px; background: #ffffff25; border: 2px solid #ffffff55;
+      font-size: 3.6rem; margin-bottom: 18px; position: relative; z-index: 1;
+      transform: rotate(-4deg);
+    }
+    .card h3 { font-size: clamp(1.5rem, 3vw, 2rem); margin: 0 0 10px; position: relative; z-index: 1; }
+    .card p { max-width: 310px; line-height: 1.55; margin: 0 0 22px; color: #ffffffed; position: relative; z-index: 1; }
+    .go {
+      margin-top: auto; display: inline-flex; align-items: center; gap: 9px;
+      border-radius: 30px; padding: 12px 22px; background: var(--yellow);
+      color: #49380b; font-weight: 900; box-shadow: 0 4px 0 #d5a92f;
+      position: relative; z-index: 1;
+    }
+    .tip {
+      max-width: 760px; margin: 34px auto 0; padding: 16px 20px;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      background: #ffffffb8; border: 1px solid #fff; border-radius: 18px;
+      color: #53647b; text-align: center; line-height: 1.5;
+    }
+    .tip strong { color: var(--navy); }
+    footer { text-align: center; margin-top: 27px; color: #6d7d93; font-size: .9rem; }
+    @media (max-width: 650px) {
+      .page { width: min(520px, 92%); padding-top: 18px; }
+      .topbar { align-items: flex-start; }
+      .brand { font-size: .78rem; padding: 9px 12px; }
+      .back { font-size: .85rem; padding: 9px 12px; }
+      header { padding-top: 38px; }
+      .cards { grid-template-columns: 1fr; gap: 18px; max-width: 430px; }
+      .card { min-height: 290px; }
+      .tip { font-size: .92rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topbar" aria-label="Navigasi">
+      <div class="brand">📚 MISI MATEMATIKA</div>
+      <a class="back" href="https://sdn160gresik.github.io/UPT-SD-NEGERI-160-GRESIK/kelas-5/lembah/lembah.html">
+        <span aria-hidden="true">↩</span> Kembali
+      </a>
+    </nav>
+
+    <header>
+      <div class="eyebrow">🌟 AYO BELAJAR SAMBIL BERMAIN!</div>
+      <h1>Petualangan <span>Faktor</span><br>Bilangan</h1>
+      <p class="subtitle">Siapkan semangatmu! Pilih misi belajar, temukan rahasia bilangan, dan jadilah jagoan matematika. Kamu pasti bisa! 💪</p>
+      <div class="sparkles" aria-hidden="true">✨ ⭐ ✨</div>
+    </header>
+
+    <section aria-labelledby="pilihan">
+      <div class="choose">
+        <h2 id="pilihan">Pilih Misi Belajarmu!</h2>
+        <p>Sentuh salah satu tombol untuk mulai belajar.</p>
+      </div>
+
+      <div class="cards">
+        <a class="card prime" href="faktor%20prima.html">
+          <div class="icon" aria-hidden="true">🧩</div>
+          <h3>Faktorisasi Prima</h3>
+          <p>Uraikan bilangan menjadi perkalian faktor-faktor prima. Ayo pecahkan tantangannya!</p>
+          <span class="go">Mulai Belajar <span aria-hidden="true">➜</span></span>
+        </a>
+
+        <a class="card kpk" href="https://sdn160gresik.github.io/UPT-SD-NEGERI-160-GRESIK/kelas-5/lembah/KPK/KPK-FPB.html">
+          <div class="icon" aria-hidden="true">🔢</div>
+          <h3>KPK &amp; FPB</h3>
+          <p>Pelajari Kelipatan Persekutuan Terkecil dan Faktor Persekutuan Terbesar dengan cara seru!</p>
+          <span class="go">Mulai Belajar <span aria-hidden="true">➜</span></span>
+        </a>
+      </div>
+    </section>
+
+    <div class="tip">
+      <span aria-hidden="true" style="font-size:1.7rem">🚀</span>
+      <span><strong>Ingat, pejuang matematika!</strong> Belajar sedikit demi sedikit, berlatih dengan tekun, dan jangan takut salah. Terus semangat!</span>
+    </div>
+
+    <footer>UPT SDN 160 GRESIK · Belajar Matematika Jadi Menyenangkan 💙</footer>
+  </main>
+</body>
+</html>

@@ -1,251 +1,163 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🌍 Petualangan di Dunia Faktor 🌍</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Petualangan Matematika | Faktorisasi Prima, KPK & FPB</title>
   <style>
-    html, body {
-      margin: 0; padding: 0;
-      font-family: 'Poppins', sans-serif;
-      height: 100%; width: 100%;
-      overflow-x: hidden;
-      background: url('https://i.imgur.com/IWnniCm.jpeg') no-repeat center center fixed;
-      background-size: cover;
-      background-position: center;
-      color: #fff;
+    :root {
+      --navy: #18345b;
+      --blue: #2676d9;
+      --purple: #7654d8;
+      --yellow: #ffd45c;
+      --green: #25b981;
+      --ink: #24324a;
     }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .nav-left img {
-      height: 45px;
-      margin-right: 0.5rem;
-    }
-
-    .nav-right {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      position: relative;
-    }
-
-    .nav-right a,
-    .dropdown-btn {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      text-decoration: none;
-      color: #0288d1;
-      font-weight: bold;
-      font-size: 0.9rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      user-select: none;
-      border: none;
-    }
-
-    .nav-right a:hover,
-    .dropdown-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .title-section {
-      text-align: center;
-      margin: 20px 15px 10px;
-      background: rgba(255,255,255,0.85);
-      color: #0288d1;
-      padding: 0.7rem 1.2rem;
-      border-radius: 12px;
-      max-width: 650px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 1px 1px 6px rgba(0,0,0,0.2);
-    }
-
-    .title-section h1 {
+    * { box-sizing: border-box; }
+    body {
       margin: 0;
-      font-size: 2.2rem;
-      text-shadow: none;
-      background: none;
-      color: #0288d1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 15%, #fff5b8 0 7%, transparent 7.5%),
+        radial-gradient(circle at 88% 18%, #c8f5e7 0 8%, transparent 8.5%),
+        linear-gradient(135deg, #dff3ff, #f4eaff 52%, #fff3d8);
+      overflow-x: hidden;
     }
-
-    .title-section p {
-      margin-top: 0.3rem;
-      font-size: 1rem;
-      color: #0288d1;
-    }
-
-    .map-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 15px;
-      padding: 20px;
-      max-width: 700px;
+    .page {
+      width: min(1080px, 92%);
       margin: auto;
+      padding: 26px 0 32px;
     }
-
-    /* Dropdown khusus untuk menu interaktif */
-    .dropdown-map {
-      position: relative;
-      display: inline-block;
-      width: 100%;
-      max-width: 260px;
-      margin: auto;
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .brand {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 10px 16px; border-radius: 30px;
+      color: #fff; background: var(--navy); font-weight: 800;
+      letter-spacing: .3px; box-shadow: 0 5px 0 #102643;
     }
-
-    .map-item.dropdown-btn {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.9);
-      color: #0288d1;
-      font-weight: bold;
-      font-size: 1rem;
-      border: none;
-      border-radius: 12px;
-      padding: 15px;
-      cursor: pointer;
-      text-align: center;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      user-select: none;
+    .back {
+      display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none; color: var(--navy); font-weight: 800;
+      background: #fff; padding: 11px 17px; border-radius: 30px;
+      box-shadow: 0 5px 15px #29466b20; transition: .2s;
     }
-
-    .map-item.dropdown-btn:hover {
-      background-color: #dff6ff;
-      transform: scale(1.05);
+    .back:hover { transform: translateY(-3px); background: #fff8dc; }
+    header { text-align: center; padding: 48px 12px 28px; }
+    .eyebrow {
+      display: inline-block; padding: 8px 16px; border-radius: 30px;
+      background: #fff; color: #7654d8; font-size: .9rem; font-weight: 900;
+      box-shadow: 0 5px 15px #29466b15;
     }
-
-    .dropdown-content-map {
-      display: none;
-      position: absolute;
-      background-color: rgba(255, 255, 255, 0.95);
-      min-width: 220px;
-      border-radius: 12px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-      z-index: 30;
-      top: 100%;
-      left: 0;
-      margin-top: 5px;
+    h1 {
+      margin: 17px 0 10px; color: var(--navy);
+      font-size: clamp(2.15rem, 5vw, 3.8rem); line-height: 1.08;
+      letter-spacing: -1.5px;
     }
-
-    .dropdown-content-map a {
-      color: #0288d1;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border-radius: 8px;
-      transition: background-color 0.3s ease;
+    h1 span { color: var(--purple); }
+    .subtitle { max-width: 650px; margin: 0 auto; color: #52647e; font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.6; }
+    .sparkles { font-size: 1.6rem; letter-spacing: 12px; margin-top: 20px; }
+    .choose { text-align: center; margin: 14px 0 22px; }
+    .choose h2 { margin: 0 0 7px; color: var(--navy); font-size: clamp(1.35rem, 3vw, 1.8rem); }
+    .choose p { margin: 0; color: #687992; }
+    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 850px; margin: 25px auto 0; }
+    .card {
+      position: relative; overflow: hidden; display: flex; flex-direction: column;
+      align-items: center; text-align: center; min-height: 330px;
+      padding: 30px 25px 27px; border-radius: 28px; color: white;
+      text-decoration: none; box-shadow: 0 12px 0 #18345b18, 0 18px 35px #29466b20;
+      transition: transform .22s, box-shadow .22s;
     }
-
-    /* Warna hover beda-beda sesuai variabel */
-    .dropdown-content-map a:hover {
-      background-color: var(--hover-bg, #bde5ff);
+    .card:hover { transform: translateY(-8px) scale(1.015); box-shadow: 0 17px 0 #18345b18, 0 25px 40px #29466b25; }
+    .card:focus-visible, .back:focus-visible { outline: 4px solid var(--yellow); outline-offset: 4px; }
+    .prime { background: linear-gradient(145deg, #3289ed, #225ac5); }
+    .kpk { background: linear-gradient(145deg, #9270ed, #6245c7); }
+    .card::before, .card::after { content: ""; position: absolute; border-radius: 50%; background: #ffffff18; }
+    .card::before { width: 180px; height: 180px; top: -75px; right: -55px; }
+    .card::after { width: 110px; height: 110px; bottom: -55px; left: -30px; }
+    .icon {
+      width: 104px; height: 104px; display: grid; place-items: center;
+      border-radius: 28px; background: #ffffff25; border: 2px solid #ffffff55;
+      font-size: 3.6rem; margin-bottom: 18px; position: relative; z-index: 1;
+      transform: rotate(-4deg);
     }
-
-    /* Tampilkan dropdown ketika aktif */
-    .dropdown-map.open .dropdown-content-map {
-      display: block;
+    .card h3 { font-size: clamp(1.5rem, 3vw, 2rem); margin: 0 0 10px; position: relative; z-index: 1; }
+    .card p { max-width: 310px; line-height: 1.55; margin: 0 0 22px; color: #ffffffed; position: relative; z-index: 1; }
+    .go {
+      margin-top: auto; display: inline-flex; align-items: center; gap: 9px;
+      border-radius: 30px; padding: 12px 22px; background: var(--yellow);
+      color: #49380b; font-weight: 900; box-shadow: 0 4px 0 #d5a92f;
+      position: relative; z-index: 1;
     }
-
-    /* Responsive */
-    @media (max-width: 480px) {
-      nav {
-        padding: 1rem;
-      }
-      .nav-right {
-        gap: 0.3rem;
-      }
-      .nav-right a,
-      .dropdown-btn {
-        font-size: 0.8rem;
-        padding: 0.3rem 0.6rem;
-      }
-      .map-grid {
-        grid-template-columns: 1fr;
-        max-width: 90%;
-      }
-      .title-section h1 {
-        font-size: 1.6rem;
-      }
+    .tip {
+      max-width: 760px; margin: 34px auto 0; padding: 16px 20px;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      background: #ffffffb8; border: 1px solid #fff; border-radius: 18px;
+      color: #53647b; text-align: center; line-height: 1.5;
+    }
+    .tip strong { color: var(--navy); }
+    footer { text-align: center; margin-top: 27px; color: #6d7d93; font-size: .9rem; }
+    @media (max-width: 650px) {
+      .page { width: min(520px, 92%); padding-top: 18px; }
+      .topbar { align-items: flex-start; }
+      .brand { font-size: .78rem; padding: 9px 12px; }
+      .back { font-size: .85rem; padding: 9px 12px; }
+      header { padding-top: 38px; }
+      .cards { grid-template-columns: 1fr; gap: 18px; max-width: 430px; }
+      .card { min-height: 290px; }
+      .tip { font-size: .92rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
     }
   </style>
 </head>
 <body>
+  <main class="page">
+    <nav class="topbar" aria-label="Navigasi">
+      <div class="brand">📚 MISI MATEMATIKA</div>
+      <a class="back" href="https://sdn160gresik.github.io/UPT-SD-NEGERI-160-GRESIK/kelas-5/lembah/lembah.html">
+        <span aria-hidden="true">↩</span> Kembali
+      </a>
+    </nav>
 
-  <!-- Navigasi -->
-  <nav>
-    <div class="nav-left">
-      <img src="https://i.imgur.com/sxm7RR1.png" alt="Logo Gresik" />
-      <img src="https://i.imgur.com/tGA5UBc.png" alt="Logo Tut Wuri" style="height: 50px;" />
-      <img src="https://i.imgur.com/oWB8vKW.png" alt="Logo Sekolah" />
-    </div>
-    <div class="nav-right">
-      <a href="/UPT-SD-NEGERI-160-GRESIK/index.html">🏠 Beranda</a>
-      <a href="../lembah.html">◀️ kembali</a>
-      <a href="#">🖼️ Galeri</a>
-    </div>
-  </nav>
+    <header>
+      <div class="eyebrow">🌟 AYO BELAJAR SAMBIL BERMAIN!</div>
+      <h1>Petualangan <span>Faktor</span><br>Bilangan</h1>
+      <p class="subtitle">Siapkan semangatmu! Pilih misi belajar, temukan rahasia bilangan, dan jadilah jagoan matematika. Kamu pasti bisa! 💪</p>
+      <div class="sparkles" aria-hidden="true">✨ ⭐ ✨</div>
+    </header>
 
-  <!-- Judul Halaman -->
-  <div class="title-section">
-    <h1>🌍 Petualangan di Dunia Faktor 🌍</h1>
-    <p>Uji pengetahuanmu di dunia faktor yang penuh tantangan!</p>
-  </div>
-
-  <!-- Menu Interaktif dengan dropdown latihan -->
-  <div class="map-grid">
-    <div class="dropdown-map">
-      <button class="map-item dropdown-btn">
-        <span class="emoji">📝</span> Yuk, Mulai Tantanganmu! ▼
-      </button>
-      <div class="dropdown-content-map">
-        <a href="faktor1.html" style="--hover-bg:#b3d9ff;">🏁 Tantangan 1</a>
-        <a href="faktor2.html" style="--hover-bg:#b3ffcc;">🎯 Tantangan 2</a>
-        <a href="faktor3.html" style="--hover-bg:#ffb3b3;">🔥 Tantangan 3</a>
-        <a href="faktor4.html" style="--hover-bg:#fff0b3;">🚀 Tantangan 4</a>
-        <a href="faktor5.html" style="--hover-bg:#d9b3ff;">💡 Tantangan 5</a>
-        <a href="faktor6.html" style="--hover-bg:#ffcce6;">📚 Tantangan 6</a>
-        <a href="faktor7.html" style="--hover-bg:#b3fff0;">🎉 Tantangan 7</a>
-        <a href="faktor8.html" style="--hover-bg:#ffd9b3;">🧩 Tantangan 8</a>
-        <a href="faktor9.html" style="--hover-bg:#e6ccff;">⭐ Tantangan 9</a>
-        <a href="faktor10.html" style="--hover-bg:#ccffdd;">🏆 Tantangan 10</a>
+    <section aria-labelledby="pilihan">
+      <div class="choose">
+        <h2 id="pilihan">Pilih Misi Belajarmu!</h2>
+        <p>Sentuh salah satu tombol untuk mulai belajar.</p>
       </div>
+
+      <div class="cards">
+        <a class="card prime" href="faktor%20prima.html">
+          <div class="icon" aria-hidden="true">🧩</div>
+          <h3>Faktorisasi Prima</h3>
+          <p>Uraikan bilangan menjadi perkalian faktor-faktor prima. Ayo pecahkan tantangannya!</p>
+          <span class="go">Mulai Belajar <span aria-hidden="true">➜</span></span>
+        </a>
+
+        <a class="card kpk" href="https://sdn160gresik.github.io/UPT-SD-NEGERI-160-GRESIK/kelas-5/lembah/KPK/KPK-FPB.html">
+          <div class="icon" aria-hidden="true">🔢</div>
+          <h3>KPK &amp; FPB</h3>
+          <p>Pelajari Kelipatan Persekutuan Terkecil dan Faktor Persekutuan Terbesar dengan cara seru!</p>
+          <span class="go">Mulai Belajar <span aria-hidden="true">➜</span></span>
+        </a>
+      </div>
+    </section>
+
+    <div class="tip">
+      <span aria-hidden="true" style="font-size:1.7rem">🚀</span>
+      <span><strong>Ingat, pejuang matematika!</strong> Belajar sedikit demi sedikit, berlatih dengan tekun, dan jangan takut salah. Terus semangat!</span>
     </div>
-  </div>
 
-  <script>
-    // Toggle dropdown
-    const dropdownBtn = document.querySelector('.map-item.dropdown-btn');
-    const dropdownMap = document.querySelector('.dropdown-map');
-
-    dropdownBtn.addEventListener('click', () => {
-      dropdownMap.classList.toggle('open');
-    });
-
-    window.addEventListener('click', (e) => {
-      if (!dropdownMap.contains(e.target)) {
-        dropdownMap.classList.remove('open');
-      }
-    });
-  </script>
-
+    <footer>UPT SDN 160 GRESIK · Belajar Matematika Jadi Menyenangkan 💙</footer>
+  </main>
 </body>
 </html>
-

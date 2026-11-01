@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faktorisasi Prima – Permainan Pohon Faktor</title>
+<style>
+:root{
+  --navy:#172b62;--blue:#1688dc;--blue2:#dff2ff;--purple:#7438bb;
+  --purple2:#f0e5ff;--yellow:#ffd34f;--green:#20a65a;--green2:#e0f8e8;
+  --red:#d93648;--red2:#ffe5e8;--ink:#18305f;--muted:#657493;
+  --paper:#fffdf5;--line:#d8e3f5;--shadow:0 10px 26px rgba(30,65,120,.13)
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family: "Trebuchet MS", Arial, sans-serif;color:var(--ink);
+ background:radial-gradient(circle at 10% 5%,#d9f4ff 0 12%,transparent 28%),
+ radial-gradient(circle at 95% 15%,#f0e5ff 0 10%,transparent 25%),
+ linear-gradient(180deg,#eaf8ff,#f8fbff 58%,#e7f7e9)}
+button,input{font:inherit}
+button{cursor:pointer;border:0}
+.app{max-width:1450px;margin:auto;padding:20px}
+header{text-align:center;position:relative;margin:0 auto 18px}
+.decor{position:absolute;font-size:clamp(25px,4vw,48px);top:12px;filter:drop-shadow(0 4px 2px #0001)}
+.decor.left{left:2%}.decor.right{right:2%}
+h1{display:inline-block;margin:0;padding:12px 38px;border:5px solid #9c5a16;border-radius:22px;
+ background:linear-gradient(#ffe88a,#ffbd32);color:#713b05;text-shadow:0 2px #fff8;
+ font-size:clamp(25px,4vw,48px);box-shadow:0 7px 0 #b77b28, var(--shadow);letter-spacing:.5px}
+.subtitle{max-width:850px;margin:16px auto 0;padding:12px 18px;border:3px solid #e2b94e;
+ border-radius:18px;background:#fff9df;font-weight:800;font-size:clamp(14px,2vw,19px)}
+.stats{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px 0}
+.stat{background:white;border:2px solid var(--line);border-radius:15px;padding:9px 16px;
+ box-shadow:0 4px 10px #23456b12;font-weight:800}
+.stat b{color:var(--purple);font-size:1.1em}
+.progress-wrap{max-width:700px;margin:0 auto 20px;background:#dce7f5;border-radius:30px;height:13px;overflow:hidden}
+.progress{height:100%;width:0;background:linear-gradient(90deg,#21b768,#8cdb68);transition:width .3s}
+.layout{display:grid;grid-template-columns:minmax(260px,.78fr) minmax(0,1.7fr);gap:18px;align-items:stretch}
+.panel{background:#fff;border:4px solid var(--line);border-radius:25px;box-shadow:var(--shadow);overflow:hidden;min-width:0}
+.panel-head{padding:12px 16px;color:white;text-align:center;font-size:clamp(17px,2vw,23px);font-weight:900;text-shadow:0 2px 2px #0003}
+.blue-head{background:linear-gradient(110deg,#0877c8,#38b5ef)}
+.purple-head{background:linear-gradient(110deg,#6330a8,#a05ce0)}
+.question-body{padding:22px;display:flex;flex-direction:column;align-items:center;gap:15px;min-height:470px}
+.question-label{font-weight:800;color:#52688d;text-align:center}
+.number-card{width:min(100%,290px);padding:15px;border-radius:24px;border:4px solid #e3a52b;
+ background:linear-gradient(145deg,#fff4a9,#ffd34f);text-align:center;box-shadow:0 6px 0 #d99b2a}
+.number-card span{display:block;font-size:clamp(55px,7vw,82px);line-height:1.05;font-weight:1000;color:#18336d;text-shadow:0 3px #fff}
+.input-area{width:100%;max-width:340px}
+.input-title{font-weight:900;text-align:center;margin:2px 0 10px}
+.factor-inputs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.factor-field label{display:block;font-size:13px;font-weight:800;color:#52688d;margin-bottom:5px}
+.factor-field input{width:100%;min-width:0;border:3px solid #b9d9f3;border-radius:13px;padding:12px 8px;
+ text-align:center;font-size:24px;font-weight:900;color:var(--navy);outline:none;background:#f8fcff}
+.factor-field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #1688dc22}
+.primary,.secondary,.next-btn{border-radius:14px;padding:12px 20px;font-weight:900;transition:.15s;box-shadow:0 4px 0 #0002}
+.primary{background:linear-gradient(#28bd69,#138c49);color:white;width:100%;margin-top:12px}
+.secondary{background:#fff0bf;color:#684300;border:2px solid #e7bd4d}
+.next-btn{background:linear-gradient(#8c4bd0,#6630a7);color:white}
+button:hover{filter:brightness(1.04);transform:translateY(-1px)}
+button:active{transform:translateY(2px);box-shadow:none}
+.feedback{width:100%;max-width:340px;min-height:48px;border-radius:14px;padding:12px;text-align:center;font-weight:900;display:none}
+.feedback.good{display:block;background:var(--green2);color:#13763c;border:2px solid #75d594;animation:pop .25s}
+.feedback.bad{display:block;background:var(--red2);color:#b22235;border:2px solid #f19aa5;animation:shake .25s}
+@keyframes pop{from{transform:scale(.96)}to{transform:scale(1)}}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.tree-body{padding:18px;min-height:470px;display:flex;flex-direction:column;gap:15px}
+.tree-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.tree-hint{font-size:13px;color:var(--muted);font-weight:700}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;font-weight:800}
+.legend span{display:flex;align-items:center;gap:5px}
+.dot{width:13px;height:13px;border-radius:50%;display:inline-block}\n.legend-composite{color:#9a6810}
+.dot.prime{background:#27b765;border:1px solid #1c9b50}.dot.composite{background:#fff3c5;border:2px solid #e1a52c}
+.tree-scroll{overflow:auto;flex:1;padding:12px 6px 18px;min-height:300px}
+.tree{display:flex;justify-content:center;min-width:max-content}
+.node{display:flex;flex-direction:column;align-items:center;position:relative;padding:0 8px}
+.node-value{min-width:58px;height:48px;padding:0 14px;display:flex;align-items:center;justify-content:center;
+ border:3px solid #1479bf;background:linear-gradient(#effaff,#ccecff);border-radius:16px;
+ color:#18366f;font-weight:1000;font-size:23px;box-shadow:0 3px 0 #b6d9ef;position:relative;z-index:1}
+.node-value.prime{border-color:#1c9b50;background:linear-gradient(#e9fff0,#b9f0ca);border-radius:50%;min-width:52px}
+.node-value.pending{border-color:#e1a52c;background:#fff3c5}
+.children{display:flex;justify-content:center;position:relative;padding-top:34px}
+.children:before{content:"";position:absolute;top:0;left:50%;height:17px;border-left:3px solid #7d67b8}
+.child{position:relative;padding:0 7px}
+.child:before{content:"";position:absolute;top:-17px;left:50%;height:17px;border-left:3px solid #7d67b8}
+.child:not(:only-child):after{content:"";position:absolute;top:-17px;left:0;right:0;border-top:3px solid #7d67b8}
+.child:first-child:after{left:50%}.child:last-child:after{right:50%}
+.tree-root>.children{padding-top:34px}
+.empty-tree{margin:auto;text-align:center;color:#7785a0;font-weight:800;padding:60px 15px}
+.result-card{background:linear-gradient(120deg,#fff5c8,#fffdf1);border:3px solid #edc44f;border-radius:18px;padding:14px;text-align:center;display:none}
+.result-card.show{display:block;animation:pop .3s}
+.result-title{font-weight:900;color:#855300;font-size:14px}
+.result-expanded{font-size:18px;font-weight:900;margin:6px 0;color:#263c70}
+.result-power{font-size:clamp(22px,3vw,30px);font-weight:1000;color:#158248}
+.bottom{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:18px 0}
+.tip{background:#fff9df;border:2px dashed #e7bd4d;border-radius:16px;padding:12px 16px;text-align:center;color:#76541a;font-weight:700;margin-top:16px}
+.screen{position:fixed;inset:0;background:#11264acc;display:flex;align-items:center;justify-content:center;padding:18px;z-index:10}
+.dialog{background:#fff;border:5px solid #e9c15a;border-radius:25px;padding:28px;max-width:520px;width:100%;text-align:center;box-shadow:0 20px 60px #081a3c55}
+.dialog h2{font-size:30px;color:#6836a5;margin:0 0 10px}
+.dialog p{line-height:1.55;color:#52617e}
+.dialog .primary{max-width:260px}
+.dialog-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.dialog-actions button{min-width:125px}
+.black-heart{font-size:64px;line-height:1.2;filter:grayscale(1);margin:4px 0 10px}\n.notice-heart{font-size:22px;letter-spacing:5px;margin:8px 0 18px;font-weight:900}
+.heart-stat b{letter-spacing:2px;color:#d9273f}
+.heart-lost{filter:grayscale(1);opacity:.45}
+.time-track{height:13px;width:100%;margin:0 0 18px;background:#dce6f4;border:1px solid #cbd8eb;border-radius:999px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(20,45,90,.12)}
+.time-track-fill{height:100%;width:100%;border-radius:999px;background:linear-gradient(90deg,#22b65c,#a5dc3f);transition:width .35s linear,background .35s ease}
+.time-track-fill.time-low{background:linear-gradient(90deg,#f5a623,#e04444)}
+.time-track-fill.time-critical{background:linear-gradient(90deg,#e04444,#a91532);animation:timerPulse .7s infinite alternate}
+.timer-warning{color:#d93648!important;animation:timerPulse .7s infinite alternate}
+@keyframes timerPulse{to{opacity:.45;transform:scale(1.08)}}
+.difficulty-easy{color:#16834a!important}.difficulty-medium{color:#b77909!important}.difficulty-hard{color:#c52c42!important}
+.hidden{display:none!important}
+footer{text-align:center;color:#71809a;font-size:12px;margin:16px 0 4px}
+@media(max-width:800px){.app{padding:12px}.layout{grid-template-columns:1fr}.question-body{min-height:unset}.tree-body{min-height:420px}.decor{display:none}}
+@media(max-width:420px){h1{padding:10px 14px}.question-body,.tree-body{padding:14px}.stat{padding:8px 10px;font-size:13px}.tree-scroll{min-height:260px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <span class="decor left">📚🌿</span><span class="decor right">💡🔎</span>
+    <h1>FAKTORISASI PRIMA</h1>
+    <div class="subtitle">Ayo uraikan bilangan menjadi faktor-faktor prima menggunakan pohon faktor!</div>
+  </header>
+
+  <section class="stats" aria-label="Informasi permainan">
+    <div class="stat">⭐ Skor: <b id="score">0</b></div>
+    <div class="stat">🎯 Tingkat: <b id="difficulty">—</b></div>
+    <div class="stat">⏳ Waktu soal: <b id="timer">00:00</b></div>
+    <div class="stat heart-stat">❤️ Nyawa: <b id="hearts" aria-label="3 hati tersisa">❤️ ❤️ ❤️</b></div>
+  </section>
+  <div class="time-track" aria-label="Indikator sisa waktu">
+    <div class="time-track-fill" id="timeProgress"></div>
+  </div>
+
+  <main class="layout">
+    <section class="panel">
+      <div class="panel-head blue-head">🔢 Bilangan yang Dianalisis</div>
+      <div class="question-body">
+        <div class="question-label">Tentukan faktorisasi prima dari bilangan:</div>
+        <div class="number-card"><span id="questionNumber">72</span></div>
+        <div class="input-area">
+          <div class="input-title" id="inputPrompt">Masukkan dua faktor dari 72</div>
+          <div class="factor-inputs">
+            <div class="factor-field"><label for="factorA">FAKTOR PERTAMA</label><input id="factorA" type="number" min="2" step="1" inputmode="numeric" placeholder="..." /></div>
+            <div class="factor-field"><label for="factorB">FAKTOR KEDUA</label><input id="factorB" type="number" min="2" step="1" inputmode="numeric" placeholder="..." /></div>
+          </div>
+          <button class="primary" id="checkBtn">✓ PERIKSA JAWABAN</button>
+        </div>
+        <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+        <div style="display:flex;gap:8px;width:100%;max-width:340px;flex-wrap:wrap"><button class="secondary" id="hintBtn" style="flex:1">💡 PETUNJUK FAKTOR</button><button class="secondary" id="helpBtn" style="flex:1">📘 CARA BERMAIN</button></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head purple-head">🌳 Pohon Faktor</div>
+      <div class="tree-body">
+        <div class="tree-toolbar">
+          <div class="tree-hint" id="treeHint">Pilih faktor untuk menguraikan bilangan yang belum prima.</div>
+          <div class="legend"><span class="legend-composite"><i class="dot composite"></i> Belum prima</span><span><i class="dot prime"></i> Bilangan prima</span></div>
+        </div>
+        <div class="tree-scroll"><div class="tree" id="treeArea"></div></div>
+        <div class="result-card" id="resultCard">
+          <div class="result-title">🎉 FAKTORISASI PRIMA SELESAI!</div>
+          <div class="result-expanded" id="expandedForm"></div>
+          <div class="result-power" id="powerForm"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="bottom">
+    <button class="secondary hidden" id="restartBtn">↻ ULANGI SOAL</button>
+    <button class="next-btn hidden" id="nextBtn" disabled>SOAL BERIKUTNYA ➜</button>
+  </div>
+  <div class="tip">📘 Ingat! Bilangan prima hanya memiliki dua faktor, yaitu 1 dan bilangan itu sendiri.</div>
+  <footer>Permainan Matematika SD • Faktorisasi Prima • Belajar sambil berlatih</footer>
+</div>
+
+<div class="screen" id="startScreen">
+  <div class="dialog">
+    <div style="font-size:48px">🌳📚✨</div>
+    <h2>Petualangan Pohon Faktor</h2>
+    <p>Uraikan bilangan menjadi faktor-faktor prima. Masukkan dua faktor, periksa jawaban, lalu lanjutkan sampai semua ujung pohon berisi bilangan prima.</p>
+    <p><b>10 soal • Skor otomatis • Timer sesuai tingkat kesulitan</b></p>
+    <p>Soal mudah: 45 detik • Sedang: 60 detik • Sulit: 90 detik. Jika waktu habis, ketiga ikon hati berubah hitam dan kotak pesan melayang muncul. Waktu habis tidak mengurangi kesempatan; hati hanya berkurang jika jawaban salah.</p>
+    <button class="primary" id="startBtn">▶ MULAI BERMAIN</button>
+  </div>
+</div>
+
+<div class="screen hidden" id="helpScreen">
+  <div class="dialog">
+    <h2>💡 Cara Bermain</h2>
+    <p>1. Perhatikan bilangan pada kolom kiri.<br>2. Masukkan dua faktor yang hasil kalinya sama dengan bilangan yang sedang dipilih.<br>3. Tekan PERIKSA JAWABAN.<br>4. Ulangi pada setiap bilangan yang belum prima di pohon faktor.<br>5. Jika semua ujung pohon sudah prima, hasil faktorisasi akan muncul.</p>
+    <p>Contoh: 12 dapat diuraikan menjadi 3 × 4, kemudian 4 menjadi 2 × 2.</p>
+    <p><b>Timer:</b> Mudah 45 detik, Sedang 60 detik, Sulit 90 detik. Waktu dihitung untuk setiap soal. Jika waktu habis, ketiga ikon hati berubah hitam dan kotak pesan melayang muncul. Hati hanya berkurang jika jawaban salah.</p>
+    <button class="primary" id="closeHelp">MENGERTI</button>
+  </div>
+</div>
+
+<div class="screen hidden" id="mistakeScreen">
+  <div class="dialog">
+    <div class="black-heart">🖤</div>
+    <h2 id="noticeTitle">Waktu Habis!</h2>
+    <p id="noticeMessage">Waktu pengerjaan soal sudah selesai. Tidak apa-apa, tetap semangat! Kamu bisa mencoba lagi atau melanjutkan ke soal berikutnya.</p>
+    <p class="notice-heart" id="noticeHeart">❤️ ❤️ 🖤</p>
+    <div class="dialog-actions">
+      <button class="primary" id="mistakeRetryBtn">↻ ULANGI</button>
+      <button class="secondary" id="mistakeNewBtn">SOAL BARU</button>
+      <button class="secondary" id="mistakeExitBtn">KELUAR</button>
+    </div>
+  </div>
+</div>
+
+<div class="screen hidden" id="endScreen">
+  <div class="dialog">
+    <div style="font-size:48px">🏆🎉</div>
+    <h2>Permainan Selesai!</h2>
+    <p id="finalSummary"></p>
+    <div class="dialog-actions">
+      <button class="primary" id="playAgainBtn">↻ MAIN LAGI</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  const BANK = [12,14,18,20,24,26,28,30,32,36,40,42,44,48,50,52,54,56,60,66,68,70,72,78,80,84,88,90,92,96,98];
+  const TOTAL = 10; // Target awal; permainan berlanjut dengan soal unik tanpa batas.
+  const $ = id => document.getElementById(id);
+  let questions=[], usedQuestions=new Set(), qIndex=0, score=0, correctSplits=0, wrongAttempts=0;
+  let root=null, activeNode=null, elapsed=0, clock=null, started=false, completed=false;
+  let mistakesThisQuestion=0, heartsLeft=3, questionLocked=false, pointsThisQuestion=0, splitsThisQuestion=0, timeExpired=false;
+  let questionTimeLimit=45, remainingTime=45, difficultyLabel='Mudah';
+
+  function isPrime(n){
+    if(n<2) return false;
+    for(let i=2;i*i<=n;i++) if(n%i===0) return false;
+    return true;
+  }
+  function shuffle(arr){
+    const a=[...arr];
+    for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+    return a;
+  }
+  function primeFactorCount(number){
+    let n=number,count=0;
+    for(let divisor=2;divisor*divisor<=n;divisor++){
+      while(n%divisor===0){count++;n/=divisor;}
+    }
+    if(n>1) count++;
+    return count;
+  }
+  function setQuestionDifficulty(number){
+    const count=primeFactorCount(number);
+    if(count<=3){difficultyLabel='Mudah';questionTimeLimit=45;}
+    else if(count===4){difficultyLabel='Sedang';questionTimeLimit=60;}
+    else{difficultyLabel='Sulit';questionTimeLimit=90;}
+    remainingTime=questionTimeLimit;
+    $('difficulty').textContent=difficultyLabel;
+    $('difficulty').className=difficultyLabel==='Mudah'?'difficulty-easy':difficultyLabel==='Sedang'?'difficulty-medium':'difficulty-hard';
+    updateQuestionTimer();
+  }
+  function updateQuestionTimer(){
+    $('timer').textContent=formatTime(remainingTime);
+    $('timer').classList.toggle('timer-warning',remainingTime<=10);
+    const bar=$('timeProgress');
+    const percent=questionTimeLimit>0?(remainingTime/questionTimeLimit)*100:0;
+    bar.style.width=Math.max(0,Math.min(100,percent))+'%';
+    bar.classList.toggle('time-low',remainingTime<=Math.ceil(questionTimeLimit*.35)&&remainingTime>10);
+    bar.classList.toggle('time-critical',remainingTime<=10);
+  }
+  function makeNode(value,parent=null){
+    return {value,parent,children:null,id:Math.random().toString(36).slice(2)};
+  }
+  function activeComposite(node){
+    if(!node.children && !isPrime(node.value)) return node;
+    if(node.children){
+      return activeComposite(node.children[0]) || activeComposite(node.children[1]);
+    }
+    return null;
+  }
+  function allPrime(node){
+    if(!node.children) return isPrime(node.value);
+    return allPrime(node.children[0]) && allPrime(node.children[1]);
+  }
+  function leaves(node,out=[]){
+    if(!node.children) out.push(node.value);
+    else {leaves(node.children[0],out);leaves(node.children[1],out);}
+    return out;
+  }
+  function renderNode(node,rootNode=false){
+    const wrap=document.createElement('div');
+    wrap.className='node'+(rootNode?' tree-root':'');
+    const value=document.createElement('div');
+    value.className='node-value '+(isPrime(node.value)?'prime':'composite')+(!node.children && node===activeNode?' pending':'');
+    value.textContent=node.value;
+    value.title=isPrime(node.value)?'Bilangan prima':'Bilangan yang masih dapat diuraikan';
+    wrap.appendChild(value);
+    if(node.children){
+      const kids=document.createElement('div');kids.className='children';
+      node.children.forEach(child=>{
+        const holder=document.createElement('div');holder.className='child';
+        holder.appendChild(renderNode(child,false));kids.appendChild(holder);
+      });
+      wrap.appendChild(kids);
+    }
+    return wrap;
+  }
+  function renderTree(){
+    const area=$('treeArea');area.innerHTML='';
+    if(!root){area.innerHTML='<div class="empty-tree">Pohon faktor akan muncul di sini.</div>';return;}
+    area.appendChild(renderNode(root,true));
+    $('treeHint').textContent=completed?'Semua ujung pohon sudah merupakan bilangan prima.':'Bilangan berwarna biru masih perlu diuraikan. Lingkaran hijau menandai bilangan prima.';
+  }
+  function updateHearts(){
+    const icons = [0,1,2].map(i => i < heartsLeft ? '❤️' : '<span class="heart-lost">🖤</span>');
+    $('hearts').innerHTML = icons.join(' ');
+    $('hearts').setAttribute('aria-label', heartsLeft+' hati tersisa');
+  }
+  function updateStats(){
+    $('score').textContent=Math.round(score);
+
+  }
+  function formatTime(s){
+    const m=Math.floor(s/60),sec=s%60;
+    return String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');
+  }
+  function startClock(){
+    clearInterval(clock);
+    clock=setInterval(()=>{
+      if(!started) return;
+      elapsed++;
+      if(!completed && !questionLocked){
+        remainingTime=Math.max(0,remainingTime-1);
+        updateQuestionTimer();
+        if(remainingTime===0){
+          // Waktu habis tidak dihitung sebagai jawaban salah dan tidak mengurangi heartsLeft.
+          timeExpired=true;
+          questionLocked=true;
+          $('factorA').disabled=true;$('factorB').disabled=true;
+          $('checkBtn').disabled=true;$('checkBtn').style.opacity='.55';
+          $('noticeTitle').textContent='Waktu Habis!';
+          $('noticeMessage').textContent='Waktu untuk mengerjakan soal ini sudah habis. Tidak apa-apa, tetap semangat! Kamu dapat mengulangi soal ini atau mencoba soal baru.';
+          $('noticeHeart').textContent='🖤 🖤 🖤';
+          $('hearts').innerHTML='<span class="heart-lost">🖤</span> <span class="heart-lost">🖤</span> <span class="heart-lost">🖤</span>';
+          $('hearts').setAttribute('aria-label','Waktu habis');
+          $('mistakeScreen').classList.remove('hidden');
+        }
+      }
+    },1000);
+  }
+  function setFeedback(type,msg){
+    const box=$('feedback');box.className='feedback '+type;box.textContent=msg;
+  }
+  function clearFeedback(){
+    const box=$('feedback');box.className='feedback';box.textContent='';
+  }
+  function ensureQuestionExists(){
+    if(qIndex < questions.length) return;
+    // Setelah seluruh bank awal terpakai, buat bilangan komposit dua digit yang belum pernah muncul.
+    let candidate, attempts=0;
+    do{
+      candidate=10+Math.floor(Math.random()*90);
+      attempts++;
+      if(attempts>1000){
+        candidate=10+((candidate-9)%90);
+        attempts=0;
+      }
+    }while(isPrime(candidate)||usedQuestions.has(candidate));
+    questions.push(candidate);
+  }
+  function loadQuestion(){
+    ensureQuestionExists();
+    const number=questions[qIndex];
+    usedQuestions.add(number);
+    root=makeNode(number);activeNode=root;completed=false;
+    // Skor hanya berlaku untuk satu soal; soal baru selalu dimulai dari 0.
+    score=0;
+    mistakesThisQuestion=0;heartsLeft=3;questionLocked=false;pointsThisQuestion=0;splitsThisQuestion=0;timeExpired=false;
+    $('mistakeScreen').classList.add('hidden');
+    updateHearts();
+    $('questionNumber').textContent=number;
+    setQuestionDifficulty(number);
+    $('inputPrompt').textContent='Masukkan dua faktor dari '+number;
+    $('factorA').value='';$('factorB').value='';
+    $('factorA').disabled=false;$('factorB').disabled=false;
+    $('checkBtn').disabled=false;$('checkBtn').style.opacity='1';
+    $('nextBtn').disabled=true;$('nextBtn').classList.add('hidden');
+    $('restartBtn').classList.add('hidden');
+    $('resultCard').classList.remove('show');
+    clearFeedback();renderTree();updateStats();
+    $('factorA').focus({preventScroll:true});
+  }
+  function checkAnswer(){
+    if(!started || completed || !activeNode || questionLocked) return;
+
+    const rawA=$('factorA').value.trim();
+    const rawB=$('factorB').value.trim();
+
+    // Empty fields are not counted as a wrong attempt.
+    if(rawA==='' || rawB===''){
+      setFeedback('bad','Isi kedua kotak faktor terlebih dahulu.');
+      return;
+    }
+
+    const a=Number(rawA), b=Number(rawB);
+    if(!Number.isInteger(a) || !Number.isInteger(b) || a<=1 || b<=1){
+      registerWrongAnswer('Masukkan dua bilangan bulat yang lebih besar dari 1.');
+      return;
+    }
+
+    if(a*b!==activeNode.value){
+      registerWrongAnswer('Perkalian kedua faktor belum sama dengan bilangan yang dipilih. Coba lagi!');
+      return;
+    }
+
+    const parentValue=activeNode.value;
+    activeNode.children=[makeNode(a,activeNode),makeNode(b,activeNode)];
+    correctSplits++;
+    const requiredSplits=Math.max(1,primeFactorCount(root.value)-1);
+    const earnedPoints=100/requiredSplits;
+    score+=earnedPoints;pointsThisQuestion+=earnedPoints;splitsThisQuestion++;
+    $('score').textContent=Math.round(score);
+    setFeedback('good','✓ BENAR! '+parentValue+' = '+a+' × '+b);
+    activeNode=activeComposite(root);
+    $('factorA').value='';$('factorB').value='';
+
+    if(!activeNode){
+      completed=true;
+      const exactQuestionPoints=100;
+      score += exactQuestionPoints-pointsThisQuestion;
+      pointsThisQuestion=exactQuestionPoints;
+      $('score').textContent=Math.round(score);
+      const factors=leaves(root).sort((x,y)=>x-y);
+      const counts={};
+      factors.forEach(n=>counts[n]=(counts[n]||0)+1);
+      const expanded=factors.join(' × ');
+      const powered=Object.keys(counts)
+        .map(k=>counts[k]>1?k+'<sup>'+counts[k]+'</sup>':k)
+        .join(' × ');
+      $('expandedForm').textContent=root.value+' = '+expanded;
+      $('powerForm').innerHTML=root.value+' = '+powered;
+      $('resultCard').classList.add('show');
+      $('treeHint').textContent='Hebat! Semua cabang sudah berakhir pada bilangan prima.';
+      $('inputPrompt').textContent='Soal berhasil diselesaikan!';
+      $('factorA').disabled=true;$('factorB').disabled=true;
+      $('checkBtn').disabled=true;$('checkBtn').style.opacity='.55';
+      $('nextBtn').disabled=false;$('nextBtn').classList.remove('hidden');
+      $('restartBtn').classList.remove('hidden');
+      setFeedback('good','🏆 SEMPURNA! Faktorisasi prima berhasil ditemukan.');
+    } else {
+      $('inputPrompt').textContent='Masukkan dua faktor dari '+activeNode.value;
+    }
+    renderTree();updateStats();
+  }
+
+  function registerWrongAnswer(message){
+    wrongAttempts++;
+    mistakesThisQuestion++;
+    heartsLeft=Math.max(0,3-mistakesThisQuestion);
+    updateHearts();
+
+    if(mistakesThisQuestion>=3){
+      lockAfterThreeMistakes();
+      return;
+    }
+
+    const remaining=heartsLeft;
+    remainingTime=questionTimeLimit;
+    updateQuestionTimer();
+    setFeedback('bad','✕ JAWABAN SALAH! '+message+' Sisa hati: '+remaining+'. Waktu diulang untuk mencoba kembali.');
+  }
+
+  function discardCurrentQuestionPoints(){
+    score=Math.max(0,score-pointsThisQuestion);
+    correctSplits=Math.max(0,correctSplits-splitsThisQuestion);
+    pointsThisQuestion=0;
+    splitsThisQuestion=0;
+    updateStats();
+  }
+  function lockAfterThreeMistakes(){
+    questionLocked=true;
+    $('factorA').disabled=true;$('factorB').disabled=true;
+    $('checkBtn').disabled=true;$('checkBtn').style.opacity='.55';
+    setFeedback('bad','🖤 Tiga kesempatan telah digunakan. Pilih tindakan pada kotak pemberitahuan.');
+    $('noticeTitle').textContent='Kesempatan Habis!';
+    $('noticeMessage').textContent='Tiga hati kesempatanmu telah habis. Jangan menyerah! Periksa kembali cara mencari faktor, lalu coba lagi dengan semangat.';
+    $('noticeHeart').textContent='🖤 🖤 🖤';
+    $('mistakeScreen').classList.remove('hidden');
+  }
+  function skipToNextQuestion(){
+    if(!started) return;
+    if(!timeExpired) discardCurrentQuestionPoints();
+    qIndex++;
+    loadQuestion();
+  }
+  function exitGame(){
+    clearInterval(clock);started=false;completed=false;questionLocked=false;
+    qIndex=0;score=0;correctSplits=0;wrongAttempts=0;elapsed=0;
+    pointsThisQuestion=0;splitsThisQuestion=0;mistakesThisQuestion=0;
+    $('mistakeScreen').classList.add('hidden');
+    $('endScreen').classList.add('hidden');
+    $('startScreen').classList.remove('hidden');
+    $('score').textContent='0';$('questionNo').textContent='0';
+    $('timer').textContent='00:00';$('timer').classList.remove('timer-warning');
+    $('difficulty').textContent='—';$('difficulty').className='';
+    remainingTime=0;questionTimeLimit=45;heartsLeft=3;updateHearts();updateQuestionTimer();
+    $('treeArea').innerHTML='<div class="empty-tree">Pohon faktor akan muncul di sini.</div>';
+    $('questionNumber').textContent='—';
+    $('factorA').value='';$('factorB').value='';
+    $('factorA').disabled=false;$('factorB').disabled=false;
+    $('checkBtn').disabled=false;$('checkBtn').style.opacity='1';
+    $('nextBtn').disabled=true;clearFeedback();
+  }
+  function showHint(){
+    if(!activeNode||completed||questionLocked)return;
+    setFeedback('good','💡 Petunjuk: uji apakah bilangan ini habis dibagi 2. Jika tidak, coba uji 3, 5, atau 7. Setelah menemukan pembagi, tentukan faktor pasangannya dengan cara membagi bilangan awal. Masukkan kedua faktor tersebut, lalu periksa jawabanmu!');
+  }
+  function restartCurrent(){
+    if(!started)return;
+    discardCurrentQuestionPoints();
+    loadQuestion();
+  }
+  function nextQuestion(){
+    if(!completed)return;
+    qIndex++;
+    loadQuestion();
+  }
+  function finishGame(){
+    clearInterval(clock);completed=true;
+    $('mistakeScreen').classList.add('hidden');
+    $('helpScreen').classList.add('hidden');
+    $('finalSummary').innerHTML='Skor akhir: <b>'+score+'</b><br>Soal dikerjakan: <b>'+qIndex+'</b><br>Penguraian faktor benar: <b>'+correctSplits+'</b><br>Percobaan salah: <b>'+wrongAttempts+'</b><br>Total waktu bermain: <b>'+formatTime(elapsed)+'</b>';
+    $('endScreen').classList.remove('hidden');
+  }
+  function startGame(){
+    questions=shuffle(BANK);
+    usedQuestions=new Set();
+    qIndex=0;score=0;correctSplits=0;wrongAttempts=0;elapsed=0;started=true;
+    $('timer').textContent='00:00';
+    $('difficulty').textContent='—';$('difficulty').className='';
+    $('startScreen').classList.add('hidden');$('endScreen').classList.add('hidden');
+    startClock();loadQuestion();
+  }
+
+  $('startBtn').addEventListener('click',startGame);
+  $('checkBtn').addEventListener('click',checkAnswer);
+  $('factorA').addEventListener('keydown',e=>{if(e.key==='Enter')$('factorB').focus();});
+  $('factorB').addEventListener('keydown',e=>{if(e.key==='Enter')checkAnswer();});
+  $('hintBtn').addEventListener('click',showHint);
+  $('helpBtn').addEventListener('click',()=>$('helpScreen').classList.remove('hidden'));
+  $('restartBtn').addEventListener('click',restartCurrent);
+  // Tombol pada kotak 3 kali kesalahan
+  $('mistakeNewBtn').addEventListener('click',skipToNextQuestion);
+  $('mistakeRetryBtn').addEventListener('click',restartCurrent);
+  $('mistakeExitBtn').addEventListener('click',exitGame);
+  $('nextBtn').addEventListener('click',nextQuestion);
+  $('closeHelp').addEventListener('click',()=>$('helpScreen').classList.add('hidden'));
+  $('playAgainBtn').addEventListener('click',startGame);
+  $('hintBtn').title='Tampilkan pasangan faktor sebagai petunjuk.';
+  $('helpBtn').title='Buka petunjuk cara bermain.';
+  renderTree();updateStats();
+})();
+</script>
+</body>
+</html>

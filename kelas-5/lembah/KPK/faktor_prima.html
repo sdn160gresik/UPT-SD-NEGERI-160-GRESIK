@@ -104,7 +104,8 @@ button:active{transform:translateY(2px);box-shadow:none}
 .bottom{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:18px 0}
 .tip{background:#fff9df;border:2px dashed #e7bd4d;border-radius:16px;padding:12px 16px;text-align:center;color:#76541a;font-weight:700;margin-top:16px}
 .screen{position:fixed;inset:0;background:#11264acc;display:flex;align-items:center;justify-content:center;padding:18px;z-index:10}
-.dialog{background:#fff;border:5px solid #e9c15a;border-radius:25px;padding:28px;max-width:520px;width:100%;text-align:center;box-shadow:0 20px 60px #081a3c55}
+.dialog{background:linear-gradient(155deg,#ffffff 0%,#fffdf2 100%);border:5px solid #e9c15a;border-radius:25px;padding:28px;max-width:520px;width:100%;text-align:center;box-shadow:0 20px 60px #081a3c55;animation:dialogPop .28s ease-out}
+@keyframes dialogPop{from{opacity:0;transform:translateY(12px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
 .dialog h2{font-size:30px;color:#6836a5;margin:0 0 10px}
 .dialog p{line-height:1.55;color:#52617e}
 .dialog .primary{max-width:260px}
@@ -475,15 +476,38 @@ footer{text-align:center;color:#71809a;font-size:12px;margin:16px 0 4px}
     heartsLeft=Math.max(0,3-mistakesThisQuestion);
     updateHearts();
 
+    // Setiap jawaban yang salah menampilkan kotak keterangan tepat di tengah layar.
+    // Kesempatan tetap dapat digunakan; soal dikunci hanya setelah tiga kesalahan.
     if(mistakesThisQuestion>=3){
-      lockAfterThreeMistakes();
+      lockAfterThreeMistakes(message);
       return;
     }
 
-    const remaining=heartsLeft;
     remainingTime=questionTimeLimit;
     updateQuestionTimer();
-    setFeedback('bad','✕ JAWABAN SALAH! '+message+' Sisa hati: '+remaining+'. Waktu diulang untuk mencoba kembali.');
+
+    $('noticeTitle').textContent='Ups, Belum Tepat! 🌟';
+    $('noticeMessage').textContent=
+      'Tidak apa-apa, pejuang matematika! Jawabanmu belum tepat. '+
+      message+
+      ' Yuk, tarik napas, periksa kembali perkalian kedua faktor, lalu coba lagi. '+
+      'Kamu pasti bisa! Semangat terus, ya!';
+    $('noticeHeart').textContent='❤️ '.repeat(heartsLeft).trim()+
+      (heartsLeft>0?' ':'')+'🖤 '.repeat(3-heartsLeft).trim();
+    $('mistakeRetryBtn').textContent='💪 COBA LAGI';
+    $('mistakeNewBtn').textContent='SOAL BARU';
+    $('mistakeExitBtn').textContent='KELUAR';
+    $('mistakeScreen').classList.remove('hidden');
+    setFeedback('bad','✕ Jawaban belum tepat. Baca pesan penyemangat di tengah layar, lalu coba lagi!');
+  }
+
+  function continueAfterWrongAnswer(){
+    if(mistakesThisQuestion>=3){
+      restartCurrent();
+      return;
+    }
+    $('mistakeScreen').classList.add('hidden');
+    $('factorA').focus({preventScroll:true});
   }
 
   function discardCurrentQuestionPoints(){
@@ -493,14 +517,21 @@ footer{text-align:center;color:#71809a;font-size:12px;margin:16px 0 4px}
     splitsThisQuestion=0;
     updateStats();
   }
-  function lockAfterThreeMistakes(){
+  function lockAfterThreeMistakes(message=''){
     questionLocked=true;
     $('factorA').disabled=true;$('factorB').disabled=true;
     $('checkBtn').disabled=true;$('checkBtn').style.opacity='.55';
     setFeedback('bad','🖤 Tiga kesempatan telah digunakan. Pilih tindakan pada kotak pemberitahuan.');
-    $('noticeTitle').textContent='Kesempatan Habis!';
-    $('noticeMessage').textContent='Tiga hati kesempatanmu telah habis. Jangan menyerah! Periksa kembali cara mencari faktor, lalu coba lagi dengan semangat.';
+    $('noticeTitle').textContent='Tiga Kesempatan Terpakai! 💛';
+    $('noticeMessage').textContent=
+      'Kali ini memang belum berhasil, tetapi jangan berkecil hati! '+
+      (message?message+' ':'')+
+      'Setiap kesalahan adalah kesempatan untuk belajar. Ayo ulangi soal ini dengan lebih teliti, '+
+      'atau pilih soal baru untuk melanjutkan petualanganmu!';
     $('noticeHeart').textContent='🖤 🖤 🖤';
+    $('mistakeRetryBtn').textContent='↻ ULANGI SOAL';
+    $('mistakeNewBtn').textContent='SOAL BARU';
+    $('mistakeExitBtn').textContent='KELUAR';
     $('mistakeScreen').classList.remove('hidden');
   }
   function skipToNextQuestion(){
@@ -567,7 +598,7 @@ footer{text-align:center;color:#71809a;font-size:12px;margin:16px 0 4px}
   $('restartBtn').addEventListener('click',restartCurrent);
   // Tombol pada kotak 3 kali kesalahan
   $('mistakeNewBtn').addEventListener('click',skipToNextQuestion);
-  $('mistakeRetryBtn').addEventListener('click',restartCurrent);
+  $('mistakeRetryBtn').addEventListener('click',continueAfterWrongAnswer);
   $('mistakeExitBtn').addEventListener('click',exitGame);
   $('nextBtn').addEventListener('click',nextQuestion);
   $('closeHelp').addEventListener('click',()=>$('helpScreen').classList.add('hidden'));

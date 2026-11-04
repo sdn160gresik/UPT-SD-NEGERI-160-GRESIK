@@ -50,6 +50,17 @@ button,input,select{font:inherit}button{cursor:pointer;border:0}.wrap{width:min(
 
 .pin-overlay{position:fixed;inset:0;z-index:2147483646;display:none;align-items:center;justify-content:center;padding:16px;background:#18203dcc;backdrop-filter:blur(5px)}.pin-overlay.show{display:flex}.pin-card{width:min(390px,100%);padding:24px;border:3px solid #fff;border-radius:22px;background:linear-gradient(145deg,#fff,#f2efff);box-shadow:0 20px 70px #10183266;text-align:center}.pin-card h2{margin:0 0 8px;color:#5940a5;font-size:22px}.pin-card p{margin:0 0 15px;color:#65718a;font-size:13px;line-height:1.5}.pin-input{display:block;width:100%;padding:13px 14px;border:2px solid #dce3fb;border-radius:13px;text-align:center;font-size:22px;font-weight:900;letter-spacing:8px;outline:none}.pin-input:focus{border-color:#7954d8;box-shadow:0 0 0 4px #7954d822}.pin-error{min-height:20px;margin:8px 0;color:#c34242;font-size:12px;font-weight:800}.pin-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.pin-actions button{padding:11px 15px;border-radius:12px;font-weight:900}.pin-submit{background:linear-gradient(110deg,#3869e8,#8951d2);color:#fff}.pin-cancel{background:#edf0f8;color:#46516a}
 
+
+/* Tombol kembali ke halaman lembah */
+.page-navigation{display:flex;align-items:center;justify-content:flex-start;margin:0 0 14px}
+.back-lembah{display:inline-flex;align-items:center;gap:10px;padding:11px 18px 11px 12px;border:2px solid #ffffff;border-radius:999px;background:linear-gradient(110deg,#ffffff,#f1f5ff);color:#4057a8;text-decoration:none;font-size:14px;font-weight:950;box-shadow:0 7px 18px #5268a526;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.back-lembah:hover{transform:translateY(-3px);filter:brightness(1.03);box-shadow:0 11px 23px #5268a53b}
+.back-lembah:focus-visible{outline:4px solid #f6c85f;outline-offset:3px}
+.back-lembah-icon{display:grid;place-items:center;width:31px;height:31px;border-radius:50%;background:linear-gradient(135deg,#ffcf70,#ff9c61);color:#713d26;font-size:19px;box-shadow:inset 0 -2px 0 #d9783a55}
+.back-lembah-text{display:flex;flex-direction:column;line-height:1.15}
+.back-lembah-text small{font-size:9px;font-weight:800;letter-spacing:.7px;color:#7a86a5;margin-top:3px}
+@media(max-width:430px){.page-navigation{margin-bottom:10px}.back-lembah{padding:9px 14px 9px 10px;font-size:13px}}
+
 </style></head>
 <body>
 <div class="popup-overlay" id="resultPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
@@ -98,6 +109,15 @@ button,input,select{font:inherit}button{cursor:pointer;border:0}.wrap{width:min(
   </section>
 </div>
 <div class="wrap">
+<nav class="page-navigation" aria-label="Navigasi halaman">
+  <a class="back-lembah" href="lembah.html" aria-label="Kembali ke halaman Lembah">
+    <span class="back-lembah-icon" aria-hidden="true">🏡</span>
+    <span class="back-lembah-text">
+      <span>⬅️ Kembali ke Lembah</span>
+      <small>MENU UTAMA PEMBELAJARAN</small>
+    </span>
+  </a>
+</nav>
 <header class="hero"><div class="eyebrow">✨ Misi Matematika • Kelas 5 SD</div><h1>Petualangan Konversi Pecahan!</h1><p>Jelajahi berbagai cara mengubah pecahan dengan angka sederhana. Pilih misi, pecahkan tantangan, dan kumpulkan bintang!</p>
 <div class="stats"><span class="pill">⭐ Skor: <b id="score">0</b></span><span class="pill">🔥 Benar beruntun: <b id="streak">0</b></span><span class="pill">🏅 Terjawab: <b id="done">0</b></span></div></header>
 <div class="layout">

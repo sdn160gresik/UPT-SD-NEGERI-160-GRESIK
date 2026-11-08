@@ -1,246 +1,2236 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Galeri Acak Angka 1–10</title>
-  <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      background: url('https://i.imgur.com/WlSU2f0.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
-      text-align: center;
-      min-height: 100vh;
-      margin: 0;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Castle Duels - Petualangan Pecahan</title>
+
+<style>
+
+/* =========================================
+   TEMA CASTLE DUELS - FANTASY FOREST
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Trebuchet MS", "Poppins", sans-serif;
+
+    background:
+        radial-gradient(ellipse at 50% 35%,
+            rgba(255,255,210,0.85),
+            rgba(177,238,255,0.45) 25%,
+            transparent 55%),
+        linear-gradient(
+            180deg,
+            #43b9e8 0%,
+            #a3e7f4 30%,
+            #9bdc70 65%,
+            #327b36 100%
+        );
+
+    color: white;
+    text-align: center;
+
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    isolation: isolate;
+}
+
+/* =========================================
+   BACKGROUND HUTAN FANTASI
+========================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 50% 32%,
+            rgba(255,255,210,0.75),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 15% 80%,
+            rgba(108,209,58,0.6),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 75%,
+            rgba(65,165,46,0.6),
+            transparent 30%
+        );
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at -3% 8%,
+            #173f27 0%,
+            #285e2e 18%,
+            transparent 19%
+        ),
+        radial-gradient(
+            ellipse at 0% 28%,
+            #3d872e 0%,
+            #3d872e 16%,
+            transparent 17%
+        ),
+        radial-gradient(
+            ellipse at 1% 70%,
+            #64b638 0%,
+            #64b638 18%,
+            transparent 19%
+        ),
+        radial-gradient(
+            ellipse at 103% 10%,
+            #173f27 0%,
+            #285e2e 18%,
+            transparent 19%
+        ),
+        radial-gradient(
+            ellipse at 100% 35%,
+            #438c32 0%,
+            #438c32 17%,
+            transparent 18%
+        ),
+        radial-gradient(
+            ellipse at 100% 75%,
+            #66b83b 0%,
+            #66b83b 18%,
+            transparent 19%
+        ),
+        linear-gradient(
+            0deg,
+            #215b2c 0%,
+            #4c9d35 12%,
+            transparent 35%
+        );
+
+    filter: saturate(1.15);
+}
+
+/* =========================================
+   JUDUL BERJALAN
+========================================= */
+
+.title-container {
+    position: fixed;
+    top: 10px;
+    width: 100%;
+
+    overflow-x: auto;
+    white-space: nowrap;
+
+    z-index: 100;
+    scrollbar-width: none;
+}
+
+.title-container::-webkit-scrollbar {
+    display: none;
+}
+
+.title-box {
+    display: inline-block;
+
+    background:
+        linear-gradient(
+            135deg,
+            #163e75,
+            #258fc3 45%,
+            #164c82
+        );
+
+    border: 3px solid #f9d36a;
+
+    padding: 10px 30px;
+    border-radius: 20px;
+
+    box-shadow:
+        0 5px 0 #102c4e,
+        0 9px 18px rgba(0,0,0,0.45),
+        inset 0 2px 5px rgba(255,255,255,0.5);
+
+    text-shadow: 2px 3px 3px rgba(0,0,0,0.7);
+
+    color: #fff6be;
+
+    font-weight: 900;
+    font-size: 1.2em;
+
+    letter-spacing: 1px;
+
+    margin-left: 100%;
+}
+
+/* =========================================
+   MENU DROPDOWN OPERASI PECAHAN
+========================================= */
+
+.fraction-menu {
+    position: fixed;
+
+    top: 72px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 150;
+
+    width: min(92%, 390px);
+
+    padding: 9px 12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #174c79,
+            #237f9d
+        );
+
+    border: 3px solid #f8d76c;
+    border-radius: 18px;
+
+    box-shadow:
+        0 5px 0 #103b5b,
+        0 8px 18px rgba(0,0,0,0.4);
+}
+
+.fraction-menu label {
+    display: block;
+
+    color: #fff2ad;
+
+    font-size: 12px;
+    font-weight: 900;
+
+    margin-bottom: 6px;
+
+    letter-spacing: 1px;
+}
+
+.fraction-menu select {
+    width: 100%;
+
+    padding: 11px 14px;
+
+    border: 2px solid #f5d477;
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff5c9,
+            #f5d783
+        );
+
+    color: #62400e;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    outline: none;
+    cursor: pointer;
+}
+
+.fraction-menu select option {
+    background: #fff4c8;
+    color: #62400e;
+    font-weight: bold;
+}
+
+/* =========================================
+   ANGKA MEDALI KERAJAAN
+========================================= */
+
+.circle {
+    width: 82px;
+    height: 82px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.9em;
+    font-weight: 900;
+
+    color: #fff9d9;
+
+    cursor: grab;
+
+    position: absolute;
+
+    border: 4px solid #f8d76c;
+
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #fff5b4,
+            #e6a92f 38%,
+            #a65a12 75%,
+            #6c370d 100%
+        );
+
+    text-shadow:
+        2px 3px 3px rgba(0,0,0,0.75);
+
+    box-shadow:
+        0 6px 0 #754014,
+        0 10px 15px rgba(0,0,0,0.4),
+        inset 0 3px 7px rgba(255,255,255,0.7);
+
+    user-select: none;
+
+    transition:
+        box-shadow 0.2s ease;
+
+    z-index: 2;
+
+    touch-action: none;
+}
+
+.circle::before {
+    content: "✦";
+
+    position: absolute;
+
+    top: 5px;
+    right: 12px;
+
+    font-size: 13px;
+
+    color: #fff8c2;
+
+    pointer-events: none;
+}
+
+.circle::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 6px;
+
+    border: 2px solid rgba(255,255,210,0.4);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+.circle:hover {
+    box-shadow:
+        0 7px 0 #754014,
+        0 12px 22px rgba(0,0,0,0.5),
+        0 0 20px rgba(255,222,100,0.8);
+}
+
+.circle:active {
+    cursor: grabbing;
+}
+
+/* =========================================
+   HALAMAN SOAL MELAYANG
+========================================= */
+
+.image-page {
+    display: none;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 500;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 15px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(13,44,54,0.68),
+            rgba(5,24,35,0.86)
+        );
+
+    backdrop-filter: blur(5px);
+}
+
+/* Kotak utama */
+
+.question-card {
+    width: min(94%, 570px);
+
+    max-height: 90vh;
+    overflow-y: auto;
+
+    padding: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #174b70,
+            #21828c,
+            #20584f
+        );
+
+    border: 5px solid #f4cf68;
+
+    border-radius: 27px;
+
+    box-shadow:
+        0 10px 0 #754817,
+        0 18px 40px rgba(0,0,0,0.65),
+        inset 0 2px 12px rgba(255,255,255,0.3);
+
+    position: relative;
+}
+
+.question-card::before {
+    content: "✦";
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    color: #ffe28b;
+    font-size: 25px;
+    pointer-events: none;
+}
+
+.question-card::after {
+    content: "✦";
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #ffe28b;
+    font-size: 25px;
+    pointer-events: none;
+}
+
+/* =========================================
+   JUDUL SOAL
+========================================= */
+
+.question-title {
+    color: #ffe18a;
+
+    font-size: clamp(19px, 4vw, 28px);
+
+    font-weight: 900;
+
+    text-shadow:
+        2px 3px 4px rgba(0,0,0,0.65);
+
+    margin: 5px 0 8px;
+}
+
+.question-operation {
+    display: inline-block;
+
+    padding: 8px 15px;
+
+    background: rgba(255,255,255,0.14);
+
+    border: 1px solid #e9d18c;
+
+    border-radius: 15px;
+
+    color: #fff6c5;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    margin-bottom: 12px;
+}
+
+.question-number {
+    color: #ffe7a0;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+/* =========================================
+   AREA PERTANYAAN
+========================================= */
+
+.question-box {
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf0,
+            #f7e6b7
+        );
+
+    color: #553714;
+
+    border: 3px solid #e8bb53;
+
+    border-radius: 20px;
+
+    padding: 24px 15px;
+
+    margin: 10px 0 18px;
+
+    box-shadow:
+        inset 0 3px 8px rgba(255,255,255,0.8),
+        0 5px 12px rgba(0,0,0,0.25);
+}
+
+.question-text {
+    font-size: clamp(20px, 4vw, 27px);
+
+    font-weight: 900;
+
+    line-height: 1.7;
+
+    color: #49300f;
+}
+
+/* =========================================
+   TAMPILAN PECAHAN VERTIKAL
+========================================= */
+
+.math-fraction {
+    display: inline-flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+    justify-content: center;
+
+    vertical-align: middle;
+
+    min-width: 35px;
+
+    margin: 0 5px;
+
+    color: inherit;
+
+    font-weight: 900;
+
+    line-height: 1.15;
+}
+
+.math-fraction .numerator,
+.math-fraction .denominator {
+    display: block;
+
+    text-align: center;
+
+    padding: 2px 7px;
+
+    font-size: 1em;
+}
+
+.math-fraction .fraction-line {
+    display: block;
+
+    width: 100%;
+    height: 2px;
+
+    background: currentColor;
+
+    border-radius: 3px;
+}
+
+.math-mixed {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+}
+
+.math-whole {
+    font-size: 1.15em;
+    font-weight: 900;
+}
+
+.question-text .math-fraction {
+    font-size: 1.35em;
+}
+
+/* =========================================
+   KOTAK JAWABAN
+========================================= */
+
+.answer-label {
+    display: block;
+
+    color: #fff2b5;
+
+    font-size: 15px;
+    font-weight: 900;
+
+    margin-bottom: 9px;
+}
+
+.answer-entry {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 76px;
+    margin: 0 auto;
+}
+
+.answer-input {
+    width: 76px;
+    height: 48px;
+    padding: 7px;
+    border-radius: 10px;
+    border: 3px solid #f5d477;
+    outline: none;
+    background: #fffdf2;
+    color: #3c321c;
+    font-size: 22px;
+    font-weight: 900;
+    text-align: center;
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.answer-input:focus {
+    border-color: #72e7dc;
+    box-shadow: 0 0 12px rgba(114,231,220,0.8);
+}
+
+.answer-input::placeholder {
+    color: #b4a78a;
+    font-size: 12px;
+}
+
+.answer-fraction {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.answer-fraction .answer-line {
+    width: 76px;
+    height: 4px;
+    border-radius: 4px;
+    background: #fff0bc;
+}
+
+.answer-mixed {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.answer-whole {
+    width: 76px;
+}
+
+.answer-single {
+    width: min(100%, 320px);
+    height: 52px;
+}
+
+.answer-hint {
+    color: #fff0bc;
+
+    font-size: 12px;
+
+    margin-top: 8px;
+
+    line-height: 1.5;
+}
+
+/* =========================================
+   PESAN HASIL
+========================================= */
+
+.feedback {
+    display: none;
+
+    padding: 12px;
+
+    margin: 15px 0 5px;
+
+    border-radius: 14px;
+
+    font-weight: 900;
+
+    font-size: 15px;
+}
+
+.feedback.correct {
+    display: block;
+
+    background: #c9f5c6;
+
+    border: 2px solid #58c85c;
+
+    color: #176b24;
+}
+
+.feedback.wrong {
+    display: block;
+
+    background: #ffe1bd;
+
+    border: 2px solid #f5a34d;
+
+    color: #8b4310;
+}
+
+/* =========================================
+   TOMBOL SOAL
+========================================= */
+
+.question-buttons {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 18px;
+}
+
+button {
+    background:
+        linear-gradient(
+            180deg,
+            #ffdf75,
+            #f2a52d 55%,
+            #c66b13
+        );
+
+    border: 3px solid #fff0a9;
+
+    padding: 12px 24px;
+
+    border-radius: 30px;
+
+    color: #633309;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    font-size: 14px;
+
+    box-shadow:
+        0 5px 0 #87450d,
+        0 7px 12px rgba(0,0,0,0.35);
+}
+
+button:hover {
+    background:
+        linear-gradient(
+            180deg,
+            #fff1a7,
+            #ffc34c
+        );
+
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #87450d;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* =========================================
+   TOMBOL KEMBALI KE HALAMAN LEMBAH
+========================================= */
+
+.back-to-valley {
+    position: fixed;
+    left: 16px;
+    bottom: 18px;
+    z-index: 700;
+    padding: 11px 20px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #ffdf75, #f2a52d 55%, #c66b13);
+    border: 3px solid #fff0a9;
+    border-radius: 30px;
+    color: #633309;
+    font-weight: 900;
+    font-size: 14px;
+    box-shadow: 0 5px 0 #87450d, 0 7px 12px rgba(0,0,0,0.35);
+    transition: 0.2s;
+}
+
+.back-to-valley:hover {
+    background: linear-gradient(180deg, #fff1a7, #ffc34c);
+    transform: translateY(-2px);
+}
+
+.back-to-valley:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #87450d;
+}
+
+/* =========================================
+   DEKORASI CAHAYA
+========================================= */
+
+.sparkle {
+    position: fixed;
+
+    color: #fff5a6;
+
+    font-size: 18px;
+
+    pointer-events: none;
+
+    opacity: 0.8;
+
+    animation: twinkle 2s infinite alternate;
+
+    z-index: 0;
+}
+
+@keyframes twinkle {
+    from {
+        opacity: 0.25;
+        transform: scale(0.7);
     }
 
-    /* 🔹 Judul geser horizontal */
-    .title-container {
-      position: fixed;
-      top: 10px;
-      width: 100%;
-      overflow-x: auto;
-      white-space: nowrap;
-      z-index: 10;
-      scrollbar-width: none;
+    to {
+        opacity: 1;
+        transform: scale(1.3);
     }
-    .title-container::-webkit-scrollbar {
-      display: none;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .circle {
+        width: 66px;
+        height: 66px;
+        font-size: 1.5em;
+        border-width: 3px;
     }
 
     .title-box {
-      display: inline-block;
-      background: linear-gradient(135deg, #ff7eb3, #ff758c);
-      padding: 10px 30px;
-      border-radius: 25px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-      font-weight: 700;
-      font-size: 1.2em;
-      margin-left: 100%;
+        font-size: 1em;
+        padding: 9px 22px;
     }
 
-    .circle {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8em;
-      font-weight: bold;
-      color: white;
-      cursor: grab;
-      position: absolute;
-      transition: transform 0.2s ease;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-      user-select: none;
+    .fraction-menu {
+        top: 68px;
+        width: 92%;
     }
 
-    .circle:active {
-      cursor: grabbing;
-      transform: scale(1.1);
+    .fraction-menu select {
+        font-size: 12px;
+        padding: 10px;
     }
 
-    .image-page {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      z-index: 5;
+    .question-card {
+        padding: 17px 13px;
     }
 
-    .image-page img {
-      max-width: 90%;
-      max-height: 70vh;
-      border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.7);
-      margin-bottom: 20px;
+    .question-box {
+        padding: 20px 10px;
+    }
+
+    .answer-input {
+        width: 68px;
+        height: 45px;
+        font-size: 20px;
+    }
+
+    .answer-fraction .answer-line {
+        width: 68px;
+    }
+
+    .answer-whole {
+        width: 68px;
     }
 
     button {
-      background: #ff8a00;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 25px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-      font-size: 1em;
+        font-size: 12px;
+        padding: 11px 17px;
     }
+}
 
-    button:hover {
-      background: #ffb347;
-      transform: scale(1.05);
-    }
-  </style>
+</style>
 </head>
+
 <body>
 
-  <!-- 🔹 Judul geser manual -->
-  <div class="title-container" id="scroll-title">
+
+<!-- Tombol kembali ke halaman lembah -->
+<a href="lembah.html" class="back-to-valley" aria-label="Kembali ke halaman lembah">
+    🛡️ KEMBALI
+</a>
+
+<!-- =====================================
+     JUDUL BERJALAN
+===================================== -->
+
+<div class="title-container" id="scroll-title">
+
     <div class="title-box">
-      😄 Klik Angka Favoritmu! Temukan kejutan menarik! 🎁
+        🏰 CASTLE DUELS ✦ PETUALANGAN DUNIA PECAHAN
+        TEMUKAN TANTANGAN MATEMATIKAMU! ⚔️
     </div>
-  </div>
 
-  <div id="landing-page"></div>
+</div>
 
-  <div class="image-page" id="image-page">
-    <h1>Gambar Pilihanmu 🎁</h1>
-    <img id="random-image" src="" alt="Gambar acak">
-    <button onclick="goBack()">Kembali</button>
-  </div>
 
-  <script>
-    const imageLinks = [
-      "https://i.imgur.com/hlm8Zg1.png", //soal 1
-      "https://i.imgur.com/smRojbD.png", //soal 2
-      "https://i.imgur.com/zwggr4U.png", //soal 3
-      "https://i.imgur.com/lqlu66e.png", //soal 4
-      "https://i.imgur.com/2SMuWIV.png", //soal 5
-      "https://i.imgur.com/8rf7NQD.png", //soal 6
-      "https://i.imgur.com/V6ue1yg.png", //soal 7
-      "https://i.imgur.com/p732whj.png", //soal 8
-      "https://i.imgur.com/MMAp3rN.png", //soal 9
-      "https://i.imgur.com/jF1rJiy.png", //soal 10
-      "https://i.imgur.com/mBhN8VD.png", //soal 11
-"https://i.imgur.com/KAiBpI7.png", //soal 12
-"https://i.imgur.com/9zgWUW3.png", //soal 13
-"https://i.imgur.com/OzWwGXH.png", //soal 14
-"https://i.imgur.com/zWOrBGN.png", //soal 15
-"https://i.imgur.com/GpRvEJD.png" //soal 16
+<!-- =====================================
+     MENU DROPDOWN OPERASI PECAHAN
+===================================== -->
+
+<div class="fraction-menu">
+
+    <label for="fraction-operation">
+        🏰 PILIH OPERASI PERUBAHAN BENTUK PECAHAN
+    </label>
+
+    <select id="fraction-operation"
+            onchange="changeOperation()">
+
+        <option value="0">⚔️ PILIH OPERASI PECAHAN</option>
+
+        <option value="1">1. Pecahan Biasa → Pecahan Campuran</option>
+
+        <option value="2">2. Pecahan Campuran → Pecahan Biasa</option>
+
+        <option value="3">3. Pecahan Biasa → Desimal</option>
+
+        <option value="4">4. Desimal → Pecahan Biasa</option>
+
+        <option value="5">5. Pecahan Biasa → Persen</option>
+
+        <option value="6">6. Persen → Pecahan Biasa</option>
+
+        <option value="7">7. Pecahan Campuran → Desimal</option>
+
+        <option value="8">8. Desimal → Pecahan Campuran</option>
+
+        <option value="9">9. Pecahan Campuran → Persen</option>
+
+        <option value="10">10. Persen → Pecahan Campuran</option>
+
+        <option value="11">11. Desimal → Persen</option>
+
+        <option value="12">12. Persen → Desimal</option>
+
+    </select>
+
+</div>
+
+
+<!-- =====================================
+     HALAMAN UTAMA
+===================================== -->
+
+<div id="landing-page"></div>
+
+
+<!-- =====================================
+     HALAMAN SOAL MELAYANG
+===================================== -->
+
+<div class="image-page" id="image-page">
+
+    <div class="question-card">
+
+        <h1 class="question-title">
+            🏰 TANTANGAN KERAJAAN!
+        </h1>
+
+        <div class="question-operation" id="question-operation">
+            Operasi Pecahan
+        </div>
+
+        <div class="question-number" id="question-number">
+            SOAL 1
+        </div>
+
+        <div class="question-box">
+
+            <div class="question-text" id="question-text">
+                Soal akan muncul di sini
+            </div>
+
+        </div>
+
+        <label class="answer-label" id="answer-label">
+            ✏️ TULISKAN JAWABANMU
+        </label>
+
+        <div id="answer-input" class="answer-entry"></div>
+
+        <div class="answer-hint" id="answer-hint">
+            Masukkan jawaban dengan benar.
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <div class="question-buttons">
+
+            <button id="check-button"
+                    onclick="checkAnswer()">
+                ⚔️ PERIKSA JAWABAN
+            </button>
+
+            <button id="next-button"
+                    onclick="nextQuestion()"
+                    style="display:none">
+                🏆 SOAL BERIKUTNYA
+            </button>
+
+            <button onclick="goBack()">
+                🛡️ KEMBALI
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   DATA OPERASI PECAHAN
+========================================= */
+
+const operations = {
+
+    1: "Pecahan Biasa → Pecahan Campuran",
+    2: "Pecahan Campuran → Pecahan Biasa",
+    3: "Pecahan Biasa → Desimal",
+    4: "Desimal → Pecahan Biasa",
+    5: "Pecahan Biasa → Persen",
+    6: "Persen → Pecahan Biasa",
+    7: "Pecahan Campuran → Desimal",
+    8: "Desimal → Pecahan Campuran",
+    9: "Pecahan Campuran → Persen",
+    10: "Persen → Pecahan Campuran",
+    11: "Desimal → Persen",
+    12: "Persen → Desimal"
+
+};
+
+let selectedOperation = 0;
+
+let currentQuestion = null;
+
+let questionPools = {};
+
+let usedQuestions = {};
+
+let questionNumber = 0;
+
+let hasAnswered = false;
+
+
+/* =========================================
+   MEMBUAT TAMPILAN PECAHAN VERTIKAL
+========================================= */
+
+function fractionHTML(numerator, denominator) {
+
+    return `
+        <span class="math-fraction">
+            <span class="numerator">${numerator}</span>
+            <span class="fraction-line"></span>
+            <span class="denominator">${denominator}</span>
+        </span>
+    `;
+
+}
+
+
+/* =========================================
+   MEMBUAT TAMPILAN PECAHAN CAMPURAN
+========================================= */
+
+function mixedHTML(whole, numerator, denominator) {
+
+    return `
+        <span class="math-mixed">
+            <span class="math-whole">${whole}</span>
+            ${fractionHTML(numerator, denominator)}
+        </span>
+    `;
+
+}
+
+
+/* =========================================
+   FORMAT SOAL MENJADI VISUAL MATEMATIKA
+========================================= */
+
+function formatQuestionHTML(question) {
+
+    return question
+        .replace(
+            /\b(\d+)\s+(\d+)\/(\d+)\b/g,
+            (match, whole, n, d) =>
+                mixedHTML(whole, n, d)
+        )
+        .replace(
+            /\b(\d+)\/(\d+)\b/g,
+            (match, n, d) =>
+                fractionHTML(n, d)
+        );
+
+}
+
+
+/* =========================================
+   FUNGSI BANTU MATEMATIKA
+========================================= */
+
+function gcd(a, b) {
+
+    a = Math.abs(a);
+    b = Math.abs(b);
+
+    while (b) {
+
+        let temp = b;
+
+        b = a % b;
+
+        a = temp;
+
+    }
+
+    return a || 1;
+
+}
+
+function fractionText(n, d) {
+
+    const g = gcd(n, d);
+
+    n /= g;
+    d /= g;
+
+    return `${n}/${d}`;
+
+}
+
+function decimalText(value) {
+
+    return String(Number(value.toFixed(4)));
+
+}
+
+
+/* =========================================
+   MEMBUAT BANK SOAL
+========================================= */
+
+function createQuestionBank() {
+
+    const bank = {};
+
+    function add(id, question, answer, type, hint) {
+
+        if (!bank[id]) bank[id] = [];
+
+        bank[id].push({
+
+            question,
+            answer: String(answer),
+            type,
+            hint
+
+        });
+
+    }
+
+    /* -------------------------------------
+       1. PECAHAN BIASA → CAMPURAN
+    ------------------------------------- */
+
+    const denominators = [2, 3, 4, 5, 10];
+
+    denominators.forEach(d => {
+
+        for (let w = 1; w <= 4; w++) {
+
+            for (let r = 1; r < d; r++) {
+
+                const n = w * d + r;
+
+                add(
+                    1,
+                    `Ubahlah pecahan <b>${n}/${d}</b> menjadi pecahan campuran!`,
+                    `${w} ${r}/${d}`,
+                    "fraction",
+                    "Tuliskan bilangan bulat, lalu pembilang dan penyebut. Contoh: 1 1/2."
+                );
+
+            }
+
+        }
+
+    });
+
+
+    /* -------------------------------------
+       2. CAMPURAN → PECAHAN BIASA
+    ------------------------------------- */
+
+    denominators.forEach(d => {
+
+        for (let w = 1; w <= 5; w++) {
+
+            for (let r = 1; r < d; r++) {
+
+                const n = w * d + r;
+
+                add(
+                    2,
+                    `Ubahlah pecahan campuran <b>${w} ${r}/${d}</b> menjadi pecahan biasa!`,
+                    `${n}/${d}`,
+                    "fraction",
+                    "Kalikan bilangan bulat dengan penyebut, lalu tambahkan pembilang."
+                );
+
+            }
+
+        }
+
+    });
+
+
+    /* -------------------------------------
+       3. PECAHAN BIASA → DESIMAL
+    ------------------------------------- */
+
+    const decimalFractions = [
+
+        [1,2],[1,4],[3,4],[1,5],[2,5],
+        [3,5],[4,5],[1,10],[3,10],[7,10],
+        [9,10],[1,20],[3,20],[7,20],[1,25],
+        [2,25],[3,25],[1,50],[3,50],[1,100],
+        [25,100],[50,100],[75,100]
+
     ];
 
-    function createCircles() {
-      const container = document.getElementById("landing-page");
-      container.innerHTML = "";
+    decimalFractions.forEach(([n,d]) => {
 
-      for (let i = 1; i <= 10; i++) {
+        add(
+            3,
+            `Ubahlah pecahan <b>${n}/${d}</b> menjadi bilangan desimal!`,
+            decimalText(n/d),
+            "decimal",
+            "Bagilah pembilang dengan penyebut. Gunakan koma atau titik untuk desimal."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       4. DESIMAL → PECAHAN BIASA
+    ------------------------------------- */
+
+    const decimalToFraction = [
+
+        ["0,5",5,10],
+        ["0,25",25,100],
+        ["0,75",75,100],
+        ["0,2",2,10],
+        ["0,4",4,10],
+        ["0,6",6,10],
+        ["0,8",8,10],
+        ["0,3",3,10],
+        ["0,7",7,10],
+        ["0,9",9,10],
+        ["0,15",15,100],
+        ["0,35",35,100],
+        ["0,45",45,100],
+        ["0,65",65,100],
+        ["0,85",85,100],
+        ["0,1",1,10]
+
+    ];
+
+    decimalToFraction.forEach(([v,n,d]) => {
+
+        add(
+            4,
+            `Ubahlah desimal <b>${v}</b> menjadi pecahan biasa paling sederhana!`,
+            fractionText(n,d),
+            "fraction",
+            "Tuliskan desimal sebagai pecahan berpenyebut 10 atau 100, kemudian sederhanakan."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       5. PECAHAN BIASA → PERSEN
+    ------------------------------------- */
+
+    const fractionToPercent = [
+
+        [1,2],[1,4],[3,4],[1,5],[2,5],
+        [3,5],[4,5],[1,10],[3,10],[7,10],
+        [9,10],[1,20],[3,20],[7,20],
+        [1,25],[2,25],[3,25],[1,50],
+        [3,50],[1,100],[25,100],[75,100]
+
+    ];
+
+    fractionToPercent.forEach(([n,d]) => {
+
+        add(
+            5,
+            `Ubahlah pecahan <b>${n}/${d}</b> menjadi persen!`,
+            `${n/d*100}`,
+            "percent",
+            "Kalikan pecahan dengan 100%."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       6. PERSEN → PECAHAN BIASA
+    ------------------------------------- */
+
+    const percentages = [
+
+        10,20,25,30,40,50,60,70,75,80,
+        90,15,35,45,55,65,85,5
+
+    ];
+
+    percentages.forEach(p => {
+
+        add(
+            6,
+            `Ubahlah <b>${p}%</b> menjadi pecahan biasa paling sederhana!`,
+            fractionText(p,100),
+            "fraction",
+            "Tuliskan persen sebagai pecahan dengan penyebut 100, kemudian sederhanakan."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       7. CAMPURAN → DESIMAL
+    ------------------------------------- */
+
+    const mixedToDecimal = [
+
+        [1,1,2],[1,1,4],[1,3,4],
+        [2,1,2],[2,1,4],[2,3,4],
+        [3,1,2],[3,1,4],[3,3,4],
+        [1,1,5],[2,2,5],[3,3,5],
+        [1,1,10],[2,5,10],[3,7,10]
+
+    ];
+
+    mixedToDecimal.forEach(([w,n,d]) => {
+
+        add(
+            7,
+            `Ubahlah pecahan campuran <b>${w} ${n}/${d}</b> menjadi desimal!`,
+            decimalText(w+n/d),
+            "decimal",
+            "Ubah pecahannya menjadi desimal, kemudian tambahkan bilangan bulat."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       8. DESIMAL → CAMPURAN
+    ------------------------------------- */
+
+    const decimalToMixed = [
+
+        ["1,5",1,1,2],
+        ["1,25",1,1,4],
+        ["1,75",1,3,4],
+        ["2,5",2,1,2],
+        ["2,25",2,1,4],
+        ["2,75",2,3,4],
+        ["3,5",3,1,2],
+        ["3,25",3,1,4],
+        ["3,75",3,3,4],
+        ["1,2",1,1,5],
+        ["2,4",2,2,5],
+        ["3,6",3,3,5]
+
+    ];
+
+    decimalToMixed.forEach(([v,w,n,d]) => {
+
+        add(
+            8,
+            `Ubahlah desimal <b>${v}</b> menjadi pecahan campuran paling sederhana!`,
+            `${w} ${n}/${d}`,
+            "fraction",
+            "Pisahkan bilangan bulat dan bagian desimalnya."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       9. CAMPURAN → PERSEN
+    ------------------------------------- */
+
+    const mixedToPercent = [
+
+        [1,1,2],[1,1,4],[1,3,4],
+        [2,1,2],[2,1,4],[2,3,4],
+        [3,1,2],[3,1,4],[3,3,4],
+        [1,1,5],[2,2,5],[3,3,5]
+
+    ];
+
+    mixedToPercent.forEach(([w,n,d]) => {
+
+        add(
+            9,
+            `Ubahlah pecahan campuran <b>${w} ${n}/${d}</b> menjadi persen!`,
+            `${(w+n/d)*100}`,
+            "percent",
+            "Ubah menjadi desimal atau pecahan biasa, lalu kalikan 100%."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       10. PERSEN → CAMPURAN
+    ------------------------------------- */
+
+    const percentToMixed = [
+
+        [150,1,1,2],
+        [125,1,1,4],
+        [175,1,3,4],
+        [250,2,1,2],
+        [225,2,1,4],
+        [275,2,3,4],
+        [350,3,1,2],
+        [325,3,1,4],
+        [375,3,3,4],
+        [120,1,1,5],
+        [240,2,2,5]
+
+    ];
+
+    percentToMixed.forEach(([p,w,n,d]) => {
+
+        add(
+            10,
+            `Ubahlah <b>${p}%</b> menjadi pecahan campuran!`,
+            `${w} ${n}/${d}`,
+            "fraction",
+            "Bagi bilangan persen dengan 100, kemudian ubah menjadi pecahan campuran."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       11. DESIMAL → PERSEN
+    ------------------------------------- */
+
+    const decimalPercent = [
+
+        ["0,1",10],["0,2",20],["0,25",25],
+        ["0,3",30],["0,4",40],["0,5",50],
+        ["0,6",60],["0,7",70],["0,75",75],
+        ["0,8",80],["0,9",90],["0,15",15],
+        ["0,35",35],["0,45",45],["0,65",65],
+        ["1,2",120],["1,5",150],["2,5",250]
+
+    ];
+
+    decimalPercent.forEach(([v,p]) => {
+
+        add(
+            11,
+            `Ubahlah desimal <b>${v}</b> menjadi persen!`,
+            `${p}`,
+            "percent",
+            "Kalikan bilangan desimal dengan 100, lalu tambahkan tanda persen."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       12. PERSEN → DESIMAL
+    ------------------------------------- */
+
+    const percentDecimal = [
+
+        [10,"0,1"],[20,"0,2"],[25,"0,25"],
+        [30,"0,3"],[40,"0,4"],[50,"0,5"],
+        [60,"0,6"],[70,"0,7"],[75,"0,75"],
+        [80,"0,8"],[90,"0,9"],[15,"0,15"],
+        [35,"0,35"],[45,"0,45"],[65,"0,65"],
+        [120,"1,2"],[150,"1,5"],[250,"2,5"]
+
+    ];
+
+    percentDecimal.forEach(([p,v]) => {
+
+        add(
+            12,
+            `Ubahlah <b>${p}%</b> menjadi bilangan desimal!`,
+            v.replace(",","."),
+            "decimal",
+            "Bagilah bilangan persen dengan 100."
+        );
+
+    });
+
+    return bank;
+
+}
+
+
+/* =========================================
+   MENGACAK BANK SOAL
+========================================= */
+
+function shuffleArray(array) {
+
+    const result = [...array];
+
+    for (let i = result.length - 1; i > 0; i--) {
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [result[i], result[j]] =
+        [result[j], result[i]];
+
+    }
+
+    return result;
+
+}
+
+
+/* =========================================
+   MEMULAI BANK SOAL OPERASI
+========================================= */
+
+function initializePool(id) {
+
+    questionPools[id] =
+        shuffleArray(createQuestionBank()[id]);
+
+    usedQuestions[id] = 0;
+
+}
+
+
+/* =========================================
+   MENGUBAH PILIHAN OPERASI
+========================================= */
+
+function changeOperation() {
+
+    selectedOperation = Number(
+        document.getElementById("fraction-operation").value
+    );
+
+    document.getElementById("image-page").style.display =
+        "none";
+
+    currentQuestion = null;
+
+    if (selectedOperation === 0) return;
+
+    if (!questionPools[selectedOperation]) {
+
+        initializePool(selectedOperation);
+
+    }
+
+}
+
+
+/* =========================================
+   MEMBUAT MEDALI ANGKA 1-10
+========================================= */
+
+function createCircles() {
+
+    const container =
+        document.getElementById("landing-page");
+
+    container.innerHTML = "";
+
+    for (let i = 1; i <= 10; i++) {
+
         const circle = document.createElement("div");
+
         circle.classList.add("circle");
+
         circle.textContent = i;
+
         circle.style.background = getRandomGradient();
 
-        const x = Math.random() * (window.innerWidth - 100);
-        const y = Math.random() * (window.innerHeight - 150) + 100;
+        const maxX = Math.max(
+            10,
+            window.innerWidth - 100
+        );
+
+        const minY = window.innerWidth <= 600 ? 175 : 155;
+
+        const maxY = Math.max(
+            minY + 20,
+            window.innerHeight - 100
+        );
+
+        const x = Math.random() * maxX;
+
+        const y = Math.random() * (maxY - minY) + minY;
+
         circle.style.left = `${x}px`;
+
         circle.style.top = `${y}px`;
 
-        circle.onclick = () => showRandomImage(i);
+        makeDraggable(circle);
 
-        makeDraggable(circle); // ➕ Tambahkan kemampuan geser
         container.appendChild(circle);
-      }
+
     }
 
-    function makeDraggable(element) {
-      let isDragging = false, offsetX, offsetY;
+}
 
-      element.addEventListener("mousedown", (e) => {
+
+/* =========================================
+   FUNGSI GESER MEDALI
+   KLIK DAN DRAG DIPISAHKAN
+========================================= */
+
+function makeDraggable(element) {
+
+    let isDragging = false;
+
+    let hasMoved = false;
+
+    let offsetX = 0;
+    let offsetY = 0;
+
+    let startX = 0;
+    let startY = 0;
+
+    const dragThreshold = 8;
+
+    element.addEventListener("pointerdown", (e) => {
+
+        if (e.pointerType === "mouse" && e.button !== 0) {
+            return;
+        }
+
         isDragging = true;
+        hasMoved = false;
+
+        startX = e.clientX;
+        startY = e.clientY;
+
         offsetX = e.clientX - element.offsetLeft;
         offsetY = e.clientY - element.offsetTop;
+
         element.style.zIndex = 1000;
-      });
 
-      window.addEventListener("mousemove", (e) => {
-        if (isDragging) {
-          element.style.left = `${e.clientX - offsetX}px`;
-          element.style.top = `${e.clientY - offsetY}px`;
+        element.setPointerCapture(e.pointerId);
+
+        e.preventDefault();
+
+    });
+
+    element.addEventListener("pointermove", (e) => {
+
+        if (!isDragging) return;
+
+        const distance = Math.hypot(
+            e.clientX - startX,
+            e.clientY - startY
+        );
+
+        if (distance > dragThreshold) {
+
+            hasMoved = true;
+
         }
-      });
 
-      window.addEventListener("mouseup", () => {
-        isDragging = false;
-        element.style.zIndex = 1;
-      });
+        if (hasMoved) {
 
-      // 📱 Tambahkan dukungan sentuhan (untuk HP)
-      element.addEventListener("touchstart", (e) => {
-        isDragging = true;
-        const touch = e.touches[0];
-        offsetX = touch.clientX - element.offsetLeft;
-        offsetY = touch.clientY - element.offsetTop;
-        element.style.zIndex = 1000;
-      });
+            const maxLeft =
+                window.innerWidth - element.offsetWidth;
 
-      window.addEventListener("touchmove", (e) => {
-        if (isDragging) {
-          const touch = e.touches[0];
-          element.style.left = `${touch.clientX - offsetX}px`;
-          element.style.top = `${touch.clientY - offsetY}px`;
+            const maxTop =
+                window.innerHeight - element.offsetHeight;
+
+            const x = Math.max(
+                0,
+                Math.min(maxLeft, e.clientX - offsetX)
+            );
+
+            const y = Math.max(
+                55,
+                Math.min(maxTop, e.clientY - offsetY)
+            );
+
+            element.style.left = `${x}px`;
+            element.style.top = `${y}px`;
+
         }
-      });
 
-      window.addEventListener("touchend", () => {
+    });
+
+    element.addEventListener("pointerup", (e) => {
+
+        if (!isDragging) return;
+
         isDragging = false;
-        element.style.zIndex = 1;
-      });
+
+        element.style.zIndex = 2;
+
+        if (hasMoved) {
+
+            e.preventDefault();
+
+            return;
+
+        }
+
+        showRandomQuestion(
+            Number(element.textContent)
+        );
+
+    });
+
+    element.addEventListener("pointercancel", () => {
+
+        isDragging = false;
+        hasMoved = false;
+
+        element.style.zIndex = 2;
+
+    });
+
+}
+
+
+/* =========================================
+   WARNA MEDALI ACAK
+========================================= */
+
+function getRandomGradient() {
+
+    const colors = [
+
+        ["#fff0a1", "#e6a92f", "#85440c"],
+        ["#61d9f2", "#258cc5", "#164b86"],
+        ["#ffb16b", "#ed6532", "#9f351c"],
+        ["#a7e56d", "#4eaa36", "#276329"],
+        ["#ffe78b", "#e7ae28", "#a66a12"],
+        ["#b69aff", "#7851c7", "#422a82"],
+        ["#ff9cbb", "#d94e7a", "#8e2850"],
+        ["#72e7dc", "#1a9e9c", "#11616c"],
+        ["#d2ee82", "#83b933", "#47721c"],
+        ["#fff0a1", "#f2b62e", "#a96613"]
+
+    ];
+
+    const random =
+        colors[Math.floor(Math.random() * colors.length)];
+
+    return `radial-gradient(
+        circle at 35% 25%,
+        ${random[0]},
+        ${random[1]} 55%,
+        ${random[2]} 100%
+    )`;
+
+}
+
+
+/* =========================================
+   MENGAMBIL SOAL BARU
+========================================= */
+
+function getNextQuestion(id) {
+
+    if (!questionPools[id]) {
+
+        initializePool(id);
+
     }
 
-    function getRandomGradient() {
-      const colors = [
-        ["#ff512f", "#dd2476"],
-        ["#36d1dc", "#5b86e5"],
-        ["#ff9966", "#ff5e62"],
-        ["#11998e", "#38ef7d"],
-        ["#f7971e", "#ffd200"],
-        ["#8e2de2", "#4a00e0"],
-        ["#f953c6", "#b91d73"],
-        ["#30cfd0", "#330867"],
-        ["#00b09b", "#96c93d"],
-        ["#ff758c", "#ff7eb3"]
-      ];
-      const random = colors[Math.floor(Math.random() * colors.length)];
-      return `linear-gradient(135deg, ${random[0]}, ${random[1]})`;
+    const pool = questionPools[id];
+
+    if (usedQuestions[id] >= pool.length) {
+
+        questionPools[id] = shuffleArray(
+            createQuestionBank()[id]
+        );
+
+        usedQuestions[id] = 0;
+
+        alert(
+            "🏰 Hebat! Semua soal pada operasi ini sudah dikerjakan. Petualangan dimulai kembali dengan urutan soal baru!"
+        );
+
     }
 
-    function showRandomImage(number) {
-      const randomIndex = Math.floor(Math.random() * imageLinks.length);
-      document.getElementById("random-image").src = imageLinks[randomIndex];
-      document.getElementById("landing-page").style.display = "none";
-      document.getElementById("image-page").style.display = "flex";
+    const question =
+        questionPools[id][usedQuestions[id]];
+
+    usedQuestions[id]++;
+
+    return question;
+
+}
+
+
+/* =========================================
+   MEMBUAT KOTAK ISIAN JAWABAN SESUAI BENTUK
+========================================= */
+
+function renderAnswerFields() {
+    const container = document.getElementById("answer-input");
+    container.innerHTML = "";
+
+    const fractionOperations = [1, 2, 4, 6, 8, 10];
+    const mixedOperations = [1, 8, 10];
+
+    function makeInput(placeholder, extraClass = "") {
+        const input = document.createElement("input");
+        input.type = "number";
+        input.inputMode = "numeric";
+        input.className = "answer-input " + extraClass;
+        input.placeholder = placeholder;
+        input.autocomplete = "off";
+        input.setAttribute("aria-label", placeholder);
+        input.addEventListener("keydown", function(e) {
+            if (e.key === "Enter") checkAnswer();
+        });
+        return input;
     }
 
-    function goBack() {
-      document.getElementById("image-page").style.display = "none";
-      document.getElementById("landing-page").style.display = "block";
-      createCircles();
+    if (fractionOperations.includes(selectedOperation)) {
+        if (mixedOperations.includes(selectedOperation)) {
+            const mixed = document.createElement("div");
+            mixed.className = "answer-mixed";
+            const whole = makeInput("Bulat", "answer-whole");
+            whole.dataset.part = "whole";
+            const fraction = document.createElement("div");
+            fraction.className = "answer-fraction";
+            const numerator = makeInput("Pembilang");
+            numerator.dataset.part = "numerator";
+            const line = document.createElement("div");
+            line.className = "answer-line";
+            const denominator = makeInput("Penyebut");
+            denominator.dataset.part = "denominator";
+            fraction.append(numerator, line, denominator);
+            mixed.append(whole, fraction);
+            container.appendChild(mixed);
+            whole.focus();
+        } else {
+            const fraction = document.createElement("div");
+            fraction.className = "answer-fraction";
+            const numerator = makeInput("Pembilang");
+            numerator.dataset.part = "numerator";
+            const line = document.createElement("div");
+            line.className = "answer-line";
+            const denominator = makeInput("Penyebut");
+            denominator.dataset.part = "denominator";
+            fraction.append(numerator, line, denominator);
+            container.appendChild(fraction);
+            numerator.focus();
+        }
+    } else {
+        const input = makeInput("Masukkan jawaban", "answer-single");
+        input.type = "text";
+        input.inputMode = "decimal";
+        input.placeholder = "Contoh: 0,75";
+        input.id = "single-answer";
+        container.appendChild(input);
+        input.focus();
+    }
+}
+
+function getAnswerValue() {
+    const container = document.getElementById("answer-input");
+    const whole = container.querySelector('[data-part="whole"]');
+    const numerator = container.querySelector('[data-part="numerator"]');
+    const denominator = container.querySelector('[data-part="denominator"]');
+
+    if (numerator && denominator) {
+        if (!numerator.value.trim() || !denominator.value.trim()) return "";
+        if (whole) {
+            if (!whole.value.trim()) return "";
+            return `${whole.value.trim()} ${numerator.value.trim()}/${denominator.value.trim()}`;
+        }
+        return `${numerator.value.trim()}/${denominator.value.trim()}`;
+    }
+    const single = container.querySelector("#single-answer");
+    return single ? single.value.trim() : "";
+}
+
+function setAnswerDisabled(disabled) {
+    document.querySelectorAll("#answer-input input").forEach(input => {
+        input.disabled = disabled;
+    });
+}
+
+/* =========================================
+   MENAMPILKAN SOAL ACAK
+========================================= */
+
+function showRandomQuestion(number) {
+
+    if (selectedOperation === 0) {
+
+        alert("🏰 Silakan pilih operasi pecahan terlebih dahulu!");
+
+        return;
+
     }
 
-    createCircles();
-  </script>
+    currentQuestion =
+        getNextQuestion(selectedOperation);
+
+    questionNumber++;
+
+    hasAnswered = false;
+
+    document.getElementById("question-operation").textContent =
+        "⚔️ " + operations[selectedOperation];
+
+    document.getElementById("question-number").textContent =
+        "TANTANGAN NOMOR " + number +
+        " • SOAL KE-" + questionNumber;
+
+    document.getElementById("question-text").innerHTML =
+        formatQuestionHTML(currentQuestion.question);
+
+    document.getElementById("answer-hint").textContent =
+        "💡 " + currentQuestion.hint;
+
+    renderAnswerFields();
+
+    document.getElementById("feedback").className =
+        "feedback";
+
+    document.getElementById("feedback").textContent = "";
+
+    document.getElementById("check-button").style.display =
+        "inline-block";
+
+    document.getElementById("next-button").style.display =
+        "none";
+
+    setAnswerDisabled(false);
+
+    document.getElementById("image-page").style.display =
+        "flex";
+
+    setTimeout(() => {
+        const firstInput = document.querySelector("#answer-input input");
+        if (firstInput) firstInput.focus();
+    }, 100);
+
+}
+
+
+/* =========================================
+   MEMBACA JAWABAN PECAHAN
+========================================= */
+
+function parseFraction(value) {
+
+    let s = value.trim().replace(/\s+/g, " ");
+
+    // Pecahan campuran: 2 1/3
+
+    let mixed = s.match(/^(-?\d+)\s+(\d+)\/(\d+)$/);
+
+    if (mixed) {
+
+        let whole = Number(mixed[1]);
+        let n = Number(mixed[2]);
+        let d = Number(mixed[3]);
+
+        if (d === 0 || n >= d) return null;
+
+        let sign = whole < 0 ? -1 : 1;
+
+        return sign * (Math.abs(whole) * d + n) / d;
+
+    }
+
+    // Pecahan biasa: 3/4
+
+    let fraction = s.match(/^(-?\d+)\s*\/\s*(\d+)$/);
+
+    if (fraction) {
+
+        let n = Number(fraction[1]);
+        let d = Number(fraction[2]);
+
+        if (d === 0) return null;
+
+        return n / d;
+
+    }
+
+    return null;
+
+}
+
+
+/* =========================================
+   MEMERIKSA JAWABAN
+========================================= */
+
+function checkAnswer() {
+
+    if (!currentQuestion || hasAnswered) return;
+
+    const value = getAnswerValue();
+
+    const feedback =
+        document.getElementById("feedback");
+
+    if (!value) {
+
+        feedback.className = "feedback wrong";
+
+        feedback.textContent =
+            "✏️ Silakan tuliskan jawaban terlebih dahulu!";
+
+        return;
+
+    }
+
+    let correct = false;
+
+    const type = currentQuestion.type;
+
+    const expected = Number(currentQuestion.answer);
+
+    if (type === "fraction") {
+
+        const parsed = parseFraction(value);
+
+        const expectedFraction =
+            parseFraction(currentQuestion.answer);
+
+        if (parsed !== null && expectedFraction !== null) {
+
+            correct =
+                Math.abs(parsed - expectedFraction) < 0.000001;
+
+        }
+
+    }
+
+    else if (type === "decimal") {
+
+        const userNumber = Number(
+            value.replace(",", ".")
+        );
+
+        correct =
+            Number.isFinite(userNumber) &&
+            Math.abs(userNumber - expected) < 0.0001;
+
+    }
+
+    else if (type === "percent") {
+
+        const cleaned = value
+            .replace("%", "")
+            .replace(",", ".")
+            .trim();
+
+        const userNumber = Number(cleaned);
+
+        correct =
+            Number.isFinite(userNumber) &&
+            Math.abs(userNumber - expected) < 0.0001;
+
+    }
+
+
+    if (correct) {
+
+        hasAnswered = true;
+
+        feedback.className = "feedback correct";
+
+        feedback.innerHTML =
+            "🎉 BENAR! HEBAT SEKALI! 🏆<br>" +
+            "Kamu berhasil menyelesaikan tantangan kerajaan!";
+
+        setAnswerDisabled(true);
+
+        document.getElementById("check-button").style.display =
+            "none";
+
+        document.getElementById("next-button").style.display =
+            "inline-block";
+
+    } else {
+
+        feedback.className = "feedback wrong";
+
+        feedback.innerHTML =
+            "💪 BELUM TEPAT!<br>" +
+            "Ayo coba periksa kembali perhitunganmu!";
+
+        const firstInput = document.querySelector("#answer-input input");
+        if (firstInput) firstInput.focus();
+
+    }
+
+}
+
+
+/* =========================================
+   SOAL BERIKUTNYA
+========================================= */
+
+function nextQuestion() {
+
+    if (!hasAnswered) return;
+
+    showRandomQuestion(0);
+
+}
+
+
+/* =========================================
+   KEMBALI KE HALAMAN UTAMA
+========================================= */
+
+function goBack() {
+
+    document.getElementById("image-page").style.display =
+        "none";
+
+    document.getElementById("landing-page").style.display =
+        "block";
+
+}
+
+
+/* =========================================
+   ENTER UNTUK MEMERIKSA JAWABAN
+========================================= */
+
+
+
+
+/* =========================================
+   EFEK KILAUAN FANTASI
+========================================= */
+
+function createSparkles() {
+
+    const symbols = ["✦", "✧", "✨", "·"];
+
+    for (let i = 0; i < 18; i++) {
+
+        const sparkle = document.createElement("div");
+
+        sparkle.className = "sparkle";
+
+        sparkle.textContent =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        sparkle.style.left =
+            Math.random() * 100 + "vw";
+
+        sparkle.style.top =
+            Math.random() * 100 + "vh";
+
+        sparkle.style.animationDelay =
+            Math.random() * 3 + "s";
+
+        document.body.appendChild(sparkle);
+
+    }
+
+}
+
+
+/* =========================================
+   INISIALISASI
+========================================= */
+
+createSparkles();
+
+createCircles();
+
+</script>
 
 </body>
 </html>
-

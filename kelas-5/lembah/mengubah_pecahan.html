@@ -1,0 +1,2745 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Castle Duels - Petualangan Pecahan</title>
+
+<style>
+
+/* =========================================
+   TEMA CASTLE DUELS - FANTASY FOREST
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Trebuchet MS", "Poppins", sans-serif;
+
+    background:
+        radial-gradient(ellipse at 50% 35%,
+            rgba(255,255,210,0.85),
+            rgba(177,238,255,0.45) 25%,
+            transparent 55%),
+        linear-gradient(
+            180deg,
+            #43b9e8 0%,
+            #a3e7f4 30%,
+            #9bdc70 65%,
+            #327b36 100%
+        );
+
+    color: white;
+    text-align: center;
+
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    isolation: isolate;
+}
+
+/* =========================================
+   BACKGROUND HUTAN FANTASI
+========================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 50% 32%,
+            rgba(255,255,210,0.75),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 15% 80%,
+            rgba(108,209,58,0.6),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 75%,
+            rgba(65,165,46,0.6),
+            transparent 30%
+        );
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at -3% 8%,
+            #173f27 0%,
+            #285e2e 18%,
+            transparent 19%
+        ),
+        radial-gradient(
+            ellipse at 0% 28%,
+            #3d872e 0%,
+            #3d872e 16%,
+            transparent 17%
+        ),
+        radial-gradient(
+            ellipse at 1% 70%,
+            #64b638 0%,
+            #64b638 18%,
+            transparent 19%
+        ),
+        radial-gradient(
+            ellipse at 103% 10%,
+            #173f27 0%,
+            #285e2e 18%,
+            transparent 19%
+        ),
+        radial-gradient(
+            ellipse at 100% 35%,
+            #438c32 0%,
+            #438c32 17%,
+            transparent 18%
+        ),
+        radial-gradient(
+            ellipse at 100% 75%,
+            #66b83b 0%,
+            #66b83b 18%,
+            transparent 19%
+        ),
+        linear-gradient(
+            0deg,
+            #215b2c 0%,
+            #4c9d35 12%,
+            transparent 35%
+        );
+
+    filter: saturate(1.15);
+}
+
+/* =========================================
+   JUDUL BERJALAN
+========================================= */
+
+.title-container {
+    position: fixed;
+    top: 10px;
+    width: 100%;
+
+    overflow-x: auto;
+    white-space: nowrap;
+
+    z-index: 100;
+    scrollbar-width: none;
+}
+
+.title-container::-webkit-scrollbar {
+    display: none;
+}
+
+.title-box {
+    display: inline-block;
+
+    background:
+        linear-gradient(
+            135deg,
+            #163e75,
+            #258fc3 45%,
+            #164c82
+        );
+
+    border: 3px solid #f9d36a;
+
+    padding: 10px 30px;
+    border-radius: 20px;
+
+    box-shadow:
+        0 5px 0 #102c4e,
+        0 9px 18px rgba(0,0,0,0.45),
+        inset 0 2px 5px rgba(255,255,255,0.5);
+
+    text-shadow: 2px 3px 3px rgba(0,0,0,0.7);
+
+    color: #fff6be;
+
+    font-weight: 900;
+    font-size: 1.2em;
+
+    letter-spacing: 1px;
+
+    margin-left: 100%;
+}
+
+/* =========================================
+   MENU DROPDOWN OPERASI PECAHAN
+========================================= */
+
+.fraction-menu {
+    position: fixed;
+
+    top: 72px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 150;
+
+    width: min(92%, 390px);
+
+    padding: 9px 12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #174c79,
+            #237f9d
+        );
+
+    border: 3px solid #f8d76c;
+    border-radius: 18px;
+
+    box-shadow:
+        0 5px 0 #103b5b,
+        0 8px 18px rgba(0,0,0,0.4);
+}
+
+.fraction-menu label {
+    display: block;
+
+    color: #fff2ad;
+
+    font-size: 12px;
+    font-weight: 900;
+
+    margin-bottom: 6px;
+
+    letter-spacing: 1px;
+}
+
+.fraction-menu select {
+    width: 100%;
+
+    padding: 11px 14px;
+
+    border: 2px solid #f5d477;
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff5c9,
+            #f5d783
+        );
+
+    color: #62400e;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    outline: none;
+    cursor: pointer;
+}
+
+.fraction-menu select option {
+    background: #fff4c8;
+    color: #62400e;
+    font-weight: bold;
+}
+
+/* =========================================
+   ANGKA MEDALI KERAJAAN
+========================================= */
+
+.circle {
+    width: 82px;
+    height: 82px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.9em;
+    font-weight: 900;
+
+    color: #fff9d9;
+
+    cursor: grab;
+
+    position: absolute;
+
+    border: 4px solid #f8d76c;
+
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #fff5b4,
+            #e6a92f 38%,
+            #a65a12 75%,
+            #6c370d 100%
+        );
+
+    text-shadow:
+        2px 3px 3px rgba(0,0,0,0.75);
+
+    box-shadow:
+        0 6px 0 #754014,
+        0 10px 15px rgba(0,0,0,0.4),
+        inset 0 3px 7px rgba(255,255,255,0.7);
+
+    user-select: none;
+
+    transition:
+        box-shadow 0.2s ease;
+
+    z-index: 2;
+
+    touch-action: none;
+}
+
+.circle::before {
+    content: "✦";
+
+    position: absolute;
+
+    top: 5px;
+    right: 12px;
+
+    font-size: 13px;
+
+    color: #fff8c2;
+
+    pointer-events: none;
+}
+
+.circle::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 6px;
+
+    border: 2px solid rgba(255,255,210,0.4);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+.circle:hover {
+    box-shadow:
+        0 7px 0 #754014,
+        0 12px 22px rgba(0,0,0,0.5),
+        0 0 20px rgba(255,222,100,0.8);
+}
+
+.circle:active {
+    cursor: grabbing;
+}
+
+/* =========================================
+   HALAMAN SOAL MELAYANG
+========================================= */
+
+.image-page {
+    display: none;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 500;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 15px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(13,44,54,0.68),
+            rgba(5,24,35,0.86)
+        );
+
+    backdrop-filter: blur(5px);
+}
+
+/* Kotak utama */
+
+.question-card {
+    width: min(94%, 570px);
+
+    max-height: 90vh;
+    overflow-y: auto;
+
+    padding: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #174b70,
+            #21828c,
+            #20584f
+        );
+
+    border: 5px solid #f4cf68;
+
+    border-radius: 27px;
+
+    box-shadow:
+        0 10px 0 #754817,
+        0 18px 40px rgba(0,0,0,0.65),
+        inset 0 2px 12px rgba(255,255,255,0.3);
+
+    position: relative;
+}
+
+.question-card::before {
+    content: "✦";
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    color: #ffe28b;
+    font-size: 25px;
+    pointer-events: none;
+}
+
+.question-card::after {
+    content: "✦";
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #ffe28b;
+    font-size: 25px;
+    pointer-events: none;
+}
+
+/* =========================================
+   JUDUL SOAL
+========================================= */
+
+.question-title {
+    color: #ffe18a;
+
+    font-size: clamp(19px, 4vw, 28px);
+
+    font-weight: 900;
+
+    text-shadow:
+        2px 3px 4px rgba(0,0,0,0.65);
+
+    margin: 5px 0 8px;
+}
+
+.question-operation {
+    display: inline-block;
+
+    padding: 8px 15px;
+
+    background: rgba(255,255,255,0.14);
+
+    border: 1px solid #e9d18c;
+
+    border-radius: 15px;
+
+    color: #fff6c5;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    margin-bottom: 12px;
+}
+
+.question-number {
+    color: #ffe7a0;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+/* =========================================
+   AREA PERTANYAAN
+========================================= */
+
+.question-box {
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf0,
+            #f7e6b7
+        );
+
+    color: #553714;
+
+    border: 3px solid #e8bb53;
+
+    border-radius: 20px;
+
+    padding: 24px 15px;
+
+    margin: 10px 0 18px;
+
+    box-shadow:
+        inset 0 3px 8px rgba(255,255,255,0.8),
+        0 5px 12px rgba(0,0,0,0.25);
+}
+
+.question-text {
+    font-size: clamp(20px, 4vw, 27px);
+
+    font-weight: 900;
+
+    line-height: 1.7;
+
+    color: #49300f;
+}
+
+/* =========================================
+   TAMPILAN PECAHAN VERTIKAL
+========================================= */
+
+.math-fraction {
+    display: inline-flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+    justify-content: center;
+
+    vertical-align: middle;
+
+    min-width: 35px;
+
+    margin: 0 5px;
+
+    color: inherit;
+
+    font-weight: 900;
+
+    line-height: 1.15;
+}
+
+.math-fraction .numerator,
+.math-fraction .denominator {
+    display: block;
+
+    text-align: center;
+
+    padding: 2px 7px;
+
+    font-size: 1em;
+}
+
+.math-fraction .fraction-line {
+    display: block;
+
+    width: 100%;
+    height: 2px;
+
+    background: currentColor;
+
+    border-radius: 3px;
+}
+
+.math-mixed {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+}
+
+.math-whole {
+    font-size: 1.15em;
+    font-weight: 900;
+}
+
+.question-text .math-fraction {
+    font-size: 1.35em;
+}
+
+/* =========================================
+   KOTAK JAWABAN
+========================================= */
+
+.answer-label {
+    display: block;
+
+    color: #fff2b5;
+
+    font-size: 15px;
+    font-weight: 900;
+
+    margin-bottom: 9px;
+}
+
+.answer-entry {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 76px;
+    margin: 0 auto;
+}
+
+.answer-input {
+    width: 76px;
+    height: 48px;
+    padding: 7px;
+    border-radius: 10px;
+    border: 3px solid #f5d477;
+    outline: none;
+    background: #fffdf2;
+    color: #3c321c;
+    font-size: 22px;
+    font-weight: 900;
+    text-align: center;
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.answer-input:focus {
+    border-color: #72e7dc;
+    box-shadow: 0 0 12px rgba(114,231,220,0.8);
+}
+
+.answer-input::placeholder {
+    color: #b4a78a;
+    font-size: 12px;
+}
+
+.answer-fraction {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.answer-fraction .answer-line {
+    width: 76px;
+    height: 4px;
+    border-radius: 4px;
+    background: #fff0bc;
+}
+
+.answer-mixed {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.answer-whole {
+    width: 76px;
+}
+
+.answer-single {
+    width: min(100%, 320px);
+    height: 52px;
+}
+
+.answer-hint {
+    color: #fff0bc;
+
+    font-size: 12px;
+
+    margin-top: 8px;
+
+    line-height: 1.5;
+}
+
+/* =========================================
+   PESAN HASIL
+========================================= */
+
+.feedback {
+    display: none;
+
+    padding: 12px;
+
+    margin: 15px 0 5px;
+
+    border-radius: 14px;
+
+    font-weight: 900;
+
+    font-size: 15px;
+}
+
+.feedback.correct {
+    display: block;
+
+    background: #c9f5c6;
+
+    border: 2px solid #58c85c;
+
+    color: #176b24;
+}
+
+.feedback.wrong {
+    display: block;
+
+    background: #ffe1bd;
+
+    border: 2px solid #f5a34d;
+
+    color: #8b4310;
+}
+
+/* =========================================
+   TOMBOL SOAL
+========================================= */
+
+.question-buttons {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 18px;
+}
+
+button {
+    background:
+        linear-gradient(
+            180deg,
+            #ffdf75,
+            #f2a52d 55%,
+            #c66b13
+        );
+
+    border: 3px solid #fff0a9;
+
+    padding: 12px 24px;
+
+    border-radius: 30px;
+
+    color: #633309;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    font-size: 14px;
+
+    box-shadow:
+        0 5px 0 #87450d,
+        0 7px 12px rgba(0,0,0,0.35);
+}
+
+button:hover {
+    background:
+        linear-gradient(
+            180deg,
+            #fff1a7,
+            #ffc34c
+        );
+
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #87450d;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* =========================================
+   TOMBOL KEMBALI KE HALAMAN LEMBAH
+========================================= */
+
+.back-to-valley {
+    position: fixed;
+    left: 16px;
+    top: 14px;
+    bottom: auto;
+    z-index: 700;
+    padding: 11px 20px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #ffdf75, #f2a52d 55%, #c66b13);
+    border: 3px solid #fff0a9;
+    border-radius: 30px;
+    color: #633309;
+    font-weight: 900;
+    font-size: 14px;
+    box-shadow: 0 5px 0 #87450d, 0 7px 12px rgba(0,0,0,0.35);
+    transition: 0.2s;
+}
+
+.back-to-valley:hover {
+    background: linear-gradient(180deg, #fff1a7, #ffc34c);
+    transform: translateY(-2px);
+}
+
+.back-to-valley:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #87450d;
+}
+
+/* =========================================
+   DEKORASI CAHAYA
+========================================= */
+
+.sparkle {
+    position: fixed;
+
+    color: #fff5a6;
+
+    font-size: 18px;
+
+    pointer-events: none;
+
+    opacity: 0.8;
+
+    animation: twinkle 2s infinite alternate;
+
+    z-index: 0;
+}
+
+@keyframes twinkle {
+    from {
+        opacity: 0.25;
+        transform: scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .back-to-valley {
+        top: 10px;
+        left: 10px;
+        padding: 8px 13px;
+        font-size: 11px;
+    }
+
+    .circle {
+        width: 66px;
+        height: 66px;
+        font-size: 1.5em;
+        border-width: 3px;
+    }
+
+    .title-box {
+        font-size: 1em;
+        padding: 9px 22px;
+    }
+
+    .fraction-menu {
+        top: 68px;
+        width: 92%;
+    }
+
+    .fraction-menu select {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .question-card {
+        padding: 17px 13px;
+    }
+
+    .question-box {
+        padding: 20px 10px;
+    }
+
+    .answer-input {
+        width: 68px;
+        height: 45px;
+        font-size: 20px;
+    }
+
+    .answer-fraction .answer-line {
+        width: 68px;
+    }
+
+    .answer-whole {
+        width: 68px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 11px 17px;
+    }
+}
+
+
+
+/* =========================================
+   TEMA BARU: DUNIA BLOK & PETUALANGAN ALAM
+   Terinspirasi dari referensi visual voxel
+   Struktur HTML dan fungsi permainan tetap
+========================================= */
+body {
+    font-family: "Trebuchet MS", "Arial Rounded MT Bold", sans-serif;
+    background-color: #78c9ef;
+    background-image:
+        linear-gradient(180deg, rgba(91,185,235,.05) 0 58%, rgba(255,255,255,0) 58%),
+        linear-gradient(0deg, #4b9b32 0%, #75bd38 18%, transparent 18%),
+        repeating-linear-gradient(90deg, transparent 0 79px, rgba(255,255,255,.035) 80px 82px),
+        linear-gradient(180deg, #64b9e8 0%, #b9e9e7 58%, #8dcf4d 59%, #4c9631 100%);
+}
+body::before {
+    background:
+        linear-gradient(135deg, transparent 0 48%, rgba(255,255,255,.18) 49% 52%, transparent 53%) 12% 18% / 150px 90px no-repeat,
+        linear-gradient(45deg, transparent 0 45%, rgba(255,255,255,.14) 46% 55%, transparent 56%) 78% 12% / 190px 100px no-repeat,
+        radial-gradient(circle at 15% 24%, rgba(255,255,255,.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 76% 19%, rgba(255,255,255,.85) 0 3px, transparent 4px),
+        radial-gradient(circle at 50% 42%, rgba(255,255,255,.3), transparent 35%);
+}
+body::after {
+    background:
+        linear-gradient(90deg, transparent 0 8%, #286c2b 8% 13%, #398a2e 13% 18%, transparent 18%) 0 54% / 100% 155px repeat-x,
+        linear-gradient(90deg, transparent 0 5%, #4e9b35 5% 10%, #2e762c 10% 15%, transparent 15%) 0 64% / 100% 185px repeat-x,
+        linear-gradient(0deg, #397c2a 0 13%, #6cab35 13% 17%, transparent 17%);
+    opacity: .9;
+    filter: none;
+}
+.title-box, .fraction-menu, .question-card, .question-box,
+.circle, .back-to-valley, button {
+    border-radius: 4px !important;
+}
+.title-box {
+    background: linear-gradient(180deg, #568f37 0%, #34752c 48%, #285c27 49%, #397b2b 100%);
+    border: 4px solid #d7b66b;
+    box-shadow: 0 6px 0 #493b28, 0 10px 18px rgba(20,45,20,.45), inset 0 3px rgba(255,255,255,.22);
+    color: #fff5c9;
+    text-shadow: 3px 3px 0 #315322, 1px 1px 0 #315322;
+}
+.fraction-menu {
+    background: linear-gradient(180deg, #79512f 0%, #674126 48%, #4d321f 49%, #6a4427 100%);
+    border: 4px solid #c89b55;
+    border-radius: 5px;
+    box-shadow: 0 6px 0 #382718, 0 10px 18px rgba(0,0,0,.4), inset 0 2px rgba(255,255,255,.18);
+}
+.fraction-menu label { color: #fff0b3; text-shadow: 2px 2px #392719; }
+.fraction-menu select {
+    border: 3px solid #b98b4c;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #f6e8b7, #d9bd7b);
+    color: #49321d;
+    box-shadow: inset 0 3px rgba(255,255,255,.5), 0 3px 0 #49321d;
+}
+.circle {
+    border: 4px solid #f3d27b;
+    background: linear-gradient(135deg, #f6d36b 0%, #c98a32 48%, #8b5525 49%, #b9782c 100%);
+    box-shadow: 0 6px 0 #55351d, 0 10px 14px rgba(0,0,0,.38), inset 0 3px rgba(255,255,255,.3);
+    text-shadow: 3px 3px 0 #55351d;
+}
+.circle::before { content: "✦"; text-shadow: 1px 1px #72501e; }
+.circle::after { border: 2px solid rgba(255,244,190,.35); border-radius: 2px; }
+.circle:hover { box-shadow: 0 7px 0 #55351d, 0 12px 22px rgba(0,0,0,.5), 0 0 16px rgba(255,229,125,.75); }
+.image-page {
+    background: rgba(18, 38, 28, .72);
+    backdrop-filter: blur(3px);
+}
+.question-card {
+    background: linear-gradient(180deg, #79512f 0%, #684328 48%, #50331f 49%, #79502c 100%);
+    border: 5px solid #d8b36a;
+    box-shadow: 0 9px 0 #382719, 0 18px 38px rgba(0,0,0,.65), inset 0 3px 0 rgba(255,255,255,.2);
+}
+.question-card::before, .question-card::after { color: #f6d77c; text-shadow: 2px 2px #4c321d; }
+.question-title { color: #ffe89a; text-shadow: 3px 3px 0 #49311d; }
+.question-operation {
+    background: #456f35;
+    border: 2px solid #b7a05c;
+    border-radius: 3px;
+    color: #fff4c4;
+    box-shadow: inset 0 2px rgba(255,255,255,.2);
+}
+.question-number { color: #f8e7ad; }
+.question-box {
+    background: linear-gradient(180deg, #f6edca, #ddc995);
+    color: #49331d;
+    border: 4px solid #b88c4c;
+    border-radius: 4px;
+    box-shadow: inset 0 3px rgba(255,255,255,.6), 0 5px 0 #49321e;
+}
+.question-text { color: #49331d; }
+.answer-label { color: #ffedb0; text-shadow: 2px 2px #49311d; }
+.answer-input {
+    border: 3px solid #b98c4c;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #fffdf0, #e9dfbd);
+    color: #3d2c1a;
+    box-shadow: inset 0 3px 5px rgba(0,0,0,.12), 0 3px 0 #49321e;
+}
+.answer-input:focus { border-color: #a6d96a; box-shadow: 0 0 0 3px rgba(166,217,106,.35), inset 0 2px 5px rgba(0,0,0,.1); }
+.answer-input::placeholder { color: #9d8c6c; }
+.answer-hint { color: #f8e8b4; }
+.feedback { border-radius: 4px; }
+.feedback.correct { background: #c9ef9b; border: 3px solid #60983c; color: #28551e; }
+.feedback.wrong { background: #f6d4a2; border: 3px solid #b87937; color: #75421d; }
+button, .back-to-valley {
+    background: linear-gradient(180deg, #a8d65d 0%, #6da83d 48%, #47782d 49%, #60963a 100%);
+    border: 3px solid #d7c17c;
+    border-radius: 4px;
+    color: #fff8d7;
+    text-shadow: 2px 2px 0 #355225;
+    box-shadow: 0 5px 0 #355025, 0 7px 12px rgba(0,0,0,.35), inset 0 2px rgba(255,255,255,.25);
+}
+button:hover, .back-to-valley:hover {
+    background: linear-gradient(180deg, #c6ed79, #83bd4a 50%, #65963b);
+    color: white;
+}
+button:active, .back-to-valley:active { box-shadow: 0 2px 0 #355025; }
+.back-to-valley { border-color: #e1c47b; }
+.sparkle { color: #fff7b0; text-shadow: 0 0 5px #fff; }
+@media (max-width: 600px) {
+    .title-box { border-width: 3px; }
+    .fraction-menu, .question-card { border-width: 3px; }
+    .circle { border-width: 3px; }
+}
+
+
+
+/* =========================================
+   DETAIL LINGKUNGAN VOXEL: LANGIT, KEBUN,
+   POHON BALOK, PAGAR, BUNGA, DAN LEBAH
+========================================= */
+body {
+    overflow-x: hidden;
+    background:
+      linear-gradient(180deg, #63b7e8 0%, #8bd0ef 48%, #b8e5d1 63%, #82c84b 64%, #4d9634 100%);
+}
+.voxel-scenery {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    image-rendering: pixelated;
+}
+.voxel-sun {
+    position: absolute;
+    width: 112px;
+    height: 112px;
+    right: 9%;
+    top: 4%;
+    background: #fff7a8;
+    border: 12px solid #f5ed75;
+    box-shadow: 0 0 0 9px rgba(255,245,120,.22), 0 0 55px rgba(255,249,157,.75);
+    transform: rotate(-8deg);
+}
+.voxel-cloud {
+    position: absolute;
+    width: 145px;
+    height: 35px;
+    background: #effaff;
+    box-shadow: 22px -22px 0 0 #effaff, 55px -22px 0 0 #effaff, 78px 0 0 0 #effaff,
+                10px 7px 0 0 rgba(80,151,185,.18);
+    opacity: .9;
+    transform: scale(.75);
+}
+.cloud-one { top: 15%; left: 13%; }
+.cloud-two { top: 27%; right: 20%; transform: scale(.52); opacity:.72; }
+.voxel-hill {
+    position: absolute;
+    bottom: 9%;
+    width: 42vw;
+    height: 28vh;
+    background: linear-gradient(90deg,#398a2e 0 22%,#55a936 22% 45%,#438f2e 45% 70%,#69b83b 70%);
+    clip-path: polygon(0 100%,0 48%,12% 48%,12% 30%,28% 30%,28% 14%,44% 14%,44% 32%,60% 32%,60% 5%,76% 5%,76% 25%,88% 25%,88% 44%,100% 44%,100% 100%);
+    opacity:.95;
+}
+.hill-left { left:-5%; }
+.hill-right { right:-7%; transform:scaleX(-1); bottom:11%; }
+.voxel-ground {
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:19%;
+    background:
+      repeating-linear-gradient(90deg, transparent 0 58px, rgba(39,105,35,.22) 59px 63px),
+      linear-gradient(180deg,#8acb42 0 18%,#65ad35 18% 34%,#438b2e 34% 100%);
+    border-top:8px solid #a5dc54;
+    box-shadow: inset 0 12px rgba(255,255,255,.12);
+}
+.voxel-tree {
+    position:absolute;
+    bottom:17%;
+    width:34px;
+    height:145px;
+    background:linear-gradient(90deg,#754522 0 35%,#9b6330 35% 70%,#68401f 70%);
+    box-shadow: inset 5px 0 rgba(255,255,255,.12);
+}
+.voxel-tree::before {
+    content:"";
+    position:absolute;
+    width:120px;height:88px;
+    left:-43px;top:-65px;
+    background:linear-gradient(90deg,#39872c 0 25%,#58a936 25% 55%,#347d2b 55% 78%,#69b83c 78%);
+    box-shadow: -17px 18px 0 -5px #4b9b31, 18px -17px 0 -9px #6fbd3d, 0 7px 0 5px #2e7228;
+}
+.tree-left { left:5%; transform:scale(1.05); }
+.tree-right { right:6%; transform:scale(1.28); }
+.tree-mid { left:35%; bottom:16%; transform:scale(.65); }
+.voxel-fence {
+    position:absolute;
+    left:0;right:0;bottom:17%;height:42px;
+    background:repeating-linear-gradient(90deg,#a56b32 0 13px,#d29a4d 13px 20px,#75451f 20px 24px);
+    border-top:8px solid #e0b568;
+    border-bottom:7px solid #75451f;
+    box-shadow:0 5px 0 rgba(50,53,25,.2);
+    opacity:.92;
+}
+.voxel-fence::before,.voxel-fence::after {
+    content:"";position:absolute;left:0;right:0;height:8px;background:#c58a43;border:2px solid #805027;
+}
+.voxel-fence::before{top:8px}.voxel-fence::after{bottom:7px}
+.voxel-flower {
+    position:absolute;bottom:8%;width:13px;height:26px;background:#368b2e;
+    transform:rotate(-8deg);
+}
+.voxel-flower::before {
+    content:"✿";position:absolute;left:-9px;top:-18px;font-size:28px;
+    color:#f7e66c;text-shadow:2px 2px 0 #d6a83e;
+}
+.flower-a{left:18%}.flower-b{left:29%;bottom:5%}.flower-c{right:22%;bottom:7%}
+.flower-d{right:10%;bottom:11%;transform:scale(1.2)}
+.voxel-bee {
+    position:absolute;width:28px;height:22px;background:repeating-linear-gradient(90deg,#f5c83e 0 8px,#342d20 8px 13px);
+    border:3px solid #3a3020;border-radius:4px;
+    animation: bee-float 4s ease-in-out infinite alternate;
+}
+.voxel-bee::before,.voxel-bee::after{content:"";position:absolute;width:13px;height:9px;top:-10px;background:#e9f8ff;border:2px solid rgba(255,255,255,.8);transform:rotate(-25deg)}
+.voxel-bee::before{left:0}.voxel-bee::after{right:-4px;transform:rotate(25deg)}
+.bee-a{top:20%;left:26%}.bee-b{top:35%;right:17%;transform:scale(.7);animation-delay:1s}
+@keyframes bee-float { from{translate:0 0} to{translate:18px -12px} }
+
+/* Semua komponen permainan berada di depan dekorasi */
+.title-container,.fraction-menu,#landing-page,.back-to-valley,.image-page,.sparkle { z-index:2; }
+.fraction-menu { z-index:150; }
+.back-to-valley { z-index:700; }
+.image-page { z-index:500; }
+.title-container { z-index:100; }
+#landing-page { position:relative; }
+
+/* Efek balok dan tekstur pada panel */
+.title-box,.fraction-menu,.question-card,.question-box,.circle,button,.back-to-valley {
+    image-rendering:pixelated;
+    border-radius:3px !important;
+}
+.title-box { letter-spacing:1.2px; }
+.fraction-menu,.question-card { position:relative; }
+.fraction-menu::after,.question-card::after {
+    text-shadow:none;
+}
+.question-card { outline:5px solid rgba(73,48,25,.18); }
+.question-box { position:relative; }
+.question-box::after {
+    content:"";position:absolute;inset:6px;border:2px dashed rgba(128,91,43,.22);pointer-events:none;
+}
+.circle { border-radius:3px !important; }
+.circle::before { content:"✦"; }
+@media(max-width:600px){
+    .voxel-sun{width:70px;height:70px;border-width:8px;right:7%;top:8%}
+    .voxel-tree{transform:scale(.65);transform-origin:bottom}
+    .tree-right{transform:scale(.78)}
+    .tree-mid{display:none}
+    .voxel-hill{height:19vh;width:55vw;bottom:12%}
+    .voxel-fence{bottom:16%;height:28px}
+    .voxel-ground{height:18%}
+    .cloud-one{top:18%;left:4%;transform:scale(.48)}
+    .cloud-two{top:31%;right:4%;transform:scale(.4)}
+}
+
+
+
+/* =========================================
+   PENYEMPURNAAN VISUAL VOXEL - REFERENSI
+   Mempertahankan susunan fitur dan logika game
+========================================= */
+body {
+    display:block;
+    min-height:100vh;
+    width:100%;
+    overflow:hidden;
+    background:#69bce9;
+    background-image:
+      linear-gradient(180deg,#65b9e8 0%,#8bd0ed 48%,#c1e8dc 62%,#9bd45a 63%,#65ad3c 100%);
+}
+body::before {
+    z-index:-2;
+    background:
+      radial-gradient(circle at 86% 12%,rgba(255,255,190,.55),transparent 19%),
+      linear-gradient(180deg,transparent 0 57%,rgba(255,255,255,.12) 57.2%,transparent 58%),
+      radial-gradient(circle at 17% 35%,rgba(255,255,255,.13),transparent 28%);
+}
+body::after {
+    z-index:-1;
+    background:
+      linear-gradient(90deg,#2d782d 0 4%,#4d9b32 4% 8%,#347c2b 8% 12%,transparent 12% 17%,#3b852d 17% 22%,transparent 22%) 0 49%/100% 145px repeat-x,
+      linear-gradient(90deg,transparent 0 7%,#39832d 7% 12%,#5aa83a 12% 17%,transparent 17% 25%,#2f7629 25% 31%,transparent 31%) 0 58%/100% 175px repeat-x,
+      linear-gradient(180deg,transparent 0 75%,#a2d74c 75% 78%,#69b13a 78% 86%,#397f2d 86% 100%);
+    opacity:1;
+}
+.voxel-scenery { z-index:0; }
+.voxel-sun {
+    width:118px;height:118px;right:10%;top:3%;
+    background:linear-gradient(135deg,#fffde0 0 48%,#fff6a0 49% 100%);
+    border:10px solid #e8ed70;
+    box-shadow:0 0 0 10px rgba(255,244,108,.22),0 0 65px 22px rgba(255,245,143,.48);
+    transform:rotate(-9deg);
+}
+.voxel-cloud {
+    width:88px;height:27px;
+    background:#f6fdff;
+    box-shadow:18px -18px 0 #f6fdff,42px -18px 0 #f6fdff,60px 0 0 #f6fdff,
+      8px 7px 0 rgba(104,157,183,.2),26px 7px 0 rgba(104,157,183,.2);
+    image-rendering:pixelated;
+}
+.cloud-one {top:14%;left:12%;transform:scale(1.15)}
+.cloud-two {top:26%;right:23%;transform:scale(.72)}
+.voxel-hill {
+    bottom:13%;height:32vh;width:47vw;
+    background:
+      linear-gradient(90deg,#36852b 0 15%,#4b9c31 15% 31%,#64ad36 31% 47%,#39842b 47% 66%,#58a635 66% 83%,#347b2b 83%);
+    filter:drop-shadow(0 7px 0 rgba(34,94,30,.25));
+}
+.hill-left {left:-7%}
+.hill-right {right:-8%;bottom:15%;transform:scaleX(-1)}
+.voxel-ground {
+    height:23%;
+    background:
+      repeating-linear-gradient(90deg,transparent 0 72px,rgba(35,104,34,.14) 73px 78px),
+      repeating-linear-gradient(0deg,transparent 0 34px,rgba(255,255,255,.06) 35px 38px),
+      linear-gradient(180deg,#9bd84b 0 13%,#79c13e 13% 29%,#5ca536 29% 54%,#3f862d 54% 100%);
+    border-top:9px solid #b5e85b;
+}
+.voxel-tree {
+    width:42px;height:158px;bottom:20%;
+    background:repeating-linear-gradient(90deg,#71421f 0 13px,#98602c 13px 28px,#623a1d 28px 42px);
+    box-shadow:inset 6px 0 rgba(255,218,139,.13),8px 0 0 rgba(47,91,28,.18);
+}
+.voxel-tree::before {
+    width:142px;height:105px;left:-50px;top:-80px;
+    background:
+      linear-gradient(90deg,#2e7828 0 23%,#4a9b2e 23% 48%,#65b33a 48% 72%,#347d29 72% 100%);
+    box-shadow:
+      -18px 20px 0 -5px #438d2d,18px -18px 0 -8px #70bd3f,
+      45px 18px 0 -12px #3d862b,-32px -14px 0 -14px #6ab63a,
+      0 10px 0 7px #2b7028;
+}
+.tree-left {left:5%;transform:scale(1.12)}
+.tree-right {right:6%;transform:scale(1.35)}
+.tree-mid {left:37%;bottom:18%;transform:scale(.72)}
+.voxel-fence {
+    bottom:20%;height:48px;
+    background:repeating-linear-gradient(90deg,#9b612c 0 12px,#d29a4b 12px 18px,#75451f 18px 23px);
+    border-top:8px solid #e3b96b;border-bottom:8px solid #68401f;
+    box-shadow:0 5px 0 rgba(47,67,27,.22),0 10px 0 rgba(255,255,255,.08);
+}
+.voxel-fence::before,.voxel-fence::after {
+    height:9px;background:linear-gradient(180deg,#dca95e,#a96e32);border:2px solid #75451f;
+}
+.voxel-fence::before{top:7px}.voxel-fence::after{bottom:7px}
+.voxel-flower {z-index:1;width:12px;height:28px;background:linear-gradient(90deg,#27752a,#54a43a);}
+.voxel-flower::before {font-size:30px;filter:drop-shadow(2px 3px 0 rgba(87,72,31,.25));}
+.flower-a::before{color:#f8e66c}.flower-b::before{color:#d78af0}.flower-c::before{color:#fff4df}.flower-d::before{color:#ed5a54}
+.voxel-bee {
+    width:31px;height:23px;border:3px solid #3c3323;
+    background:repeating-linear-gradient(90deg,#ffd84e 0 8px,#342b20 8px 14px);
+    box-shadow:3px 4px 0 rgba(39,54,31,.2);
+}
+.voxel-bee::before,.voxel-bee::after {height:12px;box-shadow:1px 1px 0 rgba(65,91,99,.25)}
+.bee-a{top:22%;left:24%}.bee-b{top:36%;right:16%}
+
+/* Panel permainan seperti balok kayu dan batu */
+.title-container {top:12px;padding:0 12px;}
+.title-box {
+    background:linear-gradient(180deg,#78b94b 0 20%,#4f9637 21% 48%,#34732d 49% 100%);
+    border:5px solid #d7b36b;
+    box-shadow:0 7px 0 #5a3b22,0 12px 22px rgba(28,55,24,.42),inset 0 4px rgba(255,255,255,.25);
+    color:#fff7d4;text-shadow:3px 3px 0 #315b27,1px 1px 0 #315b27;
+}
+.fraction-menu {
+    top:76px;
+    background:linear-gradient(180deg,#a87542 0 14%,#80512d 15% 48%,#624027 49% 100%);
+    border:5px solid #d8b56f;
+    box-shadow:0 7px 0 #49301d,0 12px 20px rgba(29,48,23,.42),inset 0 4px rgba(255,255,255,.18);
+}
+.fraction-menu::before,.question-card::marker {content:none}
+.fraction-menu select {
+    border:3px solid #b98b4d;background:linear-gradient(180deg,#fff4c9,#e3c982);
+    box-shadow:inset 0 3px rgba(255,255,255,.65),0 4px 0 #51351f;
+}
+.circle {
+    border-radius:3px!important;
+    border:4px solid #f3d77d;
+    background:linear-gradient(135deg,#ffe68b 0 20%,#d9a13c 21% 48%,#a96a2b 49% 75%,#805020 76%);
+    box-shadow:0 7px 0 #65401f,0 11px 18px rgba(0,0,0,.35),inset 4px 4px rgba(255,255,255,.25);
+    text-shadow:3px 3px 0 #60401e;
+}
+.circle::after {inset:7px;border:2px solid rgba(255,244,190,.45);border-radius:0!important;}
+.question-card {
+    background:linear-gradient(180deg,#a87845 0 12%,#80512e 13% 48%,#5c3b25 49% 100%);
+    border:6px solid #dfbd78;
+    box-shadow:0 10px 0 #49301d,0 20px 45px rgba(0,0,0,.58),inset 0 4px rgba(255,255,255,.2);
+}
+.question-box {
+    background:linear-gradient(180deg,#fff6d9,#e6d3a0);
+    border:5px solid #b88b4c;box-shadow:inset 0 4px rgba(255,255,255,.7),0 6px 0 #49321e;
+}
+.question-operation {background:linear-gradient(180deg,#72a94a,#477d31);border:3px solid #c7a765;}
+button,.back-to-valley {
+    border-radius:3px!important;
+    background:linear-gradient(180deg,#b5e36a 0 18%,#83bd49 19% 48%,#568b35 49% 100%);
+    border:4px solid #e0c783;color:#fffbe2;
+    text-shadow:2px 2px 0 #355526;
+    box-shadow:0 6px 0 #3b5d29,0 9px 13px rgba(0,0,0,.3),inset 0 3px rgba(255,255,255,.3);
+}
+button:hover,.back-to-valley:hover {background:linear-gradient(180deg,#d0f18a,#9ccc58 50%,#6b9d3c);}
+.back-to-valley {top:14px;left:14px;z-index:800;}
+.image-page {background:rgba(28,54,35,.66);backdrop-filter:blur(3px);}
+.answer-label {color:#fff3c2;text-shadow:2px 2px #51351f;}
+.answer-input {border:3px solid #bd9254;background:linear-gradient(180deg,#fffdf1,#e8ddb9);box-shadow:inset 0 3px 5px rgba(0,0,0,.12),0 4px 0 #51351f;}
+.answer-fraction .answer-line {background:#fff0bc;box-shadow:0 2px 0 #684522;}
+
+/* Tambahan detail latar: ladang, jalur tanah, petak tanaman dan batu */
+.voxel-path {
+    position:absolute;left:39%;bottom:0;width:24%;height:24%;
+    background:linear-gradient(90deg,#9a713c,#c39a5b 45%,#8a6335);
+    clip-path:polygon(36% 0,64% 0,100% 100%,0 100%);
+    opacity:.9;z-index:0;
+}
+.voxel-crop {
+    position:absolute;bottom:20%;right:25%;width:19%;height:9%;
+    background:repeating-linear-gradient(90deg,#6b4a27 0 7px,#ad7d3d 7px 11px);
+    border:5px solid #d1a35b;box-shadow:0 5px 0 #70471f;
+    transform:skewY(-7deg);
+}
+.voxel-crop::before {
+    content:"";position:absolute;inset:-24px 5px 10px;
+    background:repeating-linear-gradient(90deg,transparent 0 13px,#4c9a32 14px 18px,transparent 19px 25px);
+}
+.voxel-rock {
+    position:absolute;bottom:17%;width:34px;height:23px;
+    background:linear-gradient(135deg,#c7d0c0 0 30%,#8b9b83 31% 70%,#64745e 71%);
+    box-shadow:5px 5px 0 #58694d;transform:skew(-12deg);
+}
+.rock-a{left:12%}.rock-b{right:13%;bottom:15%;transform:scale(.7) skew(-12deg)}
+.voxel-grass {
+    position:absolute;bottom:21%;width:22px;height:18px;
+    border-left:5px solid #3b8b31;border-right:4px solid #55a83a;
+    transform:skew(-18deg);
+}
+.grass-a{left:31%}.grass-b{left:68%;bottom:18%}.grass-c{right:34%;bottom:23%}
+@media(max-width:600px){
+    .back-to-valley{top:9px;left:8px;padding:7px 10px;font-size:10px;}
+    .title-container{top:9px;padding-left:105px;}
+    .title-box{font-size:.82em;padding:8px 15px;}
+    .fraction-menu{top:63px;width:min(92%,390px);}
+    .voxel-sun{width:66px;height:66px;right:7%;top:14%;border-width:7px;}
+    .voxel-ground{height:20%;}
+    .voxel-fence{bottom:18%;}
+    .voxel-path{height:20%;width:32%;left:34%;}
+    .voxel-crop{right:16%;width:24%;bottom:20%;}
+    .rock-a{left:8%}.rock-b{right:7%;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Dekorasi latar dunia balok: tidak mengganggu tombol atau permainan -->
+<div class="voxel-scenery" aria-hidden="true">
+    <div class="voxel-sun"></div>
+    <div class="voxel-cloud cloud-one"></div>
+    <div class="voxel-cloud cloud-two"></div>
+    <div class="voxel-hill hill-left"></div>
+    <div class="voxel-hill hill-right"></div>
+    <div class="voxel-tree tree-left"></div>
+    <div class="voxel-tree tree-right"></div>
+    <div class="voxel-tree tree-mid"></div>
+    <div class="voxel-fence"></div>
+    <div class="voxel-ground"></div>
+    <div class="voxel-path"></div>
+    <div class="voxel-crop"></div>
+    <div class="voxel-rock rock-a"></div>
+    <div class="voxel-rock rock-b"></div>
+    <div class="voxel-grass grass-a"></div>
+    <div class="voxel-grass grass-b"></div>
+    <div class="voxel-grass grass-c"></div>
+    <div class="voxel-flower flower-a"></div>
+    <div class="voxel-flower flower-b"></div>
+    <div class="voxel-flower flower-c"></div>
+    <div class="voxel-flower flower-d"></div>
+    <div class="voxel-bee bee-a"></div>
+    <div class="voxel-bee bee-b"></div>
+</div>
+
+
+<!-- Tombol kembali ke halaman lembah -->
+<a href="lembah.html" class="back-to-valley" aria-label="Kembali ke halaman lembah">
+    🛡️ KEMBALI
+</a>
+
+<!-- =====================================
+     JUDUL BERJALAN
+===================================== -->
+
+<div class="title-container" id="scroll-title">
+
+    <div class="title-box">
+        🏰 CASTLE DUELS ✦ PETUALANGAN DUNIA PECAHAN
+        TEMUKAN TANTANGAN MATEMATIKAMU! ⚔️
+    </div>
+
+</div>
+
+
+<!-- =====================================
+     MENU DROPDOWN OPERASI PECAHAN
+===================================== -->
+
+<div class="fraction-menu">
+
+    <label for="fraction-operation">
+        🏰 PILIH OPERASI PERUBAHAN BENTUK PECAHAN
+    </label>
+
+    <select id="fraction-operation"
+            onchange="changeOperation()">
+
+        <option value="0">⚔️ PILIH OPERASI PECAHAN</option>
+
+        <option value="1">1. Pecahan Biasa → Pecahan Campuran</option>
+
+        <option value="2">2. Pecahan Campuran → Pecahan Biasa</option>
+
+        <option value="3">3. Pecahan Biasa → Desimal</option>
+
+        <option value="4">4. Desimal → Pecahan Biasa</option>
+
+        <option value="5">5. Pecahan Biasa → Persen</option>
+
+        <option value="6">6. Persen → Pecahan Biasa</option>
+
+        <option value="7">7. Pecahan Campuran → Desimal</option>
+
+        <option value="8">8. Desimal → Pecahan Campuran</option>
+
+        <option value="9">9. Pecahan Campuran → Persen</option>
+
+        <option value="10">10. Persen → Pecahan Campuran</option>
+
+        <option value="11">11. Desimal → Persen</option>
+
+        <option value="12">12. Persen → Desimal</option>
+
+    </select>
+
+</div>
+
+
+<!-- =====================================
+     HALAMAN UTAMA
+===================================== -->
+
+<div id="landing-page"></div>
+
+
+<!-- =====================================
+     HALAMAN SOAL MELAYANG
+===================================== -->
+
+<div class="image-page" id="image-page">
+
+    <div class="question-card">
+
+        <h1 class="question-title">
+            🏰 TANTANGAN KERAJAAN!
+        </h1>
+
+        <div class="question-operation" id="question-operation">
+            Operasi Pecahan
+        </div>
+
+        <div class="question-number" id="question-number">
+            SOAL 1
+        </div>
+
+        <div class="question-box">
+
+            <div class="question-text" id="question-text">
+                Soal akan muncul di sini
+            </div>
+
+        </div>
+
+        <label class="answer-label" id="answer-label">
+            ✏️ TULISKAN JAWABANMU
+        </label>
+
+        <div id="answer-input" class="answer-entry"></div>
+
+        <div class="answer-hint" id="answer-hint">
+            Masukkan jawaban dengan benar.
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <div class="question-buttons">
+
+            <button id="check-button"
+                    onclick="checkAnswer()">
+                ⚔️ PERIKSA JAWABAN
+            </button>
+
+            <button id="next-button"
+                    onclick="nextQuestion()"
+                    style="display:none">
+                🏆 SOAL BERIKUTNYA
+            </button>
+
+            <button onclick="goBack()">
+                🛡️ KEMBALI
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   DATA OPERASI PECAHAN
+========================================= */
+
+const operations = {
+
+    1: "Pecahan Biasa → Pecahan Campuran",
+    2: "Pecahan Campuran → Pecahan Biasa",
+    3: "Pecahan Biasa → Desimal",
+    4: "Desimal → Pecahan Biasa",
+    5: "Pecahan Biasa → Persen",
+    6: "Persen → Pecahan Biasa",
+    7: "Pecahan Campuran → Desimal",
+    8: "Desimal → Pecahan Campuran",
+    9: "Pecahan Campuran → Persen",
+    10: "Persen → Pecahan Campuran",
+    11: "Desimal → Persen",
+    12: "Persen → Desimal"
+
+};
+
+let selectedOperation = 0;
+
+let currentQuestion = null;
+
+let questionPools = {};
+
+let usedQuestions = {};
+
+let questionNumber = 0;
+
+let hasAnswered = false;
+
+
+/* =========================================
+   MEMBUAT TAMPILAN PECAHAN VERTIKAL
+========================================= */
+
+function fractionHTML(numerator, denominator) {
+
+    return `
+        <span class="math-fraction">
+            <span class="numerator">${numerator}</span>
+            <span class="fraction-line"></span>
+            <span class="denominator">${denominator}</span>
+        </span>
+    `;
+
+}
+
+
+/* =========================================
+   MEMBUAT TAMPILAN PECAHAN CAMPURAN
+========================================= */
+
+function mixedHTML(whole, numerator, denominator) {
+
+    return `
+        <span class="math-mixed">
+            <span class="math-whole">${whole}</span>
+            ${fractionHTML(numerator, denominator)}
+        </span>
+    `;
+
+}
+
+
+/* =========================================
+   FORMAT SOAL MENJADI VISUAL MATEMATIKA
+========================================= */
+
+function formatQuestionHTML(question) {
+
+    return question
+        .replace(
+            /\b(\d+)\s+(\d+)\/(\d+)\b/g,
+            (match, whole, n, d) =>
+                mixedHTML(whole, n, d)
+        )
+        .replace(
+            /\b(\d+)\/(\d+)\b/g,
+            (match, n, d) =>
+                fractionHTML(n, d)
+        );
+
+}
+
+
+/* =========================================
+   FUNGSI BANTU MATEMATIKA
+========================================= */
+
+function gcd(a, b) {
+
+    a = Math.abs(a);
+    b = Math.abs(b);
+
+    while (b) {
+
+        let temp = b;
+
+        b = a % b;
+
+        a = temp;
+
+    }
+
+    return a || 1;
+
+}
+
+function fractionText(n, d) {
+
+    const g = gcd(n, d);
+
+    n /= g;
+    d /= g;
+
+    return `${n}/${d}`;
+
+}
+
+function decimalText(value) {
+
+    return String(Number(value.toFixed(4)));
+
+}
+
+
+/* =========================================
+   MEMBUAT BANK SOAL
+========================================= */
+
+function createQuestionBank() {
+
+    const bank = {};
+
+    function add(id, question, answer, type, hint) {
+
+        if (!bank[id]) bank[id] = [];
+
+        bank[id].push({
+
+            question,
+            answer: String(answer),
+            type,
+            hint
+
+        });
+
+    }
+
+    /* -------------------------------------
+       1. PECAHAN BIASA → CAMPURAN
+    ------------------------------------- */
+
+    const denominators = [2, 3, 4, 5, 10];
+
+    denominators.forEach(d => {
+
+        for (let w = 1; w <= 4; w++) {
+
+            for (let r = 1; r < d; r++) {
+
+                const n = w * d + r;
+
+                add(
+                    1,
+                    `Ubahlah pecahan <b>${n}/${d}</b> menjadi pecahan campuran!`,
+                    `${w} ${r}/${d}`,
+                    "fraction",
+                    "Tuliskan bilangan bulat, lalu pembilang dan penyebut. Contoh: 1 1/2."
+                );
+
+            }
+
+        }
+
+    });
+
+
+    /* -------------------------------------
+       2. CAMPURAN → PECAHAN BIASA
+    ------------------------------------- */
+
+    denominators.forEach(d => {
+
+        for (let w = 1; w <= 5; w++) {
+
+            for (let r = 1; r < d; r++) {
+
+                const n = w * d + r;
+
+                add(
+                    2,
+                    `Ubahlah pecahan campuran <b>${w} ${r}/${d}</b> menjadi pecahan biasa!`,
+                    `${n}/${d}`,
+                    "fraction",
+                    "Kalikan bilangan bulat dengan penyebut, lalu tambahkan pembilang."
+                );
+
+            }
+
+        }
+
+    });
+
+
+    /* -------------------------------------
+       3. PECAHAN BIASA → DESIMAL
+    ------------------------------------- */
+
+    const decimalFractions = [
+
+        [1,2],[1,4],[3,4],[1,5],[2,5],
+        [3,5],[4,5],[1,10],[3,10],[7,10],
+        [9,10],[1,20],[3,20],[7,20],[1,25],
+        [2,25],[3,25],[1,50],[3,50],[1,100],
+        [25,100],[50,100],[75,100]
+
+    ];
+
+    decimalFractions.forEach(([n,d]) => {
+
+        add(
+            3,
+            `Ubahlah pecahan <b>${n}/${d}</b> menjadi bilangan desimal!`,
+            decimalText(n/d),
+            "decimal",
+            "Bagilah pembilang dengan penyebut. Gunakan koma atau titik untuk desimal."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       4. DESIMAL → PECAHAN BIASA
+    ------------------------------------- */
+
+    const decimalToFraction = [
+
+        ["0,5",5,10],
+        ["0,25",25,100],
+        ["0,75",75,100],
+        ["0,2",2,10],
+        ["0,4",4,10],
+        ["0,6",6,10],
+        ["0,8",8,10],
+        ["0,3",3,10],
+        ["0,7",7,10],
+        ["0,9",9,10],
+        ["0,15",15,100],
+        ["0,35",35,100],
+        ["0,45",45,100],
+        ["0,65",65,100],
+        ["0,85",85,100],
+        ["0,1",1,10]
+
+    ];
+
+    decimalToFraction.forEach(([v,n,d]) => {
+
+        add(
+            4,
+            `Ubahlah desimal <b>${v}</b> menjadi pecahan biasa paling sederhana!`,
+            fractionText(n,d),
+            "fraction",
+            "Tuliskan desimal sebagai pecahan berpenyebut 10 atau 100, kemudian sederhanakan."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       5. PECAHAN BIASA → PERSEN
+    ------------------------------------- */
+
+    const fractionToPercent = [
+
+        [1,2],[1,4],[3,4],[1,5],[2,5],
+        [3,5],[4,5],[1,10],[3,10],[7,10],
+        [9,10],[1,20],[3,20],[7,20],
+        [1,25],[2,25],[3,25],[1,50],
+        [3,50],[1,100],[25,100],[75,100]
+
+    ];
+
+    fractionToPercent.forEach(([n,d]) => {
+
+        add(
+            5,
+            `Ubahlah pecahan <b>${n}/${d}</b> menjadi persen!`,
+            `${n/d*100}`,
+            "percent",
+            "Kalikan pecahan dengan 100%."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       6. PERSEN → PECAHAN BIASA
+    ------------------------------------- */
+
+    const percentages = [
+
+        10,20,25,30,40,50,60,70,75,80,
+        90,15,35,45,55,65,85,5
+
+    ];
+
+    percentages.forEach(p => {
+
+        add(
+            6,
+            `Ubahlah <b>${p}%</b> menjadi pecahan biasa paling sederhana!`,
+            fractionText(p,100),
+            "fraction",
+            "Tuliskan persen sebagai pecahan dengan penyebut 100, kemudian sederhanakan."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       7. CAMPURAN → DESIMAL
+    ------------------------------------- */
+
+    const mixedToDecimal = [
+
+        [1,1,2],[1,1,4],[1,3,4],
+        [2,1,2],[2,1,4],[2,3,4],
+        [3,1,2],[3,1,4],[3,3,4],
+        [1,1,5],[2,2,5],[3,3,5],
+        [1,1,10],[2,5,10],[3,7,10]
+
+    ];
+
+    mixedToDecimal.forEach(([w,n,d]) => {
+
+        add(
+            7,
+            `Ubahlah pecahan campuran <b>${w} ${n}/${d}</b> menjadi desimal!`,
+            decimalText(w+n/d),
+            "decimal",
+            "Ubah pecahannya menjadi desimal, kemudian tambahkan bilangan bulat."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       8. DESIMAL → CAMPURAN
+    ------------------------------------- */
+
+    const decimalToMixed = [
+
+        ["1,5",1,1,2],
+        ["1,25",1,1,4],
+        ["1,75",1,3,4],
+        ["2,5",2,1,2],
+        ["2,25",2,1,4],
+        ["2,75",2,3,4],
+        ["3,5",3,1,2],
+        ["3,25",3,1,4],
+        ["3,75",3,3,4],
+        ["1,2",1,1,5],
+        ["2,4",2,2,5],
+        ["3,6",3,3,5]
+
+    ];
+
+    decimalToMixed.forEach(([v,w,n,d]) => {
+
+        add(
+            8,
+            `Ubahlah desimal <b>${v}</b> menjadi pecahan campuran paling sederhana!`,
+            `${w} ${n}/${d}`,
+            "fraction",
+            "Pisahkan bilangan bulat dan bagian desimalnya."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       9. CAMPURAN → PERSEN
+    ------------------------------------- */
+
+    const mixedToPercent = [
+
+        [1,1,2],[1,1,4],[1,3,4],
+        [2,1,2],[2,1,4],[2,3,4],
+        [3,1,2],[3,1,4],[3,3,4],
+        [1,1,5],[2,2,5],[3,3,5]
+
+    ];
+
+    mixedToPercent.forEach(([w,n,d]) => {
+
+        add(
+            9,
+            `Ubahlah pecahan campuran <b>${w} ${n}/${d}</b> menjadi persen!`,
+            `${(w+n/d)*100}`,
+            "percent",
+            "Ubah menjadi desimal atau pecahan biasa, lalu kalikan 100%."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       10. PERSEN → CAMPURAN
+    ------------------------------------- */
+
+    const percentToMixed = [
+
+        [150,1,1,2],
+        [125,1,1,4],
+        [175,1,3,4],
+        [250,2,1,2],
+        [225,2,1,4],
+        [275,2,3,4],
+        [350,3,1,2],
+        [325,3,1,4],
+        [375,3,3,4],
+        [120,1,1,5],
+        [240,2,2,5]
+
+    ];
+
+    percentToMixed.forEach(([p,w,n,d]) => {
+
+        add(
+            10,
+            `Ubahlah <b>${p}%</b> menjadi pecahan campuran!`,
+            `${w} ${n}/${d}`,
+            "fraction",
+            "Bagi bilangan persen dengan 100, kemudian ubah menjadi pecahan campuran."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       11. DESIMAL → PERSEN
+    ------------------------------------- */
+
+    const decimalPercent = [
+
+        ["0,1",10],["0,2",20],["0,25",25],
+        ["0,3",30],["0,4",40],["0,5",50],
+        ["0,6",60],["0,7",70],["0,75",75],
+        ["0,8",80],["0,9",90],["0,15",15],
+        ["0,35",35],["0,45",45],["0,65",65],
+        ["1,2",120],["1,5",150],["2,5",250]
+
+    ];
+
+    decimalPercent.forEach(([v,p]) => {
+
+        add(
+            11,
+            `Ubahlah desimal <b>${v}</b> menjadi persen!`,
+            `${p}`,
+            "percent",
+            "Kalikan bilangan desimal dengan 100, lalu tambahkan tanda persen."
+        );
+
+    });
+
+
+    /* -------------------------------------
+       12. PERSEN → DESIMAL
+    ------------------------------------- */
+
+    const percentDecimal = [
+
+        [10,"0,1"],[20,"0,2"],[25,"0,25"],
+        [30,"0,3"],[40,"0,4"],[50,"0,5"],
+        [60,"0,6"],[70,"0,7"],[75,"0,75"],
+        [80,"0,8"],[90,"0,9"],[15,"0,15"],
+        [35,"0,35"],[45,"0,45"],[65,"0,65"],
+        [120,"1,2"],[150,"1,5"],[250,"2,5"]
+
+    ];
+
+    percentDecimal.forEach(([p,v]) => {
+
+        add(
+            12,
+            `Ubahlah <b>${p}%</b> menjadi bilangan desimal!`,
+            v.replace(",","."),
+            "decimal",
+            "Bagilah bilangan persen dengan 100."
+        );
+
+    });
+
+    return bank;
+
+}
+
+
+/* =========================================
+   MENGACAK BANK SOAL
+========================================= */
+
+function shuffleArray(array) {
+
+    const result = [...array];
+
+    for (let i = result.length - 1; i > 0; i--) {
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [result[i], result[j]] =
+        [result[j], result[i]];
+
+    }
+
+    return result;
+
+}
+
+
+/* =========================================
+   MEMULAI BANK SOAL OPERASI
+========================================= */
+
+function initializePool(id) {
+
+    questionPools[id] =
+        shuffleArray(createQuestionBank()[id]);
+
+    usedQuestions[id] = 0;
+
+}
+
+
+/* =========================================
+   MENGUBAH PILIHAN OPERASI
+========================================= */
+
+function changeOperation() {
+
+    selectedOperation = Number(
+        document.getElementById("fraction-operation").value
+    );
+
+    document.getElementById("image-page").style.display =
+        "none";
+
+    currentQuestion = null;
+
+    if (selectedOperation === 0) return;
+
+    if (!questionPools[selectedOperation]) {
+
+        initializePool(selectedOperation);
+
+    }
+
+}
+
+
+/* =========================================
+   MEMBUAT MEDALI ANGKA 1-10
+========================================= */
+
+function createCircles() {
+
+    const container =
+        document.getElementById("landing-page");
+
+    container.innerHTML = "";
+
+    for (let i = 1; i <= 10; i++) {
+
+        const circle = document.createElement("div");
+
+        circle.classList.add("circle");
+
+        circle.textContent = i;
+
+        circle.style.background = getRandomGradient();
+
+        const maxX = Math.max(
+            10,
+            window.innerWidth - 100
+        );
+
+        const minY = window.innerWidth <= 600 ? 175 : 155;
+
+        const maxY = Math.max(
+            minY + 20,
+            window.innerHeight - 100
+        );
+
+        const x = Math.random() * maxX;
+
+        const y = Math.random() * (maxY - minY) + minY;
+
+        circle.style.left = `${x}px`;
+
+        circle.style.top = `${y}px`;
+
+        makeDraggable(circle);
+
+        container.appendChild(circle);
+
+    }
+
+}
+
+
+/* =========================================
+   FUNGSI GESER MEDALI
+   KLIK DAN DRAG DIPISAHKAN
+========================================= */
+
+function makeDraggable(element) {
+
+    let isDragging = false;
+
+    let hasMoved = false;
+
+    let offsetX = 0;
+    let offsetY = 0;
+
+    let startX = 0;
+    let startY = 0;
+
+    const dragThreshold = 8;
+
+    element.addEventListener("pointerdown", (e) => {
+
+        if (e.pointerType === "mouse" && e.button !== 0) {
+            return;
+        }
+
+        isDragging = true;
+        hasMoved = false;
+
+        startX = e.clientX;
+        startY = e.clientY;
+
+        offsetX = e.clientX - element.offsetLeft;
+        offsetY = e.clientY - element.offsetTop;
+
+        element.style.zIndex = 1000;
+
+        element.setPointerCapture(e.pointerId);
+
+        e.preventDefault();
+
+    });
+
+    element.addEventListener("pointermove", (e) => {
+
+        if (!isDragging) return;
+
+        const distance = Math.hypot(
+            e.clientX - startX,
+            e.clientY - startY
+        );
+
+        if (distance > dragThreshold) {
+
+            hasMoved = true;
+
+        }
+
+        if (hasMoved) {
+
+            const maxLeft =
+                window.innerWidth - element.offsetWidth;
+
+            const maxTop =
+                window.innerHeight - element.offsetHeight;
+
+            const x = Math.max(
+                0,
+                Math.min(maxLeft, e.clientX - offsetX)
+            );
+
+            const y = Math.max(
+                55,
+                Math.min(maxTop, e.clientY - offsetY)
+            );
+
+            element.style.left = `${x}px`;
+            element.style.top = `${y}px`;
+
+        }
+
+    });
+
+    element.addEventListener("pointerup", (e) => {
+
+        if (!isDragging) return;
+
+        isDragging = false;
+
+        element.style.zIndex = 2;
+
+        if (hasMoved) {
+
+            e.preventDefault();
+
+            return;
+
+        }
+
+        showRandomQuestion(
+            Number(element.textContent)
+        );
+
+    });
+
+    element.addEventListener("pointercancel", () => {
+
+        isDragging = false;
+        hasMoved = false;
+
+        element.style.zIndex = 2;
+
+    });
+
+}
+
+
+/* =========================================
+   WARNA MEDALI ACAK
+========================================= */
+
+function getRandomGradient() {
+
+    const colors = [
+
+        ["#fff0a1", "#e6a92f", "#85440c"],
+        ["#61d9f2", "#258cc5", "#164b86"],
+        ["#ffb16b", "#ed6532", "#9f351c"],
+        ["#a7e56d", "#4eaa36", "#276329"],
+        ["#ffe78b", "#e7ae28", "#a66a12"],
+        ["#b69aff", "#7851c7", "#422a82"],
+        ["#ff9cbb", "#d94e7a", "#8e2850"],
+        ["#72e7dc", "#1a9e9c", "#11616c"],
+        ["#d2ee82", "#83b933", "#47721c"],
+        ["#fff0a1", "#f2b62e", "#a96613"]
+
+    ];
+
+    const random =
+        colors[Math.floor(Math.random() * colors.length)];
+
+    return `radial-gradient(
+        circle at 35% 25%,
+        ${random[0]},
+        ${random[1]} 55%,
+        ${random[2]} 100%
+    )`;
+
+}
+
+
+/* =========================================
+   MENGAMBIL SOAL BARU
+========================================= */
+
+function getNextQuestion(id) {
+
+    if (!questionPools[id]) {
+
+        initializePool(id);
+
+    }
+
+    const pool = questionPools[id];
+
+    if (usedQuestions[id] >= pool.length) {
+
+        questionPools[id] = shuffleArray(
+            createQuestionBank()[id]
+        );
+
+        usedQuestions[id] = 0;
+
+        alert(
+            "🏰 Hebat! Semua soal pada operasi ini sudah dikerjakan. Petualangan dimulai kembali dengan urutan soal baru!"
+        );
+
+    }
+
+    const question =
+        questionPools[id][usedQuestions[id]];
+
+    usedQuestions[id]++;
+
+    return question;
+
+}
+
+
+/* =========================================
+   MEMBUAT KOTAK ISIAN JAWABAN SESUAI BENTUK
+========================================= */
+
+function renderAnswerFields() {
+    const container = document.getElementById("answer-input");
+    container.innerHTML = "";
+
+    const fractionOperations = [1, 2, 4, 6, 8, 10];
+    const mixedOperations = [1, 8, 10];
+
+    function makeInput(placeholder, extraClass = "") {
+        const input = document.createElement("input");
+        input.type = "number";
+        input.inputMode = "numeric";
+        input.className = "answer-input " + extraClass;
+        input.placeholder = placeholder;
+        input.autocomplete = "off";
+        input.setAttribute("aria-label", placeholder);
+        input.addEventListener("keydown", function(e) {
+            if (e.key === "Enter") checkAnswer();
+        });
+        return input;
+    }
+
+    if (fractionOperations.includes(selectedOperation)) {
+        if (mixedOperations.includes(selectedOperation)) {
+            const mixed = document.createElement("div");
+            mixed.className = "answer-mixed";
+            const whole = makeInput("Bulat", "answer-whole");
+            whole.dataset.part = "whole";
+            const fraction = document.createElement("div");
+            fraction.className = "answer-fraction";
+            const numerator = makeInput("Pembilang");
+            numerator.dataset.part = "numerator";
+            const line = document.createElement("div");
+            line.className = "answer-line";
+            const denominator = makeInput("Penyebut");
+            denominator.dataset.part = "denominator";
+            fraction.append(numerator, line, denominator);
+            mixed.append(whole, fraction);
+            container.appendChild(mixed);
+            whole.focus();
+        } else {
+            const fraction = document.createElement("div");
+            fraction.className = "answer-fraction";
+            const numerator = makeInput("Pembilang");
+            numerator.dataset.part = "numerator";
+            const line = document.createElement("div");
+            line.className = "answer-line";
+            const denominator = makeInput("Penyebut");
+            denominator.dataset.part = "denominator";
+            fraction.append(numerator, line, denominator);
+            container.appendChild(fraction);
+            numerator.focus();
+        }
+    } else {
+        const input = makeInput("Masukkan jawaban", "answer-single");
+        input.type = "text";
+        input.inputMode = "decimal";
+        input.placeholder = "Contoh: 0,75";
+        input.id = "single-answer";
+        container.appendChild(input);
+        input.focus();
+    }
+}
+
+function getAnswerValue() {
+    const container = document.getElementById("answer-input");
+    const whole = container.querySelector('[data-part="whole"]');
+    const numerator = container.querySelector('[data-part="numerator"]');
+    const denominator = container.querySelector('[data-part="denominator"]');
+
+    if (numerator && denominator) {
+        if (!numerator.value.trim() || !denominator.value.trim()) return "";
+        if (whole) {
+            if (!whole.value.trim()) return "";
+            return `${whole.value.trim()} ${numerator.value.trim()}/${denominator.value.trim()}`;
+        }
+        return `${numerator.value.trim()}/${denominator.value.trim()}`;
+    }
+    const single = container.querySelector("#single-answer");
+    return single ? single.value.trim() : "";
+}
+
+function setAnswerDisabled(disabled) {
+    document.querySelectorAll("#answer-input input").forEach(input => {
+        input.disabled = disabled;
+    });
+}
+
+/* =========================================
+   MENAMPILKAN SOAL ACAK
+========================================= */
+
+function showRandomQuestion(number) {
+
+    if (selectedOperation === 0) {
+
+        alert("🏰 Silakan pilih operasi pecahan terlebih dahulu!");
+
+        return;
+
+    }
+
+    currentQuestion =
+        getNextQuestion(selectedOperation);
+
+    questionNumber++;
+
+    hasAnswered = false;
+
+    document.getElementById("question-operation").textContent =
+        "⚔️ " + operations[selectedOperation];
+
+    document.getElementById("question-number").textContent =
+        "TANTANGAN NOMOR " + number +
+        " • SOAL KE-" + questionNumber;
+
+    document.getElementById("question-text").innerHTML =
+        formatQuestionHTML(currentQuestion.question);
+
+    document.getElementById("answer-hint").textContent =
+        "💡 " + currentQuestion.hint;
+
+    renderAnswerFields();
+
+    document.getElementById("feedback").className =
+        "feedback";
+
+    document.getElementById("feedback").textContent = "";
+
+    document.getElementById("check-button").style.display =
+        "inline-block";
+
+    document.getElementById("next-button").style.display =
+        "none";
+
+    setAnswerDisabled(false);
+
+    document.getElementById("image-page").style.display =
+        "flex";
+
+    setTimeout(() => {
+        const firstInput = document.querySelector("#answer-input input");
+        if (firstInput) firstInput.focus();
+    }, 100);
+
+}
+
+
+/* =========================================
+   MEMBACA JAWABAN PECAHAN
+========================================= */
+
+function parseFraction(value) {
+
+    let s = value.trim().replace(/\s+/g, " ");
+
+    // Pecahan campuran: 2 1/3
+
+    let mixed = s.match(/^(-?\d+)\s+(\d+)\/(\d+)$/);
+
+    if (mixed) {
+
+        let whole = Number(mixed[1]);
+        let n = Number(mixed[2]);
+        let d = Number(mixed[3]);
+
+        if (d === 0 || n >= d) return null;
+
+        let sign = whole < 0 ? -1 : 1;
+
+        return sign * (Math.abs(whole) * d + n) / d;
+
+    }
+
+    // Pecahan biasa: 3/4
+
+    let fraction = s.match(/^(-?\d+)\s*\/\s*(\d+)$/);
+
+    if (fraction) {
+
+        let n = Number(fraction[1]);
+        let d = Number(fraction[2]);
+
+        if (d === 0) return null;
+
+        return n / d;
+
+    }
+
+    return null;
+
+}
+
+
+/* =========================================
+   MEMERIKSA JAWABAN
+========================================= */
+
+function checkAnswer() {
+
+    if (!currentQuestion || hasAnswered) return;
+
+    const value = getAnswerValue();
+
+    const feedback =
+        document.getElementById("feedback");
+
+    if (!value) {
+
+        feedback.className = "feedback wrong";
+
+        feedback.textContent =
+            "✏️ Silakan tuliskan jawaban terlebih dahulu!";
+
+        return;
+
+    }
+
+    let correct = false;
+
+    const type = currentQuestion.type;
+
+    const expected = Number(currentQuestion.answer);
+
+    if (type === "fraction") {
+
+        const parsed = parseFraction(value);
+
+        const expectedFraction =
+            parseFraction(currentQuestion.answer);
+
+        if (parsed !== null && expectedFraction !== null) {
+
+            correct =
+                Math.abs(parsed - expectedFraction) < 0.000001;
+
+        }
+
+    }
+
+    else if (type === "decimal") {
+
+        const userNumber = Number(
+            value.replace(",", ".")
+        );
+
+        correct =
+            Number.isFinite(userNumber) &&
+            Math.abs(userNumber - expected) < 0.0001;
+
+    }
+
+    else if (type === "percent") {
+
+        const cleaned = value
+            .replace("%", "")
+            .replace(",", ".")
+            .trim();
+
+        const userNumber = Number(cleaned);
+
+        correct =
+            Number.isFinite(userNumber) &&
+            Math.abs(userNumber - expected) < 0.0001;
+
+    }
+
+
+    if (correct) {
+
+        hasAnswered = true;
+
+        feedback.className = "feedback correct";
+
+        feedback.innerHTML =
+            "🎉 BENAR! HEBAT SEKALI! 🏆<br>" +
+            "Kamu berhasil menyelesaikan tantangan kerajaan!";
+
+        setAnswerDisabled(true);
+
+        document.getElementById("check-button").style.display =
+            "none";
+
+        document.getElementById("next-button").style.display =
+            "inline-block";
+
+    } else {
+
+        feedback.className = "feedback wrong";
+
+        feedback.innerHTML =
+            "💪 BELUM TEPAT!<br>" +
+            "Ayo coba periksa kembali perhitunganmu!";
+
+        const firstInput = document.querySelector("#answer-input input");
+        if (firstInput) firstInput.focus();
+
+    }
+
+}
+
+
+/* =========================================
+   SOAL BERIKUTNYA
+========================================= */
+
+function nextQuestion() {
+
+    if (!hasAnswered) return;
+
+    showRandomQuestion(0);
+
+}
+
+
+/* =========================================
+   KEMBALI KE HALAMAN UTAMA
+========================================= */
+
+function goBack() {
+
+    document.getElementById("image-page").style.display =
+        "none";
+
+    document.getElementById("landing-page").style.display =
+        "block";
+
+}
+
+
+/* =========================================
+   ENTER UNTUK MEMERIKSA JAWABAN
+========================================= */
+
+
+
+
+/* =========================================
+   EFEK KILAUAN FANTASI
+========================================= */
+
+function createSparkles() {
+
+    const symbols = ["✦", "✧", "✨", "·"];
+
+    for (let i = 0; i < 18; i++) {
+
+        const sparkle = document.createElement("div");
+
+        sparkle.className = "sparkle";
+
+        sparkle.textContent =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        sparkle.style.left =
+            Math.random() * 100 + "vw";
+
+        sparkle.style.top =
+            Math.random() * 100 + "vh";
+
+        sparkle.style.animationDelay =
+            Math.random() * 3 + "s";
+
+        document.body.appendChild(sparkle);
+
+    }
+
+}
+
+
+/* =========================================
+   INISIALISASI
+========================================= */
+
+createSparkles();
+
+createCircles();
+
+</script>
+
+</body>
+</html>

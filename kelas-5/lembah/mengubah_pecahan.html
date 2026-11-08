@@ -1385,6 +1385,287 @@ button:hover,.back-to-valley:hover {background:linear-gradient(180deg,#d0f18a,#9
     .rock-a{left:8%}.rock-b{right:7%;}
 }
 
+
+
+/* =========================================
+   TIMER TANTANGAN - WAKTU SESUAI KESULITAN
+========================================= */
+.question-timer{
+    width:min(100%,330px);margin:0 auto 14px;padding:9px 13px 10px;
+    display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;
+    color:#fff7d4;background:linear-gradient(180deg,#477b35,#315d29);
+    border:3px solid #d7b66b;box-shadow:0 4px 0 #49351f,inset 0 2px rgba(255,255,255,.22);
+    text-shadow:2px 2px #29451f;font-size:12px;font-weight:900;
+}
+.timer-icon{font-size:19px}.timer-caption{letter-spacing:.7px}
+#timer-count{font-size:23px;min-width:58px;color:#fff2a6;font-variant-numeric:tabular-nums}
+.timer-track{flex-basis:100%;height:9px;background:#263e25;border:2px solid #d5bd7b;overflow:hidden}
+#timer-bar{display:block;width:100%;height:100%;background:linear-gradient(90deg,#a8db55,#f3d45e);transition:width .35s linear}
+.question-timer.warning{background:linear-gradient(180deg,#a85a2d,#793b22);border-color:#f2c06b}
+.question-timer.warning #timer-count{color:#fff0a0}
+.question-timer.expired{background:linear-gradient(180deg,#9d3e2f,#68271f);border-color:#f3a08a}
+.question-timer.expired #timer-count{color:#fff}
+@media(max-width:600px){.question-timer{width:min(100%,290px);padding:7px 9px;margin-bottom:10px}#timer-count{font-size:20px}.timer-caption{font-size:10px}}
+
+
+/* =========================================
+   RESPONSIVE SATU LAYAR - DESKTOP, TABLET,
+   HP POTRET, DAN HP LANDSCAPE
+   Semua elemen dipadatkan proporsional tanpa
+   mengubah struktur HTML maupun logika permainan.
+========================================= */
+html, body {
+    width:100%;
+    height:100%;
+    min-height:100%;
+    margin:0;
+    overflow:hidden !important;
+    overscroll-behavior:none;
+}
+body {
+    position:relative;
+    min-height:100dvh;
+    height:100dvh;
+}
+.title-container {
+    position:fixed;
+    top:clamp(6px,1.4vh,14px);
+    left:50%;
+    transform:translateX(-50%);
+    width:min( min(70vw, 760px), calc(100vw - 180px) );
+    padding:0;
+    overflow:hidden;
+    text-align:center;
+    white-space:normal;
+    z-index:100;
+}
+.title-box {
+    display:block;
+    width:100%;
+    max-width:100%;
+    margin:0;
+    padding:clamp(5px,1vh,10px) clamp(8px,1.5vw,20px);
+    font-size:clamp(11px,1.45vw,19px);
+    line-height:1.15;
+    white-space:normal;
+}
+.back-to-valley {
+    position:fixed;
+    top:clamp(6px,1.2vh,13px);
+    left:clamp(6px,1vw,14px);
+    padding:clamp(6px,1vh,10px) clamp(8px,1.2vw,16px);
+    font-size:clamp(10px,1vw,13px);
+    z-index:800;
+    white-space:nowrap;
+}
+.fraction-menu {
+    position:fixed;
+    top:clamp(54px,8.5vh,78px);
+    left:50%;
+    transform:translateX(-50%);
+    width:min( min(92vw, 410px), calc(100vw - 24px) );
+    padding:clamp(5px,.9vh,9px) clamp(8px,1vw,12px);
+    z-index:150;
+}
+.fraction-menu label {
+    margin-bottom:clamp(3px,.5vh,6px);
+    font-size:clamp(9px,1vw,12px);
+    line-height:1.15;
+}
+.fraction-menu select {
+    padding:clamp(6px,.8vh,10px) 9px;
+    font-size:clamp(10px,1.05vw,13px);
+    min-height:0;
+}
+#landing-page {
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    z-index:3;
+    pointer-events:none;
+}
+#landing-page .circle { pointer-events:auto; }
+.circle {
+    width:clamp(48px,6.2vw,82px);
+    height:clamp(48px,6.2vw,82px);
+    font-size:clamp(19px,2.3vw,30px);
+}
+.image-page {
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    min-height:0;
+    padding:clamp(6px,1.5vh,14px);
+    overflow:hidden;
+    justify-content:center;
+    align-items:center;
+}
+.question-card {
+    width:min( min(94vw, 650px), calc(100vw - 16px) );
+    max-width:650px;
+    max-height:calc(100dvh - 14px);
+    height:auto;
+    overflow:hidden;
+    padding:clamp(8px,1.6vh,17px) clamp(10px,1.8vw,20px);
+    border-width:clamp(3px,.5vw,6px);
+    border-radius:4px;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:center;
+    gap:clamp(3px,.6vh,7px);
+}
+.question-title {
+    font-size:clamp(16px,2.5vh,25px);
+    line-height:1.08;
+    margin:0 0 2px;
+}
+.question-operation {
+    align-self:center;
+    margin:0;
+    padding:clamp(3px,.6vh,7px) 10px;
+    font-size:clamp(9px,1.2vh,12px);
+    line-height:1.15;
+}
+.question-number {
+    margin:0;
+    font-size:clamp(9px,1.2vh,12px);
+    line-height:1.1;
+}
+.question-timer {
+    width:min(100%,330px);
+    align-self:center;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    gap:3px 8px;
+    margin:0;
+    padding:clamp(4px,.7vh,7px) 9px;
+}
+.timer-icon {font-size:clamp(12px,1.7vh,18px)}
+.timer-caption {font-size:clamp(8px,1.05vh,10px)}
+#timer-count {font-size:clamp(15px,2vh,22px);min-width:48px;line-height:1}
+.timer-track {height:7px;}
+.question-box {
+    margin:clamp(2px,.5vh,6px) 0;
+    padding:clamp(8px,1.4vh,16px) clamp(8px,1.5vw,14px);
+    min-height:clamp(58px,10vh,105px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.question-text {
+    font-size:clamp(16px,2.5vh,25px);
+    line-height:1.25;
+}
+.question-text .math-fraction {font-size:1.15em}
+.answer-label {
+    margin:0;
+    font-size:clamp(10px,1.35vh,14px);
+    line-height:1.1;
+}
+.answer-entry {
+    min-height:clamp(48px,8.5vh,78px);
+    margin:0;
+    gap:clamp(6px,1vw,12px);
+}
+.answer-input {
+    width:clamp(48px,7vw,68px);
+    height:clamp(32px,5.5vh,46px);
+    padding:3px;
+    font-size:clamp(16px,2.2vh,21px);
+}
+.answer-fraction .answer-line {width:clamp(48px,7vw,68px);}
+.answer-whole {width:clamp(48px,7vw,68px);height:clamp(32px,5.5vh,46px);}
+.answer-single {width:min(75%,300px);height:clamp(34px,5.5vh,48px);}
+.answer-hint {
+    margin:0;
+    font-size:clamp(9px,1.15vh,11px);
+    line-height:1.2;
+}
+.feedback {
+    margin:2px 0;
+    padding:clamp(5px,.8vh,9px);
+    font-size:clamp(10px,1.3vh,13px);
+    line-height:1.2;
+}
+.question-buttons {
+    gap:clamp(5px,.8vw,10px);
+    margin-top:clamp(3px,.7vh,8px);
+}
+.question-buttons button {
+    padding:clamp(6px,.9vh,10px) clamp(9px,1.5vw,18px);
+    font-size:clamp(9px,1.15vh,12px);
+    line-height:1.1;
+}
+.voxel-sun {width:clamp(48px,8vw,118px);height:clamp(48px,8vw,118px);}
+
+/* Layar sempit: susun judul, tombol kembali, dan menu secara hemat ruang */
+@media (max-width:600px) {
+    .title-container {
+        top:7px;
+        left:auto;
+        right:7px;
+        transform:none;
+        width:calc(100vw - 112px);
+    }
+    .title-box {font-size:clamp(9px,2.7vw,13px);padding:6px 7px;}
+    .back-to-valley {top:7px;left:7px;padding:6px 8px;font-size:10px;}
+    .fraction-menu {
+        top:clamp(48px,8vh,62px);
+        width:calc(100vw - 18px);
+        padding:5px 8px;
+    }
+    .fraction-menu label {font-size:9px;margin-bottom:3px;}
+    .fraction-menu select {font-size:10px;padding:6px 7px;}
+    .circle {width:clamp(45px,12vw,62px);height:clamp(45px,12vw,62px);font-size:clamp(17px,5vw,23px);}
+    .question-card {width:calc(100vw - 12px);padding:7px 9px;gap:3px;}
+    .question-title {font-size:clamp(15px,4.3vw,20px);}
+    .question-box {min-height:clamp(52px,10vh,76px);padding:7px 5px;}
+    .question-text {font-size:clamp(15px,4.4vw,20px);}
+    .answer-entry {min-height:48px;}
+    .answer-input {width:48px;height:34px;font-size:17px;}
+    .answer-fraction .answer-line {width:48px;}
+    .answer-whole {width:48px;height:34px;}
+    .question-buttons button {font-size:9px;padding:7px 9px;}
+}
+
+/* Mode landscape atau layar pendek: kompresi vertikal ekstra */
+@media (max-height:620px) {
+    .title-container {top:4px;}
+    .title-box {padding:4px 8px;font-size:11px;}
+    .back-to-valley {top:4px;padding:4px 8px;font-size:9px;}
+    .fraction-menu {top:38px;padding:3px 7px;width:min(350px,70vw);}
+    .fraction-menu label {font-size:8px;margin-bottom:2px;}
+    .fraction-menu select {padding:4px 7px;font-size:9px;}
+    .question-card {max-height:calc(100dvh - 8px);padding:5px 9px;gap:2px;}
+    .question-title {font-size:16px;margin:0;}
+    .question-operation {padding:3px 8px;font-size:9px;}
+    .question-number {font-size:9px;}
+    .question-timer {padding:3px 7px;}
+    .question-box {min-height:42px;padding:5px;margin:1px 0;}
+    .question-text {font-size:16px;line-height:1.1;}
+    .answer-label {font-size:9px;}
+    .answer-entry {min-height:39px;}
+    .answer-input,.answer-whole {height:29px;width:44px;font-size:15px;}
+    .answer-fraction .answer-line {width:44px;}
+    .answer-hint {font-size:8px;}
+    .feedback {padding:4px;font-size:9px;}
+    .question-buttons {margin-top:2px;gap:5px;}
+    .question-buttons button {padding:5px 8px;font-size:9px;}
+}
+
+@media (max-width:600px) and (max-height:620px) {
+    .title-container {width:calc(100vw - 100px);}
+    .title-box {font-size:9px;}
+    .fraction-menu {top:35px;width:calc(100vw - 14px);}
+    .question-card {width:calc(100vw - 8px);}
+}
+
 </style>
 </head>
 
@@ -1508,6 +1789,13 @@ button:hover,.back-to-valley:hover {background:linear-gradient(180deg,#d0f18a,#9
             SOAL 1
         </div>
 
+        <div class="question-timer" id="question-timer" aria-live="polite">
+            <span class="timer-icon">⏱️</span>
+            <span class="timer-caption">WAKTU TERSISA</span>
+            <strong id="timer-count">00:50</strong>
+            <div class="timer-track"><span id="timer-bar"></span></div>
+        </div>
+
         <div class="question-box">
 
             <div class="question-text" id="question-text">
@@ -1586,6 +1874,10 @@ let usedQuestions = {};
 let questionNumber = 0;
 
 let hasAnswered = false;
+
+let timerInterval = null;
+let timerRemaining = 0;
+let timerDuration = 0;
 
 
 /* =========================================
@@ -2100,6 +2392,8 @@ function initializePool(id) {
 
 function changeOperation() {
 
+    stopQuestionTimer();
+
     selectedOperation = Number(
         document.getElementById("fraction-operation").value
     );
@@ -2450,6 +2744,65 @@ function setAnswerDisabled(disabled) {
 }
 
 /* =========================================
+   TIMER: DURASI BERDASARKAN TINGKAT KESULITAN
+   Semua soal mendapat waktu minimal 50 detik.
+========================================= */
+function calculateQuestionTime(question, operation) {
+    const baseByOperation = {
+        1: 65, 2: 65, 3: 60, 4: 60, 5: 55, 6: 60,
+        7: 65, 8: 70, 9: 65, 10: 70, 11: 50, 12: 50
+    };
+    let seconds = baseByOperation[operation] || 50;
+    const text = question.question || "";
+    const numbers = (text.match(/\d+/g) || []).map(Number);
+    // Penyebut besar dan bilangan yang lebih besar membutuhkan waktu tambahan.
+    if (numbers.some(n => n >= 10)) seconds += 10;
+    else if (numbers.some(n => n >= 5)) seconds += 5;
+    if (/\d+\s+\d+\/\d+/.test(text)) seconds += 5;
+    return Math.max(50, Math.min(90, seconds));
+}
+
+function stopQuestionTimer() {
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = null;
+}
+
+function renderTimer() {
+    const count = document.getElementById("timer-count");
+    const bar = document.getElementById("timer-bar");
+    const panel = document.getElementById("question-timer");
+    if (!count || !bar || !panel) return;
+    const minutes = Math.floor(timerRemaining / 60);
+    const seconds = timerRemaining % 60;
+    count.textContent = `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
+    bar.style.width = `${Math.max(0, timerRemaining / timerDuration * 100)}%`;
+    panel.classList.toggle("warning", timerRemaining <= 15 && timerRemaining > 0);
+    panel.classList.toggle("expired", timerRemaining <= 0);
+}
+
+function startQuestionTimer() {
+    stopQuestionTimer();
+    timerDuration = calculateQuestionTime(currentQuestion, selectedOperation);
+    timerRemaining = timerDuration;
+    renderTimer();
+    timerInterval = setInterval(() => {
+        timerRemaining--;
+        renderTimer();
+        if (timerRemaining <= 0) {
+            stopQuestionTimer();
+            if (hasAnswered) return;
+            hasAnswered = true;
+            setAnswerDisabled(true);
+            const feedback = document.getElementById("feedback");
+            feedback.className = "feedback wrong";
+            feedback.innerHTML = "⏰ WAKTU HABIS!<br>Kesempatan menjawab soal ini sudah selesai. Ayo lanjut ke soal berikutnya!";
+            document.getElementById("check-button").style.display = "none";
+            document.getElementById("next-button").style.display = "inline-block";
+        }
+    }, 1000);
+}
+
+/* =========================================
    MENAMPILKAN SOAL ACAK
 ========================================= */
 
@@ -2500,6 +2853,8 @@ function showRandomQuestion(number) {
 
     document.getElementById("image-page").style.display =
         "flex";
+
+    startQuestionTimer();
 
     setTimeout(() => {
         const firstInput = document.querySelector("#answer-input input");
@@ -2632,6 +2987,7 @@ function checkAnswer() {
     if (correct) {
 
         hasAnswered = true;
+        stopQuestionTimer();
 
         feedback.className = "feedback correct";
 
@@ -2681,6 +3037,8 @@ function nextQuestion() {
 ========================================= */
 
 function goBack() {
+
+    stopQuestionTimer();
 
     document.getElementById("image-page").style.display =
         "none";

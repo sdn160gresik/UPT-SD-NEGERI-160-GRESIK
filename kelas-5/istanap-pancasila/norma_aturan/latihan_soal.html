@@ -22,6 +22,34 @@ body{margin:0;min-height:100vh;padding:22px;background:
 .crest{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,#1e5fa8,#0d2b55);color:var(--gold);display:grid;place-items:center;font-size:24px;box-shadow:0 8px 18px #173d6b33}
 .school{font-size:11px;letter-spacing:.16em;color:#60758e;margin-top:3px}
 .pill{background:#edf4fc;border:1px solid #d7e5f4;color:#31577f;padding:8px 12px;border-radius:999px;font-size:12px;font-weight:800}
+.back-material{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:9px 14px;border-radius:11px;text-decoration:none;
+  background:linear-gradient(110deg,#1e5fa8,#2b7bc0);color:#fff;
+  border:1px solid #1b5794;font-size:12px;font-weight:850;
+  box-shadow:0 5px 13px #1e5fa822;transition:.16s;white-space:nowrap
+}
+.back-material:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.top-actions{display:flex;align-items:center;justify-content:flex-end;gap:9px;flex-wrap:wrap}
+.score-open{font-family:inherit;cursor:pointer}
+.score-modal{position:fixed;inset:0;background:#07152de8;display:grid;place-items:center;padding:18px;z-index:40}
+.score-panel{width:min(980px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:20px;box-shadow:0 25px 80px #0006}
+.score-head{position:sticky;top:0;z-index:2;background:linear-gradient(110deg,#102d59,#1d5795);color:#fff;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.score-head h2{margin:0;font-size:20px}
+.score-close{border:1px solid #ffffff66;background:#ffffff18;color:#fff;border-radius:9px;padding:8px 12px;font-weight:850;cursor:pointer}
+.score-content{padding:20px}
+.score-summary{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.score-summary span{background:#edf4fc;border:1px solid #d7e5f4;border-radius:10px;padding:8px 12px;font-size:12px;font-weight:850;color:#31577f}
+.score-table-wrap{overflow:auto;border:1px solid #dce5ef;border-radius:12px}
+.score-table{border-collapse:collapse;width:100%;min-width:720px;font-size:13px}
+.score-table th,.score-table td{padding:11px 12px;border-bottom:1px solid #e6edf4;text-align:left;white-space:nowrap}
+.score-table th{background:#f0f5fb;color:#27476d}
+.score-value{font-weight:950;color:#155c9c}
+.score-empty{text-align:center;color:#718198;padding:25px}
+.score-error{color:#b42332;font-size:13px;margin:10px 0;text-align:center}
+@media(max-width:680px){.top-actions{width:100%;justify-content:stretch}.top-actions>*{flex:1}.back-material{font-size:11px;padding:8px 10px}}
+
+
 .wrap{max-width:980px;margin:auto}
 .card{background:var(--paper);border:1px solid #e1e9f2;border-radius:22px;overflow:hidden;box-shadow:0 18px 55px #193d6512}
 .hero{background:linear-gradient(120deg,#102d59,#1d5795 68%,#2876b6);color:white;padding:30px 34px;position:relative;overflow:hidden}
@@ -73,8 +101,12 @@ body{margin:0;min-height:100vh;padding:22px;background:
 .loading{position:fixed;inset:0;background:#07152dcc;display:grid;place-items:center;padding:20px;z-index:30}
 .loading-box{background:white;border-radius:18px;padding:24px 30px;text-align:center;font-weight:850;color:#385675;box-shadow:0 20px 60px #0003}
 .error-text{color:#b42332;font-size:13px;margin-top:12px;line-height:1.5}
+.result-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.back-result{display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none}
+@media(max-width:580px){.result-actions{grid-template-columns:1fr}}
+
 @media(max-width:680px){
- body{padding:12px}.topbar{align-items:flex-start}.topbar>.pill{font-size:10px}
+ body{padding:12px}.topbar{align-items:center;flex-wrap:wrap}.back-material{font-size:11px;padding:8px 10px}
  .hero{padding:24px 21px}.content{padding:22px 20px 25px}
  .grid{grid-template-columns:1fr;gap:12px}.actions{flex-direction:column}
  .result-grid{gap:7px}.result-box{padding:12px 5px}.result-box strong{font-size:21px}
@@ -84,7 +116,7 @@ body{margin:0;min-height:100vh;padding:22px;background:
 <body>
 <div class="topbar">
   <div class="brand"><div class="crest">✦</div><div>ISTANA PANCASILA<div class="school">UPT SDN 160 GRESIK</div></div></div>
-  <div class="pill">Kuis Interaktif • BAB 2</div>
+  <div class="top-actions"><button class="back-material score-open" type="button" onclick="openScoreAccess()">▤ DATA NILAI SISWA</button><a class="back-material" href="norma_aturan.html">← Kembali ke Materi</a></div>
 </div>
 
 <main class="wrap">
@@ -132,10 +164,30 @@ body{margin:0;min-height:100vh;padding:22px;background:
       <div class="result-box"><strong id="wrongResult">0</strong><span>Jawaban salah</span></div>
     </div>
     <p id="remainingInfo" class="result-note"></p>
-    <button class="btn primary full" onclick="location.reload()">KEMBALI KE HALAMAN AWAL</button>
+    <div class="result-actions">
+      <a class="btn secondary full back-result" href="norma_aturan.html">← KEMBALI KE MATERI</a>
+      <button class="btn primary full" onclick="location.reload()">ULANGI / KEMBALI KE HALAMAN AWAL</button>
+    </div>
   </div>
 </section>
 </main>
+
+<div id="scoreModal" class="score-modal hidden">
+<section class="score-panel" role="dialog" aria-modal="true" aria-labelledby="scoreTitle">
+  <div class="score-head"><h2 id="scoreTitle">▤ Data Nilai Siswa</h2><button class="score-close" onclick="closeScoreAccess()">TUTUP ✕</button></div>
+  <div class="score-content">
+    <p style="color:#8a4b12;background:#fff6e5;border:1px solid #f1d59a;border-radius:10px;padding:11px 13px;font-size:12px;line-height:1.5"></p>
+    <div class="score-summary"><span id="scoreCount">Memuat data nilai...</span><span>Urutan: terbaru ke terlama</span></div>
+    <div class="score-table-wrap"><table class="score-table">
+      <thead><tr><th>No.</th><th>Waktu</th><th>Nama Siswa</th><th>Kelas</th><th>Absen</th><th>Jumlah Soal</th><th>Benar</th><th>Salah</th><th>Nilai</th></tr></thead>
+      <tbody id="scoreRows"></tbody>
+    </table></div>
+    <div id="scoreEmpty" class="score-empty hidden">Belum ada data nilai siswa.</div>
+    <div id="scoreError" class="score-error hidden"></div>
+    <button class="btn secondary" style="margin-top:14px" onclick="refreshStudentScores()">MUAT ULANG DATA</button>
+  </div>
+</section>
+</div>
 
 <div id="modal" class="modal hidden">
   <div id="modalBox" class="modal-box good">
@@ -203,10 +255,38 @@ function apiCall(action, params = {}) {
     script.onerror = () => {
       if (finished) return;
       finished = true; clearTimeout(timer); cleanup();
-      reject(new Error("Gagal menghubungi Google Apps Script. Pastikan deployment dapat diakses oleh siapa saja."));
+      reject(new Error("Gerbang data belum terbuka! Periksa koneksi dan pastikan layanan sudah dapat diakses oleh semua pengunjung."));
     };
     document.head.appendChild(script);
   });
+}
+
+function openScoreAccess(){show("scoreModal");refreshStudentScores()}
+function closeScoreAccess(){hide("scoreModal")}
+async function refreshStudentScores(){
+  const errorBox=document.getElementById("scoreError");
+  errorBox.textContent="";hide("scoreError");
+  document.getElementById("scoreCount").textContent="Memuat data nilai...";
+  setLoading(true);
+  try{
+    const data=await apiCall("getScores");
+    setLoading(false);
+    const rows=Array.isArray(data.rows)?data.rows:[];
+    document.getElementById("scoreCount").textContent=rows.length+" data nilai";
+    const tbody=document.getElementById("scoreRows");tbody.innerHTML="";
+    rows.forEach((row,index)=>{
+      const tr=document.createElement("tr");
+      [index+1,row.time,row.nama,row.kelas,row.absen,row.total,row.benar,row.salah,row.nilai].forEach((value,i)=>{
+        const td=document.createElement("td");td.textContent=value==null?"":String(value);
+        if(i===8)td.className="score-value";tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+    if(rows.length)hide("scoreEmpty");else show("scoreEmpty");
+  }catch(error){
+    setLoading(false);errorBox.textContent=error.message||String(error);show("scoreError");
+    document.getElementById("scoreCount").textContent="Data nilai belum dapat dimuat";
+  }
 }
 
 function showStartError(message) {

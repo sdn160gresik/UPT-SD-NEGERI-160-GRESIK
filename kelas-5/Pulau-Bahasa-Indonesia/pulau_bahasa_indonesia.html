@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#087e8b">
+<title>Pulau Bahasa Indonesia | Kelas 5</title>
+<style>
+:root{
+  --ocean:#075b70;--deep:#063b52;--sea:#0c91a0;--aqua:#bcefe8;
+  --sand:#fff3d4;--sand2:#f7dfaa;--coral:#ef795e;--sun:#ffc857;
+  --ink:#173b4a;--muted:#58727a;--white:#fff;--green:#2d8875;
+  --shadow:0 14px 36px rgba(3,45,61,.19)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);
+ background:linear-gradient(180deg,#9de4df 0,#d8f5e9 36%,#fff0c8 100%);font-size:16px}
+button,a{font:inherit}
+button{cursor:pointer}
+.site-header{position:relative;isolation:isolate;overflow:hidden;text-align:center;color:#fff;padding:25px 16px 32px;
+ background:linear-gradient(135deg,#06445b,#087e8b 58%,#18a5a1);border-bottom:7px solid var(--sun)}
+.site-header:before,.site-header:after{content:"";position:absolute;z-index:-1;border-radius:50%;background:#ffffff12}
+.site-header:before{width:330px;height:330px;left:-95px;top:-180px}
+.site-header:after{width:420px;height:420px;right:-120px;bottom:-300px}
+.sun-disc{position:absolute;right:12%;top:20px;width:68px;height:68px;border-radius:50%;background:var(--sun);box-shadow:0 0 45px #ffd36b88;opacity:.95}
+.brand{font-size:12px;font-weight:850;letter-spacing:.17em;color:#d7fff5;text-transform:uppercase}
+.logo{display:grid;place-items:center;width:68px;height:68px;margin:0 auto 10px;border:3px solid #ffe09a;border-radius:50%;
+ background:linear-gradient(145deg,#ffcb67,#e97754);box-shadow:0 0 0 6px #ffffff20;font-size:35px}
+h1{font-family:Georgia,serif;font-size:clamp(30px,5vw,54px);line-height:1.08;margin:9px 0;color:#fff1c7;text-shadow:0 3px 0 #06465b}
+.site-header p{max-width:760px;margin:8px auto;line-height:1.65;color:#edfffb}
+.back-main{display:inline-flex;align-items:center;gap:8px;margin-top:15px;padding:11px 17px;border-radius:12px;
+ background:linear-gradient(180deg,#ffe29a,#ffbf4d);color:#4c3b19;text-decoration:none;font-weight:850;
+ border:1px solid #fff0bc;box-shadow:0 4px 0 #b77b32;transition:.2s}
+.back-main:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.wave{height:22px;background:radial-gradient(35px 14px at 35px 0,#fff0c8 98%,transparent 100%) 0 0/70px 22px repeat-x}
+.container{width:min(1200px,calc(100% - 32px));margin:25px auto 35px}
+.intro,.lesson-panel{background:var(--sand);border:2px solid #e3bd70;border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+.intro{text-align:center;padding:28px 22px 20px}
+.intro .island-icon{font-size:35px}
+.intro h2{font:700 clamp(24px,4vw,36px) Georgia,serif;color:var(--deep);margin:5px 0 9px}
+.intro p{max-width:780px;margin:0 auto;color:var(--muted);line-height:1.75}
+.chapter-label{display:inline-block;margin:22px 0 9px;padding:7px 14px;border-radius:99px;background:#d9f2e9;color:#086b70;
+ font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.lesson-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:10px 24px 28px}
+.lesson-card{display:flex;align-items:center;gap:14px;text-align:left;min-height:90px;padding:15px 17px;border:1px solid #e3c98f;
+ border-radius:16px;background:linear-gradient(135deg,#fffdf5,#f8e6bd);color:var(--ink);box-shadow:0 4px 12px #19475b10;transition:.2s}
+.lesson-card:hover{transform:translateY(-3px);border-color:#d79a42;box-shadow:0 9px 18px #19475b20}
+.lesson-number{display:grid;place-items:center;flex:0 0 43px;width:43px;height:43px;border-radius:50%;
+ background:linear-gradient(145deg,#ffd979,#f4a94c);color:#65451b;font-weight:950;font-size:18px}
+.lesson-card strong{display:block;font:700 17px Georgia,serif;color:#07576a;line-height:1.35}
+.lesson-card small{display:block;color:#667c7c;margin-top:5px;line-height:1.4}
+.arrow{margin-left:auto;color:#d07842;font-size:25px;font-weight:900}
+.lesson-panel{max-width:1000px;margin:0 auto}
+.progress-wrap{display:flex;align-items:center;gap:13px;color:#07576a;font-size:13px;font-weight:800;margin:0 auto 12px}
+.progress-track{height:9px;flex:1;border-radius:99px;background:#ffffffa8;overflow:hidden}
+.progress-track span{display:block;height:100%;width:0;background:linear-gradient(90deg,#0e9d9c,#ffc857);transition:width .3s}
+.lesson-top{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:19px 25px;
+ color:#fff;background:linear-gradient(100deg,#07566b,#0b8990);border-bottom:5px solid var(--sun)}
+.lesson-top .kicker{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:#c8fff0;font-weight:900}
+.lesson-top .lesson-title{font:700 22px Georgia,serif;margin-top:5px;color:#fff2c9}
+.top-decor{font-size:28px;white-space:nowrap}
+.lesson-content{padding:clamp(22px,4vw,42px);background:linear-gradient(180deg,#fff8e7,#fff3d5)}
+.lesson-content h2{font:700 clamp(25px,3.5vw,37px) Georgia,serif;color:#07576a;line-height:1.2;margin:0 0 19px}
+.lesson-content h3{font:800 20px Georgia,serif;color:#a74d37;margin:25px 0 10px}
+.lesson-content p{font-size:16px;line-height:1.85;margin:0 0 14px;color:#294d57}
+.lesson-content .lead{font-weight:700;color:#07576a}
+.lesson-content .note{padding:15px 18px;border-left:5px solid var(--coral);border-radius:10px;background:#fff;
+ box-shadow:0 3px 10px #17495b0c;margin:13px 0;line-height:1.8}
+.lesson-content .definition{padding:17px 19px;border:1px solid #b8ded4;border-radius:13px;background:#e9f8ef;margin:14px 0;line-height:1.8}
+.lesson-content ul,.lesson-content ol{padding-left:25px;margin:8px 0 18px}
+.lesson-content li{padding-left:4px;margin:8px 0;line-height:1.75}
+.lesson-content table{width:100%;border-collapse:collapse;margin:14px 0 20px;background:#fff;border-radius:11px;overflow:hidden}
+.lesson-content th,.lesson-content td{border:1px solid #d8cba9;padding:11px 13px;text-align:left;vertical-align:top;line-height:1.6}
+.lesson-content th{background:#d8f0e7;color:#07576a;font-weight:850}
+.lesson-content tr:nth-child(even) td{background:#fffaf0}
+.lesson-content .quote{padding:17px 20px;border-radius:13px;background:#fff;border:1px dashed #d9a34c;font-style:italic;line-height:1.85}
+.lesson-content .formula{display:inline-block;padding:8px 15px;border-radius:10px;background:#075b70;color:#fff;font-weight:900;letter-spacing:.06em;margin:4px 0 12px}
+.lesson-actions{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:18px 24px;background:#f7e7bf;border-top:1px solid #e3cf9f}
+.action{border:0;border-radius:11px;padding:12px 17px;background:#08788a;color:#fff;font-weight:850;box-shadow:0 3px 0 #07566b;transition:.18s}
+.action:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.action.gold{background:linear-gradient(180deg,#ffda83,#f2ae43);color:#503a19;box-shadow:0 3px 0 #b77b32}
+.action.coral{background:linear-gradient(180deg,#f28c70,#dc644e);box-shadow:0 3px 0 #a74738}
+.action:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.hidden{display:none!important}
+.site-footer{text-align:center;color:#07566b;padding:18px;font-size:13px;font-weight:700}
+@media(max-width:700px){
+ .container{width:calc(100% - 20px);margin:14px auto 25px}
+ .lesson-grid{grid-template-columns:1fr;padding:8px 14px 20px}
+ .intro{padding:22px 15px 16px}
+ .lesson-top{padding:15px 17px}
+ .lesson-content{padding:20px 17px}
+ .lesson-actions{padding:14px}
+ .action{flex:1 1 42%;font-size:14px}
+ .top-decor{font-size:22px}
+ .sun-disc{right:5%;width:45px;height:45px}
+}
+@media(max-width:420px){
+ .brand{font-size:10px;letter-spacing:.1em}
+ .lesson-card{padding:12px}
+ .lesson-card strong{font-size:15px}
+ .lesson-content p,.lesson-content li{font-size:15px}
+ .lesson-content th,.lesson-content td{padding:8px;font-size:14px}
+}
+@media print{
+ body{background:#fff}.site-header,.intro,.progress-wrap,.lesson-actions,.site-footer{display:none!important}
+ .container{width:100%;margin:0}.lesson-panel{border:0;box-shadow:none}
+ .lesson-content{background:#fff}.lesson-top{print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="sun-disc" aria-hidden="true"></div>
+  <div class="logo" aria-hidden="true">📚</div>
+  <div class="brand">UPT SDN 160 GRESIK · PETUALANGAN LITERASI</div>
+  <h1>PULAU BAHASA INDONESIA</h1>
+  <p>Jelajahi pulau pengetahuan, temukan rahasia suku kata, imbuhan, cerita pendek, wawancara, dan laporan pengamatan.</p>
+  <a class="back-main" href="../pulau.html">← Kembali ke Pulau Utama</a>
+</header>
+<div class="wave" aria-hidden="true"></div>
+
+<main class="container">
+  <section class="intro" id="homePage">
+    <div class="island-icon" aria-hidden="true">🏝️ 🐚 🌴</div>
+    <h2>Peta Petualangan Bahasa Indonesia</h2>
+    <p>Pilih salah satu pos belajar di bawah ini. Bacalah materi secara berurutan, perhatikan contoh, dan pahami setiap penjelasan sebelum melanjutkan ke pos berikutnya.</p>
+    <div id="lessonGrid"></div>
+  </section>
+
+  <div class="progress-wrap hidden" id="progressWrap">
+    <span id="progressCount">Materi 1</span>
+    <div class="progress-track"><span id="progressBar"></span></div>
+    <span id="progressPercent">0%</span>
+  </div>
+
+  <section class="lesson-panel hidden" id="detailPage">
+    <div class="lesson-top">
+      <div>
+        <div class="kicker">✦ Pos Pengetahuan Pulau Bahasa ✦</div>
+        <div class="lesson-title" id="lessonTitle">Materi 1</div>
+      </div>
+      <div class="top-decor" aria-hidden="true">🌊 🐚</div>
+    </div>
+    <article class="lesson-content" id="lessonContent"></article>
+    <div class="lesson-actions">
+      <button class="action" id="backHome" type="button" onclick="backToHome()">← Daftar Materi</button>
+      <button class="action gold" id="nextLesson" type="button" onclick="moveNext()">Materi Berikutnya →</button>
+      <button class="action coral" type="button" onclick="goTraining()">✎ Latihan Soal</button>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">🌴 Pulau Bahasa Indonesia · Membaca, memahami, bertanya, dan berkarya dengan gembira 🌴</footer>
+
+<script>
+"use strict";
+
+const lessons = [
+{
+ chapter:"BAB III – EKSPRESI DIRI MELALUI HOBI",
+ title:"Tujuan Pembelajaran dan Pengantar Bab III",
+ icon:"📖",
+ blocks:[
+  {type:"heading",text:"BAB III – EKSPRESI DIRI MELALUI HOBI"},
+  {type:"sub",text:"Tujuan Pembelajaran"},
+  {type:"list",items:[
+   "Membaca kata-kata dengan pola CV (konsonan-vokal) dengan fasih dan indah.",
+   "Membaca kata-kata dengan pola CVC (konsonan-vokal-konsonan) dengan fasih dan indah.",
+   "Membaca kata-kata berpola kompleks (lebih dari tiga suku kata) dengan fasih dan indah.",
+   "Menentukan tema cerita pendek sederhana.",
+   "Menyusun alur cerita pendek sederhana.",
+   "Menulis cerita pendek sederhana dengan menggunakan bahasa yang jelas dan mudah dipahami."
+  ]},
+  {type:"sub",text:"Ayo Mengawali Pembelajaran"},
+  {type:"quote",text:"“Selamat pagi, anak-anak! Apa kabar hari ini?”"},
+  {type:"quote",text:"“Sebelum belajar, Ibu/Bapak ingin bertanya. Siapa yang punya hobi?”"},
+  {type:"p",text:"Hobi adalah kegemaran. Pilihan hobi sangat banyak, misalnya bermain bola, membaca, berlari, berkesenian, dan lain-lain."},
+  {type:"quote",text:"“Anak-anak, ternyata kata-kata tentang hobi memiliki suku kata yang bisa kita pelajari. Misalnya, kata bola terdiri dari bo dan la. Nah, bo dan la termasuk pola konsonan-vokal.”"},
+  {type:"quote",text:"“Dengan belajar pola konsonan-vokal, kalian akan lebih mudah membaca kata, cerita, dan buku tentang hobi yang kalian sukai.”"},
+  {type:"sub",text:"Ringkasan Materi"},
+  {type:"p",text:"Apa yang kalian ketahui tentang gabungan huruf? Bagaimana cara kita menentukan gabungan huruf dari konsonan dan huruf vokal? Kalian akan mengetahuinya dengan mempelajari materi bab ini tentang pola CV, CVC, imbuhan, dan cerita pendek."}
+ ]
+},
+{
+ chapter:"BAB III – EKSPRESI DIRI MELALUI HOBI",
+ title:"Huruf Vokal dan Pola CV",
+ icon:"🔤",
+ blocks:[
+  {type:"heading",text:"Mengenal Huruf Vokal dan Huruf Konsonan"},
+  {type:"p",text:"Sebelum memulai, mari kita ingat kembali: apa itu huruf vokal? Huruf vokal disebut juga huruf hidup, sedangkan huruf konsonan adalah huruf selain vokal."},
+  {type:"table",headers:["Huruf Vokal","Contoh Kata"],rows:[["A","Api"],["I","Ikan"],["U","Ular"],["E","Es"],["O","Obat"]]},
+  {type:"note",text:"Huruf selain A, I, U, E, dan O disebut huruf konsonan."},
+  {type:"heading",text:"1. Pola CV (Konsonan–Vokal)"},
+  {type:"definition",text:"Pola KV adalah pola suku kata yang terdiri atas satu konsonan dan satu vokal."},
+  {type:"formula",text:"Rumus: K + V"},
+  {type:"table",headers:["Pola","Susunan Huruf","Cara Membaca"],rows:[
+   ["ba","b + a","ba"],["mi","m + i","mi"],["mu","m + u","mu"],["se","s + e","se"],["ro","r + o","ro"]
+  ]},
+  {type:"sub",text:"Contoh Pola KV dalam Kata"},
+  {type:"table",headers:["Kata","Pemisahan Suku Kata"],rows:[
+   ["baju","ba – ju"],["meja","me – ja"],["sepi","se – pi"],["roda","ro – da"],["buku","bu – ku"]
+  ]},
+  {type:"sub",text:"Lafal dan Intonasi"},
+  {type:"p",text:"Cara membaca yang benar menggunakan lafal dan intonasi. Lafal adalah cara mengucapkan bunyi bahasa dengan tepat. Intonasi adalah tinggi-rendah nada saat membaca."},
+  {type:"note",text:"Contoh: kata “buku” dibaca “bu-ku”, bukan “buk-u”."}
+ ]
+},
+{
+ chapter:"BAB III – EKSPRESI DIRI MELALUI HOBI",
+ title:"Pola CVC dan Membaca Nyaring",
+ icon:"🗣️",
+ blocks:[
+  {type:"heading",text:"2. Pola CVC (Konsonan–Vokal–Konsonan)"},
+  {type:"definition",text:"Pola KVK terdiri atas satu konsonan, satu vokal, dan satu konsonan."},
+  {type:"formula",text:"Rumus: K + V + K"},
+  {type:"sub",text:"Contoh Pola KVK"},
+  {type:"table",headers:["Kata","Susunan Huruf"],rows:[
+   ["tas","t + a + s"],["rak","r + a + k"],["jam","j + a + m"],["cat","c + a + t"],["bus","b + u + s"]
+  ]},
+  {type:"sub",text:"Contoh Pola KVK dalam Kata"},
+  {type:"table",headers:["Kata","Pemisahan Suku Kata"],rows:[
+   ["sabun","sa – bun"],["makan","ma – kan"],["kantor","kan – tor"],["pensil","pen – sil"],["gambar","gam – bar"]
+  ]},
+  {type:"sub",text:"Analisis Pola Suku Kata"},
+  {type:"table",headers:["Contoh 1","Contoh 2"],rows:[
+   ["Kata: sabun","Kata: kantor"],
+   ["Pemisahan: sa = KV; bun = KVK","Pemisahan: kan = KVK; tor = KVK"],
+   ["Pola: KV–KVK","Pola: KVK–KVK"]
+  ]},
+  {type:"heading",text:"3. Keterampilan Membaca Nyaring"},
+  {type:"p",text:"Hal-hal yang harus diperhatikan saat membaca nyaring:"},
+  {type:"list",items:[
+   "Kejelasan suara.",
+   "Ketepatan pengucapan.",
+   "Intonasi.",
+   "Tanda baca: titik (.) artinya berhenti; koma (,) artinya jeda sebentar; tanda tanya (?) artinya nada bertanya."
+  ]}
+ ]
+},
+{
+ chapter:"BAB III – EKSPRESI DIRI MELALUI HOBI",
+ title:"Imbuhan me-, -kan, dan -lah",
+ icon:"🧩",
+ blocks:[
+  {type:"heading",text:"Imbuhan me-"},
+  {type:"definition",text:"Imbuhan me- adalah awalan yang membentuk kata dasar menjadi kata kerja."},
+  {type:"p",text:"Beberapa makna imbuhan me- adalah sebagai berikut:"},
+  {type:"list",items:[
+   "Melakukan suatu pekerjaan. Contoh: membaca, menulis, menari, melukis, memasak.",
+   "Membentuk atau menjadikan sesuatu. Contoh: membeku, mendidih, mengecil.",
+   "Mengerjakan sesuatu dengan alat. Contoh: menggunting, mencangkul, memblender."
+  ]},
+  {type:"sub",text:"Penyesuaian Imbuhan me-"},
+  {type:"p",text:"Perhatikan bahwa terdapat penyesuaian jika kita menggabungkan kata dasar dan awalan me-."},
+  {type:"list",items:[
+   "Imbuhan me- menjadi mem- jika kata dasar dimulai dengan huruf p.",
+   "Imbuhan me- menjadi meng- jika kata dasar dimulai dengan huruf k.",
+   "Imbuhan me- menjadi men- jika kata dasar dimulai dengan huruf t.",
+   "Imbuhan me- tidak berubah jika kata dasar dimulai dengan huruf tertentu seperti l, m, n, r, atau w."
+  ]},
+  {type:"note",text:"Pada kata tertentu, huruf awal kata dasar dapat mengalami peluluhan ketika mendapat imbuhan me-. Contoh yang terdapat dalam materi: tulis menjadi menulis."},
+  {type:"heading",text:"Imbuhan -kan"},
+  {type:"definition",text:"Imbuhan -kan adalah akhiran yang mengubah kata dasar menjadi kata kerja. Kata kerja yang terbentuk menyatakan makna perintah."},
+  {type:"p",text:"Contoh: ambilkan, dengarkan, pindahkan, tuangkan."},
+  {type:"heading",text:"Imbuhan -lah"},
+  {type:"definition",text:"Imbuhan -lah adalah akhiran yang mengubah kata dasar menjadi kata kerja. Kata kerja yang terbentuk menekankan kata dasarnya dan menyatakan perintah."},
+  {type:"p",text:"Contoh: buatlah, gambarlah."},
+  {type:"sub",text:"Latihan Mengidentifikasi Imbuhan"},
+  {type:"p",text:"Daftarlah 5 kata berimbuhan me- dan tuliskan kata dasar serta maknanya seperti pada tabel berikut."},
+  {type:"table",headers:["No.","Kata Berimbuhan me-","Kata Dasar","Makna"],rows:[
+   ["1","menempel","tempel","Melakukan suatu pekerjaan"],["2","","",""],["3","","",""],["4","","",""],["5","","",""]
+  ]}
+ ]
+},
+{
+ chapter:"BAB III – EKSPRESI DIRI MELALUI HOBI",
+ title:"Cerita Pendek: Pengertian dan Ciri-ciri",
+ icon:"📚",
+ blocks:[
+  {type:"heading",text:"Cerita Pendek"},
+  {type:"definition",text:"Cerita pendek atau cerpen adalah jenis karya sastra prosa fiksi yang menceritakan peristiwa pokok secara ringkas, padat, dan fokus pada satu tokoh utama. Umumnya cerpen terdiri dari kurang dari 10.000 kata, dapat diselesaikan dalam sekali duduk, serta memberikan kesan mendalam."},
+  {type:"sub",text:"Ciri-ciri Cerita Pendek"},
+  {type:"list",items:[
+   "Ceritanya singkat dan tidak terlalu panjang.",
+   "Memiliki sedikit tokoh.",
+   "Hanya menceritakan satu masalah utama.",
+   "Alur cerita sederhana dan mudah dipahami.",
+   "Memiliki pesan atau amanat."
+  ]}
+ ]
+},
+{
+ chapter:"BAB III – EKSPRESI DIRI MELALUI HOBI",
+ title:"Unsur, Struktur, dan Langkah Membuat Cerpen",
+ icon:"📝",
+ blocks:[
+  {type:"heading",text:"Unsur-unsur Cerita Pendek"},
+  {type:"list",items:[
+   "Tema adalah ide pokok atau inti cerita. Contoh: persahabatan, kejujuran, dan disiplin.",
+   "Tokoh adalah pelaku dalam cerita. Tokoh utama adalah tokoh yang paling sering muncul. Tokoh tambahan adalah tokoh pendukung cerita.",
+   "Penokohan adalah sifat atau watak tokoh. Contoh sifat: baik hati, rajin, pemalas, jujur, dan sombong.",
+   "Latar adalah tempat, waktu, dan suasana dalam cerita. Latar tempat: sekolah, rumah, pasar. Latar waktu: pagi hari, malam hari, hari Minggu. Latar suasana: sedih, gembira, tegang.",
+   "Alur adalah jalannya cerita. Awal: memperkenalkan tokoh. Tengah: muncul masalah. Akhir: masalah selesai.",
+   "Amanat adalah pesan yang ingin disampaikan penulis."
+  ]},
+  {type:"heading",text:"Struktur Cerita Pendek"},
+  {type:"list",items:[
+   "Orientasi: bagian pengenalan tokoh, tempat, dan waktu.",
+   "Komplikasi: bagian munculnya masalah.",
+   "Resolusi: bagian penyelesaian masalah."
+  ]},
+  {type:"heading",text:"Langkah-langkah Membuat Cerita Pendek"},
+  {type:"list",items:[
+   "Menentukan tema.",
+   "Menentukan tokoh.",
+   "Menentukan latar.",
+   "Membuat alur cerita.",
+   "Menulis cerita dengan bahasa yang jelas.",
+   "Menentukan amanat."
+  ]},
+  {type:"sub",text:"Contoh Kutipan Cerita Pendek: Pensil Baru Rani"},
+  {type:"quote",text:"Pada hari Senin pagi, Rani pergi ke sekolah dengan gembira. Ia membawa pensil baru hadiah dari ibunya. Saat pelajaran dimulai, pensil Rani jatuh ke lantai. Tiba-tiba pensil itu hilang. Rani merasa sedih dan mencari ke bawah meja. Ternyata, pensil itu terbawa oleh Mila tanpa sengaja. Mila segera meminta maaf dan mengembalikannya kepada Rani. Rani memaafkan Mila. Mereka pun kembali belajar bersama dengan senang."}
+ ]
+},
+{
+ chapter:"BAB IV – BELAJAR BERWIRAUSAHA",
+ title:"Tujuan Pembelajaran dan Pengantar Bab IV",
+ icon:"🛍️",
+ blocks:[
+  {type:"heading",text:"BAB IV – BELAJAR BERWIRAUSAHA"},
+  {type:"sub",text:"Tujuan Pembelajaran"},
+  {type:"list",items:[
+   "Menyapa dan berkenalan dengan orang lain dengan sopan.",
+   "Mengajukan dan menjawab pertanyaan.",
+   "Menulis laporan pengamatan sederhana dengan menggunakan bahasa yang jelas dan mudah dipahami.",
+   "Mengidentifikasi objek yang akan dideskripsikan melalui pengamatan dengan cermat."
+  ]},
+  {type:"sub",text:"Ayo Mengawali Pembelajaran"},
+  {type:"quote",text:"“Anak-anak, siapa di antara kalian yang pernah membeli makanan, minuman, atau barang dari pedagang di sekitar rumah atau sekolah? Menurut kalian, apa yang membuat usaha mereka bisa dikenal banyak orang dan tetap berjalan sampai sekarang?”"},
+  {type:"p",text:"Untuk mengetahui lebih dalam tentang usaha seseorang, kita bisa melakukan wawancara langsung kepada pelaku usaha. Dari hasil wawancara dan pengamatan tersebut, kita dapat memperoleh informasi penting, seperti cara memulai usaha, tantangan yang dihadapi, dan strategi agar usahanya berhasil."},
+  {type:"p",text:"Setelah melakukan pengamatan dan wawancara, informasi yang kita dapatkan perlu disusun menjadi laporan pengamatan agar lebih rapi, jelas, dan mudah dipahami orang lain."},
+  {type:"sub",text:"Ringkasan Materi"},
+  {type:"p",text:"Apa yang kalian ketahui tentang wawancara? Bagaimana cara mengutarakan pertanyaan? Kalian akan mengetahuinya dengan mempelajari materi bab ini tentang menyapa dan berkenalan, mengajukan dan menjawab pertanyaan orang lain, serta menulis laporan pengamatan."}
+ ]
+},
+{
+ chapter:"BAB IV – BELAJAR BERWIRAUSAHA",
+ title:"Kalimat Tanya dan Kata Tanya",
+ icon:"❔",
+ blocks:[
+  {type:"heading",text:"Apa Itu Kalimat Tanya?"},
+  {type:"definition",text:"Kalimat tanya adalah kalimat yang digunakan untuk meminta informasi, penjelasan, atau respons (jawaban/tindakan) dari orang lain. Secara formal, kalimat ini sering ditandai dengan penggunaan kata tanya (5W + 1H), yaitu apa, siapa, kapan, di mana, mengapa, dan bagaimana. Kalimat tanya diakhiri dengan tanda tanya (?)."},
+  {type:"sub",text:"Ciri-ciri Kalimat Tanya"},
+  {type:"list",items:[
+   "Menggunakan kata tanya.",
+   "Bertujuan meminta informasi atau jawaban.",
+   "Diakhiri tanda tanya (?)."
+  ]},
+  {type:"sub",text:"Kata Tanya dalam Kalimat Tanya"},
+  {type:"table",headers:["Kata Tanya","Fungsi"],rows:[
+   ["Apa","Menanyakan benda atau hal."],["Siapa","Menanyakan orang."],["Kapan","Menanyakan waktu."],
+   ["Di mana","Menanyakan tempat."],["Mengapa","Menanyakan alasan."],["Bagaimana","Menanyakan cara atau keadaan."]
+  ]},
+  {type:"sub",text:"Latihan Membuat Kalimat Tanya"},
+  {type:"p",text:"Buatlah contoh kalimat tanya menggunakan kata tanya berikut."},
+  {type:"table",headers:["Kata Tanya","Kalimat Tanya"],rows:[
+   ["Apa","........................................................"],["Siapa","........................................................"],
+   ["Kapan","........................................................"],["Di mana","........................................................"],
+   ["Mengapa","........................................................"],["Bagaimana","........................................................"]
+  ]}
+ ]
+},
+{
+ chapter:"BAB IV – BELAJAR BERWIRAUSAHA",
+ title:"Wawancara: Pengertian, Tujuan, dan Jenis",
+ icon:"🎙️",
+ blocks:[
+  {type:"heading",text:"Apa Itu Wawancara?"},
+  {type:"definition",text:"Wawancara adalah kegiatan tanya jawab secara lisan antara dua orang atau lebih, yaitu pewawancara dan narasumber, yang bertujuan untuk memperoleh informasi, data, pendapat, atau keterangan mendalam mengenai suatu hal."},
+  {type:"note",text:"Pewawancara adalah orang yang mengajukan pertanyaan. Narasumber adalah orang yang memberikan informasi atau jawaban."},
+  {type:"heading",text:"Tujuan Wawancara"},
+  {type:"list",items:[
+   "Mendapatkan informasi.",
+   "Mengetahui pendapat seseorang.",
+   "Mengumpulkan data untuk laporan.",
+   "Menambah pengetahuan dan pengalaman."
+  ]},
+  {type:"heading",text:"Jenis-jenis Wawancara"},
+  {type:"sub",text:"1. Wawancara Terstruktur"},
+  {type:"p",text:"Wawancara terstruktur adalah wawancara yang pertanyaannya sudah disiapkan terlebih dahulu."},
+  {type:"note",text:"Contoh: “Kapan Bapak memulai usaha?” dan “Apa kendala dalam berjualan?”"},
+  {type:"sub",text:"2. Wawancara Tidak Terstruktur"},
+  {type:"p",text:"Wawancara tidak terstruktur adalah wawancara yang pertanyaannya berkembang saat kegiatan berlangsung."},
+  {type:"note",text:"Contoh: ketika narasumber bercerita tentang kesulitan usahanya, pewawancara dapat bertanya lebih lanjut."}
+ ]
+},
+{
+ chapter:"BAB IV – BELAJAR BERWIRAUSAHA",
+ title:"Persiapan, Sikap, dan Langkah Wawancara",
+ icon:"🤝",
+ blocks:[
+  {type:"heading",text:"Hal-hal yang Harus Dipersiapkan Sebelum Wawancara"},
+  {type:"list",items:[
+   "Menentukan tema. Contoh tema: kewirausahaan, lingkungan, kesehatan, dan pendidikan.",
+   "Menentukan narasumber: pilih orang yang mengetahui informasi sesuai tema. Contoh: pedagang, guru, dokter, dan petani.",
+   "Menyusun daftar pertanyaan. Pertanyaan disusun dengan jelas, singkat, sopan, dan sesuai tema.",
+   "Menyiapkan alat. Contoh: buku catatan, pensil/pulpen, dan alat perekam."
+  ]},
+  {type:"heading",text:"Sikap yang Harus Dimiliki Saat Wawancara"},
+  {type:"list",items:[
+   "Bersikap sopan.",
+   "Mengucapkan salam.",
+   "Mendengarkan dengan baik.",
+   "Tidak memotong pembicaraan.",
+   "Mengucapkan terima kasih setelah selesai."
+  ]},
+  {type:"heading",text:"Langkah-langkah Melakukan Wawancara"},
+  {type:"sub",text:"1. Membuka Wawancara"},
+  {type:"list",items:["Mengucapkan salam.","Memperkenalkan diri.","Menjelaskan tujuan wawancara."]},
+  {type:"note",text:"Contoh: “Selamat pagi, Pak. Saya Rina dari kelas 5. Saya ingin melakukan wawancara tentang usaha makanan.”"},
+  {type:"sub",text:"2. Mengajukan Pertanyaan"},
+  {type:"p",text:"Ajukan pertanyaan satu per satu dengan sopan."},
+  {type:"note",text:"Contoh: “Sejak kapan Bapak membuka usaha ini?” dan “Apa saja bahan yang digunakan?”"},
+  {type:"sub",text:"3. Mencatat Jawaban"},
+  {type:"p",text:"Tuliskan jawaban penting dari narasumber."},
+  {type:"sub",text:"4. Menutup Wawancara"},
+  {type:"p",text:"Tutup wawancara dengan mengucapkan terima kasih atau berpamitan."},
+  {type:"note",text:"Contoh: “Terima kasih atas waktunya, Pak.”"}
+ ]
+},
+{
+ chapter:"BAB IV – BELAJAR BERWIRAUSAHA",
+ title:"Contoh Wawancara dengan Pedagang",
+ icon:"🍜",
+ blocks:[
+  {type:"heading",text:"Bacalah Wawancara dengan Seorang Pedagang Berikut!"},
+  {type:"table",headers:["Pewawancara (P)","Narasumber (N)"],rows:[
+   ["P: “Selamat pagi, Pak. Perkenalkan, saya Dinda, siswa kelas 5. Saya ingin melakukan wawancara tentang usaha Bapak. Apakah boleh?”","N: “Boleh, silakan.”"],
+   ["P: “Siapa nama Bapak?”","N: “Nama saya Pak Rudi.”"],
+   ["P: “Apa usaha yang Bapak jalankan?”","N: “Saya berjualan bakso.”"],
+   ["P: “Sejak kapan Bapak mulai berjualan?”","N: “Saya mulai berjualan sejak tahun 2019.”"],
+   ["P: “Mengapa Bapak memilih usaha bakso?”","N: “Karena bakso banyak disukai orang.”"],
+   ["P: “Di mana Bapak berjualan?”","N: “Saya berjualan di depan sekolah.”"],
+   ["P: “Bagaimana cara Bapak menarik pembeli?”","N: “Saya menjaga rasa makanan dan melayani pembeli dengan ramah.”"],
+   ["P: “Apa kesulitan yang pernah Bapak hadapi?”","N: “Harga bahan makanan kadang naik.”"],
+   ["P: “Terima kasih atas waktunya, Pak.”","N: “Sama-sama.”"]
+  ]}
+ ]
+},
+{
+ chapter:"BAB IV – BELAJAR BERWIRAUSAHA",
+ title:"Menulis Laporan Hasil Wawancara",
+ icon:"📋",
+ blocks:[
+  {type:"heading",text:"Menulis Laporan Hasil Wawancara"},
+  {type:"p",text:"Setelah melakukan wawancara, kalian dapat menuliskan hasilnya dalam sebuah laporan hasil wawancara. Laporan hasil wawancara berguna untuk menyampaikan informasi yang kalian dapatkan dari wawancara."},
+  {type:"sub",text:"Hal-hal yang Perlu Dimuat dalam Laporan Hasil Wawancara"},
+  {type:"list",items:[
+   "Judul wawancara.",
+   "Waktu dan tempat pelaksanaan wawancara.",
+   "Identitas narasumber dan pewawancara.",
+   "Latar belakang wawancara.",
+   "Tujuan wawancara.",
+   "Hasil wawancara.",
+   "Kesimpulan."
+  ]},
+  {type:"heading",text:"Contoh Laporan Hasil Wawancara"},
+  {type:"sub",text:"Cara Merawat Tanaman Hias"},
+  {type:"sub",text:"1. Latar Belakang"},
+  {type:"p",text:"Kami adalah siswa kelas 5 SD Nusantara yang mendapatkan tugas Bahasa Indonesia untuk mempelajari cara merawat tanaman hias di lingkungan rumah."},
+  {type:"sub",text:"2. Tujuan Wawancara"},
+  {type:"p",text:"Tujuan wawancara ini adalah untuk mengetahui cara merawat tanaman hias agar tumbuh subur dan sehat."},
+  {type:"sub",text:"3. Topik Wawancara"},
+  {type:"p",text:"Cara Merawat Tanaman Hias."},
+  {type:"sub",text:"4. Waktu dan Tempat Kegiatan"},
+  {type:"list",items:["Hari/Tanggal: Sabtu, 16 Mei 2026.","Waktu: Pukul 09.00–10.00 WIB.","Tempat: Rumah Ibu Sri (taman depan rumah)."]},
+  {type:"sub",text:"5. Identitas Pewawancara dan Narasumber"},
+  {type:"list",items:["Pewawancara: Budi Santoso.","Narasumber: Ibu Sri (pecinta tanaman hias)."]},
+  {type:"sub",text:"6. Hasil Wawancara"},
+  {type:"p",text:"Ibu Sri menjelaskan bahwa merawat tanaman hias harus memperhatikan intensitas penyiraman, yaitu dua kali sehari (pagi dan sore). Tanaman perlu mendapatkan sinar matahari yang cukup, tetapi tidak boleh terlalu terik. Selain itu, pemberian pupuk dilakukan dua minggu sekali dan daun kering harus dibuang agar tanaman tetap sehat."},
+  {type:"sub",text:"7. Kesimpulan"},
+  {type:"p",text:"Merawat tanaman hias membutuhkan ketekunan, terutama dalam penyiraman teratur, pencahayaan yang pas, dan pemupukan. Tanaman yang dirawat dengan baik akan tumbuh subur dan indah."}
+ ]
+},
+{
+ chapter:"BAB IV – BELAJAR BERWIRAUSAHA",
+ title:"Laporan Pengamatan Sederhana",
+ icon:"🔎",
+ blocks:[
+  {type:"heading",text:"Menulis Laporan Pengamatan Sederhana"},
+  {type:"definition",text:"Laporan pengamatan sederhana adalah tulisan yang berisi hasil kegiatan mengamati suatu objek atau kegiatan secara langsung, lalu disusun secara runtut dan jelas."},
+  {type:"sub",text:"Contoh Kegiatan Pengamatan"},
+  {type:"list",items:["Mengamati pedagang kantin.","Mengamati kebersihan kelas.","Mengamati lingkungan sekolah."]},
+  {type:"heading",text:"B. Tujuan Laporan Pengamatan"},
+  {type:"list",items:[
+   "Menyampaikan hasil pengamatan secara jelas.",
+   "Melatih kemampuan menulis siswa.",
+   "Memberikan informasi berdasarkan fakta.",
+   "Melatih ketelitian dalam mengamati."
+  ]},
+  {type:"heading",text:"C. Ciri-ciri Laporan Pengamatan"},
+  {type:"list",items:[
+   "Berdasarkan fakta (kenyataan).",
+   "Ditulis secara runtut dan jelas.",
+   "Menggunakan bahasa baku.",
+   "Tidak berisi opini pribadi.",
+   "Sesuai hasil pengamatan langsung."
+  ]},
+  {type:"heading",text:"D. Struktur Laporan Pengamatan"},
+  {type:"list",items:[
+   "Judul: menjelaskan objek yang diamati. Contoh: Laporan Pengamatan Kantin Sekolah.",
+   "Tujuan Pengamatan: menjelaskan maksud pengamatan dilakukan. Contoh: untuk mengetahui kegiatan di kantin sekolah.",
+   "Waktu dan Tempat: menuliskan kapan dan di mana pengamatan dilakukan.",
+   "Objek yang Diamati: menjelaskan apa yang diamati.",
+   "Hasil Pengamatan: menuliskan hasil yang ditemukan secara jelas.",
+   "Kesimpulan: ringkasan dari hasil pengamatan."
+  ]},
+  {type:"heading",text:"E. Langkah Menulis Laporan Pengamatan"},
+  {type:"list",items:[
+   "Tentukan objek yang diamati.",
+   "Lakukan pengamatan secara langsung.",
+   "Catat hal-hal penting.",
+   "Susun laporan berdasarkan struktur.",
+   "Gunakan bahasa yang jelas dan sederhana."
+  ]}
+ ]
+}
+];
+
+let currentLesson = 0;
+
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g, ch => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[ch]));
+}
+function renderBlock(block){
+ const text = escapeHTML(block.text || "");
+ switch(block.type){
+  case "heading": return `<h2>${text}</h2>`;
+  case "sub": return `<h3>${text}</h3>`;
+  case "p": return `<p>${text}</p>`;
+  case "note": return `<div class="note">${text}</div>`;
+  case "definition": return `<div class="definition">${text}</div>`;
+  case "quote": return `<div class="quote">${text}</div>`;
+  case "formula": return `<div class="formula">${text}</div>`;
+  case "list": return `<ul>${block.items.map(item=>`<li>${escapeHTML(item)}</li>`).join("")}</ul>`;
+  case "numbered": return `<ol>${block.items.map(item=>`<li>${escapeHTML(item)}</li>`).join("")}</ol>`;
+  case "table":
+   return `<div style="overflow-x:auto"><table><thead><tr>${block.headers.map(h=>`<th>${escapeHTML(h)}</th>`).join("")}</tr></thead><tbody>${block.rows.map(row=>`<tr>${row.map(cell=>`<td>${escapeHTML(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+  default:return "";
+ }
+}
+function buildHome(){
+ const grid=document.getElementById("lessonGrid");
+ let html="";
+ let previousChapter="";
+ lessons.forEach((lesson,index)=>{
+  if(lesson.chapter!==previousChapter){
+   html+=`<div class="chapter-label">${escapeHTML(lesson.chapter)}</div>`;
+   previousChapter=lesson.chapter;
+  }
+  html+=`<button class="lesson-card" type="button" onclick="openLesson(${index})">
+   <span class="lesson-number">${index+1}</span>
+   <span><strong>${escapeHTML(lesson.title)}</strong><small>${escapeHTML(lesson.chapter)} · Buka materi</small></span>
+   <span class="arrow" aria-hidden="true">›</span>
+  </button>`;
+ });
+ grid.innerHTML=html;
+}
+function openLesson(index){
+ currentLesson=index;
+ document.getElementById("homePage").classList.add("hidden");
+ document.getElementById("detailPage").classList.remove("hidden");
+ document.getElementById("progressWrap").classList.remove("hidden");
+ renderLesson();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function renderLesson(){
+ const lesson=lessons[currentLesson];
+ document.getElementById("lessonTitle").textContent=`Materi ${currentLesson+1} dari ${lessons.length} · ${lesson.title}`;
+ document.getElementById("lessonContent").innerHTML=lesson.blocks.map(renderBlock).join("");
+ document.getElementById("progressCount").textContent=`Materi ${currentLesson+1}/${lessons.length}`;
+ const percent=Math.round(((currentLesson+1)/lessons.length)*100);
+ document.getElementById("progressBar").style.width=percent+"%";
+ document.getElementById("progressPercent").textContent=percent+"%";
+ document.getElementById("nextLesson").textContent=currentLesson===lessons.length-1
+  ?"Kembali ke Peta Materi ✓":"Materi Berikutnya →";
+}
+function backToHome(){
+ document.getElementById("detailPage").classList.add("hidden");
+ document.getElementById("progressWrap").classList.add("hidden");
+ document.getElementById("homePage").classList.remove("hidden");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function moveNext(){
+ if(currentLesson<lessons.length-1) openLesson(currentLesson+1);
+ else backToHome();
+}
+function goTraining(){
+ window.location.href="soal_bahasa_indonesia.html";
+}
+buildHome();
+</script>
+</body>
+</html>

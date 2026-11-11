@@ -163,7 +163,7 @@ button,input{font:inherit}
   </div>
   <p id="saveStatus" class="result-note">Mengirim hasil ujian...</p>
   <div class="result-actions">
-   <button class="btn primary full" onclick="startQuiz()">↻ MULAI LAGI · 20 SOAL BARU</button>
+   <button class="btn primary full" onclick="startQuiz()">↻ MULAI ULANG</button>
    <a class="btn secondary full back-result" href="bab1.html">← KEMBALI KE MATERI</a>
    <button class="btn secondary full" onclick="location.reload()">KEMBALI KE HALAMAN AWAL</button>
   </div>
@@ -252,7 +252,8 @@ function startQuiz(){
  // Setelah seluruh bank pernah tampil, sesi berikutnya berisi 20 soal acak.
  SESSION_QUESTIONS=shuffleArray(selectedQuestions).slice(0,20);
  current=0;answers=Array(SESSION_QUESTIONS.length).fill("");currentCorrect=0;
- hide("identity");show("quiz");
+ hide("identity");hide("result");show("quiz");
+ window.scrollTo({top:0,behavior:"smooth"});
  $("studentTag").textContent=student.nama+" · "+student.kelas;
  renderQuestion();
 }

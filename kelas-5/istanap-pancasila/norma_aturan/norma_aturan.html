@@ -28,6 +28,6 @@ function openRoom(i){current=i;document.getElementById('homePage').classList.add
 function renderPage(){const s=sections[current];document.getElementById('roomTitle').textContent=`Materi ${current+1} dari ${sections.length} · ${s.title}`;const blocks=s.paras.map((p,i)=>{if(i===0)return '';if(/^([a-h][.)])\s/.test(p))return `<p class="point">${esc(p)}</p>`;if(/^[123]\)\s/.test(p)||/^[cd]\. Penerapan/.test(p))return `<p class="source-heading">${esc(p)}</p>`;return `<p class="${i===1?'lead':''}">${esc(p)}</p>`}).join('');document.getElementById('material').innerHTML=`<h2>${esc(s.paras[0])}</h2>${blocks}`;document.getElementById('pageCount').textContent=`Materi ${current+1}/${sections.length}`;const pct=Math.round((current+1)/sections.length*100);document.getElementById('pageProgressBar').style.width=pct+'%';document.getElementById('pagePercent').textContent=pct+'%';document.getElementById('nextPage').textContent=current===sections.length-1?'Kembali ke Daftar Materi ✓':'Lanjut ke Materi Berikutnya →'}
 function backToHome(){document.getElementById('detailPage').classList.add('hidden');document.getElementById('pageProgress').classList.add('hidden');document.getElementById('homePage').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})}
 function moveNext(){if(current<sections.length-1){openRoom(current+1)}else{backToHome()}}
-function goTraining(){window.location.href='latihan_norma.html'}
+function goTraining(){window.location.href='latihan_soal.html'}
 buildHome();
 </script></body></html>

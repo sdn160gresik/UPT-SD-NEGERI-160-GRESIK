@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#102d59">
+<title>Kuis Norma dan Aturan | UPT SDN 160 GRESIK</title>
+<style>
+:root{
+  --navy:#102d59;--blue:#1f5fa8;--blue2:#2e83d0;--gold:#f5c451;
+  --ink:#193451;--muted:#718198;--line:#dce6f1;--paper:#fff;
+  --bg:#edf3fa;--green:#168653;--red:#cf4050;
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:22px;background:
+ radial-gradient(circle at 12% 10%,#d6e8fb 0,transparent 28%),
+ radial-gradient(circle at 90% 80%,#dce8f7 0,transparent 28%),var(--bg);
+ color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.hidden{display:none!important}
+.topbar{max-width:980px;margin:0 auto 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--navy);font-weight:950;letter-spacing:.06em}
+.crest{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,#1e5fa8,#0d2b55);color:var(--gold);display:grid;place-items:center;font-size:24px;box-shadow:0 8px 18px #173d6b33}
+.school{font-size:11px;letter-spacing:.16em;color:#60758e;margin-top:3px}
+.pill{background:#edf4fc;border:1px solid #d7e5f4;color:#31577f;padding:8px 12px;border-radius:999px;font-size:12px;font-weight:800}
+.wrap{max-width:980px;margin:auto}
+.card{background:var(--paper);border:1px solid #e1e9f2;border-radius:22px;overflow:hidden;box-shadow:0 18px 55px #193d6512}
+.hero{background:linear-gradient(120deg,#102d59,#1d5795 68%,#2876b6);color:white;padding:30px 34px;position:relative;overflow:hidden}
+.hero:after{content:"✦";position:absolute;right:36px;top:-34px;font-size:150px;color:#ffffff12;transform:rotate(15deg)}
+.eyebrow{font-size:11px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:#f7d47b}
+.hero h1{margin:8px 0 0;font-size:clamp(24px,4vw,34px);line-height:1.16;max-width:720px}
+.hero p{margin:9px 0 0;color:#d9e9fa}
+.content{padding:28px 34px 34px}
+.content h2{margin:0 0 18px;color:var(--navy);font-size:20px}
+.grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:14px;margin-bottom:22px}
+.field label{display:block;font-size:12px;font-weight:850;color:#51657d;margin-bottom:7px}
+.field input{width:100%;height:47px;border:1px solid #cfdae7;border-radius:11px;padding:0 13px;font:inherit;color:var(--ink);outline:none;background:#fbfdff}
+.field input:focus{border-color:var(--blue2);box-shadow:0 0 0 3px #2e83d01a}
+.btn{border:0;border-radius:12px;padding:13px 18px;font:inherit;font-weight:900;cursor:pointer;transition:.16s}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.primary{background:linear-gradient(110deg,#1e5fa8,#2b7bc0);color:white;box-shadow:0 8px 18px #1e5fa833}
+.primary:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.05)}
+.secondary{background:#edf3fa;color:#31577f;border:1px solid #d9e4f0}
+.full{width:100%}
+.stats{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:15px}
+.progress{height:9px;border-radius:99px;background:#e9eff6;overflow:hidden;margin-bottom:23px}
+#progressBar{height:100%;width:0;background:linear-gradient(90deg,#f0bf48,#2b7bc0);transition:width .25s}
+.question-meta{display:flex;justify-content:space-between;gap:10px;color:#6d7f94;font-size:12px;font-weight:800;margin-bottom:12px}
+.question{font-size:clamp(18px,2.5vw,22px);line-height:1.5;font-weight:850;color:#17385f;margin:0 0 18px}
+.answer-label{display:block;font-size:12px;font-weight:850;color:#728198;margin-bottom:10px}
+.option-list{display:grid;gap:10px}
+.option{width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;padding:13px 15px;border:1.5px solid #dce5ef;background:#fbfdff;border-radius:13px;color:#29445f;font:inherit;line-height:1.45;cursor:pointer;transition:.15s}
+.option:hover:not(:disabled){border-color:#7ba9d6;background:#f4f9ff}
+.option.selected{border-color:#2b76b9;background:#eaf4ff;box-shadow:0 0 0 2px #2b76b91a}
+.option:disabled{cursor:default}
+.option-letter{flex:0 0 29px;width:29px;height:29px;border-radius:9px;background:#e9f0f7;color:#31577f;display:grid;place-items:center;font-weight:950;font-size:13px}
+.option.selected .option-letter{background:#2768ad;color:#fff}
+.actions{display:flex;gap:10px;margin-top:19px}
+.actions .btn{flex:1}
+.result-score{font-size:clamp(48px,8vw,66px);font-weight:950;color:#174b83;line-height:1}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+.result-box{background:#f1f6fc;padding:16px;border-radius:14px;text-align:center}
+.result-box strong{display:block;font-size:25px;color:#183d6a}
+.result-box span{font-size:12px;color:#64748b;font-weight:750}
+.result-note{text-align:center;color:#64748b;font-size:13px;line-height:1.5}
+.modal{position:fixed;inset:0;background:#07152dcc;display:grid;place-items:center;padding:20px;z-index:20}
+.modal-box{width:min(440px,100%);background:white;border-radius:22px;padding:28px;text-align:center;box-shadow:0 25px 80px #0005;animation:pop .2s ease}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-icon{width:64px;height:64px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;font-size:30px;font-weight:900}
+.modal-box.good .modal-icon{background:#e2f7ed;color:var(--green)}
+.modal-box.bad .modal-icon{background:#ffeaec;color:var(--red)}
+.modal-box h2{margin:8px 0;color:#18375e}
+.modal-box p{color:#596b82;line-height:1.55;margin:8px 0 18px}
+.loading{position:fixed;inset:0;background:#07152dcc;display:grid;place-items:center;padding:20px;z-index:30}
+.loading-box{background:white;border-radius:18px;padding:24px 30px;text-align:center;font-weight:850;color:#385675;box-shadow:0 20px 60px #0003}
+.error-text{color:#b42332;font-size:13px;margin-top:12px;line-height:1.5}
+@media(max-width:680px){
+ body{padding:12px}.topbar{align-items:flex-start}.topbar>.pill{font-size:10px}
+ .hero{padding:24px 21px}.content{padding:22px 20px 25px}
+ .grid{grid-template-columns:1fr;gap:12px}.actions{flex-direction:column}
+ .result-grid{gap:7px}.result-box{padding:12px 5px}.result-box strong{font-size:21px}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand"><div class="crest">✦</div><div>ISTANA PANCASILA<div class="school">UPT SDN 160 GRESIK</div></div></div>
+  <div class="pill">Kuis Interaktif • BAB 2</div>
+</div>
+
+<main class="wrap">
+<section id="identity" class="card">
+  <div class="hero"><div class="eyebrow">Ruang Ujian Istana</div><h1>Norma dan Aturan dalam Kehidupan</h1></div>
+  <div class="content">
+    <h2>Identitas Siswa</h2>
+    <div class="grid">
+      <div class="field"><label for="nama">Nama lengkap</label><input id="nama" autocomplete="name" placeholder="Masukkan nama siswa"></div>
+      <div class="field"><label for="kelas">Kelas</label><input id="kelas" placeholder="Contoh: 5A"></div>
+      <div class="field"><label for="absen">Nomor absen</label><input id="absen" inputmode="numeric" placeholder="Nomor absen"></div>
+    </div>
+    <button class="btn primary full" id="startBtn" onclick="startQuiz()">MULAI MENGERJAKAN <span>→</span></button>
+    <div id="startError" class="error-text hidden"></div>
+  </div>
+</section>
+
+<section id="quiz" class="card hidden">
+  <div class="hero"><div class="eyebrow">Ujian Berlangsung</div><h1>Ruang Tantangan Norma</h1><p>Pilih satu jawaban yang paling tepat pada setiap soal.</p></div>
+  <div class="content">
+    <div class="stats">
+      <div class="pill" id="counter">Soal 1 dari 20</div>
+      <div class="pill" id="scoreLive">Benar: 0</div>
+      <div class="pill" id="studentTag">Siswa</div>
+    </div>
+    <div class="progress"><div id="progressBar"></div></div>
+    <div class="question-meta"><span id="sectionName">Materi</span><span id="bloomTag">C1</span></div>
+    <p class="question" id="questionText"></p>
+    <span class="answer-label">Pilih satu jawaban yang paling tepat!</span>
+    <div class="option-list" id="optionList"></div>
+    <div class="actions">
+      <button class="btn secondary" id="clearBtn" onclick="clearAnswer()">Hapus pilihan</button>
+      <button class="btn primary" id="checkBtn" onclick="checkCurrent()" disabled>PILIH JAWABAN</button>
+    </div>
+  </div>
+</section>
+
+<section id="result" class="card hidden">
+  <div class="hero"><div class="eyebrow">Hasil Pembelajaran</div><h1>Ujian Selesai!</h1><p id="resultStudent"></p></div>
+  <div class="content">
+    <div style="text-align:center"><div class="result-score" id="finalScore">0</div><div style="font-weight:850;color:#62738b">NILAI AKHIR</div></div>
+    <div class="result-grid">
+      <div class="result-box"><strong id="totalResult">20</strong><span>Jumlah soal</span></div>
+      <div class="result-box"><strong id="correctResult">0</strong><span>Jawaban benar</span></div>
+      <div class="result-box"><strong id="wrongResult">0</strong><span>Jawaban salah</span></div>
+    </div>
+    <p id="remainingInfo" class="result-note"></p>
+    <button class="btn primary full" onclick="location.reload()">KEMBALI KE HALAMAN AWAL</button>
+  </div>
+</section>
+</main>
+
+<div id="modal" class="modal hidden">
+  <div id="modalBox" class="modal-box good">
+    <div class="modal-icon" id="modalIcon">✓</div>
+    <h2 id="modalTitle">Jawaban Benar!</h2>
+    <p id="modalMessage"></p>
+    <button class="btn primary full" id="modalNext" onclick="continueAfterFeedback()">LANJUT</button>
+  </div>
+</div>
+
+<div id="loading" class="loading hidden"><div class="loading-box">⏳ Memproses, mohon tunggu...</div></div>
+
+<script>
+/* GANTI URL DI BAWAH INI DENGAN URL WEB APP GOOGLE APPS SCRIPT YANG BERAKHIR /exec */
+const API_URL = "TEMPEL_URL_WEB_APP_DI_SINI";
+
+let student = {};
+let quizQuestions = [];
+let current = 0;
+let responses = [];
+let correctCount = 0;
+let checked = false;
+let remainingAfter = 0;
+let selectedOption = "";
+
+function show(id){document.getElementById(id).classList.remove("hidden")}
+function hide(id){document.getElementById(id).classList.add("hidden")}
+function setLoading(value){value ? show("loading") : hide("loading")}
+
+function apiCall(action, params = {}) {
+  return new Promise((resolve, reject) => {
+    if (!API_URL || API_URL.includes("TEMPEL_URL")) {
+      reject(new Error("URL Web App belum dipasang. Isi API_URL di bagian JavaScript index.html."));
+      return;
+    }
+    const callbackName = "kuisCallback_" + Date.now() + "_" + Math.floor(Math.random()*100000);
+    const script = document.createElement("script");
+    let finished = false;
+    const cleanup = () => {
+      if (script.parentNode) script.parentNode.removeChild(script);
+      try { delete window[callbackName]; } catch(e) { window[callbackName] = undefined; }
+    };
+    const timer = setTimeout(() => {
+      if (finished) return;
+      finished = true; cleanup();
+      reject(new Error("Koneksi ke server tidak merespons. Periksa URL Web App dan koneksi internet."));
+    }, 25000);
+
+    window[callbackName] = (response) => {
+      if (finished) return;
+      finished = true; clearTimeout(timer); cleanup();
+      if (response && response.ok) resolve(response.data);
+      else reject(new Error(response && response.error ? response.error : "Terjadi kesalahan pada server."));
+    };
+
+    const query = new URLSearchParams();
+    query.set("action", action);
+    query.set("callback", callbackName);
+    Object.keys(params).forEach(key => {
+      const value = typeof params[key] === "string" ? params[key] : JSON.stringify(params[key]);
+      query.set(key, value);
+    });
+    query.set("_", String(Date.now()));
+    script.src = API_URL + (API_URL.includes("?") ? "&" : "?") + query.toString();
+    script.onerror = () => {
+      if (finished) return;
+      finished = true; clearTimeout(timer); cleanup();
+      reject(new Error("Gagal menghubungi Google Apps Script. Pastikan deployment dapat diakses oleh siapa saja."));
+    };
+    document.head.appendChild(script);
+  });
+}
+
+function showStartError(message) {
+  const el = document.getElementById("startError");
+  el.textContent = message;
+  show("startError");
+}
+
+async function startQuiz() {
+  student = {
+    nama: document.getElementById("nama").value.trim(),
+    kelas: document.getElementById("kelas").value.trim(),
+    absen: document.getElementById("absen").value.trim()
+  };
+  hide("startError");
+  if (!student.nama || !student.kelas || !student.absen) {
+    showStartError("Lengkapi nama, kelas, dan nomor absen terlebih dahulu.");
+    return;
+  }
+
+  const button = document.getElementById("startBtn");
+  button.disabled = true;
+  setLoading(true);
+  try {
+    const data = await apiCall("getQuiz", {student: student});
+    if (data.done) {
+      setLoading(false);
+      showStartError(data.message || "Tidak ada soal yang tersisa untuk identitas ini.");
+      button.disabled = false;
+      return;
+    }
+    quizQuestions = data.questions || [];
+    remainingAfter = Number(data.remainingAfterThis || 0);
+    current = 0; responses = []; correctCount = 0;
+    hide("identity"); show("quiz");
+    document.getElementById("studentTag").textContent = student.nama + " • " + student.kelas;
+    setLoading(false);
+    renderQuestion();
+  } catch (error) {
+    setLoading(false);
+    button.disabled = false;
+    showStartError(error.message || String(error));
+  }
+}
+
+function renderQuestion() {
+  const q = quizQuestions[current];
+  checked = false;
+  selectedOption = "";
+  document.getElementById("counter").textContent = `Soal ${current+1} dari ${quizQuestions.length}`;
+  document.getElementById("scoreLive").textContent = "Benar: " + correctCount;
+  document.getElementById("sectionName").textContent = q.section || "Materi";
+  document.getElementById("bloomTag").textContent = q.bloom || "";
+  document.getElementById("questionText").textContent = q.question;
+
+  const list = document.getElementById("optionList");
+  list.innerHTML = "";
+  (q.options || []).forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option";
+    const letter = document.createElement("span");
+    letter.className = "option-letter";
+    letter.textContent = String.fromCharCode(65 + index);
+    const label = document.createElement("span");
+    label.textContent = option;
+    button.append(letter, label);
+    button.addEventListener("click", () => {
+      if (checked) return;
+      selectedOption = option;
+      list.querySelectorAll(".option").forEach(el => el.classList.remove("selected"));
+      button.classList.add("selected");
+      document.getElementById("checkBtn").disabled = false;
+      document.getElementById("checkBtn").textContent = "PERIKSA JAWABAN";
+    });
+    list.appendChild(button);
+  });
+
+  document.getElementById("checkBtn").disabled = true;
+  document.getElementById("checkBtn").textContent = "PILIH JAWABAN";
+  document.getElementById("progressBar").style.width = (current / quizQuestions.length * 100) + "%";
+}
+
+function clearAnswer() {
+  if (checked) return;
+  selectedOption = "";
+  document.querySelectorAll("#optionList .option").forEach(el => el.classList.remove("selected"));
+  document.getElementById("checkBtn").disabled = true;
+  document.getElementById("checkBtn").textContent = "PILIH JAWABAN";
+}
+
+async function checkCurrent() {
+  if (checked || !selectedOption) return;
+  const q = quizQuestions[current];
+  document.getElementById("checkBtn").disabled = true;
+  setLoading(true);
+  try {
+    const result = await apiCall("checkAnswer", {questionId: q.id, answer: selectedOption});
+    setLoading(false);
+    checked = true;
+    if (result.correct) correctCount++;
+    responses.push({id: q.id, answer: selectedOption});
+    document.querySelectorAll("#optionList .option").forEach(el => el.disabled = true);
+    document.getElementById("scoreLive").textContent = "Benar: " + correctCount;
+
+    document.getElementById("modalBox").className = "modal-box " + (result.correct ? "good" : "bad");
+    document.getElementById("modalIcon").textContent = result.correct ? "✓" : "✕";
+    document.getElementById("modalTitle").textContent = result.correct ? "Jawaban Benar!" : "Jawaban Belum Tepat";
+    document.getElementById("modalMessage").textContent = result.correct
+      ? "Hebat! Jawabanmu sesuai dengan kunci jawaban."
+      : "Kunci jawaban: " + result.correctAnswer;
+    document.getElementById("modalNext").textContent =
+      current === quizQuestions.length - 1 ? "LIHAT HASIL" : "SOAL BERIKUTNYA";
+    show("modal");
+  } catch (error) {
+    setLoading(false);
+    document.getElementById("checkBtn").disabled = false;
+    alert(error.message || String(error));
+  }
+}
+
+function continueAfterFeedback() {
+  hide("modal");
+  current++;
+  if (current < quizQuestions.length) {
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+}
+
+async function finishQuiz() {
+  setLoading(true);
+  try {
+    const result = await apiCall("submitResult", {
+      payload: {student: student, responses: responses}
+    });
+    setLoading(false);
+    hide("quiz"); show("result");
+    document.getElementById("finalScore").textContent = result.score;
+    document.getElementById("totalResult").textContent = result.total;
+    document.getElementById("correctResult").textContent = result.correct;
+    document.getElementById("wrongResult").textContent = result.wrong;
+    document.getElementById("resultStudent").textContent =
+      student.nama + " • Kelas " + student.kelas + " • Absen " + student.absen;
+    document.getElementById("remainingInfo").textContent = remainingAfter > 0
+      ? "Ujian selesai. Masih tersedia soal lain yang belum pernah ditampilkan."
+      : "Ujian selesai. Seluruh soal dalam bank telah ditampilkan untuk identitas ini.";
+  } catch (error) {
+    setLoading(false);
+    alert("Nilai belum berhasil disimpan: " + (error.message || String(error)) +
+      ". Jangan tutup halaman; coba lanjutkan penyimpanan dengan memuat ulang hanya jika diperlukan.");
+  }
+}
+</script>
+</body>
+</html>

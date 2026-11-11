@@ -229,7 +229,7 @@ function apiCall(action, params={}) {
   Object.entries(params).forEach(([k,v])=>query.set(k,typeof v==="string"?v:JSON.stringify(v)));
   query.set("_",String(Date.now()));
   script.src=API_URL+(API_URL.includes("?")?"&":"?")+query.toString();
-  script.onerror=()=>{if(finished)return;finished=true;clearTimeout(timer);cleanup();reject(new Error("Tidak dapat menghubungi gerbang data. Pastikan deployment Apps Script dapat diakses siapa saja."));};
+  script.onerror=()=>{if(finished)return;finished=true;clearTimeout(timer);cleanup();reject(new Error("🚀 AKSES DATA TERGANGGU! Sistem gagal terhubung ke PUSAT KENDALI DATA"));};
   document.head.appendChild(script);
  });
 }

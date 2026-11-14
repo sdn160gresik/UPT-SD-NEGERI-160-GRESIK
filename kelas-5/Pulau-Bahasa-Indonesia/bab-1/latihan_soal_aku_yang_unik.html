@@ -1,0 +1,4539 @@
+
+<!doctype html>
+<html lang="id" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Kuis Bahasa Indonesia Kelas 5 | Aku yang Unik</title>
+
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      box-sizing: border-box;
+      font-family: 'Nunito', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) rotate(-5deg);
+      }
+
+      50% {
+        transform: translateY(-20px) rotate(5deg);
+      }
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes shake {
+      0%, 100% {
+        transform: translateX(0);
+      }
+
+      20%, 60% {
+        transform: translateX(-10px);
+      }
+
+      40%, 80% {
+        transform: translateX(10px);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes celebrate {
+      0% {
+        transform: scale(1) rotate(0deg);
+      }
+
+      25% {
+        transform: scale(1.1) rotate(-5deg);
+      }
+
+      50% {
+        transform: scale(1.2) rotate(5deg);
+      }
+
+      75% {
+        transform: scale(1.1) rotate(-3deg);
+      }
+
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    @keyframes confetti {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(100px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 0 40px rgba(168, 85, 247, 0.8);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes spin-celebrate {
+      0% {
+        transform: scale(1) rotate(0deg);
+      }
+
+      50% {
+        transform: scale(1.15) rotate(10deg);
+      }
+
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    @keyframes pulse-celebrate {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    @keyframes falling-confetti {
+      0% {
+        transform: translateY(-10px) rotate(0deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(80px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes retry-bounce {
+      0% {
+        transform: scale(0.8) translateY(-20px);
+        opacity: 0;
+      }
+
+      50% {
+        transform: scale(1.1) translateY(0);
+      }
+
+      100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes retry-shake {
+      0%, 100% {
+        transform: translateX(0) scale(1);
+      }
+
+      25% {
+        transform: translateX(-10px) scale(1.05);
+      }
+
+      50% {
+        transform: translateX(10px) scale(1.05);
+      }
+
+      75% {
+        transform: translateX(-5px) scale(1.05);
+      }
+    }
+
+    .animate-retry-bounce {
+      animation: retry-bounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .animate-retry-shake {
+      animation: retry-shake 0.8s ease-in-out;
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .animate-pop {
+      animation: pop 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .animate-shake {
+      animation: shake 0.5s ease-in-out;
+    }
+
+    .animate-bounce-custom {
+      animation: bounce 0.5s ease-in-out;
+    }
+
+    .animate-celebrate {
+      animation: celebrate 0.6s ease-in-out;
+    }
+
+    .animate-pulse-glow {
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    .animate-slide-up {
+      animation: slideUp 0.5s ease-out forwards;
+    }
+
+    .animate-spin-celebrate {
+      animation: spin-celebrate 0.6s ease-in-out;
+    }
+
+    .animate-pulse-celebrate {
+      animation: pulse-celebrate 0.8s ease-in-out infinite;
+    }
+
+    .confetti-result {
+      position: absolute;
+      pointer-events: none;
+      animation: falling-confetti 1.2s ease-out forwards;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .letter-btn {
+      transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .letter-btn:hover:not(:disabled) {
+      transform: scale(1.1) translateY(-3px);
+    }
+
+    .letter-btn:active:not(:disabled) {
+      transform: scale(0.95);
+    }
+
+    .slot-box {
+      transition: all 0.3s ease;
+    }
+
+    .slot-filled {
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .word-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .word-space {
+      width: 14px;
+      flex-shrink: 0;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      animation: confetti 1s ease-out forwards;
+    }
+
+    .question-image {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      max-height: 360px;
+      object-fit: contain;
+      margin: 12px auto 0;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    }
+
+    .option-list {
+      margin-top: 12px;
+      text-align: left;
+      background: rgba(255,255,255,0.8);
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .option-line {
+      padding: 5px 8px;
+      border-radius: 8px;
+      line-height: 1.45;
+    }
+
+    .question-extra {
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 12px;
+      padding: 12px;
+      background: white;
+      border-radius: 12px;
+      text-align: left;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #374151;
+      border: 1px solid #dbeafe;
+    }
+
+    @media (max-width: 640px) {
+      .question-image {
+        max-height: 260px;
+      }
+
+      .slot-box {
+        width: 22px !important;
+        height: 30px !important;
+        font-size: 13px !important;
+      }
+
+      .word-space {
+        width: 8px;
+      }
+    }
+
+    @media (orientation: landscape) and (max-height: 600px) {
+      #start-screen {
+        padding: 1rem !important;
+      }
+
+      .glass-card {
+        padding: 1.5rem !important;
+      }
+
+      #game-title {
+        font-size: 1.5rem !important;
+      }
+
+      .glass-card p {
+        font-size: 0.75rem !important;
+      }
+
+      .glass-card h3 {
+        font-size: 0.75rem !important;
+      }
+
+      .glass-card ul li {
+        font-size: 0.65rem !important;
+      }
+
+      #game-screen {
+        padding: 0.5rem !important;
+      }
+
+      #game-screen .glass-card {
+        padding: 0.75rem !important;
+        margin-bottom: 0.5rem !important;
+      }
+
+      .slot-box {
+        width: 1.25rem !important;
+        height: 1.75rem !important;
+        font-size: 0.875rem !important;
+      }
+
+      .letter-btn {
+        width: 1.75rem !important;
+        height: 1.75rem !important;
+        font-size: 0.75rem !important;
+      }
+
+      #question-text {
+        font-size: 0.875rem !important;
+      }
+
+      #answer-slots {
+        gap: 0.25rem !important;
+        margin-bottom: 0.5rem !important;
+      }
+
+      #end-screen .glass-card {
+        padding: 1.5rem !important;
+      }
+
+      #end-emoji {
+        font-size: 3rem !important;
+        margin-bottom: 1rem !important;
+      }
+
+      #end-title {
+        font-size: 1.25rem !important;
+      }
+
+      #end-message {
+        font-size: 0.875rem !important;
+      }
+
+      #final-score {
+        font-size: 2rem !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="h-full w-full overflow-auto bg-gradient-to-br from-blue-600 via-cyan-500 to-teal-400">
+
+<div id="app" class="min-h-full w-full">
+
+  <!-- ================= START SCREEN ================= -->
+
+  <div id="start-screen"
+       class="min-h-full w-full flex flex-col items-center justify-center p-2">
+
+    <div class="glass-card rounded-2xl p-5 md:p-8 max-w-sm w-full text-center shadow-2xl animate-slide-up">
+
+      <div class="text-5xl md:text-6xl mb-4 animate-float">
+        📚
+      </div>
+
+      <h1 id="game-title"
+          class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-3">
+        Kuis Bahasa Indonesia Kelas 5
+      </h1>
+
+      <p class="text-gray-600 text-sm mb-5 leading-relaxed">
+        Susun huruf-huruf yang tersedia untuk membentuk jawaban yang benar!
+        <span class="block mt-1 text-xs text-cyan-500 font-semibold">
+          🇮🇩 Aku yang Unik — Bahasa Indonesia Kelas 5
+        </span>
+      </p>
+
+      <div class="bg-gradient-to-r from-blue-100 to-cyan-100 rounded-xl p-3 mb-5 text-left">
+
+        <h3 class="font-bold text-blue-700 mb-1 text-sm">
+          Cara Bermain:
+        </h3>
+
+        <ul class="text-xs text-gray-600 space-y-0.5">
+          <li>👆 Klik huruf untuk menyusun jawaban</li>
+          <li>📝 Susun jawaban lengkap, bukan hanya huruf A/B/C/D</li>
+          <li>✅ Jawaban benar = +10 poin</li>
+          <li>❌ Huruf salah = -1 poin</li>
+          <li>❤️ 3 kesalahan = 1 hati berkurang</li>
+          <li>💔 Nyawa habis = Game Over!</li>
+        </ul>
+
+      </div>
+
+      <div id="highscore-section"
+           class="bg-gradient-to-r from-yellow-100 to-amber-100 rounded-xl p-3 mb-5 text-center">
+
+        <p class="text-xs text-amber-700 font-semibold">
+          🏆 Skor Tertinggi
+        </p>
+
+        <p id="best-score-display"
+           class="text-2xl font-bold text-amber-600">
+          -
+        </p>
+
+      </div>
+
+      <button id="start-btn"
+              onclick="startGame()"
+              class="w-full py-3 px-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-pulse-glow">
+        🚀 Mulai Bermain!
+      </button>
+
+    </div>
+  </div>
+
+
+  <!-- ================= GAME SCREEN ================= -->
+
+  <div id="game-screen"
+       class="min-h-full w-full flex flex-col p-2 hidden relative">
+
+    <!-- TOP INFO -->
+
+    <div class="glass-card rounded-xl p-2 mb-2 shadow-xl">
+
+      <div class="flex justify-between items-center flex-wrap gap-1 text-xs md:text-sm">
+
+        <div class="flex items-center gap-2">
+
+          <span class="text-gray-700 font-semibold">
+            Pilih Soal:
+          </span>
+
+          <button onclick="toggleQuestionSelector()"
+                  class="bg-blue-100 hover:bg-blue-200 px-2 py-1 rounded-lg text-blue-700 font-bold text-xs transition-all">
+
+            <span id="question-number">
+              Soal 1/120
+            </span>
+
+            📋
+
+          </button>
+
+        </div>
+
+        <div class="bg-gradient-to-r from-yellow-400 to-orange-500 px-2 py-1 rounded-lg text-white font-bold flex items-center gap-1 text-xs">
+
+          <span>
+            Skor:
+          </span>
+
+          <span id="score">
+            0
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="mt-1 flex justify-center gap-1">
+
+        <div id="mistake-hearts"
+             class="flex gap-0.5">
+
+          <span class="text-lg">❤️</span>
+          <span class="text-lg">❤️</span>
+          <span class="text-lg">❤️</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- QUESTION SELECTOR -->
+
+    <div id="question-selector-modal"
+         class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 flex items-center justify-center p-2">
+
+      <div class="glass-card rounded-2xl p-4 max-w-sm w-full max-h-96 shadow-2xl overflow-auto">
+
+        <h2 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-4 sticky top-0">
+          Pilih Soal
+        </h2>
+
+        <div id="question-selector-list"
+             class="grid grid-cols-4 gap-2">
+        </div>
+
+        <button onclick="toggleQuestionSelector()"
+                class="w-full mt-4 py-2 px-4 bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold rounded-lg transition-all">
+          Tutup
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- QUESTION CARD -->
+
+    <div class="glass-card rounded-xl p-3 mb-2 shadow-xl flex-grow flex flex-col">
+
+      <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg p-3 mb-3">
+
+        <h2 class="text-sm md:text-base font-bold text-gray-800 text-center"
+            id="question-text">
+          Pertanyaan akan muncul di sini...
+        </h2>
+
+        <!-- GAMBAR SOAL -->
+
+        <div id="question-image-container"
+             class="flex flex-col items-center">
+        </div>
+
+        <!-- PILIHAN JAWABAN -->
+
+        <div id="question-options"
+             class="option-list">
+        </div>
+
+      </div>
+
+
+      <!-- ANSWER -->
+
+      <div class="mb-3">
+
+        <p class="text-center text-gray-500 text-xs mb-2 font-semibold">
+          📝 Susun Jawaban Lengkap:
+        </p>
+
+        <div id="answer-slots"
+             class="flex flex-wrap justify-center gap-1">
+        </div>
+
+      </div>
+
+
+      <!-- FEEDBACK -->
+
+      <div id="feedback"
+           class="text-center mb-2 h-8 flex items-center justify-center">
+      </div>
+
+
+      <!-- LETTER BUTTONS -->
+
+      <div class="mt-auto">
+
+        <p class="text-center text-gray-500 text-xs mb-2 font-semibold">
+          🔤 Pilih Huruf / Angka / Tanda:
+        </p>
+
+        <div id="letter-buttons"
+             class="flex flex-wrap justify-center gap-1">
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- BACK BUTTON -->
+
+    <div class="flex justify-center mt-3">
+
+      <a href="pulau.html"
+         class="text-white font-semibold hover:underline">
+        Kembali
+      </a>
+
+    </div>
+
+
+    <!-- RETRY OVERLAY -->
+
+    <div id="retry-overlay"
+         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+
+      <div class="glass-card rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl animate-retry-bounce">
+
+        <div class="text-6xl mb-4 animate-retry-shake">
+          🔄
+        </div>
+
+        <h2 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-4">
+          Ulangi!
+        </h2>
+
+        <p class="text-gray-700 text-lg font-semibold mb-6">
+          Jawaban belum tepat, coba lagi!
+        </p>
+
+        <div class="flex gap-2">
+
+          <button onclick="closeRetryOverlay()"
+                  class="flex-1 py-3 px-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+            ✨ Lanjut
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= RESULT SCREEN ================= -->
+
+  <div id="result-screen"
+       class="min-h-full w-full flex items-center justify-center p-2 hidden relative overflow-hidden">
+
+    <div id="result-confetti-container"></div>
+
+    <div class="glass-card rounded-2xl p-6 md:p-10 max-w-xs w-full text-center shadow-2xl animate-slide-up relative">
+
+      <div id="result-emoji"
+           class="text-6xl md:text-7xl mb-2 animate-spin-celebrate">
+        ✅
+      </div>
+
+      <div class="space-y-3 mb-6">
+
+        <div class="bg-gradient-to-r from-green-100 to-emerald-100 rounded-xl p-3">
+
+          <p id="result-score"
+             class="text-5xl md:text-6xl font-black text-green-600">
+            +10
+          </p>
+
+        </div>
+
+        <div class="bg-gradient-to-r from-yellow-100 to-amber-100 rounded-xl p-3">
+
+          <p class="text-xs text-gray-600 mb-1">
+            Total Skor
+          </p>
+
+          <p id="result-total-score"
+             class="text-4xl font-black text-amber-600">
+            10
+          </p>
+
+        </div>
+
+        <div id="correct-answer-display"
+             class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-3 hidden">
+
+          <p class="text-xs text-purple-700 mb-1 font-semibold">
+            Jawaban Benar:
+          </p>
+
+          <p id="correct-answer-text"
+             class="text-lg font-black text-purple-700">
+            JAWABAN
+          </p>
+
+        </div>
+
+      </div>
+
+      <button id="result-next-btn"
+              onclick="nextQuestion()"
+              class="w-full py-3 px-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 animate-pulse-celebrate">
+        🚀 Soal Berikutnya
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= END SCREEN ================= -->
+
+  <div id="end-screen"
+       class="min-h-full w-full flex items-center justify-center p-2 hidden">
+
+    <div class="glass-card rounded-2xl p-6 md:p-8 max-w-sm w-full text-center shadow-2xl animate-slide-up relative overflow-hidden">
+
+      <div id="confetti-container"></div>
+
+      <div id="end-emoji"
+           class="text-5xl md:text-6xl mb-4 animate-celebrate">
+        🎉
+      </div>
+
+      <h2 id="end-title"
+          class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 mb-3">
+        Permainan Selesai!
+      </h2>
+
+      <div class="bg-gradient-to-r from-blue-100 to-cyan-100 rounded-xl p-4 mb-4">
+
+        <p class="text-gray-600 text-base mb-1">
+          Skor Akhir
+        </p>
+
+        <p id="final-score"
+           class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">
+          0
+        </p>
+
+      </div>
+
+      <p id="end-message"
+         class="text-base text-gray-700 mb-4 font-semibold">
+        Pesan evaluasi
+      </p>
+
+      <div id="end-correct-answer-display"
+           class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-3 mb-4 hidden">
+
+        <p class="text-xs text-purple-700 mb-1 font-semibold">
+          Jawaban Terakhir yang Benar:
+        </p>
+
+        <p id="end-correct-answer-text"
+           class="text-base font-black text-purple-700">
+          JAWABAN
+        </p>
+
+      </div>
+
+      <button onclick="restartGame()"
+              class="w-full py-3 px-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+        🔄 Main Ulang
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+const defaultConfig = {
+  game_title: "Kuis Bahasa Indonesia Kelas 5",
+  start_button_text: "🚀 Mulai Bermain!"
+};
+
+let config = { ...defaultConfig };
+
+let allGameScores = [];
+
+
+/* =========================================================
+   BANK SOAL
+   20 SOAL AWAL + 100 SOAL TAMBAHAN DARI BANK SOAL
+   ========================================================= */
+
+const questionBank = [
+
+  /* ================= SOAL 1 ================= */
+
+  {
+    question:
+      "Wiwin menulis sebuah puisi yang setiap awal barisnya dibentuk dari rangkaian huruf yang memberi makna atau pesan puisi. Puisi yang dibuat oleh Wiwin disebut ...",
+
+    options: [
+      "A. pantun",
+      "B. gurindam",
+      "C. mantra",
+      "D. akrostik"
+    ],
+
+    answer: "AKROSTIK",
+
+    image: null
+  },
+
+
+  /* ================= SOAL 2 ================= */
+
+  {
+    question:
+      "Perhatikan kreasi berikut!\n\nBerdasarkan kreasi di atas, Adit memiliki sifat ....",
+
+    options: [
+      "A. teratur",
+      "B. selalu berusaha",
+      "C. banyak ide",
+      "D. membangkitkan tawa"
+    ],
+
+    answer: "BANYAK IDE",
+
+    image:
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiY71tLZQYPSVJeAP_jYlejhxLfmurdqOmMsLgQ6kkwtT1RCcExQV5qfBz8UEOudfC03qGQn2oH-qWHk3vrIHiVmi8-ffGiEdjVtosarhh6fXyjjafPqdMVQg6sIOIIJscTdqDxlHdNDTqFGr2I_qrvEac6IP-zXuw5YBJca2QawYVDAeBgNCgIz0Pu/s886/soal%20kreasi%20akrostik%20kelas%205%20kurikulum%20merdeka.png"
+  },
+
+
+  /* ================= SOAL 3 ================= */
+
+  {
+    question:
+      "Wayan bersaudara dengan Made. Mereka memiliki beberapa persamaan. Salah satu persamaannya yaitu ....",
+
+    options: [
+      "A. sifat",
+      "B. cita-cita",
+      "C. bentuk hidung",
+      "D. warna kulit"
+    ],
+
+    answer: "WARNA KULIT",
+
+    /*
+     * GAMBAR SOAL 3
+     * Diagram Venn Bahasa Indonesia Kelas 5
+     */
+    image:
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSF8SPnt52b12GoY7xOdn_EavxJ6H1JZfmKq-MmHKALU-WcxNBd0X-GJqOLBwqwu05ils85sFEobUNdY7JXqpNIQYHdYmSXsP10Ydc4xKLweUOvAwISUdLNa3N_i7XIUmZ7Zpb8aC06WhGdOHqDHGXo2xCR1en_aQkwyaa7yxyQZluG6pZ7zxmHGzv/s886/soal%20diagram%20venn%20bahasa%20indonesia%20kelas%205%20kumer.png"
+  },
+
+
+  /* ================= SOAL 4 ================= */
+
+  {
+    question:
+      "Wayan dan Made memang bersaudara. Namun, mereka berdua memiliki perbedaan. Berikut ini salah satu perbedaannya yaitu ....",
+
+    options: [
+      "A. cita-cita",
+      "B. bentuk wajah",
+      "C. alamat rumah",
+      "D. warna kulit"
+    ],
+
+    answer: "CITA-CITA",
+
+    /*
+     * GAMBAR SOAL 4
+     * Menggunakan gambar yang sama sesuai permintaan
+     */
+    image:
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSF8SPnt52b12GoY7xOdn_EavxJ6H1JZfmKq-MmHKALU-WcxNBd0X-GJqOLBwqwu05ils85sFEobUNdY7JXqpNIQYHdYmSXsP10Ydc4xKLweUOvAwISUdLNa3N_i7XIUmZ7Zpb8aC06WhGdOHqDHGXo2xCR1en_aQkwyaa7yxyQZluG6pZ7zxmHGzv/s886/soal%20diagram%20venn%20bahasa%20indonesia%20kelas%205%20kumer.png"
+  },
+
+
+  /* ================= SOAL 5 ================= */
+
+  {
+    question:
+      "Made memiliki angan-angan menjadi seorang ... saat dia dewasa.",
+
+    options: [
+      "A. atlet bulu tangkis",
+      "B. penulis buku",
+      "C. youtuber",
+      "D. pencipta lagu"
+    ],
+
+    answer: "PENULIS BUKU",
+
+    /*
+     * GAMBAR SOAL 5
+     * Menggunakan gambar yang sama sesuai permintaan
+     */
+    image:
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSF8SPnt52b12GoY7xOdn_EavvJ6H1JZfmKq-MmHKALU-WcxNBd0X-GJqOLBwqwu05ils85sFEobUNdY7JXqpNIQYHdYmSXsP10Ydc4xKLweUOvAwISUdLNa3N_i7XIUmZ7Zpb8aC06WhGdOHqDHGXo2xCR1en_aQkwyaa7yxyQZluG6pZ7zxmHGzv/s886/soal%20diagram%20venn%20bahasa%20indonesia%20kelas%205%20kumer.png"
+  },
+
+
+  /* ================= SOAL 6 ================= */
+
+  {
+  question:
+    "Perhatikan gambar dan tabel di bawah!\n\nParagraf yang paling sesuai untuk mendeskripsikan gambar di atas ditunjukkan oleh nomor ....",
+
+  options: [
+    "A. satu",
+    "B. dua",
+    "C. tiga",
+    "D. empat"
+  ],
+
+  answer: "DUA",
+
+  image:
+    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhw6yscV4j0DkVAtkrPce5blNgdg1DfdqoM64U_BQHpfbBbL_FGrYsHBMICxwQDtQChXVslufSmUphyyKsjn3zGjXS6qctdx_NruwpFxawoLFQx00VCNdYcSMFTCAbELmEzwCPB5sWy86mAlpEPn-r74AxJ3VJzyk3--vJY3XSZefe-ktXtYd1GZFEy/s886/soal%20teks%20deskripsi%20bahasa%20indonesia%20kelas%205.png",
+
+  extraText:
+    `1. Didi akan tampil di acara pentas seni yang diselenggarakan sekolahnya. Dia latihan terus-menerus untuk mengasah bakatnya yang selalu dibanggakan. Mikrofon menempel pada salah satu tangannya yang menandakan dia siap untuk bernyayi. "Ehem ehem cek satu, dua, tiga" kata Didi sebelum bernyanyi. Kemudian dia bernyanyi dengan penuh semangat.
+
+2. Seorang anak sedang bernyanyi. Satu tangan memagang mikrofon, sedangkan tangan lainnya bergerak mengikuti alunan nada. Posisi badan penyanyi tegak sembari kepala mengarah ke atas. Mulut penyanyi tersebut terbuka lebar menandakan lagu yang sedang dinyanyikan tepat pada nada tinggi. Penyanyi tampak begitu bersemangat.
+
+3. Menyanyi bukanlah pekerjaan yang mudah. Terdapat beberapa cara agar kita dapat bernyanyi dengan baik. Pertama, kita harus memahami tinggi rendahnya nada. Kedua, menghafal lirik lagu yang akan dinyanyikan. Ketiga, menyanyi dengan pelafan yang jelas. Keempat, gestur tubuh harus disesuaikan dengan lirik lagu yang dinyanyikan.
+
+4. Banyak penyanyi di tanah air yang memiliki suara emas. Salah satunya adalah Mahalini Ayu Raharja. Wanita yang berasal dari Denpasar, Bali ini mulai dikenal sejak tampil di acara Indonesia Idol. Selain dikenal sebagai penyanyi yang handal, dia juga merupakan pencipta lagu-lagu yang hits. Lagu Mahalini yang paling sering diputar di banyak sosial media berjudul Kisah Sempurna.`
+},
+
+
+  /* ================= SOAL 7 ================= */
+
+  {
+    question:
+      "Perhatikan gambar di bawah!\n\nKalimat yang paling tepat untuk mendeskripsikan gambar di atas yaitu....",
+
+    options: [
+      "A. tanaman tersebut senang karena dirawat",
+      "B. anak laki-laki sedang menyiram tanaman",
+      "C. tanaman sangat baik disiram pada pagi hari",
+      "D. seorang anak mempraktekkan cara menanam"
+    ],
+
+    answer:
+      "ANAK LAKI-LAKI SEDANG MENYIRAM TANAMAN",
+
+    image:
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikrW4IQK2gfmjrFSONKsfAQfQEaQ-77ax1GVBm5GHQHjC1g2eLhSB_-wXQsBzjJnWyMliPuUyqs3Rcselu5EFuN_M3RbZqSp9fYowMKM1v33pz3BOsdwReHQcU5QLepsqBX7c9PYiqxpXNiBn9bquEGSRxpDq7f9kpmNnJbjZTDZtcM1CHbkX8Pn5R/s886/deskripsi%20gambar.jpg"
+  },
+
+
+  /* ================= SOAL 8 ================= */
+
+  {
+    question:
+      "Aku tidak bergantung pada orang lain. Aku dalam keadaan dapat berdiri sendiri. Berdasarkan pernyataan tersebut, sifatku adalah ....",
+
+    options: [
+      "A. jenaka",
+      "B. optimistis",
+      "C. mandiri",
+      "D. lincah"
+    ],
+
+    answer: "MANDIRI",
+
+    image: null
+  },
+
+
+  /* ================= SOAL 9 ================= */
+
+  {
+    question:
+      "Miska adalah seorang siswi kelas lima sekolah dasar. Dia dikenal sebagai siswi yang jujur, sehingga banyak orang yang menyukai kepribadiannya tersebut.\n\nKata jujur pada kalimat di atas memiliki makna ....",
+
+    options: [
+      "A. lurus hati",
+      "B. rendah hati",
+      "C. lapang dada",
+      "D. berjiwa besar"
+    ],
+
+    answer: "LURUS HATI",
+
+    image: null
+  },
+
+
+  /* ================= SOAL 10 ================= */
+
+  {
+    question:
+      "Pak Ketut dikenal sebagai pelukis yang kreatif, karena beliau menghasilkan karya-karya yang sangat unik.\n\nKata kreatif pada kalimat di atas memiliki makna ....",
+
+    options: [
+      "A. tajam pikiran",
+      "B. banyak ide",
+      "C. memiliki daya cipta",
+      "D. selalu berusaha"
+    ],
+
+    answer: "MEMILIKI DAYA CIPTA",
+
+    image: null
+  },
+
+
+  /* ================= SOAL 11 ================= */
+
+  {
+    question:
+      "Perhatikan gambar di bawah!\n\nKata sifat yang tepat untuk mendeskripsikan kegiatan anak-anak pada gambar di atas yaitu ....",
+
+    options: [
+      "A. rajin",
+      "B. cerdas",
+      "C. ramah",
+      "D. lincah"
+    ],
+
+    answer: "LINCAH",
+
+    image:
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhbRFaXUL34bnjyUPHs78T-h90FKVp9P2hL3O3delf2Wv5sGRXEvUcewM5alfmL0nLol6SfQW3GQ7Z1zg4aYKRyngKe4HKJ0vYP2HGfFoTNwS3rRqohG-y_ptdP45OjRs6VaW2pVkvq1Kl4J7Ku2Ebbr2VlB9TAgonkgEjXrazyf5ZG5mFfLVEqjNU7/s885/soal%20hots%20bahasa%20indonesia%20kelas%205%20bab%201%20kurikulum%20merdeka.jpg"
+  },
+
+
+  /* ================= SOAL 12 ================= */
+
+  {
+    question:
+      'Imbuhan dalam bentuk awalan pe- digunakan untuk menyatakan kata sifat. Hasil pembentukan kata setelah mendapat imbuhan pe- dari kata "bohong" yaitu ....',
+
+    options: [
+      "A. pebohong",
+      "B. penyohong",
+      "C. pembohong",
+      "D. penbohong"
+    ],
+
+    answer: "PEMBOHONG",
+
+    image: null
+  },
+
+
+  /* ================= SOAL 13 ================= */
+
+  {
+    question:
+      'Kata "dendam" jika diberikan imbuhan pe- akan menjadi kata ....',
+
+    options: [
+      "A. pedendam",
+      "B. penyendam",
+      "C. pemdendam",
+      "D. pendendam"
+    ],
+
+    answer: "PENDENDAM",
+
+    image: null
+  },
+
+
+  /* ================= SOAL 14 ================= */
+
+  {
+    question:
+      "Berdasarkan cerita di atas, sifat tokoh yang dapat kita teladani yaitu ...",
+
+    options: [
+      "A. berani",
+      "B. penolong",
+      "C. jujur",
+      "D. pemaaf"
+    ],
+
+    answer: "PENOLONG",
+
+    image: null,
+
+    extraText:
+      `Siam dan Chen
+
+Dahulu kala, di suatu desa tinggalah seorang pria dermawan bernama Pak Long. Dia memiliki dua orang anak bernama Siam dan Lui. Siam adalah anak yang penurut dan suka menolong. Masyarakat sekitar sangat kagum dengan perilaku Siam. Setiap pagi terlihat Siam dengan penuh semangat mendorong gerobak buah ke pasar. Setelah membantu ayahnya berjualan, Siam bersiap-siap untuk pergi ke sekolah.
+
+Siam memiliki tetangga bernama Chen. Mereka juga merupakan teman sekelas. Chen suka bermain games di ponsel pintarnya. Tidak pernah terlihat sekalipun dia pernah membantu keluarganya membersihkan rumah. Dia juga sering melupakan tugas-tugas yang diberikan Ibu Guru, sehingga dia langganan terkena hukuman. Namun, Chen tidak pernah jera. Di sekolah, Chen lebih suka mengobrol dan menggambar dibandingkan mendengarkan penjelasan guru.`
+  },
+
+
+  /* ================= SOAL 15 ================= */
+
+  {
+    question:
+      "Berdasarkan cerita di atas, sifat tokoh yang sebaiknya kita hindari yaitu ....",
+
+    options: [
+      "A. penakut",
+      "B. pendendam",
+      "C. malas",
+      "D. pesimistis"
+    ],
+
+    answer: "MALAS",
+
+    image: null,
+
+    extraText:
+      `Siam dan Chen
+
+Dahulu kala, di suatu desa tinggalah seorang pria dermawan bernama Pak Long. Dia memiliki dua orang anak bernama Siam dan Lui. Siam adalah anak yang penurut dan suka menolong. Masyarakat sekitar sangat kagum dengan perilaku Siam. Setiap pagi terlihat Siam dengan penuh semangat mendorong gerobak buah ke pasar. Setelah membantu ayahnya berjualan, Siam bersiap-siap untuk pergi ke sekolah.
+
+Siam memiliki tetangga bernama Chen. Mereka juga merupakan teman sekelas. Chen suka bermain games di ponsel pintarnya. Tidak pernah terlihat sekalipun dia pernah membantu keluarganya membersihkan rumah. Dia juga sering melupakan tugas-tugas yang diberikan Ibu Guru, sehingga dia langganan terkena hukuman. Namun, Chen tidak pernah jera. Di sekolah, Chen lebih suka mengobrol dan menggambar dibandingkan mendengarkan penjelasan guru.`
+  },
+
+
+  /* ================= SOAL 16 ================= */
+
+  {
+    question:
+      "“Jadilah orang yang alim. Jika tidak mampu, maka jadilah penuntut ilmu. Jika tidak mampu jadi penuntut ilmu, jadilah pendengar ilmu“ kata Kepala Kantor Kemenag Kabupaten Kotabaru.\n\nKata alim sinonimnya yaitu....",
+
+    options: [
+      "A. apik",
+      "B. soleh",
+      "C. badung",
+      "D. penggerutu"
+    ],
+
+    answer: "SOLEH",
+
+    image: null
+  },
+
+
+  /* ================= SOAL 17 ================= */
+
+  {
+    question:
+      "Dita sering menyisihkan uang bekal yang diberikan oleh ibunya. Dia juga membeli barang-barang yang hanya diperlukan. Dita anak yang tidak ....",
+
+    options: [
+      "A. boros",
+      "B. hemat",
+      "C. rajin",
+      "D. pendiam"
+    ],
+
+    answer: "HEMAT",
+
+    image: null
+  },
+
+
+  /* ================= SOAL 18 ================= */
+
+  {
+    question:
+      "Ibuku selalu menyapa orang-orang yang berbelanja di warung dengan penuh senyuman. Beliau dikenal sebagai penjual yang ramah.\n\nKata ramah antonimnya yaitu....",
+
+    options: [
+      "A. kaku",
+      "B. nakal",
+      "C. cerewet",
+      "D. baik"
+    ],
+
+    answer: "KAKU",
+
+    image: null
+  },
+
+
+  /* ================= SOAL 19 ================= */
+
+  {
+    question:
+      `Perhatikan pernyataan berikut!
+
+1. Adit rajin belajar, sehingga ia memperoleh peringkat 1 di kelas.
+2. Gita suka bermain piano, sedangkan Chika suka bermain gitar.
+3. Nopita dapat segera menemukan kancing yang tercecer di jalan karena ia memiliki mata yang jeli.
+4. Kerajinan pot bunga dari barang bekas tersebut dibuat oleh Bayu dan Widi.
+
+Kalimat majemuk setara yang sejalan ditunjukkan oleh nomor...`,
+
+    options: [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 4"
+    ],
+
+    answer: "4",
+
+    image: null
+  },
+
+
+  /* ================= SOAL 20 ================= */
+
+  {
+    question:
+      "Nancy pandai berhitung. Nancy tidak pandai menyanyi.\n\nKata penghubung yang tepat untuk melengkapi dua kalimat tunggal di atas, agar menjadi sebuah kalimat majemuk yaitu.....",
+
+    options: [
+      "A. tetapi",
+      "B. karena",
+      "C. atau",
+      "D. sehingga"
+    ],
+
+    answer: "TETAPI",
+
+    image: null
+  }
+
+,
+
+  /* BANK SOAL TAMBAHAN: 100 SOAL BAB I - AKU YANG UNIK */
+  {
+    "question": "Apakah yang dimaksud dengan puisi akrostik?",
+    "options": [
+      "A. Puisi yang setiap awal barisnya membentuk rangkaian huruf bermakna.",
+      "B. Puisi yang seluruh barisnya memiliki jumlah kata sama.",
+      "C. Puisi yang hanya menceritakan pengalaman pribadi penulis.",
+      "D. Puisi yang menggunakan kata-kata berima pada setiap baris."
+    ],
+    "answer": "PUISI YANG SETIAP AWAL BARISNYA MEMBENTUK RANGKAIAN HURUF BERMAKNA",
+    "image": null,
+    "explanation": "Akrostik adalah puisi yang huruf awal setiap barisnya membentuk rangkaian huruf atau pesan tertentu."
+  },
+  {
+    "question": "Nama RANI digunakan untuk membuat puisi akrostik. Huruf awal baris ketiga adalah ....",
+    "options": [
+      "A. R",
+      "B. A",
+      "C. N",
+      "D. I"
+    ],
+    "answer": "N",
+    "image": null,
+    "explanation": "Urutan huruf nama RANI adalah R, A, N, dan I. Baris ketiga dimulai dengan N."
+  },
+  {
+    "question": "Urutan huruf yang tepat untuk membuat akrostik menggunakan nama DITA adalah ....",
+    "options": [
+      "A. D – T – I – A",
+      "B. D – I – T – A",
+      "C. I – D – A – T",
+      "D. T – A – D – I"
+    ],
+    "answer": "D I T A",
+    "image": null,
+    "explanation": "Huruf awal setiap baris harus mengikuti urutan nama yang digunakan, yaitu D-I-T-A."
+  },
+  {
+    "question": "Perhatikan baris puisi berikut: Ramah kepada semua teman; Aku senang membaca buku; Selalu rajin belajar; Ingin menjadi dokter. Nama yang terbentuk dari huruf awal puisi tersebut adalah ....",
+    "options": [
+      "A. SARI",
+      "B. RISA",
+      "C. RASI",
+      "D. ARIS"
+    ],
+    "answer": "RASI",
+    "image": null,
+    "explanation": "Huruf awal setiap baris membentuk urutan R-A-S-I."
+  },
+  {
+    "question": "Hal utama yang harus diperhatikan ketika membuat puisi akrostik adalah ....",
+    "options": [
+      "A. Semua baris harus memiliki jumlah suku kata sama.",
+      "B. Huruf awal setiap baris harus mengikuti urutan nama.",
+      "C. Setiap baris harus diakhiri tanda tanya.",
+      "D. Seluruh puisi harus menggunakan kata berima."
+    ],
+    "answer": "HURUF AWAL SETIAP BARIS HARUS MENGIKUTI URUTAN NAMA",
+    "image": null,
+    "explanation": "Ciri utama akrostik adalah penggunaan huruf awal setiap baris sesuai rangkaian huruf yang ingin dibentuk."
+  },
+  {
+    "question": "Riko membuat akrostik dengan nama BUDI. Baris kedua harus dimulai dengan huruf ....",
+    "options": [
+      "A. B",
+      "B. D",
+      "C. I",
+      "D. U"
+    ],
+    "answer": "U",
+    "image": null,
+    "explanation": "Huruf kedua dalam nama BUDI adalah U."
+  },
+  {
+    "question": "Rani telah membuat puisi akrostik. Namun, beberapa barisnya tidak memiliki hubungan makna. Perbaikan terbaik adalah ....",
+    "options": [
+      "A. Menghapus seluruh huruf awal puisi.",
+      "B. Mengganti semua baris dengan kalimat yang sama.",
+      "C. Memperbaiki isi baris agar membentuk pesan yang saling berkaitan.",
+      "D. Mengubah nama yang digunakan tanpa memperbaiki isi puisi."
+    ],
+    "answer": "MEMPERBAIKI ISI BARIS AGAR MEMBENTUK PESAN YANG SALING BERKAITAN",
+    "image": null,
+    "explanation": "Akrostik yang baik harus mengikuti urutan huruf sekaligus memiliki isi yang bermakna."
+  },
+  {
+    "question": "Perhatikan rancangan akrostik R-U-D-I: Rajin membaca setiap hari; Usaha keras mencapai cita-cita; Disiplin dalam belajar; Ingin menjadi guru. Penilaian yang tepat terhadap rancangan tersebut adalah ....",
+    "options": [
+      "A. Rancangan tepat karena huruf awal dan isi puisi sesuai.",
+      "B. Rancangan salah karena setiap baris harus berima.",
+      "C. Rancangan salah karena tidak menggunakan kalimat tanya.",
+      "D. Rancangan tepat hanya jika setiap baris terdiri atas dua kata."
+    ],
+    "answer": "RANCANGAN TEPAT KARENA HURUF AWAL DAN ISI PUISI SESUAI",
+    "image": null,
+    "explanation": "Rancangan tersebut sudah mengikuti urutan R-U-D-I dan setiap baris memiliki pesan yang jelas."
+  },
+  {
+    "question": "Kata sifat digunakan untuk menggambarkan ....",
+    "options": [
+      "A. tempat dan waktu kejadian",
+      "B. urutan kegiatan seseorang",
+      "C. hubungan antara dua kalimat",
+      "D. keadaan, karakter, atau sifat seseorang"
+    ],
+    "answer": "KEADAAN KARAKTER ATAU SIFAT SESEORANG",
+    "image": null,
+    "explanation": "Kata sifat dapat digunakan untuk menggambarkan keadaan benda maupun karakter seseorang."
+  },
+  {
+    "question": "Kata berikut yang termasuk kata sifat adalah ....",
+    "options": [
+      "A. sekolah",
+      "B. jujur",
+      "C. membaca",
+      "D. berlari"
+    ],
+    "answer": "JUJUR",
+    "image": null,
+    "explanation": "Jujur merupakan kata sifat yang menggambarkan karakter seseorang."
+  },
+  {
+    "question": "Seseorang yang senang menyapa dan berbicara dengan orang lain memiliki sifat ....",
+    "options": [
+      "A. pendiam",
+      "B. pemarah",
+      "C. ramah",
+      "D. angkuh"
+    ],
+    "answer": "RAMAH",
+    "image": null,
+    "explanation": "Ramah berarti bersikap baik dan bersahabat kepada orang lain."
+  },
+  {
+    "question": "Rina selalu mengerjakan tugas sendiri tanpa bergantung kepada orang lain. Sifat Rina adalah ....",
+    "options": [
+      "A. mandiri",
+      "B. jenaka",
+      "C. pemarah",
+      "D. pendendam"
+    ],
+    "answer": "MANDIRI",
+    "image": null,
+    "explanation": "Mandiri berarti mampu melakukan sesuatu tanpa selalu bergantung pada bantuan orang lain."
+  },
+  {
+    "question": "Perhatikan sifat: 1. Jujur; 2. Angkuh; 3. Rajin; 4. Pembohong. Sifat yang patut diteladani adalah ....",
+    "options": [
+      "A. 1 dan 2",
+      "B. 2 dan 4",
+      "C. 3 dan 4",
+      "D. 1 dan 3"
+    ],
+    "answer": "1 DAN 3",
+    "image": null,
+    "explanation": "Jujur dan rajin merupakan sifat positif. Angkuh dan pembohong merupakan sifat yang sebaiknya dihindari."
+  },
+  {
+    "question": "Dimas selalu memiliki harapan baik meskipun menghadapi kesulitan. Dimas memiliki sifat ....",
+    "options": [
+      "A. pesimistis",
+      "B. optimistis",
+      "C. pendendam",
+      "D. pemarah"
+    ],
+    "answer": "OPTIMISTIS",
+    "image": null,
+    "explanation": "Optimistis berarti memiliki harapan baik dan berpikir positif."
+  },
+  {
+    "question": "Fani selalu memeriksa pekerjaannya dengan teliti sebelum dikumpulkan. Sifat Fani adalah ....",
+    "options": [
+      "A. jenaka",
+      "B. lincah",
+      "C. cermat",
+      "D. sederhana"
+    ],
+    "answer": "CERMAT",
+    "image": null,
+    "explanation": "Cermat berarti teliti dan berhati-hati ketika melakukan sesuatu."
+  },
+  {
+    "question": "Anak yang mampu menghasilkan gagasan dan karya baru memiliki sifat ....",
+    "options": [
+      "A. kreatif",
+      "B. pemarah",
+      "C. angkuh",
+      "D. pembohong"
+    ],
+    "answer": "KREATIF",
+    "image": null,
+    "explanation": "Kreatif berarti memiliki kemampuan menghasilkan gagasan atau karya baru."
+  },
+  {
+    "question": "Pasangan kata yang sama-sama menggambarkan sifat positif adalah ....",
+    "options": [
+      "A. rajin dan malas",
+      "B. jujur dan pembohong",
+      "C. angkuh dan sombong",
+      "D. ramah dan sopan"
+    ],
+    "answer": "RAMAH DAN SOPAN",
+    "image": null,
+    "explanation": "Ramah dan sopan merupakan sifat positif yang patut diterapkan dalam kehidupan sehari-hari."
+  },
+  {
+    "question": "Sinta sering membuat teman-temannya tertawa dengan cerita lucu. Sifat Sinta adalah ....",
+    "options": [
+      "A. pendiam",
+      "B. jenaka",
+      "C. pemarah",
+      "D. pesimistis"
+    ],
+    "answer": "JENAKA",
+    "image": null,
+    "explanation": "Jenaka berarti lucu atau mampu membuat orang lain tertawa."
+  },
+  {
+    "question": "Kalimat yang menggunakan kata sifat kreatif secara tepat adalah ....",
+    "options": [
+      "A. Ayah kreatif pergi ke pasar setiap pagi.",
+      "B. Ibu kreatif membeli sayuran di toko.",
+      "C. Lala membuat hiasan kelas dengan gagasan yang kreatif.",
+      "D. Rudi kreatif sedang berjalan menuju sekolah."
+    ],
+    "answer": "LALA MEMBUAT HIASAN KELAS DENGAN GAGASAN YANG KREATIF",
+    "image": null,
+    "explanation": "Kreatif digunakan untuk menggambarkan kemampuan Lala menghasilkan gagasan atau karya baru."
+  },
+  {
+    "question": "Budi sering menunda pekerjaan. Sifat yang sebaiknya dikembangkan agar kebiasaannya berubah adalah ....",
+    "options": [
+      "A. rajin",
+      "B. angkuh",
+      "C. pendendam",
+      "D. pembohong"
+    ],
+    "answer": "RAJIN",
+    "image": null,
+    "explanation": "Rajin merupakan sifat yang tepat untuk membiasakan diri menyelesaikan pekerjaan tanpa menunda-nunda."
+  },
+  {
+    "question": "Salah satu kegunaan kamus adalah ....",
+    "options": [
+      "A. mencari jumlah halaman buku",
+      "B. mengetahui urutan tokoh cerita",
+      "C. mencari makna kata dan contoh penggunaannya",
+      "D. menentukan waktu suatu peristiwa"
+    ],
+    "answer": "MENCARI MAKNA KATA DAN CONTOH PENGGUNAANNYA",
+    "image": null,
+    "explanation": "Kamus digunakan untuk mencari arti kata dan contoh penggunaannya dalam kalimat."
+  },
+  {
+    "question": "Kata-kata dalam kamus cetak umumnya disusun berdasarkan ....",
+    "options": [
+      "A. abjad",
+      "B. panjang kata",
+      "C. jumlah kalimat",
+      "D. jenis bacaan"
+    ],
+    "answer": "ABJAD",
+    "image": null,
+    "explanation": "Entri kamus disusun menurut urutan abjad agar mudah ditemukan."
+  },
+  {
+    "question": "Urutan kata berikut yang benar berdasarkan abjad adalah ....",
+    "options": [
+      "A. cerdik – cerdas – cermat",
+      "B. cermat – cerdik – cerdas",
+      "C. cerdas – cermat – cerdik",
+      "D. cerdas – cerdik – cermat"
+    ],
+    "answer": "CERDAS CERDIK CERMAT",
+    "image": null,
+    "explanation": "Urutan berdasarkan abjad adalah cerdas, cerdik, kemudian cermat."
+  },
+  {
+    "question": "Makna kata cerdas dalam contoh kamus adalah ....",
+    "options": [
+      "A. banyak akal",
+      "B. tajam pikiran",
+      "C. tajam penglihatan",
+      "D. mudah bergerak"
+    ],
+    "answer": "TAJAM PIKIRAN",
+    "image": null,
+    "explanation": "Cerdas berarti memiliki ketajaman pikiran atau kemampuan berpikir yang baik."
+  },
+  {
+    "question": "Kata cerdik memiliki makna ....",
+    "options": [
+      "A. banyak akal",
+      "B. suka bercanda",
+      "C. mudah bergaul",
+      "D. rajin bekerja"
+    ],
+    "answer": "BANYAK AKAL",
+    "image": null,
+    "explanation": "Cerdik berarti banyak akal dan pandai menemukan cara untuk mengatasi masalah."
+  },
+  {
+    "question": "Rani dapat segera menemukan buku yang tercecer karena penglihatannya tajam. Kata sifat yang tepat adalah ....",
+    "options": [
+      "A. jenaka",
+      "B. sederhana",
+      "C. sopan",
+      "D. jeli"
+    ],
+    "answer": "JELI",
+    "image": null,
+    "explanation": "Jeli berarti memiliki ketajaman penglihatan atau kecermatan dalam memperhatikan sesuatu."
+  },
+  {
+    "question": "Perhatikan daftar kata: 1. Acah; 2. Abu; 3. Acak; 4. Abu-abu. Urutan berdasarkan abjad yang tepat adalah ....",
+    "options": [
+      "A. 1 – 2 – 3 – 4",
+      "B. 2 – 4 – 1 – 3",
+      "C. 3 – 1 – 2 – 4",
+      "D. 2 – 1 – 4 – 3"
+    ],
+    "answer": "2 4 1 3",
+    "image": null,
+    "explanation": "Urutannya adalah abu, abu-abu, acah, dan acak."
+  },
+  {
+    "question": "Ketika menemukan kata yang belum dipahami dalam bacaan, tindakan yang tepat adalah ....",
+    "options": [
+      "A. melewati seluruh bacaan",
+      "B. menebak tanpa mencari tahu",
+      "C. mencari maknanya dalam kamus",
+      "D. mengganti kata tersebut sesuka hati"
+    ],
+    "answer": "MENCARI MAKNANYA DALAM KAMUS",
+    "image": null,
+    "explanation": "Kamus dapat membantu menemukan makna kata yang belum diketahui."
+  },
+  {
+    "question": "Salah satu kelebihan kamus daring adalah ....",
+    "options": [
+      "A. pencarian kata dapat dilakukan dengan mengetik ejaannya",
+      "B. seluruh halaman harus dibaca secara berurutan",
+      "C. pengguna harus mencari kata dari halaman pertama",
+      "D. setiap kata selalu disertai gambar"
+    ],
+    "answer": "PENCARIAN KATA DAPAT DILAKUKAN DENGAN MENGETIK EJAANNYA",
+    "image": null,
+    "explanation": "Kamus daring memungkinkan pengguna mengetik kata dan menemukan penjelasannya dengan cepat."
+  },
+  {
+    "question": "Seorang siswa mencari arti kata rajin, tetapi justru membuka bagian huruf S. Kesalahan siswa tersebut adalah ....",
+    "options": [
+      "A. memilih kamus yang terlalu tebal",
+      "B. membaca penjelasan terlalu cepat",
+      "C. menggunakan kata yang terlalu pendek",
+      "D. tidak memperhatikan urutan abjad"
+    ],
+    "answer": "TIDAK MEMPERHATIKAN URUTAN ABJAD",
+    "image": null,
+    "explanation": "Kata rajin diawali huruf R sehingga pencarian harus dilakukan pada bagian huruf R."
+  },
+  {
+    "question": "Perhatikan kegiatan: 1. Menemukan arti kata; 2. Mengetahui contoh pemakaian kata; 3. Memahami kosakata yang belum diketahui. Kesimpulan yang tepat adalah ....",
+    "options": [
+      "A. Kamus hanya digunakan untuk mencari nama orang.",
+      "B. Kamus membantu pembaca memahami kosakata.",
+      "C. Kamus digunakan untuk menghitung jumlah kata.",
+      "D. Kamus hanya berisi kumpulan cerita pendek."
+    ],
+    "answer": "KAMUS MEMBANTU PEMBACA MEMAHAMI KOSAKATA",
+    "image": null,
+    "explanation": "Ketiga kegiatan tersebut merupakan manfaat kamus dalam membantu memahami kosakata."
+  },
+  {
+    "question": "Kalimat yang menggunakan kata cerdik secara tepat adalah ....",
+    "options": [
+      "A. Anak itu cerdik karena selalu tidur siang.",
+      "B. Rumah tersebut cerdik dan berwarna biru.",
+      "C. Rudi menemukan cara mengatasi masalah karena ia cerdik.",
+      "D. Buku cerdik itu tersimpan di dalam lemari."
+    ],
+    "answer": "RUDI MENEMUKAN CARA MENGATASI MASALAH KARENA IA CERDIK",
+    "image": null,
+    "explanation": "Cerdik digunakan untuk menggambarkan seseorang yang memiliki banyak akal dalam menyelesaikan masalah."
+  },
+  {
+    "question": "Imbuhan adalah ....",
+    "options": [
+      "A. tambahan pada kata dasar",
+      "B. gabungan beberapa paragraf",
+      "C. tanda akhir sebuah kalimat",
+      "D. kata yang memiliki makna berlawanan"
+    ],
+    "answer": "TAMBAHAN PADA KATA DASAR",
+    "image": null,
+    "explanation": "Imbuhan merupakan tambahan pada kata dasar yang dapat diletakkan di awal, tengah, atau akhir kata."
+  },
+  {
+    "question": "Imbuhan yang dibahas dalam bagian ini adalah ....",
+    "options": [
+      "A. ber-",
+      "B. me-",
+      "C. ter-",
+      "D. pe-"
+    ],
+    "answer": "PE-",
+    "image": null,
+    "explanation": "Bagian ini membahas imbuhan awalan pe-."
+  },
+  {
+    "question": "Kata lupa setelah mendapat awalan pe- menjadi ....",
+    "options": [
+      "A. pelupaan",
+      "B. pelupa",
+      "C. melupakan",
+      "D. terlupa"
+    ],
+    "answer": "PELUPA",
+    "image": null,
+    "explanation": "Bentuk kata yang tepat adalah pe- + lupa menjadi pelupa."
+  },
+  {
+    "question": "Kata penyabar berasal dari kata dasar ....",
+    "options": [
+      "A. sabaran",
+      "B. kesabaran",
+      "C. sabar",
+      "D. bersabar"
+    ],
+    "answer": "SABAR",
+    "image": null,
+    "explanation": "Penyabar berasal dari kata dasar sabar yang mendapatkan awalan pe- dengan perubahan bentuk menjadi peny-."
+  },
+  {
+    "question": "Bentuk kata yang tepat dari kata dasar malas dengan awalan pe- adalah ....",
+    "options": [
+      "A. pemalas",
+      "B. pelalas",
+      "C. pemalasan",
+      "D. kemalasan"
+    ],
+    "answer": "PEMALAS",
+    "image": null,
+    "explanation": "Kata malas apabila mendapatkan awalan pe- menjadi pemalas."
+  },
+  {
+    "question": "Perhatikan pembentukan kata: lupa menjadi pelupa; sabar menjadi penyabar; maaf menjadi pemaaf. Kesimpulan yang tepat adalah ....",
+    "options": [
+      "A. Semua kata tersebut berubah menjadi kata kerja.",
+      "B. Awalan hanya dapat digunakan di akhir kata.",
+      "C. Kata dasar tidak boleh mengalami perubahan bentuk.",
+      "D. Awalan pe- dapat membentuk kata yang menggambarkan sifat seseorang."
+    ],
+    "answer": "AWALAN PE- DAPAT MEMBENTUK KATA YANG MENGGAMBARKAN SIFAT SESEORANG",
+    "image": null,
+    "explanation": "Pelupa, penyabar, dan pemaaf merupakan kata yang menggambarkan sifat atau karakter seseorang."
+  },
+  {
+    "question": "Seseorang yang sulit memaafkan kesalahan orang lain dan selalu mengingatnya disebut ....",
+    "options": [
+      "A. pemaaf",
+      "B. pendendam",
+      "C. penyabar",
+      "D. pendiam"
+    ],
+    "answer": "PENDENDAM",
+    "image": null,
+    "explanation": "Pendendam adalah orang yang menyimpan dendam terhadap kesalahan orang lain."
+  },
+  {
+    "question": "Adi dikenal sebagai anak yang selalu memaafkan kesalahan temannya. Kata yang tepat untuk menggambarkan Adi adalah ....",
+    "options": [
+      "A. pemarah",
+      "B. pelupa",
+      "C. pemaaf",
+      "D. pendendam"
+    ],
+    "answer": "PEMAAF",
+    "image": null,
+    "explanation": "Pemaaf berarti orang yang mudah memberikan maaf kepada orang lain."
+  },
+  {
+    "question": "Kata dasar tolong apabila mendapatkan awalan pe- menjadi ....",
+    "options": [
+      "A. penolong",
+      "B. pertolongan",
+      "C. menolong",
+      "D. tertolong"
+    ],
+    "answer": "PENOLONG",
+    "image": null,
+    "explanation": "Kata penolong berasal dari kata dasar tolong dengan imbuhan awalan pe-."
+  },
+  {
+    "question": "Kalimat yang menggunakan kata berawalan pe- secara tepat adalah ....",
+    "options": [
+      "A. Sinta dikenal sebagai anak yang penyabarannya.",
+      "B. Sinta dikenal sebagai anak yang menyabar.",
+      "C. Sinta dikenal sebagai anak yang kesabar.",
+      "D. Sinta dikenal sebagai anak yang penyabar ketika menghadapi masalah."
+    ],
+    "answer": "SINTA DIKENAL SEBAGAI ANAK YANG PENYABAR KETIKA MENGHADAPI MASALAH",
+    "image": null,
+    "explanation": "Penyabar merupakan bentuk kata yang tepat untuk menggambarkan seseorang yang memiliki sifat sabar."
+  },
+  {
+    "question": "Sinonim adalah ....",
+    "options": [
+      "A. kata yang memiliki bunyi sama",
+      "B. kata yang memiliki makna berlawanan",
+      "C. kata yang memiliki persamaan makna",
+      "D. kata yang memiliki jumlah huruf sama"
+    ],
+    "answer": "KATA YANG MEMILIKI PERSAMAAN MAKNA",
+    "image": null,
+    "explanation": "Sinonim merupakan hubungan persamaan makna antara dua kata atau lebih."
+  },
+  {
+    "question": "Sinonim kata pintar adalah ....",
+    "options": [
+      "A. pandai",
+      "B. malas",
+      "C. lambat",
+      "D. bodoh"
+    ],
+    "answer": "PANDAI",
+    "image": null,
+    "explanation": "Pintar dan pandai memiliki makna yang sama atau hampir sama."
+  },
+  {
+    "question": "Sinonim kata rapi adalah ....",
+    "options": [
+      "A. kusut",
+      "B. berantakan",
+      "C. kotor",
+      "D. apik"
+    ],
+    "answer": "APIK",
+    "image": null,
+    "explanation": "Apik merupakan kata yang memiliki makna sama dengan rapi."
+  },
+  {
+    "question": "Sinonim kata pembohong adalah ....",
+    "options": [
+      "A. orang yang rajin",
+      "B. pembual",
+      "C. orang yang sopan",
+      "D. orang yang teliti"
+    ],
+    "answer": "PEMBUAL",
+    "image": null,
+    "explanation": "Pembohong dan pembual memiliki makna yang berkaitan dengan orang yang berkata tidak benar."
+  },
+  {
+    "question": "Sinonim kata supel adalah ....",
+    "options": [
+      "A. kaku",
+      "B. angkuh",
+      "C. luwes",
+      "D. pemarah"
+    ],
+    "answer": "LUWES",
+    "image": null,
+    "explanation": "Supel berarti pandai bergaul dan mudah menyesuaikan diri. Luwes merupakan padanan yang sesuai."
+  },
+  {
+    "question": "Rina selalu berhati-hati ketika menghitung uang belanja. Sinonim kata cermat adalah ....",
+    "options": [
+      "A. teliti",
+      "B. ceroboh",
+      "C. malas",
+      "D. lambat"
+    ],
+    "answer": "TELITI",
+    "image": null,
+    "explanation": "Cermat memiliki makna teliti dan berhati-hati dalam melakukan sesuatu."
+  },
+  {
+    "question": "Pasangan kata yang memiliki persamaan makna adalah ....",
+    "options": [
+      "A. besar – kecil",
+      "B. rajin – malas",
+      "C. jujur – bohong",
+      "D. lucu – jenaka"
+    ],
+    "answer": "LUCU JENAKA",
+    "image": null,
+    "explanation": "Lucu dan jenaka memiliki makna yang sama, yaitu sesuatu yang mengundang tawa."
+  },
+  {
+    "question": "Kata alim dalam latihan sinonim memiliki padanan kata ....",
+    "options": [
+      "A. nakal",
+      "B. soleh",
+      "C. sombong",
+      "D. pemarah"
+    ],
+    "answer": "SOLEH",
+    "image": null,
+    "explanation": "Alim memiliki makna taat beragama atau saleh."
+  },
+  {
+    "question": "Kalimat yang menggunakan kata sinonim pandai secara tepat adalah ....",
+    "options": [
+      "A. Dito cerdas karena tidak pernah belajar.",
+      "B. Dito cerdas adalah nama sebuah sekolah.",
+      "C. Dito dikenal cerdas karena mampu menyelesaikan soal dengan baik.",
+      "D. Dito cerdas tetapi tidak dapat memahami pertanyaan."
+    ],
+    "answer": "DITO DIKENAL CERDAS KARENA MAMPU MENYELESAIKAN SOAL DENGAN BAIK",
+    "image": null,
+    "explanation": "Cerdas merupakan kata yang memiliki makna serupa dengan pandai."
+  },
+  {
+    "question": "Perhatikan pasangan kata: 1. Pemarah – penggerutu; 2. Lucu – jenaka; 3. Angkuh – sombong. Pasangan yang menunjukkan persamaan makna adalah ....",
+    "options": [
+      "A. 1, 2, dan 3",
+      "B. 1 dan 2",
+      "C. 2 dan 3",
+      "D. 1 dan 3"
+    ],
+    "answer": "1 2 DAN 3",
+    "image": null,
+    "explanation": "Ketiga pasangan tersebut memiliki makna yang sama atau berdekatan."
+  },
+  {
+    "question": "Antonim adalah ....",
+    "options": [
+      "A. kata yang memiliki persamaan bunyi",
+      "B. kata yang memiliki persamaan makna",
+      "C. kata yang memiliki makna berlawanan",
+      "D. kata yang memiliki jumlah huruf sama"
+    ],
+    "answer": "KATA YANG MEMILIKI MAKNA BERLAWANAN",
+    "image": null,
+    "explanation": "Antonim merupakan hubungan antara kata-kata yang memiliki makna berlawanan."
+  },
+  {
+    "question": "Antonim kata mahal adalah ....",
+    "options": [
+      "A. tinggi",
+      "B. murah",
+      "C. besar",
+      "D. banyak"
+    ],
+    "answer": "MURAH",
+    "image": null,
+    "explanation": "Mahal dan murah merupakan pasangan kata yang berlawanan makna."
+  },
+  {
+    "question": "Antonim kata cepat adalah ....",
+    "options": [
+      "A. segera",
+      "B. gesit",
+      "C. lambat",
+      "D. lekas"
+    ],
+    "answer": "LAMBAT",
+    "image": null,
+    "explanation": "Cepat berarti tidak memerlukan waktu lama, sedangkan lambat berarti tidak cepat."
+  },
+  {
+    "question": "Kata yang berantonim dengan hemat adalah ....",
+    "options": [
+      "A. teliti",
+      "B. sabar",
+      "C. rajin",
+      "D. boros"
+    ],
+    "answer": "BOROS",
+    "image": null,
+    "explanation": "Hemat berarti menggunakan sesuatu secara bijaksana, sedangkan boros berarti menggunakan sesuatu secara berlebihan."
+  },
+  {
+    "question": "Antonim kata pemberani adalah ....",
+    "options": [
+      "A. penakut",
+      "B. periang",
+      "C. pemaaf",
+      "D. penyabar"
+    ],
+    "answer": "PENAKUT",
+    "image": null,
+    "explanation": "Pemberani dan penakut memiliki makna yang berlawanan."
+  },
+  {
+    "question": "Antonim kata pendiam adalah ....",
+    "options": [
+      "A. apik",
+      "B. cerewet",
+      "C. penyendiri",
+      "D. pemalu"
+    ],
+    "answer": "CEREWET",
+    "image": null,
+    "explanation": "Pendiam berarti tidak banyak berbicara, sedangkan cerewet berarti banyak berbicara."
+  },
+  {
+    "question": "Antonim kata optimistis adalah ....",
+    "options": [
+      "A. dinamis",
+      "B. kreatif",
+      "C. pesimistis",
+      "D. komunikatif"
+    ],
+    "answer": "PESIMISTIS",
+    "image": null,
+    "explanation": "Optimistis berarti memiliki harapan baik, sedangkan pesimistis berarti cenderung memiliki pandangan buruk."
+  },
+  {
+    "question": "Pasangan kata yang menunjukkan hubungan antonim adalah ....",
+    "options": [
+      "A. pintar – pandai",
+      "B. lucu – jenaka",
+      "C. ramah – sopan",
+      "D. jujur – bohong"
+    ],
+    "answer": "JUJUR BOHONG",
+    "image": null,
+    "explanation": "Jujur berarti berkata sesuai kenyataan, sedangkan bohong berarti berkata tidak sesuai kenyataan."
+  },
+  {
+    "question": "Antonim kata pemaaf adalah ....",
+    "options": [
+      "A. pendendam",
+      "B. penyabar",
+      "C. periang",
+      "D. ramah"
+    ],
+    "answer": "PENDENDAM",
+    "image": null,
+    "explanation": "Pemaaf berarti mudah memaafkan, sedangkan pendendam berarti menyimpan rasa dendam."
+  },
+  {
+    "question": "Seseorang yang mudah marah sebaiknya belajar menjadi lebih ....",
+    "options": [
+      "A. penggerutu",
+      "B. penyabar",
+      "C. pembohong",
+      "D. angkuh"
+    ],
+    "answer": "PENYABAR",
+    "image": null,
+    "explanation": "Penyabar merupakan sifat yang berlawanan dengan pemarah dan patut dikembangkan."
+  },
+  {
+    "question": "Kalimat majemuk setara adalah kalimat yang ....",
+    "options": [
+      "A. hanya memiliki satu kata kerja",
+      "B. selalu menggunakan tanda tanya",
+      "C. terdiri atas gabungan beberapa kalimat tunggal yang berkedudukan setara",
+      "D. tidak menggunakan kata penghubung"
+    ],
+    "answer": "TERDIRI ATAS GABUNGAN BEBERAPA KALIMAT TUNGGAL YANG BERKEDUDUKAN SETARA",
+    "image": null,
+    "explanation": "Kalimat majemuk setara merupakan gabungan beberapa kalimat tunggal yang memiliki kedudukan setara."
+  },
+  {
+    "question": "Kata penghubung yang digunakan untuk menyatakan hubungan sejalan adalah ....",
+    "options": [
+      "A. dan",
+      "B. tetapi",
+      "C. karena",
+      "D. sehingga"
+    ],
+    "answer": "DAN",
+    "image": null,
+    "explanation": "Kata dan digunakan untuk menghubungkan informasi yang sejalan atau menyatakan penjumlahan."
+  },
+  {
+    "question": "Kata penghubung yang menunjukkan hubungan berlawanan adalah ....",
+    "options": [
+      "A. dan",
+      "B. atau",
+      "C. karena",
+      "D. tetapi"
+    ],
+    "answer": "TETAPI",
+    "image": null,
+    "explanation": "Tetapi digunakan untuk menghubungkan dua informasi yang memiliki pertentangan."
+  },
+  {
+    "question": "Kata penghubung yang dapat menyatakan hubungan sebab-akibat adalah ....",
+    "options": [
+      "A. dan",
+      "B. karena",
+      "C. atau",
+      "D. namun"
+    ],
+    "answer": "KARENA",
+    "image": null,
+    "explanation": "Karena dan sehingga dapat digunakan untuk menunjukkan hubungan sebab-akibat."
+  },
+  {
+    "question": "Perhatikan kalimat: Rano adalah anak yang baik. Wuri adalah anak yang baik. Gabungan kedua kalimat yang tepat adalah ....",
+    "options": [
+      "A. Rano adalah anak yang baik karena Wuri.",
+      "B. Rano adalah anak yang baik tetapi Wuri.",
+      "C. Rano dan Wuri adalah anak yang baik.",
+      "D. Rano atau Wuri adalah anak yang baik."
+    ],
+    "answer": "RANO DAN WURI ADALAH ANAK YANG BAIK",
+    "image": null,
+    "explanation": "Kedua kalimat memiliki informasi sejalan sehingga digabungkan menggunakan kata dan."
+  },
+  {
+    "question": "“Rani pandai berhitung, tetapi kurang pandai melukis.” Hubungan yang ditunjukkan kata tetapi adalah ....",
+    "options": [
+      "A. sebab-akibat",
+      "B. berlawanan",
+      "C. penjumlahan",
+      "D. pilihan"
+    ],
+    "answer": "BERLAWANAN",
+    "image": null,
+    "explanation": "Kata tetapi menunjukkan pertentangan antara kemampuan Rani dalam berhitung dan melukis."
+  },
+  {
+    "question": "Kalimat yang menunjukkan hubungan sebab-akibat adalah ....",
+    "options": [
+      "A. Sinta rajin belajar sehingga memperoleh nilai baik.",
+      "B. Sinta membeli pensil dan penghapus.",
+      "C. Sinta ingin membaca atau menggambar.",
+      "D. Sinta pandai berhitung tetapi kurang pandai melukis."
+    ],
+    "answer": "SINTA RAJIN BELAJAR SEHINGGA MEMPEROLEH NILAI BAIK",
+    "image": null,
+    "explanation": "Kerajinan belajar merupakan sebab, sedangkan memperoleh nilai baik merupakan akibat."
+  },
+  {
+    "question": "“Rano mengenal jenis makanan dengan mencecapnya, sedangkan Wuri mengenal jenis makanan dengan melihatnya.” Hubungan yang ditunjukkan kata sedangkan adalah ....",
+    "options": [
+      "A. penjumlahan",
+      "B. sebab-akibat",
+      "C. tujuan",
+      "D. berlawanan"
+    ],
+    "answer": "BERLAWANAN",
+    "image": null,
+    "explanation": "Kata sedangkan menunjukkan perbedaan cara Rano dan Wuri mengenal jenis makanan."
+  },
+  {
+    "question": "Gabungan kalimat “Radi menyukai sepak bola” dan “Radi menyukai bulu tangkis” adalah ....",
+    "options": [
+      "A. Radi menyukai sepak bola karena bulu tangkis.",
+      "B. Radi menyukai sepak bola dan bulu tangkis.",
+      "C. Radi menyukai sepak bola tetapi bulu tangkis.",
+      "D. Radi menyukai sepak bola sehingga bulu tangkis."
+    ],
+    "answer": "RADI MENYUKAI SEPAK BOLA DAN BULU TANGKIS",
+    "image": null,
+    "explanation": "Kedua kalimat menyatakan kesukaan yang sejalan sehingga menggunakan kata dan."
+  },
+  {
+    "question": "“Aimin sudah berusaha sungguh-sungguh, namun ia belum menjadi juara kelas.” Kata namun menunjukkan hubungan ....",
+    "options": [
+      "A. penjumlahan",
+      "B. pilihan",
+      "C. sebab-akibat",
+      "D. berlawanan"
+    ],
+    "answer": "BERLAWANAN",
+    "image": null,
+    "explanation": "Kata namun menunjukkan pertentangan antara usaha yang telah dilakukan dan hasil yang diperoleh."
+  },
+  {
+    "question": "Kata penghubung yang tepat: “Darmin _____ Darman adalah anak Pak Salim.”",
+    "options": [
+      "A. dan",
+      "B. tetapi",
+      "C. karena",
+      "D. sehingga"
+    ],
+    "answer": "DAN",
+    "image": null,
+    "explanation": "Kata dan menghubungkan dua nama orang sebagai subjek dalam kalimat."
+  },
+  {
+    "question": "“Kalian boleh memilih bermain monopoli _____ bermain halma.” Kata penghubung yang tepat adalah ....",
+    "options": [
+      "A. karena",
+      "B. tetapi",
+      "C. atau",
+      "D. sehingga"
+    ],
+    "answer": "ATAU",
+    "image": null,
+    "explanation": "Kata atau digunakan untuk menyatakan pilihan di antara dua kegiatan."
+  },
+  {
+    "question": "“Banyak orang tidak menyukainya karena ia seorang pembual” menunjukkan hubungan ....",
+    "options": [
+      "A. pilihan",
+      "B. penjumlahan",
+      "C. pertentangan",
+      "D. sebab-akibat"
+    ],
+    "answer": "SEBAB-AKIBAT",
+    "image": null,
+    "explanation": "Sifat pembual menjadi penyebab banyak orang tidak menyukainya."
+  },
+  {
+    "question": "Kalimat yang menggunakan kata penghubung sehingga secara tepat adalah ....",
+    "options": [
+      "A. Dini membawa buku sehingga pensil.",
+      "B. Dini tidur hingga larut malam sehingga bangun kesiangan.",
+      "C. Dini ingin membaca sehingga menggambar.",
+      "D. Dini rajin tetapi sehingga pandai."
+    ],
+    "answer": "DINI TIDUR HINGGA LARUT MALAM SEHINGGA BANGUN KESIANGAN",
+    "image": null,
+    "explanation": "Tidur hingga larut malam menjadi sebab Dini bangun kesiangan."
+  },
+  {
+    "question": "Edo anak yang pendiam. Edi anak yang supel. Gabungan kalimat yang tepat adalah ....",
+    "options": [
+      "A. Edo anak yang pendiam karena Edi anak yang supel.",
+      "B. Edo anak yang pendiam dan Edi karena supel.",
+      "C. Edo anak yang pendiam, sedangkan Edi anak yang supel.",
+      "D. Edo atau Edi anak yang pendiam dan supel."
+    ],
+    "answer": "EDO ANAK YANG PENDIAM SEDANGKAN EDI ANAK YANG SUPEL",
+    "image": null,
+    "explanation": "Kedua kalimat menggambarkan sifat berbeda sehingga kata sedangkan paling tepat digunakan."
+  },
+  {
+    "question": "Rani rajin berlatih. Rani memenangi lomba. Gabungan yang tepat adalah ....",
+    "options": [
+      "A. Rani memenangi lomba karena rajin berlatih.",
+      "B. Rani rajin berlatih tetapi memenangi lomba.",
+      "C. Rani rajin berlatih atau memenangi lomba.",
+      "D. Rani rajin berlatih namun tidak memenangi lomba."
+    ],
+    "answer": "RANI MEMENANGI LOMBA KARENA RAJIN BERLATIH",
+    "image": null,
+    "explanation": "Rajin berlatih menjadi sebab Rani memenangi lomba."
+  },
+  {
+    "question": "Beta berambut panjang. Beta berambut ikal. Gabungan kalimat yang tepat adalah ....",
+    "options": [
+      "A. Beta berambut panjang karena berambut ikal.",
+      "B. Beta berambut panjang dan berambut ikal.",
+      "C. Beta berambut panjang tetapi tidak berambut ikal.",
+      "D. Beta berambut panjang atau berambut ikal."
+    ],
+    "answer": "BETA BERAMBUT PANJANG DAN BERAMBUT IKAL",
+    "image": null,
+    "explanation": "Kedua informasi merupakan ciri fisik Beta yang dapat digabungkan menggunakan kata dan."
+  },
+  {
+    "question": "Yosa sering tidur hingga larut malam. Akibatnya, ia sering bangun kesiangan. Kata penghubung yang tepat adalah ....",
+    "options": [
+      "A. dan",
+      "B. atau",
+      "C. tetapi",
+      "D. sehingga"
+    ],
+    "answer": "SEHINGGA",
+    "image": null,
+    "explanation": "Kata sehingga menghubungkan kebiasaan tidur larut malam dengan akibat bangun kesiangan."
+  },
+  {
+    "question": "Tujuan penulisan teks deskripsi adalah ....",
+    "options": [
+      "A. memberikan petunjuk melakukan kegiatan",
+      "B. menceritakan peristiwa secara berurutan",
+      "C. menggambarkan objek secara jelas",
+      "D. menyampaikan percakapan antartokoh"
+    ],
+    "answer": "MEMBERIKAN PETUNJUK MELAKUKAN KEGIATAN",
+    "image": null,
+    "explanation": "Teks deskripsi bertujuan menggambarkan orang, benda, atau tempat agar pembaca memperoleh gambaran yang jelas."
+  },
+  {
+    "question": "Informasi yang dapat digunakan untuk menulis deskripsi tentang sahabat adalah ....",
+    "options": [
+      "A. harga barang dan tempat pembelian",
+      "B. nama, usia, ciri fisik, sifat, dan kegiatan bersama",
+      "C. jumlah halaman dan ukuran buku",
+      "D. jadwal perjalanan dan biaya transportasi"
+    ],
+    "answer": "NAMA USIA CIRI FISIK SIFAT DAN KEGIATAN BERSAMA",
+    "image": null,
+    "explanation": "Informasi tersebut membantu penulis menggambarkan sahabat secara lengkap."
+  },
+  {
+    "question": "Berdasarkan informasi tentang Lila dalam bacaan, usia Lila adalah ....",
+    "options": [
+      "A. 9 tahun",
+      "B. 10 tahun",
+      "C. 12 tahun",
+      "D. 11 tahun"
+    ],
+    "answer": "11 TAHUN",
+    "image": null,
+    "explanation": "Pada tabel informasi tentang Lila, usianya tercantum 11 tahun."
+  },
+  {
+    "question": "Ciri fisik Lila berdasarkan informasi dalam bacaan adalah ....",
+    "options": [
+      "A. rambut pendek, wajah oval, dan lesung pipit kanan",
+      "B. rambut ikal, wajah lonjong, dan lesung pipit kiri",
+      "C. rambut lurus, wajah bundar, dan lesung pipit kanan",
+      "D. rambut panjang, wajah bundar, dan lesung pipit kiri"
+    ],
+    "answer": "RAMBUT PANJANG WAJAH BUNDAR DAN LESUNG PIPIT KIRI",
+    "image": null,
+    "explanation": "Informasi dalam bacaan menyebutkan rambut panjang, muka bundar, dan lesung pipit di sebelah kiri."
+  },
+  {
+    "question": "Dua sifat Lila yang disebutkan dalam bacaan adalah ....",
+    "options": [
+      "A. periang dan kreatif",
+      "B. pendiam dan pemarah",
+      "C. angkuh dan sederhana",
+      "D. pemalu dan pendendam"
+    ],
+    "answer": "PERIANG DAN KREATIF",
+    "image": null,
+    "explanation": "Lila digambarkan sebagai anak yang periang dan kreatif."
+  },
+  {
+    "question": "Tina dan Lila biasanya berangkat ke sekolah bersama karena ....",
+    "options": [
+      "A. mereka mengikuti kegiatan olahraga",
+      "B. rumah mereka bertetangga",
+      "C. mereka memiliki kendaraan yang sama",
+      "D. mereka selalu berangkat bersama guru"
+    ],
+    "answer": "RUMAH MEREKA BERTETANGGA",
+    "image": null,
+    "explanation": "Dalam bacaan dijelaskan bahwa rumah Tina dan Lila bertetangga sehingga mereka berangkat ke sekolah bersama."
+  },
+  {
+    "question": "Kegiatan yang dilakukan Tina dan Lila saat jam istirahat adalah ....",
+    "options": [
+      "A. bermain di taman",
+      "B. membaca di perpustakaan",
+      "C. mengerjakan pekerjaan rumah",
+      "D. jajan di kantin"
+    ],
+    "answer": "JAJAN DI KANTIN",
+    "image": null,
+    "explanation": "Dalam contoh tulisan Tina disebutkan bahwa mereka biasa jajan di kantin saat istirahat."
+  },
+  {
+    "question": "Kegiatan Tina dan Lila pada akhir pekan adalah ....",
+    "options": [
+      "A. mengikuti upacara sekolah",
+      "B. membersihkan ruang kelas",
+      "C. membuat prakarya atau pergi ke taman bermain",
+      "D. mengikuti ujian bersama"
+    ],
+    "answer": "MEMBUAT PRAKARYA ATAU PERGI KE TAMAN BERMAIN",
+    "image": null,
+    "explanation": "Pada akhir pekan mereka biasanya membuat prakarya atau pergi ke taman bermain."
+  },
+  {
+    "question": "Kalimat yang menggambarkan ciri fisik seseorang adalah ....",
+    "options": [
+      "A. Rina mempunyai rambut panjang dan wajah bundar.",
+      "B. Rina senang membantu teman yang kesulitan.",
+      "C. Rina bercita-cita menjadi seorang guru.",
+      "D. Rina selalu mengerjakan tugas tepat waktu."
+    ],
+    "answer": "RINA MEMPUNYAI RAMBUT PANJANG DAN WAJAH BUNDAR",
+    "image": null,
+    "explanation": "Rambut panjang dan wajah bundar merupakan ciri fisik seseorang."
+  },
+  {
+    "question": "Kalimat yang menggambarkan sifat seseorang adalah ....",
+    "options": [
+      "A. Rambut Sinta panjang dan hitam.",
+      "B. Sinta selalu ceria dan senang membantu teman.",
+      "C. Wajah Sinta berbentuk bundar.",
+      "D. Sinta memiliki lesung pipit di pipinya."
+    ],
+    "answer": "SINTA SELALU CERIA DAN SENANG MEMBANTU TEMAN",
+    "image": null,
+    "explanation": "Ceria dan senang membantu merupakan sifat atau karakter seseorang."
+  },
+  {
+    "question": "Perhatikan informasi: Nama Lila; usia 11 tahun; sifat periang dan kreatif. Kalimat yang sesuai adalah ....",
+    "options": [
+      "A. Lila berusia 12 tahun dan memiliki sifat pemarah.",
+      "B. Lila berusia 10 tahun dan memiliki sifat pendiam.",
+      "C. Lila berusia 11 tahun dan memiliki sifat angkuh.",
+      "D. Lila berusia 11 tahun dan memiliki sifat periang serta kreatif."
+    ],
+    "answer": "LILA BERUSIA 11 TAHUN DAN MEMILIKI SIFAT PERIANG SERTA KREATIF",
+    "image": null,
+    "explanation": "Kalimat D sesuai dengan nama, usia, dan sifat Lila berdasarkan informasi yang diberikan."
+  },
+  {
+    "question": "Kalimat yang tidak sesuai dengan informasi tentang Lila adalah ....",
+    "options": [
+      "A. Lila berusia 11 tahun.",
+      "B. Lila memiliki sifat periang dan kreatif.",
+      "C. Lila berambut pendek dan berwajah lonjong.",
+      "D. Lila mempunyai lesung pipit di sebelah kiri."
+    ],
+    "answer": "LILA BERAMBUT PENDEK DAN BERWAJAH LONJONG",
+    "image": null,
+    "explanation": "Lila memiliki rambut panjang dan wajah bundar, bukan rambut pendek dan wajah lonjong."
+  },
+  {
+    "question": "Tina ingin menambahkan informasi tentang kegiatan bersama sahabatnya. Kalimat yang paling sesuai adalah ....",
+    "options": [
+      "A. Kami sering mengerjakan PR bersama setelah pulang sekolah.",
+      "B. Lila mempunyai rambut panjang dan wajah bundar.",
+      "C. Usia Lila adalah 11 tahun.",
+      "D. Lila memiliki sifat kreatif dan periang."
+    ],
+    "answer": "KAMI SERING MENGERJAKAN PR BERSAMA SETELAH PULANG SEKOLAH",
+    "image": null,
+    "explanation": "Kalimat tersebut menggambarkan kegiatan yang dilakukan Tina dan Lila bersama."
+  },
+  {
+    "question": "Paragraf tentang Lila berisi identitas, usia, rambut panjang, wajah bundar, serta sifat periang dan kreatif. Informasi utama paragraf tersebut adalah ....",
+    "options": [
+      "A. pengalaman perjalanan Lila",
+      "B. identitas, ciri fisik, dan sifat Lila",
+      "C. kegiatan olahraga Lila",
+      "D. cita-cita Lila"
+    ],
+    "answer": "IDENTITAS CIRI FISIK DAN SIFAT LILA",
+    "image": null,
+    "explanation": "Paragraf tersebut berisi informasi tentang identitas, ciri fisik, dan sifat Lila."
+  },
+  {
+    "question": "Teks deskripsi tentang sahabat sebaiknya disusun berdasarkan ....",
+    "options": [
+      "A. cerita yang tidak berkaitan dengan sahabat",
+      "B. pendapat yang belum diketahui kebenarannya",
+      "C. informasi yang sengaja dibuat berbeda dari kenyataan",
+      "D. informasi yang sesuai dengan keadaan sebenarnya"
+    ],
+    "answer": "INFORMASI YANG SESUAI DENGAN KEADAAN SEBENARNYA",
+    "image": null,
+    "explanation": "Deskripsi yang baik menggunakan informasi yang benar dan sesuai dengan objek yang digambarkan."
+  },
+  {
+    "question": "Lila senang membuat origami. Lila senang membuat kerajinan dari kertas. Gabungan informasi yang tepat adalah ....",
+    "options": [
+      "A. Lila senang membuat origami tetapi kerajinan kertas.",
+      "B. Lila senang membuat origami karena kerajinan kertas.",
+      "C. Lila senang membuat origami dan kerajinan dari kertas.",
+      "D. Lila senang membuat origami atau kerajinan yang tidak disukainya."
+    ],
+    "answer": "LILA SENANG MEMBUAT ORIGAMI DAN KERAJINAN DARI KERTAS",
+    "image": null,
+    "explanation": "Kedua kalimat memiliki informasi yang sejalan sehingga dapat digabungkan menggunakan kata dan."
+  },
+  {
+    "question": "Tina ingin membuat deskripsi sahabatnya lebih menarik. Hal yang sebaiknya dilakukan adalah ....",
+    "options": [
+      "A. menambahkan informasi tentang ciri fisik, sifat, dan kebiasaan sahabat",
+      "B. menghilangkan seluruh informasi tentang sahabat",
+      "C. mengganti nama sahabat dengan nama orang lain",
+      "D. menambahkan kalimat yang tidak berhubungan dengan topik"
+    ],
+    "answer": "MENAMBAHKAN INFORMASI TENTANG CIRI FISIK SIFAT DAN KEBIASAAN SAHABAT",
+    "image": null,
+    "explanation": "Informasi yang relevan dan terperinci membantu pembaca membayangkan sosok yang dideskripsikan."
+  },
+  {
+    "question": "Urutan rancangan penulisan yang tepat: 1. memperkenalkan nama sahabat; 2. menjelaskan usia dan ciri fisik; 3. menggambarkan sifat; 4. menceritakan kegiatan bersama adalah ....",
+    "options": [
+      "A. 4 – 2 – 1 – 3",
+      "B. 1 – 2 – 3 – 4",
+      "C. 3 – 1 – 2 – 4",
+      "D. 2 – 3 – 4 – 1"
+    ],
+    "answer": "1 2 3 4",
+    "image": null,
+    "explanation": "Penulisan dimulai dengan memperkenalkan sahabat, dilanjutkan identitas dan ciri fisik, sifat, kemudian kegiatan bersama."
+  },
+  {
+    "question": "Seorang siswa sudah memiliki informasi nama, usia, sifat, ciri fisik, dan kegiatan bersama sahabat. Langkah yang tepat sebelum menulis adalah ....",
+    "options": [
+      "A. menghapus seluruh informasi yang dikumpulkan",
+      "B. menulis kalimat secara acak tanpa memperhatikan isi",
+      "C. mengganti informasi dengan cerita yang tidak sesuai",
+      "D. mengelompokkan informasi berdasarkan bagian tulisan"
+    ],
+    "answer": "MENGELOMPOKKAN INFORMASI BERDASARKAN BAGIAN TULISAN",
+    "image": null,
+    "explanation": "Pengelompokan informasi membantu penulis menyusun teks deskripsi secara runtut dan sistematis."
+  },
+  {
+    "question": "Paragraf menggambarkan Lila berusia 11 tahun, berambut panjang, berwajah bundar, periang, kreatif, dan sering bersama penulis. Judul yang paling tepat adalah ....",
+    "options": [
+      "A. Kegiatan di Sekolah",
+      "B. Pengalaman Liburan",
+      "C. Sahabat Baikku",
+      "D. Cara Membuat Origami"
+    ],
+    "answer": "SAHABAT BAIKKU",
+    "image": null,
+    "explanation": "Paragraf tersebut menggambarkan identitas, ciri fisik, sifat, dan kegiatan bersama seorang sahabat."
+  }
+
+]
+
+
+/* =========================================================
+   VARIABLES
+   ========================================================= */
+
+let currentQuestion = null;
+let score = 0;
+let mistakes = 0;
+let answerSlots = [];
+let usedLetters = [];
+let hearts = 3;
+let usedQuestions = [];
+let currentQuestionIndex = 0;
+let completedQuestions = new Set();
+let answerChecking = false;
+
+
+/* =========================================================
+   DATA SDK
+   ========================================================= */
+
+const dataHandler = {
+
+  onDataChanged(data) {
+
+    allGameScores = data || [];
+
+    updateHighscoreDisplay();
+
+  }
+
+};
+
+
+async function initializeDataSDK() {
+
+  if (window.dataSdk) {
+
+    const result =
+      await window.dataSdk.init(
+        dataHandler
+      );
+
+    if (!result.isOk) {
+
+      console.error(
+        "Failed to initialize Data SDK"
+      );
+
+    }
+
+  }
+
+}
+
+
+async function saveScore(finalScore) {
+
+  if (!window.dataSdk) return;
+
+  const result =
+    await window.dataSdk.create({
+
+      game_id:
+        'quiz_' + Date.now(),
+
+      score:
+        finalScore,
+
+      date:
+        new Date().toISOString()
+
+    });
+
+  if (!result.isOk) {
+
+    console.error(
+      "Failed to save score"
+    );
+
+  }
+
+}
+
+
+function updateHighscoreDisplay() {
+
+  const bestScore =
+    allGameScores.length > 0
+      ? Math.max(
+          ...allGameScores.map(
+            s => s.score || 0
+          )
+        )
+      : 0;
+
+  const display =
+    document.getElementById(
+      'best-score-display'
+    );
+
+  if (display) {
+
+    display.textContent =
+      bestScore > 0
+        ? bestScore
+        : '-';
+
+  }
+
+}
+
+
+/* =========================================================
+   SCREEN
+   ========================================================= */
+
+function showScreen(screenId) {
+
+  document.getElementById(
+    'start-screen'
+  ).classList.add('hidden');
+
+  document.getElementById(
+    'game-screen'
+  ).classList.add('hidden');
+
+  document.getElementById(
+    'result-screen'
+  ).classList.add('hidden');
+
+  document.getElementById(
+    'end-screen'
+  ).classList.add('hidden');
+
+  document.getElementById(
+    screenId
+  ).classList.remove('hidden');
+
+}
+
+
+/* =========================================================
+   PENGACAKAN SOAL
+   Ambil 25 soal unik dari seluruh bank soal.
+   Fisher-Yates memastikan setiap soal terpilih maksimal sekali
+   dalam satu sesi permainan.
+   ========================================================= */
+
+const QUESTIONS_PER_GAME = 25;
+
+function getQuestionsInOrder() {
+
+  const shuffled = [...questionBank];
+
+  for (let i = shuffled.length - 1; i > 0; i--) {
+
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+
+  }
+
+  // Jika bank soal berisi setidaknya 25 soal, hasil selalu tepat 25 soal unik.
+  // Jika jumlah bank kurang dari 25, tampilkan semua soal unik yang tersedia.
+  return shuffled.slice(0, Math.min(QUESTIONS_PER_GAME, shuffled.length));
+
+}
+
+
+/* =========================================================
+   START GAME
+   ========================================================= */
+
+function startGame() {
+
+  score = 0;
+  mistakes = 0;
+  hearts = 3;
+  currentQuestionIndex = 0;
+
+  completedQuestions =
+    new Set();
+
+  answerChecking = false;
+
+  updateScore();
+  updateMistakes();
+
+  usedQuestions =
+    getQuestionsInOrder();
+
+  if (usedQuestions.length < QUESTIONS_PER_GAME) {
+    console.warn(
+      `Bank soal hanya memiliki ${usedQuestions.length} soal unik. Tambahkan soal ke bank agar kuis dapat menampilkan 25 soal tanpa pengulangan.`
+    );
+  }
+
+  currentQuestion =
+    usedQuestions[0];
+
+  showScreen(
+    'game-screen'
+  );
+
+  setupQuestion();
+
+  updateQuestionSelector();
+
+}
+
+
+/* =========================================================
+   RESTART
+   ========================================================= */
+
+function restartGame() {
+
+  startGame();
+
+}
+
+
+/* =========================================================
+   QUESTION SELECTOR
+   ========================================================= */
+
+function toggleQuestionSelector() {
+
+  const modal =
+    document.getElementById(
+      'question-selector-modal'
+    );
+
+  modal.classList.toggle(
+    'hidden'
+  );
+
+}
+
+
+function updateQuestionSelector() {
+
+  const list =
+    document.getElementById(
+      'question-selector-list'
+    );
+
+  list.innerHTML = '';
+
+  usedQuestions.forEach(
+    (q, index) => {
+
+      const btn =
+        document.createElement(
+          'button'
+        );
+
+      btn.className =
+        'w-12 h-12 rounded-lg font-bold text-sm transition-all transform hover:scale-110';
+
+      if (index < currentQuestionIndex) {
+
+        // Soal yang sudah pernah ditampilkan tidak dapat dibuka kembali.
+        btn.disabled = true;
+        btn.className +=
+          ' bg-gray-400 text-white opacity-60 cursor-not-allowed';
+        btn.textContent = '✓';
+
+      }
+
+      else if (
+        completedQuestions.has(
+          index
+        )
+      ) {
+
+        btn.className +=
+          ' bg-gradient-to-br from-green-400 to-green-600 text-white shadow-lg';
+
+        btn.textContent =
+          '✓';
+
+      }
+
+      else if (
+        index === currentQuestionIndex
+      ) {
+
+        btn.className +=
+          ' bg-gradient-to-br from-blue-600 to-cyan-600 text-white shadow-lg ring-2 ring-white';
+
+        btn.textContent =
+          index + 1;
+
+      }
+
+      else {
+
+        btn.className +=
+          ' bg-gray-200 hover:bg-gray-300 text-gray-700 shadow';
+
+        btn.textContent =
+          index + 1;
+
+      }
+
+      btn.onclick =
+        () =>
+          selectQuestion(
+            index
+          );
+
+      list.appendChild(
+        btn
+      );
+
+    }
+  );
+
+}
+
+
+function selectQuestion(index) {
+
+  if (
+    index < currentQuestionIndex ||
+    index >= usedQuestions.length
+  ) {
+
+    return;
+
+  }
+
+  currentQuestionIndex =
+    index;
+
+  currentQuestion =
+    usedQuestions[index];
+
+  answerChecking = false;
+
+  document.getElementById(
+    'retry-overlay'
+  ).classList.add(
+    'hidden'
+  );
+
+  setupQuestion();
+
+  updateQuestionSelector();
+
+  document.getElementById(
+    'question-selector-modal'
+  ).classList.add(
+    'hidden'
+  );
+
+}
+
+
+/* =========================================================
+   SETUP QUESTION
+   ========================================================= */
+
+function setupQuestion() {
+
+  answerChecking = false;
+
+  const questionText =
+    document.getElementById(
+      'question-text'
+    );
+
+  questionText.innerHTML =
+    currentQuestion.question
+      .replace(
+        /\n/g,
+        "<br>"
+      );
+
+  document.getElementById(
+    'question-number'
+  ).textContent =
+    `Soal ${currentQuestionIndex + 1}/${usedQuestions.length}`;
+
+
+  /* IMAGE */
+
+  const imageContainer =
+    document.getElementById(
+      'question-image-container'
+    );
+
+  imageContainer.innerHTML =
+    '';
+
+
+  if (
+    currentQuestion.image
+  ) {
+
+    const img =
+      document.createElement(
+        'img'
+      );
+
+    img.className =
+      'question-image';
+
+    img.src =
+      currentQuestion.image;
+
+    img.alt =
+      'Gambar pendukung soal';
+
+    img.loading =
+      'lazy';
+
+    img.onerror =
+      function() {
+
+        this.style.display =
+          'none';
+
+      };
+
+    imageContainer.appendChild(
+      img
+    );
+
+  }
+
+
+  /* EXTRA TEXT */
+
+  if (
+    currentQuestion.extraText
+  ) {
+
+    const extra =
+      document.createElement(
+        'div'
+      );
+
+    extra.className =
+      'question-extra';
+
+    extra.innerHTML =
+      currentQuestion.extraText
+        .replace(
+          /\n/g,
+          '<br>'
+        );
+
+    imageContainer.appendChild(
+      extra
+    );
+
+  }
+
+
+  /* OPTIONS */
+
+  const optionsContainer =
+    document.getElementById(
+      'question-options'
+    );
+
+  optionsContainer.innerHTML =
+    '';
+
+  currentQuestion.options.forEach(
+    option => {
+
+      const optionDiv =
+        document.createElement(
+          'div'
+        );
+
+      optionDiv.className =
+        'option-line';
+
+      optionDiv.textContent =
+        option;
+
+      optionsContainer.appendChild(
+        optionDiv
+      );
+
+    }
+  );
+
+
+  /* ANSWER */
+
+  answerSlots = [];
+  usedLetters = [];
+
+  const slotsContainer =
+    document.getElementById(
+      'answer-slots'
+    );
+
+  slotsContainer.innerHTML =
+    '';
+
+  const answer =
+    currentQuestion.answer
+      .toUpperCase()
+      .trim();
+
+  const words =
+    answer.split(/\s+/);
+
+
+  words.forEach(
+    (word, wordIndex) => {
+
+      const wordContainer =
+        document.createElement(
+          'div'
+        );
+
+      wordContainer.className =
+        'word-group';
+
+
+      for (
+        let i = 0;
+        i < word.length;
+        i++
+      ) {
+
+        const slot =
+          document.createElement(
+            'div'
+          );
+
+        slot.className =
+          'slot-box w-6 h-8 md:w-8 md:h-10 bg-gray-100 border-2 border-blue-300 rounded-md flex items-center justify-center text-base md:text-lg font-bold text-blue-700 cursor-pointer hover:border-blue-500 transition-all';
+
+        slot.dataset.index =
+          answerSlots.length;
+
+        slot.dataset.expectedLetter =
+          word[i];
+
+        slot.onclick =
+          () =>
+            removeLetterFromSlot(
+              parseInt(
+                slot.dataset.index
+              )
+            );
+
+
+        answerSlots.push({
+
+          element:
+            slot,
+
+          letter:
+            null,
+
+          expected:
+            word[i]
+
+        });
+
+
+        wordContainer.appendChild(
+          slot
+        );
+
+      }
+
+
+      slotsContainer.appendChild(
+        wordContainer
+      );
+
+
+      if (
+        wordIndex <
+        words.length - 1
+      ) {
+
+        const spacer =
+          document.createElement(
+            'div'
+          );
+
+        spacer.className =
+          'word-space';
+
+        slotsContainer.appendChild(
+          spacer
+        );
+
+      }
+
+    }
+  );
+
+
+  /* LETTER / NUMBER / SYMBOL BUTTONS */
+
+  const buttonsContainer =
+    document.getElementById(
+      'letter-buttons'
+    );
+
+  buttonsContainer.innerHTML =
+    '';
+
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-'
+      .split('');
+
+
+  characters.forEach(
+    char => {
+
+      const btn =
+        document.createElement(
+          'button'
+        );
+
+      btn.className =
+        'letter-btn w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-blue-500 to-cyan-500 text-white text-sm md:text-base font-bold rounded-lg shadow-lg hover:shadow-xl';
+
+      btn.textContent =
+        char;
+
+      btn.dataset.letter =
+        char;
+
+      btn.dataset.usedCount =
+        '0';
+
+      btn.onclick =
+        () =>
+          selectLetter(btn);
+
+      buttonsContainer.appendChild(
+        btn
+      );
+
+    }
+  );
+
+
+  document.getElementById(
+    'feedback'
+  ).innerHTML =
+    '';
+
+}
+
+
+/* =========================================================
+   SELECT LETTER
+   ========================================================= */
+
+function selectLetter(btn) {
+
+  if (
+    answerChecking
+  ) {
+
+    return;
+
+  }
+
+  const letter =
+    btn.dataset.letter
+      .toUpperCase();
+
+
+  const letterExistsInAnswer =
+    answerSlots.some(
+      slot =>
+        slot.expected
+          .toUpperCase() ===
+        letter
+    );
+
+
+  if (
+    !letterExistsInAnswer
+  ) {
+
+    mistakes++;
+
+    score =
+      Math.max(
+        0,
+        score - 1
+      );
+
+
+    if (
+      mistakes % 3 === 0
+    ) {
+
+      hearts--;
+
+    }
+
+
+    updateScore();
+    updateMistakes();
+
+
+    showFeedback(
+      '❌ Huruf/tanda salah! -1 poin',
+      'error'
+    );
+
+
+    btn.classList.add(
+      'animate-shake'
+    );
+
+
+    setTimeout(
+      () =>
+        btn.classList.remove(
+          'animate-shake'
+        ),
+      500
+    );
+
+
+    if (
+      hearts <= 0
+    ) {
+
+      setTimeout(
+        () =>
+          endGame(
+            'mistakes'
+          ),
+        1000
+      );
+
+    }
+
+    return;
+
+  }
+
+
+  const targetSlotIndex =
+    answerSlots.findIndex(
+      slot =>
+        slot.expected
+          .toUpperCase() ===
+        letter &&
+        slot.letter === null
+    );
+
+
+  if (
+    targetSlotIndex === -1
+  ) {
+
+    return;
+
+  }
+
+
+  const slot =
+    answerSlots[
+      targetSlotIndex
+    ];
+
+  slot.letter =
+    letter;
+
+  slot.element.textContent =
+    letter;
+
+  slot.element.classList.add(
+    'slot-filled',
+    'animate-pop'
+  );
+
+
+  btn.classList.add(
+    'animate-bounce-custom'
+  );
+
+
+  setTimeout(
+    () =>
+      btn.classList.remove(
+        'animate-bounce-custom'
+      ),
+    500
+  );
+
+
+  btn.dataset.usedCount =
+    (
+      parseInt(
+        btn.dataset.usedCount
+      ) + 1
+    ).toString();
+
+
+  usedLetters.push({
+
+    btn:
+      btn,
+
+    slotIndex:
+      targetSlotIndex,
+
+    letter:
+      letter
+
+  });
+
+
+  updateButtonAppearance(
+    btn,
+    letter
+  );
+
+
+  const allFilled =
+    answerSlots.every(
+      s =>
+        s.letter !== null
+    );
+
+
+  if (
+    allFilled
+  ) {
+
+    answerChecking =
+      true;
+
+    setTimeout(
+      () =>
+        checkAnswer(),
+      500
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   BUTTON APPEARANCE
+   ========================================================= */
+
+function updateButtonAppearance(
+  btn,
+  letter
+) {
+
+  const normalizedLetter =
+    letter.toUpperCase();
+
+
+  const totalNeeded =
+    answerSlots.filter(
+      slot =>
+        slot.expected
+          .toUpperCase() ===
+        normalizedLetter
+    ).length;
+
+
+  const totalFilled =
+    answerSlots.filter(
+      slot =>
+        slot.expected
+          .toUpperCase() ===
+          normalizedLetter &&
+        slot.letter
+          ?.toUpperCase() ===
+          normalizedLetter
+    ).length;
+
+
+  if (
+    totalFilled >=
+    totalNeeded
+  ) {
+
+    btn.className =
+      'letter-btn w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-gray-400 to-gray-500 text-white text-sm md:text-base font-bold rounded-lg shadow-lg opacity-50 cursor-not-allowed';
+
+    btn.disabled =
+      true;
+
+  }
+
+  else {
+
+    btn.className =
+      'letter-btn w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-blue-500 to-cyan-500 text-white text-sm md:text-base font-bold rounded-lg shadow-lg hover:shadow-xl';
+
+    btn.disabled =
+      false;
+
+  }
+
+}
+
+
+function updateAllButtonAppearances() {
+
+  const buttonsContainer =
+    document.getElementById(
+      'letter-buttons'
+    );
+
+  const buttons =
+    buttonsContainer.querySelectorAll(
+      'button'
+    );
+
+
+  buttons.forEach(
+    btn => {
+
+      updateButtonAppearance(
+        btn,
+        btn.dataset.letter
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   REMOVE LETTER
+   ========================================================= */
+
+function removeLetterFromSlot(
+  slotIndex
+) {
+
+  const slot =
+    answerSlots[
+      slotIndex
+    ];
+
+
+  if (
+    !slot ||
+    !slot.letter
+  ) {
+
+    return;
+
+  }
+
+
+  const letter =
+    slot.letter;
+
+
+  const usedIndex =
+    usedLetters.findIndex(
+      u =>
+        u.slotIndex ===
+        slotIndex
+    );
+
+
+  if (
+    usedIndex !== -1
+  ) {
+
+    const used =
+      usedLetters[
+        usedIndex
+      ];
+
+    const currentCount =
+      parseInt(
+        used.btn.dataset.usedCount
+      );
+
+
+    used.btn.dataset.usedCount =
+      Math.max(
+        0,
+        currentCount - 1
+      ).toString();
+
+
+    usedLetters.splice(
+      usedIndex,
+      1
+    );
+
+  }
+
+
+  slot.letter =
+    null;
+
+  slot.element.textContent =
+    '';
+
+  slot.element.classList.remove(
+    'slot-filled',
+    'animate-pop'
+  );
+
+
+  answerChecking =
+    false;
+
+
+  showFeedback(
+    '↩️ Huruf dihapus',
+    'error'
+  );
+
+
+  updateAllButtonAppearances();
+
+}
+
+
+/* =========================================================
+   NORMALIZE ANSWER
+   ========================================================= */
+
+function normalizeAnswer(
+  text
+) {
+
+  return text
+    .toUpperCase()
+    .replace(
+      /\s+/g,
+      ' '
+    )
+    .trim();
+
+}
+
+
+/* =========================================================
+   CHECK ANSWER
+   ========================================================= */
+
+function checkAnswer() {
+
+  if (
+    !answerSlots.length
+  ) {
+
+    return;
+
+  }
+
+
+  const userAnswer =
+    answerSlots
+      .map(
+        s =>
+          s.letter || ''
+      )
+      .join('');
+
+
+  const expectedWords =
+    normalizeAnswer(
+      currentQuestion.answer
+    ).split(' ');
+
+  let position =
+    0;
+
+
+  const userWords =
+    expectedWords.map(
+      word => {
+
+        const part =
+          userAnswer.substring(
+            position,
+            position + word.length
+          );
+
+        position +=
+          word.length;
+
+        return part;
+
+      }
+    );
+
+
+  const normalizedUserAnswer =
+    normalizeAnswer(
+      userWords.join(' ')
+    );
+
+
+  const correctAnswer =
+    normalizeAnswer(
+      currentQuestion.answer
+    );
+
+
+  if (
+    normalizedUserAnswer ===
+    correctAnswer
+  ) {
+
+    score += 10;
+
+    completedQuestions.add(
+      currentQuestionIndex
+    );
+
+    updateScore();
+
+
+    showFeedback(
+      '🎉 Benar! +10 poin',
+      'success'
+    );
+
+
+    answerSlots.forEach(
+      (slot, i) => {
+
+        setTimeout(
+          () => {
+
+            slot.element.classList.add(
+              'animate-celebrate'
+            );
+
+          },
+          i * 50
+        );
+
+      }
+    );
+
+
+    updateQuestionSelector();
+
+
+    setTimeout(
+      () => {
+
+        saveScore(score);
+
+        showResultScreen();
+
+      },
+      1500
+    );
+
+  }
+
+  else {
+
+    answerChecking =
+      false;
+
+    showRetryOverlay();
+
+  }
+
+}
+
+
+/* =========================================================
+   RETRY
+   ========================================================= */
+
+function showRetryOverlay() {
+
+  const overlay =
+    document.getElementById(
+      'retry-overlay'
+    );
+
+  overlay.classList.remove(
+    'hidden'
+  );
+
+
+  showFeedback(
+    '😅 Jawaban belum tepat!',
+    'error'
+  );
+
+}
+
+
+function closeRetryOverlay() {
+
+  const overlay =
+    document.getElementById(
+      'retry-overlay'
+    );
+
+  overlay.classList.add(
+    'hidden'
+  );
+
+
+  answerChecking =
+    false;
+
+
+  answerSlots.forEach(
+    slot => {
+
+      slot.letter =
+        null;
+
+      slot.element.textContent =
+        '';
+
+      slot.element.classList.remove(
+        'slot-filled',
+        'animate-pop',
+        'animate-celebrate'
+      );
+
+    }
+  );
+
+
+  usedLetters = [];
+
+
+  const buttons =
+    document
+      .getElementById(
+        'letter-buttons'
+      )
+      .querySelectorAll(
+        'button'
+      );
+
+
+  buttons.forEach(
+    btn => {
+
+      btn.dataset.usedCount =
+        '0';
+
+    }
+  );
+
+
+  updateAllButtonAppearances();
+
+
+  document.getElementById(
+    'feedback'
+  ).innerHTML =
+    '';
+
+}
+
+
+/* =========================================================
+   RESULT
+   ========================================================= */
+
+function showResultScreen() {
+
+  document.getElementById(
+    'result-score'
+  ).textContent =
+    '+10';
+
+
+  document.getElementById(
+    'result-total-score'
+  ).textContent =
+    score;
+
+
+  const correctAnswerDisplay =
+    document.getElementById(
+      'correct-answer-display'
+    );
+
+
+  const correctAnswerText =
+    document.getElementById(
+      'correct-answer-text'
+    );
+
+
+  correctAnswerText.textContent =
+    currentQuestion.answer;
+
+
+  correctAnswerDisplay.classList.remove(
+    'hidden'
+  );
+
+
+  const nextButton =
+    document.getElementById(
+      'result-next-btn'
+    );
+
+
+  if (
+    currentQuestionIndex >=
+    usedQuestions.length - 1
+  ) {
+
+    nextButton.textContent =
+      '🏆 Lihat Hasil Akhir';
+
+  }
+
+  else {
+
+    nextButton.textContent =
+      '🚀 Soal Berikutnya';
+
+  }
+
+
+  showScreen(
+    'result-screen'
+  );
+
+
+  createResultConfetti();
+
+}
+
+
+/* =========================================================
+   RESULT CONFETTI
+   ========================================================= */
+
+function createResultConfetti() {
+
+  const container =
+    document.getElementById(
+      'result-confetti-container'
+    );
+
+
+  container.innerHTML =
+    '';
+
+
+  const emojis = [
+    '🎉',
+    '⭐',
+    '✨',
+    '🎊',
+    '🌟',
+    '👏',
+    '💫'
+  ];
+
+
+  const colors = [
+    '#0284c7',
+    '#06b6d4',
+    '#14b8a6',
+    '#10b981',
+    '#3b82f6'
+  ];
+
+
+  for (
+    let i = 0;
+    i < 20;
+    i++
+  ) {
+
+    const piece =
+      document.createElement(
+        'div'
+      );
+
+
+    piece.className =
+      'confetti-result';
+
+
+    piece.style.left =
+      Math.random() * 100 + '%';
+
+
+    piece.style.top =
+      '-10px';
+
+
+    piece.style.fontSize =
+      Math.random() > 0.5
+        ? '1.5rem'
+        : '1rem';
+
+
+    piece.style.animationDelay =
+      Math.random() * 0.3 + 's';
+
+
+    if (
+      Math.random() > 0.3
+    ) {
+
+      piece.textContent =
+        emojis[
+          Math.floor(
+            Math.random() *
+            emojis.length
+          )
+        ];
+
+    }
+
+    else {
+
+      piece.style.width =
+        '8px';
+
+      piece.style.height =
+        '8px';
+
+      piece.style.borderRadius =
+        Math.random() > 0.5
+          ? '50%'
+          : '0';
+
+      piece.style.backgroundColor =
+        colors[
+          Math.floor(
+            Math.random() *
+            colors.length
+          )
+        ];
+
+    }
+
+
+    container.appendChild(
+      piece
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   NEXT QUESTION
+   ========================================================= */
+
+function nextQuestion() {
+
+  currentQuestionIndex++;
+
+
+  if (
+    currentQuestionIndex <
+    usedQuestions.length
+  ) {
+
+    currentQuestion =
+      usedQuestions[
+        currentQuestionIndex
+      ];
+
+
+    document.getElementById(
+      'correct-answer-display'
+    ).classList.add(
+      'hidden'
+    );
+
+
+    showScreen(
+      'game-screen'
+    );
+
+
+    setupQuestion();
+
+    updateQuestionSelector();
+
+  }
+
+  else {
+
+    endGame(
+      'complete'
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   FEEDBACK
+   ========================================================= */
+
+function showFeedback(
+  message,
+  type
+) {
+
+  const feedback =
+    document.getElementById(
+      'feedback'
+    );
+
+
+  const colorClass =
+    type === 'success'
+      ? 'text-green-600 bg-green-100'
+      : 'text-red-600 bg-red-100';
+
+
+  feedback.innerHTML = `
+    <div class="px-4 py-2 rounded-xl ${colorClass} font-bold animate-pop">
+      ${message}
+    </div>
+  `;
+
+}
+
+
+/* =========================================================
+   SCORE
+   ========================================================= */
+
+function updateScore() {
+
+  document.getElementById(
+    'score'
+  ).textContent =
+    score;
+
+}
+
+
+/* =========================================================
+   HEARTS
+   ========================================================= */
+
+function updateMistakes() {
+
+  const heartsContainer =
+    document.getElementById(
+      'mistake-hearts'
+    );
+
+
+  const heartsDisplay = [];
+
+
+  for (
+    let i = 0;
+    i < 3;
+    i++
+  ) {
+
+    let emoji =
+      '❤️';
+
+
+    const heartStartMistake =
+      (2 - i) * 3 + 1;
+
+    const heartEndMistake =
+      (2 - i + 1) * 3;
+
+
+    if (
+      mistakes >=
+        heartStartMistake &&
+      mistakes <=
+        heartEndMistake
+    ) {
+
+      const mistakesInThisHeart =
+        mistakes -
+        heartStartMistake +
+        1;
+
+
+      if (
+        mistakesInThisHeart === 1
+      ) {
+
+        emoji =
+          '🧡';
+
+      }
+
+      else if (
+        mistakesInThisHeart === 2
+      ) {
+
+        emoji =
+          '💛';
+
+      }
+
+      else if (
+        mistakesInThisHeart === 3
+      ) {
+
+        emoji =
+          '💚';
+
+      }
+
+    }
+
+    else if (
+      mistakes >
+      heartEndMistake
+    ) {
+
+      emoji =
+        '🖤';
+
+    }
+
+
+    heartsDisplay.push(
+      emoji
+    );
+
+  }
+
+
+  heartsContainer.innerHTML =
+    heartsDisplay
+      .map(
+        h =>
+          `<span class="text-lg">${h}</span>`
+      )
+      .join('');
+
+}
+
+
+/* =========================================================
+   END GAME
+   ========================================================= */
+
+function endGame(
+  reason
+) {
+
+  const endEmoji =
+    document.getElementById(
+      'end-emoji'
+    );
+
+
+  const endTitle =
+    document.getElementById(
+      'end-title'
+    );
+
+
+  const endMessage =
+    document.getElementById(
+      'end-message'
+    );
+
+
+  const finalScore =
+    document.getElementById(
+      'final-score'
+    );
+
+
+  const endCorrectAnswerDisplay =
+    document.getElementById(
+      'end-correct-answer-display'
+    );
+
+
+  const endCorrectAnswerText =
+    document.getElementById(
+      'end-correct-answer-text'
+    );
+
+
+  finalScore.textContent =
+    score;
+
+
+  endCorrectAnswerDisplay.classList.add(
+    'hidden'
+  );
+
+
+  if (
+    completedQuestions.size > 0
+  ) {
+
+    let lastCorrectQuestion =
+      null;
+
+
+    for (
+      let i =
+        currentQuestionIndex - 1;
+      i >= 0;
+      i--
+    ) {
+
+      if (
+        completedQuestions.has(i)
+      ) {
+
+        lastCorrectQuestion =
+          usedQuestions[i];
+
+        break;
+
+      }
+
+    }
+
+
+    if (
+      !lastCorrectQuestion
+    ) {
+
+      const completedIndexes =
+        [...completedQuestions];
+
+      const lastIndex =
+        completedIndexes[
+          completedIndexes.length - 1
+        ];
+
+
+      if (
+        lastIndex !== undefined
+      ) {
+
+        lastCorrectQuestion =
+          usedQuestions[
+            lastIndex
+          ];
+
+      }
+
+    }
+
+
+    if (
+      lastCorrectQuestion
+    ) {
+
+      endCorrectAnswerText.textContent =
+        lastCorrectQuestion.answer;
+
+      endCorrectAnswerDisplay.classList.remove(
+        'hidden'
+      );
+
+    }
+
+  }
+
+
+  if (
+    reason === 'complete' &&
+    score >= usedQuestions.length * 10
+  ) {
+
+    endEmoji.textContent =
+      '🏆';
+
+    endTitle.textContent =
+      'Sempurna!';
+
+    endMessage.textContent =
+      `Luar biasa! Kamu berhasil menyelesaikan seluruh ${usedQuestions.length} soal dengan sangat baik!`;
+
+    createConfetti();
+
+  }
+
+  else if (
+    reason === 'complete'
+  ) {
+
+    endEmoji.textContent =
+      '🎉';
+
+    endTitle.textContent =
+      'Kuis Selesai!';
+
+    endMessage.textContent =
+      `Hebat! Kamu sudah menyelesaikan seluruh ${usedQuestions.length} soal. Terus berlatih agar semakin jago!`;
+
+    createConfetti();
+
+  }
+
+  else if (
+    reason === 'mistakes'
+  ) {
+
+    endEmoji.textContent =
+      '😢';
+
+    endTitle.textContent =
+      'Game Over!';
+
+    endMessage.textContent =
+      'Terlalu banyak kesalahan. Ayo coba lagi dan susun jawaban dengan lebih teliti!';
+
+  }
+
+  else if (
+    score >= 100
+  ) {
+
+    endEmoji.textContent =
+      '🎯';
+
+    endTitle.textContent =
+      'Bagus!';
+
+    endMessage.textContent =
+      'Usaha yang sangat baik! Terus berlatih!';
+
+  }
+
+  else {
+
+    endEmoji.textContent =
+      '💪';
+
+    endTitle.textContent =
+      'Jangan Menyerah!';
+
+    endMessage.textContent =
+      'Terus berlatih untuk hasil yang lebih baik!';
+
+  }
+
+
+  showScreen(
+    'end-screen'
+  );
+
+}
+
+
+/* =========================================================
+   CONFETTI
+   ========================================================= */
+
+function createConfetti() {
+
+  const container =
+    document.getElementById(
+      'confetti-container'
+    );
+
+
+  container.innerHTML =
+    '';
+
+
+  const colors = [
+    '#0284c7',
+    '#06b6d4',
+    '#14b8a6',
+    '#10b981',
+    '#3b82f6'
+  ];
+
+
+  for (
+    let i = 0;
+    i < 30;
+    i++
+  ) {
+
+    const piece =
+      document.createElement(
+        'div'
+      );
+
+
+    piece.className =
+      'confetti-piece';
+
+
+    piece.style.left =
+      Math.random() * 100 + '%';
+
+
+    piece.style.top =
+      Math.random() * 50 + '%';
+
+
+    piece.style.backgroundColor =
+      colors[
+        Math.floor(
+          Math.random() *
+          colors.length
+        )
+      ];
+
+
+    piece.style.animationDelay =
+      Math.random() * 0.5 + 's';
+
+
+    piece.style.borderRadius =
+      Math.random() > 0.5
+        ? '50%'
+        : '0';
+
+
+    container.appendChild(
+      piece
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   CONFIG
+   ========================================================= */
+
+function applyConfig(
+  cfg
+) {
+
+  document.getElementById(
+    'game-title'
+  ).textContent =
+    cfg.game_title ||
+    defaultConfig.game_title;
+
+
+  document.getElementById(
+    'start-btn'
+  ).textContent =
+    cfg.start_button_text ||
+    defaultConfig.start_button_text;
+
+}
+
+
+if (
+  window.elementSdk
+) {
+
+  window.elementSdk.init({
+
+    defaultConfig,
+
+    onConfigChange:
+      async (
+        cfg
+      ) => {
+
+        config = {
+          ...defaultConfig,
+          ...cfg
+        };
+
+        applyConfig(
+          config
+        );
+
+      },
+
+
+    mapToCapabilities:
+      (
+        cfg
+      ) => ({
+
+        recolorables: [],
+
+        borderables: [],
+
+        fontEditable:
+          undefined,
+
+        fontSizeable:
+          undefined
+
+      }),
+
+
+    mapToEditPanelValues:
+      (
+        cfg
+      ) =>
+        new Map([
+
+          [
+            "game_title",
+            cfg.game_title ||
+            defaultConfig.game_title
+          ],
+
+          [
+            "start_button_text",
+            cfg.start_button_text ||
+            defaultConfig.start_button_text
+          ]
+
+        ])
+
+  });
+
+}
+
+
+applyConfig(
+  config
+);
+
+initializeDataSDK();
+
+</script>
+
+</body>
+</html>

@@ -298,11 +298,18 @@ function renderQuestion(){
  $("questionText").textContent=q.question;
  $("progressBar").style.width=(current/SESSION_QUESTIONS.length*100)+"%";
  const list=$("optionList");list.innerHTML="";
- q.options.forEach((option,index)=>{
+ // Acak urutan pilihan pada setiap soal, tetapi simpan huruf asal agar kunci tetap akurat.
+ const shuffledOptions=q.options.map((option,originalIndex)=>({option,originalLetter:"ABCD"[originalIndex]}));
+ for(let i=shuffledOptions.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [shuffledOptions[i],shuffledOptions[j]]=[shuffledOptions[j],shuffledOptions[i]];
+ }
+ shuffledOptions.forEach((item,index)=>{
   const b=document.createElement("button");b.type="button";b.className="option";
+  b.dataset.originalLetter=item.originalLetter;
   const letter=document.createElement("span");letter.className="option-letter";letter.textContent="ABCD"[index];
-  const text=document.createElement("span");text.textContent=option;b.append(letter,text);
-  b.addEventListener("click",()=>{if(locked)return;selected="ABCD"[index];list.querySelectorAll(".option").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");$("checkBtn").disabled=false;$("checkBtn").textContent="PERIKSA JAWABAN";});
+  const text=document.createElement("span");text.textContent=item.option;b.append(letter,text);
+  b.addEventListener("click",()=>{if(locked)return;selected=item.originalLetter;list.querySelectorAll(".option").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");$("checkBtn").disabled=false;$("checkBtn").textContent="PERIKSA JAWABAN";});
   list.appendChild(b);
  });
  $("checkBtn").disabled=true;$("checkBtn").textContent="PILIH JAWABAN";
@@ -313,7 +320,7 @@ function checkCurrent(){
  const q=SESSION_QUESTIONS[current];locked=true;answers[current]=selected;
  const unscored=q.correct===null;
  const correct=!unscored&&selected===q.correct;if(correct)currentCorrect++;
- $("optionList").querySelectorAll(".option").forEach((el,i)=>{el.disabled=true;if(!unscored&&"ABCD"[i]===q.correct)el.classList.add("selected");});
+ $("optionList").querySelectorAll(".option").forEach(el=>{el.disabled=true;if(!unscored&&el.dataset.originalLetter===q.correct)el.classList.add("selected");});
  $("feedbackBox").className="modal-box"+(!correct&&!unscored?" bad":"");
  $("feedbackIcon").textContent=unscored?"i":(correct?"✓":"✕");
  $("feedbackTitle").textContent=unscored?"Soal Tidak Dinilai":(correct?"Jawaban Tepat!":"Belum Tepat");

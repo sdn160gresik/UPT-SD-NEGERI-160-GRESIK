@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#087e8b">
+<title>Aku yang Unik | Bahasa Indonesia Kelas 5</title>
+<style>
+:root{
+  --ocean:#075b70;--deep:#063b52;--sea:#0c91a0;--aqua:#bcefe8;
+  --sand:#fff3d4;--sand2:#f7dfaa;--coral:#ef795e;--sun:#ffc857;
+  --ink:#173b4a;--muted:#58727a;--white:#fff;--green:#2d8875;
+  --shadow:0 14px 36px rgba(3,45,61,.19)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);
+ background:linear-gradient(180deg,#9de4df 0,#d8f5e9 36%,#fff0c8 100%);font-size:16px}
+button,a{font:inherit}
+button{cursor:pointer}
+.site-header{position:relative;isolation:isolate;overflow:hidden;text-align:center;color:#fff;padding:25px 16px 32px;
+ background:linear-gradient(135deg,#06445b,#087e8b 58%,#18a5a1);border-bottom:7px solid var(--sun)}
+.site-header:before,.site-header:after{content:"";position:absolute;z-index:-1;border-radius:50%;background:#ffffff12}
+.site-header:before{width:330px;height:330px;left:-95px;top:-180px}
+.site-header:after{width:420px;height:420px;right:-120px;bottom:-300px}
+.sun-disc{position:absolute;right:12%;top:20px;width:68px;height:68px;border-radius:50%;background:var(--sun);box-shadow:0 0 45px #ffd36b88;opacity:.95}
+.brand{font-size:12px;font-weight:850;letter-spacing:.17em;color:#d7fff5;text-transform:uppercase}
+.logo{display:grid;place-items:center;width:68px;height:68px;margin:0 auto 10px;border:3px solid #ffe09a;border-radius:50%;
+ background:linear-gradient(145deg,#ffcb67,#e97754);box-shadow:0 0 0 6px #ffffff20;font-size:35px}
+h1{font-family:Georgia,serif;font-size:clamp(30px,5vw,54px);line-height:1.08;margin:9px 0;color:#fff1c7;text-shadow:0 3px 0 #06465b}
+.site-header p{max-width:760px;margin:8px auto;line-height:1.65;color:#edfffb}
+.back-main{display:inline-flex;align-items:center;gap:8px;margin-top:15px;padding:11px 17px;border-radius:12px;
+ background:linear-gradient(180deg,#ffe29a,#ffbf4d);color:#4c3b19;text-decoration:none;font-weight:850;
+ border:1px solid #fff0bc;box-shadow:0 4px 0 #b77b32;transition:.2s}
+.back-main:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.wave{height:22px;background:radial-gradient(35px 14px at 35px 0,#fff0c8 98%,transparent 100%) 0 0/70px 22px repeat-x}
+.container{width:min(1200px,calc(100% - 32px));margin:25px auto 35px}
+.intro,.lesson-panel{background:var(--sand);border:2px solid #e3bd70;border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+.intro{text-align:center;padding:28px 22px 20px}
+.intro .island-icon{font-size:35px}
+.intro h2{font:700 clamp(24px,4vw,36px) Georgia,serif;color:var(--deep);margin:5px 0 9px}
+.intro p{max-width:780px;margin:0 auto;color:var(--muted);line-height:1.75}
+.chapter-label{display:inline-block;margin:22px 0 9px;padding:7px 14px;border-radius:99px;background:#d9f2e9;color:#086b70;
+ font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.lesson-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:10px 24px 28px}
+.lesson-card{display:flex;align-items:center;gap:14px;text-align:left;min-height:90px;padding:15px 17px;border:1px solid #e3c98f;
+ border-radius:16px;background:linear-gradient(135deg,#fffdf5,#f8e6bd);color:var(--ink);box-shadow:0 4px 12px #19475b10;transition:.2s}
+.lesson-card:hover{transform:translateY(-3px);border-color:#d79a42;box-shadow:0 9px 18px #19475b20}
+.lesson-number{display:grid;place-items:center;flex:0 0 43px;width:43px;height:43px;border-radius:50%;
+ background:linear-gradient(145deg,#ffd979,#f4a94c);color:#65451b;font-weight:950;font-size:18px}
+.lesson-card strong{display:block;font:700 17px Georgia,serif;color:#07576a;line-height:1.35}
+.lesson-card small{display:block;color:#667c7c;margin-top:5px;line-height:1.4}
+.arrow{margin-left:auto;color:#d07842;font-size:25px;font-weight:900}
+.lesson-panel{max-width:1000px;margin:0 auto}
+.progress-wrap{display:flex;align-items:center;gap:13px;color:#07576a;font-size:13px;font-weight:800;margin:0 auto 12px}
+.progress-track{height:9px;flex:1;border-radius:99px;background:#ffffffa8;overflow:hidden}
+.progress-track span{display:block;height:100%;width:0;background:linear-gradient(90deg,#0e9d9c,#ffc857);transition:width .3s}
+.lesson-top{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:19px 25px;
+ color:#fff;background:linear-gradient(100deg,#07566b,#0b8990);border-bottom:5px solid var(--sun)}
+.lesson-top .kicker{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:#c8fff0;font-weight:900}
+.lesson-top .lesson-title{font:700 22px Georgia,serif;margin-top:5px;color:#fff2c9}
+.top-decor{font-size:28px;white-space:nowrap}
+.lesson-content{padding:clamp(22px,4vw,42px);background:linear-gradient(180deg,#fff8e7,#fff3d5)}
+.lesson-content h2{font:700 clamp(25px,3.5vw,37px) Georgia,serif;color:#07576a;line-height:1.2;margin:0 0 19px}
+.lesson-content h3{font:800 20px Georgia,serif;color:#a74d37;margin:25px 0 10px}
+.lesson-content p{font-size:16px;line-height:1.85;margin:0 0 14px;color:#294d57}
+.lesson-content .lead{font-weight:700;color:#07576a}
+.lesson-content .note{padding:15px 18px;border-left:5px solid var(--coral);border-radius:10px;background:#fff;
+ box-shadow:0 3px 10px #17495b0c;margin:13px 0;line-height:1.8}
+.lesson-content .definition{padding:17px 19px;border:1px solid #b8ded4;border-radius:13px;background:#e9f8ef;margin:14px 0;line-height:1.8}
+.lesson-content ul,.lesson-content ol{padding-left:25px;margin:8px 0 18px}
+.lesson-content li{padding-left:4px;margin:8px 0;line-height:1.75}
+.lesson-content table{width:100%;border-collapse:collapse;margin:14px 0 20px;background:#fff;border-radius:11px;overflow:hidden}
+.lesson-content th,.lesson-content td{border:1px solid #d8cba9;padding:11px 13px;text-align:left;vertical-align:top;line-height:1.6}
+.lesson-content th{background:#d8f0e7;color:#07576a;font-weight:850}
+.lesson-content tr:nth-child(even) td{background:#fffaf0}
+.lesson-content .quote{padding:17px 20px;border-radius:13px;background:#fff;border:1px dashed #d9a34c;font-style:italic;line-height:1.85}
+.lesson-content .formula{display:inline-block;padding:8px 15px;border-radius:10px;background:#075b70;color:#fff;font-weight:900;letter-spacing:.06em;margin:4px 0 12px}
+.lesson-actions{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:18px 24px;background:#f7e7bf;border-top:1px solid #e3cf9f}
+.action{border:0;border-radius:11px;padding:12px 17px;background:#08788a;color:#fff;font-weight:850;box-shadow:0 3px 0 #07566b;transition:.18s}
+.action:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.action.gold{background:linear-gradient(180deg,#ffda83,#f2ae43);color:#503a19;box-shadow:0 3px 0 #b77b32}
+.action.coral{background:linear-gradient(180deg,#f28c70,#dc644e);box-shadow:0 3px 0 #a74738}
+.action:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.hidden{display:none!important}
+.site-footer{text-align:center;color:#07566b;padding:18px;font-size:13px;font-weight:700}
+@media(max-width:700px){
+ .container{width:calc(100% - 20px);margin:14px auto 25px}
+ .lesson-grid{grid-template-columns:1fr;padding:8px 14px 20px}
+ .intro{padding:22px 15px 16px}
+ .lesson-top{padding:15px 17px}
+ .lesson-content{padding:20px 17px}
+ .lesson-actions{padding:14px}
+ .action{flex:1 1 42%;font-size:14px}
+ .top-decor{font-size:22px}
+ .sun-disc{right:5%;width:45px;height:45px}
+}
+@media(max-width:420px){
+ .brand{font-size:10px;letter-spacing:.1em}
+ .lesson-card{padding:12px}
+ .lesson-card strong{font-size:15px}
+ .lesson-content p,.lesson-content li{font-size:15px}
+ .lesson-content th,.lesson-content td{padding:8px;font-size:14px}
+}
+@media print{
+ body{background:#fff}.site-header,.intro,.progress-wrap,.lesson-actions,.site-footer{display:none!important}
+ .container{width:100%;margin:0}.lesson-panel{border:0;box-shadow:none}
+ .lesson-content{background:#fff}.lesson-top{print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="sun-disc" aria-hidden="true"></div>
+  <div class="logo" aria-hidden="true">📚</div>
+  <div class="brand">UPT SDN 160 GRESIK · BAHASA INDONESIA KELAS V</div>
+  <h1>AKU YANG UNIK</h1>
+  <p>Kenali keunikan diri, hargai perbedaan, dan pelajari kata sifat, sinonim, antonim, imbuhan pe-, kalimat majemuk setara, serta teks deskripsi.</p>
+  <a class="back-main" href="pulau.html">← Kembali ke Pulau Utama</a>
+</header>
+<div class="wave" aria-hidden="true"></div>
+
+<main class="container">
+  <section class="intro" id="homePage">
+    <div class="island-icon" aria-hidden="true">🏝️ 🐚 🌴</div>
+    <h2>Peta Pembelajaran: Aku yang Unik</h2>
+    <p>Pilih bagian pembelajaran di bawah ini. Pelajari materi, bacaan, contoh, tabel, dan kegiatan secara berurutan.</p>
+    <div id="lessonGrid"></div>
+  </section>
+
+  <div class="progress-wrap hidden" id="progressWrap">
+    <span id="progressCount">Materi 1</span>
+    <div class="progress-track"><span id="progressBar"></span></div>
+    <span id="progressPercent">0%</span>
+  </div>
+
+  <section class="lesson-panel hidden" id="detailPage">
+    <div class="lesson-top">
+      <div>
+        <div class="kicker">✦ Pos Pengetahuan Pulau Bahasa ✦</div>
+        <div class="lesson-title" id="lessonTitle">Materi 1</div>
+      </div>
+      <div class="top-decor" aria-hidden="true">🌊 🐚</div>
+    </div>
+    <article class="lesson-content" id="lessonContent"></article>
+    <div class="lesson-actions">
+      <button class="action" id="backHome" type="button" onclick="backToHome()">← Daftar Materi</button>
+      <button class="action gold" id="nextLesson" type="button" onclick="moveNext()">Materi Berikutnya →</button>
+      <button class="action coral" type="button" onclick="goTraining()">✎ Latihan Soal</button>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">🌟 Aku yang Unik · Mengenal diri, menghargai teman, dan belajar bersama 🌟</footer>
+
+<script>
+"use strict";
+
+const lessons = [{"chapter":"BAB I – AKU YANG UNIK","title":"1. Tujuan Pembelajaran","icon":"📘","blocks":[{"type":"heading","text":"1. Tujuan Pembelajaran"},{"type":"p","text":"Bab ini akan mengajarkan kalian untuk menjadi peserta didik yang percaya diri dalam mengenal karakter unik yang kalian miliki, menghargai karakter unik teman kalian, serta menunjukkan integritas dan berakhlak baik dalam lingkungan belajar dan sosial melalui berbagai kegiatan bersama."},{"type":"p","text":"Unsur kebahasaan yang akan kalian pelajari pada bab ini adalah:"},{"type":"list","items":["Kata sifat.","Sinonim dan antonim.","Makna awalan pe-.","Kalimat majemuk setara.","Penulisan teks deskripsi."]}]},{"chapter":"BAB I – AKU YANG UNIK","title":"2. Kegiatan Pembuka: Memperkenalkan Diri","icon":"📘","blocks":[{"type":"heading","text":"2. Kegiatan Pembuka: Memperkenalkan Diri"},{"type":"p","text":"Ini kali pertama kalian bertemu dengan teman sekelas kalian di kelas lima. Apakah kalian berjumpa dengan teman-teman lama? Apakah ada siswa baru di kelas kalian?"},{"type":"p","text":"Mari bergiliran memperkenalkan diri di depan kelas. Sebutkan:"},{"type":"list","items":["Nama panggilan.","Hobi.","Makanan kesukaan."]}]},{"chapter":"BAB I – AKU YANG UNIK","title":"3. Kreativitas: Membuat Akrostik","icon":"📘","blocks":[{"type":"heading","text":"3. Kreativitas: Membuat Akrostik"},{"type":"p","text":"Kegiatan kreasi kali ini adalah membuat sebuah akrostik."},{"type":"p","text":"Akrostik adalah puisi yang setiap awal barisnya dibentuk dari rangkaian huruf yang memberi makna atau pesan puisi."},{"type":"p","text":"Buatlah akrostik dengan menggunakan nama kalian. Susunlah inisial nama kalian sebagai huruf pemula setiap baris puisi. Kalian dapat menuliskan hal-hal yang berkaitan dengan diri kalian seperti sifat, cita-cita, hobi, atau daerah tempat tinggal."},{"type":"sub","text":"Contoh akrostik: RAFI"},{"type":"table","headers":["Huruf awal","Baris puisi"],"rows":[["R","Ramah dan berani sifatku"],["A","Anganku adalah menjadi tentara saat aku dewasa"],["F","Futsal adalah olahraga favoritku"],["I","Indonesia adalah tanah airku"]]},{"type":"p","text":"Hiaslah puisi buatan kalian semenarik mungkin. Pajanglah di dinding kelas agar seluruh teman dapat membacanya."}]},{"chapter":"BAB I – AKU YANG UNIK","title":"4. Membaca: Rana dan Rani","icon":"📘","blocks":[{"type":"heading","text":"4. Membaca: Rana dan Rani"},{"type":"p","text":"Apakah kalian mempunyai keluarga atau teman yang bersaudara kembar? Apakah rupa mereka sama? Bagaimana cara kalian membedakan mereka? Bacalah teks singkat di bawah ini tentang dua bersaudara Rana dan Rani."},{"type":"sub","text":"Rana dan Rani"},{"type":"p","text":"Rana dan Rani adalah dua bersaudara. Mereka memiliki rupa yang sama. Wajah, mata, dan alis mereka mirip. Mereka berhidung mancung dan berdagu lancip."},{"type":"p","text":"Rana dan Rani adalah kembar identik. Membedakan rupa mereka sangatlah sulit. Kelahiran mereka berjarak tujuh menit. Rana adalah kakak dan Rani adalah adik."},{"type":"p","text":"Rana dan Rani memiliki sifat yang berbeda. Rana pendiam, tetapi Rani periang. Hobi mereka juga tidak sama. Rana suka olahraga senam, sedangkan Rani suka merangkai kembang."},{"type":"p","text":"Rana dan Rani bercita-cita mulia. Mereka ingin mengabdi pada negara tercinta Indonesia. Rana menjadi atlet dan Rani menjadi pengusaha ternama. Belajar rajin dan tekun menjadi ikhtiar mereka."},{"type":"sub","text":"Pertanyaan pemahaman"},{"type":"numbered","items":["Siapakah saudara kembar pada teks di samping?","Apakah yang dimaksud dengan kembar identik?","Berapa lama jarak kelahiran si Kembar?","Jika kalian menjadi teman mereka, bagaimana kalian dapat membedakan keduanya?","Apa sajakah persamaan dan perbedaan pada si Kembar Rana dan Rani? Gunakan Diagram Venn sebagai panduan. Tuliskan persamaan keduanya pada daerah tengah diagram. Tuliskan perbedaan atau ciri khusus masing-masing pada bagian kiri dan kanan diagram."]},{"type":"table","headers":["Rana","Persamaan Rana dan Rani","Rani"],"rows":[["(Ciri khusus Rana)","(Hal-hal yang sama)","(Ciri khusus Rani)"]]}]},{"chapter":"BAB I – AKU YANG UNIK","title":"5. Berbicara, Berdiskusi, dan Mempresentasikan","icon":"📘","blocks":[{"type":"heading","text":"5. Berbicara, Berdiskusi, dan Mempresentasikan"},{"type":"p","text":"Bukalah halaman judul bab ini. Amatilah anak-anak yang menjadi ilustrasi pada halaman tersebut. Diskusikan dengan teman-teman kalian:"},{"type":"list","items":["Apa saja persamaan yang kalian lihat?","Apa saja perbedaan yang kalian lihat?","Bagaimana perasaan kalian melihat perbedaan tersebut?","Tokoh mana yang menurut kalian mirip dengan kalian?","Tokoh mana yang mirip dengan teman kalian?"]},{"type":"p","text":"Perhatikan ketiga ilustrasi anak pada buku. Apa yang dapat kalian deskripsikan tentang mereka? Simaklah penjelasan lebih lanjut dari guru tentang pengenalan diri."}]},{"chapter":"BAB I – AKU YANG UNIK","title":"6. Kata Sifat","icon":"📘","blocks":[{"type":"heading","text":"6. Kata Sifat"},{"type":"p","text":"Kali ini kita akan membahas kata sifat. Selain untuk mendeskripsikan benda, kata sifat biasanya digunakan untuk menggambarkan karakter atau sikap seseorang. Perhatikan kumpulan kata sifat berikut. Mana sajakah kata sifat yang mewakili diri kalian? Tulislah dalam buku kalian."},{"type":"table","headers":["Kumpulan kata sifat pada ilustrasi buku"],"rows":[["ramah • cerdas • jeli • rapi • optimistis • kreatif • mandiri • rajin • komunikatif • jujur • lincah • jenaka • sederhana • cerdik • sopan"]]},{"type":"p","text":"Sekarang, mintalah teman kalian untuk memilih sejumlah kata sifat yang mewakili diri kalian, lalu cocokkan hasilnya. Berapa banyak sifat kalian yang dapat ditebak teman kalian?"},{"type":"table","headers":["Sifatku adalah ….","Menurut temanku, sifatku adalah …."],"rows":[["1. Ramah, karena aku senang berbicara dengan orang lain dan menyapa mereka.","1. Jenaka, karena aku sering terlihat gembira dan suka membuat orang lain tertawa."],["2. …., karena …","2. …., karena …"],["3. …., karena …","3. …., karena …"],["4. …., karena …","4. …., karena …"],["5. …., karena …","5. …., karena …"]]}]},{"chapter":"BAB I – AKU YANG UNIK","title":"7. Menyimak: Menggunakan Kamus","icon":"📘","blocks":[{"type":"heading","text":"7. Menyimak: Menggunakan Kamus"},{"type":"p","text":"Apakah kalian pernah membaca kamus? Informasi apa saja yang kalian temukan di dalamnya? Kamus sering digunakan untuk mencari makna kata dan contoh pemakaian kata pada kalimat. Dalam bentuk buku, kata disusun menurut abjad. Zaman sekarang, kamus juga tersedia secara daring. Kita tinggal mengetik ejaan kata dan dalam sekejap kita dapat menemukan penjelasannya."},{"type":"p","text":"Perhatikan contoh isi kamus berikut. Entri kamus disusun menurut abjad."},{"type":"table","headers":["Kata dalam contoh kamus","Keterangan makna"],"rows":[["abu (Ar)","Bapak; ayah (pada nama orang)."],["abu (v)","Kalah (dalam permainan congklak, gasing)."],["abu-abu (a)","Warna kelabu; warna seperti abu kayu terbakar, terjadi dengan mencampur pigmen hitam dan putih sama banyaknya. Keabu-abuan berarti berwarna agak kelabu atau mendekati warna kelabu."],["abu-abu (m)","Sejenis ikan laut, Neothunnus rarua."],["abuan (n)","Bagian hasil sawah yang disediakan untuk yang mengerjakannya; uang simpanan untuk cadangan."],["acah (v)","Mengacah: melanggar; murid yang mengacah akan dihukum."],["acak (a)","Sembarang; sampel acak. Mengacak berarti melakukan sesuatu tidak dengan aturan atau mengacaukan. Acak-acakan berarti tidak teratur, kacau, tidak cermat, atau serampangan."]]},{"type":"p","text":"Bersama guru dan teman sekelas kalian, pelajarilah isi kamus dan bagaimana menggunakannya untuk mendapatkan informasi."},{"type":"sub","text":"Latihan Kosakata"},{"type":"p","text":"Urutkan kelima belas kata sifat di halaman sebelumnya menurut abjad. Gunakan kamus untuk mencari makna katanya. Kemudian, tulislah kalimat bermakna dengan menggunakan kata tersebut. Kerjakan semuanya dalam buku tulis kalian."},{"type":"p","text":"Contoh untuk tiga kata pertama:"},{"type":"table","headers":["No.","Kata","Makna kata","Kalimat"],"rows":[["1","cerdas","tajam pikiran","Sekolah mendidik anak agar menjadi siswa yang cerdas dan baik budinya."],["2","cerdik","banyak akal","Si Kancil yang cerdik dapat lolos dari terkaman mangsa."],["3","jeli","tajam penglihatan","Mata Rani yang jeli membuatnya dapat segera menemukan buku yang tercecer di jalan."]]},{"type":"sub","text":"Latihan Teka-Teki Silang"},{"type":"p","text":"Isilah teka-teki silang dengan menggunakan kata sifat yang telah dipelajari pada halaman sebelumnya."},{"type":"table","headers":["Mendatar","Menurun"],"rows":[["2. Tidak bohong","1. Memiliki daya cipta"],["5. Baik tutur kata dan sikap","3. Mudah dimengerti"],["7. Dapat mengerjakan sendiri","4. Orang yang selalu memiliki harapan baik"],["9. Baik kelakuannya","6. Selalu berusaha, giat"],["13. Panjang akal, banyak ide","8. Selalu bergerak, tidak bisa diam"],["14. Tidak berlebihan","10. Lucu, kocak"],["15. Teratur dan bersih","11. Tajam pikiran, pintar"],["","12. Awas penglihatan"]]},{"type":"p","text":"Kata yang dicantumkan sebagai petunjuk pada ilustrasi: ramah, rapi, mandiri, jujur, sederhana."}]},{"chapter":"BAB I – AKU YANG UNIK","title":"8. Bahasa: Imbuhan Awalan pe-","icon":"📘","blocks":[{"type":"heading","text":"8. Bahasa: Imbuhan Awalan pe-"},{"type":"p","text":"Imbuhan adalah tambahan pada kata dasar yang diletakkan di awal, tengah, atau akhir kata."},{"type":"p","text":"Imbuhan yang akan dipelajari kali ini adalah imbuhan dalam bentuk awalan pe-. Salah satu makna yang terdapat pada imbuhan pe- adalah menyatakan kata sifat."},{"type":"table","headers":["Pembentukan kata","Contoh kalimat"],"rows":[["pe- + lupa → pelupa","Egi berjanji akan menulis jadwal agar tidak lagi menjadi anak pelupa."],["pe- + maaf → pemaaf","Jangan ragu mengakui perbuatanmu karena ia seorang pemaaf."],["pe- + sabar → penyabar","Ibuku yang penyabar tetap lembut menjawab adikku yang rewel."]]},{"type":"p","text":"Perhatikan bahwa imbuhan pe- akan berubah menjadi pem- atau peny- untuk beberapa kata."},{"type":"sub","text":"Latihan imbuhan pe-"},{"type":"p","text":"Tulislah hasil pembentukan kata setelah mendapat imbuhan pe- dari daftar kata-kata di bawah ini."},{"type":"note","text":"Contoh: diam → pendiam"},{"type":"numbered","items":["bohong → …","riang → …","dendam → …","tolong → …","malas → …"]}]},{"chapter":"BAB I – AKU YANG UNIK","title":"9. Membaca: Darman dan Darmin","icon":"📘","blocks":[{"type":"heading","text":"9. Membaca: Darman dan Darmin"},{"type":"p","text":"Bacalah teks di bawah ini."},{"type":"sub","text":"DARMAN DAN DARMIN"},{"type":"p","text":"Cerita Rakyat dari DKI Jakarta"},{"type":"p","text":"Dahulu kala, di suatu daerah di Jakarta, tinggallah saudagar kaya bernama Pak Salim. Dia terkenal sebagai tuan tanah. Pak Salim mempunyai dua orang anak. Anak pertama bernama Darman dan anak kedua bernama Darmin. Sepeninggal istrinya, Pak Salim merawat kedua anaknya seorang diri."},{"type":"p","text":"Kedua anak Pak Salim memiliki sifat yang sangat berbeda. Dari kecil, Darman senang bermain silat. Untuk memperdalam silatnya, dia tidak segan-segan mencari ilmu ke berbagai perguruan silat. Namun, ilmu yang dimilikinya tidak dimanfaatkan dengan baik. Darman sering terlibat perkelahian dengan anak-anak di sekitar kampungnya."},{"type":"p","text":"Setiap hari, ada saja orang yang mengadu kepada Pak Salim akibat perbuatan Darman. Pak Salim sudah berusaha memasukkan Darman ke sekolah, tetapi dia sering bolos. Akhirnya, Pak Salim membiarkannya memilih jalan hidup sendiri."},{"type":"p","text":"Beda halnya dengan anak kedua Pak Salim, Darmin. Sejak kecil, dia rajin mengikuti pengajian di sekitar kampungnya. Dia juga sering menolong tetangga yang kesusahan. Di sekolah, Darmin dikenal sebagai anak yang pintar. Oleh sebab itu, dia sering diminta ayahnya membantu pembukuan keuangan."},{"type":"p","text":"Selain memiliki dua anak laki-laki, Pak Salim juga mengangkat anak perempuan bernama Amini. Orang tua Amini dan Pak Salim bersaudara. Karena kemiskinannya, orang tua Amini memercayakan pengasuhan anaknya kepada Pak Salim. Mereka ingin anaknya mendapat pendidikan yang baik. Sejak kecil, Amini lebih dekat dengan Darmin karena mereka memiliki sifat yang sama."},{"type":"note","text":"Sumber: http://badanbahasa.kemdikbud.go.id/lamanbahasa/sites/default/files/Cerita%20Darman%20dan%20Darmin.pdf"},{"type":"sub","text":"Pertanyaan dan diskusi"},{"type":"p","text":"Setelah menyimak teks “Darman dan Darmin”, dapatkah kalian menyebutkan sifat dari masing-masing anak? Petunjuk apa yang kalian dapatkan dari teks?"},{"type":"table","headers":["Sifat Darman","Sifat Darmin"],"rows":[["................................................","................................................"]]},{"type":"p","text":"Diskusikan bersama teman-teman sekelas kalian hasil identifikasi sifat-sifat dari tokoh dalam cerita Darman dan Darmin."},{"type":"numbered","items":["Bagaimana pendapat kalian tentang sifat Darman?","Bagaimana pendapat kalian tentang sifat Darmin?","Sifat-sifat manakah yang bisa kalian tiru? Mengapa?","Adakah saran yang dapat kalian berikan kepada Darman dan Darmin?"]}]},{"chapter":"BAB I – AKU YANG UNIK","title":"10. Makna Kata: Sinonim","icon":"📘","blocks":[{"type":"heading","text":"10. Makna Kata: Sinonim"},{"type":"p","text":"Sinonim adalah persamaan makna kata."},{"type":"p","text":"Sinonim dari pintar adalah pandai."},{"type":"p","text":"Sinonim dari rapi adalah apik."},{"type":"sub","text":"Latihan sinonim"},{"type":"p","text":"Pasangkan kata-kata di bawah ini dengan sinonimnya. Lalu tulislah dalam kotak, kata-kata mana yang menggambarkan sifat yang patut ditiru dan mana sifat yang sebaiknya dihindari."},{"type":"table","headers":["Daftar kata","Pilihan sinonim"],"rows":[["1. pembohong","luwes"],["2. alim","giat"],["3. rapi","apik"],["4. nakal","teliti"],["5. cermat","pembual"],["6. supel","badung"],["7. pemarah","sombong"],["8. rajin","soleh"],["9. lucu","jenaka"],["10. angkuh","penggerutu"]]},{"type":"p","text":"Ada sifat yang patut kita tiru. Ada sifat yang sebaiknya kita hindari karena akan berakibat buruk pada kita dan orang lain. Amati daftar kata di atas, lalu tulislah dalam kotak kata-kata mana yang menggambarkan sifat yang patut ditiru dan mana yang menggambarkan sifat yang sebaiknya kita hindari."},{"type":"table","headers":["Sifat yang patut ditiru","Sifat yang sebaiknya dihindari"],"rows":[["________________________","________________________"],["________________________","________________________"],["________________________","________________________"],["________________________","________________________"],["________________________","________________________"]]}]},{"chapter":"BAB I – AKU YANG UNIK","title":"11. Makna Kata: Antonim","icon":"📘","blocks":[{"type":"heading","text":"11. Makna Kata: Antonim"},{"type":"p","text":"Antonim adalah perbedaan makna kata. Kata yang berantonim berarti bermakna berlawanan."},{"type":"p","text":"Antonim mahal adalah murah. Antonim cepat adalah lambat."},{"type":"p","text":"Contoh antonim lainnya:"},{"type":"table","headers":["Kata","Antonim","Kata","Antonim"],"rows":[["gelap","terang","jujur","bohong"],["besar","kecil","mandiri","manja"]]},{"type":"sub","text":"Latihan antonim"},{"type":"p","text":"Pilihlah antonim yang tepat untuk kata-kata bercetak tebal."},{"type":"table","headers":["No.","Kata","Pilihan jawaban"],"rows":[["1","hemat","boros • pelit • sabar"],["2","pemberani","periang • penakut • pemaaf"],["3","pendiam","apik • penyendiri • cerewet"],["4","rajin","giat • malas • humoris"],["5","optimistis","jujur • dinamis • pesimistis"],["6","baik","nakal • jujur • humoris"],["7","ramah","luwes • kaku • sopan"],["8","jujur","apik • pembohong • humoris"],["9","pemaaf","pendendam • periang • penyabar"],["10","pemarah","penggerutu • penyabar • pendiam"]]},{"type":"sub","text":"Latihan melengkapi kalimat"},{"type":"p","text":"Lengkapilah kalimat pada kotak di bawah ini dengan kata-kata yang sesuai."},{"type":"numbered","items":["Anak yang _____ akan dijauhi temannya.","Tika anak yang _____. Kami jarang berbicara. Dia lebih senang menghabiskan waktunya untuk membaca atau melukis.","Ibuku seorang _____. Beliau tidak pernah marah atau dendam dengan kenakalan kami.","Sejak kisahnya menyelamatkan sang adik dari rumahnya yang terbakar api tersebar, Ami selalu dikenal sebagai si anak ________.","Kamu harus giat belajar karena _____ pangkal pandai.","Ayu sering membawa bekal dari rumah dan menyimpan uang jajannya. Ayu anak yang _____.","Anak yang _____ selalu dapat dipercaya dan tidak suka berbuat curang.","Niko adalah anak yang _____. Dia tidak pernah menyakiti perasaan orang lain.","Adikku dikenal karena senyum sapanya yang bersahabat. Ia sangat ______.","Ayo semangat! Kita harus ______ dapat menyelesaikan tugas ini tepat waktu."]}]},{"chapter":"BAB I – AKU YANG UNIK","title":"12. Jurnal Membaca","icon":"📘","blocks":[{"type":"heading","text":"12. Jurnal Membaca"},{"type":"p","text":"Saatnya menulis jurnal. Kali ini, contoh buku pilihannya adalah tentang persahabatan dua orang anak. Mereka mempunyai beberapa perbedaan dan persamaan, tetapi memiliki pertemanan yang indah. Dapatkah kalian menemukan buku bertema persahabatan di perpustakaan sekolah atau koleksi di rumah?"},{"type":"p","text":"Selamat membaca! Setelah itu, tulislah jurnalnya. Berikut ini adalah satu contoh jurnal yang bisa kalian tiru."},{"type":"sub","text":"Jurnal Membaca"},{"type":"table","headers":["Identitas buku","Keterangan"],"rows":[["Judul","Aku Suka Caramu"],["Penulis","Audelia Agustine"],["Ilustrator","Haikal"],["Penerbit","Yayasan Litara"],["Tanggal membaca","14 Oktober 2020"],["Rating","☆☆☆☆"]]},{"type":"sub","text":"Tinjauan Tulisan"},{"type":"p","text":"Buku ini berkisah tentang persahabatan Wuri dan Rano. Rano adalah siswa berkebutuhan khusus. Dia buta, tapi punya banyak kelebihan dan sangat mandiri. Rano hafal jalan, meskipun tidak bisa melihatnya. Rano juga dapat menebak jenis makanan di pesta ulang tahun teman dengan mencecap rasanya. Wuri bersahabat dengan Rano karena Rano sangat cerdas dan menyenangkan. Rano menganggap Wuri sahabatnya karena Wuri baik dan tidak memandang rendah keterbatasan Rano."},{"type":"p","text":"Buku ini menarik karena banyak kisah serunya. Aku belajar banyak dari buku ini. Tentang kemandirian dan persahabatan, kemampuan pancaindra, pengenalan lingkungan sekitar, juga tentang denah dan tata ruang permukiman warga. Ada juga cara menerima dan mengatasi kekurangan fisik yang dijelaskan dengan sederhana dan bermakna."}]},{"chapter":"BAB I – AKU YANG UNIK","title":"13. Kalimat Majemuk Setara","icon":"📘","blocks":[{"type":"heading","text":"13. Kalimat Majemuk Setara"},{"type":"p","text":"Kalimat majemuk setara adalah kalimat yang terdiri atas beberapa kalimat tunggal yang dapat dihubungkan. Tabel di bawah ini menjelaskan jenis hubungan dari kalimat majemuk setara."},{"type":"table","headers":["Jenis hubungan","Pengertian","Kata penghubung","Contoh"],"rows":[["Sejalan","Gabungan kalimat tunggal yang menyatakan penjumlahan karena memiliki situasi yang sama.","dan","Rano adalah anak yang baik. Wuri adalah anak yang baik. → Rano dan Wuri adalah anak yang baik."],["Berlawanan","Gabungan kalimat tunggal yang menyatakan penjumlahan karena memiliki situasi yang sama.","tetapi, namun, sedangkan","Rano mengenal jenis makanan dengan mencecapnya. Wuri mengenal jenis makanan dengan melihatnya. → Rano mengenal jenis makanan dengan mencecapnya, sedangkan Wuri dengan melihatnya."],["Sebab-akibat","Gabungan kalimat tunggal yang menyatakan hubungan sebab dan akibat.","karena, sehingga","Rano adalah anak yang cerdas. Rano dapat menghafal rute jalan dengan cepat. → Rano dapat menghafal rute jalan dengan cepat karena ia adalah anak yang cerdas."]]},{"type":"note","text":"Sumber: https://acuanbahasa.kemdikbud.go.id/book/12/5cb467d936a24 halaman 519–525"},{"type":"sub","text":"Latihan menggabungkan kalimat"},{"type":"p","text":"Gabungkan dua kalimat tunggal di bawah ini menjadi sebuah kalimat majemuk dengan kata penghubung yang sesuai."},{"type":"numbered","items":["Rani rajin berlatih. Rani memenangi lomba.","Edo anak yang pendiam. Edi anak yang supel.","Radi menyukai sepak bola. Radi menyukai bulu tangkis.","Siska pandai berhitung. Siska tidak pandai melukis.","Beta berambut panjang. Beta berambut ikal."]},{"type":"sub","text":"Latihan memilih kata penghubung"},{"type":"p","text":"Lengkapilah kalimat di bawah ini dengan pilihan kata penghubung yang sesuai."},{"type":"p","text":"Pilihan kata: atau • namun • karena • sehingga • dan"},{"type":"numbered","items":["Aimin sudah berusaha sungguh-sungguh ______ ia belum menjadi juara kelas.","Darmin _____ Darman adalah anak Pak Salim.","Kalian boleh memilih hendak bermain monopoli ____ bermain halma.","Banyak orang tidak menyukainya _____ ia seorang pembual.","Yosa sering tidur hingga larut malam _________ ia sering bangun kesiangan."]}]},{"chapter":"BAB I – AKU YANG UNIK","title":"14. Berbicara, Berdiskusi, dan Mempresentasikan: Sahabat","icon":"📘","blocks":[{"type":"heading","text":"14. Berbicara, Berdiskusi, dan Mempresentasikan: Sahabat"},{"type":"p","text":"Diskusikan dan ceritakan jawaban kalian atas pertanyaan berikut."},{"type":"list","items":["Apakah kalian memiliki sahabat?","Mengapa kalian senang bersahabat dengannya?","Apakah persamaan yang kalian miliki?","Apakah perbedaan yang kalian miliki?","Hal apa yang sering kalian lakukan bersama-sama?"]}]},{"chapter":"BAB I – AKU YANG UNIK","title":"15. Menulis Teks Deskripsi tentang Sahabat","icon":"📘","blocks":[{"type":"heading","text":"15. Menulis Teks Deskripsi tentang Sahabat"},{"type":"p","text":"Minggu lalu, Tina mendapat tugas dari guru untuk menuliskan teks singkat tentang sahabat. Teks tersebut berisi informasi singkat tentang seorang sahabat dan juga hal-hal yang dilakukan bersama sahabat. Untuk tugas ini, Tina akan menulis teks tentang Lila, sahabat baiknya."},{"type":"p","text":"Perhatikan informasi tentang Lila pada kolom sebelah kiri. Bacalah informasi tersebut dengan baik. Lalu, isilah titik-titik pada tabel sebelah kanan untuk melengkapi tulisan Tina tentang sahabatnya."},{"type":"table","headers":["Informasi tentang Lila","Keterangan"],"rows":[["Nama","Lila"],["Usia","11 tahun"],["Deskripsi fisik","Rambut panjang, muka bundar, lesung pipit di sebelah kiri"],["Sifat","Periang, kreatif"],["Hal yang dilakukan bersama","Pergi ke sekolah bersama, makan siang di kantin, mengerjakan PR, saat akhir pekan pergi ke taman bermain."]]},{"type":"sub","text":"Contoh tulisan Tina"},{"type":"p","text":"Hai! Aku Tina. Aku mau mengenalkan sahabatku. Namanya (1) ____ dan dia berumur (2) ____. Rambutnya ikal dan (3) ____. Wajahnya (4) ____ dan ia mempunyai lesung pipit di sebelah (5) ____. Lila anak yang (6) ____ dan (7) ____. Tertawanya khas sekali. Ia sangat terampil dalam membuat kreasi dari origami."},{"type":"p","text":"Lila dan aku sudah akrab sejak kami kecil. Lila anak tunggal, sedangkan aku anak bungsu. Kami selalu berangkat ke (8) ____ bersama karena rumah kami bertetangga. Saat jam istirahat kami jajan (9) ____. Saat usai sekolah, aku akan mampir ke rumahnya dan kami mengerjakan PR bersama. Saat akhir pekan kami biasanya membuat prakarya atau (10) ________."},{"type":"sub","text":"Tugas menulis kalian"},{"type":"p","text":"Nah, sekarang giliran kalian! Buatlah tabel seperti di samping di buku tulis. Isilah kolom sebelah kiri dengan informasi mengenai teman baik kalian, lalu tulislah sebuah paragraf di kolom sebelah kanan tentang teman kalian menggunakan informasi yang ada. Kalian dapat menambahkan keterangan lainnya pada paragraf tulisan. Gunakan pilihan kata sifat dan kata penghubung yang tepat untuk memperkaya tulisan."},{"type":"table","headers":["Informasi tentang teman","Isian kalian"],"rows":[["Nama","........................................................"],["Usia","........................................................"],["Deskripsi fisik","........................................................"],["Sifat","........................................................"],["Hal yang dilakukan bersama","........................................................"]]},{"type":"p","text":"Paragraf tentang sahabat:"},{"type":"p","text":"........................................................................................................................................"},{"type":"p","text":"........................................................................................................................................"},{"type":"p","text":"........................................................................................................................................"},{"type":"p","text":"........................................................................................................................................"}]},{"chapter":"BAB I – AKU YANG UNIK","title":"16. Refleksi Pembelajaran","icon":"📘","blocks":[{"type":"heading","text":"16. Refleksi Pembelajaran"},{"type":"p","text":"Kita telah sampai pada akhir pelajaran bab ini. Sekarang, gunakan tabel di bawah ini sebagai panduan untuk merefleksikan pengalaman belajar kalian pada Bab Aku yang Unik."},{"type":"table","headers":["Aku mampu ….","Sudah bisa","Masih perlu belajar"],"rows":[["1. Menggunakan kata sifat untuk mendeskripsikan sesuatu","☐","☐"],["2. Menyebutkan sinonim dan antonim suatu kata","☐","☐"],["3. Memberikan imbuhan pe- pada kata dengan tepat","☐","☐"],["4. Menulis kalimat majemuk setara","☐","☐"],["5. Menulis teks sederhana yang menggunakan kata sifat dan kalimat majemuk setara","☐","☐"]]},{"type":"p","text":"Hal yang paling menyenangkan dari mempelajari bab ini adalah …."},{"type":"p","text":"........................................................................................................................................"},{"type":"p","text":"Bagian yang paling menantang dari bab ini adalah …."},{"type":"p","text":"........................................................................................................................................"}]},{"chapter":"BAB I – AKU YANG UNIK","title":"Catatan penyusunan","icon":"📘","blocks":[{"type":"heading","text":"Catatan penyusunan"},{"type":"p","text":"Materi di atas disusun berdasarkan Bab I “Aku yang Unik” pada buku Bahasa Indonesia: Bergerak Bersama untuk SD Kelas V, halaman buku 1–24. Nomor halaman buku dicantumkan dalam urutan isi; beberapa unsur visual seperti diagram Venn, teka-teki silang, dan tabel isian disajikan ulang sebagai teks/tabel agar mudah diedit di Word."}]}];
+
+let currentLesson = 0;
+
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g, ch => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[ch]));
+}
+function renderBlock(block){
+ const text = escapeHTML(block.text || "");
+ switch(block.type){
+  case "heading": return `<h2>${text}</h2>`;
+  case "sub": return `<h3>${text}</h3>`;
+  case "p": return `<p>${text}</p>`;
+  case "note": return `<div class="note">${text}</div>`;
+  case "definition": return `<div class="definition">${text}</div>`;
+  case "quote": return `<div class="quote">${text}</div>`;
+  case "formula": return `<div class="formula">${text}</div>`;
+  case "list": return `<ul>${block.items.map(item=>`<li>${escapeHTML(item)}</li>`).join("")}</ul>`;
+  case "numbered": return `<ol>${block.items.map(item=>`<li>${escapeHTML(item)}</li>`).join("")}</ol>`;
+  case "table":
+   return `<div style="overflow-x:auto"><table><thead><tr>${block.headers.map(h=>`<th>${escapeHTML(h)}</th>`).join("")}</tr></thead><tbody>${block.rows.map(row=>`<tr>${row.map(cell=>`<td>${escapeHTML(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+  default:return "";
+ }
+}
+function buildHome(){
+ const grid=document.getElementById("lessonGrid");
+ let html="";
+ let previousChapter="";
+ lessons.forEach((lesson,index)=>{
+  if(lesson.chapter!==previousChapter){
+   html+=`<div class="chapter-label">${escapeHTML(lesson.chapter)}</div>`;
+   previousChapter=lesson.chapter;
+  }
+  html+=`<button class="lesson-card" type="button" onclick="openLesson(${index})">
+   <span class="lesson-number">${index+1}</span>
+   <span><strong>${escapeHTML(lesson.title)}</strong><small>${escapeHTML(lesson.chapter)} · Buka materi</small></span>
+   <span class="arrow" aria-hidden="true">›</span>
+  </button>`;
+ });
+ grid.innerHTML=html;
+}
+function openLesson(index){
+ currentLesson=index;
+ document.getElementById("homePage").classList.add("hidden");
+ document.getElementById("detailPage").classList.remove("hidden");
+ document.getElementById("progressWrap").classList.remove("hidden");
+ renderLesson();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function renderLesson(){
+ const lesson=lessons[currentLesson];
+ document.getElementById("lessonTitle").textContent=`Materi ${currentLesson+1} dari ${lessons.length} · ${lesson.title}`;
+ document.getElementById("lessonContent").innerHTML=lesson.blocks.map(renderBlock).join("");
+ document.getElementById("progressCount").textContent=`Materi ${currentLesson+1}/${lessons.length}`;
+ const percent=Math.round(((currentLesson+1)/lessons.length)*100);
+ document.getElementById("progressBar").style.width=percent+"%";
+ document.getElementById("progressPercent").textContent=percent+"%";
+ document.getElementById("nextLesson").textContent=currentLesson===lessons.length-1
+  ?"Kembali ke Peta Materi ✓":"Materi Berikutnya →";
+}
+function backToHome(){
+ document.getElementById("detailPage").classList.add("hidden");
+ document.getElementById("progressWrap").classList.add("hidden");
+ document.getElementById("homePage").classList.remove("hidden");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function moveNext(){
+ if(currentLesson<lessons.length-1) openLesson(currentLesson+1);
+ else backToHome();
+}
+function goTraining(){
+ window.location.href="latihan_soal_aku_yang_unik.html";
+}
+buildHome();
+</script>
+</body>
+</html>

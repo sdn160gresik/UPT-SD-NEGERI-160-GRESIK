@@ -432,6 +432,29 @@
         font-size: 2rem !important;
       }
     }
+  
+    /* IDENTITAS SISWA & DATA NILAI */
+    .identity-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px}
+    .identity-card{width:min(560px,100%);background:rgba(255,255,255,.96);border:1px solid #dbeafe;border-radius:24px;padding:28px;box-shadow:0 20px 60px #063b6b30}
+    .identity-field{text-align:left;margin:13px 0}
+    .identity-field label{display:block;font-weight:900;color:#1e4774;font-size:13px;margin-bottom:7px}
+    .identity-field input{width:100%;height:48px;border:1px solid #cbd5e1;border-radius:12px;padding:0 14px;font:inherit;outline:none}
+    .identity-field input:focus{border-color:#1686c9;box-shadow:0 0 0 3px #1686c922}
+    .identity-btn{width:100%;border:0;border-radius:13px;padding:14px;background:linear-gradient(110deg,#155eaa,#0891b2);color:white;font-weight:900;font-size:15px;cursor:pointer}
+    .identity-error{color:#b42332;font-size:13px;font-weight:800;margin-top:10px;min-height:18px}
+    .identity-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px}
+    .identity-small-btn{border:1px solid #cbd5e1;background:#eff6ff;color:#1e4774;border-radius:10px;padding:9px 13px;font-weight:850;cursor:pointer}
+    .student-chip{background:#e0f2fe;color:#075985;border-radius:999px;padding:6px 11px;font-size:12px;font-weight:900}
+    .scores-overlay{position:fixed;inset:0;background:#07152de8;z-index:100;display:flex;align-items:center;justify-content:center;padding:14px}
+    .scores-panel{background:#fff;border-radius:18px;width:min(1000px,100%);max-height:90vh;overflow:auto;padding:20px}
+    .scores-table-wrap{overflow:auto;margin-top:14px}
+    .scores-table{border-collapse:collapse;width:100%;min-width:760px;font-size:12px}
+    .scores-table th,.scores-table td{padding:10px;border-bottom:1px solid #e2e8f0;text-align:left;white-space:nowrap}
+    .scores-table th{background:#eaf3fc;color:#1e4774}
+    .scores-close{float:right;border:0;background:#e2e8f0;border-radius:9px;padding:8px 12px;font-weight:900;cursor:pointer}
+    .hidden-screen{display:none!important}
+    @media(max-width:600px){.identity-card{padding:21px}.identity-screen{padding:12px}}
+
   </style>
 </head>
 
@@ -439,9 +462,51 @@
 
 <div id="app" class="min-h-full w-full">
 
+  <!-- FORM IDENTITAS SISWA -->
+  <section id="identity-screen" class="identity-screen">
+    <div class="identity-card text-center">
+      <div class="text-5xl mb-3">🎓</div>
+      <div class="text-xs font-black tracking-widest text-cyan-700 mb-2">UPT SDN 160 GRESIK</div>
+      <h1 class="text-2xl md:text-3xl font-black text-blue-900 mb-2">Identitas Siswa</h1>
+      <p class="text-sm text-gray-600 mb-5">Lengkapi data diri sebelum memulai latihan soal.</p>
+      <div class="identity-field">
+        <label for="student-name">Nama Lengkap</label>
+        <input id="student-name" autocomplete="name" maxlength="100" placeholder="Masukkan nama lengkap">
+      </div>
+      <div class="identity-field">
+        <label for="student-class">Kelas</label>
+        <input id="student-class" maxlength="20" placeholder="Contoh: 5A">
+      </div>
+      <div class="identity-field">
+        <label for="student-number">Nomor Absen</label>
+        <input id="student-number" inputmode="numeric" maxlength="5" placeholder="Masukkan nomor absen">
+      </div>
+      <button id="identity-start-btn" class="identity-btn" onclick="submitStudentIdentity()">MULAI LATIHAN SOAL →</button>
+      <div id="identity-error" class="identity-error" role="alert"></div>
+      <div class="identity-actions">
+        <button class="identity-small-btn" onclick="openStudentScores()">▤ Data Nilai Siswa</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="student-scores-overlay" class="scores-overlay hidden-screen" aria-modal="true" role="dialog">
+    <div class="scores-panel">
+      <button class="scores-close" onclick="closeStudentScores()">TUTUP ✕</button>
+      <h2 class="text-xl font-black text-blue-900">Data Nilai Siswa</h2>
+      <p id="scores-status" class="text-sm text-gray-500 mt-2">Memuat data...</p>
+      <div class="scores-table-wrap">
+        <table class="scores-table">
+          <thead><tr><th>No.</th><th>Waktu</th><th>Nama</th><th>Kelas</th><th>Absen</th><th>Jumlah Soal</th><th>Benar</th><th>Salah</th><th>Skor</th><th>Status</th></tr></thead>
+          <tbody id="student-scores-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+
   <!-- ================= START SCREEN ================= -->
 
-  <div id="start-screen"
+  <div id="start-screen" class="hidden"
        class="min-h-full w-full flex flex-col items-center justify-center p-2">
 
     <div class="glass-card rounded-2xl p-5 md:p-8 max-w-sm w-full text-center shadow-2xl animate-slide-up">
@@ -549,6 +614,7 @@
 
       <div class="mt-1 flex justify-center gap-1">
 
+        <div id="student-identity-chip" class="student-chip text-center mb-1">Siswa</div>
         <div id="mistake-hearts"
              class="flex gap-0.5">
 
@@ -829,6 +895,132 @@
 
 
 <script>
+
+
+/* =========================================================
+   IDENTITAS SISWA DAN GOOGLE SHEETS
+   Ganti API_URL dengan URL Web App Apps Script yang berakhir /exec.
+   ========================================================= */
+const API_URL = "https://script.google.com/macros/s/AKfycbyQmlZssdwZUmkvk52MyPiDY9RCAwH6Q6QtZu1v-t-Q3kz3WzckDqEEeuib8hln_3vGDg/exec";
+let currentStudent = null;
+let resultAlreadySaved = false;
+
+function callStudentApi(action, params = {}) {
+  return new Promise((resolve, reject) => {
+    if (!API_URL || API_URL.includes("TEMPEL_URL")) {
+      reject(new Error("URL Web App Google Apps Script belum dipasang pada API_URL."));
+      return;
+    }
+    const callbackName = "studentApi_" + Date.now() + "_" + Math.floor(Math.random()*100000);
+    const script = document.createElement("script");
+    let done = false;
+    const cleanup = () => {
+      if (script.parentNode) script.parentNode.removeChild(script);
+      try { delete window[callbackName]; } catch(e) { window[callbackName] = undefined; }
+    };
+    const timer = setTimeout(() => {
+      if (done) return;
+      done = true; cleanup();
+      reject(new Error("Server tidak merespons. Periksa koneksi dan URL Web App."));
+    }, 25000);
+    window[callbackName] = response => {
+      if (done) return;
+      done = true; clearTimeout(timer); cleanup();
+      if (response && response.ok) resolve(response.data || {});
+      else reject(new Error(response && response.error ? response.error : "Terjadi kesalahan server."));
+    };
+    const query = new URLSearchParams({action, callback:callbackName, _:String(Date.now())});
+    Object.entries(params).forEach(([key,value]) => {
+      query.set(key, typeof value === "string" ? value : JSON.stringify(value));
+    });
+    script.src = API_URL + (API_URL.includes("?") ? "&" : "?") + query.toString();
+    script.onerror = () => {
+      if (done) return;
+      done = true; clearTimeout(timer); cleanup();
+      reject(new Error("Tidak dapat menghubungi Web App. Pastikan akses Web App diatur untuk siapa saja."));
+    };
+    document.head.appendChild(script);
+  });
+}
+
+async function submitStudentIdentity() {
+  const nama = document.getElementById("student-name").value.trim().replace(/\s+/g," ");
+  const kelas = document.getElementById("student-class").value.trim().toUpperCase();
+  const absen = document.getElementById("student-number").value.trim();
+  const error = document.getElementById("identity-error");
+  const button = document.getElementById("identity-start-btn");
+  error.textContent = "";
+  if (!nama || !kelas || !absen) {
+    error.textContent = "Nama lengkap, kelas, dan nomor absen wajib diisi.";
+    return;
+  }
+  if (!/^\d{1,5}$/.test(absen)) {
+    error.textContent = "Nomor absen harus berupa angka.";
+    return;
+  }
+  currentStudent = {nama, kelas, absen};
+  button.disabled = true;
+  button.textContent = "MENYIAPKAN LATIHAN...";
+  document.getElementById("identity-screen").classList.add("hidden-screen");
+  document.getElementById("start-screen").classList.remove("hidden");
+  document.getElementById("student-identity-chip").textContent = `${nama} • ${kelas} • Absen ${absen}`;
+  resultAlreadySaved = false;
+  startGame();
+}
+
+async function saveScore(finalScore, status) {
+  if (!currentStudent || resultAlreadySaved) return;
+  resultAlreadySaved = true;
+  const total = Array.isArray(usedQuestions) ? usedQuestions.length : 0;
+  const benar = Math.max(0, Math.round(Number(finalScore || 0) / 10));
+  const salah = Math.max(0, total - benar);
+  try {
+    await callStudentApi("saveResult", {
+      payload: {
+        student: currentStudent,
+        total,
+        benar,
+        salah,
+        nilai: Number(finalScore || 0),
+        status: status || "Selesai",
+        game: "Latihan Bahasa Indonesia Kelas 5 - Aku yang Unik"
+      }
+    });
+  } catch (err) {
+    resultAlreadySaved = false;
+    console.error("Gagal menyimpan nilai:", err);
+    alert("Latihan selesai, tetapi nilai belum tersimpan. " + err.message);
+  }
+}
+
+async function openStudentScores() {
+  const overlay = document.getElementById("student-scores-overlay");
+  const status = document.getElementById("scores-status");
+  const body = document.getElementById("student-scores-body");
+  overlay.classList.remove("hidden-screen");
+  status.textContent = "Memuat data nilai...";
+  body.innerHTML = "";
+  try {
+    const data = await callStudentApi("getScores");
+    const rows = Array.isArray(data.rows) ? data.rows : [];
+    status.textContent = `${rows.length} data nilai (terbaru ditampilkan lebih dahulu).`;
+    rows.forEach((row, index) => {
+      const tr = document.createElement("tr");
+      [index+1,row.waktu,row.nama,row.kelas,row.absen,row.total,row.benar,row.salah,row.nilai,row.status].forEach(value => {
+        const td = document.createElement("td");
+        td.textContent = value == null ? "" : String(value);
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    });
+    if (!rows.length) status.textContent = "Belum ada nilai yang tersimpan.";
+  } catch (err) {
+    status.textContent = "Data nilai gagal dimuat: " + err.message;
+  }
+}
+function closeStudentScores() {
+  document.getElementById("student-scores-overlay").classList.add("hidden-screen");
+}
 
 const defaultConfig = {
   game_title: "Kuis Bahasa Indonesia Kelas 5",
@@ -2538,33 +2730,7 @@ async function initializeDataSDK() {
 }
 
 
-async function saveScore(finalScore) {
-
-  if (!window.dataSdk) return;
-
-  const result =
-    await window.dataSdk.create({
-
-      game_id:
-        'quiz_' + Date.now(),
-
-      score:
-        finalScore,
-
-      date:
-        new Date().toISOString()
-
-    });
-
-  if (!result.isOk) {
-
-    console.error(
-      "Failed to save score"
-    );
-
-  }
-
-}
+/* saveScore() didefinisikan pada modul identitas siswa di atas. */
 
 
 function updateHighscoreDisplay() {
@@ -3646,8 +3812,6 @@ function checkAnswer() {
     setTimeout(
       () => {
 
-        saveScore(score);
-
         showResultScreen();
 
       },
@@ -4354,6 +4518,8 @@ function endGame(
   showScreen(
     'end-screen'
   );
+
+  saveScore(score, reason === 'complete' ? 'Selesai' : 'Berhenti - Game Over');
 
 }
 

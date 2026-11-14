@@ -342,7 +342,7 @@ async function finishQuiz(){
  loading(true);
  try{
   const scoredAnswers=SESSION_QUESTIONS.map((q,i)=>({q,a:answers[i]})).filter(x=>x.q.correct!==null);
-  const result=await apiCall("submitResult",{student,answers:scoredAnswers.map(x=>x.a).join(""),questionIds:scoredAnswers.map(x=>x.q.id),total:scoredTotal});
+  const result=await apiCall("submitResult",{student,answers:scoredAnswers.map(x=>x.a).join(""),questionIds:scoredAnswers.map(x=>x.q.id),total:scoredTotal,correct:correct,wrong:scoredTotal-correct,score:score});
   $("saveStatus").textContent="✓ Nilai berhasil disimpan. "+(unscored?`${unscored} soal tidak dinilai karena memerlukan gambar/bacaan atau konteks tambahan.`:"")+" Nilai dapat dilihat melalui tombol DATA NILAI SISWA.";
  }catch(e){
   $("saveStatus").textContent="Nilai belum berhasil tersimpan ke server: "+e.message+" Anda dapat mencoba lagi dengan tombol di bawah.";

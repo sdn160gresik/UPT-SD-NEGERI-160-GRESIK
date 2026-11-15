@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#174d35">
+<title>Menu Petualangan Matematika</title>
+<style>
+*{box-sizing:border-box}
+:root{--gold:#f4d27c;--cream:#fff4d0;--green:#8bcf55;--dark:#24451f}
+html,body{margin:0;min-height:100%;font-family:"Trebuchet MS",Arial,sans-serif}
+body{
+ min-height:100vh;display:flex;align-items:center;justify-content:center;
+ padding:24px;overflow-x:hidden;color:#fff8dc;
+ background:
+  radial-gradient(circle at 50% 20%,rgba(255,255,190,.45),transparent 27%),
+  linear-gradient(180deg,#69bce9 0%,#a9dce0 52%,#91cc4b 53%,#3d812e 100%);
+}
+.scene{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.sun{position:absolute;right:10%;top:8%;width:90px;height:90px;background:#fff3a1;border:9px solid #e8df70;box-shadow:0 0 45px #fff5a1;transform:rotate(8deg)}
+.cloud{position:absolute;top:18%;left:12%;width:90px;height:25px;background:#f4fcff;box-shadow:20px -17px #f4fcff,45px -17px #f4fcff,65px 0 #f4fcff}
+.hill{position:absolute;bottom:12%;width:42vw;height:28vh;background:linear-gradient(90deg,#347c2a,#5aa63b,#347c2a);clip-path:polygon(0 100%,0 55%,15% 55%,15% 30%,35% 30%,35% 10%,55% 10%,55% 35%,75% 35%,75% 20%,100% 20%,100% 100%)}
+.hill.left{left:-5%}.hill.right{right:-5%;transform:scaleX(-1)}
+.ground{position:absolute;bottom:0;left:0;right:0;height:18%;background:repeating-linear-gradient(90deg,transparent 0 65px,#286d2d22 66px 70px),linear-gradient(#8bcb45 0 15%,#5ca337 15% 50%,#367b2b 50%)}
+.tree{position:absolute;bottom:16%;width:30px;height:125px;background:#80502a}
+.tree:before{content:"";position:absolute;left:-42px;top:-55px;width:115px;height:85px;background:linear-gradient(90deg,#2e762b 0 25%,#55a63a 25% 60%,#347d2b 60%);box-shadow:0 8px 0 #286b27}
+.tree.one{left:7%}.tree.two{right:8%;transform:scale(1.15)}
+.panel{
+ position:relative;z-index:1;width:min(850px,100%);padding:clamp(20px,4vw,38px);
+ background:linear-gradient(180deg,#93643a,#704628 52%,#51331f);
+ border:7px solid #e0bd76;box-shadow:0 11px 0 #3c2819,0 24px 55px #102b1c88,inset 0 4px #ffffff30;
+ text-align:center;
+}
+.eyebrow{font-size:12px;letter-spacing:.2em;color:#f8e6a6;font-weight:900}
+h1{font-size:clamp(25px,5vw,42px);margin:10px 0;color:#fff2b7;text-shadow:3px 4px #49301d}
+.subtitle{margin:0 auto 25px;max-width:620px;line-height:1.6;color:#f7e9c9}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:left}
+.game{
+ display:flex;flex-direction:column;min-height:245px;padding:20px;
+ background:linear-gradient(145deg,#285f39,#173e2b);
+ border:4px solid #d9b66d;box-shadow:0 6px 0 #3c291a;
+}
+.game.castle{background:linear-gradient(145deg,#426f38,#244b2c)}
+.icon{font-size:42px;line-height:1.2}
+.game h2{font-size:21px;margin:10px 0 7px;color:#ffedaf}
+.game p{font-size:14px;line-height:1.55;color:#e4f0d8;margin:0 0 18px}
+.open{
+ display:inline-flex;align-items:center;justify-content:center;margin-top:auto;
+ padding:12px 15px;text-decoration:none;font-weight:900;color:#fff8dc;
+ background:linear-gradient(180deg,#b7df69,#75ad3e 50%,#4b7e2e);
+ border:3px solid #e8d18b;box-shadow:0 5px 0 #345325;text-shadow:2px 2px #355225;
+}
+.open:hover{filter:brightness(1.12);transform:translateY(-2px)}
+.back{
+ display:inline-block;margin-top:25px;padding:11px 22px;text-decoration:none;
+ color:#573516;background:linear-gradient(#ffe69a,#d99a39);
+ border:3px solid #fff0b5;box-shadow:0 5px 0 #70421c;font-weight:900
+}
+.back:hover{filter:brightness(1.08)}
+.note{font-size:11px;color:#f0dfb7;margin:18px 0 0}
+@media(max-width:620px){body{padding:12px}.panel{padding:20px 14px;border-width:5px}.cards{grid-template-columns:1fr}.game{min-height:0}.sun{width:58px;height:58px;right:5%;top:5%}.cloud{left:3%;top:12%;transform:scale(.7)}}
+</style>
+</head>
+<body>
+<div class="scene" aria-hidden="true">
+ <div class="sun"></div><div class="cloud"></div>
+ <div class="hill left"></div><div class="hill right"></div>
+ <div class="tree one"></div><div class="tree two"></div><div class="ground"></div>
+</div>
+
+<main class="panel">
+ <div class="eyebrow">✦ UPT SDN 160 GRESIK ✦ KELAS IV–VI ✦</div>
+ <h1>🏰 PETUALANGAN MATEMATIKA</h1>
+ <p class="subtitle">Pilih tantangan yang ingin kamu jelajahi. Asah kemampuan mengubah pecahan dan taklukkan soal-soal matematika dengan semangat!</p>
+
+ <section class="cards">
+  <article class="game castle">
+   <div class="icon">⚔️</div>
+   <h2>Castle Duels</h2>
+   <p>Petualangan dunia pecahan dengan 12 pilihan operasi. Kerjakan tantangan, masukkan jawaban, dan raih kemenangan!</p>
+   <a class="open" href="mengubah_pecahan.html">BUKA CASTLE DUELS →</a>
+  </article>
+
+  <article class="game">
+   <div class="icon">🌄</div>
+   <h2>Lembah Matematika</h2>
+   <p>Latihan soal pilihan ganda mengubah pecahan dalam berbagai bentuk. Lengkapi identitas, periksa jawaban, dan pelajari pembahasannya.</p>
+   <a class="open" href="Lembah_Matematika.html">BUKA LEMBAH MATEMATIKA →</a>
+  </article>
+ </section>
+
+ <a class="back" href="lembah.html">🛡️ KEMBALI KE LEMBAH</a>
+</main>
+</body>
+</html>

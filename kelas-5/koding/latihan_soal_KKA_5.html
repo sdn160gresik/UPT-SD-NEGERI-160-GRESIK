@@ -100,13 +100,13 @@ function show(id){$(id).classList.remove("hidden")}function hide(id){$(id).class
 function loading(v){v?show("loading"):hide("loading")}
 function apiCall(action,params={}){
  return new Promise((resolve,reject)=>{
-  if(!API_URL||API_URL.includes("TEMPEL_URL"))return reject(new Error("URL Web App belum dipasang pada API_URL."));
+  if(!API_URL||API_URL.includes("TEMPEL_URL"))return reject(new Error("Terjadi kegagalan sistem."));
   const cb="kkaCallback_"+Date.now()+"_"+Math.floor(Math.random()*1e6),script=document.createElement("script");let done=false;
   const clean=()=>{script.remove();try{delete window[cb]}catch(e){window[cb]=undefined}};
   const timer=setTimeout(()=>{if(done)return;done=true;clean();reject(new Error("MISI TERHENTI! Jalur komunikasi ke pusat data terputus."))},25000);
-  window[cb]=res=>{if(done)return;done=true;clearTimeout(timer);clean();res&&res.ok?resolve(res.data):reject(new Error(res?.error||"Terjadi kesalahan server."))};
+  window[cb]=res=>{if(done)return;done=true;clearTimeout(timer);clean();res&&res.ok?resolve(res.data):reject(new Error(res?.error||"Terjadi kesalahan komunikasi."))};
   const qs=new URLSearchParams({action,callback:cb,...Object.fromEntries(Object.entries(params).map(([k,v])=>[k,typeof v==="string"?v:JSON.stringify(v)])),_:Date.now()});
-  script.src=API_URL+(API_URL.includes("?")?"&":"?")+qs.toString();script.onerror=()=>{if(done)return;done=true;clearTimeout(timer);clean();reject(new Error("Tidak dapat mengakses Web App. Pastikan akses deployment untuk siapa saja."))};document.head.appendChild(script);
+  script.src=API_URL+(API_URL.includes("?")?"&":"?")+qs.toString();script.onerror=()=>{if(done)return;done=true;clearTimeout(timer);clean();reject(new Error("MISI TERHENTI! Jalur komunikasi ke pusat data terputus."))};document.head.appendChild(script);
  });
 }
 function startError(msg){$("startError").textContent=msg;show("startError")}

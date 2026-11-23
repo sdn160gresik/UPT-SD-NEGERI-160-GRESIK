@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAS Bahasa Indonesia Kelas V</title>
+<style>
+:root{--blue:#168bea;--sky:#b9e8ff;--purple:#dccbff;--pink:#f7c8e8;--yellow:#ffda72;--green:#a8da83;--navy:#102b62;--ink:#17243a;--line:#c9d8e8;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Trebuchet MS",Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,#c8f0ff 0,#edf9ff 38%,#f6fbff 100%);min-height:100vh}
+.decor-top{position:absolute;inset:0 0 auto;height:190px;overflow:hidden;pointer-events:none;z-index:0;background:linear-gradient(120deg,#35b6f5,#91dcff 55%,#4cb8ed)}
+.cloud{position:absolute;background:#fffdf1;border-radius:60px;filter:drop-shadow(0 4px 2px #4c9bc055)}
+.cloud:before,.cloud:after{content:"";position:absolute;background:inherit;border-radius:50%}
+.cloud.one{width:290px;height:65px;top:25px;left:8%}.cloud.one:before{width:95px;height:95px;left:40px;top:-35px}.cloud.one:after{width:110px;height:100px;right:38px;top:-40px}
+.cloud.two{width:350px;height:72px;top:15px;right:8%}.cloud.two:before{width:100px;height:100px;left:55px;top:-38px}.cloud.two:after{width:115px;height:105px;right:45px;top:-42px}
+.leaves{position:absolute;top:-22px;color:#328a38;font-size:72px;text-shadow:18px 12px 0 #83c94d,35px 3px 0 #4aa64c}
+.leaves.left{left:-12px}.leaves.right{right:-12px;transform:scaleX(-1)}
+.wrapper{position:relative;z-index:1;max-width:1500px;margin:auto;padding:14px 22px 38px}
+.hero{min-height:165px;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:22px 170px 14px}
+.hero-title{position:relative;z-index:1;background:#fffdf1;border-radius:50px;padding:18px 45px 14px;box-shadow:0 7px 0 #b6e8ff;max-width:760px}
+.hero h1{font-size:clamp(24px,3vw,40px);margin:0 0 7px;color:var(--navy);font-weight:900;letter-spacing:-.8px}
+.ribbon{display:inline-block;background:#e7474c;color:white;padding:7px 36px;border-radius:10px;transform:rotate(-1deg);font-size:clamp(19px,2.2vw,29px);font-weight:900;box-shadow:0 4px 0 #b92e37}
+.grade{display:table;margin:9px auto 0;background:var(--yellow);padding:5px 28px;border-radius:25px;font-weight:900;color:#17315b;font-size:20px}
+.hero-deco{position:absolute;font-size:70px;filter:drop-shadow(0 5px 2px #285b7540);bottom:8px}
+.hero-deco.left{left:22px}.hero-deco.right{right:22px}
+.meta{display:grid;grid-template-columns:1.4fr .8fr .9fr 1.2fr;gap:8px;background:#f7fcff;border:2px solid #9bd5fa;border-radius:18px;padding:12px 18px;box-shadow:0 5px 12px #277eb522;margin-bottom:14px}
+.meta-item{display:flex;align-items:center;justify-content:center;gap:9px;font-weight:700;font-size:14px;text-align:center}
+.meta-item .ico{font-size:22px}
+.layout{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(290px,.78fr);gap:14px;align-items:start}
+.main,.side-card{background:#fff;border:2px solid #a9d9f8;border-radius:22px;box-shadow:0 8px 18px #1b76aa18;padding:16px}
+.instructions{background:linear-gradient(110deg,#f1eaff,#e5d9ff);border-radius:16px;padding:13px 18px;margin-bottom:16px;position:relative;overflow:hidden}
+.section-title{font-size:22px;color:#24196f;margin:0 0 8px;font-weight:900;display:flex;align-items:center;gap:10px}
+.instructions ol{margin:0;padding-left:27px;line-height:1.55;font-size:15px;font-weight:600;max-width:82%}
+.book-art{position:absolute;right:25px;bottom:5px;font-size:72px;transform:rotate(-8deg);filter:drop-shadow(0 5px 2px #a77b3240)}
+.question-box{border:1.5px solid #c8dff0;border-radius:18px;overflow:hidden;background:#fff}
+.q-head{background:linear-gradient(90deg,#b9e8ff,#d6f3ff);padding:11px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.q-title{font-size:22px;font-weight:900;color:var(--navy);display:flex;gap:10px;align-items:center}
+.q-type{background:#367fd0;color:#fff;border-radius:20px;padding:7px 18px;font-weight:800;font-size:13px;white-space:nowrap}
+.q-body{padding:18px 22px 20px;min-height:370px}
+.q-body p{line-height:1.55;margin:7px 0}
+.stimulus{background:#f5faff;border-left:4px solid #68b9ed;padding:12px 15px;border-radius:8px;margin:10px 0 14px;line-height:1.6}
+.options{display:grid;gap:9px;margin-top:13px}
+.option{display:flex;align-items:center;gap:12px;border:1.5px solid #cbd7e2;border-radius:12px;padding:9px 13px;cursor:pointer;transition:.15s;background:#fff}
+.option:hover{border-color:var(--blue);background:#f1f9ff}
+.option:has(input:checked){border-color:#168bea;background:#e5f5ff;box-shadow:0 0 0 2px #168bea20}
+.option input{accent-color:#168bea;width:19px;height:19px;flex:0 0 auto}
+.option strong{min-width:22px}
+.match-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+.match-col{border:1px solid #d8e5ef;border-radius:12px;padding:12px;background:#f9fcff}
+.match-col h4{margin:0 0 10px;color:#214a80}
+.match-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,1fr);gap:10px;align-items:center;margin:10px 0;font-size:14px}
+.match-row select{width:100%;padding:9px;border:1px solid #b8ccdc;border-radius:9px;background:white;font:inherit}
+.answer-area{width:100%;min-height:105px;border:1.5px solid #cbd7e2;border-radius:12px;padding:12px;font:16px/1.5 inherit;resize:vertical}
+.answer-area:focus,.match-row select:focus{outline:3px solid #168bea30;border-color:#168bea}
+.q-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+.btn{border:0;border-radius:13px;padding:12px 20px;font-weight:900;font-size:15px;cursor:pointer;transition:.15s}
+.btn:disabled{opacity:.45;cursor:not-allowed}.btn.restart{background:#20a05a;color:#fff;box-shadow:0 4px 0 #147642;margin-top:14px}
+.btn.prev{background:#9aa4ad;color:white}.btn.next,.btn.submit{background:#0878d4;color:#fff;box-shadow:0 4px 0 #075ca7}
+.counter{background:#ffe49a;color:#17243a;border-radius:14px;padding:11px 22px;font-weight:900;min-width:190px;text-align:center}
+.side-card{padding:15px;margin-bottom:14px}
+.side-title{margin:0 0 13px;padding:11px 14px;border-radius:13px;background:linear-gradient(90deg,#e5ddff,#d9d4ff);color:#24196f;font-size:20px;font-weight:900}
+.number-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.num{height:46px;border-radius:11px;background:#fff;border:1.7px solid #3b8bd8;color:#15223a;font-size:18px;font-weight:900;cursor:pointer}
+.num.active{background:#176fc4;color:#fff;border-color:#176fc4}
+.num.done{background:#b8e9a0;border-color:#65ae4d;color:#214b1b}
+.legend{background:linear-gradient(135deg,#fff1fa,#f9e8f5);border:1px solid #f0c8e2;border-radius:15px;overflow:hidden}
+.legend h3{margin:0;padding:12px 14px;background:#f8d9ef;color:#34125f;font-size:18px}
+.legend-list{padding:12px 14px;display:grid;gap:12px}
+.legend-item{display:grid;grid-template-columns:35px 1fr;gap:8px;align-items:center;font-size:13px;line-height:1.4}
+.legend-icon{font-size:24px;text-align:center;color:#13275d}
+.legend-item b{font-size:14px}
+.progress-wrap{height:9px;background:#e6eff6;border-radius:10px;margin:14px 0 5px;overflow:hidden}
+.progress{height:100%;width:0;background:linear-gradient(90deg,#168bea,#8ddc9a);transition:.2s}
+.progress-label{font-size:12px;color:#56708a;text-align:right}
+.bottom-deco{position:fixed;bottom:-20px;left:0;right:0;height:65px;pointer-events:none;z-index:-1;background:linear-gradient(0deg,#8bcf6b 0 25%,transparent 26%)}
+.bottom-deco:before,.bottom-deco:after{content:"";position:absolute;bottom:18px;width:100px;height:65px;background:#69b84e;border-radius:70% 70% 0 0}
+.bottom-deco:before{left:-25px}.bottom-deco:after{right:-25px}
+.toast{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:#15264a88;backdrop-filter:blur(5px);z-index:9999}
+.toast.show{display:flex}
+.toast-card{width:min(440px,100%);text-align:center;padding:26px 24px 22px;border-radius:24px;background:linear-gradient(145deg,#fff 0%,#eff8ff 100%);border:3px solid #fff;box-shadow:0 18px 55px #092b5c55;animation:popMessage .24s ease-out}
+.toast-icon{font-size:48px;line-height:1.2;margin-bottom:10px}
+.toast-title{font-size:22px;font-weight:1000;color:#174b86;margin:0 0 9px}
+.toast-text{font-size:16px;line-height:1.55;color:#294766;margin:0 0 18px;white-space:pre-line}
+.toast-action{border:0;border-radius:13px;padding:11px 27px;background:linear-gradient(90deg,#168bea,#16b77a);color:#fff;font-weight:900;font-size:15px;cursor:pointer;box-shadow:0 4px 0 #0870a9}
+@keyframes popMessage{from{opacity:0;transform:translateY(12px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+.result{display:none;margin-top:14px;padding:16px;border-radius:14px;background:#eaf8e5;border:1px solid #b4dda5}.score-big{font-size:34px;font-weight:900;color:#176fc4;margin:8px 0}.review-table{width:100%;border-collapse:collapse;margin-top:14px;background:#fff;border-radius:10px;overflow:hidden}.review-table th,.review-table td{border:1px solid #d7e3ec;padding:8px;text-align:left;font-size:13px}.review-table th{background:#dff1ff;color:#173b69}.correct-text{color:#247a24;font-weight:800}.wrong-text{color:#bd3030;font-weight:800}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:12px}.side-card{margin:0}.meta{grid-template-columns:1fr 1fr}.hero{padding:20px 95px}.hero-deco{font-size:48px}}
+@media(max-width:600px){.wrapper{padding:8px}.hero{padding:16px 5px;min-height:150px}.hero-deco{display:none}.hero-title{padding:15px 13px}.hero h1{font-size:23px}.ribbon{font-size:18px;padding:7px 15px}.grade{font-size:16px}.meta{grid-template-columns:1fr 1fr;padding:10px 6px}.meta-item{font-size:12px;justify-content:flex-start}.main{padding:10px}.instructions ol{max-width:100%;font-size:13px}.book-art{display:none}.section-title,.q-title{font-size:18px}.q-body{padding:14px;min-height:330px}.q-type{font-size:11px;padding:6px 10px}.match-grid{grid-template-columns:1fr}.sidebar{grid-template-columns:1fr}.q-nav{flex-wrap:wrap}.counter{order:-1;width:100%}.btn{flex:1;padding:11px 8px}.number-grid{gap:6px}.num{height:42px}}
+
+.identity-card{background:#fff;border:2px solid #9bd5fa;border-radius:18px;padding:16px 20px;margin:0 0 14px;box-shadow:0 5px 12px #277eb522}
+.identity-title{font-size:21px;font-weight:900;color:#24196f;margin:0 0 12px}
+.identity-grid{display:grid;grid-template-columns:1.4fr .8fr .8fr;gap:12px}
+.identity-field label{display:block;font-weight:800;font-size:13px;color:#214a80;margin-bottom:6px}
+.identity-field input,.identity-field select{width:100%;padding:11px 12px;border:1.5px solid #b8ccdc;border-radius:10px;font:inherit;background:#fff}
+.identity-field input:focus,.identity-field select:focus{outline:3px solid #168bea30;border-color:#168bea}
+.identity-help{font-size:12px;color:#56708a;margin:10px 0}
+.identity-start{background:#20a05a;color:#fff;box-shadow:0 4px 0 #147642}
+.identity-data{background:linear-gradient(90deg,#7b4bd1,#4b8fe8);color:#fff;box-shadow:0 4px 0 #3c63aa;margin-left:8px}
+.identity-error{display:none;color:#b42318;font-size:13px;font-weight:700;margin-top:8px}
+@media(max-width:600px){.identity-grid{grid-template-columns:1fr}.identity-data{margin:10px 0 0;width:100%}.identity-start{width:100%}}
+
+
+.data-page{display:none;background:#fff;border:2px solid #9bd5fa;border-radius:22px;padding:18px;margin:0 0 16px;box-shadow:0 8px 18px #1b76aa18}
+.data-page-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.data-page-title{margin:0;color:#173b69;font-size:clamp(20px,3vw,28px);font-weight:900}
+.data-toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}
+.data-table-wrap{overflow-x:auto;border:1px solid #c9d8e8;border-radius:12px}
+.data-table{width:100%;border-collapse:collapse;min-width:760px;background:#fff}
+.data-table th,.data-table td{padding:10px 12px;border-bottom:1px solid #d7e3ec;text-align:left;font-size:13px;white-space:nowrap}
+.data-table th{background:#dff1ff;color:#173b69;position:sticky;top:0}
+.data-table tr:nth-child(even){background:#f7fbff}
+.data-status{padding:14px;border-radius:12px;background:#f1f8ff;color:#245b86;font-weight:700;margin:12px 0}
+.data-empty{text-align:center;padding:28px 12px;color:#56708a}
+.data-back{background:#64748b;color:#fff}
+.data-refresh{background:#0878d4;color:#fff}
+.data-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0}
+.data-stat{background:linear-gradient(135deg,#eaf6ff,#f0eaff);padding:13px;border-radius:13px;text-align:center}
+.data-stat b{display:block;color:#173b69;font-size:23px}
+.data-stat span{font-size:12px;color:#56708a;font-weight:700}
+@media(max-width:600px){.data-page{padding:12px}.data-summary{grid-template-columns:1fr 1fr}.data-page-head{align-items:flex-start}}
+
+</style>
+</head>
+<body>
+<div class="decor-top"><div class="cloud one"></div><div class="cloud two"></div><div class="leaves left">❧</div><div class="leaves right">❧</div></div>
+<div class="wrapper">
+<header class="hero">
+  <div class="hero-deco left">📚</div>
+  <div class="hero-title">
+    <h1>SUMATIF AKHIR SEMESTER (SAS) I</h1>
+    <div class="ribbon">BAHASA INDONESIA</div>
+    <div class="grade">KELAS V SD</div>
+  </div>
+  <div class="hero-deco right">📖 ✏️</div>
+</header>
+<section class="meta">
+  <div class="meta-item"><span class="ico">📘</span><span>Mata Pelajaran: Bahasa Indonesia</span></div>
+  <div class="meta-item"><span class="ico">▦</span><span>Kelas: V (Lima)</span></div>
+  <div class="meta-item"><span class="ico">🗓️</span><span>Semester: I (Ganjil)</span></div>
+  <div class="meta-item"><span class="ico">🎓</span><span>Tahun Pelajaran: 2026/2027</span></div>
+</section>
+
+<section class="identity-card" id="identityCard">
+  <h2 class="identity-title">📝 IDENTITAS PESERTA UJIAN</h2>
+  <div class="identity-grid">
+    <div class="identity-field">
+      <label for="studentName">Nama lengkap</label>
+      <input id="studentName" type="text" maxlength="100" placeholder="Masukkan nama lengkap" autocomplete="name" required>
+    </div>
+    <div class="identity-field">
+      <label for="studentClass">Kelas</label>
+      <select id="studentClass" required>
+        <option value="">Pilih kelas</option>
+        <option value="5">5</option>
+        <option value="5A">5A</option>
+        <option value="5B">5B</option>
+        <option value="lainnya">Lainnya</option>
+      </select>
+      <input id="otherClass" type="text" maxlength="30" placeholder="Tuliskan kelas lainnya"
+             aria-label="Tuliskan kelas lainnya" style="display:none;margin-top:8px;">
+    </div>
+    <div class="identity-field">
+      <label for="studentNumber">No. absen</label>
+      <input id="studentNumber" type="number" min="1" max="60" placeholder="Nomor absen" required>
+    </div>
+  </div>
+  <p class="identity-help">Lengkapi identitas terlebih dahulu sebelum mulai mengerjakan soal.</p>
+  <button class="btn identity-start" id="startExamBtn" type="button">Mulai Mengerjakan Ujian →</button>
+  <button class="btn identity-data" id="studentDataBtn" type="button">📊 Data Siswa</button>
+  <div class="identity-error" id="identityError">Lengkapi nama, kelas, dan nomor absen dengan benar.</div>
+</section>
+
+
+<section class="data-page" id="studentDataPage">
+  <div class="data-page-head">
+    <div>
+      <h2 class="data-page-title">🏆 GALERI PRESTASI PENJELAJAH ILMU</h2>
+      <p style="margin:6px 0 0;color:#56708a">Rekap hasil perjalanan siswa dalam SAS Bahasa Indonesia Kelas V.</p>
+    </div>
+    <button class="btn data-back" id="backFromDataBtn" type="button">← Kembali</button>
+  </div>
+  <div class="data-summary">
+    <div class="data-stat"><b id="dataTotal">0</b><span>Peserta</span></div>
+    <div class="data-stat"><b id="dataAverage">—</b><span>Rata-rata nilai</span></div>
+    <div class="data-stat"><b id="dataHighest">—</b><span>Nilai tertinggi</span></div>
+  </div>
+  <div class="data-toolbar">
+    <input id="dataSearch" type="search" placeholder="Cari nama atau kelas siswa..." style="flex:1;min-width:190px;padding:11px 12px;border:1.5px solid #b8ccdc;border-radius:10px;font:inherit">
+    <button class="btn data-refresh" id="refreshDataBtn" type="button">↻ Muat Ulang Data</button>
+  </div>
+  <div class="data-status" id="dataStatus">📚 Menyiapkan catatan prestasi...</div>
+  <div class="data-table-wrap" id="dataTableWrap" style="display:none">
+    <table class="data-table">
+      <thead><tr><th>No.</th><th>Nama Siswa</th><th>Kelas</th><th>Absen</th><th>Jumlah Soal</th><th>Benar</th><th>Salah</th><th>Nilai</th><th>Waktu Selesai</th></tr></thead>
+      <tbody id="dataTableBody"></tbody>
+    </table>
+  </div>
+  <div class="data-empty" id="dataEmpty" style="display:none">Belum ada catatan hasil ujian yang dapat ditampilkan.</div>
+</section>
+
+<div class="layout" id="examLayout" style="display:none">
+  <main class="main">
+    <section class="instructions">
+      <h2 class="section-title">▤ PETUNJUK PENGERJAAN</h2>
+      <ol>
+        <li>Setiap sesi menampilkan 25 soal yang dipilih dari bank soal SAS Bahasa Indonesia Kelas V.</li>
+        <li>Untuk pilihan ganda, pilih satu jawaban yang paling tepat.</li>
+        <li>Untuk pilihan ganda kompleks, pilih semua jawaban yang benar.</li>
+        <li>Untuk menjodohkan, pasangkan pernyataan dengan jawaban yang sesuai.</li>
+        <li>Soal yang sudah pernah ditampilkan tidak akan muncul lagi pada sesi berikutnya sampai seluruh bank soal digunakan.</li>
+        <li>Periksa kembali semua jawaban sebelum menyelesaikan ujian.</li>
+      </ol>
+      <div class="book-art">📖</div>
+    </section>
+    <section class="question-box">
+      <div class="q-head">
+        <div class="q-title">📖 <span id="qHeading">SOAL NOMOR 1</span></div>
+        <span class="q-type" id="qType">PILIHAN GANDA</span>
+      </div>
+      <div class="q-body" id="questionBody"></div>
+    </section>
+    <div class="q-nav">
+      <button class="btn prev" id="prevBtn" type="button">← Sebelumnya</button>
+      <div class="counter" id="counter">Soal 1 dari 25</div>
+      <button class="btn next" id="nextBtn" type="button">Selanjutnya →</button>
+    </div>
+    <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+    <div class="progress-label" id="progressLabel">0 dari 25 soal telah dijawab</div>
+    <div class="result" id="result"></div>
+  </main>
+  <aside class="sidebar">
+    <section class="side-card">
+      <h2 class="side-title">☑ DAFTAR SOAL</h2>
+      <div class="number-grid" id="numberGrid"></div>
+    </section>
+    <section class="side-card legend">
+      <h3>▤ KETERANGAN BENTUK SOAL</h3>
+      <div class="legend-list">
+        <div class="legend-item"><div class="legend-icon">◯</div><div><b>Pilihan Ganda (PG)</b></div></div>
+        <div class="legend-item"><div class="legend-icon">☑</div><div><b>Pilihan Ganda Kompleks</b></div></div>
+        <div class="legend-item"><div class="legend-icon">B/S</div><div><b>Benar atau Salah</b></div></div><div class="legend-item"><div class="legend-icon">🔗</div><div><b>Menjodohkan</b></div></div>
+      </div>
+    </section>
+    <section class="side-card">
+      <h2 class="side-title">📊 PROGRES PENGERJAAN</h2>
+      <p style="margin:0;font-size:14px">Jawablah seluruh soal sebelum mengakhiri ujian.</p>
+      <button class="btn submit" id="finishBtn" style="width:100%;margin-top:12px" type="button">Selesaikan Ujian</button>
+    </section>
+  </aside>
+</div>
+</div>
+<div class="bottom-deco"></div>
+<div class="toast" id="toast" role="dialog" aria-modal="true" aria-labelledby="toastTitle">
+  <div class="toast-card">
+    <div class="toast-icon" id="toastIcon">🌟</div>
+    <h2 class="toast-title" id="toastTitle">Semangat!</h2>
+    <p class="toast-text" id="toastText"></p>
+    <button class="toast-action" id="toastClose" type="button">Siap, Lanjutkan! 🚀</button>
+  </div>
+</div>
+<script>
+const questions = [
+  {
+    "type": "Pilihan Ganda",
+    "kind": "single",
+    "prompt": "Bacalah cerita berikut!",
+    "ask": "Amanat yang tepat berdasarkan cerita tersebut adalah ....",
+    "opts": [
+      "Kita harus menjaga barang milik sendiri agar tidak hilang.",
+      "Kita harus mengembalikan barang yang bukan milik kita.",
+      "Kita boleh menggunakan barang temuan jika tidak ada pemiliknya.",
+      "Kita harus menyimpan barang temuan di rumah."
+    ],
+    "correct": [
+      1
+    ],
+    "stimulus": "SEPEDA YANG DIKEMBALIKAN<br>Suatu sore, Fajar menemukan sebuah sepeda kecil tergeletak di depan balai desa. Ia melihat sebuah nama tertulis pada bagian keranjang sepeda tersebut. Fajar mengetahui bahwa sepeda itu bukan miliknya.<br><br>Ia kemudian membawa sepeda tersebut ke rumah ketua RT. Tidak lama kemudian, seorang anak datang mencari sepedanya. Anak itu sangat senang ketika mengetahui bahwa sepedanya telah ditemukan. Fajar merasa bangga karena telah melakukan hal yang benar."
+  },
+  {
+    "type": "Pilihan Ganda",
+    "kind": "single",
+    "prompt": "Perhatikan cerita berikut!",
+    "ask": "Jika Lala berubah menjadi anak yang rajin membantu teman-temannya, unsur intrinsik yang mengalami perubahan adalah ....",
+    "opts": [
+      "Latar tempat.",
+      "Latar waktu.",
+      "Penokohan.",
+      "Tema."
+    ],
+    "correct": [
+      2
+    ],
+    "stimulus": "Setiap Sabtu pagi, Lala dan teman-temannya membersihkan taman sekolah. Lala bertugas menyapu daun kering. Namun, ketika teman-temannya bekerja, Lala justru bermain sendiri dan tidak mau membantu."
+  },
+  {
+    "type": "Pilihan Ganda",
+    "kind": "single",
+    "prompt": "Kegiatan tanya jawab antara pewawancara dan narasumber untuk memperoleh informasi mengenai suatu hal disebut ....",
+    "ask": "",
+    "opts": [
+      "Diskusi.",
+      "Wawancara.",
+      "Pengamatan.",
+      "Presentasi."
+    ],
+    "correct": [
+      1
+    ]
+  },
+  {
+    "type": "Pilihan Ganda",
+    "kind": "single",
+    "prompt": "Ardi akan melakukan wawancara dengan seorang petani untuk mengetahui cara menanam jagung.",
+    "ask": "Pertanyaan yang tidak sesuai dengan tujuan wawancara tersebut adalah ....",
+    "opts": [
+      "Kapan waktu yang tepat untuk menanam jagung?",
+      "Bagaimana cara merawat tanaman jagung?",
+      "Apa saja alat yang digunakan untuk menanam jagung?",
+      "Siapa penyanyi yang paling disukai Bapak?"
+    ],
+    "correct": [
+      3
+    ]
+  },
+  {
+    "type": "Pilihan Ganda Kompleks",
+    "kind": "multi",
+    "prompt": "Bacalah ringkasan cerita berikut! Pernyataan yang sesuai dengan isi cerita tersebut adalah ....",
+    "opts": [
+      "Mira memiliki sifat suka menolong.",
+      "Mira membantu seorang nenek membawa belanjaan.",
+      "Mira meminta hadiah setelah membantu nenek.",
+      "Mira menunjukkan sikap peduli terhadap orang lain."
+    ],
+    "correct": [
+      0,
+      1,
+      3
+    ],
+    "stimulus": "Mira melihat seorang nenek kesulitan membawa belanjaan. Mira segera menghampiri nenek tersebut dan menawarkan bantuan. Ia membantu membawa belanjaan sampai ke rumah nenek. Nenek mengucapkan terima kasih atas kebaikan Mira."
+  },
+  {
+    "type": "Pilihan Ganda Kompleks",
+    "kind": "multi",
+    "prompt": "Perhatikan kalimat-kalimat berikut! Pilihlah kalimat yang menggunakan kata tanya dengan tepat!",
+    "opts": [
+      "Siapa nama kepala sekolahmu?",
+      "Mengapa tanaman harus disiram?",
+      "Di mana kamu membeli sepatu itu?",
+      "Kapan harga sebuah buku cerita?"
+    ],
+    "correct": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "type": "Pilihan Ganda Kompleks",
+    "kind": "multi",
+    "prompt": "Laporan hasil pengamatan harus disusun berdasarkan fakta. Berikut ini yang merupakan ciri-ciri laporan pengamatan yang baik adalah ....",
+    "opts": [
+      "Berisi informasi berdasarkan hasil pengamatan.",
+      "Mengutamakan pendapat pribadi penulis.",
+      "Disusun menggunakan bahasa yang jelas.",
+      "Memuat informasi secara runtut."
+    ],
+    "correct": [
+      0,
+      2,
+      3
+    ]
+  },
+  {
+    "type": "Pilihan Ganda Kompleks",
+    "kind": "multi",
+    "prompt": "Nanda akan mewawancarai seorang petugas perpustakaan mengenai kegiatan membaca di sekolah. Sikap yang sebaiknya dilakukan Nanda adalah ....",
+    "opts": [
+      "Mengucapkan salam sebelum memulai wawancara.",
+      "Mendengarkan penjelasan narasumber dengan saksama.",
+      "Memotong pembicaraan narasumber agar wawancara cepat selesai.",
+      "Mengucapkan terima kasih setelah wawancara selesai."
+    ],
+    "correct": [
+      0,
+      1,
+      3
+    ]
+  },
+  {
+    "type": "Benar atau Salah",
+    "kind": "boolean",
+    "prompt": "Bacalah cuplikan wawancara berikut! Tentukan benar atau salah setiap pernyataan.",
+    "left": [
+      "Warga mengadakan kerja bakti setiap hari Minggu.",
+      "Kerja bakti dilakukan untuk membersihkan selokan dan jalan kampung.",
+      "Kegiatan kerja bakti hanya diikuti oleh anak-anak.",
+      "Seluruh warga ikut berpartisipasi dalam kegiatan kerja bakti."
+    ],
+    "correct": [
+      "B",
+      "B",
+      "S",
+      "B"
+    ],
+    "stimulus": "Pewawancara: \"Selamat pagi, Pak. Apa kegiatan yang dilakukan warga untuk menjaga kebersihan lingkungan?\"<br>Narasumber: \"Setiap hari Minggu, warga mengadakan kerja bakti membersihkan selokan dan jalan kampung.\"<br>Pewawancara: \"Siapa saja yang mengikuti kegiatan tersebut?\"<br>Narasumber: \"Kegiatan ini diikuti oleh seluruh warga, baik orang tua maupun pemuda.\""
+  },
+  {
+    "type": "Benar atau Salah",
+    "kind": "boolean",
+    "prompt": "Perhatikan pernyataan tentang etika wawancara berikut! Tentukan benar atau salah!",
+    "left": [
+      "Pewawancara harus menggunakan bahasa yang sopan.",
+      "Pewawancara boleh berbicara sendiri ketika narasumber menjawab.",
+      "Pewawancara sebaiknya mendengarkan jawaban narasumber.",
+      "Pewawancara tidak perlu memperkenalkan diri sebelum wawancara."
+    ],
+    "correct": [
+      "B",
+      "S",
+      "B",
+      "S"
+    ]
+  },
+  {
+    "type": "Benar atau Salah",
+    "kind": "boolean",
+    "prompt": "Perhatikan penggunaan kata berimbuhan berikut! Tentukan benar atau salah!",
+    "left": [
+      "Kata bermain berasal dari kata dasar main dan mendapat awalan ber-.",
+      "Kata tuliskan berasal dari kata dasar tulis dan mendapat akhiran -kan.",
+      "Kata makanan berasal dari kata dasar makan dan mendapat akhiran -an.",
+      "Kata menyapu berasal dari kata dasar sapu dan mendapat awalan ber-."
+    ],
+    "correct": [
+      "B",
+      "B",
+      "B",
+      "S"
+    ]
+  },
+  {
+    "type": "Benar atau Salah",
+    "kind": "boolean",
+    "prompt": "Perhatikan langkah-langkah menulis cerita pendek berikut! Tentukan benar atau salah!",
+    "left": [
+      "Menentukan tema merupakan langkah awal dalam menulis cerita pendek.",
+      "Menentukan tokoh dan penokohan tidak diperlukan dalam cerita pendek.",
+      "Menentukan latar membantu pembaca mengetahui tempat dan waktu terjadinya peristiwa.",
+      "Amanat merupakan pesan yang ingin disampaikan penulis kepada pembaca."
+    ],
+    "correct": [
+      "B",
+      "S",
+      "B",
+      "B"
+    ]
+  },
+  {
+    "type": "Menjodohkan",
+    "kind": "match",
+    "prompt": "Pasangkan kata berikut dengan pola suku katanya!",
+    "left": [
+      "1. Jam",
+      "2. Roti",
+      "3. Piring",
+      "4. Kelapa"
+    ],
+    "right": [
+      "A. KV-KV-KV",
+      "B. KVK",
+      "C. KVK-KVK",
+      "D. KV-KV",
+      "E. KV-KVK"
+    ],
+    "correct": [
+      "B",
+      "D",
+      "C",
+      "A"
+    ]
+  },
+  {
+    "type": "Menjodohkan",
+    "kind": "match",
+    "prompt": "Pasangkan kata tanya dengan fungsinya!",
+    "left": [
+      "1. Kapan",
+      "2. Bagaimana",
+      "3. Mengapa"
+    ],
+    "right": [
+      "A. Menanyakan cara atau keadaan.",
+      "B. Menanyakan alasan.",
+      "C. Menanyakan waktu.",
+      "D. Menanyakan jumlah."
+    ],
+    "correct": [
+      "C",
+      "A",
+      "B"
+    ]
+  },
+  {
+    "type": "Menjodohkan",
+    "kind": "match",
+    "prompt": "Pasangkan situasi dalam cerita dengan unsur intrinsik yang tepat!",
+    "left": [
+      "1. Peristiwa terjadi pada malam hari.",
+      "2. Tokoh memiliki sifat pemberani.",
+      "3. Peristiwa berlangsung di halaman sekolah."
+    ],
+    "right": [
+      "A. Latar tempat.",
+      "B. Amanat.",
+      "C. Penokohan.",
+      "D. Latar waktu."
+    ],
+    "correct": [
+      "D",
+      "C",
+      "A"
+    ]
+  },
+  {
+    "type": "Menjodohkan",
+    "kind": "match",
+    "prompt": "Pasangkan pernyataan berikut dengan jenis wawancara yang tepat!",
+    "left": [
+      "1. Pewawancara menyiapkan daftar pertanyaan sebelum wawancara dimulai.",
+      "2. Pertanyaan diajukan secara spontan mengikuti jawaban narasumber."
+    ],
+    "right": [
+      "A. Wawancara terstruktur.",
+      "B. Laporan hasil wawancara.",
+      "C. Wawancara tidak terstruktur."
+    ],
+    "correct": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "type": "Pilihan Ganda",
+    "kind": "single",
+    "prompt": "Kalimat yang berfungsi untuk menanyakan sesuatu dan mengharapkan jawaban disebut ....",
+    "ask": "",
+    "opts": [
+      "Kalimat berita.",
+      "Kalimat tanya.",
+      "Kalimat perintah.",
+      "Kalimat ajakan."
+    ],
+    "correct": [
+      1
+    ]
+  },
+  {
+    "type": "Pilihan Ganda",
+    "kind": "single",
+    "prompt": "Perhatikan kalimat berikut! \"........ cara Bu Rani membuat kerajinan dari bahan bekas?\"",
+    "ask": "Kata tanya yang tepat untuk melengkapi kalimat tersebut adalah ....",
+    "opts": [
+      "Siapa.",
+      "Kapan.",
+      "Bagaimana.",
+      "Di mana."
+    ],
+    "correct": [
+      2
+    ]
+  },
+  {
+    "type": "Pilihan Ganda",
+    "kind": "single",
+    "prompt": "Perhatikan kata berikut! BERLARI",
+    "ask": "Kata dasar dan imbuhan yang digunakan pada kata tersebut adalah ....",
+    "opts": [
+      "Lari dan awalan ber-.",
+      "Lari dan akhiran -kan.",
+      "Berlari dan akhiran -lah.",
+      "Lari dan awalan me-."
+    ],
+    "correct": [
+      0
+    ]
+  },
+  {
+    "type": "Pilihan Ganda",
+    "kind": "single",
+    "prompt": "Ketika melakukan wawancara, pewawancara sebaiknya ....",
+    "ask": "",
+    "opts": [
+      "Mengajukan pertanyaan dengan sopan dan jelas.",
+      "Memaksa narasumber menjawab sesuai keinginan.",
+      "Mengabaikan jawaban yang diberikan narasumber.",
+      "Mengajukan pertanyaan di luar topik pembicaraan."
+    ],
+    "correct": [
+      0
+    ]
+  },
+  {
+    "type": "Pilihan Ganda",
+    "kind": "single",
+    "prompt": "Perhatikan catatan hasil wawancara berikut!",
+    "ask": "Kalimat laporan yang tidak sesuai dengan catatan hasil wawancara adalah ....",
+    "opts": [
+      "Pak Hasan bekerja sebagai peternak ayam.",
+      "Peternakan Pak Hasan berada di Desa Sukamaju.",
+      "Pak Hasan mulai beternak ayam pada tahun 2020.",
+      "Pak Hasan memiliki peternakan sapi sebanyak 150 ekor."
+    ],
+    "correct": [
+      3
+    ],
+    "stimulus": "Nama narasumber: Pak Hasan<br>Pekerjaan: Peternak ayam<br>Lokasi peternakan: Desa Sukamaju<br>Mulai beternak: Tahun 2020<br>Jumlah ayam: 150 ekor<br>Makanan ayam: Jagung dan dedak"
+  },
+  {
+    "type": "Pilihan Ganda",
+    "kind": "single",
+    "prompt": "Seorang siswa melakukan wawancara dengan seorang penjual sayur. Narasumber mengatakan bahwa ia mulai berjualan pada tahun 2023. Namun, siswa menuliskan dalam laporannya bahwa narasumber mulai berjualan pada tahun 2019.",
+    "ask": "Mengapa laporan tersebut tidak tepat?",
+    "opts": [
+      "Karena laporan harus menggunakan banyak kalimat.",
+      "Karena laporan harus ditulis dengan bahasa yang sulit.",
+      "Karena laporan harus sesuai dengan informasi dari narasumber.",
+      "Karena laporan harus ditambahkan cerita pribadi penulis."
+    ],
+    "correct": [
+      2
+    ]
+  },
+  {
+    "type": "Pilihan Ganda",
+    "kind": "single",
+    "prompt": "Riko akan mewawancarai teman-temannya tentang kebiasaan berolahraga.",
+    "ask": "Pertanyaan yang tepat untuk mengetahui waktu seseorang berolahraga adalah ....",
+    "opts": [
+      "Mengapa kamu suka berolahraga?",
+      "Kapan kamu biasanya berolahraga?",
+      "Siapa teman berolahragamu?",
+      "Bagaimana cara melakukan olahraga?"
+    ],
+    "correct": [
+      1
+    ]
+  },
+  {
+    "type": "Pilihan Ganda",
+    "kind": "single",
+    "prompt": "Bacalah cerita pendek berikut!",
+    "ask": "Tema dan sikap yang dapat diteladani dari cerita tersebut adalah ....",
+    "opts": [
+      "Persaingan; berusaha mengalahkan orang lain.",
+      "Kemandirian; menyelesaikan pekerjaan tanpa bantuan siapa pun.",
+      "Kepedulian keluarga; membantu orang tua dengan tulus.",
+      "Keberanian; menghadapi bahaya seorang diri."
+    ],
+    "correct": [
+      2
+    ],
+    "stimulus": "HADIAH UNTUK IBU<br>Hari Minggu pagi, Nisa melihat ibunya sedang sibuk membersihkan rumah. Sementara itu, Nisa ingin bermain bersama teman-temannya. Namun, ia mengurungkan niatnya setelah melihat ibunya bekerja sendirian.<br><br>Nisa segera mengambil sapu dan membantu membersihkan ruang tamu. Setelah selesai, ia membantu ibunya merapikan meja makan. Ibu merasa senang melihat kepedulian Nisa.<br><br>Nisa pun merasa bahagia karena dapat meringankan pekerjaan ibunya."
+  },
+  {
+    "type": "Pilihan Ganda",
+    "kind": "single",
+    "prompt": "Perhatikan dua kata berikut! 1. Menuliskan  2. Ambillah",
+    "ask": "Pernyataan yang tepat mengenai kedua kata tersebut adalah ....",
+    "opts": [
+      "Menuliskan berasal dari kata tulis dengan awalan me- dan akhiran -kan, sedangkan ambillah berasal dari kata ambil dengan akhiran -lah.",
+      "Menuliskan berasal dari kata tulis dengan awalan ber-, sedangkan ambillah berasal dari kata ambil dengan akhiran -kan.",
+      "Menuliskan berasal dari kata tulis dengan akhiran -lah, sedangkan ambillah berasal dari kata ambil dengan awalan me-.",
+      "Menuliskan berasal dari kata tulis dengan awalan di-, sedangkan ambillah berasal dari kata ambil dengan awalan ter-."
+    ],
+    "correct": [
+      0
+    ]
+  }
+];
+const answers={};
+let submitted=false;
+const TOTAL_PER_SESSION=25;
+const SEEN_KEY="sas_bindo_kelas5_seen_v1";
+const SESSION_KEY="sas_bindo_kelas5_session_v1";
+// Tempel URL Web App Google Apps Script setelah melakukan Deploy.
+const GOOGLE_SCRIPT_URL="https://script.google.com/macros/s/AKfycbz1whiznal5riVfbqcmDTMZpQRT2TbhBFX2wjuNW92VjPZIq7XE5agcFaBWq5ZrroBs/exec";
+// Data siswa ditampilkan di halaman khusus melalui endpoint Web App Google Apps Script.
+ // GOOGLE_SCRIPT_URL harus menggunakan URL Web App yang sama dengan penyimpanan hasil ujian.
+let studentIdentity=null;
+let examStarted=false;
+function shuffleArray(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function readSeen(){try{return JSON.parse(localStorage.getItem(SEEN_KEY)||"[]");}catch(e){return [];}}
+function buildSession(){
+  try{const saved=JSON.parse(sessionStorage.getItem(SESSION_KEY)||"null");if(Array.isArray(saved)&&saved.length===TOTAL_PER_SESSION&&saved.every(i=>Number.isInteger(i)&&i>=0&&i<questions.length))return saved;}catch(e){}
+  let seen=readSeen().filter(i=>Number.isInteger(i)&&i>=0&&i<questions.length);
+  let unseen=questions.map((q,i)=>i).filter(i=>!seen.includes(i));
+  if(unseen.length<TOTAL_PER_SESSION){seen=[];unseen=questions.map((q,i)=>i);try{localStorage.setItem(SEEN_KEY,"[]");}catch(e){}}
+  const chosen=shuffleArray(unseen).slice(0,TOTAL_PER_SESSION);
+  try{sessionStorage.setItem(SESSION_KEY,JSON.stringify(chosen));}catch(e){}
+  return chosen;
+}
+const sessionIds=buildSession();
+const sessionQuestions=sessionIds.map(id=>questions[id]);
+let current=0;
+const body=document.getElementById("questionBody"), grid=document.getElementById("numberGrid");
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function markSeen(i){try{const seen=readSeen();const id=sessionIds[i];if(!seen.includes(id)){seen.push(id);localStorage.setItem(SEEN_KEY,JSON.stringify(seen));}}catch(e){}}
+function isAnswered(i){const q=sessionQuestions[i],v=answers[i];if(q.kind==="essay")return !!(v&&v.trim());if(q.kind==="boolean")return Array.isArray(v)&&v.length===q.left.length&&v.every(Boolean);if(q.kind==="match")return Array.isArray(v)&&v.every(x=>x);return Array.isArray(v)&&v.length>0;}
+function renderGrid(){grid.innerHTML="";sessionQuestions.forEach((q,i)=>{const b=document.createElement("button");b.className="num"+(i===current?" active":"")+(isAnswered(i)?" done":"");b.textContent=i+1;b.type="button";b.setAttribute("aria-label","Buka soal "+(i+1));b.disabled=submitted;b.onclick=()=>{if(!submitted){current=i;render()}};grid.appendChild(b)});updateProgress()}
+function updateProgress(){const n=sessionQuestions.filter((q,i)=>isAnswered(i)).length;document.getElementById("progress").style.width=(n/TOTAL_PER_SESSION*100)+"%";document.getElementById("progressLabel").textContent=n+" dari "+TOTAL_PER_SESSION+" soal telah dijawab"}
+function render(){
+ const q=sessionQuestions[current];markSeen(current);document.getElementById("qHeading").textContent="SOAL NOMOR "+(current+1);document.getElementById("qType").textContent=q.type.toUpperCase();document.getElementById("counter").textContent="Soal "+(current+1)+" dari "+TOTAL_PER_SESSION;
+ let out=`<p><b>${q.prompt||""}</b></p>`;if(q.stimulus)out+=`<div class="stimulus">${q.stimulus}</div>`;if(q.ask)out+=`<p><b>${q.ask}</b></p>`;
+ const saved=answers[current];
+ if(q.kind==="single"||q.kind==="multi"){out+='<div class="options">';q.opts.forEach((o,j)=>{const checked=(saved||[]).includes(j);out+=`<label class="option"><input type="${q.kind==="single"?"radio":"checkbox"}" name="answer" value="${j}" ${checked?"checked":""}><span>${o}</span></label>`});out+="</div>"}
+ if(q.kind==="essay"){out+=`<textarea class="answer-area" id="essayAnswer" placeholder="Tuliskan jawabanmu di sini...">${saved?esc(saved):""}</textarea>`}
+ if(q.kind==="boolean"){out+='<div class="match-grid"><div class="match-col"><h4>Pilih Benar (B) atau Salah (S) untuk setiap pernyataan</h4>';q.left.forEach((v,j)=>{out+=`<div class="match-row"><b>${String.fromCharCode(97+j)}. ${v}</b><select data-boolean="${j}"><option value="">Pilih jawaban...</option><option value="B" ${saved&&saved[j]==="B"?"selected":""}>Benar (B)</option><option value="S" ${saved&&saved[j]==="S"?"selected":""}>Salah (S)</option></select></div>`});out+="</div></div>"}
+ if(q.kind==="match"){out+='<div class="match-grid"><div class="match-col"><h4>Pilih jawaban yang sesuai untuk setiap pernyataan</h4>';q.left.forEach((v,j)=>{out+=`<div class="match-row"><b>${v}</b><select data-match="${j}"><option value="">Pilih jawaban...</option>${q.right.map((r,k)=>`<option value="${r[0]}" ${saved&&saved[j]===r[0]?"selected":""}>${r}</option>`).join("")}</select></div>`});out+="</div></div>"}
+ body.innerHTML=out;
+ body.querySelectorAll('input[name="answer"]').forEach(el=>{el.disabled=submitted;el.addEventListener("change",()=>{if(submitted)return;if(q.kind==="single")answers[current]=[Number(el.value)];else answers[current]=[...body.querySelectorAll('input[name="answer"]:checked')].map(x=>Number(x.value));renderGrid()})});
+ const ta=body.querySelector("#essayAnswer");if(ta){ta.disabled=submitted;ta.addEventListener("input",()=>{if(submitted)return;answers[current]=ta.value;renderGrid()})}
+ body.querySelectorAll("select[data-boolean]").forEach(el=>{el.disabled=submitted;el.addEventListener("change",()=>{if(submitted)return;const arr=Array.isArray(answers[current])?[...answers[current]]:Array(q.left.length).fill("");arr[Number(el.dataset.boolean)]=el.value;answers[current]=arr;renderGrid()})});
+ body.querySelectorAll("select[data-match]").forEach(el=>{el.disabled=submitted;el.addEventListener("change",()=>{if(submitted)return;const arr=Array.isArray(answers[current])?[...answers[current]]:Array(q.left.length).fill("");arr[Number(el.dataset.match)]=el.value;answers[current]=arr;renderGrid()})});
+ document.getElementById("prevBtn").disabled=current===0;document.getElementById("nextBtn").textContent=current===TOTAL_PER_SESSION-1?"Soal Terakhir":"Selanjutnya →";renderGrid();if(!submitted)document.getElementById("result").style.display="none";
+}
+
+
+// Semua pemberitahuan penting ditampilkan melalui kotak melayang di tengah layar.
+function showMessage(message, title="Tetap Semangat!", icon="🌟"){
+ const modal=document.getElementById("toast");
+ document.getElementById("toastTitle").textContent=title;
+ document.getElementById("toastIcon").textContent=icon;
+ document.getElementById("toastText").textContent=message;
+ modal.classList.add("show");
+ document.getElementById("toastClose").focus();
+}
+function closeMessage(){document.getElementById("toast").classList.remove("show");}
+document.getElementById("toastClose").addEventListener("click",closeMessage);
+document.getElementById("toast").addEventListener("click",e=>{
+ if(e.target.id==="toast")closeMessage();
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMessage();});
+
+const classSelect=document.getElementById("studentClass");
+const otherClassInput=document.getElementById("otherClass");
+classSelect.addEventListener("change",()=>{
+ const isOther=classSelect.value==="lainnya";
+ otherClassInput.style.display=isOther?"block":"none";
+ otherClassInput.required=isOther;
+ if(!isOther)otherClassInput.value="";
+});
+
+let allStudentResults=[];
+function showStudentDataPage(){
+  document.getElementById("identityCard").style.display="none";
+  document.getElementById("examLayout").style.display="none";
+  document.getElementById("studentDataPage").style.display="block";
+  window.scrollTo({top:0,behavior:"smooth"});
+  loadStudentResults();
+}
+function backFromStudentData(){
+  document.getElementById("studentDataPage").style.display="none";
+  if(examStarted){
+    document.getElementById("examLayout").style.display="grid";
+  }else{
+    document.getElementById("identityCard").style.display="block";
+  }
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function setDataStatus(message){
+  const el=document.getElementById("dataStatus");
+  el.textContent=message;
+  el.style.display="block";
+}
+function renderStudentResults(){
+  const query=document.getElementById("dataSearch").value.trim().toLowerCase();
+  const filtered=allStudentResults.filter(r=>
+    String(r.nama||"").toLowerCase().includes(query) ||
+    String(r.kelas||"").toLowerCase().includes(query)
+  );
+  const body=document.getElementById("dataTableBody");
+  body.innerHTML="";
+  filtered.forEach((r,i)=>{
+    const tr=document.createElement("tr");
+    const values=[i+1,r.nama||"-",r.kelas||"-",r.absen||"-",r.jumlahSoal||25,r.benar??"-",r.salah??"-",r.nilai??"-",r.waktuSelesai?new Date(r.waktuSelesai).toLocaleString("id-ID"):"-"];
+    values.forEach(v=>{const td=document.createElement("td");td.textContent=String(v);tr.appendChild(td);});
+    body.appendChild(tr);
+  });
+  document.getElementById("dataTotal").textContent=allStudentResults.length;
+  const scores=allStudentResults.map(r=>Number(r.nilai)).filter(Number.isFinite);
+  document.getElementById("dataAverage").textContent=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):"—";
+  document.getElementById("dataHighest").textContent=scores.length?Math.max(...scores):"—";
+  document.getElementById("dataTableWrap").style.display=filtered.length?"block":"none";
+  document.getElementById("dataEmpty").style.display=filtered.length?"none":"block";
+  if(allStudentResults.length)setDataStatus(`✨ Menampilkan ${filtered.length} dari ${allStudentResults.length} catatan hasil siswa.`);
+}
+function loadStudentResults(){
+  if(!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("TEMPEL_URL")){
+    setDataStatus("🚀 Data belum ada. Ruang data pusat masih dalam perbaikan");
+    document.getElementById("dataTableWrap").style.display="none";
+    return;
+  }
+  setDataStatus("📚 Sedang membuka catatan prestasi para penjelajah ilmu...");
+  const old=document.getElementById("studentDataJsonp");
+  if(old)old.remove();
+  const callbackName="receiveStudentResults_"+Date.now();
+  window[callbackName]=function(result){
+    try{
+      if(!result || result.success===false)throw new Error(result?.message||"Data tidak dapat dibaca.");
+      allStudentResults=Array.isArray(result.data)?result.data:(Array.isArray(result.results)?result.results:[]);
+      renderStudentResults();
+    }catch(err){
+      setDataStatus("⚠️ Catatan prestasi belum dapat dimuat. Periksa pengaturan Google Apps Script dan izin akses Web App.");
+      document.getElementById("dataTableWrap").style.display="none";
+    }finally{
+      delete window[callbackName];
+      const script=document.getElementById("studentDataJsonp");
+      if(script)script.remove();
+    }
+  };
+  const script=document.createElement("script");
+  script.id="studentDataJsonp";
+  script.onerror=()=>{
+    setDataStatus("⚠️ Koneksi ke catatan prestasi gagal. Periksa URL Web App dan koneksi internet.");
+    delete window[callbackName];
+    script.remove();
+  };
+  script.src=GOOGLE_SCRIPT_URL+"?action=getResults&callback="+encodeURIComponent(callbackName)+"&t="+Date.now();
+  document.body.appendChild(script);
+}
+document.getElementById("studentDataBtn").addEventListener("click",showStudentDataPage);
+document.getElementById("backFromDataBtn").addEventListener("click",backFromStudentData);
+document.getElementById("refreshDataBtn").addEventListener("click",loadStudentResults);
+document.getElementById("dataSearch").addEventListener("input",renderStudentResults);
+
+document.getElementById("startExamBtn").addEventListener("click",()=>{
+ const name=document.getElementById("studentName").value.trim();
+ const selectedClass=classSelect.value;
+ const studentClass=selectedClass==="lainnya"?otherClassInput.value.trim():selectedClass;
+ const number=Number(document.getElementById("studentNumber").value);
+ const error=document.getElementById("identityError");
+ if(!name||!studentClass||!Number.isInteger(number)||number<1||number>60){
+   error.style.display="none";showMessage("Yuk, lengkapi nama, kelas, dan nomor absen dengan benar sebelum memulai. Kamu pasti bisa! 💪","Data Belum Lengkap","📝");return;
+ }
+ studentIdentity={nama:name,kelas:studentClass,absen:number};
+ examStarted=true;
+ document.getElementById("identityCard").style.display="none";
+ document.getElementById("examLayout").style.display="grid";
+ render();
+});
+
+document.getElementById("prevBtn").onclick=()=>{if(current>0){current--;render()}};
+document.getElementById("nextBtn").onclick=()=>{if(current<TOTAL_PER_SESSION-1){current++;render()}};
+function isCorrect(q, answer){
+ if(!Array.isArray(answer))return false;
+ if(q.kind==="match"||q.kind==="boolean")return q.correct.length===q.left.length && q.correct.every((v,i)=>answer[i]===v);
+ const a=[...answer].sort((x,y)=>x-y),c=[...q.correct].sort((x,y)=>x-y);
+ return a.length===c.length && a.every((v,i)=>v===c[i]);
+}
+function answerKeyText(q){
+ if(q.kind==="boolean")return q.left.map((v,i)=>v+" → "+(q.correct[i]==="B"?"Benar":"Salah")).join("; ");
+ if(q.kind==="match")return q.left.map((v,i)=>{const r=q.right.find(x=>x[0]===q.correct[i]);return v+" → "+(r||q.correct[i])}).join("; ");
+ return q.correct.map(i=>q.opts[i]).join("; ");
+}
+
+function sendResultToSpreadsheet(resultData){
+ if(!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("TEMPEL_URL")){
+   document.getElementById("saveStatus").textContent="Hasil dihitung di halaman ini. URL Google Apps Script belum diatur sehingga belum dikirim ke spreadsheet.";
+   return;
+ }
+ const payload={
+   ...studentIdentity,
+   mataPelajaran:"Bahasa Indonesia",
+   kelasUjian:"Kelas V",
+   semester:"I (Ganjil)",
+   tahunPelajaran:"2026/2027",
+   jumlahSoal:TOTAL_PER_SESSION,
+   benar:resultData.correctCount,
+   salah:resultData.wrongCount,
+   nilai:resultData.score,
+   jawaban:sessionQuestions.map((q,i)=>({
+     nomor:i+1,jenis:q.type,jawaban:answers[i],
+     benar:isCorrect(q,answers[i]),kunci:answerKeyText(q)
+   })),
+   waktuSelesai:new Date().toISOString()
+ };
+ const formBody=new URLSearchParams();
+ formBody.append("payload",JSON.stringify(payload));
+ document.getElementById("saveStatus").textContent="Mengirim hasil ujian ke spreadsheet...";
+ showMessage("Jawabanmu sedang dikirim ke Google Spreadsheet. Terima kasih sudah mengerjakan dengan sungguh-sungguh! ✨","Menyimpan Hasil Ujian","📤");
+ fetch(GOOGLE_SCRIPT_URL,{method:"POST",mode:"no-cors",body:formBody})
+   .then(()=>{document.getElementById("saveStatus").textContent="Data ujian telah dikirim. Periksa Google Spreadsheet untuk memastikan data masuk.";showMessage("Pengiriman data telah diproses. Silakan periksa Google Spreadsheet untuk memastikan hasil ujian sudah tercatat. Hebat, kamu sudah menyelesaikan ujian! 🎉","Ujian Selesai!","🎊");})
+   .catch(()=>{document.getElementById("saveStatus").textContent="Pengiriman gagal. Periksa koneksi internet dan URL Web App.";showMessage("Hasil ujianmu tetap tampil di halaman ini, tetapi belum berhasil dikirim. Periksa koneksi internet dan URL Web App Google Apps Script, lalu coba lagi. 💪","Pengiriman Belum Berhasil","⚠️");});
+}
+
+document.getElementById("finishBtn").onclick=()=>{
+ if(submitted)return;
+ const unanswered=sessionQuestions.map((q,i)=>isAnswered(i)?null:i+1).filter(Boolean);
+ const result=document.getElementById("result");result.style.display="block";
+ if(unanswered.length){
+  showMessage(`Masih ada ${unanswered.length} soal yang belum dijawab (nomor: ${unanswered.join(", ")}). Yuk, periksa kembali dan lengkapi jawabanmu. Sedikit lagi menuju garis akhir! 🏁`,"Ayo Selesaikan Dulu!","💡");
+ }else{
+  const correctCount=sessionQuestions.filter((q,i)=>isCorrect(q,answers[i])).length;
+  const wrongCount=TOTAL_PER_SESSION-correctCount;
+  const score=Math.round(correctCount/TOTAL_PER_SESSION*100);
+  submitted=true;
+  let rows=sessionQuestions.map((q,i)=>{const ok=isCorrect(q,answers[i]);return `<tr><td>${i+1}</td><td class="${ok?"correct-text":"wrong-text"}">${ok?"Benar":"Belum tepat"}</td><td>${esc(answerKeyText(q))}</td></tr>`}).join("");
+  result.innerHTML=`<h2 style="margin:0;color:#173b69">HASIL PENILAIAN UJIAN</h2><p><b>Nama:</b> ${esc(studentIdentity?.nama||"-")} &nbsp; <b>Kelas:</b> ${esc(studentIdentity?.kelas||"-")} &nbsp; <b>No. Absen:</b> ${studentIdentity?.absen||"-"}</p><div class="score-big">Nilai: ${score}</div><p><b>Jawaban benar:</b> ${correctCount} soal &nbsp; | &nbsp; <b>Jawaban salah:</b> ${wrongCount} soal</p><p>Skor dihitung dengan rumus: jumlah jawaban benar ÷ 25 × 100. Setiap soal bernilai 4 poin. Untuk pilihan ganda kompleks dan menjodohkan, nilai penuh diberikan jika seluruh pilihan/pasangan tepat.</p><p id="saveStatus" style="font-size:13px;font-weight:700;color:#245b86">Menyiapkan penyimpanan hasil...</p><h3>Ulasan Jawaban dan Kunci</h3><table class="review-table"><thead><tr><th>No.</th><th>Hasil</th><th>Kunci jawaban</th></tr></thead><tbody>${rows}</tbody></table><button class="btn restart" id="restartBtn" type="button">↻ Mulai Lagi / Ulangi Ujian</button><p style="font-size:13px;color:#56708a">Sesi berikutnya akan memilih soal baru yang belum pernah muncul. Setelah seluruh soal digunakan, pengacakan dimulai kembali.</p>`;
+  document.getElementById("restartBtn").addEventListener("click",()=>{try{sessionStorage.removeItem(SESSION_KEY)}catch(e){};window.location.reload()});
+  document.getElementById("finishBtn").disabled=true;document.getElementById("finishBtn").textContent="Ujian Selesai";
+  document.getElementById("prevBtn").disabled=true;document.getElementById("nextBtn").disabled=true;
+  body.querySelectorAll("input,select,textarea").forEach(el=>el.disabled=true);
+  renderGrid();
+ }
+ result.scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+</script>
+</body>
+</html>

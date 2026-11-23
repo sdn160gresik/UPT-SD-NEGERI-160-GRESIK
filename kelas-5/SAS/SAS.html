@@ -88,22 +88,6 @@
     white-space: nowrap;
   }
   .artboard:hover .hint { opacity: 1; }
-  .toast {
-    position: absolute; left: 50%; top: 5%;
-    transform: translate(-50%, -15px);
-    z-index: 20;
-    max-width: 90%;
-    padding: 12px 20px;
-    border-radius: 16px;
-    color: #fff; font-weight: 800;
-    text-align: center;
-    background: linear-gradient(135deg, #0755a8, #7835cb);
-    border: 2px solid rgba(255,255,255,.8);
-    box-shadow: 0 8px 25px rgba(0,0,0,.3);
-    opacity: 0; pointer-events: none;
-    transition: .25s ease;
-  }
-  .toast.show { opacity: 1; transform: translate(-50%, 0); }
   /* HP portrait: kanvas landscape diputar dan diskalakan agar seluruh menu terlihat. */
   @media (max-aspect-ratio: 4/5) {
      .artboard {
@@ -141,7 +125,6 @@
       onclick="openSAS('SAS 2', SAS_2_URL)"></button>
     <div class="hint">PILIH BUKU SAS 1 ATAU SAS 2</div>
   </section>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </main>
 <script>
   // Ubah alamat berikut sesuai nama file halaman ujian yang digunakan.
@@ -149,12 +132,8 @@
   const SAS_2_URL = "sas2.html";
 
   function openSAS(label, destination) {
-    const toast = document.getElementById("toast");
-    toast.textContent = "✨ Membuka " + label + "… Semangat mengerjakan!";
-    toast.classList.add("show");
-    window.setTimeout(() => {
-      window.location.href = destination;
-    }, 450);
+    // Langsung membuka halaman SAS tanpa menampilkan pesan melayang.
+    window.location.href = destination;
   }
 </script>
 </body>

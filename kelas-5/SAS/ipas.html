@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Latihan SAS IPAS</title>
+
+<style>
+:root {
+    --navy: #062c3b;
+    --blue: #087e8b;
+    --cyan: #42e8d5;
+    --green: #65e6a5;
+    --yellow: #ffdc70;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 15px;
+    overflow-x: hidden;
+    background:
+        radial-gradient(circle at 15% 15%, #147c87 0, transparent 35%),
+        radial-gradient(circle at 90% 80%, #126c5b 0, transparent 35%),
+        linear-gradient(135deg, #041d30, #075064 55%, #062c3b);
+}
+
+/* DEKORASI CAHAYA */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: .25;
+    pointer-events: none;
+    animation: glow 7s ease-in-out infinite alternate;
+}
+
+body::before {
+    background: #37f5cf;
+    top: -100px;
+    left: -80px;
+}
+
+body::after {
+    background: #b1ff71;
+    bottom: -100px;
+    right: -80px;
+    animation-delay: 2s;
+}
+
+@keyframes glow {
+    from { transform: scale(.8); }
+    to { transform: scale(1.3); }
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    animation: appear .8s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* IDENTITAS SEKOLAH */
+.school {
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: var(--cyan);
+    margin-bottom: 12px;
+    text-shadow: 0 0 15px rgba(66,232,213,.5);
+}
+
+/* IKON IPAS */
+.science-icon {
+    font-size: 65px;
+    margin-bottom: 5px;
+    display: inline-block;
+    filter: drop-shadow(0 0 15px #42e8d5);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-12px) rotate(5deg); }
+}
+
+/* JUDUL */
+.title {
+    font-size: clamp(48px, 8vw, 78px);
+    font-weight: 1000;
+    letter-spacing: 8px;
+    line-height: 1;
+    color: white;
+    text-shadow:
+        0 0 10px #42e8d5,
+        0 0 30px rgba(66,232,213,.6);
+}
+
+.subtitle {
+    color: var(--yellow);
+    font-size: clamp(18px, 4vw, 27px);
+    font-weight: 900;
+    letter-spacing: 5px;
+    margin-top: 12px;
+    text-shadow: 0 0 15px rgba(255,220,112,.3);
+}
+
+.description {
+    color: #d5f5f1;
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 18px 0 25px;
+}
+
+/* KALIMAT PENYEMANGAT */
+.motivation {
+    display: inline-block;
+    padding: 11px 22px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(101,230,165,.5);
+    border-radius: 30px;
+    background: rgba(101,230,165,.10);
+    color: #aaffc9;
+    font-size: 14px;
+    font-weight: 800;
+    box-shadow: 0 0 20px rgba(101,230,165,.1);
+}
+
+/* MENU */
+.menu-title {
+    font-size: 17px;
+    font-weight: 900;
+    color: var(--cyan);
+    margin-bottom: 18px;
+    letter-spacing: 2px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+/* KARTU LATIHAN */
+.menu-card {
+    position: relative;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(
+        145deg,
+        rgba(22,132,143,.85),
+        rgba(5,48,68,.96)
+    );
+    border: 1px solid rgba(66,232,213,.45);
+    border-radius: 22px;
+    padding: 22px 12px;
+    min-height: 145px;
+    box-shadow: 0 9px 25px rgba(0,0,0,.25);
+    transition: .3s ease;
+    overflow: hidden;
+}
+
+.menu-card::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: rgba(66,232,213,.10);
+    border-radius: 50%;
+    top: -65px;
+    right: -35px;
+}
+
+.menu-card:hover {
+    transform: translateY(-8px) scale(1.025);
+    border-color: var(--yellow);
+    box-shadow: 0 0 30px rgba(66,232,213,.35);
+    background: linear-gradient(145deg, #138d91, #07516a);
+}
+
+.menu-card:active {
+    transform: scale(.97);
+}
+
+.menu-card .number {
+    font-size: 37px;
+    font-weight: 1000;
+    color: var(--yellow);
+    text-shadow: 0 0 15px rgba(255,220,112,.3);
+}
+
+.menu-card .name {
+    font-size: 17px;
+    font-weight: 900;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+.menu-card .icon {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.menu-card .arrow {
+    position: absolute;
+    right: 16px;
+    top: 15px;
+    font-size: 21px;
+    color: var(--cyan);
+    transition: .3s;
+}
+
+.menu-card:hover .arrow {
+    transform: translateX(5px);
+    color: var(--yellow);
+}
+
+/* KARTU KELIMA */
+.menu-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 48%;
+    width: 100%;
+    justify-self: center;
+}
+
+/* PESAN SEMANGAT */
+.encouragement {
+    margin-top: 30px;
+    padding: 17px 15px;
+    border-radius: 17px;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.15);
+    color: #e1fff4;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.encouragement strong {
+    color: var(--yellow);
+    font-size: 16px;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,.2);
+    color: #b9e6e4;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 1.8;
+}
+
+.footer strong {
+    color: var(--yellow);
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+    body {
+        padding: 30px 14px;
+    }
+
+    .menu-grid {
+        gap: 11px;
+    }
+
+    .menu-card {
+        min-height: 125px;
+        padding: 17px 8px;
+        border-radius: 17px;
+    }
+
+    .menu-card .number {
+        font-size: 31px;
+    }
+
+    .menu-card .name {
+        font-size: 13px;
+    }
+
+    .menu-card .icon {
+        font-size: 22px;
+    }
+
+    .school {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+
+    .menu-card:last-child {
+        max-width: 100%;
+    }
+
+    .motivation {
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="school">UPT SDN 160 GRESIK</div>
+
+    <div class="science-icon">🔬🌍</div>
+
+    <h1 class="title">SAS</h1>
+
+    <div class="subtitle">IPAS</div>
+
+    <p class="description">
+        SUMATIF AKHIR SEMESTER
+        <br>
+        🌱 Jelajahi Ilmu, Temukan Keajaiban! 🌱
+        <br>
+        Pilih petualangan latihan yang ingin kamu selesaikan!
+    </p>
+
+    <div class="motivation">
+        🚀 SIAP MENJADI PENJELAJAH ILMU?
+    </div>
+
+    <div class="menu-title">
+        ✦ PILIH MISI LATIHANMU ✦
+    </div>
+
+    <div class="menu-grid">
+
+        <a href="../lembah/sas/latihan1.html" class="menu-card">
+            <span class="arrow">➜</span>
+            <div class="icon">🌱</div>
+            <div class="number">01</div>
+            <div class="name">LATIHAN 1</div>
+        </a>
+
+        <a href="../lembah/sas/latihan2.html" class="menu-card">
+            <span class="arrow">➜</span>
+            <div class="icon">🌍</div>
+            <div class="number">02</div>
+            <div class="name">LATIHAN 2</div>
+        </a>
+
+        <a href="../lembah/sas/latihan3.html" class="menu-card">
+            <span class="arrow">➜</span>
+            <div class="icon">🔭</div>
+            <div class="number">03</div>
+            <div class="name">LATIHAN 3</div>
+        </a>
+
+        <a href="../lembah/sas/latihan4.html" class="menu-card">
+            <span class="arrow">➜</span>
+            <div class="icon">⚡</div>
+            <div class="number">04</div>
+            <div class="name">LATIHAN 4</div>
+        </a>
+
+        <a href="../lembah/sas/latihan5.html" class="menu-card">
+            <span class="arrow">➜</span>
+            <div class="icon">🧪</div>
+            <div class="number">05</div>
+            <div class="name">LATIHAN 5</div>
+        </a>
+
+    </div>
+
+    <div class="encouragement">
+        <strong>🌟 KAMU PASTI BISA! 🌟</strong>
+        <br>
+        Belajar IPAS itu menyenangkan!
+        Amati, berpikir, temukan jawaban, dan teruslah mencoba.
+        <br>
+        Jangan takut salah, karena setiap usaha adalah langkah menuju keberhasilan! 💪
+    </div>
+
+    <div class="footer">
+        <strong>SEMANGAT BELAJAR, PENJELAJAH CILIK! 🚀</strong>
+        <br><br>
+        © 2026 UPT SDN 160 GRESIK
+        <br>
+        LATIHAN SOAL SAS IPAS
+    </div>
+
+</div>
+
+</body>
+</html>

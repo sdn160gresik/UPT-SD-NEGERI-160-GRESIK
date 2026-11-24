@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<title>Ujian KKA | Berpikir Komputasional</title>
+<style>
+:root{--bg:#07111f;--panel:#102139;--panel2:#142943;--cyan:#45e4f2;--blue:#438bff;--violet:#a78bfa;--lime:#b7f36b;--text:#e9f4ff;--muted:#a9bfd4;--line:#315575;--red:#ff718b;--green:#8df0bc}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:20px;background:radial-gradient(ellipse at 50% -10%,#1c4770 0,#0b1b30 45%,#050b16 100%);color:var(--text);font-family:system-ui,"Segoe UI",sans-serif}
+.hidden{display:none!important}.topbar,.wrap{max-width:980px;margin:0 auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px;font-weight:950;letter-spacing:.06em}.crest{width:43px;height:43px;display:grid;place-items:center;border:1px solid var(--cyan);border-radius:13px;background:linear-gradient(145deg,#143c5a,#251c4d);color:var(--lime);font-size:23px;box-shadow:0 0 20px #45e4f233}
+.school{font-size:10px;letter-spacing:.16em;color:var(--muted);margin-top:3px}.top-actions{display:flex;gap:8px;flex-wrap:wrap}
+.linkbtn,.btn{display:inline-flex;justify-content:center;align-items:center;gap:7px;text-decoration:none;border:1px solid #3d6684;border-radius:10px;padding:10px 14px;font:inherit;font-size:12px;font-weight:850;color:#eaf7ff;background:#173451;cursor:pointer}
+.linkbtn.primary,.btn.primary{background:linear-gradient(110deg,#167c91,#3159a5);border-color:var(--cyan);color:white;box-shadow:0 0 18px #45e4f222}
+.card{background:linear-gradient(145deg,#102139ee,#0c192bee);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 14px 40px #0006}
+.hero{background:linear-gradient(120deg,#123b59,#272451);padding:27px 32px;border-bottom:1px solid var(--cyan);position:relative;overflow:hidden}
+.hero:after{content:"⌘";position:absolute;right:25px;top:-30px;font-size:145px;color:#45e4f211}
+.eyebrow{font-size:11px;letter-spacing:.18em;color:var(--cyan);font-weight:900}.hero h1{font-size:clamp(24px,4vw,35px);margin:8px 0;color:#f2fbff}.hero p{margin:7px 0 0;color:#c5d9ec;line-height:1.6}
+.content{padding:27px 32px 32px}.content h2{font-size:20px;margin:0 0 18px;color:#effaff}
+.grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:13px;margin-bottom:20px}
+.latihan-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px}
+.latihan-card{min-height:118px;border:1px solid #35617b;border-radius:14px;background:linear-gradient(145deg,#153b57,#17264b);color:#eaf7ff;cursor:pointer;padding:16px 10px;text-align:center;font:inherit;transition:.18s}
+.latihan-card:hover{transform:translateY(-3px);border-color:var(--cyan);box-shadow:0 8px 22px #45e4f222}
+.latihan-card strong{display:block;font-size:25px;color:var(--lime);margin-bottom:7px}
+.latihan-card span{font-size:12px;font-weight:850;letter-spacing:.04em}
+.selected-latihan{display:inline-flex;margin:0 0 14px;padding:7px 12px;border:1px solid var(--cyan);border-radius:30px;background:#12364a;color:#bdeff3;font-size:12px;font-weight:850}.field label{display:block;font-size:12px;font-weight:850;color:#a9bfd4;margin-bottom:7px}
+.field input{width:100%;height:47px;border:1px solid #315575;border-radius:10px;padding:0 13px;font:inherit;color:var(--text);outline:none;background:#09192b}
+.field input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #45e4f21a}
+.btn{font-size:14px;padding:13px 17px}.btn:disabled{opacity:.45;cursor:not-allowed}.full{width:100%}.secondary{background:#142943}
+.error{color:#ff9aaa;font-size:13px;margin-top:12px;line-height:1.5}
+.pills{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:15px}.pill{background:#102d47;border:1px solid #35617b;color:#bdeff3;padding:7px 11px;border-radius:30px;font-size:12px;font-weight:850}
+.progress{height:8px;background:#ffffff1c;border-radius:30px;overflow:hidden;margin-bottom:22px}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--lime));transition:width .25s}
+.meta{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:12px;font-weight:800;margin-bottom:12px}.question{font-size:clamp(18px,2.5vw,22px);line-height:1.55;font-weight:850;color:#f0f8ff;margin:0 0 18px}
+.option-list{display:grid;gap:10px}.option{width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;padding:13px 15px;border:1px solid #315575;background:#0d2035;border-radius:12px;color:#dceeff;font:inherit;line-height:1.5;cursor:pointer;transition:.15s}
+.option:hover:not(:disabled){border-color:var(--cyan);background:#12304a}.option.selected{border-color:var(--cyan);background:#153c50;box-shadow:0 0 0 2px #45e4f21b}.option:disabled{cursor:default}
+.letter{flex:0 0 29px;width:29px;height:29px;border-radius:8px;background:#183c55;color:var(--cyan);display:grid;place-items:center;font-weight:950}
+.actions{display:flex;gap:10px;margin-top:19px}.actions .btn{flex:1}
+.modal,.loading{position:fixed;inset:0;background:#020914df;display:grid;place-items:center;padding:18px;z-index:20}
+.modal-box,.loading-box{width:min(470px,100%);background:#102139;border:1px solid var(--cyan);border-radius:18px;padding:25px;text-align:center;box-shadow:0 20px 70px #0008}
+.modal-icon{width:58px;height:58px;border-radius:16px;margin:0 auto 12px;display:grid;place-items:center;font-size:27px;font-weight:950;background:#153a4b;color:var(--green)}
+.modal-box.bad .modal-icon{color:var(--red);background:#48253a}.modal-box h2{margin:8px 0;color:#f1fbff}.modal-box p{color:#c4d8e9;line-height:1.65;margin:8px 0 18px}
+.explain{background:#0b1a2d;border:1px solid #315575;border-radius:10px;padding:13px;text-align:left;font-size:13px;color:#cfe3f4;margin:12px 0 18px}
+.result-score{font-size:clamp(48px,8vw,68px);font-weight:950;color:var(--lime);text-align:center;line-height:1.1}.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.result-box{background:#142943;border:1px solid #315575;padding:15px;border-radius:12px;text-align:center}.result-box strong{display:block;font-size:25px;color:var(--cyan)}.result-box span{font-size:11px;color:var(--muted);font-weight:800}
+.result-note{text-align:center;color:var(--muted);font-size:13px;line-height:1.6}.result-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:17px}
+@media(max-width:680px){body{padding:12px}.latihan-grid{grid-template-columns:repeat(2,1fr)}.hero{padding:23px 20px}.content{padding:21px 18px 24px}.grid{grid-template-columns:1fr;gap:11px}.actions{flex-direction:column}.result-grid{gap:6px}.result-box{padding:11px 4px}.result-box strong{font-size:21px}.result-actions{grid-template-columns:1fr}.topbar{align-items:flex-start}.top-actions{width:100%}.top-actions>*{flex:1}}
+</style></head>
+<body>
+<div class="topbar">
+ <div class="brand"><div class="crest">⌘</div><div>LABORATORIUM KKA<div class="school">UPT SDN 160 GRESIK · KELAS V</div></div></div>
+ <div class="top-actions">
+    <a class="linkbtn primary" href="Laboratorium_KKA_Berpikir_Komputasional.html">← KEMBALI KE MATERI</a>
+  <a class="linkbtn" href="../Petualangan-Kelas-5.html">⌂ PETUALANGAN KELAS 5</a>
+ </div>
+</div>
+<main class="wrap">
+<section id="latihanMenu" class="card">
+ <div class="hero"><div class="eyebrow">✦ PILIH MODE LATIHAN ✦</div><h1>Laboratorium Latihan KKA</h1><p>Pilih salah satu latihan untuk memulai tantangan Berpikir Komputasional.</p></div>
+ <div class="content">
+  <h2>Menu Latihan</h2>
+  <p style="color:var(--muted);line-height:1.6;margin-top:-8px">Setiap latihan memiliki kumpulan soal tersendiri. Pilih latihan yang ingin kamu kerjakan.</p>
+  <div class="latihan-grid">
+   <button class="latihan-card" onclick="chooseLatihan(1)"><strong>01</strong><span>LATIHAN 1</span></button>
+   <button class="latihan-card" onclick="chooseLatihan(2)"><strong>02</strong><span>LATIHAN 2</span></button>
+   <button class="latihan-card" onclick="chooseLatihan(3)"><strong>03</strong><span>LATIHAN 3</span></button>
+   <button class="latihan-card" onclick="chooseLatihan(4)"><strong>04</strong><span>LATIHAN 4</span></button>
+   <button class="latihan-card" onclick="chooseLatihan(5)"><strong>05</strong><span>LATIHAN 5</span></button>
+  </div>
+ </div>
+</section>
+<section id="identity" class="card hidden">
+ <div class="hero"><div class="eyebrow">✦ SISTEM EVALUASI DIGITAL ✦</div><h1>Tantangan Berpikir Komputasional</h1><p id="identitySubtitle">BAB 1 · Pengenalan Berpikir Komputasional</p></div>
+ <div class="content">
+  <div class="selected-latihan" id="selectedLatihanLabel">LATIHAN 1 DIPILIH</div><h2>Identitas Peserta</h2>
+  <div class="grid">
+   <div class="field"><label for="nama">Nama lengkap</label><input id="nama" autocomplete="name" placeholder="Masukkan nama siswa"></div>
+   <div class="field"><label for="kelas">Kelas</label><input id="kelas" placeholder="Contoh: 5A"></div>
+   <div class="field"><label for="absen">Nomor absen</label><input id="absen" inputmode="numeric" placeholder="Nomor absen"></div>
+  </div>
+  <button class="btn primary full" id="startBtn" onclick="startQuiz()">MULAI TANTANGAN <span>→</span></button><button class="btn secondary full" style="margin-top:9px" onclick="backToLatihan()">← GANTI LATIHAN</button>
+  <div id="startError" class="error hidden"></div>
+ </div>
+</section>
+<section id="quiz" class="card hidden">
+ <div class="hero"><div class="eyebrow">✦ MODE TANTANGAN AKTIF ✦</div><h1>Ruang Uji Logika</h1><p>Pilih satu jawaban yang paling tepat. Setiap jawaban akan disertai pembahasan.</p></div>
+ <div class="content">
+  <div class="pills"><span class="pill" id="counter">Soal 1</span><span class="pill" id="scoreLive">Benar: 0</span><span class="pill" id="studentTag">Siswa</span></div>
+  <div class="progress"><span id="progressBar"></span></div>
+  <div class="meta"><span id="sectionName">BAB 1</span><span id="bloomTag">C1</span></div>
+  <p class="question" id="questionText"></p>
+  <div class="meta"><span>PILIH SATU JAWABAN</span><span>A · B · C · D</span></div>
+  <div class="option-list" id="optionList"></div>
+  <div class="actions"><button class="btn secondary" onclick="clearAnswer()">HAPUS PILIHAN</button><button class="btn primary" id="checkBtn" onclick="checkCurrent()" disabled>PERIKSA JAWABAN</button></div>
+ </div>
+</section>
+<section id="result" class="card hidden">
+ <div class="hero"><div class="eyebrow">✦ HASIL EVALUASI ✦</div><h1>Tantangan Selesai!</h1><p id="resultStudent"></p><p id="resultLatihan" style="color:var(--cyan);font-weight:850"></p></div>
+ <div class="content">
+  <div class="result-score" id="finalScore">0</div><div style="text-align:center;color:var(--muted);font-weight:850">NILAI AKHIR</div>
+  <div class="result-grid"><div class="result-box"><strong id="totalResult">0</strong><span>Jumlah soal</span></div><div class="result-box"><strong id="correctResult">0</strong><span>Jawaban benar</span></div><div class="result-box"><strong id="wrongResult">0</strong><span>Jawaban salah</span></div></div>
+  <p id="remainingInfo" class="result-note"></p>
+  <div class="result-actions"><a class="btn secondary" href="Laboratorium_KKA_Berpikir_Komputasional.html">← KEMBALI KE MATERI</a><button class="btn primary" onclick="location.reload()">SELESAI</button></div>
+ </div>
+</section>
+</main>
+<div id="feedback" class="modal hidden"><div id="feedbackBox" class="modal-box good"><div class="modal-icon" id="feedbackIcon">✓</div><h2 id="feedbackTitle">Jawaban benar</h2><p id="feedbackText"></p><div class="explain" id="explanation"></div><button class="btn primary full" id="feedbackNext" onclick="continueAfterFeedback()">LANJUT</button></div></div>
+<div id="loading" class="loading hidden"><div class="loading-box">◈ Menghubungkan ke pusat data...</div></div>
+<script>
+/* GANTI dengan URL Web App Google Apps Script setelah Deploy */
+const API_URL="https://script.google.com/macros/s/AKfycbybxIsQ1kZYDz7EgK0TLwO_57-udtOMlPGByTBo7SfgDBI90v67SYcSUArS_kduZBSx2g/exec";
+let student={},quizQuestions=[],current=0,responses=[],correctCount=0,selectedOption="",checked=false,remainingAfter=0,selectedLatihan=1;
+const $=id=>document.getElementById(id);
+function show(id){$(id).classList.remove("hidden")}function hide(id){$(id).classList.add("hidden")}
+function loading(v){v?show("loading"):hide("loading")}
+function chooseLatihan(n){
+ selectedLatihan=Number(n);
+ $("selectedLatihanLabel").textContent="LATIHAN "+selectedLatihan+" DIPILIH";
+ hide("latihanMenu");show("identity");
+}
+function backToLatihan(){hide("identity");show("latihanMenu");hide("startError");$("startBtn").disabled=false;}
+function apiCall(action,params={}){
+ return new Promise((resolve,reject)=>{
+  if(!API_URL||API_URL.includes("TEMPEL_URL"))return reject(new Error("Terjadi kegagalan sistem."));
+  const cb="kkaCallback_"+Date.now()+"_"+Math.floor(Math.random()*1e6),script=document.createElement("script");let done=false;
+  const clean=()=>{script.remove();try{delete window[cb]}catch(e){window[cb]=undefined}};
+  const timer=setTimeout(()=>{if(done)return;done=true;clean();reject(new Error("MISI TERHENTI! Jalur komunikasi ke pusat data terputus."))},25000);
+  window[cb]=res=>{if(done)return;done=true;clearTimeout(timer);clean();res&&res.ok?resolve(res.data):reject(new Error(res?.error||"Terjadi kesalahan komunikasi."))};
+  const qs=new URLSearchParams({action,callback:cb,...Object.fromEntries(Object.entries(params).map(([k,v])=>[k,typeof v==="string"?v:JSON.stringify(v)])),_:Date.now()});
+  script.src=API_URL+(API_URL.includes("?")?"&":"?")+qs.toString();script.onerror=()=>{if(done)return;done=true;clearTimeout(timer);clean();reject(new Error("MISI TERHENTI! Jalur komunikasi ke pusat data terputus."))};document.head.appendChild(script);
+ });
+}
+function startError(msg){$("startError").textContent=msg;show("startError")}
+async function startQuiz(){
+ student={nama:$("nama").value.trim(),kelas:$("kelas").value.trim(),absen:$("absen").value.trim()};hide("startError");
+ if(!student.nama||!student.kelas||!student.absen)return startError("Lengkapi nama, kelas, dan nomor absen terlebih dahulu.");
+ $("startBtn").disabled=true;loading(true);
+ try{
+  const data=await apiCall("getQuiz",{student,latihan:selectedLatihan});quizQuestions=data.questions||[];remainingAfter=Number(data.remainingAfterThis||0);
+  if(!quizQuestions.length)throw new Error(data.message||"Belum ada soal yang dapat ditampilkan.");
+  current=0;responses=[];correctCount=0;$("sectionName").textContent="LATIHAN "+selectedLatihan;hide("identity");show("quiz");$("studentTag").textContent=student.nama+" · "+student.kelas;renderQuestion();
+ }catch(e){startError(e.message||String(e));$("startBtn").disabled=false}finally{loading(false)}
+}
+function renderQuestion(){
+ const q=quizQuestions[current];checked=false;selectedOption="";
+ $("counter").textContent=`SOAL ${current+1} DARI ${quizQuestions.length}`;$("scoreLive").textContent="Benar: "+correctCount;
+ $("sectionName").textContent=q.section||"BAB 1";$("bloomTag").textContent=q.bloom+" · "+q.bloomName;$("questionText").textContent=q.question;
+ $("progressBar").style.width=(current/quizQuestions.length*100)+"%";const list=$("optionList");list.innerHTML="";
+ q.options.forEach((opt,i)=>{const b=document.createElement("button");b.type="button";b.className="option";const letter=document.createElement("span");letter.className="letter";letter.textContent="ABCD"[i];const label=document.createElement("span");label.textContent=opt;b.append(letter,label);b.onclick=()=>{if(checked)return;selectedOption=opt;list.querySelectorAll(".option").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");$("checkBtn").disabled=false};list.appendChild(b)});
+ $("checkBtn").disabled=true;
+}
+function clearAnswer(){if(checked)return;selectedOption="";$("optionList").querySelectorAll(".option").forEach(x=>x.classList.remove("selected"));$("checkBtn").disabled=true}
+async function checkCurrent(){
+ if(checked||!selectedOption)return;$("checkBtn").disabled=true;loading(true);
+ try{
+  const q=quizQuestions[current],r=await apiCall("checkAnswer",{questionId:q.id,answerText:selectedOption});
+  checked=true;if(r.correct)correctCount++;responses.push({id:q.id,answerText:selectedOption});
+  $("scoreLive").textContent="Benar: "+correctCount;$("feedbackBox").className="modal-box "+(r.correct?"good":"bad");
+  $("feedbackIcon").textContent=r.correct?"✓":"✕";$("feedbackTitle").textContent=r.correct?"Jawaban Benar!":"Jawaban Belum Tepat";
+  $("feedbackText").textContent=r.correct?"Bagus! Pilihanmu tepat.":"Jawaban yang benar adalah: "+r.correctAnswerText+".";
+  $("explanation").textContent="Pembahasan: "+r.explanation;
+  $("feedbackNext").textContent=current===quizQuestions.length-1?"LIHAT HASIL":"SOAL BERIKUTNYA";
+  $("optionList").querySelectorAll("button").forEach(b=>b.disabled=true);show("feedback");
+ }catch(e){$("checkBtn").disabled=false;alert(e.message||String(e))}finally{loading(false)}
+}
+function continueAfterFeedback(){hide("feedback");current++;if(current<quizQuestions.length)renderQuestion();else finishQuiz()}
+function finishQuiz(){
+ const total=quizQuestions.length,benar=correctCount,salah=total-benar;
+ const nilai=total?Math.round((benar/total)*100):0;
+ hide("quiz");show("result");
+ $("finalScore").textContent=nilai;
+ $("totalResult").textContent=total;
+ $("correctResult").textContent=benar;
+ $("wrongResult").textContent=salah;
+ $("resultStudent").textContent=student.nama+" · Kelas "+student.kelas+" · Absen "+student.absen;
+ $("resultLatihan").textContent="LATIHAN "+selectedLatihan;
+ $("remainingInfo").textContent="Latihan selesai. Hasil ini hanya ditampilkan pada perangkat siswa dan tidak dikirim atau disimpan sebagai data nilai siswa.";
+}
+
+</script></body></html>

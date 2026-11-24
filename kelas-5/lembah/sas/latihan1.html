@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#102b50">
+<title>SAS Matematika | UPT SDN 160 GRESIK</title>
+<style>
+:root{--bg:#07182e;--panel:#102b50;--panel2:#173b68;--blue:#70c8ff;--cyan:#9be9ff;--gold:#ffd477;--text:#f2f8ff;--muted:#b9cde3;--line:#31577e;--red:#ff9b9b;--green:#9be5b2}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:18px;background:radial-gradient(ellipse at 50% -10%,#326b9b 0,#173b68 38%,#061326 100%);color:var(--text);font-family:system-ui,"Segoe UI",sans-serif}
+.hidden{display:none!important}.topbar,.wrap{max-width:1020px;margin:0 auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px;font-weight:950;letter-spacing:.05em}.crest{width:46px;height:46px;display:grid;place-items:center;border:1px solid var(--gold);border-radius:15px;background:linear-gradient(145deg,#246ca0,#8a642d);color:#fff;font-size:24px;box-shadow:0 0 22px #70c8ff33}
+.school{font-size:10px;letter-spacing:.15em;color:var(--muted);margin-top:3px}.top-actions{display:flex;gap:8px;flex-wrap:wrap}
+.linkbtn,.btn{display:inline-flex;justify-content:center;align-items:center;gap:7px;text-decoration:none;border:1px solid #527da4;border-radius:11px;padding:10px 14px;font:inherit;font-size:12px;font-weight:850;color:#f1f8ff;background:#19466f;cursor:pointer}
+.linkbtn.primary,.btn.primary{background:linear-gradient(110deg,#247cb5,#a07831);border-color:var(--gold);color:white;box-shadow:0 0 18px #70c8ff22}
+.card{background:linear-gradient(145deg,#102b50ee,#0b203bee);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 14px 40px #0006}
+.hero{background:linear-gradient(120deg,#17649b,#765a2c);padding:28px 32px;border-bottom:1px solid var(--gold);position:relative;overflow:hidden}
+.hero:after{content:"📐";position:absolute;right:25px;top:8px;font-size:100px;opacity:.16}
+.eyebrow{font-size:11px;letter-spacing:.18em;color:#e5f7ff;font-weight:900}.hero h1{font-size:clamp(25px,4vw,36px);margin:8px 0;color:#fff}.hero p{margin:7px 0 0;color:#e1f3ff;line-height:1.6;max-width:760px}
+.content{padding:27px 32px 32px}.content h2{font-size:20px;margin:0 0 18px;color:#f1f8ff}
+.grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:13px;margin-bottom:20px}.field label{display:block;font-size:12px;font-weight:850;color:var(--muted);margin-bottom:7px}
+.field input{width:100%;height:48px;border:1px solid #527da4;border-radius:11px;padding:0 13px;font:inherit;color:var(--text);outline:none;background:#091d36}
+.field input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #9be9ff1c}
+.btn{font-size:14px;padding:13px 17px}.btn:disabled{opacity:.45;cursor:not-allowed}.full{width:100%}.secondary{background:#194064}
+.error{color:#ffb4b4;font-size:13px;margin-top:12px;line-height:1.5}
+.pills{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:15px}.pill{background:#173e66;border:1px solid #527da4;color:#e2f5ff;padding:7px 11px;border-radius:30px;font-size:12px;font-weight:850}
+.progress{height:9px;background:#ffffff20;border-radius:30px;overflow:hidden;margin-bottom:22px}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--gold));transition:width .25s}
+.meta{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:12px;font-weight:800;margin-bottom:12px}
+.question{font-size:clamp(19px,2.5vw,23px);line-height:1.6;font-weight:850;color:#f4faff;margin:0 0 18px}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.05;margin:0 .12em;font-size:.92em;white-space:nowrap}.frac .num{display:block;padding:0 .16em .08em;border-bottom:1.5px solid currentColor}.frac .den{display:block;padding:.08em .16em 0}
+.option-list{display:grid;gap:10px;margin-top:8px}.option{width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;padding:13px 15px;border:1px solid #31577e;background:#091d36;border-radius:12px;color:#e7f3ff;font:inherit;line-height:1.5;cursor:pointer;transition:.15s}.option:hover:not(:disabled){border-color:var(--cyan);background:#173e66}.option.selected{border-color:var(--cyan);background:#20557e;box-shadow:0 0 0 2px #9be9ff20}.option:disabled{cursor:default}.letter{flex:0 0 29px;width:29px;height:29px;border-radius:8px;background:#24547c;color:var(--cyan);display:grid;place-items:center;font-weight:950}
+.hint{font-size:12px;color:#c4d9ed;line-height:1.5;margin:9px 0 0}.actions{display:flex;gap:10px;margin-top:19px}.actions .btn{flex:1}
+.modal,.loading,.score-modal{position:fixed;inset:0;background:#04101fde;display:grid;place-items:center;padding:18px;z-index:20}
+.modal-box,.loading-box{width:min(520px,100%);background:#102b50;border:1px solid var(--gold);border-radius:19px;padding:25px;text-align:center;box-shadow:0 20px 70px #0008}
+.modal-icon{width:58px;height:58px;border-radius:17px;margin:0 auto 12px;display:grid;place-items:center;font-size:27px;font-weight:950;background:#20557e;color:var(--green)}
+.modal-box.bad .modal-icon{color:var(--red);background:#542d32}.modal-box h2{margin:8px 0;color:#f1f8ff}.modal-box p{color:#d4e7f8;line-height:1.65;margin:8px 0 18px}
+.explain{background:#091d36;border:1px solid #31577e;border-radius:11px;padding:13px;text-align:left;font-size:13px;color:#d8eafa;margin:12px 0 18px;line-height:1.6}
+.result-score{font-size:clamp(48px,8vw,68px);font-weight:950;color:var(--gold);text-align:center;line-height:1.1}.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.result-box{background:#173e66;border:1px solid #31577e;padding:15px;border-radius:13px;text-align:center}.result-box strong{display:block;font-size:25px;color:var(--gold)}.result-box span{font-size:11px;color:var(--muted);font-weight:800}
+.result-note{text-align:center;color:var(--muted);font-size:13px;line-height:1.6}.result-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:17px}
+.score-panel{width:min(1000px,100%);max-height:90vh;overflow:auto;background:#102b50;border:1px solid var(--gold);border-radius:18px}
+.score-head{position:sticky;top:0;background:#173e66;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--gold)}
+.score-head h2{margin:0;font-size:19px}.table-wrap{overflow:auto;padding:18px}.score-table{width:100%;border-collapse:collapse;min-width:760px;font-size:12px}.score-table th,.score-table td{padding:10px;border-bottom:1px solid #31577e;text-align:left;white-space:nowrap}.score-table th{color:var(--gold);background:#091d36}.score-table td{color:#e0edf9}.score-empty{text-align:center;color:var(--muted);padding:20px}.loading-box{width:auto;color:#edfbff;font-weight:850}
+@media(max-width:680px){body{padding:12px}.hero{padding:23px 20px}.content{padding:21px 18px 24px}.grid{grid-template-columns:1fr;gap:11px}.actions{flex-direction:column}.result-grid{gap:6px}.result-box{padding:11px 4px}.result-box strong{font-size:21px}.result-actions{grid-template-columns:1fr}.topbar{align-items:flex-start}.top-actions{width:100%}.top-actions>*{flex:1}}
+</style>
+</head>
+<body>
+<div class="topbar">
+ <div class="brand"><div class="crest">📐</div><div>SAS MATEMATIKA<div class="school">UPT SDN 160 GRESIK · KELAS V · TAHUN AJARAN 2026/2027</div></div></div>
+ <div class="top-actions"><button class="linkbtn" onclick="openScores()">▤ DATA NILAI SISWA</button><a class="linkbtn primary" href="../Petualangan-Kelas-5.html">⌂ MENU UTAMA</a></div>
+</div>
+<main class="wrap">
+<section id="identity" class="card">
+ <div class="hero"><div class="eyebrow">✦ SUMATIF AKHIR SEMESTER 1 ✦</div><h1>Ujian Matematika Kelas V</h1><p></p></div>
+ <div class="content"><h2>Identitas Peserta</h2>
+  <div class="grid">
+   <div class="field"><label for="nama">Nama lengkap</label><input id="nama" autocomplete="name" placeholder="Masukkan nama siswa"></div>
+   <div class="field"><label for="kelas">Kelas</label><input id="kelas" placeholder="Contoh: 5A"></div>
+   <div class="field"><label for="absen">Nomor absen</label><input id="absen" inputmode="numeric" placeholder="Nomor absen"></div>
+  </div>
+  <button class="btn primary full" id="startBtn" onclick="startQuiz()">MULAI SAS MATEMATIKA <span>→</span></button><div id="startError" class="error hidden"></div>
+ </div>
+</section>
+<section id="quiz" class="card hidden">
+ <div class="hero"><div class="eyebrow">✦ UJIAN SEDANG BERLANGSUNG ✦</div><h1>Ruang Tantangan Matematika</h1><p>Baca petunjuk setiap bagian. Untuk pilihan ganda kompleks, pilih semua jawaban yang benar.</p></div>
+ <div class="content">
+  <div class="pills"><span class="pill" id="counter">Soal 1</span><span class="pill" id="scoreLive">Terjawab: 0</span><span class="pill" id="studentTag">Siswa</span></div>
+  <div class="progress"><span id="progressBar"></span></div>
+  <div class="meta"><span id="sectionName">BAGIAN A</span><span id="formatTag">Pilihan Ganda</span></div>
+  <p class="question" id="questionText"></p>
+  <div class="meta"><span id="instruction">PILIH SATU JAWABAN YANG TEPAT</span><span id="optionMark">A · B · C · D</span></div>
+  <div class="option-list" id="optionList"></div>
+  <p class="hint" id="questionHint"></p>
+  <div class="actions"><button class="btn secondary" onclick="clearAnswer()">HAPUS PILIHAN</button><button class="btn primary" id="checkBtn" onclick="checkCurrent()" disabled>PERIKSA JAWABAN</button></div>
+ </div>
+</section>
+<section id="result" class="card hidden">
+ <div class="hero"><div class="eyebrow">✦ SAS SELESAI ✦</div><h1>Ujian Telah Diselesaikan</h1><p id="resultStudent"></p></div>
+ <div class="content"><div class="result-score" id="finalScore">0</div><div style="text-align:center;color:var(--muted);font-weight:850">NILAI AKHIR</div>
+  <div class="result-grid"><div class="result-box"><strong id="totalResult">40</strong><span>Jumlah soal</span></div><div class="result-box"><strong id="correctResult">0</strong><span>Soal benar</span></div><div class="result-box"><strong id="wrongResult">0</strong><span>Soal belum tepat</span></div></div>
+  <p id="remainingInfo" class="result-note"></p><div class="result-actions"><button class="btn secondary" onclick="location.reload()">ULANGI UJIAN</button><a class="btn primary" href="../Petualangan-Kelas-5.html">KEMBALI KE MENU</a></div>
+ </div>
+</section>
+</main>
+<div id="feedback" class="modal hidden"><div id="feedbackBox" class="modal-box good"><div class="modal-icon" id="feedbackIcon">✓</div><h2 id="feedbackTitle">Jawaban benar</h2><p id="feedbackText"></p><div class="explain" id="explanation"></div><button class="btn primary full" id="feedbackNext" onclick="continueAfterFeedback()">SOAL BERIKUTNYA</button></div></div>
+<div id="scoreModal" class="score-modal hidden"><section class="score-panel"><div class="score-head"><h2>▤ DATA NILAI SISWA</h2><button class="btn secondary" onclick="closeScores()">TUTUP ✕</button></div><div class="table-wrap"><div id="scoreCount" class="pill">Memuat data...</div><table class="score-table"><thead><tr><th>No.</th><th>Waktu</th><th>Nama</th><th>Kelas</th><th>Absen</th><th>Jumlah Soal</th><th>Benar</th><th>Salah</th><th>Nilai</th></tr></thead><tbody id="scoreRows"></tbody></table><div id="scoreEmpty" class="score-empty hidden">Belum ada data nilai.</div><div id="scoreError" class="error hidden"></div><button class="btn secondary" style="margin-top:12px" onclick="loadScores()">MUAT ULANG</button></div></section></div>
+<div id="loading" class="loading hidden"><div class="loading-box">📘 Menyiapkan ujian matematika...</div></div>
+<script>
+const API_URL="https://script.google.com/macros/s/AKfycbxjftS3u1c9doZU0Tncc6j2TBq3x1gHNjiS3SK4v7QMRIqd4Dw6ro2WqrJmwcUSncwGMg/exec";
+let student={},quizQuestions=[],current=0,responses=[],selectedAnswers=[],checked=false;
+const $=id=>document.getElementById(id);
+function show(id){$(id).classList.remove("hidden")}function hide(id){$(id).classList.add("hidden")}
+function loading(v){v?show("loading"):hide("loading")}
+function apiCall(action,params={}){return new Promise((resolve,reject)=>{
+ if(!API_URL||API_URL.includes("TEMPEL_URL"))return reject(new Error("Pasang URL Web App Apps Script pada API_URL terlebih dahulu."));
+ const cb="sasMathCallback_"+Date.now()+"_"+Math.floor(Math.random()*1e6),script=document.createElement("script");let done=false;
+ const clean=()=>{script.remove();try{delete window[cb]}catch(e){window[cb]=undefined}};
+ const timer=setTimeout(()=>{if(done)return;done=true;clean();reject(new Error("Server tidak merespons. Periksa URL Web App dan koneksi internet."))},25000);
+ window[cb]=res=>{if(done)return;done=true;clearTimeout(timer);clean();res&&res.ok?resolve(res.data):reject(new Error(res?.error||"Terjadi kesalahan server."))};
+ const qs=new URLSearchParams({action,callback:cb,...Object.fromEntries(Object.entries(params).map(([k,v])=>[k,typeof v==="string"?v:JSON.stringify(v)])),_:Date.now()});
+ script.src=API_URL+(API_URL.includes("?")?"&":"?")+qs.toString();script.onerror=()=>{if(done)return;done=true;clearTimeout(timer);clean();reject(new Error("Tidak dapat mengakses Web App. Pastikan akses deployment untuk siapa saja."))};document.head.appendChild(script);
+})}
+function fractionHTML(value){
+ const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+ let h=esc(value);
+ h=h.replace(/(\d+)\s+(\d+)\/(\d+)/g,'$1 <span class="frac"><span class="num">$2</span><span class="den">$3</span></span>');
+ h=h.replace(/(\d+)\/(\d+)/g,'<span class="frac"><span class="num">$1</span><span class="den">$2</span></span>');
+ return h;
+}
+function startError(msg){$("startError").textContent=msg;show("startError")}
+async function startQuiz(){
+ student={nama:$("nama").value.trim(),kelas:$("kelas").value.trim(),absen:$("absen").value.trim()};hide("startError");
+ if(!student.nama||!student.kelas||!student.absen)return startError("Lengkapi nama, kelas, dan nomor absen terlebih dahulu.");
+ $("startBtn").disabled=true;loading(true);
+ try{const data=await apiCall("getQuiz",{student});quizQuestions=data.questions||[];if(quizQuestions.length!==20)throw new Error("Sesi ujian harus memuat 20 soal. Jumlah soal yang diterima: "+quizQuestions.length);
+ current=0;responses=[];hide("identity");show("quiz");$("studentTag").textContent=student.nama+" · "+student.kelas;renderQuestion();
+ }catch(e){startError(e.message||String(e));$("startBtn").disabled=false}finally{loading(false)}
+}
+function renderQuestion(){
+ const q=quizQuestions[current];checked=false;selectedAnswers=[];
+ $("counter").textContent=`SOAL ${current+1} DARI ${quizQuestions.length}`;$("scoreLive").textContent="Terjawab: "+responses.length;
+ $("sectionName").textContent=q.section;$("formatTag").textContent=q.format;$("questionText").innerHTML=fractionHTML(q.question);
+ $("progressBar").style.width=(current/quizQuestions.length*100)+"%";
+ $("instruction").textContent=q.type==="multiple"? "PILIH SATU JAWABAN YANG TEPAT":q.type==="multi"?"PILIH SEMUA JAWABAN YANG BENAR":q.type==="boolean"?"PILIH BENAR ATAU SALAH":"PILIH HURUF JAWABAN YANG SESUAI";
+ $("optionMark").textContent=q.type==="multi"?"DAPAT LEBIH DARI SATU":q.type==="match"?"A · B · C · D · E · F":"";
+ $("questionHint").textContent=q.type==="multi"?"Soal ini dapat memiliki lebih dari satu jawaban benar.":q.type==="boolean"?"Tentukan apakah pernyataan tersebut benar atau salah.":q.type==="match"?"Pilih pasangan jawaban yang tepat dari pilihan yang tersedia.":"";
+ const list=$("optionList");list.innerHTML="";
+ (q.options||[]).forEach((opt,i)=>{
+  const b=document.createElement("button");b.type="button";b.className="option";
+  const letter=document.createElement("span");letter.className="letter";letter.textContent=q.type==="boolean"?(i===0?"B":"S"):" ABCDEF"[i+1];
+  const label=document.createElement("span");label.innerHTML=fractionHTML(opt);b.append(letter,label);
+  b.onclick=()=>{if(checked)return;
+   if(q.type==="multi"){const ix=selectedAnswers.indexOf(opt);if(ix>=0)selectedAnswers.splice(ix,1);else selectedAnswers.push(opt);b.classList.toggle("selected",selectedAnswers.includes(opt));}
+   else{selectedAnswers=[opt];list.querySelectorAll(".option").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");}
+   $("checkBtn").disabled=selectedAnswers.length===0;
+  };list.appendChild(b);
+ });
+ $("checkBtn").disabled=true;
+}
+function clearAnswer(){if(checked)return;selectedAnswers=[];$("optionList").querySelectorAll(".option").forEach(b=>b.classList.remove("selected"));$("checkBtn").disabled=true}
+async function checkCurrent(){
+ if(checked||!selectedAnswers.length)return;$("checkBtn").disabled=true;loading(true);
+ try{const q=quizQuestions[current],r=await apiCall("checkAnswer",{questionId:q.id,answers:selectedAnswers});
+  checked=true;responses.push({id:q.id,answers:selectedAnswers});
+  $("scoreLive").textContent="Terjawab: "+responses.length;$("feedbackBox").className="modal-box "+(r.correct?"good":"bad");
+  $("feedbackIcon").textContent=r.correct?"✓":"✕";$("feedbackTitle").textContent=r.correct?"Jawaban Benar!":"Jawaban Belum Tepat";
+  $("feedbackText").textContent=r.correct?"Bagus! Jawabanmu tepat.":"Perhatikan kunci jawaban dan pembahasan berikut.";
+  $("explanation").innerHTML="<b>Jawaban benar:</b> "+fractionHTML(r.correctAnswerText)+"<br><b>Pembahasan:</b> "+fractionHTML(r.explanation);
+  $("feedbackNext").textContent=current===quizQuestions.length-1?"LIHAT HASIL":"LANJUT KE SOAL BERIKUTNYA";
+  $("optionList").querySelectorAll("button").forEach(b=>b.disabled=true);show("feedback");
+ }catch(e){$("checkBtn").disabled=false;alert(e.message||String(e))}finally{loading(false)}
+}
+function continueAfterFeedback(){hide("feedback");current++;if(current<quizQuestions.length)renderQuestion();else finishQuiz()}
+async function finishQuiz(){
+ loading(true);try{const r=await apiCall("submitResult",{payload:{student,responses}});
+ hide("quiz");show("result");$("finalScore").textContent=r.score;$("totalResult").textContent=r.total;
+ $("correctResult").textContent=r.correct;$("wrongResult").textContent=r.wrong;
+ $("resultStudent").textContent=student.nama+" · Kelas "+student.kelas+" · Absen "+student.absen;
+ $("remainingInfo").textContent="Kamu telah menyelesaikan 20 soal yang dipilih secara acak dari bank soal. Nilai dihitung berdasarkan bobot soal yang muncul pada sesi ini. Hasil ujian telah dikirim ke data nilai.";
+ }catch(e){alert("Nilai belum tersimpan: "+(e.message||String(e)))}finally{loading(false)}
+}
+async function openScores(){show("scoreModal");await loadScores()}function closeScores(){hide("scoreModal")}
+async function loadScores(){
+ $("scoreError").textContent="";hide("scoreError");$("scoreCount").textContent="Memuat data...";loading(true);
+ try{const data=await apiCall("getScores"),rows=data.rows||[];$("scoreCount").textContent=rows.length+" data nilai";const body=$("scoreRows");body.innerHTML="";
+  rows.forEach((r,i)=>{const tr=document.createElement("tr");[i+1,r.time,r.nama,r.kelas,r.absen,r.total,r.benar,r.salah,r.nilai].forEach(v=>{const td=document.createElement("td");td.textContent=v??"";tr.appendChild(td)});body.appendChild(tr)});
+  rows.length?hide("scoreEmpty"):show("scoreEmpty");
+ }catch(e){$("scoreError").textContent=e.message||String(e);show("scoreError")}finally{loading(false)}
+}
+</script>
+</body>
+</html>

@@ -104,11 +104,48 @@
     opacity: .92;
     white-space: nowrap;
   }
+
+  .back-button {
+    position: absolute;
+    left: 50%;
+    bottom: 4%;
+    transform: translateX(-50%);
+    z-index: 30;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: clamp(9px, 1.2vw, 14px) clamp(20px, 2.5vw, 32px);
+    border: 2px solid rgba(255,255,255,.9);
+    border-radius: 999px;
+    color: #173c32;
+    background: linear-gradient(180deg, #fff0a6, #ffc94d);
+    box-shadow: 0 5px 0 #b87920, 0 8px 18px rgba(0,0,0,.3);
+    font-size: clamp(12px, 1.25vw, 17px);
+    font-weight: 900;
+    letter-spacing: .5px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform .18s ease, filter .18s ease;
+  }
+  .back-button:hover {
+    transform: translateX(-50%) translateY(-2px);
+    filter: brightness(1.08);
+  }
+  .back-button:active {
+    transform: translateX(-50%) scale(.97);
+  }
+  .back-button:focus-visible {
+    outline: 4px solid #fff5a8;
+    outline-offset: 4px;
+  }
+
   @media (max-width: 700px) {
     body { align-items: flex-start; }
     .stage { width: 100vw; }
     .hotspot { border-radius: 20%; }
     .hint { bottom: 6px; font-size: 10px; padding: 6px 10px; }
+    .back-button { bottom: 3%; padding: 8px 18px; font-size: 11px; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; }
@@ -122,6 +159,7 @@
   <!-- Area klik transparan tepat di atas buku SAS 1 dan SAS 2. -->
   <a class="hotspot sas1" href="sas1.html" aria-label="Buka SAS 1" title="SAS 1"></a>
   <a class="hotspot sas2" href="sas2.html" aria-label="Buka SAS 2" title="SAS 2"></a>
+  <a class="back-button" href="../Petualangan-Kelas-5.html" aria-label="Kembali ke Petualangan Kelas 5">⬅ KEMBALI</a>
 </main>
 <div class="hint">Pilih SAS 1 atau SAS 2 untuk melanjutkan ✨</div>
 

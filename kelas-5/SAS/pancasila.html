@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Latihan SAS Pancasila</title>
+
+<style>
+:root {
+    --blue: #102b61;
+    --red: #ed3434;
+    --gold: #ffcf57;
+    --white: #ffffff;
+    --cream: #fff1d0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background:
+        radial-gradient(circle at 15% 15%, #ff6b5e 0, transparent 30%),
+        radial-gradient(circle at 85% 80%, #f5a623 0, transparent 35%),
+        linear-gradient(135deg, #751b27, #bd2935 50%, #102b61);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 15px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* DEKORASI ANIMASI */
+
+.decoration {
+    position: fixed;
+    font-size: 38px;
+    opacity: .7;
+    pointer-events: none;
+    animation: float 5s ease-in-out infinite;
+}
+
+.d1 { top: 10%; left: 7%; }
+.d2 { top: 20%; right: 8%; animation-delay: 1s; }
+.d3 { bottom: 15%; left: 10%; animation-delay: 2s; }
+.d4 { bottom: 12%; right: 9%; animation-delay: 1.5s; }
+.d5 { top: 50%; left: 3%; animation-delay: .8s; }
+.d6 { top: 50%; right: 3%; animation-delay: 1.8s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-8deg); }
+    50% { transform: translateY(-22px) rotate(8deg); }
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    animation: appear 1s ease;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.school {
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 12px;
+    text-shadow: 0 0 12px rgba(255,207,87,.6);
+}
+
+.book-icon {
+    font-size: 70px;
+    margin-bottom: 8px;
+    display: inline-block;
+    filter: drop-shadow(0 0 15px #ffcf57);
+    animation: book 3s ease-in-out infinite;
+}
+
+@keyframes book {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-12px) rotate(5deg); }
+}
+
+.title {
+    font-size: clamp(42px, 8vw, 72px);
+    font-weight: 1000;
+    letter-spacing: 5px;
+    color: white;
+    text-shadow: 0 0 20px #ffcf57, 0 5px 0 #751b27;
+}
+
+.subtitle {
+    color: var(--gold);
+    font-size: clamp(19px, 3vw, 27px);
+    font-weight: 1000;
+    letter-spacing: 3px;
+    margin-top: 5px;
+    text-shadow: 0 0 12px rgba(255,207,87,.5);
+}
+
+.theme {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 22px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #ffcf57, #fff0b0);
+    color: #741b27;
+    font-size: 13px;
+    font-weight: 1000;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 18px rgba(0,0,0,.2);
+}
+
+.description {
+    color: #fff1e8;
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 20px 0 30px;
+}
+
+.menu-title {
+    font-size: 17px;
+    font-weight: 1000;
+    color: var(--gold);
+    margin-bottom: 18px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255,207,87,.5);
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.menu-card {
+    position: relative;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(145deg,
+        rgba(190, 48, 56, .96),
+        rgba(85, 20, 43, .97));
+    border: 2px solid rgba(255,207,87,.65);
+    border-radius: 22px;
+    padding: 23px 12px;
+    min-height: 140px;
+    box-shadow: 0 9px 25px rgba(0,0,0,.25);
+    transition: .3s ease;
+    overflow: hidden;
+    animation: cardAppear .7s both;
+}
+
+.menu-card:nth-child(1) { animation-delay: .1s; }
+.menu-card:nth-child(2) { animation-delay: .2s; }
+.menu-card:nth-child(3) { animation-delay: .3s; }
+.menu-card:nth-child(4) { animation-delay: .4s; }
+.menu-card:nth-child(5) { animation-delay: .5s; }
+
+@keyframes cardAppear {
+    from { opacity: 0; transform: translateY(25px) scale(.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.menu-card::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -50%;
+    width: 50%;
+    height: 300%;
+    background: rgba(255,255,255,.15);
+    transform: rotate(30deg);
+    transition: .5s;
+}
+
+.menu-card:hover::before {
+    left: 120%;
+}
+
+.menu-card:hover {
+    transform: translateY(-9px) scale(1.035);
+    border-color: white;
+    box-shadow: 0 0 30px rgba(255,207,87,.6);
+    background: linear-gradient(145deg, #e64b43, #a51e36);
+}
+
+.menu-card .number {
+    font-size: 39px;
+    font-weight: 1000;
+    color: var(--gold);
+    text-shadow: 0 3px 10px rgba(0,0,0,.3);
+}
+
+.menu-card .name {
+    font-size: 17px;
+    font-weight: 1000;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+.menu-card .desc {
+    font-size: 11px;
+    color: #ffe5dc;
+    margin-top: 6px;
+}
+
+.menu-card .arrow {
+    position: absolute;
+    right: 15px;
+    top: 13px;
+    font-size: 22px;
+    color: var(--gold);
+    transition: .3s;
+}
+
+.menu-card:hover .arrow {
+    transform: translateX(6px);
+    color: white;
+}
+
+.menu-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    width: 100%;
+    justify-self: center;
+}
+
+/* TOMBOL KEMBALI */
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #ffcf57, #ff963d);
+    color: #751b27;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 1000;
+    letter-spacing: 1px;
+    border-radius: 15px;
+    border: 2px solid rgba(255,255,255,.6);
+    box-shadow: 0 6px 20px rgba(255,202,85,.3);
+    transition: .3s ease;
+}
+
+.back-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(255,202,85,.6);
+    background: linear-gradient(135deg, #ffe69b, #ffb52e);
+}
+
+.footer {
+    margin-top: 35px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,.2);
+    color: #ffe5dc;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 1.8;
+}
+
+.footer strong {
+    color: var(--gold);
+    font-size: 14px;
+}
+
+@media (max-width: 480px) {
+    .menu-grid { gap: 10px; }
+
+    .menu-card {
+        min-height: 120px;
+        padding: 18px 8px;
+        border-radius: 17px;
+    }
+
+    .menu-card .number { font-size: 31px; }
+    .menu-card .name { font-size: 14px; }
+    .menu-card .desc { font-size: 10px; }
+
+    .school {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+
+    .menu-card:last-child { max-width: 100%; }
+
+    .back-button {
+        width: 100%;
+        max-width: 300px;
+        font-size: 13px;
+    }
+
+    .decoration { font-size: 25px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- DEKORASI -->
+
+<div class="decoration d1">⭐</div>
+<div class="decoration d2">🇮🇩</div>
+<div class="decoration d3">🏛️</div>
+<div class="decoration d4">🛡️</div>
+<div class="decoration d5">✨</div>
+<div class="decoration d6">🌟</div>
+
+<div class="container">
+
+    <div class="school">UPT SDN 160 GRESIK</div>
+
+    <div class="book-icon">🦅</div>
+
+    <h1 class="title">SAS</h1>
+
+    <div class="subtitle">PENDIDIKAN PANCASILA</div>
+
+    <div class="theme">
+        🇮🇩 PETUALANGAN NEGERI PANCASILA
+    </div>
+
+    <p class="description">
+        SUMATIF AKHIR SEMESTER
+        <br>
+        Siap menjadi generasi hebat berjiwa Pancasila?
+        <br>
+        Pilih latihan dan tunjukkan sikap serta pengetahuan terbaikmu!
+    </p>
+
+    <div class="menu-title">
+        ✦ PILIH PETUALANGAN LATIHAN ✦
+    </div>
+
+    <div class="menu-grid">
+
+        <a href="../Pancasila/sas/latihan1.html"
+           class="menu-card">
+            <span class="arrow">➜</span>
+            <div class="number">01</div>
+            <div class="name">LATIHAN 1</div>
+            <div class="desc">⭐ Mulai Petualangan Pancasila</div>
+        </a>
+
+        <a href="../Pancasila/sas/latihan2.html"
+           class="menu-card">
+            <span class="arrow">➜</span>
+            <div class="number">02</div>
+            <div class="name">LATIHAN 2</div>
+            <div class="desc">🛡️ Tantangan Berikutnya</div>
+        </a>
+
+        <a href="../Pancasila/sas/latihan3.html"
+           class="menu-card">
+            <span class="arrow">➜</span>
+            <div class="number">03</div>
+            <div class="name">LATIHAN 3</div>
+            <div class="desc">🇮🇩 Jelajahi Nilai Pancasila</div>
+        </a>
+
+        <a href="../Pancasila/sas/latihan4.html"
+           class="menu-card">
+            <span class="arrow">➜</span>
+            <div class="number">04</div>
+            <div class="name">LATIHAN 4</div>
+            <div class="desc">💡 Asah Pengetahuanmu</div>
+        </a>
+
+        <a href="../Pancasila/sas/latihan5.html"
+           class="menu-card">
+            <span class="arrow">➜</span>
+            <div class="number">05</div>
+            <div class="name">LATIHAN 5</div>
+            <div class="desc">🏆 Jadilah Juara Pancasila</div>
+        </a>
+
+    </div>
+
+    <!-- TOMBOL KEMBALI -->
+
+    <a href="sas1.html" class="back-button">
+        <span>⬅</span>
+        KEMBALI KE MENU SAS
+    </a>
+
+    <div class="footer">
+        <strong>🌟 BERJIWA PANCASILA, INDONESIA JAYA! 🌟</strong>
+        <br>
+        © 2026 UPT SDN 160 GRESIK
+        <br>
+        LATIHAN SOAL SAS PENDIDIKAN PANCASILA
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10245c">
+<title>SAS Pendidikan Pancasila | UPT SDN 160 GRESIK</title>
+<style>
+:root{
+ --bg:#08142f;--panel:#122653;--panel2:#1b3974;--blue:#2878d0;--cyan:#67e8f9;
+ --gold:#ffd166;--pink:#ff83bd;--green:#7ce7ad;--red:#ff9eaa;
+ --text:#f7fbff;--muted:#c5d6f5;--line:#4265a2;
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:18px;color:var(--text);font-family:system-ui,"Segoe UI",sans-serif;
+ background:radial-gradient(ellipse at 50% -15%,#367fc0 0,#193b79 35%,#08142f 100%);overflow-x:hidden}
+body:before,body:after{content:"✦";position:fixed;color:#ffffff20;font-size:34px;pointer-events:none;animation:twinkle 3s infinite alternate}
+body:before{top:14%;left:5%}body:after{right:7%;top:66%;animation-delay:1s}
+@keyframes twinkle{from{opacity:.2;transform:scale(.8) rotate(0)}to{opacity:1;transform:scale(1.3) rotate(35deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes glow{0%,100%{box-shadow:0 0 12px #67e8f933}50%{box-shadow:0 0 27px #67e8f977}}
+@keyframes pop{from{opacity:0;transform:scale(.96) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.hidden{display:none!important}
+.topbar,.wrap{max-width:1020px;margin:0 auto}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px;font-weight:950;letter-spacing:.04em}
+.crest{width:49px;height:49px;display:grid;place-items:center;border:1px solid var(--gold);border-radius:16px;
+ background:linear-gradient(145deg,#e2a52e,#2878d0);font-size:26px;box-shadow:0 0 22px #ffd16644;animation:float 3s ease-in-out infinite}
+.school{font-size:10px;letter-spacing:.1em;color:var(--muted);margin-top:3px}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap}
+.score-table-wrap{width:min(900px,100%);max-height:min(70vh,620px);overflow:auto;margin:14px 0 18px;border:1px solid #4265a2;border-radius:13px;background:#091832}
+.score-table{width:100%;border-collapse:collapse;min-width:680px;font-size:12px}
+.score-table th,.score-table td{padding:11px 10px;border-bottom:1px solid #4265a255;text-align:left;white-space:nowrap}
+.score-table th{position:sticky;top:0;background:#1b3974;color:#ffe7a5;z-index:1}
+.score-table td:last-child{font-weight:950;color:var(--gold)}
+.score-empty{text-align:center;color:var(--muted);padding:25px}
+.linkbtn,.btn{display:inline-flex;justify-content:center;align-items:center;gap:7px;text-decoration:none;border:1px solid #6689c4;
+ border-radius:13px;padding:10px 14px;font:inherit;font-size:12px;font-weight:900;color:#fff;background:#1b3974;cursor:pointer;transition:.2s}
+.linkbtn:hover,.btn:hover{transform:translateY(-2px);filter:brightness(1.15)}
+.linkbtn.primary,.btn.primary{background:linear-gradient(110deg,#e19a27,#237ac5);border-color:var(--gold);box-shadow:0 0 18px #67e8f933}
+.card{background:linear-gradient(145deg,#122653f5,#0d1c3df2);border:1px solid var(--line);border-radius:23px;overflow:hidden;box-shadow:0 16px 45px #0008;animation:pop .4s ease}
+.hero{background:linear-gradient(120deg,#164b91,#2678b7 55%,#bd7c20);padding:28px 32px;border-bottom:1px solid var(--gold);position:relative;overflow:hidden}
+.hero:after{content:"⭐";position:absolute;right:28px;top:7px;font-size:100px;opacity:.2;animation:float 3.5s ease-in-out infinite}
+.eyebrow{font-size:11px;letter-spacing:.18em;color:#fff;font-weight:950}
+.hero h1{font-size:clamp(25px,4vw,36px);margin:8px 0;color:#fff}
+.hero p{margin:7px 0 0;color:#f1f7ff;line-height:1.65;max-width:760px}
+.content{padding:27px 32px 32px}.content h2{font-size:20px;margin:0 0 18px}
+.grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:13px;margin-bottom:20px}
+.field label{display:block;font-size:12px;font-weight:850;color:var(--muted);margin-bottom:7px}
+.field input{width:100%;height:48px;border:1px solid #6689c4;border-radius:11px;padding:0 13px;font:inherit;color:var(--text);outline:none;background:#091832}
+.field input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #67e8f922}
+.btn{font-size:14px;padding:13px 17px}.btn:disabled{opacity:.45;cursor:not-allowed}.full{width:100%}
+.secondary{background:#1b3974}.error{color:#ffb4c1;font-size:13px;margin-top:12px;line-height:1.5}
+.pills{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:15px}
+.pill{background:#1b3974;border:1px solid #6689c4;color:#f5faff;padding:7px 11px;border-radius:30px;font-size:12px;font-weight:850}
+.progress{height:10px;background:#ffffff20;border-radius:30px;overflow:hidden;margin-bottom:22px}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--gold),var(--pink));transition:width .3s}
+.meta{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:12px;font-weight:800;margin-bottom:12px}
+.question{font-size:clamp(19px,2.5vw,23px);line-height:1.6;font-weight:850;color:#fff;margin:0 0 18px;white-space:pre-line}
+.option-list{display:grid;gap:10px;margin-top:8px}
+.option{width:100%;display:flex;align-items:flex-start;gap:12px;text-align:left;padding:14px 15px;border:1px solid #4265a2;background:#091832;
+ border-radius:13px;color:#f5faff;font:inherit;line-height:1.55;cursor:pointer;transition:.15s}
+.option:hover:not(:disabled){border-color:var(--cyan);background:#1b3974}
+.option.selected{border-color:var(--cyan);background:#244b88;box-shadow:0 0 0 2px #67e8f922}
+.option:disabled{cursor:default}
+.option-dot{width:21px;height:21px;flex:0 0 21px;margin-top:2px;border:2px solid #a9c1e8;border-radius:7px;display:grid;place-items:center}
+.option.selected .option-dot:after{content:"✓";font-size:14px;font-weight:1000;color:var(--gold)}
+.hint{font-size:12px;color:#d6e5ff;line-height:1.5;margin:9px 0 0}
+.actions{display:flex;gap:10px;margin-top:19px}.actions .btn{flex:1}
+.modal,.loading{position:fixed;inset:0;background:#050d20e8;display:grid;place-items:center;padding:18px;z-index:20}
+.modal-box,.loading-box{width:min(540px,100%);background:#122653;border:1px solid var(--gold);border-radius:19px;padding:25px;text-align:center;box-shadow:0 20px 70px #0009}
+.modal-icon{width:58px;height:58px;border-radius:17px;margin:0 auto 12px;display:grid;place-items:center;font-size:27px;font-weight:950;background:#205b55;color:var(--green)}
+.modal-box.bad .modal-icon{color:var(--red);background:#542d48}
+.modal-box h2{margin:8px 0}.modal-box p{color:#e1ecff;line-height:1.65;margin:8px 0 18px}
+.explain{background:#091832;border:1px solid #4265a2;border-radius:11px;padding:13px;text-align:left;font-size:13px;color:#e8f1ff;margin:12px 0 18px;line-height:1.6}
+.result-score{font-size:clamp(48px,8vw,68px);font-weight:950;color:var(--gold);text-align:center;line-height:1.1}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.result-box{background:#1b3974;border:1px solid #4265a2;padding:15px;border-radius:13px;text-align:center}
+.result-box strong{display:block;font-size:25px;color:var(--gold)}.result-box span{font-size:11px;color:var(--muted);font-weight:800}
+.result-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:17px}
+.loading-box{width:auto;color:#fff;font-weight:850;animation:glow 1.5s infinite}
+footer{text-align:center;color:#b9cbed;font-size:11px;padding:18px}
+@media(max-width:680px){body{padding:12px}.hero{padding:23px 20px}.content{padding:21px 18px 24px}.grid{grid-template-columns:1fr;gap:11px}.actions{flex-direction:column}.result-grid{gap:6px}.result-box{padding:11px 4px}.result-box strong{font-size:21px}.result-actions{grid-template-columns:1fr}.topbar{align-items:flex-start}.top-actions{width:100%}.top-actions>*{flex:1}}
+
+/* Kotak pesan melayang khusus tema SAS Pendidikan Pancasila */
+.message-box{
+ position:relative;overflow:hidden;border:2px solid var(--gold);
+ background:radial-gradient(circle at 10% 0%,#2d75b5 0,transparent 42%),linear-gradient(145deg,#173c78 0%,#102653 58%,#0b1b3c 100%);
+ box-shadow:0 0 0 5px #ffd16620,0 24px 85px #000b,0 0 35px #67e8f955;
+ animation:messagePop .28s cubic-bezier(.2,.8,.2,1);
+}
+.message-box:before,.message-box:after{content:"✦";position:absolute;color:#ffd16655;font-size:44px;pointer-events:none;animation:twinkle 2.2s infinite alternate}
+.message-box:before{left:15px;top:12px}.message-box:after{right:17px;bottom:65px;animation-delay:.7s}
+.message-box .modal-icon{width:66px;height:66px;border-radius:21px;color:#fff;background:linear-gradient(145deg,#e3a32b,#2878c9);border:1px solid #ffe29a;box-shadow:0 0 24px #ffd16666}
+.message-ribbon{display:inline-block;margin:2px auto 5px;padding:6px 12px;border-radius:30px;color:#ffe7a5;background:#ffffff12;border:1px solid #ffd16666;font-size:10px;font-weight:950;letter-spacing:.14em}
+.message-box h2{font-size:clamp(21px,4vw,27px);color:#fff2c7;text-shadow:0 2px 12px #0006}
+.message-box p{font-size:15px;color:#e7f2ff;white-space:pre-line}
+@keyframes messagePop{from{opacity:0;transform:translateY(18px) scale(.92)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+</style>
+</head>
+<body>
+<div class="topbar">
+ <div class="brand"><div class="crest">🇮🇩</div><div>SAS PENDIDIKAN PANCASILA<div class="school">UPT SDN 160 GRESIK · KELAS V · TAHUN AJARAN 2026/2027</div></div></div>
+ <div class="top-actions"><button class="linkbtn primary" type="button" onclick="showScores()">🏆 DATA NILAI SISWA</button><a class="linkbtn primary" href="../../SAS/pancasila.html">⌂ MENU UTAMA</a></div>
+</div>
+<main class="wrap">
+<section id="identity" class="card">
+ <div class="hero"><div class="eyebrow">✦ SUMATIF AKHIR SEMESTER GANJIL ✦</div>
+ <h1>Misi Hebat Penjaga Pancasila!</h1>
+ <p>Halo, Pejuang Pancasila! Siapkan semangatmu, baca setiap soal dengan teliti, dan tunjukkan sikap jujur serta percaya diri. Ayo selesaikan tantangan norma dan aturan dengan hebat! Bank berisi 35 soal; setiap sesi menampilkan 25 soal acak.</p></div>
+ <div class="content"><h2>🌟 Identitas Peserta</h2>
+  <div class="grid">
+   <div class="field"><label for="nama">Nama lengkap</label><input id="nama" autocomplete="name" placeholder="Masukkan nama siswa"></div>
+   <div class="field"><label for="kelas">Kelas</label><input id="kelas" placeholder="Contoh: 5A"></div>
+   <div class="field"><label for="absen">Nomor absen</label><input id="absen" inputmode="numeric" placeholder="Nomor absen"></div>
+  </div>
+  <button class="btn primary full" id="startBtn" onclick="startQuiz()">🚀 MULAI MISI SAS PANCASILA</button>
+  <div id="startError" class="error hidden"></div>
+ </div>
+</section>
+<section id="quiz" class="card hidden">
+ <div class="hero"><div class="eyebrow">✦ TANTANGAN PENJAGA PANCASILA ✦</div><h1>Waktunya Beraksi, Pejuang!</h1>
+ <p>Kerjakan dengan teliti. Untuk pilihan ganda kompleks, pilih semua jawaban yang benar. Tetap semangat sampai akhir!</p></div>
+ <div class="content">
+  <div class="pills"><span class="pill" id="counter">SOAL 1</span><span class="pill" id="scoreLive">Terjawab: 0</span><span class="pill" id="studentTag">Siswa</span></div>
+  <div class="progress"><span id="progressBar"></span></div>
+  <div class="meta"><span id="sectionName">NORMA DAN ATURAN</span><span id="formatTag">Pilihan Ganda</span></div>
+  <p class="question" id="questionText"></p>
+  <div class="meta"><span id="instruction">PILIH SATU JAWABAN YANG TEPAT</span><span id="optionMark"></span></div>
+  <div class="option-list" id="optionList"></div>
+  <p class="hint" id="hintText">Pilih jawabanmu, lalu tekan tombol periksa jawaban.</p>
+  <div class="actions"><button class="btn secondary" onclick="clearAnswer()">HAPUS PILIHAN</button><button class="btn primary" id="checkBtn" onclick="checkCurrent()" disabled>PERIKSA JAWABAN</button></div>
+ </div>
+</section>
+<section id="result" class="card hidden">
+ <div class="hero"><div class="eyebrow">✦ MISI PANCASILA SELESAI ✦</div><h1>LUAR BIASA, PEJUANG PANCASILA!</h1><p id="resultStudent"></p></div>
+ <div class="content"><div class="result-score" id="finalScore">0</div><div style="text-align:center;color:var(--muted);font-weight:850">NILAI AKHIR</div>
+  <div class="result-grid"><div class="result-box"><strong id="totalResult">25</strong><span>Jumlah soal</span></div><div class="result-box"><strong id="correctResult">0</strong><span>Jawaban benar</span></div><div class="result-box"><strong id="wrongResult">0</strong><span>Jawaban belum tepat</span></div></div>
+  <p style="text-align:center;color:var(--muted)">Terus belajar, bersikap jujur, disiplin, dan hormati hak orang lain. Kamu hebat!</p>
+  <div class="result-actions"><button class="btn secondary" onclick="location.reload()">🔄 ULANGI UJIAN</button><a class="btn primary" href="../../SAS/Pancasila.html">⌂ KEMBALI KE MENU</a></div>
+ </div>
+</section>
+</main>
+
+<div id="scoresModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="scoresTitle">
+ <div class="modal-box" style="width:min(940px,100%);text-align:left">
+  <div class="modal-icon">🏆</div>
+  <h2 id="scoresTitle" style="text-align:center;color:#fff2c7">DATA NILAI SISWA</h2>
+  <p id="scoresSummary" style="text-align:center">Memuat data nilai...</p>
+  <div class="score-table-wrap" id="scoresTableWrap"><div class="score-empty">✨ Mengambil data dari spreadsheet...</div></div>
+  <div class="result-actions"><button class="btn secondary" type="button" onclick="loadScores()">🔄 MUAT ULANG</button><button class="btn primary" type="button" onclick="closeScores()">TUTUP</button></div>
+ </div>
+</div>
+
+<div id="messageModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="messageTitle">
+ <div class="modal-box message-box">
+  <div class="modal-icon" id="messageIcon">✨</div>
+  <div class="message-ribbon">✦ PESAN PENJAGA PANCASILA ✦</div>
+  <h2 id="messageTitle">Informasi</h2>
+  <p id="messageText"></p>
+  <button class="btn primary full" id="messageButton" onclick="closeMessage()">MENGERTI ✨</button>
+ </div>
+</div>
+
+<div id="feedback" class="modal hidden"><div id="feedbackBox" class="modal-box good">
+ <div class="modal-icon" id="feedbackIcon">✓</div><h2 id="feedbackTitle">Jawaban benar!</h2><p id="feedbackText"></p>
+ <div class="explain" id="explanation"></div><button class="btn primary full" id="feedbackNext" onclick="continueAfterFeedback()">SOAL BERIKUTNYA</button>
+</div></div>
+<div id="loading" class="loading hidden"><div class="loading-box">✨ Menyiapkan misi Penjaga Pancasila...</div></div>
+<footer>🇮🇩 UPT SDN 160 GRESIK · Belajar Norma, Aturan, Hak, dan Kewajiban</footer>
+<script>
+/* RILIS HTML 2.0 - gunakan URL Web App dari deployment GS 2.0. */
+const API_URL = "https://script.google.com/macros/s/AKfycbx1FWl5u42tmA-kEx5aVqoRqJXbXK9xr394tYFaUStyq7wFWVMDwujPD1Ux3Xkl0O-o_w/exec"; // wajib diisi URL deployment GS versi 2.0
+
+const $ = id => document.getElementById(id);
+let student = {}, questions = [], current = 0, selectedAnswers = [], responses = [], checked = false;
+
+function show(id){$(id).classList.remove("hidden")}
+function hide(id){$(id).classList.add("hidden")}
+function loading(v){v ? show("loading") : hide("loading")}
+function showMessage(message, title="Informasi", icon="✨", buttonText="MENGERTI ✨"){
+  $("messageTitle").textContent = title;
+  $("messageText").textContent = message;
+  $("messageIcon").textContent = icon;
+  $("messageButton").textContent = buttonText;
+  show("messageModal");
+}
+function closeMessage(){hide("messageModal")}
+function startError(msg){
+  hide("startError");
+  showMessage(msg, "Identitas Belum Lengkap", "📝", "SAYA MENGERTI");
+}
+
+/* Komunikasi JSONP agar dapat dipanggil dari halaman HTML/GitHub Pages. */
+function apiCall(action, params = {}) {
+  return new Promise((resolve, reject) => {
+    if (!API_URL || API_URL.includes("TEMPEL_URL")) {
+      reject(new Error("URL Web App belum diisi. Masukkan URL deployment Google Apps Script pada konstanta API_URL."));
+      return;
+    }
+    const callback = "sasPancasilaCallback_" + Date.now() + "_" + Math.floor(Math.random()*100000);
+    const script = document.createElement("script");
+    let selesai = false;
+
+    const bersihkan = () => {
+      script.remove();
+      try { delete window[callback]; } catch(e) { window[callback] = undefined; }
+    };
+
+    const timer = setTimeout(() => {
+      if (selesai) return;
+      selesai = true;
+      bersihkan();
+      reject(new Error("Server tidak merespons. Periksa URL Web App dan koneksi internet."));
+    }, 25000);
+
+    window[callback] = hasil => {
+      if (selesai) return;
+      selesai = true;
+      clearTimeout(timer);
+      bersihkan();
+      if (hasil && hasil.ok) resolve(hasil.data);
+      else reject(new Error((hasil && hasil.error) || "Terjadi kesalahan pada server."));
+    };
+
+    const query = new URLSearchParams({
+      action,
+      callback,
+      ...Object.fromEntries(Object.entries(params).map(([k,v]) => [
+        k, typeof v === "string" ? v : JSON.stringify(v)
+      ])),
+      _: Date.now()
+    });
+
+    script.src = API_URL + (API_URL.includes("?") ? "&" : "?") + query.toString();
+    script.onerror = () => {
+      if (selesai) return;
+      selesai = true;
+      clearTimeout(timer);
+      bersihkan();
+      reject(new Error("Tidak dapat mengakses Web App. Pastikan akses deployment adalah Anyone."));
+    };
+    document.head.appendChild(script);
+  });
+}
+
+async function startQuiz(){
+  student = {
+    nama: $("nama").value.trim(),
+    kelas: $("kelas").value.trim(),
+    absen: $("absen").value.trim()
+  };
+  hide("startError");
+
+  if (!student.nama || !student.kelas || !student.absen) {
+    startError("Lengkapi nama, kelas, dan nomor absen terlebih dahulu.");
+    return;
+  }
+
+  $("startBtn").disabled = true;
+  loading(true);
+  try {
+    const data = await apiCall("getQuiz", {student});
+    questions = data.questions || [];
+    if (questions.length !== 25) {
+      throw new Error("Sesi harus memuat 25 soal. Soal yang diterima: " + questions.length);
+    }
+    current = 0;
+    responses = [];
+    selectedAnswers = [];
+    hide("identity");
+    show("quiz");
+    $("studentTag").textContent = student.nama + " · " + student.kelas;
+    renderQuestion();
+  } catch(e) {
+    startError(e.message || String(e));
+    $("startBtn").disabled = false;
+  } finally {
+    loading(false);
+  }
+}
+
+function renderQuestion(){
+  const q = questions[current];
+  checked = false;
+  selectedAnswers = [];
+  $("counter").textContent = `SOAL ${current+1} DARI ${questions.length}`;
+  $("scoreLive").textContent = "Terjawab: " + responses.length;
+  $("sectionName").textContent = (q.section || "PENDIDIKAN PANCASILA").toUpperCase();
+  $("formatTag").textContent = q.type === "pg" ? "Pilihan Ganda" : "Pilihan Ganda Kompleks";
+  $("questionText").textContent = q.question;
+  $("progressBar").style.width = (current / questions.length * 100) + "%";
+  $("instruction").textContent = q.type === "pg"
+    ? "PILIH SATU JAWABAN YANG TEPAT"
+    : "PILIH SEMUA JAWABAN YANG BENAR";
+  $("hintText").textContent = q.type === "pg"
+    ? "Pilih satu jawaban terbaikmu, lalu tekan periksa jawaban."
+    : "Pilih semua pilihan yang benar. Jawaban benar dapat lebih dari satu.";
+
+  const list = $("optionList");
+  list.innerHTML = "";
+  (q.options || []).forEach(opt => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "option";
+    const dot = document.createElement("span");
+    dot.className = "option-dot";
+    const label = document.createElement("span");
+    label.textContent = opt;
+    b.append(dot, label);
+    b.onclick = () => toggleOption(opt, b);
+    list.appendChild(b);
+  });
+  $("checkBtn").disabled = true;
+}
+
+function toggleOption(opt, button){
+  if (checked) return;
+  const q = questions[current];
+  if (q.type === "pg") {
+    selectedAnswers = [opt];
+    $("optionList").querySelectorAll(".option").forEach(x => x.classList.remove("selected"));
+    button.classList.add("selected");
+  } else {
+    if (selectedAnswers.includes(opt)) {
+      selectedAnswers = selectedAnswers.filter(x => x !== opt);
+      button.classList.remove("selected");
+    } else {
+      selectedAnswers.push(opt);
+      button.classList.add("selected");
+    }
+  }
+  $("checkBtn").disabled = selectedAnswers.length === 0;
+}
+
+function clearAnswer(){
+  if (checked) return;
+  selectedAnswers = [];
+  $("optionList").querySelectorAll(".option").forEach(b => b.classList.remove("selected"));
+  $("checkBtn").disabled = true;
+}
+
+async function checkCurrent(){
+  if (checked || selectedAnswers.length === 0) return;
+  $("checkBtn").disabled = true;
+  loading(true);
+  try {
+    const q = questions[current];
+    const hasil = await apiCall("checkAnswer", {
+      questionId: q.id,
+      answers: selectedAnswers
+    });
+
+    checked = true;
+    responses.push({
+      id: q.id,
+      answers: selectedAnswers.slice()
+    });
+
+    $("scoreLive").textContent = "Terjawab: " + responses.length;
+    $("feedbackBox").className = "modal-box " + (hasil.correct ? "good" : "bad");
+    $("feedbackIcon").textContent = hasil.correct ? "✓" : "✦";
+    $("feedbackTitle").textContent = hasil.correct ? "Jawaban Tepat!" : "Belum Tepat, Tetap Semangat!";
+    $("feedbackText").textContent = hasil.correct
+      ? "Luar biasa! Kamu berhasil menyelesaikan tantangan ini dengan benar."
+      : "Tidak apa-apa, terus belajar dan jangan menyerah. Perhatikan jawaban benar dan pembahasannya.";
+    $("explanation").textContent =
+      "Jawaban yang benar: " + (hasil.correctAnswerText || (hasil.correctAnswer || []).join("; ")) +
+      ". Pembahasan: " + (hasil.explanation || "Pelajari kembali materi " + q.section + ".");
+    $("feedbackNext").textContent = current === questions.length - 1
+      ? "LIHAT HASIL AKHIR"
+      : "LANJUT KE SOAL BERIKUTNYA";
+
+    $("optionList").querySelectorAll("button").forEach(b => {
+      b.disabled = true;
+      const teks = b.querySelector("span:last-child").textContent;
+      if ((hasil.correctAnswer || []).includes(teks)) b.style.borderColor = "var(--green)";
+    });
+    show("feedback");
+  } catch(e) {
+    $("checkBtn").disabled = false;
+    showMessage(e.message || String(e), "Koneksi Bermasalah", "⚠️", "COBA LAGI");
+  } finally {
+    loading(false);
+  }
+}
+
+function continueAfterFeedback(){
+  hide("feedback");
+  current++;
+  if (current < questions.length) renderQuestion();
+  else finishQuiz();
+}
+
+async function finishQuiz(){
+  loading(true);
+  try {
+    const hasil = await apiCall("submitResult", {
+      payload: {student, responses}
+    });
+    hide("quiz");
+    show("result");
+    $("finalScore").textContent = hasil.score;
+    $("totalResult").textContent = hasil.total;
+    $("correctResult").textContent = hasil.correct;
+    $("wrongResult").textContent = hasil.wrong;
+    $("resultStudent").textContent =
+      student.nama + " · Kelas " + student.kelas + " · Absen " + student.absen;
+  } catch(e) {
+    showMessage("Nilai belum berhasil disimpan: " + (e.message || String(e)), "Nilai Belum Tersimpan", "⚠️", "MENGERTI");
+    current = questions.length - 1;
+  } finally {
+    loading(false);
+  }
+}
+
+async function showScores(){
+  show("scoresModal");
+  await loadScores();
+}
+function closeScores(){hide("scoresModal")}
+function escapeHTML(value){
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;", "'":"&#39;"}[ch]));
+}
+async function loadScores(){
+  $("scoresSummary").textContent = "Mengambil data nilai siswa...";
+  $("scoresTableWrap").innerHTML = '<div class="score-empty">✨ Menghubungkan ke spreadsheet...</div>';
+  try{
+    const data = await apiCall("getScores");
+    if (data.version && data.version !== "SAS_PANCASILA_2.0") {
+      throw new Error("Versi server tidak sesuai. Perbarui deployment Google Apps Script ke versi 2.0.");
+    }
+    const rows = data.scores || [];
+    $("scoresSummary").textContent = "Jumlah hasil ujian tersimpan: " + (data.count ?? rows.length);
+    if(!rows.length){
+      $("scoresTableWrap").innerHTML = '<div class="score-empty">Belum ada nilai siswa yang tersimpan.</div>';
+      return;
+    }
+    const body = rows.map((r,i) => `<tr><td>${i+1}</td><td>${escapeHTML(r.waktu)}</td><td>${escapeHTML(r.nama)}</td><td>${escapeHTML(r.kelas)}</td><td>${escapeHTML(r.absen)}</td><td>${r.total}</td><td>${r.benar}</td><td>${r.salah}</td><td>${r.nilai}</td></tr>`).join("");
+    $("scoresTableWrap").innerHTML = `<table class="score-table"><thead><tr><th>No.</th><th>Waktu</th><th>Nama</th><th>Kelas</th><th>Absen</th><th>Jumlah</th><th>Benar</th><th>Salah</th><th>Nilai</th></tr></thead><tbody>${body}</tbody></table>`;
+  }catch(e){
+    $("scoresSummary").textContent = "Data nilai belum dapat dimuat.";
+    $("scoresTableWrap").innerHTML = `<div class="score-empty">${escapeHTML(e.message || String(e))}</div>`;
+  }
+}
+
+</script>
+</body>
+</html>

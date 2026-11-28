@@ -170,8 +170,8 @@ footer{text-align:center;color:#b9cbed;font-size:11px;padding:18px}
 <div id="loading" class="loading hidden"><div class="loading-box">✨ Menyiapkan misi Penjaga Pancasila...</div></div>
 <footer>🇮🇩 UPT SDN 160 GRESIK · Belajar Norma, Aturan, Hak, dan Kewajiban</footer>
 <script>
-/* GANTI URL ini setelah Web App Google Apps Script di-deploy. */
-const API_URL = "TEMPEL_URL_WEB_APP_DI_SINI";
+/* RILIS HTML 2.0 - gunakan URL Web App dari deployment GS 2.0. */
+const API_URL = "https://script.google.com/macros/s/AKfycbx1FWl5u42tmA-kEx5aVqoRqJXbXK9xr394tYFaUStyq7wFWVMDwujPD1Ux3Xkl0O-o_w/exec"; // wajib diisi URL deployment GS versi 2.0
 
 const $ = id => document.getElementById(id);
 let student = {}, questions = [], current = 0, selectedAnswers = [], responses = [], checked = false;
@@ -195,7 +195,7 @@ function startError(msg){
 /* Komunikasi JSONP agar dapat dipanggil dari halaman HTML/GitHub Pages. */
 function apiCall(action, params = {}) {
   return new Promise((resolve, reject) => {
-    if (!API_URL || API_URL.includes("https://script.google.com/macros/s/AKfycbx1FWl5u42tmA-kEx5aVqoRqJXbXK9xr394tYFaUStyq7wFWVMDwujPD1Ux3Xkl0O-o_w/exec")) {
+    if (!API_URL || API_URL.includes("TEMPEL_URL")) {
       reject(new Error("Masukkan URL Web App Google Apps Script pada variabel API_URL."));
       return;
     }
@@ -428,6 +428,9 @@ async function loadScores(){
   $("scoresTableWrap").innerHTML = '<div class="score-empty">✨ Menghubungkan ke spreadsheet...</div>';
   try{
     const data = await apiCall("getScores");
+    if (data.version && data.version !== "SAS_PANCASILA_2.0") {
+      throw new Error("Versi server tidak sesuai. Perbarui deployment Google Apps Script ke versi 2.0.");
+    }
     const rows = data.scores || [];
     $("scoresSummary").textContent = "Jumlah hasil ujian tersimpan: " + (data.count ?? rows.length);
     if(!rows.length){
